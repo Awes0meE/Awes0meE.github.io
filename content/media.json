@@ -1,0 +1,60 @@
+[
+  {
+    "id": "robot-demo",
+    "title": "Robot navigation demo",
+    "type": "video",
+    "src": "/uploads/visuals/robot-platform.svg",
+    "thumbnail": "/uploads/visuals/robot-platform.svg",
+    "date": "2024-06-08",
+    "projectSlug": "sat301-graduation-thesis",
+    "caption": "Autonomous robot platform test footage placeholder."
+  },
+  {
+    "id": "slam-map",
+    "title": "SLAM map trace",
+    "type": "image",
+    "src": "/uploads/visuals/dashboard.svg",
+    "thumbnail": "/uploads/visuals/dashboard.svg",
+    "date": "2024-05-21",
+    "projectSlug": "sat301-graduation-thesis",
+    "caption": "Mapping and telemetry dashboard placeholder."
+  },
+  {
+    "id": "pid-board",
+    "title": "PID controller board",
+    "type": "image",
+    "src": "/uploads/visuals/circuit-board.svg",
+    "thumbnail": "/uploads/visuals/circuit-board.svg",
+    "date": "2024-05-11",
+    "projectSlug": "pid-starter-kit",
+    "caption": "Embedded controller board and notes."
+  },
+  {
+    "id": "filter-waveform",
+    "title": "Signal estimation chart",
+    "type": "image",
+    "src": "/uploads/visuals/waveform.svg",
+    "thumbnail": "/uploads/visuals/waveform.svg",
+    "date": "2024-04-12",
+    "projectSlug": "pid-starter-kit",
+    "caption": "Kalman filter and signal analysis visual."
+  },
+  {
+    "id": "lab-notes",
+    "title": "Engineering notebook",
+    "type": "image",
+    "src": "/uploads/visuals/lab-notes.svg",
+    "thumbnail": "/uploads/visuals/lab-notes.svg",
+    "date": "2024-04-03",
+    "caption": "Notebook pages for formulas and experiment planning."
+  },
+  {
+    "id": "control-dashboard",
+    "title": "Control dashboard",
+    "type": "image",
+    "src": "/uploads/visuals/dashboard.svg",
+    "thumbnail": "/uploads/visuals/dashboard.svg",
+    "date": "2024-03-18",
+    "caption": "Telemetry and control visualization."
+  }
+]

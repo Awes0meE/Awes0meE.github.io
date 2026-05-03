@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">Circuit board on engineering notes</title>
+  <desc id="desc">A stylized green PCB placed over technical notebook paper.</desc>
+  <rect width="960" height="640" fill="#eef1ed"/>
+  <g stroke="#cbd3cd" stroke-width="1">
+    <path d="M0 112h960M0 184h960M0 256h960M0 328h960M0 400h960M0 472h960M0 544h960"/>
+    <path d="M88 0v640M176 0v640M264 0v640M352 0v640M440 0v640M528 0v640M616 0v640M704 0v640M792 0v640M880 0v640"/>
+  </g>
+  <g opacity=".55" stroke="#6f7d75" stroke-width="2" fill="none">
+    <path d="M82 344c55-92 119-117 190-72 43 27 83 31 121 12 39-19 78-9 116 31"/>
+    <path d="M64 458c109-38 182-43 219-14 40 31 80 36 121 15 38-19 88-11 151 25"/>
+    <path d="M620 122l92 72 80-16 92 64"/>
+    <path d="M624 520l88-72 93 16 70-59"/>
+  </g>
+  <g transform="translate(214 111) rotate(-7 267 204)">
+    <rect x="0" y="0" width="548" height="396" rx="20" fill="#0e5138"/>
+    <rect x="21" y="23" width="506" height="350" rx="10" fill="#146a49" stroke="#d8eadf" stroke-opacity=".35"/>
+    <g fill="#d8c987">
+      <circle cx="46" cy="48" r="15"/><circle cx="502" cy="48" r="15"/><circle cx="46" cy="348" r="15"/><circle cx="502" cy="348" r="15"/>
+      <rect x="438" y="87" width="48" height="36" rx="6"/><rect x="438" y="145" width="48" height="36" rx="6"/><rect x="65" y="246" width="50" height="34" rx="6"/>
+    </g>
+    <g stroke="#9ed0b6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M112 90h82v46h58M109 314h82v-48h61M306 94h75v64h65M306 307h72v-76h64"/>
+      <path d="M191 136v47h75M192 266v-48h74M383 158v43h62M378 231v-36h59"/>
+    </g>
+    <rect x="236" y="150" width="112" height="94" rx="10" fill="#18302a" stroke="#8bb99f"/>
+    <g stroke="#d9e8df" stroke-width="3">
+      <path d="M248 139v-18M270 139v-18M292 139v-18M314 139v-18M336 139v-18"/>
+      <path d="M248 273v-18M270 273v-18M292 273v-18M314 273v-18M336 273v-18"/>
+      <path d="M225 165h-18M225 187h-18M225 209h-18M225 231h-18"/>
+      <path d="M377 165h-18M377 187h-18M377 209h-18M377 231h-18"/>
+    </g>
+    <rect x="72" y="82" width="64" height="70" rx="8" fill="#1d2b2a"/>
+    <rect x="385" y="250" width="84" height="54" rx="8" fill="#1d2b2a"/>
+    <rect x="154" y="258" width="48" height="48" rx="8" fill="#c47430"/>
+    <circle cx="151" cy="99" r="15" fill="#ccd8d2"/>
+    <circle cx="406" cy="119" r="18" fill="#ccd8d2"/>
+    <circle cx="132" cy="304" r="14" fill="#ccd8d2"/>
+  </g>
+</svg>

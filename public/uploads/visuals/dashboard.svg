@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Control dashboard visualization</title>
+  <desc id="desc">A dark monitoring dashboard with signal charts and status panels.</desc>
+  <rect width="720" height="420" fill="#121b18"/>
+  <rect x="28" y="28" width="664" height="364" rx="12" fill="#17241f" stroke="#385244"/>
+  <g fill="#9fb3a8" font-family="ui-sans-serif, system-ui" font-size="16">
+    <text x="58" y="70">CONTROL SIGNALS</text>
+    <text x="486" y="70">SYSTEM STATE</text>
+  </g>
+  <g stroke="#2f7a56" stroke-width="3" fill="none">
+    <path d="M58 149c28-60 57-58 87 5s60 64 91 3 61-61 91 0 59 62 87 4"/>
+    <path d="M58 211c31-16 62-17 94-2s64 17 95 4 62-9 94 13 55 24 73 6"/>
+  </g>
+  <g stroke="#b65f23" stroke-width="3" fill="none">
+    <path d="M58 268c40-20 75-15 105 14s62 31 96 5 69-28 105-5 72 17 107-19"/>
+  </g>
+  <g fill="#25352f" stroke="#385244">
+    <rect x="486" y="102" width="150" height="58" rx="8"/>
+    <rect x="486" y="178" width="150" height="58" rx="8"/>
+    <rect x="486" y="254" width="150" height="58" rx="8"/>
+  </g>
+  <g fill="#dce7df" font-family="ui-sans-serif, system-ui">
+    <text x="506" y="137" font-size="22">0.032</text>
+    <text x="506" y="213" font-size="22">Stable</text>
+    <text x="506" y="289" font-size="22">42 Hz</text>
+  </g>
+  <g fill="#2f7a56">
+    <circle cx="623" cy="126" r="8"/><circle cx="623" cy="202" r="8"/><circle cx="623" cy="278" r="8"/>
+  </g>
+</svg>

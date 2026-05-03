@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">Autonomous robot platform</title>
+  <desc id="desc">A compact robotics platform with sensors, wires, and a map trace.</desc>
+  <rect width="960" height="640" fill="#eef1ed"/>
+  <g transform="translate(166 190)">
+    <ellipse cx="312" cy="340" rx="280" ry="45" fill="#cfd8d2"/>
+    <rect x="88" y="160" width="448" height="160" rx="18" fill="#2e3533"/>
+    <rect x="130" y="105" width="360" height="86" rx="12" fill="#e6ece7" stroke="#9facA4"/>
+    <rect x="192" y="44" width="236" height="94" rx="10" fill="#1c2724"/>
+    <circle cx="162" cy="326" r="56" fill="#181f1d"/>
+    <circle cx="462" cy="326" r="56" fill="#181f1d"/>
+    <circle cx="162" cy="326" r="26" fill="#58645f"/>
+    <circle cx="462" cy="326" r="26" fill="#58645f"/>
+    <rect x="262" y="213" width="96" height="58" rx="10" fill="#0f5138"/>
+    <circle cx="310" cy="213" r="58" fill="none" stroke="#b65f23" stroke-width="4"/>
+    <path d="M210 116c35-75 82-79 142-12 36 41 78 30 126-31" fill="none" stroke="#2f7a56" stroke-width="6"/>
+    <path d="M186 130c42-31 80-22 115 27 34 48 72 39 113-27" fill="none" stroke="#b65f23" stroke-width="5"/>
+  </g>
+  <g transform="translate(636 96)" fill="none" stroke="#7b8a82" stroke-width="3" opacity=".8">
+    <path d="M36 188c40-84 80-114 121-89 38 23 57 2 56-64"/>
+    <path d="M20 220h220v160H20z"/>
+    <path d="M55 258h56v48H55zM142 258h56v84h-56z"/>
+  </g>
+</svg>

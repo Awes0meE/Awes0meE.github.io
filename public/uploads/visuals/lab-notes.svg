@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Engineering notebook</title>
+  <desc id="desc">Notebook pages with equations, block diagrams, and lab marks.</desc>
+  <rect width="720" height="420" fill="#f4f1e8"/>
+  <g stroke="#d0c9ba" stroke-width="1">
+    <path d="M0 58h720M0 108h720M0 158h720M0 208h720M0 258h720M0 308h720M0 358h720"/>
+    <path d="M88 0v420"/>
+  </g>
+  <g fill="none" stroke="#33423b" stroke-width="3" opacity=".8">
+    <path d="M126 91h92v54h-92zM218 118h74M292 118v86h90"/>
+    <path d="M445 82c46 40 46 82 0 126M462 82c46 40 46 82 0 126"/>
+    <path d="M130 256c42-34 83-34 124 0s81 34 120 0 81-33 126 3"/>
+  </g>
+  <g fill="#33423b" font-family="ui-serif, Georgia" font-size="28" opacity=".85">
+    <text x="118" y="206">e(t) = r(t) - y(t)</text>
+    <text x="118" y="333">u(t) = Kp e + Ki ∫e dt + Kd de/dt</text>
+  </g>
+  <g fill="#b65f23" opacity=".85">
+    <circle cx="583" cy="304" r="34" fill="none" stroke="#b65f23" stroke-width="5"/>
+    <path d="M560 306l18 17 33-43" fill="none" stroke="#b65f23" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

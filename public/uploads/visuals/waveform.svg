@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Signal waveform</title>
+  <desc id="desc">A light signal analysis chart with Kalman filtering traces.</desc>
+  <rect width="720" height="420" fill="#fbfcfa"/>
+  <g stroke="#d9dfda" stroke-width="1">
+    <path d="M66 44v312M66 356h600"/>
+    <path d="M66 96h600M66 148h600M66 200h600M66 252h600M66 304h600"/>
+  </g>
+  <path d="M66 250c26-104 52-109 78-16s52 95 78 6 52-103 78-26 52 98 78 28 52-70 78-7 52 72 78 19 52-98 78-36 37 74 54 34" fill="none" stroke="#2f7a56" stroke-width="4"/>
+  <path d="M66 252c45-45 91-48 137-8s91 42 137 3 91-40 137-5 91 33 137-6 39-27 52-24" fill="none" stroke="#b65f23" stroke-width="4"/>
+  <g fill="#4f5854" font-family="ui-sans-serif, system-ui" font-size="18">
+    <text x="66" y="394">Estimated signal vs measured noise</text>
+  </g>
+</svg>

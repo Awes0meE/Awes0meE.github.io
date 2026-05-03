@@ -1,0 +1,14 @@
+---
+title: "Embedded Debug Log"
+titleZh: "嵌入式系统启动过程与调试记录"
+summary: "A structured log format for board bring-up, serial output, peripheral checks, and repeatable debugging."
+summaryZh: "整理单片机启动、串口输出、外设检查和可复现实验记录的调试模板。"
+date: "2024-04-29"
+tags: ["Embedded", "STM32", "Debug"]
+---
+
+## Debugging Pattern / 调试模式
+
+The goal is to make every board bring-up reproducible: power, clock, serial output, minimal loop, peripheral test, then integration.
+
+嵌入式调试最怕“这次好了但不知道为什么”。这篇笔记会把每一步的判断标准写清楚。
