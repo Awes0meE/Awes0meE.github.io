@@ -50,3 +50,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Added related development notes to project detail pages.
 - Files changed: added optional `projectSlug` to the note content model, tagged Juanyun notes with `juanyun-thermal-hardware`, and updated project pages to render matching notes.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Added project back-links on note detail pages.
+- Files changed: updated `app/notes/[slug]/page.tsx` to show a related-project card when a note has `projectSlug`.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

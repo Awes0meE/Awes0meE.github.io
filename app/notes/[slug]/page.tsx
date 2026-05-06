@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ContentRenderer } from "@/components/content-renderer";
-import { getNote, getNotes } from "@/lib/content";
+import { getNote, getNotes, getProject } from "@/lib/content";
 
 type NotePageProps = {
   params: Promise<{ slug: string }>;
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
 export default async function NotePage({ params }: NotePageProps) {
   const { slug } = await params;
   const note = getNote(slug);
+  const relatedProject = note?.projectSlug ? getProject(note.projectSlug) : undefined;
 
   if (!note) {
     notFound();
@@ -53,6 +54,18 @@ export default async function NotePage({ params }: NotePageProps) {
             </span>
           ))}
         </div>
+        {relatedProject ? (
+          <Link
+            href={`/work/${relatedProject.slug}`}
+            className="mt-6 flex items-center justify-between gap-4 rounded-lg border border-line bg-white p-4 text-sm transition hover:-translate-y-0.5 hover:shadow-fine"
+          >
+            <span>
+              <span className="block font-semibold text-ink">Related Project / 相关项目</span>
+              <span className="mt-1 block text-graphite">{relatedProject.titleZh}</span>
+            </span>
+            <ArrowRight className="shrink-0 text-pine" size={18} />
+          </Link>
+        ) : null}
         <div className="mt-10 border-t border-line pt-2">
           <ContentRenderer source={note.body} />
         </div>
