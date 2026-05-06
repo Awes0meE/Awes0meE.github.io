@@ -21,7 +21,13 @@ export default function MediaPage() {
         {media.map((item) => (
           <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white">
             <div className="relative aspect-[4/3] bg-chalk">
-              <Image src={item.thumbnail} alt={item.title} fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover" />
+              <Image
+                src={item.thumbnail}
+                alt={item.title}
+                fill
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                className="object-cover"
+              />
               {item.type === "video" ? (
                 <span className="absolute bottom-3 left-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-pine">
                   <PlayCircle size={24} />
@@ -31,13 +37,18 @@ export default function MediaPage() {
             <div className="p-5">
               <h2 className="text-lg font-semibold text-ink">{item.title}</h2>
               <p className="mt-2 text-sm leading-6 text-graphite">{item.caption}</p>
-              <div className="mt-4 flex items-center justify-between text-sm text-graphite">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-graphite">
                 <span>{item.date}</span>
-                {item.projectSlug ? (
-                  <Link href={`/work/${item.projectSlug}`} className="font-semibold text-pine hover:text-copper">
-                    Related project
-                  </Link>
-                ) : null}
+                <div className="flex items-center gap-3">
+                  <a href={item.src} className="font-semibold text-pine hover:text-copper">
+                    Open media
+                  </a>
+                  {item.projectSlug ? (
+                    <Link href={`/work/${item.projectSlug}`} className="font-semibold text-pine hover:text-copper">
+                      Related project
+                    </Link>
+                  ) : null}
+                </div>
               </div>
             </div>
           </article>

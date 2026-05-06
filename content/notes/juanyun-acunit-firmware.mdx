@@ -1,0 +1,40 @@
+---
+title: "STM32 External Unit Firmware"
+titleZh: "STM32 外机固件整理笔记"
+summary: "Notes on reorganizing the external unit firmware into App, Service, BSP, Core, CMake, VSCode, OpenOCD, and release artifacts."
+summaryZh: "我整理 STM32 外机固件的笔记：把压缩机、电子膨胀阀、NTC、DHT22、OLED、编码器和按键逻辑分层，并补齐 CMake、VSCode、OpenOCD 和发布说明。"
+date: "2026-05-06"
+tags: ["STM32", "Firmware", "CMake", "BSP"]
+---
+
+## What This Firmware Does / 固件做什么
+
+外机固件基于 STM32F103C8T6，用于外机控制板的功能联调和样机验证。它面向压缩机启停与 PWM、FG 测速、电子膨胀阀回零和开度调节、NTC 温度采样、DHT22 温湿度读取、旋转编码器、按键输入和 OLED 显示。
+
+我把它定位成“联调演示 / 验证平台”，不是最终量产控制策略。这个判断很重要，因为它决定了代码更关注关键链路打通、可读性、可烧录和可调试，而不是完整故障状态机和闭环热管理策略。
+
+## My Work / 我的工作
+
+- 我把工程分成 `Core`、`App`、`Service`、`BSP_drivers` 几层，降低主循环里堆逻辑的风险。
+- 我把 `svc_control`、`svc_sensor`、`svc_ui` 这类业务逻辑从底层驱动里拆出来，让硬件驱动和功能流程更容易单独看。
+- 我补齐了 VSCode + CMake + ARM GCC + ST-Link 的构建、烧录和调试路径，减少只依赖 CubeIDE 工程的锁定。
+- 我整理了 V0.5 release notes，记录 README、PINOUT、CMakePresets、OpenOCD 配置、VSCode tasks 和产物验证。
+
+## Technical Points / 技术点
+
+- 1 ms 任务用于 EEV 步进控制。
+- 10 ms 任务用于 FG 维护、编码器按键扫描和 UI 输入处理。
+- 100 ms 任务用于 NTC 温度更新。
+- 500 ms 任务用于 OLED 刷新。
+- 2000 ms 任务用于 DHT22 温湿度读取。
+- UI 文本在内容不变时跳过 OLED 刷新，减少 I2C 传输和格式化开销。
+- NTC 查表从线性搜索改为二分搜索，避免周期任务里不必要的耗时。
+
+## Evidence / 证据
+
+- [AC unit V2.0 development SOP](/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf)
+- [AC unit V2.0 requirements](/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf)
+
+## Reflection / 复盘
+
+这次整理让我意识到，作品集里“我会写 STM32”这种说法不够有说服力。更有说服力的是我能说明工程为什么分层、任务为什么按周期调度、某个优化为什么不会改变业务行为、以及别人如何在另一台电脑上把固件构建和烧录起来。

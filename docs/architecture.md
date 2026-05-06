@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a Next.js App Router portfolio site for `Awes0meE / Lizhiyi`, deployed on Vercel with DNS managed through Cloudflare.
+This is a Next.js App Router portfolio site for `Awes0meE / Li Zhiyi`, deployed on Vercel with DNS managed through Cloudflare.
 
 The implementation is deliberately file-based. Projects, notes, and media are versioned with Git so the portfolio can grow gradually without needing a database or admin backend.
 
@@ -73,4 +73,3 @@ The site does not execute arbitrary MDX components. Body content is rendered thr
 - No login.
 - No admin upload panel.
 - No server-side API required for portfolio content.
-

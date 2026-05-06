@@ -1,0 +1,26 @@
+---
+title: "DHT11 / AM2302 Sensor Board Plan"
+titleZh: "DHT11 / AM2302 温湿度小板计划"
+summary: "A compact sensor-board planning note for DHT11 and AM2302 modules, used as a smaller hardware task inside the Juanyun archive."
+summaryZh: "我对 DHT11 / AM2302 温湿度传感器小板任务的整理：这是卷云资料里较小但适合展示硬件任务拆解能力的一条线。"
+date: "2026-05-06"
+tags: ["Sensor", "PCB", "DHT11", "AM2302"]
+---
+
+## Background / 背景
+
+源目录里有一份 `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf`。这类小板不像外机板那样复杂，但它很适合作为作品集里的“小而完整”的硬件任务：需求明确、接口清楚、验证路径短。
+
+## My Work / 我的工作
+
+- 我把温湿度传感器小板作为一个独立任务记录，避免它淹没在外机板和底座板的大工程里。
+- 我把它和底座/外机固件中的 DHT11、DHT22、AM2302 采集逻辑关联起来，说明硬件小板和固件驱动不是孤立存在的。
+- 我计划后续补充原理图、接口定义、上拉电阻、线长、采样周期和读取失败处理。
+
+## Evidence / 证据
+
+- [DHT11 / AM2302 board plan PDF](/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf)
+
+## Reflection / 复盘
+
+小任务也值得写清楚。我希望以后这个网站不只展示“大项目”，也展示我如何把一个简单传感器模块从任务书、原理图、PCB、固件读取到测试记录完整串起来。

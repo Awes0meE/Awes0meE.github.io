@@ -15,4 +15,14 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Domain: `https://www.66ccff-labs.com/` works publicly; apex domain redirects to `www`.
 - Skills: installed `karpathy-guidelines` and `neat-freak` into Codex user skills.
 - Documentation: added `CODEX.md`, `AGENTS.md`, `MEMORY.md`, and `docs/` knowledge base; added a cross-device bootstrap path in `AGENTS.md`.
+- Profile: normalized public identity to `Awes0meE / Li Zhiyi`, updated contact email, and aligned degree wording with Communication Engineering.
 - Follow-up: start replacing placeholder content with real portfolio assets and case studies.
+
+## 2026-05-06
+
+- Summary: Created branch `content/juanyun-tech` and drafted the first Juanyun Technology content import.
+- Source: inspected `F:\XJTLU\工作相关\卷云科技有限责任公司`, including current AC unit/base unit projects, legacy DIY cooling, FOC, solenoid valve, BLDC fan, datasheets, internship proof, reimbursement, and billing folders.
+- Files changed: added `content/projects/juanyun-thermal-hardware.mdx`, eight `content/notes/juanyun-*.mdx` files, Juanyun media entries, public technical assets under `public/uploads/projects/juanyun-tech/`, and `docs/juanyun-tech-source-inventory.md`.
+- Privacy: kept invoices, reimbursements, billing documents, internship proof, vendor package trees, and build artifacts out of the served public app.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed; local HTTP checks returned `200` for `/work/juanyun-thermal-hardware`, `/media`, and `/notes/juanyun-acunit-board`.
+- Follow-up: review public PDFs/downloads before merging or pushing this branch to any public deployment.

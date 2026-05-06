@@ -1,0 +1,26 @@
+---
+title: "Solenoid Valve and BLDC Fan Archive"
+titleZh: "螺线管阀门与 BLDC 静音风扇资料归档"
+summary: "Archive notes for solenoid valve control, OLED/encoder UI experiments, ULN2003/stepper references, and a quiet single-phase BLDC fan driver board."
+summaryZh: "螺线管阀门控制、OLED/编码器交互、ULN2003/步进驱动资料，以及单相 BLDC 静音风扇驱动板的归档笔记。"
+date: "2026-05-06"
+tags: ["Actuator", "BLDC", "STM32", "Archive"]
+---
+
+## Background / 背景
+
+源目录里还有两条不适合直接塞进当前主线的历史材料：`Legacy_螺线管阀门开发_Project` 和 `Legacy_BLDC_QuietFan_Project`。前者更偏 STM32 阀门控制、OLED、编码器和驱动模块验证，后者是一块超静音单相 BLDC 风扇驱动板资料。
+
+## My Work / 我的工作
+
+- 我先把它们归档成一篇 note，说明它们是 actuator / motor driver 方向的历史材料。
+- 螺线管阀门资料里我识别到 STM32F103 工程、OLED 显示、编码器输入、按键、阀门控制和 ULN2003/步进电机参考资料。
+- BLDC 风扇资料里我先保留了 BOM 作为附件，后续需要补 PCB 截图、驱动拓扑、噪声目标和测试记录。
+
+## Evidence / 证据
+
+- [BLDC quiet fan BOM](/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx)
+
+## Reflection / 复盘
+
+这部分现在还是资料索引，不是完整作品展示。它的价值是把我做过或接触过的执行器/电机控制方向材料纳入后续整理路线，等我补足图片、代码说明和测试证据后再拆成正式项目页。

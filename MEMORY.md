@@ -13,6 +13,9 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: Cloudflare DNS points the domain to Vercel. `www.66ccff-labs.com` resolves through a Vercel DNS CNAME, and the apex domain redirects to `www`.
 - `2026-05-06`: External skills installed into Codex user skills: `karpathy-guidelines` and `neat-freak`. Restart Codex to expose them as first-class skills.
 - `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
+- `2026-05-06`: Public identity was normalized to `Awes0meE / Li Zhiyi`; contact email is `lizhiyi20030401@gmail.com`; degree wording is Communication Engineering.
+- `2026-05-06`: Branch `content/juanyun-tech` was created for draft portfolio content from `F:\XJTLU\工作相关\卷云科技有限责任公司`.
+- `2026-05-06`: Juanyun technical materials were mapped into one project, eight notes, media entries, and public assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, and internship-proof files were not published.
 
 ## Stable Decisions
 
@@ -26,7 +29,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 
 ## Site Identity
 
-- Brand/domain: `66ccff Labs` can be used as a lab-style wrapper, but the personal portfolio identity remains `Awes0meE / Lizhiyi`.
+- Brand/domain: `66ccff Labs` can be used as a lab-style wrapper, but the personal portfolio identity remains `Awes0meE / Li Zhiyi`.
 - Visual tone: engineering academic, precise, bilingual, clean, evidence-driven.
 - Avoid returning to generic template-blog styling.
 
@@ -40,6 +43,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `content/media.json`: gallery metadata.
 - `public/uploads/`: images, videos, and downloadable assets.
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
+- `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
 
 ## Verification Baseline
 
@@ -59,7 +63,8 @@ Expected result:
 
 ## Open Content Work
 
-- Replace placeholder SVG visuals with real project photos, screenshots, videos, and diagrams.
+- Review the Juanyun branch attachments before merging to `main`, especially PDFs and downloadable engineering files.
+- Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
 - Fill `SAT301 Graduation Thesis` with abstract, architecture, experiments, figures, and thesis evidence.
 - Improve `About` with real biography, skills, education, and contact details.

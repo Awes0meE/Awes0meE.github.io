@@ -4,7 +4,7 @@ English | [中文](#中文说明)
 
 ## Overview
 
-This repository contains the source code for Lizhiyi / Awes0meE's bilingual engineering portfolio. It replaces an old Hexo-generated static export with a maintainable Next.js application designed for projects, notes, media, and future full-stack extensions.
+This repository contains the source code for Li Zhiyi / Awes0meE's bilingual engineering portfolio. It replaces an old Hexo-generated static export with a maintainable Next.js application designed for projects, notes, media, and future full-stack extensions.
 
 The old deployed Hexo output is preserved under `legacy/hexo-export/` for reference only. It is not served by the new application.
 
@@ -140,7 +140,7 @@ git push origin v0.1.0
 
 ## 项目概览
 
-这个仓库是 Lizhiyi / Awes0meE 的英中双语工程作品集网站源码。它把原来由 Hexo 教程生成的静态输出，重构成了一个可长期维护的 Next.js 应用，用于展示项目、学习笔记、媒体材料，并为未来的全栈功能预留空间。
+这个仓库是 Li Zhiyi / Awes0meE 的英中双语工程作品集网站源码。它把原来由 Hexo 教程生成的静态输出，重构成了一个可长期维护的 Next.js 应用，用于展示项目、学习笔记、媒体材料，并为未来的全栈功能预留空间。
 
 旧版 Hexo 输出已完整保存在 `legacy/hexo-export/`，仅作为参考资料，不再作为新网站服务内容。
 

@@ -1,0 +1,32 @@
+---
+title: "STM32 Base Unit Firmware"
+titleZh: "STM32 底座板固件整理笔记"
+summary: "Notes on the base unit firmware covering DHT11/DHT22 sensing, IR presence detection, fan PWM, OLED UI, Bluetooth report, and Flash parameter persistence."
+summaryZh: "我整理底座板固件的笔记：温湿度采集、红外在位检测、风扇 PWM、OLED UI、蓝牙上报和 Flash 参数持久化。"
+date: "2026-05-06"
+tags: ["STM32", "Firmware", "Flash", "OLED"]
+---
+
+## Background / 背景
+
+底座板固件来自 `Current_Product_BaseUnit_Project`，同样基于 STM32F103C8T6。它和外机固件不同，目标更偏向一个能稳定运行的底座控制固件：采集环境和出风口温湿度，检测设备是否在位，按用户设定输出风扇 PWM，并把状态显示在 OLED 上。
+
+## My Work / 我的工作
+
+- 我把底座固件整理成 `App + BSP_drivers + Core` 的结构。
+- 我梳理了 `DHT11 / DHT22`、红外检测、按键、编码器、风扇、OLED、蓝牙和 Flash 参数存储的职责边界。
+- 我记录了 UI 状态机：`UI_OFF`、`UI_BOOT`、`UI_NORMAL`、`UI_CONFIRM`。
+- 我把蓝牙上报改成更适合后台周期发送的 DMA 异步方式。
+- 我加入风扇设定值掉电记忆，使用内部 Flash 的 EEPROM emulation 思路，并用延迟写入降低频繁擦写风险。
+
+## Technical Points / 技术点
+
+- DHT11 负责环境温湿度，DHT22 负责出风口温湿度。
+- 风扇使用 PWM 输出，设定范围为 0 到 100%。
+- OLED 页面显示 `ENV / OUT / FAN`，关机确认页显示倒计时。
+- 蓝牙报文形如 `DATA:<envT>,<outT>,<fan>`。
+- Flash 参数区域使用页头、记录、CRC32 和 commit 标记思路恢复最后一次有效设定。
+
+## Reflection / 复盘
+
+这个工程让我开始重视“掉电后设备应该记得什么”。很多课堂或 demo 工程只要跑起来就结束，但实际产品需要考虑参数保存、关机确认、按键误触发、传感器读取失败后的旧值保留，以及蓝牙上报是否阻塞主循环。

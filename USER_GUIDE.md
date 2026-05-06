@@ -4,7 +4,7 @@ English | [中文](#中文说明)
 
 ## What This Website Is
 
-This is a personal engineering portfolio for Lizhiyi / Awes0meE. It is designed for visitors such as HR, supervisors, classmates, collaborators, and reviewers who want to understand the author's projects, technical direction, notes, and media evidence.
+This is a personal engineering portfolio for Li Zhiyi / Awes0meE. It is designed for visitors such as HR, supervisors, classmates, collaborators, and reviewers who want to understand the author's projects, technical direction, notes, and media evidence.
 
 The site contains:
 
@@ -154,7 +154,7 @@ If you are reading this as a visitor, you only need the public website link. The
 
 ## 这个网站是什么
 
-这是 Lizhiyi / Awes0meE 的个人工程作品集网站。它面向 HR、导师、同学、合作者和评审者，用来展示作者的项目、技术方向、学习笔记和图片/视频等证据材料。
+这是 Li Zhiyi / Awes0meE 的个人工程作品集网站。它面向 HR、导师、同学、合作者和评审者，用来展示作者的项目、技术方向、学习笔记和图片/视频等证据材料。
 
 网站包含：
 

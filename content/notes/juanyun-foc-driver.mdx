@@ -1,0 +1,27 @@
+---
+title: "FOC Driver Board Archive"
+titleZh: "慧驱动 FOC 驱动板资料整理"
+summary: "Archive notes for a sensorless FOC driver board line containing STM32F4 / DRV8301 code, PCB exports, BOMs, Gerber, and STEP model."
+summaryZh: "慧驱动 FOC 资料整理：包含 STM32F4 / DRV8301 代码、PCB、BOM、Gerber 和 STEP 模型。当前先作为 legacy 硬件控制资料归档。"
+date: "2026-05-06"
+tags: ["FOC", "Motor Control", "PCB", "STM32F4"]
+---
+
+## Background / 背景
+
+`Legacy_慧驱动FOC_Project` 是电机控制方向的历史资料。源目录里包含 STM32F4 / DRV8301 相关代码、Keil/IAR 工程、PCB、BOM、Gerber 和 STEP 模型。
+
+## My Work / 我的工作
+
+- 我先把它作为 legacy archive 归入网站，避免和当前卷云热管理主线混在一起。
+- 我提取了最适合公开展示的 PCB 证据：Gerber 压缩包和 STEP 模型。
+- 后续如果要把它写成正式项目，我会补充 FOC 控制链路、采样、电流环、驱动保护、上电测试和波形证据。
+
+## Evidence / 证据
+
+- [FOC driver Gerber archive](/uploads/projects/juanyun-tech/foc-driver-gerber.zip)
+- [FOC driver STEP model](/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step)
+
+## Reflection / 复盘
+
+这条线现在还不能作为完整公开 case study，因为缺少我对算法、硬件验证和测试波形的叙述。先放进网站的意义是建立索引，提醒后续不要把电机控制资料丢在硬盘里。

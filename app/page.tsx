@@ -36,10 +36,10 @@ export default function Home() {
               Awes0meE / Li Zhiyi
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
-              电子与电气工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。
+              通信工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。
             </p>
             <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
-              ECE undergraduate at XJTLU. I build control systems, embedded hardware, and robotics solutions with engineering rigor and curiosity.
+              Communication Engineering undergraduate at XJTLU. I build control systems, embedded hardware, and robotics solutions with engineering rigor and curiosity.
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
             <div className="mt-8 grid gap-5 text-sm text-ink sm:grid-cols-2">
