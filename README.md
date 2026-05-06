@@ -8,6 +8,11 @@ This repository contains the source code for Li Zhiyi / Awes0meE's bilingual eng
 
 The old deployed Hexo output is preserved under `legacy/hexo-export/` for reference only. It is not served by the new application.
 
+Public site:
+
+- Production: `https://www.66ccff-labs.com/`
+- Vercel deployment: `https://awes0mee-portfolio.vercel.app/`
+
 ## Tech Stack
 
 - Framework: Next.js App Router
@@ -95,6 +100,15 @@ links:
 ```
 
 Notes are stored in `content/notes/*.mdx`. Media items are stored in `content/media.json`, with assets under `public/uploads/`.
+
+Use `projectSlug` on notes and media items when they should appear as related material on a project page.
+
+Current draft content branch:
+
+- `content/juanyun-tech`
+- Contains Juanyun Technology project pages, development notes, media entries, and technical assets under `public/uploads/projects/juanyun-tech/`.
+- Review all public attachments before merging this branch to `main`.
+- Do not publish private financial, billing, credential, installer, vendor, or build-output files.
 
 ## Deployment
 
@@ -232,9 +246,23 @@ links:
 
 学习笔记放在 `content/notes/*.mdx`。媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。
 
+如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
+
+当前草稿内容分支：
+
+- `content/juanyun-tech`
+- 包含卷云科技项目页、开发笔记、媒体条目和 `public/uploads/projects/juanyun-tech/` 下的技术资产。
+- 合并到 `main` 前需要复查所有公开附件。
+- 不要发布私密财务、开票、证明、安装包、vendor 包或 build 输出文件。
+
 ## 部署
 
 推荐部署到 Vercel。
+
+当前公开访问地址：
+
+- 生产域名：`https://www.66ccff-labs.com/`
+- Vercel 部署地址：`https://awes0mee-portfolio.vercel.app/`
 
 Vercel 推荐配置：
 

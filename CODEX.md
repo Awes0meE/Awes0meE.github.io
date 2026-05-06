@@ -52,7 +52,14 @@ npm run build
 npm audit --omit=dev
 ```
 
-If the current PowerShell process cannot find `npm`, temporarily prefix PATH:
+On this Windows machine, use `npm.cmd` if PowerShell blocks `npm.ps1` through execution policy:
+
+```powershell
+npm.cmd run lint
+npm.cmd run build
+```
+
+If the current PowerShell process cannot find npm at all, temporarily prefix PATH:
 
 ```powershell
 $env:Path='C:\Program Files\nodejs;' + $env:Path
@@ -91,6 +98,7 @@ Notes require:
 - `summaryZh`
 - `date`
 - `tags`
+- optional `projectSlug`
 
 Media items live in `content/media.json` and require:
 
@@ -102,6 +110,20 @@ Media items live in `content/media.json` and require:
 - `date`
 - `caption`
 - optional `projectSlug`
+
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card.
+
+## Current Content Branch
+
+`content/juanyun-tech` is a draft content branch for materials from:
+
+```text
+F:\XJTLU\工作相关\卷云科技有限责任公司
+```
+
+As of `2026-05-06`, that branch contains 7 Juanyun project pages, 13 Juanyun notes, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`.
+
+Before merging this branch to `main`, review all public PDFs, source files, CAD/EDA files, videos, and large binary attachments. Keep private documents out of the public app: invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
 
 ## Visual Direction
 
@@ -122,6 +144,8 @@ For content-only edits:
 npm run lint
 npm run build
 ```
+
+Use the `npm.cmd` form on Windows PowerShell if script execution policy blocks `npm`.
 
 For visual/layout edits:
 

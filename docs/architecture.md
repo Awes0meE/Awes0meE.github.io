@@ -56,9 +56,15 @@ Media:
 
 - JSON object with thumbnail, source path, caption, date, and optional related project.
 
+Current content state on branch `content/juanyun-tech` as of `2026-05-06`:
+
+- 10 project files total, including 7 Juanyun project pages;
+- 18 note files total, including 13 Juanyun notes;
+- 125 public Juanyun technical assets under `public/uploads/projects/juanyun-tech/`.
+
 ## Rendering Notes
 
-The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, and links. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, links, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
 
@@ -76,3 +82,7 @@ Project detail pages also derive related notes from note frontmatter and related
 - No login.
 - No admin upload panel.
 - No server-side API required for portfolio content.
+
+## Public Asset Boundary
+
+Portfolio downloads are static files in `public/uploads/`. On the Juanyun content branch, only technical evidence is intended to be public. Do not publish invoices, reimbursements, billing records, internship proof documents, executable installers, vendor package trees, or generated build outputs.

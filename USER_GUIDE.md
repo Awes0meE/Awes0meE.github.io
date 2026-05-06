@@ -34,7 +34,19 @@ Then open the address above in a browser.
 
 Other people should not use `127.0.0.1`; that address only works on your own computer.
 
-To let others visit the website, deploy it online. The recommended method is Vercel:
+The current public website is:
+
+```text
+https://www.66ccff-labs.com/
+```
+
+The Vercel deployment address is:
+
+```text
+https://awes0mee-portfolio.vercel.app/
+```
+
+To let others visit a new version, deploy it online. The recommended method is Vercel:
 
 1. Push the latest code to GitHub.
 2. Log in to Vercel.
@@ -123,6 +135,10 @@ content/media.json
 
 Add a new object with title, type, thumbnail, date, and caption.
 
+## What Not To Publish
+
+Do not put private or unnecessary files into the public website folder. Avoid publishing invoices, reimbursements, billing records, internship proof documents, executable installers, downloaded vendor packages, and generated build outputs.
+
 ## How To Check Before Publishing
 
 Before sharing a new version, run:
@@ -184,7 +200,19 @@ npm run dev
 
 别人不能访问你的 `127.0.0.1`，因为这个地址只代表你自己的电脑。
 
-如果想让 HR、老师或朋友访问，需要把网站部署到线上。推荐使用 Vercel：
+当前公开网站地址是：
+
+```text
+https://www.66ccff-labs.com/
+```
+
+Vercel 部署地址是：
+
+```text
+https://awes0mee-portfolio.vercel.app/
+```
+
+如果想让 HR、老师或朋友访问新版本，需要把网站部署到线上。推荐使用 Vercel：
 
 1. 把最新代码推送到 GitHub。
 2. 登录 Vercel。
@@ -272,6 +300,10 @@ content/media.json
 ```
 
 添加包含标题、类型、缩略图、日期和说明的新对象。
+
+## 不要公开哪些文件
+
+不要把私密或没必要公开的文件放进网站公开目录。不要发布发票、报销单、开票资料、实习证明、exe 安装包、下载来的 vendor 包和编译生成物。
 
 ## 发布前如何检查
 

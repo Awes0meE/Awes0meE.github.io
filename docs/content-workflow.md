@@ -4,11 +4,12 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. `PID Starter Kit`
-2. `SAT301 Graduation Thesis`
-3. `About`
-4. `Media`
-5. Additional notes and smaller projects
+1. Review `content/juanyun-tech` attachments before merging to `main`.
+2. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
+3. `PID Starter Kit`
+4. `SAT301 Graduation Thesis`
+5. `About`
+6. Media gallery polish and smaller notes.
 
 ## Add Or Edit A Project
 
@@ -76,6 +77,8 @@ projectSlug: "my-project-slug"
 
 `projectSlug` is optional. Add it when a note should appear automatically on a project detail page.
 
+The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-acunit-control-platform"` connects the note to `/work/juanyun-acunit-control-platform`.
+
 ## Add Images Or Videos
 
 Put assets under:
@@ -98,6 +101,8 @@ Reference files with public paths:
 ```text
 /uploads/projects/pid-starter-kit/cover.jpg
 ```
+
+For technical archives, normalize filenames to stable ASCII names before publishing. Do not publish private or noisy folders directly. Exclude invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
 
 ## Add Media Gallery Items
 
@@ -143,7 +148,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-Then:
+Then push the branch you are working on. For `main` releases:
 
 ```powershell
 git add -A
@@ -152,3 +157,9 @@ git push origin main
 ```
 
 Vercel will redeploy automatically.
+
+For draft content branches such as `content/juanyun-tech`, push that branch and review attachments before merging:
+
+```powershell
+git push origin content/juanyun-tech
+```

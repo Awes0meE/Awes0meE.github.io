@@ -15,7 +15,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
 - `2026-05-06`: Public identity was normalized to `Awes0meE / Li Zhiyi`; contact email is `lizhiyi20030401@gmail.com`; degree wording is Communication Engineering.
 - `2026-05-06`: Branch `content/juanyun-tech` was created for draft portfolio content from `F:\XJTLU\工作相关\卷云科技有限责任公司`.
-- `2026-05-06`: Juanyun technical materials were mapped into one project, eight notes, media entries, and public assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, and internship-proof files were not published.
+- `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, internship-proof files, executable installers, vendor package folders, and build outputs were not published.
 
 ## Stable Decisions
 
@@ -23,6 +23,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - Keep `AGENTS.md` focused on cross-device bootstrap and short agent entry instructions.
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
+- Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
 - Use Vercel for deployment and Cloudflare for DNS management.
@@ -47,11 +48,11 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 
 ## Verification Baseline
 
-Known-good checks as of `2026-05-03`:
+Known-good checks as of `2026-05-06` on Windows PowerShell:
 
 ```powershell
-npm run lint
-npm run build
+npm.cmd run lint
+npm.cmd run build
 npm audit --omit=dev
 ```
 
@@ -59,11 +60,12 @@ Expected result:
 
 - lint passes;
 - production build passes;
-- production audit reports `0 vulnerabilities`.
+- production audit should report `0 vulnerabilities` when dependency state has not changed.
 
 ## Open Content Work
 
-- Review the Juanyun branch attachments before merging to `main`, especially PDFs and downloadable engineering files.
+- Review the Juanyun branch attachments before merging to `main`, especially PDFs, source files, EDA/CAD files, videos, and large binary downloads.
+- Decide whether the large public attachments should remain in Git or be moved to Git LFS / external storage before long-term public deployment.
 - Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
 - Fill `SAT301 Graduation Thesis` with abstract, architecture, experiments, figures, and thesis evidence.
