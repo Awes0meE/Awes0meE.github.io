@@ -70,8 +70,11 @@ summary: "English summary"
 summaryZh: "中文摘要"
 date: "2026-05-06"
 tags: ["PID", "Control", "Lab Note"]
+projectSlug: "my-project-slug"
 ---
 ```
+
+`projectSlug` is optional. Add it when a note should appear automatically on a project detail page.
 
 ## Add Images Or Videos
 
@@ -149,4 +152,3 @@ git push origin main
 ```
 
 Vercel will redeploy automatically.
-

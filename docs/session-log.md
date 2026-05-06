@@ -44,3 +44,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Added related media to project detail pages.
 - Files changed: updated `app/work/[slug]/page.tsx` so each project automatically displays media entries whose `projectSlug` matches the current project.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Added related development notes to project detail pages.
+- Files changed: added optional `projectSlug` to the note content model, tagged Juanyun notes with `juanyun-thermal-hardware`, and updated project pages to render matching notes.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

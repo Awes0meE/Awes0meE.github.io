@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, PlayCircle } from "lucide-react";
+import { ArrowLeft, ExternalLink, PlayCircle, ScrollText } from "lucide-react";
 import { ContentRenderer } from "@/components/content-renderer";
-import { formatDateRange, getMediaItems, getProject, getProjects } from "@/lib/content";
+import { formatDateRange, getMediaItems, getNotes, getProject, getProjects } from "@/lib/content";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
+  const relatedNotes = getNotes().filter((note) => note.projectSlug === slug);
   const relatedMedia = getMediaItems().filter((item) => item.projectSlug === slug);
 
   if (!project) {
@@ -85,6 +86,38 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="prose-reset mt-10 border-t border-line pt-2">
           <ContentRenderer source={project.body} />
         </div>
+        {relatedNotes.length ? (
+          <section className="mt-12 border-t border-line pt-10">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-ink">Development Notes / 开发笔记</h2>
+                <p className="mt-2 text-sm leading-6 text-graphite">
+                  First-person logs connected to this project&apos;s hardware, firmware, documentation, and legacy archive.
+                </p>
+              </div>
+              <Link href="/notes" className="text-sm font-semibold text-pine hover:text-copper">
+                Open notes archive
+              </Link>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {relatedNotes.map((note) => (
+                <Link
+                  key={note.slug}
+                  href={`/notes/${note.slug}`}
+                  className="grid grid-cols-[40px_1fr] gap-3 rounded-lg border border-line bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-fine"
+                >
+                  <span className="grid h-10 w-10 place-items-center rounded-md border border-line text-pine">
+                    <ScrollText size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-ink">{note.titleZh}</span>
+                    <span className="mt-1 block text-xs text-graphite">{note.title}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {relatedMedia.length ? (
           <section className="mt-12 border-t border-line pt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">

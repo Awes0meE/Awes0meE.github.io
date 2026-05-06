@@ -49,7 +49,8 @@ Note:
 
 - slug from filename;
 - metadata from frontmatter;
-- markdown-like body content.
+- markdown-like body content;
+- optional `projectSlug` for project-detail related-note sections.
 
 Media:
 
@@ -58,6 +59,8 @@ Media:
 ## Rendering Notes
 
 The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, and links. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+
+Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
 
 ## Deployment
 

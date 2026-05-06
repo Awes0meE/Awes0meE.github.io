@@ -34,6 +34,7 @@ export type Note = {
   summaryZh: string;
   date: string;
   tags: string[];
+  projectSlug?: string;
   body: string;
 };
 
