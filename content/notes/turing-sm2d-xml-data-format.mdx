@@ -1,35 +1,245 @@
 ---
 title: "sm2d XML Sample Reading Notes"
 titleZh: "sm2d XML 样例文件观察笔记"
-summary: "A short note on using public Seamly2D sample files to observe the XML-based pattern and measurement data format before deciding whether deeper parsing work was worthwhile."
-summaryZh: "用公开 Seamly2D 样例文件观察 XML 版型和量体数据格式的短记录，用来判断后续是否值得继续做解析。"
+summary: "The original README note around the Seamly2D sample folder plus the full public .sm2d and .smis XML samples rendered on the note page."
+summaryZh: "把 Seamly2D 样例文件夹 README 里的原话，以及公开 .sm2d / .smis XML 样例全文直接放到笔记页。"
 date: "2025-08-20"
 tags: ["Seamly2D", "XML", "Data Format", "Qt"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
+## 原文来源
 
-## Early Idea / 一开始怎么想
+这篇不再写成短观察笔记。先放 `readme.txt` 里关于这些文件夹和样例的原话，再把公开的 `.sm2d` 和 `.smis` 样例全文放出来。
 
-Seamly2D stores pattern data in XML-style files. Before touching deeper behavior, it made sense to open a real `.sm2d` file and a related `.smis` measurement file, then see what the application is actually reading.
+- [打开 README 原文](/uploads/projects/nanjing-turing/readme.txt)
+- [打开 sm2d 样例文件](/uploads/projects/nanjing-turing/sample-pattern-example.sm2d)
+- [打开 smis 量体样例文件](/uploads/projects/nanjing-turing/sample-measurements.smis)
 
-Seamly2D 的版型文件本质上是 XML 结构。继续往里面做功能之前，我先找了一个 `.sm2d` 样例和对应的 `.smis` 量体文件，想看清楚软件到底在读什么。
+## README 原文
 
-## What I Looked For / 当时在看什么
+code 文件夹中是程序源代码，更改的地方除了 Seamly2D_addon 文件夹中的文件之外，还对 Seamly2D.pro 和 seamly2d.pro 这两个 qmake 构建文件进行了一些更改以进行编译。
 
-当时主要想分清三类内容：几何点和曲线在哪里，量体变量在哪里，界面状态或元数据又在哪里。如果这些层次都没看明白，直接说“我要解析格式”其实会很空。
+Seamly2D__Release 文件夹中是 Release 成功编译出来以后使用 windeployqt 收集到的所有依赖，该文件夹移植到任意一个电脑上都可以运行里面的 seamly2d.exe 程序。
 
-The sample files were useful as reading material. They showed that the project format is structured enough to inspect, but a real parser would still need a clear purpose: validation, migration, visualization, or feature extraction.
+Seamly2D_addon 文件夹中的 .cpp 与 .h 文件全是新增到项目中的文件，其中 auth_utils 和 password_utils 的文件添加到了 code\Seamly2D\src\app\seamly2d\auth 中，其余所有添加的源文件和头文件都添加到了 code\Seamly2D\src\app\seamly2d\dialogs 中。
 
-## Files / 样例文件
+sm2d样例文件 文件夹中是从 seamly2d 官方论坛上找来的一个衣服样板文件，可以用于研究 sm2d 的数据格式。
 
-这里保留的只是两个很小的样例文件，方便说明当时确实看过数据结构：
+code\Seamly2D\build 文件夹中保留了两个现成的构建好的程序 Develop 分支，一个是用 debug 的编译配置跑的，一个是用 release 的配置跑的，经实测两者都可以直接导入 Qt Creator 运行。
 
-- [sample pattern file](/uploads/projects/nanjing-turing/sample-pattern-example.sm2d)
-- [sample measurement file](/uploads/projects/nanjing-turing/sample-measurements.smis)
+使用 Qt Creator 首次导入之前，因开发环境不同，可能需要删除 code\Seamly2D 路径下的 Seamly2D.pro.user 文件才能成功读取项目，此外，如果 code\Seamly2D 文件夹中有 git 相关的文件夹也有可能导致读取项目卡死。
 
-## Looking Back / 回头看
+## sample-pattern-example.sm2d
 
-这个方向最后没有做成大功能，反而是合理的。先读样例，确认格式长什么样，再决定要不要继续写解析器，比一上来就造一个没有用途的 parser 更现实。
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Seamly2D v0.6.0.1 (https://seamly.io).-->
+    <version>0.7.2</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements>theo all wa measurements.smis</measurements>
+    <variables/>
+    <draftBlock name="Front + Back Bodice + Short sleeve">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" showPointName="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="0" basePoint="1" id="2" length="@chest/4" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A1" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="1" id="3" length="@garmentlengthtshirt" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A2" showPointName="true" type="endLine"/>
+            <point angle="90" basePoint="1" id="4" length="2" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A3" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="4" id="5" length="@chest/4" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A4" showPointName="true" type="endLine"/>
+            <line firstPoint="5" id="6" lineColor="black" lineType="solidLine" lineWeight="1" secondPoint="2"/>
+            <point angle="0" basePoint="3" id="7" length="28.7901" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A5" showPointName="true" type="endLine"/>
+            <line firstPoint="2" id="8" lineColor="black" lineType="solidLine" lineWeight="1" secondPoint="7"/>
+            <point firstPoint="4" id="9" length="@necksize/5" lineColor="black" lineType="none" lineWeight="0.35" mx="0.132292" my="0.264583" name="A6" secondPoint="5" showPointName="true" type="alongLine"/>
+            <spline angle1="219.549" angle2="0" color="cornflowerblue" id="10" length1="1.29642" length2="1.80026" lineWeight="1" penStyle="solidLine" point1="9" point4="1" type="simpleInteractive"/>
+            <point angle="0" basePoint="9" id="11" length="10" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A7" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="11" id="12" length="2.5" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A8" showPointName="true" type="endLine"/>
+            <point angle="345.926" basePoint="9" id="13" length="@shoulder" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A9" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="1" id="14" length="@backnecktowaist" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A10waist" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="1" id="15" length="@scyedepth + 3" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A10chest" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="1" id="16" length="23.8/2" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A10" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="16" id="17" length="@halfback + 2" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A11" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="17" id="18" length="21.3719" lineColor="black" lineType="dashLine" lineWeight="1" mx="0.132292" my="0.264583" name="A12" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="15" id="19" length="28.7901" lineColor="black" lineType="dashLine" lineWeight="1" mx="0.132292" my="0.264583" name="A13" showPointName="true" type="endLine"/>
+            <point firstPoint="15" id="20" lineColor="black" lineType="dashLine" lineWeight="0.35" mx="0.132292" my="0.264583" name="A14" secondPoint="19" showPointName="true" type="intersectXY"/>
+            <point id="21" mx="0.132292" my="0.264583" name="A15" p1Line1="17" p1Line2="19" p2Line1="18" p2Line2="20" showPointName="true" type="lineIntersect"/>
+            <point angle="45" basePoint="21" id="22" length="3" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.977473" my="-2.46305" name="A16" showPointName="true" type="endLine"/>
+            <spline color="cornflowerblue" id="23" lineWeight="1" penStyle="solidLine" type="pathInteractive">
+                <pathPoint angle1="350.282" angle2="170.282" length1="0" length2="0.287543" pSpline="19"/>
+                <pathPoint angle1="303.055" angle2="123.055" length1="2.91802" length2="2.2329" pSpline="22"/>
+                <pathPoint angle1="265.986" angle2="85.986" length1="2.37198" length2="4.63886" pSpline="17"/>
+                <pathPoint angle1="276.965" angle2="96.965" length1="0.449468" length2="0" pSpline="13"/>
+            </spline>
+            <line firstPoint="19" id="24" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" secondPoint="7"/>
+            <point angle="225" basePoint="3" id="26" length="2.3797" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A17" showPointName="true" type="endLine"/>
+            <point angle="90" basePoint="26" id="27" length="73.6812" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A18" showPointName="true" type="endLine"/>
+            <operation axisType="1" center="27" id="28" suffix="_a1" type="flippingByAxis">
+                <source>
+                    <item alias="" color="black" idObject="1" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="10" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="9" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="12" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="13" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="23" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="19" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="7" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="3" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="14" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="20" lineType="solidLine"/>
+                    <item alias="" color="black" idObject="16" lineType="solidLine"/>
+                </source>
+                <destination>
+                    <item idObject="29" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="30"/>
+                    <item idObject="31" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="32" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="33" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="34"/>
+                    <item idObject="35" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="36" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="37" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="38" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="39" mx="0.132292" my="0.264583" showPointName="true"/>
+                    <item idObject="40" mx="0.132292" my="0.264583" showPointName="true"/>
+                </destination>
+            </operation>
+            <line firstPoint="33" id="41" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" secondPoint="31"/>
+            <line firstPoint="29" id="42" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" secondPoint="37"/>
+            <line firstPoint="37" id="43" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" secondPoint="36"/>
+            <line firstPoint="35" id="44" lineColor="cornflowerblue" lineType="solidLine" lineWeight="1" secondPoint="36"/>
+            <point angle="90" basePoint="29" id="45" length="4.79354" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A19" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="31" id="46" length="10.0149" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A20" showPointName="true" type="endLine"/>
+            <point id="47" mx="0.132292" my="0.264583" name="A21" p1Line1="31" p1Line2="29" p2Line1="46" p2Line2="45" showPointName="true" type="lineIntersect"/>
+            <point angle="270" basePoint="47" id="48" length="8.8" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="A22" showPointName="true" type="endLine"/>
+            <spline angle1="274.155" angle2="176.739" color="cornflowerblue" id="49" length1="7.73771" length2="3.05405" lineWeight="1" penStyle="solidLine" point1="31" point4="48" type="simpleInteractive"/>
+        </calculation>
+        <modeling/>
+        <pieces/>
+        <groups/>
+        <images/>
+    </draftBlock>
+    <draftBlock name="front bodive">
+        <calculation>
+            <point id="25" mx="0.132292" my="0.264583" name="B" showPointName="true" type="single" x="32.2844" y="1.05833"/>
+        </calculation>
+        <modeling/>
+        <pieces/>
+        <groups/>
+        <images/>
+    </draftBlock>
+    <draftBlock name="sleeve">
+        <calculation>
+            <point id="50" mx="0.132292" my="0.264583" name="C" showPointName="true" type="single" x="64.9677" y="1.05833"/>
+            <point angle="0" basePoint="50" id="51" length="@armcirc" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C1" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="50" id="52" length="@sleevelength1" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C2" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="52" id="53" length="@armcirc" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C3" showPointName="true" type="endLine"/>
+            <line firstPoint="51" id="54" lineColor="black" lineType="solidLine" lineWeight="1" secondPoint="53"/>
+            <point angle="0" basePoint="50" id="55" length="@armcirc/2" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C4" showPointName="true" type="endLine"/>
+            <point angle="0.120702" basePoint="50" id="56" length="7" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C5" showPointName="true" type="endLine"/>
+            <point angle="180" basePoint="51" id="57" length="7" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C6" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="56" id="58" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C7" showPointName="true" type="endLine"/>
+            <point angle="270.26" basePoint="55" id="59" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C8" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="57" id="60" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C9" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="50" id="61" length="@scyedepth/3" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C10" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="61" id="62" length="28" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C11" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="51" id="63" length="@scyedepth/6" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C12" showPointName="true" type="endLine"/>
+            <point angle="180" basePoint="63" id="64" length="29.9586" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C13" showPointName="true" type="endLine"/>
+            <point id="65" mx="0.132292" my="0.264583" name="C14" p1Line1="57" p1Line2="63" p2Line1="60" p2Line2="64" showPointName="true" type="lineIntersect"/>
+            <spline color="black" id="66" lineWeight="1" penStyle="solidLine" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="55"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="65"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="62"/>
+            </spline>
+            <point id="67" mx="0.132292" my="0.264583" name="C15" p1Line1="56" p1Line2="64" p2Line1="58" p2Line2="63" showPointName="true" type="lineIntersect"/>
+            <point angle="90" basePoint="67" id="68" length="1.5" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C16" showPointName="true" type="endLine"/>
+            <spline color="black" id="69" lineWeight="1" penStyle="solidLine" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="55"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="68"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="61"/>
+            </spline>
+            <point angle="0" basePoint="50" id="70" length="3.5" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C17" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="56" id="71" length="3.5" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C18" showPointName="true" type="endLine"/>
+            <point angle="0.429256" basePoint="55" id="72" length="3.5" lineColor="black" lineType="solidLine" lineWeight="1" mx="2.56646" my="-0.052917" name="C19" showPointName="true" type="endLine"/>
+            <point angle="360" basePoint="57" id="73" length="3.5" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C20" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="70" id="74" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C21" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="71" id="75" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C22" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="72" id="76" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C23" showPointName="true" type="endLine"/>
+            <point angle="270" basePoint="73" id="77" length="70.0085" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C24" showPointName="true" type="endLine"/>
+            <point angle="0" basePoint="68" curve="69" id="78" lineColor="black" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C25" showPointName="true" type="curveIntersectAxis"/>
+            <point direction="forward" id="79" length="4.1557" lineColor="black" mx="0.132292" my="0.264583" name="C26" showPointName="true" splinePath="66" type="cutSplinePath"/>
+            <point direction="forward" id="80" length="15.6228-4.1557" lineColor="black" mx="0.132292" my="0.264583" name="C27" showPointName="true" splinePath="66" type="cutSplinePath"/>
+            <point direction="forward" id="81" length="15.845-3.96125" lineColor="black" mx="-0.529166" my="-3.59833" name="C28" showPointName="true" splinePath="69" type="cutSplinePath"/>
+            <point direction="forward" id="82" length="3.96125" lineColor="black" mx="0.132292" my="0.264583" name="C29" showPointName="true" splinePath="69" type="cutSplinePath"/>
+            <point angle="135" basePoint="81" id="83" length="6.09261" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C30" showPointName="true" type="endLine"/>
+            <point angle="315" basePoint="81" id="84" length="7.42695" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C31" showPointName="true" type="endLine"/>
+            <point angle="225" basePoint="79" id="87" length="8.66333" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C34" showPointName="true" type="endLine"/>
+            <point angle="45" basePoint="79" id="88" length="5.58523" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C35" showPointName="true" type="endLine"/>
+            <point angle="315" basePoint="82" id="89" length="9.86871" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C32" showPointName="true" type="endLine"/>
+            <point angle="135" basePoint="82" id="90" length="6.2406" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C33" showPointName="true" type="endLine"/>
+            <point angle="225" basePoint="80" id="91" length="7.50487" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C36" showPointName="true" type="endLine"/>
+            <point angle="45" basePoint="80" id="92" length="6.18064" lineColor="black" lineType="dotLine" lineWeight="1" mx="0.132292" my="0.264583" name="C37" showPointName="true" type="endLine"/>
+            <point angle="315" basePoint="81" id="93" length="0.5" lineColor="deeppink" lineType="dotLine" lineWeight="1" mx="1.77271" my="-1.08479" name="C38" showPointName="true" type="endLine"/>
+            <point angle="135" basePoint="82" id="94" length="1" lineColor="deeppink" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C39" showPointName="true" type="endLine"/>
+            <point angle="45" basePoint="79" id="95" length="2" lineColor="deeppink" lineType="solidLine" lineWeight="1" mx="-0.687916" my="0.396875" name="C40" showPointName="true" type="endLine"/>
+            <point angle="225" basePoint="80" id="96" length="1" lineColor="deeppink" lineType="solidLine" lineWeight="1" mx="0.132292" my="0.264583" name="C41" showPointName="true" type="endLine"/>
+            <spline color="darkviolet" id="97" lineWeight="1" penStyle="solidLine" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="1.50178" pSpline="61"/>
+                <pathPoint angle1="220.064" angle2="40.064" length1="1.97173" length2="2.54967" pSpline="78"/>
+                <pathPoint angle1="180.431" angle2="0.431" length1="5.19288" length2="6.36768" pSpline="55"/>
+                <pathPoint angle1="112.952" angle2="292.952" length1="3.02285" length2="0" pSpline="65"/>
+                <pathPoint angle1="179.612" angle2="359.612" length1="4.83839" length2="5.83885" pSpline="62"/>
+            </spline>
+        </calculation>
+        <modeling/>
+        <pieces/>
+        <groups/>
+        <images/>
+    </draftBlock>
+</pattern>
+```
 
-对实习阶段来说，它更像是在补业务上下文：Seamly2D 不是普通画图软件，图形背后还连着尺寸、版型和 XML 数据。
+## sample-measurements.smis
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<smis>
+    <!--Measurements created with SeamlyMe v2025.6.30.216 (https://seamly.io/).-->
+    <version>0.3.4</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="garmentlength(tshirt)" name="@garmentlengthtshirt" value="67"/>
+        <m name="@inch" value="2.54"/>
+        <m name="@one_halfinch" value="@inch/2"/>
+        <m name="@one_quarterinch" value="@inch/4"/>
+        <m name="@one_eighthinch" value="@inch/8"/>
+        <m name="@one_sixteenthinch" value="@inch/16"/>
+        <m full_name="chest: A" name="@chest" value="90.4"/>
+        <m full_name="seat: B" name="@seat" value="95.8"/>
+        <m full_name="waist: C " name="@waist" value="80.2"/>
+        <m full_name="trouser waist position (4-6cm below waist): D" name="@trouserwaistposition" value="86.7"/>
+        <m full_name="half back: E-F" name="@halfback" value="22"/>
+        <m full_name="back neck to waist: G-H" name="@backnecktowaist" value="42"/>
+        <m full_name="scye depth: G-I" name="@scyedepth" value="20.8"/>
+        <m full_name="neck size: J" name="@necksize" value="44"/>
+        <m full_name="(1 piece sleeve) sleevelength: K-L" name="@sleevelength1" value="68"/>
+        <m full_name="(2 piece sleeve) sleevelength: E-M" name="@sleevelength2" value="89"/>
+        <m full_name="inside leg: N-O" name="@insideleg" value="88"/>
+        <m full_name="body rise: P-Q" name="@bodyrise" value="20"/>
+        <m full_name="close wrist measurement: R" name="@wristcirc" value="18"/>
+        <m full_name="arm circumference: S" name="@armcirc" value="28"/>
+        <m full_name="shoulder: K-T" name="@shoulder" value="17"/>
+    </body-measurements>
+</smis>
+```

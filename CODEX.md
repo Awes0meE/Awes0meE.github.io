@@ -78,6 +78,7 @@ Local Next.js cache rule:
 - `.editorconfig` and `.vscode/settings.json` enforce UTF-8, LF line endings, and final newlines for this workspace.
 - `.gitattributes` keeps common text formats normalized to LF in Git.
 - On Windows PowerShell, command output can still display mojibake if the console code page is wrong. Verify file contents with Node.js or VS Code before rewriting text that may already be valid UTF-8.
+- Hard rule for future batch edits: do not pipe inline Chinese here-strings from PowerShell into Node/Python/other interpreters. Use `apply_patch` for Chinese text, or create a temporary UTF-8 script/file first and run that. After generation, verify files with Node.js `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` / repeated question-mark mojibake.
 
 ## Routes
 
@@ -166,7 +167,7 @@ Current content count on `main`:
 - 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 29 media gallery items cover images/videos referenced by project and note pages, plus site visual-system assets.
+- 25 media gallery items cover images/videos referenced by project and note pages.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 
 Juanyun public boundary:
@@ -188,7 +189,7 @@ Maintain the current engineering-academic identity:
 
 ## Writing Direction
 
-Portfolio notes should keep the user's practical learning-log texture. Avoid AI handoff / delivery-report phrasing such as "only these two evidence types are public" or "the change was not intentionally expanded"; write closer to first-hand learning and debugging traces.
+Portfolio notes should keep the user's current practical learning-log texture: concrete, casual, close to the debugging scene, and comfortable with small human details. Avoid AI handoff / delivery-report phrasing such as "only these two evidence types are public" or "the change was not intentionally expanded"; write closer to first-hand learning and debugging traces. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
 For `content/notes/*.mdx`:
 

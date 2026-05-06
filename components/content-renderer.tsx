@@ -56,7 +56,7 @@ function splitBilingualSlash(text: string) {
 }
 
 function parseInline(text: string) {
-  const inlinePattern = /`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
+  const inlinePattern = /`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
   let match: RegExpExecArray | null;
@@ -73,15 +73,23 @@ function parseInline(text: string) {
         </code>
       );
     } else {
-      parts.push(
-        <a
-          key={`${match[2]}-${match.index}`}
-          href={match[3]}
-          className="font-medium text-pine underline-offset-4 hover:underline"
-        >
-          {match[2]}
-        </a>
-      );
+      if (match[2]) {
+        parts.push(
+          <a
+            key={`${match[2]}-${match.index}`}
+            href={match[3]}
+            className="font-medium text-pine underline-offset-4 hover:underline"
+          >
+            {match[2]}
+          </a>
+        );
+      } else {
+        parts.push(
+          <strong key={`strong-${match.index}`} className="font-semibold text-ink">
+            {match[4]}
+          </strong>
+        );
+      }
     }
     lastIndex = match.index + match[0].length;
   }

@@ -298,49 +298,5 @@
     "projectSlug": "tianjin-metro-stm32-foundation",
     "caption": "Servo PWM parameter sheet used while connecting timer output to actuator movement.",
     "captionZh": "把定时器 PWM 输出接到舵机动作时用到的参数图。"
-  },
-  {
-    "id": "control-dashboard",
-    "title": "Control dashboard",
-    "titleZh": "控制仪表盘",
-    "type": "image",
-    "src": "/uploads/visuals/dashboard.svg",
-    "thumbnail": "/uploads/visuals/dashboard.svg",
-    "date": "2024-03-18",
-    "caption": "Telemetry and control visualization used by the site visual system.",
-    "captionZh": "网站视觉系统里用于遥测和控制感的仪表盘图。"
-  },
-  {
-    "id": "lab-notes",
-    "title": "Engineering notebook",
-    "titleZh": "工程笔记本",
-    "type": "image",
-    "src": "/uploads/visuals/lab-notes.svg",
-    "thumbnail": "/uploads/visuals/lab-notes.svg",
-    "date": "2024-04-03",
-    "caption": "Notebook visual used around learning notes and the homepage.",
-    "captionZh": "学习笔记和首页区域使用的工程笔记视觉图。"
-  },
-  {
-    "id": "robot-platform-visual",
-    "title": "Robot platform visual",
-    "titleZh": "机器人平台视觉图",
-    "type": "image",
-    "src": "/uploads/visuals/robot-platform.svg",
-    "thumbnail": "/uploads/visuals/robot-platform.svg",
-    "date": "2024-04-03",
-    "caption": "General robotics-platform illustration kept with the site visual assets.",
-    "captionZh": "网站视觉素材里保留的机器人平台图。"
-  },
-  {
-    "id": "waveform-visual",
-    "title": "Waveform visual",
-    "titleZh": "波形视觉图",
-    "type": "image",
-    "src": "/uploads/visuals/waveform.svg",
-    "thumbnail": "/uploads/visuals/waveform.svg",
-    "date": "2024-04-03",
-    "caption": "Signal waveform illustration kept with the site visual assets.",
-    "captionZh": "网站视觉素材里保留的信号波形图。"
   }
 ]

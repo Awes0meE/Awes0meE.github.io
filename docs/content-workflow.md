@@ -176,8 +176,11 @@ Notes should keep the user's practical learning-log texture. Public pages should
 - avoid phrases like `这次只公开...`, `功能改动没有故意扩大`, `公开证据边界`, and repetitive `我负责了... / 我参与了...` lists;
 - write in a plain learning-log voice, often beginning from the action or observation instead of a formal subject;
 - add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
+- if an uploaded public `.txt`, `.md`, or self-authored document is the real artifact, publish it as a proper note page with the original wording rendered as article text; project `assetPaths` can still link the file, but should not be the only readable copy.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
+
+On Windows PowerShell, avoid Chinese batch-generation through inline here-string pipes. Use `apply_patch` for Chinese edits, or create a temporary UTF-8 script/file and run it. After generating Chinese content, verify the saved file with Node.js `fs.readFileSync(path, "utf8")` and check for `\uFFFD` or repeated question-mark mojibake before committing.
 
 ## Local Development Troubleshooting
 

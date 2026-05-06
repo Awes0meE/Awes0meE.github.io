@@ -68,7 +68,7 @@ Current content state on `main` release `v0.6.0`, as of `2026-05-07`:
 - 1 Claude Chime hardware power-board archive;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
-- 29 media gallery items covering project/note images, the DIY demo video, and site visual assets;
+- 25 media gallery items covering project/note images and the DIY demo video;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 
 ## Rendering Notes
