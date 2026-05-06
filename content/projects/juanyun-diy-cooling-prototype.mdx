@@ -1,8 +1,8 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器原型"
-summary: "A legacy but evidence-rich cooling prototype combining 3D printed structure, acrylic/CAD variants, ESP32 fan control, desktop monitoring, and a demo video."
-summaryZh: "一个早期但证据比较完整的散热原型：包含 3D 打印结构、亚克力/CAD 版本、ESP32 风扇控制、桌面端监控和演示视频。"
+summary: "A public-safe prototype page keeping only a demo video and two 3D-print preview images, while removing schematic, Gerber, CAD, and source downloads."
+summaryZh: "压风式散热器原型的公开版页面：只保留演示视频和两张 3D 打印预览图，移除原理图、Gerber、CAD 和源码下载。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
@@ -10,46 +10,24 @@ cover: "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg"
 featured: false
 links:
   demo: "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4"
-  download: "/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf"
 ---
 
 ## Project Brief / 项目简介
 
-This prototype came before the more formal Juanyun thermal-control hardware work. I treated it as a hands-on cooling experiment: design a pressure-flow structure, choose fans and power components, add ESP32-side control, and build a small desktop-side monitoring workflow.
+This legacy prototype connects structure, airflow, embedded control, and a desktop-side monitoring workflow. Only a small public evidence set remains because raw design files are not necessary for a public portfolio preview.
 
-这个项目不是最终产品型工程，而是早期快速探索：我一边处理结构和风道，一边把风扇、电源、控制程序、桌面端显示和使用说明串起来。现在把它单独拆成项目页，是因为它比普通笔记更能展示我从机械结构到嵌入式控制再到桌面工具的完整动手链路。
+这个原型页只保留轻量证据，用来说明项目确实覆盖过结构、风道、控制和桌面端监控。原理图、Gerber、EasyEDA、CAD、3MF、PlatformIO 和 C# 源码暂不公开。
 
 ![DIY pressure-flow cooling 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 
-## What I Built / 我做了什么
-
-- I kept multiple enclosure directions: 3D printed parts, acrylic/CAD cutting files, a low-cost cardboard variant, and fan replacement notes.
-- I organized the ESP32 control sketch and desktop-monitoring program as evidence of the control and display path.
-- I preserved the schematic, demo video, and print-preparation screenshots so this prototype can be reviewed as a concrete build rather than a vague idea.
-
-- 我保留了多条结构路线：3D 打印、亚克力切割、纸箱低成本版本和风扇替代方案。
-- 我整理了 ESP32 控制程序和桌面端监控线索，说明这个项目不只是外壳结构，也包含控制和状态显示。
-- 我把原理图、演示视频和打印准备截图放进网站，先形成可被浏览的证据链。
-
-## Evidence / 证据
+## Public Evidence / 公开证据
 
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
-- [PCB schematic PDF](/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf)
-- [ESP32 sketch](/uploads/projects/juanyun-tech/diy-cooling-esp32.ino)
-- [EasyEDA project](/uploads/projects/juanyun-tech/diy-cooling-easyeda-project.epro2)
-- [Gerber archive](/uploads/projects/juanyun-tech/diy-cooling-gerber.zip)
-- [PlatformIO ESP32 source](/uploads/projects/juanyun-tech/diy-cooling-platformio-main.cpp)
-- [PlatformIO config](/uploads/projects/juanyun-tech/diy-cooling-platformio.ini)
-- [Desktop C# form source](/uploads/projects/juanyun-tech/diy-cooling-desktop-form.cs)
-- [Desktop C# program source](/uploads/projects/juanyun-tech/diy-cooling-desktop-program.cs)
-- [Manual acrylic DWG](/uploads/projects/juanyun-tech/diy-cooling-acrylic-manual.dwg)
-- [Automatic acrylic DWG](/uploads/projects/juanyun-tech/diy-cooling-acrylic-auto.dwg)
-- [A1 mini 3MF slice](/uploads/projects/juanyun-tech/diy-cooling-3dprint-a1-mini.3mf)
+- [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
+- [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
 ![DIY pressure-flow cooling second 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
 ## Reflection / 复盘
 
-Looking back, the main value of this prototype is not that it was polished. Its value is that it exposed all the messy interfaces between structure, airflow, electronics, software, and documentation. That experience later made the Juanyun hardware SOP and board-level documentation feel much more necessary.
-
-回头看，这个项目最有价值的地方不是它多成熟，而是它把结构、风道、电子、电源、软件和文档之间的混乱连接暴露出来了。也正因为做过这种快速原型，我后来才更明确地意识到：硬件项目必须有需求、接口、版本、证据和复盘。
+The value of this prototype is not polish. The value is the exposed interface between structure, airflow, electronics, software, and documentation. Detailed files can stay in a private archive until they are cleaned and desensitized.

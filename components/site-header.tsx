@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { BilingualText } from "@/components/bilingual-text";
+import { LanguageToggle } from "@/components/language-toggle";
 import { Logo } from "@/components/logo";
 import { navItems } from "@/lib/site";
 
@@ -15,17 +17,20 @@ export function SiteHeader() {
               href={item.href}
               className="underline-offset-[10px] transition hover:text-pine hover:underline"
             >
-              {item.label}
+              <BilingualText en={item.labelEn} zh={item.labelZh} />
             </Link>
           ))}
         </nav>
-        <Link
-          href="/work"
-          className="hidden items-center gap-2 rounded-md border border-pine px-4 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white sm:flex"
-        >
-          View Projects / 查看项目
-          <ArrowRight size={16} />
-        </Link>
+        <div className="flex items-center gap-2">
+          <LanguageToggle />
+          <Link
+            href="/work"
+            className="hidden items-center gap-2 rounded-md border border-pine px-4 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white lg:flex"
+          >
+            <BilingualText en="View Projects" zh="查看项目" />
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
     </header>
   );

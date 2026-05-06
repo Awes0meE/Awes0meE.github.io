@@ -1,54 +1,32 @@
 ---
 title: "Juanyun AC Unit Control Platform"
 titleZh: "卷云外机控制平台 V2.0 / V2.1"
-summary: "A current-product hardware case study for the Juanyun AC unit control platform, covering requirements, PCB split, compressor/EEV interfaces, power routing, UI board, and firmware-facing constraints."
-summaryZh: "卷云外机控制平台当前产品线整理：覆盖 V2.0/V2.1 需求、主控板/分电板/交互板拆分、压缩机与电子膨胀阀接口、电源路径、UI 板和固件联调约束。"
+summary: "A public-safe case-study shell for the Juanyun AC unit control platform. Detailed board files and firmware evidence stay private until reviewed and desensitized."
+summaryZh: "卷云外机控制平台的公开版项目页。详细板图、生产导出文件和固件证据先设为私密，等脱敏后再公开。"
 date: "2026-04 to 2026-05"
-status: "Branch Draft"
+status: "Private Evidence Review"
 tags: ["STM32", "PCB", "Thermal", "Compressor", "Interface"]
 cover: "/uploads/projects/juanyun-tech/acunit-v21-system-block.png"
 featured: true
-links:
-  download: "/uploads/projects/juanyun-tech/acunit-v21-main-schematic.pdf"
 ---
 
 ## Project Brief / 项目简介
 
-This page separates the current AC unit control platform from the broader Juanyun internship archive. I treated the V2.0 and V2.1 folders as a real product line: requirements, block diagrams, PCB exports, compressor references, and firmware constraints all had to connect to one system story.
+The AC unit control platform is a product-facing hardware line with multiple boards, compressor and fan interfaces, sensor inputs, UI controls, and firmware-facing constraints. The public page describes only the engineering scope. Schematics, PCB exports, Gerber packages, BOM files, and firmware source are not served from the website.
 
-这页专门整理卷云外机控制平台。相比早期原型，这条线更接近真实产品开发：我需要把需求、系统框图、三块 PCB、压缩机/电子膨胀阀接口、供电约束和固件联调条件放在同一个逻辑里说明。
+这条线比普通课程项目更接近公司真实产品，公开时需要保守处理。外机板相关的原理图、PCB、生产包、源码和内部需求材料暂不放公网。
 
 ![AC Unit V2.1 system block diagram](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-## My Work / 我的工作
+## Scope / 工作范围
 
-- 我把 V2.0 的单板需求整理成可讨论的硬件约束，包括 24 V 输入、12 V 风扇、NTC、DHT11、压力变送器、OLED、编码器、压缩机驱动板和电子膨胀阀。
-- 我参与整理 V2.1 的三板拆分：主控板负责 STM32 控制和传感接口，分电板承担 24 V/12 V 分配和负载路径，交互板负责编码器、按键、OLED 和用户输入。
-- 我把压缩机、压缩机驱动板和电子膨胀阀放进同一个接口风险清单里，避免只看 MCU 引脚而忽略功率、电流、线束和调试边界。
-- 我把外机固件整理成可以支撑联调的结构，让硬件页面里展示的不只是 PCB 图，而是硬件和固件能一起工作的证据。
+- Hardware requirements around power, sensing, UI, compressor-driver, fan, and electronic-expansion-valve interfaces.
+- V2.0 / V2.1 board-version structure explained as a system instead of a single PCB screenshot.
+- Hardware constraints connected with firmware bring-up, pin planning, module boundaries, and future test records.
 
-## Evidence / 证据
+## Public Evidence / 当前公开证据
 
-- [V2.0 requirements PDF](/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf)
-- [V2.0 development SOP PDF](/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf)
-- [V2.0 system block](/uploads/projects/juanyun-tech/acunit-v20-system-block.png)
-- [V1.0 / V2.0 hardware revision archive](/notes/juanyun-acunit-hardware-revision-archive)
-- [V2.1 system block](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
-- [V2.1 main board schematic](/uploads/projects/juanyun-tech/acunit-v21-main-schematic.pdf)
-- [V2.1 main board PCB export](/uploads/projects/juanyun-tech/acunit-v21-main-pcb.pdf)
-- [V2.1 power board schematic](/uploads/projects/juanyun-tech/acunit-v21-power-schematic.pdf)
-- [V2.1 power board PCB export](/uploads/projects/juanyun-tech/acunit-v21-power-pcb.pdf)
-- [V2.1 interaction board schematic](/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf)
-- [V2.1 interaction board PCB export](/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf)
-- [V2.1 manufacturing export package](/notes/juanyun-acunit-v21-manufacturing-package)
-- [V2.1 component datasheet review](/notes/juanyun-acunit-v21-component-datasheets)
-- [Firmware README](/uploads/projects/juanyun-tech/acunit-firmware-readme.md)
-- [Firmware PINOUT](/uploads/projects/juanyun-tech/acunit-firmware-pinout.md)
-- [Firmware V0.5 release notes](/uploads/projects/juanyun-tech/acunit-release-notes-v05.md)
-- [Application source](/uploads/projects/juanyun-tech/acunit-app.c)
-- [Control service source](/uploads/projects/juanyun-tech/acunit-svc-control.c)
-- [Sensor service source](/uploads/projects/juanyun-tech/acunit-svc-sensor.c)
-- [UI service source](/uploads/projects/juanyun-tech/acunit-svc-ui.c)
+No raw company design files are public in this validation branch. The next public-safe evidence should be redrawn diagrams, masked board photos, high-level interface tables, and reviewed development notes.
 
 ![AC Unit V2.1 main board front render](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
 
@@ -56,8 +34,6 @@ This page separates the current AC unit control platform from the broader Juanyu
 
 ![AC Unit V2.1 interaction board front render](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
 
-## What I Still Need To Add / 后续补充
+## Public Notes Boundary / 公开笔记边界
 
-This page is still a branch draft. The next useful evidence would be real board photos, power-on notes, firmware flashing logs, oscilloscope or multimeter measurements, and a version table explaining why V2.1 changed from the V2.0 shape.
-
-这页后续应该继续补实物照片、上电记录、烧录截图、测量记录和版本变更表。现在先把结构搭起来，让招聘方或导师能看出这不是一张孤立 PCB，而是一条被需求、接口和固件约束共同驱动的产品线。
+Related Juanyun notes are visible on the site. Downloadable production files and source-code files stay out of the deployed public assets.

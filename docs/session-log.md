@@ -4,6 +4,55 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Cleaned up local preview troubleshooting after a corrupted Next.js `.next` development cache caused Juanyun note pages to fail with a missing `vendor-chunks/esprima.js` module.
+- Files changed: documented the recovery path in `README.md`, `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md`; clarified that the error comes from local cache corruption around `gray-matter -> js-yaml -> esprima`, not from broken MDX note content.
+- Verification: stopped stale project Next.js processes, deleted `.next/`, restarted `npm run dev`, and confirmed all 9 Juanyun note routes returned `200`.
+
+## 2026-05-06
+
+- Summary: Reconciled project documentation after the language-toggle and Juanyun visibility updates.
+- Files changed: rewrote long-term project docs with clean bilingual examples, documented the body-level language bootstrap, and removed stale/garbled guidance from `README.md`, `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md`.
+- Verification: `npm.cmd run lint`, `npm.cmd run build`, and `git diff --check` passed.
+
+## 2026-05-06
+
+- Summary: Added a site-wide English/Simplified Chinese language toggle.
+- Files changed: added `LanguageToggle` and `BilingualText`, rewired header/footer/home/list/detail/about/media UI labels to use paired text, added optional Chinese media title/caption metadata, and kept the app statically generated with `html[data-lang]` CSS switching.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Repaired Juanyun note mojibake and removed low-value reference notes.
+- Files changed: rewrote the remaining Juanyun note bodies as normal Chinese, removed the compressor datasheet, AC unit component datasheet, AC unit manufacturing-export, and base-unit component datasheet notes, and updated project memory/docs counts from 13 to 9 Juanyun notes.
+- Verification: checked the remaining `content/notes/juanyun-*.mdx` files for common mojibake markers and checked content references to the deleted note slugs.
+
+## 2026-05-06
+
+- Summary: Ran `/neat` after pushing `feature/note-visibility`.
+- Files changed: reconciled `CODEX.md`, `MEMORY.md`, `README.md`, `USER_GUIDE.md`, and `docs/juanyun-tech-source-inventory.md` with the current Juanyun public boundary: notes are public, but website-accessible assets are limited to approved screenshots/renders and one prototype demo video.
+- Verification: checked note visibility frontmatter, listed current Juanyun public assets, confirmed the sensitive public-link scan stays empty, and confirmed no raw Juanyun files are tracked under the public upload folder at HEAD.
+
+## 2026-05-06
+
+- Summary: Adjusted the Juanyun public boundary before pushing `feature/note-visibility`.
+- Files changed: made Juanyun notes public, restored safe board/system screenshots, added board media entries, and kept raw PCB/manufacturing/source downloads out of `public/uploads/projects/juanyun-tech/`.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build now includes the Juanyun note pages while the sensitive file-link scan stays empty.
+
+## 2026-05-06
+
+- Summary: Revised public project and note narration on `feature/note-visibility`.
+- Files changed: rewrote public project pages and five public notes toward direct descriptive narration, removed `My Work` style sectioning, reduced first-person phrasing, and added English/Chinese section support.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Created `feature/note-visibility` to test note-level public/private visibility and reduce public Juanyun exposure.
+- Files changed: added `visibility` to the note content model, filtered public note routes through `getNotes()`, rewrote Juanyun project pages as public-safe shells, reduced raw downloadable assets, and removed company Gerber/schematic/BOM/source/CAD files from `public/uploads/projects/juanyun-tech/`.
+- Privacy: Juanyun notes and safe screenshots/renders are public; raw board/manufacturing/source files are not website-accessible on this branch.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build generated only the five public note pages and no Juanyun note HTML pages.
+
+## 2026-05-06
+
 - Summary: Ran `/neat` after rewriting all notes in the user's personal learning-log style.
 - Files changed: updated `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md` so future agents preserve the new note voice instead of reverting to generic portfolio prose.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

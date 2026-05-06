@@ -5,25 +5,28 @@ summary: "A working note for converting PID theory into embedded experiments, tu
 summaryZh: "记录 PID 从理论到嵌入式实验、调参日志和可视化反馈的实现过程。"
 date: "2024-05-18"
 tags: ["Control", "PID", "Matlab"]
+visibility: public
 ---
 
-## 前期想法
+## Starting Point / 前期想法
 
-PID 这个东西很神奇，课上学的时候感觉就是三个字母和一堆公式，真正调起来才发现它像在和系统讨价还价。P 大了冲，I 大了慢慢攒账，D 看起来很聪明但又容易被噪声整破防。
+PID looks simple in class: three letters, one formula, a few tuning rules. Real tuning feels different. A larger P term can become aggressive, integral action slowly pays back accumulated error, and D looks clever until noise starts fighting back.
 
-我写这篇笔记，是想把 PID 从“理论知道一点”变成“实验能说清楚”。只背公式没用，必须把误差、输出、响应曲线和调参过程放在一起看。
+这篇笔记先把 PID 从“理论知道一点”拉到“实验能说清楚”。只背公式没用，误差、输出、响应曲线和调参过程必须放在一起看。
 
-## 疑问：为什么 PID 要配可视化？
+## Question / 疑问：为什么 PID 需要可视化？
 
-因为只看最终结果很容易误判。系统是不是超调、是不是振荡、是不是稳态误差太大、是不是执行器已经饱和，这些都要看曲线。没有可视化，调参就像闭着眼拧螺丝，拧对了也不知道为什么。
+Only looking at the final result is misleading. Overshoot, oscillation, steady-state error, actuator saturation, and sluggish recovery all show up more clearly in curves than in a single success/failure result.
 
-## 阶段目标
+只看最终结果很容易误判。系统是不是超调、是不是振荡、是不是稳态误差太大、是不是执行器已经饱和，都要看曲线。没有可视化，调参就像闭眼拧螺丝，拧对了也不知道为什么。
 
-- 把 P、I、D 分别对响应的影响写清楚。
-- 用小实验记录调参过程，不要只留最终参数。
-- 把误差、控制输出和测量值画出来。
-- 后续接到 PID Starter Kit 里，形成嵌入式实验证据。
+## Stage Goals / 阶段目标
 
-## 复盘
+- Explain how P, I, and D separately affect response behavior.
+- Record tuning as a process instead of only keeping the final parameters.
+- Plot error, control output, and measured value together.
+- Connect the note to PID Starter Kit as embedded experiment evidence.
 
-PID 对我来说是控制方向的入口。它不一定高级，但很工程。后续如果能把理论、代码、波形和硬件实验串起来，这篇笔记就不是“学习记录”，而是一个可以反复复用的调参手册。
+## Reflection / 复盘
+
+PID is not necessarily advanced, but it is very engineering-oriented. A useful PID note should eventually connect theory, code, waveform, hardware experiment, and tuning record into one reusable manual.

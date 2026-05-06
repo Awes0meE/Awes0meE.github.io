@@ -5,25 +5,28 @@ summary: "Reading notes for mapping, localization, loop closure, and robotics sy
 summaryZh: "记录建图、定位、回环检测和机器人系统取舍的阅读笔记。"
 date: "2024-03-21"
 tags: ["SLAM", "Robotics", "Review"]
+visibility: public
 ---
 
-## 前期想法
+## Starting Point / 前期想法
 
-SLAM 这个词第一次看很酷，建图、定位、回环、机器人，好像全是高大上的关键词。但真正读资料的时候会发现，它不是一个算法名字，而是一整套系统问题。传感器、算力、场景、误差、实时性，哪一个不行都会让结果翻车。
+SLAM looks like a single impressive keyword at first: mapping, localization, loop closure, robots. In practice it is a system problem. Sensors, compute budget, scene constraints, error accumulation, and real-time behavior all affect the result.
 
-所以这篇笔记不打算只抄公式。公式当然重要，但我现在更想搞清楚不同方法在真实机器人系统里各自怕什么，需要什么输入，失败模式是什么。
+这篇不只抄公式。公式当然重要，但更重要的是先知道不同方法在真实机器人系统里各自怕什么、需要什么输入、失败模式是什么。
 
-## 疑问：为什么不先死磕某一个算法？
+## Question / 疑问：为什么不先死磕某一个算法？
 
-可以，但我现在更缺的是系统地图。先知道视觉、激光、IMU、轮速计各自能提供什么，再去看具体算法会更稳。不然很容易陷入“看懂一篇文章，但不知道它在系统里放哪”的状态。
+A single algorithm makes more sense after the system map is clear. Visual SLAM, LiDAR SLAM, IMU fusion, and wheel odometry provide different assumptions and failure modes. Without that map, it is easy to understand one paper while still not knowing where it belongs in a robot.
 
-## 阶段目标
+可以先看某个算法，但更缺的是系统地图。先知道视觉、激光、IMU、轮速计各自能提供什么，再去看具体算法会更稳。
 
-- 整理定位、建图、回环检测之间的关系。
-- 对比视觉 SLAM、激光 SLAM 和多传感器融合的输入要求。
-- 记录不同方法的失败场景，不只看成功 demo。
-- 后续和机器人平台或毕业设计内容关联起来。
+## Stage Goals / 阶段目标
 
-## 复盘
+- Map the relationship between localization, mapping, and loop closure.
+- Compare input requirements for visual SLAM, LiDAR SLAM, and multi-sensor fusion.
+- Record failure scenarios instead of only successful demos.
+- Connect the reading route to robot-platform or graduation-thesis work later.
 
-这篇现在更像阅读路线图。SLAM 对我来说不只是算法学习，也是在训练系统取舍思维：传感器怎么选，算力怎么分，场景怎么限制，失败以后怎么定位问题。
+## Reflection / 复盘
+
+This note is currently a reading route map. SLAM is not only algorithm learning; it is also system tradeoff training: sensor choice, compute allocation, scene limitation, and failure diagnosis.

@@ -1,22 +1,22 @@
 ---
 title: "STM32 Base Unit Firmware"
 titleZh: "STM32 底座板固件整理笔记"
-summary: "Notes on the base unit firmware covering DHT11/DHT22 sensing, IR presence detection, fan PWM, OLED UI, Bluetooth report, and Flash parameter persistence."
-summaryZh: "我整理底座板固件的笔记：温湿度采集、红外在位检测、风扇 PWM、OLED UI、蓝牙上报和 Flash 参数持久化。"
+summary: "Notes on base-unit firmware for DHT sensing, IR presence detection, fan PWM, OLED UI, Bluetooth reporting, and Flash persistence."
+summaryZh: "底座板固件整理笔记：温湿度采集、红外在位检测、风扇 PWM、OLED UI、蓝牙上报和 Flash 参数持久化。"
 date: "2026-05-06"
 tags: ["STM32", "Firmware", "Flash", "OLED"]
 projectSlug: "juanyun-baseunit-control-firmware"
+visibility: public
 ---
-
 ## 前期想法
 
 底座板固件比外机固件少了一些“大件”，但它反而更像一个完整的小产品。它要读环境温湿度和出风口温湿度，要判断设备在不在位，要让用户调风扇，还要在 OLED 上显示状态，最后还要通过蓝牙上报数据。听起来每个功能都不难，但全部放进一个主循环里，难度就上来了。
 
-我一开始最担心的是它变成“能跑但很乱”的工程。课堂 demo 里风扇能转、OLED 能亮就差不多了，但真实设备还要考虑关机确认、掉电记忆、传感器读取失败、按键误触发、蓝牙发送会不会卡住主循环。
+一开始最担心的是它变成“能跑但很乱”的工程。课程 demo 里风扇能转、OLED 能亮就差不多了，但真实设备还要考虑关机确认、掉电记忆、传感器读取失败、按键误触发、蓝牙发送会不会卡住主循环。
 
 ## 改变
 
-我把底座固件按 `App + BSP_drivers + Core` 的方式整理。`Core` 保留 CubeMX 生成的外设初始化，`BSP_drivers` 处理 DHT、IR、风扇、OLED、蓝牙、Flash，`App` 负责状态机和任务调度。这样后续看代码时，至少知道该去哪里找问题。
+底座固件按 `App + BSP_drivers + Core` 的方式整理。`Core` 保留 CubeMX 生成的外设初始化，`BSP_drivers` 处理 DHT、IR、风扇、OLED、蓝牙、Flash，`App` 负责状态机和任务调度。这样后续看代码时，至少知道该去哪里找问题。
 
 疑问：为什么一个风扇设定值也要做掉电记忆？
 
@@ -33,12 +33,8 @@ projectSlug: "juanyun-baseunit-control-firmware"
 
 ## 证据
 
-- [Application scheduler source](/uploads/projects/juanyun-tech/baseunit-app.c)
-- [Bluetooth DMA report source](/uploads/projects/juanyun-tech/baseunit-bluetooth.c)
-- [Flash parameter store source](/uploads/projects/juanyun-tech/baseunit-nvstore.c)
-- [Firmware README](/uploads/projects/juanyun-tech/baseunit-firmware-readme.md)
-- [Component datasheet review](/notes/juanyun-baseunit-component-datasheets)
+公开页只保留固件结构说明，底座板源码和器件约束清单暂时不从网站提供下载。
 
 ## 复盘
 
-这个工程让我开始重视“设备应该记得什么”。以前我会更关注功能能不能跑，现在会多想一步：断电以后怎么办，用户误触怎么办，传感器失败怎么办，通信会不会阻塞。底座板不算复杂，但它很适合训练产品化固件的思路。
+这个工程让我开始重视“设备应该记得什么”。以前更关注功能能不能跑，现在会多想一步：断电以后怎么办，用户误触怎么办，传感器失败怎么办，通信会不会阻塞。底座板不算复杂，但它很适合训练产品化固件的思路。

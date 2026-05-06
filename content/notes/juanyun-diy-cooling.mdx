@@ -1,34 +1,33 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器开发笔记"
-summary: "Archive notes for an earlier pressure-flow cooling prototype with 3D printed structure, acrylic/CAD variants, ESP32 control, desktop monitoring, and demo video."
-summaryZh: "早期 DIY 压风式散热器资料整理：包括 3D 打印结构、亚克力/CAD 版本、ESP32 控制、桌面端监控和演示视频。"
+summary: "Archive notes for an earlier pressure-flow cooling prototype with 3D printed structure, ESP32 control, desktop monitoring, and demo video."
+summaryZh: "早期 DIY 压风式散热器开发笔记：包括 3D 打印结构、ESP32 控制、桌面端监控和演示视频。"
 date: "2026-05-06"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool"]
 projectSlug: "juanyun-diy-cooling-prototype"
+visibility: public
 ---
-
 ## 前期想法
 
 这个压风式散热器项目现在回头看，味道很“早期探索”。结构、风道、风扇、电源、ESP32、桌面端显示、说明视频，全都混在一起，文件夹也很有当年随手堆资料的风格。说好听点叫探索性强，说难听点就是管理不太规范。
 
-但它也有价值。因为它不是单纯画一块板，也不是单纯写一段代码，而是把一个实际散热想法从结构到控制再到桌面端监控都碰了一遍。虽然不成熟，但很能说明我当时是真动手折腾过的。
+但它也有价值。因为它不是单纯画一块板，也不是单纯写一段代码，而是把一个实际散热想法从结构到控制再到桌面端监控都碰了一遍。虽然不成熟，但很能说明当时是真动手折腾过的。
 
 ![DIY pressure-flow cooling 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 
 ## 改变
 
-一开始我只想把演示视频和 ESP32 程序放上来，后来发现这样会把项目写得太单薄。这个项目真正有意思的地方是它同时有 3D 打印、亚克力切割、纸箱版本、PCB、ESP32、桌面端 C# 程序和使用说明。于是我把能公开的设计文件和源码都补进来了。
+一开始只想把演示视频和 ESP32 程序放上来，后来发现这样会把项目写得太单薄。这个项目真正有意思的地方是它同时涉及 3D 打印、亚克力切割、纸箱版本、PCB、ESP32、桌面端 C# 程序和使用说明。公开页现在只保留可以展示的预览图和视频，原始工程文件暂时不挂出来。
 
 疑问：为什么不把安装包也放上来？
 
-因为安装包、运行库、NuGet 包这些东西适合私下备份，不适合放进公开作品集。作品集需要的是能证明开发过程的源码、设计文件和演示，不是把整个电脑里的依赖垃圾场搬上网。
+因为安装包、运行库、NuGet 包这些东西适合私下备份，不适合放进公开作品集。作品集需要的是能证明开发过程的设计痕迹和演示，不是把整个电脑里的依赖垃圾场搬上网。
 
 ## 阶段目标
 
 - 保留结构路线：3D 打印、亚克力切割、纸箱低成本版本。
-- 保留控制路线：ESP32、PlatformIO、PCB 原理图和 Gerber。
-- 保留上位机路线：桌面端 C# 源码和项目文件。
+- 保留控制路线：ESP32、桌面端监控和演示视频。
 - 后续补更清楚的风道解释、温度对比和实际使用效果，不要只靠视频撑场面。
 
 ## 证据
@@ -36,21 +35,9 @@ projectSlug: "juanyun-diy-cooling-prototype"
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
 - [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 - [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
-- [PCB schematic PDF](/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf)
-- [ESP32 sketch](/uploads/projects/juanyun-tech/diy-cooling-esp32.ino)
-- [EasyEDA project](/uploads/projects/juanyun-tech/diy-cooling-easyeda-project.epro2)
-- [Gerber archive](/uploads/projects/juanyun-tech/diy-cooling-gerber.zip)
-- [PlatformIO ESP32 source](/uploads/projects/juanyun-tech/diy-cooling-platformio-main.cpp)
-- [PlatformIO config](/uploads/projects/juanyun-tech/diy-cooling-platformio.ini)
-- [Desktop C# form source](/uploads/projects/juanyun-tech/diy-cooling-desktop-form.cs)
-- [Desktop C# program source](/uploads/projects/juanyun-tech/diy-cooling-desktop-program.cs)
-- [Desktop C# project file](/uploads/projects/juanyun-tech/diy-cooling-desktop-csproj.xml)
-- [Manual acrylic DWG](/uploads/projects/juanyun-tech/diy-cooling-acrylic-manual.dwg)
-- [Automatic acrylic DWG](/uploads/projects/juanyun-tech/diy-cooling-acrylic-auto.dwg)
-- [A1 mini 3MF slice](/uploads/projects/juanyun-tech/diy-cooling-3dprint-a1-mini.3mf)
 
 ![DIY pressure-flow cooling second 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
 ## 复盘
 
-这个项目的价值不在于它有多成熟，而在于它暴露了结构、风道、电子、电源、软件、文档之间的混乱连接。也正因为做过这种项目，我后来才更能理解为什么硬件开发需要 SOP、版本记录和证据链。
+这个项目的价值不在于它有多成熟，而在于它暴露了结构、风道、电子、电源、软件、文档之间的混乱连接。也正因为做过这种项目，后面才更能理解为什么硬件开发需要 SOP、版本记录和证据链。

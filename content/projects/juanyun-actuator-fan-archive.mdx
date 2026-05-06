@@ -1,48 +1,17 @@
 ---
 title: "Actuator and Quiet Fan Driver Archive"
 titleZh: "螺线管阀门与 BLDC 静音风扇驱动归档"
-summary: "An archived actuator-control line covering STM32 solenoid/valve control, OLED and encoder UI experiments, ULN2003 references, and a quiet single-phase BLDC fan driver board."
-summaryZh: "一条执行器控制与风扇驱动方向的历史资料线：包含 STM32 螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料，以及单相 BLDC 静音风扇驱动板。"
+summary: "A private-evidence archive shell for actuator and fan-driver experiments. Public page keeps the direction while hiding raw source, schematic, BOM, and EDA files."
+summaryZh: "执行器与风扇驱动资料线的公开版占位页；当前保留方向，隐藏源码、原理图、BOM 和 EDA 文件。"
 date: "2026-03 to 2026-04"
-status: "Archived Evidence"
+status: "Private Evidence Review"
 tags: ["STM32", "Actuator", "BLDC", "OLED", "Encoder"]
 cover: "/uploads/visuals/circuit-board.svg"
 featured: false
-links:
-  download: "/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c"
 ---
 
 ## Project Brief / 项目简介
 
-This project page groups two thinner archive lines that belong to the same actuator-control direction: an STM32 solenoid-valve control experiment and a quiet single-phase BLDC fan driver board archive. The goal is not to overstate them as polished products, but to make the technical evidence discoverable.
+This archive groups thinner actuator-control experiments: solenoid-valve control and a quiet single-phase BLDC fan-driver board line. It is useful as a future direction, but the public portfolio should not publish raw company files.
 
-这页把两条单独看都比较薄的历史线合并：一条是 STM32 螺线管阀门控制实验，一条是超静音单相 BLDC 风扇驱动板。它们现在都更适合叫“证据归档”，但放成独立项目页后，后续补图、补测试和补代码解释会更方便。
-
-## What Is In The Archive / 资料里有什么
-
-- STM32F103 valve-control project generated from CubeMX.
-- `valve.c` and `main.c` source files for the valve-control experiment.
-- OLED, rotary encoder, key input, delay, I2C, and UI-related support code.
-- ULN2003 / stepper-driver reference schematic.
-- Quiet single-phase BLDC fan driver BOM and EDA project file.
-
-- STM32F103 阀门控制工程和 `.ioc` 配置。
-- `valve.c`、`main.c` 等阀门控制实验代码。
-- OLED、编码器、按键、延时、I2C 和界面相关支持代码。
-- ULN2003 / 步进驱动参考原理图。
-- 单相 BLDC 静音风扇驱动板 BOM 和 EDA 工程文件。
-
-## Evidence / 证据
-
-- [Solenoid valve CubeMX config](/uploads/projects/juanyun-tech/solenoid-valve-control.ioc)
-- [Solenoid valve control source](/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c)
-- [Solenoid valve main source](/uploads/projects/juanyun-tech/solenoid-valve-control-main.c)
-- [ULN2003 stepper driver schematic](/uploads/projects/juanyun-tech/uln2003-stepper-driver-schematic.pdf)
-- [BLDC quiet fan driver BOM](/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx)
-- [BLDC quiet fan EDA project](/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro)
-
-## Reflection / 复盘
-
-This archive is useful because it shows the actuator side of my hardware work: not only sensing and UI, but also driving things that move. To make it stronger later, I need to add photos, wiring records, timing diagrams, current measurements, and a short explanation of how the valve or fan driver behaves under real load.
-
-这条线对作品集的价值在于它展示了“驱动执行器”的方向：不只是采集传感器和做界面，也要控制会动的负载。后续要把它写扎实，我需要补实物照片、接线记录、时序图、电流测试，以及阀门或风扇在真实负载下的行为说明。
+这条线后续可以补接线记录、时序图、电流测量、实物照片和脱敏代码片段。当前不公开 `.ioc`、`.c`、原理图、BOM 或 EDA 工程。

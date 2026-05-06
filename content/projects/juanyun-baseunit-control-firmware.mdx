@@ -1,43 +1,30 @@
 ---
 title: "Juanyun Base Unit Control Firmware"
 titleZh: "卷云底座板 STM32 控制固件"
-summary: "A firmware-focused case study for the STM32F103 base unit controller, covering DHT sensing, IR presence detection, fan PWM, OLED UI, Bluetooth reporting, and Flash parameter persistence."
-summaryZh: "卷云底座板 STM32F103 控制固件整理：覆盖 DHT 温湿度采集、红外在位检测、风扇 PWM、OLED 交互、蓝牙上报和 Flash 参数保存。"
+summary: "A public-safe overview of STM32 base-unit firmware work: sensing, local display, fan control, Bluetooth reporting, and persistent settings."
+summaryZh: "STM32 底座板控制固件的公开版概览：覆盖传感、显示、风扇控制、蓝牙上报和参数保存，但不公开源码。"
 date: "2026-04 to 2026-05"
-status: "Branch Draft"
+status: "Private Evidence Review"
 tags: ["STM32", "Firmware", "OLED", "Bluetooth", "Flash"]
 cover: "/uploads/visuals/dashboard.svg"
 featured: true
-links:
-  download: "/uploads/projects/juanyun-tech/baseunit-app.c"
 ---
 
 ## Project Brief / 项目简介
 
-The base unit firmware is a smaller but cleaner embedded-control story than the AC unit hardware page. It focuses on how I organized a real STM32F103 firmware project so a desk cooling base can sense environment/outlet temperature, detect whether the device is present, drive a fan, display local state, report over Bluetooth, and remember the user's fan setting after power loss.
+This firmware line is a useful embedded-systems case, but the source files came from a company work folder. The public page keeps the architecture-level description and removes direct source downloads.
 
-底座板固件这条线更偏软件工程。我把它整理成一个能独立讲清楚的 STM32 项目：传感、执行、显示、通信和参数持久化都在一个循环里协同工作，而不是单独的课堂 demo。
+这条线适合后续写成完整的嵌入式项目复盘，但当前版本不公开 `.c`、`.ioc`、README、PINOUT 或内部开发文档。
 
-## My Work / 我的工作
+## Firmware Scope / 固件范围
 
-- 我把主流程收敛到 `APP_BindHandles()`、`APP_Init()` 和 `APP_Loop()`，让 CubeMX 生成层和业务逻辑分开。
-- 我整理了 `DHT11 / DHT22` 双路温湿度采集、红外在位检测、风扇 PWM、编码器/按键输入、OLED 显示和蓝牙上报。
-- 我把 UI 状态拆成 `UI_OFF`、`UI_BOOT`、`UI_NORMAL`、`UI_CONFIRM`，避免关机确认、开机 Logo 和正常控制逻辑互相污染。
-- 我加入了风扇设定值掉电记忆，使用内部 Flash 参数区、CRC32 和 commit 标记思路恢复最后一次有效值。
-- 我把蓝牙上报改成 DMA 异步发送，降低周期上报阻塞主循环的风险。
+- Periodic temperature and humidity sensing.
+- Presence / outlet-state detection.
+- Fan PWM control and local OLED state display.
+- Bluetooth reporting.
+- Flash-backed user setting persistence.
+- Separation between generated HAL code, app logic, service modules, and board-support modules.
 
-## Evidence / 证据
+## Evidence Boundary / 证据边界
 
-- [Firmware README](/uploads/projects/juanyun-tech/baseunit-firmware-readme.md)
-- [CubeMX IOC configuration](/uploads/projects/juanyun-tech/baseunit-product-base.ioc)
-- [Application scheduler source](/uploads/projects/juanyun-tech/baseunit-app.c)
-- [Bluetooth DMA report source](/uploads/projects/juanyun-tech/baseunit-bluetooth.c)
-- [Flash parameter store source](/uploads/projects/juanyun-tech/baseunit-nvstore.c)
-- [Fan PWM driver source](/uploads/projects/juanyun-tech/baseunit-fan.c)
-- [Component datasheet review](/notes/juanyun-baseunit-component-datasheets)
-
-## What This Shows / 这个项目能证明什么
-
-This project is useful in the portfolio because it shows embedded product thinking at a small scale: timing, state, persistence, user interaction, and communication all need to behave together. The most important part is not that each driver exists, but that the system has clear ownership boundaries and can be explained by reading the code.
-
-这页后续可以继续补烧录截图、串口日志、OLED 实拍和风扇 PWM 示波器截图。当前版本先把源码证据和第一人称复盘放进网站，让它从“总项目里的一个 bullet”变成独立可访问的作品页。
+Public evidence should later be rewritten as screenshots, logs, diagrams, and masked snippets. Full source files stay private unless the company-sensitive parts are removed.

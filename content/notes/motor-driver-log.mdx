@@ -5,25 +5,28 @@ summary: "A lab note for motor driver wiring, PWM behavior, speed feedback, and 
 summaryZh: "记录电机驱动接线、PWM 行为、速度反馈和控制环稳定性。"
 date: "2024-03-03"
 tags: ["Motor", "Driver", "Lab Note"]
+visibility: public
 ---
 
-## 前期想法
+## Starting Point / 前期想法
 
-电机驱动这个方向很容易让人上头，因为电机一转起来就很有成就感。但问题也很现实：线接错、供电不稳、PWM 频率不合适、反馈信号乱跳，都会让一个看起来简单的实验变得很抽象。
+Motor-driver experiments can look successful too early. Once the motor spins, the experiment feels alive, but wiring mistakes, unstable power, unsuitable PWM frequency, and noisy feedback can still hide underneath.
 
-所以这篇笔记先不追求写成完整教程，而是作为实验记录模板。以后每次调电机，都要把驱动板型号、供电、电机参数、PWM 频率、反馈方式和异常现象记下来。不然过几天再看，只剩一句“好像能转”。
+这篇先作为实验记录模板，不写成完整教程。每次调电机，都应该留下驱动板型号、供电、电机参数、PWM 频率、反馈方式和异常现象。不然过几天再看，只剩一句“好像能转”。
 
-## 疑问：电机能转不就行了吗？
+## Question / 疑问：电机能转不就行了吗？
 
-不行。能转只是第一步。工程里更重要的是它怎么转，启动有没有冲击，低速稳不稳，反馈准不准，负载一变会不会抽风。尤其后面如果做闭环控制，前面这些假设不写清楚，调参会变成玄学。
+Not enough. Rotation is only the first signal. Engineering work needs to know how it starts, whether low speed is stable, whether feedback is believable, and whether load changes break the loop.
 
-## 阶段目标
+能转只是第一步。更重要的是怎么转：启动有没有冲击，低速稳不稳，反馈准不准，负载一变会不会抽风。后续如果要做闭环控制，前面这些假设不写清楚，调参会变成玄学。
 
-- 记录接线和供电，避免下次重复踩线序坑。
-- 记录 PWM 频率、占空比和电机响应。
-- 记录速度反馈来源，是霍尔、编码器还是估算。
-- 补示波器截图、参数表和异常情况复盘。
+## Stage Goals / 阶段目标
 
-## 复盘
+- Record wiring and power configuration.
+- Record PWM frequency, duty cycle, and motor response.
+- Identify speed-feedback source: Hall sensor, encoder, or estimation.
+- Add oscilloscope captures, parameter tables, and abnormal-case notes.
 
-这篇现在还很早，但方向是对的。电机控制不是“让它转”这么简单，真正麻烦的是可控、可测、可复现。后续 FOC 和风扇驱动相关内容也可以慢慢接到这条学习线上。
+## Reflection / 复盘
+
+Motor control is not just making something spin. The harder part is making it controllable, measurable, and repeatable. FOC and fan-driver content can later connect to this learning line.

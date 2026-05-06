@@ -1,16 +1,16 @@
 ---
 title: "DHT11 / AM2302 Sensor Board Plan"
 titleZh: "DHT11 / AM2302 温湿度小板计划"
-summary: "A compact sensor-board planning note for DHT11 and AM2302 modules, used as a smaller hardware task inside the Juanyun archive."
-summaryZh: "我对 DHT11 / AM2302 温湿度传感器小板任务的整理：这是卷云资料里较小但适合展示硬件任务拆解能力的一条线。"
+summary: "A small-board note for a DHT11 / AM2302 sensor task that connects requirements, interface choices, firmware sensing, and verification."
+summaryZh: "DHT11 / AM2302 温湿度传感器小板任务记录：一条较小但适合展示硬件任务拆解能力的项目线。"
 date: "2026-05-06"
 tags: ["Sensor", "PCB", "DHT11", "AM2302"]
 projectSlug: "juanyun-dht-sensor-breakout-board"
+visibility: public
 ---
-
 ## 前期想法
 
-温湿度小板这条线很小，小到一开始我差点觉得没必要单独写。毕竟它不像外机板那样有压缩机、电源树、三块 PCB，也不像 FOC 那样看起来很“高级”。但后来想想，小任务其实更容易看出一个人有没有把事情做完整。
+温湿度小板这条线很小，小到一开始差点觉得没必要单独写。毕竟它不像外机板那样有压缩机、电源树、三块 PCB，也不像 FOC 那样看起来很“高级”。但后来想想，小任务其实更容易看出一个人有没有把事情做完整。
 
 一个 DHT11 / AM2302 小板，如果只说“接个传感器”，那确实没什么可写。但如果从任务书、接口、电源、上拉、电缆长度、采样周期、固件读取、失败处理一路想下来，它就变成了一个小而完整的硬件任务。
 
@@ -20,16 +20,15 @@ projectSlug: "juanyun-dht-sensor-breakout-board"
 
 ## 阶段目标
 
-- 把任务计划书先放进网站，避免资料继续埋在文件夹里。
+- 把任务背景先放进网站，避免继续埋在文件夹里。
 - 后续补原理图、接口定义、上拉电阻、线长和采样周期。
-- 和底座/外机固件里的 DHT11、DHT22、AM2302 读取逻辑关联起来。
+- 和底座 / 外机固件里的 DHT11、DHT22、AM2302 读取逻辑关联起来。
 - 最后补实物照片和读取失败处理记录，不要只停留在任务计划。
 
 ## 证据
 
-- [DHT11 / AM2302 board plan PDF](/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf)
 - [Sensor breakout board project](/work/juanyun-dht-sensor-breakout-board)
 
 ## 复盘
 
-小任务也要认真写。以后这个网站不能只放“大项目”，也要放这种能说明我如何从一个具体需求一路推进到硬件、固件和测试的小闭环。
+小任务也要认真写。以后这个网站不能只放“大项目”，也要放这种能说明如何从一个具体需求一路推进到硬件、固件和测试的小闭环。

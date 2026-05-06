@@ -16,6 +16,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html[data-lang="en"] .lang-zh,
+html[data-lang="zh"] .lang-en {
+  display: none !important;
+}
+
+html[data-lang="en"] .language-option-en,
+html[data-lang="zh"] .language-option-zh {
+  background: #1f563f;
+  color: #ffffff;
+}
+
 body {
   margin: 0;
   background:

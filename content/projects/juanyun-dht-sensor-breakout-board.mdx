@@ -1,37 +1,29 @@
 ---
 title: "DHT11 / AM2302 Sensor Breakout Board"
 titleZh: "DHT11 / AM2302 温湿度传感器小板"
-summary: "A compact hardware planning case for a DHT11/AM2302 temperature-humidity breakout board, connecting board-level requirements with firmware sensing work."
-summaryZh: "DHT11/AM2302 温湿度传感器小板任务整理：把小板需求、接口、固件采集和后续验证路径串成一个小而完整的硬件案例。"
+summary: "A small hardware-planning project connecting sensor-board requirements with firmware sensing work. Detailed board files stay private for now."
+summaryZh: "一个小型传感器板规划项目，把小板需求和固件采集联系起来；详细板级文件暂不公开。"
 date: "2026-04 to 2026-05"
-status: "Planning Evidence"
+status: "Private Evidence Review"
 tags: ["Sensor", "PCB", "DHT11", "AM2302"]
 cover: "/uploads/visuals/waveform.svg"
 featured: false
-links:
-  download: "/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf"
 ---
 
 ## Project Brief / 项目简介
 
-This is a smaller Juanyun hardware task, but it belongs in the portfolio because it shows how I think about a simple module as a complete engineering unit: requirement, interface, PCB constraints, firmware reading, and test evidence.
+This is a small Juanyun hardware task. Small boards still matter because a bounded requirement has to become interface decisions, firmware constraints, and a verification plan.
 
-这个项目不是“大板子”，但它适合展示我对小任务的拆解方式。温湿度小板如果只看原理图会很简单，但真正交付时仍然要说明接口、电源、上拉、线长、采样周期、读取失败和固件联调。
+当前公开页只保留任务方向。小板 PDF、原理图、PCB 或生产文件暂时不放公网。
 
-## My Work / 我的工作
+## Public Version Plan / 公开版补充计划
 
-- 我把 DHT11 / AM2302 小板从卷云大文件夹里单独整理出来，避免它被外机板和底座板资料淹没。
-- 我把硬件任务书和底座固件里的双路 DHT 采集逻辑关联起来，让小板设计能回到实际系统使用场景。
-- 我把后续需要补的证据列清楚：原理图、PCB、接口定义、上拉电阻选择、读取失败处理、实物测试照片和串口/OLED 显示结果。
+Later public material can include:
 
-## Evidence / 证据
+- desensitized interface notes;
+- sensor reading flow;
+- sampling period and failure handling;
+- serial, OLED, or log screenshots;
+- product photos without company-sensitive information.
 
-- [DHT11 / AM2302 board plan PDF](/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf)
-- [Related base unit firmware project](/work/juanyun-baseunit-control-firmware)
-- [Related AC unit control platform](/work/juanyun-acunit-control-platform)
-
-## Reflection / 复盘
-
-I want this website to include small engineering tasks as well as large projects. A compact sensor board can still show whether I can define a bounded task, connect hardware and firmware, and leave a clear verification path for the next iteration.
-
-我希望作品集不只放“大而全”的项目。小板任务如果写清楚，也能证明我会把一个具体硬件需求从任务书推进到接口、固件和测试。
+后续可补脱敏后的接口说明、传感器读取流程、采样周期、失败处理、串口/OLED/日志截图，以及不含公司信息的实物照片。

@@ -13,10 +13,11 @@ import {
   ScrollText,
   SquareActivity
 } from "lucide-react";
+import { BilingualText } from "@/components/bilingual-text";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { TechnicalVisual } from "@/components/technical-visual";
-import { formatDateRange, getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
+import { formatDateRange, formatDateRangeZh, getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function Home() {
@@ -33,27 +34,39 @@ export default function Home() {
             style={{ maxWidth: "calc(100vw - 40px)" }}
           >
             <h1 className="max-w-80 text-balance text-4xl font-semibold tracking-normal text-ink sm:max-w-full sm:text-5xl md:text-6xl">
-              Awes0meE / Li Zhiyi
+              Awes0meE / 66CCFF Labs
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
-              通信工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。
+              <BilingualText
+                en="Communication Engineering undergraduate focused on control, embedded systems, and robotics practice."
+                zh="通信工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。"
+              />
             </p>
             <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
-              Communication Engineering undergraduate at XJTLU. I build control systems, embedded hardware, and robotics solutions with engineering rigor and curiosity.
+              <BilingualText
+                en="I build control systems, embedded hardware, and robotics solutions with engineering rigor and curiosity."
+                zh="关注能测量、能复现、能解释、能持续改进的工程系统。"
+              />
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
             <div className="mt-8 grid gap-5 text-sm text-ink sm:grid-cols-2">
               <div className="flex items-start gap-3">
                 <Building2 className="mt-1 text-ink" size={26} strokeWidth={1.7} />
                 <div>
-                  <p className="font-semibold">西交利物浦大学 (XJTLU)</p>
-                  <p className="mt-1 text-xs text-graphite">School of Advanced Technology</p>
+                  <p className="font-semibold">
+                    <BilingualText en="Xi'an Jiaotong-Liverpool University" zh="西交利物浦大学" />
+                  </p>
+                  <p className="mt-1 text-xs text-graphite">
+                    <BilingualText en="School of Advanced Technology" zh="高级技术学院" />
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Code2 className="mt-1 text-ink" size={26} strokeWidth={1.7} />
                 <div>
-                  <p className="font-semibold">Next.js Full-Stack</p>
+                  <p className="font-semibold">
+                    <BilingualText en="Next.js Full-Stack" zh="Next.js 全栈" />
+                  </p>
                   <p className="mt-1 text-xs text-graphite">TypeScript · Tailwind · MDX</p>
                 </div>
               </div>
@@ -63,14 +76,14 @@ export default function Home() {
                 href="/work"
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-pine px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-ink"
               >
-                View Projects / 查看项目
+                <BilingualText en="View Projects" zh="查看项目" />
                 <ArrowRight size={16} />
               </Link>
               <Link
                 href="/about"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-pine transition hover:border-pine hover:text-copper sm:border-0 sm:px-2"
               >
-                About Me / 关于我
+                <BilingualText en="About Me" zh="关于我" />
                 <ArrowRight size={16} />
               </Link>
             </div>
@@ -81,7 +94,10 @@ export default function Home() {
 
       <section className="border-b border-line py-10">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <SectionHeading title="Featured Projects / 精选项目" action={{ href: "/work", label: "View all projects / 查看全部项目" }} />
+          <SectionHeading
+            title={<BilingualText en="Featured Projects" zh="精选项目" />}
+            action={{ href: "/work", label: <BilingualText en="View all projects" zh="查看全部项目" /> }}
+          />
           <div className="grid gap-5 lg:grid-cols-2">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
@@ -93,7 +109,10 @@ export default function Home() {
       <section className="border-b border-line">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
           <div className="border-line px-5 py-10 lg:border-r lg:px-8">
-            <SectionHeading title="Notes / 学习笔记" action={{ href: "/notes", label: "View all notes / 查看全部笔记" }} />
+            <SectionHeading
+              title={<BilingualText en="Notes" zh="学习笔记" />}
+              action={{ href: "/notes", label: <BilingualText en="View all notes" zh="查看全部笔记" /> }}
+            />
             <div className="divide-y divide-line rounded-lg border border-line bg-white">
               {notes.map((note) => (
                 <Link
@@ -105,7 +124,9 @@ export default function Home() {
                     <ScrollText size={18} />
                   </span>
                   <span>
-                    <span className="block font-medium text-ink">{note.titleZh}</span>
+                    <span className="block font-medium text-ink">
+                      <BilingualText en={note.title} zh={note.titleZh} />
+                    </span>
                     <span className="mt-2 flex flex-wrap gap-2">
                       {note.tags.slice(0, 3).map((tag) => (
                         <span key={tag} className="rounded border border-line bg-paper px-2 py-0.5 text-xs text-graphite">
@@ -119,12 +140,15 @@ export default function Home() {
               ))}
             </div>
             <Link href="/notes" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-pine hover:text-copper">
-              更多笔记 / More notes
+              <BilingualText en="More notes" zh="更多笔记" />
               <ArrowRight size={16} />
             </Link>
           </div>
           <div className="px-5 py-10 lg:px-8">
-            <SectionHeading title="Media / 媒体" action={{ href: "/media", label: "View all media / 查看全部媒体" }} />
+            <SectionHeading
+              title={<BilingualText en="Media" zh="媒体" />}
+              action={{ href: "/media", label: <BilingualText en="View all media" zh="查看全部媒体" /> }}
+            />
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {media.map((item) => (
                 <Link key={item.id} href="/media" className="group relative aspect-[4/3] overflow-hidden rounded-lg border border-line bg-chalk">
@@ -154,21 +178,31 @@ export default function Home() {
               <Image src="/uploads/visuals/lab-notes.svg" alt="Li Zhiyi profile visual" fill sizes="112px" className="object-cover" />
             </div>
             <div>
-              <h2 className="text-2xl font-semibold text-ink">About / 关于</h2>
+              <h2 className="text-2xl font-semibold text-ink">
+                <BilingualText en="About" zh="关于" />
+              </h2>
               <p className="mt-4 leading-7 text-graphite">
-                热爱工程与创造，关注控制、嵌入式与机器人方向。喜欢从原理出发，把想法变成可运行的系统。
+                <BilingualText
+                  en="I am interested in engineering and building real systems, especially control, embedded systems, and robotics."
+                  zh="热爱工程与创造，关注控制、嵌入式与机器人方向。喜欢从原理出发，把想法变成可运行的系统。"
+                />
               </p>
               <p className="mt-3 leading-7 text-graphite">
-                Passionate about engineering and building real systems. Focused on control, embedded systems, and robotics.
+                <BilingualText
+                  en="This portfolio records projects, notes, media evidence, and the process of improving the website itself."
+                  zh="这个作品集会持续记录项目、笔记、媒体证据和网站本身的完善过程。"
+                />
               </p>
               <Link href="/about" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine hover:text-copper">
-                More about me / 了解更多
+                <BilingualText en="More about me" zh="了解更多" />
                 <ArrowRight size={16} />
               </Link>
             </div>
           </div>
           <div className="border-line md:border-l md:pl-8">
-            <h2 className="text-xl font-semibold text-ink">Let&apos;s connect / 联系我</h2>
+            <h2 className="text-xl font-semibold text-ink">
+              <BilingualText en="Let's connect" zh="联系我" />
+            </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
               <a className="flex items-center gap-3 hover:text-pine" href={`mailto:${site.email}`}>
                 <Mail size={18} />
@@ -180,17 +214,19 @@ export default function Home() {
               </a>
               <p className="flex items-center gap-3">
                 <MapPin size={18} />
-                {site.location}
+                <BilingualText en={site.location} zh={site.locationZh} />
               </p>
             </div>
           </div>
           <div className="border-line md:border-l md:pl-8">
-            <h2 className="text-xl font-semibold text-ink">Currently</h2>
+            <h2 className="text-xl font-semibold text-ink">
+              <BilingualText en="Currently" zh="当前" />
+            </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
-              <p className="flex items-center gap-3"><Microchip size={18} />PID Starter Kit 开发中</p>
-              <p className="flex items-center gap-3"><SquareActivity size={18} />Robotics 学习中</p>
-              <p className="flex items-center gap-3"><Code2 size={18} />Next.js 全栈作品集中</p>
-              <p className="flex items-center gap-3"><CalendarDays size={18} />{formatDateRange("2026.05 to Now")}</p>
+              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="PID Starter Kit in progress" zh="PID Starter Kit 开发中" /></p>
+              <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Robotics learning" zh="Robotics 学习中" /></p>
+              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Next.js portfolio build" zh="Next.js 作品集建设中" /></p>
+              <p className="flex items-center gap-3"><CalendarDays size={18} /><BilingualText en={formatDateRange("2026.05 to Now")} zh={formatDateRangeZh("2026.05 to Now")} /></p>
             </div>
           </div>
         </div>
