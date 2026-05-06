@@ -10,7 +10,7 @@ projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 <!-- turing-english-translation: cmake-build-logic -->
 
-## English Translation / 英文译文
+## English Translation
 
 ### Source
 
@@ -24,32 +24,17 @@ This page now renders the original Notion Markdown exports directly, not a PDF t
 
 The CMake note was written as a systematic study record for understanding low-level project building and deployment. The study material came from a Bilibili CMake course and its companion blog posts. The structure starts from a local Linux development environment, then moves through basic CMake commands, source-file discovery, header include paths, static and dynamic libraries, logging, string operations, and common project organization patterns.
 
-For the local environment, I used WSL on Windows 11 with Ubuntu and VS Code Remote - WSL. The setup path was: enable WSL from an administrator PowerShell, install Ubuntu from Microsoft Store, create the Linux username/password, update packages with `sudo apt update && sudo apt upgrade -y`, and install the base development tools:
-
-```bash
-sudo apt install -y build-essential gcc g++ cmake make git
-```
+For the local environment, I used WSL on Windows 11 with Ubuntu and VS Code Remote - WSL. The setup path was: enable WSL from an administrator PowerShell, install Ubuntu from Microsoft Store, create the Linux username/password, update packages with `sudo apt update && sudo apt upgrade -y`, and install the base development tools with `sudo apt install -y build-essential gcc g++ cmake make git`.
 
 The environment was considered ready after `gcc --version` and `cmake --version` returned valid versions. VS Code was then connected into WSL through the Remote - WSL extension, and the C/C++ extension was installed inside the WSL environment.
 
 CMake itself was described as a cross-platform project build tool. Its core input is `CMakeLists.txt`; CMake reads the commands in that file and generates the appropriate underlying build files for the current platform and toolchain. The conceptual build flow is preprocessing, compilation, assembly, and linking. A tiny program can be compiled directly with a command such as `g++ *.cpp -o app`, but once a project grows to many source files, headers, dependencies, and libraries, manual command-line compilation stops being practical.
 
-The first small CMake example used five `.cpp` files plus one header. The initial `CMakeLists.txt` was:
-
-```cmake
-cmake_minimum_required(VERSION 3.25)
-project(test)
-add_executable(app add.c sub.cpp mult.cpp div.cpp main.cpp)
-```
+The first small CMake example used five `.cpp` files plus one header. The initial `CMakeLists.txt` declared the minimum CMake version with `cmake_minimum_required(VERSION 3.25)`, named the project with `project(test)`, and created the executable target with `add_executable(app add.c sub.cpp mult.cpp div.cpp main.cpp)`.
 
 The key points were: `cmake_minimum_required` declares the minimum CMake version; `project` declares the project name and optional metadata; `add_executable` declares the executable target and must receive source files, not headers. Running `cmake` in the directory containing `CMakeLists.txt` generated build files, then `make` produced the executable.
 
-The `set` command was introduced as CMake's way to define variables. In this learning note, I understood a variable mainly as a named collection of source files or a reusable configuration value. For example:
-
-```cmake
-set(SRC_LIST add.c div.c main.c mult.c sub.c)
-add_executable(app ${SRC_LIST})
-```
+The `set` command was introduced as CMake's way to define variables. In this learning note, I understood a variable mainly as a named collection of source files or a reusable configuration value, such as `set(SRC_LIST add.c div.c main.c mult.c sub.c)` followed by `add_executable(app ${SRC_LIST})`.
 
 Variables are referenced with `${...}`. The same command can set the C++ standard, such as `CMAKE_CXX_STANDARD 17`, and output paths such as `EXECUTABLE_OUTPUT_PATH`.
 
@@ -73,20 +58,9 @@ The note distinguishes several layers:
 
 For Qt, binary compatibility is a hard rule. A Qt library built for MSVC2019 x64 should be used by a project compiled with the matching MSVC2019 x64 toolchain. If the compiler version, CPU architecture, or runtime library does not match, typical errors include `LNK1112` for machine type conflicts, `LNK2038` for runtime/toolset mismatches, and runtime failures from missing or incompatible DLLs.
 
-The Qt installation layout was read as a map of this compatibility information. For example:
+The Qt installation layout was read as a map of this compatibility information. For example, `C:\Qt\6.5.3\msvc2019_64` means Qt 6.5.3 built for the MSVC 2019 64-bit toolchain. Its `bin` directory contains runtime DLLs and tools, `include` contains headers, `lib` contains link-time libraries, and `lib/cmake/Qt6` contains CMake package configuration files such as `Qt6Config.cmake` and `Qt6CoreConfig.cmake`. Those CMake files define imported targets such as `Qt6::Core`, which carry include paths, link libraries, and binary locations.
 
-```text
-C:\Qt\6.5.3\msvc2019_64
-```
-
-means Qt 6.5.3 built for the MSVC 2019 64-bit toolchain. Its `bin` directory contains runtime DLLs and tools, `include` contains headers, `lib` contains link-time libraries, and `lib/cmake/Qt6` contains CMake package configuration files such as `Qt6Config.cmake` and `Qt6CoreConfig.cmake`. Those CMake files define imported targets such as `Qt6::Core`, which carry include paths, link libraries, and binary locations.
-
-Qt modules were described as separately linkable functional packages: `Qt6::Core` for core types and the meta-object system, `Qt6::Gui` for graphics/windowing foundations, `Qt6::Widgets` for desktop UI controls, `Qt6::Network` for network APIs, and `Qt6::Sql` for database access. A project must request and link the modules it uses:
-
-```cmake
-find_package(Qt6 REQUIRED COMPONENTS Network)
-target_link_libraries(my_app PRIVATE Qt6::Network)
-```
+Qt modules were described as separately linkable functional packages: `Qt6::Core` for core types and the meta-object system, `Qt6::Gui` for graphics/windowing foundations, `Qt6::Widgets` for desktop UI controls, `Qt6::Network` for network APIs, and `Qt6::Sql` for database access. A project must request and link the modules it uses, for example with `find_package(Qt6 REQUIRED COMPONENTS Network)` and `target_link_libraries(my_app PRIVATE Qt6::Network)`.
 
 The note also explains Qt's automatic tools. `moc` processes the meta-object system, especially `Q_OBJECT`, signals, slots, and dynamic properties. `uic` converts `.ui` files from Qt Designer into generated C++ headers. `rcc` compiles `.qrc` resource collections into generated C++ code so resources can be accessed through paths such as `:/images/logo.png`. In qmake or CMake projects these tools are usually invoked automatically during the build.
 
