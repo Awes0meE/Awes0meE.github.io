@@ -31,7 +31,7 @@ public/uploads/projects/juanyun-tech/
 | `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V1.0/V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, manufacturing exports, and selected V2.1 component datasheets. |
 | `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
-| `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
+| `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32/PlatformIO code, desktop C# source, EasyEDA/Gerber, acrylic DWG, 3MF slice, and 3D print previews. Executable installers, NuGet/vendor packages, and build outputs are not published. |
 | `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber, STEP model, BOM/PnP/interactive BOM, EasyEDA project, selected STM32F4/DRV8301 source files, and key datasheets. |
 | `Legacy_螺线管阀门开发_Project` | 818 | Standalone actuator/fan archive project plus public note; selected project source files and ULN2003 schematic are published, while vendor example packages are not. |
 | `Legacy_BLDC_QuietFan_Project` | 2 | Included in the actuator/fan archive project with BOM and EDA project attachment. |
@@ -125,10 +125,20 @@ public/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro
 public/uploads/projects/juanyun-tech/cirro-logo.png
 public/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf
+public/uploads/projects/juanyun-tech/diy-cooling-3dprint-a1-mini.3mf
 public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg
 public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg
+public/uploads/projects/juanyun-tech/diy-cooling-acrylic-auto.dwg
+public/uploads/projects/juanyun-tech/diy-cooling-acrylic-manual.dwg
+public/uploads/projects/juanyun-tech/diy-cooling-desktop-csproj.xml
 public/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4
+public/uploads/projects/juanyun-tech/diy-cooling-desktop-form.cs
+public/uploads/projects/juanyun-tech/diy-cooling-desktop-program.cs
+public/uploads/projects/juanyun-tech/diy-cooling-easyeda-project.epro2
 public/uploads/projects/juanyun-tech/diy-cooling-esp32.ino
+public/uploads/projects/juanyun-tech/diy-cooling-gerber.zip
+public/uploads/projects/juanyun-tech/diy-cooling-platformio.ini
+public/uploads/projects/juanyun-tech/diy-cooling-platformio-main.cpp
 public/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf
 public/uploads/projects/juanyun-tech/foc-driver-gerber.zip
 public/uploads/projects/juanyun-tech/foc-driver-adc.c
@@ -169,6 +179,7 @@ The user asked to put the folder contents into the portfolio branch. The impleme
 - billing information;
 - internship proof documents;
 - raw vendor package folders;
+- executable installers;
 - full build artifacts and generated object files.
 
 Before merging this branch into `main`, review all public PDFs and download attachments again. This matters because the GitHub repository and Vercel deployment can become public-facing once pushed or merged.

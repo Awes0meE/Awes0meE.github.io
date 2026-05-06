@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Expanded the DIY pressure-flow cooling prototype with PCB, PlatformIO, desktop C# source, acrylic DWG, and 3MF slice evidence.
+- Files changed: updated `content/projects/juanyun-diy-cooling-prototype.mdx`, `content/notes/juanyun-diy-cooling.mdx`, and the Juanyun inventory; published EasyEDA/Gerber, selected ESP32/PlatformIO files, selected C# desktop source, DWG files, and one 3MF slice while excluding duplicate video, executable installers, NuGet/vendor packages, and build outputs.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Expanded the FOC driver archive with selected source, manufacturing, EDA, interactive BOM, and datasheet evidence.
 - Files changed: updated `content/projects/juanyun-foc-driver-board.mdx` and `content/notes/juanyun-foc-driver.mdx`, published selected STM32F4/DRV8301 source files, BOM/PnP/interactive BOM, EasyEDA project, DRV8301/HY3010D datasheets, and updated the Juanyun inventory.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
