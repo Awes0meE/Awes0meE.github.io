@@ -158,14 +158,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Latest released tag: `v0.5.0`. `main` currently also includes the post-`v0.5.0` media and note refresh; create the next semantic version tag when that state is ready to be named as a release.
+Latest released tag: `v0.6.0`.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.6.0 -m "v0.6.0 portfolio update"
+git tag -a v0.7.0 -m "v0.7.0 portfolio update"
 git push origin main
-git push origin v0.6.0
+git push origin v0.7.0
 ```
 
 ---
@@ -314,12 +314,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.5.0`。当前 `main` 还包含 `v0.5.0` 之后的媒体与笔记更新；等这部分状态需要正式命名时，再创建下一个语义化版本标签。
+最新已发布标签：`v0.6.0`。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.6.0 -m "v0.6.0 portfolio update"
+git tag -a v0.7.0 -m "v0.7.0 portfolio update"
 git push origin main
-git push origin v0.6.0
+git push origin v0.7.0
 ```

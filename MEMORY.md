@@ -32,7 +32,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Release `v0.5.0` was merged to `main` and pushed to GitHub at commit `3add408 Add project archive pages`.
 - `2026-05-07`: Added root `.nojekyll` because GitHub Pages/Jekyll tried to parse uploaded Markdown/code evidence under `public/uploads/` as Liquid templates and failed on an Inno Setup GUID. Vercel remains the canonical deployment target.
 - `2026-05-07`: Media and notes were refreshed after `v0.5.0`: `content/media.json` now has 29 items covering project/note images and videos; Nanjing Turing gained `turing-three-week-development-log`; the Juanyun hardware SOP is rendered as webpage text; and notes/projects were rewritten away from AI handoff phrasing toward practical learning-log narration.
-- `2026-05-07`: Follow-up `/neat` clarified the release boundary: `v0.5.0` remains the latest tag, while current `main` includes the post-tag media/note refresh.
+- `2026-05-07`: Release `v0.6.0` names the post-`v0.5.0` media/note refresh on `main`, including the 29-item media gallery, webpage-rendered SOP/text assets, note prose refresh, and release-boundary docs cleanup.
 
 ## Stable Decisions
 
@@ -98,7 +98,7 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review the deployed post-`v0.5.0` media/note refresh on `https://www.66ccff-labs.com/` when the Vercel deployment for current `main` is available, especially `/media`, `juanyun-hardware-sop`, `turing-three-week-development-log`, and the larger Juanyun / Nanjing Turing project pages.
+- Browser-review release `v0.6.0` on `https://www.66ccff-labs.com/` after deployment, especially `/media`, `juanyun-hardware-sop`, `turing-three-week-development-log`, and the larger Juanyun / Nanjing Turing project pages.
 - Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.

@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Tagged the media/note refresh as release `v0.6.0` and pushed it for deployment.
+- Files changed: bumped package metadata to `0.6.0`; updated `README.md`, `CODEX.md`, `MEMORY.md`, `docs/architecture.md`, `docs/juanyun-tech-source-inventory.md`, and this session log so the current release boundary is no longer described as post-`v0.5.0`.
+- Verification: version metadata check, upload/media coverage validation, `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed before tagging and pushing `v0.6.0`.
+
+## 2026-05-07
+
 - Summary: Ran `/neat` after the media/note refresh commit reached `main`, focusing on release-boundary wording and handoff freshness.
 - Files changed: updated `README.md`, `USER_GUIDE.md`, `MEMORY.md`, `docs/architecture.md`, and `docs/juanyun-tech-source-inventory.md` so the docs distinguish the `v0.5.0` tag from the later media/note refresh on `main` and avoid stale branch wording; removed a duplicate Juanyun SOP cover asset path so the project page and media page share the same public cover entry.
 - Verification: repository state, Node/npm versions, external Codex skills, content counts, media JSON, stale-phrase searches, and upload/media coverage were checked; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

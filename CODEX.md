@@ -147,7 +147,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current mainline state is post-`v0.5.0` content work on `main`, after the project archive page expansion and media/note refresh.
+The current mainline state is release `v0.6.0` on `main`, after the project archive page expansion and media/note refresh.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
