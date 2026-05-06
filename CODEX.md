@@ -151,7 +151,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current mainline state is release `v0.6.1` on `main`, after the project archive page expansion, media/note refresh, Notion CMake source-note replacement, and English body coverage pass.
+The current mainline state is based on release `v0.6.1` on `main`, with a post-release media and cover refresh for the Juanyun, Nanjing Turing, and Tianjin internship project pages.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -170,10 +170,11 @@ Current content count on `main`:
 - 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 38 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams.
+- 50 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams plus processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, and EEV driver-board images.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
+- `ContentRenderer` renders consecutive standalone Markdown images as a clickable responsive gallery grid. Use plain consecutive image lines in MDX when several schematic sheets or board renders belong together. In-body evidence figures and project-file image previews are served through direct public URLs, so keep these assets compressed before adding them.
 
 Juanyun public boundary:
 

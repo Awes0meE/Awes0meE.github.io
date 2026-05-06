@@ -144,6 +144,18 @@
     "captionZh": "自写硬件开发 SOP 的封面图。"
   },
   {
+    "id": "juanyun-cirro-tech-cover",
+    "title": "Cirro Tech project cover",
+    "titleZh": "卷云科技项目封面图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "Processed Cirro Tech logo cover used for the larger Juanyun thermal-management archive.",
+    "captionZh": "整理后的卷云科技 Logo 封面，用在卷云热管理硬件与固件开发档案页。"
+  },
+  {
     "id": "juanyun-diy-cooling-demo",
     "title": "DIY cooling desktop demo",
     "titleZh": "DIY 散热器桌面端演示",
@@ -192,16 +204,124 @@
     "captionZh": "打印外壳时留下的支撑设置和切片零件预览。"
   },
   {
-    "id": "foc-circuit-board-visual",
-    "title": "FOC board visual",
-    "titleZh": "FOC 电路板视觉图",
+    "id": "juanyun-diy-cooling-stm32-pcb-render",
+    "title": "DIY cooling STM32 PCB render",
+    "titleZh": "DIY 压风式散热器 STM32 版 PCB 渲染图",
     "type": "image",
-    "src": "/uploads/visuals/circuit-board.svg",
-    "thumbnail": "/uploads/visuals/circuit-board.svg",
-    "date": "2026-05-06",
+    "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png",
+    "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-cover.jpg",
+    "date": "2026-03-17",
+    "projectSlug": "juanyun-diy-cooling-prototype",
+    "caption": "STM32-version PCB render now used as the DIY pressure-flow cooling prototype cover.",
+    "captionZh": "STM32 版 PCB 渲染图，现在作为 DIY 压风式散热器原型项目封面使用。"
+  },
+  {
+    "id": "juanyun-diy-cooling-stm32-schematic",
+    "title": "DIY cooling STM32 schematic",
+    "titleZh": "DIY 压风式散热器 STM32 版原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
+    "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
+    "date": "2026-03-17",
+    "projectSlug": "juanyun-diy-cooling-prototype",
+    "caption": "Schematic image for the STM32-version cooling prototype board.",
+    "captionZh": "STM32 版散热器控制板的原理图，用来补齐这条原型线的硬件证据。"
+  },
+  {
+    "id": "juanyun-foc-board-render",
+    "title": "FOC driver board render",
+    "titleZh": "慧驱动 FOC 测试板渲染图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-driver-board-render.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-driver-cover.jpg",
+    "date": "2025-11-25",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "Circuit-board visual used as the FOC driver archive cover.",
-    "captionZh": "FOC 驱动板归档页使用的电路板视觉图。"
+    "caption": "3D render for the sensorless PMSM FOC driver board archive.",
+    "captionZh": "无感 PMSM FOC 驱动板归档页使用的 3D 板卡渲染图。"
+  },
+  {
+    "id": "juanyun-foc-schematic-mcu",
+    "title": "FOC MCU schematic sheet",
+    "titleZh": "FOC MCU 分页原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mcu.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mcu.png",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-foc-driver-board",
+    "caption": "MCU sheet from the FOC driver board schematic export.",
+    "captionZh": "FOC 驱动板原理图导出的 MCU 分页。"
+  },
+  {
+    "id": "juanyun-foc-schematic-conn",
+    "title": "FOC connector schematic sheet",
+    "titleZh": "FOC 连接器分页原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-conn.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-conn.png",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-foc-driver-board",
+    "caption": "Connector sheet from the FOC driver board schematic export.",
+    "captionZh": "FOC 驱动板原理图导出的连接器分页。"
+  },
+  {
+    "id": "juanyun-foc-schematic-adc",
+    "title": "FOC ADC schematic sheet",
+    "titleZh": "FOC ADC 分页原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-adc.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-adc.png",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-foc-driver-board",
+    "caption": "ADC sheet from the FOC driver board schematic export.",
+    "captionZh": "FOC 驱动板原理图导出的 ADC 采样分页。"
+  },
+  {
+    "id": "juanyun-foc-schematic-mos",
+    "title": "FOC MOSFET stage schematic sheet",
+    "titleZh": "FOC MOS 功率级分页原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mos.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mos.png",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-foc-driver-board",
+    "caption": "MOSFET power-stage sheet from the FOC driver board schematic export.",
+    "captionZh": "FOC 驱动板原理图导出的 MOS 功率级分页。"
+  },
+  {
+    "id": "juanyun-foc-schematic-driver",
+    "title": "FOC driver schematic sheet",
+    "titleZh": "FOC 驱动分页原理图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-driver.png",
+    "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-driver.png",
+    "date": "2026-05-07",
+    "projectSlug": "juanyun-foc-driver-board",
+    "caption": "Driver sheet from the FOC driver board schematic export.",
+    "captionZh": "FOC 驱动板原理图导出的驱动分页。"
+  },
+  {
+    "id": "juanyun-eev-board-render",
+    "title": "EEV driver board render",
+    "titleZh": "EEV 驱动小板渲染图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png",
+    "thumbnail": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png",
+    "date": "2026-03-17",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "Small ULN2003A EEV driver board render kept with the Juanyun actuator archive.",
+    "captionZh": "放在卷云执行器归档里的 ULN2003A EEV 驱动小板渲染图。"
+  },
+  {
+    "id": "juanyun-eev-schematic",
+    "title": "EEV driver board schematic",
+    "titleZh": "EEV 驱动小板电路图",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png",
+    "thumbnail": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png",
+    "date": "2026-03-17",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "Schematic for the small EEV driver board.",
+    "captionZh": "EEV 驱动小板的电路图，用来说明执行器支线的驱动关系。"
   },
   {
     "id": "claude-chime-logo",
@@ -226,6 +346,18 @@
     "projectSlug": "nanjing-turing-qt-embedded-learning",
     "caption": "Seamly2D visual used for the Qt/C++ internship archive.",
     "captionZh": "南京图灵 Qt/C++ 实习档案页使用的 Seamly2D 项目标识。"
+  },
+  {
+    "id": "turing-ai-institute-cover",
+    "title": "Turing AI Institute cover",
+    "titleZh": "南京图灵人工智能研究院封面图",
+    "type": "image",
+    "src": "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg",
+    "thumbnail": "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg",
+    "date": "2025-08-10",
+    "projectSlug": "nanjing-turing-qt-embedded-learning",
+    "caption": "Processed institute logo cover for the Nanjing Turing Qt/CMake internship archive.",
+    "captionZh": "南京图灵 Qt/CMake 实习档案页使用的研究院 Logo 封面图。"
   },
   {
     "id": "qt-logo-study-folder",
@@ -286,6 +418,18 @@
     "projectSlug": "tianjin-metro-stm32-foundation",
     "caption": "Pinout image repeatedly used while starting STM32F103C8T6 peripheral work.",
     "captionZh": "开始摸 STM32F103C8T6 外设时反复对照的引脚图。"
+  },
+  {
+    "id": "tianjin-rail-transit-cover",
+    "title": "Tianjin Rail Transit cover",
+    "titleZh": "天津轨道交通封面图",
+    "type": "image",
+    "src": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
+    "thumbnail": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
+    "date": "2025-02-05",
+    "projectSlug": "tianjin-metro-stm32-foundation",
+    "caption": "Processed Tianjin Rail Transit logo cover for the STM32 foundation internship archive.",
+    "captionZh": "天津轨道交通 STM32 入门实习档案页使用的 Logo 封面图。"
   },
   {
     "id": "servo-pwm-180-parameters",

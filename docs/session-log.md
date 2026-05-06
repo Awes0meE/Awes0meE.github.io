@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Refreshed project cover images and Juanyun legacy media evidence after new local assets were added.
+- Files changed: added processed Cirro Tech, Nanjing Turing, Tianjin Rail Transit, DIY STM32 PCB, FOC board, FOC schematic, and EEV driver-board images under `public/uploads/`; updated Juanyun thermal, FOC, DIY, Nanjing Turing, and Tianjin project pages; refreshed `content/media.json`; taught `ContentRenderer` to turn consecutive Markdown images into clickable galleries; made in-body and project-file evidence images use direct public URLs; updated docs and memory.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for `/media` and the updated project routes; Playwright desktop/mobile screenshots confirmed the new covers and FOC schematic gallery render cleanly.
+
+## 2026-05-07
+
 - Summary: Fixed language-scoping leaks in Turing and Juanyun notes, then tightened the renderer and verification pipeline.
 - Files changed: removed English-only fenced snippets from the Qt6 and Release translation sections; scoped Juanyun SOP paired listings with `en-text` / `zh-text`; added bilingual image captions for Juanyun note media; updated `components/content-renderer.tsx` to ignore standalone HTML comments, support scoped code fences, improve mixed slash heading/caption splitting, and use a less brittle language detector; decoded percent-encoded `assetPaths` in `components/project-assets.tsx`; locked project/note detail routes with `dynamicParams = false`; migrated linting to ESLint flat config; added `scripts/validate-content.mjs`; refreshed docs and memory for the new content rules.
 - Verification: `npm.cmd run lint`, `npm.cmd run validate-content`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for the Qt6 note, Release packaging note, Juanyun SOP note, Juanyun thermal project page, and `/media`.

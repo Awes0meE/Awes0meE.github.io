@@ -170,6 +170,24 @@ function parseLocalizedInline(text: string) {
   );
 }
 
+type ParsedImage = {
+  alt: string;
+  src: string;
+};
+
+function parseImageLine(line: string): ParsedImage | null {
+  const match = line.trim().match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    alt: match[1],
+    src: match[2]
+  };
+}
+
 function splitBlocks(source: string) {
   const blocks: string[] = [];
   const lines = source.replace(/\r\n/g, "\n").split("\n");
@@ -265,37 +283,55 @@ export function ContentRenderer({ source }: { source: string }) {
     );
   }
 
+  function renderImageFigure(image: ParsedImage, key: string | number, sizes: string, className?: string) {
+    return (
+      <figure key={key} className={cn("overflow-hidden rounded-lg border border-line bg-chalk", className)}>
+        <a href={image.src} className="block">
+          <div className="relative aspect-[16/9]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes={sizes}
+              loading="eager"
+              unoptimized
+              className="object-contain p-2 transition duration-500 hover:scale-[1.01]"
+            />
+          </div>
+        </a>
+        {image.alt ? (
+          <figcaption className="border-t border-line bg-white px-4 py-3 text-sm text-graphite">
+            {parseLocalizedInline(image.alt)}
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
   return (
     <div>
       {blocks.map((block, index) => {
         const trimmed = block.trim();
-        const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        const imageLines = trimmed.split("\n").map(parseImageLine);
         const codeMatch = trimmed.match(/^```([A-Za-z0-9_+#.-]*)\n([\s\S]*?)\n```$/);
 
         if (isHtmlCommentBlock(trimmed)) {
           return null;
         }
 
-        if (imageMatch) {
-          const [, alt, src] = imageMatch;
+        if (imageLines.every(Boolean)) {
+          const images = imageLines as ParsedImage[];
+
+          if (images.length === 1) {
+            return renderImageFigure(images[0], index, "(min-width: 1024px) 896px, calc(100vw - 40px)", "mt-8");
+          }
 
           return (
-            <figure key={index} className="mt-8 overflow-hidden rounded-lg border border-line bg-chalk">
-              <div className="relative aspect-[16/9]">
-                <Image
-                  src={src}
-                  alt={alt}
-                  fill
-                  sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
-                  className="object-contain p-2"
-                />
-              </div>
-              {alt ? (
-                <figcaption className="border-t border-line bg-white px-4 py-3 text-sm text-graphite">
-                  {parseLocalizedInline(alt)}
-                </figcaption>
-              ) : null}
-            </figure>
+            <div key={index} className="mt-8 grid gap-4 md:grid-cols-2">
+              {images.map((image, imageIndex) =>
+                renderImageFigure(image, `${index}-${image.src}-${imageIndex}`, "(min-width: 1024px) 432px, calc(100vw - 40px)")
+              )}
+            </div>
           );
         }
 

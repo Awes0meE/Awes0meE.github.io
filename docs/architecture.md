@@ -60,7 +60,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main` release `v0.6.1`, as of `2026-05-07`:
+Current content state on `main`, based on release `v0.6.1` plus the post-release media/cover refresh, as of `2026-05-07`:
 
 - 6 project files total;
 - 19 public note files total;
@@ -68,18 +68,18 @@ Current content state on `main` release `v0.6.1`, as of `2026-05-07`:
 - 1 Claude Chime hardware power-board archive;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
-- 38 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, and the DIY demo video;
+- 50 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and the DIY demo video;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
 
 ## Rendering Notes
 
-The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, and standalone Markdown image blocks. Standalone HTML comments are ignored so internal content markers do not appear on public pages. Normal fenced code blocks are shared technical evidence; scoped fences such as `en-text` and `zh-powershell` can be used when a whole listing belongs to one language view. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, standalone Markdown image blocks, and consecutive Markdown image blocks as clickable responsive galleries. Evidence figures use direct public image URLs after the assets have been compressed, which keeps long archive pages from showing stale optimizer placeholders. Standalone HTML comments are ignored so internal content markers do not appear on public pages. Normal fenced code blocks are shared technical evidence; scoped fences such as `en-text` and `zh-powershell` can be used when a whole listing belongs to one language view. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`. The detail page order is project body, development notes, public project files, then related media.
 
-Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. Percent-encoded upload paths are decoded before filesystem lookup. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
+Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. Image previews in this archive also use direct public URLs, so the asset-prep step should resize/crop large source images before committing them. Percent-encoded upload paths are decoded before filesystem lookup. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
 
 ## Language Layer
 

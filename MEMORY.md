@@ -36,6 +36,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Nanjing Turing source-text notes were changed to render uploaded public originals directly as note pages: Qt6 Seamly2D first-run TXT, Release packaging Markdown, README + `.sm2d` / `.smis` samples, and then the CMake/build-logic note was replaced again with the user's two Notion-exported Markdown originals instead of the lossy PDF text extraction.
 - `2026-05-07`: Release `v0.6.1` adds the Notion CMake/build-logic originals, page-internal heading anchors, Markdown table rendering, a full public English body coverage pass across projects/notes, and a 38-item media gallery covering all project/note images and videos.
 - `2026-05-07`: Content rendering was tightened after English translation code snippets leaked into Chinese note views. `ContentRenderer` now ignores standalone HTML comments, supports scoped fenced-code prefixes such as `en-text` / `zh-text`, splits bilingual slash text from the last valid Chinese separator, and project/note detail routes lock unknown slugs to generated static params.
+- `2026-05-07`: Post-`v0.6.1` media/cover refresh added processed cover images for Juanyun, Nanjing Turing, and Tianjin rail-transit project pages; added DIY STM32 PCB render/schematic, FOC board render plus five schematic sheets, and EEV driver-board render/schematic to project pages and `/media`; `content/media.json` now has 50 items. `ContentRenderer` now turns consecutive standalone Markdown images into clickable responsive galleries, and in-body / project-asset evidence images use direct public URLs to avoid blank optimizer placeholders on long archive pages.
 
 ## Stable Decisions
 
@@ -108,7 +109,7 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review release `v0.6.1` on `https://www.66ccff-labs.com/` after deployment, especially `/media`, `turing-cmake-build-logic`, the Nanjing Turing project page, Tianjin STM32 pages, and the larger Juanyun project/note pages.
+- Browser-review the next deployment on `https://www.66ccff-labs.com/`, especially `/media`, `/work/juanyun-thermal-hardware`, `/work/juanyun-foc-driver-board`, `/work/juanyun-diy-cooling-prototype`, the Nanjing Turing project page, and the Tianjin STM32 project page.
 - Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.
