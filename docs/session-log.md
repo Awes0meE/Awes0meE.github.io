@@ -68,3 +68,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Split the FOC driver board archive into its own project page.
 - Files changed: added `content/projects/juanyun-foc-driver-board.mdx`, reassigned the FOC note to that project slug, and updated the Juanyun source inventory.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Split the actuator and quiet fan driver archive into its own project page.
+- Files changed: added `content/projects/juanyun-actuator-fan-archive.mdx`, published selected solenoid-valve source files, ULN2003 schematic, and BLDC EDA project attachment, then reassigned the actuator archive note to the new project slug.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

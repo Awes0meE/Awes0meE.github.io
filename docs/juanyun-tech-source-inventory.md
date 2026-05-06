@@ -29,8 +29,8 @@ public/uploads/projects/juanyun-tech/
 | `Current_Product_BaseUnit_Project` | 1659 | Public note for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
 | `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber and STEP model; code details still need a later review. |
-| `Legacy_螺线管阀门开发_Project` | 818 | Public archive note only; raw vendor examples and driver packages are not published. |
-| `Legacy_BLDC_QuietFan_Project` | 2 | Public archive note with BOM attachment. |
+| `Legacy_螺线管阀门开发_Project` | 818 | Standalone actuator/fan archive project plus public note; selected project source files and ULN2003 schematic are published, while vendor example packages are not. |
+| `Legacy_BLDC_QuietFan_Project` | 2 | Included in the actuator/fan archive project with BOM and EDA project attachment. |
 | `通用数据手册` | 3 | Mentioned as supporting material; not copied into public uploads in this pass. |
 | `实习证明` | 2 | Not published. Treat as private credential material. |
 | `费用报销单 & 发票` | 46 | Not published. Treat as private financial evidence. |
@@ -56,6 +56,7 @@ public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
 public/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx
+public/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro
 public/uploads/projects/juanyun-tech/cirro-logo.png
 public/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf
 public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg
@@ -67,6 +68,10 @@ public/uploads/projects/juanyun-tech/foc-driver-gerber.zip
 public/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step
 public/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg
 public/uploads/projects/juanyun-tech/juanyun-hardware-sop-awes0mee.pdf
+public/uploads/projects/juanyun-tech/solenoid-valve-control.ioc
+public/uploads/projects/juanyun-tech/solenoid-valve-control-main.c
+public/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c
+public/uploads/projects/juanyun-tech/uln2003-stepper-driver-schematic.pdf
 ```
 
 ## Privacy Boundary
