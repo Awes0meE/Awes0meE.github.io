@@ -15,14 +15,30 @@ projectSlug: "juanyun-foc-driver-board"
 ## My Work / 我的工作
 
 - 我先把它作为独立的 legacy project 归入网站，避免和当前卷云热管理主线混在一起。
-- 我提取了最适合公开展示的 PCB 证据：Gerber 压缩包和 STEP 模型。
+- 我提取了最适合公开展示的 PCB 证据：Gerber 压缩包、STEP 模型、BOM、贴片坐标、交互 BOM 和 EasyEDA 工程。
+- 我补充了源码层证据，包括 FOC 算法、DRV8301 驱动、ADC、Hall sensor、低速任务、板级配置和上位机通信初始化。
 - 后续如果要把它写成正式项目，我会补充 FOC 控制链路、采样、电流环、驱动保护、上电测试和波形证据。
 
 ## Evidence / 证据
 
 - [FOC driver Gerber archive](/uploads/projects/juanyun-tech/foc-driver-gerber.zip)
 - [FOC driver STEP model](/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step)
+- [FOC driver BOM](/uploads/projects/juanyun-tech/foc-driver-bom.xlsx)
+- [FOC driver pick-and-place CSV](/uploads/projects/juanyun-tech/foc-driver-pick-place.csv)
+- [FOC driver interactive BOM](/uploads/projects/juanyun-tech/foc-driver-interactive-bom.html)
+- [FOC EasyEDA project](/uploads/projects/juanyun-tech/foc-driver-easyeda-project.epro2)
+- [FOC algorithm source](/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.c)
+- [FOC algorithm header](/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.h)
+- [DRV8301 driver source](/uploads/projects/juanyun-tech/foc-driver-drv8301.c)
+- [DRV8301 driver header](/uploads/projects/juanyun-tech/foc-driver-drv8301.h)
+- [ADC source](/uploads/projects/juanyun-tech/foc-driver-adc.c)
+- [Hall sensor source](/uploads/projects/juanyun-tech/foc-driver-hall-sensor.c)
+- [Low-task source](/uploads/projects/juanyun-tech/foc-driver-low-task.c)
+- [Board configuration source](/uploads/projects/juanyun-tech/foc-driver-board-config.c)
+- [PC communication init source](/uploads/projects/juanyun-tech/foc-driver-pc-communication-init.c)
+- [DRV8301 datasheet](/uploads/projects/juanyun-tech/foc-driver-drv8301-datasheet.pdf)
+- [HY3010D MOSFET datasheet](/uploads/projects/juanyun-tech/foc-driver-hy3010d-mosfet-datasheet.pdf)
 
 ## Reflection / 复盘
 
-这条线现在还不能作为完整公开 case study，因为缺少我对算法、硬件验证和测试波形的叙述。先放进网站的意义是建立索引，提醒后续不要把电机控制资料丢在硬盘里。
+这条线现在还不能作为完整公开 case study，因为缺少我对算法、硬件验证和测试波形的叙述。补完源码和制造资料之后，它已经不只是“索引”，但后续仍然需要我用自己的话讲清楚电流采样、调制、保护和启动过程。

@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Expanded the FOC driver archive with selected source, manufacturing, EDA, interactive BOM, and datasheet evidence.
+- Files changed: updated `content/projects/juanyun-foc-driver-board.mdx` and `content/notes/juanyun-foc-driver.mdx`, published selected STM32F4/DRV8301 source files, BOM/PnP/interactive BOM, EasyEDA project, DRV8301/HY3010D datasheets, and updated the Juanyun inventory.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Added an AC unit V2.1 component datasheet review note for key power, sensing, Wi-Fi, fan, EEV driver, MOSFET, and TVS evidence.
 - Files changed: added `content/notes/juanyun-acunit-v21-component-datasheets.mdx`, linked it from the AC unit project/board note, and published selected V2.1 datasheets plus fan/pressure-transmitter parameter images.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

@@ -32,7 +32,7 @@ public/uploads/projects/juanyun-tech/
 | `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
-| `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber and STEP model; code details still need a later review. |
+| `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber, STEP model, BOM/PnP/interactive BOM, EasyEDA project, selected STM32F4/DRV8301 source files, and key datasheets. |
 | `Legacy_螺线管阀门开发_Project` | 818 | Standalone actuator/fan archive project plus public note; selected project source files and ULN2003 schematic are published, while vendor example packages are not. |
 | `Legacy_BLDC_QuietFan_Project` | 2 | Included in the actuator/fan archive project with BOM and EDA project attachment. |
 | `通用数据手册` | 3 | Supporting compressor/driver datasheet note for the AC unit control platform. |
@@ -131,7 +131,24 @@ public/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4
 public/uploads/projects/juanyun-tech/diy-cooling-esp32.ino
 public/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf
 public/uploads/projects/juanyun-tech/foc-driver-gerber.zip
+public/uploads/projects/juanyun-tech/foc-driver-adc.c
+public/uploads/projects/juanyun-tech/foc-driver-board-config.c
+public/uploads/projects/juanyun-tech/foc-driver-bom.xlsx
+public/uploads/projects/juanyun-tech/foc-driver-code-readme.txt
+public/uploads/projects/juanyun-tech/foc-driver-drv8301.c
+public/uploads/projects/juanyun-tech/foc-driver-drv8301.h
+public/uploads/projects/juanyun-tech/foc-driver-drv8301-datasheet.pdf
+public/uploads/projects/juanyun-tech/foc-driver-drv8301-final-bom.xlsx
+public/uploads/projects/juanyun-tech/foc-driver-easyeda-project.epro2
+public/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.c
+public/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.h
+public/uploads/projects/juanyun-tech/foc-driver-hall-sensor.c
+public/uploads/projects/juanyun-tech/foc-driver-hy3010d-mosfet-datasheet.pdf
+public/uploads/projects/juanyun-tech/foc-driver-interactive-bom.html
+public/uploads/projects/juanyun-tech/foc-driver-low-task.c
 public/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step
+public/uploads/projects/juanyun-tech/foc-driver-pc-communication-init.c
+public/uploads/projects/juanyun-tech/foc-driver-pick-place.csv
 public/uploads/projects/juanyun-tech/ge2117-v2-compressor-driver-manual.pdf
 public/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg
 public/uploads/projects/juanyun-tech/juanyun-hardware-sop-awes0mee.pdf
