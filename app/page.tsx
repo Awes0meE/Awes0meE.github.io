@@ -57,7 +57,7 @@ export default function Home() {
                     <BilingualText en="Xi'an Jiaotong-Liverpool University" zh="西交利物浦大学" />
                   </p>
                   <p className="mt-1 text-xs text-graphite">
-                    <BilingualText en="School of Advanced Technology" zh="高级技术学院" />
+                    <BilingualText en="School of Advanced Technology" zh="智能工程学院" />
                   </p>
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
           <div className="grid gap-6 sm:grid-cols-[120px_1fr]">
             <div className="relative h-28 w-28 overflow-hidden rounded-full border border-line bg-chalk">
-              <Image src="/uploads/visuals/lab-notes.svg" alt="Li Zhiyi profile visual" fill sizes="112px" className="object-cover" />
+              <Image src="/uploads/projects/avatar.jpg" alt="Li Zhiyi profile visual" fill sizes="112px" className="object-cover" />
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-ink">
@@ -226,7 +226,7 @@ export default function Home() {
               <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="Embedded hardware archive expansion" zh="嵌入式硬件档案扩展中" /></p>
               <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Robotics learning" zh="Robotics 学习中" /></p>
               <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Project evidence curation" zh="项目证据整理中" /></p>
-              <p className="flex items-center gap-3"><CalendarDays size={18} /><BilingualText en={formatDateRange("2026.05 to Now")} zh={formatDateRangeZh("2026.05 to Now")} /></p>
+              <p className="flex items-center gap-3"><CalendarDays size={18} /><BilingualText en={formatDateRange("2025.08 to Now")} zh={formatDateRangeZh("2025.08 to Now")} /></p>
             </div>
           </div>
         </div>
