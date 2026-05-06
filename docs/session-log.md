@@ -14,6 +14,5 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Verified custom domain and created project-local AI memory/docs system.
 - Domain: `https://www.66ccff-labs.com/` works publicly; apex domain redirects to `www`.
 - Skills: installed `karpathy-guidelines` and `neat-freak` into Codex user skills.
-- Documentation: added `CODEX.md`, `AGENTS.md`, `MEMORY.md`, and `docs/` knowledge base.
+- Documentation: added `CODEX.md`, `AGENTS.md`, `MEMORY.md`, and `docs/` knowledge base; added a cross-device bootstrap path in `AGENTS.md`.
 - Follow-up: start replacing placeholder content with real portfolio assets and case studies.
-

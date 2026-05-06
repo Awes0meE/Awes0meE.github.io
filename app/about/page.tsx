@@ -10,7 +10,13 @@ export const metadata: Metadata = {
 const skills = [
   "Control systems",
   "Embedded C/C++",
-  "Robotics & SLAM",
+  "Robotics",
+  "Microcontrollers",
+  "STM32",
+  "Free-RTOS",
+  "LVGL",
+  "PCB",
+  "Low-voltage electronics",
   "Python tooling",
   "Next.js full-stack",
   "Technical writing"
@@ -23,7 +29,7 @@ export default function AboutPage() {
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_0.75fr]">
         <section>
           <p className="text-xl leading-9 text-ink">
-            我是 Lizhiyi / Awes0meE，西交利物浦大学电子与电气工程方向本科生。这个网站会逐步记录我的工程项目、学习笔记、实验媒体和作品集建设过程。
+            我是 Awes0meE，西交利物浦大学通信工程本科生。这个网站会逐步记录我的工程项目、学习笔记、实验媒体和作品集建设过程。
           </p>
           <p className="mt-5 leading-8 text-graphite">
             I am interested in systems that connect theory, hardware, and software: control loops that can be measured, embedded tools that can be reused, and robot behaviors that can be explained through evidence.

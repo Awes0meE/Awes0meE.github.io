@@ -37,7 +37,7 @@ These rules incorporate the installed `neat-freak` skill:
   - `docs/` plus `README.md` and `USER_GUIDE.md`: human-facing documentation.
 - At the end of meaningful milestones, reconcile docs against code. Do not only append new facts.
 - Prefer updating existing memory entries over duplicating them.
-- Use absolute dates such as `2026-05-06`; avoid vague time words like "today" or "recently" in durable docs.
+- Use absolute dates such as `2026-05-06`; avoid vague relative-time wording in durable docs.
 - Delete or rewrite stale guidance when it becomes wrong.
 
 ## Commands
@@ -152,4 +152,3 @@ Update project docs when any of these change:
 - any decision that future agents should not rediscover.
 
 Use `docs/memory-system.md` for the memory update protocol.
-

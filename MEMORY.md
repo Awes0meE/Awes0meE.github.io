@@ -12,10 +12,12 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: Custom domain `https://www.66ccff-labs.com/` was verified working from the public internet.
 - `2026-05-06`: Cloudflare DNS points the domain to Vercel. `www.66ccff-labs.com` resolves through a Vercel DNS CNAME, and the apex domain redirects to `www`.
 - `2026-05-06`: External skills installed into Codex user skills: `karpathy-guidelines` and `neat-freak`. Restart Codex to expose them as first-class skills.
+- `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
 
 ## Stable Decisions
 
 - Use `CODEX.md` as the primary project-agent guide. `AGENTS.md` points to it for compatibility.
+- Keep `AGENTS.md` focused on cross-device bootstrap and short agent entry instructions.
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
@@ -70,4 +72,3 @@ Expected result:
 - Do not store secrets, private tokens, or sensitive personal information.
 - Use absolute dates.
 - Replace stale facts instead of adding contradictory entries.
-

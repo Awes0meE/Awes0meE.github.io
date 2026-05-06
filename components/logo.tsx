@@ -9,7 +9,7 @@ export function Logo() {
         <span className="absolute bottom-2 left-2 h-7 w-px bg-pine" />
       </span>
       <span className="leading-tight">
-        <span className="block text-sm font-semibold text-ink">Awes0meE / Lizhiyi</span>
+        <span className="block text-sm font-semibold text-ink">Awes0meE / Li Zhiyi</span>
         <span className="block text-xs text-graphite">XJTLU · Undergraduate</span>
       </span>
     </Link>

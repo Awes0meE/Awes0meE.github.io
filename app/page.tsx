@@ -33,7 +33,7 @@ export default function Home() {
             style={{ maxWidth: "calc(100vw - 40px)" }}
           >
             <h1 className="max-w-80 text-balance text-4xl font-semibold tracking-normal text-ink sm:max-w-full sm:text-5xl md:text-6xl">
-              Awes0meE / Lizhiyi
+              Awes0meE / Li Zhiyi
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
               电子与电气工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。
@@ -151,7 +151,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
           <div className="grid gap-6 sm:grid-cols-[120px_1fr]">
             <div className="relative h-28 w-28 overflow-hidden rounded-full border border-line bg-chalk">
-              <Image src="/uploads/visuals/lab-notes.svg" alt="Lizhiyi profile visual" fill sizes="112px" className="object-cover" />
+              <Image src="/uploads/visuals/lab-notes.svg" alt="Li Zhiyi profile visual" fill sizes="112px" className="object-cover" />
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-ink">About / 关于</h2>
@@ -188,7 +188,7 @@ export default function Home() {
             <h2 className="text-xl font-semibold text-ink">Currently</h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
               <p className="flex items-center gap-3"><Microchip size={18} />PID Starter Kit 开发中</p>
-              <p className="flex items-center gap-3"><SquareActivity size={18} />Robotics & SLAM 学习中</p>
+              <p className="flex items-center gap-3"><SquareActivity size={18} />Robotics 学习中</p>
               <p className="flex items-center gap-3"><Code2 size={18} />Next.js 全栈作品集中</p>
               <p className="flex items-center gap-3"><CalendarDays size={18} />{formatDateRange("2026.05 to Now")}</p>
             </div>

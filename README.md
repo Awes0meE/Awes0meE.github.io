@@ -118,7 +118,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-Current expected result:
+Expected result for this version:
 
 - Lint passes
 - Production build passes
@@ -166,7 +166,7 @@ content/media.json      媒体图库数据
 lib/                    内容读取和站点常量
 public/uploads/         公开图片、视频和视觉素材
 docs/                   架构、内容维护和记忆系统文档
-CODEX.md                当前仓库的 AI 协作指南
+CODEX.md                本仓库的 AI 协作指南
 MEMORY.md               项目长期记忆和决策记录
 legacy/hexo-export/     旧版 Hexo 输出归档
 ```
@@ -175,7 +175,7 @@ legacy/hexo-export/     旧版 Hexo 输出归档
 
 - `CODEX.md`：给 Codex 和其他 AI agent 的项目规则。
 - `AGENTS.md`：指向 `CODEX.md` 的兼容入口。
-- `MEMORY.md`：当前项目长期记忆。
+- `MEMORY.md`：本项目长期记忆。
 - `docs/memory-system.md`：记忆系统的读取和更新方法。
 - `docs/content-workflow.md`：如何添加项目、笔记、图片和视频。
 - `docs/architecture.md`：路由、数据流、部署和非目标。
@@ -254,7 +254,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-当前预期结果：
+本版本预期结果：
 
 - lint 通过
 - 生产构建通过

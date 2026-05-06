@@ -1,10 +1,10 @@
 export const site = {
-  name: "Awes0meE / Lizhiyi",
-  title: "Awes0meE / Lizhiyi | XJTLU Engineering Portfolio",
+  name: "Awes0meE / Li Zhiyi",
+  title: "Awes0meE / Li Zhiyi | XJTLU Engineering Portfolio",
   description:
     "Bilingual undergraduate engineering portfolio for control systems, embedded hardware, robotics, notes, and media.",
-  url: "https://awes0mee.github.io",
-  email: "lizhiyi.work@gmail.com",
+  url: "https://www.66ccff-labs.com",
+  email: "lizhiyi20030401@gmail.com",
   github: "https://github.com/Awes0meE",
   location: "Suzhou, China"
 };

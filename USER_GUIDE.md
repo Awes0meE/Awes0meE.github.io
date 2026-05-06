@@ -6,7 +6,7 @@ English | [中文](#中文说明)
 
 This is a personal engineering portfolio for Lizhiyi / Awes0meE. It is designed for visitors such as HR, supervisors, classmates, collaborators, and reviewers who want to understand the author's projects, technical direction, notes, and media evidence.
 
-The site currently contains:
+The site contains:
 
 - Homepage: personal introduction and featured work
 - Work: project case studies
@@ -156,7 +156,7 @@ If you are reading this as a visitor, you only need the public website link. The
 
 这是 Lizhiyi / Awes0meE 的个人工程作品集网站。它面向 HR、导师、同学、合作者和评审者，用来展示作者的项目、技术方向、学习笔记和图片/视频等证据材料。
 
-当前网站包含：
+网站包含：
 
 - 首页：个人介绍和精选项目
 - Work / 项目：项目案例
