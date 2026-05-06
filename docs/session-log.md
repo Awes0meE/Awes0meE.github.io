@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Added an AC unit V2.1 manufacturing export package note with BOM, Gerber, and pick-and-place evidence for the main, power, and interaction boards.
+- Files changed: added `content/notes/juanyun-acunit-v21-manufacturing-package.mdx`, linked it from the AC unit project/board note, and published normalized V2.1 BOM/Gerber/PnP files.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Added selected AC unit firmware source evidence to the current AC unit control platform and firmware note.
 - Files changed: published selected V0.5 `product_acunit` README, PINOUT, IOC, release notes, App/Service/BSP source files, and linked them from the AC unit project/note while excluding HAL/CMSIS vendor trees and binary build artifacts.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

@@ -1,0 +1,39 @@
+---
+title: "AC Unit V2.1 Manufacturing Export Package"
+titleZh: "外机板 V2.1 生产导出资料整理"
+summary: "A manufacturing-evidence note for the AC unit V2.1 main, power, and interaction board BOM, Gerber, and pick-and-place exports."
+summaryZh: "外机板 V2.1 主控板、分电板、交互板的 BOM、Gerber 和贴片坐标导出资料整理，用于证明 PCB 不是只停留在截图阶段。"
+date: "2026-05-06"
+tags: ["PCB", "Manufacturing", "Gerber", "BOM"]
+projectSlug: "juanyun-acunit-control-platform"
+---
+
+## Why This Matters / 为什么这部分重要
+
+PCB renders and schematics are useful, but a board becomes more convincing when the manufacturing exports are also organized. For V2.1, I kept the main board, power board, and interaction board as separate export groups so future review can trace each board from system role to schematic, PCB, BOM, Gerber, and placement file.
+
+PCB 截图和原理图能说明设计意图，但生产导出资料能说明这个设计已经走到可打样/可审核的阶段。V2.1 拆成主控板、分电板、交互板后，我把三块板的 BOM、Gerber 和贴片坐标分别整理，方便后续检查制造风险。
+
+## Export Groups / 导出分组
+
+- Main board: STM32 control, compressor/EEV/sensor interfaces, Wi-Fi serial link, and debug/programming connections.
+- Power board: 24 V input, downstream power distribution, high-current routing, and connectorized board-to-board wiring.
+- Interaction board: OLED, encoder, buttons, and user-facing control inputs.
+
+## Evidence / 证据
+
+- [Main board BOM](/uploads/projects/juanyun-tech/acunit-v21-main-bom.xlsx)
+- [Main board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-main-gerber.zip)
+- [Main board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-main-pick-place.csv)
+- [Power board BOM](/uploads/projects/juanyun-tech/acunit-v21-power-bom.xlsx)
+- [Power board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-power-gerber.zip)
+- [Power board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-power-pick-place.csv)
+- [Interaction board BOM](/uploads/projects/juanyun-tech/acunit-v21-ui-bom.xlsx)
+- [Interaction board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-ui-gerber.zip)
+- [Interaction board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-ui-pick-place.csv)
+
+## Reflection / 复盘
+
+This note helps separate design evidence from production evidence. The next improvement is to add a short design-for-manufacturing checklist: connector orientation, silkscreen readability, mounting constraints, current paths, and whether the pick-and-place files match the intended assembly side.
+
+这篇后续可以继续补 DFM 检查清单，例如连接器方向、丝印可读性、安装孔、载流路径、贴片坐标层面是否和装配面一致。当前版本先把生产文件整理成能被网站访问的证据链。
