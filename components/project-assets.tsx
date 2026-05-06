@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Download, ExternalLink, FileArchive, FileCode2, FileText, ImageIcon, Video } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ContentRenderer } from "@/components/content-renderer";
 
 type ProjectAsset = {
   href: string;
@@ -132,9 +133,9 @@ function AssetCard({ asset }: { asset: ProjectAsset }) {
     return (
       <article className="overflow-hidden rounded-lg border border-line bg-white">
         <AssetHeader asset={asset} icon={<FileText size={18} />} />
-        <pre className="max-h-[560px] whitespace-pre-wrap overflow-auto border-t border-line bg-paper p-4 text-sm leading-7 text-graphite">
-          {asset.content}
-        </pre>
+        <div className="max-h-[640px] overflow-auto border-t border-line bg-white px-5 pb-6 pt-2">
+          <ContentRenderer source={asset.content} />
+        </div>
       </article>
     );
   }

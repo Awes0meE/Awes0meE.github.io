@@ -14,29 +14,24 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## 前期想法
+## PWM First / 先看 PWM
 
-PWM 是第一次把“数字输出”变成“连续效果”的地方。LED 亮度、舵机角度、电机速度都可以从占空比开始理解。这个阶段如果只写一句 `SetCompare`，容易觉得很简单；真正要弄清楚的是频率、周期、预分频、占空比和外设通道之间的关系。
+PWM 是第一次把“高低电平”变成“连续效果”的地方。LED 亮度、舵机角度、电机速度都可以从占空比开始理解。只写一句 `SetCompare` 看起来很简单，但背后要把频率、周期、预分频、占空比和通道关系想清楚。
 
-PWM made the board feel less binary. The same timer idea could drive LED dimming, servo pulses, and DC motor speed experiments.
-
-## 阶段目标
-
-- 配置定时器 PWM 输出，理解 duty cycle 和频率。
-- 用舵机资料确认 180 度舵机的控制脉宽范围。
-- 用 ADC 读取光敏传感器，把模拟量变成可显示、可控制的数据。
-- 用 UART 或串口工具观察数据，避免只靠 OLED 判断。
+PWM made the board feel less binary. The same timer idea could drive LED dimming, servo pulses, and motor-speed experiments.
 
 ![180 degree servo PWM parameter reference / 180 度舵机 PWM 控制参数参考](/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png)
 
-## 改变
+## ADC And UART / 采样和观察
 
-在地铁环境监测小系统里，亮度控制没有只用一个固定比例，而是做了一个很朴素的查表。表里记录 LED PWM 值和光敏 ADC 值的对应关系，再用线性插值估算目标亮度需要的 PWM。这个方法不复杂，但它说明学习已经从“外设能不能出波形”往“数据怎么用于控制”挪了一步。
+ADC 练习把光敏传感器的模拟量变成数字。串口和 OLED 则负责把这些数字显示出来。这个阶段我才更明显地感觉到：嵌入式调试不能只靠看硬件有没有动，最好能把中间数据也吐出来。
 
-## 证据
+在地铁环境监测小系统里，亮度控制没有只用固定比例，而是做了一个很朴素的查表。表里记录 LED PWM 值和光敏 ADC 值的对应关系，再用线性插值估算目标亮度需要的 PWM。方法不复杂，但它把“外设能出波形”往“数据参与控制”推进了一步。
+
+## File / 文件
 
 公开摘录保留了校准表、PWM 限幅和查表插值逻辑：[PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。
 
-## 复盘
+## Looking Back / 回头看
 
-这部分最现实的收获是：传感器值通常不干净，控制输出也不是一句函数调用就完事。即使只是 LED 调光，也要考虑采样范围、目标值、限幅和实际响应。后面再看 PID 时，才更容易理解为什么反馈和参数调节不是抽象公式。
+传感器值通常不干净，控制输出也不是一句函数调用就结束。即使只是 LED 调光，也要考虑采样范围、目标值、限幅和实际响应。后面再看 PID 时，这些小练习会让公式没那么悬空。

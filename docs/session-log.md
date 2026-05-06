@@ -255,3 +255,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Fixed the GitHub Pages build failure caused by Jekyll parsing uploaded project Markdown as Liquid.
 - Files changed: added root `.nojekyll`, documented the GitHub Pages/Vercel deployment boundary, and recorded the failure mode in project memory.
 - Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-05-07
+
+- Summary: Refreshed the media gallery and rewrote notes/projects into a more natural learning-log voice.
+- Files changed: expanded `content/media.json` to cover project/note images and videos; updated `/media` cards to show source projects; changed Markdown/text project assets to render as readable page content while source files stay in code frames; added `content/notes/turing-three-week-development-log.mdx`; replaced the Juanyun hardware SOP note with the SOP text itself; rewrote Juanyun, Nanjing Turing, and Tianjin STM32 notes/projects away from AI handoff phrasing.
+- Verification: upload-link validation passed for 25 content files; media coverage validation passed for 29 media items and 16 content image/video refs; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local HTTP checks returned `200` for `/media`, `/notes/juanyun-hardware-sop`, `/notes/turing-three-week-development-log`, `/work/juanyun-thermal-hardware`, and `/work/nanjing-turing-qt-embedded-learning`.

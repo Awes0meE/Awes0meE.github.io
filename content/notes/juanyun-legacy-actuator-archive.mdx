@@ -2,24 +2,24 @@
 title: "Solenoid Valve and BLDC Fan Archive Notes"
 titleZh: "螺线管阀门与 BLDC 风扇归档笔记"
 summary: "Archive notes for smaller actuator and fan-driver materials: solenoid-valve control, OLED and encoder interaction, ULN2003 references, and a single-phase BLDC quiet-fan driver board."
-summaryZh: "执行器与风扇驱动材料归档笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料、单相 BLDC 静音风扇驱动板，以及筛选后的公开证据。"
+summaryZh: "执行器与风扇驱动材料归档笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料、单相 BLDC 静音风扇驱动板，以及筛选后的文件线索。"
 date: "2026-05-06"
 tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## 前期想法
+## 起点
 
 这部分材料比较散。一边是螺线管阀门控制，里面有 STM32F103 工程、电磁阀驱动板、OLED、EC11 编码器、按键和 ULN2003 / 步进驱动参考；另一边是单相 BLDC 静音风扇驱动板，材料只有 BOM 和 EDA 项目。它们都和执行器、电机、驱动有关，但还没有形成一条很完整的主线。
 
-所以先归档。归档不是“这项目很完整”，而是承认它现在还只是线索。至少以后回头看时知道：这里有一批关于负载驱动、人机交互、小电机和简单执行器的材料，不会被混在大项目旁边悄悄丢掉。
+所以先留下来。它现在还不是完整项目，更像一组线索：负载驱动、人机交互、小电机和简单执行器。至少以后回头看时，不会把这些小材料混在大项目旁边悄悄丢掉。
 
-## 疑问：为什么不直接删掉这些边角料？
+## 为什么不直接删掉这些边角料？
 
 因为它们可能是后续能力线索。执行器驱动、OLED 显示、编码器输入、风扇驱动，这些都是嵌入式硬件里很常见的碎片。单个看起来不大，但组合起来就是很多控制板的基本功。
 
-问题在于证据还不够完整。现在如果硬写成成熟项目，会显得假。缺少的东西很明确：实物照片、接线图、状态机、测试日志、故障处理、波形或至少一张清楚的运行截图。
+问题在于记录还不够完整。现在如果硬写成成熟项目，会显得假。缺少的东西很明确：实物照片、接线图、状态机、测试日志、故障处理、波形或至少一张清楚的运行截图。
 
 ## 目前能说明什么
 
@@ -28,9 +28,9 @@ visibility: public
 - BLDC 静音风扇板目前只有 BOM 和 EDA 项目，适合先作为方向线索，暂时不当成完整 case。
 - Vendor examples 和工具包很多，但不适合直接搬到公开站点。
 
-## 证据
+## 文件
 
-公开页现在提供筛选后的 legacy 证据：
+页面现在提供筛选后的 legacy 文件：
 
 - [Solenoid main.c](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)
 - [Solenoid valve control source](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)
@@ -41,15 +41,15 @@ visibility: public
 - [BLDC quiet fan BOM](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-bom.xlsx)
 - [BLDC quiet fan EasyEDA project](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-easyeda.epro)
 
-不公开供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包。这里保留的是归档证据，不是完整工程发布。
+供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包不放。这里留的是能看出方向的文件，不是完整工程发布。
 
-## 阶段目标
+## 还要补的记录
 
 - 给螺线管阀门补一张状态图：打开、关闭、保持、故障、手动输入。
 - 给执行器驱动补一张重画接线图，说明 MCU、驱动芯片、负载和保护位置。
 - 给 OLED / 编码器交互补一张运行截图或实物照片。
 - BLDC 风扇板后续需要补目标电压、拓扑、噪声目标和 bring-up 记录。
 
-## 复盘
+## 现在回头看
 
-这类材料最容易陷入两个极端：要么觉得小就删掉，要么硬凑成大项目。现在先放在中间：承认它们只是归档线索，但把它们和执行器 / 电机控制方向关联起来。以后证据补齐，再升级。
+这类材料最容易陷入两个极端：要么觉得小就删掉，要么硬凑成大项目。现在放在中间更合适：承认它们只是线索，但把它们和执行器 / 电机控制方向关联起来。以后照片、接线和运行记录补齐，再写成更完整的页面。

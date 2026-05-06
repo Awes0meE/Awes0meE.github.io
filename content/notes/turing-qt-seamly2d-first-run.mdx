@@ -9,37 +9,35 @@ visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 
-## Early Idea / 前期想法
+## Early Idea / 一开始怎么想
 
-The first target was simple on paper: clone Seamly2D, open it in Qt Creator, and run it on Windows 11. In practice, the first useful lesson was that "Qt project" is not enough information. The Qt major version, MSVC version, SDK, debugger, qmake file, and post-link deployment step all matter.
+The first plan sounded simple: clone Seamly2D, open it in Qt Creator, and run it on Windows 11. The first real lesson was that "a Qt project" is not enough information. Qt version, MSVC version, Windows SDK, debugger, qmake, and deploy steps all get a vote.
 
-一开始的目标其实很朴素：把 Seamly2D 拉下来，用 Qt Creator 打开，在 Windows 11 上跑起来。但很快发现，“这是一个 Qt 项目”这个描述太粗了。Qt 大版本、MSVC 版本、Windows SDK、CDB 调试器、qmake 文件、post-link 部署步骤，每一个都可能卡住。
+一开始想得很简单：把 Seamly2D 拉下来，用 Qt Creator 打开，然后点运行。真正开始做才发现，Qt 项目不是一个按钮能解决的东西。Qt 大版本、MSVC、Windows SDK、CDB 调试器、`.pro` 文件、生成目录、部署工具，哪一个不对都会报错。
 
-## 改变
+## What Changed / 后来怎么改
 
-最早尝试过 Qt 5.15.2，但工程里已经出现了 Qt6 写法和 `core5compat` 相关依赖。为了兼容 Qt5 去改几十处代码，风险和工作量都不合理，所以方向改成安装 Qt 6.5.3 的 MSVC2019 64-bit Kit。
+最早试过 Qt 5.15.2，但工程里已经有 Qt6 写法和 `core5compat` 相关依赖。为了兼容 Qt5 去改一堆源码不太现实，所以后来改成 Qt 6.5.3 + MSVC2019 64-bit Kit。
 
-这个转向本身比“成功编译”更重要。它说明环境选择不是凭感觉选最新版或旧版，而是要看项目文件、源码调用和工具链 ABI 是否一致。
+这个选择比“装了新版 Qt”更具体：Qt 包、编译器 ABI、x64 环境和项目配置要对上。旧的 `.pro.user` 也删掉了，因为里面存着上一台机器的路径和 Kit 信息，继续沿用只会把问题带回来。
 
 ## Practical Fixes / 实际修正
 
-The practical fixes were mostly small but connected: delete stale `.pro.user`, use the Qt6 kit, manually bind the MSVC 2019 v142 compiler, run qmake before build, and make `windeployqt` discoverable only where it was needed.
+The useful fixes were small but connected: delete stale user config, choose the Qt6 kit, bind MSVC 2019 v142, run qmake before building, and avoid letting deployment steps interrupt Debug builds.
 
-实际修正都是小动作，但要连起来：删掉旧的 `.pro.user`，改用 Qt6 Kit，手动绑定 MSVC 2019 v142 编译器，先执行 qmake 再 Build All Projects，并且只在需要时让 `windeployqt` 能被找到。
+实际处理大概是这样：
 
-- Qt5 路线的问题：项目已经使用 Qt6 风格代码，强行兼容 Qt5 会变成大面积补丁。
-- Qt6 路线的关键：`Qt 6.5.3 MSVC2019 64-bit` 要和 MSVC 2019 v142、x64 命令行、SDK 保持一致。
-- Debug 阶段的实际处理：把 `windeployqt` 的 post-link 行为限制到 Release，避免 Debug 阶段被部署步骤拖死。
-- 本地运行问题：Qt 的 Windows 几何 warning 会在某些窗口状态下变成干扰，需要清掉旧配置并对 warning 做更安全的处理。
-
-## Evidence / 证据
-
-The original setup note is kept as source material. The public project page only republishes summarized evidence and avoids copying the full upstream source tree.
-
-原始环境记录保留在源目录里。公开页只放整理后的证据，不复制完整上游源码树。
+- 删掉旧 `.pro.user`，让 Qt Creator 重新生成本机配置。
+- 选择 `Qt 6.5.3 MSVC2019 64-bit`，不要让 Qt5 和 Qt6 混在一起。
+- 手动确认 MSVC 2019 v142、Windows SDK 和 x64 命令行。
+- Build 前先跑 qmake，让生成规则更新。
+- 把 `windeployqt` 这类部署步骤放到 Release 里处理，Debug 阶段先保证能调起来。
+- 清掉本地窗口几何配置和 warning 干扰，避免“能编译但一启动就奇怪”的问题。
 
 ![Qt logo used in the study folder / 学习目录里的 Qt 图](/uploads/projects/nanjing-turing/qt-logo.png)
 
-## 复盘
+## Looking Back / 回头看
 
-这次最明显的收获不是“会用 Qt Creator”，而是知道 Qt Creator 只是一个入口。真正决定项目能不能跑的是背后的编译器、SDK、Qt 包、qmake 规则、生成目录和部署工具。以后再看类似项目，第一反应应该先检查 Kit 和构建链路，而不是直接点绿色运行按钮。
+这次跑通环境最大的收获不是会点 Qt Creator，而是开始知道 Qt Creator 只是入口。真正决定能不能跑的是背后的 Kit、编译器、SDK、qmake 规则和运行时依赖。
+
+以后再遇到类似桌面项目，我会先看项目文件和工具链匹配，再动代码。很多时候不是源码坏了，而是电脑上的环境没有和项目说同一种话。

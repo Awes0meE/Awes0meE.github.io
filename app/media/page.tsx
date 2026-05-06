@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { getMediaItems } from "@/lib/content";
+import { getMediaItems, getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "媒体"
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function MediaPage() {
   const media = getMediaItems();
+  const projectsBySlug = new Map(getProjects().map((project) => [project.slug, project]));
 
   return (
     <main className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
@@ -24,7 +25,10 @@ export default function MediaPage() {
         />
       </p>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {media.map((item) => (
+        {media.map((item) => {
+          const sourceProject = item.projectSlug ? projectsBySlug.get(item.projectSlug) : undefined;
+
+          return (
           <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white">
             <div className="relative aspect-[4/3] bg-chalk">
               <Image
@@ -47,6 +51,18 @@ export default function MediaPage() {
               <p className="mt-2 text-sm leading-6 text-graphite">
                 <BilingualText en={item.caption} zh={item.captionZh ?? item.caption} />
               </p>
+              <p className="mt-3 text-xs font-semibold uppercase tracking-normal text-copper">
+                {sourceProject ? (
+                  <Link href={`/work/${sourceProject.slug}`} className="hover:text-pine">
+                    <BilingualText
+                      en={`From ${sourceProject.title}`}
+                      zh={`来自项目：${sourceProject.titleZh}`}
+                    />
+                  </Link>
+                ) : (
+                  <BilingualText en="From site visual system" zh="来自网站视觉系统" />
+                )}
+              </p>
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-graphite">
                 <span>{item.date}</span>
                 <div className="flex items-center gap-3">
@@ -62,7 +78,8 @@ export default function MediaPage() {
               </div>
             </div>
           </article>
-        ))}
+        );
+        })}
       </div>
     </main>
   );

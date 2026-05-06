@@ -14,9 +14,9 @@ assetPaths:
 
 ## Project Brief / 项目简述
 
-This line is a useful motor-control archive rather than a finished public release. The source folder contains a sensorless PMSM FOC board, STM32F4 firmware, DRV8301 driver work, motor-control source modules, datasheets, BOM/PnP exports, a STEP model, an EasyEDA project, and generated build folders. Because this is a non-sensitive legacy folder, selected evidence files are now linked publicly; the page still avoids pretending that a file dump is the same thing as a validated FOC case study.
+This line is useful motor-control material rather than a finished public release. The source folder contains a sensorless PMSM FOC board, STM32F4 firmware, DRV8301 driver work, motor-control source modules, datasheets, BOM/PnP exports, a STEP model, an EasyEDA project, and generated build folders. Because this is a non-sensitive legacy folder, selected files are linked publicly; the page still avoids pretending that a file dump is the same thing as a validated FOC case study.
 
-更准确地说，它现在是“方向已经有了，证据还没讲透”。FOC 很适合放作品集，因为关键词漂亮：三相驱动、无感控制、Clarke/Park、SVPWM、电流采样、速度环、保护逻辑、DRV8301、STM32F4。问题是，如果只把 Gerber、BOM、STEP 和源码堆上来，看起来很硬，实际并没有解释清楚板子怎么起转、怎么保护、波形是否稳定、调参过程有没有闭环。
+更准确地说，它现在是“方向已经有了，调试还没讲透”。FOC 很适合放作品集，因为关键词漂亮：三相驱动、无感控制、Clarke/Park、SVPWM、电流采样、速度环、保护逻辑、DRV8301、STM32F4。问题是，如果只把 Gerber、BOM、STEP 和源码堆上来，看起来很硬，实际并没有解释清楚板子怎么起转、怎么保护、波形是否稳定、调参过程有没有闭环。
 
 ## Archive Scope / 归档范围
 
@@ -25,13 +25,13 @@ This line is a useful motor-control archive rather than a finished public releas
 - Toolchain line: IAR / Keil project files, CMSIS / STM32F4 library material, Debug / Release build output, and vendor documentation.
 - Reference line: DRV8301, STM32F446RE, MOSFET, encoder, and CMSIS references.
 
-## How This Page Uses Raw Evidence / 公开证据怎么用
+## How The Files Are Used / 文件怎么用
 
-The public site now serves selected FOC board files because the source is from a public legacy project line, not from the two Current_Product folders. The evidence is useful for showing that the board archive exists: schematic/manufacturing outputs, the EasyEDA project, the STEP model, driver references, and selected motor-control source files. It still needs redrawn diagrams, test screenshots, oscilloscope captures, current-sampling notes, startup-state explanation, and tuning logs before it becomes a strong engineering case study.
+The site serves selected FOC board files because the source is from a legacy project line, not from the two Current_Product folders. The files are useful for showing what exists: schematic/manufacturing outputs, the EasyEDA project, the STEP model, driver references, and selected motor-control source files. It still needs redrawn diagrams, test screenshots, oscilloscope captures, current-sampling notes, startup-state explanation, and tuning logs before it becomes a strong engineering case study.
 
-现在先把这条线作为归档页保留下来，不硬装成“完整量产级驱动器”。等后面补到波形、日志和调参记录，再把它升级成真正的 case study 会更稳。
+现在把这条线当材料页保留下来，不硬装成“完整量产级驱动器”。等后面补到波形、日志和调参记录，再写成真正的 case study 会更稳。
 
-## Public Evidence / 公开证据
+## Files / 文件
 
 - [EasyEDA project](/uploads/projects/juanyun-public/foc-driver/easyeda-project.epro2)
 - [Gerber archive](/uploads/projects/juanyun-public/foc-driver/gerber.zip)
@@ -49,7 +49,7 @@ The public site now serves selected FOC board files because the source is from a
 - [DRV8301 datasheet](/uploads/projects/juanyun-public/foc-driver/drv8301-datasheet.pdf)
 - [HY3010D MOSFET datasheet](/uploads/projects/juanyun-public/foc-driver/hy3010d-mosfet-datasheet.pdf)
 
-## Public Boundary / 公开边界
+## What Stayed Out / 没放上来的东西
 
 Still not published from the source archive:
 
@@ -59,12 +59,12 @@ Still not published from the source archive:
 - Debug / Release build outputs;
 - duplicate generated exports and tool caches.
 
-## Next Public Material / 后续适合补的材料
+## Missing Debug Notes / 还缺的调试记录
 
 - A redrawn FOC signal path from phase current sampling to Park / Clarke transform, PI loops, SVPWM, and gate-driver output.
 - Startup and protection notes: pre-charge, alignment, fault pin handling, over-current assumptions, and DRV8301 status reading.
 - Test evidence: phase-current waveforms, PWM timing, speed response, failed startup cases, and parameter-tuning notes.
 
-## Reflection / 复盘
+## Looking Back / 现在回头看
 
-这条线最大的风险是“看起来高级，所以很容易写虚”。真正能说服人的不是关键词，而是把采样、调制、保护、起转和测试证据讲清楚。当前版本先把非敏感 legacy 证据放出来，同时承认它还只是归档，不把文件数量当成项目成熟度。
+这条线最大的风险是“看起来高级，所以很容易写虚”。真正有用的不是关键词，而是把采样、调制、保护、起转和测试记录讲清楚。当前页面先把非敏感 legacy 文件放出来，同时承认它还只是材料页，不把文件数量当成项目成熟度。

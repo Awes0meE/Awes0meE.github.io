@@ -14,31 +14,26 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## 前期想法
+## From Output To Input / 从输出到输入
 
-LED 闪烁之后，下一步自然会碰到输入。按钮、蜂鸣器、编码器这些东西不复杂，但它们会逼着人理解 GPIO 模式、上拉输入、消抖、外部中断线、NVIC 优先级，以及“主循环轮询”和“中断响应”的区别。
+LED 闪起来以后，下一步就是输入。按钮、蜂鸣器、编码器这些模块看起来简单，但它们会把 GPIO 模式、上拉输入、消抖、外部中断线、NVIC 优先级都带出来。
 
-This was the stage where the board stopped being only an output device. External events started to change the program state.
+This was the point where the board stopped being only an output device. External events started to change the program state.
 
-## 改变
+## Polling And Interrupts / 轮询和中断
 
-一开始可以用按键轮询改变 LED 状态，但很快会发现轮询不适合所有输入。编码器更适合用 EXTI 捕捉边沿，再通过另一路相位判断方向。代码里保留了 `EXTI15_10_IRQHandler`，每次中断根据 B 相电平对计数加减，这比在主循环里一直读 GPIO 更接近真实外设处理方式。
+一开始用主循环轮询按键就能改变 LED 状态，但编码器这种输入更顺手的做法是用 EXTI 捕捉边沿，再根据另一路相位判断方向。代码里保留了 `EXTI15_10_IRQHandler`，每次中断根据 B 相电平对计数加减。
 
-## 阶段目标
+中断不是“更高级的轮询”。它还要考虑触发边沿、标志位清除、优先级，以及中断服务函数和主循环之间共享变量的问题。这个阶段的代码还很入门，但已经开始碰到嵌入式里很常见的节奏问题。
 
-- 分清输入、输出、复用、上拉、下拉、推挽、开漏这些 GPIO 模式。
-- 用 EXTI 让按键或编码器改变系统状态。
-- 用定时器替代纯软件延时，理解预分频、自动重装载和计数值。
-- 用 OLED 输出计数结果，让调试不只依赖肉眼看 LED。
+## Timers / 定时器
 
-## 证据
+定时器练习把延时从纯软件循环里拿出来。预分频、自动重装载、计数值这些词一开始有点抽象，但只要和 LED 闪烁频率、OLED 上的计数显示连起来，就会好理解很多。
 
-编码器控制舵机速度的公开摘录保留了“旋钮计数映射到速度，并做上下限保护”的核心逻辑：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
+## File / 文件
 
-## 疑问
+编码器控制舵机速度的摘录保留了“旋钮计数映射到速度，并做上下限保护”的核心逻辑：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
 
-中断并不是“更高级的轮询”。它需要考虑触发边沿、标志位清除、优先级，以及主循环和中断服务函数之间共享变量的边界。这个阶段的代码还比较粗，但已经开始碰到嵌入式系统里最常见的问题：什么时候立即响应，什么时候留给主循环慢慢处理。
+## Looking Back / 回头看
 
-## 复盘
-
-这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就不再只靠“好像动了”。对于后面的 PWM 调光和环境监测小系统，这种可观察性很重要。
+这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就不再只靠“好像动了”。后面的 PWM 调光和环境监测小系统，也是在这个基础上继续叠。

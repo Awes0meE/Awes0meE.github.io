@@ -1,7 +1,7 @@
 ---
 title: "Nanjing Turing Qt, Build, and Packaging Learning Log"
 titleZh: "南京图灵 Qt、编译与打包学习记录"
-summary: "A public project page rebuilt from internship traces at Nanjing Turing AI Research Institute: Qt/C++ onboarding, Seamly2D modification, CMake build reasoning, and Windows/macOS release packaging."
+summary: "An internship archive rebuilt from Nanjing Turing AI Research Institute traces: Qt/C++ onboarding, Seamly2D modification, CMake build reasoning, and Windows/macOS release packaging."
 summaryZh: "从南京图灵人工智能研究院实习痕迹整理出的公开项目页：Qt/C++ 入门、Seamly2D 二次开发、CMake 编译理解，以及 Windows/macOS Release 打包流程。"
 date: "2025-08"
 status: "Completed"
@@ -17,31 +17,47 @@ assetPaths:
 
 ## Brief / 简介
 
-This page records an internship learning track around Seamly2D, a Qt/C++ desktop application for clothing pattern design. The useful part is not a polished product claim, but the path from "can this project even build on my machine" to a working Qt6 environment, a small authentication add-on, and a repeatable release-packaging note.
+This page keeps a practical internship trail around Seamly2D, a Qt/C++ desktop application for clothing pattern design. The main story is ordinary but useful: get the project onto a Windows laptop, make Qt Creator stop complaining, add a small login/user-management layer, then figure out why a Release build still cannot run on another machine.
 
-这页记录的是南京图灵人工智能研究院实习期间留下的一段学习轨迹。内容不是把 Seamly2D 包装成一个完整产品，而是把当时真正花时间的部分摊开：Qt/C++ 怎么跑起来，qmake 项目怎么接上 Qt6，登录注册和用户管理怎么嵌进去，最后 Windows/macOS 的发布包怎么一步步整理。
+这页记录的是在南京图灵实习时围着 Seamly2D 做的一段学习和排错。它不是一个“做完了某个产品”的故事，更像真实实习里的节奏：先把项目拉下来，发现环境跑不通；换 Qt Kit、换编译器、删旧配置；能运行以后做一点登录注册和用户管理；最后再被 Release 打包、DLL、签名和 macOS 迁移继续折腾。
 
 ![Seamly2D banner / Seamly2D 项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
 
-## Source Inventory / 源目录盘点
+## Source Folder / 源目录里有什么
 
-The source folder contains three kinds of material: internship logs, learning documents, and build artifacts. The logs and documents are suitable for public notes. The full upstream source tree, generated build folders, DLLs, installers, and multi-gigabyte delivery zip files are treated as context only and are not copied into the website.
+The original folder had logs, study notes, scripts, sample files, and many generated artifacts. Only small reading material and cleaned excerpts were copied into the website. Full upstream source trees, build folders, installers, DLL piles, and huge delivery zips stayed out of `public/uploads`.
 
-源目录里能分出三类材料：日志、学习文档、构建产物。日志和学习文档适合整理成公开笔记；完整上游源码树、build 文件夹、DLL、安装包、巨大的交付 zip 只当作背景，不直接搬到网页公开目录。
+源目录里比较有用的是这些东西：
 
-- `W1/W2/W3 开发日志.txt`：三周的实际节奏，从 Qt 环境、注册登录、用户管理，到 Release、签名和 macOS 打包。
-- `Windows11从0开始在Qt6环境下跑通Seamly2D的全流程记录.docx`：最早的环境搭建和 Qt5 转 Qt6 决策记录。
-- `Seamly2D - Release 版本打包发布流程.md/pdf`：Windows Release、`windeployqt`、第三方 DLL、证书、Inno Setup 的完整流程。
-- `关于编译的底层逻辑（Qt 学习导向）.pdf`：把 MSVC、SDK、CMake、Ninja、Qt 包发现和架构匹配串起来的学习笔记。
-- `build_package.sh` 和 `build_package_sign.sh`：macOS 侧 `macdeployqt`、DMG 和自签名流程尝试。
-- `Seamly2D_addon/`：登录、注册、控制面板、用户管理、哈希密码和角色控制相关新增文件。
-- `sm2d样例文件/`：用于观察 Seamly2D XML 数据结构的公开样例。
+- 三周开发日志：从 Qt 环境、注册登录、用户管理，到 Release、签名和 macOS 打包。
+- Windows 11 跑 Seamly2D 的流程记录：主要是 Qt5 失败、Qt6/MSVC2019 跑通、qmake 和 Kit 的选择。
+- Release 打包 PDF：Windows 下 `windeployqt`、第三方 DLL、自签名、Inno Setup 的步骤。
+- 编译底层逻辑 PDF：把 MSVC、SDK、CMake、Ninja、Qt 包发现这些概念串了一遍。
+- macOS 打包脚本：尝试用 `macdeployqt`、DMG 和自签名把流程自动化。
+- `Seamly2D_addon/`：登录、注册、控制面板、用户管理、密码哈希和角色控制相关新增文件。
+- `sm2d` 和 `smis` 样例文件：用来观察 Seamly2D 的 XML 数据格式。
 
-## What Became Public / 公开证据边界
+## What I Actually Worked On / 实际做过的事
 
-The public assets are intentionally small: two PDFs, a few learning images, macOS packaging scripts, one sample pattern file, one sample measurement file, and a short role-management code excerpt. The large delivery archives, release folders, installers, DLLs, and full source dump stay out of `public/uploads`.
+The first week was mostly about getting a working setup and adding the simplest account flow. Registration and login used `QDialog` and `QSettings`; password storage moved away from plain text to salted SHA-256 hashes; password inputs were masked; and a Chinese input-method crash around the login box was fixed by restricting input hints.
 
-公开证据只保留小而清楚的材料：两个 PDF、几张学习图、macOS 打包脚本、一个样例版型文件、一个样例量体文件，以及一小段角色管理代码摘录。大体积交付包、Release 文件夹、安装器、DLL、完整源码树都不放进 `public/uploads`。
+第一周的工作很像“先活下来”：项目能不能编译，Qt Creator 用哪个 Kit，`main` 里注册和登录怎么插进去，用户不存在、密码错误、用户已存在这些提示怎么给。很多改动都不大，但它们必须连起来，软件才不会一启动就把人挡在门外。
+
+The second week added a small control-panel path. The first account had to be `admin`; administrators could see user management; normal users could not. User deletion, promotion, and demotion were added with confirmation prompts and role checks, including the rule that only `admin` could demote another administrator.
+
+第二周主要补用户管理：控制面板窗口加大，增加“用户管理”，区分普通用户和管理员，管理员可以删除普通用户、提升普通用户，也能在限制条件下做降级。这里没有去大改 Seamly2D 主业务，只是在入口前加了一层轻量权限。
+
+## Build And Release / 编译与发布
+
+The most time-consuming part was not writing another dialog. It was learning why the same Qt project behaves differently across machines. Qt5 and Qt6 were not interchangeable, `core5compat` mattered, MSVC v142 had to match the Qt package, old `.pro.user` files could poison the setup, and a Debug run inside Qt Creator did not mean a releasable folder existed.
+
+真正耗时的是编译和打包。开发机里点绿色运行按钮可以跑，不代表把 `exe` 拷出来就能给别人用。Windows 侧要用 `windeployqt` 收依赖，还要补 `xerces-c_3_2.dll` 这类第三方库；再往后才是自签名、Inno Setup 和安装包。macOS 侧也一样，`.app`、frameworks、`macdeployqt`、签名、DMG 都要重新过一遍。
+
+![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
+
+## Public Files / 页面里保留的文件
+
+These are small files that help explain the work without dumping a whole development folder:
 
 - [Windows Release packaging PDF](/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf)
 - [Qt build-logic notes PDF](/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf)
@@ -49,26 +65,8 @@ The public assets are intentionally small: two PDFs, a few learning images, macO
 - [macOS signing packaging script](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)
 - [role-management code excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)
 
-## Development Shape / 开发形状
+## Looking Back / 回头看
 
-The feature work stayed deliberately small. Seamly2D itself is a large desktop codebase, so the safer move was to add a narrow authentication layer and keep the rest of the application path recognizable: first-run registration, login, control panel, administrator-only user management, and the original clothing-design entry.
+这段实习留下来的东西很“学习现场”：有些地方是功能，有些地方只是把坑踩明白。比如 Qt 项目不能只看源码，还要看 Kit、编译器、SDK、qmake/CMake 规则和运行时依赖；Release 打包也不是最后点一下按钮，而是另外一套排查流程。
 
-功能改动没有故意扩大。Seamly2D 本身已经是一个很大的 Qt 桌面项目，当时比较现实的做法是只加一层窄的用户入口：首次注册、登录、控制面板、管理员用户管理，再回到原来的服装设计主流程。
-
-The code side used `QDialog`, `QSettings`, salted SHA-256 password hashes, an `admin` first-user rule, input-method hints for username/password fields, and explicit role constraints for delete, promote, and demote operations.
-
-代码侧主要接触了 `QDialog`、`QSettings`、加盐 SHA-256 密码哈希、首次用户必须为 `admin` 的规则、用户名/密码输入框的输入法限制，以及删除、升权、降权时的角色约束。
-
-## Build And Release / 编译与发布
-
-The harder part was not writing another dialog. It was understanding why a Qt desktop project succeeds on one machine and fails on another: Qt version mismatch, `core5compat`, MSVC toolchain selection, `windeployqt` not on PATH, missing `xerces-c_3_2.dll`, and the difference between a debug run inside Qt Creator and a releasable folder.
-
-真正更耗时间的不是再写一个对话框，而是搞清楚为什么同一个 Qt 桌面项目在一台电脑上能跑、换一台就不行：Qt 版本不匹配、`core5compat`、MSVC 工具链、`windeployqt` 的 PATH、缺少 `xerces-c_3_2.dll`，以及 Qt Creator 里 Debug 能跑和 Release 文件夹能交付之间的差别。
-
-![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
-
-## Review / 复盘
-
-This internship trace is useful because it is close to how technical learning actually happens: first a vague task, then environment problems, then a small feature, then build failures, then packaging, and only later a clearer mental model of toolchains and release boundaries.
-
-这段实习痕迹有价值，是因为它接近真实学习的样子：先是一个模糊任务，然后是环境问题，然后做一个小功能，再遇到编译失败和打包问题，最后才慢慢把工具链、发布边界和跨平台差异想清楚。
+现在再看，它最有价值的部分不是某个登录框，而是第一次比较完整地经历了桌面软件从本机跑通到整理成可运行文件的过程。环境不通、编译器冲突、打包缺 DLL、换平台又重来，这些细节比漂亮的结果页更接近当时的实习状态。

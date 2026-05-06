@@ -131,7 +131,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render source/text files inline, and link binary files.
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render Markdown/text documents as readable article content, render source/code files in code frames, and link binary files.
 
 ## Language Switching
 
@@ -142,12 +142,12 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - `components/bilingual-text.tsx` renders paired English/Chinese text and CSS in `app/globals.css` hides the inactive language.
 - Projects and notes use existing `title/titleZh` and `summary/summaryZh` fields.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
-- `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks, and show a fallback notice when one body language is still missing.
+- `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文` and hide language-detected body blocks when both languages exist. Single-language notes stay readable instead of showing missing-language placeholder notices.
 - MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text.
 
 ## Current Content State
 
-The current mainline state is release `v0.5.0` on `main`, tagged after the project archive page expansion.
+The current mainline state is post-`v0.5.0` content work on `main`, after the project archive page expansion and media/note refresh.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -161,11 +161,12 @@ D:\XJTLU\工作相关\Claude Chime 硬件
 Current content count on `main`:
 
 - 6 project pages total;
-- 18 public notes total;
+- 19 public notes total;
 - 3 Juanyun project pages and 9 Juanyun notes remain;
 - 1 Claude Chime hardware power-board archive was added;
-- 1 Nanjing Turing Qt/CMake/packaging project and 4 related notes were added;
+- 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
+- 29 media gallery items cover images/videos referenced by project and note pages, plus site visual-system assets.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 
 Juanyun public boundary:
@@ -187,12 +188,12 @@ Maintain the current engineering-academic identity:
 
 ## Writing Direction
 
-Portfolio notes should keep the user's practical learning-log texture, but public-facing writing should use direct descriptive narration rather than repetitive first-person claims.
+Portfolio notes should keep the user's practical learning-log texture. Avoid AI handoff / delivery-report phrasing such as "only these two evidence types are public" or "the change was not intentionally expanded"; write closer to first-hand learning and debugging traces.
 
 For `content/notes/*.mdx`:
 
-- describe the system, constraint, question, evidence, and next step directly;
-- use sections such as `前期想法`, `改变`, `疑问`, `阶段目标`, `证据`, and `复盘` when they fit;
+- describe the system, constraint, question, file, and next step directly;
+- use natural sections such as `起点`, `怎么卡住`, `怎么改`, `文件`, `还要补的记录`, and `现在回头看` when they fit;
 - keep mild self-reflection only when it clarifies the work;
 - explain why a direction changed, not only what was done;
 - avoid repetitive `我负责 / 我参与 / 我整理` bullet-heavy writing unless the note genuinely needs a checklist;

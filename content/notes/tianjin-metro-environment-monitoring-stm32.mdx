@@ -14,29 +14,27 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## 前期想法
+## Small Integration / 小综合
 
-前面的练习都是单点：LED、按键、定时器、PWM、ADC。到了“地铁环境智能检测系统”这个题目，重点变成把这些单点放进一个主循环里。题目听起来比较大，但实际更像一个综合训练板：环境亮度、温湿度、状态灯、舵机动作和 OLED 显示都要能同时跑。
+前面的练习都是单点：LED、按键、定时器、PWM、ADC。到了“地铁环境智能检测系统”这个题目，重点变成把这些单点放进同一个主循环里。名字听起来比较大，实际更像一块综合训练板。
 
 This demo was not an industrial metro controller. It was a compact embedded exercise that used a metro scenario to connect peripherals into one observable loop.
 
-## 阶段目标
+## What Ran Together / 接在一起的模块
 
 - OLED 实时显示当前亮度、目标亮度、LED PWM 和温湿度。
 - LDR 通过 ADC 获取环境亮度。
 - 编码器通过外部中断调整目标亮度。
-- DHT11 通过定时节奏读取温湿度。
+- DHT11 按固定节奏读取温湿度。
 - TIM4 输出 PWM 控制白色 LED 亮度。
 - 三色 LED 模拟状态灯，舵机模拟车门开合动作。
 
-## 证据
+最容易出问题的地方不是某一个传感器，而是几个节奏混在一起：OLED 刷新、DHT11 时序、编码器中断、PWM 输出、光敏 ADC 采样都在跑。短期可以靠调试和延时顶住，但如果系统继续变大，就需要更清楚的任务调度和模块分层。
+
+## File / 文件
 
 主循环摘录保留了模块初始化、DHT11 更新标志、ADC 读数、OLED 更新和 PWM 查表输出：[metro environment main loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c)。
 
-## 疑问
-
-这个工程最容易出问题的地方不是某一个传感器，而是多个节奏混在一起：OLED 刷新、DHT11 时序、编码器中断、PWM 输出、光敏 ADC 采样都在抢注意力。短期可以靠调试和延时硬撑，但如果系统继续长大，就需要更清楚的任务调度和模块边界。
-
-## 复盘
+## Looking Back / 回头看
 
 这类小综合最大的价值是暴露“会一个外设”和“能把几个外设一起跑”之间的差距。它不完美，但已经能把亮度、温湿度、输入、输出和显示串起来。对于第一次实习来说，这比单独列一串“学习了 STM32 外设”更扎实。

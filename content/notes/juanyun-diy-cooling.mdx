@@ -9,7 +9,7 @@ projectSlug: "juanyun-diy-cooling-prototype"
 visibility: public
 ---
 
-## 前期想法
+## 起点
 
 这个压风式散热器现在回头看，味道很“早期探索”。3D 打印、亚克力切割、纸箱低成本版本、显卡拆机风扇、ESP32、桌面端程序、PCB 文件、安装包、演示视频，全挤在一个目录里。说好听一点是动手范围很广，说难听一点就是资料管理有点野。
 
@@ -17,32 +17,32 @@ visibility: public
 
 ![DIY pressure-flow cooling 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 
-## 改变
+## 清理方式
 
-一开始差点想把 ESP32 程序、桌面端工程和安装包都当证据放上来。后来重新划边界以后，这条线可以公开，但仍然不能把整个工程目录当网盘丢上来。真正适合放到作品集里的，是能解释原型链路的少量文件：控制代码、桌面端入口、PCB 输出、切片文件和结构制作清单；安装器、依赖包、构建输出和重复工程目录仍然没有必要发布。
+差点把 ESP32 程序、桌面端工程和安装包都放上来。重新清理以后，这条线可以写，也可以放少量文件，但不能把整个工程目录当网盘丢上来。更有用的是能解释原型链路的文件：控制代码、桌面端入口、PCB 输出、切片文件和结构制作清单。安装器、依赖包、构建输出和重复工程目录就不放了。
 
-所以公开页现在保留四类证据：
+所以页面现在保留四类材料：
 
-- 3D 打印预览图，说明结构不是嘴上说说；
+- 3D 打印预览图，能看出结构不是嘴上说说；
 - 桌面端演示视频，说明控制和显示链路曾经跑起来过；
 - ESP32、C#、PCB、Gerber、EasyEDA 和 3MF 等筛选后的关键文件；
 - 文字盘点，说明原始归档里还有哪些材料，但不把完整杂乱工程包扔上网。
 
 ![DIY pressure-flow cooling support settings and sliced parts](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
 
-## 疑问
+## 为什么这些文件能放
 
-为什么现在可以把 3MF、Gerber 和源码片段放出来？这条线不是 Current_Product，按用户重新划定的边界可以公开讨论，也可以公开筛选后的工程证据。
+3MF、Gerber 和源码片段来自非 Current_Product 的早期原型，可以在筛过之后用来说明结构、PCB 和控制链路。
 
-答案是：公开的是能说明问题的文件，不是整个目录。3MF、Gerber、EasyEDA 和源码片段本身可以作为证据；安装包、依赖目录、构建输出、重复版本、vendor 文件和没有说明的整包工程还是会让页面变成文件堆。等以后真要开源这个小原型，可以再单独清理许可、命名、README、版本和构建方式。
+但放的是能说明问题的文件，不是整个目录。3MF、Gerber、EasyEDA 和源码片段本身有用；安装包、依赖目录、构建输出、重复版本、vendor 文件和没有说明的整包工程只会让页面变成文件堆。等以后真要开源这个小原型，可以再单独清理许可、命名、README、版本和构建方式。
 
-## 阶段目标
+## 还缺什么
 
 - 保留结构路线：3D 打印、亚克力切割、纸箱低成本版本各自是什么用途。
 - 保留控制路线：ESP32 PWM、风扇调速、桌面端显示和演示视频如何串起来。
 - 后续补风道解释、温度对比和使用限制，不要只靠视频撑场面。
 
-## 证据
+## 文件
 
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
 - [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
@@ -59,6 +59,6 @@ visibility: public
 
 ![DIY pressure-flow cooling second 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
-## 复盘
+## 现在回头看
 
 这个项目最有用的地方，是提醒后面的硬件任务别只留下“能跑”的结果。结构怎么改、风扇为什么这样选、程序和桌面端怎么通信、失败版本在哪里，这些都应该被记录。不然几个月后再打开文件夹，就只能靠文件名考古。

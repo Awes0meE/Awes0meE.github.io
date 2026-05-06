@@ -1,0 +1,60 @@
+---
+title: "Three-Week Seamly2D Development Log"
+titleZh: "Seamly2D 三周开发日志整理"
+summary: "A readable version of the three raw internship logs: first Qt setup and login, then user management, and finally Release packaging across Windows and macOS."
+summaryZh: "把三份原始实习周日志整理成网页正文：第一周跑 Qt 和登录注册，第二周做用户管理，第三周转向 Windows/macOS Release 打包。"
+date: "2025-08-29"
+tags: ["Qt", "Seamly2D", "Internship", "Packaging"]
+visibility: public
+projectSlug: "nanjing-turing-qt-embedded-learning"
+---
+
+## Raw Logs / 原始日志
+
+The raw text logs are kept here for traceability, while this page rewrites them into a more readable learning record.
+
+原始三份 txt 还在，方便对照：
+
+- [Week 1 raw log](/uploads/projects/nanjing-turing/week-1-development-log.txt)
+- [Week 2 raw log](/uploads/projects/nanjing-turing/week-2-development-log.txt)
+- [Week 3 raw log](/uploads/projects/nanjing-turing/week-3-development-log.txt)
+
+## Week 1 / 第一周：先把 Qt 项目跑起来
+
+第一周主要是在熟悉环境和摸清任务。刚接触 Qt C++，先看 Qt 的基本运行方式，再把 Seamly2D 代码拉到本地，尝试用 Qt Creator 跑起来。这个过程不像写完一段功能那么干净，更多是在处理环境、Kit、qmake、路径和编译器这些问题。
+
+At the same time, I started learning Git in a practical way: clone the project, keep local changes organized, and write down how the setup was done.
+
+功能上，第一周从注册和登录开始。注册界面把用户信息存到 `QSettings`，后来又把密码从明文改成加盐哈希验证。登录界面接进 `main` 流程后，软件启动时就会先经过注册/登录，再进入原本的 Seamly2D。
+
+这一周还补了很多小交互：用户已存在、用户不存在、密码错误这些提示；回车键默认从“取消”改成“确认”；密码输入改成隐藏显示。还有一个很具体的坑：登录界面输入密码时，如果当前是中文输入法，程序可能闪退。后来通过限制用户名和密码输入框的输入法提示，把这个问题绕开了。
+
+## Week 2 / 第二周：用户管理和角色限制
+
+第二周继续围着登录后的控制面板做。先把控制面板窗口调大，然后增加“用户管理”入口。第一次注册的账号必须叫 `admin`，这个提示直接放在首次注册页面里，避免一开始就注册错。
+
+之后开始区分用户类型：普通用户和管理员。只有管理员能看到“用户管理”，普通用户登录后看不到这个入口。用户管理界面里能查看当前所有注册用户，也能做删除、提升为管理员、降级为普通用户这些操作。
+
+这里真正麻烦的不是把按钮画出来，而是限制条件。删除用户前要弹确认框；管理员只能删除普通用户，不能删其他管理员；提升操作只能对普通用户做；降级操作只有 `admin` 账号能做，其他管理员之间不能互相降级。
+
+这些规则都不算复杂，但放在桌面软件里就会牵出很多细节：当前登录用户是谁，目标用户是什么角色，按钮什么时候显示，点错了能不能取消，提示信息有没有说清楚。第二周的工作基本是在把这个小权限系统补完整。
+
+## Week 3 / 第三周：从功能转到 Release
+
+第三周先看了一下 `.sm2d` 文件的 XML 格式，用样例文件初步观察数据结构。随后把 `develop` 分支彻底跑通，把功能固定下来，方向从继续加功能转到 Release。
+
+Windows 侧的 Release 过程比想象中长。先配置编译环境，处理电脑上编译器版本冲突；再回头研究程序编译的底层逻辑，把 MSVC、CMake、Ninja、Qt 包发现这些内容整理成学习文档。接着试 `windeployqt`，把 Qt 依赖收集到可独立运行的程序目录里。
+
+打包时又遇到签名和安装包问题。先研究 Windows 数字证书，创建自签名证书并给程序签名；然后学 Inno Setup，把散落的 Release 文件整理成安装包。最后把“Release 编译、收集依赖、数字签名、打包安装包”这条流程打通，并写成流程文档。
+
+后半段切到 macOS。把 Windows 上已经开发过的代码移到 Mac，重新配置 Qt 和编译环境。Homebrew 装的 Qt 和官方渠道的 Qt 路径、架构不完全一样，也会引出编译器版本冲突。先跑通 Debug，再切到 Release。
+
+macOS 打包时试了 `macdeployqt`，把依赖收进 `.app`，然后研究证书和签名。自签名证书创建成功，但完整签注流程没有完全做到正式发布级别。最后写了 shell 自动化脚本，把编译、打包、依赖收集和签名检查尽量串起来；除了签名本身，其他部分基本能跑。
+
+实习收尾时，把这三周产生的文件按类别整理，补了开发日志和 README，方便以后交接或回头看。
+
+## Looking Back / 回头看
+
+这三周的线索其实很清楚：第一周是“能不能跑起来”，第二周是“入口和用户管理能不能用”，第三周是“能不能离开开发环境交给别人运行”。每一步都不算华丽，但都很真实。
+
+The useful lesson was that desktop software work is not only UI code. Toolchains, local configs, release folders, missing DLLs, signing, and platform differences all become part of the job once the program has to leave the developer machine.

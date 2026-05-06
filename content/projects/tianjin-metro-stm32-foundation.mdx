@@ -14,31 +14,33 @@ assetPaths:
   - "/uploads/projects/tianjin-metro"
 ---
 
-## Project Brief / 项目简述
+## Project Brief / 项目简介
 
-This page archives the STM32 learning path from a Tianjin rail-transit internship folder. The valuable part is not a finished product claim, but the trace of a first real internship: building the toolchain, touching registers, wiring modules, and slowly connecting microcontroller basics with railway control language.
+This page keeps the STM32 trail from a short Tianjin rail-transit internship. It starts from a very basic place: install Keil, connect ST-Link, flash a board, blink an LED, then keep adding peripherals until a small environment-monitoring demo appears.
 
-这组材料来自天津轨道交通相关实习。文件夹名是天津津铁通信有限公司，实习报告里记录的方向是轨道交通、OCC、ATC，以及从 STM32 到 PID、再到电机和列车控制系统的学习路径。它更像一次入门训练，不适合包装成“独立负责某系统”，但很适合保留为大学以来第一次实习的真实技术痕迹。
+这组材料来自天津轨道交通相关实习。现在回头看，它不应该被写成“独立负责地铁控制系统”这种夸张说法。更真实的情况是：第一次实习，从点灯开始摸外设，慢慢把 STM32F103C8T6、Keil MDK、ST-Link、GPIO、中断、定时器、PWM、ADC、串口和传感器连到一起。
 
 ![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
 
-## Source Inventory / 源目录盘点
+## Source Folder / 源目录里有什么
 
-- `Study_STM32F103C8T6` 是主线材料：基本外设、中断、定时器、PWM、舵机、编码器，以及地铁环境智能检测系统。
-- `STM32相关资料` 是学习资料库：Keil5 MDK、参考文档、固件库、模块资料、课件和程序源码，体量很大，很多是 vendor 或网络收集资料。
-- `MG995商家资料` 提供舵机控制参数和若干参考例程，适合只抽取控制参数图，不适合整包复制。
-- 实习报告 PDF 能帮助确认 2025-02-05 到 2025-02-16 的学习路线，但原文件含学号、联系人和电话，所以没有作为公开下载资产复制。
-- 控制中心手册、设备图纸、故障台账、安装包、固件库、`.hex`、`.o`、`.crf`、`.axf` 等文件没有复制到公开目录。
+- `Study_STM32F103C8T6` 是主线材料：基础外设、中断、定时器、PWM、舵机、编码器，以及地铁环境智能检测系统。
+- `STM32相关资料` 更像学习资料库：Keil5 MDK、参考文档、固件库、模块资料、课件和例程。里面很多是 vendor 或网络资料，没有整包搬到网站。
+- `MG995商家资料` 主要用来看舵机 PWM 参数，只抽了必要参考图。
+- 实习报告能说明 2025-02-05 到 2025-02-16 的学习路线，但原文件含个人信息，所以没有作为下载文件公开。
+- 控制中心手册、设备图纸、故障台账、安装包、固件库、`.hex`、`.o`、`.crf`、`.axf` 等文件没有复制进公开目录。
 
 ## Learning Route / 学习路线
 
-前几天的任务很基础：先看清 STM32F103C8T6 是什么，Keil MDK 和 ST-Link 怎么连，启动文件、时钟、GPIO 初始化和延时函数怎么形成最小闭环。这个阶段的成就感来自很小的现象：板载 LED 能稳定闪烁，OLED 能显示状态，调试器里能看到寄存器变化。
+前几天基本就是把“最小闭环”跑起来：Keil 工程能编译，ST-Link 能下载，板载 LED 能闪，OLED 能显示，调试器里能看到寄存器和变量变化。这个阶段很基础，但它解决了后面所有练习的前提：出了问题时，至少能分清是代码、下载、接线还是供电。
 
-The learning then moved through GPIO modes, EXTI, timers, PWM, UART, ADC, DMA, SPI, I2C, RTC, watchdog, and FreeRTOS basics. In the folder, those topics appear as separate Keil projects rather than polished notes, which matches the reality of a short placement: learn one peripheral, make it run, keep the trace, then move on.
+Then the exercises moved from output to input and timing: GPIO modes, EXTI, encoder counting, timers, PWM, UART, ADC, DMA, SPI, I2C, RTC, watchdog, and FreeRTOS basics. In the folder, most topics are separate Keil projects, which fits a short placement better than a single polished document.
 
-## Small Integration / 小综合题
+后面开始把外设往一起接。按钮和编码器让人开始理解 EXTI 和 NVIC；定时器让延时不再只靠空循环；PWM 用来调 LED 和舵机；ADC 读光敏传感器；串口/OLED 用来观察数据。很多代码还很入门，但每一段都能对应到板子上的一个现象。
 
-最完整的工程是 `x-x STM32地铁环境智能检测系统`。它把 OLED、LDR 光敏传感器、DHT11、编码器、TIM3/TIM4、PWM 调光、三色灯和舵机放在同一个 STM32F103C8T6 工程里。题目有“地铁环境”的包装，但底层训练其实很朴素：传感器读数、定时更新、外部中断输入、PWM 输出、显示刷新，以及如何把几个模块接在一起后还能调得动。
+## Small Integration / 小综合
+
+最完整的工程是 `x-x STM32地铁环境智能检测系统`。它把 OLED、LDR 光敏传感器、DHT11、编码器、TIM3/TIM4、PWM 调光、三色灯和舵机放在同一个 STM32F103C8T6 工程里。名字里有“地铁环境”，实际训练重点是更底层的：传感器读数、定时更新、外部中断输入、PWM 输出、显示刷新，以及几个模块同时跑时怎么调。
 
 Evidence is kept as small public snippets, not as a full firmware dump:
 
@@ -47,12 +49,14 @@ Evidence is kept as small public snippets, not as a full firmware dump:
 - [PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
 - [Encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)
 
-## Evidence Boundary / 证据边界
+## Rail-Control Reading / 轨道交通阅读
 
-这次只公开两类证据：一类是 STM32 学习图片，另一类是经过压缩的代码摘录。没有把完整 Keil 工程、商家资料包、固件库、安装程序、地铁控制中心图纸、故障台账或含个人联系信息的报告 PDF 放进 `public/uploads`。
+实习报告后半段还读到 PID、ATP、ATO、ATS 这些词。它们和前面的 STM32 练习不是同一个层级，但能让人把“板子上的输入输出”往系统概念上靠一点：传感器反馈、执行机构、速度/位置控制、自动防护和调度管理分别在什么位置。
 
-The public page is intentionally a learning archive. It shows the technical path and concrete files without pretending that a short internship produced an industrial rail-control subsystem.
+短期实习当然做不出工业级列控系统，但它让我第一次把微控制器、控制算法和轨道交通术语放在同一张图里看。
 
-## Review / 复盘
+## Looking Back / 回头看
 
-这次实习最重要的东西不是某一个外设，而是第一次把“课程里的单片机”放进真实行业语境里。STM32、PID、电机、ATP/ATO/ATS 这些词在报告里第一次连在一起。现在回头看，有些代码还很入门，有些注释和命名也不成熟，但正因为这样，它能说明当时是在从零搭环境、从寄存器和外设一步一步往系统概念上靠。
+这段经历最值得保留的地方就是它很朴素。先装环境，点灯，读按键，跑中断，看定时器，再把传感器和显示接起来。中间有很多“不知道为什么不亮”“下载器没连上”“数据跳来跳去”的小问题，但这些正是嵌入式入门真正会遇到的东西。
+
+现在把它放进作品集，不是为了把一次短实习包装成大项目，而是留下第一阶段的学习轨迹：从一块 STM32 板子开始，慢慢摸到外设、控制和行业语境。

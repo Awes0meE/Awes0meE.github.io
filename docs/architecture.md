@@ -63,20 +63,21 @@ Media:
 Current content state on `main` release `v0.5.0` as of `2026-05-07`:
 
 - 6 project files total;
-- 18 public note files total;
+- 19 public note files total;
 - 3 Juanyun project pages and 9 Juanyun notes;
 - 1 Claude Chime hardware power-board archive;
-- 1 Nanjing Turing Qt/CMake/packaging project and 4 related notes;
+- 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
+- 29 media gallery items covering project/note images, the DIY demo video, and site visual assets;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 
 ## Rendering Notes
 
-The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, links, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
 
-Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; text, Markdown, and source files are rendered inline, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
+Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
 
 ## Language Layer
 
@@ -89,7 +90,7 @@ The language toggle is intentionally lightweight:
 - `app/globals.css` hides `.lang-en` or `.lang-zh` based on `html[data-lang]`.
 - The app remains statically generated; language switching does not require dynamic routes, middleware, cookies, or server-side rendering.
 
-Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings, hide language-detected body blocks, and show a fallback notice when one body language is still missing. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
+Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings and hide language-detected body blocks only when both English and Chinese body text exist. Chinese-only or English-only notes stay readable instead of showing placeholder fallback notices. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
 
 ## Deployment
 

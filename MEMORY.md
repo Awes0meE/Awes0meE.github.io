@@ -31,6 +31,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Branch `project-archive-pages` was created to make project pages larger evidence archives. The branch removed the portfolio rebuild, PID Starter Kit, ACUnit, BaseUnit, DHT, and actuator standalone project pages; merged ACUnit/BaseUnit/DHT/actuator material into `juanyun-thermal-hardware`; added `components/project-assets.tsx` and project `assetPaths`; added a Claude Chime hardware power-board archive; and updated the footer copyright to `Awes0meE / 66CCFF Labs`.
 - `2026-05-07`: Release `v0.5.0` was merged to `main` and pushed to GitHub at commit `3add408 Add project archive pages`.
 - `2026-05-07`: Added root `.nojekyll` because GitHub Pages/Jekyll tried to parse uploaded Markdown/code evidence under `public/uploads/` as Liquid templates and failed on an Inno Setup GUID. Vercel remains the canonical deployment target.
+- `2026-05-07`: Media and notes were refreshed after `v0.5.0`: `content/media.json` now has 29 items covering project/note images and videos; Nanjing Turing gained `turing-three-week-development-log`; the Juanyun hardware SOP is rendered as webpage text; and notes/projects were rewritten away from AI handoff phrasing toward practical learning-log narration.
 
 ## Stable Decisions
 
@@ -39,10 +40,10 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
-- Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. The renderer previews images/videos, inlines small source/text/Markdown files, and links binary documents / CAD / EDA / fabrication archives.
+- Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. The renderer previews images/videos, renders Markdown/text documents as readable article content, renders source/code files in code frames, and links binary documents / CAD / EDA / fabrication archives.
 - Use `BilingualText` for fixed UI labels and paired metadata. Do not return to mixed labels such as `Work / 项目` now that the site has a global language toggle.
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
-- Write notes with the user's practical self-study / internship-log texture, but public pages should prefer direct descriptive narration over repetitive first-person `我...` claims.
+- Write notes with the user's practical self-study / internship-log texture. Avoid AI handoff / delivery-report phrasing; prefer plain narration around what got tried, what broke, how it was worked around, and what file or test remains.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
@@ -62,6 +63,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/language-toggle.tsx`: client-side EN/简中 language switch.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: renders project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
+- `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews and fenced code blocks.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.
 - `content/projects/`: project case-study source files.
@@ -95,8 +97,8 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review the deployed `v0.5.0` pages on `https://www.66ccff-labs.com/` after Vercel finishes deployment, especially the larger Juanyun archive, Claude Chime hardware page, Nanjing Turing logs, and Tianjin STM32 archive files.
-- Add real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
+- Browser-review the deployed post-`v0.5.0` media/note refresh on `https://www.66ccff-labs.com/` after Vercel finishes deployment, especially `/media`, `juanyun-hardware-sop`, `turing-three-week-development-log`, and the larger Juanyun / Nanjing Turing project pages.
+- Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.
 - Decide how `66ccff Labs` should appear in the visual identity without diluting the personal portfolio.

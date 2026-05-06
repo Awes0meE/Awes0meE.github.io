@@ -2,7 +2,7 @@
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器原型"
 summary: "A legacy cooling prototype that connected 3D printed air-channel parts, fan selection, ESP32 PWM control, and a Windows desktop demo, with selected PCB, source, and fabrication evidence published after pruning noisy project output."
-summaryZh: "一个早期压风式散热器原型，把 3D 打印风道、风扇选型、ESP32 PWM 控制和 Windows 桌面端演示串在一起；公开页补充了筛选后的 PCB、源码和制作证据，同时排除了安装包、依赖和构建输出。"
+summaryZh: "一个早期压风式散热器原型，把 3D 打印风道、风扇选型、ESP32 PWM 控制和 Windows 桌面端演示串在一起；页面保留筛选后的 PCB、源码和制作文件，同时排除安装包、依赖和构建输出。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
@@ -22,7 +22,7 @@ assetPaths:
 
 This prototype is messy in a very early-project way: structure, airflow, small electronics, ESP32 control, desktop monitoring, part sourcing, and user instruction material all live in the same archive. It is not a polished product page. The useful part is that it shows a complete idea being pushed through several real interfaces instead of stopping at one PCB or one sketch.
 
-这条线的公开版本不把原始工程包整包挂出来，但会把能说明开发过程的关键证据补上。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。根据新的边界，这不是 Current_Product 敏感项目，所以筛选后的 Gerber、EasyEDA、PlatformIO、Arduino、C# 和 3MF 证据可以公开；安装包、依赖目录、构建输出和混乱的完整工程树仍不直接发布。
+这条线不把原始工程包整包挂出来，只放能说明开发过程的关键文件。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。它不是 Current_Product 资料，所以筛选后的 Gerber、EasyEDA、PlatformIO、Arduino、C# 和 3MF 可以放出来；安装包、依赖目录、构建输出和混乱的完整工程树不直接发布。
 
 ## What Was In The Archive / 归档里有什么
 
@@ -32,7 +32,7 @@ This prototype is messy in a very early-project way: structure, airflow, small e
 - PCB and fabrication route: EasyEDA projects, a schematic export, a Gerber package, acrylic parts list, and one Bambu Studio 3MF slicing file.
 - Delivery route: a Windows demo video and a desktop installer existed in the source archive, but the installer and build output are not published.
 
-## Public Evidence / 公开证据
+## Files / 文件
 
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
 - [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
@@ -51,10 +51,12 @@ This prototype is messy in a very early-project way: structure, airflow, small e
 - [Acrylic parts list](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx)
 - [Bambu A1 mini slicing file](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)
 
-## Public Boundary / 公开边界
+## What Stayed Out / 没放上来的东西
 
-The prototype is now treated as a public legacy archive, not a sensitive current-product folder. Selected PCB, firmware, desktop, and fabrication files are published because they are small enough to inspect and tied directly to the prototype. The boundary is still deliberate: installers, dependency folders, generated build output, vendor folders, duplicate exports, and the uncurated source tree stay out of the website.
+The prototype is treated as legacy material, not a sensitive current-product folder. Selected PCB, firmware, desktop, and fabrication files are included because they are small enough to inspect and tied directly to the prototype. Installers, dependency folders, generated build output, vendor folders, duplicate exports, and the uncurated source tree stay out of the website.
 
-## Reflection / 复盘
+这个原型按早期 legacy 材料处理，不是 Current_Product。PCB、固件、桌面端和制作文件可以筛选后放出，因为它们能直接说明原型链路；安装器、依赖目录、生成的 build 输出、vendor 文件、重复导出和没整理过的完整工程树不放。
 
-它的价值不在“做得多成熟”，而在暴露了结构、风道、电子控制、桌面端显示和文档交付之间的混乱连接。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些东西，项目一多，回头看就只剩一堆不知道为什么这样命名的文件夹。
+## Looking Back / 现在回头看
+
+它的价值不在“做得多成熟”，而在暴露结构、风道、电子控制、桌面端显示和说明文档之间的混乱连接。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些东西，项目一多，回头看就只剩一堆不知道为什么这样命名的文件夹。

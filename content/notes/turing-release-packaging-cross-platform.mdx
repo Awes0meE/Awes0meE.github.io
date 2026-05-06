@@ -9,39 +9,30 @@ visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 
-## Early Idea / 前期想法
+## Early Idea / 一开始怎么想
 
-After the program could run inside Qt Creator, it was tempting to treat the task as finished. The release step proved otherwise. A program that runs on the development machine is not automatically a program that can be copied to another machine.
+After the program ran inside Qt Creator, it was tempting to think the hard part was over. The Release step quickly corrected that. A program running on the development laptop is not the same thing as a folder someone else can double-click.
 
-程序能在 Qt Creator 里跑起来以后，很容易以为任务结束了。但 Release 阶段证明不是这样：开发机上能运行，不代表复制到另一台电脑上也能运行。
+程序能在 Qt Creator 里跑起来以后，很容易以为“差不多了”。但 Release 打包马上把这个想法打掉：开发机能运行，不代表复制到另一台电脑上也能打开。
 
-## 改变
+## Windows / Windows 侧
 
-Windows 侧的关键不是单独拿到 `seamly2d.exe`，而是用 `windeployqt` 收集 Qt 依赖，再手动补上 Seamly2D 需要的 `xerces-c_3_2.dll`。之后才轮到代码签名、安装包和交付体验。
+Windows 侧先要编 Release，再把 `seamly2d.exe` 放进干净目录，用 `windeployqt` 收集 Qt 依赖。只收 Qt 还不够，Seamly2D 还缺 `xerces-c_3_2.dll`，这个 DLL 不补上就会在别的机器上启动失败。
 
-macOS 侧同样不是把 `.app` 拷出来就完事。需要 `macdeployqt` 收集 frameworks，再考虑签名、扩展属性、Gatekeeper 和 DMG。自签名证书只能解决一部分本地验证问题，不能等同于商业发布证书。
+后面继续试了自签名证书和 Inno Setup。自签名只能解决本地测试和流程理解，不能当成正式发布证书。Inno Setup 的脚本则把一堆散文件变成安装包，至少让最终文件夹不再像临时复制出来的 build 目录。
 
-## Stage Goal / 阶段目标
+## macOS / macOS 侧
 
-The practical target was a repeatable release checklist: build Release, collect dependencies, verify the application outside the IDE, sign when possible, and package the final folder or app bundle.
+macOS 侧换了一套麻烦：先把 Windows 上的代码移到 Mac，配置 Qt 和编译器，处理 Homebrew Qt 与官方 Qt 的路径差异，跑通 Debug，再切 Release。之后用 `macdeployqt` 收 frameworks，尝试自签名和 DMG。
 
-实际目标是把发布流程写成能复现的检查表：先编 Release，再收集依赖，离开 IDE 单独运行验证，能签名就签名，最后再做安装包或 DMG。
+签名这一步没有完全走到正式发布那种程度，但脚本把编译、打包、依赖收集这些部分尽量串了起来。除签名外，自动化流程基本能跑。
 
-- Windows：Release build -> copy `seamly2d.exe` -> run `windeployqt` -> add `xerces-c_3_2.dll` -> test -> sign -> Inno Setup installer.
-- macOS：Release build -> copy `.app` -> run `macdeployqt` -> remove stale signature/attributes -> optional self-sign -> verify -> create DMG.
-- 不复制公开：`Windows_deliver_pack.zip`、`macOS_deliver_pack.zip`、`Seamly2D__Release/`、安装器和 DLL。
-- 公开保留：流程 PDF 和两个 shell 脚本，方便说明当时打包逻辑。
-
-## Evidence / 证据
-
-The release-flow PDF is the main public artifact. The macOS scripts are also copied because they are short automation records and do not include private credentials.
-
-公开证据以 Release 流程 PDF 为主。macOS 两个脚本也复制出来，因为它们只是短的自动化记录，不包含私钥或凭证。
+## Files / 留下的文件
 
 - [Release packaging flow PDF](/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf)
 - [macOS package script](/uploads/projects/nanjing-turing/macos-build-package.sh)
 - [macOS package with signing checks](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)
 
-## 复盘
+## Looking Back / 回头看
 
-Release 打包最容易低估。开发阶段的问题通常会给出编译错误；发布阶段的问题很多时候表现为“别人电脑打不开”。这次记录的意义，是把“我这里能跑”拆成更明确的条件：依赖齐不齐、架构对不对、签名策略是什么、交付物里到底包含哪些文件。
+Release 打包最容易被低估。开发阶段的问题通常会直接报编译错误；打包阶段的问题经常是“我这里能跑，别人那里打不开”。这次最大的收获是把“能跑”拆细：依赖齐不齐，架构对不对，DLL 有没有漏，签名是什么状态，安装包里到底放了哪些文件。

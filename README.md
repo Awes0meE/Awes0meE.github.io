@@ -109,13 +109,13 @@ assetPaths:
 
 Notes are stored in `content/notes/*.mdx`. Each note should include `visibility: public` or `visibility: private`. Missing visibility is treated as private, so drafts do not accidentally appear on the public site.
 
-Media items are stored in `content/media.json`, with assets under `public/uploads/`. Use optional `titleZh` and `captionZh` when the media card needs Chinese text for the global language switch.
+Media items are stored in `content/media.json`, with assets under `public/uploads/`. Use optional `titleZh` and `captionZh` when the media card needs Chinese text for the global language switch, and add `projectSlug` so the media page can show which project the image or video comes from.
 
 The site has a top-right English / Simplified Chinese toggle. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
-Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. Images and videos are previewed; small code, Markdown, and text files render inline; binary files such as PDFs, spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents are linked directly.
+Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. Images and videos are previewed; Markdown and text documents render as readable page content; source/code files render in code frames; binary files such as PDFs, spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents are linked directly.
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
@@ -124,6 +124,7 @@ Current main content state:
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
+- The media gallery covers project/note images and videos, and the Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks.
 - Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
@@ -260,13 +261,13 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 学习笔记放在 `content/notes/*.mdx`。每篇笔记都应该设置 `visibility: public` 或 `visibility: private`。缺失 `visibility` 会被当作 private，避免草稿误发布。
 
-媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体卡片需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`。
+媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体卡片需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`；如果媒体来自某个项目，补上 `projectSlug`，媒体页会显示来源项目。
 
 网站右上角有 English / 简体中文切换按钮。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
-项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料直接列到项目页。图片和视频会预览，小型代码、Markdown 和文本文件会内嵌展示，PDF、表格、Gerber、STEP、EasyEDA、Word 等二进制资料会作为直接链接。
+项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料直接列到项目页。图片和视频会预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF、表格、Gerber、STEP、EasyEDA、Word 等二进制资料会作为直接链接。
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 

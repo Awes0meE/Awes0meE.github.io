@@ -14,28 +14,26 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## 前期想法
+## After The Peripherals / 外设之后
 
-STM32 练习做完以后，实习日志后半段转向 PID 和列车自动控制系统。这个转向很自然：前面已经有 PWM、电机、编码器和传感器反馈，后面再看 PID，就不再只是课本里的三个字母，而是和速度、亮度、温度、位置这些可测量量连在一起。
+STM32 练习做完以后，实习日志后半段转向 PID 和列车自动控制系统。这个转向挺自然：前面已经碰过 PWM、电机、编码器和传感器反馈，再看 PID 时，它就不只是课本里的三个字母，而是和速度、亮度、温度、位置这些量连在一起。
 
 The report then connected embedded basics with ATC terms: ATP, ATO, and ATS. At this stage the work was mostly reading, simulation thinking, and small STM32 mapping exercises.
 
-## 阶段目标
+## What I Tried To Connect / 当时想连起来的东西
 
-- 理解开环和闭环控制的差别。
-- 分清 P、I、D 三个参数对系统响应的影响。
-- 了解手动调参、Ziegler-Nichols 等基础调参思路。
-- 把编码器、电机 PWM、传感器反馈和“列车速度/位置控制”的概念对应起来。
-- 阅读 ATP、ATO、ATS 的基本功能，不把它们混成一个笼统的“地铁控制系统”。
+- 开环和闭环控制有什么差别。
+- P、I、D 三个参数分别会怎样影响响应。
+- 手动调参、Ziegler-Nichols 这类基础方法大概怎么用。
+- 编码器、电机 PWM、传感器反馈和“列车速度/位置控制”之间有什么类比关系。
+- ATP、ATO、ATS 分别负责什么，不把它们混成一个笼统的“地铁控制系统”。
 
-## 疑问
+当时最大的疑问是：STM32 入门练习和轨道交通行业之间到底有什么关系？后来比较清楚的答案是，它们不是同一个层级。STM32 练习训练的是底层感知、执行和调试能力；ATP/ATO/ATS 是系统级概念。
 
-当时的疑问是：STM32 入门练习和轨道交通行业之间到底有什么关系？后来比较清楚的答案是，它们不是同一个层级。STM32 练习解决的是底层感知、执行和调试能力；ATP/ATO/ATS 是系统级概念。短期实习不可能把工业系统做出来，但可以用微控制器训练理解控制链路所需要的最小元素。
+## File / 文件
 
-## 证据
+编码器和舵机速度摘录可以作为最小控制链路的例子：输入变化、限幅、输出更新。它离真实列车控制很远，但能说明“传感器输入到执行输出”的基础关系：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
 
-编码器和舵机速度摘录可以作为最小控制链路的证据：输入变化、限幅、输出更新。它离真实列车控制很远，但能说明“传感器输入到执行输出”的基础关系：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
+## Looking Back / 回头看
 
-## 复盘
-
-这部分最适合写成学习笔记，而不是项目页。它的意义在于把第一次实习的行业语境留住：轨道交通不是只有硬件板，也不是只有控制理论。真正要继续走下去，需要同时补嵌入式基础、控制算法、系统安全边界和工程验证。这个认识比“我学会了 PID”更真实。
+这部分更像学习笔记，不像项目页。它的意义是把第一次实习的行业语境留住：轨道交通不是只有硬件板，也不是只有控制理论。真正继续往下走，需要同时补嵌入式基础、控制算法、系统安全和工程验证。这个认识比单纯写“学会了 PID”真实得多。

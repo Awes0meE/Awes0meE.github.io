@@ -48,7 +48,7 @@ assetPaths:
 
 Set `featured: true` only for projects that should appear on the homepage.
 
-Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render small source / Markdown / text files inline, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files.
+Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render Markdown / text documents as readable article content, render small source/code files in code frames, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files.
 
 ## Add Or Edit A Note
 
@@ -144,6 +144,8 @@ Example:
 
 Use `titleZh` and `captionZh` when a media card should switch cleanly between English and Simplified Chinese.
 
+Every project/note image or video that should be discoverable from the media page needs a matching `content/media.json` entry. Use `projectSlug` whenever the media belongs to a project; the media page displays that source project on each card.
+
 ## Language Switching
 
 The website has a top-right English / Simplified Chinese language switch. The default language is Simplified Chinese unless the visitor has saved English in browser `localStorage`.
@@ -151,7 +153,7 @@ The website has a top-right English / Simplified Chinese language switch. The de
 - Use `BilingualText` for fixed labels in TSX files.
 - Keep `title/titleZh` and `summary/summaryZh` complete for projects and notes.
 - Use `titleZh/captionZh` in `content/media.json` for media cards.
-- `ContentRenderer` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks, and show a fallback notice when one body language is still missing.
+- `ContentRenderer` can split simple bilingual headings such as `English / 中文` and hide language-detected body blocks when both languages exist. It does not show missing-language placeholder notices; single-language notes remain readable.
 - Long MDX body content is not automatically machine-translated. Add real bilingual body sections manually when an article needs both languages.
 
 ## Writing Standard
@@ -166,16 +168,13 @@ Every serious project should eventually include:
 - links to source, demo, release, or paper if available;
 - English and Chinese summaries.
 
-Notes should keep the user's practical learning-log texture. Public pages should read more like direct engineering notes than self-promotional reports:
+Notes should keep the user's practical learning-log texture. Public pages should read like direct engineering notes, not AI handoff reports or self-promotional summaries:
 
-- start from `前期想法` when the motivation or confusion matters;
-- use `改变` to explain a pivot in direction;
-- use `疑问` to capture practical questions and the answer reached at the time;
-- use `阶段目标` for concrete next steps or constraints;
-- keep `证据` links for files, images, videos, source, PDFs, and datasets;
-- end with `复盘` when there is a useful lesson;
-- avoid overusing `我负责了...` and `我参与了...` lists, because they sound fake when the note is meant to be a learning record;
-- use direct description: system scope, constraints, evidence boundary, question, and next step;
+- start from `起点` or the first confusing symptom when the motivation matters;
+- use sections like `怎么卡住`, `怎么改`, `文件`, `还要补的记录`, and `现在回头看` when they fit;
+- keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
+- avoid phrases like `这次只公开...`, `功能改动没有故意扩大`, `公开证据边界`, and repetitive `我负责了... / 我参与了...` lists;
+- write in a plain learning-log voice, often beginning from the action or observation instead of a formal subject;
 - add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.

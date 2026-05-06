@@ -9,38 +9,38 @@ visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 
-## Early Idea / 前期想法
+## Early Idea / 一开始怎么想
 
-The build problem first looked like a list of commands: install CMake, open a developer prompt, run qmake, run build. That was not enough. When the error message changes after every small environment tweak, memorizing commands stops working.
+At first, build problems looked like a command list: install CMake, open a developer prompt, run qmake, click build. That worked only until the next environment error. Once every small PATH or Kit change produced a different message, memorizing commands stopped helping.
 
-编译问题一开始看起来像命令清单：装 CMake，打开开发者命令行，跑 qmake，点击编译。但这种记命令的方式很快就不够了。环境变量一改、工具链一换，报错也跟着变，只背步骤很难判断哪里错了。
+一开始我把编译理解成命令清单：装 CMake，开开发者命令行，跑 qmake，点编译。后来发现这不够。环境变量一变、编译器一换、Qt 包路径一错，报错就换一套说法，只背步骤很难知道卡在哪里。
 
-## 改变
+## How I Split It / 后来拆成几层
 
-后来把问题拆成几层看：平台和架构先决定 x86/x64；MSVC、Windows SDK、`cl`、`link`、`lib` 负责把源码、目标文件、库和可执行文件连起来；CMake/Ninja 更像调度器，负责生成规则和按依赖图执行；Qt 则要能被 CMake 或 qmake 正确找到。
+后来把它拆开看：
 
-这样看之后，CMake 不是“另一个编译器”。它更像是把工具链、依赖、规则写清楚的人。真正编译和链接的还是底层工具。
+- 平台和架构先决定 x86 还是 x64。
+- MSVC 里的 `cl` 负责编译，`link` 负责链接，`lib` 处理静态库。
+- `PATH`、`INCLUDE`、`LIB` 决定命令、头文件和库能不能被找到。
+- CMake 不是编译器，它负责 configure、generate，然后把规则交给 Ninja 或 MSBuild。
+- Qt 还要能被找到，例如 `CMAKE_PREFIX_PATH`、`Qt6_DIR`、`Qt6Config.cmake` 是否指向正确安装目录。
+
+这样看以后，“编译失败”就不再是一个黑盒。它可能是找不到工具、找不到头文件、找不到库、架构不一致，也可能是生成规则和 Qt 包版本不匹配。
 
 ![CMake to Make flow / CMake 到 Make 的流程图](/uploads/projects/nanjing-turing/cmake-make-flow.png)
 
-## 阶段目标
+## Notes From The PDF / PDF 里记了什么
 
-- 分清 `cl`、`link`、`lib` 分别在做什么。
-- 分清 `.cpp`、`.obj`、`.lib`、`.dll`、`.exe`、`.pdb` 的位置。
-- 理解为什么 Qt 的架构、编译器版本和命令行环境要匹配。
-- 理解 `CMAKE_PREFIX_PATH`、`Qt6_DIR` 和 `Qt6Config.cmake` 为什么会影响 Qt 包发现。
-- 理解 Ninja 只是执行规则，不负责替代编译器。
+The exported PDF is basically a learning map. It mixes diagrams, rough handwritten notes, and plain explanations of how source files become object files, libraries, executables, and finally something that still needs DLLs at runtime.
 
-## Evidence / 证据
-
-The exported PDF is public because it is a learning note, not a private source file. It captures the build-chain thinking at the time, including some rough handwritten and diagram-based explanations.
-
-这个 PDF 可以公开，因为它是学习笔记，不是公司源码或交付包。里面保留了当时对编译链路的理解：有些地方很基础，但正是这些基础问题影响了 Qt 项目能不能在另一台机器上跑起来。
+那份 PDF 不是教程成品，更像当时给自己画的一张地图。里面把 `.cpp`、`.obj`、`.lib`、`.dll`、`.exe`、`.pdb` 这些文件放在同一条链路里看，也记录了为什么 Qt 的架构、编译器版本和命令行环境要匹配。
 
 - [Qt build-logic notes PDF](/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf)
 
 ![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
 
-## 复盘
+## Looking Back / 回头看
 
-这部分学习解决的是一个很现实的问题：以后看到“编译失败”，不要直接把它当成一个黑盒错误。先问是找不到工具、找不到头文件、找不到库、架构不一致、生成规则错了，还是运行时缺 DLL。能把问题归类，排查速度就会明显变快。
+这部分学习很基础，但很管用。以前看到编译报错容易直接复制错误信息去搜；现在至少会先问：这是配置阶段、生成阶段、编译阶段、链接阶段，还是运行时缺依赖？
+
+能把错误归到某一层，排查就不再完全靠运气。
