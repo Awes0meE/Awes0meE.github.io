@@ -1,43 +1,27 @@
----
+﻿---
 title: "Base Unit Component Datasheet Review"
-titleZh: "底座板器件规格书整理"
-summary: "A supporting note that maps the base unit component datasheets to practical firmware and board-level design constraints."
-summaryZh: "底座板器件规格书支撑笔记：把 DC-DC、晶振、编码器、MOSFET、电源座、三极管和滑动开关资料映射到板级与固件约束。"
+titleZh: "底座板器件资料整理"
+summary: "A component-reference note mapping DC-DC, crystals, encoder, MOSFET, power jack, BJT, and slide switch documents to board and firmware constraints."
+summaryZh: "底座板器件资料整理：把 DC-DC、晶振、编码器、MOSFET、电源座、三极管和滑动开关资料映射到板级与固件约束。"
 date: "2026-05-06"
 tags: ["Datasheet", "PCB", "Firmware", "Component"]
 projectSlug: "juanyun-baseunit-control-firmware"
-visibility: private
+visibility: public
 ---
+## 鍓嶆湡鎯虫硶
 
-## 前期想法
+搴曞骇鏉胯繖閮ㄥ垎鐪嬭捣鏉ユ瘮澶栨満鏉跨畝鍗曪紝浣嗙畝鍗曚笉浠ｈ〃鍙互涓嶆煡璧勬枡銆傜紪鐮佸櫒銆佺數婧愬骇銆丮OSFET銆丏C-DC銆佹櫠鎸€佹粦鍔ㄥ紑鍏筹紝杩欎簺涓滆タ鍗曠嫭鐪嬮兘涓嶅鏉傦紝缁勫悎鍒颁竴涓澘瀛愪笂灏变細寮€濮嬩簰鐩稿奖鍝嶃€?
+鎴戜互鍓嶅緢瀹规槗鎶?datasheet 褰撴垚鈥滈噰璐檮浠垛€濓紝闇€瑕佺殑鏃跺€欐悳涓€涓嬪氨琛屻€傚悗鏉ュ彂鐜拌繖鏍蜂笉琛岋紝鍥犱负鍥轰欢閲岀殑鍘绘姈銆丳WM銆佹帀鐢典繚瀛樸€佷笂鐢电姸鎬侊紝鍏跺疄閮藉拰鍣ㄤ欢琛屼负鏈夊叧銆傚櫒浠惰祫鏂欎笉鏁寸悊锛屽悗闈㈠啓浠ｇ爜涔熶細鍑劅瑙夈€?
+## 鐤戦棶锛氬簳搴у浐浠朵负浠€涔堣鍏冲績鍣ㄤ欢瑙勬牸涔︼紵
 
-底座板这部分看起来比外机板简单，但简单不代表可以不查资料。编码器、电源座、MOSFET、DC-DC、晶振、滑动开关，这些东西单独看都不复杂，组合到一个板子上就会开始互相影响。
+鍥犱负鍥轰欢涓嶆槸娲诲湪鐪熺┖閲岀殑銆侲C11 缂栫爜鍣ㄥ鏋滄姈寰楀帀瀹筹紝UI 閫昏緫灏辫鑰冭檻鍘绘姈鍜屾柟鍚戝垽鏂紱MOSFET 鍜岄鎵囪緭鍑轰細褰卞搷 PWM 鐨勫畨鍏ㄨ竟鐣岋紱鐢垫簮搴с€佸紑鍏冲拰 3.3 V 闄嶅帇浼氬奖鍝嶄笂鐢靛拰鎺夌數鐘舵€併€傜‖浠剁害鏉熶笉娓呮锛岃蒋浠跺啓寰楀啀婕備寒涔熷彲鑳藉彧鏄焊涓婅皥鍏点€?
+## 鎴戝叧娉ㄧ殑鍐呭
 
-我以前很容易把 datasheet 当成“采购附件”，需要的时候搜一下就行。后来发现这样不行，因为固件里的去抖、PWM、掉电保存、上电状态，其实都和器件行为有关。器件资料不整理，后面写代码也会凭感觉。
+- XL1509-3.3锛?.3 V 鐢垫簮璺緞鍜岃礋杞戒綑閲忋€?- EC11锛氭棆閽皟閫熴€佸幓鎶栥€佹柟鍚戝垽鏂拰 UI 鐘舵€佹満銆?- AO4407銆丼S8050锛氶鎵囬┍鍔ㄥ拰鎵ц绔竟鐣屻€?- DC-005銆佹粦鍔ㄥ紑鍏筹細鐢ㄦ埛鎿嶄綔銆佷笂鐢佃矾寰勫拰缁撴瀯瀹夎銆?- 8 MHz 涓?32.768 kHz 鏅舵尟锛氫富鏃堕挓鍜屽悗缁?RTC / 浣庡姛鑰楅鐣欍€?
+## 璇佹嵁
 
-## 疑问：底座固件为什么要关心器件规格书？
 
-因为固件不是活在真空里的。EC11 编码器如果抖得厉害，UI 逻辑就要考虑去抖和方向判断；MOSFET 和风扇输出会影响 PWM 的安全边界；电源座、开关和 3.3 V 降压会影响上电和掉电状态。硬件约束不清楚，软件写得再漂亮也可能只是纸上谈兵。
+## 澶嶇洏
 
-## 我关注的内容
+杩欑瘒涓嶆槸涓轰簡鍫嗛檮浠讹紝鑰屾槸鎻愰啋鑷繁浠ュ悗鍋氱‖浠?鍥轰欢缁撳悎椤圭洰鏃讹紝datasheet 瑕佸彉鎴愯璁¤緭鍏ャ€傚悗缁鏋滆ˉ搴曞骇鏉?PCB 鎴浘鍜屾祴閲忚褰曪紝杩欎簺璧勬枡灏辫兘瑙ｉ噴涓轰粈涔堟煇浜涙帴鍙ｅ拰鍥轰欢澶勭悊鏂瑰紡鏄悎鐞嗙殑銆?
 
-- XL1509-3.3：3.3 V 电源路径和负载余量。
-- EC11：旋钮调速、去抖、方向判断和 UI 状态机。
-- AO4407、SS8050：风扇驱动和执行端边界。
-- DC-005、滑动开关：用户操作、上电路径和结构安装。
-- 8 MHz 与 32.768 kHz 晶振：主时钟和后续 RTC / 低功耗预留。
-
-## 证据
-
-- [XL1509-3.3 DC-DC datasheet](/uploads/projects/juanyun-tech/baseunit-xl1509-3v3-dcdc-datasheet.pdf)
-- [X32258 8 MHz crystal datasheet](/uploads/projects/juanyun-tech/baseunit-x32258-8mhz-crystal-datasheet.pdf)
-- [EC11 encoder datasheet](/uploads/projects/juanyun-tech/baseunit-ec11-encoder-datasheet.pdf)
-- [32.768 kHz crystal datasheet](/uploads/projects/juanyun-tech/baseunit-32k-crystal-datasheet.pdf)
-- [AO4407 MOSFET datasheet](/uploads/projects/juanyun-tech/baseunit-ao4407-mosfet-datasheet.pdf)
-- [DC-005 power jack datasheet](/uploads/projects/juanyun-tech/baseunit-dc005-power-jack-datasheet.pdf)
-- [SS8050 BJT datasheet](/uploads/projects/juanyun-tech/baseunit-ss8050-bjt-datasheet.pdf)
-- [SS12D10G6 slide switch datasheet](/uploads/projects/juanyun-tech/baseunit-ss12d10g6-slide-switch-datasheet.pdf)
-
-## 复盘
-
-这篇不是为了堆附件，而是提醒自己以后做硬件/固件结合项目时，datasheet 要变成设计输入。后续如果补底座板 PCB 截图和测量记录，这些资料就能解释为什么某些接口和固件处理方式是合理的。

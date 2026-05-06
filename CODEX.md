@@ -128,7 +128,7 @@ As of `2026-05-06`, that branch contains 7 Juanyun project pages, 13 Juanyun not
 
 Before merging this branch to `main`, review all public PDFs, source files, CAD/EDA files, videos, and large binary attachments. Keep private documents out of the public app: invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
 
-On branch `feature/note-visibility`, Juanyun notes are marked `visibility: private` and the public Juanyun asset folder has been reduced to three prototype media files. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, or company firmware source dumps without explicit desensitization review.
+On branch `feature/note-visibility`, Juanyun notes are visible, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, or company firmware source dumps without explicit desensitization review.
 
 ## Visual Direction
 

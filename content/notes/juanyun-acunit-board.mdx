@@ -1,38 +1,28 @@
----
+﻿---
 title: "Juanyun AC Unit Control Board"
 titleZh: "卷云外机板 V2.0 / V2.1 开发笔记"
-summary: "My first-person notes on the AC unit control board split into main, power, and interaction PCBs with compressor, fan, sensor, OLED, Wi-Fi, and EEV interfaces."
-summaryZh: "我对卷云外机板 V2.0/V2.1 的整理：从单板需求扩展到主控板、分电板、交互板三块 PCB，处理压缩机、风扇、温压传感器、OLED、Wi-Fi 和电子膨胀阀接口。"
+summary: "Notes on the AC unit control board split into main, power, and interaction PCBs with compressor, fan, sensor, OLED, Wi-Fi, and EEV interfaces."
+summaryZh: "卷云外机板 V2.0/V2.1 整理：从单板需求扩展到主控板、分电板、交互板三块 PCB，覆盖压缩机、风扇、传感器、OLED、Wi-Fi 和电子膨胀阀接口。"
 date: "2026-05-06"
 tags: ["PCB", "STM32", "Thermal", "Interface"]
 projectSlug: "juanyun-acunit-control-platform"
-visibility: private
+visibility: public
 ---
+## 鍓嶆湡鎯虫硶
 
-## 前期想法
-
-卷云外机板这条线一开始给我的感觉就是：东西很多，但不能乱。24 V 输入、12 V 风扇、压缩机驱动板、电子膨胀阀、NTC、DHT、压力变送器、OLED、编码器、Wi-Fi 预留，全都挤在一个“外机板”概念里面。如果只是把这些接口一股脑画到板子上，看起来像是在干活，实际上后面调试的时候一定会出事。
-
-所以我当时最先想清楚的不是“怎么画得快”，而是“怎么把这个系统拆开”。V2.0 更像是先把核心链路打通，V2.1 则开始变成主控板、分电板、交互板三块板。这个变化对我挺重要，因为它让我第一次比较明确地意识到：硬件不是元器件堆叠，而是约束拆分。
-
+鍗蜂簯澶栨満鏉胯繖鏉＄嚎涓€寮€濮嬬粰鎴戠殑鎰熻灏辨槸锛氫笢瑗垮緢澶氾紝浣嗕笉鑳戒贡銆?4 V 杈撳叆銆?2 V 椋庢墖銆佸帇缂╂満椹卞姩鏉裤€佺數瀛愯啫鑳€闃€銆丯TC銆丏HT銆佸帇鍔涘彉閫佸櫒銆丱LED銆佺紪鐮佸櫒銆乄i-Fi 棰勭暀锛屽叏閮芥尋鍦ㄤ竴涓€滃鏈烘澘鈥濇蹇甸噷闈€傚鏋滃彧鏄妸杩欎簺鎺ュ彛涓€鑲¤剳鐢诲埌鏉垮瓙涓婏紝鐪嬭捣鏉ュ儚鏄湪骞叉椿锛屽疄闄呬笂鍚庨潰璋冭瘯鐨勬椂鍊欎竴瀹氫細鍑轰簨銆?
+鎵€浠ユ垜褰撴椂鏈€鍏堟兂娓呮鐨勪笉鏄€滄€庝箞鐢诲緱蹇€濓紝鑰屾槸鈥滄€庝箞鎶婅繖涓郴缁熸媶寮€鈥濄€俈2.0 鏇村儚鏄厛鎶婃牳蹇冮摼璺墦閫氾紝V2.1 鍒欏紑濮嬪彉鎴愪富鎺ф澘銆佸垎鐢垫澘銆佷氦浜掓澘涓夊潡鏉裤€傝繖涓彉鍖栧鎴戞尯閲嶈锛屽洜涓哄畠璁╂垜绗竴娆℃瘮杈冩槑纭湴鎰忚瘑鍒帮細纭欢涓嶆槸鍏冨櫒浠跺爢鍙狅紝鑰屾槸绾︽潫鎷嗗垎銆?
 ![AC Unit V2.1 system block diagram](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-## 改变
+## 鏀瑰彉
 
-如果只按学生项目的思路，可能会觉得“能跑就行”。但外机板不是一个小 demo，它要接压缩机、风扇、传感器和用户交互，还要给固件留调试空间。于是我开始把需求拆成几块看：电源怎么走，接口怎么分，哪些东西要跨板，哪些信号后续软件能测，哪些接口只是预留，哪些地方要小心噪声和大电流。
+濡傛灉鍙寜瀛︾敓椤圭洰鐨勬€濊矾锛屽彲鑳戒細瑙夊緱鈥滆兘璺戝氨琛屸€濄€備絾澶栨満鏉夸笉鏄竴涓皬 demo锛屽畠瑕佹帴鍘嬬缉鏈恒€侀鎵囥€佷紶鎰熷櫒鍜岀敤鎴蜂氦浜掞紝杩樿缁欏浐浠剁暀璋冭瘯绌洪棿銆備簬鏄垜寮€濮嬫妸闇€姹傛媶鎴愬嚑鍧楃湅锛氱數婧愭€庝箞璧帮紝鎺ュ彛鎬庝箞鍒嗭紝鍝簺涓滆タ瑕佽法鏉匡紝鍝簺淇″彿鍚庣画杞欢鑳芥祴锛屽摢浜涙帴鍙ｅ彧鏄鐣欙紝鍝簺鍦版柟瑕佸皬蹇冨櫔澹板拰澶х數娴併€?
+鐤戦棶锛氫负浠€涔?V2.1 瑕佹媶涓夊潡鏉匡紝涓嶈兘涓€鍧楁澘瑙ｅ喅锛?
+鎴戠殑鐞嗚В鏄紝涓€鍧楁澘褰撶劧涔熻兘鐢伙紝浣嗛棶棰樹細闆嗕腑鍦ㄤ竴璧枫€傚ぇ鐢垫祦銆佺數婧愬垎閰嶃€佺敤鎴锋寜閿?OLED銆佷紶鎰熷櫒杈撳叆銆佽皟璇曟帴鍙ｅ叏鎸ゅ湪涓€璧凤紝鍚庨潰鏀逛竴涓帴鍙ｅ彲鑳藉奖鍝嶄竴鐗囥€傛媶鎴愪富鎺с€佸垎鐢点€佷氦浜掍箣鍚庯紝绯荤粺杈圭晫鏇存竻妤氾紝鍚庣画灏忔壒閲忛獙璇佷篃鏇村鏄撹В閲娿€?
+## 闃舵鐩爣
 
-疑问：为什么 V2.1 要拆三块板，不能一块板解决？
-
-我的理解是，一块板当然也能画，但问题会集中在一起。大电流、电源分配、用户按键/OLED、传感器输入、调试接口全挤在一起，后面改一个接口可能影响一片。拆成主控、分电、交互之后，系统边界更清楚，后续小批量验证也更容易解释。
-
-## 阶段目标
-
-- 把 V2.0 / V2.1 的系统框图、原理图、PCB 导出和渲染图整理出来。
-- 把主控板、分电板、交互板各自承担的职责说清楚。
-- 把压缩机、风扇、压力变送器、电子膨胀阀这些接口风险写进笔记。
-- 后续补实物照片、上电记录和版本对比，不要让页面只停留在“文件很多”的状态。
-
-## 证据
+- 鎶?V2.0 / V2.1 鐨勭郴缁熸鍥俱€佸師鐞嗗浘銆丳CB 瀵煎嚭鍜屾覆鏌撳浘鏁寸悊鍑烘潵銆?- 鎶婁富鎺ф澘銆佸垎鐢垫澘銆佷氦浜掓澘鍚勮嚜鎵挎媴鐨勮亴璐ｈ娓呮銆?- 鎶婂帇缂╂満銆侀鎵囥€佸帇鍔涘彉閫佸櫒銆佺數瀛愯啫鑳€闃€杩欎簺鎺ュ彛椋庨櫓鍐欒繘绗旇銆?- 鍚庣画琛ュ疄鐗╃収鐗囥€佷笂鐢佃褰曞拰鐗堟湰瀵规瘮锛屼笉瑕佽椤甸潰鍙仠鐣欏湪鈥滄枃浠跺緢澶氣€濈殑鐘舵€併€?
+## 璇佹嵁
 
 - [V2.0 system block](/uploads/projects/juanyun-tech/acunit-v20-system-block.png)
 - [V1.0 / V2.0 hardware revision archive](/notes/juanyun-acunit-hardware-revision-archive)
@@ -41,9 +31,6 @@ visibility: private
 - [V2.1 main board back render](/uploads/projects/juanyun-tech/acunit-v21-main-back.png)
 - [V2.1 power board front render](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
 - [V2.1 interaction board front render](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
-- [V2.1 main schematic](/uploads/projects/juanyun-tech/acunit-v21-main-schematic.pdf)
-- [V2.1 power schematic](/uploads/projects/juanyun-tech/acunit-v21-power-schematic.pdf)
-- [V2.1 interaction schematic](/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf)
 - [V2.1 manufacturing export package](/notes/juanyun-acunit-v21-manufacturing-package)
 - [V2.1 component datasheet review](/notes/juanyun-acunit-v21-component-datasheets)
 
@@ -51,6 +38,7 @@ visibility: private
 
 ![AC Unit V2.1 interaction board front render](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
 
-## 复盘
+## 澶嶇洏
 
-这条线给我的最大收获不是某一张板画得怎么样，而是我开始用“系统约束”看硬件。以前我会更关注 MCU 引脚够不够，现在会去想电源树、接口边界、跨板连接、可测点、固件能不能验证、后续别人能不能看懂。后续如果要把它写成真正成熟的 case study，还得补实物和问题清单。
+杩欐潯绾跨粰鎴戠殑鏈€澶ф敹鑾蜂笉鏄煇涓€寮犳澘鐢诲緱鎬庝箞鏍凤紝鑰屾槸鎴戝紑濮嬬敤鈥滅郴缁熺害鏉熲€濈湅纭欢銆備互鍓嶆垜浼氭洿鍏虫敞 MCU 寮曡剼澶熶笉澶燂紝鐜板湪浼氬幓鎯崇數婧愭爲銆佹帴鍙ｈ竟鐣屻€佽法鏉胯繛鎺ャ€佸彲娴嬬偣銆佸浐浠惰兘涓嶈兘楠岃瘉銆佸悗缁埆浜鸿兘涓嶈兘鐪嬫噦銆傚悗缁鏋滆鎶婂畠鍐欐垚鐪熸鎴愮啛鐨?case study锛岃繕寰楄ˉ瀹炵墿鍜岄棶棰樻竻鍗曘€?
+

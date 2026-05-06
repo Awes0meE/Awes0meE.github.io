@@ -113,7 +113,7 @@ Current draft content branch:
 - Contains Juanyun Technology project pages, development notes, media entries, and technical assets under `public/uploads/projects/juanyun-tech/`.
 - Review all public attachments before merging this branch to `main`.
 - Do not publish private financial, billing, credential, installer, vendor, or build-output files.
-- On `feature/note-visibility`, Juanyun notes are private and public Juanyun assets have been reduced to three prototype media files.
+- On `feature/note-visibility`, Juanyun notes are public, while raw board/manufacturing/source files are not served from `public/uploads/`; only approved screenshots/renders and the prototype demo video remain website-accessible.
 
 ## Deployment
 

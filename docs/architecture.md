@@ -63,7 +63,7 @@ Current content state after the Juanyun import as of `2026-05-06`:
 
 - 10 project files total, including 7 Juanyun project pages;
 - 18 note files total, including 13 Juanyun notes;
-- on `feature/note-visibility`, all Juanyun notes are private and only three Juanyun prototype media assets remain public.
+- on `feature/note-visibility`, Juanyun notes are public, while public Juanyun assets are limited to approved screenshots/renders and one prototype demo video.
 
 ## Rendering Notes
 

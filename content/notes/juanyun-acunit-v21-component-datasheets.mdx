@@ -1,48 +1,30 @@
----
+﻿---
 title: "AC Unit V2.1 Component Datasheet Review"
-titleZh: "外机板 V2.1 关键器件资料整理"
-summary: "A supporting note for AC unit V2.1 component datasheets, mapping fan, pressure transmitter, Wi-Fi, DHT11, power, EEV driver, MOSFET, and TVS documents to board and firmware constraints."
-summaryZh: "外机板 V2.1 关键器件资料支撑笔记：把风扇、压力变送器、Wi-Fi、DHT11、电源、电子膨胀阀驱动、MOSFET 和 TVS 资料映射到硬件/固件约束。"
+titleZh: "外机板 V2.1 器件资料整理"
+summary: "A component-evidence note for fan, pressure-transmitter, Wi-Fi, DHT11, power, EEV driver, MOSFET, and TVS references."
+summaryZh: "外机板 V2.1 关键器件资料整理：把风扇、压力变送器、Wi-Fi、DHT11、电源、电子膨胀阀驱动、MOSFET 和 TVS 资料映射到硬件/固件约束。"
 date: "2026-05-06"
 tags: ["Datasheet", "PCB", "Power", "Interface"]
 projectSlug: "juanyun-acunit-control-platform"
-visibility: private
+visibility: public
 ---
+## 鍓嶆湡鎯虫硶
 
-## 前期想法
+浠ュ墠鐪?datasheet锛屾垜缁忓父浼氳寰楄繖鏄€滈檮甯﹁祫鏂欌€濓紝鐪熸閲嶈鐨勬槸鍘熺悊鍥惧拰 PCB銆傚悗鏉ュ仛澶栨満鏉跨殑鏃跺€欏彂鐜颁笉鏄繖鏍枫€傚櫒浠惰祫鏂欏叾瀹炴槸寰堝璁捐閫夋嫨鐨勫簳灞傚師鍥狅紝鍙槸骞虫椂瀹冧滑澶垎鏁ｄ簡锛岀湅璧锋潵鍍忎竴鍫?PDF 鍨冨溇鍫嗐€?
+V2.1 閲岄潰鏈夐鎵囥€佸帇鍔涘彉閫佸櫒銆丒SP-01S銆丏HT11銆佺數婧愯姱鐗囥€乁LN2003銆丮OSFET銆乀VS锛岃繖浜涗笢瑗垮鏋滃彧鍦?BOM 閲屽嚭鐜帮紝鍒汉鏍规湰涓嶇煡閬撳畠浠负浠€涔堥噸瑕併€傛墍浠ユ垜鎶婂畠浠崟鐙暣鐞嗘垚杩欑瘒绗旇锛屽厛鎶娾€滀负浠€涔堣鐪嬭繖浜涜祫鏂欌€濊娓呮銆?
+## 鐤戦棶锛歞atasheet 鏀句綔鍝侀泦閲屼細涓嶄細澶按锛?
+浼氾紝濡傛灉鍙槸鍫嗕笅杞介摼鎺ュ氨寰堟按銆備絾濡傛灉鑳借鏄?datasheet 褰卞搷浜嗕粈涔堝喅绛栵紝姣斿鐢垫簮浣欓噺銆佹帴鍙ｄ繚鎶ゃ€乁ART 鍒嗛厤銆佺數瀛愯啫鑳€闃€椹卞姩銆佷紶鎰熷櫒閲囨牱鑼冨洿锛岄偅瀹冨氨涓嶆槸瑁呴グ锛岃€屾槸璁捐渚濇嵁銆?
+## 鎴戝叧娉ㄧ殑鍐呭
 
-以前看 datasheet，我经常会觉得这是“附带资料”，真正重要的是原理图和 PCB。后来做外机板的时候发现不是这样。器件资料其实是很多设计选择的底层原因，只是平时它们太分散了，看起来像一堆 PDF 垃圾堆。
-
-V2.1 里面有风扇、压力变送器、ESP-01S、DHT11、电源芯片、ULN2003、MOSFET、TVS，这些东西如果只在 BOM 里出现，别人根本不知道它们为什么重要。所以我把它们单独整理成这篇笔记，先把“为什么要看这些资料”说清楚。
-
-## 疑问：datasheet 放作品集里会不会太水？
-
-会，如果只是堆下载链接就很水。但如果能说明 datasheet 影响了什么决策，比如电源余量、接口保护、UART 分配、电子膨胀阀驱动、传感器采样范围，那它就不是装饰，而是设计依据。
-
-## 我关注的内容
-
-- PWM 风扇和压力变送器决定了控制/采样信号到底长什么样。
-- ESP-01S 影响 UART 分配、3.3 V 供电稳定性和天线空间。
-- TPS54560、LGS5145、AMS1117 关系到电源树，不是随便挑个降压芯片就完事。
-- ULN2003A 对应电子膨胀阀/步进驱动，固件里也要有步进控制抽象。
-- DHT11、2N7002、SMAJ12A、SMBJ30A 则关系到低速传感、信号处理和保护。
-
-## 证据
+- PWM 椋庢墖鍜屽帇鍔涘彉閫佸櫒鍐冲畾浜嗘帶鍒?閲囨牱淇″彿鍒板簳闀夸粈涔堟牱銆?- ESP-01S 褰卞搷 UART 鍒嗛厤銆?.3 V 渚涚數绋冲畾鎬у拰澶╃嚎绌洪棿銆?- TPS54560銆丩GS5145銆丄MS1117 鍏崇郴鍒扮數婧愭爲锛屼笉鏄殢渚挎寫涓檷鍘嬭姱鐗囧氨瀹屼簨銆?- ULN2003A 瀵瑰簲鐢靛瓙鑶ㄨ儉闃€/姝ヨ繘椹卞姩锛屽浐浠堕噷涔熻鏈夋杩涙帶鍒舵娊璞°€?- DHT11銆?N7002銆丼MAJ12A銆丼MBJ30A 鍒欏叧绯诲埌浣庨€熶紶鎰熴€佷俊鍙峰鐞嗗拰淇濇姢銆?
+## 璇佹嵁
 
 ![PWM fan parameter sheet](/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg)
 
 ![Pressure transmitter parameter sheet](/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg)
 
-- [DHT11 datasheet](/uploads/projects/juanyun-tech/acunit-v21-dht11-datasheet.pdf)
-- [ESP-01S Wi-Fi module datasheet](/uploads/projects/juanyun-tech/acunit-v21-esp01s-wifi-datasheet.pdf)
-- [TPS54560 DC-DC datasheet](/uploads/projects/juanyun-tech/acunit-v21-tps54560-dcdc-datasheet.pdf)
-- [LGS5145 DC-DC datasheet](/uploads/projects/juanyun-tech/acunit-v21-lgs5145-dcdc-datasheet.pdf)
-- [ULN2003A Darlington array datasheet](/uploads/projects/juanyun-tech/acunit-v21-uln2003a-darlington-datasheet.pdf)
-- [AMS1117-3.3 LDO datasheet](/uploads/projects/juanyun-tech/acunit-v21-ams1117-3v3-datasheet.pdf)
-- [2N7002 MOSFET datasheet](/uploads/projects/juanyun-tech/acunit-v21-2n7002-datasheet.pdf)
-- [SMAJ12A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smaj12a-tvs-datasheet.pdf)
-- [SMBJ30A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smbj30a-tvs-datasheet.pdf)
 
-## 复盘
+## 澶嶇洏
 
-这篇的作用不是展示我读完了多少 PDF，而是把外机板从“图片展示”往“工程归档”拉一点。后续应该继续把每组器件资料对应到原理图上的具体位置，比如保护器件放哪、连接器为什么这样选、电源余量怎么算。
+杩欑瘒鐨勪綔鐢ㄤ笉鏄睍绀烘垜璇诲畬浜嗗灏?PDF锛岃€屾槸鎶婂鏈烘澘浠庘€滃浘鐗囧睍绀衡€濆線鈥滃伐绋嬪綊妗ｂ€濇媺涓€鐐广€傚悗缁簲璇ョ户缁妸姣忕粍鍣ㄤ欢璧勬枡瀵瑰簲鍒板師鐞嗗浘涓婄殑鍏蜂綋浣嶇疆锛屾瘮濡備繚鎶ゅ櫒浠舵斁鍝€佽繛鎺ュ櫒涓轰粈涔堣繖鏍烽€夈€佺數婧愪綑閲忔€庝箞绠椼€?
+

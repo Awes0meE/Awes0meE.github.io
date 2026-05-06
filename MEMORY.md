@@ -18,7 +18,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, internship-proof files, executable installers, vendor package folders, and build outputs were not published.
 - `2026-05-06`: All `content/notes/*.mdx` files were rewritten toward the user's own learning-log voice, modeled after their Qt internship note style: process-first, reflective, mildly informal, with `前期想法 / 改变 / 疑问 / 阶段目标 / 证据 / 复盘` style sections where appropriate.
 
-- `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. All Juanyun notes are private on this branch, and public Juanyun assets were reduced to the DIY cooling demo video plus two 3D-print preview images.
+- `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. Juanyun notes are public on this branch, but website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
 - `2026-05-06`: Public project and note writing direction shifted toward direct descriptive narration: fewer "我..." claims, more plain system/scope/evidence descriptions, and bilingual section support.
 
 ## Stable Decisions
@@ -71,7 +71,7 @@ Expected result:
 
 ## Open Content Work
 
-- Review whether private Juanyun notes should stay in this public GitHub repo. `visibility: private` hides them from the website, but it does not hide note source from a public repository.
+- Keep checking that company-sensitive Juanyun files are not restored under `public/uploads/`; notes and safe screenshots can be public, but raw board/manufacturing/source files should not be website-accessible.
 - Decide whether the large public attachments should remain in Git or be moved to Git LFS / external storage before long-term public deployment.
 - Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.

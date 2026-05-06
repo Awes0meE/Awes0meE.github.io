@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Adjusted the Juanyun public boundary before pushing `feature/note-visibility`.
+- Files changed: made Juanyun notes public, restored safe board/system screenshots, added board media entries, and kept raw PCB/manufacturing/source downloads out of `public/uploads/projects/juanyun-tech/`.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build now includes the Juanyun note pages while the sensitive file-link scan stays empty.
+
+## 2026-05-06
+
 - Summary: Revised public project and note narration on `feature/note-visibility`.
 - Files changed: rewrote public project pages and five public notes toward direct descriptive narration, removed `My Work` style sectioning, reduced first-person phrasing, and added English/Chinese section support.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
@@ -11,8 +17,8 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 ## 2026-05-06
 
 - Summary: Created `feature/note-visibility` to test note-level public/private visibility and reduce public Juanyun exposure.
-- Files changed: added `visibility` to the note content model, marked all Juanyun notes private, filtered public note routes through `getNotes()`, rewrote Juanyun project pages as public-safe shells, reduced `content/media.json`, and removed company Gerber/schematic/BOM/source/CAD assets from `public/uploads/projects/juanyun-tech/`.
-- Privacy: only the DIY cooling demo video and two 3D-print preview images remain public under the Juanyun upload folder on this branch.
+- Files changed: added `visibility` to the note content model, filtered public note routes through `getNotes()`, rewrote Juanyun project pages as public-safe shells, reduced raw downloadable assets, and removed company Gerber/schematic/BOM/source/CAD files from `public/uploads/projects/juanyun-tech/`.
+- Privacy: Juanyun notes and safe screenshots/renders are public; raw board/manufacturing/source files are not website-accessible on this branch.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build generated only the five public note pages and no Juanyun note HTML pages.
 
 ## 2026-05-06

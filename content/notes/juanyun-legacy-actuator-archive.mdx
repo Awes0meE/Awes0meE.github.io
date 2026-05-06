@@ -1,37 +1,26 @@
----
+﻿---
 title: "Solenoid Valve and BLDC Fan Archive"
-titleZh: "螺线管阀门与 BLDC 静音风扇资料归档"
-summary: "Archive notes for solenoid valve control, OLED/encoder UI experiments, ULN2003/stepper references, and a quiet single-phase BLDC fan driver board."
+titleZh: "螺线管阀门与 BLDC 风扇归档"
+summary: "Archive notes for solenoid-valve control, OLED/encoder interaction, ULN2003 references, and a single-phase BLDC quiet fan driver board."
 summaryZh: "螺线管阀门控制、OLED/编码器交互、ULN2003/步进驱动资料，以及单相 BLDC 静音风扇驱动板的归档笔记。"
 date: "2026-05-06"
 tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-actuator-fan-archive"
-visibility: private
+visibility: public
 ---
+## 鍓嶆湡鎯虫硶
 
-## 前期想法
+杩欓儴鍒嗚祫鏂欐瘮杈冩潅锛氫竴杈规槸铻虹嚎绠￠榾闂ㄦ帶鍒讹紝閲岄潰鏈?STM32F103銆丱LED銆佺紪鐮佸櫒銆佹寜閿拰 ULN2003/姝ヨ繘鐢垫満鍙傝€冿紱鍙︿竴杈规槸鍗曠浉 BLDC 闈欓煶椋庢墖椹卞姩鏉裤€傚畠浠兘鍜屾墽琛屽櫒銆佺數鏈恒€侀┍鍔ㄦ湁鍏筹紝浣嗗張涓嶉€傚悎纭杩涘綋鍓嶅鏈烘澘涓荤嚎銆?
+鎵€浠ユ垜鍏堟妸瀹冧滑鏀捐繘涓€涓綊妗ｉ」鐩噷銆傝繖鏍峰仛鐨勭洰鐨勪笉鏄杩欐潯绾垮凡缁忓畬鏁达紝鑰屾槸閬垮厤瀹冧滑缁х画鏁ｈ惤鍦ㄧ‖鐩橀噷銆備互鍚庡鏋滆ˉ浜嗗疄鐗┿€佹祴璇曞拰鏇村畬鏁寸殑浠ｇ爜璇存槑锛屽啀鑰冭檻鎷嗘垚鏇存寮忕殑椤圭洰銆?
+## 鐤戦棶锛氫负浠€涔堜笉鐩存帴鍒犳帀杩欎簺杈硅鏂欙紵
 
-这部分资料比较杂：一边是螺线管阀门控制，里面有 STM32F103、OLED、编码器、按键和 ULN2003/步进电机参考；另一边是单相 BLDC 静音风扇驱动板。它们都和执行器、电机、驱动有关，但又不适合硬塞进当前外机板主线。
+鍥犱负瀹冧滑鍙兘鏄悗缁兘鍔涚嚎绱€傛墽琛屽櫒銆侀鎵囬┍鍔ㄣ€丱LED/缂栫爜鍣ㄤ氦浜掞紝杩欎簺鍜屽祵鍏ュ紡鏂瑰悜鏄湁鍏崇殑銆傚彧鏄幇鍦ㄨ瘉鎹繕涓嶅瀹屾暣锛岀‖鍐欐垚鎴愮啛椤圭洰浼氭樉寰楀亣銆傚厛褰掓。锛屽埆鍚癸紝涔熷埆涓€?
+## 鐩墠鑳借鏄庝粈涔?
+- 铻虹嚎绠￠榾闂ㄨ祫鏂欓噷鏈?STM32F103 宸ョ▼銆侀榾闂ㄦ帶鍒躲€丱LED 鏄剧ず銆佺紪鐮佸櫒杈撳叆鍜屾寜閿€昏緫銆?- ULN2003 鍜屾杩涢┍鍔ㄨ祫鏂欏彲浠ュ拰鐢靛瓙鑶ㄨ儉闃€/鎵ц鍣ㄦ帶鍒舵€濊矾鍏宠仈璧锋潵銆?- BLDC 闈欓煶椋庢墖椹卞姩鏉跨幇鍦ㄤ繚鐣欎簡 BOM 鍜?EDA 宸ョ▼锛屽悗缁繕闇€瑕佽ˉ鎷撴墤銆佸櫔澹扮洰鏍囧拰娴嬭瘯璁板綍銆?
+## 璇佹嵁
 
-所以我先把它们放进一个归档项目里。这样做的目的不是说这条线已经完整，而是避免它们继续散落在硬盘里。以后如果补了实物、测试和更完整的代码说明，再考虑拆成更正式的项目。
 
-## 疑问：为什么不直接删掉这些边角料？
+## 澶嶇洏
 
-因为它们可能是后续能力线索。执行器、风扇驱动、OLED/编码器交互，这些和嵌入式方向是有关的。只是现在证据还不够完整，硬写成成熟项目会显得假。先归档，别吹，也别丢。
+杩欑瘒鐜板湪灏辨槸璧勬枡绱㈠紩锛屼笉鏄畬鏁翠綔鍝佸睍绀恒€傚畠鐨勪环鍊兼槸鎶婃墽琛屽櫒/鐢垫満鎺у埗鏂瑰悜鍏堢暀浣忥紝鍚庨潰琛ュ浘鐗囥€佹簮鐮佽瑙ｅ拰娴嬭瘯璇佹嵁鍚庯紝鍐嶅喅瀹氳涓嶈鍗囩骇鎴愭寮?case study銆?
 
-## 目前能说明什么
-
-- 螺线管阀门资料里有 STM32F103 工程、阀门控制、OLED 显示、编码器输入和按键逻辑。
-- ULN2003 和步进驱动资料可以和电子膨胀阀/执行器控制思路关联起来。
-- BLDC 静音风扇驱动板现在保留了 BOM 和 EDA 工程，后续还需要补拓扑、噪声目标和测试记录。
-
-## 证据
-
-- [BLDC quiet fan BOM](/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx)
-- [BLDC quiet fan EDA project](/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro)
-- [Solenoid valve control source](/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c)
-- [ULN2003 stepper driver schematic](/uploads/projects/juanyun-tech/uln2003-stepper-driver-schematic.pdf)
-
-## 复盘
-
-这篇现在就是资料索引，不是完整作品展示。它的价值是把执行器/电机控制方向先留住，后面补图片、源码讲解和测试证据后，再决定要不要升级成正式 case study。

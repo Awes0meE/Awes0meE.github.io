@@ -1,42 +1,28 @@
----
+﻿---
 title: "AC Unit V2.1 Manufacturing Export Package"
 titleZh: "外机板 V2.1 生产导出资料整理"
 summary: "A manufacturing-evidence note for the AC unit V2.1 main, power, and interaction board BOM, Gerber, and pick-and-place exports."
-summaryZh: "外机板 V2.1 主控板、分电板、交互板的 BOM、Gerber 和贴片坐标导出资料整理，用于证明 PCB 不是只停留在截图阶段。"
+summaryZh: "外机板 V2.1 主控板、分电板、交互板的 BOM、Gerber 和贴片坐标导出资料整理；公开页只保留说明，不提供下载。"
 date: "2026-05-06"
 tags: ["PCB", "Manufacturing", "Gerber", "BOM"]
 projectSlug: "juanyun-acunit-control-platform"
-visibility: private
+visibility: public
 ---
+## 鍓嶆湡鎯虫硶
 
-## 前期想法
+鍙斁 PCB 娓叉煋鍥惧叾瀹炲緢瀹规槗缁欎汉涓€绉嶉敊瑙夛細杩欏潡鏉跨湅璧锋潵涓嶉敊锛屾墍浠ラ」鐩氨绠楀畬鎴愪簡銆備絾瀹為檯纭欢寮€鍙戦噷锛岃兘涓嶈兘瀵煎嚭 BOM銆丟erber銆佽创鐗囧潗鏍囷紝鎵嶆洿鎺ヨ繎鈥滆兘涓嶈兘鎷垮幓鎵撴牱/瀹℃牳鈥濈殑闃舵銆?
+V2.1 鎷嗘垚涓绘帶鏉裤€佸垎鐢垫澘銆佷氦浜掓澘浠ュ悗锛屾垜瑙夊緱鏈夊繀瑕佹妸涓夊潡鏉跨殑鐢熶骇瀵煎嚭鏂囦欢涔熷垎寮€鏁寸悊銆備笉鐒朵互鍚庡洖澶寸湅锛岃嚜宸遍兘鍙兘鍒嗕笉娓呭摢涓?BOM 瀵瑰簲鍝潡鏉匡紝鍝釜鍧愭爣鏂囦欢瀵瑰簲鍝釜瑁呴厤闈紝鎯虫兂灏卞ご鐤笺€?
+## 鐤戦棶锛氳繖浜涘埗閫犳枃浠跺浣滃搧闆嗘湁浠€涔堟剰涔夛紵
 
-只放 PCB 渲染图其实很容易给人一种错觉：这块板看起来不错，所以项目就算完成了。但实际硬件开发里，能不能导出 BOM、Gerber、贴片坐标，才更接近“能不能拿去打样/审核”的阶段。
+瀹冧滑鑳借瘉鏄庤繖涓」鐩笉鏄彧鐢讳簡鍑犲紶濂界湅鐨勫浘銆侭OM銆丟erber銆丳nP 鏂囦欢铏界劧涓嶉€傚悎鐩存帴鎷挎潵褰撯€滄晠浜嬧€濓紝浣嗗畠浠槸纭欢椤圭洰寰堥噸瑕佺殑璇佹嵁銆備竴涓澘瀛愭湁娌℃湁璧板埌鍙墦鏍烽樁娈碉紝鐪嬭繖浜涙枃浠舵瘮鐪嬫埅鍥炬洿闈犺氨銆?
+## 瀵煎嚭鍒嗙粍
 
-V2.1 拆成主控板、分电板、交互板以后，我觉得有必要把三块板的生产导出文件也分开整理。不然以后回头看，自己都可能分不清哪个 BOM 对应哪块板，哪个坐标文件对应哪个装配面，想想就头疼。
+- 涓绘帶鏉匡細STM32 鎺у埗銆佸帇缂╂満/EEV/浼犳劅鍣ㄦ帴鍙ｃ€乄i-Fi 涓插彛鍜岃皟璇曠儳褰曡繛鎺ャ€?- 鍒嗙數鏉匡細24 V 杈撳叆銆佷笅娓镐緵鐢点€佸ぇ鐢垫祦璺緞鍜岃法鏉胯繛鎺ャ€?- 浜や簰鏉匡細OLED銆佺紪鐮佸櫒銆佹寜閿拰鐢ㄦ埛杈撳叆銆?
+## 璇佹嵁
 
-## 疑问：这些制造文件对作品集有什么意义？
+公开页不提供 BOM、Gerber 或贴片坐标下载。这里只保留生产导出流程的说明，避免把公司可复用制造资料挂到网站上。
 
-它们能证明这个项目不是只画了几张好看的图。BOM、Gerber、PnP 文件虽然不适合直接拿来当“故事”，但它们是硬件项目很重要的证据。一个板子有没有走到可打样阶段，看这些文件比看截图更靠谱。
+## 澶嶇洏
 
-## 导出分组
+杩欑瘒鍏堟妸鐢熶骇璇佹嵁鏀剧ǔ銆傚悗缁湡姝ｈ琛ョ殑鏄?DFM 妫€鏌ユ竻鍗曪紝渚嬪杩炴帴鍣ㄦ柟鍚戙€佷笣鍗般€佸畨瑁呭瓟銆佽浇娴佽矾寰勩€佽创鐗囧潗鏍囧拰瑁呴厤闈㈡湁娌℃湁瀵逛笂銆傜幇鍦ㄨ嚦灏戝厛閬垮厤杩欎簺鏂囦欢缁х画韬哄湪纭洏娣卞鏃犱汉闂触銆?
 
-- 主控板：STM32 控制、压缩机/EEV/传感器接口、Wi-Fi 串口和调试烧录连接。
-- 分电板：24 V 输入、下游供电、大电流路径和跨板连接。
-- 交互板：OLED、编码器、按键和用户输入。
-
-## 证据
-
-- [Main board BOM](/uploads/projects/juanyun-tech/acunit-v21-main-bom.xlsx)
-- [Main board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-main-gerber.zip)
-- [Main board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-main-pick-place.csv)
-- [Power board BOM](/uploads/projects/juanyun-tech/acunit-v21-power-bom.xlsx)
-- [Power board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-power-gerber.zip)
-- [Power board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-power-pick-place.csv)
-- [Interaction board BOM](/uploads/projects/juanyun-tech/acunit-v21-ui-bom.xlsx)
-- [Interaction board Gerber archive](/uploads/projects/juanyun-tech/acunit-v21-ui-gerber.zip)
-- [Interaction board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v21-ui-pick-place.csv)
-
-## 复盘
-
-这篇先把生产证据放稳。后续真正该补的是 DFM 检查清单，例如连接器方向、丝印、安装孔、载流路径、贴片坐标和装配面有没有对上。现在至少先避免这些文件继续躺在硬盘深处无人问津。

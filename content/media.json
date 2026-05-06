@@ -1,5 +1,55 @@
 [
   {
+    "id": "juanyun-acunit-main-front",
+    "title": "AC Unit V2.1 main board front",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
+    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
+    "date": "2026-05-05",
+    "projectSlug": "juanyun-acunit-control-platform",
+    "caption": "Public board-render snapshot for the Juanyun AC unit V2.1 hardware branch."
+  },
+  {
+    "id": "juanyun-acunit-main-back",
+    "title": "AC Unit V2.1 main board back",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
+    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
+    "date": "2026-05-05",
+    "projectSlug": "juanyun-acunit-control-platform",
+    "caption": "Back-side board-render snapshot kept as public visual evidence."
+  },
+  {
+    "id": "juanyun-acunit-power-front",
+    "title": "AC Unit V2.1 power board",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
+    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
+    "date": "2026-05-05",
+    "projectSlug": "juanyun-acunit-control-platform",
+    "caption": "Power board render for the public project gallery."
+  },
+  {
+    "id": "juanyun-acunit-ui-front",
+    "title": "AC Unit V2.1 interaction board",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
+    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
+    "date": "2026-05-05",
+    "projectSlug": "juanyun-acunit-control-platform",
+    "caption": "Interaction board render for buttons, encoder, and OLED-facing controls."
+  },
+  {
+    "id": "juanyun-acunit-v21-block",
+    "title": "AC Unit V2.1 system block",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
+    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
+    "date": "2026-04-26",
+    "projectSlug": "juanyun-acunit-control-platform",
+    "caption": "System-level block diagram kept as a public-safe overview image."
+  },
+  {
     "id": "juanyun-diy-cooling-demo",
     "title": "DIY cooling desktop demo",
     "type": "video",
