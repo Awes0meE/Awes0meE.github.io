@@ -132,7 +132,7 @@ Normal fenced code blocks are rendered as shared technical evidence. If a whole 
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
-Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. The project page shows a left-side file index and a right-side preview panel. Images and videos preview inline; Markdown and text documents render as readable page content; source/code files render in code frames; PDFs embed from page one where the browser supports it; binary files such as spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents keep direct open links.
+Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. The project page shows a left-side file index and a right-side preview panel. Images and videos preview inline; Markdown and text documents render as readable page content; source/code files render in code frames; PDFs embed from page one where the browser supports it; binary files such as spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents keep direct open links. Uploaded Markdown previews resolve relative links/images from the source file path. HTML and SVG uploads are treated as download-only artifacts rather than inline previews.
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
@@ -144,6 +144,7 @@ Current main content state:
 - The media gallery covers 50 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and the Notion-exported Nanjing Turing build diagrams.
 - The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
 - Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
+- Public project files render through a two-pane browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, and a `juanyun-tech` allowlist checked by `npm run validate-content`.
 - Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
@@ -181,14 +182,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Latest released tag: `v0.6.1`.
+Latest released tag: `v0.7.0`.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.6.2 -m "v0.6.2 portfolio update"
+git tag -a v0.7.1 -m "v0.7.1 portfolio update"
 git push origin main
-git push origin v0.6.2
+git push origin v0.7.1
 ```
 
 ---
@@ -296,7 +297,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
-项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料放进项目页的文件浏览器。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，表格、Gerber、STEP、EasyEDA、Word 等二进制资料保留直接打开链接。
+项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料放进项目页的文件浏览器。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，表格、Gerber、STEP、EasyEDA、Word 等二进制资料保留直接打开链接。上传 Markdown 里的相对链接和图片会按源文件路径解析；HTML 和 SVG 上传物只作为下载附件处理，不做内嵌预览。
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 
@@ -308,6 +309,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 - 媒体页覆盖 50 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图，以及南京图灵 Notion 导出的编译逻辑图。
 - 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
 - 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
+- 项目公开资料通过双栏文件浏览器展示，并在服务端做路径归一化、严格 UTF-8 读取、目录/文件/预览体积上限，以及由 `npm run validate-content` 检查的 `juanyun-tech` allowlist。
 - 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
 - 不要发布私密财务、开票、证明、凭据、安装包、vendor、依赖或 build 输出文件。
 
@@ -350,12 +352,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.6.1`。
+最新已发布标签：`v0.7.0`。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.6.2 -m "v0.6.2 portfolio update"
+git tag -a v0.7.1 -m "v0.7.1 portfolio update"
 git push origin main
-git push origin v0.6.2
+git push origin v0.7.1
 ```

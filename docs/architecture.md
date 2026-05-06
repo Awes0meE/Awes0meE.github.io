@@ -61,7 +61,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main`, based on release `v0.6.1` plus the post-release media/cover refresh, as of `2026-05-07`:
+Current content state on `main`, based on release `v0.7.0`, as of `2026-05-07`:
 
 - 6 project files total;
 - 19 public note files total;
@@ -73,6 +73,7 @@ Current content state on `main`, based on release `v0.6.1` plus the post-release
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
+- public project-file archives render through a two-pane file browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, relative Markdown link resolution, and a `juanyun-tech` allowlist gate checked by content validation.
 
 ## Rendering Notes
 
@@ -80,7 +81,7 @@ The site does not execute arbitrary MDX components. Body content is rendered thr
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`. The detail page order is project body, development notes, public project files, then related media.
 
-Project pages can also render public project-file archives through `components/project-assets.tsx` and the interactive `components/project-asset-browser.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; the archive renders as a two-pane file browser with a left project-file index and a right preview panel. Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, PDF files are embedded on the first page where the browser supports it, and binary documents / fabrication / CAD / archive files keep a direct open action. Image previews in this archive also use direct public URLs, so the asset-prep step should resize/crop large source images before committing them. Percent-encoded upload paths are decoded before filesystem lookup. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
+Project pages can also render public project-file archives through `components/project-assets.tsx` and the interactive `components/project-asset-browser.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; the archive renders as a two-pane file browser with a left project-file index and a right preview panel. Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, PDF files are embedded on the first page where the browser supports it, and binary documents / fabrication / CAD / archive files keep a direct open action. Image previews in this archive also use direct public URLs, so the asset-prep step should resize/crop large source images before committing them. Uploaded Markdown previews resolve relative links and images from the source file path. HTML and SVG files are kept as download-only artifacts rather than inline previews. Percent-encoded upload paths are decoded before filesystem lookup. The server resolver uses strict UTF-8 decoding for previewed text, directory-depth and file-count caps for broad folders, and an aggregate preview-size cap so a large evidence folder cannot over-expand the rendered page. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
 
 ## Language Layer
 
@@ -119,4 +120,4 @@ Portfolio downloads are static files in `public/uploads/`. Only reviewed technic
 
 Static files in `public/uploads/` are public even if no page links to them. For the Juanyun material, `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` remain sensitive: do not publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, complete firmware source dumps, internal requirement/manufacturing packages, or product build outputs from those folders unless they have been explicitly reviewed and desensitized.
 
-Other Juanyun legacy folders are treated as public after pruning noisy project output. Current `main` may serve selected legacy PDFs, images, source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF models, and schematics under `public/uploads/projects/juanyun-public/`, while excluding installers, vendor/dependency folders, generated build outputs, duplicate raw dumps, and private financial/proof documents.
+Other Juanyun legacy folders are treated as public after pruning noisy project output. Current `main` may serve selected legacy PDFs, images, source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF models, and schematics under `public/uploads/projects/juanyun-public/`, while excluding installers, vendor/dependency folders, generated build outputs, duplicate raw dumps, and private financial/proof documents. `scripts/validate-content.mjs` also enforces the explicit `public/uploads/projects/juanyun-tech/` allowlist so WPS-synced raw files cannot silently become public assets.

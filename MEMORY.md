@@ -41,6 +41,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Encoding policy is now executable. `scripts/validate-encoding.mjs` checks Git-managed text-like files for valid UTF-8, null bytes, replacement characters, and common mojibake snippets; `npm.cmd run lint` includes the check. Legacy public FOC source and PnP evidence that had GBK/UTF-16 remnants was normalized to UTF-8 before display.
 - `2026-05-07`: Experimental branch `experiment/project-asset-browser` replaces stacked public project-file cards with a two-pane browser. `components/project-assets.tsx` remains the server-side resolver and safety boundary; `components/project-asset-browser.tsx` is the client-side index/preview UI.
 - `2026-05-07`: Full review of the experimental project asset browser hardened public-file handling: non-allowlisted local Juanyun files were moved out of `public/uploads/projects/juanyun-tech` to `D:\XJTLU\XJTLU_Portfolio_private\juanyun-tech-public-quarantine-20260507`; content validation now fails if extra files reappear there; browser previews gained directory/file caps, aggregate text-preview caps, strict UTF-8 reads, Markdown relative-link resolution, safer active-upload handling, and mobile preview scrolling.
+- `2026-05-07`: Release `v0.7.0` promotes the two-pane public project-file browser to `main`, keeps the 50-item media/gallery content state, and records the public-asset hardening work as part of the release boundary.
 
 ## Stable Decisions
 

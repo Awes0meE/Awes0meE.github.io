@@ -215,7 +215,7 @@ assetPaths:
 
 If `featured: true`, the project appears on the homepage featured section.
 
-If `assetPaths` is set, the project page shows uploaded public files in a file browser. The left side is a project-file index, and the right side previews the selected file. Images and videos show inline previews, Markdown / text documents render as readable page content, source/code files render in code frames, PDFs embed from page one where the browser supports it, and binary files keep direct open links.
+If `assetPaths` is set, the project page shows uploaded public files in a file browser. The left side is a project-file index, and the right side previews the selected file. Images and videos show inline previews, Markdown / text documents render as readable page content, source/code files render in code frames, PDFs embed from page one where the browser supports it, and binary files keep direct open links. Relative images and links inside uploaded Markdown are resolved from the source file path. HTML and SVG files are kept as download-only artifacts.
 
 ## 如何添加新项目
 
@@ -227,7 +227,7 @@ If `assetPaths` is set, the project page shows uploaded public files in a file b
 
 如果把 `featured` 设置为 `true`，这个项目会显示在首页精选项目区域。
 
-如果设置 `assetPaths`，项目页会用文件浏览器展示这些公开路径下的上传资料。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，二进制文件保留直接打开链接。
+如果设置 `assetPaths`，项目页会用文件浏览器展示这些公开路径下的上传资料。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，二进制文件保留直接打开链接。上传 Markdown 里的相对图片和链接会按源文件位置解析；HTML 和 SVG 文件只作为下载附件保留。
 
 ## How To Add Images Or Videos
 

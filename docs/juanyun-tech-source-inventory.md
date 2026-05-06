@@ -12,7 +12,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-On `main` release `v0.6.1`, the website keeps Juanyun public writing in:
+On `main` release `v0.7.0`, the website keeps Juanyun public writing in:
 
 ```text
 content/projects/juanyun-*.mdx
@@ -55,7 +55,7 @@ public/uploads/projects/juanyun-public/actuator-fan/
 
 The three `juanyun-public/` subfolders contain selected legacy evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. This is allowed only for non-Current_Product legacy folders after pruning installers, dependency folders, vendor packages, generated build outputs, invoices, reimbursements, billing records, internship proof documents, and duplicate raw dumps.
 
-Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/` so WPS-synced ignored ACUnit/BaseUnit raw files are not listed even if they appear locally under `public/`.
+Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/`, and `scripts/validate-content.mjs` fails if non-allowlisted files reappear there. This matters because WPS-synced ignored ACUnit/BaseUnit raw files would still be static public files if they were left under `public/`, even when no page lists them.
 
 ## Portfolio Content Mapping
 

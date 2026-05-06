@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Prepared release `v0.7.0` for the project asset browser branch.
+- Files changed: bumped package metadata to `0.7.0`; refreshed README, USER_GUIDE, CODEX, MEMORY, architecture, environment-toolchain, Juanyun inventory, and content workflow guidance so the two-pane browser, relative Markdown asset links, HTML/SVG download behavior, strict UTF-8 preview reads, directory/file/preview caps, and `juanyun-tech` allowlist validation are the documented release behavior.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed before merging to `main` and tagging `v0.7.0`.
+
+## 2026-05-07
+
 - Summary: Created experimental branch `experiment/project-asset-browser` for a two-pane public project-file browser.
 - Files changed: replaced stacked `ProjectAssets` cards with a server/client split: `components/project-assets.tsx` still resolves safe public files and `components/project-asset-browser.tsx` provides the left file index, right preview window, current-file open action, inline Markdown/text/code/media previews, PDF first-page embeds, and binary-file fallback panel. Follow-up review tightened bilingual file counts, preview remounting by selected href, external-link `rel`, Markdown relative-link resolution, mobile preview scrolling, HTML/SVG download handling, directory/file/preview caps, strict UTF-8 reads, and the Juanyun public allowlist gate. Non-allowlisted local Juanyun files were copied out of `public/uploads/projects/juanyun-tech` to an outside-repo quarantine before deletion from the public folder. Updated README, USER_GUIDE, CODEX, MEMORY, architecture, and content workflow docs for the new archive behavior.
 - Verification: `npm.cmd run lint`, `npm.cmd run typecheck`, and `npm.cmd run build` passed; local production screenshots checked desktop and mobile rendering on the Nanjing Turing project page.

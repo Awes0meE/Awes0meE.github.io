@@ -28,6 +28,8 @@ where.exe npm.cmd
 
 Use `npm.cmd` in PowerShell. On many Windows machines, `npm` resolves to `npm.ps1`, and PowerShell execution policy can block it even when Node.js is installed correctly.
 
+This repo is often maintained from Windows PowerShell rather than PowerShell 7. Avoid shell syntax and .NET APIs that only work in newer environments: use separate commands instead of `&&`, and do not assume `[System.IO.Path]::GetRelativePath` exists for safety-critical file moves. For file quarantines or public-folder cleanup, use `$ErrorActionPreference = 'Stop'`, verify source/target roots, copy with hash checks, then remove originals only after the copy is confirmed.
+
 If Node.js is installed but the current shell cannot find it, restart PowerShell or temporarily refresh PATH:
 
 ```powershell
