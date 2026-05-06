@@ -148,7 +148,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render Markdown/text documents as readable article content, render source/code files in code frames, and link binary files. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can render a two-pane public file browser: the server component resolves reviewed files with path normalization, directory/file caps, strict UTF-8 reads, aggregate preview-size caps, and the Juanyun allowlist; the client component handles left-index selection plus right-side previews for images/videos, Markdown/text, source code, PDFs, and binary fallback cards. Uploaded Markdown previews resolve relative links/images against the source file path. HTML and SVG uploads are download-only artifacts, not inline previews. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
 
 ## Language Switching
 
@@ -160,13 +160,13 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - Projects and notes use existing `title/titleZh` and `summary/summaryZh` fields.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
 - `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks/headings/tables when both languages exist, render basic Markdown tables, and add heading anchors for internal links. Single-language notes stay readable instead of showing missing-language placeholder notices.
-- MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text. As of `v0.6.1`, public project/note pages should not leave important Chinese-only body content without an English counterpart.
+- MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text. As of `v0.7.0`, public project/note pages should not leave important Chinese-only body content without an English counterpart.
 - Normal fenced code blocks are language-neutral in `ContentRenderer`. Use `en-*` / `zh-*` language prefixes, such as `en-text` or `zh-powershell`, only when a whole code/listing block belongs to one language view. `ContentRenderer` strips that prefix from the visible code label and hides the block with the same CSS language rules as prose.
 - Standalone HTML comments in MDX bodies are ignored by `ContentRenderer`; use them only as internal markers, not as visible content.
 
 ## Current Content State
 
-The current mainline state is based on release `v0.6.1` on `main`, with a post-release media and cover refresh for the Juanyun, Nanjing Turing, and Tianjin internship project pages.
+The current mainline state is based on release `v0.7.0` on `main`, including the media/cover refresh and the two-pane public project-file browser for project archives.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
