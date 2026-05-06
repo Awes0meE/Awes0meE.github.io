@@ -223,9 +223,9 @@ export default function Home() {
               <BilingualText en="Currently" zh="当前" />
             </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
-              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="PID Starter Kit in progress" zh="PID Starter Kit 开发中" /></p>
+              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="Embedded hardware archive expansion" zh="嵌入式硬件档案扩展中" /></p>
               <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Robotics learning" zh="Robotics 学习中" /></p>
-              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Next.js portfolio build" zh="Next.js 作品集建设中" /></p>
+              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Project evidence curation" zh="项目证据整理中" /></p>
               <p className="flex items-center gap-3"><CalendarDays size={18} /><BilingualText en={formatDateRange("2026.05 to Now")} zh={formatDateRangeZh("2026.05 to Now")} /></p>
             </div>
           </div>

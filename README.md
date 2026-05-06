@@ -91,17 +91,19 @@ Projects are stored in `content/projects/*.mdx`. Each project uses frontmatter:
 
 ```yaml
 ---
-title: "PID Starter Kit"
-titleZh: "个人 PID 控制器开发套件"
+title: "Example Hardware Archive"
+titleZh: "示例硬件档案"
 summary: "English summary"
 summaryZh: "中文摘要"
 date: "2024.10 to Now"
 status: "In Progress"
 tags: ["STM32", "Control", "PCB"]
-cover: "/uploads/visuals/circuit-board.svg"
+cover: "/uploads/projects/example-hardware/cover.jpg"
 featured: true
 links:
-  repo: "https://github.com/Awes0meE/PID-Starter-Kit"
+  repo: "https://github.com/Awes0meE/example"
+assetPaths:
+  - "/uploads/projects/example-hardware"
 ---
 ```
 
@@ -113,12 +115,15 @@ The site has a top-right English / Simplified Chinese toggle. Fixed UI labels us
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
+Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. Images and videos are previewed; small code, Markdown, and text files render inline; binary files such as PDFs, spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents are linked directly.
+
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current main content state:
+Current branch content state:
 
-- `main` has removed the inaccurate SAT301 placeholder project and five empty shell notes.
-- `main` includes real internship material from Juanyun, Nanjing Turing, and Tianjin rail-transit STM32 study work.
+- `project-archive-pages` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
+- The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
+- The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
 - Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
@@ -152,14 +157,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Current release: `v0.4.0`.
+Latest released tag: `v0.4.0`. Current working branch: `project-archive-pages` for the unreleased project-archive expansion.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.4.0 -m "v0.4.0 internship content expansion"
+git tag -a v0.5.0 -m "v0.5.0 project archive pages"
 git push origin main
-git push origin v0.4.0
+git push origin v0.5.0
 ```
 
 ---
@@ -261,12 +266,15 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
+项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料直接列到项目页。图片和视频会预览，小型代码、Markdown 和文本文件会内嵌展示，PDF、表格、Gerber、STEP、EasyEDA、Word 等二进制资料会作为直接链接。
+
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 
-当前 main 内容状态：
+当前分支内容状态：
 
-- `main` 已删除不准确的 SAT301 占位项目和五篇空壳笔记。
-- `main` 已补入卷云、南京图灵、天津轨道交通 STM32 学习相关的真实实习材料。
+- `project-archive-pages` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
+- 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
+- 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
 - 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
 - 不要发布私密财务、开票、证明、凭据、安装包、vendor、依赖或 build 输出文件。
 
@@ -305,12 +313,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-当前版本：`v0.4.0`。
+最新已发布标签：`v0.4.0`。当前工作分支：`project-archive-pages`，用于尚未发布的项目档案页扩展。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.4.0 -m "v0.4.0 internship content expansion"
+git tag -a v0.5.0 -m "v0.5.0 project archive pages"
 git push origin main
-git push origin v0.4.0
+git push origin v0.5.0
 ```

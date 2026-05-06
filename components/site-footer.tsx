@@ -9,8 +9,8 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 text-sm text-graphite md:grid-cols-[1fr_auto] lg:px-8">
         <p>
           <BilingualText
-            en="(c) 2026 Awes0meE / Li Zhiyi. Built with Next.js, TypeScript, MDX, and Tailwind CSS."
-            zh="(c) 2026 Awes0meE / Li Zhiyi。使用 Next.js、TypeScript、MDX 和 Tailwind CSS 构建。"
+            en="(c) 2026 Awes0meE / 66CCFF Labs. Built with Next.js, TypeScript, MDX, and Tailwind CSS."
+            zh="(c) 2026 Awes0meE / 66CCFF Labs。使用 Next.js、TypeScript、MDX 和 Tailwind CSS 构建。"
           />
         </p>
         <div className="flex items-center gap-5 text-ink">

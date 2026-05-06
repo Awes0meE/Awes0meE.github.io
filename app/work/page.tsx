@@ -18,7 +18,7 @@ export default function WorkPage() {
         </h1>
         <p className="mt-5 text-lg leading-8 text-graphite">
           <BilingualText
-            en="Case studies for control systems, embedded hardware, robotics, and the portfolio platform itself."
+            en="Case studies and project archives for embedded hardware, firmware, control systems, robotics, and internship evidence."
             zh="这里会持续整理项目背景、工程过程、技术栈、实验记录和可验证成果。"
           />
         </p>

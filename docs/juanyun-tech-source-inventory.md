@@ -1,18 +1,18 @@
 # Juanyun Technology Source Inventory
 
-Date: 2026-05-06
+Date: 2026-05-07
 
 Source path inspected:
 
 ```text
-F:\XJTLU\工作相关\卷云科技有限责任公司
+D:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
 This document records how the raw Juanyun source folder is represented in the portfolio. It is a source-to-portfolio map, not permission to publish the raw source tree.
 
 ## Current Public Boundary
 
-On `main` as of release `v0.4.0`, the website keeps Juanyun public writing in:
+On the `project-archive-pages` working branch, the website keeps Juanyun public writing in:
 
 ```text
 content/projects/juanyun-*.mdx
@@ -55,6 +55,8 @@ public/uploads/projects/juanyun-public/actuator-fan/
 
 The three `juanyun-public/` subfolders contain selected legacy evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. This is allowed only for non-Current_Product legacy folders after pruning installers, dependency folders, vendor packages, generated build outputs, invoices, reimbursements, billing records, internship proof documents, and duplicate raw dumps.
 
+Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/` so WPS-synced ignored ACUnit/BaseUnit raw files are not listed even if they appear locally under `public/`.
+
 ## Portfolio Content Mapping
 
 The public-facing writing lives in:
@@ -65,16 +67,14 @@ content/notes/juanyun-*.mdx
 content/media.json
 ```
 
-Current Juanyun expansion work focuses on non-sensitive public materials:
+Current Juanyun project-page structure focuses on three larger public archives instead of many thin pages:
 
 - `juanyun-diy-cooling-prototype` and `juanyun-diy-cooling`;
 - `juanyun-foc-driver-board` and `juanyun-foc-driver`;
-- `juanyun-actuator-fan-archive` and `juanyun-legacy-actuator-archive`;
-- `juanyun-dht-sensor-breakout-board` and `juanyun-dht11-am2302-board`;
+- `juanyun-thermal-hardware` as the main archive for ACUnit overview, BaseUnit firmware overview, DHT11 / AM2302 planning, actuator/fan evidence, and SOP material;
+- `juanyun-legacy-actuator-archive`, `juanyun-dht11-am2302-board`, ACUnit notes, and BaseUnit notes now point to `juanyun-thermal-hardware`;
 - `juanyun-hardware-sop`;
-- `juanyun-thermal-hardware` as an umbrella overview only.
-
-`content/media.json` is intentionally not edited during this subtask to avoid cross-agent conflicts.
+- ACUnit media entries now point to `juanyun-thermal-hardware`.
 
 ## Source Folder Summary
 

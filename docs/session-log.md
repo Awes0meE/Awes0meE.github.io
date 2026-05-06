@@ -231,3 +231,15 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Split the actuator and quiet fan driver archive into its own project page.
 - Files changed: added `content/projects/juanyun-actuator-fan-archive.mdx`, published selected solenoid-valve source files, ULN2003 schematic, and BLDC EDA project attachment, then reassigned the actuator archive note to the new project slug.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-07
+
+- Summary: Consolidated project pages into larger evidence archives on branch `project-archive-pages`.
+- Files changed: removed the old portfolio rebuild, PID Starter Kit, ACUnit, BaseUnit, DHT, and actuator standalone project pages; merged ACUnit/BaseUnit/DHT/actuator material into `juanyun-thermal-hardware`; added `components/project-assets.tsx` with project `assetPaths`; added Claude Chime hardware public assets and project page; added Nanjing Turing logs / Markdown / Word-derived text evidence; updated footer copyright to `Awes0meE / 66CCFF Labs`; refreshed docs and memory.
+- Verification: `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed. Production server smoke checks passed for `/work`, `/work/juanyun-thermal-hardware`, `/work/claude-chime-hardware-power-board`, and the old ACUnit redirect to `/work/juanyun-thermal-hardware`.
+
+## 2026-05-07
+
+- Summary: Ran `/neat` after the project-archive expansion to reconcile docs and remove stale branch / path wording.
+- Files changed: updated `CODEX.md`, `MEMORY.md`, `README.md`, and `USER_GUIDE.md` so the current local path, unreleased branch state, release-tag wording, and `assetPaths` workflow match the code.
+- Verification: content/project/media reference validation passed for 6 projects, 18 public notes, and current media items; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

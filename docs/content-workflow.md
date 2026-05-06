@@ -7,7 +7,7 @@ This document explains how to add real portfolio content without changing the ap
 1. Review the current `main` deployment in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake notes, and Tianjin STM32 internship notes.
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` stay public-safe only; other legacy Juanyun material can use reviewed public evidence.
 3. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
-4. Fill `PID Starter Kit` with real firmware, PCB, test-data, and tool screenshots.
+4. Expand project archive pages with direct evidence, inline source/text previews, and internal links.
 5. Improve `About`, media gallery polish, and smaller notes.
 
 ## Add Or Edit A Project
@@ -41,10 +41,14 @@ links:
   repo: "https://github.com/Awes0meE/example"
   demo: "https://example.com"
   download: "https://example.com/download"
+assetPaths:
+  - "/uploads/projects/my-project"
 ---
 ```
 
 Set `featured: true` only for projects that should appear on the homepage.
+
+Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render small source / Markdown / text files inline, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files.
 
 ## Add Or Edit A Note
 
@@ -77,7 +81,7 @@ projectSlug: "my-project-slug"
 
 `projectSlug` is optional. Add it when a note should appear automatically on a project detail page.
 
-The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-acunit-control-platform"` connects the note to `/work/juanyun-acunit-control-platform`.
+The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-thermal-hardware"` connects the note to `/work/juanyun-thermal-hardware`.
 
 `visibility` controls whether the note is served publicly:
 
@@ -98,7 +102,7 @@ public/uploads/
 Recommended structure:
 
 ```text
-public/uploads/projects/pid-starter-kit/
+public/uploads/projects/my-project/
 public/uploads/media/
 public/uploads/profile/
 ```
@@ -106,7 +110,7 @@ public/uploads/profile/
 Reference files with public paths:
 
 ```text
-/uploads/projects/pid-starter-kit/cover.jpg
+/uploads/projects/my-project/cover.jpg
 ```
 
 For technical archives, normalize filenames to stable ASCII names before publishing. Do not publish private or noisy folders directly. Exclude invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
@@ -129,10 +133,10 @@ Example:
   "title": "PID step response",
   "titleZh": "PID 阶跃响应",
   "type": "image",
-  "src": "/uploads/projects/pid-starter-kit/step-response.png",
-  "thumbnail": "/uploads/projects/pid-starter-kit/step-response.png",
+  "src": "/uploads/projects/my-project/step-response.png",
+  "thumbnail": "/uploads/projects/my-project/step-response.png",
   "date": "2026-05-06",
-  "projectSlug": "pid-starter-kit",
+  "projectSlug": "my-project",
   "caption": "Step response captured during controller tuning.",
   "captionZh": "控制器调参过程中记录的阶跃响应。"
 }

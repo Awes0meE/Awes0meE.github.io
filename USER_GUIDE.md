@@ -205,6 +205,8 @@ cover: "/uploads/visuals/circuit-board.svg"
 featured: false
 links:
   repo: "https://github.com/Awes0meE/example"
+assetPaths:
+  - "/uploads/projects/my-new-project"
 ---
 ```
 
@@ -212,6 +214,8 @@ links:
 5. Save the file and check the website locally.
 
 If `featured: true`, the project appears on the homepage featured section.
+
+If `assetPaths` is set, the project page lists uploaded public files from those paths. Images and videos show previews, small code / Markdown / text files render on the page, and binary files open through direct links.
 
 ## 如何添加新项目
 
@@ -222,6 +226,8 @@ If `featured: true`, the project appears on the homepage featured section.
 5. 保存文件，并在本地网站里检查效果。
 
 如果把 `featured` 设置为 `true`，这个项目会显示在首页精选项目区域。
+
+如果设置 `assetPaths`，项目页会列出这些公开路径下的上传资料。图片和视频会预览，小型代码、Markdown 和文本文件会直接显示，二进制文件会提供直接打开链接。
 
 ## How To Add Images Or Videos
 
@@ -245,6 +251,8 @@ Use it in content with a public path:
 
 For media gallery items, edit `content/media.json`. Add `titleZh` and `captionZh` if the card needs Chinese text for the language switch.
 
+For project-file archives, add the file or folder path to the project's `assetPaths` field. This is the preferred way to show code snippets, Markdown notes, PDFs, Gerber archives, EDA files, spreadsheets, Word documents, and other evidence inside a project page.
+
 ## 如何添加图片或视频
 
 把图片或视频文件放到：
@@ -266,6 +274,8 @@ public/uploads/projects/pid/demo-board.jpg
 ```
 
 如果要添加到媒体库，编辑 `content/media.json`。如果媒体卡片需要支持中文切换，补上 `titleZh` 和 `captionZh`。
+
+如果要把资料展示在某个项目页，把文件或文件夹路径加入该项目的 `assetPaths`。这是展示代码片段、Markdown 笔记、PDF、Gerber、EDA、表格、Word 文档和其他项目证据的推荐方式。
 
 ## What Not To Publish
 

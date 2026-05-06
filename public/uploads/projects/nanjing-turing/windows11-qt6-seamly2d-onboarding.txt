@@ -1,0 +1,179 @@
+安装git for windows，进入 https://gitforwindows.org/ 下载之后正常安装一路点next即可。安装好后，按Win+R输入cmd打开命令提示符，在框中输入git --version验证是否安装成功，若安装成功会返回git version x.xx.x.windows字样。
+
+安装MSVC v142（VS2019）x64 工具链 + Windows 10/11 SDK + 调试器 CDB，所需空间较大（约10GB）。进入 https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/ 安装vs_BuildTools.exe，安装途中会弹出Visual Studio Installer的工作负载勾选界面，将使用C++的桌面开发勾选上，并在右侧安装详细信息的可选项中，除默认的选项外，额外勾选MSVC v142 - VS 2019 C++ x64/x86 生成工具和Windows 10 SDK，最后点击安装（最好不要改默认安装路径，下面会用到），安装完建议重启一次电脑。重启后按win键呼出开始菜单，在最近安装中打开x64 Native Tools Command Prompt for VS xxxx，在弹出来的命令框中输入cl，返回用于x64的Microsoft (R) C/C++优化编译器+版本号说明安装成功。
+
+安装Qt Installer，进入 https://www.qt.io/download-qt-installer 开始自动下载，下载完成后运行Qt在线安装程序，首次安装需要Qt官网的账户，若没有需要注册一个，注册需要过邮箱验证，注册后登录继续下一步。进入到安装选项步骤时勾选底下的自定义安装，点击下一步。在自定义步骤时，点击搜索框旁显示按钮，勾选Archive，选是，在加载完成后在列表中去掉Qt6.x的勾，展开下面Qt5.15.2并勾选MSVC 2019 64-bit，然后展开下面Qt Creator并勾选Qt Creator x.x.x、CDB Debugger Support和Debugging Tools for Windows，然后点击下一步，下载完成后打开Qt creator，在欢迎界面单击下方的5 Terminal，并在Terminal中输入 "C:\Qt\5.15.2\msvc2019_64\bin\qmake.exe" -v 若返回QMake与Qt的版本即安装成功。
+
+将Seamly2D源码用git拉到本地，随意选择一个方便管理的路径（例如D:\work），在该路径下空白处单击鼠标右键，选择在终端中打开，在终端中输入 git clone https://github.com/FashionFreedom/Seamly2D.git 等待克隆完成，若出现网络报错可能是因为正在使用代理（VPN），需要先在终端中输入 git config --global https.proxy http://127.0.0.1:7890 再将代码拉到本地，若还有报错可参考使用git指令连接服务器报错问题解决方法解决。拉取完成后该路径下会出现Seamly2D文件夹。
+
+完成以上步骤开发环境基本就配置完成了，接下来用Qt Creator打开工程并配置Kit。打开Qt Creator，在欢迎页面点击打开项目，打开刚才路径中的Seamly2D文件夹并选择Seamly2D.pro文件打开。打开后会弹出配置项目窗口，已经可以看到软件自动勾选上了刚才安装的Desktop Qt 5.15.2 MSVC2019 64bit，勾选上下面的Debug（如果要发布版本的话需要把下面的Release也勾选上，不发布的话就不用勾），点击右下角的Configure Project。进入项目界面后点击左边的项目（扳手图标），再点击上方的管理构建套件，在构建套件（Kit）页面中检查Kit为Desktop Qt 5.15.2 MSVC2019 64bit，Qt版本为Qt 5.15.2 MSVC2019 64bit，编译器中有Visual Studio 生成工具（后缀为amd64），Debuggers中有Auto-detected CDB，即为所有环境都配置完成。
+
+Seamly2D项目的首次编译的顺序：第一次打开项目无需等待右下角的Indexing完成，直接点击上方菜单中的构建，选择执行qmake。执行时发现qmake报错，查找问题，发现原因是工程文件里写了Qt6才有的模块core5compat，而刚才安装的开发环境为Qt5，故qmake被中断。解决方式有如下2种：
+
+（为了效率直接请去看第二部分,第一部分为开发历程，纯记录用）将core5compat模块调用前添加版本判断，具体方式为首先在项目中全局搜索core5compat，然后在搜索结果中按以下说明依次修改：
+
+将src/app/seamly2d/seamly2d.pro中的 
+
+QT       += core gui widgets xml svg printsupport network core5compat multimedia
+
+改为
+
+QT       += core gui widgets xml svg printsupport network multimedia
+
+qtHaveModule(core5compat): QT += core5compat
+
+将src/app/seamlyme/seamlyme.pro中的
+
+QT       += core gui widgets network xml printsupport svg core5compat
+
+改为
+
+QT       += core gui widgets network xml printsupport svg
+
+qtHaveModule(core5compat): QT += core5compat
+
+将src/test/CollectionTest/CollectionTest.pro中的
+
+QT       += testlib widgets printsupport core5compat
+
+改为
+
+QT       += testlib widgets printsupport
+
+qtHaveModule(core5compat): QT += core5compat
+
+将src/test/Seamly2DTest/Seamly2DTest.pro中的
+
+QT       += core testlib gui printsupport xml core5compat
+
+改为
+
+QT       += core testlib gui printsupport xml
+
+qtHaveModule(core5compat): QT += core5compat
+
+将src/test/TranslationsTest/TranslationsTest.pro中的
+
+QT       += testlib widgets xml printsupport core5compat
+
+改为
+
+QT       += testlib widgets xml printsupport
+
+qtHaveModule(core5compat): QT += core5compat
+
+全部改完之后先点击上方构建中的清除（最上面的清除），待清除完后再次执行qmake，一段时间后，4编译输出栏中提示qmake_all" finished successfully，项目成功qmake完成。但是在下一步编译全部的时候发现有30+报错，查找原因才发现当前分支中的代码已经按Qt6的写法整理过了（用了QStringConverter、QtCore5Compat/*等Qt5中没有的头文件），连qExp<qreal>这种模板式调用也是Qt6风格（在Qt5里要写qExp(x)这种非模板形式），如果自行修改的话需要将30+处代码做Qt5兼容条件编译，工作量太大。无奈故直接转向第二种解决方式（Qt6开发）。
+
+改用Qt6的Kit编译，关闭Qt Creator，win键打开开始菜单，打开Qt Maintenance Tool并登录，选择添加或移除组件，展开Qt 6.5.3，勾选MSVC 2019 64-bit和Qt 5 Compatibility Module，展开Additional Libraries，勾选Qt Multimedia，点击下一步并更新。安装完成后先在电脑代码文件路径中删除Seamly2D文件夹中的build文件夹和Seamly2D.pro.user文件。然后打开Qt Creator，在欢迎页面点击打开项目，找到Seamly2D文件夹中的Seamly2D.pro文件打开。在弹出的配置项目界面中去掉Qt 5.12.2的勾，然后勾选刚装好的Qt 6.5.3的勾，点击右下角Configure Project。项目打开后点击左侧项目按键（扳手图标），点击管理构建套件，在Kit页面选择编译器，点击添加MSVC类型编译器，名称设为 MSVC 2019 v142 (BuildTools) ，初始化设为
+
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat
+
+（如果在步骤2安装MSVC v142工具链时没改默认路径，初始化路径就是上面的，如果改了，将路径改为对应安装路径），ABI自动选择x86-windows-msvc2019-pe-64bit，应用即可。回到构建套件页面，上面的框中选择Desktop Qt 6.5.3 MSVC2019 64bit，下面的编译器选择刚才创建的MSVC 2019 v142 (BuildTools)，检查调试器是否为Auto-detected CDB，如是点应用确定即可。返回项目，在顶部构建菜单中选择执行qmake，一段时间后提示qmake_all" finished successfully，qmake成功。
+
+用第二种方式qmake成功后，选择构建菜单中的Build All Projects开始编译。在编译一半的时候出现报错，内容为'windeployqt'报错，经查，项目在deploy步骤中调用了windeployqt，但当前构建环境的环境变量PATH中没有Qt的bin目录，所以找不到可执行文件。添加环境变量即可，在Qt Creator中点击左边项目（扳手图标），在右边找到Build Environment，去掉使用系统环境变量的勾，点击详情，然后点击添加，右边填写，内容为：
+
+PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64;C:\Qt\6.5.3\msvc2019_64\bin;%{Env:PATH}
+
+保存即可。回到项目中，在下面搜索栏中全局搜索windeployqt，搜索结果中按以下修改，可以进一步在debug（非Release）阶段绕过windeployqt的其他奇葩报错：
+
+将seamly2d.pro中的
+
+win32 {
+
+QMAKE_POST_LINK += windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe)
+
+}
+
+改为
+
+win32:CONFIG(release, debug|release) {
+
+WDEP = $$shell_path($$[QT_INSTALL_BINS]/windeployqt.exe)
+
+OUTEXE = $$shell_path($$DESTDIR/seamly2d.exe)
+
+QMAKE_POST_LINK += "\"$$WDEP\" \"$$OUTEXE\""
+
+}
+
+将seamlyme.pro中的
+
+win32 {
+
+QMAKE_POST_LINK += windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe)
+
+}
+
+改为
+
+win32:CONFIG(release, debug|release) {
+
+WDEP = $$shell_path($$[QT_INSTALL_BINS]/windeployqt.exe)
+
+OUTEXE = $$shell_path($$DESTDIR/seamly2d.exe)
+
+QMAKE_POST_LINK += "\"$$WDEP\" \"$$OUTEXE\""
+
+}
+
+顶部菜单选择构建，先清除；然后Build All Projects，等待一段时间，编译成功。点击左下角绿色三角运行，发现程序可以成功打开。
+
+打开软件后发现会出现Qt 在 Windows 下的几何警告（QWindowsWindow::setGeometry报错），这是因为欢迎窗口想按上一次保存的坐标/尺寸显示，但当前显示器/DPI不允许，于是Qt调整了大小并给了一个警告。解决方法：win + R弹出运行窗口，输入 %APPDATA% 打开Roaming文件夹，找到其中的Seamly2DTeam文件夹并删除；然后还是运行窗口输入 %LOCALAPPDATA% 打开local文件夹，找到其中的Seamly2D文件夹并删除；最后在运行窗口中输入 regedit 打开注册表，找到HKEY_CURRENT_USER\Software\Seamly2DTeam路径并将Seamly2DTeam的整个注册表删除。然后全局搜索noisyFailureMsgHandler，在application_2d.cpp和application_me.cpp中noisyFailureMsgHandler的函数定义下面新各写一个安全消息处理包装函数，代码如下：
+
+// 原项目里已有 noisyFailureMsgHandler 的声明/定义
+
+// 写一个包装器：对 warning 降级处理/忽略几何警告，其它级别仍走原逻辑
+
+static void seamlySafeMsgHandler(QtMsgType type,
+
+                                 const QMessageLogContext &ctx,
+
+                                 const QString &msg)
+
+{
+
+    if (type == QtWarningMsg) {
+
+        // 1) 只忽略这条会导致退出的几何警告（Windows 多屏/高DPI时常见）
+
+        if (msg.startsWith(QStringLiteral("QWindowsWindow::setGeometry: Unable to set geometry")))
+
+            return;
+
+        // 2) 其它 warning：仅打印到控制台/日志，不弹窗不退出
+
+        fprintf(stderr, "%s\n", msg.toLocal8Bit().constData());
+
+        return;
+
+    }
+
+    // 其余（Debug/Info也可只打印；Critical/Fatal走原有处理）
+
+    // 如果 noisyFailureMsgHandler 是自带的“原处理器”，保留调用它：
+
+    noisyFailureMsgHandler(type, ctx, msg);
+
+}
+
+然后在各自的头文件加入 #include <cstdio> 和 #include <QMessageBox> 即可。创建完包装函数之后，在对应的cpp文件中使用该函数，方法如下：
+
+在Application2D::beginLogging()函数中（全局搜索找下），将：
+
+qInstallMessageHandler(noisyFailureMsgHandler);
+
+改成
+
+qInstallMessageHandler(seamlySafeMsgHandler);
+
+在ApplicationME::initOptions()函数中（全局搜索找下），将：
+
+qInstallMessageHandler(noisyFailureMsgHandler);
+
+改成
+
+qInstallMessageHandler(seamlySafeMsgHandler);
+
+然后从头跑，依旧顶部菜单构建 -> 清除；构建 -> 执行qmake；构建 -> Build All Projects，等待一段时间编译成功后，左下角运行，弹窗被解决。
+
+至此，Seamly2D成功的在win11的Qt6环境中正常运行，可以进一步进行后续开发。

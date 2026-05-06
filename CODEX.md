@@ -5,7 +5,7 @@ Project operating guide for AI agents working on the XJTLU Portfolio.
 ## Project Snapshot
 
 - Repository: `Awes0meE/Awes0meE.github.io`
-- Local path: `F:\XJTLU\XJTLU_Portfolio`
+- Current local path: `D:\XJTLU\XJTLU_Portfolio` on this machine. The path may differ on another computer.
 - Public site: `https://www.66ccff-labs.com/`
 - Vercel preview/base deployment: `https://awes0mee-portfolio.vercel.app/`
 - Stack: Next.js App Router, TypeScript, React, Tailwind CSS, local MDX-like content files, JSON media metadata.
@@ -102,6 +102,7 @@ Projects require frontmatter matching `lib/content.ts`:
 - `cover`
 - `featured`
 - `links`
+- optional `assetPaths`
 
 Notes require:
 
@@ -129,7 +130,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card.
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render source/text files inline, and link binary files.
 
 ## Language Switching
 
@@ -145,23 +146,26 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current mainline handoff state is release `v0.4.0` plus the final review fixes on `main`.
+The current development state is branch `project-archive-pages`, created after release `v0.4.0` plus the final review fixes on `main`.
 
-As of `2026-05-06`, `main` has removed the inaccurate SAT301 placeholder project and five empty shell notes, then added real internship material from:
+As of `2026-05-07`, the working branch has removed placeholder projects and consolidated real internship / hardware material from:
 
 ```text
-F:\XJTLU\工作相关\卷云科技有限责任公司
-F:\XJTLU\工作相关\南京图灵人工智能研究院
-F:\XJTLU\工作相关\天津津铁通信有限公司
+D:\XJTLU\工作相关\卷云科技有限责任公司
+D:\XJTLU\工作相关\南京图灵人工智能研究院
+D:\XJTLU\工作相关\天津津铁通信有限公司
+D:\XJTLU\工作相关\Claude Chime 硬件
 ```
 
-Current content count on `main`:
+Current content count on `project-archive-pages`:
 
-- 11 project pages total;
+- 6 project pages total;
 - 18 public notes total;
-- 7 Juanyun project pages and 9 Juanyun notes remain;
+- 3 Juanyun project pages and 9 Juanyun notes remain;
+- 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 4 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
+- The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 
 Juanyun public boundary:
 

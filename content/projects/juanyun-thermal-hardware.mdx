@@ -1,55 +1,96 @@
 ---
-title: "Juanyun Thermal Hardware Internship"
-titleZh: "卷云科技热管理硬件与固件开发"
-summary: "A public-safe overview of Juanyun Technology hardware and firmware internship work, linking approved current-product screenshots plus selected non-sensitive legacy evidence while keeping ACUnit/BaseUnit product files private."
-summaryZh: "卷云科技硬件与固件实习工作的公开总览页，链接已审核的当前产品截图和筛选后的非敏感 legacy 证据，同时继续保护 ACUnit/BaseUnit 当前产品文件。"
+title: "Juanyun Thermal Management Hardware and Firmware Archive"
+titleZh: "卷云科技热管理硬件与固件开发档案"
+summary: "A larger Juanyun Technology project dossier that merges the ACUnit control platform, BaseUnit STM32 firmware, DHT11 / AM2302 breakout plan, smaller actuator archive, SOP material, and non-sensitive legacy hardware evidence into one public project page."
+summaryZh: "卷云科技实习材料的大项目档案页：把外机控制平台、底座板 STM32 固件、DHT11 / AM2302 小板、执行器归档、硬件 SOP 和非敏感 legacy 硬件证据合并到一个公开项目中。"
 date: "2026-02 to 2026-05"
-status: "Public Overview"
-tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "SOP"]
+status: "Public Project Archive"
+tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "SOP", "Sensor"]
 cover: "/uploads/projects/juanyun-tech/acunit-v21-main-front.png"
 featured: true
+assetPaths:
+  - "/uploads/projects/juanyun-tech/acunit-v20-system-block.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-main-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-main-front.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-power-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-power-front.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg"
+  - "/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg"
+  - "/uploads/projects/juanyun-tech/acunit-v21-system-block.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-ui-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png"
+  - "/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg"
+  - "/uploads/projects/juanyun-public/actuator-fan"
+  - "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png"
+  - "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf"
+  - "/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf"
+  - "/uploads/projects/juanyun-public/hardware-sop-cover.jpeg"
 ---
 
 ## Project Brief / 项目简述
 
-This page is the umbrella for the Juanyun internship archive. It intentionally stays at overview level. The source material covers current product boards and firmware, legacy prototypes, small sensor / actuator tasks, FOC experiments, datasheets, and hardware-development process documents. Some of that material is safe to discuss publicly; some of it is product-sensitive and should stay outside the website.
+This is now the main Juanyun internship project page rather than a thin index. The earlier separate ACUnit, BaseUnit, DHT11 / AM2302, and actuator / BLDC pages are folded into this larger dossier so the project reads like one substantial engineering archive: hardware versions, firmware boundaries, sensor-board planning, actuator experiments, public legacy evidence, and process documentation all sit together.
 
-公开页的目标不是把公司文件夹搬上网，而是讲清楚做过哪些方向、哪些证据可以公开、哪些材料必须收住。当前产品相关的 ACUnit / BaseUnit 内容只保留脱敏截图和叙述，不提供 Gerber、原理图、BOM/PnP、EDA/CAD、完整固件源码或制造资料下载。其他卷云 legacy 项目按用户重新划定的边界可以公开，当前页面只链接筛选后的关键证据，不发布未整理的整包目录。
+这页现在作为卷云科技实习经历的主项目页，而不是一个只负责跳转的目录。外机控制平台、底座板 STM32 固件、DHT11 / AM2302 温湿度小板、螺线管阀门和 BLDC 静音风扇这些材料合并在同一个大项目里，重点展示“热管理硬件与固件开发”这一条完整实习线，而不是把每个小文件夹都拆成松散的小项目。
 
-![AC Unit V2.1 main board render](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
+![AC Unit V2.1 main board render / 外机板 V2.1 主控板渲染图](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
 
-## Public Scope / 公开范围
+## Public Boundary / 公开边界
 
-- Thermal control-board overview: board version screenshots, high-level block diagrams, and public notes.
-- Base-unit firmware overview: sensing, display, fan control, Bluetooth reporting, and parameter persistence as public narrative only.
-- Legacy prototype lines: DIY pressure-flow cooling prototype, FOC driver-board archive, actuator / fan archive, and DHT sensor breakout plan.
-- Process material: the self-authored hardware development SOP, published as a public note and PDF.
+The only local source folders treated as non-public are `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. The public page can show reviewed screenshots and high-level writing about those current-product directions, but it does not publish their raw Gerber archives, schematic PDFs, BOM / PnP files, EDA / CAD source, complete firmware source, internal requirements, manufacturing packages, vendor folders, installers, generated build outputs, invoices, billing records, or credentials.
 
-## Related Public Pages / 相关公开页
+边界说清楚很重要：卷云资料里只有 `Current_Product_ACUnit_Project` 和 `Current_Product_BaseUnit_Project` 两个目录按敏感资料处理。页面可以展示已经放进 `public/uploads` 的脱敏截图和概览叙述，但不发布这两个目录下的生产包、原理图、BOM、PnP、完整源码、内部需求、制造资料、安装包、vendor、构建输出或财务凭据。其他非 Current_Product 的 legacy 材料按公开档案处理，页面下方的“公开项目资料”会把已经上传到 public 的文件尽量列全。
 
-- [DIY pressure-flow cooling prototype](/work/juanyun-diy-cooling-prototype)
-- [FOC driver board archive](/work/juanyun-foc-driver-board)
-- [Actuator and quiet fan driver archive](/work/juanyun-actuator-fan-archive)
-- [DHT11 / AM2302 sensor breakout board](/work/juanyun-dht-sensor-breakout-board)
-- [Hardware SOP note](/notes/juanyun-hardware-sop)
+## Subproject 1: ACUnit Control Platform / 子项目一：外机控制平台
 
-## Public Evidence Boundary / 公开证据边界
+The ACUnit line is the largest and most product-facing part of the archive. It involved a control-board platform with main board, power distribution, interaction board, compressor / fan / electronic-expansion-valve interfaces, sensor inputs, and firmware-facing pin and module constraints. The public version shows the system block diagrams and board-render snapshots already reviewed for display.
 
-Served publicly:
+外机控制平台是这组材料里最接近公司当前产品的一条线。公开页保留的是系统层级：主控板、分电板、交互板、压缩机、风机、电子膨胀阀、传感器输入，以及固件侧需要面对的引脚、模块和接口约束。具体生产导出文件和完整源码不放公网，页面只展示已经审核过的框图和板卡渲染截图。
 
-- selected screenshots / board renders already under `/uploads/projects/juanyun-tech/`;
-- the DIY demo video, 3D-print preview screenshots, and selected DIY source / PCB / fabrication files;
-- selected FOC driver Gerber, BOM/PnP, InteractiveBOM, EasyEDA, STEP, datasheets, and source excerpts;
-- selected solenoid-valve source / IOC files, OLED / EC11 schematics, ULN2003 reference, and BLDC fan BOM / EasyEDA files;
-- the DHT task-plan PDF and cover preview;
-- the self-authored hardware SOP PDF and cover image.
+- ACUnit V2.0 / V2.1 system-block screenshots are used as public-safe architecture evidence.
+- Main, power, and UI board renders show board-version structure without exposing raw design files.
+- Pressure-transmitter and PWM-fan parameter screenshots document the kind of interface constraints firmware had to respect.
+- Related notes below preserve the hardware revision, board, and firmware reflections without turning private company packages into downloads.
 
-Not served publicly:
+![AC Unit V2.1 system block diagram / 外机板 V2.1 系统框图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-- Current_Product_ACUnit_Project raw Gerber, schematic, BOM/PnP, EDA/CAD, firmware, and manufacturing packages;
-- Current_Product_BaseUnit_Project STM32 firmware source tree, vendor packages, generated build output, and internal handoff files;
-- legacy installers, dependency folders, vendor folders, generated build output, duplicate exports, and uncurated complete source trees.
+## Subproject 2: BaseUnit STM32 Firmware / 子项目二：底座板 STM32 固件
+
+The BaseUnit firmware line is represented as architecture and learning evidence instead of raw source release. Its scope covered periodic temperature / humidity sensing, local OLED display, fan control, Bluetooth reporting, outlet / presence style state detection, and Flash-backed parameter persistence. The useful portfolio story is how the firmware was separated into generated HAL code, board-support modules, service logic, and app-level behavior.
+
+底座板 STM32 控制固件不作为源码发布，而是作为嵌入式系统结构来讲。它覆盖温湿度采集、本地 OLED 显示、风扇控制、蓝牙上报、状态检测和 Flash 参数保存。对作品集来说，更有价值的是把 HAL 生成代码、BSP、服务模块和应用逻辑之间的边界讲清楚，而不是直接把公司工程树搬到公网。
+
+- Sensing path: temperature / humidity sampling, state refresh, and update cadence.
+- Interaction path: local display, user-visible state, and basic parameter feedback.
+- Control path: fan PWM and state-dependent behavior.
+- Persistence path: Flash-backed setting storage and restart continuity.
+
+## Subproject 3: DHT11 / AM2302 Breakout / 子项目三：温湿度传感器小板
+
+The DHT11 / AM2302 task is small but complete enough to belong in the main project. It turns a 4-pin humidity / temperature sensor body into a practical 3-pin module interface with pull-up, decoupling, package, board-size, connector, and MCU validation constraints.
+
+DHT11 / AM2302 小板任务规模不大，但非常适合放在大项目里：它把一个 4 引脚温湿度传感器整理成 3P 模块接口，同时明确上拉、去耦、封装、尺寸、连接器、上电等待和 MCU 验证要求。小任务如果只写“接了 DHT11”会很空；把这些约束写出来，才像一个完整的硬件任务。
+
+- Target board outline: `30 mm x 14 mm`.
+- Interface: `3V3 / DATA / GND`, single-wire-style data path.
+- Support components: pull-up, decoupling, and optional signal damping.
+- Mechanical note: one M2 positioning hole and a simple 2-layer PCB assumption.
+- Public evidence: the planning PDF and cover image are listed below.
+
+![DHT11 / AM2302 breakout plan cover / 温湿度小板规划封面](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
+
+## Subproject 4: Actuator, Display, And Fan Driver Archive / 子项目四：执行器、显示与风扇驱动归档
+
+The smaller actuator archive is no longer a standalone project page, but it is still useful inside the Juanyun dossier. It contains solenoid-valve STM32 source excerpts, an IOC file, OLED and EC11 encoder schematic references, a ULN2003 datasheet, and a BLDC quiet-fan BOM / EasyEDA file. These files show the actuator side of the internship material: driving loads, reading simple controls, showing state, and preserving board evidence.
+
+螺线管阀门和 BLDC 静音风扇不再单独作为项目页，但它们作为卷云大项目的一部分仍然有价值。公开资料里有 STM32 阀门控制源码摘录、IOC 文件、OLED 和 EC11 编码器原理图参考、ULN2003 资料，以及 BLDC 静音风扇 BOM / EasyEDA 文件。它们说明了执行器、显示输入和小型驱动板这条支线是真实存在的。
+
+## Process Material: Hardware SOP / 流程材料：硬件开发 SOP
+
+The self-authored hardware SOP is kept as a process artifact. It matters because a hardware internship is not only a list of boards: requirements, version naming, schematic checks, PCB checks, fabrication outputs, bring-up notes, and review boundaries decide whether later work can be understood.
+
+自写硬件 SOP 是这组资料里很重要的一块流程证据。硬件实习不只是“画了几块板”，更关键的是需求、版本命名、原理图检查、PCB 检查、生产输出、调试记录和复盘边界。后续补充项目时，这份 SOP 可以作为解释“为什么要这样整理证据”的锚点。
 
 ## Reflection / 复盘
 
-这页更像目录，不是单个项目的战报。卷云材料的难点是边界：公开太少会像空壳，公开太多又会把公司工程文件暴露出去。现在的做法是把可公开的学习线和流程线写实，把当前产品线保持在总览和脱敏截图层级。
+这个大项目最大的变化是从“几个小页面各说各的”变成“一个实习档案讲一条线”。这样更接近真实工作：外机板、底座板、传感器小板、执行器、风扇、SOP 并不是互相无关的作品集碎片，而是在热管理硬件与固件开发里反复碰到的接口、约束和证据。后续要继续完善的方向，是给这些公开文件补上更多自己的解释：为什么这样选接口，哪个版本解决了什么问题，测试证据如何支撑结论。

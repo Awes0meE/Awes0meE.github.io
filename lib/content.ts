@@ -24,6 +24,7 @@ export type Project = {
   tags: string[];
   cover: string;
   links?: LinkSet;
+  assetPaths?: string[];
   featured: boolean;
   body: string;
 };
@@ -133,6 +134,8 @@ export function formatStatusZh(value: string) {
   const statusMap: Record<string, string> = {
     "In Progress": "进行中",
     "Public Archive": "公开归档",
+    "Public Hardware Archive": "公开硬件归档",
+    "Public Project Archive": "公开项目归档",
     "Private Evidence Review": "私有证据审查",
     "Planning Archive": "计划归档",
     "Archived Prototype": "原型归档",
