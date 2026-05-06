@@ -50,17 +50,20 @@ Note:
 - slug from filename;
 - metadata from frontmatter;
 - markdown-like body content;
+- `visibility` controls public routing;
 - optional `projectSlug` for project-detail related-note sections.
+
+The public note helpers intentionally filter to `visibility: public`. Missing `visibility` is normalized to private in `lib/content.ts`, so a newly added draft note is hidden unless it is explicitly published.
 
 Media:
 
 - JSON object with thumbnail, source path, caption, date, and optional related project.
 
-Current content state on branch `content/juanyun-tech` as of `2026-05-06`:
+Current content state after the Juanyun import as of `2026-05-06`:
 
 - 10 project files total, including 7 Juanyun project pages;
 - 18 note files total, including 13 Juanyun notes;
-- 125 public Juanyun technical assets under `public/uploads/projects/juanyun-tech/`.
+- on `feature/note-visibility`, all Juanyun notes are private and only three Juanyun prototype media assets remain public.
 
 ## Rendering Notes
 
@@ -86,3 +89,5 @@ Project detail pages also derive related notes from note frontmatter and related
 ## Public Asset Boundary
 
 Portfolio downloads are static files in `public/uploads/`. On the Juanyun content branch, only technical evidence is intended to be public. Do not publish invoices, reimbursements, billing records, internship proof documents, executable installers, vendor package trees, or generated build outputs.
+
+Static files in `public/uploads/` are public even if no page links to them. For company work, do not publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, complete firmware source dumps, or internal requirement/manufacturing packages unless they have been explicitly reviewed and desensitized.

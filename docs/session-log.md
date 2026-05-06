@@ -4,6 +4,13 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Created `feature/note-visibility` to test note-level public/private visibility and reduce public Juanyun exposure.
+- Files changed: added `visibility` to the note content model, marked all Juanyun notes private, filtered public note routes through `getNotes()`, rewrote Juanyun project pages as public-safe shells, reduced `content/media.json`, and removed company Gerber/schematic/BOM/source/CAD assets from `public/uploads/projects/juanyun-tech/`.
+- Privacy: only the DIY cooling demo video and two 3D-print preview images remain public under the Juanyun upload folder on this branch.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build generated only the five public note pages and no Juanyun note HTML pages.
+
+## 2026-05-06
+
 - Summary: Ran `/neat` after rewriting all notes in the user's personal learning-log style.
 - Files changed: updated `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md` so future agents preserve the new note voice instead of reverting to generic portfolio prose.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

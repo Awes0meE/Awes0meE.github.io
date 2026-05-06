@@ -71,6 +71,7 @@ summary: "English summary"
 summaryZh: "中文摘要"
 date: "2026-05-06"
 tags: ["PID", "Control", "Lab Note"]
+visibility: private
 projectSlug: "my-project-slug"
 ---
 ```
@@ -78,6 +79,14 @@ projectSlug: "my-project-slug"
 `projectSlug` is optional. Add it when a note should appear automatically on a project detail page.
 
 The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-acunit-control-platform"` connects the note to `/work/juanyun-acunit-control-platform`.
+
+`visibility` controls whether the note is served publicly:
+
+- `visibility: public` makes the note appear on the homepage, `/notes`, project detail related-note sections, and `/notes/[slug]`.
+- `visibility: private` hides the note from those public surfaces and makes the public detail route return 404.
+- missing `visibility` is treated as private. Use this for drafts.
+
+This is website-level hiding only. If the GitHub repository is public, private note source can still be visible in the repository. Truly confidential notes should stay outside the public repo or move to a future authenticated storage layer.
 
 ## Add Images Or Videos
 
@@ -103,6 +112,8 @@ Reference files with public paths:
 ```
 
 For technical archives, normalize filenames to stable ASCII names before publishing. Do not publish private or noisy folders directly. Exclude invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
+
+For company work, be stricter: do not put Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, full firmware source dumps, or internal requirement/manufacturing packages under `public/uploads/` unless they are explicitly reviewed and desensitized. Files under `public/uploads/` are public static assets even when no page links to them.
 
 ## Add Media Gallery Items
 

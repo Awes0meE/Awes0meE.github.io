@@ -1,55 +1,5 @@
 [
   {
-    "id": "juanyun-acunit-main-front",
-    "title": "AC Unit V2.1 main board front",
-    "type": "image",
-    "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
-    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
-    "date": "2026-05-05",
-    "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Main control PCB render for the Juanyun AC unit V2.1 hardware branch."
-  },
-  {
-    "id": "juanyun-acunit-main-back",
-    "title": "AC Unit V2.1 main board back",
-    "type": "image",
-    "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
-    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
-    "date": "2026-05-05",
-    "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Back-side PCB render for checking routing, connectors, and assembly space."
-  },
-  {
-    "id": "juanyun-acunit-power-front",
-    "title": "AC Unit V2.1 power board",
-    "type": "image",
-    "src": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
-    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
-    "date": "2026-05-05",
-    "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Power distribution board render for 24 V input and downstream power paths."
-  },
-  {
-    "id": "juanyun-acunit-ui-front",
-    "title": "AC Unit V2.1 interaction board",
-    "type": "image",
-    "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
-    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
-    "date": "2026-05-05",
-    "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Interaction PCB render for buttons, rotary encoder, and user-facing controls."
-  },
-  {
-    "id": "juanyun-acunit-v21-block",
-    "title": "AC Unit V2.1 system block",
-    "type": "image",
-    "src": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
-    "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
-    "date": "2026-04-26",
-    "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "System-level block diagram for the main board, power board, and interaction board split."
-  },
-  {
     "id": "juanyun-diy-cooling-demo",
     "title": "DIY cooling desktop demo",
     "type": "video",
@@ -57,7 +7,7 @@
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Legacy pressure-flow cooling prototype demo video with desktop-side monitoring."
+    "caption": "Public-safe demo video for the legacy pressure-flow cooling prototype."
   },
   {
     "id": "juanyun-diy-cooling-print-preview",
@@ -67,7 +17,7 @@
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "3D printing preparation screenshot for the legacy pressure-flow cooling prototype."
+    "caption": "3D printing preparation screenshot for the pressure-flow cooling prototype."
   },
   {
     "id": "robot-demo",

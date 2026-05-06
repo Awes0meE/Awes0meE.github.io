@@ -99,9 +99,13 @@ links:
 ---
 ```
 
-Notes are stored in `content/notes/*.mdx`. Media items are stored in `content/media.json`, with assets under `public/uploads/`.
+Notes are stored in `content/notes/*.mdx`. Each note should include `visibility: public` or `visibility: private`. Missing visibility is treated as private, so drafts do not accidentally appear on the public site.
+
+Media items are stored in `content/media.json`, with assets under `public/uploads/`.
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
+
+Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place company Gerber, schematic, BOM/PnP, EDA/CAD source, full firmware source, invoice, reimbursement, installer, vendor, or build-output files there unless they have been reviewed and desensitized.
 
 Current draft content branch:
 
@@ -109,6 +113,7 @@ Current draft content branch:
 - Contains Juanyun Technology project pages, development notes, media entries, and technical assets under `public/uploads/projects/juanyun-tech/`.
 - Review all public attachments before merging this branch to `main`.
 - Do not publish private financial, billing, credential, installer, vendor, or build-output files.
+- On `feature/note-visibility`, Juanyun notes are private and public Juanyun assets have been reduced to three prototype media files.
 
 ## Deployment
 

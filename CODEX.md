@@ -98,7 +98,10 @@ Notes require:
 - `summaryZh`
 - `date`
 - `tags`
+- `visibility`: `public` or `private`
 - optional `projectSlug`
+
+Notes without `visibility: public` are treated as private. Private notes are not listed on the homepage, `/notes`, or project detail pages, and `/notes/[slug]` returns 404 for them through the public route helpers.
 
 Media items live in `content/media.json` and require:
 
@@ -124,6 +127,8 @@ F:\XJTLU\工作相关\卷云科技有限责任公司
 As of `2026-05-06`, that branch contains 7 Juanyun project pages, 13 Juanyun notes, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`.
 
 Before merging this branch to `main`, review all public PDFs, source files, CAD/EDA files, videos, and large binary attachments. Keep private documents out of the public app: invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
+
+On branch `feature/note-visibility`, Juanyun notes are marked `visibility: private` and the public Juanyun asset folder has been reduced to three prototype media files. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, or company firmware source dumps without explicit desensitization review.
 
 ## Visual Direction
 

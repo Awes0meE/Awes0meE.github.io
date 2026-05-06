@@ -18,6 +18,8 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, internship-proof files, executable installers, vendor package folders, and build outputs were not published.
 - `2026-05-06`: All `content/notes/*.mdx` files were rewritten toward the user's own learning-log voice, modeled after their Qt internship note style: process-first, reflective, mildly informal, with `前期想法 / 改变 / 疑问 / 阶段目标 / 证据 / 复盘` style sections where appropriate.
 
+- `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. All Juanyun notes are private on this branch, and public Juanyun assets were reduced to the DIY cooling demo video plus two 3D-print preview images.
+
 ## Stable Decisions
 
 - Use `CODEX.md` as the primary project-agent guide. `AGENTS.md` points to it for compatibility.
@@ -25,8 +27,10 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
+- Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
 - Write notes in the user's personal self-study / internship-log voice rather than generic portfolio marketing prose.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
+- Public files under `public/uploads/` are not private. Do not place company Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
 - Use Vercel for deployment and Cloudflare for DNS management.
 
@@ -66,7 +70,7 @@ Expected result:
 
 ## Open Content Work
 
-- Review the Juanyun branch attachments before merging to `main`, especially PDFs, source files, EDA/CAD files, videos, and large binary downloads.
+- Review whether private Juanyun notes should stay in this public GitHub repo. `visibility: private` hides them from the website, but it does not hide note source from a public repository.
 - Decide whether the large public attachments should remain in Git or be moved to Git LFS / external storage before long-term public deployment.
 - Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.

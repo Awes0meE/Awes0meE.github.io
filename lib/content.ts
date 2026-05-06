@@ -11,6 +11,8 @@ export type LinkSet = {
   download?: string;
 };
 
+export type ContentVisibility = "public" | "private";
+
 export type Project = {
   slug: string;
   title: string;
@@ -34,6 +36,7 @@ export type Note = {
   summaryZh: string;
   date: string;
   tags: string[];
+  visibility: ContentVisibility;
   projectSlug?: string;
   body: string;
 };
@@ -87,7 +90,16 @@ function getContentSortTime(value: string) {
 }
 
 export const getProjects = cache(() => readCollection<Project>("projects"));
-export const getNotes = cache(() => readCollection<Note>("notes"));
+export const getAllNotes = cache(() =>
+  readCollection<Note>("notes").map((note) => ({
+    ...note,
+    visibility: note.visibility === "public" ? "public" : "private"
+  }))
+);
+
+export const getNotes = cache(() =>
+  getAllNotes().filter((note) => note.visibility === "public")
+);
 
 export const getFeaturedProjects = cache(() =>
   getProjects().filter((project) => project.featured)

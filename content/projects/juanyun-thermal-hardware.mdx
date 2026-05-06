@@ -1,70 +1,40 @@
 ---
 title: "Juanyun Thermal Hardware Internship"
 titleZh: "卷云科技热管理硬件与固件开发"
-summary: "A branch-stage portfolio case study for my hardware and firmware work at Juanyun Technology, covering STM32 control boards, PCB versions, SOP writing, sensor boards, and legacy thermal-control prototypes."
-summaryZh: "我在卷云科技参与的热管理硬件与固件开发整理：包括 STM32 外机板、底座板固件、PCB 版本迭代、开发 SOP、DHT11/AM2302 小板，以及早期压风式散热、FOC、螺线管阀门和 BLDC 风扇资料。"
+summary: "A public-safe overview of my Juanyun Technology hardware and firmware internship work, with detailed company artifacts kept private."
+summaryZh: "卷云科技硬件与固件实习工作的公开版概览；涉及公司产品细节、Gerber、原理图、BOM 和源码的材料暂不公开。"
 date: "2026-02 to 2026-05"
-status: "Branch Draft"
+status: "Public Overview"
 tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "SOP"]
-cover: "/uploads/projects/juanyun-tech/acunit-v21-main-front.png"
+cover: "/uploads/visuals/circuit-board.svg"
 featured: true
-links:
-  download: "/uploads/projects/juanyun-tech/juanyun-hardware-sop-awes0mee.pdf"
 ---
 
 ## Project Brief / 项目简介
 
-This is the first branch draft for my Juanyun Technology work. I am treating the source folder as a raw engineering archive: code, PCB exports, SOP documents, purchase evidence, old prototypes, and working notes were mixed together, so this page reorganizes them into a public portfolio structure.
+This page is intentionally a public-safe overview. The raw Juanyun folder contains real company engineering artifacts: board exports, firmware source, datasheets, SOP documents, prototype records, and manufacturing files. Those files are useful evidence for my own archive, but many of them are not suitable for a public portfolio.
 
-这篇先用第一人称记录我在卷云科技硬件开发中的真实工作线索。当前版本不会假装已经是最终 case study，而是先把材料放进网站：有图的放图，有 PDF 的放 PDF，有工程文件的写清楚我做了什么、为什么做、后续还需要补什么证据。
+这页现在不再直接公开 Gerber、原理图、BOM、贴片坐标、源码和完整 PDF。它先保留项目方向、我做过的工作范围和后续可以公开补证据的位置。真正需要给导师、HR 或面试官看的版本，可以之后单独准备脱敏材料。
 
-![AC Unit V2.1 main board front render](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
+## What I Worked On / 我做过的方向
 
-## What I Worked On / 我做了什么
+- STM32-based control-board firmware organization.
+- AC-unit control-board requirement reading, interface split, and board-version documentation.
+- Base-unit sensing, display, fan-control, Bluetooth reporting, and parameter persistence.
+- Hardware-development SOP writing and project handoff documentation.
+- Smaller sensor, actuator, cooling-prototype, and motor-control archive lines.
 
-- 我整理并推进了卷云外机板 V2.0/V2.1 的需求、系统框图、接口拆分、PCB 导出资料和开发 SOP。
-- 我参与了基于 STM32F103C8T6 的外机固件工程整理，把压缩机、电子膨胀阀、NTC、DHT22、OLED、编码器和按键逻辑组织成可维护的 App / Service / BSP 分层。
-- 我参与了底座板固件工程整理，覆盖 DHT11/DHT22 温湿度采集、红外在位检测、风扇 PWM、OLED 本地显示、蓝牙上报和 Flash 参数保存。
-- 我把原来更偏临时验证的工程逐步补上 README、PINOUT、CMake、VSCode task、OpenOCD 和 release notes，让工程可以被复现、烧录和交接。
-- 我保留了早期项目线索，包括 DIY 压风式散热器、FOC 无感驱动板、螺线管阀门控制和单相 BLDC 静音风扇驱动板，后续会逐步拆成更完整的子项目。
+## Public Evidence Boundary / 公开证据边界
 
-## Evidence Added / 已放入网站的证据
+For now I only keep a very small public evidence set. Company-specific production files stay out of the deployed website:
 
-- [Hardware development SOP PDF](/uploads/projects/juanyun-tech/juanyun-hardware-sop-awes0mee.pdf)
-- [DHT11 / AM2302 board plan](/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf)
-- [AC Unit V2.0 requirements PDF](/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf)
-- [AC Unit V2.0 development SOP PDF](/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf)
-- [AC Unit V2.1 main board PCB export](/uploads/projects/juanyun-tech/acunit-v21-main-pcb.pdf)
-- [AC Unit V2.1 power board PCB export](/uploads/projects/juanyun-tech/acunit-v21-power-pcb.pdf)
-- [AC Unit V2.1 interaction board PCB export](/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf)
-- [DIY cooling desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
-- [DIY cooling schematic PDF](/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf)
-- [FOC driver Gerber archive](/uploads/projects/juanyun-tech/foc-driver-gerber.zip)
-- [FOC driver STEP model](/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step)
+- no Gerber archives;
+- no schematic PDFs;
+- no BOM or pick-and-place files;
+- no EasyEDA/CAD source projects;
+- no complete firmware source dumps;
+- no internal requirement or manufacturing packages.
 
-## Engineering Notes / 开发笔记
+## Next Step / 后续补充
 
-I wrote the notes as first-person engineering logs rather than marketing copy. The current goal is to expose my thinking: how I split modules, how I cleaned firmware structure, how I moved from quick verification toward reusable engineering assets, and where the risk points were.
-
-对应笔记入口：
-
-- [AC unit control board V2.0/V2.1](/notes/juanyun-acunit-board)
-- [AC unit control platform project](/work/juanyun-acunit-control-platform)
-- [STM32 external unit firmware](/notes/juanyun-acunit-firmware)
-- [Compressor and driver datasheet review](/notes/juanyun-compressor-datasheets)
-- [STM32 base unit firmware project](/work/juanyun-baseunit-control-firmware)
-- [STM32 base unit firmware note](/notes/juanyun-baseunit-firmware)
-- [Hardware development SOP](/notes/juanyun-hardware-sop)
-- [DHT11 / AM2302 sensor board project](/work/juanyun-dht-sensor-breakout-board)
-- [DHT11 / AM2302 sensor board note](/notes/juanyun-dht11-am2302-board)
-- [DIY pressure-flow cooling prototype](/notes/juanyun-diy-cooling)
-- [FOC driver board archive](/work/juanyun-foc-driver-board)
-- [Solenoid valve and BLDC fan archive](/work/juanyun-actuator-fan-archive)
-
-![AC Unit V2.1 system block diagram](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
-
-## Review Before Public Merge / 合并前检查
-
-This branch intentionally keeps the content in draft form. Before merging into the public main branch, I still need to review whether every published PDF, board image, and download is appropriate for long-term public display.
-
-我已经把报销单、发票、开票资料和实习证明这类材料排除在公开页面之外。它们能证明项目背景，但不适合作为公开作品集附件。后续如果需要给 HR 或导师看，可以单独准备私密版本。
+后续如果要公开展示这段经历，优先补脱敏后的照片、系统框图重绘版、个人复盘、测试记录截图和不含公司机密的说明图。这样能证明我参与过真实工程，而不是把公司的完整设计文件直接扔到网上。
