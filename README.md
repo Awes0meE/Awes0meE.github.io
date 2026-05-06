@@ -113,14 +113,14 @@ The site has a top-right English / Simplified Chinese toggle. Fixed UI labels us
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
-Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place company Gerber, schematic, BOM/PnP, EDA/CAD source, full firmware source, invoice, reimbursement, installer, vendor, or build-output files there unless they have been reviewed and desensitized.
+Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current release content state:
+Current branch content state:
 
-- Juanyun Technology project pages, development notes, media entries, and a small approved media set live on `main`.
-- Keep reviewing public attachments before future releases; raw board/manufacturing/source files should stay outside the served app unless explicitly desensitized.
-- Do not publish private financial, billing, credential, installer, vendor, or build-output files.
-- Juanyun notes are public, while raw board/manufacturing/source files are not served from `public/uploads/`; only approved screenshots/renders and the prototype demo video remain website-accessible.
+- `content/internship-juanyun-expansion` removes the inaccurate SAT301 placeholder project and five empty shell notes.
+- The branch adds real internship material from Juanyun, Nanjing Turing, and Tianjin rail-transit STM32 study work.
+- Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
+- Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
 ## Deployment
 
@@ -152,14 +152,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Current release: `v0.3.0`.
+Current release: `v0.4.0`.
 
 Use semantic version tags:
 
 ```bash
-git tag -a v0.3.0 -m "v0.3.0 bilingual content and visibility release"
+git tag -a v0.4.0 -m "v0.4.0 internship content expansion"
 git push origin main
-git push origin v0.3.0
+git push origin v0.4.0
 ```
 
 ---
@@ -261,13 +261,14 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
-重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。公司 Gerber、原理图、BOM/PnP、EDA/CAD 源文件、完整固件源码、发票、报销、安装包、vendor 包或 build 输出文件，在没有脱敏审查前不要放进去。
+重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 
-当前发布内容状态：
+当前分支内容状态：
 
-- 卷云科技项目页、开发笔记、媒体条目和少量已审核截图、渲染图、演示视频已经在 `main` 上。
-- 后续发版前仍然要复查所有公开附件；Gerber、原理图、BOM/PnP、EDA/CAD、源码和内部制造资料不要直接作为网站静态文件发布。
-- 不要发布私密财务、开票、证明、安装包、vendor 包或 build 输出文件。
+- `content/internship-juanyun-expansion` 分支删除了不准确的 SAT301 占位项目和五篇空壳笔记。
+- 这个分支补入了卷云、南京图灵、天津轨道交通 STM32 学习相关的真实实习材料。
+- 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
+- 不要发布私密财务、开票、证明、凭据、安装包、vendor、依赖或 build 输出文件。
 
 ## 部署
 
@@ -304,12 +305,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-当前版本：`v0.3.0`。
+当前版本：`v0.4.0`。
 
 使用语义化版本标签：
 
 ```bash
-git tag -a v0.3.0 -m "v0.3.0 bilingual content and visibility release"
+git tag -a v0.4.0 -m "v0.4.0 internship content expansion"
 git push origin main
-git push origin v0.3.0
+git push origin v0.4.0
 ```

@@ -1,38 +1,49 @@
 ---
 title: "Hardware Development SOP"
 titleZh: "硬件开发 SOP 整理"
-summary: "A note on turning repeated hardware development steps into a reusable SOP for requirements, block diagrams, component selection, review, handoff, tests, and revision records."
-summaryZh: "硬件开发 SOP 整理：需求说明、系统框图、器件选型、PCB 检查、固件交接、测试记录和版本留档。"
+summary: "A public note and PDF for the self-authored Juanyun hardware-development SOP, covering requirements, architecture, component selection, schematic review, layout checks, bring-up, release files, and revision records."
+summaryZh: "卷云硬件开发 SOP 的公开笔记与 PDF，覆盖需求、架构、器件选型、原理图检查、Layout 检查、bring-up、发布文件和改版记录。"
 date: "2026-05-06"
 tags: ["SOP", "Hardware", "Documentation"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
+
 ## 前期想法
 
-刚开始做硬件整理的时候，最折磨人的不是某个电路怎么接，而是“当时为什么这么接”没人说得清。需求、接口、器件、版本、测试、固件交接，如果没有记录，后面每次迭代都像考古。
+刚开始整理硬件资料时，最折磨人的不是某个电路怎么接，而是“当时为什么这么接”没人说得清。需求、接口、器件、版本、测试、固件交接，如果没有记录，后面每次迭代都像考古。
 
-于是开始写 SOP。听起来有点像公司流程文档，很无聊，但对硬件开发来说其实很有用。因为硬件不像软件，错了不是重新 npm install 一下就完事，板子打样、焊接、返工都是真成本。
+于是开始写 SOP。听起来像公司流程文档，有点无聊，但对硬件开发其实很有用。硬件不像软件，错了不是重新 `npm install` 一下就完事，打样、焊接、返工、等快递都是真成本。
 
-![Hardware SOP cover image](/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg)
+![Hardware SOP cover image](/uploads/projects/juanyun-public/hardware-sop-cover.jpeg)
 
-## 疑问：为什么一个学生作品集要放 SOP？
+## 这份 SOP 解决什么
 
-因为 SOP 能证明这段经历不只是“做一个东西”，也开始尝试把开发过程抽象出来。项目做多了以后，真正值钱的不是每次从零开始莽，而是能沉淀出一套下次还可以复用的流程。
+The SOP turns repeated board-development steps into a reusable checklist and folder structure. It is not meant to be fancy. It is meant to reduce missing context before a board is sent out, brought up, or handed to firmware.
+
+它建议每块板建立独立项目文件夹，按需求与架构、器件选型、原理图、Layout、发板文件、bring-up 与测试、改版记录、归档发布来组织。这个结构很朴素，但比“所有文件塞进一个目录”强太多。
 
 ## 覆盖内容
 
-- 立项和需求说明，先把要做什么说清楚。
-- 系统框图、电源树和模块边界，别一上来就画 PCB。
-- 关键器件选型、datasheet、封装和引脚核对。
-- PCB 走线、供电、接口、可测性、装配和导出检查。
-- 固件联调需要的引脚表、接口定义、烧录方式和调试入口。
-- 版本记录、问题清单、发布附件和后续维护。
+- Board-level requirements: project background, current-version goal, input / output conditions, interfaces, power, structure, environment, cost, and what this version explicitly does not cover.
+- System architecture: block diagram, power tree, module boundaries, interface ownership, and debug entry points.
+- Component selection: datasheet, package, pinout, supply margin, replacement risk, procurement notes, and footprint check.
+- Schematic and layout review: power path, connector orientation, test points, mounting, manufacturability, and export sanity check.
+- Firmware handoff: pin table, interface definition, flashing method, debug port, boot mode, and required bring-up sequence.
+- Release and revision record: files to archive, issue list, test result, change reason, and next revision notes.
+
+## 疑问：为什么学生作品集要放 SOP？
+
+因为 SOP 能证明这段经历不只是“做一个东西”，也开始尝试把开发过程抽象出来。项目做多以后，真正值钱的不是每次从零开始莽，而是能沉淀出一套下次还可以复用的流程。
+
+还有一个很现实的原因：公开作品集不能把公司 Gerber、BOM、EDA、固件源码都放出来。那要怎么展示硬件经验？SOP 是一个更安全的证据。它展示的是开发方法，而不是泄露完整设计文件。
 
 ## 证据
 
-- [Hardware SOP cover](/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg)
+- [Hardware development SOP PDF](/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf)
+- [Hardware SOP cover](/uploads/projects/juanyun-public/hardware-sop-cover.jpeg)
+- [Juanyun thermal hardware overview](/work/juanyun-thermal-hardware)
 
 ## 复盘
 
-这份 SOP 的意义是，它把“跟着项目做事”往“设计开发流程”推了一点。以后这个网站继续完善，也应该按类似方式给每个项目补证据链，而不是只放几张漂亮截图。
+这份 SOP 的意义是把“跟着项目做事”往“设计开发流程”推了一点。它不酷，但很实用。以后每个硬件项目都应该有类似证据链：需求怎么来、接口怎么定、为什么这样选型、发板前检查了什么、bring-up 失败在哪里、下一版改什么。没有这些，作品集就会只剩几张漂亮截图。

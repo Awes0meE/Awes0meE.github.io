@@ -1,17 +1,50 @@
 ---
 title: "Actuator and Quiet Fan Driver Archive"
 titleZh: "螺线管阀门与 BLDC 静音风扇驱动归档"
-summary: "A private-evidence archive shell for actuator and fan-driver experiments. Public page keeps the direction while hiding raw source, schematic, BOM, and EDA files."
-summaryZh: "执行器与风扇驱动资料线的公开版占位页；当前保留方向，隐藏源码、原理图、BOM 和 EDA 文件。"
+summary: "An archive page for smaller actuator-control and fan-driver experiments, covering solenoid-valve control, OLED/encoder interaction, ULN2003 references, and a single-phase BLDC quiet-fan board with selected public source, schematic, BOM, and EDA evidence."
+summaryZh: "一个较小的执行器与风扇驱动归档页，覆盖螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料和单相 BLDC 静音风扇板，并补充筛选后的源码、原理图、BOM 和 EDA 证据。"
 date: "2026-03 to 2026-04"
-status: "Private Evidence Review"
+status: "Public Archive"
 tags: ["STM32", "Actuator", "BLDC", "OLED", "Encoder"]
 cover: "/uploads/visuals/circuit-board.svg"
 featured: false
 ---
 
-## Project Brief / 项目简介
+## Project Brief / 项目简述
 
-This archive groups thinner actuator-control experiments: solenoid-valve control and a quiet single-phase BLDC fan-driver board line. It is useful as a future direction, but the public portfolio should not publish raw company files.
+This page groups two thinner but related development lines: a solenoid-valve control archive and a single-phase BLDC quiet-fan driver archive. They are not large enough yet to become separate polished portfolio projects, but they are worth keeping because they show the actuator side of the hardware work: driving loads, reading simple inputs, showing state, and keeping a board archive from disappearing into a random folder.
 
-这条线后续可以补接线记录、时序图、电流测量、实物照片和脱敏代码片段。当前不公开 `.ioc`、`.c`、原理图、BOM 或 EDA 工程。
+源目录里能看到 STM32F103 valve-control code, OLED module references, EC11 encoder references, ULN2003 / stepper-driver material, a solenoid-valve driver EDA file, and a quiet-fan BLDC board BOM / EDA file。根据新的边界，这些 legacy 材料不是 Current_Product 敏感内容，所以筛选后的源码、原理图、BOM 和 EDA 可以作为公开证据；供应商示例包、可执行工具、完整工程树和构建输出仍然不直接发布。
+
+## Archive Scope / 归档范围
+
+- Solenoid-valve line: selected STM32F103 source files, IOC configuration, electromagnetic-valve control board context, GPIO / display / encoder / button style interaction.
+- Display and input line: OLED and EC11 encoder module schematics, with vendor examples excluded.
+- Driver reference line: ULN2003 Darlington array material, useful for thinking about low-side load drive and simple actuator wiring.
+- Quiet-fan line: a single-phase BLDC fan-driver board archive with selected BOM and EasyEDA project evidence.
+
+## Public Evidence / 公开证据
+
+- [Solenoid main.c](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)
+- [Solenoid valve control source](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)
+- [Solenoid valve IOC configuration](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve-control.ioc)
+- [OLED module schematic](/uploads/projects/juanyun-public/actuator-fan/oled-module-schematic.pdf)
+- [EC11 encoder schematic](/uploads/projects/juanyun-public/actuator-fan/ec11-encoder-schematic.pdf)
+- [ULN2003 datasheet](/uploads/projects/juanyun-public/actuator-fan/uln2003-datasheet-en.pdf)
+- [BLDC quiet fan BOM](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-bom.xlsx)
+- [BLDC quiet fan EasyEDA project](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-easyeda.epro)
+
+## Public Boundary / 公开边界
+
+This archive still stays modest. The public files prove that the actuator and fan-driver lines existed, but they do not turn the archive into a complete release. Vendor source packages, executable tools, generated output, duplicate reference bundles, and uncurated project folders stay out of the website.
+
+## What Would Make It Stronger / 后续补什么才像样
+
+- A small state diagram for valve open / close / fault / manual input.
+- A redrawn wiring diagram for actuator load, driver IC, MCU pins, and protection assumptions.
+- Photos or screenshots that show OLED / encoder interaction without exposing private project files.
+- For the BLDC fan board: target voltage, noise goal, topology, basic bring-up result, and test notes.
+
+## Reflection / 复盘
+
+这些边角材料不该删，也不该硬吹。执行器、风扇、OLED、编码器这些东西和嵌入式硬件方向是连着的，只是测试叙事还不够完整。现在先把能公开的 legacy 证据补上；等有测试记录和图，再决定要不要拆成正式 case study。

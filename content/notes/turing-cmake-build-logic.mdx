@@ -1,0 +1,46 @@
+---
+title: "CMake And Build Logic Learning Notes"
+titleZh: "CMake 与编译底层逻辑学习笔记"
+summary: "A learning note that connects platform architecture, MSVC tools, PATH/INCLUDE/LIB, CMake configure/generate/build, Ninja, and Qt package discovery."
+summaryZh: "把平台架构、MSVC 工具、PATH/INCLUDE/LIB、CMake configure/generate/build、Ninja 和 Qt 包发现串起来的学习笔记。"
+date: "2025-08-18"
+tags: ["CMake", "Compiler", "Ninja", "Qt"]
+visibility: public
+projectSlug: "nanjing-turing-qt-embedded-learning"
+---
+
+## Early Idea / 前期想法
+
+The build problem first looked like a list of commands: install CMake, open a developer prompt, run qmake, run build. That was not enough. When the error message changes after every small environment tweak, memorizing commands stops working.
+
+编译问题一开始看起来像命令清单：装 CMake，打开开发者命令行，跑 qmake，点击编译。但这种记命令的方式很快就不够了。环境变量一改、工具链一换，报错也跟着变，只背步骤很难判断哪里错了。
+
+## 改变
+
+后来把问题拆成几层看：平台和架构先决定 x86/x64；MSVC、Windows SDK、`cl`、`link`、`lib` 负责把源码、目标文件、库和可执行文件连起来；CMake/Ninja 更像调度器，负责生成规则和按依赖图执行；Qt 则要能被 CMake 或 qmake 正确找到。
+
+这样看之后，CMake 不是“另一个编译器”。它更像是把工具链、依赖、规则写清楚的人。真正编译和链接的还是底层工具。
+
+![CMake to Make flow / CMake 到 Make 的流程图](/uploads/projects/nanjing-turing/cmake-make-flow.png)
+
+## 阶段目标
+
+- 分清 `cl`、`link`、`lib` 分别在做什么。
+- 分清 `.cpp`、`.obj`、`.lib`、`.dll`、`.exe`、`.pdb` 的位置。
+- 理解为什么 Qt 的架构、编译器版本和命令行环境要匹配。
+- 理解 `CMAKE_PREFIX_PATH`、`Qt6_DIR` 和 `Qt6Config.cmake` 为什么会影响 Qt 包发现。
+- 理解 Ninja 只是执行规则，不负责替代编译器。
+
+## Evidence / 证据
+
+The exported PDF is public because it is a learning note, not a private source file. It captures the build-chain thinking at the time, including some rough handwritten and diagram-based explanations.
+
+这个 PDF 可以公开，因为它是学习笔记，不是公司源码或交付包。里面保留了当时对编译链路的理解：有些地方很基础，但正是这些基础问题影响了 Qt 项目能不能在另一台机器上跑起来。
+
+- [Qt build-logic notes PDF](/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf)
+
+![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
+
+## 复盘
+
+这部分学习解决的是一个很现实的问题：以后看到“编译失败”，不要直接把它当成一个黑盒错误。先问是找不到工具、找不到头文件、找不到库、架构不一致、生成规则错了，还是运行时缺 DLL。能把问题归类，排查速度就会明显变快。

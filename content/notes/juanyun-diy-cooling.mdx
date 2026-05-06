@@ -1,43 +1,64 @@
 ---
-title: "DIY Pressure-Flow Cooling Prototype"
+title: "DIY Pressure-Flow Cooling Prototype Notes"
 titleZh: "DIY 压风式散热器开发笔记"
-summary: "Archive notes for an earlier pressure-flow cooling prototype with 3D printed structure, ESP32 control, desktop monitoring, and demo video."
-summaryZh: "早期 DIY 压风式散热器开发笔记：包括 3D 打印结构、ESP32 控制、桌面端监控和演示视频。"
+summary: "A practical archive note for an early pressure-flow cooling prototype: 3D printed airflow parts, fan options, ESP32 PWM control, desktop demo, and selected public PCB/source/fabrication evidence."
+summaryZh: "早期 DIY 压风式散热器开发笔记：3D 打印风道、风扇选型、ESP32 PWM 控制、桌面端演示，以及筛选后的 PCB、源码和制作证据。"
 date: "2026-05-06"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool"]
 projectSlug: "juanyun-diy-cooling-prototype"
 visibility: public
 ---
+
 ## 前期想法
 
-这个压风式散热器项目现在回头看，味道很“早期探索”。结构、风道、风扇、电源、ESP32、桌面端显示、说明视频，全都混在一起，文件夹也很有当年随手堆资料的风格。说好听点叫探索性强，说难听点就是管理不太规范。
+这个压风式散热器现在回头看，味道很“早期探索”。3D 打印、亚克力切割、纸箱低成本版本、显卡拆机风扇、ESP32、桌面端程序、PCB 文件、安装包、演示视频，全挤在一个目录里。说好听一点是动手范围很广，说难听一点就是资料管理有点野。
 
-但它也有价值。因为它不是单纯画一块板，也不是单纯写一段代码，而是把一个实际散热想法从结构到控制再到桌面端监控都碰了一遍。虽然不成熟，但很能说明当时是真动手折腾过的。
+但它不是空壳。它至少把一个散热想法从结构、风道、供电、PWM 控制、桌面显示和使用说明都摸了一遍。很多东西不成熟，但这类项目的价值本来就不是“第一版就优雅”，而是能看见一个想法怎样被硬塞进现实世界。
 
 ![DIY pressure-flow cooling 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 
 ## 改变
 
-一开始只想把演示视频和 ESP32 程序放上来，后来发现这样会把项目写得太单薄。这个项目真正有意思的地方是它同时涉及 3D 打印、亚克力切割、纸箱版本、PCB、ESP32、桌面端 C# 程序和使用说明。公开页现在只保留可以展示的预览图和视频，原始工程文件暂时不挂出来。
+一开始差点想把 ESP32 程序、桌面端工程和安装包都当证据放上来。后来重新划边界以后，这条线可以公开，但仍然不能把整个工程目录当网盘丢上来。真正适合放到作品集里的，是能解释原型链路的少量文件：控制代码、桌面端入口、PCB 输出、切片文件和结构制作清单；安装器、依赖包、构建输出和重复工程目录仍然没有必要发布。
 
-疑问：为什么不把安装包也放上来？
+所以公开页现在保留四类证据：
 
-因为安装包、运行库、NuGet 包这些东西适合私下备份，不适合放进公开作品集。作品集需要的是能证明开发过程的设计痕迹和演示，不是把整个电脑里的依赖垃圾场搬上网。
+- 3D 打印预览图，说明结构不是嘴上说说；
+- 桌面端演示视频，说明控制和显示链路曾经跑起来过；
+- ESP32、C#、PCB、Gerber、EasyEDA 和 3MF 等筛选后的关键文件；
+- 文字盘点，说明原始归档里还有哪些材料，但不把完整杂乱工程包扔上网。
+
+![DIY pressure-flow cooling support settings and sliced parts](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
+
+## 疑问
+
+为什么现在可以把 3MF、Gerber 和源码片段放出来？这条线不是 Current_Product，按用户重新划定的边界可以公开讨论，也可以公开筛选后的工程证据。
+
+答案是：公开的是能说明问题的文件，不是整个目录。3MF、Gerber、EasyEDA 和源码片段本身可以作为证据；安装包、依赖目录、构建输出、重复版本、vendor 文件和没有说明的整包工程还是会让页面变成文件堆。等以后真要开源这个小原型，可以再单独清理许可、命名、README、版本和构建方式。
 
 ## 阶段目标
 
-- 保留结构路线：3D 打印、亚克力切割、纸箱低成本版本。
-- 保留控制路线：ESP32、桌面端监控和演示视频。
-- 后续补更清楚的风道解释、温度对比和实际使用效果，不要只靠视频撑场面。
+- 保留结构路线：3D 打印、亚克力切割、纸箱低成本版本各自是什么用途。
+- 保留控制路线：ESP32 PWM、风扇调速、桌面端显示和演示视频如何串起来。
+- 后续补风道解释、温度对比和使用限制，不要只靠视频撑场面。
 
 ## 证据
 
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
 - [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 - [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
+- [3D printing preview 3](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
+- [ESP32 PlatformIO main.cpp](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)
+- [ESP32 Arduino PWM sketch](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)
+- [Desktop C# Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)
+- [PCB schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)
+- [PCB Gerber archive](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)
+- [EasyEDA 2026 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)
+- [Bambu A1 mini slicing file](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)
+- [Project page](/work/juanyun-diy-cooling-prototype)
 
 ![DIY pressure-flow cooling second 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
 ## 复盘
 
-这个项目的价值不在于它有多成熟，而在于它暴露了结构、风道、电子、电源、软件、文档之间的混乱连接。也正因为做过这种项目，后面才更能理解为什么硬件开发需要 SOP、版本记录和证据链。
+这个项目最有用的地方，是提醒后面的硬件任务别只留下“能跑”的结果。结构怎么改、风扇为什么这样选、程序和桌面端怎么通信、失败版本在哪里，这些都应该被记录。不然几个月后再打开文件夹，就只能靠文件名考古。

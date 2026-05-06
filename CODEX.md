@@ -143,17 +143,31 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks, and show a fallback notice when one body language is still missing.
 - MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text.
 
-## Current Main Content State
+## Current Content State
 
-Juanyun Technology content has been merged into `main` for the `v0.3.0` release. It was originally drafted from:
+The active working branch is `content/internship-juanyun-expansion`.
+
+As of `2026-05-06`, this branch removes the inaccurate SAT301 placeholder project and five empty shell notes, then adds real internship material from:
 
 ```text
 F:\XJTLU\工作相关\卷云科技有限责任公司
+F:\XJTLU\工作相关\南京图灵人工智能研究院
+F:\XJTLU\工作相关\天津津铁通信有限公司
 ```
 
-As of `2026-05-06`, the public content set contains 7 Juanyun project pages and 9 Juanyun notes after removing pure datasheet/manual/manufacturing-export notes from the public note set.
+Current content count on this branch:
 
-Juanyun notes are visible on the public site, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, company firmware source dumps, desktop source dumps, internal manufacturing packages, invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, or generated build outputs without explicit desensitization review.
+- 11 project pages total;
+- 18 public notes total;
+- 7 Juanyun project pages and 9 Juanyun notes remain;
+- 1 Nanjing Turing Qt/CMake/packaging project and 4 related notes were added;
+- 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
+
+Juanyun public boundary:
+
+- Sensitive: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. Do not publish raw Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source, complete firmware source, internal product requirements, manufacturing packages, invoices, reimbursements, billing records, credentials, executable installers, vendor folders, or generated build outputs from those folders.
+- Public after pruning: legacy Juanyun DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT breakout planning, and the self-authored `卷云硬件开发SOP_Awes0meE.pdf`.
+- Static public assets for the expanded public Juanyun material live under `public/uploads/projects/juanyun-public/`; this branch may include selected legacy Gerber, EDA, BOM/PnP, STEP/3MF, source snippets, schematics, PDFs, and images from non-Current_Product folders after pruning installers, dependency folders, vendor folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
 
 ## Visual Direction
 

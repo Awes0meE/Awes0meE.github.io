@@ -271,7 +271,7 @@ public/uploads/projects/pid/demo-board.jpg
 
 Do not put private or unnecessary files into the public website folder. Avoid publishing invoices, reimbursements, billing records, internship proof documents, executable installers, downloaded vendor packages, and generated build outputs.
 
-For company projects, also avoid putting Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, firmware source dumps, desktop source dumps, and internal manufacturing packages under `public/uploads/` unless they have been reviewed and desensitized.
+For company projects, also avoid putting Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, firmware source dumps, desktop source dumps, and internal manufacturing packages under `public/uploads/` unless they have been reviewed and desensitized. For the current Juanyun branch, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive, while non-Current_Product legacy folders may publish selected reviewed evidence after pruning installers, vendor/dependency folders, generated build output, private proof files, and uncurated raw dumps.
 
 Files in `public/uploads/` are public after deployment even when no page links to them.
 
@@ -279,7 +279,7 @@ Files in `public/uploads/` are public after deployment even when no page links t
 
 不要把私密或没必要公开的文件放进网站公开目录。不要发布发票、报销单、开票资料、实习证明、exe 安装包、下载来的 vendor 包和编译生成物。
 
-公司项目还要额外谨慎：Gerber、原理图 PDF、BOM/PnP、EDA/CAD 源文件、固件源码、桌面端源码和内部制造资料不要直接放进 `public/uploads/`，除非已经明确脱敏审核过。
+公司项目还要额外谨慎：Gerber、原理图 PDF、BOM/PnP、EDA/CAD 源文件、固件源码、桌面端源码和内部制造资料不要直接放进 `public/uploads/`，除非已经明确脱敏审核过。当前卷云分支里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然敏感；非 Current_Product 的 legacy 文件夹可以发布筛选后的公开证据，但要排除安装包、vendor/依赖目录、构建输出、证明文件和未整理的原始整包。
 
 `public/uploads/` 里的文件部署后就是公开静态文件，就算页面没有链接也不能当私密存储用。
 
