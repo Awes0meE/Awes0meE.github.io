@@ -132,7 +132,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render Markdown/text documents as readable article content, render source/code files in code frames, and link binary files.
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render Markdown/text documents as readable article content, render source/code files in code frames, and link binary files. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
 
 ## Language Switching
 

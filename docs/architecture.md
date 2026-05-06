@@ -77,7 +77,7 @@ Current content state on `main` release `v0.6.1`, as of `2026-05-07`:
 
 The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
-Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
+Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`. The detail page order is project body, development notes, public project files, then related media.
 
 Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
 

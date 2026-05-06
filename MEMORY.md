@@ -44,6 +44,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
 - Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. The renderer previews images/videos, renders Markdown/text documents as readable article content, renders source/code files in code frames, and links binary documents / CAD / EDA / fabrication archives.
+- Keep project detail sections ordered as project body, development notes, public project files, then related media. This keeps the narrative and note trail above the file archive.
 - Use `BilingualText` for fixed UI labels and paired metadata. Do not return to mixed labels such as `Work / 项目` now that the site has a global language toggle.
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
 - Keep the current project/note prose style for future content. The user likes the plain practical self-study / internship-log texture now used in notes and projects: concrete, casual, close to the debugging scene, less formal logic, not AI handoff or delivery-report phrasing.

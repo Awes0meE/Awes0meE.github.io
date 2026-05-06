@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Moved project development-note cards above public project-file archives on every project detail page.
+- Files changed: reordered the related-notes and `ProjectAssets` sections in `app/work/[slug]/page.tsx`; updated `CODEX.md`, `MEMORY.md`, `docs/architecture.md`, and `docs/content-workflow.md` to record the project detail order as body, development notes, public project files, then related media.
+- Verification: `git diff --check`, `npm.cmd run lint`, and `npm.cmd run build` passed for the route change; `/neat` docs were checked with UTF-8 and diff checks.
+
+## 2026-05-07
+
 - Summary: Hid English-only CMake translation snippets from the Chinese view and documented the code-fence language-switching trap.
 - Files changed: converted the English translation examples at the top of `content/notes/turing-cmake-build-logic.mdx` from fenced code blocks to inline code and made the heading English-only; updated `CODEX.md`, `MEMORY.md`, `README.md`, and `docs/content-workflow.md` so future content edits treat fenced code blocks as shared evidence, not language-scoped prose.
 - Verification: `git diff --check`, `npm.cmd run lint`, and `npm.cmd run build` passed before the content fix was pushed; `/neat` docs were checked with `git diff --check`.

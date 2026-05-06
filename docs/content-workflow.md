@@ -84,6 +84,8 @@ projectSlug: "my-project-slug"
 
 The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-thermal-hardware"` connects the note to `/work/juanyun-thermal-hardware`.
 
+On project detail pages, related development notes appear above the public project-file archive. Use notes for narrative, debugging, and reflection; use `assetPaths` for the downloadable or inline-rendered evidence below that note trail.
+
 `visibility` controls whether the note is served publicly:
 
 - `visibility: public` makes the note appear on the homepage, `/notes`, project detail related-note sections, and `/notes/[slug]`.
