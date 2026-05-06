@@ -8,32 +8,34 @@ tags: ["Embedded", "STM32", "Debug"]
 visibility: public
 ---
 
-## 前期想法
+## Starting Point / 前期想法
 
-刚开始调单片机的时候，我最常见的状态是：板子不亮，串口没输出，LED 也没反应，然后我开始怀疑人生。更糟糕的是，偶尔它又突然好了，但我完全不知道它为什么好。这个阶段最可怕的不是 bug，而是没有记录，下一次遇到同样的问题还得重新抓瞎。
+Early board bring-up often starts with a very plain failure: no LED, no serial output, no visible reaction. The worst part is not the bug itself, but the lack of record. When the board suddenly works again, the reason is still unclear.
 
-所以这篇笔记不是为了装得很工程化，而是给自己立一个规矩：以后 bring-up 不要凭感觉撞大运，要把电源、时钟、下载、串口、最小循环、外设测试一步步写下来。哪一步通过，哪一步没通过，看到什么现象，都要有记录。
+嵌入式调试最怕“玄学变好”。一次能跑不代表问题被理解了。电源、时钟、下载、串口、最小循环、外设测试都需要一步步写下来：哪一步通过，哪一步没通过，看到什么现象。
 
-## 阶段目标
+## Stage Goals / 阶段目标
 
-- 先确认供电和下载链路，不要一上来就怀疑业务代码。
-- 让串口或 LED 成为最小可观测输出。
-- 每加一个外设，只做一件事，测完再集成。
-- 把“这次为什么好了”写下来，避免下次继续玄学调试。
+- Check power and flashing path before suspecting application code.
+- Use serial output or LED blinking as the minimum observable signal.
+- Add and test one peripheral at a time.
+- Record why a failure disappeared, instead of relying on memory.
 
-## 疑问：为什么要这么麻烦？
+## Question / 疑问：为什么要这么麻烦？
 
-因为嵌入式调试里，很多问题看起来像软件，其实是电源、时钟、引脚复用、下载器、焊接、线序、波特率或者外设初始化顺序。直接改代码很爽，但很容易把问题改得更乱。调试记录的意义就是逼自己慢下来，先证明硬件和基础链路是活的。
+Many embedded problems look like software bugs but come from power, clock, pin multiplexing, wiring order, baud rate, soldering, or initialization order. Random code edits can make the system even harder to understand. A debug log forces the process back to evidence.
 
-## 记录模板
+很多嵌入式问题看起来像软件，其实是供电、时钟、引脚复用、下载器、焊接、线序、波特率或者外设初始化顺序。调试记录的意义就是先证明硬件和基础链路是活的，再动业务逻辑。
 
-- 电源：输入电压、稳压输出、是否发热。
-- 下载：ST-Link / J-Link 是否识别，芯片型号是否正确。
-- 时钟：HSE / HSI / PLL 配置是否和工程一致。
-- 串口：TX/RX 线序、波特率、GND 是否共地。
-- 最小循环：LED 翻转或串口打印是否稳定。
-- 外设：一次只测一个外设，不要把 OLED、传感器、PWM 一锅炖。
+## Record Template / 记录模板
 
-## 复盘
+- Power: input voltage, regulator output, and abnormal heating.
+- Flashing: ST-Link / J-Link recognition and chip model.
+- Clock: HSE / HSI / PLL configuration.
+- Serial: TX/RX wiring, baud rate, and shared ground.
+- Minimum loop: stable LED toggle or serial print.
+- Peripheral: one new peripheral per test round.
 
-这篇笔记现在还是模板，但它提醒我一件事：调试不是靠灵感救场，而是靠可重复的排查路径。以后每个真正上电的项目都应该把这套记录补成实物证据。
+## Reflection / 复盘
+
+Debugging should not depend on sudden inspiration. A repeatable checklist is more useful than a lucky fix. Future powered-up projects should turn this template into real photos, logs, and measurements.

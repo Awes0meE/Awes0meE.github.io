@@ -19,6 +19,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: All `content/notes/*.mdx` files were rewritten toward the user's own learning-log voice, modeled after their Qt internship note style: process-first, reflective, mildly informal, with `前期想法 / 改变 / 疑问 / 阶段目标 / 证据 / 复盘` style sections where appropriate.
 
 - `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. All Juanyun notes are private on this branch, and public Juanyun assets were reduced to the DIY cooling demo video plus two 3D-print preview images.
+- `2026-05-06`: Public project and note writing direction shifted toward direct descriptive narration: fewer "我..." claims, more plain system/scope/evidence descriptions, and bilingual section support.
 
 ## Stable Decisions
 
@@ -28,7 +29,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
-- Write notes in the user's personal self-study / internship-log voice rather than generic portfolio marketing prose.
+- Write notes with the user's practical self-study / internship-log texture, but public pages should prefer direct descriptive narration over repetitive first-person "我..." claims.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. Do not place company Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.

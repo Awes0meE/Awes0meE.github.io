@@ -151,7 +151,7 @@ Every serious project should eventually include:
 - links to source, demo, release, or paper if available;
 - English and Chinese summaries.
 
-Notes should use the user's own learning-log voice. The preferred shape is closer to an internship/self-study notebook than to a corporate project report:
+Notes should keep the user's practical learning-log texture. Public pages should read more like direct engineering notes than self-promotional reports:
 
 - start from `前期想法` when the motivation or confusion matters;
 - use `改变` to explain a pivot in direction;
@@ -160,6 +160,9 @@ Notes should use the user's own learning-log voice. The preferred shape is close
 - keep `证据` links for files, images, videos, source, PDFs, and datasets;
 - end with `复盘` when there is a useful lesson;
 - avoid overusing “我负责了...” and “我参与了...” lists, because they sound fake when the note is meant to be a learning record.
+
+- use direct description: system scope, constraints, evidence boundary, question, and next step;
+- add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
 

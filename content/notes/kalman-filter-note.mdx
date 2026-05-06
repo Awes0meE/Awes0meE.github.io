@@ -8,23 +8,25 @@ tags: ["Estimation", "Kalman Filter", "Python"]
 visibility: public
 ---
 
-## 前期想法
+## Starting Point / 前期想法
 
-卡尔曼滤波第一次看公式的时候，我的感受是：每个符号都认识，合起来就不太认识。预测、更新、协方差、增益，看起来很数学，但真正写进代码时，最容易迷糊的是“它到底相信谁”。
+Kalman filtering is easy to recognize and hard to internalize. Prediction, update, covariance, and gain all look reasonable on paper. The practical question is simpler: when should the estimate trust the model, and when should it trust the measurement?
 
-所以这篇笔记不打算一上来堆推导。先从小例子开始，传感器有噪声，模型也不完全靠谱，滤波器夹在中间做取舍。这个直觉建立起来以后，再回头看公式会舒服很多。
+这篇笔记不急着堆推导。先从一个小例子开始：传感器有噪声，模型也不完全可靠，滤波器夹在中间做取舍。这个直觉建立以后，再回头看公式会舒服很多。
 
-## 疑问：为什么不直接用现成库？
+## Question / 疑问：为什么不直接用现成库？
 
-当然可以用库，但如果完全不知道参数是什么意思，用库也只是把玄学换了个包装。至少要知道测量噪声变大以后会发生什么，模型预测不准时会发生什么，增益为什么会变。
+Libraries are useful, but blind use only hides the confusion. At minimum, the parameters should explain what happens when measurement noise increases, when model prediction drifts, and why the gain changes.
 
-## 阶段目标
+当然可以用库，但如果完全不知道参数含义，用库也只是换了一层包装。至少要知道测量噪声变大以后会发生什么，模型预测不准时会发生什么，增益为什么会变。
 
-- 先用一维例子跑通预测和更新。
-- 画出原始测量、真实值和估计值，不要只看数字。
-- 调整噪声参数，观察滤波器到底更相信模型还是测量。
-- 后续接真实传感器数据时，再补异常值和延迟问题。
+## Stage Goals / 阶段目标
 
-## 复盘
+- Run prediction and update with a one-dimensional example.
+- Plot raw measurement, reference value, and estimated value together.
+- Adjust noise parameters and observe whether the filter trusts model or measurement more.
+- Add outlier and latency handling when real sensor data is introduced.
 
-这篇还只是学习笔记的起点。对我来说，卡尔曼滤波真正有用的地方不是背公式，而是训练“估计”这个思维：现实数据不干净，模型也不完美，工程里经常要在两者之间做判断。
+## Reflection / 复盘
+
+The useful part is not memorizing formulas. The useful part is estimation thinking: real data is noisy, models are imperfect, and engineering decisions often live between the two.
