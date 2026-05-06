@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Added a base unit component datasheet review note and published the selected datasheet PDFs as supporting evidence.
+- Files changed: added `content/notes/juanyun-baseunit-component-datasheets.mdx`, linked it from the base unit project/note, and added normalized public filenames for the eight base unit component datasheets.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Split the DHT11/AM2302 sensor breakout board planning task into its own lightweight hardware project page.
 - Files changed: added `content/projects/juanyun-dht-sensor-breakout-board.mdx`, reassigned the DHT note to that project slug, and linked the small-board project from the Juanyun overview and source inventory.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

@@ -29,7 +29,7 @@ public/uploads/projects/juanyun-tech/
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
 | `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, STM32 external unit firmware note. |
-| `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project and public note for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
+| `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
 | `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber and STEP model; code details still need a later review. |
@@ -60,11 +60,19 @@ public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
 public/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf
 public/uploads/projects/juanyun-tech/baseunit-app.c
+public/uploads/projects/juanyun-tech/baseunit-32k-crystal-datasheet.pdf
+public/uploads/projects/juanyun-tech/baseunit-ao4407-mosfet-datasheet.pdf
 public/uploads/projects/juanyun-tech/baseunit-bluetooth.c
+public/uploads/projects/juanyun-tech/baseunit-dc005-power-jack-datasheet.pdf
+public/uploads/projects/juanyun-tech/baseunit-ec11-encoder-datasheet.pdf
 public/uploads/projects/juanyun-tech/baseunit-fan.c
 public/uploads/projects/juanyun-tech/baseunit-firmware-readme.md
 public/uploads/projects/juanyun-tech/baseunit-nvstore.c
 public/uploads/projects/juanyun-tech/baseunit-product-base.ioc
+public/uploads/projects/juanyun-tech/baseunit-ss12d10g6-slide-switch-datasheet.pdf
+public/uploads/projects/juanyun-tech/baseunit-ss8050-bjt-datasheet.pdf
+public/uploads/projects/juanyun-tech/baseunit-x32258-8mhz-crystal-datasheet.pdf
+public/uploads/projects/juanyun-tech/baseunit-xl1509-3v3-dcdc-datasheet.pdf
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro
 public/uploads/projects/juanyun-tech/cirro-logo.png

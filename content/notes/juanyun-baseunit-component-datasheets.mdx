@@ -1,0 +1,40 @@
+---
+title: "Base Unit Component Datasheet Review"
+titleZh: "底座板器件规格书整理"
+summary: "A supporting note that maps the base unit component datasheets to practical firmware and board-level design constraints."
+summaryZh: "底座板器件规格书支撑笔记：把 DC-DC、晶振、编码器、MOSFET、电源座、三极管和滑动开关资料映射到板级与固件约束。"
+date: "2026-05-06"
+tags: ["Datasheet", "PCB", "Firmware", "Component"]
+projectSlug: "juanyun-baseunit-control-firmware"
+---
+
+## Why This Note Exists / 为什么写这篇
+
+The base unit firmware does not live alone. It depends on real component limits: encoder behavior, fan-driving MOSFET selection, power input connector, 3.3 V conversion, clock source, and small switching components. I kept these datasheets as supporting evidence so the firmware page can point back to board-level constraints.
+
+底座固件不是凭空存在的。编码器手感、风扇 PWM 输出、电源输入、3.3 V 降压、晶振、开关和三极管都会影响固件可用性和硬件验证方式。我把这些规格书整理成一篇支撑笔记，方便后续继续补 PCB 和测试记录。
+
+## What I Mapped / 我关注的内容
+
+- XL1509-3.3 关系到 3.3 V 电源路径和负载余量。
+- EC11 编码器关系到旋钮调速、去抖、方向判断和 UI 状态机。
+- AO4407 MOSFET、SS8050 BJT 和风扇 PWM 输出关系到执行端驱动边界。
+- DC-005 电源座和滑动开关关系到用户操作、上电/断电路径和结构安装。
+- 8 MHz 与 32.768 kHz 晶振资料用于确认时钟源和后续低功耗/RTC 预留讨论。
+
+## Evidence / 证据
+
+- [XL1509-3.3 DC-DC datasheet](/uploads/projects/juanyun-tech/baseunit-xl1509-3v3-dcdc-datasheet.pdf)
+- [X32258 8 MHz crystal datasheet](/uploads/projects/juanyun-tech/baseunit-x32258-8mhz-crystal-datasheet.pdf)
+- [EC11 encoder datasheet](/uploads/projects/juanyun-tech/baseunit-ec11-encoder-datasheet.pdf)
+- [32.768 kHz crystal datasheet](/uploads/projects/juanyun-tech/baseunit-32k-crystal-datasheet.pdf)
+- [AO4407 MOSFET datasheet](/uploads/projects/juanyun-tech/baseunit-ao4407-mosfet-datasheet.pdf)
+- [DC-005 power jack datasheet](/uploads/projects/juanyun-tech/baseunit-dc005-power-jack-datasheet.pdf)
+- [SS8050 BJT datasheet](/uploads/projects/juanyun-tech/baseunit-ss8050-bjt-datasheet.pdf)
+- [SS12D10G6 slide switch datasheet](/uploads/projects/juanyun-tech/baseunit-ss12d10g6-slide-switch-datasheet.pdf)
+
+## Reflection / 复盘
+
+This note is not a claim that I designed every component from scratch. It records how I treat datasheets as engineering inputs instead of random attachments. Later, when I add real PCB screenshots or measurement logs, this page can explain why those parts mattered.
+
+这篇不是为了堆附件，而是为了说明我会把器件资料当成设计输入。后续补 PCB 或实测记录时，这些规格书能解释为什么某些接口、供电和固件处理方式要这样做。
