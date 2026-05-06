@@ -1,0 +1,40 @@
+---
+title: "FOC Driver Board Archive"
+titleZh: "慧驱动 FOC 驱动板归档"
+summary: "An archived motor-control hardware line containing STM32F4 / DRV8301 code, PCB source exports, BOMs, Gerber files, and a STEP model for later FOC case-study expansion."
+summaryZh: "一条电机控制方向的历史硬件资料线：包含 STM32F4 / DRV8301 代码、PCB 工程、BOM、Gerber 和 STEP 模型，后续可扩展成完整 FOC case study。"
+date: "2025-11 to 2026-03"
+status: "Archived Evidence"
+tags: ["FOC", "Motor Control", "STM32F4", "DRV8301", "PCB"]
+cover: "/uploads/visuals/circuit-board.svg"
+featured: false
+links:
+  download: "/uploads/projects/juanyun-tech/foc-driver-gerber.zip"
+---
+
+## Project Brief / 项目简介
+
+This is an archived motor-control hardware line from the Juanyun source folder. The material is not ready to be presented as a finished FOC control case study, but it already contains enough engineering evidence to deserve its own project page instead of being buried inside a general archive.
+
+这条线来自 `Legacy_慧驱动FOC_Project`。目前它更像一个“证据归档型项目”：我能展示 PCB、Gerber、STEP、BOM 和代码工程线索，但还需要补足控制算法、采样链路、上电调试、保护策略和测试波形，才能变成完整的 FOC 项目复盘。
+
+## What Is In The Archive / 资料里有什么
+
+- STM32F4 / DRV8301 related firmware and IDE projects.
+- PCB source/export files, BOM files, Gerber archive, and STEP model.
+- Procurement-related component lists and board manufacturing artifacts.
+
+- STM32F4 / DRV8301 相关固件和 IDE 工程。
+- PCB 源文件/导出文件、BOM、Gerber 压缩包和 STEP 三维模型。
+- 元器件采购清单和板级制造资料。
+
+## Evidence / 证据
+
+- [FOC driver Gerber archive](/uploads/projects/juanyun-tech/foc-driver-gerber.zip)
+- [FOC driver STEP model](/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step)
+
+## Reflection / 复盘
+
+This project is useful as a future bridge between my embedded hardware work and motor-control learning. For now I am deliberately labeling it as archived evidence, because a responsible FOC case study should include current sampling, phase-voltage/current constraints, gate-driver behavior, protection handling, startup behavior, and oscilloscope or log evidence.
+
+这条线对我的作品集有价值，因为它能把嵌入式硬件和电机控制方向连接起来。但我现在不会把它包装成已经完成的成熟项目。后续要认真写这条线，我需要补上电流采样、相电压/相电流约束、驱动芯片行为、保护逻辑、启动过程和示波器/日志证据。
