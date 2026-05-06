@@ -28,7 +28,7 @@ public/uploads/projects/juanyun-tech/
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, STM32 external unit firmware note. |
+| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence. |
 | `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
@@ -46,6 +46,18 @@ public/uploads/projects/juanyun-tech/
 public/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf
 public/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf
 public/uploads/projects/juanyun-tech/acunit-v20-system-block.png
+public/uploads/projects/juanyun-tech/acunit-app.c
+public/uploads/projects/juanyun-tech/acunit-bsp-comp.c
+public/uploads/projects/juanyun-tech/acunit-bsp-eev.c
+public/uploads/projects/juanyun-tech/acunit-bsp-ntc.c
+public/uploads/projects/juanyun-tech/acunit-bsp-oled.c
+public/uploads/projects/juanyun-tech/acunit-firmware-pinout.md
+public/uploads/projects/juanyun-tech/acunit-firmware-readme.md
+public/uploads/projects/juanyun-tech/acunit-product-acunit.ioc
+public/uploads/projects/juanyun-tech/acunit-release-notes-v05.md
+public/uploads/projects/juanyun-tech/acunit-svc-control.c
+public/uploads/projects/juanyun-tech/acunit-svc-sensor.c
+public/uploads/projects/juanyun-tech/acunit-svc-ui.c
 public/uploads/projects/juanyun-tech/acunit-v21-main-back.png
 public/uploads/projects/juanyun-tech/acunit-v21-main-front.png
 public/uploads/projects/juanyun-tech/acunit-v21-main-pcb.pdf

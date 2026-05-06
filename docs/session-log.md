@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Added selected AC unit firmware source evidence to the current AC unit control platform and firmware note.
+- Files changed: published selected V0.5 `product_acunit` README, PINOUT, IOC, release notes, App/Service/BSP source files, and linked them from the AC unit project/note while excluding HAL/CMSIS vendor trees and binary build artifacts.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Added a base unit component datasheet review note and published the selected datasheet PDFs as supporting evidence.
 - Files changed: added `content/notes/juanyun-baseunit-component-datasheets.mdx`, linked it from the base unit project/note, and added normalized public filenames for the eight base unit component datasheets.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
