@@ -2,6 +2,12 @@
 
 Append-only chronology for meaningful project milestones. Keep detailed current facts in `MEMORY.md`.
 
+## 2026-05-07
+
+- Summary: Ran `/neat` for a cross-device handoff cleanup after the final portfolio review commit reached `main`.
+- Files changed: updated `MEMORY.md` with the `3c14b80` handoff commit and refreshed the known-good verification date.
+- Verification: repository docs were checked for stale branch wording and relative-date drift; content reference validation passed for 11 projects, 18 public notes, and 11 media items; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
 ## 2026-05-06
 
 - Summary: Completed the final handoff code review on `main` before continuing development on another computer.
