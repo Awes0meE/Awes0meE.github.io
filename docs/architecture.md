@@ -59,11 +59,11 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state after the Juanyun import as of `2026-05-06`:
+Current content state on `main` as of the `v0.3.0` release:
 
 - 10 project files total, including 7 Juanyun project pages;
 - 14 note files total, including 9 Juanyun notes;
-- on `feature/note-visibility`, Juanyun notes are public, while public Juanyun assets are limited to approved screenshots/renders and one prototype demo video.
+- Juanyun notes are public, while public Juanyun assets are limited to approved screenshots/renders and one prototype demo video.
 
 ## Rendering Notes
 
@@ -82,7 +82,7 @@ The language toggle is intentionally lightweight:
 - `app/globals.css` hides `.lang-en` or `.lang-zh` based on `html[data-lang]`.
 - The app remains statically generated; language switching does not require dynamic routes, middleware, cookies, or server-side rendering.
 
-Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
+Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings, hide language-detected body blocks, and show a fallback notice when one body language is still missing. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
 
 ## Deployment
 

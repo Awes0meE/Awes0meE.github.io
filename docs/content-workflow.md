@@ -4,7 +4,7 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review `content/juanyun-tech` attachments before merging to `main`.
+1. Keep reviewing Juanyun public attachments after the `v0.3.0` merge to `main`.
 2. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
 3. `PID Starter Kit`
 4. `SAT301 Graduation Thesis`
@@ -144,12 +144,13 @@ Use `titleZh` and `captionZh` when a media card should switch cleanly between En
 
 ## Language Switching
 
-The website has a top-right `EN / 简中` language switch.
+The website has a top-right English / Simplified Chinese language switch. The default language is Simplified Chinese unless the visitor has saved English in browser `localStorage`.
 
 - Use `BilingualText` for fixed labels in TSX files.
 - Keep `title/titleZh` and `summary/summaryZh` complete for projects and notes.
 - Use `titleZh/captionZh` in `content/media.json` for media cards.
-- Long MDX body content is not automatically translated. Add bilingual body sections manually when an article needs both languages.
+- `ContentRenderer` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks, and show a fallback notice when one body language is still missing.
+- Long MDX body content is not automatically machine-translated. Add real bilingual body sections manually when an article needs both languages.
 
 ## Writing Standard
 
@@ -226,8 +227,8 @@ git push origin main
 
 Vercel will redeploy automatically.
 
-For draft content branches such as `content/juanyun-tech`, push that branch and review attachments before merging:
+For draft content branches, push the branch and review attachments before merging:
 
 ```powershell
-git push origin content/juanyun-tech
+git push origin my-content-branch
 ```

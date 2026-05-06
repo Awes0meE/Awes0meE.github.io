@@ -140,19 +140,20 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - `components/bilingual-text.tsx` renders paired English/Chinese text and CSS in `app/globals.css` hides the inactive language.
 - Projects and notes use existing `title/titleZh` and `summary/summaryZh` fields.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
-- MDX body content is not automatically translated. Add bilingual body sections manually when a project/note needs full two-language article text.
+- `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks, and show a fallback notice when one body language is still missing.
+- MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text.
 
-## Current Content Branch
+## Current Main Content State
 
-`content/juanyun-tech` is a draft content branch for materials from:
+Juanyun Technology content has been merged into `main` for the `v0.3.0` release. It was originally drafted from:
 
 ```text
 F:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
-As of `2026-05-06`, the Juanyun content set contains 7 Juanyun project pages and 9 Juanyun notes after removing pure datasheet/manual/manufacturing-export notes from the public note set.
+As of `2026-05-06`, the public content set contains 7 Juanyun project pages and 9 Juanyun notes after removing pure datasheet/manual/manufacturing-export notes from the public note set.
 
-On branch `feature/note-visibility`, Juanyun notes are visible, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, company firmware source dumps, desktop source dumps, internal manufacturing packages, invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, or generated build outputs without explicit desensitization review.
+Juanyun notes are visible on the public site, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, company firmware source dumps, desktop source dumps, internal manufacturing packages, invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, or generated build outputs without explicit desensitization review.
 
 ## Visual Direction
 

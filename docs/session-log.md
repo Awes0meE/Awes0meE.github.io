@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Merged `feature/note-visibility` into `main` and prepared release `v0.3.0`.
+- Files changed: synchronized release documentation with the merged mainline state, including Juanyun public/private boundaries, bilingual language switching behavior, UTF-8 workspace policy, and release tag guidance.
+- Verification: release checks were rerun after the merge before pushing `main` and the release tag.
+
+## 2026-05-06
+
 - Summary: Cleaned up local preview troubleshooting after a corrupted Next.js `.next` development cache caused Juanyun note pages to fail with a missing `vendor-chunks/esprima.js` module.
 - Files changed: documented the recovery path in `README.md`, `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md`; clarified that the error comes from local cache corruption around `gray-matter -> js-yaml -> esprima`, not from broken MDX note content.
 - Verification: stopped stale project Next.js processes, deleted `.next/`, restarted `npm run dev`, and confirmed all 9 Juanyun note routes returned `200`.

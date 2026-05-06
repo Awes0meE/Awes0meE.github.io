@@ -115,13 +115,12 @@ Use `projectSlug` on notes and media items when they should appear as related ma
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place company Gerber, schematic, BOM/PnP, EDA/CAD source, full firmware source, invoice, reimbursement, installer, vendor, or build-output files there unless they have been reviewed and desensitized.
 
-Current draft content branch:
+Current release content state:
 
-- `content/juanyun-tech`
-- Contains Juanyun Technology project pages, development notes, media entries, and a small approved media set under `public/uploads/projects/juanyun-tech/`.
-- Review all public attachments before merging this branch to `main`; raw board/manufacturing/source files should stay outside the served app unless explicitly desensitized.
+- Juanyun Technology project pages, development notes, media entries, and a small approved media set live on `main`.
+- Keep reviewing public attachments before future releases; raw board/manufacturing/source files should stay outside the served app unless explicitly desensitized.
 - Do not publish private financial, billing, credential, installer, vendor, or build-output files.
-- On `feature/note-visibility`, Juanyun notes are public, while raw board/manufacturing/source files are not served from `public/uploads/`; only approved screenshots/renders and the prototype demo video remain website-accessible.
+- Juanyun notes are public, while raw board/manufacturing/source files are not served from `public/uploads/`; only approved screenshots/renders and the prototype demo video remain website-accessible.
 
 ## Deployment
 
@@ -153,12 +152,14 @@ Expected result for this version:
 
 ## Release Tags
 
+Current release: `v0.3.0`.
+
 Use semantic version tags:
 
 ```bash
-git tag -a v0.1.0 -m "v0.1.0 portfolio rebuild"
+git tag -a v0.3.0 -m "v0.3.0 bilingual content and visibility release"
 git push origin main
-git push origin v0.1.0
+git push origin v0.3.0
 ```
 
 ---
@@ -262,11 +263,10 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。公司 Gerber、原理图、BOM/PnP、EDA/CAD 源文件、完整固件源码、发票、报销、安装包、vendor 包或 build 输出文件，在没有脱敏审查前不要放进去。
 
-当前草稿内容分支：
+当前发布内容状态：
 
-- `content/juanyun-tech`
-- 包含卷云科技项目页、开发笔记、媒体条目和 `public/uploads/projects/juanyun-tech/` 下少量已审核截图、渲染图和演示视频。
-- 合并到 `main` 前需要复查所有公开附件；Gerber、原理图、BOM/PnP、EDA/CAD、源码和内部制造资料不要直接作为网站静态文件发布。
+- 卷云科技项目页、开发笔记、媒体条目和少量已审核截图、渲染图、演示视频已经在 `main` 上。
+- 后续发版前仍然要复查所有公开附件；Gerber、原理图、BOM/PnP、EDA/CAD、源码和内部制造资料不要直接作为网站静态文件发布。
 - 不要发布私密财务、开票、证明、安装包、vendor 包或 build 输出文件。
 
 ## 部署
@@ -304,10 +304,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
+当前版本：`v0.3.0`。
+
 使用语义化版本标签：
 
 ```bash
-git tag -a v0.1.0 -m "v0.1.0 portfolio rebuild"
+git tag -a v0.3.0 -m "v0.3.0 bilingual content and visibility release"
 git push origin main
-git push origin v0.1.0
+git push origin v0.3.0
 ```

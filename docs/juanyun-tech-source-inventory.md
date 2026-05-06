@@ -12,7 +12,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-On `feature/note-visibility`, the website keeps the Juanyun notes public, but only serves a small approved media set from:
+On `main` for release `v0.3.0`, the website keeps the Juanyun notes public, but only serves a small approved media set from:
 
 ```text
 public/uploads/projects/juanyun-tech/
@@ -49,13 +49,13 @@ content/notes/juanyun-*.mdx
 content/media.json
 ```
 
-The current branch contains 7 Juanyun project pages and 9 Juanyun notes. Notes use `visibility: public` or `visibility: private`; on this branch the remaining Juanyun notes are public so their writing can be reviewed in the live portfolio layout. Pure datasheet/manual/manufacturing-export notes were removed from the public note set.
+The current public site contains 7 Juanyun project pages and 9 Juanyun notes. Notes use `visibility: public` or `visibility: private`; the remaining Juanyun notes are public so their writing can be reviewed in the live portfolio layout. Pure datasheet/manual/manufacturing-export notes were removed from the public note set.
 
 ## Source Folder Summary
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Used for public case-study writing, block diagrams, PCB render screenshots, parameter screenshots, and AC unit notes. Raw schematic, Gerber, BOM/PnP, EDA source, firmware source, and manufacturing exports are not served by the website on `feature/note-visibility`. |
+| `Current_Product_ACUnit_Project` | 1210 | Used for public case-study writing, block diagrams, PCB render screenshots, parameter screenshots, and AC unit notes. Raw schematic, Gerber, BOM/PnP, EDA source, firmware source, and manufacturing exports are not served by the website. |
 | `Current_Product_BaseUnit_Project` | 1659 | Used for base-unit firmware narrative and learning notes. Raw STM32 project files, source code, vendor packages, and build output are not served. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Used as background for the DHT11/AM2302 small-board project note. The original PDF is not served on the current branch. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Used for the DIY cooling prototype project and note. Current public evidence is limited to two 3D-print preview images and one prototype demo video. Gerber, EasyEDA, DWG, 3MF, source code, installers, vendor packages, and build outputs are not served. |

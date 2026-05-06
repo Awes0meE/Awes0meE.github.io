@@ -21,6 +21,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
 - `2026-05-06`: Added a site-wide English/Simplified Chinese language toggle. The implementation uses `html[data-lang]`, `components/language-toggle.tsx`, `components/bilingual-text.tsx`, and optional `titleZh/captionZh` media metadata without adding a heavy i18n dependency.
 - `2026-05-06`: The language bootstrap script was moved out of manual `<head>` rendering and into the start of `<body>` to reduce hydration mismatch noise from browser-extension-injected head scripts.
+- `2026-05-06`: `feature/note-visibility` was merged into `main` for release `v0.3.0`, covering Juanyun public/private visibility, site-wide bilingual switching, UTF-8 workspace policy, and public asset cleanup.
 - `2026-05-06`: Local note-route failures such as `Cannot find module './vendor-chunks/esprima.js'` were traced to corrupted `.next` development cache, not broken note content. Stop project Node/Next.js processes, delete `.next/`, then restart `npm run dev`.
 
 ## Stable Decisions
