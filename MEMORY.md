@@ -43,6 +43,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Full review of the experimental project asset browser hardened public-file handling: non-allowlisted local Juanyun files were moved out of `public/uploads/projects/juanyun-tech` to `D:\XJTLU\XJTLU_Portfolio_private\juanyun-tech-public-quarantine-20260507`; content validation now fails if extra files reappear there; browser previews gained directory/file caps, aggregate text-preview caps, strict UTF-8 reads, Markdown relative-link resolution, safer active-upload handling, and mobile preview scrolling.
 - `2026-05-07`: Release `v0.7.0` promotes the two-pane public project-file browser to `main`, keeps the 50-item media/gallery content state, and records the public-asset hardening work as part of the release boundary.
 - `2026-05-07`: Added repo-local `AddProject.skill` / `skills/add-project/SKILL.md` to make future local-folder project imports repeatable: branch first, audit source files, curate public evidence, create bilingual notes/project/media, review, verify, push each milestone, and run `/neat` cleanup.
+- `2026-05-07`: Homepage identity polish after `v0.7.0`: the top-left wordmark now reads `Awes0meE / 66CCFF Lab`, the hero/footer can still use `66CCFF Labs`, the homepage profile avatar uses `public/uploads/projects/avatar.jpg`, the Chinese XJTLU school label is `智能工程学院`, and the homepage current date range starts at `2025.08`.
 
 ## Stable Decisions
 
@@ -73,7 +74,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Site Identity
 
-- Brand/domain: `66ccff Labs` can be used as a lab-style wrapper, but the personal portfolio identity remains `Awes0meE / Li Zhiyi`.
+- Brand/domain: `66CCFF Lab(s)` can be used as a lab-style wrapper. The top-left site wordmark is `Awes0meE / 66CCFF Lab`; the hero/footer may use `Awes0meE / 66CCFF Labs`; the personal identity and metadata can still refer to `Awes0meE / Li Zhiyi`.
 - Visual tone: engineering academic, precise, bilingual, clean, evidence-driven.
 - Avoid returning to generic template-blog styling.
 

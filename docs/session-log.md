@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Ran final `/neat` after homepage identity polish.
+- Files changed: recorded the post-`v0.7.0` homepage identity state in `MEMORY.md`: top-left wordmark `Awes0meE / 66CCFF Lab`, homepage avatar path, Chinese school label `智能工程学院`, and `2025.08` current date-range start.
+- Verification: `git diff --check`, `npm.cmd run lint`, and final worktree cleanup checks passed.
+
+## 2026-05-07
+
 - Summary: Added a repo-local `AddProject.skill` workflow for future project imports.
 - Files changed: created `skills/add-project/SKILL.md`, `skills/add-project/references/source-audit.md`, `skills/add-project/references/content-build.md`, and root `AddProject.skill`; updated `docs/agent-skills.md` and `MEMORY.md`; added `.skill` files to the UTF-8 validation extension list.
 - Verification: skill structure validation, `git diff --check`, `npm.cmd run validate-encoding`, `npm.cmd run lint`, and `npm.cmd run build` passed.
