@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function parseInline(text: string) {
   const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
   const parts: React.ReactNode[] = [];
@@ -35,6 +37,30 @@ export function ContentRenderer({ source }: { source: string }) {
     <div>
       {blocks.map((block, index) => {
         const trimmed = block.trim();
+        const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+
+        if (imageMatch) {
+          const [, alt, src] = imageMatch;
+
+          return (
+            <figure key={index} className="mt-8 overflow-hidden rounded-lg border border-line bg-chalk">
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
+                  className="object-contain p-2"
+                />
+              </div>
+              {alt ? (
+                <figcaption className="border-t border-line bg-white px-4 py-3 text-sm text-graphite">
+                  {alt}
+                </figcaption>
+              ) : null}
+            </figure>
+          );
+        }
 
         if (trimmed.startsWith("## ")) {
           return (

@@ -32,3 +32,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Improved content sorting on the Juanyun branch.
 - Files changed: updated `lib/content.ts` so project and note lists sort by the leading date inside date ranges such as `2026-02 to 2026-05`, instead of relying on unstable `Date.parse()` behavior.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Added inline image rendering for portfolio notes.
+- Files changed: updated `components/content-renderer.tsx` to render simple Markdown image blocks, then embedded key Juanyun board, SOP, and DIY cooling images into the project and notes.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
