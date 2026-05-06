@@ -215,7 +215,7 @@ assetPaths:
 
 If `featured: true`, the project appears on the homepage featured section.
 
-If `assetPaths` is set, the project page lists uploaded public files from those paths. Images and videos show previews, Markdown / text documents render as readable page content, source/code files render in code frames, and binary files open through direct links.
+If `assetPaths` is set, the project page shows uploaded public files in a file browser. The left side is a project-file index, and the right side previews the selected file. Images and videos show inline previews, Markdown / text documents render as readable page content, source/code files render in code frames, PDFs embed from page one where the browser supports it, and binary files keep direct open links.
 
 ## 如何添加新项目
 
@@ -227,7 +227,7 @@ If `assetPaths` is set, the project page lists uploaded public files from those 
 
 如果把 `featured` 设置为 `true`，这个项目会显示在首页精选项目区域。
 
-如果设置 `assetPaths`，项目页会列出这些公开路径下的上传资料。图片和视频会预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，二进制文件会提供直接打开链接。
+如果设置 `assetPaths`，项目页会用文件浏览器展示这些公开路径下的上传资料。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，二进制文件保留直接打开链接。
 
 ## How To Add Images Or Videos
 
@@ -251,7 +251,7 @@ Use it in content with a public path:
 
 For media gallery items, edit `content/media.json`. Add `titleZh` and `captionZh` if the card needs Chinese text for the language switch, and use `projectSlug` so the card can show its source project.
 
-For project-file archives, add the file or folder path to the project's `assetPaths` field. This is the preferred way to show code snippets, Markdown notes, PDFs, Gerber archives, EDA files, spreadsheets, Word documents, and other project files inside a project page.
+For project-file archives, add the file or folder path to the project's `assetPaths` field. This is the preferred way to show code snippets, Markdown notes, PDFs, Gerber archives, EDA files, spreadsheets, Word documents, and other project files inside a project-page browser.
 
 Keep uploaded text-like files in UTF-8 before publishing them. This includes Markdown, TXT, CSV, source code, XML, HTML, and EDA/manufacturing text exports. The site now checks Git-managed text files with `npm run validate-encoding`.
 
@@ -277,7 +277,7 @@ public/uploads/projects/pid/demo-board.jpg
 
 如果要添加到媒体库，编辑 `content/media.json`。如果媒体卡片需要支持中文切换，补上 `titleZh` 和 `captionZh`；如果媒体属于某个项目，补上 `projectSlug`。
 
-如果要把资料展示在某个项目页，把文件或文件夹路径加入该项目的 `assetPaths`。这是展示代码片段、Markdown 笔记、PDF、Gerber、EDA、表格、Word 文档和其他项目文件的推荐方式。
+如果要把资料展示在某个项目页，把文件或文件夹路径加入该项目的 `assetPaths`。这是把代码片段、Markdown 笔记、PDF、Gerber、EDA、表格、Word 文档和其他项目文件放进项目页文件浏览器的推荐方式。
 
 上传前要把文本类文件统一成 UTF-8，包括 Markdown、TXT、CSV、源码、XML、HTML、EDA/制造导出的文本资料。网站现在会通过 `npm run validate-encoding` 检查 Git 管理的文本文件编码。
 

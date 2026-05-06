@@ -132,7 +132,7 @@ Normal fenced code blocks are rendered as shared technical evidence. If a whole 
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
-Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. Images and videos are previewed; Markdown and text documents render as readable page content; source/code files render in code frames; binary files such as PDFs, spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents are linked directly.
+Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. The project page shows a left-side file index and a right-side preview panel. Images and videos preview inline; Markdown and text documents render as readable page content; source/code files render in code frames; PDFs embed from page one where the browser supports it; binary files such as spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents keep direct open links.
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
@@ -296,7 +296,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
-项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料直接列到项目页。图片和视频会预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF、表格、Gerber、STEP、EasyEDA、Word 等二进制资料会作为直接链接。
+项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料放进项目页的文件浏览器。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，表格、Gerber、STEP、EasyEDA、Word 等二进制资料保留直接打开链接。
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 

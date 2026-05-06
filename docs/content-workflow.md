@@ -49,7 +49,7 @@ assetPaths:
 
 Set `featured: true` only for projects that should appear on the homepage.
 
-Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render Markdown / text documents as readable article content, render small source/code files in code frames, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files. Prefer explicit file lists over broad directories when a folder contains Notion stubs, unfinished exports, or other files that should not appear as project evidence.
+Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages show these files in a two-pane browser: the left side is a project-file index, and the right side previews the currently selected file. Images and videos preview inline, Markdown / text documents render as readable article content, small source/code files render in code frames, PDFs embed from page one where the browser supports it, and spreadsheets, EDA/CAD files, fabrication archives, and other binary files keep a direct open action. Prefer explicit file lists over broad directories when a folder contains Notion stubs, unfinished exports, or other files that should not appear as project evidence.
 
 ## Add Or Edit A Note
 
