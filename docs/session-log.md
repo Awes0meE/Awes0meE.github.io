@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Ran `/neat` after the English UI and UTF-8 enforcement commit, then cleaned the remaining human guide wording.
+- Files changed: updated `USER_GUIDE.md` so media wording, language-toggle wording, publish checks, maintenance workflow, and upload guidance include the current UTF-8 encoding gate; tightened README command comments so `npm run lint` is described as ESLint plus content and encoding validation.
+- Verification: repository docs, root Markdown guides, stale command wording, and relative-time wording were reviewed; `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-05-07
+
 - Summary: Audited the English interface and made the UTF-8 encoding policy executable.
 - Files changed: switched list-page metadata titles to English; removed English-mode Chinese residue from the language toggle and project-file cards; tightened `ContentRenderer` language detection for Chinese source-text blocks; made Chinese-only uploaded documents show an English note-link panel in English mode while keeping the original inline in Chinese mode; added `scripts/validate-encoding.mjs`; added the encoding gate to `npm.cmd run lint`; normalized public FOC source/PnP text evidence to UTF-8; updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/content-workflow.md`, and `docs/environment-toolchain.md` with the strict UTF-8 rule.
 - Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, `npm.cmd audit --omit=dev`, and a local production English UI audit over 30 routes passed.

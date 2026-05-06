@@ -88,7 +88,7 @@ Local troubleshooting:
 
 ```bash
 npm run dev              # Start local development server
-npm run lint             # Run ESLint and content validation
+npm run lint             # Run ESLint, content validation, and encoding validation
 npm run build            # Build the production site
 npm run start            # Start a production server after build
 npm run typecheck        # Run TypeScript without emitting files
@@ -272,7 +272,7 @@ http://127.0.0.1:3000
 
 ```bash
 npm run dev       # 启动本地开发服务器
-npm run lint      # 运行 ESLint 和内容校验
+npm run lint      # 运行 ESLint、内容校验和编码校验
 npm run build     # 构建生产版本
 npm run start     # 构建后启动生产服务器
 npm run typecheck # 运行 TypeScript 类型检查

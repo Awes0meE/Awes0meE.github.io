@@ -11,7 +11,7 @@ The site contains:
 - Homepage: personal introduction and featured work
 - Work: project case studies
 - Notes: learning notes and technical writing
-- Media: images, videos, dashboards, and experiment materials
+- Media: images, videos, board renders, and experiment materials
 - About: profile and contact information
 
 ## 这个网站是什么
@@ -23,7 +23,7 @@ The site contains:
 - 首页：个人介绍和精选项目
 - Work / 项目：项目案例
 - Notes / 笔记：学习笔记和技术记录
-- Media / 媒体：图片、视频、仪表盘和实验材料
+- Media / 媒体：图片、视频、板卡渲染图和实验材料
 - About / 关于：个人信息和联系方式
 
 ## How To Visit The Website On This Computer
@@ -104,13 +104,13 @@ https://awes0mee-portfolio.vercel.app/
 
 ## Language Switch
 
-The top-right `EN / 简中` button switches the main website UI between English and Simplified Chinese. The choice is saved in the browser, so refreshing the page keeps the selected language.
+The top-right `EN / ZH` or `EN / 简中` button switches the main website UI between English and Simplified Chinese. The choice is saved in the browser, so refreshing the page keeps the selected language.
 
 Long note or project body text is not automatically machine-translated. If a long article needs both languages, edit the MDX content manually.
 
 ## 语言切换
 
-网页右上角的 `EN / 简中` 按钮可以把主要界面在英文和简体中文之间切换。选择会保存在浏览器里，刷新页面后仍然保持上次选择。
+网页右上角的 `EN / 简中` 或 `EN / ZH` 按钮可以把主要界面在英文和简体中文之间切换。选择会保存在浏览器里，刷新页面后仍然保持上次选择。
 
 长篇项目正文和笔记正文不会自动机翻。如果某篇文章需要完整中英双语，需要手动编辑对应的 MDX 内容。
 
@@ -253,6 +253,8 @@ For media gallery items, edit `content/media.json`. Add `titleZh` and `captionZh
 
 For project-file archives, add the file or folder path to the project's `assetPaths` field. This is the preferred way to show code snippets, Markdown notes, PDFs, Gerber archives, EDA files, spreadsheets, Word documents, and other project files inside a project page.
 
+Keep uploaded text-like files in UTF-8 before publishing them. This includes Markdown, TXT, CSV, source code, XML, HTML, and EDA/manufacturing text exports. The site now checks Git-managed text files with `npm run validate-encoding`.
+
 ## 如何添加图片或视频
 
 把图片或视频文件放到：
@@ -277,6 +279,8 @@ public/uploads/projects/pid/demo-board.jpg
 
 如果要把资料展示在某个项目页，把文件或文件夹路径加入该项目的 `assetPaths`。这是展示代码片段、Markdown 笔记、PDF、Gerber、EDA、表格、Word 文档和其他项目文件的推荐方式。
 
+上传前要把文本类文件统一成 UTF-8，包括 Markdown、TXT、CSV、源码、XML、HTML、EDA/制造导出的文本资料。网站现在会通过 `npm run validate-encoding` 检查 Git 管理的文本文件编码。
+
 ## What Not To Publish
 
 Do not put private or unnecessary files into the public website folder. Avoid publishing invoices, reimbursements, billing records, internship proof documents, executable installers, downloaded vendor packages, and generated build outputs.
@@ -300,13 +304,14 @@ Before sharing a new version, run:
 ```bash
 npm run lint
 npm run validate-content
+npm run validate-encoding
 npm run typecheck
 npm run build
 ```
 
-On Windows PowerShell, use the `npm.cmd` form of the same commands. Full machine setup is documented in `docs/environment-toolchain.md`.
+On Windows PowerShell, use the `npm.cmd` form of the same commands. `npm run lint` already includes content validation and encoding validation, but the individual commands are useful when checking one layer. Full machine setup is documented in `docs/environment-toolchain.md`.
 
-If both checks and the build pass, the site is ready to publish.
+If checks and the build pass, the site is ready to publish.
 
 ## 发布前如何检查
 
@@ -315,18 +320,21 @@ If both checks and the build pass, the site is ready to publish.
 ```bash
 npm run lint
 npm run validate-content
+npm run validate-encoding
 npm run typecheck
 npm run build
 ```
 
-内容校验和构建都通过，就说明网站可以发布。
+在 Windows PowerShell 里使用同样命令的 `npm.cmd` 形式。`npm run lint` 已经包含内容校验和编码校验，但单独命令方便只检查其中一层。
+
+校验和构建都通过，就说明网站可以发布。
 
 ## Suggested Maintenance Workflow
 
 1. Start local preview with `npm run dev`.
 2. Modify content or pages.
 3. Check the website in the browser.
-4. Run `npm run lint`, `npm run validate-content`, `npm run typecheck`, and `npm run build`.
+4. Run `npm run lint`, `npm run validate-content`, `npm run validate-encoding`, `npm run typecheck`, and `npm run build`.
 5. Commit changes to Git.
 6. Push to GitHub.
 7. Let Vercel deploy the public version.
@@ -336,7 +344,7 @@ npm run build
 1. 用 `npm run dev` 启动本地预览。
 2. 修改内容或页面。
 3. 在浏览器检查网站效果。
-4. 运行 `npm run lint`、`npm run validate-content` 和 `npm run build`。
+4. 运行 `npm run lint`、`npm run validate-content`、`npm run validate-encoding`、`npm run typecheck` 和 `npm run build`。
 5. 提交 Git 版本。
 6. 推送到 GitHub。
 7. 让 Vercel 自动部署公开版本。
