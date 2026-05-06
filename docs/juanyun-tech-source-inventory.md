@@ -28,7 +28,7 @@ public/uploads/projects/juanyun-tech/
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V1.0/V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, and manufacturing exports. |
+| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V1.0/V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, manufacturing exports, and selected V2.1 component datasheets. |
 | `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
@@ -63,6 +63,11 @@ public/uploads/projects/juanyun-tech/acunit-v10-dxf.dxf
 public/uploads/projects/juanyun-tech/acunit-v10-gerber.zip
 public/uploads/projects/juanyun-tech/acunit-v10-step.step
 public/uploads/projects/juanyun-tech/acunit-v21-main-back.png
+public/uploads/projects/juanyun-tech/acunit-v21-2n7002-datasheet.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-ams1117-3v3-datasheet.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-dht11-datasheet.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-esp01s-wifi-datasheet.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-lgs5145-dcdc-datasheet.pdf
 public/uploads/projects/juanyun-tech/acunit-v20-main-bom.xlsx
 public/uploads/projects/juanyun-tech/acunit-v20-main-gerber.zip
 public/uploads/projects/juanyun-tech/acunit-v20-main-pcb.pdf
@@ -81,6 +86,7 @@ public/uploads/projects/juanyun-tech/acunit-v21-main-gerber.zip
 public/uploads/projects/juanyun-tech/acunit-v21-main-pick-place.csv
 public/uploads/projects/juanyun-tech/acunit-v21-main-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-main-schematic.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg
 public/uploads/projects/juanyun-tech/acunit-v21-power-back.png
 public/uploads/projects/juanyun-tech/acunit-v21-power-bom.xlsx
 public/uploads/projects/juanyun-tech/acunit-v21-power-front.png
@@ -88,7 +94,11 @@ public/uploads/projects/juanyun-tech/acunit-v21-power-gerber.zip
 public/uploads/projects/juanyun-tech/acunit-v21-power-pick-place.csv
 public/uploads/projects/juanyun-tech/acunit-v21-power-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-power-schematic.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg
+public/uploads/projects/juanyun-tech/acunit-v21-smaj12a-tvs-datasheet.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-smbj30a-tvs-datasheet.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-system-block.png
+public/uploads/projects/juanyun-tech/acunit-v21-tps54560-dcdc-datasheet.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-ui-back.png
 public/uploads/projects/juanyun-tech/acunit-v21-ui-bom.xlsx
 public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
@@ -96,6 +106,7 @@ public/uploads/projects/juanyun-tech/acunit-v21-ui-gerber.zip
 public/uploads/projects/juanyun-tech/acunit-v21-ui-pick-place.csv
 public/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf
+public/uploads/projects/juanyun-tech/acunit-v21-uln2003a-darlington-datasheet.pdf
 public/uploads/projects/juanyun-tech/baseunit-app.c
 public/uploads/projects/juanyun-tech/baseunit-32k-crystal-datasheet.pdf
 public/uploads/projects/juanyun-tech/baseunit-ao4407-mosfet-datasheet.pdf

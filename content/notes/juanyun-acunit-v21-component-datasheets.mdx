@@ -1,0 +1,45 @@
+---
+title: "AC Unit V2.1 Component Datasheet Review"
+titleZh: "外机板 V2.1 关键器件资料整理"
+summary: "A supporting note for AC unit V2.1 component datasheets, mapping fan, pressure transmitter, Wi-Fi, DHT11, power, EEV driver, MOSFET, and TVS documents to board and firmware constraints."
+summaryZh: "外机板 V2.1 关键器件资料支撑笔记：把风扇、压力变送器、Wi-Fi、DHT11、电源、电子膨胀阀驱动、MOSFET 和 TVS 资料映射到硬件/固件约束。"
+date: "2026-05-06"
+tags: ["Datasheet", "PCB", "Power", "Interface"]
+projectSlug: "juanyun-acunit-control-platform"
+---
+
+## Why This Note Exists / 为什么写这篇
+
+The V2.1 board split is only meaningful if the component constraints are traceable. I grouped the key datasheets here so the project page can explain why the board needs separate power handling, protected signal paths, Wi-Fi reserve, EEV driving, fan control, and sensor inputs.
+
+V2.1 拆成主控板、分电板、交互板，不只是为了排版更整齐，而是因为器件约束会把系统自然拆开。我把关键规格书整理在这里，方便后续把板级设计和固件联调讲清楚。
+
+## What I Mapped / 我关注的内容
+
+- PWM fan and pressure transmitter parameters define signal ranges and control/measurement expectations.
+- ESP-01S affects UART allocation, 3.3 V supply stability, antenna clearance, and firmware communication reserve.
+- TPS54560, LGS5145, and AMS1117 affect the power tree and local regulation strategy.
+- ULN2003A explains the EEV/stepper drive path and why the firmware needs a stepped control abstraction.
+- DHT11, 2N7002, SMAJ12A, and SMBJ30A connect the low-speed sensor path, level/signal conditioning, and surge/ESD protection discussion.
+
+## Evidence / 证据
+
+![PWM fan parameter sheet](/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg)
+
+![Pressure transmitter parameter sheet](/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg)
+
+- [DHT11 datasheet](/uploads/projects/juanyun-tech/acunit-v21-dht11-datasheet.pdf)
+- [ESP-01S Wi-Fi module datasheet](/uploads/projects/juanyun-tech/acunit-v21-esp01s-wifi-datasheet.pdf)
+- [TPS54560 DC-DC datasheet](/uploads/projects/juanyun-tech/acunit-v21-tps54560-dcdc-datasheet.pdf)
+- [LGS5145 DC-DC datasheet](/uploads/projects/juanyun-tech/acunit-v21-lgs5145-dcdc-datasheet.pdf)
+- [ULN2003A Darlington array datasheet](/uploads/projects/juanyun-tech/acunit-v21-uln2003a-darlington-datasheet.pdf)
+- [AMS1117-3.3 LDO datasheet](/uploads/projects/juanyun-tech/acunit-v21-ams1117-3v3-datasheet.pdf)
+- [2N7002 MOSFET datasheet](/uploads/projects/juanyun-tech/acunit-v21-2n7002-datasheet.pdf)
+- [SMAJ12A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smaj12a-tvs-datasheet.pdf)
+- [SMBJ30A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smbj30a-tvs-datasheet.pdf)
+
+## Reflection / 复盘
+
+This note makes the case study less like a picture gallery and more like an engineering archive. The next step is to connect each datasheet group to a concrete design decision in the schematic: connector choice, protection device placement, power rail margin, and firmware initialization order.
+
+这篇让项目不只是图片展示，而更像工程归档。后续我应该把每组器件资料继续映射到原理图决策：接口怎么选、保护器件放哪里、电源裕量怎么估、固件初始化为什么按那个顺序来。

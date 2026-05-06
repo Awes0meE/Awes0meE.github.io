@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Added an AC unit V2.1 component datasheet review note for key power, sensing, Wi-Fi, fan, EEV driver, MOSFET, and TVS evidence.
+- Files changed: added `content/notes/juanyun-acunit-v21-component-datasheets.mdx`, linked it from the AC unit project/board note, and published selected V2.1 datasheets plus fan/pressure-transmitter parameter images.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Added an AC unit V1.0/V2.0 hardware revision archive note with earlier mechanical and manufacturing exports.
 - Files changed: added `content/notes/juanyun-acunit-hardware-revision-archive.mdx`, linked it from the AC unit project/board note, and published normalized V1.0 BOM/Gerber/DXF/STEP plus V2.0 PCB/BOM/Gerber/PnP files.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
