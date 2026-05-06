@@ -75,6 +75,14 @@ content/notes/
 
 Open a `.mdx` file, modify the English and Chinese text, save it, then refresh the browser.
 
+Notes have a visibility switch in the file header:
+
+```yaml
+visibility: public
+```
+
+Use `public` when the note can appear on the website. Use `private` when the note is still a draft or should not be visible to normal visitors. This only hides the note from the website; it does not make the source file private if the GitHub repository is public.
+
 ## How To Add A New Project
 
 1. Copy an existing file from `content/projects/`.
@@ -138,6 +146,8 @@ Add a new object with title, type, thumbnail, date, and caption.
 ## What Not To Publish
 
 Do not put private or unnecessary files into the public website folder. Avoid publishing invoices, reimbursements, billing records, internship proof documents, executable installers, downloaded vendor packages, and generated build outputs.
+
+For company projects, also avoid putting Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, firmware source dumps, desktop source dumps, and internal manufacturing packages under `public/uploads/` unless they have been reviewed and desensitized. Files in `public/uploads/` are public after deployment even when no page links to them.
 
 ## How To Check Before Publishing
 
@@ -241,6 +251,14 @@ content/notes/
 
 打开 `.mdx` 文件，修改里面的中文和英文内容，保存后刷新浏览器即可看到变化。
 
+笔记文件头部有一个可见性开关：
+
+```yaml
+visibility: public
+```
+
+`public` 表示这篇笔记会显示在网站上；`private` 表示暂时隐藏，适合草稿或者暂时不想公开的内容。这个开关只控制网站显示，不代表 GitHub 仓库里的源文件也是私密的。
+
 ## 如何添加新项目
 
 1. 复制 `content/projects/` 里面已有的一个文件。
@@ -304,6 +322,8 @@ content/media.json
 ## 不要公开哪些文件
 
 不要把私密或没必要公开的文件放进网站公开目录。不要发布发票、报销单、开票资料、实习证明、exe 安装包、下载来的 vendor 包和编译生成物。
+
+公司项目还要额外谨慎：Gerber、原理图 PDF、BOM/PnP、EDA/CAD 源文件、固件源码、桌面端源码和内部制造资料不要直接放进 `public/uploads/`，除非已经明确脱敏审核过。`public/uploads/` 里的文件部署后就是公开静态文件，就算页面没有链接也不能当私密存储用。
 
 ## 发布前如何检查
 

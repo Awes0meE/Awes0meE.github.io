@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Ran `/neat` after pushing `feature/note-visibility`.
+- Files changed: reconciled `CODEX.md`, `MEMORY.md`, `README.md`, `USER_GUIDE.md`, and `docs/juanyun-tech-source-inventory.md` with the current Juanyun public boundary: notes are public, but website-accessible assets are limited to approved screenshots/renders and one prototype demo video.
+- Verification: checked note visibility frontmatter, listed current Juanyun public assets, confirmed the sensitive public-link scan stays empty, and confirmed no raw Juanyun files are tracked under the public upload folder at HEAD.
+
+## 2026-05-06
+
 - Summary: Adjusted the Juanyun public boundary before pushing `feature/note-visibility`.
 - Files changed: made Juanyun notes public, restored safe board/system screenshots, added board media entries, and kept raw PCB/manufacturing/source downloads out of `public/uploads/projects/juanyun-tech/`.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed. Production build now includes the Juanyun note pages while the sensitive file-link scan stays empty.

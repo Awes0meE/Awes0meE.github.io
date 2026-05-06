@@ -124,11 +124,9 @@ Media items live in `content/media.json` and require:
 F:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
-As of `2026-05-06`, that branch contains 7 Juanyun project pages, 13 Juanyun notes, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`.
+As of `2026-05-06`, the Juanyun content set contains 7 Juanyun project pages and 13 Juanyun notes.
 
-Before merging this branch to `main`, review all public PDFs, source files, CAD/EDA files, videos, and large binary attachments. Keep private documents out of the public app: invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
-
-On branch `feature/note-visibility`, Juanyun notes are visible, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, or company firmware source dumps without explicit desensitization review.
+On branch `feature/note-visibility`, Juanyun notes are visible, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, company firmware source dumps, desktop source dumps, internal manufacturing packages, invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, or generated build outputs without explicit desensitization review.
 
 ## Visual Direction
 

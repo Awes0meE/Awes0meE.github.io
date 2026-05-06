@@ -110,8 +110,8 @@ Important privacy rule: `visibility: private` hides a note from the website, but
 Current draft content branch:
 
 - `content/juanyun-tech`
-- Contains Juanyun Technology project pages, development notes, media entries, and technical assets under `public/uploads/projects/juanyun-tech/`.
-- Review all public attachments before merging this branch to `main`.
+- Contains Juanyun Technology project pages, development notes, media entries, and a small approved media set under `public/uploads/projects/juanyun-tech/`.
+- Review all public attachments before merging this branch to `main`; raw board/manufacturing/source files should stay outside the served app unless explicitly desensitized.
 - Do not publish private financial, billing, credential, installer, vendor, or build-output files.
 - On `feature/note-visibility`, Juanyun notes are public, while raw board/manufacturing/source files are not served from `public/uploads/`; only approved screenshots/renders and the prototype demo video remain website-accessible.
 
@@ -256,8 +256,8 @@ links:
 当前草稿内容分支：
 
 - `content/juanyun-tech`
-- 包含卷云科技项目页、开发笔记、媒体条目和 `public/uploads/projects/juanyun-tech/` 下的技术资产。
-- 合并到 `main` 前需要复查所有公开附件。
+- 包含卷云科技项目页、开发笔记、媒体条目和 `public/uploads/projects/juanyun-tech/` 下少量已审核截图、渲染图和演示视频。
+- 合并到 `main` 前需要复查所有公开附件；Gerber、原理图、BOM/PnP、EDA/CAD、源码和内部制造资料不要直接作为网站静态文件发布。
 - 不要发布私密财务、开票、证明、安装包、vendor 包或 build 输出文件。
 
 ## 部署

@@ -8,178 +8,79 @@ Source path inspected:
 F:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
-This document records how the raw source folder was mapped into the portfolio branch `content/juanyun-tech`.
+This document records how the raw Juanyun source folder is represented in the portfolio. It is a source-to-portfolio map, not permission to publish the raw source tree.
 
-## Public Portfolio Mapping
+## Current Public Boundary
 
-The public website content lives in:
+On `feature/note-visibility`, the website keeps the Juanyun notes public, but only serves a small approved media set from:
 
 ```text
-content/projects/juanyun-thermal-hardware.mdx
-content/projects/juanyun-acunit-control-platform.mdx
-content/projects/juanyun-baseunit-control-firmware.mdx
-content/projects/juanyun-dht-sensor-breakout-board.mdx
-content/notes/juanyun-*.mdx
-content/media.json
 public/uploads/projects/juanyun-tech/
 ```
+
+The current website-accessible files are:
+
+```text
+public/uploads/projects/juanyun-tech/acunit-v20-system-block.png
+public/uploads/projects/juanyun-tech/acunit-v21-main-back.png
+public/uploads/projects/juanyun-tech/acunit-v21-main-front.png
+public/uploads/projects/juanyun-tech/acunit-v21-power-back.png
+public/uploads/projects/juanyun-tech/acunit-v21-power-front.png
+public/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg
+public/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg
+public/uploads/projects/juanyun-tech/acunit-v21-system-block.png
+public/uploads/projects/juanyun-tech/acunit-v21-ui-back.png
+public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
+public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg
+public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg
+public/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4
+public/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg
+```
+
+No Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, firmware source files, manufacturing packages, or raw company document bundles should be present under `public/uploads/projects/juanyun-tech/` without explicit desensitization review.
+
+## Portfolio Content Mapping
+
+The public-facing writing lives in:
+
+```text
+content/projects/juanyun-*.mdx
+content/notes/juanyun-*.mdx
+content/media.json
+```
+
+The current branch contains 7 Juanyun project pages and 13 Juanyun notes. Notes use `visibility: public` or `visibility: private`; on this branch the Juanyun notes are public so their writing can be reviewed in the live portfolio layout.
 
 ## Source Folder Summary
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V1.0/V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, manufacturing exports, and selected V2.1 component datasheets. |
-| `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
-| `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
-| `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32/PlatformIO code, desktop C# source, EasyEDA/Gerber, acrylic DWG, 3MF slice, and 3D print previews. Executable installers, NuGet/vendor packages, and build outputs are not published. |
-| `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber, STEP model, BOM/PnP/interactive BOM, EasyEDA project, selected STM32F4/DRV8301 source files, and key datasheets. |
-| `Legacy_螺线管阀门开发_Project` | 818 | Standalone actuator/fan archive project plus public note; selected project source files and ULN2003 schematic are published, while vendor example packages are not. |
-| `Legacy_BLDC_QuietFan_Project` | 2 | Included in the actuator/fan archive project with BOM and EDA project attachment. |
-| `通用数据手册` | 3 | Supporting compressor/driver datasheet note for the AC unit control platform. |
+| `Current_Product_ACUnit_Project` | 1210 | Used for public case-study writing, block diagrams, PCB render screenshots, parameter screenshots, and AC unit notes. Raw schematic, Gerber, BOM/PnP, EDA source, firmware source, and manufacturing exports are not served by the website on `feature/note-visibility`. |
+| `Current_Product_BaseUnit_Project` | 1659 | Used for base-unit firmware narrative and learning notes. Raw STM32 project files, source code, vendor packages, and build output are not served. |
+| `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Used as background for the DHT11/AM2302 small-board project note. The original PDF is not served on the current branch. |
+| `Legacy_DIY压风式散热器_Project` | 536 | Used for the DIY cooling prototype project and note. Current public evidence is limited to two 3D-print preview images and one prototype demo video. Gerber, EasyEDA, DWG, 3MF, source code, installers, vendor packages, and build outputs are not served. |
+| `Legacy_慧驱动FOC_Project` | 4762 | Used for an archive-style FOC driver project and note. Raw Gerber, STEP, BOM/PnP, EasyEDA, source code, and datasheets are not served on this branch. |
+| `Legacy_螺线管阀门开发_Project` | 818 | Used for actuator/fan archive writing. Raw source, schematics, and vendor examples are not served. |
+| `Legacy_BLDC_QuietFan_Project` | 2 | Mentioned inside the actuator/fan archive. Raw BOM and EDA files are not served. |
+| `通用数据手册` | 3 | Used as reference for compressor/driver discussion. The original datasheet PDFs are not served on the current branch. |
 | `实习证明` | 2 | Not published. Treat as private credential material. |
 | `费用报销单 & 发票` | 46 | Not published. Treat as private financial evidence. |
 | `卷云科技开票资料.docx` | 1 | Not published. Treat as private company billing material. |
 
-## Public Assets Added
-
-```text
-public/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-system-block.png
-public/uploads/projects/juanyun-tech/acunit-app.c
-public/uploads/projects/juanyun-tech/acunit-bsp-comp.c
-public/uploads/projects/juanyun-tech/acunit-bsp-eev.c
-public/uploads/projects/juanyun-tech/acunit-bsp-ntc.c
-public/uploads/projects/juanyun-tech/acunit-bsp-oled.c
-public/uploads/projects/juanyun-tech/acunit-firmware-pinout.md
-public/uploads/projects/juanyun-tech/acunit-firmware-readme.md
-public/uploads/projects/juanyun-tech/acunit-product-acunit.ioc
-public/uploads/projects/juanyun-tech/acunit-release-notes-v05.md
-public/uploads/projects/juanyun-tech/acunit-svc-control.c
-public/uploads/projects/juanyun-tech/acunit-svc-sensor.c
-public/uploads/projects/juanyun-tech/acunit-svc-ui.c
-public/uploads/projects/juanyun-tech/acunit-v10-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v10-dxf.dxf
-public/uploads/projects/juanyun-tech/acunit-v10-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v10-step.step
-public/uploads/projects/juanyun-tech/acunit-v21-main-back.png
-public/uploads/projects/juanyun-tech/acunit-v21-2n7002-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-ams1117-3v3-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-dht11-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-esp01s-wifi-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-lgs5145-dcdc-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-main-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v20-main-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v20-main-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-main-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v20-power-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v20-power-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v20-power-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-power-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v20-ui-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v20-ui-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v20-ui-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v20-ui-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v21-main-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v21-main-front.png
-public/uploads/projects/juanyun-tech/acunit-v21-main-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v21-main-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v21-main-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-main-schematic.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg
-public/uploads/projects/juanyun-tech/acunit-v21-power-back.png
-public/uploads/projects/juanyun-tech/acunit-v21-power-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v21-power-front.png
-public/uploads/projects/juanyun-tech/acunit-v21-power-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v21-power-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v21-power-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-power-schematic.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg
-public/uploads/projects/juanyun-tech/acunit-v21-smaj12a-tvs-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-smbj30a-tvs-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-system-block.png
-public/uploads/projects/juanyun-tech/acunit-v21-tps54560-dcdc-datasheet.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-ui-back.png
-public/uploads/projects/juanyun-tech/acunit-v21-ui-bom.xlsx
-public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
-public/uploads/projects/juanyun-tech/acunit-v21-ui-gerber.zip
-public/uploads/projects/juanyun-tech/acunit-v21-ui-pick-place.csv
-public/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf
-public/uploads/projects/juanyun-tech/acunit-v21-uln2003a-darlington-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-app.c
-public/uploads/projects/juanyun-tech/baseunit-32k-crystal-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-ao4407-mosfet-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-bluetooth.c
-public/uploads/projects/juanyun-tech/baseunit-dc005-power-jack-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-ec11-encoder-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-fan.c
-public/uploads/projects/juanyun-tech/baseunit-firmware-readme.md
-public/uploads/projects/juanyun-tech/baseunit-nvstore.c
-public/uploads/projects/juanyun-tech/baseunit-product-base.ioc
-public/uploads/projects/juanyun-tech/baseunit-ss12d10g6-slide-switch-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-ss8050-bjt-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-x32258-8mhz-crystal-datasheet.pdf
-public/uploads/projects/juanyun-tech/baseunit-xl1509-3v3-dcdc-datasheet.pdf
-public/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx
-public/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro
-public/uploads/projects/juanyun-tech/cirro-logo.png
-public/uploads/projects/juanyun-tech/dht11-am2302-board-plan.pdf
-public/uploads/projects/juanyun-tech/diy-cooling-3dprint-a1-mini.3mf
-public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg
-public/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg
-public/uploads/projects/juanyun-tech/diy-cooling-acrylic-auto.dwg
-public/uploads/projects/juanyun-tech/diy-cooling-acrylic-manual.dwg
-public/uploads/projects/juanyun-tech/diy-cooling-desktop-csproj.xml
-public/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4
-public/uploads/projects/juanyun-tech/diy-cooling-desktop-form.cs
-public/uploads/projects/juanyun-tech/diy-cooling-desktop-program.cs
-public/uploads/projects/juanyun-tech/diy-cooling-easyeda-project.epro2
-public/uploads/projects/juanyun-tech/diy-cooling-esp32.ino
-public/uploads/projects/juanyun-tech/diy-cooling-gerber.zip
-public/uploads/projects/juanyun-tech/diy-cooling-platformio.ini
-public/uploads/projects/juanyun-tech/diy-cooling-platformio-main.cpp
-public/uploads/projects/juanyun-tech/diy-cooling-schematic.pdf
-public/uploads/projects/juanyun-tech/foc-driver-gerber.zip
-public/uploads/projects/juanyun-tech/foc-driver-adc.c
-public/uploads/projects/juanyun-tech/foc-driver-board-config.c
-public/uploads/projects/juanyun-tech/foc-driver-bom.xlsx
-public/uploads/projects/juanyun-tech/foc-driver-code-readme.txt
-public/uploads/projects/juanyun-tech/foc-driver-drv8301.c
-public/uploads/projects/juanyun-tech/foc-driver-drv8301.h
-public/uploads/projects/juanyun-tech/foc-driver-drv8301-datasheet.pdf
-public/uploads/projects/juanyun-tech/foc-driver-drv8301-final-bom.xlsx
-public/uploads/projects/juanyun-tech/foc-driver-easyeda-project.epro2
-public/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.c
-public/uploads/projects/juanyun-tech/foc-driver-foc-algorithm.h
-public/uploads/projects/juanyun-tech/foc-driver-hall-sensor.c
-public/uploads/projects/juanyun-tech/foc-driver-hy3010d-mosfet-datasheet.pdf
-public/uploads/projects/juanyun-tech/foc-driver-interactive-bom.html
-public/uploads/projects/juanyun-tech/foc-driver-low-task.c
-public/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step
-public/uploads/projects/juanyun-tech/foc-driver-pc-communication-init.c
-public/uploads/projects/juanyun-tech/foc-driver-pick-place.csv
-public/uploads/projects/juanyun-tech/ge2117-v2-compressor-driver-manual.pdf
-public/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg
-public/uploads/projects/juanyun-tech/juanyun-hardware-sop-awes0mee.pdf
-public/uploads/projects/juanyun-tech/panasonic-6md030z-24v-compressor-datasheet.pdf
-public/uploads/projects/juanyun-tech/solenoid-valve-control.ioc
-public/uploads/projects/juanyun-tech/solenoid-valve-control-main.c
-public/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c
-public/uploads/projects/juanyun-tech/uln2003-stepper-driver-schematic.pdf
-public/uploads/projects/juanyun-tech/zh204-24v-compressor-datasheet.pdf
-```
-
 ## Privacy Boundary
 
-The user asked to put the folder contents into the portfolio branch. The implementation intentionally publishes technical evidence first and excludes obvious private or sensitive files from the served app:
+The source folder was inspected to create portfolio notes, but company-sensitive files should not be made website-accessible:
 
-- invoices;
-- reimbursements;
-- billing information;
+- Gerber archives;
+- schematic PDFs;
+- BOM and pick-and-place files;
+- EDA/CAD source files;
+- firmware or desktop source-code dumps;
+- internal requirement and manufacturing packages;
+- invoices, reimbursements, and billing information;
 - internship proof documents;
-- raw vendor package folders;
 - executable installers;
-- full build artifacts and generated object files.
+- vendor package folders;
+- generated build artifacts.
 
-Before merging this branch into `main`, review all public PDFs and download attachments again. This matters because the GitHub repository and Vercel deployment can become public-facing once pushed or merged.
+`visibility: private` only hides note pages from the website. It does not protect files committed to a public GitHub repository, and it does not make anything under `public/uploads/` private. Keep confidential raw files outside the public repo unless a later authenticated/private storage workflow is added.

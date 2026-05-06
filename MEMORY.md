@@ -15,7 +15,7 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
 - `2026-05-06`: Public identity was normalized to `Awes0meE / Li Zhiyi`; contact email is `lizhiyi20030401@gmail.com`; degree wording is Communication Engineering.
 - `2026-05-06`: Branch `content/juanyun-tech` was created for draft portfolio content from `F:\XJTLU\工作相关\卷云科技有限责任公司`.
-- `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and 125 public technical assets under `public/uploads/projects/juanyun-tech/`; invoices, reimbursements, billing files, internship-proof files, executable installers, vendor package folders, and build outputs were not published.
+- `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and a broad draft public asset set. That early draft later became too permissive for company work.
 - `2026-05-06`: All `content/notes/*.mdx` files were rewritten toward the user's own learning-log voice, modeled after their Qt internship note style: process-first, reflective, mildly informal, with `前期想法 / 改变 / 疑问 / 阶段目标 / 证据 / 复盘` style sections where appropriate.
 
 - `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. Juanyun notes are public on this branch, but website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
@@ -72,7 +72,7 @@ Expected result:
 ## Open Content Work
 
 - Keep checking that company-sensitive Juanyun files are not restored under `public/uploads/`; notes and safe screenshots can be public, but raw board/manufacturing/source files should not be website-accessible.
-- Decide whether the large public attachments should remain in Git or be moved to Git LFS / external storage before long-term public deployment.
+- If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
 - Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
 - Fill `SAT301 Graduation Thesis` with abstract, architecture, experiments, figures, and thesis evidence.
