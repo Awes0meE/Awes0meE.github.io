@@ -6,7 +6,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-diy-cooling-prototype",
+    "projectSlug": "juanyun-acunit-control-platform",
     "caption": "Main control PCB render for the Juanyun AC unit V2.1 hardware branch."
   },
   {
@@ -16,7 +16,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-diy-cooling-prototype",
+    "projectSlug": "juanyun-acunit-control-platform",
     "caption": "Back-side PCB render for checking routing, connectors, and assembly space."
   },
   {
@@ -26,7 +26,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-acunit-control-platform",
     "caption": "Power distribution board render for 24 V input and downstream power paths."
   },
   {
@@ -36,7 +36,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-acunit-control-platform",
     "caption": "Interaction PCB render for buttons, rotary encoder, and user-facing controls."
   },
   {
@@ -46,7 +46,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "date": "2026-04-26",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-acunit-control-platform",
     "caption": "System-level block diagram for the main board, power board, and interaction board split."
   },
   {
@@ -56,7 +56,7 @@
     "src": "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-diy-cooling-prototype",
     "caption": "Legacy pressure-flow cooling prototype demo video with desktop-side monitoring."
   },
   {
@@ -66,7 +66,7 @@
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-diy-cooling-prototype",
     "caption": "3D printing preparation screenshot for the legacy pressure-flow cooling prototype."
   },
   {

@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Split the current AC unit control platform into its own project page and added a compressor/driver datasheet review note.
+- Files changed: added `content/projects/juanyun-acunit-control-platform.mdx`, added `content/notes/juanyun-compressor-datasheets.mdx`, reassigned AC unit notes/media to the new project slug, fixed DIY media ownership, and published selected compressor/driver datasheets.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Added inline image rendering for portfolio notes.
 - Files changed: updated `components/content-renderer.tsx` to render simple Markdown image blocks, then embedded key Juanyun board, SOP, and DIY cooling images into the project and notes.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

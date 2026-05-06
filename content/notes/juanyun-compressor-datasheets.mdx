@@ -1,0 +1,32 @@
+---
+title: "Compressor And Driver Datasheet Review"
+titleZh: "压缩机与驱动板数据手册整理"
+summary: "My notes on turning compressor and driver datasheets into practical design constraints for the AC unit control platform."
+summaryZh: "我把压缩机和驱动板数据手册整理成外机控制平台的设计约束：供电、电流、接口、驱动边界和后续验证点。"
+date: "2026-05-06"
+tags: ["Compressor", "Datasheet", "Thermal", "Interface"]
+projectSlug: "juanyun-acunit-control-platform"
+---
+
+## Why I Kept These Files / 为什么保留这些资料
+
+`通用数据手册` 里不是我自己画的 PCB 或写的代码，但它们解释了外机控制平台为什么要这样分配接口和电源。压缩机、压缩机驱动板和 24 V 系统约束会直接影响 PCB、线束、保险、散热和固件联调方式。
+
+I kept this as a supporting engineering note instead of a polished project page. The point is to show how I used component documents as design inputs: not as decoration, but as constraints that shaped the board and firmware work.
+
+## What I Extracted / 我提取的约束
+
+- 压缩机和驱动板不能只按“一个负载”处理，需要确认 24 V 输入范围、启动条件、电流余量和线束连接。
+- MCU 侧需要把压缩机控制、FG 测速、电子膨胀阀控制、NTC 和压力传感器放进同一个联调顺序里。
+- 分电板存在的意义是把高电流路径和用户交互/传感部分拆开，降低布线、维护和后续迭代风险。
+- 固件联调时要明确哪些信号是控制输出，哪些是状态反馈，哪些只是预留或后续版本再闭环处理。
+
+## Evidence / 证据
+
+- [Panasonic 6MD030Z 24 V compressor datasheet](/uploads/projects/juanyun-tech/panasonic-6md030z-24v-compressor-datasheet.pdf)
+- [GE2117-V2 compressor driver manual](/uploads/projects/juanyun-tech/ge2117-v2-compressor-driver-manual.pdf)
+- [ZH204 24 V compressor datasheet](/uploads/projects/juanyun-tech/zh204-24v-compressor-datasheet.pdf)
+
+## Reflection / 复盘
+
+这类资料让我意识到，硬件项目的作品集不能只展示“我画了 PCB”。真正要说清楚的是：我为什么需要这一路电源，为什么要拆板，为什么要保留某个接口，为什么调试时要先验证某些信号。数据手册是把这些选择讲清楚的底层证据。
