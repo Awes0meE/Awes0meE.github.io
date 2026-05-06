@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Split the STM32 base unit firmware into its own project page with selected public source evidence.
+- Files changed: added `content/projects/juanyun-baseunit-control-firmware.mdx`, reassigned the base unit firmware note to the new project slug, linked the project from the Juanyun overview, and published selected `product_base` App/BSP/IOC/README files while excluding CubeIDE metadata, HAL/CMSIS vendor trees, and build outputs.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Split the current AC unit control platform into its own project page and added a compressor/driver datasheet review note.
 - Files changed: added `content/projects/juanyun-acunit-control-platform.mdx`, added `content/notes/juanyun-compressor-datasheets.mdx`, reassigned AC unit notes/media to the new project slug, fixed DIY media ownership, and published selected compressor/driver datasheets.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

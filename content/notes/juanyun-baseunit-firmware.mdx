@@ -5,7 +5,7 @@ summary: "Notes on the base unit firmware covering DHT11/DHT22 sensing, IR prese
 summaryZh: "我整理底座板固件的笔记：温湿度采集、红外在位检测、风扇 PWM、OLED UI、蓝牙上报和 Flash 参数持久化。"
 date: "2026-05-06"
 tags: ["STM32", "Firmware", "Flash", "OLED"]
-projectSlug: "juanyun-thermal-hardware"
+projectSlug: "juanyun-baseunit-control-firmware"
 ---
 
 ## Background / 背景
@@ -31,3 +31,10 @@ projectSlug: "juanyun-thermal-hardware"
 ## Reflection / 复盘
 
 这个工程让我开始重视“掉电后设备应该记得什么”。很多课堂或 demo 工程只要跑起来就结束，但实际产品需要考虑参数保存、关机确认、按键误触发、传感器读取失败后的旧值保留，以及蓝牙上报是否阻塞主循环。
+
+## Evidence / 证据
+
+- [Application scheduler source](/uploads/projects/juanyun-tech/baseunit-app.c)
+- [Bluetooth DMA report source](/uploads/projects/juanyun-tech/baseunit-bluetooth.c)
+- [Flash parameter store source](/uploads/projects/juanyun-tech/baseunit-nvstore.c)
+- [Firmware README](/uploads/projects/juanyun-tech/baseunit-firmware-readme.md)

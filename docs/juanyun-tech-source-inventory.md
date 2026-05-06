@@ -17,6 +17,7 @@ The public website content lives in:
 ```text
 content/projects/juanyun-thermal-hardware.mdx
 content/projects/juanyun-acunit-control-platform.mdx
+content/projects/juanyun-baseunit-control-firmware.mdx
 content/notes/juanyun-*.mdx
 content/media.json
 public/uploads/projects/juanyun-tech/
@@ -27,7 +28,7 @@ public/uploads/projects/juanyun-tech/
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
 | `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, STM32 external unit firmware note. |
-| `Current_Product_BaseUnit_Project` | 1659 | Public note for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
+| `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project and public note for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
 | `Legacy_慧驱动FOC_Project` | 4762 | Standalone archived project plus public note with FOC PCB Gerber and STEP model; code details still need a later review. |
 | `Legacy_螺线管阀门开发_Project` | 818 | Standalone actuator/fan archive project plus public note; selected project source files and ULN2003 schematic are published, while vendor example packages are not. |
@@ -56,6 +57,12 @@ public/uploads/projects/juanyun-tech/acunit-v21-ui-back.png
 public/uploads/projects/juanyun-tech/acunit-v21-ui-front.png
 public/uploads/projects/juanyun-tech/acunit-v21-ui-pcb.pdf
 public/uploads/projects/juanyun-tech/acunit-v21-ui-schematic.pdf
+public/uploads/projects/juanyun-tech/baseunit-app.c
+public/uploads/projects/juanyun-tech/baseunit-bluetooth.c
+public/uploads/projects/juanyun-tech/baseunit-fan.c
+public/uploads/projects/juanyun-tech/baseunit-firmware-readme.md
+public/uploads/projects/juanyun-tech/baseunit-nvstore.c
+public/uploads/projects/juanyun-tech/baseunit-product-base.ioc
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx
 public/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro
 public/uploads/projects/juanyun-tech/cirro-logo.png
