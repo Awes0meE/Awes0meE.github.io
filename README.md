@@ -113,6 +113,8 @@ Media items are stored in `content/media.json`, with assets under `public/upload
 
 The site has a top-right English / Simplified Chinese toggle. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
+Fenced code blocks are rendered as shared technical evidence. If an example belongs only to an English translation section and should not appear in Chinese mode, keep it as inline code or move it into a shared source/evidence section.
+
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
 Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. Images and videos are previewed; Markdown and text documents render as readable page content; source/code files render in code frames; binary files such as PDFs, spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents are linked directly.
@@ -266,6 +268,8 @@ npm run typecheck # 跳过 lint 的生产构建检查
 媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体卡片需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`；如果媒体来自某个项目，补上 `projectSlug`，媒体页会显示来源项目。
 
 网站右上角有 English / 简体中文切换按钮。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
+
+代码块会按共享技术证据处理，不会自动跟随英文 / 中文正文隐藏。如果某段代码例子只属于英文译文，不希望出现在中文页面里，改成 inline code，或者放到双语正文后面的共享原文 / 证据区。
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 

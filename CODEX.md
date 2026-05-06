@@ -145,6 +145,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
 - `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks/headings/tables when both languages exist, render basic Markdown tables, and add heading anchors for internal links. Single-language notes stay readable instead of showing missing-language placeholder notices.
 - MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text. As of `v0.6.1`, public project/note pages should not leave important Chinese-only body content without an English counterpart.
+- Fenced code blocks are language-neutral in `ContentRenderer`. Do not put English-only explanatory code fences inside an English article section if they should disappear in Chinese mode; rewrite them as inline code, or place the examples in a clearly shared source/evidence section.
 
 ## Current Content State
 

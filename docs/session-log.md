@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Hid English-only CMake translation snippets from the Chinese view and documented the code-fence language-switching trap.
+- Files changed: converted the English translation examples at the top of `content/notes/turing-cmake-build-logic.mdx` from fenced code blocks to inline code and made the heading English-only; updated `CODEX.md`, `MEMORY.md`, `README.md`, and `docs/content-workflow.md` so future content edits treat fenced code blocks as shared evidence, not language-scoped prose.
+- Verification: `git diff --check`, `npm.cmd run lint`, and `npm.cmd run build` passed before the content fix was pushed; `/neat` docs were checked with `git diff --check`.
+
+## 2026-05-07
+
 - Summary: Prepared release `v0.6.1` with the user's Notion-exported CMake/build-logic originals, full public English body coverage, and refreshed media coverage.
 - Files changed: replaced the lossy CMake/build-logic PDF extraction path with two Notion Markdown originals under `public/uploads/projects/nanjing-turing/other-materials/`; expanded the Nanjing Turing project asset list; added the Notion build diagrams to `content/media.json`; improved `components/content-renderer.tsx` with heading anchors, language-scoped headings/tables, recursive bold inline parsing, and Markdown table rendering; added/adjusted English sections across Juanyun, Nanjing Turing, Tianjin, and project pages; bumped package metadata to `0.6.1`; updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/juanyun-tech-source-inventory.md`.
 - Verification: upload/media coverage validation passed for 101 content upload refs, 38 media items, and 38 content image/video refs; UTF-8/mojibake scan passed for 35 markdown/content files; version/media metadata check passed; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for `/media`, `/work/nanjing-turing-qt-embedded-learning`, `/notes/turing-cmake-build-logic`, `/notes/tianjin-stm32-environment-setup`, and `/notes/juanyun-hardware-sop`.
