@@ -8,18 +8,21 @@ tags: ["FOC", "Motor Control", "PCB", "STM32F4"]
 projectSlug: "juanyun-foc-driver-board"
 ---
 
-## Background / 背景
+## 前期想法
 
-`Legacy_慧驱动FOC_Project` 是电机控制方向的历史资料。源目录里包含 STM32F4 / DRV8301 相关代码、Keil/IAR 工程、PCB、BOM、Gerber 和 STEP 模型。
+FOC 这条线看起来很香，电机控制、STM32F4、DRV8301、无感控制，关键词一摆出来就很适合作品集。但我也很清楚，不能因为它看起来高级，就把它包装成一个我已经完全吃透的成熟项目。
 
-## My Work / 我的工作
+这批资料更准确的定位是历史归档。里面确实有 PCB、BOM、Gerber、STEP、DRV8301、FOC 算法源码、ADC、Hall、低速任务、上位机通信等内容，但要写成真正的 FOC case study，还缺测试波形、采样链路解释、保护逻辑和启动过程复盘。
 
-- 我先把它作为独立的 legacy project 归入网站，避免和当前卷云热管理主线混在一起。
-- 我提取了最适合公开展示的 PCB 证据：Gerber 压缩包、STEP 模型、BOM、贴片坐标、交互 BOM 和 EasyEDA 工程。
-- 我补充了源码层证据，包括 FOC 算法、DRV8301 驱动、ADC、Hall sensor、低速任务、板级配置和上位机通信初始化。
-- 后续如果要把它写成正式项目，我会补充 FOC 控制链路、采样、电流环、驱动保护、上电测试和波形证据。
+## 改变
 
-## Evidence / 证据
+一开始我只放了 Gerber 和 STEP，后来发现这太像“先占个坑”。既然源目录里有源码和制造资料，就应该把能公开的部分整理出来。于是我补了 FOC 算法、DRV8301 驱动、ADC、Hall sensor、低速任务、板级配置、上位机通信初始化，以及 BOM、PnP、交互 BOM、EasyEDA 工程和关键 datasheet。
+
+疑问：这算不算完整作品？
+
+现在还不算。它更像是一条已经有很多证据的资料线。真正完整的作品应该能回答：电流怎么采，PWM 怎么调制，保护怎么触发，启动怎么处理，电机转起来时波形和日志是什么样。现在这些还没有补齐，所以我不想硬装。
+
+## 证据
 
 - [FOC driver Gerber archive](/uploads/projects/juanyun-tech/foc-driver-gerber.zip)
 - [FOC driver STEP model](/uploads/projects/juanyun-tech/foc-driver-pcb-3d.step)
@@ -39,6 +42,6 @@ projectSlug: "juanyun-foc-driver-board"
 - [DRV8301 datasheet](/uploads/projects/juanyun-tech/foc-driver-drv8301-datasheet.pdf)
 - [HY3010D MOSFET datasheet](/uploads/projects/juanyun-tech/foc-driver-hy3010d-mosfet-datasheet.pdf)
 
-## Reflection / 复盘
+## 复盘
 
-这条线现在还不能作为完整公开 case study，因为缺少我对算法、硬件验证和测试波形的叙述。补完源码和制造资料之后，它已经不只是“索引”，但后续仍然需要我用自己的话讲清楚电流采样、调制、保护和启动过程。
+这条线对我有吸引力，因为它把嵌入式、功率驱动和控制算法连在一起。但越是这种看起来高级的内容，越不能乱吹。现在先诚实地把证据放好，后面如果真的要打磨，就要补电流采样、调制、保护、启动和波形。

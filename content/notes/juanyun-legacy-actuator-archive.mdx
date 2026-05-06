@@ -8,23 +8,29 @@ tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-actuator-fan-archive"
 ---
 
-## Background / 背景
+## 前期想法
 
-源目录里还有两条不适合直接塞进当前主线的历史材料：`Legacy_螺线管阀门开发_Project` 和 `Legacy_BLDC_QuietFan_Project`。前者更偏 STM32 阀门控制、OLED、编码器和驱动模块验证，后者是一块超静音单相 BLDC 风扇驱动板资料。
+这部分资料比较杂：一边是螺线管阀门控制，里面有 STM32F103、OLED、编码器、按键和 ULN2003/步进电机参考；另一边是单相 BLDC 静音风扇驱动板。它们都和执行器、电机、驱动有关，但又不适合硬塞进当前外机板主线。
 
-## My Work / 我的工作
+所以我先把它们放进一个归档项目里。这样做的目的不是说这条线已经完整，而是避免它们继续散落在硬盘里。以后如果补了实物、测试和更完整的代码说明，再考虑拆成更正式的项目。
 
-- 我先把它们归档成一篇 note，并挂到独立项目页，说明它们是 actuator / motor driver 方向的历史材料。
-- 螺线管阀门资料里我识别到 STM32F103 工程、OLED 显示、编码器输入、按键、阀门控制和 ULN2003/步进电机参考资料。
-- BLDC 风扇资料里我先保留了 BOM 作为附件，后续需要补 PCB 截图、驱动拓扑、噪声目标和测试记录。
+## 疑问：为什么不直接删掉这些边角料？
 
-## Evidence / 证据
+因为它们可能是后续能力线索。执行器、风扇驱动、OLED/编码器交互，这些和嵌入式方向是有关的。只是现在证据还不够完整，硬写成成熟项目会显得假。先归档，别吹，也别丢。
+
+## 目前能说明什么
+
+- 螺线管阀门资料里有 STM32F103 工程、阀门控制、OLED 显示、编码器输入和按键逻辑。
+- ULN2003 和步进驱动资料可以和电子膨胀阀/执行器控制思路关联起来。
+- BLDC 静音风扇驱动板现在保留了 BOM 和 EDA 工程，后续还需要补拓扑、噪声目标和测试记录。
+
+## 证据
 
 - [BLDC quiet fan BOM](/uploads/projects/juanyun-tech/bldc-quiet-fan-bom.xlsx)
 - [BLDC quiet fan EDA project](/uploads/projects/juanyun-tech/bldc-quiet-fan-driver.epro)
 - [Solenoid valve control source](/uploads/projects/juanyun-tech/solenoid-valve-control-valve.c)
 - [ULN2003 stepper driver schematic](/uploads/projects/juanyun-tech/uln2003-stepper-driver-schematic.pdf)
 
-## Reflection / 复盘
+## 复盘
 
-这部分现在还是资料索引，不是完整作品展示。它的价值是把我做过或接触过的执行器/电机控制方向材料纳入后续整理路线，等我补足图片、代码说明和测试证据后再拆成正式项目页。
+这篇现在就是资料索引，不是完整作品展示。它的价值是把执行器/电机控制方向先留住，后面补图片、源码讲解和测试证据后，再决定要不要升级成正式 case study。

@@ -8,22 +8,26 @@ tags: ["PCB", "Revision", "Manufacturing", "Archive"]
 projectSlug: "juanyun-acunit-control-platform"
 ---
 
-## Why I Kept The Older Versions / 为什么保留早期版本
+## 前期想法
 
-The V2.1 page shows the current direction, but the older exports are useful because they show iteration history. A portfolio case study is stronger when I can explain how a board moved from an earlier layout and mechanical export into a three-board architecture with clearer manufacturing files.
+整理 V2.1 的时候，我一开始差点只想放最终版本。后来想想不对，作品集如果只放最终截图，很容易变成“看起来很完整，但不知道怎么来的”。V1.0 和 V2.0 虽然不一定是现在最漂亮的版本，但它们能证明这个项目不是凭空出现的。
 
-V2.1 是当前更完整的方向，但 V1.0 / V2.0 的资料能证明版本迭代过程。作品集不应该只放最终截图，也应该留下早期打样、结构、BOM、Gerber 和三板拆分的证据。
+V1.0 更像早期机械和制造证据，V2.0 已经能看到三板拆分的雏形。把这些东西留下来，后面写版本对比的时候才有东西可讲，不然全靠回忆，回忆这种东西最不靠谱。
 
-## Revision Evidence / 版本证据
+## 疑问：旧版本有必要放吗？
 
-V1.0 kept the early mechanical/manufacturing package:
+有必要，但不能乱放。旧版本不是为了证明“以前我就很强”，而是为了说明设计是怎么一步步变清楚的。比如从一开始的板形、BOM、Gerber、DXF、STEP，到后面主控板、分电板、交互板分开导出，这里面其实有设计思路的变化。
+
+## 版本证据
+
+V1.0 先保留机械和制造包：
 
 - [V1.0 BOM](/uploads/projects/juanyun-tech/acunit-v10-bom.xlsx)
 - [V1.0 Gerber archive](/uploads/projects/juanyun-tech/acunit-v10-gerber.zip)
 - [V1.0 DXF](/uploads/projects/juanyun-tech/acunit-v10-dxf.dxf)
 - [V1.0 STEP model](/uploads/projects/juanyun-tech/acunit-v10-step.step)
 
-V2.0 is already split into main, power, and interaction board outputs:
+V2.0 已经按主控、分电、交互三块板整理：
 
 - [V2.0 main board PCB PDF](/uploads/projects/juanyun-tech/acunit-v20-main-pcb.pdf)
 - [V2.0 main board BOM](/uploads/projects/juanyun-tech/acunit-v20-main-bom.xlsx)
@@ -38,8 +42,6 @@ V2.0 is already split into main, power, and interaction board outputs:
 - [V2.0 interaction board Gerber archive](/uploads/projects/juanyun-tech/acunit-v20-ui-gerber.zip)
 - [V2.0 interaction board pick-and-place CSV](/uploads/projects/juanyun-tech/acunit-v20-ui-pick-place.csv)
 
-## Reflection / 复盘
+## 复盘
 
-I am keeping this as an archive note rather than over-polishing it now. The useful next step is to add a version comparison table explaining what changed between V1.0, V2.0, and V2.1: board split, connector choices, pressure sensor count, Wi-Fi reserve, power routing, and interaction-board layout.
-
-这篇先作为版本证据归档。后续最值得补的是 V1.0 / V2.0 / V2.1 对比表：为什么拆板、为什么改接口、压力变送器数量怎么变、Wi-Fi 怎么预留、电源路径和交互板布局怎么变化。
+这篇现在先作为归档，不强行写得很完美。后面最该补的是版本对比表：V1.0 到 V2.0 到 V2.1，到底改了什么，为什么改，哪些是电源问题，哪些是接口问题，哪些是为了后续固件联调。这个补上以后，项目的成长线会清楚很多。

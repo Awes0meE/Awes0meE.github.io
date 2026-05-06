@@ -8,21 +8,25 @@ tags: ["Datasheet", "PCB", "Power", "Interface"]
 projectSlug: "juanyun-acunit-control-platform"
 ---
 
-## Why This Note Exists / 为什么写这篇
+## 前期想法
 
-The V2.1 board split is only meaningful if the component constraints are traceable. I grouped the key datasheets here so the project page can explain why the board needs separate power handling, protected signal paths, Wi-Fi reserve, EEV driving, fan control, and sensor inputs.
+以前看 datasheet，我经常会觉得这是“附带资料”，真正重要的是原理图和 PCB。后来做外机板的时候发现不是这样。器件资料其实是很多设计选择的底层原因，只是平时它们太分散了，看起来像一堆 PDF 垃圾堆。
 
-V2.1 拆成主控板、分电板、交互板，不只是为了排版更整齐，而是因为器件约束会把系统自然拆开。我把关键规格书整理在这里，方便后续把板级设计和固件联调讲清楚。
+V2.1 里面有风扇、压力变送器、ESP-01S、DHT11、电源芯片、ULN2003、MOSFET、TVS，这些东西如果只在 BOM 里出现，别人根本不知道它们为什么重要。所以我把它们单独整理成这篇笔记，先把“为什么要看这些资料”说清楚。
 
-## What I Mapped / 我关注的内容
+## 疑问：datasheet 放作品集里会不会太水？
 
-- PWM fan and pressure transmitter parameters define signal ranges and control/measurement expectations.
-- ESP-01S affects UART allocation, 3.3 V supply stability, antenna clearance, and firmware communication reserve.
-- TPS54560, LGS5145, and AMS1117 affect the power tree and local regulation strategy.
-- ULN2003A explains the EEV/stepper drive path and why the firmware needs a stepped control abstraction.
-- DHT11, 2N7002, SMAJ12A, and SMBJ30A connect the low-speed sensor path, level/signal conditioning, and surge/ESD protection discussion.
+会，如果只是堆下载链接就很水。但如果能说明 datasheet 影响了什么决策，比如电源余量、接口保护、UART 分配、电子膨胀阀驱动、传感器采样范围，那它就不是装饰，而是设计依据。
 
-## Evidence / 证据
+## 我关注的内容
+
+- PWM 风扇和压力变送器决定了控制/采样信号到底长什么样。
+- ESP-01S 影响 UART 分配、3.3 V 供电稳定性和天线空间。
+- TPS54560、LGS5145、AMS1117 关系到电源树，不是随便挑个降压芯片就完事。
+- ULN2003A 对应电子膨胀阀/步进驱动，固件里也要有步进控制抽象。
+- DHT11、2N7002、SMAJ12A、SMBJ30A 则关系到低速传感、信号处理和保护。
+
+## 证据
 
 ![PWM fan parameter sheet](/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg)
 
@@ -38,8 +42,6 @@ V2.1 拆成主控板、分电板、交互板，不只是为了排版更整齐，
 - [SMAJ12A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smaj12a-tvs-datasheet.pdf)
 - [SMBJ30A TVS datasheet](/uploads/projects/juanyun-tech/acunit-v21-smbj30a-tvs-datasheet.pdf)
 
-## Reflection / 复盘
+## 复盘
 
-This note makes the case study less like a picture gallery and more like an engineering archive. The next step is to connect each datasheet group to a concrete design decision in the schematic: connector choice, protection device placement, power rail margin, and firmware initialization order.
-
-这篇让项目不只是图片展示，而更像工程归档。后续我应该把每组器件资料继续映射到原理图决策：接口怎么选、保护器件放哪里、电源裕量怎么估、固件初始化为什么按那个顺序来。
+这篇的作用不是展示我读完了多少 PDF，而是把外机板从“图片展示”往“工程归档”拉一点。后续应该继续把每组器件资料对应到原理图上的具体位置，比如保护器件放哪、连接器为什么这样选、电源余量怎么算。

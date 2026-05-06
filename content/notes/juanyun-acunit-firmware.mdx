@@ -8,30 +8,31 @@ tags: ["STM32", "Firmware", "CMake", "BSP"]
 projectSlug: "juanyun-acunit-control-platform"
 ---
 
-## What This Firmware Does / 固件做什么
+## 前期想法
 
-外机固件基于 STM32F103C8T6，用于外机控制板的功能联调和样机验证。它面向压缩机启停与 PWM、FG 测速、电子膨胀阀回零和开度调节、NTC 温度采样、DHT22 温湿度读取、旋转编码器、按键输入和 OLED 显示。
+外机固件这部分一开始看起来就是典型的 STM32 工程：CubeMX 生成一堆 `Core`，然后主循环里慢慢加功能。问题是功能一多，主循环就会变成大杂烩。压缩机、FG 测速、电子膨胀阀、NTC、DHT22、OLED、编码器、按键，如果全部糊在一起，短期能跑，长期一定难维护。
 
-我把它定位成“联调演示 / 验证平台”，不是最终量产控制策略。这个判断很重要，因为它决定了代码更关注关键链路打通、可读性、可烧录和可调试，而不是完整故障状态机和闭环热管理策略。
+我当时的想法是，先别急着把它包装成什么“量产级固件”。它更准确的定位是联调演示和验证平台。既然是验证平台，重点就是让别人能看懂、能烧录、能复现、能继续改，而不是把每个保护状态都写得像最终产品。
 
-## My Work / 我的工作
+## 改变
 
-- 我把工程分成 `Core`、`App`、`Service`、`BSP_drivers` 几层，降低主循环里堆逻辑的风险。
-- 我把 `svc_control`、`svc_sensor`、`svc_ui` 这类业务逻辑从底层驱动里拆出来，让硬件驱动和功能流程更容易单独看。
-- 我补齐了 VSCode + CMake + ARM GCC + ST-Link 的构建、烧录和调试路径，减少只依赖 CubeIDE 工程的锁定。
-- 我整理了 V0.5 release notes，记录 README、PINOUT、CMakePresets、OpenOCD 配置、VSCode tasks 和产物验证。
+我把工程拆成 `Core`、`App`、`Service`、`BSP_drivers` 几层。这样做不是为了显得架构高级，而是为了防止自己以后找代码找疯。底层驱动归底层，业务调度归业务，UI 刷新和传感器更新也不要互相污染。
 
-## Technical Points / 技术点
+疑问：为什么要折腾 VSCode + CMake + OpenOCD，CubeIDE 不能用么？
 
-- 1 ms 任务用于 EEV 步进控制。
-- 10 ms 任务用于 FG 维护、编码器按键扫描和 UI 输入处理。
+CubeIDE 当然能用，但只依赖一个 IDE 会让工程交接很脆弱。换一台电脑、换一个人、换一个工具链，可能就又要从零开始。补 CMake、OpenOCD、README、PINOUT 和 release notes 的意义，是让这个工程至少有机会脱离“只有我电脑能打开”的状态。
+
+## 阶段目标
+
+- 1 ms 任务用于电子膨胀阀步进控制。
+- 10 ms 任务用于 FG 维护、编码器按键扫描和 UI 输入。
 - 100 ms 任务用于 NTC 温度更新。
 - 500 ms 任务用于 OLED 刷新。
 - 2000 ms 任务用于 DHT22 温湿度读取。
-- UI 文本在内容不变时跳过 OLED 刷新，减少 I2C 传输和格式化开销。
-- NTC 查表从线性搜索改为二分搜索，避免周期任务里不必要的耗时。
+- OLED 内容不变时跳过刷新，少一点 I2C 传输和无意义格式化。
+- NTC 查表从线性搜索改成二分搜索，周期任务里能少耗一点就少耗一点。
 
-## Evidence / 证据
+## 证据
 
 - [AC unit V2.0 development SOP](/uploads/projects/juanyun-tech/acunit-v20-development-sop.pdf)
 - [AC unit V2.0 requirements](/uploads/projects/juanyun-tech/acunit-v20-requirements.pdf)
@@ -48,6 +49,6 @@ projectSlug: "juanyun-acunit-control-platform"
 - [NTC BSP source](/uploads/projects/juanyun-tech/acunit-bsp-ntc.c)
 - [OLED BSP source](/uploads/projects/juanyun-tech/acunit-bsp-oled.c)
 
-## Reflection / 复盘
+## 复盘
 
-这次整理让我意识到，作品集里“我会写 STM32”这种说法不够有说服力。更有说服力的是我能说明工程为什么分层、任务为什么按周期调度、某个优化为什么不会改变业务行为、以及别人如何在另一台电脑上把固件构建和烧录起来。
+这次整理让我意识到，简历里写“会 STM32”其实很空。更有说服力的是能说清楚：为什么分层，为什么这样调度，为什么某个优化不改变业务行为，以及别人怎么在另一台电脑上把工程跑起来。后面如果补上烧录截图和调试日志，这条线会更扎实。

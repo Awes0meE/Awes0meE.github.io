@@ -7,8 +7,23 @@ date: "2024-05-18"
 tags: ["Control", "PID", "Matlab"]
 ---
 
-## Why This Note Exists / 为什么写
+## 前期想法
 
-PID tuning becomes much easier when the measured signal, error, and actuator output are visible. This note collects the mental model and experiment process behind the PID Starter Kit.
+PID 这个东西很神奇，课上学的时候感觉就是三个字母和一堆公式，真正调起来才发现它像在和系统讨价还价。P 大了冲，I 大了慢慢攒账，D 看起来很聪明但又容易被噪声整破防。
 
-这篇笔记会把公式、代码、波形和调参经验串起来，避免以后每次做控制实验都从零开始。
+我写这篇笔记，是想把 PID 从“理论知道一点”变成“实验能说清楚”。只背公式没用，必须把误差、输出、响应曲线和调参过程放在一起看。
+
+## 疑问：为什么 PID 要配可视化？
+
+因为只看最终结果很容易误判。系统是不是超调、是不是振荡、是不是稳态误差太大、是不是执行器已经饱和，这些都要看曲线。没有可视化，调参就像闭着眼拧螺丝，拧对了也不知道为什么。
+
+## 阶段目标
+
+- 把 P、I、D 分别对响应的影响写清楚。
+- 用小实验记录调参过程，不要只留最终参数。
+- 把误差、控制输出和测量值画出来。
+- 后续接到 PID Starter Kit 里，形成嵌入式实验证据。
+
+## 复盘
+
+PID 对我来说是控制方向的入口。它不一定高级，但很工程。后续如果能把理论、代码、波形和硬件实验串起来，这篇笔记就不是“学习记录”，而是一个可以反复复用的调参手册。

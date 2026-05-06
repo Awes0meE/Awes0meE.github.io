@@ -8,21 +8,25 @@ tags: ["Datasheet", "PCB", "Firmware", "Component"]
 projectSlug: "juanyun-baseunit-control-firmware"
 ---
 
-## Why This Note Exists / 为什么写这篇
+## 前期想法
 
-The base unit firmware does not live alone. It depends on real component limits: encoder behavior, fan-driving MOSFET selection, power input connector, 3.3 V conversion, clock source, and small switching components. I kept these datasheets as supporting evidence so the firmware page can point back to board-level constraints.
+底座板这部分看起来比外机板简单，但简单不代表可以不查资料。编码器、电源座、MOSFET、DC-DC、晶振、滑动开关，这些东西单独看都不复杂，组合到一个板子上就会开始互相影响。
 
-底座固件不是凭空存在的。编码器手感、风扇 PWM 输出、电源输入、3.3 V 降压、晶振、开关和三极管都会影响固件可用性和硬件验证方式。我把这些规格书整理成一篇支撑笔记，方便后续继续补 PCB 和测试记录。
+我以前很容易把 datasheet 当成“采购附件”，需要的时候搜一下就行。后来发现这样不行，因为固件里的去抖、PWM、掉电保存、上电状态，其实都和器件行为有关。器件资料不整理，后面写代码也会凭感觉。
 
-## What I Mapped / 我关注的内容
+## 疑问：底座固件为什么要关心器件规格书？
 
-- XL1509-3.3 关系到 3.3 V 电源路径和负载余量。
-- EC11 编码器关系到旋钮调速、去抖、方向判断和 UI 状态机。
-- AO4407 MOSFET、SS8050 BJT 和风扇 PWM 输出关系到执行端驱动边界。
-- DC-005 电源座和滑动开关关系到用户操作、上电/断电路径和结构安装。
-- 8 MHz 与 32.768 kHz 晶振资料用于确认时钟源和后续低功耗/RTC 预留讨论。
+因为固件不是活在真空里的。EC11 编码器如果抖得厉害，UI 逻辑就要考虑去抖和方向判断；MOSFET 和风扇输出会影响 PWM 的安全边界；电源座、开关和 3.3 V 降压会影响上电和掉电状态。硬件约束不清楚，软件写得再漂亮也可能只是纸上谈兵。
 
-## Evidence / 证据
+## 我关注的内容
+
+- XL1509-3.3：3.3 V 电源路径和负载余量。
+- EC11：旋钮调速、去抖、方向判断和 UI 状态机。
+- AO4407、SS8050：风扇驱动和执行端边界。
+- DC-005、滑动开关：用户操作、上电路径和结构安装。
+- 8 MHz 与 32.768 kHz 晶振：主时钟和后续 RTC / 低功耗预留。
+
+## 证据
 
 - [XL1509-3.3 DC-DC datasheet](/uploads/projects/juanyun-tech/baseunit-xl1509-3v3-dcdc-datasheet.pdf)
 - [X32258 8 MHz crystal datasheet](/uploads/projects/juanyun-tech/baseunit-x32258-8mhz-crystal-datasheet.pdf)
@@ -33,8 +37,6 @@ The base unit firmware does not live alone. It depends on real component limits:
 - [SS8050 BJT datasheet](/uploads/projects/juanyun-tech/baseunit-ss8050-bjt-datasheet.pdf)
 - [SS12D10G6 slide switch datasheet](/uploads/projects/juanyun-tech/baseunit-ss12d10g6-slide-switch-datasheet.pdf)
 
-## Reflection / 复盘
+## 复盘
 
-This note is not a claim that I designed every component from scratch. It records how I treat datasheets as engineering inputs instead of random attachments. Later, when I add real PCB screenshots or measurement logs, this page can explain why those parts mattered.
-
-这篇不是为了堆附件，而是为了说明我会把器件资料当成设计输入。后续补 PCB 或实测记录时，这些规格书能解释为什么某些接口、供电和固件处理方式要这样做。
+这篇不是为了堆附件，而是提醒自己以后做硬件/固件结合项目时，datasheet 要变成设计输入。后续如果补底座板 PCB 截图和测量记录，这些资料就能解释为什么某些接口和固件处理方式是合理的。

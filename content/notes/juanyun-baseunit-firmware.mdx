@@ -8,34 +8,37 @@ tags: ["STM32", "Firmware", "Flash", "OLED"]
 projectSlug: "juanyun-baseunit-control-firmware"
 ---
 
-## Background / 背景
+## 前期想法
 
-底座板固件来自 `Current_Product_BaseUnit_Project`，同样基于 STM32F103C8T6。它和外机固件不同，目标更偏向一个能稳定运行的底座控制固件：采集环境和出风口温湿度，检测设备是否在位，按用户设定输出风扇 PWM，并把状态显示在 OLED 上。
+底座板固件比外机固件少了一些“大件”，但它反而更像一个完整的小产品。它要读环境温湿度和出风口温湿度，要判断设备在不在位，要让用户调风扇，还要在 OLED 上显示状态，最后还要通过蓝牙上报数据。听起来每个功能都不难，但全部放进一个主循环里，难度就上来了。
 
-## My Work / 我的工作
+我一开始最担心的是它变成“能跑但很乱”的工程。课堂 demo 里风扇能转、OLED 能亮就差不多了，但真实设备还要考虑关机确认、掉电记忆、传感器读取失败、按键误触发、蓝牙发送会不会卡住主循环。
 
-- 我把底座固件整理成 `App + BSP_drivers + Core` 的结构。
-- 我梳理了 `DHT11 / DHT22`、红外检测、按键、编码器、风扇、OLED、蓝牙和 Flash 参数存储的职责边界。
-- 我记录了 UI 状态机：`UI_OFF`、`UI_BOOT`、`UI_NORMAL`、`UI_CONFIRM`。
-- 我把蓝牙上报改成更适合后台周期发送的 DMA 异步方式。
-- 我加入风扇设定值掉电记忆，使用内部 Flash 的 EEPROM emulation 思路，并用延迟写入降低频繁擦写风险。
+## 改变
 
-## Technical Points / 技术点
+我把底座固件按 `App + BSP_drivers + Core` 的方式整理。`Core` 保留 CubeMX 生成的外设初始化，`BSP_drivers` 处理 DHT、IR、风扇、OLED、蓝牙、Flash，`App` 负责状态机和任务调度。这样后续看代码时，至少知道该去哪里找问题。
 
-- DHT11 负责环境温湿度，DHT22 负责出风口温湿度。
-- 风扇使用 PWM 输出，设定范围为 0 到 100%。
-- OLED 页面显示 `ENV / OUT / FAN`，关机确认页显示倒计时。
+疑问：为什么一个风扇设定值也要做掉电记忆？
+
+因为用户体验就是由这些小地方堆出来的。设备断电再上电，如果每次都回到默认值，使用起来就很粗糙。Flash 保存看起来只是一个小功能，但它迫使我考虑擦写次数、延迟写入、CRC 和最后一次有效记录恢复，这比单纯点亮 OLED 有意思多了。
+
+## 阶段目标
+
+- `DHT11` 负责环境温湿度，`DHT22` 负责出风口温湿度。
+- 红外检测用于判断设备是否在位。
+- 风扇 PWM 设定范围为 0 到 100%。
+- OLED 显示 `ENV / OUT / FAN`，关机确认页显示倒计时。
 - 蓝牙报文形如 `DATA:<envT>,<outT>,<fan>`。
-- Flash 参数区域使用页头、记录、CRC32 和 commit 标记思路恢复最后一次有效设定。
+- Flash 参数区用页头、记录、CRC32 和 commit 标记恢复最后一次有效设定。
 
-## Reflection / 复盘
-
-这个工程让我开始重视“掉电后设备应该记得什么”。很多课堂或 demo 工程只要跑起来就结束，但实际产品需要考虑参数保存、关机确认、按键误触发、传感器读取失败后的旧值保留，以及蓝牙上报是否阻塞主循环。
-
-## Evidence / 证据
+## 证据
 
 - [Application scheduler source](/uploads/projects/juanyun-tech/baseunit-app.c)
 - [Bluetooth DMA report source](/uploads/projects/juanyun-tech/baseunit-bluetooth.c)
 - [Flash parameter store source](/uploads/projects/juanyun-tech/baseunit-nvstore.c)
 - [Firmware README](/uploads/projects/juanyun-tech/baseunit-firmware-readme.md)
 - [Component datasheet review](/notes/juanyun-baseunit-component-datasheets)
+
+## 复盘
+
+这个工程让我开始重视“设备应该记得什么”。以前我会更关注功能能不能跑，现在会多想一步：断电以后怎么办，用户误触怎么办，传感器失败怎么办，通信会不会阻塞。底座板不算复杂，但它很适合训练产品化固件的思路。
