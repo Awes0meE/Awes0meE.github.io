@@ -12,7 +12,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-On the `project-archive-pages` working branch, the website keeps Juanyun public writing in:
+On `main` release `v0.5.0`, the website keeps Juanyun public writing in:
 
 ```text
 content/projects/juanyun-*.mdx

@@ -146,9 +146,9 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current development state is branch `project-archive-pages`, created after release `v0.4.0` plus the final review fixes on `main`.
+The current mainline state is release `v0.5.0` on `main`, tagged after the project archive page expansion.
 
-As of `2026-05-07`, the working branch has removed placeholder projects and consolidated real internship / hardware material from:
+As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
 ```text
 D:\XJTLU\工作相关\卷云科技有限责任公司
@@ -157,7 +157,7 @@ D:\XJTLU\工作相关\天津津铁通信有限公司
 D:\XJTLU\工作相关\Claude Chime 硬件
 ```
 
-Current content count on `project-archive-pages`:
+Current content count on `main`:
 
 - 6 project pages total;
 - 18 public notes total;

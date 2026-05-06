@@ -29,6 +29,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Release `v0.4.0` was merged back to `main` and pushed to GitHub at commit `55ffaab Merge internship portfolio content`. The final handoff review then continued on `main`.
 - `2026-05-07`: Final handoff review fixes were pushed to `main` at commit `3c14b80 Finalize portfolio handoff review`, adding Chinese labels for the new project statuses and reconciling docs with the merged `main` state.
 - `2026-05-07`: Branch `project-archive-pages` was created to make project pages larger evidence archives. The branch removed the portfolio rebuild, PID Starter Kit, ACUnit, BaseUnit, DHT, and actuator standalone project pages; merged ACUnit/BaseUnit/DHT/actuator material into `juanyun-thermal-hardware`; added `components/project-assets.tsx` and project `assetPaths`; added a Claude Chime hardware power-board archive; and updated the footer copyright to `Awes0meE / 66CCFF Labs`.
+- `2026-05-07`: Release `v0.5.0` was merged to `main` and pushed to GitHub at commit `3add408 Add project archive pages`.
 
 ## Stable Decisions
 
@@ -92,7 +93,7 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review the deployed `v0.4.0` pages on `https://www.66ccff-labs.com/` after Vercel finishes deployment, especially the Nanjing Turing, Tianjin rail-transit, and expanded Juanyun legacy pages.
+- Browser-review the deployed `v0.5.0` pages on `https://www.66ccff-labs.com/` after Vercel finishes deployment, especially the larger Juanyun archive, Claude Chime hardware page, Nanjing Turing logs, and Tianjin STM32 archive files.
 - Add real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.

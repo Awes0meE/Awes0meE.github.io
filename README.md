@@ -119,9 +119,9 @@ Use optional project `assetPaths` to list uploaded evidence from `public/uploads
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current branch content state:
+Current main content state:
 
-- `project-archive-pages` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
+- `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
 - Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
@@ -157,14 +157,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Latest released tag: `v0.4.0`. Current working branch: `project-archive-pages` for the unreleased project-archive expansion.
+Latest released tag: `v0.5.0`.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.5.0 -m "v0.5.0 project archive pages"
+git tag -a v0.6.0 -m "v0.6.0 portfolio update"
 git push origin main
-git push origin v0.5.0
+git push origin v0.6.0
 ```
 
 ---
@@ -270,9 +270,9 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 
-当前分支内容状态：
+当前 main 内容状态：
 
-- `project-archive-pages` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
+- `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
 - 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
@@ -313,12 +313,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.4.0`。当前工作分支：`project-archive-pages`，用于尚未发布的项目档案页扩展。
+最新已发布标签：`v0.5.0`。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.5.0 -m "v0.5.0 project archive pages"
+git tag -a v0.6.0 -m "v0.6.0 portfolio update"
 git push origin main
-git push origin v0.5.0
+git push origin v0.6.0
 ```

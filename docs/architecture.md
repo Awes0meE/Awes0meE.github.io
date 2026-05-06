@@ -60,7 +60,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on the `project-archive-pages` working branch as of `2026-05-07`:
+Current content state on `main` release `v0.5.0` as of `2026-05-07`:
 
 - 6 project files total;
 - 18 public note files total;
