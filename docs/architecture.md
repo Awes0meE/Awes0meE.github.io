@@ -97,6 +97,7 @@ Project and note cards use paired frontmatter fields. Media cards use optional `
 - Apex domain: `https://66ccff-labs.com/` redirects to `www`.
 - Vercel handles the Next.js deployment.
 - Cloudflare manages DNS.
+- The root `.nojekyll` file is intentional. This repository name also triggers GitHub Pages, but the live site is not a Jekyll site; `.nojekyll` prevents GitHub Pages from treating source content and `public/uploads/` Markdown/code archives as Liquid/Jekyll templates.
 
 ## Non-Goals For The Current Version
 

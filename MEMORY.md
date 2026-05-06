@@ -30,6 +30,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Final handoff review fixes were pushed to `main` at commit `3c14b80 Finalize portfolio handoff review`, adding Chinese labels for the new project statuses and reconciling docs with the merged `main` state.
 - `2026-05-07`: Branch `project-archive-pages` was created to make project pages larger evidence archives. The branch removed the portfolio rebuild, PID Starter Kit, ACUnit, BaseUnit, DHT, and actuator standalone project pages; merged ACUnit/BaseUnit/DHT/actuator material into `juanyun-thermal-hardware`; added `components/project-assets.tsx` and project `assetPaths`; added a Claude Chime hardware power-board archive; and updated the footer copyright to `Awes0meE / 66CCFF Labs`.
 - `2026-05-07`: Release `v0.5.0` was merged to `main` and pushed to GitHub at commit `3add408 Add project archive pages`.
+- `2026-05-07`: Added root `.nojekyll` because GitHub Pages/Jekyll tried to parse uploaded Markdown/code evidence under `public/uploads/` as Liquid templates and failed on an Inno Setup GUID. Vercel remains the canonical deployment target.
 
 ## Stable Decisions
 
@@ -46,6 +47,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
 - Use Vercel for deployment and Cloudflare for DNS management.
+- Keep root `.nojekyll` committed so incidental GitHub Pages builds do not run Jekyll/Liquid over Next.js source files and uploaded Markdown/code archives.
 
 ## Site Identity
 

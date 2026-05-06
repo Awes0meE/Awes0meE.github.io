@@ -249,3 +249,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Merged the project archive work into `main`, tagged release `v0.5.0`, pushed GitHub, and ran a release-state `/neat`.
 - Files changed: updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/architecture.md`, `docs/juanyun-tech-source-inventory.md`, `package.json`, and `package-lock.json` so durable docs and package metadata describe `main` / `v0.5.0` instead of the temporary `project-archive-pages` branch.
 - Verification: content/project/media reference validation passed for 6 projects, 18 public notes, and current media items; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-05-07
+
+- Summary: Fixed the GitHub Pages build failure caused by Jekyll parsing uploaded project Markdown as Liquid.
+- Files changed: added root `.nojekyll`, documented the GitHub Pages/Vercel deployment boundary, and recorded the failure mode in project memory.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
