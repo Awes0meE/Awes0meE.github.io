@@ -28,7 +28,7 @@ public/uploads/projects/juanyun-tech/
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, and V2.1 manufacturing exports. |
+| `Current_Product_ACUnit_Project` | 1210 | Standalone current-product case-study material: AC unit PCB V1.0/V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, selected STM32 external unit firmware source evidence, and manufacturing exports. |
 | `Current_Product_BaseUnit_Project` | 1659 | Standalone firmware project, public notes, selected source evidence, and component datasheets for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Standalone small hardware planning project and public note for the DHT11/AM2302 sensor breakout board. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
@@ -58,7 +58,23 @@ public/uploads/projects/juanyun-tech/acunit-release-notes-v05.md
 public/uploads/projects/juanyun-tech/acunit-svc-control.c
 public/uploads/projects/juanyun-tech/acunit-svc-sensor.c
 public/uploads/projects/juanyun-tech/acunit-svc-ui.c
+public/uploads/projects/juanyun-tech/acunit-v10-bom.xlsx
+public/uploads/projects/juanyun-tech/acunit-v10-dxf.dxf
+public/uploads/projects/juanyun-tech/acunit-v10-gerber.zip
+public/uploads/projects/juanyun-tech/acunit-v10-step.step
 public/uploads/projects/juanyun-tech/acunit-v21-main-back.png
+public/uploads/projects/juanyun-tech/acunit-v20-main-bom.xlsx
+public/uploads/projects/juanyun-tech/acunit-v20-main-gerber.zip
+public/uploads/projects/juanyun-tech/acunit-v20-main-pcb.pdf
+public/uploads/projects/juanyun-tech/acunit-v20-main-pick-place.csv
+public/uploads/projects/juanyun-tech/acunit-v20-power-bom.xlsx
+public/uploads/projects/juanyun-tech/acunit-v20-power-gerber.zip
+public/uploads/projects/juanyun-tech/acunit-v20-power-pcb.pdf
+public/uploads/projects/juanyun-tech/acunit-v20-power-pick-place.csv
+public/uploads/projects/juanyun-tech/acunit-v20-ui-bom.xlsx
+public/uploads/projects/juanyun-tech/acunit-v20-ui-gerber.zip
+public/uploads/projects/juanyun-tech/acunit-v20-ui-pcb.pdf
+public/uploads/projects/juanyun-tech/acunit-v20-ui-pick-place.csv
 public/uploads/projects/juanyun-tech/acunit-v21-main-bom.xlsx
 public/uploads/projects/juanyun-tech/acunit-v21-main-front.png
 public/uploads/projects/juanyun-tech/acunit-v21-main-gerber.zip
