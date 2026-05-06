@@ -8,6 +8,123 @@ tags: ["Qt", "Seamly2D", "MSVC", "qmake"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
+<!-- turing-english-translation: qt-first-run -->
+
+## English Translation / 英文译文
+
+### Source
+
+The text below is the original `windows11-qt6-seamly2d-onboarding.txt` note that I kept while bringing Seamly2D up on Windows 11. I am keeping the raw TXT/DOCX links as source material, and this English section follows the same technical path before the Chinese original.
+
+- [Open original TXT](/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.txt)
+- [Open original DOCX](/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.docx)
+
+### Windows 11: Bringing Seamly2D Up From Zero In A Qt6 Environment
+
+The first step was installing Git for Windows from `https://gitforwindows.org/`. After the normal installer flow, I opened `cmd` with `Win + R` and checked `git --version`. A response such as `git version x.xx.x.windows` meant Git was ready.
+
+Next came the MSVC toolchain: MSVC v142 / VS2019 x64 build tools, the Windows 10/11 SDK, and the CDB debugger. This installation takes a fair amount of disk space, roughly 10 GB. I installed `vs_BuildTools.exe` from the Visual C++ Build Tools page, selected the Desktop development with C++ workload, and in the optional details also selected `MSVC v142 - VS 2019 C++ x64/x86 build tools` and the Windows SDK. I kept the default installation path because later Qt Creator and the toolchain setup expect those locations. After rebooting, I opened the x64 Native Tools Command Prompt and ran `cl`; the Microsoft C/C++ compiler banner confirmed that the compiler was installed.
+
+Then I installed Qt through the online Qt Installer. It requires a Qt account on the first run. In the custom installation step I enabled archived versions, removed the default Qt 6 selection at first, selected Qt 5.15.2 with `MSVC 2019 64-bit`, and also selected Qt Creator, CDB Debugger Support, and Debugging Tools for Windows. From Qt Creator's terminal I verified qmake with:
+
+```powershell
+"C:\Qt\5.15.2\msvc2019_64\bin\qmake.exe" -v
+```
+
+After that I cloned Seamly2D:
+
+```powershell
+git clone https://github.com/FashionFreedom/Seamly2D.git
+```
+
+If the clone failed because of proxy/VPN networking, I set Git's HTTPS proxy first:
+
+```powershell
+git config --global https.proxy http://127.0.0.1:7890
+```
+
+With the repository cloned, I opened `Seamly2D.pro` in Qt Creator. The first configuration used `Desktop Qt 5.15.2 MSVC2019 64bit`, with Debug enabled and Release only enabled if a release build was needed. In the Projects/Kit page I checked that the kit, Qt version, Visual Studio compiler, and auto-detected CDB debugger were all present.
+
+### The First qmake Failure: Qt5 Versus Qt6 Project Files
+
+For the first build attempt, I did not wait for all indexing to finish. I ran qmake from the Build menu and immediately hit an error. The project files referenced `core5compat`, a Qt6-era compatibility module, while the installed build environment was still Qt5. That interrupted qmake.
+
+There were two possible directions.
+
+The first was a temporary Qt5 compatibility attempt. I searched globally for `core5compat` and changed `.pro` files so the module was only added if available:
+
+```qmake
+QT += core gui widgets xml svg printsupport network multimedia
+qtHaveModule(core5compat): QT += core5compat
+```
+
+The same conditional form was applied to the `seamly2d`, `seamlyme`, and test `.pro` files. qmake then succeeded, but the full build produced more than thirty errors. The current branch had already moved many source files toward Qt6 style, including `QStringConverter`, `QtCore5Compat/*` headers, and Qt6-style calls such as `qExp<qreal>`. Making all of that compile under Qt5 would have required many conditional compatibility edits, so I stopped this path.
+
+The second direction was to build properly with Qt6. In Qt Maintenance Tool, I added Qt 6.5.3 with `MSVC 2019 64-bit`, `Qt 5 Compatibility Module`, and `Qt Multimedia` under Additional Libraries. I then deleted the previous `build` folder and `Seamly2D.pro.user` file, reopened `Seamly2D.pro`, selected Qt 6.5.3, and configured the project again.
+
+In Qt Creator's kit settings I added an MSVC compiler entry named `MSVC 2019 v142 (BuildTools)` and pointed its initialization script to:
+
+```text
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat
+```
+
+The ABI was auto-detected as `x86-windows-msvc2019-pe-64bit`. Back in the kit page, I selected `Desktop Qt 6.5.3 MSVC2019 64bit`, the newly created MSVC v142 compiler, and the auto-detected CDB debugger. Running qmake again then finished successfully.
+
+### The windeployqt Build Error
+
+After qmake succeeded, I ran Build All Projects. Midway through compilation, the post-link deploy step failed at `windeployqt`. The project called `windeployqt`, but the build environment's `PATH` did not include Qt's `bin` directory, so the executable could not be found.
+
+Inside Qt Creator I edited the Build Environment and added a PATH value similar to:
+
+```text
+PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64;C:\Qt\6.5.3\msvc2019_64\bin;%{Env:PATH}
+```
+
+I also changed the post-link rule so `windeployqt` only runs for Release builds and uses Qt's own install path:
+
+```qmake
+win32:CONFIG(release, debug|release) {
+WDEP = $$shell_path($$[QT_INSTALL_BINS]/windeployqt.exe)
+OUTEXE = $$shell_path($$DESTDIR/seamly2d.exe)
+QMAKE_POST_LINK += "\"$$WDEP\" \"$$OUTEXE\""
+}
+```
+
+After cleaning, rerunning qmake, and building all projects again, the build completed and the green Run button launched the application successfully.
+
+### Windows Geometry Warning On Startup
+
+After the application opened, Qt sometimes printed a Windows geometry warning such as `QWindowsWindow::setGeometry`. The welcome window was trying to restore a previous saved position or size that the current DPI/display setup did not allow, so Qt adjusted it and emitted a warning.
+
+The first cleanup step was to remove local saved state:
+
+- delete the `Seamly2DTeam` folder under `%APPDATA%`;
+- delete the `Seamly2D` folder under `%LOCALAPPDATA%`;
+- remove the `HKEY_CURRENT_USER\Software\Seamly2DTeam` registry key.
+
+Then I wrapped the original message handler so this specific geometry warning would not trigger disruptive UI behavior. The wrapper ignored only the known geometry warning, printed other warnings to stderr, and passed non-warning messages through to the original handler:
+
+```cpp
+static void seamlySafeMsgHandler(QtMsgType type,
+                                 const QMessageLogContext &ctx,
+                                 const QString &msg)
+{
+    if (type == QtWarningMsg) {
+        if (msg.startsWith(QStringLiteral("QWindowsWindow::setGeometry: Unable to set geometry")))
+            return;
+
+        fprintf(stderr, "%s\n", msg.toLocal8Bit().constData());
+        return;
+    }
+
+    noisyFailureMsgHandler(type, ctx, msg);
+}
+```
+
+After adding the needed headers and replacing `qInstallMessageHandler(noisyFailureMsgHandler)` with `qInstallMessageHandler(seamlySafeMsgHandler)` in the relevant startup functions, I rebuilt from the beginning: clean, run qmake, build all projects, then run. The popup problem was resolved.
+
+At this point Seamly2D could run normally on Windows 11 in the Qt6 environment, so the project was ready for follow-up development work.
+
 ## 原文来源
 
 下面直接放当时留下来的 `windows11-qt6-seamly2d-onboarding.txt` 原文。这里不再缩成短总结，只把它从上传文件里提出来，放成一篇能正常阅读的网页笔记。

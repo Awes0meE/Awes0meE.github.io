@@ -124,7 +124,9 @@ Current main content state:
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
-- The media gallery covers project/note images and videos, and the Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks.
+- The media gallery covers 38 project/note images and videos, including the Notion-exported Nanjing Turing build diagrams.
+- The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
+- Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
 - Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
@@ -158,14 +160,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Latest released tag: `v0.6.0`.
+Latest released tag: `v0.6.1`.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.7.0 -m "v0.7.0 portfolio update"
+git tag -a v0.6.2 -m "v0.6.2 portfolio update"
 git push origin main
-git push origin v0.7.0
+git push origin v0.6.2
 ```
 
 ---
@@ -276,6 +278,9 @@ npm run typecheck # 跳过 lint 的生产构建检查
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
+- 媒体页覆盖 38 个项目 / 笔记图片和视频，包括南京图灵 Notion 导出的编译逻辑图。
+- 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
+- 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
 - 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
 - 不要发布私密财务、开票、证明、凭据、安装包、vendor、依赖或 build 输出文件。
 
@@ -314,12 +319,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.6.0`。
+最新已发布标签：`v0.6.1`。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.7.0 -m "v0.7.0 portfolio update"
+git tag -a v0.6.2 -m "v0.6.2 portfolio update"
 git push origin main
-git push origin v0.7.0
+git push origin v0.6.2
 ```

@@ -22,18 +22,28 @@ This was the point where the board stopped being only an output device. External
 
 ## Polling And Interrupts / 轮询和中断
 
+Polling a button in the main loop was enough to change LED state at first, but an encoder felt much more natural with EXTI. One channel can trigger on an edge, and the other channel can decide the direction. The excerpt keeps `EXTI15_10_IRQHandler`, where each interrupt checks the B-phase level and increments or decrements the count.
+
+An interrupt is not just "a better poll." It brings trigger edges, flag clearing, priority, and shared variables between the interrupt handler and the main loop. The code was still simple, but the timing problems were already real.
+
 一开始用主循环轮询按键就能改变 LED 状态，但编码器这种输入更顺手的做法是用 EXTI 捕捉边沿，再根据另一路相位判断方向。代码里保留了 `EXTI15_10_IRQHandler`，每次中断根据 B 相电平对计数加减。
 
 中断不是“更高级的轮询”。它还要考虑触发边沿、标志位清除、优先级，以及中断服务函数和主循环之间共享变量的问题。这个阶段的代码还很入门，但已经开始碰到嵌入式里很常见的节奏问题。
 
 ## Timers / 定时器
 
+The timer exercise moved delay away from pure software loops. Prescaler, auto-reload, and counter value sounded abstract at first. Once they were tied to LED blinking frequency and OLED count display, they became much easier to understand.
+
 定时器练习把延时从纯软件循环里拿出来。预分频、自动重装载、计数值这些词一开始有点抽象，但只要和 LED 闪烁频率、OLED 上的计数显示连起来，就会好理解很多。
 
 ## File / 文件
 
+The encoder-to-servo-speed excerpt keeps the core idea: map knob count into speed and clamp the upper and lower limits: [encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c).
+
 编码器控制舵机速度的摘录保留了“旋钮计数映射到速度，并做上下限保护”的核心逻辑：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
 
 ## Looking Back / 回头看
+
+The value here is turning input events into visible numbers. Once encoder count, timer count, and OLED display were connected, debugging stopped relying only on "it seems to move." PWM dimming and the later environment-monitoring demo were built on top of this.
 
 这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就不再只靠“好像动了”。后面的 PWM 调光和环境监测小系统，也是在这个基础上继续叠。

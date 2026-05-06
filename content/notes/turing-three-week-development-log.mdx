@@ -8,6 +8,58 @@ tags: ["Qt", "Seamly2D", "Internship", "Packaging"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
+<!-- turing-english-translation: three-week-log -->
+
+## English Reading Version / 英文整理版
+
+### Raw Logs
+
+The three raw text logs are kept for traceability:
+
+- [Week 1 raw log](/uploads/projects/nanjing-turing/week-1-development-log.txt)
+- [Week 2 raw log](/uploads/projects/nanjing-turing/week-2-development-log.txt)
+- [Week 3 raw log](/uploads/projects/nanjing-turing/week-3-development-log.txt)
+
+### Week 1: First Get The Qt Project Running
+
+The first week was mainly about understanding the environment and clarifying the task. Since I had just started working with Qt/C++, I first learned the basic way Qt projects run, then cloned Seamly2D locally and tried to bring it up in Qt Creator. This was not as clean as finishing one isolated feature; most of the work was around the environment, Git, qmake, paths, and compiler/toolchain issues.
+
+At the same time, I started learning Git in a practical way: clone the project, keep local changes organized, and write down how the setup was done.
+
+On the feature side, the first week started with registration and login. The registration UI stored user information through `QSettings`, and later the password logic was changed from plaintext storage to salted hash verification. After the login screen was connected into the `main` flow, the software would go through registration/login before entering the original Seamly2D interface.
+
+That week also included many small interaction fixes: prompts for existing users, missing users, and incorrect passwords; changing the Enter key behavior from cancel to confirm; and hiding password input. One very concrete issue was that when entering a password on the login page, the program could crash if the current input method was Chinese. I worked around it by limiting the input method hints for the username and password fields.
+
+### Week 2: User Management And Role Restrictions
+
+The second week continued around the control panel after login. I first enlarged the control panel window, then added the entry point for user management. The first registered account had to be `admin`, and that rule was shown directly on the first-registration page to avoid a wrong initial account setup.
+
+Then I added user types: normal users and administrators. Only administrators can see the user-management entry; normal users do not see it after login. Inside the user-management screen, an administrator can view all registered users and perform operations such as delete, promote to administrator, or demote to normal user.
+
+The real work was not drawing the buttons, but getting the restrictions right. Deleting a user needs a confirmation dialog. Administrators can only delete normal users, not other administrators. Promotion only applies to normal users. Demotion can only be performed by the `admin` account; other administrators cannot demote each other.
+
+These rules are not complex in theory, but desktop software makes the details visible: who is currently logged in, what role the target user has, when a button should appear, whether a mistaken click can be canceled, and whether the prompt text is clear. The second week was basically about making this small permission system complete enough to use.
+
+### Week 3: From Feature Work To Release
+
+The third week started with reading a `.sm2d` XML sample file and using it to observe the data structure. After that, I fully brought up the `develop` branch, stabilized the existing feature work, and shifted direction from adding features to preparing a Release.
+
+The Windows Release process was longer than expected. I first configured the build environment and handled compiler-version conflicts on the computer. Then I studied the lower-level build logic behind program compilation and organized notes around MSVC, CMake, Ninja, and Qt package discovery. After that, I used `windeployqt` to collect Qt dependencies into a standalone runnable program folder.
+
+Packaging then introduced signing and installer problems. I studied Windows digital certificates, created a self-signed certificate, and used it to sign the program. Then I learned Inno Setup and turned the loose Release folder into an installer. Finally, I connected the flow of Release compile, dependency collection, digital signing, and installer packaging, and wrote the process into a workflow document.
+
+The second half moved to macOS. I moved the already developed Windows code to a Mac, reconfigured Qt and the compiler environment, and dealt with path and architecture differences between Homebrew Qt and official Qt. I got Debug running first, then switched to Release.
+
+For macOS packaging, I tried `macdeployqt` to collect dependencies into the `.app`, then studied certificates and signing. The self-signed certificate could be created, but the full signing flow did not reach formal distribution quality. In the end I wrote shell automation scripts to connect build, packaging, dependency collection, and signature checks as much as possible. Apart from signing itself, the other parts were mostly runnable.
+
+At the end of the internship period, I sorted the files created during the three weeks by category and filled in the development logs and README so the work would be easier to hand off or revisit later.
+
+### Looking Back
+
+The three-week thread is actually clear: week one asked whether the project could run, week two asked whether the entry point and user management could be used, and week three asked whether the program could leave the development machine and run elsewhere. None of the steps were glamorous, but they were all real engineering work.
+
+The useful lesson was that desktop software work is not only UI code. Toolchains, local configs, release folders, missing DLLs, signing, and platform differences all become part of the job once the program has to leave the developer machine.
+
 
 ## Raw Logs / 原始日志
 

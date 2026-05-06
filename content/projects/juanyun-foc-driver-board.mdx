@@ -20,7 +20,7 @@ This line is useful motor-control material rather than a finished public release
 
 ## Archive Scope / 归档范围
 
-- Hardware line: `PMSM无感FOC驱动板` with selected BOM, pick-and-place, Gerber, STEP, and EasyEDA project files now published as legacy evidence.
+- Hardware line: a sensorless PMSM FOC driver board, with selected BOM, pick-and-place, Gerber, STEP, and EasyEDA project files now published as legacy evidence.
 - Firmware line: STM32F4 project with `motor/` modules such as `adc`, `drv8301`, `foc_algorithm`, `hall_sensor`, `speed_pid`, and parameter-identification wrappers.
 - Toolchain line: IAR / Keil project files, CMSIS / STM32F4 library material, Debug / Release build output, and vendor documentation.
 - Reference line: DRV8301, STM32F446RE, MOSFET, encoder, and CMSIS references.
@@ -66,5 +66,7 @@ Still not published from the source archive:
 - Test evidence: phase-current waveforms, PWM timing, speed response, failed startup cases, and parameter-tuning notes.
 
 ## Looking Back / 现在回头看
+
+The main risk of this line is that it looks advanced, so it becomes easy to write around the keywords instead of the engineering. The useful part is not the vocabulary; it is explaining sampling, modulation, protection, startup, and test evidence clearly. This page publishes the non-sensitive legacy files first and admits that the line is still an archive, not a mature FOC case study.
 
 这条线最大的风险是“看起来高级，所以很容易写虚”。真正有用的不是关键词，而是把采样、调制、保护、起转和测试记录讲清楚。当前页面先把非敏感 legacy 文件放出来，同时承认它还只是材料页，不把文件数量当成项目成熟度。

@@ -4,11 +4,12 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review the current `main` deployment in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake notes, and Tianjin STM32 internship notes.
+1. Review the current `main` deployment in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake/Notion source notes, Tianjin STM32 internship notes, and the media gallery.
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` stay public-safe only; other legacy Juanyun material can use reviewed public evidence.
 3. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
 4. Expand project archive pages with direct evidence, inline source/text previews, and internal links.
 5. Improve `About`, media gallery polish, and smaller notes.
+6. Keep public English and Chinese body sections equivalent. Frontmatter translation alone is not enough when an article body contains substantial Chinese or English content.
 
 ## Add Or Edit A Project
 
@@ -48,7 +49,7 @@ assetPaths:
 
 Set `featured: true` only for projects that should appear on the homepage.
 
-Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render Markdown / text documents as readable article content, render small source/code files in code frames, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files.
+Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages preview images and videos, render Markdown / text documents as readable article content, render small source/code files in code frames, and link PDFs, spreadsheets, EDA/CAD files, fabrication archives, and other binary files. Prefer explicit file lists over broad directories when a folder contains Notion stubs, unfinished exports, or other files that should not appear as project evidence.
 
 ## Add Or Edit A Note
 
@@ -154,7 +155,7 @@ The website has a top-right English / Simplified Chinese language switch. The de
 - Keep `title/titleZh` and `summary/summaryZh` complete for projects and notes.
 - Use `titleZh/captionZh` in `content/media.json` for media cards.
 - `ContentRenderer` can split simple bilingual headings such as `English / 中文` and hide language-detected body blocks when both languages exist. It does not show missing-language placeholder notices; single-language notes remain readable.
-- Long MDX body content is not automatically machine-translated. Add real bilingual body sections manually when an article needs both languages.
+- Long MDX body content is not automatically machine-translated. Add real bilingual body sections manually when an article needs both languages, and keep the English section accurate to the Chinese section when the Chinese text is the user's original writing.
 
 ## Writing Standard
 

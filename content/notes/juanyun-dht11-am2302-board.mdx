@@ -9,7 +9,9 @@ projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## 起点
+## Starting Point / 起点
+
+The temperature-and-humidity breakout-board line is very small, so small that at first it felt unnecessary to write a separate note. It does not have multiple PCBs like the external unit board, and it does not have shiny keywords like FOC. Later I realized that a small task can show whether the work was really made complete.
 
 温湿度小板这条线很小，小到一开始会觉得没必要单独写。毕竟它不像外机控制板那样有多块 PCB，也不像 FOC 那样关键词很亮。后来想想，小任务反而能看出有没有把事情做完整。
 
@@ -17,11 +19,26 @@ visibility: public
 
 ![DHT11 / AM2302 breakout plan cover](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
 
-## 小板也会出问题
+
+
+## Small Boards Can Still Fail / 小板也会出问题
+
+It is worth writing down, but not worth overselling. What this board shows is task decomposition, not technical complexity. Many embedded issues start from this kind of "small interface": reversed pin order, unclear pull-up choice, reading immediately after power-on, sampling too frequently, or long wires making edges poor.
+
 
 值得写，但不能硬吹。它能说明的是任务拆解，不是技术复杂度。嵌入式里很多问题就是从这种“小接口”开始出错的：引脚顺序反了、上拉没想清楚、传感器上电后马上读、采样间隔太短、线太长导致边沿变差。
 
-## 任务书里已经明确的点
+## Points Already Clear In The Task Brief / 任务书里已经明确的点
+
+- PCB size: `30 mm x 14 mm`.
+- Connector: `PZ2.54` angled 3-pin header.
+- Pin definition: `3V3 / DATA / GND`.
+- Communication: single-wire bus.
+- Onboard peripherals: pull-up resistor, power decoupling, optional signal damping / filtering.
+- Resistor/capacitor package: maximum `0603`.
+- Mounting: one `M2` screw positioning hole.
+- Power: prefer `3.3 V`.
+- Verification: breadboard pre-check first, then MCU verification after soldering.
 
 - PCB 尺寸：`30 mm x 14 mm`。
 - 接口：`PZ2.54` 弯针 3P。
@@ -33,17 +50,27 @@ visibility: public
 - 供电：优先 `3.3 V`。
 - 验证：可先面包板预验证，再焊后单片机验证。
 
-## 采样和验证
+
+
+## Sampling And Verification / 采样和验证
+
+AM2302 / DHT22 is fussy about timing, but this kind of fuss belongs in the task plan. After power-on, wait at least 2 seconds before reading, and keep the read interval no shorter than 2 seconds. During verification, do not only check whether the serial port prints numbers; move a hand close, breathe toward the sensor, watch whether temperature and humidity change reasonably, and run it for several minutes to see whether failures repeat. It sounds basic, but many hardware debugging hours are eaten by exactly these basic details.
+
 
 AM2302 / DHT22 对时间要求比较烦，但这类烦正是应该写进任务计划的地方。上电后至少等 2 秒再读，读取间隔不要小于 2 秒。验证时不只看串口有没有数字，还要看手靠近、吹气后温湿度有没有合理变化，并连续跑几分钟观察是否频繁失败。
 
 这听起来很基础，但很多硬件调试时间就是被这些基础问题吃掉的。
 
-## 文件
+## Files / 文件
 
 - [DHT11 / AM2302 breakout plan PDF](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf)
 - [Juanyun thermal hardware project](/work/juanyun-thermal-hardware)
 
-## 记下来
+
+
+## Why I Kept This Note / 记下来
+
+Small tasks also deserve careful notes. This board is not flashy, but it pushes one concrete requirement through a small hardware, firmware, and testing loop: size, connector, pull-up, decoupling, power-on wait, and sampling interval. None of those should be waved away with "it should be fine."
+
 
 小任务也要认真写。这个板子不炫，但它把一个具体需求推进到硬件、固件和测试的小闭环里：尺寸、接口、上拉、去耦、上电等待、采样间隔，一个都不能靠“应该没事”带过去。

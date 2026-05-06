@@ -33,7 +33,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Added root `.nojekyll` because GitHub Pages/Jekyll tried to parse uploaded Markdown/code evidence under `public/uploads/` as Liquid templates and failed on an Inno Setup GUID. Vercel remains the canonical deployment target.
 - `2026-05-07`: Media and notes were refreshed after `v0.5.0`: `content/media.json` now has 29 items covering project/note images and videos; Nanjing Turing gained `turing-three-week-development-log`; the Juanyun hardware SOP is rendered as webpage text; and notes/projects were rewritten away from AI handoff phrasing toward practical learning-log narration.
 - `2026-05-07`: Release `v0.6.0` names the post-`v0.5.0` media/note refresh on `main`, including the 29-item media gallery, webpage-rendered SOP/text assets, note prose refresh, and release-boundary docs cleanup.
-- `2026-05-07`: Nanjing Turing source-text notes were changed to render the uploaded public originals directly as note pages: Qt6 Seamly2D first-run TXT, Release packaging Markdown, CMake/build-logic PDF text extraction, and README + `.sm2d` / `.smis` samples. Media gallery now has 25 items after removing the generic dashboard, lab-notes, robot-platform, and waveform visual cards.
+- `2026-05-07`: Nanjing Turing source-text notes were changed to render uploaded public originals directly as note pages: Qt6 Seamly2D first-run TXT, Release packaging Markdown, README + `.sm2d` / `.smis` samples, and then the CMake/build-logic note was replaced again with the user's two Notion-exported Markdown originals instead of the lossy PDF text extraction.
+- `2026-05-07`: Release `v0.6.1` adds the Notion CMake/build-logic originals, page-internal heading anchors, Markdown table rendering, a full public English body coverage pass across projects/notes, and a 38-item media gallery covering all project/note images and videos.
 
 ## Stable Decisions
 
@@ -47,6 +48,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
 - Keep the current project/note prose style for future content. The user likes the plain practical self-study / internship-log texture now used in notes and projects: concrete, casual, close to the debugging scene, less formal logic, not AI handoff or delivery-report phrasing.
 - When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, prefer making it a real note page with the original wording rendered as readable article content. Do not hide the only copy under a project asset frame or replace it with a short summary.
+- Keep English body sections equivalent to Chinese body sections on public project/note pages. Do not rely on `title/titleZh` and `summary/summaryZh` alone when the article body has real content in both languages.
 - On Windows PowerShell, do not pipe inline Chinese here-strings directly into Node/Python/other interpreters for file generation. Use `apply_patch` for Chinese text or write a temporary UTF-8 script/file first, then run it. After any batch content generation, verify with Node `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` or repeated question-mark mojibake before committing.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
@@ -67,7 +69,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/language-toggle.tsx`: client-side EN/简中 language switch.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: renders project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
-- `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews and fenced code blocks.
+- `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews, fenced code blocks, basic Markdown tables, heading anchors, and language-scoped body/headings/tables.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.
 - `content/projects/`: project case-study source files.
@@ -101,7 +103,7 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review release `v0.6.0` on `https://www.66ccff-labs.com/` after deployment, especially `/media`, `juanyun-hardware-sop`, `turing-three-week-development-log`, and the larger Juanyun / Nanjing Turing project pages.
+- Browser-review release `v0.6.1` on `https://www.66ccff-labs.com/` after deployment, especially `/media`, `turing-cmake-build-logic`, the Nanjing Turing project page, Tianjin STM32 pages, and the larger Juanyun project/note pages.
 - Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.

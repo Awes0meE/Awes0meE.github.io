@@ -86,7 +86,7 @@ function parseInline(text: string) {
       } else {
         parts.push(
           <strong key={`strong-${match.index}`} className="font-semibold text-ink">
-            {match[4]}
+            {parseInline(match[4])}
           </strong>
         );
       }
@@ -99,6 +99,23 @@ function parseInline(text: string) {
   }
 
   return parts;
+}
+
+function plainInlineText(text: string) {
+  return text
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .trim();
+}
+
+function slugifyHeading(text: string) {
+  return plainInlineText(text)
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s_-]+/gu, "")
+    .trim()
+    .replace(/\s+/g, "-");
 }
 
 function parseLocalizedInline(text: string) {
@@ -147,20 +164,68 @@ function splitBlocks(source: string) {
   return blocks.filter((block) => block.trim());
 }
 
+function isMarkdownTable(block: string) {
+  const lines = block.trim().split("\n");
+  return lines.length >= 2 && lines[0].includes("|") && /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(lines[1]);
+}
+
+function splitTableRow(line: string) {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
 export function ContentRenderer({ source }: { source: string }) {
   const blocks = splitBlocks(source);
   const textBlocks = blocks
     .map((block) => block.trim())
     .filter(
       (block) =>
+        !block.startsWith("# ") &&
         !block.startsWith("## ") &&
         !block.startsWith("### ") &&
+        !block.startsWith("#### ") &&
         !block.startsWith("![") &&
         !block.startsWith("```")
     );
   const hasEnglishBody = textBlocks.some((block) => getBlockLanguage(block) === "en");
   const hasChineseBody = textBlocks.some((block) => getBlockLanguage(block) === "zh");
   const shouldScopeLanguage = hasEnglishBody && hasChineseBody;
+  const headingCounts = new Map<string, number>();
+
+  function getHeadingId(text: string) {
+    const baseId = slugifyHeading(text);
+
+    if (!baseId) {
+      return undefined;
+    }
+
+    const count = headingCounts.get(baseId) ?? 0;
+    headingCounts.set(baseId, count + 1);
+    return count ? `${baseId}-${count + 1}` : baseId;
+  }
+
+  function renderHeading(index: number, level: 2 | 3 | 4, text: string, className: string) {
+    const Heading = `h${level}` as const;
+    const split = splitBilingualSlash(text);
+    const languageClass = split ? undefined : getScopedLanguageClass(getBlockLanguage(text), shouldScopeLanguage);
+
+    return (
+      <Heading id={getHeadingId(text)} key={index} className={cn(className, "scroll-mt-24", languageClass)}>
+        {split ? (
+          <>
+            <span className="lang-en">{parseInline(split.en)}</span>
+            <span className="lang-zh">{parseInline(split.zh)}</span>
+          </>
+        ) : (
+          parseInline(text)
+        )}
+      </Heading>
+    );
+  }
 
   return (
     <div>
@@ -209,20 +274,54 @@ export function ContentRenderer({ source }: { source: string }) {
           );
         }
 
-        if (trimmed.startsWith("## ")) {
+        if (isMarkdownTable(trimmed)) {
+          const [headerLine, , ...rowLines] = trimmed.split("\n");
+          const headers = splitTableRow(headerLine);
+          const rows = rowLines.filter((line) => line.includes("|")).map(splitTableRow);
+          const languageClass = getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage);
+
           return (
-            <h2 key={index} className="mt-10 text-2xl font-semibold text-ink">
-              {parseLocalizedInline(trimmed.replace(/^##\s+/, ""))}
-            </h2>
+            <div key={index} className={cn("mt-6 overflow-x-auto rounded-lg border border-line", languageClass)}>
+              <table className="min-w-full border-collapse bg-white text-sm text-graphite">
+                <thead className="bg-paper text-left text-ink">
+                  <tr>
+                    {headers.map((header) => (
+                      <th key={header} className="border-b border-line px-4 py-3 font-semibold">
+                        {parseInline(header)}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((row, rowIndex) => (
+                    <tr key={`${row.join("-")}-${rowIndex}`} className="border-b border-line last:border-b-0">
+                      {headers.map((_, cellIndex) => (
+                        <td key={cellIndex} className="px-4 py-3 align-top leading-6">
+                          {parseInline(row[cellIndex] ?? "")}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           );
         }
 
+        if (trimmed.startsWith("# ")) {
+          return renderHeading(index, 2, trimmed.replace(/^#\s+/, ""), "mt-10 text-2xl font-semibold text-ink");
+        }
+
+        if (trimmed.startsWith("## ")) {
+          return renderHeading(index, 2, trimmed.replace(/^##\s+/, ""), "mt-10 text-2xl font-semibold text-ink");
+        }
+
         if (trimmed.startsWith("### ")) {
-          return (
-            <h3 key={index} className="mt-8 text-xl font-semibold text-ink">
-              {parseLocalizedInline(trimmed.replace(/^###\s+/, ""))}
-            </h3>
-          );
+          return renderHeading(index, 3, trimmed.replace(/^###\s+/, ""), "mt-8 text-xl font-semibold text-ink");
+        }
+
+        if (trimmed.startsWith("#### ")) {
+          return renderHeading(index, 4, trimmed.replace(/^####\s+/, ""), "mt-6 text-lg font-semibold text-ink");
         }
 
         if (/^[-*]\s+/.test(trimmed)) {

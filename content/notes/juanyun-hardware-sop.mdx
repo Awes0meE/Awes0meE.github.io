@@ -13,9 +13,37 @@ visibility: public
 
 This note keeps the hardware-development SOP as working text rather than a cold attachment. The PDF remains linked at the end, but the main value is the checklist itself: requirements, system architecture, component selection, schematic review, layout constraints, fabrication checks, bring-up, revision records, and release archiving.
 
+The body below follows the original Juanyun Hardware Development SOP. It reads more like a checklist for a small hardware team than a project retrospective. What I wanted to keep is the practical process: before a board is drawn, sent out, powered up, revised, and archived, which details should already be written down, and where first revisions most often go wrong.
+
 下面正文基本按照当时写的《卷云硬件开发 SOP》展开。读起来更像一份给小团队用的硬件开发清单，不是项目复盘。真正想留下的是这些问题：一块板从需求到发板、从回板到改版，哪些东西应该提前写清楚，哪些地方最容易在首板上翻车。
 
 ![Hardware SOP cover image](/uploads/projects/juanyun-public/hardware-sop-cover.jpeg)
+
+## 0. Usage Notes / 使用说明
+
+Applicable cases:
+- small-team hardware development;
+- small-company prototype development;
+- the stage from functional prototype to pre-small-batch trial production.
+
+Goals:
+- reduce board-spin count;
+- improve first-board bring-up success rate;
+- make the development process reviewable, handoff-friendly, and revision-friendly.
+
+Recommended project folder for each board:
+
+```text
+ProjectName/
+├── 01_Requirements_And_Structure
+├── 02_Component_Selection
+├── 03_Schematic
+├── 04_Layout
+├── 05_Fabrication_Output
+├── 06_Bringup_And_Test
+├── 07_Revision_Record
+└── 08_Archive_And_Release
+```
 
 ## 0. 使用说明
 
@@ -45,49 +73,91 @@ This note keeps the hardware-development SOP as working text rather than a cold 
 └─ 08_归档发布
 ```
 
-## 1. 板级需求说明模板
+## 1. Board-Level Requirement Template / 板级需求说明模板
+
+Document name: Board-Level Requirement Specification.
+
+Write the version, project name, board name, owner, and date first. Do not start drawing immediately. First write down where this board sits in the system and what it is supposed to do.
+
 
 文档名称：《板级需求说明》。
 
 先写版本、项目名称、板卡名称、负责人和日期。不要直接开画，先把这块板到底要放进哪个系统里写下来。
 
-### 1.1 项目背景
+### 1.1 Project Background / 项目背景
+
+- What system is this board used in?
+- What is the goal of the current version?
+
 
 - 这块板用于什么系统。
 - 当前版本目标是什么。
 
-### 1.2 功能需求
+### 1.2 Functional Requirements / 功能需求
+
+List the functions this board must implement. The earlier this is written, the less likely the design will accumulate new requirements while the PCB is already being drawn.
+
 
 列出本板必须实现的功能。写得越早，后面越不容易一边画板一边加需求。
 
-### 1.3 输入条件
+### 1.3 Input Conditions / 输入条件
+
+- input voltage;
+- input current range;
+- input signal type;
+- external interface source.
+
 
 - 输入电压。
 - 输入电流范围。
 - 输入信号类型。
 - 外部接口来源。
 
-### 1.4 输出条件
+### 1.4 Output Conditions / 输出条件
+
+- output voltage;
+- output current;
+- controlled output target;
+- output signal type.
+
 
 - 输出电压。
 - 输出电流。
 - 输出控制对象。
 - 输出信号类型。
 
-### 1.5 接口需求
+### 1.5 Interface Requirements / 接口需求
+
+At minimum, the interface table should include interface name, type, quantity, level or protocol, connected device, and notes.
+
+Example: `UART1`, serial port, one channel, `3.3V TTL`, connected to a Bluetooth module and reusable during debugging. `I2C1`, bus, one channel, `3.3V`, connected to OLED; long cables require stability attention.
+
 
 接口表至少写接口名称、类型、数量、电平或协议、连接对象和备注。
 
 例子：`UART1`，串口，1 路，`3.3V TTL`，连接蓝牙模块，调试时可复用。`I2C1`，总线，1 路，`3.3V`，连接 OLED，长线时要注意稳定性。
 
-### 1.6 电源需求
+### 1.6 Power Requirements / 电源需求
+
+- main input power;
+- each onboard power rail;
+- whether power-up sequencing matters;
+- whether large-current or pulse loads exist.
+
 
 - 主输入电源。
 - 板上各路电源。
 - 是否有上电时序要求。
 - 是否有大电流或脉冲负载。
 
-### 1.7 结构需求
+### 1.7 Mechanical Requirements / 结构需求
+
+- board outline size;
+- maximum height limit;
+- mounting-hole count and positions;
+- connector cable direction;
+- whether the board must fit an enclosure.
+
 
 - 板框尺寸。
 - 最大高度限制。
@@ -95,7 +165,15 @@ This note keeps the hardware-development SOP as working text rather than a cold 
 - 接插件出线方向。
 - 是否需要贴合外壳。
 
-### 1.8 环境需求
+### 1.8 Environmental Requirements / 环境需求
+
+- operating temperature;
+- storage temperature;
+- humidity environment;
+- vibration or shock;
+- outdoor use;
+- water or dust protection.
+
 
 - 工作温度。
 - 储存温度。
@@ -104,7 +182,14 @@ This note keeps the hardware-development SOP as working text rather than a cold 
 - 是否户外使用。
 - 是否防水防尘。
 
-### 1.9 成本与工艺目标
+### 1.9 Cost And Manufacturing Targets / 成本与工艺目标
+
+- target PCB layer count;
+- target copper thickness;
+- target BOM cost per board;
+- prototype quantity;
+- whether later small-batch production is considered.
+
 
 - PCB 层数目标。
 - 铜厚目标。
@@ -112,15 +197,40 @@ This note keeps the hardware-development SOP as working text rather than a cold 
 - 打样数量。
 - 是否考虑后续小批生产。
 
-### 1.10 本版不做的内容
+### 1.10 Out Of Scope For This Version / 本版不做的内容
+
+Clearly write what this version does not cover to prevent requirement creep. Many hardware projects do not fail because the designer cannot draw a board; they fail because "just add one more feature" never stops.
+
 
 明确写出本版不覆盖的内容，防止需求蔓延。很多硬件项目不是死在不会画板，而是死在“顺手再加一个功能”。
 
-## 2. 系统方框图与电源树模板
+## 2. System Block Diagram And Power Tree Template / 系统方框图与电源树模板
+
+Document name: System Architecture Description.
+
 
 文档名称：《系统架构说明》。
 
-### 2.1 系统方框图
+### 2.1 System Block Diagram / 系统方框图
+
+Draw the system block diagram first.
+
+```text
+24V input
+├── input protection (fuse / TVS / reverse-polarity protection)
+├── 12V power branch -> fan / actuator
+├── 5V power branch -> peripherals
+└── 3.3V power branch -> MCU / OLED / Bluetooth / sensors
+
+MCU
+├── UART1 -> Bluetooth
+├── UART2 -> driver board
+├── I2C1 -> OLED
+├── ADC1 -> NTC1 / NTC2
+├── GPIO -> keys / encoder
+└── PWM -> fan / driver control
+```
+
 
 建议先把系统方框图画出来。
 
@@ -140,17 +250,46 @@ MCU
 └─ PWM -> 风扇 / 驱动控制
 ```
 
-### 2.2 电源树
+### 2.2 Power Tree / 电源树
+
+The power tree should at least record power node, source, output value, estimated current, load target, and notes.
+
+Example: `VIN` comes from external input, `24V / 2A`, powering the whole board. `V12` comes from a buck converter or pass-through path and powers high-current loads such as fans. `V3V3` comes from an LDO or buck converter and powers MCU, OLED, Bluetooth, and sensors; low noise has priority.
+
 
 电源树至少写电源节点、来源、输出值、预估电流、负载对象和备注。
 
 例子：`VIN` 来自外部输入，`24V / 2A`，供整板。`V12` 来自 Buck 或直通，供风扇等大电流负载。`V3V3` 来自 LDO 或 Buck，供 MCU、OLED、蓝牙和传感器，低噪声优先。
 
-### 2.3 模块划分
+### 2.3 Module Breakdown / 模块划分
+
+Write the modules separately: power module, control module, display module, and driver module. For each module, list subfunctions, whether it is critical, risk level, and notes. First-board failures often happen not in the areas that look complex on the page, but in power, download, reset, connector direction, and high-current return paths.
+
 
 把模块拆开写：电源模块、控制模块、显示模块、驱动模块。每个模块写子功能、是否关键、风险等级和备注。首板最容易出事的地方一般不是“页面上看着复杂”的地方，而是电源、下载、复位、连接器方向、大电流回路这些基础位置。
 
-## 3. 关键器件选型表模板
+## 3. Key Component Selection Table Template / 关键器件选型表模板
+
+Document name: Key Component Selection Table.
+
+For key components, at least record module, component category, part number, package, key parameters, selection reason, risk points, and substitute parts.
+
+Common items:
+- main MCU: Flash, RAM, IO, clock, supply, and counterfeit risk;
+- buck chip: `Vin / Vout / Iout`, with thermal behavior as a focus;
+- TVS: `Vrwm / Vc`, with input protection as a focus;
+- MOSFET: `Vds / Id / Rds(on)`, with gate drive and heat as focuses;
+- connectors: pitch, current, direction, mating life.
+
+Additional checks:
+- datasheet downloaded;
+- footprint checked;
+- pin definitions checked;
+- voltage and current ratings meet requirements;
+- temperature range meets requirements;
+- purchasable;
+- substitute part available.
+
 
 文档名称：《关键器件选型表》。
 
@@ -174,11 +313,23 @@ MCU
 - 可采购。
 - 有无替代料。
 
-## 4. 原理图评审表模板
+## 4. Schematic Review Table Template / 原理图评审表模板
+
+Document name: Schematic Review Table.
+
 
 文档名称：《原理图评审表》。
 
-### 4.1 电源检查
+### 4.1 Power Check / 电源检查
+
+- Is the input voltage range correct?
+- Are all component voltage ratings sufficient?
+- Is input protection included?
+- Are TVS, reverse-polarity, or current-limit measures considered?
+- Is the default state of power EN correct?
+- Does every rail have decoupling?
+- Are analog and digital supplies handled reasonably?
+
 
 - 输入电压范围是否正确。
 - 所有器件耐压是否足够。
@@ -188,7 +339,16 @@ MCU
 - 每路电源是否有去耦。
 - 模拟电源和数字电源处理是否合理。
 
-### 4.2 MCU 检查
+### 4.2 MCU Check / MCU 检查
+
+- Are all power pins connected?
+- Are decoupling capacitors complete?
+- Is BOOT configuration correct?
+- Is the NRST circuit correct?
+- Is the clock or crystal circuit correct?
+- Are SWD / JTAG reserved?
+- Is a serial debug port reserved?
+
 
 - 供电脚是否完整连接。
 - 去耦电容是否齐全。
@@ -198,7 +358,14 @@ MCU
 - SWD / JTAG 是否预留。
 - 串口调试口是否预留。
 
-### 4.3 接口检查
+### 4.3 Interface Check / 接口检查
+
+- Is connector pin order correct?
+- Is logic-level direction correct?
+- Is ESD protection needed?
+- Are pull-ups or pull-downs present where needed?
+- Are there interface conflicts?
+
 
 - 接插件引脚序号是否正确。
 - 电平方向是否正确。
@@ -206,7 +373,14 @@ MCU
 - 是否有上拉或下拉。
 - 是否存在接口冲突。
 
-### 4.4 驱动与负载检查
+### 4.4 Driver And Load Check / 驱动与负载检查
+
+- Is MOSFET orientation confirmed?
+- Is diode orientation confirmed?
+- Are motor, fan, and valve load circuits correct?
+- Are freewheel, snubber, or protection designs included?
+- Are current detection and feedback paths reasonable?
+
 
 - MOS 方向是否确认。
 - 二极管方向是否确认。
@@ -214,21 +388,40 @@ MCU
 - 是否有续流、吸收或保护设计。
 - 电流检测和反馈链路是否合理。
 
-### 4.5 调试与测试检查
+### 4.5 Debug And Test Check / 调试与测试检查
+
+- Do key power rails have test points?
+- Can debug ports connect to an oscilloscope or logic analyzer?
+- Are enough rescue positions reserved?
+- Are key control signals easy to measure?
+
 
 - 关键电源是否有测试点。
 - 调试口是否可接示波器或逻辑分析仪。
 - 预留补救位是否足够。
 - 关键控制信号是否便于测量。
 
-### 4.6 封装与库检查
+### 4.6 Footprint And Library Check / 封装与库检查
+
+- Does each symbol map to the correct footprint?
+- Are footprint dimensions checked against the datasheet?
+- Do polarized parts have orientation marks?
+- Is Pin 1 clear?
+
 
 - 符号与 footprint 是否一一对应。
 - 封装尺寸是否核对 datasheet。
 - 极性器件是否有方向标记。
 - Pin1 是否清晰。
 
-### 4.7 评审结论
+### 4.7 Review Conclusion / 评审结论
+
+- proceed to layout;
+- revise and review again;
+- not approved for now.
+
+The issue list should use direct IDs. Do not only write "checked." Reviewability depends on concrete issues.
+
 
 - 可以进入 Layout。
 - 修改后再评审。
@@ -236,15 +429,31 @@ MCU
 
 问题列表要直接写编号，不要只写“已检查”。能不能复盘，靠的就是这些具体问题。
 
-## 5. Layout 约束表模板
+## 5. Layout Constraint Table Template / Layout 约束表模板
+
+Document name: Layout Constraint Table.
+
 
 文档名称：《Layout 约束表》。
 
-### 5.1 板厂工艺约束
+### 5.1 Fabrication Capability Constraints / 板厂工艺约束
+
+Write layer count, board thickness, copper thickness, minimum trace width, minimum spacing, minimum mechanical hole, and minimum via diameter first. Do not discover after layout that the board house cannot fabricate it.
+
 
 先写层数、板厚、铜厚、最小线宽、最小线距、最小机械孔、最小过孔孔径。不要画完再发现板厂做不了。
 
-### 5.2 电气约束
+### 5.2 Electrical Constraints / 电气约束
+
+- main input power: calculate trace width by current;
+- 12 V high-current branch: define trace width and copper pour early;
+- 3.3 V main supply: do not route casually;
+- crystal traces: shortest, same layer, no vias;
+- PWM control traces: keep away from sensitive analog paths;
+- I2C: keep short where possible, lower speed for long wires;
+- ADC sampling traces: keep away from switching nodes;
+- differential pairs: define impedance and length matching when differential routing exists.
+
 
 - 主输入电源：线宽按电流算。
 - 12V 大电流支路：线宽和铺铜提前定。
@@ -255,7 +464,17 @@ MCU
 - ADC 采样线：远离开关节点。
 - 差分线：有差分再写阻抗和等长。
 
-### 5.3 布局约束
+### 5.3 Placement Constraints / 布局约束
+
+- place connectors according to mechanical structure first;
+- keep copper and components away from mounting-hole keepout areas;
+- minimize high-`di/dt` loops in switching power supplies;
+- place decoupling capacitors close to supply pins;
+- place crystal close to MCU;
+- reserve heat-spreading copper and thermal vias for hot parts;
+- keep analog front ends away from the power area;
+- place MOSFETs, diodes, and inductors compactly.
+
 
 - 连接器先按结构定位。
 - 安装孔周围禁布铜、禁摆件。
@@ -266,26 +485,51 @@ MCU
 - 模拟前端远离功率区。
 - MOS、二极管、电感紧凑布局。
 
-### 5.4 接地策略
+### 5.4 Grounding Strategy / 接地策略
+
+Write whether there is a continuous ground plane, whether AGND / DGND / PGND are partitioned, where single-point connections are made, where ground vias are densified, and where high-speed or high-current return paths flow.
+
 
 写清楚是否整面地平面，AGND / DGND / PGND 是否分区，单点连接位置，地过孔加密区域，高速或高电流回流路径。
 
-### 5.5 测试约束
+### 5.5 Test Constraints / 测试约束
+
+Every key power rail must have a test point. SWD / JTAG must be accessible. The log serial port should be reachable. PWM and key control signals should be measurable. Do not leave only one GND test point.
+
 
 每路关键电源必须有测试点。SWD / JTAG 要能接入。日志串口要能接入。PWM 和关键控制信号要能测。GND 测试点不要只留一个。
 
-## 6. 发板前检查表模板
+## 6. Pre-Fabrication Checklist Template / 发板前检查表模板
+
+Document name: Pre-Fabrication Checklist.
+
 
 文档名称：《发板前检查表》。
 
-### 6.1 原理图一致性
+### 6.1 Schematic Consistency / 原理图一致性
+
+- schematic frozen;
+- netlist updated to PCB;
+- no unexplained ERC errors;
+- all ECO changes synchronized.
+
 
 - 原理图已冻结。
 - 网表已更新到 PCB。
 - 无未解释的 ERC 报错。
 - 所有 ECO 已同步。
 
-### 6.2 Layout 检查
+### 6.2 Layout Check / Layout 检查
+
+- no unexplained DRC errors;
+- all key component positions confirmed;
+- connector direction confirmed;
+- mounting-hole positions confirmed;
+- silkscreen does not cover pads;
+- polarity marks are clear;
+- board number and revision number added;
+- key test points added.
+
 
 - 无未解释的 DRC 报错。
 - 所有关键器件位置已确认。
@@ -296,7 +540,16 @@ MCU
 - 板号和版本号已加。
 - 关键测试点已加。
 
-### 6.3 制造性检查
+### 6.3 Manufacturability Check / 制造性检查
+
+- minimum trace width and spacing match board-house capability;
+- hole diameters match board-house capability;
+- solder-mask openings are reasonable;
+- via plugging or tenting requirements confirmed;
+- high-current copper areas are reasonable;
+- component spacing supports assembly;
+- enough room exists for hand soldering and rework.
+
 
 - 最小线宽线距符合板厂能力。
 - 孔径符合板厂能力。
@@ -306,7 +559,15 @@ MCU
 - 器件间距便于贴装。
 - 手工焊和返修空间足够。
 
-### 6.4 装配检查
+### 6.4 Assembly Check / 装配检查
+
+- BOM updated;
+- all part numbers are purchasable;
+- substitute parts are marked;
+- PNP / coordinate file exported;
+- assembly drawing exported;
+- polarized parts have assembly-direction notes.
+
 
 - BOM 已更新。
 - 所有料号可采购。
@@ -315,7 +576,16 @@ MCU
 - 装配图已导出。
 - 极性器件有装配方向说明。
 
-### 6.5 文件输出检查
+### 6.5 Output File Check / 文件输出检查
+
+- Gerber exported;
+- drill file exported;
+- board outline layer correct;
+- solder-mask layer correct;
+- silkscreen layer correct;
+- coordinate file correct;
+- BOM version matches board revision.
+
 
 - Gerber 已导出。
 - Drill 文件已导出。
@@ -325,17 +595,32 @@ MCU
 - 坐标文件正确。
 - BOM 版本与板版本一致。
 
-### 6.6 最终结论
+### 6.6 Final Conclusion / 最终结论
+
+The result is either ready to fabricate or revise and check again. Do not skip this step to save time; bodge wires after the boards return usually cost more time.
+
 
 可以发板，或者修改后再检查。不要为了赶时间跳过这一步，回板以后飞线更费时间。
 
-## 7. Bring-up 测试记录模板
+## 7. Bring-Up Test Record Template / Bring-up 测试记录模板
+
+Document name: Bring-Up Test Record.
+
+Start with board revision, firmware revision, test date, and tester.
+
 
 文档名称：《Bring-up 测试记录》。
 
 先写板版本、固件版本、测试日期和测试人。
 
-### 7.1 上电前检查
+### 7.1 Pre-Power Check / 上电前检查
+
+- visual inspection;
+- soldering quality;
+- polarized component direction;
+- input-to-ground resistance;
+- each power rail to ground resistance.
+
 
 - 外观检查。
 - 器件焊接质量。
@@ -343,11 +628,21 @@ MCU
 - 输入对地阻值。
 - 各电源 rail 对地阻值。
 
-### 7.2 上电测试
+### 7.2 Power-On Test / 上电测试
+
+Record input voltage, 12 V output, 5 V output, 3.3 V output, and power-on current. For each item, write target value, measured value, result, and notes.
+
 
 记录输入电压、12V 输出、5V 输出、3.3V 输出和上电电流。每一项都写目标值、实测值、结果和备注。
 
-### 7.3 最小系统测试
+### 7.3 Minimum System Test / 最小系统测试
+
+- SWD connection works;
+- firmware can be flashed;
+- clock starts normally;
+- serial logs work;
+- LED or basic IO works.
+
 
 - SWD 可连接。
 - 程序可烧录。
@@ -355,7 +650,14 @@ MCU
 - 串口日志正常。
 - LED 或基础 IO 正常。
 
-### 7.4 模块测试
+### 7.4 Module Test / 模块测试
+
+- OLED initialization, display, and long-wire stability;
+- Bluetooth connection, transmit, and receive;
+- fan start/stop, PWM, and temperature rise;
+- sensor data reading;
+- driver-board communication protocol.
+
 
 - OLED 初始化、显示、长线稳定性。
 - 蓝牙连接和收发。
@@ -363,17 +665,41 @@ MCU
 - 传感器数据读取。
 - 驱动板通信收发协议。
 
-### 7.5 问题记录
+### 7.5 Issue Record / 问题记录
+
+Issue records should include ID, symptom, condition, preliminary cause, and priority. Writing only "occasionally abnormal" is not useful; write the condition under which the abnormality appears.
+
 
 问题记录要写编号、现象、条件、初步原因和优先级。只写“偶尔异常”没有用，要写在什么条件下异常。
 
-### 7.6 结论
+### 7.6 Conclusion / 结论
+
+- first board can continue integration;
+- serious issue exists and analysis must stop first;
+- revision needs to be prepared.
+
 
 - 首板可继续联调。
 - 存在严重问题需停下分析。
 - 需准备改版。
 
-## 8. 问题闭环与改版记录模板
+## 8. Issue Closure And Revision Record Template / 问题闭环与改版记录模板
+
+Document name: Issue Closure And Revision Record.
+
+For each issue, write ID, symptom, trigger condition, root-cause analysis, fix plan, affected schematic / PCB / BOM / software, verification method, and result.
+
+Examples:
+- OLED screen corruption: appears with an external 30 cm cable; possible cause is overly fast I2C edges or interference; lower speed, reserve series resistor, optimize pull-ups; verify by 50 repeated restarts on the long cable.
+- Fan MOSFET heating: appears at high duty cycle; possible cause is insufficient gate drive or copper area; change gate resistor and add heat-spreading copper; verify temperature rise at full load for 30 minutes.
+- Unstable SWD: occasional after cabling; possible cause is poor ground reference or bad connector position; revise connector layout; verify by repeated plug/unplug tests.
+
+Revision summary should state:
+- purpose of this revision;
+- what is changed in this revision;
+- what is explicitly not changed in this revision;
+- key items to verify in the next revision.
+
 
 文档名称：《问题闭环与改版记录》。
 
@@ -392,7 +718,31 @@ MCU
 - 本轮明确不修改的内容。
 - 下版重点验证项。
 
-## 9. 版本发布与归档模板
+## 9. Version Release And Archive Template / 版本发布与归档模板
+
+Document name: Version Release Record.
+
+Each version record should at least include version, date, type, major changes, status, and owner.
+
+Examples:
+- `V0.1`: first schematic version, functional definition complete, draft;
+- `V0.2`: first layout version, PCB placement complete, draft;
+- `V1.0`: first board revision, sent for fabrication, under test;
+- `V1.1`: small revision, fixes several issues, under test;
+- `V2.0`: stable revision, functions stable, frozen.
+
+Archive file list:
+- schematic source file;
+- PCB source file;
+- Gerber;
+- drill file;
+- BOM;
+- PNP / coordinates;
+- assembly drawing;
+- test record;
+- revision record;
+- firmware version notes.
+
 
 文档名称：《版本发布记录》。
 
@@ -419,37 +769,77 @@ MCU
 - 改版记录。
 - 固件版本说明。
 
-## 10. 标准硬件 Bring-up 顺序
+## 10. Standard Hardware Bring-Up Sequence / 标准硬件 Bring-up 顺序
 
-### A. 外观检查
+
+### A. Visual Inspection / 外观检查
+
+Check whether anything is assembled backward, bridged, missing solder, or oriented incorrectly at connectors.
+
 
 有没有装反，有没有桥连，有没有漏焊，连接器方向对不对。
 
-### B. 断电测阻
+### B. Resistance Measurement Without Power / 断电测阻
+
+Measure input-to-ground resistance and each power rail to ground. If a short is suspected, do not power the board yet.
+
 
 测输入对地阻值，测各电源 rail 对地阻值。怀疑短路就先别上电。
 
-### C. 限流上电
+### C. Current-Limited Power-On / 限流上电
+
+Set the supply current limit low and power without large loads first. Watch for abnormal current draw.
+
 
 电源限流设置低一点，先不带大负载，看是否异常拉电流。
 
-### D. 测试电源树
+### D. Test The Power Tree / 测试电源树
+
+Measure `VIN`, `12V`, `5V`, `3.3V`, reference voltages, and key bias points.
+
 
 测 VIN、12V、5V、3.3V、参考电压和关键偏置点。
 
-### E. 测试最小系统
+### E. Test The Minimum System / 测试最小系统
+
+Test reset, clock, download port, serial logs, and the smallest LED program.
+
 
 测复位、时钟、下载口、串口日志和最小 LED 程序。
 
-### F. 逐模块验证
+### F. Verify Module By Module / 逐模块验证
+
+Verify display, communication, sensors, PWM, power driving, and external loads one by one. Do not connect everything before starting to search for problems.
+
 
 显示、通信、传感器、PWM、功率驱动、外接负载，一个一个来，不要全接上以后才开始找问题。
 
-### G. 温升和稳定性
+### G. Temperature Rise And Stability / 温升和稳定性
+
+Check no-load temperature rise, load temperature rise, continuous-running stability, and repeated power-cycle behavior.
+
 
 空载温升、负载温升、连续运行稳定性、多次上下电重复性。
 
-## 11. 版本命名规则建议
+## 11. Version Naming Suggestions / 版本命名规则建议
+
+Hardware versions:
+- `HW_V1.0`: first board;
+- `HW_V1.1`: minor revision without architecture change;
+- `HW_V2.0`: clear architecture change or major layout revision.
+
+Firmware versions:
+- `FW_V0.1`: bring-up version;
+- `FW_V0.5`: module-integration version;
+- `FW_V1.0`: paired with stable hardware.
+
+File naming suggestions:
+- `ProjectName_HW_V1.0_SCH`
+- `ProjectName_HW_V1.0_PCB`
+- `ProjectName_HW_V1.0_BOM`
+- `ProjectName_HW_V1.0_Gerber`
+- `ProjectName_HW_V1.0_BringupReport`
+
 
 硬件版本：
 
@@ -471,7 +861,16 @@ MCU
 - `项目名_HW_V1.0_Gerber`
 - `项目名_HW_V1.0_BringupReport`
 
-## 12. 项目风险清单
+## 12. Project Risk List / 项目风险清单
+
+Document name: Project Risk List.
+
+Example risks:
+- `R01`: long-wire I2C instability, high severity, may cause OLED corruption or initialization failure; reduce speed early, reserve series resistor, strengthen ground wiring; later fix with cable-speed reduction or bodge wire.
+- `R02`: insufficient high-current routing, high severity, may cause heating or voltage drop; calculate trace width and copper pour early; add wire copper reinforcement or revise if needed.
+- `R03`: insufficient MOSFET drive, medium severity, may cause heating or slow switching; calculate gate drive and measure waveform early; adjust gate resistor or replace MOSFET if needed.
+- `R04`: connector definition error, high severity, may make the board unusable; perform two-person review before fabrication; use bodge wire or revision if needed.
+
 
 文档名称：《项目风险清单》。
 
@@ -482,7 +881,36 @@ MCU
 - `R03`：MOS 驱动不足，等级中，可能发热或开关慢；提前计算栅驱、测波形；可改栅阻或换管。
 - `R04`：接插件定义错误，等级高，可能导致板子无法使用；发板前双人复核；必要时飞线或改版。
 
-## 13. 本 SOP 使用方法
+## 13. How To Use This SOP / 本 SOP 使用方法
+
+For each board, follow this sequence.
+
+Fill on day one:
+- Board-Level Requirement Specification;
+- System Architecture Description;
+- Risk List.
+
+Fill on day two:
+- Key Component Selection Table.
+
+After finishing the schematic:
+- Schematic Review Table.
+
+Before starting layout:
+- Layout Constraint Table.
+
+Before sending the board out:
+- Pre-Fabrication Checklist.
+
+After the board returns:
+- Bring-Up Test Record.
+
+When preparing a revision:
+- Issue Closure And Revision Record.
+
+At final release:
+- Version Release Record.
+
 
 每做一块板，按下面执行：
 
@@ -520,7 +948,7 @@ MCU
 
 - 《版本发布记录》
 
-## 原文件
+## Original Files / 原文件
 
 - [Hardware development SOP PDF](/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf)
 - [Juanyun thermal hardware overview](/work/juanyun-thermal-hardware)

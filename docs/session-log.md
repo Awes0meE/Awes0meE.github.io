@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Prepared release `v0.6.1` with the user's Notion-exported CMake/build-logic originals, full public English body coverage, and refreshed media coverage.
+- Files changed: replaced the lossy CMake/build-logic PDF extraction path with two Notion Markdown originals under `public/uploads/projects/nanjing-turing/other-materials/`; expanded the Nanjing Turing project asset list; added the Notion build diagrams to `content/media.json`; improved `components/content-renderer.tsx` with heading anchors, language-scoped headings/tables, recursive bold inline parsing, and Markdown table rendering; added/adjusted English sections across Juanyun, Nanjing Turing, Tianjin, and project pages; bumped package metadata to `0.6.1`; updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/juanyun-tech-source-inventory.md`.
+- Verification: upload/media coverage validation passed for 101 content upload refs, 38 media items, and 38 content image/video refs; UTF-8/mojibake scan passed for 35 markdown/content files; version/media metadata check passed; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for `/media`, `/work/nanjing-turing-qt-embedded-learning`, `/notes/turing-cmake-build-logic`, `/notes/tianjin-stm32-environment-setup`, and `/notes/juanyun-hardware-sop`.
+
+## 2026-05-07
+
 - Summary: Reworked the Nanjing Turing source-text notes so public originals appear as real note pages, and removed generic visual-system cards from the media gallery.
 - Files changed: replaced the short summaries in the Qt6 Seamly2D first-run, CMake/build-logic, Release packaging, and sm2d XML notes with source-text-driven page bodies; removed the dashboard, lab-notes, robot-platform, and waveform cards from `content/media.json`; added Markdown bold support in `components/content-renderer.tsx`; updated memory/docs with the user's preferred prose style and the PowerShell UTF-8 hard rule.
 - Verification: UTF-8/mojibake scan passed for changed Chinese content; upload-link validation passed for 85 public upload refs; media coverage validation passed for 25 media items and 24 content image/video refs; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local HTTP checks returned `200` for `/media` and the four updated Turing note pages.

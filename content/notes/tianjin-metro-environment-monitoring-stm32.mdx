@@ -22,6 +22,13 @@ This demo was not an industrial metro controller. It was a compact embedded exer
 
 ## What Ran Together / 接在一起的模块
 
+- OLED displayed current brightness, target brightness, LED PWM, temperature, and humidity.
+- The LDR read ambient light through ADC.
+- The encoder adjusted target brightness through external interrupts.
+- DHT11 refreshed temperature and humidity on a fixed cadence.
+- TIM4 generated PWM for white LED brightness control.
+- Tricolor LEDs simulated status lamps, and the servo simulated door movement.
+
 - OLED 实时显示当前亮度、目标亮度、LED PWM 和温湿度。
 - LDR 通过 ADC 获取环境亮度。
 - 编码器通过外部中断调整目标亮度。
@@ -29,12 +36,18 @@ This demo was not an industrial metro controller. It was a compact embedded exer
 - TIM4 输出 PWM 控制白色 LED 亮度。
 - 三色 LED 模拟状态灯，舵机模拟车门开合动作。
 
+The fragile part was not one sensor by itself. It was the mix of rhythms: OLED refresh, DHT11 timing, encoder interrupts, PWM output, and light-sensor ADC sampling all running together. For a short exercise, debugging and delays could hold it together. If the system grew, the scheduling and module boundaries would need to become much clearer.
+
 最容易出问题的地方不是某一个传感器，而是几个节奏混在一起：OLED 刷新、DHT11 时序、编码器中断、PWM 输出、光敏 ADC 采样都在跑。短期可以靠调试和延时顶住，但如果系统继续变大，就需要更清楚的任务调度和模块分层。
 
 ## File / 文件
 
+The main-loop excerpt keeps the module initialization, DHT11 update flag, ADC reading, OLED refresh, and PWM lookup output: [metro environment main loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c).
+
 主循环摘录保留了模块初始化、DHT11 更新标志、ADC 读数、OLED 更新和 PWM 查表输出：[metro environment main loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c)。
 
 ## Looking Back / 回头看
+
+This kind of small integration exposes the gap between "I can use one peripheral" and "I can keep several peripherals running together." It was not perfect, but it connected brightness, temperature, humidity, input, output, and display into one loop. For a first internship, that is sturdier than simply listing a set of STM32 peripherals learned.
 
 这类小综合最大的价值是暴露“会一个外设”和“能把几个外设一起跑”之间的差距。它不完美，但已经能把亮度、温湿度、输入、输出和显示串起来。对于第一次实习来说，这比单独列一串“学习了 STM32 外设”更扎实。

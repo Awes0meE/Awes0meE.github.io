@@ -12,7 +12,40 @@ links:
   repo: "https://github.com/FashionFreedom/Seamly2D"
   download: "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf"
 assetPaths:
-  - "/uploads/projects/nanjing-turing"
+  - "/uploads/projects/nanjing-turing/auth-role-snippet.cpp"
+  - "/uploads/projects/nanjing-turing/cmake-logo.jpeg"
+  - "/uploads/projects/nanjing-turing/cmake-make-flow.png"
+  - "/uploads/projects/nanjing-turing/compile-logic-sketch.jpg"
+  - "/uploads/projects/nanjing-turing/macos-build-package-sign.sh"
+  - "/uploads/projects/nanjing-turing/macos-build-package.sh"
+  - "/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf"
+  - "/uploads/projects/nanjing-turing/qt-logo.png"
+  - "/uploads/projects/nanjing-turing/readme.txt"
+  - "/uploads/projects/nanjing-turing/sample-measurements.smis"
+  - "/uploads/projects/nanjing-turing/sample-pattern-example.sm2d"
+  - "/uploads/projects/nanjing-turing/seamly2d-banner.png"
+  - "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.md"
+  - "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf"
+  - "/uploads/projects/nanjing-turing/week-1-development-log.txt"
+  - "/uploads/projects/nanjing-turing/week-2-development-log.txt"
+  - "/uploads/projects/nanjing-turing/week-3-development-log.txt"
+  - "/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.docx"
+  - "/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.txt"
+  - "/uploads/projects/nanjing-turing/other-materials/CMake 入门学习记录 250669c3f4008099a6d6c614a4ca6937.md"
+  - "/uploads/projects/nanjing-turing/other-materials/关于编译的底层逻辑（Qt 学习导向） 24f669c3f4008089bc2df266992845de.md"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250814_72624b.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250814_8efe1c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_2541cb.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_7db53e.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_a56fb3.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_161f13.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_1b8e6c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_221410.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_3ce4ce.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_95d4a0.png"
+  - "/uploads/projects/nanjing-turing/other-materials/image-20230309130644912.png"
 ---
 
 ## Brief / 简介
@@ -27,12 +60,22 @@ This page keeps a practical internship trail around Seamly2D, a Qt/C++ desktop a
 
 The original folder had logs, study notes, scripts, sample files, and many generated artifacts. Only small reading material and cleaned excerpts were copied into the website. Full upstream source trees, build folders, installers, DLL piles, and huge delivery zips stayed out of `public/uploads`.
 
+The useful public material now falls into a few tracks:
+
+- Three weekly development logs, moving from Qt setup, registration/login, and user management into Release packaging, signing, and macOS packaging.
+- A Windows 11 first-run note for Seamly2D, mostly about Qt5 failing, Qt6/MSVC2019 working, and choosing the right qmake and Kit.
+- A Windows Release packaging PDF, covering `windeployqt`, third-party DLLs, self-signing, and Inno Setup.
+- Two Notion-exported CMake/build-logic originals: one starts from CMake basics, the other connects MSVC, SDK, CMake, Ninja, and Qt package discovery.
+- macOS packaging scripts that tried to automate `macdeployqt`, DMG creation, and self-signing.
+- `Seamly2D_addon/`, covering login, registration, control panel, user management, password hashing, and role-control files.
+- `sm2d` and `smis` sample files for reading Seamly2D's XML data shape.
+
 源目录里比较有用的是这些东西：
 
 - 三周开发日志：从 Qt 环境、注册登录、用户管理，到 Release、签名和 macOS 打包。
 - Windows 11 跑 Seamly2D 的流程记录：主要是 Qt5 失败、Qt6/MSVC2019 跑通、qmake 和 Kit 的选择。
 - Release 打包 PDF：Windows 下 `windeployqt`、第三方 DLL、自签名、Inno Setup 的步骤。
-- 编译底层逻辑 PDF：把 MSVC、SDK、CMake、Ninja、Qt 包发现这些概念串了一遍。
+- Notion 导出的 CMake 和编译底层逻辑原文：一份从 CMake 入门开始搭地基，一份把 MSVC、SDK、CMake、Ninja、Qt 包发现这些概念串起来。
 - macOS 打包脚本：尝试用 `macdeployqt`、DMG 和自签名把流程自动化。
 - `Seamly2D_addon/`：登录、注册、控制面板、用户管理、密码哈希和角色控制相关新增文件。
 - `sm2d` 和 `smis` 样例文件：用来观察 Seamly2D 的 XML 数据格式。
@@ -59,13 +102,23 @@ The most time-consuming part was not writing another dialog. It was learning why
 
 These are small files that help explain the work without dumping a whole development folder:
 
+- [CMake and build-logic note page](/notes/turing-cmake-build-logic)
+- [CMake primer Notion Markdown](/uploads/projects/nanjing-turing/other-materials/CMake%20%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20250669c3f4008099a6d6c614a4ca6937.md)
+- [Compiler/build logic Notion Markdown](/uploads/projects/nanjing-turing/other-materials/%E5%85%B3%E4%BA%8E%E7%BC%96%E8%AF%91%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%EF%BC%88Qt%20%E5%AD%A6%E4%B9%A0%E5%AF%BC%E5%90%91%EF%BC%89%2024f669c3f4008089bc2df266992845de.md)
+- [Windows Release packaging note](/notes/turing-release-packaging-cross-platform)
 - [Windows Release packaging PDF](/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf)
-- [Qt build-logic notes PDF](/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf)
 - [macOS unsigned packaging script](/uploads/projects/nanjing-turing/macos-build-package.sh)
 - [macOS signing packaging script](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)
 - [role-management code excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)
+- [Seamly2D first-run note](/notes/turing-qt-seamly2d-first-run)
+- [sm2d XML sample note](/notes/turing-sm2d-xml-data-format)
+- [three-week development log](/notes/turing-three-week-development-log)
 
 ## Looking Back / 回头看
+
+This internship archive feels like a learning site more than a polished feature showcase. Some parts are functional work, and some parts are simply the moment where the build system finally became less mysterious. A Qt project is not only source code: Kit, compiler, SDK, qmake/CMake rules, runtime libraries, and deployment tools all sit in the path.
+
+Looking at it now, the most useful trace is not a login dialog. It is the first fairly complete pass from "runs on my machine" to "can be organized into files another machine might run." Broken environments, compiler conflicts, missing DLLs, and platform moves are less pretty than a final screenshot, but they are much closer to what the internship felt like.
 
 这段实习留下来的东西很“学习现场”：有些地方是功能，有些地方只是把坑踩明白。比如 Qt 项目不能只看源码，还要看 Kit、编译器、SDK、qmake/CMake 规则和运行时依赖；Release 打包也不是最后点一下按钮，而是另外一套排查流程。
 

@@ -8,6 +8,40 @@ tags: ["Seamly2D", "XML", "Data Format", "Qt"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
+<!-- turing-english-translation: sm2d-xml -->
+
+## English Translation / 英文译文
+
+### Source
+
+This page keeps the original `readme.txt` explanation and then renders the public `.sm2d` and `.smis` samples in full. The XML blocks are technical data and are left language-neutral; the surrounding README explanation is translated here.
+
+- [Open README source](/uploads/projects/nanjing-turing/readme.txt)
+- [Open sm2d sample file](/uploads/projects/nanjing-turing/sample-pattern-example.sm2d)
+- [Open smis measurement sample](/uploads/projects/nanjing-turing/sample-measurements.smis)
+
+### README Translation
+
+The `code` folder contains the program source code. Besides files changed under the `Seamly2D_addon` folder, I also changed the two qmake build files `Seamly2D.pro` and `seamly2d.pro` so the project could compile.
+
+The `Seamly2D__Release` folder contains all dependencies collected with `windeployqt` after a successful Release build. This folder can be copied to another computer and the `seamly2d.exe` program inside should run.
+
+The `.cpp` and `.h` files in `Seamly2D_addon` are all newly added project files. The `auth_utils` and `password_utils` files were added to `code\Seamly2D\src\app\seamly2d\auth`; the rest of the added source and header files were added to `code\Seamly2D\src\app\seamly2d\dialogs`.
+
+The `sm2d sample file` folder contains a garment pattern file found from the official Seamly2D forum. It can be used to study the `.sm2d` data format.
+
+The `code\Seamly2D\build` folder keeps two ready-made builds of the program from the `develop` branch. One was built with the Debug configuration and the other with the Release configuration. Both were tested and can be imported into Qt Creator and run directly.
+
+Before importing the project into Qt Creator for the first time, the development environment may differ from the original one. It may be necessary to delete `Seamly2D.pro.user` under `code\Seamly2D` so Qt Creator can read the project successfully. In addition, if the `code\Seamly2D` folder does not contain the expected Git-related folders/files, Qt Creator may also get stuck while loading the project.
+
+### XML Samples
+
+The `.sm2d` file is a Seamly2D pattern document. In the sample below, `pattern` is the root element, `version` and `unit` describe file-level metadata, `measurements` points to the measurement file, and each `draftBlock` stores a drafting area. Inside `calculation`, the `point`, `line`, `spline`, and `operation` elements describe the geometry construction: named points, lines, curve paths, mirror/flip operations, and formulas such as `@chest/4`.
+
+The `.smis` file is a SeamlyMe measurement document. It keeps unit metadata and a `body-measurements` list. Each `m` element maps a readable measurement name to a symbolic variable such as `@chest`, `@shoulder`, or `@sleevelength1`, with a numeric value. These variables are referenced by formulas in the `.sm2d` pattern file.
+
+The full XML listings remain below unchanged so the original data structure can be inspected directly.
+
 ## 原文来源
 
 这篇不再写成短观察笔记。先放 `readme.txt` 里关于这些文件夹和样例的原话，再把公开的 `.sm2d` 和 `.smis` 样例全文放出来。

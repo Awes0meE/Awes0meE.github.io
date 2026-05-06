@@ -24,6 +24,12 @@ This page keeps the STM32 trail from a short Tianjin rail-transit internship. It
 
 ## Source Folder / 源目录里有什么
 
+- `Study_STM32F103C8T6` is the main learning line: basic peripherals, interrupts, timers, PWM, servo control, encoder work, and the metro environment-monitoring demo.
+- `STM32 reference material` behaves more like a learning library: Keil5 MDK, reference manuals, firmware libraries, module notes, slides, and sample projects. Most of it is vendor or web material, so it is not copied wholesale into the website.
+- `MG995 vendor material` is mainly used for servo PWM parameters; only the necessary reference image is kept.
+- The internship report explains the route from 2025-02-05 to 2025-02-16, but the original file contains personal information, so it is not published as a download.
+- Control-center manuals, equipment drawings, fault ledgers, installers, firmware libraries, `.hex`, `.o`, `.crf`, and `.axf` build products are not copied into the public folder.
+
 - `Study_STM32F103C8T6` 是主线材料：基础外设、中断、定时器、PWM、舵机、编码器，以及地铁环境智能检测系统。
 - `STM32相关资料` 更像学习资料库：Keil5 MDK、参考文档、固件库、模块资料、课件和例程。里面很多是 vendor 或网络资料，没有整包搬到网站。
 - `MG995商家资料` 主要用来看舵机 PWM 参数，只抽了必要参考图。
@@ -32,13 +38,19 @@ This page keeps the STM32 trail from a short Tianjin rail-transit internship. It
 
 ## Learning Route / 学习路线
 
+The first few days were basically about getting the smallest closed loop to work: Keil could build, ST-Link could flash, the onboard LED could blink, OLED output could show something, and the debugger could expose registers and variables. It was basic, but it made every later exercise possible. When something failed, at least there was a way to tell whether the problem was code, flashing, wiring, or power.
+
 前几天基本就是把“最小闭环”跑起来：Keil 工程能编译，ST-Link 能下载，板载 LED 能闪，OLED 能显示，调试器里能看到寄存器和变量变化。这个阶段很基础，但它解决了后面所有练习的前提：出了问题时，至少能分清是代码、下载、接线还是供电。
 
 Then the exercises moved from output to input and timing: GPIO modes, EXTI, encoder counting, timers, PWM, UART, ADC, DMA, SPI, I2C, RTC, watchdog, and FreeRTOS basics. In the folder, most topics are separate Keil projects, which fits a short placement better than a single polished document.
 
+Then the peripherals started connecting to each other. Buttons and encoders made EXTI and NVIC less abstract; timers moved delays away from empty loops; PWM drove LEDs and servos; ADC read the light sensor; UART and OLED made the data visible. The code was still introductory, but each piece matched something observable on the board.
+
 后面开始把外设往一起接。按钮和编码器让人开始理解 EXTI 和 NVIC；定时器让延时不再只靠空循环；PWM 用来调 LED 和舵机；ADC 读光敏传感器；串口/OLED 用来观察数据。很多代码还很入门，但每一段都能对应到板子上的一个现象。
 
 ## Small Integration / 小综合
+
+The most complete project was the metro environment-monitoring demo. It put OLED, an LDR light sensor, DHT11, an encoder, TIM3/TIM4, PWM dimming, tricolor LEDs, and a servo into one STM32F103C8T6 project. The title says "metro environment"; the real training was lower-level: sensor readings, timed updates, external-interrupt input, PWM output, display refresh, and debugging several modules while they ran together.
 
 最完整的工程是 `x-x STM32地铁环境智能检测系统`。它把 OLED、LDR 光敏传感器、DHT11、编码器、TIM3/TIM4、PWM 调光、三色灯和舵机放在同一个 STM32F103C8T6 工程里。名字里有“地铁环境”，实际训练重点是更底层的：传感器读数、定时更新、外部中断输入、PWM 输出、显示刷新，以及几个模块同时跑时怎么调。
 
@@ -51,11 +63,19 @@ Evidence is kept as small public snippets, not as a full firmware dump:
 
 ## Rail-Control Reading / 轨道交通阅读
 
+The later report also touched PID, ATP, ATO, and ATS. These were not at the same layer as the STM32 exercises, but they helped pull board-level input and output toward a system picture: sensor feedback, actuators, speed and position control, automatic protection, and dispatch management.
+
+Of course a short internship could not produce an industrial train-control system. What it did do was put microcontrollers, control algorithms, and rail-transit terminology on the same map for the first time.
+
 实习报告后半段还读到 PID、ATP、ATO、ATS 这些词。它们和前面的 STM32 练习不是同一个层级，但能让人把“板子上的输入输出”往系统概念上靠一点：传感器反馈、执行机构、速度/位置控制、自动防护和调度管理分别在什么位置。
 
 短期实习当然做不出工业级列控系统，但它让我第一次把微控制器、控制算法和轨道交通术语放在同一张图里看。
 
 ## Looking Back / 回头看
+
+The part worth keeping is how plain the whole thing was. Set up the environment, blink the LED, read a button, run an interrupt, watch a timer, then connect sensors and a display. There were plenty of small failures: no light, no connection to the debugger, data jumping around. That is exactly what embedded learning feels like at the start.
+
+Putting it in the portfolio is not about dressing a short placement up as a major system project. It keeps the first learning trail visible: starting from one STM32 board, then slowly touching peripherals, control, and the industry context around it.
 
 这段经历最值得保留的地方就是它很朴素。先装环境，点灯，读按键，跑中断，看定时器，再把传感器和显示接起来。中间有很多“不知道为什么不亮”“下载器没连上”“数据跳来跳去”的小问题，但这些正是嵌入式入门真正会遇到的东西。
 

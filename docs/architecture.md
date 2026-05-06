@@ -60,7 +60,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main` release `v0.6.0`, as of `2026-05-07`:
+Current content state on `main` release `v0.6.1`, as of `2026-05-07`:
 
 - 6 project files total;
 - 19 public note files total;
@@ -68,12 +68,14 @@ Current content state on `main` release `v0.6.0`, as of `2026-05-07`:
 - 1 Claude Chime hardware power-board archive;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
-- 25 media gallery items covering project/note images and the DIY demo video;
+- 38 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, and the DIY demo video;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
+- the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
+- public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
 
 ## Rendering Notes
 
-The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
 
@@ -90,7 +92,7 @@ The language toggle is intentionally lightweight:
 - `app/globals.css` hides `.lang-en` or `.lang-zh` based on `html[data-lang]`.
 - The app remains statically generated; language switching does not require dynamic routes, middleware, cookies, or server-side rendering.
 
-Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings and hide language-detected body blocks only when both English and Chinese body text exist. Chinese-only or English-only notes stay readable instead of showing placeholder fallback notices. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
+Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings and hide language-detected body blocks, headings, and tables only when both English and Chinese body text exist. Chinese-only or English-only notes stay readable instead of showing placeholder fallback notices. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
 
 ## Deployment
 

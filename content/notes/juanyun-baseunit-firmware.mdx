@@ -8,13 +8,15 @@ tags: ["STM32", "Firmware", "Flash", "OLED"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
-## 起点
+## Starting Point / 起点
+
+The base-unit firmware has fewer "big parts" than the external-unit firmware, but in another sense it feels more like a complete small product. It reads ambient temperature and humidity plus outlet temperature and humidity, detects whether the device is in position, lets the user adjust the fan, shows state on an OLED, and finally reports data over Bluetooth. Each function sounds simple by itself, but putting all of them into one main loop quickly raises the difficulty.
 
 底座板固件比外机固件少了一些“大件”，但它反而更像一个完整的小产品。它要读环境温湿度和出风口温湿度，要判断设备在不在位，要让用户调风扇，还要在 OLED 上显示状态，最后还要通过蓝牙上报数据。听起来每个功能都不难，但全部放进一个主循环里，难度就上来了。
 
 一开始最担心的是它变成“能跑但很乱”的工程。课程 demo 里风扇能转、OLED 能亮就差不多了，但真实设备还要考虑关机确认、掉电记忆、传感器读取失败、按键误触发、蓝牙发送会不会卡住主循环。
 
-## 代码怎么分
+## Code Structure / 代码怎么分
 
 底座固件按 `App + BSP_drivers + Core` 的方式整理。`Core` 保留 CubeMX 生成的外设初始化，`BSP_drivers` 处理 DHT、IR、风扇、OLED、蓝牙、Flash，`App` 负责状态机和任务调度。这样后续看代码时，至少知道该去哪里找问题。
 
@@ -22,7 +24,16 @@ visibility: public
 
 因为用户体验就是由这些小地方堆出来的。设备断电再上电，如果每次都回到默认值，使用起来就很粗糙。Flash 保存看起来只是一个小功能，但它迫使我考虑擦写次数、延迟写入、CRC 和最后一次有效记录恢复，这比单纯点亮 OLED 有意思多了。
 
-## 关键功能
+## Key Functions / 关键功能
+
+The useful part of this note is the boundary between small functions and product behavior.
+
+- `DHT11` reads ambient temperature and humidity; `DHT22` reads outlet temperature and humidity.
+- Infrared detection judges whether the device is in position.
+- Fan PWM is set within a 0 to 100% range.
+- OLED displays `ENV / OUT / FAN`, and the shutdown confirmation page shows a countdown.
+- Bluetooth messages use a shape like `DATA:<envT>,<outT>,<fan>`.
+- Flash persistence uses a header, record, CRC32, and commit mark to recover the last valid setting.
 
 - `DHT11` 负责环境温湿度，`DHT22` 负责出风口温湿度。
 - 红外检测用于判断设备是否在位。
@@ -31,10 +42,14 @@ visibility: public
 - 蓝牙报文形如 `DATA:<envT>,<outT>,<fan>`。
 - Flash 参数区用页头、记录、CRC32 和 commit 标记恢复最后一次有效设定。
 
-## 文件处理
+## File Handling / 文件处理
+
+This page only keeps the firmware-structure explanation. The base-unit source code and device constraint lists are not provided as downloads from the website for now.
 
 页面只保留固件结构说明。底座板源码和器件约束清单暂时不从网站提供下载。
 
-## 调试感受
+## Debugging Reflection / 调试感受
+
+This project made me pay more attention to what a device should remember. Before, I cared more about whether the feature could run. Now I think one step further: what happens after power loss, what happens when a user mis-touches a key, what happens when a sensor fails, and whether communication can block the main loop. The base unit is not very complex, but it is a good exercise in writing small features as if real people will use them repeatedly.
 
 这个工程让我开始重视“设备应该记得什么”。以前更关注功能能不能跑，现在会多想一步：断电以后怎么办，用户误触怎么办，传感器失败怎么办，通信会不会阻塞。底座板不算复杂，但它很适合练习把小功能写得像真正会被人反复使用的设备。

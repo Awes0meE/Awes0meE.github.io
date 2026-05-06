@@ -143,12 +143,12 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - `components/bilingual-text.tsx` renders paired English/Chinese text and CSS in `app/globals.css` hides the inactive language.
 - Projects and notes use existing `title/titleZh` and `summary/summaryZh` fields.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
-- `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文` and hide language-detected body blocks when both languages exist. Single-language notes stay readable instead of showing missing-language placeholder notices.
-- MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text.
+- `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks/headings/tables when both languages exist, render basic Markdown tables, and add heading anchors for internal links. Single-language notes stay readable instead of showing missing-language placeholder notices.
+- MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text. As of `v0.6.1`, public project/note pages should not leave important Chinese-only body content without an English counterpart.
 
 ## Current Content State
 
-The current mainline state is release `v0.6.0` on `main`, after the project archive page expansion and media/note refresh.
+The current mainline state is release `v0.6.1` on `main`, after the project archive page expansion, media/note refresh, Notion CMake source-note replacement, and English body coverage pass.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -167,8 +167,10 @@ Current content count on `main`:
 - 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 25 media gallery items cover images/videos referenced by project and note pages.
+- 38 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
+- The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
+- Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
 
 Juanyun public boundary:
 

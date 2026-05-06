@@ -22,15 +22,25 @@ The first useful milestone was modest: connect STM32F103C8T6 to the PC, build th
 
 ## What I Set Up / 配了哪些东西
 
+- Keil5 MDK and an STM32F103C8T6 project.
+- Startup file, clock enable, and GPIO initialization.
+- GPIOC13 onboard LED blinking.
+- OLED power wiring and basic display output.
+- Debugger download settings and register observation.
+
 - Keil5 MDK 和 STM32F103C8T6 工程。
 - 启动文件、时钟使能和 GPIO 初始化。
 - GPIOC13 板载 LED 闪烁。
 - OLED 的供电和基础显示。
 - 调试器下载和寄存器观察。
 
+The important part was not code complexity. It was closing the loop between the PC, IDE, programmer, and board. If that loop is unstable, every later symptom becomes hard to judge.
+
 这里最重要的不是代码多复杂，而是把电脑、IDE、下载器和板子连成闭环。只要这个闭环不稳，后面所有现象都会变得很难判断。
 
 ## File / 文件
+
+The public excerpt keeps GPIOB/OLED power setup, GPIOC13 onboard LED configuration, and the main blinking loop: [basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c).
 
 公开摘录保留了 GPIOB/OLED 供电、GPIOC13 板载 LED 和主循环闪烁逻辑：[basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)。
 
@@ -38,6 +48,10 @@ The first useful milestone was modest: connect STM32F103C8T6 to the PC, build th
 
 ## Looking Back / 回头看
 
+The confusing part at the time was the relationship between library calls and registers. `GPIO_Init` looks like one function call, but behind it are port mode, speed, output type, and clock configuration. The same understanding kept coming back later with EXTI, TIM, and ADC.
+
 当时最容易混乱的是“库函数”和“寄存器”的关系。`GPIO_Init` 看起来只是一行函数调用，背后其实是在配端口模式、速度、输出类型和时钟。后面看 EXTI、TIM、ADC 时，这个理解一直在用。
+
+The result of that day was small: stable blinking and display output. For a first internship, though, blinking an LED was not a toy step. It proved that the whole development chain was really alive.
 
 这一天结果很小，就是稳定点灯和显示。但对第一次实习来说，点灯不是玩具步骤，它是在确认整套开发链路真的通了。
