@@ -35,6 +35,7 @@ const textExtensions = new Set([
   ".mdx",
   ".mjs",
   ".sh",
+  ".skill",
   ".sm2d",
   ".smis",
   ".svg",

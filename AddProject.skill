@@ -1,0 +1,17 @@
+# AddProject.skill
+
+Repo-local entrypoint for the reusable Codex skill that imports a local project folder into this portfolio.
+
+Canonical skill file:
+
+```text
+skills/add-project/SKILL.md
+```
+
+Use this by saying something like:
+
+```text
+使用 AddProject.skill，把 D:\path\to\new_project 部署成一个新项目
+```
+
+The skill covers branch creation, local source-folder audit, public-safe asset curation, bilingual notes, project page creation, media entries, review, verification, GitHub pushes at each milestone, and `/neat`-style handoff docs.

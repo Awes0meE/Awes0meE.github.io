@@ -42,6 +42,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Experimental branch `experiment/project-asset-browser` replaces stacked public project-file cards with a two-pane browser. `components/project-assets.tsx` remains the server-side resolver and safety boundary; `components/project-asset-browser.tsx` is the client-side index/preview UI.
 - `2026-05-07`: Full review of the experimental project asset browser hardened public-file handling: non-allowlisted local Juanyun files were moved out of `public/uploads/projects/juanyun-tech` to `D:\XJTLU\XJTLU_Portfolio_private\juanyun-tech-public-quarantine-20260507`; content validation now fails if extra files reappear there; browser previews gained directory/file caps, aggregate text-preview caps, strict UTF-8 reads, Markdown relative-link resolution, safer active-upload handling, and mobile preview scrolling.
 - `2026-05-07`: Release `v0.7.0` promotes the two-pane public project-file browser to `main`, keeps the 50-item media/gallery content state, and records the public-asset hardening work as part of the release boundary.
+- `2026-05-07`: Added repo-local `AddProject.skill` / `skills/add-project/SKILL.md` to make future local-folder project imports repeatable: branch first, audit source files, curate public evidence, create bilingual notes/project/media, review, verify, push each milestone, and run `/neat` cleanup.
 
 ## Stable Decisions
 
@@ -63,6 +64,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Strict encoding rule: every committed source, content, docs, and public-upload text file must be UTF-8. Convert GBK/UTF-16 legacy exports at import time; do not mix encodings in the repo and do not add runtime decoder fallbacks to hide bad files.
 - On Windows PowerShell, do not pipe inline Chinese here-strings directly into Node/Python/other interpreters for file generation. Use `apply_patch` for Chinese text or write a temporary UTF-8 script/file first, then run it. After any batch content generation, verify with Node `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` or repeated question-mark mojibake before committing.
 - On Windows PowerShell, use `npm.cmd` and avoid assuming modern .NET helper APIs exist in older shells. In particular, do not rely on `[System.IO.Path]::GetRelativePath` for safety-critical moves; use Node.js `path.relative` or a verified substring fallback, set `$ErrorActionPreference = 'Stop'`, and hash-check copied files before deleting/moving originals.
+- Use `AddProject.skill` for future "give Codex a local folder and deploy it as a portfolio project" tasks. The canonical skill lives at `skills/add-project/SKILL.md`; the root `AddProject.skill` file is a human-friendly shortcut.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
@@ -95,6 +97,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
 - `docs/environment-toolchain.md`: Node/npm, Git restore, PowerShell, local preview, screenshot tooling, encoding, and Vercel setup.
 - `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
+- `skills/add-project/SKILL.md`: reusable workflow for importing future local project folders into the site.
+- `AddProject.skill`: root shortcut that points to the repo-local add-project skill.
 - `public/uploads/projects/juanyun-public/`: reviewed public Juanyun legacy PDFs, images, source snippets, and selected project-file evidence.
 - `public/uploads/projects/claude-chime-hardware/`: public Claude Chime hardware PDFs, BOM, Gerber, EasyEDA project, logo image, and datasheets.
 - `public/uploads/projects/nanjing-turing/`: reviewed public Qt/CMake/Seamly2D learning evidence.

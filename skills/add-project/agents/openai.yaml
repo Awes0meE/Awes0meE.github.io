@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Project"
+  short_description: "Import a local project folder into this portfolio."
+  default_prompt: "Use this skill to inspect a local project folder, curate public evidence, create bilingual project/notes/media content, verify, commit, push, and prepare the release workflow."

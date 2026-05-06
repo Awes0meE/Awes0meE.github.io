@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Added a repo-local `AddProject.skill` workflow for future project imports.
+- Files changed: created `skills/add-project/SKILL.md`, `skills/add-project/references/source-audit.md`, `skills/add-project/references/content-build.md`, and root `AddProject.skill`; updated `docs/agent-skills.md` and `MEMORY.md`; added `.skill` files to the UTF-8 validation extension list.
+- Verification: skill structure validation, `git diff --check`, `npm.cmd run validate-encoding`, `npm.cmd run lint`, and `npm.cmd run build` passed.
+
+## 2026-05-07
+
 - Summary: Prepared release `v0.7.0` for the project asset browser branch.
 - Files changed: bumped package metadata to `0.7.0`; refreshed README, USER_GUIDE, CODEX, MEMORY, architecture, environment-toolchain, Juanyun inventory, and content workflow guidance so the two-pane browser, relative Markdown asset links, HTML/SVG download behavior, strict UTF-8 preview reads, directory/file/preview caps, and `juanyun-tech` allowlist validation are the documented release behavior.
 - Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed before merging to `main` and tagging `v0.7.0`.
