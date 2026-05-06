@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, PlayCircle } from "lucide-react";
 import { ContentRenderer } from "@/components/content-renderer";
-import { formatDateRange, getProject, getProjects } from "@/lib/content";
+import { formatDateRange, getMediaItems, getProject, getProjects } from "@/lib/content";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
+  const relatedMedia = getMediaItems().filter((item) => item.projectSlug === slug);
 
   if (!project) {
     notFound();
@@ -84,6 +85,49 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="prose-reset mt-10 border-t border-line pt-2">
           <ContentRenderer source={project.body} />
         </div>
+        {relatedMedia.length ? (
+          <section className="mt-12 border-t border-line pt-10">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-ink">Related Media / 相关媒体</h2>
+                <p className="mt-2 text-sm leading-6 text-graphite">
+                  Images, videos, board renders, and source attachments connected to this project.
+                </p>
+              </div>
+              <Link href="/media" className="text-sm font-semibold text-pine hover:text-copper">
+                Open media gallery
+              </Link>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedMedia.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.src}
+                  className="group overflow-hidden rounded-lg border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-fine"
+                >
+                  <div className="relative aspect-[4/3] bg-chalk">
+                    <Image
+                      src={item.thumbnail}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 1024px) 280px, 50vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    />
+                    {item.type === "video" ? (
+                      <span className="absolute bottom-3 left-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-pine">
+                        <PlayCircle size={24} />
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-sm font-semibold text-ink">{item.title}</h3>
+                    <p className="mt-2 text-xs leading-5 text-graphite">{item.caption}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </article>
     </main>
   );

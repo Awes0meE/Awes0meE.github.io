@@ -38,3 +38,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Added inline image rendering for portfolio notes.
 - Files changed: updated `components/content-renderer.tsx` to render simple Markdown image blocks, then embedded key Juanyun board, SOP, and DIY cooling images into the project and notes.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Added related media to project detail pages.
+- Files changed: updated `app/work/[slug]/page.tsx` so each project automatically displays media entries whose `projectSlug` matches the current project.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
