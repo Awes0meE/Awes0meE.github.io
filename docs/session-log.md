@@ -26,3 +26,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Privacy: kept invoices, reimbursements, billing documents, internship proof, vendor package trees, and build artifacts out of the served public app.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed; local HTTP checks returned `200` for `/work/juanyun-thermal-hardware`, `/media`, and `/notes/juanyun-acunit-board`.
 - Follow-up: review public PDFs/downloads before merging or pushing this branch to any public deployment.
+
+## 2026-05-06
+
+- Summary: Improved content sorting on the Juanyun branch.
+- Files changed: updated `lib/content.ts` so project and note lists sort by the leading date inside date ranges such as `2026-02 to 2026-05`, instead of relying on unstable `Date.parse()` behavior.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

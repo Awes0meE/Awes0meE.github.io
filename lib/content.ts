@@ -71,7 +71,18 @@ function readCollection<T extends { slug: string; date: string }>(
         body: content.trim()
       } as unknown as T;
     })
-    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+    .sort((a, b) => getContentSortTime(b.date) - getContentSortTime(a.date));
+}
+
+function getContentSortTime(value: string) {
+  const match = value.match(/\d{4}(?:[.-]\d{1,2})?(?:[.-]\d{1,2})?/);
+
+  if (!match) {
+    return 0;
+  }
+
+  const [year, month = "1", day = "1"] = match[0].split(/[.-]/);
+  return Date.UTC(Number(year), Number(month) - 1, Number(day));
 }
 
 export const getProjects = cache(() => readCollection<Project>("projects"));
