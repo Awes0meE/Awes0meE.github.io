@@ -6,7 +6,7 @@ import { BilingualText } from "@/components/bilingual-text";
 import { getMediaItems, getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "媒体"
+  title: "Media"
 };
 
 export default function MediaPage() {

@@ -5,7 +5,7 @@ import { BilingualText } from "@/components/bilingual-text";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "关于"
+  title: "About"
 };
 
 const skills = [

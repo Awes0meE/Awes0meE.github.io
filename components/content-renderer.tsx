@@ -14,8 +14,17 @@ function getBlockLanguage(text: string): BlockLanguage {
     .replace(/https?:\/\/\S+/g, "");
   const chineseCount = normalized.match(/[\u3400-\u9fff]/g)?.length ?? 0;
   const englishWordCount = normalized.match(/[A-Za-z]{3,}/g)?.length ?? 0;
+  const startsWithChinese = /^[\s>*-]*[\u3400-\u9fff]/.test(normalized);
+  const hasChinesePunctuation = /[，。；：？！、（）《》“”]/.test(normalized);
 
-  if (chineseCount && (!englishWordCount || chineseCount >= englishWordCount * 2)) {
+  if (
+    chineseCount &&
+    (!englishWordCount ||
+      startsWithChinese ||
+      hasChinesePunctuation ||
+      chineseCount >= 6 ||
+      chineseCount >= englishWordCount / 3)
+  ) {
     return "zh";
   }
 

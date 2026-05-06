@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Audited the English interface and made the UTF-8 encoding policy executable.
+- Files changed: switched list-page metadata titles to English; removed English-mode Chinese residue from the language toggle and project-file cards; tightened `ContentRenderer` language detection for Chinese source-text blocks; made Chinese-only uploaded documents show an English note-link panel in English mode while keeping the original inline in Chinese mode; added `scripts/validate-encoding.mjs`; added the encoding gate to `npm.cmd run lint`; normalized public FOC source/PnP text evidence to UTF-8; updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/content-workflow.md`, and `docs/environment-toolchain.md` with the strict UTF-8 rule.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, `npm.cmd audit --omit=dev`, and a local production English UI audit over 30 routes passed.
+
+## 2026-05-07
+
 - Summary: Ran `/neat` focused on cross-device environment and toolchain setup.
 - Files changed: added `docs/environment-toolchain.md`; added `.nvmrc`; declared Node/npm engines in `package.json` and `package-lock.json`; updated `AGENTS.md`, `CODEX.md`, `README.md`, `USER_GUIDE.md`, `MEMORY.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/memory-system.md` so new sessions use Node 22+, npm 10+, `npm.cmd` on Windows PowerShell, explicit PATH checks, local preview cleanup, Playwright screenshot guidance, and Vercel settings.
 - Verification: environment commands confirmed Node `v24.15.0`, npm `11.12.1`, and Git `2.53.0.windows.2`; `npm.cmd install --package-lock-only`, `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

@@ -118,6 +118,8 @@ Reference files with public paths:
 
 For technical archives, normalize filenames to stable ASCII names before publishing. Do not publish private or noisy folders directly. Exclude invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
 
+Normalize text-like uploads to UTF-8 before publishing. This includes `.txt`, `.md`, `.csv`, source files, XML, HTML, EasyEDA text exports, and any Notion/EDA/manufacturing text output. Do not leave GBK or UTF-16 files under `public/uploads/`; `npm.cmd run validate-encoding` is part of lint and should fail if a committed text artifact is not clean UTF-8.
+
 In project and note bodies, one standalone Markdown image renders as a clickable figure. Several standalone image lines in the same paragraph block render as a responsive gallery grid, which is the preferred pattern for related board renders, schematic sheets, and before/after image sets. These evidence figures and project-file image previews use direct public URLs for reliability, so crop and compress large source images before adding them.
 
 For company work, be stricter: do not put Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, full firmware source dumps, or internal requirement/manufacturing packages under `public/uploads/` unless they are explicitly reviewed and desensitized. For Juanyun, the user explicitly approved non-Current_Product legacy folders for selected public evidence; `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive. Files under `public/uploads/` are public static assets even when no page links to them.
@@ -228,6 +230,7 @@ That error usually means the local `.next` cache is corrupt around `gray-matter 
 ```powershell
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 npm.cmd audit --omit=dev

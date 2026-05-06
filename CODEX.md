@@ -57,6 +57,7 @@ npm.cmd install
 npm.cmd run dev
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 npm.cmd audit --omit=dev
@@ -87,9 +88,11 @@ Local Next.js cache rule:
 
 ## Encoding Policy
 
-- Use UTF-8 for all source, content, and documentation files.
+- Use UTF-8 for all source, content, documentation, and public-upload text files. Do not commit GBK, UTF-16, or mixed-encoding text artifacts.
 - `.editorconfig` and `.vscode/settings.json` enforce UTF-8, LF line endings, and final newlines for this workspace.
 - `.gitattributes` keeps common text formats normalized to LF in Git.
+- `npm.cmd run validate-encoding` checks every Git-managed text-like file for valid UTF-8, null bytes, replacement characters, and common mojibake snippets. `npm.cmd run lint` runs this check after ESLint and content validation.
+- Normalize legacy `.txt`, `.md`, `.csv`, source, XML, and HTML exports to UTF-8 before placing them under `content/` or `public/uploads/`. Do not add runtime GBK fallback readers to hide bad source files; fix the files at import time.
 - On Windows PowerShell, command output can still display mojibake if the console code page is wrong. Verify file contents with Node.js or VS Code before rewriting text that may already be valid UTF-8.
 - Hard rule for future batch edits: do not pipe inline Chinese here-strings from PowerShell into Node/Python/other interpreters. Use `apply_patch` for Chinese text, or create a temporary UTF-8 script/file first and run that. After generation, verify files with Node.js `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` / repeated question-mark mojibake.
 
@@ -226,6 +229,7 @@ For content-only edits:
 ```powershell
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 ```
@@ -245,6 +249,7 @@ For dependency changes:
 ```powershell
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 npm.cmd audit --omit=dev

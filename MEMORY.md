@@ -38,6 +38,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Content rendering was tightened after English translation code snippets leaked into Chinese note views. `ContentRenderer` now ignores standalone HTML comments, supports scoped fenced-code prefixes such as `en-text` / `zh-text`, splits bilingual slash text from the last valid Chinese separator, and project/note detail routes lock unknown slugs to generated static params.
 - `2026-05-07`: Post-`v0.6.1` media/cover refresh added processed cover images for Juanyun, Nanjing Turing, and Tianjin rail-transit project pages; added DIY STM32 PCB render/schematic, FOC board render plus five schematic sheets, and EEV driver-board render/schematic to project pages and `/media`; `content/media.json` now has 50 items. `ContentRenderer` now turns consecutive standalone Markdown images into clickable responsive galleries, and in-body / project-asset evidence images use direct public URLs to avoid blank optimizer placeholders on long archive pages.
 - `2026-05-07`: Environment/toolchain handoff was made explicit: `docs/environment-toolchain.md` now covers Git restore, Node/npm baselines, PowerShell `npm.cmd`, PATH recovery, local preview, Playwright screenshots, UTF-8 rules, and Vercel settings. `package.json` declares Node `>=22` and npm `>=10`; `.nvmrc` pins the portable Node baseline to `22`.
+- `2026-05-07`: Encoding policy is now executable. `scripts/validate-encoding.mjs` checks Git-managed text-like files for valid UTF-8, null bytes, replacement characters, and common mojibake snippets; `npm.cmd run lint` includes the check. Legacy public FOC source and PnP evidence that had GBK/UTF-16 remnants was normalized to UTF-8 before display.
 
 ## Stable Decisions
 
@@ -55,6 +56,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, prefer making it a real note page with the original wording rendered as readable article content. Do not hide the only copy under a project asset frame or replace it with a short summary.
 - Keep English body sections equivalent to Chinese body sections on public project/note pages. Do not rely on `title/titleZh` and `summary/summaryZh` alone when the article body has real content in both languages.
 - Treat normal fenced code blocks as language-neutral rendered evidence. When a whole code/listing block belongs to only one language view, use a scoped fence prefix such as `en-text`, `en-powershell`, `zh-text`, or `zh-powershell`; the renderer hides it with the same language CSS and displays the suffix as the code label.
+- Strict encoding rule: every committed source, content, docs, and public-upload text file must be UTF-8. Convert GBK/UTF-16 legacy exports at import time; do not mix encodings in the repo and do not add runtime decoder fallbacks to hide bad files.
 - On Windows PowerShell, do not pipe inline Chinese here-strings directly into Node/Python/other interpreters for file generation. Use `apply_patch` for Chinese text or write a temporary UTF-8 script/file first, then run it. After any batch content generation, verify with Node `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` or repeated question-mark mojibake before committing.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
@@ -78,6 +80,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews, normal and language-scoped fenced code blocks, basic Markdown tables, heading anchors, ignored standalone HTML comments, and language-scoped body/headings/tables.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.
+- `scripts/validate-encoding.mjs`: Git-managed text encoding gate. Keep it strict so PowerShell/GBK/UTF-16 regressions fail locally before deployment.
 - `content/projects/`: project case-study source files.
 - `content/notes/`: learning note source files.
 - `content/media.json`: gallery metadata.
@@ -97,6 +100,7 @@ Known-good checks as of `2026-05-07` on Windows PowerShell:
 ```powershell
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 npm.cmd audit --omit=dev
@@ -106,6 +110,7 @@ Expected result:
 
 - lint passes;
 - content validation passes for project/note frontmatter, projectSlug joins, and local `/uploads` references;
+- encoding validation passes for Git-managed source/content/docs/public text files;
 - production build passes;
 - production audit should report `0 vulnerabilities` when dependency state has not changed.
 

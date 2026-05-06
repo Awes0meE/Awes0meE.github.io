@@ -5,7 +5,7 @@ import { BilingualText } from "@/components/bilingual-text";
 import { getNotes } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "笔记"
+  title: "Notes"
 };
 
 export default function NotesPage() {

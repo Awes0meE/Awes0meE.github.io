@@ -10,9 +10,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0 && npm run validate-content",
+    "lint": "eslint . --max-warnings=0 && npm run validate-content && npm run validate-encoding",
     "typecheck": "tsc --noEmit",
-    "validate-content": "node scripts/validate-content.mjs"
+    "validate-content": "node scripts/validate-content.mjs",
+    "validate-encoding": "node scripts/validate-encoding.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

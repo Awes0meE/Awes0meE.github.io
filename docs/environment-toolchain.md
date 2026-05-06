@@ -52,12 +52,13 @@ Use this sequence after cloning or after a large dependency/content change:
 ```powershell
 npm.cmd install
 npm.cmd run lint
+npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 npm.cmd audit --omit=dev
 ```
 
-`npm.cmd run lint` already runs `scripts/validate-content.mjs`, but `npm.cmd run validate-content` is also available when you want the content check alone.
+`npm.cmd run lint` already runs `scripts/validate-content.mjs` and `scripts/validate-encoding.mjs`, but `npm.cmd run validate-content` and `npm.cmd run validate-encoding` are also available when you want one check alone.
 
 ## Local Preview
 
@@ -95,7 +96,9 @@ Delete temporary screenshots and helper scripts before committing.
 
 ## Encoding Rules
 
-- Keep source, content, and docs in UTF-8.
+- Keep source, content, docs, and public-upload text files in UTF-8. Do not mix UTF-8, GBK, and UTF-16 inside the repo.
+- Convert legacy `.txt`, `.md`, `.csv`, source, XML, and HTML exports to UTF-8 before placing them under `content/` or `public/uploads/`.
+- `npm.cmd run validate-encoding` checks Git-managed text-like files for valid UTF-8, null bytes, replacement characters, and common mojibake snippets. It intentionally follows Git's tracked/non-ignored file list so WPS-synced private folders excluded through `.git/info/exclude` do not block normal checks.
 - Prefer `apply_patch` for Chinese text edits.
 - Do not pipe inline Chinese here-strings from PowerShell into Node/Python/other interpreters.
 - If batch generation is unavoidable, write a temporary UTF-8 script/file first, then verify the result with `node` and `fs.readFileSync(path, "utf8")`.

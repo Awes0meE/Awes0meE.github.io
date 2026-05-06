@@ -46,7 +46,8 @@ export function LanguageToggle() {
         onClick={() => handleLanguageChange("zh")}
         className="language-option-zh rounded-full px-3 py-1.5 text-xs font-semibold text-graphite transition hover:text-pine"
       >
-        简中
+        <span className="lang-en">ZH</span>
+        <span className="lang-zh">简中</span>
       </button>
     </div>
   );

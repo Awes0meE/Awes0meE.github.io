@@ -132,10 +132,27 @@ function AssetCard({ asset }: { asset: ProjectAsset }) {
   }
 
   if (asset.kind === "document" && asset.content) {
+    const isChineseSourceDocument = isMostlyChineseText(asset.content);
+    const relatedNoteHref = getRelatedNoteHref(asset.href);
+
     return (
       <article className="overflow-hidden rounded-lg border border-line bg-white">
         <AssetHeader asset={asset} icon={<FileText size={18} />} />
-        <div className="max-h-[640px] overflow-auto border-t border-line bg-white px-5 pb-6 pt-2">
+        {isChineseSourceDocument ? (
+          <div className="lang-en border-t border-line bg-paper px-5 py-4 text-sm leading-6 text-graphite">
+            This uploaded file is an original Chinese source document. The translated article view is available above in the related notes; the original remains inline in Simplified Chinese mode.
+            {relatedNoteHref ? (
+              <>
+                {" "}
+                <a href={relatedNoteHref} className="font-semibold text-pine hover:text-copper">
+                  Open translated note
+                </a>
+                .
+              </>
+            ) : null}
+          </div>
+        ) : null}
+        <div className={`${isChineseSourceDocument ? "lang-zh " : ""}max-h-[640px] overflow-auto border-t border-line bg-white px-5 pb-6 pt-2`}>
           <ContentRenderer source={asset.content} />
         </div>
       </article>
@@ -161,9 +178,9 @@ function AssetCard({ asset }: { asset: ProjectAsset }) {
             {asset.kind === "text" ? <FileText size={18} /> : <FileArchive size={18} />}
           </span>
           <div className="min-w-0">
-            <h3 className="truncate text-sm font-semibold text-ink">{asset.name}</h3>
+            <h3 className="truncate text-sm font-semibold text-ink">{renderAssetName(asset.name)}</h3>
             <p className="mt-1 text-xs text-graphite">
-              {asset.language} · {asset.sizeLabel}
+              {asset.language} / {asset.sizeLabel}
             </p>
           </div>
         </div>
@@ -185,9 +202,9 @@ function AssetHeader({ asset, icon }: { asset: ProjectAsset; icon: ReactNode }) 
       <div className="flex min-w-0 items-center gap-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-line text-pine">{icon}</span>
         <div className="min-w-0">
-          <h3 className="truncate text-sm font-semibold text-ink">{asset.name}</h3>
+          <h3 className="truncate text-sm font-semibold text-ink">{renderAssetName(asset.name)}</h3>
           <p className="mt-1 text-xs text-graphite">
-            {asset.sizeLabel} · <a href={asset.href} className="font-semibold text-pine hover:text-copper">public URL</a>
+            {asset.sizeLabel} / <a href={asset.href} className="font-semibold text-pine hover:text-copper">public URL</a>
           </p>
         </div>
       </div>
@@ -213,6 +230,69 @@ function getProjectAssets(paths?: string[]) {
   }
 
   return [...files.values()].sort((a, b) => a.href.localeCompare(b.href));
+}
+
+function renderAssetName(name: string) {
+  const englishName = getEnglishAssetName(name);
+
+  if (englishName === name) {
+    return name;
+  }
+
+  return (
+    <>
+      <span className="lang-en">{englishName}</span>
+      <span className="lang-zh">{name}</span>
+    </>
+  );
+}
+
+function getEnglishAssetName(name: string) {
+  if (!/[\u3400-\u9fff]/.test(name)) {
+    return name;
+  }
+
+  const translated = name
+    .replace("CMake 入门学习记录", "CMake primer learning record")
+    .replace("关于编译的底层逻辑（Qt 学习导向）", "Qt-oriented build logic note");
+
+  if (!/[\u3400-\u9fff]/.test(translated)) {
+    return translated;
+  }
+
+  const extension = path.extname(name).replace(".", "").toUpperCase();
+  return extension ? `${extension} evidence file` : "Public evidence file";
+}
+
+function isMostlyChineseText(content: string) {
+  const withoutCode = content.replace(/```[\s\S]*?```/g, " ");
+  const chineseCount = withoutCode.match(/[\u3400-\u9fff]/g)?.length ?? 0;
+  const englishWordCount = withoutCode.match(/[A-Za-z]{3,}/g)?.length ?? 0;
+  return chineseCount >= 24 && chineseCount >= englishWordCount / 2;
+}
+
+function getRelatedNoteHref(href: string) {
+  if (href.includes("seamly2d-release-packaging-flow")) {
+    return "/notes/turing-release-packaging-cross-platform";
+  }
+
+  if (href.includes("windows11-qt6-seamly2d-onboarding")) {
+    return "/notes/turing-qt-seamly2d-first-run";
+  }
+
+  if (href.includes("CMake 入门") || href.includes("关于编译的底层逻辑") || href.includes("24f669c3f4008089bc2df266992845de")) {
+    return "/notes/turing-cmake-build-logic";
+  }
+
+  if (href.includes("week-1-development-log") || href.includes("week-2-development-log") || href.includes("week-3-development-log")) {
+    return "/notes/turing-three-week-development-log";
+  }
+
+  if (href.includes("readme.txt") || href.includes("sample-pattern-example") || href.includes("sample-measurements")) {
+    return "/notes/turing-sm2d-xml-data-format";
+  }
+
+  return null;
 }
 
 function resolvePublicFiles(href: string) {

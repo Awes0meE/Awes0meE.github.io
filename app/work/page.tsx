@@ -4,7 +4,7 @@ import { ProjectCard } from "@/components/project-card";
 import { getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "项目"
+  title: "Work"
 };
 
 export default function WorkPage() {
