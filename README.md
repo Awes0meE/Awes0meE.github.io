@@ -29,8 +29,20 @@ content/notes/          Learning notes in MDX
 content/media.json      Media gallery metadata
 lib/                    Content loaders and site constants
 public/uploads/         Public images, videos, and generated visuals
+docs/                   Architecture, content workflow, and memory docs
+CODEX.md                AI-agent operating guide for this repository
+MEMORY.md               Durable project memory and decisions
 legacy/hexo-export/     Archived old Hexo deployment output
 ```
+
+## AI And Maintenance Docs
+
+- `CODEX.md`: project rules for Codex and other AI agents.
+- `AGENTS.md`: compatibility pointer to `CODEX.md`.
+- `MEMORY.md`: current durable project memory.
+- `docs/memory-system.md`: how memory should be read and updated.
+- `docs/content-workflow.md`: how to add projects, notes, images, and videos.
+- `docs/architecture.md`: routes, data flow, deployment, and non-goals.
 
 ## Local Development
 
@@ -153,8 +165,20 @@ content/notes/          MDX 学习笔记
 content/media.json      媒体图库数据
 lib/                    内容读取和站点常量
 public/uploads/         公开图片、视频和视觉素材
+docs/                   架构、内容维护和记忆系统文档
+CODEX.md                当前仓库的 AI 协作指南
+MEMORY.md               项目长期记忆和决策记录
 legacy/hexo-export/     旧版 Hexo 输出归档
 ```
+
+## AI 协作与维护文档
+
+- `CODEX.md`：给 Codex 和其他 AI agent 的项目规则。
+- `AGENTS.md`：指向 `CODEX.md` 的兼容入口。
+- `MEMORY.md`：当前项目长期记忆。
+- `docs/memory-system.md`：记忆系统的读取和更新方法。
+- `docs/content-workflow.md`：如何添加项目、笔记、图片和视频。
+- `docs/architecture.md`：路由、数据流、部署和非目标。
 
 ## 本地开发
 

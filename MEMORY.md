@@ -1,0 +1,73 @@
+# MEMORY.md
+
+Durable project memory for `F:\XJTLU\XJTLU_Portfolio`.
+
+This file is for future AI sessions and long-running portfolio maintenance. It should stay concise, current, and edited rather than blindly appended.
+
+## Current State
+
+- `2026-05-03`: The old Hexo deployment output from `Awes0meE/Awes0meE.github.io` was archived under `legacy/hexo-export/`.
+- `2026-05-03`: The site was rebuilt as a Next.js App Router portfolio with TypeScript, Tailwind CSS, local content files, and Vercel deployment as the target.
+- `2026-05-03`: Release `v0.1.0` was pushed to GitHub at commit `468d42b Rebuild portfolio with Next.js`.
+- `2026-05-06`: Custom domain `https://www.66ccff-labs.com/` was verified working from the public internet.
+- `2026-05-06`: Cloudflare DNS points the domain to Vercel. `www.66ccff-labs.com` resolves through a Vercel DNS CNAME, and the apex domain redirects to `www`.
+- `2026-05-06`: External skills installed into Codex user skills: `karpathy-guidelines` and `neat-freak`. Restart Codex to expose them as first-class skills.
+
+## Stable Decisions
+
+- Use `CODEX.md` as the primary project-agent guide. `AGENTS.md` points to it for compatibility.
+- Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
+- Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
+- Do not introduce a database or CMS until file-based content becomes a real bottleneck.
+- Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
+- Use Vercel for deployment and Cloudflare for DNS management.
+
+## Site Identity
+
+- Brand/domain: `66ccff Labs` can be used as a lab-style wrapper, but the personal portfolio identity remains `Awes0meE / Lizhiyi`.
+- Visual tone: engineering academic, precise, bilingual, clean, evidence-driven.
+- Avoid returning to generic template-blog styling.
+
+## Important Files
+
+- `app/page.tsx`: homepage layout and major public-facing sections.
+- `lib/content.ts`: content loaders and typed content models.
+- `lib/site.ts`: site constants and navigation labels.
+- `content/projects/`: project case-study source files.
+- `content/notes/`: learning note source files.
+- `content/media.json`: gallery metadata.
+- `public/uploads/`: images, videos, and downloadable assets.
+- `docs/content-workflow.md`: how to add and maintain portfolio content.
+
+## Verification Baseline
+
+Known-good checks as of `2026-05-03`:
+
+```powershell
+npm run lint
+npm run build
+npm audit --omit=dev
+```
+
+Expected result:
+
+- lint passes;
+- production build passes;
+- production audit reports `0 vulnerabilities`.
+
+## Open Content Work
+
+- Replace placeholder SVG visuals with real project photos, screenshots, videos, and diagrams.
+- Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
+- Fill `SAT301 Graduation Thesis` with abstract, architecture, experiments, figures, and thesis evidence.
+- Improve `About` with real biography, skills, education, and contact details.
+- Decide how `66ccff Labs` should appear in the visual identity without diluting the personal portfolio.
+
+## Memory Update Rules
+
+- Update this file when durable facts change.
+- Move detailed chronology into `docs/session-log.md`.
+- Do not store secrets, private tokens, or sensitive personal information.
+- Use absolute dates.
+- Replace stale facts instead of adding contradictory entries.
+
