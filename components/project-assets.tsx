@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { TextDecoder } from "node:util";
 import { BilingualText } from "@/components/bilingual-text";
 import { ProjectAssetBrowser } from "@/components/project-asset-browser";
 
@@ -16,6 +17,11 @@ export type ProjectAsset = {
 
 const publicRoot = path.join(process.cwd(), "public");
 const textPreviewLimit = 256 * 1024;
+const maxPreviewContentBytes = 768 * 1024;
+const maxResolvedAssetFiles = 240;
+const maxDirectoryDepth = 6;
+const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
+const skippedDirectoryNames = new Set([".git", ".next", "__macosx", "node_modules"]);
 
 const juanyunTechAllowlist = new Set([
   "/uploads/projects/juanyun-tech/acunit-v20-system-block.png",
@@ -34,7 +40,7 @@ const juanyunTechAllowlist = new Set([
   "/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg"
 ]);
 
-const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"]);
+const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"]);
 const videoExtensions = new Set([".mov", ".mp4", ".webm"]);
 const textExtensions = new Set([
   ".c",
@@ -82,7 +88,7 @@ export function ProjectAssets({ paths }: { paths?: string[] }) {
           </p>
         </div>
         <span className="rounded border border-line bg-paper px-3 py-1 text-xs font-semibold text-graphite">
-          {assets.length} files
+          <BilingualText en={`${assets.length} files`} zh={`${assets.length} 个文件`} />
         </span>
       </div>
       <ProjectAssetBrowser assets={assets} />
@@ -92,12 +98,19 @@ export function ProjectAssets({ paths }: { paths?: string[] }) {
 
 function getProjectAssets(paths?: string[]) {
   const files = new Map<string, ProjectAsset>();
+  let remainingPreviewBytes = maxPreviewContentBytes;
 
   for (const href of paths ?? []) {
     for (const filePath of resolvePublicFiles(href)) {
-      const asset = buildAsset(filePath);
+      const asset = buildAsset(filePath, remainingPreviewBytes);
 
       if (asset) {
+        const isNewAsset = !files.has(asset.href);
+
+        if (isNewAsset && asset.content) {
+          remainingPreviewBytes = Math.max(0, remainingPreviewBytes - Buffer.byteLength(asset.content, "utf8"));
+        }
+
         files.set(asset.href, asset);
       }
     }
@@ -148,7 +161,7 @@ function resolvePublicFiles(href: string) {
   return stat.isFile() ? [filePath] : [];
 }
 
-function buildAsset(filePath: string): ProjectAsset | null {
+function buildAsset(filePath: string, remainingPreviewBytes: number): ProjectAsset | null {
   const href = publicPathToHref(filePath);
 
   if (!href) {
@@ -173,8 +186,8 @@ function buildAsset(filePath: string): ProjectAsset | null {
   }
 
   if (textExtensions.has(extension)) {
-    const isPreviewable = stat.size <= textPreviewLimit && extension !== ".html";
-    const content = isPreviewable ? fs.readFileSync(filePath, "utf8") : undefined;
+    const isPreviewable = stat.size <= textPreviewLimit && stat.size <= remainingPreviewBytes && extension !== ".html";
+    const content = isPreviewable ? readUtf8File(filePath) : undefined;
     const kind = content && documentExtensions.has(extension) ? "document" : content ? "text" : "download";
     return {
       href,
@@ -191,21 +204,36 @@ function buildAsset(filePath: string): ProjectAsset | null {
   return { href, name, nameEn: getEnglishAssetName(name), extension, sizeLabel: formatBytes(stat.size), kind: "download", language };
 }
 
-function walkDirectory(directory: string) {
+function walkDirectory(directory: string, depth = 0, files: string[] = []) {
+  if (depth > maxDirectoryDepth || files.length >= maxResolvedAssetFiles) {
+    return files;
+  }
+
   const entries = fs.readdirSync(directory, { withFileTypes: true });
-  const files: string[] = [];
 
   for (const entry of entries) {
+    if (files.length >= maxResolvedAssetFiles) {
+      break;
+    }
+
     const entryPath = path.join(directory, entry.name);
 
     if (entry.isDirectory()) {
-      files.push(...walkDirectory(entryPath));
+      if (skippedDirectoryNames.has(entry.name.toLowerCase())) {
+        continue;
+      }
+
+      walkDirectory(entryPath, depth + 1, files);
     } else if (entry.isFile()) {
       files.push(entryPath);
     }
   }
 
   return files;
+}
+
+function readUtf8File(filePath: string) {
+  return utf8Decoder.decode(fs.readFileSync(filePath));
 }
 
 function normalizePublicHref(href: string) {
@@ -231,10 +259,11 @@ function normalizePublicHref(href: string) {
 }
 
 function hrefToPublicPath(href: string) {
-  const filePath = path.join(publicRoot, href);
-  const normalizedRoot = publicRoot.endsWith(path.sep) ? publicRoot : `${publicRoot}${path.sep}`;
+  const resolvedPublicRoot = path.resolve(publicRoot);
+  const filePath = path.resolve(publicRoot, `.${href}`);
+  const normalizedRoot = `${resolvedPublicRoot}${path.sep}`;
 
-  if (!filePath.startsWith(normalizedRoot)) {
+  if (!filePath.toLowerCase().startsWith(normalizedRoot.toLowerCase())) {
     return null;
   }
 
@@ -244,7 +273,7 @@ function hrefToPublicPath(href: string) {
 function publicPathToHref(filePath: string) {
   const relative = path.relative(publicRoot, filePath);
 
-  if (relative.startsWith("..")) {
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
     return null;
   }
 

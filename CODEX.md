@@ -148,7 +148,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can list uploaded evidence, preview images/videos, render Markdown/text documents as readable article content, render source/code files in code frames, and link binary files. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
+`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can render a two-pane public file browser: the server component resolves reviewed files with path normalization, directory/file caps, strict UTF-8 reads, aggregate preview-size caps, and the Juanyun allowlist; the client component handles left-index selection plus right-side previews for images/videos, Markdown/text, source code, PDFs, and binary fallback cards. Uploaded Markdown previews resolve relative links/images against the source file path. HTML and SVG uploads are download-only artifacts, not inline previews. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
 
 ## Language Switching
 

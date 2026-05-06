@@ -101,7 +101,25 @@ function isHtmlCommentBlock(block: string) {
   return /^<!--[\s\S]*-->$/.test(block.trim());
 }
 
-function parseInline(text: string) {
+function resolveContentHref(href: string, baseHref?: string) {
+  if (
+    !baseHref ||
+    href.startsWith("/") ||
+    href.startsWith("#") ||
+    /^[a-z][a-z0-9+.-]*:/i.test(href)
+  ) {
+    return href;
+  }
+
+  try {
+    const resolved = new URL(href, new URL(baseHref, "https://portfolio.local"));
+    return `${resolved.pathname}${resolved.search}${resolved.hash}`;
+  } catch {
+    return href;
+  }
+}
+
+function parseInline(text: string, baseHref?: string) {
   const inlinePattern = /`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
@@ -123,7 +141,7 @@ function parseInline(text: string) {
         parts.push(
           <a
             key={`${match[2]}-${match.index}`}
-            href={match[3]}
+            href={resolveContentHref(match[3], baseHref)}
             className="font-medium text-pine underline-offset-4 hover:underline"
           >
             {match[2]}
@@ -132,7 +150,7 @@ function parseInline(text: string) {
       } else {
         parts.push(
           <strong key={`strong-${match.index}`} className="font-semibold text-ink">
-            {parseInline(match[4])}
+            {parseInline(match[4], baseHref)}
           </strong>
         );
       }
@@ -164,17 +182,17 @@ function slugifyHeading(text: string) {
     .replace(/\s+/g, "-");
 }
 
-function parseLocalizedInline(text: string) {
+function parseLocalizedInline(text: string, baseHref?: string) {
   const split = splitBilingualSlash(text);
 
   if (!split) {
-    return <span>{parseInline(text)}</span>;
+    return <span>{parseInline(text, baseHref)}</span>;
   }
 
   return (
     <>
-      <span className="lang-en">{parseInline(split.en)}</span>
-      <span className="lang-zh">{parseInline(split.zh)}</span>
+      <span className="lang-en">{parseInline(split.en, baseHref)}</span>
+      <span className="lang-zh">{parseInline(split.zh, baseHref)}</span>
     </>
   );
 }
@@ -184,7 +202,7 @@ type ParsedImage = {
   src: string;
 };
 
-function parseImageLine(line: string): ParsedImage | null {
+function parseImageLine(line: string, baseHref?: string): ParsedImage | null {
   const match = line.trim().match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
 
   if (!match) {
@@ -193,7 +211,7 @@ function parseImageLine(line: string): ParsedImage | null {
 
   return {
     alt: match[1],
-    src: match[2]
+    src: resolveContentHref(match[2], baseHref)
   };
 }
 
@@ -242,7 +260,7 @@ function splitTableRow(line: string) {
     .map((cell) => cell.trim());
 }
 
-export function ContentRenderer({ source }: { source: string }) {
+export function ContentRenderer({ source, baseHref }: { source: string; baseHref?: string }) {
   const blocks = splitBlocks(source);
   const textBlocks = blocks
     .map((block) => block.trim())
@@ -282,11 +300,11 @@ export function ContentRenderer({ source }: { source: string }) {
       <Heading id={getHeadingId(text)} key={index} className={cn(className, "scroll-mt-24", languageClass)}>
         {split ? (
           <>
-            <span className="lang-en">{parseInline(split.en)}</span>
-            <span className="lang-zh">{parseInline(split.zh)}</span>
+            <span className="lang-en">{parseInline(split.en, baseHref)}</span>
+            <span className="lang-zh">{parseInline(split.zh, baseHref)}</span>
           </>
         ) : (
-          parseInline(text)
+          parseInline(text, baseHref)
         )}
       </Heading>
     );
@@ -310,7 +328,7 @@ export function ContentRenderer({ source }: { source: string }) {
         </a>
         {image.alt ? (
           <figcaption className="border-t border-line bg-white px-4 py-3 text-sm text-graphite">
-            {parseLocalizedInline(image.alt)}
+            {parseLocalizedInline(image.alt, baseHref)}
           </figcaption>
         ) : null}
       </figure>
@@ -321,7 +339,7 @@ export function ContentRenderer({ source }: { source: string }) {
     <div>
       {blocks.map((block, index) => {
         const trimmed = block.trim();
-        const imageLines = trimmed.split("\n").map(parseImageLine);
+        const imageLines = trimmed.split("\n").map((line) => parseImageLine(line, baseHref));
         const codeMatch = trimmed.match(/^```([A-Za-z0-9_+#.-]*)\n([\s\S]*?)\n```$/);
 
         if (isHtmlCommentBlock(trimmed)) {
@@ -375,7 +393,7 @@ export function ContentRenderer({ source }: { source: string }) {
                   <tr>
                     {headers.map((header) => (
                       <th key={header} className="border-b border-line px-4 py-3 font-semibold">
-                        {parseInline(header)}
+                        {parseInline(header, baseHref)}
                       </th>
                     ))}
                   </tr>
@@ -385,7 +403,7 @@ export function ContentRenderer({ source }: { source: string }) {
                     <tr key={`${row.join("-")}-${rowIndex}`} className="border-b border-line last:border-b-0">
                       {headers.map((_, cellIndex) => (
                         <td key={cellIndex} className="px-4 py-3 align-top leading-6">
-                          {parseInline(row[cellIndex] ?? "")}
+                          {parseInline(row[cellIndex] ?? "", baseHref)}
                         </td>
                       ))}
                     </tr>
@@ -419,7 +437,7 @@ export function ContentRenderer({ source }: { source: string }) {
             <ul key={index} className={cn("mt-4 list-disc space-y-2 pl-5 text-graphite", languageClass)}>
               {trimmed.split("\n").map((item) => (
                 <li key={item} className="leading-7">
-                  {parseInline(item.replace(/^[-*]\s+/, ""))}
+                  {parseInline(item.replace(/^[-*]\s+/, ""), baseHref)}
                 </li>
               ))}
             </ul>
@@ -433,7 +451,7 @@ export function ContentRenderer({ source }: { source: string }) {
             <ol key={index} className={cn("mt-4 list-decimal space-y-2 pl-5 text-graphite", languageClass)}>
               {trimmed.split("\n").map((item) => (
                 <li key={item} className="leading-7">
-                  {parseInline(item.replace(/^\d+[.)]\s+/, ""))}
+                  {parseInline(item.replace(/^\d+[.)]\s+/, ""), baseHref)}
                 </li>
               ))}
             </ol>
@@ -449,7 +467,7 @@ export function ContentRenderer({ source }: { source: string }) {
                 getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage)
               )}
             >
-              {parseInline(trimmed.replace(/^>\s?/gm, ""))}
+              {parseInline(trimmed.replace(/^>\s?/gm, ""), baseHref)}
             </blockquote>
           );
         }
@@ -466,7 +484,7 @@ export function ContentRenderer({ source }: { source: string }) {
               getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage)
             )}
           >
-            {parseInline(trimmed)}
+            {parseInline(trimmed, baseHref)}
           </p>
         );
       })}

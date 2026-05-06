@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ExternalLink, FileArchive, FileCode2, FileText, FileType2, ImageIcon, Video } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
@@ -110,12 +110,24 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
   if (asset.kind === "pdf") {
     return (
       <div className="h-[680px] bg-chalk">
-        <iframe
-          src={`${asset.href}#page=1&view=FitH`}
+        <object
+          data={`${asset.href}#page=1&view=FitH`}
+          type="application/pdf"
           title={asset.name}
-          className="h-full w-full border-0"
-          loading="lazy"
-        />
+          className="h-full w-full"
+        >
+          <div className="grid h-full place-items-center px-6 py-10 text-center">
+            <div className="max-w-md">
+              <FileType2 className="mx-auto text-pine" size={38} />
+              <p className="mt-4 text-sm leading-6 text-graphite">
+                <BilingualText
+                  en="PDF preview is unavailable in this browser. Open the file to inspect the original document."
+                  zh="当前浏览器无法内嵌预览 PDF，可以打开原文件查看。"
+                />
+              </p>
+            </div>
+          </div>
+        </object>
       </div>
     );
   }
@@ -141,7 +153,7 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
           </div>
         ) : null}
         <div className={cn("max-h-[680px] overflow-auto bg-white px-5 pb-6 pt-2", isChineseSourceDocument && "lang-zh")}>
-          <ContentRenderer source={asset.content} />
+          <ContentRenderer source={asset.content} baseHref={asset.href} />
         </div>
       </>
     );
@@ -180,6 +192,7 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
 
 export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
   const [selectedHref, setSelectedHref] = useState(assets[0]?.href ?? "");
+  const previewRef = useRef<HTMLElement>(null);
   const selectedAsset = useMemo(
     () => assets.find((asset) => asset.href === selectedHref) ?? assets[0],
     [assets, selectedHref]
@@ -190,6 +203,20 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
   }
 
   const SelectedIcon = getAssetIcon(selectedAsset);
+  const opensAsDownload = selectedAsset.extension === ".html" || selectedAsset.extension === ".svg";
+
+  function handleSelect(href: string) {
+    setSelectedHref(href);
+
+    if (href === selectedHref || !window.matchMedia("(max-width: 1023px)").matches) {
+      return;
+    }
+
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    window.requestAnimationFrame(() => {
+      previewRef.current?.scrollIntoView({ behavior, block: "start" });
+    });
+  }
 
   return (
     <div className="mt-6 overflow-hidden rounded-lg border border-line bg-white">
@@ -212,8 +239,9 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
                 <button
                   type="button"
                   key={asset.href}
-                  aria-current={isSelected ? "true" : undefined}
-                  onClick={() => setSelectedHref(asset.href)}
+                  aria-pressed={isSelected}
+                  aria-controls="project-asset-preview"
+                  onClick={() => handleSelect(asset.href)}
                   className={cn(
                     "mb-1 grid w-full grid-cols-[28px_minmax(0,1fr)] gap-2 rounded-md border px-2.5 py-2 text-left transition",
                     isSelected
@@ -236,7 +264,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
           </div>
         </aside>
 
-        <article className="min-w-0">
+        <article id="project-asset-preview" ref={previewRef} className="min-w-0 scroll-mt-4">
           <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-line text-pine">
@@ -251,15 +279,18 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
             </div>
             <a
               href={selectedAsset.href}
-              target="_blank"
-              rel="noreferrer"
+              target={opensAsDownload ? undefined : "_blank"}
+              rel={opensAsDownload ? undefined : "noopener noreferrer"}
+              download={opensAsDownload ? selectedAsset.name : undefined}
               className="inline-flex items-center gap-2 rounded-md border border-pine px-3 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white"
             >
-              <BilingualText en="Open file" zh="打开文件" />
+              <BilingualText en={opensAsDownload ? "Download file" : "Open file"} zh={opensAsDownload ? "下载文件" : "打开文件"} />
               <ExternalLink size={15} />
             </a>
           </header>
-          <PreviewBody asset={selectedAsset} />
+          <div key={selectedAsset.href}>
+            <PreviewBody asset={selectedAsset} />
+          </div>
         </article>
       </div>
     </div>

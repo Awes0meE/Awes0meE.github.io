@@ -8,6 +8,23 @@ const contentRoot = path.join(root, "content");
 const publicRoot = path.join(root, "public");
 const errors = [];
 
+const juanyunTechAllowlist = new Set([
+  "/uploads/projects/juanyun-tech/acunit-v20-system-block.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-power-back.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg",
+  "/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg",
+  "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-ui-back.png",
+  "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
+  "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
+  "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
+  "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
+  "/uploads/projects/juanyun-tech/hardware-sop-cover.jpeg"
+]);
+
 function readMdxCollection(folder) {
   const directory = path.join(contentRoot, folder);
 
@@ -38,6 +55,20 @@ function isStringArray(value) {
 
 function addError(filePath, message) {
   errors.push(`${path.relative(root, filePath)}: ${message}`);
+}
+
+function walkFiles(directory, files = []) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      walkFiles(entryPath, files);
+    } else if (entry.isFile()) {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
 }
 
 function normalizePublicHref(href) {
@@ -71,10 +102,31 @@ function publicHrefExists(href) {
     return false;
   }
 
-  const filePath = path.join(publicRoot, normalized);
-  const normalizedRoot = publicRoot.endsWith(path.sep) ? publicRoot : `${publicRoot}${path.sep}`;
+  const resolvedPublicRoot = path.resolve(publicRoot);
+  const filePath = path.resolve(publicRoot, `.${normalized}`);
+  const normalizedRoot = `${resolvedPublicRoot}${path.sep}`;
 
-  return filePath.startsWith(normalizedRoot) && fs.existsSync(filePath);
+  return filePath.toLowerCase().startsWith(normalizedRoot.toLowerCase()) && fs.existsSync(filePath);
+}
+
+function publicFileToHref(filePath) {
+  return `/${path.relative(publicRoot, filePath).replaceAll(path.sep, "/")}`;
+}
+
+function validateJuanyunTechPublicBoundary() {
+  const directory = path.join(publicRoot, "uploads", "projects", "juanyun-tech");
+
+  if (!fs.existsSync(directory)) {
+    return;
+  }
+
+  for (const filePath of walkFiles(directory)) {
+    const href = publicFileToHref(filePath);
+
+    if (!juanyunTechAllowlist.has(href)) {
+      errors.push(`public/uploads/projects/juanyun-tech contains a non-allowlisted public file: ${href}`);
+    }
+  }
 }
 
 function validatePublicHref(filePath, fieldName, href) {
@@ -193,6 +245,8 @@ if (!Array.isArray(media)) {
     }
   }
 }
+
+validateJuanyunTechPublicBoundary();
 
 if (errors.length) {
   console.error("Content validation failed:");
