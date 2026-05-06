@@ -35,6 +35,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Split the DHT11/AM2302 sensor breakout board planning task into its own lightweight hardware project page.
+- Files changed: added `content/projects/juanyun-dht-sensor-breakout-board.mdx`, reassigned the DHT note to that project slug, and linked the small-board project from the Juanyun overview and source inventory.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Split the STM32 base unit firmware into its own project page with selected public source evidence.
 - Files changed: added `content/projects/juanyun-baseunit-control-firmware.mdx`, reassigned the base unit firmware note to the new project slug, linked the project from the Juanyun overview, and published selected `product_base` App/BSP/IOC/README files while excluding CubeIDE metadata, HAL/CMSIS vendor trees, and build outputs.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
