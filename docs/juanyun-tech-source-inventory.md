@@ -12,7 +12,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-On `main` release `v0.5.0`, the website keeps Juanyun public writing in:
+On `main` after the `v0.5.0` tag, the website keeps Juanyun public writing in:
 
 ```text
 content/projects/juanyun-*.mdx
@@ -90,7 +90,7 @@ Current Juanyun project-page structure focuses on three larger public archives i
 | `卷云硬件开发SOP_Awes0meE.pdf` | 1 | Public self-authored SOP. Copied as `hardware-development-sop-awes0mee.pdf` and linked from the SOP note. |
 | `SOP封面.jpeg` | 1 | Public SOP cover image. Copied as `hardware-sop-cover.jpeg`. |
 | `LOGO_temp.png` | 1 | Not used in this subtask. |
-| `通用数据手册` | 3 | Reference-only compressor / driver datasheets. Not served on this branch. |
+| `通用数据手册` | 3 | Reference-only compressor / driver datasheets. Not served by the website. |
 | `实习证明` | 2 | Not published. Treat as private credential material. |
 | `费用报销单 & 发票` | 46 | Not published. Treat as private financial evidence. |
 | `卷云科技开票资料.docx` | 1 | Not published. Treat as private company billing material. |

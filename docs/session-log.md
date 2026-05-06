@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Ran `/neat` after the media/note refresh commit reached `main`, focusing on release-boundary wording and handoff freshness.
+- Files changed: updated `README.md`, `USER_GUIDE.md`, `MEMORY.md`, `docs/architecture.md`, and `docs/juanyun-tech-source-inventory.md` so the docs distinguish the `v0.5.0` tag from the later media/note refresh on `main` and avoid stale branch wording; removed a duplicate Juanyun SOP cover asset path so the project page and media page share the same public cover entry.
+- Verification: repository state, Node/npm versions, external Codex skills, content counts, media JSON, stale-phrase searches, and upload/media coverage were checked; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-05-07
+
 - Summary: Ran `/neat` for a cross-device handoff cleanup after the final portfolio review commit reached `main`.
 - Files changed: updated `MEMORY.md` with the `3c14b80` handoff commit and refreshed the known-good verification date.
 - Verification: repository docs were checked for stale branch wording and relative-date drift; content reference validation passed for 11 projects, 18 public notes, and 11 media items; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

@@ -60,7 +60,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main` release `v0.5.0` as of `2026-05-07`:
+Current content state on `main` after the `v0.5.0` tag, as of `2026-05-07`:
 
 - 6 project files total;
 - 19 public note files total;
