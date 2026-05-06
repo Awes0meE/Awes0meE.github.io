@@ -26,6 +26,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Branch `content/internship-juanyun-expansion` was created from `main` to remove inaccurate placeholders and add real internship content from Juanyun, Nanjing Turing AI Research Institute, and Tianjin rail-transit STM32 study materials.
 - `2026-05-06`: The SAT301 placeholder project and five empty notes (`pid-control-notes`, `embedded-debug-log`, `kalman-filter-note`, `slam-reading`, `motor-driver-log`) were removed from the working branch because they were not real user work.
 - `2026-05-06`: Nanjing Turing content was added as one Qt/CMake/packaging project with four public notes; Tianjin rail-transit content was added as one STM32 foundation project with five public notes.
+- `2026-05-06`: Release `v0.4.0` was merged back to `main` and pushed to GitHub at commit `55ffaab Merge internship portfolio content`. The final handoff review then continued on `main`.
 
 ## Stable Decisions
 
@@ -86,7 +87,7 @@ Expected result:
 
 - Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Browser-review the new Nanjing Turing, Tianjin rail-transit, and expanded Juanyun legacy pages before merging the branch.
+- Browser-review the deployed `v0.4.0` pages on `https://www.66ccff-labs.com/` after Vercel finishes deployment, especially the Nanjing Turing, Tianjin rail-transit, and expanded Juanyun legacy pages.
 - Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals, especially PID Starter Kit and archived Juanyun items that still use generic visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
 - Re-evaluate thesis content later only after the user provides real project evidence.

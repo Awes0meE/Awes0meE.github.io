@@ -145,9 +145,9 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The active working branch is `content/internship-juanyun-expansion`.
+The current mainline handoff state is release `v0.4.0` plus the final review fixes on `main`.
 
-As of `2026-05-06`, this branch removes the inaccurate SAT301 placeholder project and five empty shell notes, then adds real internship material from:
+As of `2026-05-06`, `main` has removed the inaccurate SAT301 placeholder project and five empty shell notes, then added real internship material from:
 
 ```text
 F:\XJTLU\工作相关\卷云科技有限责任公司
@@ -155,7 +155,7 @@ F:\XJTLU\工作相关\南京图灵人工智能研究院
 F:\XJTLU\工作相关\天津津铁通信有限公司
 ```
 
-Current content count on this branch:
+Current content count on `main`:
 
 - 11 project pages total;
 - 18 public notes total;
@@ -167,7 +167,7 @@ Juanyun public boundary:
 
 - Sensitive: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. Do not publish raw Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source, complete firmware source, internal product requirements, manufacturing packages, invoices, reimbursements, billing records, credentials, executable installers, vendor folders, or generated build outputs from those folders.
 - Public after pruning: legacy Juanyun DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT breakout planning, and the self-authored `卷云硬件开发SOP_Awes0meE.pdf`.
-- Static public assets for the expanded public Juanyun material live under `public/uploads/projects/juanyun-public/`; this branch may include selected legacy Gerber, EDA, BOM/PnP, STEP/3MF, source snippets, schematics, PDFs, and images from non-Current_Product folders after pruning installers, dependency folders, vendor folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
+- Static public assets for the expanded public Juanyun material live under `public/uploads/projects/juanyun-public/`; `main` may include selected legacy Gerber, EDA, BOM/PnP, STEP/3MF, source snippets, schematics, PDFs, and images from non-Current_Product folders after pruning installers, dependency folders, vendor folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
 
 ## Visual Direction
 

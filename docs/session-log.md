@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Completed the final handoff code review on `main` before continuing development on another computer.
+- Files changed: added missing Chinese status labels for the new archive/review project statuses; updated `CODEX.md`, `MEMORY.md`, `README.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/juanyun-tech-source-inventory.md` so durable docs describe the merged `main` / `v0.4.0` state instead of the old content branch.
+- Verification: `git diff --check` passed; content/project/media reference validation passed for 11 projects, 18 public notes, and 11 media items; `npm.cmd run lint` passed; `npm.cmd run build` passed and generated 37 static pages; `npm.cmd audit --omit=dev` reported 0 vulnerabilities.
+
+## 2026-05-06
+
 - Summary: Prepared release `v0.4.0` for the internship content expansion branch.
 - Files changed: bumped package metadata to `0.4.0` and updated README release-tag guidance for the new release.
 - Verification: release checks were rerun before merging the branch back to `main`.

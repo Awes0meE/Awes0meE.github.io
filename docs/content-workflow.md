@@ -4,7 +4,7 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review the `content/internship-juanyun-expansion` branch in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake notes, and Tianjin STM32 internship notes.
+1. Review the current `main` deployment in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake notes, and Tianjin STM32 internship notes.
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` stay public-safe only; other legacy Juanyun material can use reviewed public evidence.
 3. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
 4. Fill `PID Starter Kit` with real firmware, PCB, test-data, and tool screenshots.
@@ -111,7 +111,7 @@ Reference files with public paths:
 
 For technical archives, normalize filenames to stable ASCII names before publishing. Do not publish private or noisy folders directly. Exclude invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, and generated build outputs.
 
-For company work, be stricter: do not put Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, full firmware source dumps, or internal requirement/manufacturing packages under `public/uploads/` unless they are explicitly reviewed and desensitized. On the current Juanyun branch, the user explicitly approved non-Current_Product legacy folders for selected public evidence; `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive. Files under `public/uploads/` are public static assets even when no page links to them.
+For company work, be stricter: do not put Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, full firmware source dumps, or internal requirement/manufacturing packages under `public/uploads/` unless they are explicitly reviewed and desensitized. For Juanyun, the user explicitly approved non-Current_Product legacy folders for selected public evidence; `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive. Files under `public/uploads/` are public static assets even when no page links to them.
 
 ## Add Media Gallery Items
 

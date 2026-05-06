@@ -132,6 +132,11 @@ export function formatDateRangeZh(value: string) {
 export function formatStatusZh(value: string) {
   const statusMap: Record<string, string> = {
     "In Progress": "进行中",
+    "Public Archive": "公开归档",
+    "Private Evidence Review": "私有证据审查",
+    "Planning Archive": "计划归档",
+    "Archived Prototype": "原型归档",
+    "Public Overview": "公开概览",
     Draft: "草稿",
     Complete: "已完成",
     Completed: "已完成",
