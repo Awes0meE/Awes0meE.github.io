@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Ran `/neat` focused on cross-device environment and toolchain setup.
+- Files changed: added `docs/environment-toolchain.md`; added `.nvmrc`; declared Node/npm engines in `package.json` and `package-lock.json`; updated `AGENTS.md`, `CODEX.md`, `README.md`, `USER_GUIDE.md`, `MEMORY.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/memory-system.md` so new sessions use Node 22+, npm 10+, `npm.cmd` on Windows PowerShell, explicit PATH checks, local preview cleanup, Playwright screenshot guidance, and Vercel settings.
+- Verification: environment commands confirmed Node `v24.15.0`, npm `11.12.1`, and Git `2.53.0.windows.2`; `npm.cmd install --package-lock-only`, `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-05-07
+
 - Summary: Refreshed project cover images and Juanyun legacy media evidence after new local assets were added.
 - Files changed: added processed Cirro Tech, Nanjing Turing, Tianjin Rail Transit, DIY STM32 PCB, FOC board, FOC schematic, and EEV driver-board images under `public/uploads/`; updated Juanyun thermal, FOC, DIY, Nanjing Turing, and Tianjin project pages; refreshed `content/media.json`; taught `ContentRenderer` to turn consecutive Markdown images into clickable galleries; made in-body and project-file evidence images use direct public URLs; updated docs and memory.
 - Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for `/media` and the updated project routes; Playwright desktop/mobile screenshots confirmed the new covers and FOC schematic gallery render cleanly.

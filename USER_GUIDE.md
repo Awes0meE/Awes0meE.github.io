@@ -300,8 +300,11 @@ Before sharing a new version, run:
 ```bash
 npm run lint
 npm run validate-content
+npm run typecheck
 npm run build
 ```
+
+On Windows PowerShell, use the `npm.cmd` form of the same commands. Full machine setup is documented in `docs/environment-toolchain.md`.
 
 If both checks and the build pass, the site is ready to publish.
 
@@ -312,6 +315,7 @@ If both checks and the build pass, the site is ready to publish.
 ```bash
 npm run lint
 npm run validate-content
+npm run typecheck
 npm run build
 ```
 
@@ -322,7 +326,7 @@ npm run build
 1. Start local preview with `npm run dev`.
 2. Modify content or pages.
 3. Check the website in the browser.
-4. Run `npm run lint`, `npm run validate-content`, and `npm run build`.
+4. Run `npm run lint`, `npm run validate-content`, `npm run typecheck`, and `npm run build`.
 5. Commit changes to Git.
 6. Push to GitHub.
 7. Let Vercel deploy the public version.

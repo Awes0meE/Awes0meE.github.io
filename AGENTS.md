@@ -13,22 +13,26 @@ When starting work on a new computer or a fresh Codex session:
 2. Read project context in this order:
    - `CODEX.md`
    - `MEMORY.md`
+   - `docs/environment-toolchain.md`
    - `docs/memory-system.md`
    - `docs/architecture.md`
    - `docs/content-workflow.md`
    - `README.md`
 3. Check local environment:
    - `node --version`
-   - `npm --version`
+   - `npm.cmd --version` on Windows PowerShell
+   - `where.exe node`
+   - `where.exe npm.cmd`
    - if PowerShell cannot find npm, check `C:\Program Files\nodejs` and refresh PATH.
 4. Check whether external Codex skills exist:
    - `karpathy-guidelines`
    - `neat-freak`
    If missing, install them from the sources listed in `docs/agent-skills.md`, or fall back to the rules already summarized in `CODEX.md`.
 5. Run verification before substantial edits:
-   - `npm install` if `node_modules/` is missing or stale.
-   - `npm run lint`
-   - `npm run build`
+   - `npm.cmd install` if `node_modules/` is missing or stale.
+   - `npm.cmd run lint`
+   - `npm.cmd run typecheck`
+   - `npm.cmd run build`
 
 Do not assume another device has the same global memory, PATH, installed plugins, or uncommitted files. Use the project-local docs as the portable source of truth and rebuild missing context quickly.
 

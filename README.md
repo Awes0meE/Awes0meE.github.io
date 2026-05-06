@@ -45,11 +45,19 @@ legacy/hexo-export/     Archived old Hexo deployment output
 - `CODEX.md`: project rules for Codex and other AI agents.
 - `AGENTS.md`: compatibility pointer to `CODEX.md`.
 - `MEMORY.md`: current durable project memory.
+- `docs/environment-toolchain.md`: Node.js, npm, PowerShell, Git, Vercel, and local preview setup.
 - `docs/memory-system.md`: how memory should be read and updated.
 - `docs/content-workflow.md`: how to add projects, notes, images, and videos.
 - `docs/architecture.md`: routes, data flow, deployment, and non-goals.
 
 ## Local Development
+
+Toolchain baseline:
+
+- Node.js 22 LTS or newer; `.nvmrc` uses `22`.
+- npm 10 or newer.
+- Use npm only. The repository intentionally keeps a single `package-lock.json`.
+- On Windows PowerShell, prefer `npm.cmd` because `npm` can resolve to a blocked `npm.ps1` shim.
 
 Install dependencies:
 
@@ -71,6 +79,7 @@ http://127.0.0.1:3000
 
 Local troubleshooting:
 
+- Detailed setup and recovery commands live in `docs/environment-toolchain.md`.
 - Do not run `npm run build` while `npm run dev` is still running. Both commands write to `.next/`, and mixing them can corrupt the local development cache.
 - If a note page fails with an error like `Cannot find module './vendor-chunks/esprima.js'`, stop all local Next.js/Node processes for this project, delete `.next/`, then run `npm run dev` again.
 - On Windows PowerShell, use `npm.cmd` if the shell blocks `npm.ps1`.
@@ -78,13 +87,15 @@ Local troubleshooting:
 ## Common Commands
 
 ```bash
-npm run dev       # Start local development server
-npm run lint      # Run ESLint and content validation
-npm run build     # Build the production site
-npm run start     # Start a production server after build
-npm run typecheck # Run TypeScript without emitting files
+npm run dev              # Start local development server
+npm run lint             # Run ESLint and content validation
+npm run build            # Build the production site
+npm run start            # Start a production server after build
+npm run typecheck        # Run TypeScript without emitting files
 npm run validate-content # Check frontmatter, projectSlug joins, and local upload refs
 ```
+
+Use the same commands with `npm.cmd` on Windows PowerShell, for example `npm.cmd run lint`.
 
 ## Content Editing
 
@@ -143,7 +154,7 @@ Recommended Vercel settings:
 - Install command: `npm install`
 - Build command: `npm run build`
 - Output directory: leave default
-- Node.js: Vercel default LTS is fine
+- Node.js: use the repository `engines` baseline or Vercel's current Node LTS
 
 ## Quality Checks
 
@@ -152,6 +163,7 @@ Before publishing:
 ```bash
 npm run lint
 npm run validate-content
+npm run typecheck
 npm run build
 npm audit --omit=dev
 ```
@@ -315,6 +327,7 @@ Vercel 推荐配置：
 ```bash
 npm run lint
 npm run validate-content
+npm run typecheck
 npm run build
 npm audit --omit=dev
 ```

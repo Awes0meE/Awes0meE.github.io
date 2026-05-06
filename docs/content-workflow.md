@@ -192,10 +192,12 @@ On Windows PowerShell, avoid Chinese batch-generation through inline here-string
 
 ## Local Development Troubleshooting
 
+For complete machine setup, Node/npm versions, PowerShell rules, and local preview commands, use `docs/environment-toolchain.md`.
+
 For local preview:
 
 ```powershell
-npm run dev
+npm.cmd run dev -- -H 127.0.0.1 -p 3000
 ```
 
 Open:
@@ -204,7 +206,7 @@ Open:
 http://127.0.0.1:3000
 ```
 
-Avoid running `npm run build` while the dev server is still running. Both commands write to `.next/`, and concurrent writes can corrupt local cache files.
+Avoid running `npm.cmd run build` while the dev server is still running. Both commands write to `.next/`, and concurrent writes can corrupt local cache files.
 
 If a local dynamic route fails with:
 
@@ -216,7 +218,7 @@ Use this recovery path:
 
 1. Stop all project Node/Next.js processes.
 2. Delete `.next/`.
-3. Run `npm run dev` again.
+3. Run `npm.cmd run dev` again.
 4. Revisit the affected note route.
 
 That error usually means the local `.next` cache is corrupt around `gray-matter -> js-yaml -> esprima`. It does not automatically mean the MDX note body needs to be rewritten.
@@ -224,10 +226,11 @@ That error usually means the local `.next` cache is corrupt around `gray-matter 
 ## Pre-Publish Checklist
 
 ```powershell
-npm run lint
-npm run validate-content
-npm run build
-npm audit --omit=dev
+npm.cmd run lint
+npm.cmd run validate-content
+npm.cmd run typecheck
+npm.cmd run build
+npm.cmd audit --omit=dev
 ```
 
 Then push the branch you are working on. For `main` releases:

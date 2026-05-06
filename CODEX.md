@@ -43,22 +43,34 @@ These rules incorporate the installed `neat-freak` skill:
 
 ## Commands
 
-Use the Node.js install on PATH if available. On this Windows machine, Node was installed under `C:\Program Files\nodejs`.
+Full setup details live in `docs/environment-toolchain.md`. Use the Node.js install on PATH if available. On this Windows machine, Node was installed under `C:\Program Files\nodejs`.
+
+Baseline:
+
+- Node.js 22 LTS or newer; this machine is verified with `v24.15.0`.
+- npm 10 or newer; this machine is verified with `11.12.1`.
+- `.nvmrc` pins the portable baseline to Node `22`.
+- Use npm only; do not introduce pnpm, yarn, Bun, or extra lockfiles.
 
 ```powershell
-npm install
-npm run dev
-npm run lint
-npm run validate-content
-npm run build
-npm audit --omit=dev
+npm.cmd install
+npm.cmd run dev
+npm.cmd run lint
+npm.cmd run validate-content
+npm.cmd run typecheck
+npm.cmd run build
+npm.cmd audit --omit=dev
 ```
 
-On this Windows machine, use `npm.cmd` if PowerShell blocks `npm.ps1` through execution policy:
+On Windows PowerShell, prefer `npm.cmd` by default. `npm` can resolve to `npm.ps1`, and execution policy may block that shim even when Node.js is installed correctly.
+
+Check the toolchain with:
 
 ```powershell
-npm.cmd run lint
-npm.cmd run build
+node --version
+npm.cmd --version
+where.exe node
+where.exe npm.cmd
 ```
 
 If the current PowerShell process cannot find npm at all, temporarily prefix PATH:
@@ -69,8 +81,8 @@ $env:Path='C:\Program Files\nodejs;' + $env:Path
 
 Local Next.js cache rule:
 
-- Do not run `npm run build` while `npm run dev` is still running. Both commands write to `.next/`.
-- If local dynamic routes fail with `Cannot find module './vendor-chunks/esprima.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm run dev`.
+- Do not run `npm.cmd run build` while `npm.cmd run dev` is still running. Both commands write to `.next/`.
+- If local dynamic routes fail with `Cannot find module './vendor-chunks/esprima.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm.cmd run dev`.
 - This error comes from a corrupted local build cache around `gray-matter -> js-yaml -> esprima`; it does not automatically mean the MDX note content is broken.
 
 ## Encoding Policy
@@ -212,12 +224,13 @@ For `content/notes/*.mdx`:
 For content-only edits:
 
 ```powershell
-npm run lint
-npm run validate-content
-npm run build
+npm.cmd run lint
+npm.cmd run validate-content
+npm.cmd run typecheck
+npm.cmd run build
 ```
 
-Use the `npm.cmd` form on Windows PowerShell if script execution policy blocks `npm`.
+Use the plain `npm run ...` form only in shells where `npm` is known to resolve correctly.
 
 For visual/layout edits:
 
@@ -230,10 +243,11 @@ For visual/layout edits:
 For dependency changes:
 
 ```powershell
-npm run lint
-npm run validate-content
-npm run build
-npm audit --omit=dev
+npm.cmd run lint
+npm.cmd run validate-content
+npm.cmd run typecheck
+npm.cmd run build
+npm.cmd audit --omit=dev
 ```
 
 ## Documentation Update Triggers

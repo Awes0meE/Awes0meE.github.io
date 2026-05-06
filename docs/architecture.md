@@ -13,6 +13,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 - TypeScript
 - Tailwind CSS
 - local file content via `gray-matter`
+- Node.js 22 LTS or newer with npm 10 or newer
 - Vercel hosting
 - Cloudflare DNS
 
@@ -100,6 +101,7 @@ Project and note cards use paired frontmatter fields. Media cards use optional `
 - Apex domain: `https://66ccff-labs.com/` redirects to `www`.
 - Vercel handles the Next.js deployment.
 - Cloudflare manages DNS.
+- Local and deployment toolchain details live in `docs/environment-toolchain.md`; `package.json` declares Node/npm engines and `.nvmrc` pins the portable Node baseline to `22`.
 - The root `.nojekyll` file is intentional. This repository name also triggers GitHub Pages, but the live site is not a Jekyll site; `.nojekyll` prevents GitHub Pages from treating source content and `public/uploads/` Markdown/code archives as Liquid/Jekyll templates.
 - Legacy project-slug redirects live in `next.config.mjs`, so they are a Vercel / Next.js hosting feature. If the site is ever exported or served as plain static files, those redirects need host-level equivalents.
 

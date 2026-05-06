@@ -22,7 +22,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Added a site-wide English/Simplified Chinese language toggle. The implementation uses `html[data-lang]`, `components/language-toggle.tsx`, `components/bilingual-text.tsx`, and optional `titleZh/captionZh` media metadata without adding a heavy i18n dependency.
 - `2026-05-06`: The language bootstrap script was moved out of manual `<head>` rendering and into the start of `<body>` to reduce hydration mismatch noise from browser-extension-injected head scripts.
 - `2026-05-06`: `feature/note-visibility` was merged into `main` for release `v0.3.0`, covering Juanyun public/private visibility, site-wide bilingual switching, UTF-8 workspace policy, and public asset cleanup.
-- `2026-05-06`: Local note-route failures such as `Cannot find module './vendor-chunks/esprima.js'` were traced to corrupted `.next` development cache, not broken note content. Stop project Node/Next.js processes, delete `.next/`, then restart `npm run dev`.
+- `2026-05-06`: Local note-route failures such as `Cannot find module './vendor-chunks/esprima.js'` were traced to corrupted `.next` development cache, not broken note content. Stop project Node/Next.js processes, delete `.next/`, then restart `npm.cmd run dev` on Windows PowerShell.
 - `2026-05-06`: Branch `content/internship-juanyun-expansion` was created from `main` to remove inaccurate placeholders and add real internship content from Juanyun, Nanjing Turing AI Research Institute, and Tianjin rail-transit STM32 study materials.
 - `2026-05-06`: The SAT301 placeholder project and five empty notes (`pid-control-notes`, `embedded-debug-log`, `kalman-filter-note`, `slam-reading`, `motor-driver-log`) were removed from the working branch because they were not real user work.
 - `2026-05-06`: Nanjing Turing content was added as one Qt/CMake/packaging project with four public notes; Tianjin rail-transit content was added as one STM32 foundation project with five public notes.
@@ -37,12 +37,14 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Release `v0.6.1` adds the Notion CMake/build-logic originals, page-internal heading anchors, Markdown table rendering, a full public English body coverage pass across projects/notes, and a 38-item media gallery covering all project/note images and videos.
 - `2026-05-07`: Content rendering was tightened after English translation code snippets leaked into Chinese note views. `ContentRenderer` now ignores standalone HTML comments, supports scoped fenced-code prefixes such as `en-text` / `zh-text`, splits bilingual slash text from the last valid Chinese separator, and project/note detail routes lock unknown slugs to generated static params.
 - `2026-05-07`: Post-`v0.6.1` media/cover refresh added processed cover images for Juanyun, Nanjing Turing, and Tianjin rail-transit project pages; added DIY STM32 PCB render/schematic, FOC board render plus five schematic sheets, and EEV driver-board render/schematic to project pages and `/media`; `content/media.json` now has 50 items. `ContentRenderer` now turns consecutive standalone Markdown images into clickable responsive galleries, and in-body / project-asset evidence images use direct public URLs to avoid blank optimizer placeholders on long archive pages.
+- `2026-05-07`: Environment/toolchain handoff was made explicit: `docs/environment-toolchain.md` now covers Git restore, Node/npm baselines, PowerShell `npm.cmd`, PATH recovery, local preview, Playwright screenshots, UTF-8 rules, and Vercel settings. `package.json` declares Node `>=22` and npm `>=10`; `.nvmrc` pins the portable Node baseline to `22`.
 
 ## Stable Decisions
 
 - Use `CODEX.md` as the primary project-agent guide. `AGENTS.md` points to it for compatibility.
 - Keep `AGENTS.md` focused on cross-device bootstrap and short agent entry instructions.
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
+- Use `docs/environment-toolchain.md` as the canonical setup and local-tooling guide for new machines, WPS-synced folders, PowerShell, Node/npm, preview servers, and Vercel settings.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
 - Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. The renderer previews images/videos, renders Markdown/text documents as readable article content, renders source/code files in code frames, and links binary documents / CAD / EDA / fabrication archives.
@@ -81,6 +83,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `content/media.json`: gallery metadata.
 - `public/uploads/`: images, videos, and downloadable assets.
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
+- `docs/environment-toolchain.md`: Node/npm, Git restore, PowerShell, local preview, screenshot tooling, encoding, and Vercel setup.
 - `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
 - `public/uploads/projects/juanyun-public/`: reviewed public Juanyun legacy PDFs, images, source snippets, and selected project-file evidence.
 - `public/uploads/projects/claude-chime-hardware/`: public Claude Chime hardware PDFs, BOM, Gerber, EasyEDA project, logo image, and datasheets.
@@ -94,8 +97,9 @@ Known-good checks as of `2026-05-07` on Windows PowerShell:
 ```powershell
 npm.cmd run lint
 npm.cmd run validate-content
+npm.cmd run typecheck
 npm.cmd run build
-npm audit --omit=dev
+npm.cmd audit --omit=dev
 ```
 
 Expected result:
