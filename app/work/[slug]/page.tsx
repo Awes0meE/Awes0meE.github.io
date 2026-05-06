@@ -102,7 +102,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="prose-reset mt-10 border-t border-line pt-2">
           <ContentRenderer source={project.body} />
         </div>
-        <ProjectAssets paths={project.assetPaths} />
         {relatedNotes.length ? (
           <section className="mt-12 border-t border-line pt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
@@ -141,6 +140,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </section>
         ) : null}
+        <ProjectAssets paths={project.assetPaths} />
         {relatedMedia.length ? (
           <section className="mt-12 border-t border-line pt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
