@@ -1,0 +1,45 @@
+---
+title: "Qt6 Seamly2D First Run Notes"
+titleZh: "Qt6 环境跑通 Seamly2D 的记录"
+summary: "Notes on moving from a failed Qt5 attempt to a working Qt6/MSVC2019 Seamly2D setup, including qmake, Qt Creator kits, windeployqt, and local warning fixes."
+summaryZh: "从 Qt5 尝试失败转到 Qt6/MSVC2019 环境跑通 Seamly2D 的记录，包括 qmake、Qt Creator Kit、windeployqt 和本地 warning 修复。"
+date: "2025-08-12"
+tags: ["Qt", "Seamly2D", "MSVC", "qmake"]
+visibility: public
+projectSlug: "nanjing-turing-qt-embedded-learning"
+---
+
+## Early Idea / 前期想法
+
+The first target was simple on paper: clone Seamly2D, open it in Qt Creator, and run it on Windows 11. In practice, the first useful lesson was that "Qt project" is not enough information. The Qt major version, MSVC version, SDK, debugger, qmake file, and post-link deployment step all matter.
+
+一开始的目标其实很朴素：把 Seamly2D 拉下来，用 Qt Creator 打开，在 Windows 11 上跑起来。但很快发现，“这是一个 Qt 项目”这个描述太粗了。Qt 大版本、MSVC 版本、Windows SDK、CDB 调试器、qmake 文件、post-link 部署步骤，每一个都可能卡住。
+
+## 改变
+
+最早尝试过 Qt 5.15.2，但工程里已经出现了 Qt6 写法和 `core5compat` 相关依赖。为了兼容 Qt5 去改几十处代码，风险和工作量都不合理，所以方向改成安装 Qt 6.5.3 的 MSVC2019 64-bit Kit。
+
+这个转向本身比“成功编译”更重要。它说明环境选择不是凭感觉选最新版或旧版，而是要看项目文件、源码调用和工具链 ABI 是否一致。
+
+## Practical Fixes / 实际修正
+
+The practical fixes were mostly small but connected: delete stale `.pro.user`, use the Qt6 kit, manually bind the MSVC 2019 v142 compiler, run qmake before build, and make `windeployqt` discoverable only where it was needed.
+
+实际修正都是小动作，但要连起来：删掉旧的 `.pro.user`，改用 Qt6 Kit，手动绑定 MSVC 2019 v142 编译器，先执行 qmake 再 Build All Projects，并且只在需要时让 `windeployqt` 能被找到。
+
+- Qt5 路线的问题：项目已经使用 Qt6 风格代码，强行兼容 Qt5 会变成大面积补丁。
+- Qt6 路线的关键：`Qt 6.5.3 MSVC2019 64-bit` 要和 MSVC 2019 v142、x64 命令行、SDK 保持一致。
+- Debug 阶段的实际处理：把 `windeployqt` 的 post-link 行为限制到 Release，避免 Debug 阶段被部署步骤拖死。
+- 本地运行问题：Qt 的 Windows 几何 warning 会在某些窗口状态下变成干扰，需要清掉旧配置并对 warning 做更安全的处理。
+
+## Evidence / 证据
+
+The original setup note is kept as source material. The public project page only republishes summarized evidence and avoids copying the full upstream source tree.
+
+原始环境记录保留在源目录里。公开页只放整理后的证据，不复制完整上游源码树。
+
+![Qt logo used in the study folder / 学习目录里的 Qt 图](/uploads/projects/nanjing-turing/qt-logo.png)
+
+## 复盘
+
+这次最明显的收获不是“会用 Qt Creator”，而是知道 Qt Creator 只是一个入口。真正决定项目能不能跑的是背后的编译器、SDK、Qt 包、qmake 规则、生成目录和部署工具。以后再看类似项目，第一反应应该先检查 Kit 和构建链路，而不是直接点绿色运行按钮。

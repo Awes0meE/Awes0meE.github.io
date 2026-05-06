@@ -18,11 +18,14 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Juanyun technical materials were expanded into 7 Juanyun project pages, 13 Juanyun notes, media entries, and a broad draft public asset set. That early draft later became too permissive for company work.
 - `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private.
 - `2026-05-06`: Juanyun public content was tightened to 7 Juanyun project pages and 9 Juanyun notes. Pure datasheet/manual/manufacturing-export notes were removed from the public note set.
-- `2026-05-06`: Website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
+- `2026-05-06`: Juanyun public boundary was clarified: only `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` are treated as sensitive product folders by default. Non-Current_Product legacy Juanyun folders can publish selected Gerber, schematic, BOM/PnP, EDA, STEP/3MF, source snippets, PDFs, and images after pruning installers, vendor/dependency folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
 - `2026-05-06`: Added a site-wide English/Simplified Chinese language toggle. The implementation uses `html[data-lang]`, `components/language-toggle.tsx`, `components/bilingual-text.tsx`, and optional `titleZh/captionZh` media metadata without adding a heavy i18n dependency.
 - `2026-05-06`: The language bootstrap script was moved out of manual `<head>` rendering and into the start of `<body>` to reduce hydration mismatch noise from browser-extension-injected head scripts.
 - `2026-05-06`: `feature/note-visibility` was merged into `main` for release `v0.3.0`, covering Juanyun public/private visibility, site-wide bilingual switching, UTF-8 workspace policy, and public asset cleanup.
 - `2026-05-06`: Local note-route failures such as `Cannot find module './vendor-chunks/esprima.js'` were traced to corrupted `.next` development cache, not broken note content. Stop project Node/Next.js processes, delete `.next/`, then restart `npm run dev`.
+- `2026-05-06`: Branch `content/internship-juanyun-expansion` was created from `main` to remove inaccurate placeholders and add real internship content from Juanyun, Nanjing Turing AI Research Institute, and Tianjin rail-transit STM32 study materials.
+- `2026-05-06`: The SAT301 placeholder project and five empty notes (`pid-control-notes`, `embedded-debug-log`, `kalman-filter-note`, `slam-reading`, `motor-driver-log`) were removed from the working branch because they were not real user work.
+- `2026-05-06`: Nanjing Turing content was added as one Qt/CMake/packaging project with four public notes; Tianjin rail-transit content was added as one STM32 foundation project with five public notes.
 
 ## Stable Decisions
 
@@ -35,7 +38,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
 - Write notes with the user's practical self-study / internship-log texture, but public pages should prefer direct descriptive narration over repetitive first-person `我...` claims.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
-- Public files under `public/uploads/` are not private. Do not place company Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there.
+- Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
 - Use Vercel for deployment and Cloudflare for DNS management.
 
@@ -59,6 +62,9 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `public/uploads/`: images, videos, and downloadable assets.
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
 - `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
+- `public/uploads/projects/juanyun-public/`: reviewed public Juanyun legacy PDFs, images, source snippets, and selected project-file evidence.
+- `public/uploads/projects/nanjing-turing/`: reviewed public Qt/CMake/Seamly2D learning evidence.
+- `public/uploads/projects/tianjin-metro/`: reviewed public STM32 foundation learning evidence.
 
 ## Verification Baseline
 
@@ -78,11 +84,12 @@ Expected result:
 
 ## Open Content Work
 
-- Keep checking that company-sensitive Juanyun files are not restored under `public/uploads/`; notes and safe screenshots can be public, but raw board/manufacturing/source files should not be website-accessible.
+- Keep checking that company-sensitive Juanyun Current_Product files are not restored under `public/uploads/`; non-Current_Product legacy evidence can be public only after pruning noisy installers, vendor/dependency folders, generated build outputs, financial/proof files, and uncurated full dumps.
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
-- Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals.
+- Browser-review the new Nanjing Turing, Tianjin rail-transit, and expanded Juanyun legacy pages before merging the branch.
+- Add real project photos, screenshots, videos, and diagrams for projects that still use placeholder SVG visuals, especially PID Starter Kit and archived Juanyun items that still use generic visuals.
 - Fill `PID Starter Kit` with concrete modules, firmware/tool screenshots, test data, and links.
-- Fill `SAT301 Graduation Thesis` with abstract, architecture, experiments, figures, and thesis evidence.
+- Re-evaluate thesis content later only after the user provides real project evidence.
 - Improve `About` with real biography, skills, education, and contact details.
 - Decide how `66ccff Labs` should appear in the visual identity without diluting the personal portfolio.
 

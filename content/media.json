@@ -84,30 +84,6 @@
     "captionZh": "压风式散热器原型的 3D 打印准备截图。"
   },
   {
-    "id": "robot-demo",
-    "title": "Robot navigation demo",
-    "titleZh": "机器人导航演示",
-    "type": "video",
-    "src": "/uploads/visuals/robot-platform.svg",
-    "thumbnail": "/uploads/visuals/robot-platform.svg",
-    "date": "2024-06-08",
-    "projectSlug": "sat301-graduation-thesis",
-    "caption": "Autonomous robot platform test footage placeholder.",
-    "captionZh": "自主机器人平台测试影像占位。"
-  },
-  {
-    "id": "slam-map",
-    "title": "SLAM map trace",
-    "titleZh": "SLAM 地图轨迹",
-    "type": "image",
-    "src": "/uploads/visuals/dashboard.svg",
-    "thumbnail": "/uploads/visuals/dashboard.svg",
-    "date": "2024-05-21",
-    "projectSlug": "sat301-graduation-thesis",
-    "caption": "Mapping and telemetry dashboard placeholder.",
-    "captionZh": "建图和遥测仪表盘占位图。"
-  },
-  {
     "id": "pid-board",
     "title": "PID controller board",
     "titleZh": "PID 控制器板卡",

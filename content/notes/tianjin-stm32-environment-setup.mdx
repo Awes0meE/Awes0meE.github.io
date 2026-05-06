@@ -1,0 +1,42 @@
+---
+title: "STM32 Environment Setup During The Tianjin Metro Internship"
+titleZh: "天津轨道交通实习：STM32 环境搭建"
+summary: "A learning note on setting up Keil MDK, ST-Link, STM32F103C8T6 startup files, GPIO output, OLED power wiring, and the first stable blink test."
+summaryZh: "从 Keil MDK、ST-Link、STM32F103C8T6 启动文件、GPIO 输出和 OLED 供电开始，记录第一次把开发板稳定跑起来的过程。"
+date: "2025-02-06"
+status: "Completed"
+tags: ["STM32", "Keil MDK", "ST-Link", "GPIO"]
+cover: "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png"
+featured: false
+links:
+  download: "/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c"
+visibility: public
+projectSlug: "tianjin-metro-stm32-foundation"
+---
+
+## 前期想法
+
+刚开始接触 STM32 时，问题不是“怎么做复杂系统”，而是电脑、IDE、下载器和板子能不能形成一个闭环。Keil MDK、ST-Link、启动文件、标准外设库、工程路径、下载设置，每个环节都不难，但第一次串起来时很容易卡在看起来不相关的小问题上。
+
+The first useful milestone was modest: connect STM32F103C8T6 to the PC, build the project, flash it through ST-Link, and confirm the board by blinking the onboard LED.
+
+## 阶段目标
+
+- 搭好 Keil5 MDK 和 STM32F103C8T6 工程。
+- 手动理解启动文件、时钟使能和 GPIO 初始化，而不是只点工程模板。
+- 让板载 LED 规律闪烁，用 OLED 显示简单状态。
+- 通过调试器观察寄存器变化，确认程序不是“看起来编译过了”而是真的跑在板子上。
+
+## 证据
+
+公开摘录保留了 GPIOB/OLED 供电、GPIOC13 板载 LED 和主循环闪烁逻辑：[basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)。
+
+![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
+
+## 疑问
+
+当时最容易混乱的是“库函数”和“寄存器”的关系。`GPIO_Init` 看起来只是一行函数调用，但背后其实是在配置端口模式、速度、输出类型和时钟。后面看 EXTI、TIM、ADC 时，这个理解很重要：外设不是凭空工作，每一步都要先有时钟、引脚模式和对应寄存器配置。
+
+## 复盘
+
+这一天的结果很小，但对第一次实习很关键。板子能稳定下载和运行以后，后面的 GPIO、中断、定时器、PWM 才有基础。如果环境没跑通，后面每个现象都分不清是代码问题、下载问题还是硬件连接问题。

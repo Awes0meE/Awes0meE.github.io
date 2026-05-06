@@ -1,33 +1,55 @@
 ---
-title: "Solenoid Valve and BLDC Fan Archive"
-titleZh: "螺线管阀门与 BLDC 风扇归档"
-summary: "Archive notes for solenoid-valve control, OLED/encoder interaction, ULN2003 references, and a single-phase BLDC quiet fan driver board."
-summaryZh: "螺线管阀门控制、OLED/编码器交互、ULN2003/步进驱动资料，以及单相 BLDC 静音风扇驱动板的归档笔记。"
+title: "Solenoid Valve and BLDC Fan Archive Notes"
+titleZh: "螺线管阀门与 BLDC 风扇归档笔记"
+summary: "Archive notes for smaller actuator and fan-driver materials: solenoid-valve control, OLED and encoder interaction, ULN2003 references, and a single-phase BLDC quiet-fan driver board."
+summaryZh: "执行器与风扇驱动材料归档笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料、单相 BLDC 静音风扇驱动板，以及筛选后的公开证据。"
 date: "2026-05-06"
 tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-actuator-fan-archive"
 visibility: public
 ---
+
 ## 前期想法
 
-这部分内容比较杂：一边是螺线管阀门控制，里面有 STM32F103、OLED、编码器、按键和 ULN2003/步进电机参考；另一边是单相 BLDC 静音风扇驱动板。它们都和执行器、电机、驱动有关，但又不适合硬塞进当前外机板主线。
+这部分材料比较散。一边是螺线管阀门控制，里面有 STM32F103 工程、电磁阀驱动板、OLED、EC11 编码器、按键和 ULN2003 / 步进驱动参考；另一边是单相 BLDC 静音风扇驱动板，材料只有 BOM 和 EDA 项目。它们都和执行器、电机、驱动有关，但还没有形成一条很完整的主线。
 
-所以先把它们放进一个归档项目里。这样做的目的不是说这条线已经完整，而是避免它们继续散落在硬盘里。以后如果补了实物、测试和更完整的代码说明，再考虑拆成更正式的项目。
+所以先归档。归档不是“这项目很完整”，而是承认它现在还只是线索。至少以后回头看时知道：这里有一批关于负载驱动、人机交互、小电机和简单执行器的材料，不会被混在大项目旁边悄悄丢掉。
 
 ## 疑问：为什么不直接删掉这些边角料？
 
-因为它们可能是后续能力线索。执行器、风扇驱动、OLED/编码器交互，这些和嵌入式方向是有关的。只是现在证据还不够完整，硬写成成熟项目会显得假。先归档，别吹，也别丢。
+因为它们可能是后续能力线索。执行器驱动、OLED 显示、编码器输入、风扇驱动，这些都是嵌入式硬件里很常见的碎片。单个看起来不大，但组合起来就是很多控制板的基本功。
+
+问题在于证据还不够完整。现在如果硬写成成熟项目，会显得假。缺少的东西很明确：实物照片、接线图、状态机、测试日志、故障处理、波形或至少一张清楚的运行截图。
 
 ## 目前能说明什么
 
-- 螺线管阀门资料里有 STM32F103 工程、阀门控制、OLED 显示、编码器输入和按键逻辑。
-- ULN2003 和步进驱动资料可以和电子膨胀阀 / 执行器控制思路关联起来。
-- BLDC 静音风扇驱动板后续还需要补拓扑、噪声目标和测试记录。
+- 螺线管阀门目录里有 STM32F103 控制工程、驱动板 EDA 文件、OLED / 编码器 / 按键相关资料。
+- ULN2003 和步进扩展板资料可以作为低侧驱动、线圈负载和简单执行器控制的参考。
+- BLDC 静音风扇板目前只有 BOM 和 EDA 项目，适合先作为方向线索，暂时不当成完整 case。
+- Vendor examples 和工具包很多，但不适合直接搬到公开站点。
 
 ## 证据
 
-公开页暂时不提供源码、原理图、BOM 或 EDA 文件下载，只保留归档说明。
+公开页现在提供筛选后的 legacy 证据：
+
+- [Solenoid main.c](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)
+- [Solenoid valve control source](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)
+- [Solenoid valve IOC configuration](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve-control.ioc)
+- [OLED module schematic](/uploads/projects/juanyun-public/actuator-fan/oled-module-schematic.pdf)
+- [EC11 encoder schematic](/uploads/projects/juanyun-public/actuator-fan/ec11-encoder-schematic.pdf)
+- [ULN2003 datasheet](/uploads/projects/juanyun-public/actuator-fan/uln2003-datasheet-en.pdf)
+- [BLDC quiet fan BOM](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-bom.xlsx)
+- [BLDC quiet fan EasyEDA project](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-easyeda.epro)
+
+不公开供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包。这里保留的是归档证据，不是完整工程发布。
+
+## 阶段目标
+
+- 给螺线管阀门补一张状态图：打开、关闭、保持、故障、手动输入。
+- 给执行器驱动补一张重画接线图，说明 MCU、驱动芯片、负载和保护位置。
+- 给 OLED / 编码器交互补一张运行截图或实物照片。
+- BLDC 风扇板后续需要补目标电压、拓扑、噪声目标和 bring-up 记录。
 
 ## 复盘
 
-这篇现在就是方向索引，不是完整作品展示。它的价值是把执行器 / 电机控制方向先留住，后面补图片、源码讲解和测试证据后，再决定要不要升级成正式 case study。
+这类材料最容易陷入两个极端：要么觉得小就删掉，要么硬凑成大项目。现在先放在中间：承认它们只是归档线索，但把它们和执行器 / 电机控制方向关联起来。以后证据补齐，再升级。

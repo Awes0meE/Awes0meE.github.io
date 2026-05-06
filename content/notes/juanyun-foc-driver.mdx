@@ -1,31 +1,64 @@
 ---
-title: "FOC Driver Board Archive"
-titleZh: "慧驱动 FOC 驱动板开发归档"
-summary: "Archive notes for a sensorless FOC driver board line with motor-control hardware and firmware references kept private where needed."
-summaryZh: "慧驱动 FOC 开发归档：电机控制、STM32F4 / DRV8301、PCB 和制造线索；公开页不提供原始制造文件或源码下载。"
+title: "FOC Driver Board Archive Notes"
+titleZh: "慧驱动 FOC 驱动板开发归档笔记"
+summary: "A cautious archive note for the STM32F4 / DRV8301 sensorless FOC driver-board line, explaining what exists, what selected evidence is public, and what is still missing before it becomes a strong case study."
+summaryZh: "STM32F4 / DRV8301 无感 FOC 驱动板归档笔记，记录现有材料、已公开的筛选证据，以及升级成完整案例前还缺什么。"
 date: "2026-05-06"
 tags: ["FOC", "Motor Control", "PCB", "STM32F4"]
 projectSlug: "juanyun-foc-driver-board"
 visibility: public
 ---
+
 ## 前期想法
 
-FOC 这条线看起来很香，电机控制、STM32F4、DRV8301、无感控制，关键词一摆出来就很适合作品集。但也要很清楚，不能因为它看起来高级，就把它包装成一个已经完全吃透的成熟项目。
+FOC 这条线一看就很适合放作品集：STM32F4、DRV8301、PMSM、无感控制、FOC 算法、电流采样、速度环、OLED、上位机通信。关键词很漂亮，甚至有点危险，因为漂亮关键词很容易把一个还没讲透的归档包装成“成熟项目”。
 
-这批内容更准确的定位是历史归档。里面确实有 PCB、BOM、Gerber、STEP、DRV8301、FOC 算法源码、ADC、Hall、低速任务、上位机通信等内容，但要写成真正的 FOC case study，还缺测试波形、采样链路解释、保护逻辑和启动过程复盘。
+源目录确实很厚。能看到 PCB、BOM、PickAndPlace、InteractiveBOM、STEP、EasyEDA 工程、DRV8301 和 STM32F4 资料、IAR / Keil 工程、`motor` 目录下的 `adc`、`drv8301`、`foc_algorithm`、`hall_sensor`、`speed_pid` 等模块。问题是，公开 case study 不应该只证明“文件存在”，而要说明它怎么工作、哪里失败、如何验证。
 
 ## 改变
 
-一开始只想放 Gerber 和 STEP，后来发现这太像“先占个坑”。现在公开页不再挂这些原始制造文件，只保留这条线的方向说明。等后面有脱敏截图、测试波形和学习复盘，再把它打磨成更正式的项目。
+最开始容易被 Gerber 和 STEP 这种文件诱惑。它们很像“硬证据”，但直接公开其实不解决核心问题：读者看不到启动逻辑、采样链路、PWM 调制、保护条件和调参过程。
 
-疑问：这算不算完整作品？
+现在的公开策略是先做归档页，同时发布筛选后的 legacy 文件，不做完整工程树下载。后续如果要认真写 FOC，就补这些东西：
 
-现在还不算。它更像是一条已经有很多证据但还没有讲透的开发线。真正完整的作品应该能回答：电流怎么采，PWM 怎么调制，保护怎么触发，启动怎么处理，电机转起来时波形和日志是什么样。现在这些还没有补齐，所以不能硬装。
+- 电流采样路径和 ADC 触发时序；
+- Clarke / Park / PI / SVPWM 的简化信号流；
+- DRV8301 fault 处理和寄存器配置思路；
+- 起转失败和成功的波形或日志；
+- 速度环、低速任务、参数辨识之间的边界。
+
+## 疑问
+
+现在算不算完整作品？
+
+还不算。它更像一条证据很多但叙事还没闭合的开发线。真正完整的 FOC 项目应该能回答：电机什么时候能稳定起转，电流波形是否合理，fault 怎么触发，采样噪声怎么处理，参数怎么调，低速和高负载时会发生什么。当前公开页先把方向留住，不把私有工程文件拿来硬撑。
 
 ## 证据
 
-公开页不提供 Gerber、BOM、EDA、STEP 或源码下载。当前只保留这条开发线的方向说明，后续适合补脱敏截图、测试波形和学习复盘。
+公开站点已经提供：
+
+- [EasyEDA project](/uploads/projects/juanyun-public/foc-driver/easyeda-project.epro2)
+- [Gerber archive](/uploads/projects/juanyun-public/foc-driver/gerber.zip)
+- [BOM table](/uploads/projects/juanyun-public/foc-driver/bom.xlsx)
+- [Pick-and-place table](/uploads/projects/juanyun-public/foc-driver/pick-and-place.csv)
+- [Interactive BOM](/uploads/projects/juanyun-public/foc-driver/interactive-bom.html)
+- [PCB 3D STEP model](/uploads/projects/juanyun-public/foc-driver/pcb-3d.step)
+- [Board configuration source](/uploads/projects/juanyun-public/foc-driver/board-config.c)
+- [Motor ADC source](/uploads/projects/juanyun-public/foc-driver/motor-adc.c)
+- [DRV8301 driver source](/uploads/projects/juanyun-public/foc-driver/motor-drv8301.c)
+- [FOC algorithm source](/uploads/projects/juanyun-public/foc-driver/motor-foc-algorithm.c)
+- [Speed PID source](/uploads/projects/juanyun-public/foc-driver/motor-speed-pid.c)
+- [DRV8301 datasheet](/uploads/projects/juanyun-public/foc-driver/drv8301-datasheet.pdf)
+
+仍然不提供 IAR / Keil 工程、完整 STM32F4 源码树、vendor library、Debug / Release 构建产物和重复工具输出。原因不是这条线敏感，而是完整工程树太重，也不能替代对起转、采样、调制、保护和测试的解释。
+
+## 阶段目标
+
+- 先把它定位成归档，不吹成成熟控制器。
+- 补一张脱敏 FOC 信号链图。
+- 找到或重做最小测试记录：PWM、相电流、速度响应、fault 日志。
+- 后续继续补短片段、重画图和测试证据，不把完整源码树或 vendor/build 目录搬上网站。
 
 ## 复盘
 
-这条线有吸引力，因为它把嵌入式、功率驱动和控制算法连在一起。但越是这种看起来高级的内容，越不能乱吹。现在先诚实地把方向留住，后面如果真的要打磨，就要补电流采样、调制、保护、启动和波形。
+越“高级”的题目越不能靠名词撑。FOC 这条线以后如果要写漂亮，重点不是把文件列得更长，而是把起转、采样、调制、保护和测试讲清楚。现在先诚实留档，别把还没复盘完的东西写成结论。

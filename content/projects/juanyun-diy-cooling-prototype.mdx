@@ -1,8 +1,8 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器原型"
-summary: "A public-safe prototype page keeping only a demo video and two 3D-print preview images, while removing schematic, Gerber, CAD, and source downloads."
-summaryZh: "压风式散热器原型的公开版页面：只保留演示视频和两张 3D 打印预览图，移除原理图、Gerber、CAD 和源码下载。"
+summary: "A legacy cooling prototype that connected 3D printed air-channel parts, fan selection, ESP32 PWM control, and a Windows desktop demo, with selected PCB, source, and fabrication evidence published after pruning noisy project output."
+summaryZh: "一个早期压风式散热器原型，把 3D 打印风道、风扇选型、ESP32 PWM 控制和 Windows 桌面端演示串在一起；公开页补充了筛选后的 PCB、源码和制作证据，同时排除了安装包、依赖和构建输出。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
@@ -12,22 +12,49 @@ links:
   demo: "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4"
 ---
 
-## Project Brief / 项目简介
+## Project Brief / 项目简述
 
-This legacy prototype connects structure, airflow, embedded control, and a desktop-side monitoring workflow. Only a small public evidence set remains because raw design files are not necessary for a public portfolio preview.
+This prototype is messy in a very early-project way: structure, airflow, small electronics, ESP32 control, desktop monitoring, part sourcing, and user instruction material all live in the same archive. It is not a polished product page. The useful part is that it shows a complete idea being pushed through several real interfaces instead of stopping at one PCB or one sketch.
 
-这个原型页只保留轻量证据，用来说明项目确实覆盖过结构、风道、控制和桌面端监控。原理图、Gerber、EasyEDA、CAD、3MF、PlatformIO 和 C# 源码暂不公开。
+这条线的公开版本不把原始工程包整包挂出来，但会把能说明开发过程的关键证据补上。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。根据新的边界，这不是 Current_Product 敏感项目，所以筛选后的 Gerber、EasyEDA、PlatformIO、Arduino、C# 和 3MF 证据可以公开；安装包、依赖目录、构建输出和混乱的完整工程树仍不直接发布。
 
 ![DIY pressure-flow cooling 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
+
+## What Was In The Archive / 归档里有什么
+
+- 3D printing route: Bambu Studio slicing previews, A1 mini / A1 / P1 / X1 print targets, split top and bottom shell parts, fan bracket, DC or Type-C interface covers, and support-setting screenshots.
+- Low-cost structure route: acrylic-cutting and cardboard versions, mostly useful for seeing how the airflow idea was tested before a cleaner enclosure existed.
+- Control route: ESP32 PWM fan control, OLED-related library dependencies, and a small desktop monitoring path.
+- PCB and fabrication route: EasyEDA projects, a schematic export, a Gerber package, acrylic parts list, and one Bambu Studio 3MF slicing file.
+- Delivery route: a Windows demo video and a desktop installer existed in the source archive, but the installer and build output are not published.
 
 ## Public Evidence / 公开证据
 
 - [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
 - [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 - [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
+- [3D printing preview 3](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
+- [ESP32 PlatformIO main.cpp](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)
+- [ESP32 PlatformIO configuration](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio.ini)
+- [ESP32 Arduino PWM sketch](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)
+- [Desktop C# Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)
+- [Desktop C# Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)
+- [Desktop C# project file](/uploads/projects/juanyun-public/diy-cooling/desktop-cpuwenduhuoqu.csproj)
+- [PCB schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)
+- [PCB Gerber archive](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)
+- [EasyEDA 2024 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro)
+- [EasyEDA 2026 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)
+- [Acrylic parts list](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx)
+- [Bambu A1 mini slicing file](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)
 
 ![DIY pressure-flow cooling second 3D print preview](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 
+![DIY pressure-flow cooling support settings and sliced parts](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
+
+## Public Boundary / 公开边界
+
+The prototype is now treated as a public legacy archive, not a sensitive current-product folder. Selected PCB, firmware, desktop, and fabrication files are published because they are small enough to inspect and tied directly to the prototype. The boundary is still deliberate: installers, dependency folders, generated build output, vendor folders, duplicate exports, and the uncurated source tree stay out of the website.
+
 ## Reflection / 复盘
 
-The value of this prototype is not polish. The value is the exposed interface between structure, airflow, electronics, software, and documentation. Detailed files can stay in a private archive until they are cleaned and desensitized.
+它的价值不在“做得多成熟”，而在暴露了结构、风道、电子控制、桌面端显示和文档交付之间的混乱连接。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些东西，项目一多，回头看就只剩一堆不知道为什么这样命名的文件夹。

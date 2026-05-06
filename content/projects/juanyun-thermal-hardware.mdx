@@ -1,8 +1,8 @@
 ---
 title: "Juanyun Thermal Hardware Internship"
 titleZh: "卷云科技热管理硬件与固件开发"
-summary: "A public-safe overview of Juanyun Technology hardware and firmware internship work, with detailed company artifacts kept private."
-summaryZh: "卷云科技硬件与固件实习工作的公开版概览；涉及公司产品细节、Gerber、原理图、BOM 和源码的材料暂不公开。"
+summary: "A public-safe overview of Juanyun Technology hardware and firmware internship work, linking approved current-product screenshots plus selected non-sensitive legacy evidence while keeping ACUnit/BaseUnit product files private."
+summaryZh: "卷云科技硬件与固件实习工作的公开总览页，链接已审核的当前产品截图和筛选后的非敏感 legacy 证据，同时继续保护 ACUnit/BaseUnit 当前产品文件。"
 date: "2026-02 to 2026-05"
 status: "Public Overview"
 tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "SOP"]
@@ -10,33 +10,46 @@ cover: "/uploads/projects/juanyun-tech/acunit-v21-main-front.png"
 featured: true
 ---
 
-## Project Brief / 项目简介
+## Project Brief / 项目简述
 
-This page is a public-safe overview of the Juanyun internship archive. The raw source folder contains real company engineering artifacts: board exports, firmware source, datasheets, SOP documents, prototype records, and manufacturing files. Those files are useful for private review, but not suitable for direct public release.
+This page is the umbrella for the Juanyun internship archive. It intentionally stays at overview level. The source material covers current product boards and firmware, legacy prototypes, small sensor / actuator tasks, FOC experiments, datasheets, and hardware-development process documents. Some of that material is safe to discuss publicly; some of it is product-sensitive and should stay outside the website.
 
-当前公开页不直接提供 Gerber、原理图、BOM、贴片坐标、源码或完整 PDF。页面只保留项目方向、工作范围、板子截图和后续可脱敏补充的位置。需要给导师、HR 或面试官看的版本，可以单独准备脱敏材料。
+公开页的目标不是把公司文件夹搬上网，而是讲清楚做过哪些方向、哪些证据可以公开、哪些材料必须收住。当前产品相关的 ACUnit / BaseUnit 内容只保留脱敏截图和叙述，不提供 Gerber、原理图、BOM/PnP、EDA/CAD、完整固件源码或制造资料下载。其他卷云 legacy 项目按用户重新划定的边界可以公开，当前页面只链接筛选后的关键证据，不发布未整理的整包目录。
 
 ![AC Unit V2.1 main board render](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
 
-## Scope / 工作范围
+## Public Scope / 公开范围
 
-- STM32-based control-board firmware organization.
-- AC-unit control-board requirement reading, interface split, and board-version documentation.
-- Base-unit sensing, display, fan-control, Bluetooth reporting, and parameter persistence.
-- Hardware-development SOP and project handoff documentation.
-- Smaller sensor, actuator, cooling-prototype, and motor-control archive lines.
+- Thermal control-board overview: board version screenshots, high-level block diagrams, and public notes.
+- Base-unit firmware overview: sensing, display, fan control, Bluetooth reporting, and parameter persistence as public narrative only.
+- Legacy prototype lines: DIY pressure-flow cooling prototype, FOC driver-board archive, actuator / fan archive, and DHT sensor breakout plan.
+- Process material: the self-authored hardware development SOP, published as a public note and PDF.
+
+## Related Public Pages / 相关公开页
+
+- [DIY pressure-flow cooling prototype](/work/juanyun-diy-cooling-prototype)
+- [FOC driver board archive](/work/juanyun-foc-driver-board)
+- [Actuator and quiet fan driver archive](/work/juanyun-actuator-fan-archive)
+- [DHT11 / AM2302 sensor breakout board](/work/juanyun-dht-sensor-breakout-board)
+- [Hardware SOP note](/notes/juanyun-hardware-sop)
 
 ## Public Evidence Boundary / 公开证据边界
 
-For now, the public evidence set is intentionally small. Company-specific production files stay out of the deployed website:
+Served publicly:
 
-- no Gerber archives;
-- no schematic PDFs;
-- no BOM or pick-and-place files;
-- no EasyEDA/CAD source projects;
-- no complete firmware source dumps;
-- no internal requirement or manufacturing packages.
+- selected screenshots / board renders already under `/uploads/projects/juanyun-tech/`;
+- the DIY demo video, 3D-print preview screenshots, and selected DIY source / PCB / fabrication files;
+- selected FOC driver Gerber, BOM/PnP, InteractiveBOM, EasyEDA, STEP, datasheets, and source excerpts;
+- selected solenoid-valve source / IOC files, OLED / EC11 schematics, ULN2003 reference, and BLDC fan BOM / EasyEDA files;
+- the DHT task-plan PDF and cover preview;
+- the self-authored hardware SOP PDF and cover image.
 
-## Next Step / 后续补充
+Not served publicly:
 
-Future public material should use desensitized photos, redrawn system diagrams, test-record screenshots, and short technical explanations without company secrets. The goal is to show real engineering participation without publishing the company's complete design files.
+- Current_Product_ACUnit_Project raw Gerber, schematic, BOM/PnP, EDA/CAD, firmware, and manufacturing packages;
+- Current_Product_BaseUnit_Project STM32 firmware source tree, vendor packages, generated build output, and internal handoff files;
+- legacy installers, dependency folders, vendor folders, generated build output, duplicate exports, and uncurated complete source trees.
+
+## Reflection / 复盘
+
+这页更像目录，不是单个项目的战报。卷云材料的难点是边界：公开太少会像空壳，公开太多又会把公司工程文件暴露出去。现在的做法是把可公开的学习线和流程线写实，把当前产品线保持在总览和脱敏截图层级。

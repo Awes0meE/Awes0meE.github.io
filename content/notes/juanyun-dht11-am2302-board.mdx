@@ -1,34 +1,49 @@
 ---
 title: "DHT11 / AM2302 Sensor Board Plan"
 titleZh: "DHT11 / AM2302 温湿度小板计划"
-summary: "A small-board note for a DHT11 / AM2302 sensor task that connects requirements, interface choices, firmware sensing, and verification."
-summaryZh: "DHT11 / AM2302 温湿度传感器小板任务记录：一条较小但适合展示硬件任务拆解能力的项目线。"
+summary: "A small-board note for a DHT11 / AM2302 sensor task, focusing on interface definition, pull-up and decoupling choices, sampling timing, and STM32 verification."
+summaryZh: "DHT11 / AM2302 温湿度传感器小板任务笔记，重点是接口定义、上拉与去耦、采样时序和 STM32 验证。"
 date: "2026-05-06"
 tags: ["Sensor", "PCB", "DHT11", "AM2302"]
 projectSlug: "juanyun-dht-sensor-breakout-board"
 visibility: public
 ---
+
 ## 前期想法
 
-温湿度小板这条线很小，小到一开始差点觉得没必要单独写。毕竟它不像外机板那样有压缩机、电源树、三块 PCB，也不像 FOC 那样看起来很“高级”。但后来想想，小任务其实更容易看出一个人有没有把事情做完整。
+温湿度小板这条线很小，小到一开始会觉得没必要单独写。毕竟它不像外机控制板那样有多块 PCB，也不像 FOC 那样关键词很亮。后来想想，小任务反而能看出有没有把事情做完整。
 
-一个 DHT11 / AM2302 小板，如果只说“接个传感器”，那确实没什么可写。但如果从任务书、接口、电源、上拉、电缆长度、采样周期、固件读取、失败处理一路想下来，它就变成了一个小而完整的硬件任务。
+一个 DHT11 / AM2302 小板，如果只说“接一个传感器”，确实没什么可写。但如果从任务书、尺寸、接口、电源、上拉、电缆长度、采样周期、固件读取、失败处理一路想下来，它就变成了一个小而完整的硬件任务。
+
+![DHT11 / AM2302 breakout plan cover](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
 
 ## 疑问：这么小的板子值得放作品集吗？
 
-值得，但前提是不能硬吹。它适合展示的是任务拆解能力，不是技术复杂度。大项目能展示系统能力，小项目能展示做事是否闭环。尤其在嵌入式里，很多问题就是从这种“小接口”开始出错的。
+值得，但前提是别硬吹。它适合展示的是任务拆解能力，不是技术复杂度。大项目能展示系统能力，小项目能展示做事是否闭环。嵌入式里很多问题就是从这种“小接口”开始出错的：引脚顺序反了、上拉没想清楚、传感器上电后马上读、采样间隔太短、线太长导致边沿变差。
 
-## 阶段目标
+## 任务书里已经明确的点
 
-- 把任务背景先放进网站，避免继续埋在文件夹里。
-- 后续补原理图、接口定义、上拉电阻、线长和采样周期。
-- 和底座 / 外机固件里的 DHT11、DHT22、AM2302 读取逻辑关联起来。
-- 最后补实物照片和读取失败处理记录，不要只停留在任务计划。
+- PCB 尺寸：`30 mm x 14 mm`。
+- 接口：`PZ2.54` 弯针 3P。
+- 接口定义：`3V3 / DATA / GND`。
+- 通信方式：单总线。
+- 板载外围：上拉电阻、电源去耦、可选信号阻尼 / 滤波。
+- 阻容封装：最大 `0603`。
+- 固定：一个 `M2` 螺丝定位孔。
+- 供电：优先 `3.3 V`。
+- 验证：可先面包板预验证，再焊后单片机验证。
+
+## 采样和验证
+
+AM2302 / DHT22 对时间要求比较烦，但这类烦正是应该写进任务计划的地方。上电后至少等 2 秒再读，读取间隔不要小于 2 秒。验证时不只看串口有没有数字，还要看手靠近、吹气后温湿度有没有合理变化，并连续跑几分钟观察是否频繁失败。
+
+这听起来很基础，但很多硬件调试时间就是被这些基础问题吃掉的。
 
 ## 证据
 
+- [DHT11 / AM2302 breakout plan PDF](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf)
 - [Sensor breakout board project](/work/juanyun-dht-sensor-breakout-board)
 
 ## 复盘
 
-小任务也要认真写。以后这个网站不能只放“大项目”，也要放这种能说明如何从一个具体需求一路推进到硬件、固件和测试的小闭环。
+小任务也要认真写。以后这个网站不能只放“大项目”，也要放这种能说明如何从一个具体需求推进到硬件、固件和测试的小闭环。它不炫，但很真实。

@@ -1,0 +1,39 @@
+---
+title: "sm2d XML Sample Reading Notes"
+titleZh: "sm2d XML 样例文件观察笔记"
+summary: "A short note on using public Seamly2D sample files to observe the XML-based pattern and measurement data format before deciding whether deeper parsing work was worthwhile."
+summaryZh: "用公开 Seamly2D 样例文件观察 XML 版型和量体数据格式的短记录，用来判断后续是否值得继续做解析。"
+date: "2025-08-20"
+tags: ["Seamly2D", "XML", "Data Format", "Qt"]
+visibility: public
+projectSlug: "nanjing-turing-qt-embedded-learning"
+---
+
+## Early Idea / 前期想法
+
+Seamly2D stores pattern data in XML-like project files. Before changing deeper behavior, it made sense to open a real `.sm2d` sample and a related `.smis` measurement file, then look at what kind of data the application actually reads.
+
+Seamly2D 的版型文件本质上是 XML 结构。继续做更深的功能之前，先找一个真实 `.sm2d` 样例和对应 `.smis` 量体文件，看软件到底在读什么数据，是比较稳的做法。
+
+## 疑问
+
+当时主要有三个问题：文件里哪些内容是几何点和曲线，哪些内容是量体变量，哪些内容只是界面或元数据。如果连这些层次都分不清，直接谈“解析格式”就会很虚。
+
+## Observation / 观察
+
+The sample files were useful as reading material, not as a finished parser task. They showed that the project format is structured enough to inspect, but meaningful parsing would need a clearer target: validation, migration, visualization, or feature extraction.
+
+样例文件更像阅读材料，不是一个已经完成的解析器任务。它能说明格式是有结构的，但如果真的继续做解析，需要先决定目标：是校验、迁移、可视化，还是提取特征。
+
+## Evidence / 证据
+
+The copied files are public sample data from the study folder. They are small enough to serve as evidence, unlike the full build folders or release archives.
+
+复制出来的是源目录中的公开样例数据，体积很小，适合作为证据；完整构建目录和发布包不适合作为网页资产。
+
+- [sample pattern file](/uploads/projects/nanjing-turing/sample-pattern-example.sm2d)
+- [sample measurement file](/uploads/projects/nanjing-turing/sample-measurements.smis)
+
+## 复盘
+
+这个方向最后没有展开成一个大功能，反而是合理的。先观察数据结构，再决定是否继续投入，比直接写一个没有目标的解析器更现实。对实习阶段来说，它更像是在补 Seamly2D 业务上下文：这不是普通画图软件，它的图形背后还连着尺寸、版型和 XML 数据。

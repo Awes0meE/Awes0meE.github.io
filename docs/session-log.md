@@ -4,6 +4,24 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Prepared release `v0.4.0` for the internship content expansion branch.
+- Files changed: bumped package metadata to `0.4.0` and updated README release-tag guidance for the new release.
+- Verification: release checks were rerun before merging the branch back to `main`.
+
+## 2026-05-06
+
+- Summary: Continued the interrupted `content/internship-juanyun-expansion` work and completed the Juanyun non-Current_Product legacy evidence alignment.
+- Files changed: linked selected DIY cooling, FOC driver, solenoid-valve, and BLDC quiet-fan legacy evidence from their project and note pages; updated `CODEX.md`, `MEMORY.md`, `docs/architecture.md`, `docs/content-workflow.md`, and `docs/juanyun-tech-source-inventory.md` so the public boundary matches the user's clarified rule.
+- Verification: checked that all `/uploads/...` links in content files resolve to files under `public/`; `npm.cmd run lint` passed; `npm.cmd run build` passed after rerunning outside the sandbox because the sandboxed build hit `spawn EPERM`.
+
+## 2026-05-06
+
+- Summary: Created `content/internship-juanyun-expansion` and expanded real portfolio content from three internship/work folders.
+- Files changed: removed the inaccurate SAT301 placeholder project and five empty shell notes; expanded public Juanyun legacy material while keeping ACUnit/BaseUnit current product folders sensitive; added Nanjing Turing Qt/CMake/packaging project notes; added Tianjin rail-transit STM32 foundation project notes; copied reviewed public evidence into `public/uploads/projects/juanyun-public/`, `public/uploads/projects/nanjing-turing/`, and `public/uploads/projects/tianjin-metro/`.
+- Verification: content frontmatter, project slugs, media paths, public asset references, and Juanyun sensitive filename boundary were checked before running lint/build.
+
+## 2026-05-06
+
 - Summary: Merged `feature/note-visibility` into `main` and prepared release `v0.3.0`.
 - Files changed: synchronized release documentation with the merged mainline state, including Juanyun public/private boundaries, bilingual language switching behavior, UTF-8 workspace policy, and release tag guidance.
 - Verification: release checks were rerun after the merge before pushing `main` and the release tag.

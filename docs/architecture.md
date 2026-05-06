@@ -59,11 +59,14 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main` as of the `v0.3.0` release:
+Current content state on branch `content/internship-juanyun-expansion` as of `2026-05-06`:
 
-- 10 project files total, including 7 Juanyun project pages;
-- 14 note files total, including 9 Juanyun notes;
-- Juanyun notes are public, while public Juanyun assets are limited to approved screenshots/renders and one prototype demo video.
+- 11 project files total;
+- 18 public note files total;
+- 7 Juanyun project pages and 9 Juanyun notes;
+- 1 Nanjing Turing Qt/CMake/packaging project and 4 related notes;
+- 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
+- the inaccurate SAT301 placeholder project and five empty placeholder notes have been removed.
 
 ## Rendering Notes
 
@@ -101,6 +104,8 @@ Project and note cards use paired frontmatter fields. Media cards use optional `
 
 ## Public Asset Boundary
 
-Portfolio downloads are static files in `public/uploads/`. On the Juanyun content branch, only technical evidence is intended to be public. Do not publish invoices, reimbursements, billing records, internship proof documents, executable installers, vendor package trees, or generated build outputs.
+Portfolio downloads are static files in `public/uploads/`. Only reviewed technical evidence is intended to be public. Do not publish invoices, reimbursements, billing records, internship proof documents, executable installers, vendor package trees, or generated build outputs.
 
-Static files in `public/uploads/` are public even if no page links to them. For company work, do not publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, complete firmware source dumps, or internal requirement/manufacturing packages unless they have been explicitly reviewed and desensitized.
+Static files in `public/uploads/` are public even if no page links to them. For the Juanyun material, `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` remain sensitive: do not publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, complete firmware source dumps, internal requirement/manufacturing packages, or product build outputs from those folders unless they have been explicitly reviewed and desensitized.
+
+Other Juanyun legacy folders are treated as public after pruning noisy project output. The current branch may serve selected legacy PDFs, images, source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF models, and schematics under `public/uploads/projects/juanyun-public/`, while excluding installers, vendor/dependency folders, generated build outputs, duplicate raw dumps, and private financial/proof documents.

@@ -1,29 +1,50 @@
 ---
 title: "DHT11 / AM2302 Sensor Breakout Board"
 titleZh: "DHT11 / AM2302 温湿度传感器小板"
-summary: "A small hardware-planning project connecting sensor-board requirements with firmware sensing work. Detailed board files stay private for now."
-summaryZh: "一个小型传感器板规划项目，把小板需求和固件采集联系起来；详细板级文件暂不公开。"
+summary: "A small breakout-board planning task for DHT11 and AM2302 / DHT22 sensors, turning a 4-pin sensor body into a 3-pin modular interface with pull-up, decoupling, and STM32 verification notes."
+summaryZh: "一个 DHT11 与 AM2302 / DHT22 温湿度传感器小板规划任务，把 4 引脚传感器本体整理成 3P 模块接口，并明确上拉、去耦和 STM32 验证要求。"
 date: "2026-04 to 2026-05"
-status: "Private Evidence Review"
+status: "Planning Archive"
 tags: ["Sensor", "PCB", "DHT11", "AM2302"]
-cover: "/uploads/visuals/waveform.svg"
+cover: "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png"
 featured: false
+links:
+  download: "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf"
 ---
 
-## Project Brief / 项目简介
+## Project Brief / 项目简述
 
-This is a small Juanyun hardware task. Small boards still matter because a bounded requirement has to become interface decisions, firmware constraints, and a verification plan.
+This is a small board task, but small does not mean empty. The plan defines a compact DHT11 / AM2302 breakout that can plug into a main control board with a simple 3-pin single-bus interface. The interesting part is not technical complexity. The useful part is how a tiny requirement becomes board size, connector, pin order, pull-up choice, decoupling, verification timing, and firmware constraints.
 
-当前公开页只保留任务方向。小板 PDF、原理图、PCB 或生产文件暂时不放公网。
+![DHT11 / AM2302 breakout plan cover](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
 
-## Public Version Plan / 公开版补充计划
+## Requirements Captured / 已明确的要求
 
-Later public material can include:
+- Board size target: `30 mm x 14 mm`.
+- Connector: `PZ2.54` angled 3-pin header.
+- Interface: `3V3 / DATA / GND`, single-wire communication.
+- On-board support: pull-up resistor, power decoupling capacitor, and optional signal damping / filtering.
+- Package target: maximum `0603` for passives.
+- Mechanical anchor: one `M2` positioning hole.
+- PCB: 2-layer board is enough.
+- Supply preference: `3.3 V`.
+- Verification: optional breadboard pre-check before PCB release, then soldered-board MCU validation.
 
-- desensitized interface notes;
-- sensor reading flow;
-- sampling period and failure handling;
-- serial, OLED, or log screenshots;
-- product photos without company-sensitive information.
+## Sensor-Side Notes / 传感器侧注意点
 
-后续可补脱敏后的接口说明、传感器读取流程、采样周期、失败处理、串口/OLED/日志截图，以及不含公司信息的实物照片。
+The plan keeps DHT11 and AM2302 / DHT22 in the same task because both are humidity and temperature sensors with a single-wire-style data interface, but the package and pin mapping cannot be treated casually. AM2302 is wider than the board target, so the document allows the sensor body to slightly exceed the PCB edge while keeping the board outline fixed.
+
+Firmware verification also matters: wait at least 2 seconds after power-on, avoid sampling faster than a 2-second interval, and check that humidity / temperature change in a reasonable direction when the sensor is touched or exposed to breath. It sounds basic, but this is exactly where small sensor boards often waste time.
+
+## Public Evidence / 公开证据
+
+- [DHT11 / AM2302 breakout plan PDF](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf)
+- [Related note](/notes/juanyun-dht11-am2302-board)
+
+## Public Boundary / 公开边界
+
+The planning PDF is public because it is a small, self-contained task document. The page still does not publish raw schematic, PCB source, Gerber, BOM/PnP, or internal manufacturing packages. If a later board version is released publicly, it should use a cleaned PDF or redrawn diagram rather than dumping the design project.
+
+## Reflection / 复盘
+
+这个项目小，但反而适合展示“把事做闭环”的能力。只说“接个 DHT11”没有意义；把尺寸、接口、上拉、去耦、采样周期、上电等待和失败处理都写清楚，才算真的把一个小硬件任务讲明白。

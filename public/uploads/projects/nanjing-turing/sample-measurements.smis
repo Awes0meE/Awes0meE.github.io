@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smis>
+    <!--Measurements created with SeamlyMe v2025.6.30.216 (https://seamly.io/).-->
+    <version>0.3.4</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="garmentlength(tshirt)" name="@garmentlengthtshirt" value="67"/>
+        <m name="@inch" value="2.54"/>
+        <m name="@one_halfinch" value="@inch/2"/>
+        <m name="@one_quarterinch" value="@inch/4"/>
+        <m name="@one_eighthinch" value="@inch/8"/>
+        <m name="@one_sixteenthinch" value="@inch/16"/>
+        <m full_name="chest: A" name="@chest" value="90.4"/>
+        <m full_name="seat: B" name="@seat" value="95.8"/>
+        <m full_name="waist: C " name="@waist" value="80.2"/>
+        <m full_name="trouser waist position (4-6cm below waist): D" name="@trouserwaistposition" value="86.7"/>
+        <m full_name="half back: E-F" name="@halfback" value="22"/>
+        <m full_name="back neck to waist: G-H" name="@backnecktowaist" value="42"/>
+        <m full_name="scye depth: G-I" name="@scyedepth" value="20.8"/>
+        <m full_name="neck size: J" name="@necksize" value="44"/>
+        <m full_name="(1 piece sleeve) sleevelength: K-L" name="@sleevelength1" value="68"/>
+        <m full_name="(2 piece sleeve) sleevelength: E-M" name="@sleevelength2" value="89"/>
+        <m full_name="inside leg: N-O" name="@insideleg" value="88"/>
+        <m full_name="body rise: P-Q" name="@bodyrise" value="20"/>
+        <m full_name="close wrist measurement: R" name="@wristcirc" value="18"/>
+        <m full_name="arm circumference: S" name="@armcirc" value="28"/>
+        <m full_name="shoulder: K-T" name="@shoulder" value="17"/>
+    </body-measurements>
+</smis>
