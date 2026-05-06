@@ -6,7 +6,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-diy-cooling-prototype",
     "caption": "Main control PCB render for the Juanyun AC unit V2.1 hardware branch."
   },
   {
@@ -16,7 +16,7 @@
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "date": "2026-05-05",
-    "projectSlug": "juanyun-thermal-hardware",
+    "projectSlug": "juanyun-diy-cooling-prototype",
     "caption": "Back-side PCB render for checking routing, connectors, and assembly space."
   },
   {

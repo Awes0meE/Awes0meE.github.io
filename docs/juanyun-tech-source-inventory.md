@@ -27,7 +27,7 @@ public/uploads/projects/juanyun-tech/
 | --- | ---: | --- |
 | `Current_Product_ACUnit_Project` | 1210 | Main public case-study material: AC unit PCB V2.0/V2.1, system block diagrams, PCB renders, schematics, SOP, STM32 external unit firmware note. |
 | `Current_Product_BaseUnit_Project` | 1659 | Public note for STM32 base unit firmware: DHT11/DHT22, IR presence detection, fan PWM, OLED UI, Bluetooth report, Flash persistence. |
-| `Legacy_DIY压风式散热器_Project` | 536 | Public legacy note with video, schematic, ESP32 sketch, and 3D print previews. |
+| `Legacy_DIY压风式散热器_Project` | 536 | Standalone archived project plus public note, with video, schematic, ESP32 sketch, and 3D print previews. |
 | `Legacy_慧驱动FOC_Project` | 4762 | Public legacy note with FOC PCB Gerber and STEP model; code details still need a later review. |
 | `Legacy_螺线管阀门开发_Project` | 818 | Public archive note only; raw vendor examples and driver packages are not published. |
 | `Legacy_BLDC_QuietFan_Project` | 2 | Public archive note with BOM attachment. |
@@ -81,4 +81,3 @@ The user asked to put the folder contents into the portfolio branch. The impleme
 - full build artifacts and generated object files.
 
 Before merging this branch into `main`, review all public PDFs and download attachments again. This matters because the GitHub repository and Vercel deployment can become public-facing once pushed or merged.
-

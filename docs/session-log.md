@@ -56,3 +56,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Added project back-links on note detail pages.
 - Files changed: updated `app/notes/[slug]/page.tsx` to show a related-project card when a note has `projectSlug`.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
+- Summary: Split the DIY pressure-flow cooling prototype into its own project page.
+- Files changed: added `content/projects/juanyun-diy-cooling-prototype.mdx`, reassigned its note and media entries to the new project slug, and updated the Juanyun source inventory.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
