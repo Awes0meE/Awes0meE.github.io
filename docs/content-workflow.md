@@ -140,6 +140,18 @@ Every serious project should eventually include:
 - links to source, demo, release, or paper if available;
 - English and Chinese summaries.
 
+Notes should use the user's own learning-log voice. The preferred shape is closer to an internship/self-study notebook than to a corporate project report:
+
+- start from `前期想法` when the motivation or confusion matters;
+- use `改变` to explain a pivot in direction;
+- use `疑问` to capture practical questions and the answer reached at the time;
+- use `阶段目标` for concrete next steps or constraints;
+- keep `证据` links for files, images, videos, source, PDFs, and datasets;
+- end with `复盘` when there is a useful lesson;
+- avoid overusing “我负责了...” and “我参与了...” lists, because they sound fake when the note is meant to be a learning record.
+
+Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
+
 ## Pre-Publish Checklist
 
 ```powershell

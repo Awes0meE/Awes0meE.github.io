@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-06
 
+- Summary: Ran `/neat` after rewriting all notes in the user's personal learning-log style.
+- Files changed: updated `CODEX.md`, `MEMORY.md`, and `docs/content-workflow.md` so future agents preserve the new note voice instead of reverting to generic portfolio prose.
+- Verification: `npm.cmd run lint` and `npm.cmd run build` passed.
+
+## 2026-05-06
+
 - Summary: Ran `/neat` knowledge cleanup after the Juanyun content expansion.
 - Files changed: reconciled `CODEX.md`, `MEMORY.md`, `docs/architecture.md`, `docs/content-workflow.md`, `README.md`, and `USER_GUIDE.md` with the current `content/juanyun-tech` branch state, including project/note counts, `projectSlug` behavior, public domain, branch review boundary, and privacy exclusions.
 - Verification: `npm.cmd run lint` and `npm.cmd run build` passed.

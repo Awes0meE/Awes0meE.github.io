@@ -136,6 +136,19 @@ Maintain the current engineering-academic identity:
 - project evidence over decoration;
 - no generic template blog styling, no Hexo identity, no stock marketing hero.
 
+## Writing Direction
+
+Portfolio notes should read like the user's own learning and internship logs, not like polished corporate case-study copy.
+
+For `content/notes/*.mdx`:
+
+- prefer first-person learning-process narration;
+- use sections such as `前期想法`, `改变`, `疑问`, `阶段目标`, `证据`, and `复盘` when they fit;
+- keep mild self-reflection and practical frustration when it clarifies the work;
+- explain why a direction changed, not only what was done;
+- avoid repetitive “我负责 / 我参与 / 我整理” bullet-heavy writing unless the note genuinely needs a checklist;
+- keep evidence links, files, and technical constraints concrete.
+
 ## Verification Policy
 
 For content-only edits:
