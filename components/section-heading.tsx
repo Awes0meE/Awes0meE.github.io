@@ -1,11 +1,12 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 
 type SectionHeadingProps = {
-  title: string;
+  title: ReactNode;
   action?: {
     href: string;
-    label: string;
+    label: ReactNode;
   };
 };
 

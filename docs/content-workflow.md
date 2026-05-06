@@ -129,14 +129,27 @@ Example:
 {
   "id": "pid-step-response",
   "title": "PID step response",
+  "titleZh": "PID 阶跃响应",
   "type": "image",
   "src": "/uploads/projects/pid-starter-kit/step-response.png",
   "thumbnail": "/uploads/projects/pid-starter-kit/step-response.png",
   "date": "2026-05-06",
   "projectSlug": "pid-starter-kit",
-  "caption": "Step response captured during controller tuning."
+  "caption": "Step response captured during controller tuning.",
+  "captionZh": "控制器调参过程中记录的阶跃响应。"
 }
 ```
+
+Use `titleZh` and `captionZh` when a media card should switch cleanly between English and Simplified Chinese.
+
+## Language Switching
+
+The website has a top-right `EN / 简中` language switch.
+
+- Use `BilingualText` for fixed labels in TSX files.
+- Keep `title/titleZh` and `summary/summaryZh` complete for projects and notes.
+- Use `titleZh/captionZh` in `content/media.json` for media cards.
+- Long MDX body content is not automatically translated. Add bilingual body sections manually when an article needs both languages.
 
 ## Writing Standard
 
@@ -144,7 +157,6 @@ Every serious project should eventually include:
 
 - problem / background;
 - what was built;
-- your responsibility;
 - technical stack;
 - key decisions;
 - evidence: screenshots, videos, diagrams, metrics, logs;
@@ -159,12 +171,42 @@ Notes should keep the user's practical learning-log texture. Public pages should
 - use `阶段目标` for concrete next steps or constraints;
 - keep `证据` links for files, images, videos, source, PDFs, and datasets;
 - end with `复盘` when there is a useful lesson;
-- avoid overusing “我负责了...” and “我参与了...” lists, because they sound fake when the note is meant to be a learning record.
-
+- avoid overusing `我负责了...` and `我参与了...` lists, because they sound fake when the note is meant to be a learning record;
 - use direct description: system scope, constraints, evidence boundary, question, and next step;
 - add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
+
+## Local Development Troubleshooting
+
+For local preview:
+
+```powershell
+npm run dev
+```
+
+Open:
+
+```text
+http://127.0.0.1:3000
+```
+
+Avoid running `npm run build` while the dev server is still running. Both commands write to `.next/`, and concurrent writes can corrupt local cache files.
+
+If a local dynamic route fails with:
+
+```text
+Cannot find module './vendor-chunks/esprima.js'
+```
+
+Use this recovery path:
+
+1. Stop all project Node/Next.js processes.
+2. Delete `.next/`.
+3. Run `npm run dev` again.
+4. Revisit the affected note route.
+
+That error usually means the local `.next` cache is corrupt around `gray-matter -> js-yaml -> esprima`. It does not automatically mean the MDX note body needs to be rewritten.
 
 ## Pre-Publish Checklist
 

@@ -44,12 +44,14 @@ export type Note = {
 export type MediaItem = {
   id: string;
   title: string;
+  titleZh?: string;
   type: "image" | "video";
   src: string;
   thumbnail: string;
   date: string;
   projectSlug?: string;
   caption: string;
+  captionZh?: string;
 };
 
 function readCollection<T extends { slug: string; date: string }>(
@@ -121,4 +123,20 @@ export const getMediaItems = cache(() => {
 
 export function formatDateRange(value: string) {
   return value.replaceAll("-", ".").replace(" to ", " - ");
+}
+
+export function formatDateRangeZh(value: string) {
+  return formatDateRange(value).replaceAll("Now", "至今");
+}
+
+export function formatStatusZh(value: string) {
+  const statusMap: Record<string, string> = {
+    "In Progress": "进行中",
+    Draft: "草稿",
+    Complete: "已完成",
+    Completed: "已完成",
+    Archived: "已归档"
+  };
+
+  return statusMap[value] ?? value;
 }

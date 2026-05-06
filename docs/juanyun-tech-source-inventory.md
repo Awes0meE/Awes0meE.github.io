@@ -49,7 +49,7 @@ content/notes/juanyun-*.mdx
 content/media.json
 ```
 
-The current branch contains 7 Juanyun project pages and 13 Juanyun notes. Notes use `visibility: public` or `visibility: private`; on this branch the Juanyun notes are public so their writing can be reviewed in the live portfolio layout.
+The current branch contains 7 Juanyun project pages and 9 Juanyun notes. Notes use `visibility: public` or `visibility: private`; on this branch the remaining Juanyun notes are public so their writing can be reviewed in the live portfolio layout. Pure datasheet/manual/manufacturing-export notes were removed from the public note set.
 
 ## Source Folder Summary
 

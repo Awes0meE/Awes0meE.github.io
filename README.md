@@ -69,6 +69,12 @@ Open:
 http://127.0.0.1:3000
 ```
 
+Local troubleshooting:
+
+- Do not run `npm run build` while `npm run dev` is still running. Both commands write to `.next/`, and mixing them can corrupt the local development cache.
+- If a note page fails with an error like `Cannot find module './vendor-chunks/esprima.js'`, stop all local Next.js/Node processes for this project, delete `.next/`, then run `npm run dev` again.
+- On Windows PowerShell, use `npm.cmd` if the shell blocks `npm.ps1`.
+
 ## Common Commands
 
 ```bash
@@ -101,7 +107,9 @@ links:
 
 Notes are stored in `content/notes/*.mdx`. Each note should include `visibility: public` or `visibility: private`. Missing visibility is treated as private, so drafts do not accidentally appear on the public site.
 
-Media items are stored in `content/media.json`, with assets under `public/uploads/`.
+Media items are stored in `content/media.json`, with assets under `public/uploads/`. Use optional `titleZh` and `captionZh` when the media card needs Chinese text for the global language switch.
+
+The site has a top-right English / Simplified Chinese toggle. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
@@ -159,9 +167,14 @@ git push origin v0.1.0
 
 ## 项目概览
 
-这个仓库是 Li Zhiyi / Awes0meE 的英中双语工程作品集网站源码。它把原来由 Hexo 教程生成的静态输出，重构成了一个可长期维护的 Next.js 应用，用于展示项目、学习笔记、媒体材料，并为未来的全栈功能预留空间。
+这个仓库是 Li Zhiyi / Awes0meE 的英中双语工程作品集网站源码。它把原来由 Hexo 教程生成的静态输出，重构成一个可长期维护的 Next.js 应用，用于展示项目、学习笔记、媒体材料，并为未来的全栈功能预留空间。
 
-旧版 Hexo 输出已完整保存在 `legacy/hexo-export/`，仅作为参考资料，不再作为新网站服务内容。
+旧版 Hexo 输出保存在 `legacy/hexo-export/`，只作为历史参考，不再作为新网站的服务内容。
+
+公开访问地址：
+
+- 生产域名：`https://www.66ccff-labs.com/`
+- Vercel 部署地址：`https://awes0mee-portfolio.vercel.app/`
 
 ## 技术栈
 
@@ -219,6 +232,12 @@ npm run dev
 http://127.0.0.1:3000
 ```
 
+本地问题排查：
+
+- 不要在 `npm run dev` 还开着的时候同时跑 `npm run build`。这两个命令都会写 `.next/`，混在一起容易把本地开发缓存弄坏。
+- 如果打开笔记页时看到类似 `Cannot find module './vendor-chunks/esprima.js'` 的报错，先停掉当前项目相关的 Next.js/Node 进程，删除 `.next/`，再重新运行 `npm run dev`。
+- 在 Windows PowerShell 里如果 `npm.ps1` 被执行策略拦住，可以改用 `npm.cmd`。
+
 ## 常用命令
 
 ```bash
@@ -231,27 +250,17 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 ## 内容维护
 
-项目内容放在 `content/projects/*.mdx`。每个项目使用 frontmatter 描述元数据：
+项目内容放在 `content/projects/*.mdx`。每个项目使用 frontmatter 描述元数据。
 
-```yaml
----
-title: "PID Starter Kit"
-titleZh: "个人 PID 控制器开发套件"
-summary: "English summary"
-summaryZh: "中文摘要"
-date: "2024.10 to Now"
-status: "In Progress"
-tags: ["STM32", "Control", "PCB"]
-cover: "/uploads/visuals/circuit-board.svg"
-featured: true
-links:
-  repo: "https://github.com/Awes0meE/PID-Starter-Kit"
----
-```
+学习笔记放在 `content/notes/*.mdx`。每篇笔记都应该设置 `visibility: public` 或 `visibility: private`。缺失 `visibility` 会被当作 private，避免草稿误发布。
 
-学习笔记放在 `content/notes/*.mdx`。媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。
+媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体卡片需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`。
+
+网站右上角有 English / 简体中文切换按钮。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
+
+重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。公司 Gerber、原理图、BOM/PnP、EDA/CAD 源文件、完整固件源码、发票、报销、安装包、vendor 包或 build 输出文件，在没有脱敏审查前不要放进去。
 
 当前草稿内容分支：
 
@@ -287,7 +296,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-本版本预期结果：
+预期结果：
 
 - lint 通过
 - 生产构建通过

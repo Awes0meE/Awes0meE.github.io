@@ -57,12 +57,12 @@ The public note helpers intentionally filter to `visibility: public`. Missing `v
 
 Media:
 
-- JSON object with thumbnail, source path, caption, date, and optional related project.
+- JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
 Current content state after the Juanyun import as of `2026-05-06`:
 
 - 10 project files total, including 7 Juanyun project pages;
-- 18 note files total, including 13 Juanyun notes;
+- 14 note files total, including 9 Juanyun notes;
 - on `feature/note-visibility`, Juanyun notes are public, while public Juanyun assets are limited to approved screenshots/renders and one prototype demo video.
 
 ## Rendering Notes
@@ -70,6 +70,19 @@ Current content state after the Juanyun import as of `2026-05-06`:
 The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, paragraphs, lists, links, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`.
+
+## Language Layer
+
+The language toggle is intentionally lightweight:
+
+- `components/language-toggle.tsx` is the only interactive control.
+- The selected value is persisted in `localStorage` and reflected on `html[data-lang]`.
+- `components/bilingual-text.tsx` renders paired English/Simplified Chinese text.
+- `app/layout.tsx` runs a small bootstrap script at the start of `<body>` so saved language state is applied before the main UI renders.
+- `app/globals.css` hides `.lang-en` or `.lang-zh` based on `html[data-lang]`.
+- The app remains statically generated; language switching does not require dynamic routes, middleware, cookies, or server-side rendering.
+
+Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
 
 ## Deployment
 

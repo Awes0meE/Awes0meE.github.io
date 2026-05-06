@@ -2,7 +2,7 @@
 
 Durable project memory for `F:\XJTLU\XJTLU_Portfolio`.
 
-This file is for future AI sessions and long-running portfolio maintenance. It should stay concise, current, and edited rather than blindly appended.
+This file is for future AI sessions and long-running portfolio maintenance. Keep it concise and current; edit stale facts instead of blindly appending duplicates.
 
 ## Current State
 
@@ -15,11 +15,13 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
 - `2026-05-06`: Public identity was normalized to `Awes0meE / Li Zhiyi`; contact email is `lizhiyi20030401@gmail.com`; degree wording is Communication Engineering.
 - `2026-05-06`: Branch `content/juanyun-tech` was created for draft portfolio content from `F:\XJTLU\工作相关\卷云科技有限责任公司`.
-- `2026-05-06`: Juanyun technical materials were expanded on branch `content/juanyun-tech` into 7 Juanyun project pages, 13 Juanyun notes, media entries, and a broad draft public asset set. That early draft later became too permissive for company work.
-- `2026-05-06`: All `content/notes/*.mdx` files were rewritten toward the user's own learning-log voice, modeled after their Qt internship note style: process-first, reflective, mildly informal, with `前期想法 / 改变 / 疑问 / 阶段目标 / 证据 / 复盘` style sections where appropriate.
-
-- `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private. Juanyun notes are public on this branch, but website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
-- `2026-05-06`: Public project and note writing direction shifted toward direct descriptive narration: fewer "我..." claims, more plain system/scope/evidence descriptions, and bilingual section support.
+- `2026-05-06`: Juanyun technical materials were expanded into 7 Juanyun project pages, 13 Juanyun notes, media entries, and a broad draft public asset set. That early draft later became too permissive for company work.
+- `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private.
+- `2026-05-06`: Juanyun public content was tightened to 7 Juanyun project pages and 9 Juanyun notes. Pure datasheet/manual/manufacturing-export notes were removed from the public note set.
+- `2026-05-06`: Website-accessible Juanyun assets are limited to approved screenshots/renders and one prototype demo video; Gerber, schematic, BOM/PnP, EDA/CAD, and source-code files are not served.
+- `2026-05-06`: Added a site-wide English/Simplified Chinese language toggle. The implementation uses `html[data-lang]`, `components/language-toggle.tsx`, `components/bilingual-text.tsx`, and optional `titleZh/captionZh` media metadata without adding a heavy i18n dependency.
+- `2026-05-06`: The language bootstrap script was moved out of manual `<head>` rendering and into the start of `<body>` to reduce hydration mismatch noise from browser-extension-injected head scripts.
+- `2026-05-06`: Local note-route failures such as `Cannot find module './vendor-chunks/esprima.js'` were traced to corrupted `.next` development cache, not broken note content. Stop project Node/Next.js processes, delete `.next/`, then restart `npm run dev`.
 
 ## Stable Decisions
 
@@ -28,8 +30,9 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 - Use `MEMORY.md` as the current durable memory index, with `docs/session-log.md` as append-only chronology.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
+- Use `BilingualText` for fixed UI labels and paired metadata. Do not return to mixed labels such as `Work / 项目` now that the site has a global language toggle.
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
-- Write notes with the user's practical self-study / internship-log texture, but public pages should prefer direct descriptive narration over repetitive first-person "我..." claims.
+- Write notes with the user's practical self-study / internship-log texture, but public pages should prefer direct descriptive narration over repetitive first-person `我...` claims.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. Do not place company Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
@@ -44,6 +47,9 @@ This file is for future AI sessions and long-running portfolio maintenance. It s
 ## Important Files
 
 - `app/page.tsx`: homepage layout and major public-facing sections.
+- `app/layout.tsx`: root layout, metadata, language bootstrap script, header/footer shell.
+- `components/language-toggle.tsx`: client-side EN/简中 language switch.
+- `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.
 - `content/projects/`: project case-study source files.

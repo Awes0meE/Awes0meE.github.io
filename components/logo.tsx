@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BilingualText } from "@/components/bilingual-text";
 
 export function Logo() {
   return (
@@ -10,7 +11,9 @@ export function Logo() {
       </span>
       <span className="leading-tight">
         <span className="block text-sm font-semibold text-ink">Awes0meE / Li Zhiyi</span>
-        <span className="block text-xs text-graphite">XJTLU · Undergraduate</span>
+        <span className="block text-xs text-graphite">
+          <BilingualText en="XJTLU Undergraduate" zh="西交利物浦大学本科生" />
+        </span>
       </span>
     </Link>
   );

@@ -65,6 +65,19 @@ If the current PowerShell process cannot find npm at all, temporarily prefix PAT
 $env:Path='C:\Program Files\nodejs;' + $env:Path
 ```
 
+Local Next.js cache rule:
+
+- Do not run `npm run build` while `npm run dev` is still running. Both commands write to `.next/`.
+- If local dynamic routes fail with `Cannot find module './vendor-chunks/esprima.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm run dev`.
+- This error comes from a corrupted local build cache around `gray-matter -> js-yaml -> esprima`; it does not automatically mean the MDX note content is broken.
+
+## Encoding Policy
+
+- Use UTF-8 for all source, content, and documentation files.
+- `.editorconfig` and `.vscode/settings.json` enforce UTF-8, LF line endings, and final newlines for this workspace.
+- `.gitattributes` keeps common text formats normalized to LF in Git.
+- On Windows PowerShell, command output can still display mojibake if the console code page is wrong. Verify file contents with Node.js or VS Code before rewriting text that may already be valid UTF-8.
+
 ## Routes
 
 - `/` homepage
@@ -107,14 +120,27 @@ Media items live in `content/media.json` and require:
 
 - `id`
 - `title`
+- optional `titleZh`
 - `type`
 - `src`
 - `thumbnail`
 - `date`
 - `caption`
+- optional `captionZh`
 - optional `projectSlug`
 
 `projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card.
+
+## Language Switching
+
+The site has a top-right language toggle for English and Simplified Chinese.
+
+- `components/language-toggle.tsx` stores the selected language in `localStorage` under `portfolio-language`.
+- `app/layout.tsx` uses an inline bootstrap script at the start of `<body>` to set `html[data-lang]` before the main UI renders.
+- `components/bilingual-text.tsx` renders paired English/Chinese text and CSS in `app/globals.css` hides the inactive language.
+- Projects and notes use existing `title/titleZh` and `summary/summaryZh` fields.
+- Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
+- MDX body content is not automatically translated. Add bilingual body sections manually when a project/note needs full two-language article text.
 
 ## Current Content Branch
 
@@ -124,7 +150,7 @@ Media items live in `content/media.json` and require:
 F:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
-As of `2026-05-06`, the Juanyun content set contains 7 Juanyun project pages and 13 Juanyun notes.
+As of `2026-05-06`, the Juanyun content set contains 7 Juanyun project pages and 9 Juanyun notes after removing pure datasheet/manual/manufacturing-export notes from the public note set.
 
 On branch `feature/note-visibility`, Juanyun notes are visible, but the public Juanyun asset folder only contains approved screenshots/renders and one prototype demo video. Do not re-publish Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, company firmware source dumps, desktop source dumps, internal manufacturing packages, invoices, reimbursements, billing records, internship proof, executable installers, vendor package folders, or generated build outputs without explicit desensitization review.
 
@@ -149,7 +175,7 @@ For `content/notes/*.mdx`:
 - use sections such as `前期想法`, `改变`, `疑问`, `阶段目标`, `证据`, and `复盘` when they fit;
 - keep mild self-reflection only when it clarifies the work;
 - explain why a direction changed, not only what was done;
-- avoid repetitive “我负责 / 我参与 / 我整理” bullet-heavy writing unless the note genuinely needs a checklist;
+- avoid repetitive `我负责 / 我参与 / 我整理` bullet-heavy writing unless the note genuinely needs a checklist;
 - keep evidence links, files, and technical constraints concrete;
 - use bilingual headings or paired English/Chinese paragraphs on public pages when a section would otherwise be Chinese-only.
 

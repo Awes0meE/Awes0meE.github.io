@@ -2,129 +2,155 @@
   {
     "id": "juanyun-acunit-main-front",
     "title": "AC Unit V2.1 main board front",
+    "titleZh": "外机板 V2.1 主控板正面",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Public board-render snapshot for the Juanyun AC unit V2.1 hardware branch."
+    "caption": "Public board-render snapshot for the Juanyun AC unit V2.1 hardware branch.",
+    "captionZh": "卷云外机板 V2.1 硬件线的公开板卡渲染截图。"
   },
   {
     "id": "juanyun-acunit-main-back",
     "title": "AC Unit V2.1 main board back",
+    "titleZh": "外机板 V2.1 主控板背面",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Back-side board-render snapshot kept as public visual evidence."
+    "caption": "Back-side board-render snapshot kept as public visual evidence.",
+    "captionZh": "作为公开视觉证据保留的主控板背面渲染截图。"
   },
   {
     "id": "juanyun-acunit-power-front",
     "title": "AC Unit V2.1 power board",
+    "titleZh": "外机板 V2.1 分电板",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Power board render for the public project gallery."
+    "caption": "Power board render for the public project gallery.",
+    "captionZh": "用于公开项目媒体库的分电板渲染图。"
   },
   {
     "id": "juanyun-acunit-ui-front",
     "title": "AC Unit V2.1 interaction board",
+    "titleZh": "外机板 V2.1 交互板",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "Interaction board render for buttons, encoder, and OLED-facing controls."
+    "caption": "Interaction board render for buttons, encoder, and OLED-facing controls.",
+    "captionZh": "面向按键、编码器和 OLED 控制的交互板渲染图。"
   },
   {
     "id": "juanyun-acunit-v21-block",
     "title": "AC Unit V2.1 system block",
+    "titleZh": "外机板 V2.1 系统框图",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "date": "2026-04-26",
     "projectSlug": "juanyun-acunit-control-platform",
-    "caption": "System-level block diagram kept as a public-safe overview image."
+    "caption": "System-level block diagram kept as a public-safe overview image.",
+    "captionZh": "作为公开安全概览图保留的系统级框图。"
   },
   {
     "id": "juanyun-diy-cooling-demo",
     "title": "DIY cooling desktop demo",
+    "titleZh": "DIY 散热器桌面端演示",
     "type": "video",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Public-safe demo video for the legacy pressure-flow cooling prototype."
+    "caption": "Public-safe demo video for the legacy pressure-flow cooling prototype.",
+    "captionZh": "早期压风式散热器原型的公开安全演示视频。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview",
     "title": "DIY cooling 3D print preview",
+    "titleZh": "DIY 散热器 3D 打印预览",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "3D printing preparation screenshot for the pressure-flow cooling prototype."
+    "caption": "3D printing preparation screenshot for the pressure-flow cooling prototype.",
+    "captionZh": "压风式散热器原型的 3D 打印准备截图。"
   },
   {
     "id": "robot-demo",
     "title": "Robot navigation demo",
+    "titleZh": "机器人导航演示",
     "type": "video",
     "src": "/uploads/visuals/robot-platform.svg",
     "thumbnail": "/uploads/visuals/robot-platform.svg",
     "date": "2024-06-08",
     "projectSlug": "sat301-graduation-thesis",
-    "caption": "Autonomous robot platform test footage placeholder."
+    "caption": "Autonomous robot platform test footage placeholder.",
+    "captionZh": "自主机器人平台测试影像占位。"
   },
   {
     "id": "slam-map",
     "title": "SLAM map trace",
+    "titleZh": "SLAM 地图轨迹",
     "type": "image",
     "src": "/uploads/visuals/dashboard.svg",
     "thumbnail": "/uploads/visuals/dashboard.svg",
     "date": "2024-05-21",
     "projectSlug": "sat301-graduation-thesis",
-    "caption": "Mapping and telemetry dashboard placeholder."
+    "caption": "Mapping and telemetry dashboard placeholder.",
+    "captionZh": "建图和遥测仪表盘占位图。"
   },
   {
     "id": "pid-board",
     "title": "PID controller board",
+    "titleZh": "PID 控制器板卡",
     "type": "image",
     "src": "/uploads/visuals/circuit-board.svg",
     "thumbnail": "/uploads/visuals/circuit-board.svg",
     "date": "2024-05-11",
     "projectSlug": "pid-starter-kit",
-    "caption": "Embedded controller board and notes."
+    "caption": "Embedded controller board and notes.",
+    "captionZh": "嵌入式控制器板卡和笔记。"
   },
   {
     "id": "filter-waveform",
     "title": "Signal estimation chart",
+    "titleZh": "信号估计图表",
     "type": "image",
     "src": "/uploads/visuals/waveform.svg",
     "thumbnail": "/uploads/visuals/waveform.svg",
     "date": "2024-04-12",
     "projectSlug": "pid-starter-kit",
-    "caption": "Kalman filter and signal analysis visual."
+    "caption": "Kalman filter and signal analysis visual.",
+    "captionZh": "Kalman 滤波和信号分析视觉图。"
   },
   {
     "id": "lab-notes",
     "title": "Engineering notebook",
+    "titleZh": "工程笔记本",
     "type": "image",
     "src": "/uploads/visuals/lab-notes.svg",
     "thumbnail": "/uploads/visuals/lab-notes.svg",
     "date": "2024-04-03",
-    "caption": "Notebook pages for formulas and experiment planning."
+    "caption": "Notebook pages for formulas and experiment planning.",
+    "captionZh": "用于公式和实验规划的笔记页。"
   },
   {
     "id": "control-dashboard",
     "title": "Control dashboard",
+    "titleZh": "控制仪表盘",
     "type": "image",
     "src": "/uploads/visuals/dashboard.svg",
     "thumbnail": "/uploads/visuals/dashboard.svg",
     "date": "2024-03-18",
-    "caption": "Telemetry and control visualization."
+    "caption": "Telemetry and control visualization.",
+    "captionZh": "遥测与控制可视化。"
   }
 ]
