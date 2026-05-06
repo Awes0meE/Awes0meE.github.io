@@ -9,7 +9,7 @@ projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## English Note / 英文说明
+## Note / 说明
 
 This note keeps the hardware-development SOP as working text rather than a cold attachment. The PDF remains linked at the end, but the main value is the checklist itself: requirements, system architecture, component selection, schematic review, layout constraints, fabrication checks, bring-up, revision records, and release archiving.
 
@@ -17,7 +17,7 @@ The body below follows the original Juanyun Hardware Development SOP. It reads m
 
 下面正文基本按照当时写的《卷云硬件开发 SOP》展开。读起来更像一份给小团队用的硬件开发清单，不是项目复盘。真正想留下的是这些问题：一块板从需求到发板、从回板到改版，哪些东西应该提前写清楚，哪些地方最容易在首板上翻车。
 
-![Hardware SOP cover image](/uploads/projects/juanyun-public/hardware-sop-cover.jpeg)
+![Hardware SOP cover image / 硬件 SOP 封面图](/uploads/projects/juanyun-public/hardware-sop-cover.jpeg)
 
 ## 0. Usage Notes / 使用说明
 
@@ -33,7 +33,7 @@ Goals:
 
 Recommended project folder for each board:
 
-```text
+```en-text
 ProjectName/
 ├── 01_Requirements_And_Structure
 ├── 02_Component_Selection
@@ -61,7 +61,7 @@ ProjectName/
 
 建议每块板建立一个独立项目文件夹：
 
-```text
+```zh-text
 项目名称/
 ├─ 01_需求与架构
 ├─ 02_器件选型
@@ -215,7 +215,7 @@ Document name: System Architecture Description.
 
 Draw the system block diagram first.
 
-```text
+```en-text
 24V input
 ├── input protection (fuse / TVS / reverse-polarity protection)
 ├── 12V power branch -> fan / actuator
@@ -234,7 +234,7 @@ MCU
 
 建议先把系统方框图画出来。
 
-```text
+```zh-text
 24V输入
 ├─ 输入保护（保险丝 / TVS / 反接保护）
 ├─ 12V电源支路 -> 风扇 / 执行器

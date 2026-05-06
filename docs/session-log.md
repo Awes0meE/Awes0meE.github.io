@@ -4,6 +4,12 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 
 ## 2026-05-07
 
+- Summary: Fixed language-scoping leaks in Turing and Juanyun notes, then tightened the renderer and verification pipeline.
+- Files changed: removed English-only fenced snippets from the Qt6 and Release translation sections; scoped Juanyun SOP paired listings with `en-text` / `zh-text`; added bilingual image captions for Juanyun note media; updated `components/content-renderer.tsx` to ignore standalone HTML comments, support scoped code fences, improve mixed slash heading/caption splitting, and use a less brittle language detector; decoded percent-encoded `assetPaths` in `components/project-assets.tsx`; locked project/note detail routes with `dynamicParams = false`; migrated linting to ESLint flat config; added `scripts/validate-content.mjs`; refreshed docs and memory for the new content rules.
+- Verification: `npm.cmd run lint`, `npm.cmd run validate-content`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local production HTTP checks returned `200` for the Qt6 note, Release packaging note, Juanyun SOP note, Juanyun thermal project page, and `/media`.
+
+## 2026-05-07
+
 - Summary: Moved project development-note cards above public project-file archives on every project detail page.
 - Files changed: reordered the related-notes and `ProjectAssets` sections in `app/work/[slug]/page.tsx`; updated `CODEX.md`, `MEMORY.md`, `docs/architecture.md`, and `docs/content-workflow.md` to record the project detail order as body, development notes, public project files, then related media.
 - Verification: `git diff --check`, `npm.cmd run lint`, and `npm.cmd run build` passed for the route change; `/neat` docs were checked with UTF-8 and diff checks.

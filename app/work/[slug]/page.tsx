@@ -20,6 +20,8 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getProjects().map((project) => ({ slug: project.slug }));
 }

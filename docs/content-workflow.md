@@ -158,7 +158,9 @@ The website has a top-right English / Simplified Chinese language switch. The de
 - Use `titleZh/captionZh` in `content/media.json` for media cards.
 - `ContentRenderer` can split simple bilingual headings such as `English / 中文` and hide language-detected body blocks when both languages exist. It does not show missing-language placeholder notices; single-language notes remain readable.
 - Long MDX body content is not automatically machine-translated. Add real bilingual body sections manually when an article needs both languages, and keep the English section accurate to the Chinese section when the Chinese text is the user's original writing.
-- Fenced code blocks are treated as shared technical evidence, so they are not hidden by the English/Chinese article-body filter. If a code example only belongs to an English translation section, keep it as inline code or move it into a shared source/evidence section below the bilingual prose.
+- Normal fenced code blocks are treated as shared technical evidence, so they are not hidden by the English/Chinese article-body filter.
+- If a whole listing belongs to one language view, prefix the fence language with `en-` or `zh-`, for example `en-text`, `en-powershell`, or `zh-text`. The renderer shows only the suffix as the label and hides the block with the same language toggle CSS.
+- Standalone HTML comments in MDX bodies are ignored by the renderer and can be used as internal markers.
 
 ## Writing Standard
 
@@ -221,6 +223,7 @@ That error usually means the local `.next` cache is corrupt around `gray-matter 
 
 ```powershell
 npm run lint
+npm run validate-content
 npm run build
 npm audit --omit=dev
 ```

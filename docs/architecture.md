@@ -34,7 +34,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 2. `lib/content.ts` reads project and note frontmatter with `gray-matter`.
 3. Route components call the content helpers.
 4. Static assets are served from `public/uploads/`.
-5. Next.js prerenders static pages during `npm run build`.
+5. Next.js prerenders static pages during `npm run build`. Project and note detail routes use `generateStaticParams()` with `dynamicParams = false`, so unknown slugs resolve as generated 404s instead of depending on runtime route fallback behavior.
 
 ## Content Types
 
@@ -75,11 +75,11 @@ Current content state on `main` release `v0.6.1`, as of `2026-05-07`:
 
 ## Rendering Notes
 
-The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, and standalone Markdown image blocks. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
+The site does not execute arbitrary MDX components. Body content is rendered through `components/content-renderer.tsx`, which supports simple headings, heading anchors, paragraphs, lists, links, blockquotes, fenced code, inline code, separators, ordered lists, basic Markdown tables, and standalone Markdown image blocks. Standalone HTML comments are ignored so internal content markers do not appear on public pages. Normal fenced code blocks are shared technical evidence; scoped fences such as `en-text` and `zh-powershell` can be used when a whole listing belongs to one language view. This was chosen to keep file-based content simple and avoid unnecessary remote-MDX risk.
 
 Project detail pages also derive related notes from note frontmatter and related media from `content/media.json` by matching `projectSlug`. The detail page order is project body, development notes, public project files, then related media.
 
-Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
+Project pages can also render public project-file archives through `components/project-assets.tsx`. A project's `assetPaths` can reference individual public files or a directory under `public/uploads/`; Markdown and text documents are rendered as readable article content, source/code files are rendered in code frames, images and videos are previewed, and binary documents / fabrication / CAD / archive files are linked directly. Percent-encoded upload paths are decoded before filesystem lookup. The component blocks unreviewed `public/uploads/projects/juanyun-tech/` files unless they are in the explicit ACUnit screenshot / DIY demo allowlist.
 
 ## Language Layer
 
@@ -92,7 +92,7 @@ The language toggle is intentionally lightweight:
 - `app/globals.css` hides `.lang-en` or `.lang-zh` based on `html[data-lang]`.
 - The app remains statically generated; language switching does not require dynamic routes, middleware, cookies, or server-side rendering.
 
-Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings and hide language-detected body blocks, headings, and tables only when both English and Chinese body text exist. Chinese-only or English-only notes stay readable instead of showing placeholder fallback notices. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
+Project and note cards use paired frontmatter fields. Media cards use optional `titleZh` and `captionZh`. `ContentRenderer` can split simple bilingual headings and hide language-detected body blocks, headings, and tables only when both English and Chinese body text exist. Chinese-only or English-only notes stay readable instead of showing placeholder fallback notices. For authored MDX, use `English title / 中文标题` for simple bilingual headings or captions. If the English side contains technical slashes, the renderer splits at the last valid slash separator whose right side contains Chinese, so titles such as `DHT11 / AM2302 Breakout / 温湿度小板` are handled correctly. Real MDX body translation remains a content-authoring task, not an automatic runtime translation feature.
 
 ## Deployment
 
@@ -101,6 +101,7 @@ Project and note cards use paired frontmatter fields. Media cards use optional `
 - Vercel handles the Next.js deployment.
 - Cloudflare manages DNS.
 - The root `.nojekyll` file is intentional. This repository name also triggers GitHub Pages, but the live site is not a Jekyll site; `.nojekyll` prevents GitHub Pages from treating source content and `public/uploads/` Markdown/code archives as Liquid/Jekyll templates.
+- Legacy project-slug redirects live in `next.config.mjs`, so they are a Vercel / Next.js hosting feature. If the site is ever exported or served as plain static files, those redirects need host-level equivalents.
 
 ## Non-Goals For The Current Version
 

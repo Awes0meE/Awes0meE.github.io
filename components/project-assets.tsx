@@ -294,11 +294,25 @@ function walkDirectory(directory: string) {
 }
 
 function normalizePublicHref(href: string) {
-  if (!href.startsWith("/uploads/") || href.includes("..")) {
+  const cleaned = href.replaceAll("\\", "/");
+
+  if (!cleaned.startsWith("/uploads/") || cleaned.includes("..")) {
     return null;
   }
 
-  return href.replaceAll("\\", "/").replace(/\/+$/, "");
+  let decoded: string;
+
+  try {
+    decoded = decodeURI(cleaned);
+  } catch {
+    return null;
+  }
+
+  if (!decoded.startsWith("/uploads/") || decoded.includes("..") || decoded.includes("\0")) {
+    return null;
+  }
+
+  return decoded.replace(/\/+$/, "");
 }
 
 function hrefToPublicPath(href: string) {

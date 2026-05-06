@@ -35,6 +35,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Release `v0.6.0` names the post-`v0.5.0` media/note refresh on `main`, including the 29-item media gallery, webpage-rendered SOP/text assets, note prose refresh, and release-boundary docs cleanup.
 - `2026-05-07`: Nanjing Turing source-text notes were changed to render uploaded public originals directly as note pages: Qt6 Seamly2D first-run TXT, Release packaging Markdown, README + `.sm2d` / `.smis` samples, and then the CMake/build-logic note was replaced again with the user's two Notion-exported Markdown originals instead of the lossy PDF text extraction.
 - `2026-05-07`: Release `v0.6.1` adds the Notion CMake/build-logic originals, page-internal heading anchors, Markdown table rendering, a full public English body coverage pass across projects/notes, and a 38-item media gallery covering all project/note images and videos.
+- `2026-05-07`: Content rendering was tightened after English translation code snippets leaked into Chinese note views. `ContentRenderer` now ignores standalone HTML comments, supports scoped fenced-code prefixes such as `en-text` / `zh-text`, splits bilingual slash text from the last valid Chinese separator, and project/note detail routes lock unknown slugs to generated static params.
 
 ## Stable Decisions
 
@@ -50,7 +51,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Keep the current project/note prose style for future content. The user likes the plain practical self-study / internship-log texture now used in notes and projects: concrete, casual, close to the debugging scene, less formal logic, not AI handoff or delivery-report phrasing.
 - When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, prefer making it a real note page with the original wording rendered as readable article content. Do not hide the only copy under a project asset frame or replace it with a short summary.
 - Keep English body sections equivalent to Chinese body sections on public project/note pages. Do not rely on `title/titleZh` and `summary/summaryZh` alone when the article body has real content in both languages.
-- Treat fenced code blocks as language-neutral rendered evidence. If an English-only explanation must be hidden in Chinese mode, keep examples inline or put shared source/code listings below the bilingual prose; otherwise code fences can show up on the Chinese page.
+- Treat normal fenced code blocks as language-neutral rendered evidence. When a whole code/listing block belongs to only one language view, use a scoped fence prefix such as `en-text`, `en-powershell`, `zh-text`, or `zh-powershell`; the renderer hides it with the same language CSS and displays the suffix as the code label.
 - On Windows PowerShell, do not pipe inline Chinese here-strings directly into Node/Python/other interpreters for file generation. Use `apply_patch` for Chinese text or write a temporary UTF-8 script/file first, then run it. After any batch content generation, verify with Node `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` or repeated question-mark mojibake before committing.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
@@ -71,7 +72,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/language-toggle.tsx`: client-side EN/简中 language switch.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: renders project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
-- `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews, fenced code blocks, basic Markdown tables, heading anchors, and language-scoped body/headings/tables.
+- `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews, normal and language-scoped fenced code blocks, basic Markdown tables, heading anchors, ignored standalone HTML comments, and language-scoped body/headings/tables.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.
 - `content/projects/`: project case-study source files.
@@ -91,6 +92,7 @@ Known-good checks as of `2026-05-07` on Windows PowerShell:
 
 ```powershell
 npm.cmd run lint
+npm.cmd run validate-content
 npm.cmd run build
 npm audit --omit=dev
 ```
@@ -98,6 +100,7 @@ npm audit --omit=dev
 Expected result:
 
 - lint passes;
+- content validation passes for project/note frontmatter, projectSlug joins, and local `/uploads` references;
 - production build passes;
 - production audit should report `0 vulnerabilities` when dependency state has not changed.
 

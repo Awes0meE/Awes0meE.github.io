@@ -49,6 +49,7 @@ Use the Node.js install on PATH if available. On this Windows machine, Node was 
 npm install
 npm run dev
 npm run lint
+npm run validate-content
 npm run build
 npm audit --omit=dev
 ```
@@ -145,7 +146,8 @@ The site has a top-right language toggle for English and Simplified Chinese.
 - Media items can use optional `titleZh` and `captionZh`; if missing, the English field is reused.
 - `components/content-renderer.tsx` can split simple bilingual headings such as `English / 中文`, hide language-detected body blocks/headings/tables when both languages exist, render basic Markdown tables, and add heading anchors for internal links. Single-language notes stay readable instead of showing missing-language placeholder notices.
 - MDX body content is not automatically machine-translated. Add real bilingual body sections manually when a project/note needs full two-language article text. As of `v0.6.1`, public project/note pages should not leave important Chinese-only body content without an English counterpart.
-- Fenced code blocks are language-neutral in `ContentRenderer`. Do not put English-only explanatory code fences inside an English article section if they should disappear in Chinese mode; rewrite them as inline code, or place the examples in a clearly shared source/evidence section.
+- Normal fenced code blocks are language-neutral in `ContentRenderer`. Use `en-*` / `zh-*` language prefixes, such as `en-text` or `zh-powershell`, only when a whole code/listing block belongs to one language view. `ContentRenderer` strips that prefix from the visible code label and hides the block with the same CSS language rules as prose.
+- Standalone HTML comments in MDX bodies are ignored by `ContentRenderer`; use them only as internal markers, not as visible content.
 
 ## Current Content State
 
@@ -210,6 +212,7 @@ For content-only edits:
 
 ```powershell
 npm run lint
+npm run validate-content
 npm run build
 ```
 
@@ -227,6 +230,7 @@ For dependency changes:
 
 ```powershell
 npm run lint
+npm run validate-content
 npm run build
 npm audit --omit=dev
 ```

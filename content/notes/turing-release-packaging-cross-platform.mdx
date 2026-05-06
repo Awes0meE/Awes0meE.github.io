@@ -10,7 +10,7 @@ projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 <!-- turing-english-translation: release-packaging -->
 
-## English Translation / 英文译文
+## English Translation
 
 ### Source
 
@@ -31,31 +31,15 @@ Before packaging, I checked that Visual Studio Build Tools still contained the r
 
 The system `Path` needed normal base tools such as Windows system paths, PowerShell, OpenSSH, Git, CMake, and Qt Creator. MSVC tools such as `cl`, `link`, and `nmake` were not expected to live directly in global PATH; Visual Studio normally configures them through its developer command prompts.
 
-From the x64 Native Tools Command Prompt, I verified:
-
-```powershell
-cl
-link
-nmake /?
-qmake -v
-```
+From the x64 Native Tools Command Prompt, I verified `cl`, `link`, `nmake /?`, and `qmake -v`.
 
 In Qt Creator, I opened `Seamly2D.pro`, cloned the existing Debug kit to avoid disturbing it, and checked that the cloned kit used `MSVC 2019 v142 (BuildTools)`, auto-detected CDB, and Qt 6.5.3 MSVC2019 64-bit. Then I added a Release build configuration. After a long compile, Qt Creator produced `seamly2d.exe` under the Release build output, and launching it directly confirmed that the app still worked.
 
 ### Collecting Windows Dependencies With windeployqt
 
-The Release executable alone was not enough. I copied only `seamly2d.exe` into a fresh folder such as `C:\Users\xxx\Desktop\Seamly2D_Release`, then ran `windeployqt` from the x64 Native Tools Command Prompt using an absolute Qt path:
+The Release executable alone was not enough. I copied only `seamly2d.exe` into a fresh folder such as `C:\Users\xxx\Desktop\Seamly2D_Release`, then ran `windeployqt` from the x64 Native Tools Command Prompt using the absolute Qt 6.5.3 `windeployqt.exe` path.
 
-```powershell
-cd C:\Users\123\Desktop\Seamly2D_Release
-C:\Qt\6.5.3\msvc2019_64\bin\windeployqt.exe seamly2d.exe
-```
-
-`windeployqt` copied the Qt runtime dependencies, but it did not copy the third-party XML library used by Seamly2D. The missing DLL was `xerces-c_3_2.dll`, from Apache Xerces-C++. Because Seamly2D stores pattern and measurement data in XML formats, this dependency is expected. I copied it manually from:
-
-```text
-{Seamly2D source path}\src\libs\xerces-c\msvc\lib
-```
+`windeployqt` copied the Qt runtime dependencies, but it did not copy the third-party XML library used by Seamly2D. The missing DLL was `xerces-c_3_2.dll`, from Apache Xerces-C++. Because Seamly2D stores pattern and measurement data in XML formats, this dependency is expected. I copied it manually from the source tree's `src\libs\xerces-c\msvc\lib` folder.
 
 After copying the DLL into the release folder, double-clicking `seamly2d.exe` should run the program with the same developed features.
 
@@ -73,12 +57,7 @@ The Windows self-signed process was:
 4. Create a code-signing certificate signed by that root certificate.
 5. Export the signing certificate as a password-protected `.pfx` file.
 
-The two important outputs were:
-
-```text
-C:\MyCertificates\MyPersonalRootCA.cer
-C:\MyCertificates\MySoftware.pfx
-```
+The two important outputs were the local root certificate `MyPersonalRootCA.cer` and the password-protected signing certificate `MySoftware.pfx` under `C:\MyCertificates`.
 
 The `.cer` file is distributed so the user can trust the local root certificate. The `.pfx` file stays with the developer and is used to sign the application.
 
@@ -90,13 +69,7 @@ After installing Inno Setup from `https://jrsoftware.org/isdl.php`, I created an
 
 The script also included `[Code]` logic to run `signtool.exe` after installation and sign the main executable and DLLs. After compiling the `.iss` script, Inno Setup produced `Seamly2D_Setup.exe` under the `Output` folder.
 
-The installer itself was then signed manually with:
-
-```powershell
-"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x86\signtool.exe" sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /f "C:\MyCertificates\MySoftware.pfx" /p "SecurePassword123" "[absolute path]\Seamly2D_Setup.exe"
-```
-
-A successful `Successfully signed` message meant the installer was signed and ready for distribution in this learning context.
+The installer itself was then signed manually with Windows SDK `signtool.exe`, a timestamp server, SHA256 digest options, the `.pfx` certificate, and the installer path. A successful `Successfully signed` message meant the installer was signed and ready for distribution in this learning context.
 
 ### Verification And Notes
 

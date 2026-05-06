@@ -299,10 +299,11 @@ Before sharing a new version, run:
 
 ```bash
 npm run lint
+npm run validate-content
 npm run build
 ```
 
-If both commands pass, the site is ready to publish.
+If both checks and the build pass, the site is ready to publish.
 
 ## 发布前如何检查
 
@@ -310,17 +311,18 @@ If both commands pass, the site is ready to publish.
 
 ```bash
 npm run lint
+npm run validate-content
 npm run build
 ```
 
-两个命令都通过，就说明网站可以发布。
+内容校验和构建都通过，就说明网站可以发布。
 
 ## Suggested Maintenance Workflow
 
 1. Start local preview with `npm run dev`.
 2. Modify content or pages.
 3. Check the website in the browser.
-4. Run `npm run lint` and `npm run build`.
+4. Run `npm run lint`, `npm run validate-content`, and `npm run build`.
 5. Commit changes to Git.
 6. Push to GitHub.
 7. Let Vercel deploy the public version.
@@ -330,7 +332,7 @@ npm run build
 1. 用 `npm run dev` 启动本地预览。
 2. 修改内容或页面。
 3. 在浏览器检查网站效果。
-4. 运行 `npm run lint` 和 `npm run build`。
+4. 运行 `npm run lint`、`npm run validate-content` 和 `npm run build`。
 5. 提交 Git 版本。
 6. 推送到 GitHub。
 7. 让 Vercel 自动部署公开版本。

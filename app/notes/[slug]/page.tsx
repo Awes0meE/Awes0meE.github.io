@@ -10,6 +10,8 @@ type NotePageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getNotes().map((note) => ({ slug: note.slug }));
 }

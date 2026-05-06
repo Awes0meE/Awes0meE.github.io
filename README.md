@@ -79,10 +79,11 @@ Local troubleshooting:
 
 ```bash
 npm run dev       # Start local development server
-npm run lint      # Run Next.js ESLint checks
+npm run lint      # Run ESLint and content validation
 npm run build     # Build the production site
 npm run start     # Start a production server after build
-npm run typecheck # Run a production build without lint
+npm run typecheck # Run TypeScript without emitting files
+npm run validate-content # Check frontmatter, projectSlug joins, and local upload refs
 ```
 
 ## Content Editing
@@ -113,7 +114,7 @@ Media items are stored in `content/media.json`, with assets under `public/upload
 
 The site has a top-right English / Simplified Chinese toggle. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
-Fenced code blocks are rendered as shared technical evidence. If an example belongs only to an English translation section and should not appear in Chinese mode, keep it as inline code or move it into a shared source/evidence section.
+Normal fenced code blocks are rendered as shared technical evidence. If a whole listing belongs only to one language view, prefix the fence language with `en-` or `zh-`, such as `en-text` or `zh-powershell`; the visible code label drops the prefix while the language toggle hides the inactive block.
 
 Use `projectSlug` on notes and media items when they should appear as related material on a project page.
 
@@ -150,6 +151,7 @@ Before publishing:
 
 ```bash
 npm run lint
+npm run validate-content
 npm run build
 npm audit --omit=dev
 ```
@@ -253,10 +255,11 @@ http://127.0.0.1:3000
 
 ```bash
 npm run dev       # 启动本地开发服务器
-npm run lint      # 运行 Next.js ESLint 检查
+npm run lint      # 运行 ESLint 和内容校验
 npm run build     # 构建生产版本
 npm run start     # 构建后启动生产服务器
-npm run typecheck # 跳过 lint 的生产构建检查
+npm run typecheck # 运行 TypeScript 类型检查
+npm run validate-content # 检查 frontmatter、projectSlug 和本地上传引用
 ```
 
 ## 内容维护
@@ -269,7 +272,7 @@ npm run typecheck # 跳过 lint 的生产构建检查
 
 网站右上角有 English / 简体中文切换按钮。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
 
-代码块会按共享技术证据处理，不会自动跟随英文 / 中文正文隐藏。如果某段代码例子只属于英文译文，不希望出现在中文页面里，改成 inline code，或者放到双语正文后面的共享原文 / 证据区。
+普通代码块会按共享技术证据处理，不会自动跟随英文 / 中文正文隐藏。如果整段列表或代码只属于某一个语言视图，围栏语言前面加 `en-` 或 `zh-`，例如 `en-text`、`zh-text`、`en-powershell`。页面右上角仍然只显示 `text` 或 `powershell`，语言切换时会隐藏另一侧。
 
 如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
 
@@ -311,6 +314,7 @@ Vercel 推荐配置：
 
 ```bash
 npm run lint
+npm run validate-content
 npm run build
 npm audit --omit=dev
 ```

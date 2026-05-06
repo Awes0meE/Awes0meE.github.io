@@ -7,17 +7,24 @@ function hasChinese(text: string) {
   return /[\u3400-\u9fff]/.test(text);
 }
 
-function hasEnglishWords(text: string) {
-  return /[A-Za-z]{3,}/.test(text);
-}
-
 function getBlockLanguage(text: string): BlockLanguage {
-  if (hasChinese(text)) {
+  const normalized = text
+    .replace(/`[^`]*`/g, "")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/https?:\/\/\S+/g, "");
+  const chineseCount = normalized.match(/[\u3400-\u9fff]/g)?.length ?? 0;
+  const englishWordCount = normalized.match(/[A-Za-z]{3,}/g)?.length ?? 0;
+
+  if (chineseCount && (!englishWordCount || chineseCount >= englishWordCount * 2)) {
     return "zh";
   }
 
-  if (hasEnglishWords(text)) {
+  if (englishWordCount) {
     return "en";
+  }
+
+  if (chineseCount) {
+    return "zh";
   }
 
   return "neutral";
@@ -36,23 +43,53 @@ function getScopedLanguageClass(language: BlockLanguage, shouldScope: boolean) {
 }
 
 function splitBilingualSlash(text: string) {
-  const parts = text.split(/\s+\/\s+/);
+  const separators = [...text.matchAll(/\s+\/\s+/g)].reverse();
 
-  if (parts.length !== 2) {
-    return null;
+  for (const separator of separators) {
+    const separatorIndex = separator.index ?? -1;
+
+    if (separatorIndex < 0) {
+      continue;
+    }
+
+    const first = text.slice(0, separatorIndex).trim();
+    const second = text.slice(separatorIndex + separator[0].length).trim();
+
+    if (!first || !second) {
+      continue;
+    }
+
+    if (hasChinese(first) || !hasChinese(second)) {
+      continue;
+    }
+
+    return {
+      en: first,
+      zh: second
+    };
   }
 
-  const [first, second] = parts;
-  const zhCandidate = second.trim();
+  return null;
+}
 
-  if (hasChinese(first) || !hasChinese(zhCandidate) || /^[A-Za-z0-9]/.test(zhCandidate)) {
-    return null;
+function getCodeLanguageMeta(language: string) {
+  const scopedLanguage = language.match(/^(en|zh)-(.+)$/);
+
+  if (!scopedLanguage) {
+    return {
+      displayLanguage: language,
+      languageClass: undefined
+    };
   }
 
   return {
-    en: first,
-    zh: second
+    displayLanguage: scopedLanguage[2],
+    languageClass: scopedLanguage[1] === "en" ? "lang-en" : "lang-zh"
   };
+}
+
+function isHtmlCommentBlock(block: string) {
+  return /^<!--[\s\S]*-->$/.test(block.trim());
 }
 
 function parseInline(text: string) {
@@ -184,6 +221,7 @@ export function ContentRenderer({ source }: { source: string }) {
     .map((block) => block.trim())
     .filter(
       (block) =>
+        !isHtmlCommentBlock(block) &&
         !block.startsWith("# ") &&
         !block.startsWith("## ") &&
         !block.startsWith("### ") &&
@@ -234,6 +272,10 @@ export function ContentRenderer({ source }: { source: string }) {
         const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
         const codeMatch = trimmed.match(/^```([A-Za-z0-9_+#.-]*)\n([\s\S]*?)\n```$/);
 
+        if (isHtmlCommentBlock(trimmed)) {
+          return null;
+        }
+
         if (imageMatch) {
           const [, alt, src] = imageMatch;
 
@@ -259,12 +301,13 @@ export function ContentRenderer({ source }: { source: string }) {
 
         if (codeMatch) {
           const [, language, code] = codeMatch;
+          const { displayLanguage, languageClass } = getCodeLanguageMeta(language);
 
           return (
-            <figure key={index} className="mt-6 overflow-hidden rounded-lg border border-line bg-[#10231e]">
-              {language ? (
+            <figure key={index} className={cn("mt-6 overflow-hidden rounded-lg border border-line bg-[#10231e]", languageClass)}>
+              {displayLanguage ? (
                 <figcaption className="border-b border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-normal text-[#b9d2ca]">
-                  {language}
+                  {displayLanguage}
                 </figcaption>
               ) : null}
               <pre className="overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
