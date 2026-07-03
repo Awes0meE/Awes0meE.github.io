@@ -136,12 +136,13 @@ Use optional project `assetPaths` to list uploaded evidence from `public/uploads
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current main content state:
+Current workspace content state:
 
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
-- The media gallery covers 50 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and the Notion-exported Nanjing Turing build diagrams.
+- The site also includes an Arduino Digital Clock course project from MEC104, with a project page, one related learning note, selected public course screenshots, Arduino sketches, a cleaned demo video, and the SN54LS47 datasheet.
+- The media gallery covers 58 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the Notion-exported Nanjing Turing build diagrams, and Digital Clock screenshots/demo media.
 - The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
 - Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
 - Public project files render through a two-pane browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, and a `juanyun-tech` allowlist checked by `npm run validate-content`.
@@ -301,12 +302,13 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 重要隐私规则：`visibility: private` 只会把笔记从网站上隐藏，不会把源码从公开 GitHub 仓库里隐藏。`public/uploads/` 下的文件部署后就是公开静态文件。不要把私密财务、证明、凭据、安装包、vendor、依赖或 build 输出文件放进去。卷云材料里，`Current_Product_ACUnit_Project*` 和 `Current_Product_BaseUnit_Project*` 仍然按敏感资料处理；非 Current_Product 的 legacy 文件夹可以在筛选后发布小段源码、Gerber/BOM/PnP、EDA、STEP/3MF、原理图、PDF、图片和演示媒体等证据，但不能整包倾倒原始目录。
 
-当前 main 内容状态：
+当前工作区内容状态：
 
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
-- 媒体页覆盖 50 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图，以及南京图灵 Notion 导出的编译逻辑图。
+- 站点还新增了 MEC104 Arduino Digital Clock 课程项目，包括项目页、1 篇学习笔记、精选公开课件截图、Arduino sketch、清理过元数据的演示视频和 SN54LS47 数据手册。
+- 媒体页覆盖 58 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图、南京图灵 Notion 导出的编译逻辑图，以及 Digital Clock 截图和演示媒体。
 - 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
 - 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
 - 项目公开资料通过双栏文件浏览器展示，并在服务端做路径归一化、严格 UTF-8 读取、目录/文件/预览体积上限，以及由 `npm run validate-content` 检查的 `juanyun-tech` allowlist。

@@ -1,6 +1,6 @@
 # MEMORY.md
 
-Durable project memory for the XJTLU Portfolio repository. Current local path in this session: `D:\XJTLU\XJTLU_Portfolio`.
+Durable project memory for the XJTLU Portfolio repository. Current local path in this session: `D:\Develop\Project_Final_Collation\XJTLU_Portfolio`.
 
 This file is for future AI sessions and long-running portfolio maintenance. Keep it concise and current; edit stale facts instead of blindly appending duplicates.
 
@@ -42,8 +42,12 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-07`: Experimental branch `experiment/project-asset-browser` replaces stacked public project-file cards with a two-pane browser. `components/project-assets.tsx` remains the server-side resolver and safety boundary; `components/project-asset-browser.tsx` is the client-side index/preview UI.
 - `2026-05-07`: Full review of the experimental project asset browser hardened public-file handling: non-allowlisted local Juanyun files were moved out of `public/uploads/projects/juanyun-tech` to `D:\XJTLU\XJTLU_Portfolio_private\juanyun-tech-public-quarantine-20260507`; content validation now fails if extra files reappear there; browser previews gained directory/file caps, aggregate text-preview caps, strict UTF-8 reads, Markdown relative-link resolution, safer active-upload handling, and mobile preview scrolling.
 - `2026-05-07`: Release `v0.7.0` promotes the two-pane public project-file browser to `main`, keeps the 50-item media/gallery content state, and records the public-asset hardening work as part of the release boundary.
-- `2026-05-07`: Added repo-local `AddProject.skill` / `skills/add-project/SKILL.md` to make future local-folder project imports repeatable: branch first, audit source files, curate public evidence, create bilingual notes/project/media, review, verify, push each milestone, and run `/neat` cleanup.
+- `2026-05-07`: Added repo-local `AddProject.skill` / `skills/add-project/SKILL.md` to make future local-folder project imports repeatable.
 - `2026-05-07`: Homepage identity polish after `v0.7.0`: the top-left wordmark now reads `Awes0meE / 66CCFF Lab`, the hero/footer can still use `66CCFF Labs`, the homepage profile avatar uses `public/uploads/projects/avatar.jpg`, the Chinese XJTLU school label is `智能工程学院`, and the homepage current date range starts at `2025.08`.
+- `2026-07-03`: Upgraded repo-local `AddProject.skill` / `skills/add-project/SKILL.md` into the portfolio project-import SOP for turning a user-provided raw project folder into public-safe uploads, bilingual project pages, notes, media entries, preview checks, verification, Git handoff, and optional release. The skill now uses focused references for intake, source audit, public-safety review, content building, and review/release.
+- `2026-07-03`: Added repo-local `engineering-note-writer` skill for converting rough project bullet points, timelines, technical stacks, and evidence into the portfolio's Chinese-first practical engineering-note voice with accurate English counterparts. `AddProject.skill` now points to it for project/note/media prose during imports.
+- `2026-07-04`: Hardened `AddProject.skill` and `engineering-note-writer` with mandatory hard-gated checklists so future agents must pass source-audit/public-safety/content/verification gates for imports and fact/structure/voice/bilingual/MDX gates for writing before continuing.
+- `2026-07-04`: Imported `C:\Users\123\Desktop\Digital Clock` as the `arduino-digital-clock-counter` portfolio project: 1 project page, 1 public learning note, 8 media entries, normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`, and selected public screenshots from the course handout. The original `Digital Clock.pdf` course handout is reference-only and should not be copied into `public/uploads/`.
 
 ## Stable Decisions
 
@@ -65,7 +69,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Strict encoding rule: every committed source, content, docs, and public-upload text file must be UTF-8. Convert GBK/UTF-16 legacy exports at import time; do not mix encodings in the repo and do not add runtime decoder fallbacks to hide bad files.
 - On Windows PowerShell, do not pipe inline Chinese here-strings directly into Node/Python/other interpreters for file generation. Use `apply_patch` for Chinese text or write a temporary UTF-8 script/file first, then run it. After any batch content generation, verify with Node `fs.readFileSync(path, "utf8")` and scan for `\uFFFD` or repeated question-mark mojibake before committing.
 - On Windows PowerShell, use `npm.cmd` and avoid assuming modern .NET helper APIs exist in older shells. In particular, do not rely on `[System.IO.Path]::GetRelativePath` for safety-critical moves; use Node.js `path.relative` or a verified substring fallback, set `$ErrorActionPreference = 'Stop'`, and hash-check copied files before deleting/moving originals.
-- Use `AddProject.skill` for future "give Codex a local folder and deploy it as a portfolio project" tasks. The canonical skill lives at `skills/add-project/SKILL.md`; the root `AddProject.skill` file is a human-friendly shortcut.
+- Use `AddProject.skill` for future "give Codex a local folder and deploy it as a portfolio project" tasks. The canonical skill lives at `skills/add-project/SKILL.md`; the root `AddProject.skill` file is a human-friendly shortcut. The import workflow is intentionally staged and hard-gated by `skills/add-project/references/hard-gated-checklist.md`: read-only source audit, public/private classification, user confirmation for ambiguous material, asset normalization, bilingual content/media creation, preview, verification, branch handoff, and optional main release after explicit approval.
+- Use `engineering-note-writer` for future "turn my rough project bullet points into portfolio prose" tasks. It should draft Chinese first, then create an English counterpart that matches the Chinese substance. It must preserve concrete engineering evidence and avoid resume, academic, corporate, or AI handoff tone. Its `skills/engineering-note-writer/references/hard-gated-checklist.md` gates fact sheet, structure, voice, banned wording, bilingual equivalence, public boundary, and MDX readiness.
 - Do not introduce a database or CMS until file-based content becomes a real bottleneck.
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
@@ -98,16 +103,20 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
 - `docs/environment-toolchain.md`: Node/npm, Git restore, PowerShell, local preview, screenshot tooling, encoding, and Vercel setup.
 - `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
-- `skills/add-project/SKILL.md`: reusable workflow for importing future local project folders into the site.
+- `skills/add-project/SKILL.md`: portfolio import SOP for turning future local project-material folders into public-safe uploads, bilingual project pages, notes, media entries, preview checks, verification, Git handoff, and optional release.
+- `skills/add-project/references/hard-gated-checklist.md`: mandatory phase gate checklist for future project imports and releases.
 - `AddProject.skill`: root shortcut that points to the repo-local add-project skill.
+- `skills/engineering-note-writer/SKILL.md`: writing-style skill for converting rough project bullets and evidence into Chinese-first bilingual engineering notes in the user's portfolio voice.
+- `skills/engineering-note-writer/references/hard-gated-checklist.md`: mandatory writing checklist for fact integrity, structure, voice, bilingual equivalence, public boundary, and MDX readiness.
 - `public/uploads/projects/juanyun-public/`: reviewed public Juanyun legacy PDFs, images, source snippets, and selected project-file evidence.
 - `public/uploads/projects/claude-chime-hardware/`: public Claude Chime hardware PDFs, BOM, Gerber, EasyEDA project, logo image, and datasheets.
 - `public/uploads/projects/nanjing-turing/`: reviewed public Qt/CMake/Seamly2D learning evidence.
 - `public/uploads/projects/tianjin-metro/`: reviewed public STM32 foundation learning evidence.
+- `public/uploads/projects/arduino-digital-clock-counter/`: reviewed public MEC104 Digital Clock assets, including selected course screenshots, a metadata-stripped demo MP4, Arduino sketches, a public TI SN54LS47 datasheet, and the source brief. The original course PDF remains outside public uploads.
 
 ## Verification Baseline
 
-Known-good checks as of `2026-05-07` on Windows PowerShell:
+Known-good checks as of `2026-07-04` on Windows PowerShell:
 
 ```powershell
 npm.cmd run lint

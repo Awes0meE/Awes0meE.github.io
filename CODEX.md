@@ -5,7 +5,7 @@ Project operating guide for AI agents working on the XJTLU Portfolio.
 ## Project Snapshot
 
 - Repository: `Awes0meE/Awes0meE.github.io`
-- Current local path: `D:\XJTLU\XJTLU_Portfolio` on this machine. The path may differ on another computer.
+- Current local path: `D:\Develop\Project_Final_Collation\XJTLU_Portfolio` on this machine. The path may differ on another computer.
 - Public site: `https://www.66ccff-labs.com/`
 - Vercel preview/base deployment: `https://awes0mee-portfolio.vercel.app/`
 - Deployment target: Vercel. Keep root `.nojekyll` committed because the repository name can trigger GitHub Pages, and this Next.js site should not let Jekyll/Liquid parse uploaded Markdown or code evidence under `public/uploads/`.
@@ -166,7 +166,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current mainline state is based on release `v0.7.0` on `main`, including the media/cover refresh and the two-pane public project-file browser for project archives.
+The current working content state extends release `v0.7.0` on `main`, including the media/cover refresh, the two-pane public project-file browser for project archives, and the imported Digital Clock course project.
 
 As of `2026-05-07`, `main` has removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -177,15 +177,16 @@ D:\XJTLU\工作相关\天津津铁通信有限公司
 D:\XJTLU\工作相关\Claude Chime 硬件
 ```
 
-Current content count on `main`:
+Current content count in this workspace:
 
-- 6 project pages total;
-- 19 public notes total;
+- 7 project pages total;
+- 20 public notes total;
 - 3 Juanyun project pages and 9 Juanyun notes remain;
 - 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 50 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams plus processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, and EEV driver-board images.
+- 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF stays out of `public/uploads/`, while selected course screenshots are public.
+- 58 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and Digital Clock screenshots/demo media.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
@@ -212,6 +213,8 @@ Maintain the current engineering-academic identity:
 
 Portfolio notes should keep the user's current practical learning-log texture: concrete, casual, close to the debugging scene, and comfortable with small human details. Avoid AI handoff / delivery-report phrasing such as "only these two evidence types are public" or "the change was not intentionally expanded"; write closer to first-hand learning and debugging traces. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
+Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. Before drafting or finalizing, read its `references/hard-gated-checklist.md`; the checklist gates fact sheet, structure, voice, banned wording, bilingual equivalence, public boundary, and MDX readiness. The skill drafts Chinese first, then creates an English counterpart that matches the Chinese substance without turning the note into a resume, paper abstract, corporate report, or AI handoff.
+
 For `content/notes/*.mdx`:
 
 - describe the system, constraint, question, file, and next step directly;
@@ -233,6 +236,8 @@ npm.cmd run validate-encoding
 npm.cmd run typecheck
 npm.cmd run build
 ```
+
+For project imports or project-media updates driven by a local source folder, use `AddProject.skill` / `skills/add-project/SKILL.md` and keep `skills/add-project/references/hard-gated-checklist.md` as the live phase gate. Do not copy source files, write public prose, verify, commit, push, merge, tag, or release until the corresponding gate passes or is reported as blocked.
 
 Use the plain `npm run ...` form only in shells where `npm` is known to resolve correctly.
 

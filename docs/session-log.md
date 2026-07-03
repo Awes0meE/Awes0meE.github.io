@@ -351,3 +351,33 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Refreshed the media gallery and rewrote notes/projects into a more natural learning-log voice.
 - Files changed: expanded `content/media.json` to cover project/note images and videos; updated `/media` cards to show source projects; changed Markdown/text project assets to render as readable page content while source files stay in code frames; added `content/notes/turing-three-week-development-log.mdx`; replaced the Juanyun hardware SOP note with the SOP text itself; rewrote Juanyun, Nanjing Turing, and Tianjin STM32 notes/projects away from AI handoff phrasing.
 - Verification: upload-link validation passed for 25 content files; media coverage validation passed for 29 media items and 16 content image/video refs; `git diff --check`, `npm.cmd run lint`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed; local HTTP checks returned `200` for `/media`, `/notes/juanyun-hardware-sop`, `/notes/turing-three-week-development-log`, `/work/juanyun-thermal-hardware`, and `/work/nanjing-turing-qt-embedded-learning`.
+
+## 2026-07-03
+
+- Summary: Upgraded the repo-local `AddProject.skill` into the portfolio project-import SOP for future high-volume project and media ingestion.
+- Files changed: updated `AddProject.skill`, `skills/add-project/SKILL.md`, `skills/add-project/agents/openai.yaml`, refreshed `source-audit.md` and `content-build.md`, added `intake-template.md`, `public-safety.md`, and `review-and-release.md`, and reconciled `CODEX.md`, `MEMORY.md`, and `docs/agent-skills.md`.
+- Verification: `quick_validate.py skills/add-project`, `git diff --check`, `npm.cmd run lint`, and `npm.cmd run typecheck` passed.
+
+## 2026-07-03
+
+- Summary: Added the repo-local `engineering-note-writer` skill for drafting Chinese-first bilingual engineering notes from rough project bullets and evidence.
+- Files changed: created `skills/engineering-note-writer/SKILL.md`, `agents/openai.yaml`, and references for voice rules, note archetypes, bilingual writing, and self-review; linked the skill from `AddProject.skill` and `skills/add-project/SKILL.md`; updated `MEMORY.md` and `docs/agent-skills.md`.
+- Verification: `PYTHONUTF8=1 quick_validate.py skills/engineering-note-writer`, `quick_validate.py skills/add-project`, `git diff --check`, `npm.cmd run lint`, and `npm.cmd run typecheck` passed.
+
+## 2026-07-04
+
+- Summary: Hardened the repo-local project-import and engineering-note writing skills with mandatory hard-gated checklists.
+- Files changed: added `skills/add-project/references/hard-gated-checklist.md` and `skills/engineering-note-writer/references/hard-gated-checklist.md`; linked them from both `SKILL.md` files, `AddProject.skill`, agent prompts, `CODEX.md`, `MEMORY.md`, and `docs/agent-skills.md`.
+- Verification: `quick_validate.py skills/add-project`, `quick_validate.py skills/engineering-note-writer`, `git diff --check`, `npm.cmd run lint`, and `npm.cmd run typecheck` passed.
+
+## 2026-07-04
+
+- Summary: Imported the MEC104 Digital Clock source folder as a new public portfolio project.
+- Files changed: added `content/projects/arduino-digital-clock-counter.mdx`, `content/notes/arduino-digital-clock-counter-course-note.mdx`, 8 `content/media.json` entries, and normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`; updated `CODEX.md`, `MEMORY.md`, `README.md`, and `docs/architecture.md` content counts. The original `Digital Clock.pdf` course handout stayed reference-only; selected course screenshots were published with user approval.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run validate-content`, `npm.cmd run validate-encoding`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed. Local preview returned 200 for `/`, `/work`, `/media`, `/work/arduino-digital-clock-counter`, and `/notes/arduino-digital-clock-counter-course-note`; Playwright screenshots were reviewed for desktop and mobile project views.
+
+## 2026-07-04
+
+- Summary: Ran a whole-portfolio neat pass after the Digital Clock import.
+- Files changed: reconciled README English/Chinese current-content wording, moved the homepage identity memory entry back into chronological order, and refreshed the verification baseline date in `MEMORY.md`.
+- Verification: searched root/docs for stale 6-project / 19-note / 50-media wording and relative-time wording; `npm.cmd run validate-content` and `npm.cmd run validate-encoding` passed.

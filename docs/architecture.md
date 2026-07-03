@@ -61,15 +61,16 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state on `main`, based on release `v0.7.0`, as of `2026-05-07`:
+Current content state in this workspace, extending release `v0.7.0`, as of `2026-07-04`:
 
-- 6 project files total;
-- 19 public note files total;
+- 7 project files total;
+- 20 public note files total;
 - 3 Juanyun project pages and 9 Juanyun notes;
 - 1 Claude Chime hardware power-board archive;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
-- 50 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and the DIY demo video;
+- 1 Arduino Digital Clock course project and 1 related note from `C:\Users\123\Desktop\Digital Clock`;
+- 58 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the DIY demo video, and Digital Clock screenshots/demo media;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
