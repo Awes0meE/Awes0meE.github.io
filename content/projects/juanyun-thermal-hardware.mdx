@@ -1,8 +1,8 @@
 ---
 title: "Juanyun Thermal Management Hardware and Firmware Archive"
 titleZh: "卷云科技热管理硬件与固件开发档案"
-summary: "A larger Juanyun Technology project dossier that merges the ACUnit control platform, BaseUnit STM32 firmware, DHT11 / AM2302 breakout plan, smaller actuator archive, SOP material, and non-sensitive legacy hardware evidence into one public project page."
-summaryZh: "卷云科技实习材料的大项目档案页：把外机控制平台、底座板 STM32 固件、DHT11 / AM2302 小板、执行器归档、硬件 SOP 和非敏感 legacy 硬件证据合并到一个公开项目中。"
+summary: "A practical archive for the Juanyun thermal-management internship line: ACUnit board splitting, STM32 firmware rhythm, a DHT11 / AM2302 sensor board, actuator and fan-drive evidence, the DIY cooling prototype, and a self-authored hardware SOP."
+summaryZh: "卷云科技热管理方向的实习档案页：外机板拆分、STM32 固件节拍、DHT11 / AM2302 温湿度小板、执行器与风扇驱动线索、DIY 压风式散热原型，以及自写硬件开发 SOP。"
 date: "2026-02 to 2026-05"
 status: "Public Project Archive"
 tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "SOP", "Sensor"]
@@ -29,88 +29,114 @@ assetPaths:
   - "/uploads/projects/juanyun-public/hardware-sop-cover.jpeg"
 ---
 
-## Project Brief / 项目简述
+## Why This Page Exists / 为什么把这些放在一页
 
-This is the main Juanyun internship project page. The earlier separate ACUnit, BaseUnit, DHT11 / AM2302, and actuator / BLDC pages are folded into one hardware-and-firmware trail: board versions, firmware structure, sensor-board planning, actuator experiments, legacy files, and process notes sit together.
+The Juanyun material spreads across several small lines rather than one tidy board-firmware-demo package. That shape is close to what thermal-management hardware work actually felt like during the internship: several lines kept touching the same questions. How does power enter the system? Which signal belongs on which board? How often should firmware refresh a sensor or display? What does a small actuator board need before it becomes more than a schematic? And if the files lack names and explanations, how long will it take to understand them again two months later?
 
-这页作为卷云科技实习经历的主项目页来写。外机控制平台、底座板 STM32 固件、DHT11 / AM2302 温湿度小板、螺线管阀门和 BLDC 静音风扇放在同一条线上看，更接近真实工作里的状态：一边画板，一边写固件，一边查传感器和驱动资料，还要不停把文件整理清楚。
+卷云这组材料散在几条小线里，很难被压成“一块板、一份固件、一个最终 demo”的整齐结构。它更接近实习时热管理硬件工作的真实状态：几条小线反复碰到同一类问题。电源怎么进来，信号应该落在哪块板，固件多久读一次传感器、刷新一次 OLED，一个小执行器板要留下哪些东西才算超过一张原理图，文件如果缺少命名和解释，两个月以后再打开还能不能看懂。
+
+因此我把外机板、底座固件、DHT11 / AM2302 小板、螺线管阀门与风扇驱动、DIY 压风式散热原型、硬件 SOP 放到同一个大项目页里。它们单独看有的很大，有的很小，放在一起能看出一条更稳定的主线：热管理硬件一直在电源、接口、传感器、执行器、固件节拍和记录习惯之间来回找平衡。
 
 ![AC Unit V2.1 main board render / 外机板 V2.1 主控板渲染图](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
 
-## What Can Be Shown / 哪些内容能放
+## The Main Thread Is Interface Work / 主线其实是接口工作
 
-The only local source folders treated as non-public are `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. The public page can show reviewed screenshots and high-level writing about those current-product directions, but it does not publish their raw Gerber archives, schematic PDFs, BOM / PnP files, EDA / CAD source, complete firmware source, internal requirements, manufacturing packages, vendor folders, installers, generated build outputs, invoices, billing records, or credentials.
+The ACUnit line is the heaviest part of the archive. At the surface it looks like board design, but the first-principles problem is interface pressure. A thermal-control board has to talk to compressors, fans, pressure transmitters, NTC and DHT sensors, an electronic expansion valve, OLED, encoder input, keys, and reserved communication modules. If everything is treated as "just another connector," the board may still be drawable, but debugging becomes a mess.
 
-卷云资料里只有 `Current_Product_ACUnit_Project` 和 `Current_Product_BaseUnit_Project` 两个目录按敏感资料处理。这里可以放已经脱敏的截图和概览叙述，但不放这两个目录下的生产包、原理图、BOM、PnP、完整源码、内部需求、制造资料、安装包、vendor、构建输出或财务凭据。其他非 Current_Product 的 legacy 材料经过筛选后放在页面下方的项目资料里。
+外机控制平台是这组材料里最重的一条线。表面上看是画板，往底下拆其实是接口压力。一个热管理控制板要接压缩机、风机、压力变送器、NTC 和 DHT 传感器、电子膨胀阀、OLED、编码器、按键，还要预留通信模块。如果所有东西都被当成“再加一个接口”，板子当然也能画出来，但后面调试会很痛苦。
 
-## Subproject 1: ACUnit Control Platform / 子项目一：外机控制平台
+V2.0 still reads like a system trying to collect the main links. V2.1 starts to look more deliberate: main board, power board, and interaction board are separated. That split has practical value. It gives power distribution, user interaction, and MCU-side signals their own places, and it makes later debugging less dependent on guessing where the problem hides.
 
-The ACUnit line is the largest and most product-facing part of the archive. It involved a control-board platform with main board, power distribution, interaction board, compressor / fan / electronic-expansion-valve interfaces, sensor inputs, and firmware-facing pin and module constraints. The public version shows the system block diagrams and board-render snapshots already reviewed for display.
-
-外机控制平台是这组材料里最接近公司当前产品的一条线。这里保留的是系统层级：主控板、分电板、交互板、压缩机、风机、电子膨胀阀、传感器输入，以及固件侧需要面对的引脚、模块和接口约束。具体生产导出文件和完整源码不放公网，只放已经审核过的框图和板卡渲染截图。
-
-- ACUnit V2.0 / V2.1 system-block screenshots are used as public-safe architecture evidence.
-- Main, power, and UI board renders show board-version structure without exposing raw design files.
-- Pressure-transmitter and PWM-fan parameter screenshots document the kind of interface constraints firmware had to respect.
-- Related notes below preserve the hardware revision, board, and firmware reflections without turning private company packages into downloads.
+V2.0 更像是在把主要链路先收拢起来。到了 V2.1，拆成主控板、分电板、交互板以后，结构就清楚很多。这个拆分的价值很具体：电源分配、用户交互和 MCU 周围的信号各自有位置。后面排问题时，也不至于所有风险都挤在一块板上互相干扰。
 
 ![AC Unit V2.1 system block diagram / 外机板 V2.1 系统框图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-## Subproject 2: BaseUnit STM32 Firmware / 子项目二：底座板 STM32 固件
+## Board Files Are Only Part Of The Story / 板卡截图只是一部分
 
-The BaseUnit firmware line is described through architecture and debugging notes instead of raw source release. Its scope covered periodic temperature / humidity sensing, local OLED display, fan control, Bluetooth reporting, outlet / presence style state detection, and Flash-backed parameter persistence. The useful part is how the firmware was separated into generated HAL code, board-support modules, service logic, and app-level behavior.
+The page keeps reviewed system diagrams and board renders for the current-product ACUnit direction, but the raw manufacturing and design packages stay out of the website. That sounds like a file-management sentence, but the real reason is simpler: a portfolio page should explain the engineering thinking without turning company product folders into downloads.
 
-底座板 STM32 控制固件不作为源码发布，而是作为嵌入式系统结构来讲。它覆盖温湿度采集、本地 OLED 显示、风扇控制、蓝牙上报、状态检测和 Flash 参数保存。重点是 HAL 生成代码、BSP、服务模块和应用逻辑怎么分开，以及这种小设备为什么也要考虑掉电记忆和任务节拍。
+这个页面保留了外机方向已经审核过的系统框图和板卡渲染，但原始生产包和设计包不放到网站上。听起来像是在讲文件管理，其实原因很简单：作品集的重点是说明工程思路，同时保留公司当前产品目录的边界。
 
-- Sensing path: temperature / humidity sampling, state refresh, and update cadence.
-- Interaction path: local display, user-visible state, and basic parameter feedback.
-- Control path: fan PWM and state-dependent behavior.
-- Persistence path: Flash-backed setting storage and restart continuity.
+The useful public evidence here is visual and structural. The block diagrams show how the system was divided. The main, power, and UI board renders show how the three-board idea took shape. The pressure-transmitter and PWM-fan parameter screenshots show the kind of external constraints firmware and hardware both had to respect. Those are enough to discuss the work without pretending the page is an open-source hardware release.
 
-## Subproject 3: DHT11 / AM2302 Breakout / 子项目三：温湿度传感器小板
+这里真正有用的公开证据是结构性的。框图能说明系统怎么拆，主控板、分电板、交互板渲染图能说明三板结构怎么落下来，压力变送器和 PWM 风机参数截图能说明外部器件约束会反过来影响硬件和固件。用这些材料已经可以把事情讲清楚，不需要假装这是一个开源硬件发布页。
 
-The DHT11 / AM2302 task is small but complete enough to belong in the main project. It turns a 4-pin humidity / temperature sensor body into a practical 3-pin module interface with pull-up, decoupling, package, board-size, connector, and MCU validation constraints.
+![AC Unit V2.1 power board front render / 外机板 V2.1 电源板正面渲染图](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
 
-DHT11 / AM2302 小板任务规模不大，但非常适合放在大项目里：它把一个 4 引脚温湿度传感器整理成 3P 模块接口，同时明确上拉、去耦、封装、尺寸、连接器、上电等待和 MCU 验证要求。小任务如果只写“接了 DHT11”会很空；把这些约束写出来，才像一个完整的硬件任务。
+![AC Unit V2.1 interaction board front render / 外机板 V2.1 交互板正面渲染图](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
 
-- Target board outline: `30 mm x 14 mm`.
-- Interface: `3V3 / DATA / GND`, single-wire-style data path.
-- Support components: pull-up, decoupling, and optional signal damping.
-- Mechanical note: one M2 positioning hole and a simple 2-layer PCB assumption.
-- Public evidence: the planning PDF and cover image are listed below.
+## Firmware Is Mostly About Rhythm / 固件最麻烦的是节拍
+
+The firmware side has a similar lesson. A CubeMX-generated STM32 project is easy to start, but it gets hard once compressor logic, FG speed sensing, electronic expansion valve stepping, NTC readings, DHT22 readings, OLED refresh, encoder input, and keys all start living in the same loop. A single successful run of each function says very little. The harder question is whether the firmware still has a readable rhythm after all functions are added.
+
+固件这边也有类似的问题。CubeMX 生成一个 STM32 工程很容易，真正麻烦的是压缩机逻辑、FG 测速、电子膨胀阀步进、NTC 采样、DHT22 读取、OLED 刷新、编码器和按键全进主循环之后，代码还看不看得懂。单个功能跑通一次只能说明很少的东西，更难的问题是所有功能加上以后，固件还有没有一个能维护的节拍。
+
+That is why the external-unit firmware notes care about `Core`, `App`, `Service`, `BSP_drivers`, CMake, VSCode, OpenOCD, release notes, and pin records. This is not architecture for its own sake. It is a way to stop future debugging from becoming a file search. A 1 ms valve task, a 10 ms input task, a 100 ms NTC update, a 500 ms OLED refresh, and a 2000 ms DHT22 read should not be mentally mixed into one vague "main loop."
+
+所以外机固件笔记里会写 `Core`、`App`、`Service`、`BSP_drivers`，也会写 CMake、VSCode、OpenOCD、release notes 和引脚记录。这样分层的价值在于减少后续调试时的文件搜索成本。1 ms 的阀门步进、10 ms 的输入扫描、100 ms 的 NTC 更新、500 ms 的 OLED 刷新、2000 ms 的 DHT22 读取，不应该都被糊成一个模糊的“主循环”。
+
+The BaseUnit firmware is smaller, but in some ways it feels more like a complete little device. It reads ambient and outlet temperature/humidity, checks whether the unit is in position, controls a fan, shows state on OLED, reports over Bluetooth, and remembers settings through Flash. That last part is easy to underestimate. A device that forgets every setting after power loss may still "work," but it does not feel like something people can repeatedly use.
+
+底座板固件规模小一些，但某种意义上更像一个完整小设备。它要读环境和出风口温湿度，要判断设备在不在位，要控制风扇，要在 OLED 上显示状态，还要通过蓝牙上报，并且用 Flash 记住设置。Flash 记忆这一点很容易被低估。一个设备断电以后什么都忘，功能上可能也算“能跑”，但不像真的会被人反复使用的东西。
+
+## Small Sensor Boards Still Deserve Notes / 小传感器板也值得写
+
+The DHT11 / AM2302 breakout is a tiny task, but I kept it because small boards often reveal whether the work was actually completed. A 30 mm x 14 mm board with `3V3 / DATA / GND` does not sound impressive. But the moment the plan names pull-up, decoupling, optional damping, connector choice, package size, M2 positioning, 3.3 V power, power-on wait, sampling interval, and MCU verification, the task stops being "just connect a sensor."
+
+DHT11 / AM2302 温湿度小板很小，但我还是把它留下来，因为小板最能看出事情有没有做完整。`30 mm x 14 mm` 的板子，`3V3 / DATA / GND` 三个脚，听起来一点都不炫。但只要任务书里写清楚上拉、去耦、可选阻尼、连接器、封装、M2 定位孔、3.3 V 供电、上电等待、采样间隔和 MCU 验证，它就不再只是“接个传感器”。
+
+很多嵌入式调试时间其实就是被这种小问题吃掉的。引脚顺序反了，上拉没想清楚，上电马上读，采样间隔太短，线太长导致边沿不好。大项目里这些细节常常被压过去，但真正上板时它们会回来找你。
+
+Many embedded debugging hours are lost to exactly these small details: reversed pin order, unclear pull-up choice, reading too soon after power-on, sampling too frequently, or long wires damaging signal edges. Large projects can hide these problems in the noise, but the board will eventually bring them back.
 
 ![DHT11 / AM2302 breakout plan cover / 温湿度小板规划封面](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
 
-## Subproject 4: Actuator, Display, And Fan Driver Archive / 子项目四：执行器、显示与风扇驱动归档
+## Actuators And Fans Are Still Clues / 执行器和风扇现在还是线索
 
-The smaller actuator material is no longer a standalone project page, but it is still useful inside the Juanyun record. It contains solenoid-valve STM32 source excerpts, an IOC file, OLED and EC11 encoder schematic references, a ULN2003 datasheet, and a BLDC quiet-fan BOM / EasyEDA file. These files show the actuator side of the internship material: driving loads, reading simple controls, showing state, and keeping board traces.
+The actuator and fan-drive material is less complete, so I do not want to write it as if it were a finished product. Right now it is better understood as a set of useful clues: STM32F103 solenoid-valve source excerpts, IOC configuration, OLED and EC11 references, ULN2003 material, and a small BLDC quiet-fan board with BOM / EasyEDA evidence.
 
-螺线管阀门和 BLDC 静音风扇不再单独作为项目页，但放在卷云大项目里仍然有价值。资料里有 STM32 阀门控制源码摘录、IOC 文件、OLED 和 EC11 编码器原理图参考、ULN2003 资料，以及 BLDC 静音风扇 BOM / EasyEDA 文件。它们对应的是执行器、显示输入和小型驱动板这条支线。
+执行器和风扇驱动这部分材料还不够完整，所以我不想把它写成成熟项目。现在更准确的说法是，它们是一组有用的线索：STM32F103 螺线管阀门源码摘录、IOC 配置、OLED 和 EC11 参考、ULN2003 资料，以及一个有 BOM / EasyEDA 证据的小型 BLDC 静音风扇板。
 
-The newly added EEV board render and schematic make this branch easier to read. It is a small ULN2003A driver board, but the useful detail is direct: one side shows the connector and transistor-array layout, the other side shows how the LEDs and valve-side outputs are wired.
+The EEV driver-board render and schematic are useful because they make this branch more concrete. You can see the ULN2003A-centered low-side drive idea, the input header, valve-side connector, and status LEDs. It is still a small board, but at least it tells a clear actuator story: MCU signal in, driver stage in the middle, load side out, and visible feedback around it.
 
-这次补进来的 EEV 小板图把执行器这一段变得清楚很多。板子不大，核心就是 ULN2003A、输入排针、阀侧连接器和几路指示灯；3D 渲染图看摆放，电路图看驱动路径，放在一起比只写“做过阀门驱动”更实在。
+EEV 小板的 3D 渲染和电路图让这条支线具体了很多。能看见以 ULN2003A 为中心的低侧驱动思路，能看见输入排针、阀侧连接器和几路指示灯。它还是一块小板，但至少把执行器这件事讲清楚了：MCU 信号进来，中间经过驱动级，负载侧出去，旁边有可见反馈。
 
 ![EEV driver board 3D render / EEV 驱动小板 3D 渲染图](/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png)
 ![EEV driver board schematic / EEV 驱动小板电路图](/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png)
 
-## Subproject 5: DIY Pressure-Flow Cooling Prototype / 子项目五：DIY 压风式散热器原型
+## The DIY Cooling Prototype Is The Messy End Of The Same Thread / DIY 原型是同一条线里比较野的一端
 
-The DIY cooling prototype also belongs in this larger thermal-management trail. The earlier page already kept the 3D-printing route and desktop demo; the new STM32-version PCB render is better as a hardware-facing snapshot. It shows how the airflow prototype slowly picked up a real control board: USB-C, DC input, DCDC area, switches, headers, and an MCU footprint all started living on the same board.
+The DIY pressure-flow cooling prototype sits farther from the ACUnit product line, yet it belongs on this page because it asks a similar question in a rougher way: how do airflow structure, power, control, and a small user-facing demo connect?
 
-DIY 压风式散热器也放回这条热管理硬件线里看。原来更多是在看 3D 打印外壳、桌面端 demo 和 ESP32 控制；这次补进来的 STM32 版 PCB 渲染更像硬件版本记录。USB-C、DC 输入、DCDC、按键、排针、主控封装这些东西一上板，这个原型就不只是“做了个风道”，而是开始长成一套小控制硬件。
+DIY 压风式散热器没有外机板那么接近产品，但它应该放在这页里，因为它用更粗糙的方式问了同一个问题：风道结构、电源、控制和一个能给人看的 demo 到底怎么接起来。
+
+This line has a different texture. There are 3D-printed parts, an ESP32 / STM32 control direction, a desktop demo, PCB output, slicing files, and a lot of early-folder mess. The value comes from seeing the idea move through several physical forms. It became something with files, boards, and parts instead of staying as a sentence in a note.
+
+这条线的质感不一样。里面有 3D 打印件、ESP32 / STM32 控制方向、桌面端 demo、PCB 输出、切片文件，也有不少早期目录里的混乱。它的价值来自这个想法真的经过了几种物理形态：文件、板子、零件都留下来了，而不是只停在文档里的一句话。
+
+The STM32-version PCB render and schematic are the part I would keep closest to the hardware story. Once USB-C, DC input, DCDC area, switches, headers, and an MCU footprint appear on one board, the airflow prototype starts to become a small control system instead of only a shell or duct.
+
+STM32 版 PCB 渲染和原理图，是这条线里最适合放到硬件主线里的证据。USB-C、DC 输入、DCDC、按键、排针和主控封装都出现在同一块板上以后，这个散热原型开始从外壳或风道长成一个小控制系统。
 
 ![DIY pressure-flow cooling STM32 PCB 3D render / DIY 压风式散热器 STM32 版 PCB 3D 渲染图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
 ![DIY pressure-flow cooling STM32 schematic / DIY 压风式散热器 STM32 版原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
 
-## Process Material: Hardware SOP / 流程材料：硬件开发 SOP
+## Why The SOP Matters / 为什么 SOP 也放进来
 
-The self-authored hardware SOP is kept as process material. A hardware internship is not only a list of boards: requirements, version naming, schematic checks, PCB checks, fabrication outputs, bring-up notes, and review habits decide whether later work can still be understood.
+The self-authored hardware SOP is process material, and it might be the most honest artifact on this page. Hardware work leaves too many files: requirements, schematic versions, PCB versions, BOM, Gerber, pick-and-place, test notes, firmware pins, datasheets, photos, and sometimes a few almost-identical folders. Without a habit for naming, checking, and recording, the project becomes file archaeology very quickly.
 
-自写硬件 SOP 放在这里，是因为硬件实习不只是“画了几块板”。需求、版本命名、原理图检查、PCB 检查、生产输出和调试记录如果当时不写，几个月后再看文件夹会非常痛苦。这份 SOP 更像当时整理工作习惯留下来的手册。
+自写硬件 SOP 属于流程材料，但它可能是这页里最诚实的材料。硬件工作会留下太多文件：需求、原理图版本、PCB 版本、BOM、Gerber、贴片坐标、测试记录、固件引脚、数据手册、照片，还有几个看起来差不多的文件夹。如果没有命名、检查和记录习惯，项目很快就会变成文件考古。
 
-## What This Page Still Needs / 后面还要补
+The SOP is useful because it shows that this internship also involved the boring parts around a circuit: naming, checking, exporting, and explaining. It forced me to think about how a later person, including future me, would understand the work. What changed between versions? Which file is the manufacturing output? Which screenshot is only a reference? Which debug note explains why an interface was chosen? Those questions are boring until the first time you lose half a day to a bad folder.
 
-The next useful layer is the debugging detail: why an interface was chosen, which version fixed which problem, what to check first on power-up, how sensor readings were chased when they looked wrong, and how firmware timing affected peripherals. The ACUnit board, BaseUnit firmware, sensor breakout, actuator material, fan work, and SOP are not isolated pieces. They keep returning to the same hardware-and-firmware questions: power, interfaces, timing, debugging, and records.
+SOP 有价值，是因为它说明这段实习还包含电路之外那些很琐碎的部分：命名、检查、导出和解释。它也逼着我去想后面的人，包括未来的我，怎么重新理解这些工作。版本之间改了什么，哪个文件才是生产输出，哪个截图只是参考，哪条调试记录说明了为什么选这个接口。这些问题平时很无聊，直到你第一次因为一个乱目录浪费半天。
 
-后面要继续补的是更细的调试说明：为什么这样选接口，哪个版本解决了什么问题，上电时先查哪里，传感器读数异常时怎么排，固件任务节拍怎么影响外设。外机板、底座板、传感器小板、执行器、风扇和 SOP 不是互相无关的小块，它们都在热管理硬件与固件开发里反复碰到同一类问题：电源、接口、时序、调试和记录。
+## What The Page Still Needs / 后面还要补什么
+
+This page now has structure, but the strongest missing layer is still bring-up evidence. Board renders and planning PDFs explain intent; debugging logs explain reality. The next useful records would be power-on checks, interface tests, DHT22 failure handling, OpenOCD flashing screenshots, OLED refresh before/after optimization, electronic-expansion-valve stepping behavior, and physical photos that show how the boards were actually connected.
+
+这页现在有结构了，但最缺的还是 bring-up 证据。板卡渲染和任务 PDF 能说明意图，调试日志才说明现实。后面最值得补的是上电检查、接口测试、DHT22 读取失败处理、OpenOCD 烧录截图、OLED 刷新优化前后、电子膨胀阀步进表现，以及能看出板子实际怎么接的实物照片。
+
+现在回头看，这组卷云材料最有用的地方在于它提醒我：硬件项目需要留下比“能跑过”更多的东西。电源怎么分，接口怎么拆，固件多久跑一次任务，小板为什么也要写清楚，文件怎么让后来的人看懂，这些才是热管理硬件和固件开发里反复出现的问题。
+
+Looking back, the useful part of this Juanyun archive is the reminder that hardware projects need to leave more than an "it ran once" result. Power distribution, interface splitting, firmware timing, small-board planning, and readable file records are the questions that kept returning throughout the thermal-management work.
