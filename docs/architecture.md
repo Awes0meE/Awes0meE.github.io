@@ -70,7 +70,7 @@ Current content state in this workspace, extending release `v0.7.0`, as of `2026
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
 - 1 Arduino Digital Clock course project and 1 related note from `C:\Users\123\Desktop\Digital Clock`;
-- 58 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the DIY demo video, and Digital Clock screenshots/demo media;
+- 61 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the DIY demo video, and Digital Clock screenshots/demo/report media;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.

@@ -47,7 +47,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-07-03`: Upgraded repo-local `AddProject.skill` / `skills/add-project/SKILL.md` into the portfolio project-import SOP for turning a user-provided raw project folder into public-safe uploads, bilingual project pages, notes, media entries, preview checks, verification, Git handoff, and optional release. The skill now uses focused references for intake, source audit, public-safety review, content building, and review/release.
 - `2026-07-03`: Added repo-local `engineering-note-writer` skill for converting rough project bullet points, timelines, technical stacks, and evidence into the portfolio's Chinese-first practical engineering-note voice with accurate English counterparts. `AddProject.skill` now points to it for project/note/media prose during imports.
 - `2026-07-04`: Hardened `AddProject.skill` and `engineering-note-writer` with mandatory hard-gated checklists so future agents must pass source-audit/public-safety/content/verification gates for imports and fact/structure/voice/bilingual/MDX gates for writing before continuing.
-- `2026-07-04`: Imported `C:\Users\123\Desktop\Digital Clock` as the `arduino-digital-clock-counter` portfolio project: 1 project page, 1 public learning note, 8 media entries, normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`, and selected public screenshots from the course handout. The original `Digital Clock.pdf` course handout is reference-only and should not be copied into `public/uploads/`.
+- `2026-07-04`: Imported `C:\Users\123\Desktop\Digital Clock` as the `arduino-digital-clock-counter` portfolio project: 1 project page, 1 public learning note, 11 media entries, normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`, selected public screenshots from the course handout, and selected cropped excerpts from the homework report. The original `Digital Clock.pdf` course handout and homework report PDF are reference-only and should not be copied into `public/uploads/`.
 
 ## Stable Decisions
 
@@ -112,7 +112,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `public/uploads/projects/claude-chime-hardware/`: public Claude Chime hardware PDFs, BOM, Gerber, EasyEDA project, logo image, and datasheets.
 - `public/uploads/projects/nanjing-turing/`: reviewed public Qt/CMake/Seamly2D learning evidence.
 - `public/uploads/projects/tianjin-metro/`: reviewed public STM32 foundation learning evidence.
-- `public/uploads/projects/arduino-digital-clock-counter/`: reviewed public MEC104 Digital Clock assets, including selected course screenshots, a metadata-stripped demo MP4, Arduino sketches, a public TI SN54LS47 datasheet, and the source brief. The original course PDF remains outside public uploads.
+- `public/uploads/projects/arduino-digital-clock-counter/`: reviewed public MEC104 Digital Clock assets, including selected course screenshots, selected homework-report excerpts, a metadata-stripped demo MP4, Arduino sketches, and a public TI SN54LS47 datasheet. The original course PDF, homework report PDF, and source description TXT remain outside public uploads.
 
 ## Verification Baseline
 

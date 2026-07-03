@@ -1,9 +1,9 @@
 ---
 title: "Reading The Digital Clock Course Brief"
 titleZh: "Digital Clock 课件读后记录"
-summary: "A learning note that revisits the MEC104 digital-clock brief, the SN54LS47 decoder, button pull-up/pull-down wiring, and the small Arduino sketches kept from the project folder."
-summaryZh: "一篇回看 MEC104 数字钟课件的学习笔记：从两位计数规则、SN54LS47 译码器、按键上下拉，到文件夹里留下的两个 Arduino 小 sketch。"
-date: "2024-05-03"
+summary: "A course-reading note around the MEC104 digital-clock brief, the SN54LS47 decoder, button pull-up/pull-down wiring, and two small Arduino sketches from the folder."
+summaryZh: "围绕 MEC104 数字钟课件的一篇读后记录：两位计数规则、SN54LS47 译码器、按键上下拉，以及文件夹里留下的两个 Arduino 小 sketch。"
+date: "2024.04 to 2024.05"
 tags: ["Arduino", "BCD", "Seven-Segment Display", "Course Note", "Embedded"]
 visibility: public
 projectSlug: "arduino-digital-clock-counter"
@@ -11,57 +11,57 @@ projectSlug: "arduino-digital-clock-counter"
 
 ## Starting Point / 起点
 
-The source folder is small, which actually makes it easy to read. There is one project brief, one demo video, one cover photo, a TI datasheet, two Arduino sketches, and a 32-page MEC104 course handout. The handout stays as reference material, and the useful pages are kept here as screenshots with my own reading notes around them.
+The source folder is small, so the learning line is easy to trace. It has one short project brief, one demo video, one cover photo, a TI datasheet, two Arduino sketches, and a 32-page MEC104 course handout. For this note, I only pulled out the handout pages that explain the build: requirements, BCD decoding, button levels, milestones, and the one-digit simulation.
 
-这个资料文件夹很小，反而容易看清楚。里面有项目描述、演示视频、封面图、TI 数据手册、两个 Arduino sketch，还有一份 32 页的 MEC104 课程课件。课件原件作为参考材料使用，这篇笔记只把有用的页面截出来，再用我自己的视角补上当时真正学到的东西。
+这个资料文件夹很小，反而容易看清楚。里面有一段项目描述、一个演示视频、一张封面图、TI 数据手册、两个 Arduino sketch，还有一份 32 页的 MEC104 课程课件。这篇笔记只围绕几页真正能说明项目的课件截图写：需求、BCD 译码、按键电平、里程碑和一位数码管仿真。
 
 ![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
 
 ## Requirements To States / 从要求到状态
 
-The requirement was bigger than "show a number." It asked for a two-digit display, a roll-over value tied to the group number, and pause/reset buttons. For a beginner, this already means the program needs state: current count, roll-over condition, stopped/running flag, and reset behavior. The breadboard then has to make those states visible through two seven-segment displays.
+The requirement was bigger than "show a number." It asked for a two-digit display, a roll-over value tied to the group number, and pause/reset buttons. For a beginner, that already means the program needs state: current count, roll-over condition, stopped/running flag, and reset behavior. The breadboard then has to make those states visible through two seven-segment displays.
 
 课件要求并不只是“显示一个数字”。它要求两位显示、按小组号设置归零点，还要有暂停和复位按键。对刚接触嵌入式的人来说，这已经意味着程序里要有状态：当前计数、归零条件、运行/暂停标志、复位动作。面包板这边则要把这些状态通过两个七段数码管显示出来。
 
-The project description says this was my second contact with embedded concepts. That feels accurate from the files. The code was still small, and the real learning was in connecting the written rules to pins, voltages, lookup tables, and visible output.
+The project description says this was my second contact with embedded concepts. The files do feel like that stage. The code is still small; the real learning sits between the written rules and the physical details: pins, voltage levels, lookup tables, and visible output.
 
-项目描述里写，这是我第二次接触嵌入式相关内容和概念。从留下的文件看，这个判断挺准确。代码还很小，真正的学习点在于把课件规则接到引脚、电平、查表数组和可见输出上。
+项目描述里写，这是我第二次接触嵌入式相关内容和概念。从留下的文件看，这个判断挺准确。代码还很小，真正的学习点夹在课件规则和物理细节之间：引脚、电平、查表数组和能看见的输出。
 
 ## Decoder And Lookup Table / 译码器和查表
 
-The SN54LS47 part was the first place where the project stopped being a pure Arduino exercise. Arduino did not drive every LED segment directly. It sent four BCD bits into the decoder, and the decoder handled the seven-segment output pattern.
+The SN54LS47 part is where the project starts to look less like a pure Arduino exercise. Arduino does not drive every LED segment directly. It sends four BCD bits into the decoder, and the decoder handles the seven-segment output pattern.
 
-SN54LS47 这一块，是这个项目从纯 Arduino 练习变成数字电路练习的地方。Arduino 没有直接控制每一段 LED，而是把四位 BCD 信号送进译码器，再由译码器负责七段数码管的输出组合。
+SN54LS47 这一块，让这个项目开始不像纯 Arduino 练习。Arduino 没有直接控制每一段 LED，而是把四位 BCD 信号送进译码器，再由译码器负责七段数码管的输出组合。
 
 ![BCD decoder notes / BCD 到七段译码器说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
 
-The `single-digit-bcd-counter.ino` file keeps that idea in code. Pins 9 to 12 are treated as A/B/C/D inputs, and the `BCD` matrix writes one row per digit. It is a one-digit exercise, but the logic is exactly the piece that scales into a two-digit counter: prepare the BCD value, write the pins, wait, then advance the count.
+The `single-digit-bcd-counter.ino` file keeps that idea in code. Pins 9 to 12 are treated as A/B/C/D inputs, and the `BCD` matrix writes one row per digit. The sketch only drives one digit, which makes it easier to read: prepare the BCD value, write the pins, wait, then advance the count.
 
-`single-digit-bcd-counter.ino` 把这个思路保留在代码里。9 到 12 号引脚被当作 A/B/C/D 输入，`BCD` 矩阵按每个数字写一行。它只是一位数码管的练习，但逻辑正好是两位计数器会继续用到的那块：准备 BCD 值、写引脚、等待、再推进计数。
+`single-digit-bcd-counter.ino` 把这个思路保留在代码里。9 到 12 号引脚被当作 A/B/C/D 输入，`BCD` 矩阵按每个数字写一行。这个 sketch 只带一位数码管，所以更容易读：准备 BCD 值、写引脚、等待、再推进计数。
 
 ## Buttons And Floating Inputs / 按键和悬空输入
 
-The button slide is a good reminder of a very early embedded lesson: `digitalRead()` only makes sense when the input level is defined. If the button circuit leaves the pin floating, the program can print numbers through Serial all day and still behave strangely.
+The button slide is a very early embedded lesson: `digitalRead()` only makes sense when the input level is defined. If the button circuit leaves the pin floating, the program can print numbers through Serial all day and still behave strangely.
 
-按键这一页现在看起来很基础，但它提醒的是嵌入式入门里很早会碰到的问题：`digitalRead()` 只有在输入电平确定的时候才有意义。如果按键电路让引脚悬空，程序就算一直往串口打印，也会出现很奇怪的状态。
+按键这一页现在看起来很基础，但它提醒的是嵌入式入门很早就会碰到的问题：`digitalRead()` 只有在输入电平确定的时候才有意义。如果按键电路让引脚悬空，程序就算一直往串口打印，也会出现很奇怪的状态。
 
 ![Button pull-up and pull-down notes / 按键上下拉说明](/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png)
 
-The `digital-read-key.ino` sketch is almost a probe. It sets pin 7 as the pause key, pin 6 as the reset key, then prints both readings. The file is plain, and that is exactly why it is useful: before writing the full counter logic, make the physical inputs observable.
+The `digital-read-key.ino` sketch is almost a probe. It sets pin 7 as the pause key and pin 6 as the reset key, then prints both readings. The file is plain, which is why it works as a checkpoint: before writing the full counter logic, make the physical inputs observable.
 
-`digital-read-key.ino` 更像一个小探针。它把 7 号引脚当暂停键，6 号引脚当复位键，然后把两个读数都打印出来。这个文件看起来不炫，但它是很正确的小测试：在写完整计数逻辑之前，先让物理输入变得可观察。
+`digital-read-key.ino` 更像一个小探针。它把 7 号引脚当暂停键，6 号引脚当复位键，然后把两个读数都打印出来。这个文件看起来不炫，但正好适合作为检查点：在写完整计数逻辑之前，先让物理输入变得可观察。
 
 ## From One Digit To Two Digits / 从一位到两位
 
-The course handout also suggested breaking the work into milestones: timing generator, decoder, display, programming, and testing. That is close to how the remaining files read. The one-digit demo proves the BCD-to-display path, the button sketch proves the input path, and the final breadboard build combines those pieces.
+The course handout also suggested breaking the work into milestones: timing generator, decoder, display, programming, and testing. The remaining files can be read along the same line. The one-digit demo checks the BCD-to-display path, the button sketch checks the input path, and the final breadboard build combines those pieces.
 
-课件也建议按里程碑拆：计时发生器、译码器、显示、程序和测试。留下的文件基本也能按这个方向读。一位 demo 验证的是 BCD 到显示的链路，按键 sketch 验证输入链路，面包板成品再把这些部分接到一起。
+课件也建议按里程碑拆：计时发生器、译码器、显示、程序和测试。留下的文件基本也能按这条线读。一位 demo 查的是 BCD 到显示的链路，按键 sketch 查输入链路，面包板成品再把这些部分接到一起。
 
 ![Milestone breakdown / 课程里程碑拆分](/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png)
 ![TinkerCAD one-digit demo / TinkerCAD 一位归零计数 demo](/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png)
 
 ## Looking Back / 现在回头看
 
-This archive is useful because it catches the stage before I had PCB design experience. Everything was exposed: jumper wires, IC orientation, current-limiting resistors, BCD pin order, switch levels, and Serial debugging. Later hardware projects became cleaner, but this one shows the first time I had to make a small embedded system behave with real components.
+This folder catches the stage before I had PCB design experience. Everything was exposed: jumper wires, IC orientation, current-limiting resistors, BCD pin order, switch levels, and Serial debugging. Later hardware projects became cleaner, but this one shows the first time I had to make a small embedded system behave with real components.
 
-这组材料有价值，是因为它保留了我还没有 PCB 经验之前的状态。所有东西都摊在外面：跳线、芯片方向、限流电阻、BCD 引脚顺序、按键电平、串口调试。后来做硬件项目会更规整，但这个项目记录了我第一次认真让一个小嵌入式系统在真实元器件上跑起来的过程。
+这组材料保留的是我还没有 PCB 经验之前的状态。所有东西都摊在外面：跳线、芯片方向、限流电阻、BCD 引脚顺序、按键电平、串口调试。后来做硬件项目会更规整，但这个项目记录了我第一次认真让一个小嵌入式系统在真实元器件上跑起来的过程。

@@ -606,7 +606,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/cover.jpg",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Breadboard prototype with Arduino Nano, SN54LS47 decoder chips, and two seven-segment displays.",
     "captionZh": "面包板上的 Arduino Nano、SN54LS47 译码芯片和两位七段数码管原型。"
@@ -618,7 +618,7 @@
     "type": "video",
     "src": "/uploads/projects/arduino-digital-clock-counter/demo.mp4",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Short public MP4 showing the breadboard counter running on the desk.",
     "captionZh": "面包板计数器在桌面上运行的短视频。"
@@ -630,7 +630,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Course slide defining two-digit roll-over behavior plus pause and reset buttons.",
     "captionZh": "课程课件中关于两位归零计数、暂停和复位按键的要求页。"
@@ -642,7 +642,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Course slide splitting the build into Arduino, decoder, and display blocks.",
     "captionZh": "课程课件中把项目拆成 Arduino、译码器和显示模块的结构页。"
@@ -654,7 +654,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "SN7447 / SN54LS47 orientation, power, resistor, and BCD mapping notes from the course handout.",
     "captionZh": "课件中关于 SN7447 / SN54LS47 方向、电源、限流电阻和 BCD 映射的说明。"
@@ -666,7 +666,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Course slide used while checking pause/reset button wiring and stable input levels.",
     "captionZh": "检查暂停/复位按键接线和稳定输入电平时对应的课程页。"
@@ -678,7 +678,7 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Milestone slide that breaks the work into timing generator, decoder, display, programming, and testing.",
     "captionZh": "把项目拆成计时发生器、译码器、显示、程序和测试的里程碑页。"
@@ -690,9 +690,45 @@
     "type": "image",
     "src": "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png",
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png",
-    "date": "2024-04-15",
+    "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Reference one-digit roll-over simulation used to understand the BCD counter path.",
     "captionZh": "用于理解 BCD 计数链路的一位归零计数仿真参考页。"
+  },
+  {
+    "id": "arduino-digital-clock-report-wiring",
+    "title": "Two-digit wiring from the homework report",
+    "titleZh": "作业报告里的两位数码管接线图",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png",
+    "date": "2024.04 to 2024.05",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Report excerpt showing Arduino, two decoder chips, two seven-segment displays, resistors, and switch wiring on a breadboard.",
+    "captionZh": "作业报告截图，展示 Arduino、两颗译码芯片、两位七段数码管、电阻和按键在面包板上的接线。"
+  },
+  {
+    "id": "arduino-digital-clock-report-digit-split",
+    "title": "Digit-splitting code from the homework report",
+    "titleZh": "作业报告里的个位和十位拆分代码",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png",
+    "date": "2024.04 to 2024.05",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Report code excerpt using modulo and division to split Num into units and tens before writing BCD outputs.",
+    "captionZh": "作业报告里的代码截图，用取余和除法把 Num 拆成个位和十位，再写入 BCD 输出。"
+  },
+  {
+    "id": "arduino-digital-clock-report-switch-logic",
+    "title": "Switch logic from the homework report",
+    "titleZh": "作业报告里的开关逻辑代码",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png",
+    "date": "2024.04 to 2024.05",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Report excerpt showing pause/reset switch state checks and pressed/released flags.",
+    "captionZh": "作业报告里的开关代码截图，展示暂停/复位状态读取和 pressed/released 标志位。"
   }
 ]

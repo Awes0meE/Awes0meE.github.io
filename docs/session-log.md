@@ -381,3 +381,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Ran a whole-portfolio neat pass after the Digital Clock import.
 - Files changed: reconciled README English/Chinese current-content wording, moved the homepage identity memory entry back into chronological order, and refreshed the verification baseline date in `MEMORY.md`.
 - Verification: searched root/docs for stale 6-project / 19-note / 50-media wording and relative-time wording; `npm.cmd run validate-content` and `npm.cmd run validate-encoding` passed.
+
+## 2026-07-04
+
+- Summary: Revised the Digital Clock project page with selected homework-report content and removed the source description TXT from public project files.
+- Files changed: added cropped report excerpt images for two-digit wiring, digit splitting, and switch logic; expanded `content/projects/arduino-digital-clock-counter.mdx`; added 3 media entries; removed the public project description TXT from `assetPaths` and `public/uploads`; updated content-state wording in docs.
+- Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

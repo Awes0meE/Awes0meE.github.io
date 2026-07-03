@@ -185,8 +185,8 @@ Current content count in this workspace:
 - 1 Claude Chime hardware power-board archive was added;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF stays out of `public/uploads/`, while selected course screenshots are public.
-- 58 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and Digital Clock screenshots/demo media.
+- 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF, homework report PDF, and source description TXT stay out of `public/uploads/`, while selected course screenshots and cropped homework-report excerpts are public.
+- 61 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, and Digital Clock screenshots/demo/report media.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
