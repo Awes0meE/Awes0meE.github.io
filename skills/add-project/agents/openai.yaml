@@ -1,4 +1,4 @@
 interface:
   display_name: "Add Project"
-  short_description: "Import a local project folder into this portfolio."
-  default_prompt: "Use this skill to inspect a local project folder, curate public evidence, create bilingual project/notes/media content, verify, commit, push, and prepare the release workflow."
+  short_description: "Import raw project folders into the portfolio safely."
+  default_prompt: "Use this skill to turn a local project-materials folder into public-safe portfolio content. Follow references/hard-gated-checklist.md before copying, writing, verifying, committing, pushing, or releasing."

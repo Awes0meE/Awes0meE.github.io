@@ -1,17 +1,38 @@
 # AddProject.skill
 
-Repo-local entrypoint for the reusable Codex skill that imports a local project folder into this portfolio.
+Repo-local shortcut for the portfolio import SOP.
 
-Canonical skill file:
+Canonical skill:
 
 ```text
 skills/add-project/SKILL.md
 ```
 
-Use this by saying something like:
+Use it by saying:
 
 ```text
-使用 AddProject.skill，把 D:\path\to\new_project 部署成一个新项目
+使用 AddProject.skill，把 D:\path\to\project-materials 整理成作品集新项目。
 ```
 
-The skill covers branch creation, local source-folder audit, public-safe asset curation, bilingual notes, project page creation, media entries, review, verification, GitHub pushes at each milestone, and `/neat`-style handoff docs.
+The skill covers the full path from a user-provided raw project folder to website-ready portfolio content:
+
+1. inspect the repo and environment;
+2. read the project operating docs;
+3. create an import branch;
+4. scan the source folder read-only;
+5. classify public, private, reference-only, and needs-confirmation materials;
+6. copy and normalize public-safe uploads;
+7. use `skills/engineering-note-writer/SKILL.md` when turning rough bullet points into engineering-note prose;
+8. create or update bilingual project pages, notes, and media entries;
+9. preview and review the website;
+10. run validation, typecheck, build, and audit;
+11. commit, push, and optionally merge/release after user approval;
+12. update durable memory/docs when the public portfolio state changes.
+
+Hard gate: before copying files, writing content, verifying, committing, or releasing, use:
+
+```text
+skills/add-project/references/hard-gated-checklist.md
+```
+
+Important: `public/uploads/` is public internet. The skill must not publish sensitive files merely because they are unlinked.

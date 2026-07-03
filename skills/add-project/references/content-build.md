@@ -1,6 +1,6 @@
 # Content Build Reference
 
-Use this while creating project, note, media, and asset files.
+Use this while creating or editing project, note, media, and asset files.
 
 ## Repo Targets
 
@@ -11,15 +11,16 @@ content/media.json
 public/uploads/projects/<project-slug>/
 ```
 
-Use `apply_patch` for text edits. Use native file-copy tools for binary/media imports. Normalize text uploads to UTF-8 before committing.
+Use `apply_patch` for text edits. Use normal file-copy tools for binary assets. Normalize text uploads to UTF-8 before committing.
 
 ## Filename Rules
 
 - Prefer lowercase ASCII kebab-case.
 - Preserve meaningful version numbers: `board-v2-front.jpg`, `release-note-v05.md`.
-- Avoid spaces, Chinese punctuation, parenthetical export suffixes, and random tool IDs in public filenames.
+- Avoid spaces, Chinese punctuation, random export IDs, and parenthetical duplicate suffixes in public filenames.
 - Keep original extensions when format matters.
-- For cover images, prefer `cover.jpg` or `<project-slug>-cover.jpg`.
+- Prefer `cover.jpg` or `<project-slug>-cover.jpg` for cover images.
+- Prefer explicit names for evidence: `schematic-page-1.jpg`, `demo-loop.mp4`, `debug-log-uart.txt`.
 
 ## Project Frontmatter
 
@@ -41,7 +42,9 @@ assetPaths:
 ---
 ```
 
-Use explicit `assetPaths` file lists if the folder contains any file that should not be shown.
+Set `featured: true` only when the project should appear on the homepage.
+
+Use explicit `assetPaths` file lists when a folder contains any file that should not appear in the project file browser.
 
 ## Note Frontmatter
 
@@ -58,7 +61,7 @@ projectSlug: "<project-slug>"
 ---
 ```
 
-Use `visibility: private` for drafts. Missing visibility is treated as private.
+Use `visibility: private` for drafts. Missing visibility is treated as private. Truly confidential content should stay outside the public repo.
 
 ## Media JSON Entry
 
@@ -84,10 +87,10 @@ Every image/video that should be discoverable on `/media` needs one entry. Keep 
 Chinese:
 
 - write like a real learning/debugging log;
-- use concrete nouns, filenames, symptoms, and decisions;
+- use concrete filenames, symptoms, decisions, and constraints;
 - start sections from action or observation when natural;
-- allow plain phrasing like `先把...跑起来`, `卡在...`, `回头看...`;
-- avoid AI handoff wording: `这次只公开`, `公开证据边界`, `功能改动没有故意扩大`.
+- allow plain phrasing such as `先把...跑起来`, `卡在...`, `回头看...`;
+- avoid AI handoff wording such as `这次只公开`, `公开证据边界`, `功能改动没有故意扩大`.
 
 English:
 
@@ -96,7 +99,7 @@ English:
 - do not invent achievements beyond the evidence;
 - keep technical terms stable.
 
-Good sections:
+Useful sections:
 
 ```markdown
 ## 起点 / Starting Point
@@ -106,7 +109,7 @@ Good sections:
 ## 现在回头看 / Looking Back
 ```
 
-Use only the sections that fit.
+Use only sections that fit the material.
 
 ## Rendering Patterns
 
@@ -124,7 +127,7 @@ Gallery:
 ![Schematic page / 原理图页](/uploads/projects/<project-slug>/schematic.jpg)
 ```
 
-Language-scoped code/listing:
+Language-scoped listing:
 
 ````markdown
 ```en-text
@@ -140,23 +143,22 @@ Normal code fences are shared evidence and remain visible in both languages.
 
 ## Internal Links
 
-- Link notes to assets when an uploaded file explains the note.
-- Let `projectSlug` create related-note and related-media surfaces automatically.
-- Use note links in project body for important learning logs:
-  `/notes/<note-slug>`
-- Use public asset links for downloads:
-  `/uploads/projects/<project-slug>/<file>`
+- Link project body to important notes: `/notes/<note-slug>`.
+- Link downloads/assets with public paths: `/uploads/projects/<project-slug>/<file>`.
+- Use `projectSlug` to create related note/media surfaces automatically.
+- Keep project detail order in mind: body, related notes, public project files, related media.
 
 ## Validation Checklist
 
 Before each commit:
 
-- paths in frontmatter exist;
+- project/note frontmatter is valid;
+- local upload paths exist;
 - `assetPaths` does not expose private/noisy files;
 - media `src` and `thumbnail` exist;
-- no duplicate media IDs;
-- note `projectSlug` matches the project filename;
-- English and Chinese sections cover the same content;
+- media IDs are unique;
+- note `projectSlug` matches an existing project slug;
+- English and Chinese sections cover the same substantive content;
 - text files pass UTF-8 validation;
-- images/videos are reasonably sized and displayed;
+- images/videos are reasonably sized;
 - no unrelated changes are staged.

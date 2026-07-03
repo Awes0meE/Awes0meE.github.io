@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Note Writer"
+  short_description: "Write portfolio engineering notes in the user's style."
+  default_prompt: "Use this skill to turn rough project bullet points, timelines, technical stacks, and evidence into bilingual Chinese-first engineering notes. Follow references/hard-gated-checklist.md before drafting, translating, or finalizing."
