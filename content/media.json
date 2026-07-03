@@ -598,5 +598,101 @@
     "type": "image",
     "thumbnail": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_221410.png",
     "projectSlug": "nanjing-turing-qt-embedded-learning"
+  },
+  {
+    "id": "arduino-digital-clock-cover",
+    "title": "Arduino digital clock counter prototype",
+    "titleZh": "Arduino 两位数码管计数器原型",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/cover.jpg",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Breadboard prototype with Arduino Nano, SN54LS47 decoder chips, and two seven-segment displays.",
+    "captionZh": "面包板上的 Arduino Nano、SN54LS47 译码芯片和两位七段数码管原型。"
+  },
+  {
+    "id": "arduino-digital-clock-demo",
+    "title": "Digital clock counter demo",
+    "titleZh": "数字钟计数器演示",
+    "type": "video",
+    "src": "/uploads/projects/arduino-digital-clock-counter/demo.mp4",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Short public MP4 showing the breadboard counter running on the desk.",
+    "captionZh": "面包板计数器在桌面上运行的短视频。"
+  },
+  {
+    "id": "arduino-digital-clock-requirements",
+    "title": "Digital clock course requirements",
+    "titleZh": "Digital Clock 课程要求页",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Course slide defining two-digit roll-over behavior plus pause and reset buttons.",
+    "captionZh": "课程课件中关于两位归零计数、暂停和复位按键的要求页。"
+  },
+  {
+    "id": "arduino-digital-clock-structure",
+    "title": "Digital clock block structure",
+    "titleZh": "数字钟功能块结构",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Course slide splitting the build into Arduino, decoder, and display blocks.",
+    "captionZh": "课程课件中把项目拆成 Arduino、译码器和显示模块的结构页。"
+  },
+  {
+    "id": "arduino-digital-clock-bcd-decoder",
+    "title": "BCD-to-seven-segment decoder notes",
+    "titleZh": "BCD 到七段译码器说明",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "SN7447 / SN54LS47 orientation, power, resistor, and BCD mapping notes from the course handout.",
+    "captionZh": "课件中关于 SN7447 / SN54LS47 方向、电源、限流电阻和 BCD 映射的说明。"
+  },
+  {
+    "id": "arduino-digital-clock-button-pullup",
+    "title": "Button pull-up and pull-down notes",
+    "titleZh": "按键上下拉说明",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Course slide used while checking pause/reset button wiring and stable input levels.",
+    "captionZh": "检查暂停/复位按键接线和稳定输入电平时对应的课程页。"
+  },
+  {
+    "id": "arduino-digital-clock-milestones",
+    "title": "Digital clock milestones",
+    "titleZh": "数字钟项目里程碑",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Milestone slide that breaks the work into timing generator, decoder, display, programming, and testing.",
+    "captionZh": "把项目拆成计时发生器、译码器、显示、程序和测试的里程碑页。"
+  },
+  {
+    "id": "arduino-digital-clock-tinkercad-demo",
+    "title": "One-digit TinkerCAD demo",
+    "titleZh": "一位数码管 TinkerCAD demo",
+    "type": "image",
+    "src": "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png",
+    "date": "2024-04-15",
+    "projectSlug": "arduino-digital-clock-counter",
+    "caption": "Reference one-digit roll-over simulation used to understand the BCD counter path.",
+    "captionZh": "用于理解 BCD 计数链路的一位归零计数仿真参考页。"
   }
 ]

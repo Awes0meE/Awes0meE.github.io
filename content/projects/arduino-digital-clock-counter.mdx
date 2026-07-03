@@ -1,0 +1,85 @@
+---
+title: "Arduino Breadboard Digital Clock Counter"
+titleZh: "Arduino 面包板两位数码管计数器"
+summary: "A second-year MEC104 course prototype using an Arduino Nano, SN54LS47 BCD-to-seven-segment decoders, two seven-segment LEDs, and momentary buttons to build an auto-reset two-digit counter."
+summaryZh: "大二 MEC104 工程实训课程里的面包板原型：用 Arduino Nano、SN54LS47 BCD-七段译码器、两个七段数码管和非自锁按钮，搭建自动归零的两位计数器。"
+date: "2024.04.15 to 2024.05.03"
+status: "Completed"
+tags: ["Arduino", "Embedded", "Seven-Segment Display", "BCD", "Breadboard", "Course Project"]
+cover: "/uploads/projects/arduino-digital-clock-counter/cover.jpg"
+featured: false
+links:
+  demo: "/uploads/projects/arduino-digital-clock-counter/demo.mp4"
+  download: "/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf"
+assetPaths:
+  - "/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg"
+  - "/uploads/projects/arduino-digital-clock-counter/demo.mp4"
+  - "/uploads/projects/arduino-digital-clock-counter/project-brief-source.txt"
+  - "/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino"
+  - "/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino"
+  - "/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf"
+  - "/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png"
+  - "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png"
+  - "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png"
+  - "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png"
+  - "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png"
+  - "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png"
+  - "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png"
+---
+
+## Project Brief / 项目简介
+
+This was a second-year MEC104 engineering practice project. The build used an Arduino Nano on a breadboard, SN54LS47 / 7447-style BCD-to-seven-segment decoder chips, two seven-segment LED displays, and momentary buttons for pause and reset. The project goal was simple to state and surprisingly dense to wire: make a two-digit counter roll over automatically and still respond to button input.
+
+这是大二 MEC104 工程实训课程里留下的一个面包板项目。当时用 Arduino Nano 做主控，配合 SN54LS47 / 7447 这一类 BCD 到七段数码管的译码芯片，再接两个七段数码管和非自锁按钮，实现一个能自动归零、还能暂停和复位的两位计数器。目标听起来很小，但真正接到面包板上时，译码、限流、电源、按键输入和线序都会一起冒出来。
+
+![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
+
+## Rules Became Wiring / 规则落到接线
+
+The course brief asked for two-digit display, roll-over counting, pause, and reset. Reading it now, the important part is how the written requirements turn into hardware decisions: each digit needs a decoder path, each decoder needs a stable BCD input, every LED segment needs current limiting, and the button inputs need pull-up or pull-down behavior instead of floating pins.
+
+课件里的要求是两位显示、到指定数字后归零、暂停和复位。现在回头看，比较有意思的是这些文字规则怎么落到硬件上：每一位数码管都需要一条译码链路，每个译码器都要有稳定的 BCD 输入，LED 段线前面要有限流电阻，按键输入也要有上拉或下拉，不能让引脚悬空。
+
+![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
+![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
+
+## Circuit Pieces / 电路拆分
+
+The hardware can be read as a few small blocks: Arduino pins generate BCD signals, the SN54LS47 maps those four bits to seven-segment outputs, the display shows the decoded digit, and the buttons feed state changes back into the program. This block view helped me separate "the number is wrong" from "the decoder wiring is wrong" and "the button level is unstable."
+
+整个电路可以拆成几块来看：Arduino 引脚输出 BCD 信号，SN54LS47 把四位输入译码成七段输出，数码管负责显示，按键再把暂停和复位状态送回程序。这个拆法对当时很有帮助，因为它能把“数字不对”“译码器接错”“按键电平不稳”这些问题分开看。
+
+![Course system structure / 课程中的系统结构拆分](/uploads/projects/arduino-digital-clock-counter/course-system-structure.png)
+![BCD decoder notes / BCD 到七段译码器说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
+![Button pull-up and pull-down notes / 按键上下拉说明](/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png)
+
+## Code Trail / 代码线索
+
+The two Arduino sketches in the folder read like intermediate checkpoints. `digital-read-key.ino` only reads the pause and reset inputs on pins 7 and 6 and prints their states through Serial. It is a small file, but it captures the moment when button wiring had to become observable.
+
+`single-digit-bcd-counter.ino` is the other checkpoint. It maps pins 9, 10, 11, and 12 to BCD inputs, writes a lookup table for digits 0 to 9, then increments once per second. The finished two-digit behavior is shown by the breadboard photo and demo video, while this sketch keeps the one-digit decoder logic that made the later build easier to reason about.
+
+文件夹里的两个 Arduino sketch 更像中间检查点。`digital-read-key.ino` 只做一件事：读取 7 号和 6 号引脚上的暂停、复位按键，再通过串口打印电平。这个文件很短，但它保留了当时把按键接线变成可观察状态的过程。
+
+`single-digit-bcd-counter.ino` 是另一个检查点。它把 9、10、11、12 号引脚接成 BCD 输入，用一个查表数组表示 0 到 9，再每秒递增一次。完整的两位效果主要由面包板照片和演示视频说明，这个 sketch 则保留了从一位译码开始验证的那条线。
+
+## Files And Evidence / 文件和证据
+
+- [Demo video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) keeps the working breadboard behavior in a small public MP4.
+- [SN54LS47 datasheet](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf) is the vendor reference for the BCD-to-seven-segment decoder.
+- [Button test sketch](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino) records the pause/reset input check.
+- [Single-digit BCD counter sketch](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino) records the decoder lookup-table exercise.
+- [Source brief](/uploads/projects/arduino-digital-clock-counter/project-brief-source.txt) keeps the original project description used while preparing this portfolio entry.
+
+- [演示视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 保留了面包板实际运行的状态，并压成了较小的公开 MP4。
+- [SN54LS47 数据手册](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf) 是 BCD 到七段译码器的 vendor reference。
+- [按键测试 sketch](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino) 记录暂停和复位输入的检查。
+- [一位 BCD 计数 sketch](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino) 记录译码查表的练习。
+- [原始项目说明](/uploads/projects/arduino-digital-clock-counter/project-brief-source.txt) 保留这次整理作品集时使用的项目描述。
+
+## Looking Back / 现在回头看
+
+This project sits before my later STM32 and PCB work. At that point I still did not draw PCBs, and the component-level ideas were fuzzy. The useful part of this archive is exactly that early stage: a breadboard full of jump wires, one decoder chip at a time, Serial output for button checks, and a small visible counter that made embedded input/output feel less abstract.
+
+这条项目线发生在后来的 STM32 和 PCB 经历之前。那时我还不会画 PCB，对很多元器件原理也比较模糊。它值得放进作品集的地方也正是这个早期状态：一块插满跳线的面包板，一颗一颗译码芯片地排查，用串口看按键输入，再把一个会动的计数器摆在眼前。嵌入式的输入、输出、状态和调试，在这个阶段第一次变得具体了一点。
