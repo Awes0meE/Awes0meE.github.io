@@ -48,6 +48,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-07-03`: Added repo-local `engineering-note-writer` skill for converting rough project bullet points, timelines, technical stacks, and evidence into the portfolio's Chinese-first practical engineering-note voice with accurate English counterparts. `AddProject.skill` now points to it for project/note/media prose during imports.
 - `2026-07-04`: Hardened `AddProject.skill` and `engineering-note-writer` with mandatory hard-gated checklists so future agents must pass source-audit/public-safety/content/verification gates for imports and fact/structure/voice/bilingual/MDX gates for writing before continuing.
 - `2026-07-04`: Imported `C:\Users\123\Desktop\Digital Clock` as the `arduino-digital-clock-counter` portfolio project: 1 project page, 1 public learning note, 11 media entries, normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`, selected public screenshots from the course handout, and selected cropped excerpts from the homework report. The original `Digital Clock.pdf` course handout and homework report PDF are reference-only and should not be copied into `public/uploads/`.
+- `2026-07-04`: Investigated failed GitHub Pages deployment run `28677991122` at commit `f1371d0`. Vercel and local builds were healthy; the problem was the username repository still had legacy GitHub Pages configured to publish `main:/`, so Pages tried to deploy the raw Next.js source repository. Direct Pages deactivation returned HTTP 422, so the repository now uses a dedicated `gh-pages` branch containing only `index.html`, `404.html`, and `.nojekyll` as a redirect fallback to `https://www.66ccff-labs.com/`, with Pages source set to `gh-pages:/`.
 
 ## Stable Decisions
 
@@ -75,6 +76,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Public files under `public/uploads/` are not private. For Juanyun, treat only `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` as sensitive product folders by default; do not place their Gerber, schematic, BOM, PnP, EDA/CAD source, full firmware source, invoice, reimbursement, billing, credential, installer, vendor, or build-output files there. Other Juanyun legacy folders can be public after pruning noisy raw project/build/vendor files.
 - Preserve `legacy/hexo-export/` as historical reference. Do not serve it as the live website.
 - Use Vercel for deployment and Cloudflare for DNS management.
+- GitHub Pages is not the production deployment target. Because `Awes0meE.github.io` is a username repository, Pages may stay enabled and may reject deactivation; keep its source set to `gh-pages:/`, where the branch only serves the redirect fallback to `https://www.66ccff-labs.com/`. Never point Pages at `main:/` and never deploy the full Next.js source tree through Pages.
+- When editing the `gh-pages` redirect branch from Windows PowerShell, avoid piping PowerShell-generated tree text directly into `git mktree`; CRLF can become literal `\r` in filenames. Use a temporary worktree or temporary `GIT_INDEX_FILE` plus `git update-index` instead.
 - Keep root `.nojekyll` committed so incidental GitHub Pages builds do not run Jekyll/Liquid over Next.js source files and uploaded Markdown/code archives.
 
 ## Site Identity

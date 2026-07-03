@@ -8,7 +8,7 @@ Project operating guide for AI agents working on the XJTLU Portfolio.
 - Current local path: `D:\Develop\Project_Final_Collation\XJTLU_Portfolio` on this machine. The path may differ on another computer.
 - Public site: `https://www.66ccff-labs.com/`
 - Vercel preview/base deployment: `https://awes0mee-portfolio.vercel.app/`
-- Deployment target: Vercel. Keep root `.nojekyll` committed because the repository name can trigger GitHub Pages, and this Next.js site should not let Jekyll/Liquid parse uploaded Markdown or code evidence under `public/uploads/`.
+- Deployment target: Vercel. GitHub Pages for this username repository is only a redirect fallback: keep Pages source on `gh-pages:/`, never `main:/`. Keep root `.nojekyll` committed because the repository name can trigger GitHub Pages, and this Next.js site should not let Jekyll/Liquid parse uploaded Markdown or code evidence under `public/uploads/`.
 - Stack: Next.js App Router, TypeScript, React, Tailwind CSS, local MDX-like content files, JSON media metadata.
 - Package manager: npm.
 - Main content folders:

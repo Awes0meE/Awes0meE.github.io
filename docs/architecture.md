@@ -104,6 +104,7 @@ Project and note cards use paired frontmatter fields. Media cards use optional `
 - Vercel handles the Next.js deployment.
 - Cloudflare manages DNS.
 - Local and deployment toolchain details live in `docs/environment-toolchain.md`; `package.json` declares Node/npm engines and `.nvmrc` pins the portable Node baseline to `22`.
+- GitHub Pages is a redirect fallback only. Because this is the `Awes0meE.github.io` username repository, Pages may remain enabled, but its source must stay on `gh-pages:/`; do not set it to `main:/` or deploy the Next.js source tree through Pages.
 - The root `.nojekyll` file is intentional. This repository name also triggers GitHub Pages, but the live site is not a Jekyll site; `.nojekyll` prevents GitHub Pages from treating source content and `public/uploads/` Markdown/code archives as Liquid/Jekyll templates.
 - Legacy project-slug redirects live in `next.config.mjs`, so they are a Vercel / Next.js hosting feature. If the site is ever exported or served as plain static files, those redirects need host-level equivalents.
 

@@ -74,6 +74,8 @@ The Vercel deployment address is:
 https://awes0mee-portfolio.vercel.app/
 ```
 
+The GitHub Pages address is only a fallback redirect. Share the custom domain or Vercel address instead.
+
 To publish a new version:
 
 1. Push the latest code to GitHub.
@@ -95,6 +97,8 @@ Vercel 部署地址是：
 ```text
 https://awes0mee-portfolio.vercel.app/
 ```
+
+GitHub Pages 地址只作为跳转兜底使用。对外请发自定义域名或 Vercel 地址。
 
 发布新版本时：
 

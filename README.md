@@ -153,6 +153,8 @@ Current workspace content state:
 
 The intended deployment target is Vercel.
 
+GitHub Pages is only a redirect fallback for the username repository. Keep GitHub Pages source set to `gh-pages:/`, where `index.html` and `404.html` redirect to the production domain. Do not set Pages source to `main:/`, and do not deploy the full Next.js source tree through Pages.
+
 Recommended Vercel settings:
 
 - Framework preset: Next.js
@@ -318,6 +320,8 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 ## 部署
 
 推荐部署到 Vercel。
+
+GitHub Pages 只作为用户名仓库的跳转兜底使用。Pages source 要保持为 `gh-pages:/`，其中 `index.html` 和 `404.html` 只负责跳转到生产域名。不要把 Pages source 改回 `main:/`，也不要用 Pages 发布完整的 Next.js 源码树。
 
 当前公开访问地址：
 

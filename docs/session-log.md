@@ -387,3 +387,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Revised the Digital Clock project page with selected homework-report content and removed the source description TXT from public project files.
 - Files changed: added cropped report excerpt images for two-digit wiring, digit splitting, and switch logic; expanded `content/projects/arduino-digital-clock-counter.mdx`; added 3 media entries; removed the public project description TXT from `assetPaths` and `public/uploads`; updated content-state wording in docs.
 - Verification: `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-07-04
+
+- Summary: Investigated the failed GitHub Pages deployment and converted Pages into a redirect fallback instead of a second app deployment path.
+- Files changed: pushed a dedicated `gh-pages` branch with only `index.html`, `404.html`, and `.nojekyll`; changed repository Pages source from `main:/` to `gh-pages:/`; documented the failure mode and future guardrails in `CODEX.md`, `MEMORY.md`, `README.md`, `USER_GUIDE.md`, `docs/architecture.md`, and `docs/environment-toolchain.md`.
+- Verification: `gh api repos/Awes0meE/Awes0meE.github.io/pages --jq '{status,build_type,source,html_url,cname,https_enforced}'` reported `status: built`, `source.branch: gh-pages`, and `source.path: /`; `pages-build-deployment` run `28678418554` completed successfully on `gh-pages`; `https://awes0mee.github.io/` returned the redirect fallback HTML; `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
