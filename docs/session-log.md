@@ -393,3 +393,15 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Investigated the failed GitHub Pages deployment and converted Pages into a redirect fallback instead of a second app deployment path.
 - Files changed: pushed a dedicated `gh-pages` branch with only `index.html`, `404.html`, and `.nojekyll`; changed repository Pages source from `main:/` to `gh-pages:/`; documented the failure mode and future guardrails in `CODEX.md`, `MEMORY.md`, `README.md`, `USER_GUIDE.md`, `docs/architecture.md`, and `docs/environment-toolchain.md`.
 - Verification: `gh api repos/Awes0meE/Awes0meE.github.io/pages --jq '{status,build_type,source,html_url,cname,https_enforced}'` reported `status: built`, `source.branch: gh-pages`, and `source.path: /`; `pages-build-deployment` run `28678418554` completed successfully on `gh-pages`; `https://awes0mee.github.io/` returned the redirect fallback HTML; `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-07-04
+
+- Summary: Updated the Digital Clock project with the user's replacement cover, published the original homework report PDF, and rewrote the related course-note page with `engineering-note-writer`.
+- Files changed: added `cover-wiring.jpg` / `cover-wiring-thumb.jpg` for the replacement cover while keeping the old cover paths as compatibility files; regenerated course screenshots from `Digital Clock.pdf` with the top-right XJTLU logo removed; added `digital-clock-homework-report.pdf`; updated the Digital Clock project page, related note, cover media caption, README, and durable memory.
+- Verification: `npm.cmd run validate-content`, `npm.cmd run validate-encoding`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.
+
+## 2026-07-04
+
+- Summary: Fixed Vercel preview failures caused by the redirect-only `gh-pages` branch.
+- Files changed: added root `vercel.json` with `git.deploymentEnabled.gh-pages = false`; updated `docs/environment-toolchain.md` and `MEMORY.md`; mirrored the same `vercel.json` into the `gh-pages` branch so future redirect updates do not trigger a Next.js preview build.
+- Verification: GitHub statuses showed `main` Vercel deployment success at commit `10061ff`; failed previews were on `gh-pages` commits `159147e` and `79a9737`; Vercel CLI logs for `dpl_Ga5hESaXyDevREn4FpRZ4QL9uyHi` reported `Couldn't find any pages or app directory`; after the fix, `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, `npm.cmd run build`, and `npm.cmd audit --omit=dev` passed.

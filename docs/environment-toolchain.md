@@ -126,7 +126,7 @@ Expected configuration:
 - Canonical site: `https://www.66ccff-labs.com/`
 - Vercel deployment: `https://awes0mee-portfolio.vercel.app/`
 - GitHub Pages source: `gh-pages` branch, `/` path.
-- `gh-pages` branch contents: only `index.html`, `404.html`, and `.nojekyll`, redirecting to the canonical site.
+- `gh-pages` branch contents: only `index.html`, `404.html`, `.nojekyll`, and `vercel.json`, redirecting to the canonical site while telling Vercel not to build `gh-pages`.
 - `main` branch contents: full Next.js source. Do not set Pages source to `main:/`.
 
 Check the Pages configuration with:
@@ -151,3 +151,5 @@ gh api -X PUT repos/Awes0meE/Awes0meE.github.io/pages -f "source[branch]=gh-page
 Do not upload `path: .` from `main` as a Pages artifact. That publishes the raw Next.js source tree and can also make Jekyll/Liquid parse public Markdown/code evidence.
 
 When editing the `gh-pages` branch from Windows PowerShell, prefer a temporary worktree or a temporary `GIT_INDEX_FILE` with `git update-index`. Do not pipe PowerShell-generated tree text directly into `git mktree`; CRLF handling can accidentally create paths such as `index.html\r` instead of `index.html`.
+
+Vercel is connected to the same GitHub repository, so it may try to create preview deployments for `gh-pages`. Keep `vercel.json` on both `main` and `gh-pages` with `git.deploymentEnabled.gh-pages = false`; otherwise Vercel will run the Next.js build against the redirect-only branch and fail because that branch has no `app/` or `pages/` directory.
