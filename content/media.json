@@ -604,12 +604,12 @@
     "title": "Arduino digital clock counter prototype",
     "titleZh": "Arduino 两位数码管计数器原型",
     "type": "image",
-    "src": "/uploads/projects/arduino-digital-clock-counter/cover.jpg",
-    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
+    "src": "/uploads/projects/arduino-digital-clock-counter/cover-wiring.jpg",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-wiring-thumb.jpg",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
-    "caption": "Breadboard prototype with Arduino Nano, SN54LS47 decoder chips, and two seven-segment displays.",
-    "captionZh": "面包板上的 Arduino Nano、SN54LS47 译码芯片和两位七段数码管原型。"
+    "caption": "Wiring overview for the Arduino, two decoder chips, two seven-segment displays, resistors, and pause/reset buttons.",
+    "captionZh": "Arduino、两颗译码芯片、两位七段数码管、电阻和暂停/复位按键的接线总览。"
   },
   {
     "id": "arduino-digital-clock-demo",
@@ -617,7 +617,7 @@
     "titleZh": "数字钟计数器演示",
     "type": "video",
     "src": "/uploads/projects/arduino-digital-clock-counter/demo.mp4",
-    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-thumb.jpg",
+    "thumbnail": "/uploads/projects/arduino-digital-clock-counter/cover-wiring-thumb.jpg",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
     "caption": "Short public MP4 showing the breadboard counter running on the desk.",
