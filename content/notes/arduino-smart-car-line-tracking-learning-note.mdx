@@ -1,0 +1,106 @@
+---
+title: "Reading The Smart Car Tutorial As My First Embedded Build"
+titleZh: "Smart Car 课件与电路学习记录"
+summary: "A learning note from the MEC104 smart-car tutorial, connecting soldering order, LM7805 power regulation, IR sensors, 74HC165 input expansion, L293 motor driving, PWM tuning, and the staged Arduino tests."
+summaryZh: "从 MEC104 Smart Car 课件重新整理的一篇学习记录：把焊接顺序、LM7805 稳压、红外传感器、74HC165 输入扩展、L293 电机驱动、PWM 调速和 Arduino 分阶段测试串起来。"
+date: "2024.03 to 2024.04"
+tags: ["Arduino", "Embedded", "Line Tracking", "Soldering", "Course Note"]
+visibility: public
+projectSlug: "arduino-smart-car-line-tracker"
+---
+
+## Starting From The Tutorial / 从课件要求开始
+
+The tutorial framed the smart-car project as soldering practice, circuit reading, troubleshooting, teamwork, and a small racing challenge. That sounds straightforward now, but at the time it was a very different kind of task from writing a small Arduino sketch. The board had to be assembled first, and the code only became meaningful after the power, sensors, switches, motor driver, and mechanical parts were all alive.
+
+课件把 Smart Car 项目定义成焊接练习、电路阅读、故障排查、团队协作和一个小型圈速挑战。现在看起来很直白，但当时它和写一个小 Arduino sketch 完全不是同一种任务。板子要先被装起来，电源、传感器、开关、电机驱动和机械结构都能工作以后，代码才真正有意义。
+
+![Smart car tutorial objectives / Smart Car 课程目标页](/uploads/projects/arduino-smart-car-line-tracker/course-objectives.png)
+
+The application slide gave the project a clear target: line tracking with IR sensors, and collision avoidance with impact switches. For me, this was the point where "embedded" started to feel like a physical loop. The car observes the ground or an obstacle, the controller decides what to do, and the motors turn that decision into movement.
+
+应用场景那页把目标说得很清楚：用红外传感器做循迹，用碰撞开关做避障。对我来说，这是“嵌入式”第一次变成一条物理链路的地方。小车观察地面或者障碍物，主控决定下一步动作，电机再把这个决定变成运动。
+
+![Line-tracking and collision-avoidance applications / 循迹与碰撞避障应用页](/uploads/projects/arduino-smart-car-line-tracker/course-line-tracking-and-collision.png)
+
+## Soldering Before Coding / 写代码前先把板子焊起来
+
+The soldering part mattered because the project started from a bare PCB. The tutorial reminded us to check the component list before touching the iron, and the manual suggested a low-to-high, center-to-outside installation order. That order was practical: small resistors and surface-mount parts are easier to place before tall sockets, switches, headers, wheels, and mechanical parts start blocking the board.
+
+焊接这一段很重要，因为项目是从裸 PCB 开始的。课件提醒我们动烙铁之前先检查元件清单，manual 里也建议按从低到高、从中间到外围的顺序装。这个顺序很实用：小电阻和贴片元件要先放好，等 IC 座、开关、排针、轮子和机械件都上去了，板子就没那么好操作了。
+
+![Soldering process slide / 焊接过程课件页](/uploads/projects/arduino-smart-car-line-tracker/course-soldering-process.png)
+
+The photo from the lab bench is rough, but it is useful evidence. It shows the project at the stage where the car was still a soldering and assembly problem rather than a racing robot. Looking back, this was where I started to understand that a software symptom can come from a hardware mistake several steps earlier.
+
+焊接现场照片有点朴素，但它是很有用的证据。它记录的是小车还处在焊接和装配问题里的阶段，而不是已经能比赛的机器人。现在回头看，这个阶段让我开始理解：一个看起来像软件的问题，可能来自前面某个焊点、方向或者元件安装错误。
+
+![Soldering bench during assembly / 焊接和装配现场](/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg)
+
+## Power, Inputs, And Expansion / 电源、输入和扩展
+
+The power slide was one of the first places where component roles became concrete. The LM7805 part gives a 5 V rail, and the capacitors around it are not decorative. They affect how stable the board feels at startup and while the motors are drawing current. The report later mentions that several capacitors were easy to damage during testing, which makes this block feel much less abstract.
+
+电源那页是最早让我把元件作用看具体的地方之一。LM7805 提供 5 V 电源轨，旁边的电容不是摆设。它们会影响板子上电和电机工作时的稳定性。报告后来提到几个电容在测试中很容易损坏，这让电源模块变得没那么抽象。
+
+![Power-supply block / 电源模块课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)
+
+The input side then explains why the project needed more structure than direct pin reads. There are six IR tracking sensors, six collision switches, and two keys. The 74HC165 shift register turns those parallel input states into serial data, so the controller can read a larger set of sensors through a smaller interface. Once I saw that, `reload_shift_reg()` in the test code became a real hardware-facing step.
+
+输入侧解释了为什么这个项目不能只靠直接读几个引脚。板上有 6 个红外循迹传感器、6 个碰撞开关和 2 个按键。74HC165 移位寄存器把这些并行输入状态转换成串行数据，让主控用更少接口读更多传感器。看懂这一点以后，测试代码里的 `reload_shift_reg()` 就不再只是一个函数名，而是一次真实的硬件状态刷新。
+
+![Sensors and switches / 传感器和开关](/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png)
+![74HC165 shift-register role / 74HC165 移位寄存器作用](/uploads/projects/arduino-smart-car-line-tracker/course-shift-register.png)
+
+## Motor Driver And PWM / 电机驱动和 PWM
+
+The motor-driver part was where control became visible. The L293 sits between the controller and the motors because the microcontroller pins cannot provide motor current directly. The course asked how to change the rotation direction, and the manual showed the H-bridge idea behind that question. Later, the code made the same idea operational through left and right wheel PWM values.
+
+电机驱动这一段让“控制”变得可见。L293 夹在主控和电机之间，因为单片机引脚不能直接提供电机电流。课件问的是怎么改变电机旋转方向，manual 里展示的是 H 桥背后的思路。到了代码里，同一个问题就落到左右轮 PWM 数值上。
+
+![L293 motor-driver slide / L293 电机驱动课件页](/uploads/projects/arduino-smart-car-line-tracker/course-motor-driver.png)
+![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
+
+The PWM slide made speed tuning feel less mysterious. Higher duty cycle means higher average motor voltage, and the Arduino side exposes that as values from 0 to 255. The final report describes using different steering strengths: strong correction when the outer IR sensors see the line, smaller correction when the inner sensors see it, and a middle grade between them. That was the control logic I could tune on the track.
+
+PWM 那页让调速没那么神秘。占空比越高，电机得到的平均电压越高，Arduino 这边就表现成 0 到 255 的数值。最终报告里写到，转向强度会分成几档：外侧红外传感器检测到黑线时用更强修正，内侧传感器检测到时用较小修正，中间再留一个过渡档。赛道上能调的就是这套控制逻辑。
+
+![PWM speed-control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
+
+## Testing Before Racing / 比赛前的分段测试
+
+The tutorial's test list is a good way to read the uploaded code folder. It goes through LED, keys, collision switches, IR tracking sensors, motors, and IR speed sensors. Each test isolates one part of the car, which is exactly what a soldered board needs. If the IR sensor test is wrong, jumping straight to a racing program only makes the failure harder to locate.
+
+课件里的测试清单很适合拿来读上传的代码文件夹。它按 LED、按键、碰撞开关、红外循迹传感器、电机、红外测速传感器来分段测试。每个测试都把小车的一部分单独拿出来，这正是焊接板子需要的调试方式。如果红外传感器测试都不对，直接上完整赛道程序只会让问题更难定位。
+
+![Basic function-test list / 基础功能测试列表](/uploads/projects/arduino-smart-car-line-tracker/course-basic-function-tests.png)
+
+The racing challenge then tied everything together. The car had to follow a black line for one lap, and the useful result was not just "it moved." It had to move fast enough on straight segments, react quickly enough when the line shifted, and avoid losing the track at corners. That is why the report talks about wheel-speed differentials, RPM, sensor response, and Arduino calculation speed together.
+
+圈速挑战把前面的东西连到了一起。小车要沿黑线跑完一圈，有用的结果远远超过“它动了”。它要在直道上足够快，线路偏移时反应足够快，到了弯道还不能冲出黑线。所以报告里会把轮速差、转速、传感器响应和 Arduino 运算速度放在一起说。
+
+![Smart car final racing challenge / Smart Car 圈速挑战页](/uploads/projects/arduino-smart-car-line-tracker/course-racing-challenge.png)
+
+## What I Would Keep From This Project / 现在还值得保留的东西
+
+- [Smart car report PDF](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) records the actual line-tracking strategy and race-tuning notes.
+- [Smart car manual PDF](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) explains the circuit blocks behind the board.
+- [Testing code folder](/uploads/projects/arduino-smart-car-line-tracker/testing-code) keeps the staged bring-up programs.
+- The three car photos show the front, back, and soldering process.
+- The course screenshots used here are cropped/masked derivatives for explanation. The original tutorial PDF stays outside the public uploads.
+
+- [Smart Car Report PDF](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) 记录了实际循迹策略和比赛调参笔记。
+- [Smart Car Manual PDF](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 解释了板子背后的电路模块。
+- [Testing code 文件夹](/uploads/projects/arduino-smart-car-line-tracker/testing-code) 保留了分阶段 bring-up 程序。
+- 三张小车照片分别展示正面、背面和焊接过程。
+- 这里使用的课件截图是用于说明的裁切/遮挡版本。原始 tutorial PDF 不放进公开上传目录。
+
+## Looking Back / 现在回头看
+
+This project was small, but it changed how I read later embedded work. Before it, I could treat code, circuits, and mechanical movement as separate things. After it, I started to see the chain: a soldered component changes an electrical signal, the signal changes what the program reads, the program changes PWM outputs, and the car either follows the line or leaves it.
+
+这个项目不大，但它改变了我后来读嵌入式项目的方式。做它之前，我还能把代码、电路和机械运动当成几件分开的事。做完以后，我开始能看到这条链路：焊上去的元件改变电信号，电信号改变程序读到的状态，程序再改变 PWM 输出，小车再沿着黑线跑，或者暴露出跑偏的问题。
+
+The files are a little messy because they come from a beginner course project, but that mess is part of the record. The useful thing is that the evidence shows the real sequence: solder, test one block, read the schematic again, adjust the code, run the car, and tune it on the track.
+
+这些文件有点乱，因为它们来自一个入门课程项目。但这种乱本身也是记录的一部分。真正有用的是，它们能看出当时的顺序：焊接、测一个模块、回头再看原理图、改代码、让小车跑起来，然后在赛道上继续调。
