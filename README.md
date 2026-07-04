@@ -142,7 +142,8 @@ Current workspace content state:
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
 - The site also includes an Arduino Digital Clock course project from MEC104, with a project page, one related learning note, selected public course screenshots without the top-right XJTLU logo, selected homework-report excerpts plus the original homework report PDF, Arduino sketches, a cleaned demo video, and the SN54LS47 datasheet.
-- The media gallery covers 61 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the Notion-exported Nanjing Turing build diagrams, and Digital Clock screenshots/demo/report media.
+- The site also includes an Arduino Smart Car line-tracking course project from MEC104, with a project page, one related learning note, selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code.
+- The media gallery covers 73 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
 - The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
 - Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
 - Public project files render through a two-pane browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, and a `juanyun-tech` allowlist checked by `npm run validate-content`.
@@ -310,7 +311,8 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
 - 站点还新增了 MEC104 Arduino Digital Clock 课程项目，包括项目页、1 篇学习笔记、去掉右上角西浦校徽的精选公开课件截图、精选作业报告截图和作业报告 PDF 原件、Arduino sketch、清理过元数据的演示视频和 SN54LS47 数据手册。
-- 媒体页覆盖 61 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图、南京图灵 Notion 导出的编译逻辑图，以及 Digital Clock 截图、演示和作业报告媒体。
+- 站点还新增了 MEC104 Arduino Smart Car 循迹小车课程项目，包括项目页、1 篇学习笔记、去掉学校 logo 区域的精选公开课件截图、公开套件 manual PDF、项目报告 PDF、清理过元数据的小车照片和 Arduino 测试代码。
+- 媒体页覆盖 73 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体，以及 Smart Car 照片和课件截图。
 - 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
 - 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
 - 项目公开资料通过双栏文件浏览器展示，并在服务端做路径归一化、严格 UTF-8 读取、目录/文件/预览体积上限，以及由 `npm run validate-content` 检查的 `juanyun-tech` allowlist。

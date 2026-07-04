@@ -48,6 +48,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-07-03`: Added repo-local `engineering-note-writer` skill for converting rough project bullet points, timelines, technical stacks, and evidence into the portfolio's Chinese-first practical engineering-note voice with accurate English counterparts. `AddProject.skill` now points to it for project/note/media prose during imports.
 - `2026-07-04`: Hardened `AddProject.skill` and `engineering-note-writer` with mandatory hard-gated checklists so future agents must pass source-audit/public-safety/content/verification gates for imports and fact/structure/voice/bilingual/MDX gates for writing before continuing.
 - `2026-07-04`: Imported `C:\Users\123\Desktop\Digital Clock` as the `arduino-digital-clock-counter` portfolio project: 1 project page, 1 public learning note, 11 media entries, normalized public uploads under `public/uploads/projects/arduino-digital-clock-counter/`, selected public screenshots from the course handout, selected cropped excerpts from the homework report, and the original homework report PDF. The original `Digital Clock.pdf` course handout and source description TXT remain reference-only and should not be copied into `public/uploads/`.
+- `2026-07-05`: Imported `C:\Users\123\Desktop\Smart Car Project` as the `arduino-smart-car-line-tracker` portfolio project: 1 project page, 1 public learning note, 12 media entries, normalized public uploads under `public/uploads/projects/arduino-smart-car-line-tracker/`, selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, Arduino testing code, and a padded horizontal `cover-wide.jpg` from the user's replacement cover. The original course tutorial PDF and project-description TXT remain reference-only and should not be copied into `public/uploads/`.
 - `2026-07-04`: Investigated failed GitHub Pages deployment run `28677991122` at commit `f1371d0`. Vercel and local builds were healthy; the problem was the username repository still had legacy GitHub Pages configured to publish `main:/`, so Pages tried to deploy the raw Next.js source repository. Direct Pages deactivation returned HTTP 422, so the repository now uses a dedicated `gh-pages` branch containing only `index.html`, `404.html`, and `.nojekyll` as a redirect fallback to `https://www.66ccff-labs.com/`, with Pages source set to `gh-pages:/`.
 
 ## Stable Decisions
@@ -117,10 +118,11 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `public/uploads/projects/nanjing-turing/`: reviewed public Qt/CMake/Seamly2D learning evidence.
 - `public/uploads/projects/tianjin-metro/`: reviewed public STM32 foundation learning evidence.
 - `public/uploads/projects/arduino-digital-clock-counter/`: reviewed public MEC104 Digital Clock assets, including selected course screenshots without the top-right XJTLU logo, selected homework-report excerpts, the original homework report PDF, a metadata-stripped demo MP4, Arduino sketches, and a public TI SN54LS47 datasheet. The original course PDF and source description TXT remain outside public uploads.
+- `public/uploads/projects/arduino-smart-car-line-tracker/`: reviewed public MEC104 Smart Car assets, including selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code. The original course tutorial PDF and project-description TXT remain outside public uploads.
 
 ## Verification Baseline
 
-Known-good checks as of `2026-07-04` on Windows PowerShell:
+Known-good checks as of `2026-07-05` on Windows PowerShell:
 
 ```powershell
 npm.cmd run lint
