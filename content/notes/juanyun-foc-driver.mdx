@@ -1,8 +1,8 @@
 ---
 title: "FOC Driver Board Archive Notes"
 titleZh: "慧驱动 FOC 驱动板开发归档笔记"
-summary: "A cautious archive note for the STM32F4 / DRV8301 sensorless FOC driver-board line, explaining what exists, what selected evidence is public, and what is still missing before it becomes a strong case study."
-summaryZh: "STM32F4 / DRV8301 无感 FOC 驱动板归档笔记，记录现有材料、已公开的筛选证据，以及升级成完整案例前还缺什么。"
+summary: "A sensorless FOC board note around STM32F4, DRV8301, board files, selected motor-control source snippets, and the missing startup, sampling, and waveform records."
+summaryZh: "STM32F4 / DRV8301 无感 FOC 驱动板笔记，记录板卡文件、选出的电机控制源码片段，以及还缺的起转、采样和波形记录。"
 date: "2026-05-06"
 tags: ["FOC", "Motor Control", "PCB", "STM32F4"]
 projectSlug: "juanyun-foc-driver-board"
@@ -11,17 +11,19 @@ visibility: public
 
 ## Starting Point / 起点
 
-The FOC line looks portfolio-friendly at first sight: STM32F4, DRV8301, PMSM, sensorless control, FOC algorithm, current sampling, speed loop, OLED, and host communication. The keywords are attractive, almost dangerously so, because shiny keywords can easily package an archive that is not fully explained as a "mature project."
+FOC 这条线一看就很适合放作品集：STM32F4、DRV8301、PMSM、无感控制、FOC 算法、电流采样、速度环、OLED、上位机通信。也正因为关键词漂亮，写的时候更要小心。真正能说明水平的是电机怎样起转、采样怎样进控制链路、DRV8301 fault 怎么处理、PWM 和电流波形有没有留下记录。
 
-FOC 这条线一看就很适合放作品集：STM32F4、DRV8301、PMSM、无感控制、FOC 算法、电流采样、速度环、OLED、上位机通信。关键词很漂亮，甚至有点危险，因为漂亮关键词很容易把一个还没讲透的归档包装成“成熟项目”。
+The FOC line looks strong on a portfolio page: STM32F4, DRV8301, PMSM, sensorless control, FOC algorithm, current sampling, speed loop, OLED, and host communication. The useful writing has to stay close to startup, sampling path, DRV8301 fault handling, PWM, and current waveform evidence.
 
-源目录确实很厚。能看到 PCB、BOM、PickAndPlace、InteractiveBOM、STEP、EasyEDA 工程、DRV8301 和 STM32F4 资料、IAR / Keil 工程、`motor` 目录下的 `adc`、`drv8301`、`foc_algorithm`、`hall_sensor`、`speed_pid` 等模块。问题是，只把文件列出来并不能说明板子真的被调明白了，还要讲启动、采样、保护、失败和测试。
+源目录确实很厚。能看到 PCB、BOM、PickAndPlace、InteractiveBOM、STEP、EasyEDA 工程、DRV8301 和 STM32F4 资料、IAR / Keil 工程、`motor` 目录下的 `adc`、`drv8301`、`foc_algorithm`、`hall_sensor`、`speed_pid` 等模块。只列这些文件还不够，还要把启动、采样、保护、失败和测试写出来。
 
-## Organize It As Clues First / 先按线索整理
+The folder is substantial: PCB, BOM, PickAndPlace, InteractiveBOM, STEP, EasyEDA project, DRV8301 and STM32F4 references, IAR / Keil projects, and `motor` modules such as `adc`, `drv8301`, `foc_algorithm`, `hall_sensor`, and `speed_pid`. The next layer is explaining startup, sampling, protection, failure cases, and tests.
 
-At the beginning it is easy to be tempted by files such as Gerber and STEP. They look solid, but publishing them directly does not solve the core problem: the reader still cannot see startup logic, sampling path, PWM modulation, protection conditions, or tuning process.
+## Reading It As Clues / 先按线索读
 
-For now, the page keeps screened legacy files instead of a full project-tree download. If this FOC line is later written seriously, it needs these missing records:
+Gerber and STEP look solid, and they are useful. They show that the board exists and can be inspected. They still leave the harder questions open: startup logic, sampling path, PWM modulation, protection conditions, and tuning process.
+
+The missing records are clear:
 
 - current-sampling path and ADC trigger timing;
 - a simplified signal-flow diagram for Clarke / Park / PI / SVPWM;
@@ -29,9 +31,9 @@ For now, the page keeps screened legacy files instead of a full project-tree dow
 - waveforms or logs for failed and successful startup;
 - division of work among speed loop, low-speed task, and parameter identification.
 
-最开始容易被 Gerber 和 STEP 这种文件诱惑。它们看起来很硬，但直接放出来其实不解决核心问题：读者看不到启动逻辑、采样链路、PWM 调制、保护条件和调参过程。
+Gerber 和 STEP 看起来很硬，也确实有用。它们说明这块板存在，也能被检查。但更难的问题还在后面：启动逻辑、采样链路、PWM 调制、保护条件和调参过程。
 
-现在先保留筛过的 legacy 文件，不做完整工程树下载。后续如果要认真写 FOC，就补这些东西：
+后面要补的记录很明确：
 
 - 电流采样路径和 ADC 触发时序；
 - Clarke / Park / PI / SVPWM 的简化信号流；
@@ -39,17 +41,17 @@ For now, the page keeps screened legacy files instead of a full project-tree dow
 - 起转失败和成功的波形或日志；
 - 速度环、低速任务、参数辨识之间怎么分工。
 
-## Is It A Complete Case Study Yet? / 现在算完整作品吗
+## Current State / 现在的状态
 
-Not yet. It is more like a development line with many materials but not enough explanation. A truly complete FOC project should answer when the motor can start reliably, whether the current waveform is reasonable, how faults are triggered, how sampling noise is handled, how parameters are tuned, and what happens at low speed or high load. The current page keeps the direction visible without leaning on private project files as decoration.
+Right now this is a development line with many materials and several unanswered runtime questions. A fuller FOC case should answer when the motor starts reliably, whether the current waveform is reasonable, how faults are triggered, how sampling noise is handled, how parameters are tuned, and what happens at low speed or high load.
 
-还不算。它更像一条材料很多但还没讲透的开发线。真正完整的 FOC 项目应该能回答：电机什么时候能稳定起转，电流波形是否合理，fault 怎么触发，采样噪声怎么处理，参数怎么调，低速和高负载时会发生什么。当前页面先把方向留住，不靠私有工程文件硬撑。
+现在它更像一条材料很多、运行问题还没有讲透的开发线。更完整的 FOC 案例应该能回答：电机什么时候能稳定起转，电流波形是否合理，fault 怎么触发，采样噪声怎么处理，参数怎么调，低速和高负载时会发生什么。
 
 ## Files / 文件
 
-The site currently provides the screened evidence below.
+The site currently provides these files for reading the board and selected firmware pieces:
 
-站点已经提供：
+站点现在提供这些文件，用来读板卡和选出的固件片段：
 
 - [EasyEDA project](/uploads/projects/juanyun-public/foc-driver/easyeda-project.epro2)
 - [Gerber archive](/uploads/projects/juanyun-public/foc-driver/gerber.zip)
@@ -64,25 +66,25 @@ The site currently provides the screened evidence below.
 - [Speed PID source](/uploads/projects/juanyun-public/foc-driver/motor-speed-pid.c)
 - [DRV8301 datasheet](/uploads/projects/juanyun-public/foc-driver/drv8301-datasheet.pdf)
 
-仍然不提供 IAR / Keil 工程、完整 STM32F4 源码树、vendor library、Debug / Release 构建产物和重复工具输出。原因不是这条线本身敏感，而是完整工程树太重，也不能替代对起转、采样、调制、保护和测试的解释。
+IAR / Keil 工程、完整 STM32F4 源码树、vendor library、Debug / Release 构建产物和重复工具输出暂时留在原始归档里。完整工程树太重，也替代不了对起转、采样、调制、保护和测试的解释。
 
 ## Records Still Missing / 还要补的记录
 
-- Treat it as a material trail for now, not a mature controller.
+- Keep it as a material trail for now.
 - Add one desensitized FOC signal-chain diagram.
 - Find or redo minimal test records: PWM, phase current, speed response, and fault logs.
-- Continue adding short snippets, redrawn diagrams, and test records later, without moving the full source tree or vendor/build folders onto the website.
+- Continue adding short snippets, redrawn diagrams, and test records later.
 
-- 暂时把它当材料线索，不吹成成熟控制器。
+- 暂时把它当材料线索。
 - 补一张脱敏 FOC 信号链图。
 - 找到或重做最小测试记录：PWM、相电流、速度响应、fault 日志。
-- 后续继续补短片段、重画图和测试记录，不把完整源码树或 vendor/build 目录搬上网站。
+- 后续继续补短片段、重画图和测试记录。
 
 
 
 ## Looking Back Now / 现在回头看
 
-The more "advanced" a topic sounds, the less it should lean on keywords. If the FOC line is made solid later, the focus should not be a longer file list, but a clearer explanation of startup, sampling, modulation, protection, and testing. For now it keeps the materials and the questions, without turning an unfinished debugging line into a conclusion.
+The more advanced a topic sounds, the more it needs plain evidence. If the FOC line is made solid later, the focus should be startup, sampling, modulation, protection, and testing, with waveforms or logs close by.
 
 
-越“高级”的题目越不能靠名词撑。FOC 这条线以后如果要写扎实，重点不是把文件列得更长，而是把起转、采样、调制、保护和测试讲清楚。现在先留材料和问题，别把还没调透的东西写成结论。
+越“高级”的题目越要靠朴素证据。FOC 这条线以后如果要写扎实，重点应该是起转、采样、调制、保护和测试，而且最好有波形或日志跟在旁边。现在先留材料和问题，别把还没调透的东西写成结论。

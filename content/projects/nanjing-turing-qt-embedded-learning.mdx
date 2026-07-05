@@ -1,8 +1,8 @@
 ---
 title: "Nanjing Turing Qt, Build, and Packaging Learning Log"
 titleZh: "南京图灵 Qt、编译与打包学习记录"
-summary: "An internship archive rebuilt from Nanjing Turing AI Research Institute traces: Qt/C++ onboarding, Seamly2D modification, CMake build reasoning, and Windows/macOS release packaging."
-summaryZh: "从南京图灵人工智能研究院实习痕迹整理出的公开项目页：Qt/C++ 入门、Seamly2D 二次开发、CMake 编译理解，以及 Windows/macOS Release 打包流程。"
+summary: "A Nanjing Turing internship record around getting Seamly2D running, adding a small account-management layer, studying CMake/build logic, and packaging Qt releases on Windows and macOS."
+summaryZh: "南京图灵实习记录：跑通 Seamly2D，补一个轻量账号管理层，学习 CMake/编译逻辑，并摸索 Windows 与 macOS 上的 Qt Release 打包。"
 date: "2025-08"
 status: "Completed"
 tags: ["Qt", "C++", "CMake", "Packaging", "Internship"]
@@ -49,27 +49,29 @@ assetPaths:
   - "/uploads/projects/nanjing-turing/other-materials/image-20230309130644912.png"
 ---
 
-## Brief / 简介
+## Starting Point / 起点
 
-This page keeps a practical internship trail around Seamly2D, a Qt/C++ desktop application for clothing pattern design. The main story is ordinary but useful: get the project onto a Windows laptop, make Qt Creator stop complaining, add a small login/user-management layer, then figure out why a Release build still cannot run on another machine.
+这段南京图灵实习是我第一次比较集中地和一个真实 Qt/C++ 桌面项目打交道。项目本体是 Seamly2D，一个服装纸样设计软件。刚开始的任务很朴素：把项目拉到 Windows 电脑上，用 Qt Creator 跑起来，弄清楚 Kit、qmake、MSVC 和依赖之间到底怎么配。
 
-这页记录的是在南京图灵实习时围着 Seamly2D 做的一段学习和排错。它不是一个“做完了某个产品”的故事，更像真实实习里的节奏：先把项目拉下来，发现环境跑不通；换 Qt Kit、换编译器、删旧配置；能运行以后做一点登录注册和用户管理；最后再被 Release 打包、DLL、签名和 macOS 迁移继续折腾。
+This internship moved in a very practical order: first make Seamly2D run, then add a light registration/login and user-management layer, then learn why a Qt program that runs inside Qt Creator still needs a separate release and packaging process before it can run on another machine.
+
+这条线的顺序很实际：先让 Seamly2D 跑起来，再加一层轻量注册/登录和用户管理，接着开始理解为什么 Qt Creator 里能点绿色运行按钮，离“换台机器也能跑”还有一整套 Release 和打包流程。
 
 ![Seamly2D banner / Seamly2D 项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
 
 ## Source Folder / 源目录里有什么
 
-The original folder had logs, study notes, scripts, sample files, and many generated artifacts. Only small reading material and cleaned excerpts were copied into the website. Full upstream source trees, build folders, installers, DLL piles, and huge delivery zips stayed out of `public/uploads`.
+源目录里有周日志、我当时写下的学习笔记、脚本、样例文件，也有很多生成物。页面只放小的阅读材料和清理过的摘录；完整上游源码树、build 目录、安装包、DLL 堆和大压缩包都留在网站之外。
 
-The useful public material now falls into a few tracks:
+The useful material now falls into a few tracks:
 
-- Three weekly development logs, moving from Qt setup, registration/login, and user management into Release packaging, signing, and macOS packaging.
-- A Windows 11 first-run note for Seamly2D, mostly about Qt5 failing, Qt6/MSVC2019 working, and choosing the right qmake and Kit.
-- A Windows Release packaging PDF, covering `windeployqt`, third-party DLLs, self-signing, and Inno Setup.
-- Two Notion-exported CMake/build-logic originals: one starts from CMake basics, the other connects MSVC, SDK, CMake, Ninja, and Qt package discovery.
-- macOS packaging scripts that tried to automate `macdeployqt`, DMG creation, and self-signing.
-- `Seamly2D_addon/`, covering login, registration, control panel, user management, password hashing, and role-control files.
-- `sm2d` and `smis` sample files for reading Seamly2D's XML data shape.
+- Three weekly development logs: Qt setup, registration/login, user management, Windows Release, signing, and macOS packaging.
+- Windows 11 first-run note: Qt5 failed, Qt6/MSVC2019 worked, and the right qmake / Kit combination mattered.
+- Windows Release packaging note: `windeployqt`, third-party DLLs, self-signing, and Inno Setup.
+- Two Notion-exported CMake/build-logic notes: one starts from CMake basics, the other connects MSVC, SDK, CMake, Ninja, and Qt package discovery.
+- macOS packaging scripts: `macdeployqt`, DMG creation, and self-signing attempts.
+- `Seamly2D_addon/`: login, registration, control panel, user management, password hashing, and role-control files.
+- `sm2d` and `smis` samples: small XML files for reading Seamly2D's data shape.
 
 源目录里比较有用的是这些东西：
 
@@ -83,25 +85,29 @@ The useful public material now falls into a few tracks:
 
 ## What I Actually Worked On / 实际做过的事
 
-The first week was mostly about getting a working setup and adding the simplest account flow. Registration and login used `QDialog` and `QSettings`; password storage moved away from plain text to salted SHA-256 hashes; password inputs were masked; and a Chinese input-method crash around the login box was fixed by restricting input hints.
+第一周主要是把环境跑通，同时把最基本的账号入口接上。注册和登录用 `QDialog`、`QSettings` 做起来，密码从明文存储改成加盐 SHA-256 校验，输入框改成隐藏显示。登录界面还有一个很具体的坑：中文输入法状态下输密码可能导致程序闪退，后来通过限制用户名和密码框的输入法提示绕过去。
 
-第一周的工作很像“先活下来”：项目能不能编译，Qt Creator 用哪个 Kit，`main` 里注册和登录怎么插进去，用户不存在、密码错误、用户已存在这些提示怎么给。很多改动都不大，但它们必须连起来，软件才不会一启动就把人挡在门外。
+The first week felt like keeping the project alive before doing anything fancy: which Kit Qt Creator should use, where registration/login enters `main`, and how prompts should behave for existing users, missing users, and wrong passwords. The changes were small, but they had to connect cleanly before the original Seamly2D interface could be reached.
 
-The second week added a small control-panel path. The first account had to be `admin`; administrators could see user management; normal users could not. User deletion, promotion, and demotion were added with confirmation prompts and role checks, including the rule that only `admin` could demote another administrator.
+第二周继续补登录后的控制面板。第一次注册的账号必须叫 `admin`；管理员能看到用户管理入口，普通用户看不到。删除、提升为管理员、降级为普通用户这些操作都加了确认和角色限制，其中只有 `admin` 能降级其他管理员。
 
-第二周主要补用户管理：控制面板窗口加大，增加“用户管理”，区分普通用户和管理员，管理员可以删除普通用户、提升普通用户，也能在限制条件下做降级。这里没有去大改 Seamly2D 主业务，只是在入口前加了一层轻量权限。
+This did not touch Seamly2D's main drawing workflow deeply. It added a small permission layer in front of the original application, and the value was mostly in the details: current user, target role, visible buttons, confirmation prompts, and clear error messages.
+
+这部分没有深入改 Seamly2D 的制图主流程，更多是在原应用入口前加一层轻量权限。真正要细想的是当前登录用户是谁、目标用户是什么角色、哪些按钮该显示、误操作能不能取消、提示信息有没有说清楚。
 
 ## Build And Release / 编译与发布
 
-The most time-consuming part was not writing another dialog. It was learning why the same Qt project behaves differently across machines. Qt5 and Qt6 were not interchangeable, `core5compat` mattered, MSVC v142 had to match the Qt package, old `.pro.user` files could poison the setup, and a Debug run inside Qt Creator did not mean a releasable folder existed.
+最耗时间的部分其实在编译和打包。Qt5 和 Qt6 不能随便互换，`core5compat` 会影响项目能否通过，MSVC v142 要和 Qt 包匹配，旧 `.pro.user` 也可能把环境带偏。Qt Creator 里 Debug 能跑，只说明开发机上的那套配置当下可用，Release 文件夹还要单独整理。
 
-真正耗时的是编译和打包。开发机里点绿色运行按钮可以跑，不代表把 `exe` 拷出来就能给别人用。Windows 侧要用 `windeployqt` 收依赖，还要补 `xerces-c_3_2.dll` 这类第三方库；再往后才是自签名、Inno Setup 和安装包。macOS 侧也一样，`.app`、frameworks、`macdeployqt`、签名、DMG 都要重新过一遍。
+On Windows, the path went through `windeployqt`, missing third-party DLLs such as `xerces-c_3_2.dll`, self-signed certificates, and Inno Setup. On macOS, the same idea turned into `.app`, frameworks, `macdeployqt`, signing checks, and DMG packaging. This was the part where "runs on my machine" finally became a concrete engineering problem instead of a joke.
+
+Windows 侧要用 `windeployqt` 收依赖，还要补 `xerces-c_3_2.dll` 这类第三方库；再往后才是自签名、Inno Setup 和安装包。macOS 侧也一样，`.app`、frameworks、`macdeployqt`、签名检查、DMG 都要重新过一遍。到这里，“我电脑上能跑”终于变成了一个具体工程问题。
 
 ![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
 
 ## Public Files / 页面里保留的文件
 
-These are small files that help explain the work without dumping a whole development folder:
+These files are the parts worth reading on the website:
 
 - [CMake and build-logic note page](/notes/turing-cmake-build-logic)
 - [CMake primer Notion Markdown](/uploads/projects/nanjing-turing/other-materials/CMake%20%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20250669c3f4008099a6d6c614a4ca6937.md)
@@ -115,12 +121,14 @@ These are small files that help explain the work without dumping a whole develop
 - [sm2d XML sample note](/notes/turing-sm2d-xml-data-format)
 - [three-week development log](/notes/turing-three-week-development-log)
 
+这里的 CMake、Qt 首跑、Release 打包、sm2d XML 样例等笔记，大部分是当时写下的原文或原文型材料。它们已经作为页面内容保留，我这次只改项目主页和后来整理出来的三周开发日志，不再重写那些原始笔记本身。
+
 ## Looking Back / 回头看
 
-This internship archive feels like a learning site more than a polished feature showcase. Some parts are functional work, and some parts are simply the moment where the build system finally became less mysterious. A Qt project is not only source code: Kit, compiler, SDK, qmake/CMake rules, runtime libraries, and deployment tools all sit in the path.
+This internship is useful to keep because it shows the path from "I can open the source" to "I can explain why the built program fails somewhere else." Some pieces were feature work, and some pieces were simply the moment when Qt's environment, compiler, SDK, qmake/CMake rules, runtime libraries, and deployment tools became less blurry.
 
-Looking at it now, the most useful trace is not a login dialog. It is the first fairly complete pass from "runs on my machine" to "can be organized into files another machine might run." Broken environments, compiler conflicts, missing DLLs, and platform moves are less pretty than a final screenshot, but they are much closer to what the internship felt like.
+这段实习值得保留，是因为它展示了从“我能打开源码”到“我能解释为什么构建出来的程序换台机器会失败”的过程。有些地方是功能开发，有些地方只是 Qt 环境、编译器、SDK、qmake/CMake 规则、运行时库和部署工具终于没那么模糊的瞬间。
 
-这段实习留下来的东西很“学习现场”：有些地方是功能，有些地方只是把坑踩明白。比如 Qt 项目不能只看源码，还要看 Kit、编译器、SDK、qmake/CMake 规则和运行时依赖；Release 打包也不是最后点一下按钮，而是另外一套排查流程。
+Looking back, the most useful trace is the first fairly complete pass from local development to files another machine might run. Broken environments, compiler conflicts, missing DLLs, signing, and platform moves are less pretty than a final screenshot. They are much closer to what the internship felt like.
 
-现在再看，它最有价值的部分不是某个登录框，而是第一次比较完整地经历了桌面软件从本机跑通到整理成可运行文件的过程。环境不通、编译器冲突、打包缺 DLL、换平台又重来，这些细节比漂亮的结果页更接近当时的实习状态。
+现在再看，最有用的线索是第一次比较完整地经历桌面软件从本机开发到整理成可运行文件的过程。环境不通、编译器冲突、打包缺 DLL、签名、换平台重来，这些细节没有最终截图漂亮，但更接近当时真实的实习状态。

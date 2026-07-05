@@ -1,8 +1,8 @@
 ---
 title: "FOC Driver Board Archive"
 titleZh: "慧驱动 FOC 驱动板归档"
-summary: "An archive-style project page for a sensorless PMSM FOC driver board line around STM32F4 and DRV8301, with selected manufacturing, EDA, STEP, datasheet, and source evidence published from the non-sensitive legacy folder."
-summaryZh: "围绕 STM32F4 与 DRV8301 的无感 PMSM FOC 驱动板归档页，从非敏感 legacy 目录中发布筛选后的制造、EDA、STEP、数据手册和源码证据。"
+summary: "A sensorless PMSM FOC driver-board record around STM32F4 and DRV8301, keeping the board files visible while marking the missing bring-up and tuning evidence plainly."
+summaryZh: "围绕 STM32F4 与 DRV8301 的无感 PMSM FOC 驱动板记录，保留板卡文件，也把还缺的上电、起转和调参证据说清楚。"
 date: "2025-11 to 2026-03"
 status: "Public Archive"
 tags: ["FOC", "Motor Control", "STM32F4", "DRV8301", "PCB"]
@@ -14,30 +14,45 @@ assetPaths:
 
 ## Project Brief / 项目简述
 
-This line is useful motor-control material rather than a finished public release. The source folder contains a sensorless PMSM FOC board, STM32F4 firmware, DRV8301 driver work, motor-control source modules, datasheets, BOM/PnP exports, a STEP model, an EasyEDA project, and generated build folders. Because this is a non-sensitive legacy folder, selected files are linked publicly; the page still avoids pretending that a file dump is the same thing as a validated FOC case study.
+FOC 这条线一眼看上去很“硬”：STM32F4、DRV8301、PMSM、无感控制、Clarke / Park、SVPWM、电流采样、速度环和保护逻辑都在材料里出现了。也正因为这样，写它时要更克制。关键词可以吸引人，真正能站住的是板子怎么采样、怎么调制、怎么保护、怎么起转，以及这些过程有没有留下测试记录。
 
-更准确地说，它现在是“方向已经有了，调试还没讲透”。FOC 很适合放作品集，因为关键词漂亮：三相驱动、无感控制、Clarke/Park、SVPWM、电流采样、速度环、保护逻辑、DRV8301、STM32F4。问题是，如果只把 Gerber、BOM、STEP 和源码堆上来，看起来很硬，实际并没有解释清楚板子怎么起转、怎么保护、波形是否稳定、调参过程有没有闭环。
+The folder contains a sensorless PMSM FOC board, STM32F4 firmware, DRV8301 driver work, motor-control source modules, datasheets, BOM/PnP exports, a STEP model, an EasyEDA project, and generated build folders. The page now treats those files as a material trail. It keeps the board readable while leaving room for the missing bring-up story.
+
+源目录里有无感 PMSM FOC 板、STM32F4 固件、DRV8301 驱动相关代码、`motor/` 下的控制模块、数据手册、BOM/PnP、STEP、EasyEDA 工程和一堆生成目录。当前页面把这些文件当成材料线索来写：先让板子可读，再明确后面还要补上电、起转、波形和调参过程。
 
 ![FOC driver board 3D render / 慧驱动 FOC 测试板 3D 渲染图](/uploads/projects/juanyun-public/foc-driver/foc-driver-board-render.png)
 
 ## Archive Scope / 归档范围
 
-- Hardware line: a sensorless PMSM FOC driver board, with selected BOM, pick-and-place, Gerber, STEP, and EasyEDA project files now published as legacy evidence.
-- Firmware line: STM32F4 project with `motor/` modules such as `adc`, `drv8301`, `foc_algorithm`, `hall_sensor`, `speed_pid`, and parameter-identification wrappers.
-- Toolchain line: IAR / Keil project files, CMSIS / STM32F4 library material, Debug / Release build output, and vendor documentation.
-- Reference line: DRV8301, STM32F446RE, MOSFET, encoder, and CMSIS references.
+The useful lines in the folder are:
+
+- Hardware: sensorless PMSM FOC driver board files, including selected BOM, pick-and-place, Gerber, STEP, and EasyEDA project outputs.
+- Firmware: STM32F4 code around `adc`, `drv8301`, `foc_algorithm`, `hall_sensor`, `speed_pid`, and parameter-identification wrappers.
+- Toolchain: IAR / Keil project material, CMSIS / STM32F4 library files, Debug / Release outputs, and vendor documentation in the raw folder.
+- References: DRV8301, STM32F446RE, MOSFET, encoder, and CMSIS materials.
+
+源目录里比较有用的线索有四类：
+
+- 硬件：无感 PMSM FOC 驱动板，包含筛选后的 BOM、贴片坐标、Gerber、STEP 和 EasyEDA 工程输出。
+- 固件：STM32F4 代码里和 `adc`、`drv8301`、`foc_algorithm`、`hall_sensor`、`speed_pid`、参数辨识相关的模块。
+- 工具链：原始目录里的 IAR / Keil 工程、CMSIS / STM32F4 库、Debug / Release 输出和供应商文档。
+- 参考资料：DRV8301、STM32F446RE、MOSFET、编码器和 CMSIS 相关材料。
 
 ## How The Files Are Used / 文件怎么用
 
-The site serves selected FOC board files because the source is from a legacy project line, not from the two Current_Product folders. The files are useful for showing what exists: schematic/manufacturing outputs, the EasyEDA project, the STEP model, driver references, and selected motor-control source files. It still needs redrawn diagrams, test screenshots, oscilloscope captures, current-sampling notes, startup-state explanation, and tuning logs before it becomes a strong engineering case study.
+The public file set answers "what existed" more clearly than "how well it worked." That is still useful. The schematic/manufacturing outputs, EasyEDA project, STEP model, driver references, and selected motor-control source files let the board be inspected from several angles.
 
-现在把这条线当材料页保留下来，不硬装成“完整量产级驱动器”。等后面补到波形、日志和调参记录，再写成真正的 case study 会更稳。
+But the next layer has to be runtime evidence: redrawn signal path, test screenshots, oscilloscope captures, current-sampling notes, startup-state explanation, fault handling, and tuning logs. Once those are filled in, this page can move from a board-and-source record toward a real FOC case study.
+
+现在这组文件回答“当时有什么”比回答“跑得怎么样”更清楚。这样也有价值。原理图和制造输出、EasyEDA 工程、STEP 模型、驱动参考、选出来的电机控制源码，至少让这块板可以从几个角度被检查。
+
+下一层要补的是运行证据：重画的信号链、测试截图、示波器波形、电流采样说明、起转状态、故障处理和调参日志。等这些补上以后，这页才会从板卡和源码记录，往真正的 FOC 案例靠近。
 
 ## Board Render And Schematic Sheets / 板卡渲染与分页原理图
 
-The new render and schematic sheets make the archive much less abstract. The 3D view gives the board density, high-current terminal area, DRV8301-side layout, user controls, and silkscreen context; the five schematic sheets split the design into MCU, connector, ADC, MOSFET power stage, and driver sections.
+The board render and five schematic sheets make the project less abstract. The 3D view shows board density, high-current terminal area, DRV8301-side layout, user controls, and silkscreen context. The schematic sheets split the design into MCU, connector, ADC, MOSFET power stage, and driver sections.
 
-这次补的几张图比单纯列文件有用。3D 渲染图先把板子的密度、高电流端子、DRV8301 一侧、按键和丝印位置摆出来；五张分页原理图再把 MCU、连接器、ADC、MOS 功率级和驱动部分拆开看。现在至少能顺着图从“板子长什么样”读到“每个电路块大概在哪”。
+这几张图比单纯列文件有用。3D 渲染图先把板子的密度、高电流端子、DRV8301 一侧、按键和丝印位置摆出来；五张分页原理图再把 MCU、连接器、ADC、MOS 功率级和驱动部分拆开看。现在至少能顺着图从“板子长什么样”读到“每个电路块大概在哪”。
 
 ![FOC MCU schematic sheet / FOC MCU 分页原理图](/uploads/projects/juanyun-public/foc-driver/foc-schematic-mcu.png)
 ![FOC connector schematic sheet / FOC 连接器分页原理图](/uploads/projects/juanyun-public/foc-driver/foc-schematic-conn.png)
@@ -71,13 +86,21 @@ The new render and schematic sheets make the archive much less abstract. The 3D 
 
 ## What Stayed Out / 没放上来的东西
 
-Still not published from the source archive:
+The raw folder also contains material that would make the page heavier without explaining the board better:
 
 - full STM32F4 firmware source tree;
 - IAR / Keil project folders;
 - CMSIS / STM32F4 vendor library folders;
 - Debug / Release build outputs;
 - duplicate generated exports and tool caches.
+
+原始目录里还有一些会让页面变重、但不太增加理解的内容：
+
+- 完整 STM32F4 固件源码树；
+- IAR / Keil 工程目录；
+- CMSIS / STM32F4 vendor library；
+- Debug / Release 构建输出；
+- 重复生成文件和工具缓存。
 
 ## Missing Debug Notes / 还缺的调试记录
 
@@ -87,6 +110,6 @@ Still not published from the source archive:
 
 ## Looking Back / 现在回头看
 
-The main risk of this line is that it looks advanced, so it becomes easy to write around the keywords instead of the engineering. The useful part is not the vocabulary; it is explaining sampling, modulation, protection, startup, and test evidence clearly. This page publishes the non-sensitive legacy files first and admits that the line is still an archive, not a mature FOC case study.
+The main risk of this line is writing around vocabulary. FOC sounds impressive, but the useful writing lives in the plain checks: current sampling, modulation path, protection behavior, startup sequence, and test evidence. For now this page keeps the board files and the unanswered questions together, so the project does not pretend to be more mature than its records.
 
-这条线最大的风险是“看起来高级，所以很容易写虚”。真正有用的不是关键词，而是把采样、调制、保护、起转和测试记录讲清楚。当前页面先把非敏感 legacy 文件放出来，同时承认它还只是材料页，不把文件数量当成项目成熟度。
+这条线最大的风险是围着名词写。FOC 听起来很厉害，但真正有用的记录还是那些朴素检查：电流采样、调制链路、保护行为、起转顺序和测试证据。现在这页先把板卡文件和还没回答的问题放在一起，别让项目看起来比记录本身更成熟。

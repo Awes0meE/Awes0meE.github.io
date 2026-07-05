@@ -1,8 +1,8 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype Notes"
 titleZh: "DIY 压风式散热器开发笔记"
-summary: "A practical archive note for an early pressure-flow cooling prototype: 3D printed airflow parts, fan options, ESP32 PWM control, desktop demo, and selected public PCB/source/fabrication evidence."
-summaryZh: "早期 DIY 压风式散热器开发笔记：3D 打印风道、风扇选型、ESP32 PWM 控制、桌面端演示，以及筛选后的 PCB、源码和制作证据。"
+summary: "A pressure-flow cooling prototype note following the 3D printed structure, fan-control code, desktop demo, PCB files, and fabrication traces left in the early folder."
+summaryZh: "DIY 压风式散热器原型笔记，顺着早期目录里的 3D 打印结构、风扇控制代码、桌面端 demo、PCB 文件和制作痕迹往回读。"
 date: "2026-05-06"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool"]
 projectSlug: "juanyun-diy-cooling-prototype"
@@ -11,40 +11,48 @@ visibility: public
 
 ## Starting Point / 起点
 
-Looking back, this pressure-flow cooling prototype has a strong early-exploration flavor. 3D printing, acrylic cutting, a low-cost cardboard version, a fan taken from a graphics card, ESP32 control, a desktop app, PCB files, installers, and a demo video were all squeezed into one directory. The generous version is that the hands-on range was broad; the harsher version is that the archive was a little wild.
+这个压风式散热器原型现在看起来很有早期探索味道。3D 打印、亚克力切割、纸箱低成本版本、显卡拆机风扇、ESP32 控制、桌面端程序、PCB 文件、安装包和演示视频全挤在一个目录里。动手范围很广，文件也确实有点野。
 
-这个压风式散热器现在回头看，味道很“早期探索”。3D 打印、亚克力切割、纸箱低成本版本、显卡拆机风扇、ESP32、桌面端程序、PCB 文件、安装包、演示视频，全挤在一个目录里。说好听一点是动手范围很广，说难听一点就是资料管理有点野。
+Looking back, the pressure-flow cooling prototype has a strong early-exploration flavor. 3D printing, acrylic cutting, a low-cost cardboard version, a fan taken from a graphics card, ESP32 control, a desktop app, PCB files, installers, and a demo video were all squeezed into one directory. The hands-on range was broad, and the folder was definitely messy.
 
-但它不是空壳。它至少把一个散热想法从结构、风道、供电、PWM 控制、桌面显示和使用说明都摸了一遍。很多东西不成熟，但这类项目的价值本来就不是“第一版就优雅”，而是能看见一个想法怎样被硬塞进现实世界。
+它的价值在于这个想法真的被推过几种形态：风道结构、供电、PWM 控制、桌面显示和使用说明都摸过一遍。很多东西早期、粗糙、命名混乱，但这些痕迹能说明它当时怎样从一句想法变成实物和程序。
+
+The useful part is that the idea moved through several forms: airflow structure, power, PWM control, desktop display, and usage notes. Many parts were early and rough, but the traces show how the idea became parts, code, and a running demo.
 
 ![DIY pressure-flow cooling 3D print preview / DIY 压风式散热器 3D 打印预览](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 
-## Cleanup Method / 清理方式
+## Reading The Folder / 怎么读这个目录
 
-I almost put the ESP32 program, desktop project, and installer on the site. After reorganizing it, this line can be written about and can expose a small number of files, but the whole project directory should not be dumped online like cloud storage. The useful files are the ones that explain the prototype chain: control code, desktop entry point, PCB output, slicing file, and fabrication list. Installers, dependency packages, build output, and duplicate project folders stay out.
+The folder is easiest to read as several routes:
 
-差点把 ESP32 程序、桌面端工程和安装包都放上来。重新清理以后，这条线可以写，也可以放少量文件，但不能把整个工程目录当网盘丢上来。更有用的是能解释原型链路的文件：控制代码、桌面端入口、PCB 输出、切片文件和结构制作清单。安装器、依赖包、构建输出和重复工程目录就不放了。
+- Structure route: 3D printed shell pieces, fan bracket, support settings, and slicing previews.
+- Low-cost route: acrylic and cardboard versions used to test the airflow idea quickly.
+- Control route: ESP32 PWM code, Arduino/PlatformIO versions, and OLED-related dependencies.
+- Desktop route: C# entry points and the demo video showing the control/display path.
+- PCB route: schematic, Gerber, EasyEDA, and 3MF files that keep the hardware side readable.
 
-所以页面现在保留四类材料：
+这个目录按几条路线读会更清楚：
 
-- 3D 打印预览图，能看出结构不是嘴上说说；
-- 桌面端演示视频，说明控制和显示链路曾经跑起来过；
-- ESP32、C#、PCB、Gerber、EasyEDA 和 3MF 等筛选后的关键文件；
-- 文字盘点，说明原始归档里还有哪些材料，但不把完整杂乱工程包扔上网。
+- 结构路线：3D 打印壳体、风扇支架、支撑设置和切片预览。
+- 低成本路线：亚克力和纸箱版本，用来快速试风道想法。
+- 控制路线：ESP32 PWM 代码、Arduino / PlatformIO 两种形态，以及 OLED 相关依赖。
+- 桌面端路线：C# 入口文件和能看出控制/显示链路的演示视频。
+- PCB 路线：原理图、Gerber、EasyEDA 和 3MF，让硬件部分能被重新读。
 
 ![DIY pressure-flow cooling support settings and sliced parts / DIY 压风式散热器支撑设置和切片预览](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
 
 
 
-## Why These Files Can Be Public / 为什么这些文件能放
+## Files That Explain The Prototype / 能说明原型的文件
 
-The 3MF, Gerber, and source snippets come from a non-Current_Product early prototype, so after screening they can be used to explain the structure, PCB, and control chain. But the public files are the ones that explain the problem, not the whole directory. 3MF, Gerber, EasyEDA, and source snippets are useful by themselves; installers, dependency folders, build output, duplicate versions, vendor files, and unexplained full project dumps would only turn the page into a file heap. If this small prototype is truly open-sourced later, it should first get a clean license, naming, README, version history, and build method.
+The useful files are the ones that explain the prototype chain. 3MF, Gerber, EasyEDA, and source snippets show structure, PCB, and control logic. Installers, dependency folders, build outputs, duplicate versions, vendor files, and unexplained full project dumps make the page harder to read.
 
 
-3MF、Gerber 和源码片段来自非 Current_Product 的早期原型，可以在筛过之后用来说明结构、PCB 和控制链路。
+真正有用的是能解释原型链路的文件。3MF、Gerber、EasyEDA 和源码片段能说明结构、PCB 和控制逻辑；安装包、依赖目录、构建输出、重复版本、vendor 文件和没解释的整包工程会让页面越来越像文件堆。
 
-但放的是能说明问题的文件，不是整个目录。3MF、Gerber、EasyEDA 和源码片段本身有用；安装包、依赖目录、构建输出、重复版本、vendor 文件和没有说明的整包工程只会让页面变成文件堆。等以后真要开源这个小原型，可以再单独清理许可、命名、README、版本和构建方式。
+If this small prototype is cleaned as an open project later, it should get license text, consistent naming, README, version history, and a build method first.
 
+以后如果真的把这个小原型整理成开源项目，要先补许可、统一命名、README、版本历史和构建方法。
 
 
 ## What Is Still Missing / 还缺什么
@@ -79,7 +87,7 @@ The 3MF, Gerber, and source snippets come from a non-Current_Product early proto
 
 ## Looking Back Now / 现在回头看
 
-The most useful part of this project is that it reminds me not to leave later hardware tasks with only an "it runs" result. How the structure changed, why the fan was selected, how the program and desktop app communicate, and where failed versions sit should all be recorded. Otherwise, opening the folder a few months later becomes file-name archaeology.
+The most useful reminder from this project is that "it runs" is a weak record. The structure changes, fan choice, ESP32 control path, desktop communication, and failed versions all need short notes. Otherwise, reopening the folder a few months later becomes file-name archaeology.
 
 
-这个项目最有用的地方，是提醒后面的硬件任务别只留下“能跑”的结果。结构怎么改、风扇为什么这样选、程序和桌面端怎么通信、失败版本在哪里，这些都应该被记录。不然几个月后再打开文件夹，就只能靠文件名考古。
+这个项目最有用的提醒是：“能跑”这个记录太弱了。结构怎么改、风扇为什么这样选、ESP32 控制链路怎么走、程序和桌面端怎么通信、失败版本在哪里，这些都应该写几句。不然几个月后再打开文件夹，就只能靠文件名考古。

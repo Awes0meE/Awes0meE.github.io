@@ -1,8 +1,8 @@
 ---
 title: "STM32 External Unit Firmware"
 titleZh: "STM32 外机固件整理笔记"
-summary: "Notes on reorganizing the external unit firmware into App, Service, BSP, Core, CMake, VSCode, OpenOCD, and release artifacts."
-summaryZh: "STM32 外机固件整理笔记：压缩机、电子膨胀阀、NTC、DHT22、OLED、编码器和按键逻辑分层，并补齐 CMake、VSCode、OpenOCD 和发布说明。"
+summary: "A firmware-structure note for the external unit: task timing, App/Service/BSP layering, CMake/OpenOCD setup, and the records still needed for bring-up."
+summaryZh: "外机固件结构笔记：任务节拍、App/Service/BSP 分层、CMake/OpenOCD 配置，以及后续 bring-up 还要补的记录。"
 date: "2026-05-06"
 tags: ["STM32", "Firmware", "CMake", "BSP"]
 projectSlug: "juanyun-thermal-hardware"
@@ -10,25 +10,27 @@ visibility: public
 ---
 ## Starting Point / 起点
 
-At first glance, the external-unit firmware looked like a typical STM32 project: CubeMX generated a `Core` folder, then features slowly accumulated in the main loop. The problem was that once enough functions were added, the main loop would turn into a large knot. Compressor logic, FG speed sensing, electronic expansion valve control, NTC, DHT22, OLED, encoder, and keys can run for a short while if they are all mixed together, but they are hard to maintain for long.
+外机固件一开始看起来就是典型 STM32 工程：CubeMX 生成 `Core`，然后功能一点点往主循环里加。压缩机逻辑、FG 测速、电子膨胀阀、NTC、DHT22、OLED、编码器、按键，全都能先用最直接的方法塞进去，但时间一长主循环就会变成一团线。
 
-外机固件这部分一开始看起来就是典型 STM32 工程：CubeMX 生成一堆 `Core`，然后主循环里慢慢加功能。问题是功能一多，主循环就会变成大杂烩。压缩机、FG 测速、电子膨胀阀、NTC、DHT22、OLED、编码器、按键，如果全部糊在一起，短期能跑，长期一定难维护。
+At first glance, the firmware looked like a normal STM32 project: CubeMX generated `Core`, then functions accumulated in the main loop. Compressor logic, FG speed sensing, electronic expansion valve stepping, NTC, DHT22, OLED, encoder, and keys can all be added directly, but the loop quickly becomes tangled once several of them run together.
 
-它更像一套联调用的 STM32 平台：要能烧录，要能看懂任务节拍，要能改接口和显示内容。很多逻辑还不到最终产品的细致程度，但已经足够暴露一个问题：如果没有分层和简单文档，换台电脑或换个人维护都会很痛苦。
+这条线更像一套联调用的 STM32 平台：要能烧录，要能看懂任务节拍，要能改接口和显示内容。很多逻辑还在早期阶段，但已经暴露了一个很实际的问题：如果没有分层和说明，换台电脑或换个人维护都会很痛苦。
+
+This line felt like a bring-up platform. It needed flashing, readable task timing, interface changes, and display changes. Even before the logic became polished, it already showed why layering and short documents matter when the project moves across machines or people.
 
 ## Layering / 分层
 
-The project was organized into `Core`, `App`, `Service`, and `BSP_drivers`. This was not for architectural vanity; it was to prevent future debugging from becoming a file search. Low-level drivers stay low-level, scheduling stays in the application layer, and UI refreshes or sensor updates should not contaminate one another.
+The project was organized into `Core`, `App`, `Service`, and `BSP_drivers`. The point was simple: low-level drivers stay low-level, scheduling stays in the application layer, and UI refresh or sensor update logic should have a place to live.
 
-工程被拆成 `Core`、`App`、`Service`、`BSP_drivers` 几层。这样做不是为了显得架构高级，而是为了防止以后找代码找疯。底层驱动归底层，业务调度归业务，UI 刷新和传感器更新也不要互相污染。
+工程被拆成 `Core`、`App`、`Service`、`BSP_drivers` 几层。目的很直接：底层驱动归底层，任务调度归应用层，UI 刷新和传感器更新都要有自己的位置。
 
-为什么还要折腾 VSCode + CMake + OpenOCD，CubeIDE 不能用么？
+VSCode + CMake + OpenOCD 这一套也有类似作用。它把“怎么编译、怎么烧录、引脚在哪里、这个版本改过什么”写在 IDE 之外。CubeIDE 当然能跑，但只靠一个 IDE 的工程状态，交接和复现会变脆。
 
-CubeIDE 当然能用，但只依赖一个 IDE 会让工程交接很脆弱。换一台电脑、换一个人、换一个工具链，可能就又要从零开始。CMake、OpenOCD、README、PINOUT 和 release notes 的意义很直接：把“怎么编、怎么烧、引脚在哪、改过什么”写出来。
+VSCode, CMake, OpenOCD, README, PINOUT, and release notes make the workflow visible outside one IDE. They record how to build, flash, find pins, and understand what changed between versions.
 
 ## Task Rhythm / 任务节拍
 
-The firmware also needed a visible timing rhythm, because each peripheral has a different natural update rate.
+The firmware needed a visible timing rhythm because each peripheral has its own natural update rate.
 
 - 1 ms task: electronic expansion valve step control.
 - 10 ms task: FG maintenance, encoder/key scanning, and UI input.
@@ -48,12 +50,16 @@ The firmware also needed a visible timing rhythm, because each peripheral has a 
 
 ## File Handling / 文件处理
 
-This page only records the firmware structure and debugging direction. The `README`, `PINOUT`, `.ioc`, release notes, and `.c` sources stay in the private archive for now and are not offered as website downloads.
+This note explains the firmware structure and debugging direction. The `README`, `PINOUT`, `.ioc`, release notes, and `.c` sources stay in the private project archive for now.
 
-页面只写固件结构和调试思路。README、PINOUT、IOC、release notes 和 `.c` 源码暂时留在私有归档里，不从网站提供下载。
+页面只写固件结构和调试思路。README、PINOUT、IOC、release notes 和 `.c` 源码暂时留在私有项目归档里。
 
 ## Notes To Add Later / 后面要补
 
-The most useful follow-up would be flashing screenshots and debugging logs: OpenOCD connection, OLED refresh before and after optimization, DHT22 read-failure handling, and the stepping rhythm of the electronic expansion valve. Compared with simply saying "I can use STM32," these small records show how the firmware was actually brought up.
+The most useful follow-up records would be flashing screenshots and debugging logs: OpenOCD connection, OLED refresh before and after optimization, DHT22 read-failure handling, and the stepping rhythm of the electronic expansion valve.
 
-这条线后面最该补烧录截图和调试日志，比如 OpenOCD 连接、OLED 刷新前后、DHT22 读取失败时的处理、电子膨胀阀步进节拍。比起只写“会 STM32”，这些小记录更能说明固件到底怎么被调起来。
+这条线后面最该补烧录截图和调试日志，比如 OpenOCD 连接、OLED 刷新前后、DHT22 读取失败时的处理、电子膨胀阀步进节拍。
+
+Looking back, the lesson here is practical: firmware structure starts to matter as soon as several slow and fast tasks share one board. If the rhythm is clear, later debugging has something to hold onto.
+
+现在回头看，这条线给我的提醒很实际：只要快慢不同的任务开始共用一块板，固件结构就会变重要。节拍写清楚，后面调试才有东西可抓。

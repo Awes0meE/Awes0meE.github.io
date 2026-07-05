@@ -1,8 +1,8 @@
 ---
 title: "PID And ATC Reading Notes From The Internship"
 titleZh: "实习中的 PID 与 ATC 阅读记录"
-summary: "A reflective note on how STM32 learning connected with PID basics and rail-transit control concepts such as ATP, ATO, and ATS."
-summaryZh: "记录 STM32 入门之后，如何把 PID 基础和 ATP、ATO、ATS 等轨道交通控制概念联系起来。"
+summary: "A reading note connecting STM32 beginner exercises with PID basics and rail-transit control terms such as ATP, ATO, and ATS."
+summaryZh: "一篇阅读笔记，把 STM32 入门练习和 PID 基础、ATP/ATO/ATS 等轨道交通控制概念连起来看。"
 date: "2025-02-16"
 status: "Completed"
 tags: ["PID", "ATC", "ATP", "ATO", "ATS", "Rail Transit"]
@@ -16,7 +16,7 @@ projectSlug: "tianjin-metro-stm32-foundation"
 
 ## After The Peripherals / 外设之后
 
-STM32 练习做完以后，实习日志后半段转向 PID 和列车自动控制系统。这个转向挺自然：前面已经碰过 PWM、电机、编码器和传感器反馈，再看 PID 时，它就不只是课本里的三个字母，而是和速度、亮度、温度、位置这些量连在一起。
+STM32 练习做完以后，实习日志后半段转向 PID 和列车自动控制系统。这个转向挺自然：前面已经碰过 PWM、电机、编码器和传感器反馈，再看 PID 时，它就开始和速度、亮度、温度、位置这些量连起来。
 
 The report then connected embedded basics with ATC terms: ATP, ATO, and ATS. At this stage the work was mostly reading, simulation thinking, and small STM32 mapping exercises.
 
@@ -28,15 +28,15 @@ The report then connected embedded basics with ATC terms: ATP, ATO, and ATS. At 
 - How encoder input, motor PWM, sensor feedback, and train speed/position control can be compared at a beginner level.
 - What ATP, ATO, and ATS each do, without flattening them into one vague "metro control system."
 
-- 开环和闭环控制有什么差别。
+- 开环和反馈控制有什么差别。
 - P、I、D 三个参数分别会怎样影响响应。
 - 手动调参、Ziegler-Nichols 这类基础方法大概怎么用。
 - 编码器、电机 PWM、传感器反馈和“列车速度/位置控制”之间有什么类比关系。
 - ATP、ATO、ATS 分别负责什么，不把它们混成一个笼统的“地铁控制系统”。
 
-The biggest question then was how STM32 beginner exercises actually related to the rail-transit industry. The clearer answer came later: they are not the same layer. STM32 exercises train low-level sensing, actuation, and debugging; ATP/ATO/ATS are system-level concepts.
+The biggest question then was how STM32 beginner exercises related to the rail-transit industry. The clearer answer came later: STM32 exercises train low-level sensing, actuation, and debugging; ATP/ATO/ATS sit at the system level.
 
-当时最大的疑问是：STM32 入门练习和轨道交通行业之间到底有什么关系？后来比较清楚的答案是，它们不是同一个层级。STM32 练习训练的是底层感知、执行和调试能力；ATP/ATO/ATS 是系统级概念。
+当时最大的疑问是：STM32 入门练习和轨道交通行业之间到底有什么关系？后来比较清楚的答案是：STM32 练习训练的是底层感知、执行和调试能力；ATP/ATO/ATS 是系统级概念。
 
 ## File / 文件
 
@@ -46,6 +46,6 @@ The encoder and servo-speed excerpt works as a tiny control-chain example: input
 
 ## Looking Back / 回头看
 
-This part reads more like a study note than a project page. Its value is keeping the industry context from the first internship: rail transit is not only hardware boards, and it is not only control theory. Going further would mean building embedded basics, control algorithms, system safety, and engineering verification together. That is a more honest takeaway than simply saying "learned PID."
+This part reads more like a study note than a project page. Its value is keeping the industry context from the first internship: rail transit puts hardware boards, control theory, system safety, and engineering verification on the same map. Going further would mean building those layers together. That is a more honest takeaway than simply saying "learned PID."
 
-这部分更像学习笔记，不像项目页。它的意义是把第一次实习的行业语境留住：轨道交通不是只有硬件板，也不是只有控制理论。真正继续往下走，需要同时补嵌入式基础、控制算法、系统安全和工程验证。这个认识比单纯写“学会了 PID”真实得多。
+这部分更像学习笔记。它的意义是把第一次实习的行业语境留住：轨道交通会把硬件板、控制理论、系统安全和工程验证放到同一张图里。真正继续往下走，需要把这些层一起补起来。这个认识比单纯写“学会了 PID”真实得多。

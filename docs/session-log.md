@@ -417,3 +417,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Refreshed `engineering-note-writer` discovery metadata and synchronized the new writing guardrails into project docs.
 - Files changed: updated `skills/engineering-note-writer/SKILL.md`, its OpenAI agent prompt, writing references, `CODEX.md`, `docs/content-workflow.md`, `docs/agent-skills.md`, `MEMORY.md`, this session log, and the Digital Clock / Smart Car note summaries that still used `重新整理`-style openings.
 - Verification: custom frontmatter CSO check passed after failing on the previous description; subagent pressure checks chose to load the full skill before drafting; archive-summary opening scan passed after failing on the previous skill and note summaries; `git diff --check`, `npm.cmd run lint`, `npm.cmd run typecheck`, and `npm.cmd run build` passed.
+
+## 2026-07-05
+
+- Summary: Rewrote older project pages and related notes with `engineering-note-writer` to reduce AI-archive phrasing and bring the copy closer to practical engineering notes.
+- Files changed: updated 6 older project pages and 15 related note pages covering Juanyun, Nanjing Turing, Tianjin STM32, Claude Chime, FOC, and DIY cooling; left the newly added Smart Car and Digital Clock project/note bodies unchanged; preserved the Nanjing Turing original uploaded notes and only rewrote the later `turing-three-week-development-log` note.
+- Verification: target-file banned-phrase scan passed; `npm.cmd run validate-content`, `npm.cmd run validate-encoding`, `npm.cmd run lint`, `npm.cmd run typecheck`, `git diff --check`, and `npm.cmd run build` passed.

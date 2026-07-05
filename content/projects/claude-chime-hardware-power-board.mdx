@@ -1,8 +1,8 @@
 ---
 title: "Claude Chime Hardware Power Board"
 titleZh: "Claude Chime 单路电磁锁电源管理板"
-summary: "A compact hardware archive for a single-channel electromagnetic-lock power-management board, including the public logo image, schematic / PCB PDFs, BOM, Gerber archive, EasyEDA project, and component datasheets."
-summaryZh: "单路电磁锁电源管理板的硬件档案页，公开展示 LOGO、原理图 / PCB PDF、BOM、Gerber、EasyEDA 工程和主要器件数据手册。"
+summary: "A small single-channel electromagnetic-lock power board record, centered on the ESP32-S3 control direction, power-stage choices, and the files needed to read the board back later."
+summaryZh: "单路电磁锁电源管理板的小型记录，重点放在 ESP32-S3 控制方向、电源级选择，以及以后能重新读懂这块板的文件。"
 date: "2026-04 to 2026-05"
 status: "Public Hardware Archive"
 tags: ["PCB", "Power", "ESP32-S3", "EasyEDA", "Hardware"]
@@ -12,29 +12,46 @@ assetPaths:
   - "/uploads/projects/claude-chime-hardware"
 ---
 
-## Project Brief / 项目简述
+## Starting Point / 起点
 
-This page keeps the Claude Chime hardware folder visible as a compact board archive. The source material is small enough to present directly: a board logo image, schematic and PCB PDF exports, a BOM table, Gerber manufacturing archive, EasyEDA project file, and datasheets for the ESP32-S3 and power-stage components.
+Claude Chime 这块板的资料量不大，反而适合把它写得具体一点。它围绕的是单路电磁锁电源管理：ESP32-S3 负责控制和连接，外围再把升压、充电、MOSFET 开关和锁端输出这些东西放到一块小板上。
 
-这页把 Claude Chime 硬件资料作为一个小型板卡档案展示。它不像卷云实习材料那样需要拆很多子线，重点就是单路电磁锁控制器电源管理板：原理图、PCB、BOM、Gerber、EasyEDA 工程和关键器件数据手册都放在下面的公开资料区。
+The folder is small enough that the board can be read from its own files: logo image, schematic and PCB PDF exports, BOM, Gerber package, EasyEDA source, and the ESP32-S3 / power-stage datasheets. The useful part is seeing how a compact access-control board leaves enough evidence for someone to understand it again without opening a private chat history or guessing from a screenshot.
+
+源文件里能看见 LOGO 图、原理图和 PCB PDF、BOM、Gerber、EasyEDA 工程，以及 ESP32-S3 和电源级器件的数据手册。这个项目的价值不在资料很多，而在于一块小的门锁控制板也把“以后怎么看懂它”这件事留下来了。
 
 ![Claude Chime logo / Claude Chime 标识](/uploads/projects/claude-chime-hardware/claude-chime-logo.png)
 
 ## Hardware Shape / 硬件形状
 
-- Controller direction: ESP32-S3 based control and connectivity.
-- Power direction: boost / charging / MOSFET switching around a compact control board.
-- Output direction: single-channel electromagnetic-lock power management.
-- Evidence direction: PDF exports for quick reading, plus Gerber / EasyEDA / BOM files for archive-level inspection.
+I read this board along four lines:
+
+- Controller: ESP32-S3 gives the board a small MCU and connectivity center.
+- Power path: boost, charging, and MOSFET switching decide how the lock side is driven.
+- Output side: the design is scoped to one electromagnetic-lock channel, so the interface story stays clear.
+- File trail: PDF exports are quick to read, while Gerber, EasyEDA, BOM, and datasheets preserve the manufacturing and component context.
+
+我会按四条线看这块板：
+
+- 控制：ESP32-S3 是主控和连接能力的中心。
+- 电源：升压、充电和 MOSFET 开关决定锁端怎么被驱动。
+- 输出：范围收在单路电磁锁，接口故事比较清楚。
+- 文件：PDF 适合快速读图，Gerber、EasyEDA、BOM 和数据手册负责保留制造和器件依据。
 
 ## Files / 文件
 
-The project-files section below intentionally lists the uploaded files rather than hiding them behind a single download. The PDF and image files can be opened directly; the BOM, Gerber archive, EasyEDA source, and datasheets remain downloadable public evidence.
+The file browser below is useful because the board can be checked from several angles instead of from one final render. The schematic PDF answers the circuit question, the PCB PDF shows placement and routing, the BOM explains the component choices, and the Gerber / EasyEDA files keep the manufacturing trail.
 
-下方资料区会把上传文件逐项列出来，而不是只放一个“下载全部”。这样后续继续完善项目时，可以在正文里逐个解释：为什么选这个芯片、为什么这样走电源、哪个 PDF 对应哪个阶段、哪些制造文件只是归档证据而不是最终发布包。
+下面的文件浏览器很有用，因为它让这块板可以从几个角度重新检查，而不是只看一张最终渲染图。原理图 PDF 回答电路问题，PCB PDF 能看摆放和走线，BOM 说明器件选择，Gerber 和 EasyEDA 则保留制造线索。
 
 ## What Stayed Out / 没放上来的东西
 
-The source folder also contains a password text file for the engineering files; that file is intentionally not copied to the website. Passwords and credentials should stay outside `public/uploads` even when the rest of the board archive is public.
+The source folder also had `工程文件密码.txt`. I left it out. Board files can be useful on a portfolio page; passwords and credentials belong outside `public/uploads`.
 
-源目录里还有 `工程文件密码.txt`，这个文件没有复制到网站。即使项目资料整体可以公开，密码和凭据也不应该进入 `public/uploads`。
+源目录里还有 `工程文件密码.txt`。这个文件没有放进网站。板卡资料可以作为作品集证据，密码和凭据不能进 `public/uploads`。
+
+## Looking Back / 现在回头看
+
+This is a small hardware item, but it reminds me of a basic documentation habit: even a compact board needs enough context to be reopened later. A logo alone is presentation, a Gerber alone is manufacturing output, and a BOM alone is a table. When schematic, PCB, BOM, Gerber, EasyEDA, and datasheets sit together, the board starts to become readable engineering work.
+
+这块板不大，但它提醒我一个很基础的记录习惯：小板也要留下能被重新打开的上下文。只有 LOGO 是展示，只有 Gerber 是制造输出，只有 BOM 是表格。原理图、PCB、BOM、Gerber、EasyEDA 和数据手册放在一起，它才比较像一件能被读懂的工程工作。

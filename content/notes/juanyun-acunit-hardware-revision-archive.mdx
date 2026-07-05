@@ -1,8 +1,8 @@
 ---
 title: "AC Unit Hardware Revision Archive"
 titleZh: "外机板早期硬件版本归档"
-summary: "A revision-evidence note for earlier AC unit PCB versions, covering V1.0 mechanical context and the V2.0 three-board direction."
-summaryZh: "外机板早期硬件版本证据整理：保留 V1.0 到 V2.0 的版本变化线索，说明外机板不是凭空出现的最终截图。"
+summary: "A short revision note for earlier AC unit PCB versions, keeping V1.0 and V2.0 as clues for how the later board split took shape."
+summaryZh: "外机板早期版本小笔记，把 V1.0 和 V2.0 留作后续三板拆分成形前的线索。"
 date: "2026-05-06"
 tags: ["PCB", "Revision", "Manufacturing", "Archive"]
 projectSlug: "juanyun-thermal-hardware"
@@ -10,15 +10,19 @@ visibility: public
 ---
 ## Starting Point / 起点
 
-When I was organizing V2.1, I almost left only the final version. Later I realized that would be misleading: if people only see the final screenshots, they cannot tell how the board shape, interfaces, and board split evolved. V1.0 and V2.0 are not necessarily polished, but they preserve the early traces of the external unit board.
+整理 V2.1 时，我一开始差点只留下最终版本。后来发现这样会把过程切掉：只看最终截图，很难看出板形、接口和拆板方式是怎么一步步变清楚的。V1.0 和 V2.0 可能不漂亮，但它们保留了外机板早期的方向。
 
-整理 V2.1 的时候，差点只留下最终版本。后来发现这样很别扭：只看最终截图，会完全看不出板形、接口和拆板方式是怎么变出来的。V1.0 和 V2.0 不一定漂亮，但它们能把外机板的早期痕迹留下来。
+When I organized V2.1, I almost kept only the final version. That would cut away the process. With only final screenshots, it is hard to see how board shape, interfaces, and board splitting became clearer. V1.0 and V2.0 preserve the early direction of the external unit board.
 
-V1.0 更像早期机械和制造记录，V2.0 已经能看到三板拆分的雏形。把这些东西留下来，后面写版本对比的时候才有东西可讲。不然全靠回忆，回忆这种东西最不靠谱。
+V1.0 is closer to early mechanical and fabrication context. V2.0 already shows the beginning of the three-board idea. Keeping them gives the later V2.1 note a timeline instead of relying on memory.
+
+V1.0 更像早期机械和制造记录，V2.0 已经能看到三板拆分的雏形。把它们留下来，后面写 V2.1 时才有时间线，不用全靠回忆。
 
 ## Is It Worth Keeping Old Versions? / 旧版本有必要放吗？
 
-有必要，但不能乱放。旧版本的意义不是把早期工作夸得很完整，而是能看出设计怎么一步步变清楚：一开始关注板形和接口，后面才慢慢拆出主控板、分电板、交互板。
+Old versions are useful when they answer a question. Here the question is how the board moved from early shape/interface exploration toward the later main, power, and interaction split.
+
+旧版本有用，前提是它们能回答问题。这里的问题就是：外机板怎样从早期板形和接口探索，慢慢走到后面的主控板、分电板、交互板拆分。
 
 ## Revision Files / 版本文件
 
@@ -26,8 +30,16 @@ V1.0 先保留为早期版本线索。
 
 V2.0 已经按主控、分电、交互三块板整理。
 
+V1.0 stays as an early revision clue.
+
+V2.0 is already organized around main, power, and interaction boards.
+
 ## Notes To Add Later / 后面要补
 
-The missing piece is a revision comparison table: what changed from V1.0 to V2.0 to V2.1, why each change happened, which changes came from power issues, which came from interface issues, and which were made for later firmware integration. Once that table exists, this hardware line will be much clearer than a page of renders alone.
+The missing piece is a revision comparison table: what changed from V1.0 to V2.0 to V2.1, why each change happened, which changes came from power issues, which came from interface issues, and which were made for later firmware integration. Once that table exists, the hardware line will be clearer than a page of renders alone.
 
 后面最该补的是版本对比表：V1.0 到 V2.0 到 V2.1 到底改了什么，为什么改，哪些是电源问题，哪些是接口问题，哪些是为了后续固件联调。表格补上以后，这条硬件线会比单纯放渲染图清楚很多。
+
+Looking back, this note is small, but it keeps an important habit: do not erase early versions too quickly. Old files can be messy, yet they often explain why the final board looks the way it does.
+
+现在回头看，这篇笔记很小，但保留了一个重要习惯：不要太快把早期版本擦掉。旧文件可能乱，却经常能解释最终板子为什么长成这样。

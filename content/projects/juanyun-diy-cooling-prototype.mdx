@@ -1,8 +1,8 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器原型"
-summary: "A legacy cooling prototype that connected 3D printed air-channel parts, fan selection, ESP32 PWM control, and a Windows desktop demo, with selected PCB, source, and fabrication evidence published after pruning noisy project output."
-summaryZh: "一个早期压风式散热器原型，把 3D 打印风道、风扇选型、ESP32 PWM 控制和 Windows 桌面端演示串在一起；页面保留筛选后的 PCB、源码和制作文件，同时排除安装包、依赖和构建输出。"
+summary: "An early pressure-flow cooling prototype that moved through 3D printed air ducts, fan control, ESP32 PWM, PCB output, and a small Windows desktop demo."
+summaryZh: "早期压风式散热器原型，从 3D 打印风道、风扇控制、ESP32 PWM、PCB 输出一路摸到一个 Windows 桌面端演示。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
@@ -20,20 +20,30 @@ assetPaths:
 
 ## Project Brief / 项目简述
 
-This prototype is messy in a very early-project way: structure, airflow, small electronics, ESP32 control, desktop monitoring, part sourcing, and user instruction material all live in the same archive. It is not a polished product page. The useful part is that it shows a complete idea being pushed through several real interfaces instead of stopping at one PCB or one sketch.
+This prototype has the texture of an idea being pushed into the real world before the folder structure caught up. There are 3D-printed air-channel parts, acrylic and cardboard routes, fan-selection experiments, ESP32 PWM control, a desktop monitoring program, PCB output, slicing files, a demo video, and a parts list all living close together.
 
-这条线不把原始工程包整包挂出来，只放能说明开发过程的关键文件。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。它不是 Current_Product 资料，所以筛选后的 Gerber、EasyEDA、PlatformIO、Arduino、C# 和 3MF 可以放出来；安装包、依赖目录、构建输出和混乱的完整工程树不直接发布。
+这个原型很有早期项目的味道：风道结构还在试，控制链路也在试，桌面端显示也被塞进来。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。它还没有到很规整的阶段，但已经把“风怎么走、风扇怎么控、数据怎么给人看”这几个问题拉到同一张桌子上。
 
 ![DIY pressure-flow cooling STM32 PCB 3D render / DIY 压风式散热器 STM32 版 PCB 3D 渲染图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
 ![DIY pressure-flow cooling STM32 schematic / DIY 压风式散热器 STM32 版原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
 
 ## What Was In The Archive / 归档里有什么
 
-- 3D printing route: Bambu Studio slicing previews, A1 mini / A1 / P1 / X1 print targets, split top and bottom shell parts, fan bracket, DC or Type-C interface covers, and support-setting screenshots.
-- Low-cost structure route: acrylic-cutting and cardboard versions, mostly useful for seeing how the airflow idea was tested before a cleaner enclosure existed.
-- Control route: ESP32 PWM fan control, OLED-related library dependencies, and a small desktop monitoring path.
-- PCB and fabrication route: EasyEDA projects, a schematic export, a Gerber package, acrylic parts list, and one Bambu Studio 3MF slicing file.
-- Delivery route: a Windows demo video and a desktop installer existed in the source archive, but the installer and build output are not published.
+The source folder reads like several routes were active at the same time:
+
+- Structure route: Bambu Studio slicing previews, A1 mini / A1 / P1 / X1 print targets, split top and bottom shell parts, fan bracket, DC or Type-C interface covers, and support-setting screenshots.
+- Low-cost route: acrylic-cutting and cardboard versions, useful for seeing how the airflow idea was tried before a cleaner enclosure existed.
+- Control route: ESP32 PWM fan control, OLED-related dependencies, and a Windows desktop monitoring path.
+- PCB route: EasyEDA projects, schematic export, Gerber package, acrylic parts list, and a Bambu Studio 3MF slicing file.
+- Demo route: a Windows video shows the desktop side running; the installer and generated build output stay out of the site because they add noise rather than understanding.
+
+源目录读起来像几条路线同时在跑：
+
+- 结构路线：Bambu Studio 切片预览、A1 mini / A1 / P1 / X1 打印目标、上下壳拆件、风扇支架、DC 或 Type-C 接口盖，以及支撑设置截图。
+- 低成本路线：亚克力切割和纸箱版本，用来观察风道想法在更粗糙条件下怎么被试出来。
+- 控制路线：ESP32 PWM 风扇控制、OLED 相关依赖，以及 Windows 桌面监控程序。
+- PCB 路线：EasyEDA 工程、原理图导出、Gerber、亚克力零件清单和 Bambu Studio 3MF 切片文件。
+- 演示路线：桌面端运行视频可以说明链路曾经跑起来；安装包和生成的 build 输出不放进站点，它们增加的是噪声，不增加理解。
 
 ## Files / 文件
 
@@ -58,12 +68,12 @@ This prototype is messy in a very early-project way: structure, airflow, small e
 
 ## What Stayed Out / 没放上来的东西
 
-The prototype is treated as legacy material, not a sensitive current-product folder. Selected PCB, firmware, desktop, and fabrication files are included because they are small enough to inspect and tied directly to the prototype. Installers, dependency folders, generated build output, vendor folders, duplicate exports, and the uncurated source tree stay out of the website.
+The useful material here is the part that explains the prototype chain. PlatformIO / Arduino snippets, C# entry points, PCB files, Gerber, EasyEDA, and 3MF are small enough to inspect and tied to the work. Installers, dependency folders, generated output, duplicate exports, vendor folders, and the uncurated full source tree would only make the page harder to read.
 
-这个原型按早期 legacy 材料处理，不是 Current_Product。PCB、固件、桌面端和制作文件可以筛选后放出，因为它们能直接说明原型链路；安装器、依赖目录、生成的 build 输出、vendor 文件、重复导出和没整理过的完整工程树不放。
+这条线真正有用的是能解释原型链路的材料。PlatformIO / Arduino 片段、C# 入口、PCB 文件、Gerber、EasyEDA 和 3MF 都比较小，也和项目直接相关。安装器、依赖目录、生成输出、重复导出、vendor 文件和没有整理过的完整工程树会把页面变得更难读。
 
 ## Looking Back / 现在回头看
 
-The value here is not maturity. It is the way structure, airflow, electronics control, desktop display, and written instructions started crashing into each other. Reading the hardware SOP later makes more sense after seeing this kind of early mess: even small prototypes need versions, interfaces, and verification notes. Without those traces, a folder full of files turns into a folder full of guesses.
+The valuable trace is the collision between structure, airflow, electronics control, desktop display, and written instructions. That is exactly where early hardware prototypes become messy. Reading the hardware SOP later makes more sense after seeing this folder: small prototypes still need versions, interfaces, and verification notes. Without those traces, reopening the project becomes file-name archaeology.
 
-它的价值不在“做得多成熟”，而在暴露结构、风道、电子控制、桌面端显示和说明文档之间的混乱连接。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些东西，项目一多，回头看就只剩一堆不知道为什么这样命名的文件夹。
+这条线最值得保留的，是结构、风道、电子控制、桌面端显示和说明文档互相撞在一起的过程。早期硬件原型就是容易在这里变乱。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些痕迹，几个月后再打开项目，就只能靠文件名考古。

@@ -1,112 +1,80 @@
 ---
 title: "Three-Week Seamly2D Development Log"
-titleZh: "Seamly2D 三周开发日志整理"
-summary: "A readable version of the three raw internship logs: first Qt setup and login, then user management, and finally Release packaging across Windows and macOS."
-summaryZh: "把三份原始实习周日志整理成网页正文：第一周跑 Qt 和登录注册，第二周做用户管理，第三周转向 Windows/macOS Release 打包。"
+titleZh: "Seamly2D 三周开发日志"
+summary: "The three Nanjing Turing weekly logs trace a practical path from Qt setup and login work to user management, then Windows/macOS release packaging."
+summaryZh: "南京图灵三周实习日志：从 Qt 环境和登录注册，到用户管理，再到 Windows/macOS Release 打包。"
 date: "2025-08-29"
 tags: ["Qt", "Seamly2D", "Internship", "Packaging"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
-<!-- turing-english-translation: three-week-log -->
 
-## English Reading Version / 英文整理版
+## Raw Log Files / 原始日志文件
 
-### Raw Logs
+The three raw text logs are still linked here. I treat them as the base evidence for this page:
 
-The three raw text logs are kept for traceability:
-
-- [Week 1 raw log](/uploads/projects/nanjing-turing/week-1-development-log.txt)
-- [Week 2 raw log](/uploads/projects/nanjing-turing/week-2-development-log.txt)
-- [Week 3 raw log](/uploads/projects/nanjing-turing/week-3-development-log.txt)
-
-### Week 1: First Get The Qt Project Running
-
-The first week was mainly about understanding the environment and clarifying the task. Since I had just started working with Qt/C++, I first learned the basic way Qt projects run, then cloned Seamly2D locally and tried to bring it up in Qt Creator. This was not as clean as finishing one isolated feature; most of the work was around the environment, Git, qmake, paths, and compiler/toolchain issues.
-
-At the same time, I started learning Git in a practical way: clone the project, keep local changes organized, and write down how the setup was done.
-
-On the feature side, the first week started with registration and login. The registration UI stored user information through `QSettings`, and later the password logic was changed from plaintext storage to salted hash verification. After the login screen was connected into the `main` flow, the software would go through registration/login before entering the original Seamly2D interface.
-
-That week also included many small interaction fixes: prompts for existing users, missing users, and incorrect passwords; changing the Enter key behavior from cancel to confirm; and hiding password input. One very concrete issue was that when entering a password on the login page, the program could crash if the current input method was Chinese. I worked around it by limiting the input method hints for the username and password fields.
-
-### Week 2: User Management And Role Restrictions
-
-The second week continued around the control panel after login. I first enlarged the control panel window, then added the entry point for user management. The first registered account had to be `admin`, and that rule was shown directly on the first-registration page to avoid a wrong initial account setup.
-
-Then I added user types: normal users and administrators. Only administrators can see the user-management entry; normal users do not see it after login. Inside the user-management screen, an administrator can view all registered users and perform operations such as delete, promote to administrator, or demote to normal user.
-
-The real work was not drawing the buttons, but getting the restrictions right. Deleting a user needs a confirmation dialog. Administrators can only delete normal users, not other administrators. Promotion only applies to normal users. Demotion can only be performed by the `admin` account; other administrators cannot demote each other.
-
-These rules are not complex in theory, but desktop software makes the details visible: who is currently logged in, what role the target user has, when a button should appear, whether a mistaken click can be canceled, and whether the prompt text is clear. The second week was basically about making this small permission system complete enough to use.
-
-### Week 3: From Feature Work To Release
-
-The third week started with reading a `.sm2d` XML sample file and using it to observe the data structure. After that, I fully brought up the `develop` branch, stabilized the existing feature work, and shifted direction from adding features to preparing a Release.
-
-The Windows Release process was longer than expected. I first configured the build environment and handled compiler-version conflicts on the computer. Then I studied the lower-level build logic behind program compilation and organized notes around MSVC, CMake, Ninja, and Qt package discovery. After that, I used `windeployqt` to collect Qt dependencies into a standalone runnable program folder.
-
-Packaging then introduced signing and installer problems. I studied Windows digital certificates, created a self-signed certificate, and used it to sign the program. Then I learned Inno Setup and turned the loose Release folder into an installer. Finally, I connected the flow of Release compile, dependency collection, digital signing, and installer packaging, and wrote the process into a workflow document.
-
-The second half moved to macOS. I moved the already developed Windows code to a Mac, reconfigured Qt and the compiler environment, and dealt with path and architecture differences between Homebrew Qt and official Qt. I got Debug running first, then switched to Release.
-
-For macOS packaging, I tried `macdeployqt` to collect dependencies into the `.app`, then studied certificates and signing. The self-signed certificate could be created, but the full signing flow did not reach formal distribution quality. In the end I wrote shell automation scripts to connect build, packaging, dependency collection, and signature checks as much as possible. Apart from signing itself, the other parts were mostly runnable.
-
-At the end of the internship period, I sorted the files created during the three weeks by category and filled in the development logs and README so the work would be easier to hand off or revisit later.
-
-### Looking Back
-
-The three-week thread is actually clear: week one asked whether the project could run, week two asked whether the entry point and user management could be used, and week three asked whether the program could leave the development machine and run elsewhere. None of the steps were glamorous, but they were all real engineering work.
-
-The useful lesson was that desktop software work is not only UI code. Toolchains, local configs, release folders, missing DLLs, signing, and platform differences all become part of the job once the program has to leave the developer machine.
-
-
-## Raw Logs / 原始日志
-
-The raw text logs are kept here for traceability, while this page rewrites them into a more readable learning record.
-
-原始三份 txt 还在，方便对照：
+原始三份 txt 还在。这里的叙述以它们作为底稿：
 
 - [Week 1 raw log](/uploads/projects/nanjing-turing/week-1-development-log.txt)
 - [Week 2 raw log](/uploads/projects/nanjing-turing/week-2-development-log.txt)
 - [Week 3 raw log](/uploads/projects/nanjing-turing/week-3-development-log.txt)
 
-## Week 1 / 第一周：先把 Qt 项目跑起来
+## Week 1: Get The Qt Project Running / 第一周：先把 Qt 项目跑起来
 
-第一周主要是在熟悉环境和摸清任务。刚接触 Qt C++，先看 Qt 的基本运行方式，再把 Seamly2D 代码拉到本地，尝试用 Qt Creator 跑起来。这个过程不像写完一段功能那么干净，更多是在处理环境、Kit、qmake、路径和编译器这些问题。
+第一周最先面对的就是环境。刚接触 Qt/C++，先要弄明白 Qt Creator、Kit、qmake、编译器、路径这些东西怎样凑在一起。把 Seamly2D 拉到本地以后，最急的任务是让项目能在自己的电脑上稳定启动。
 
-At the same time, I started learning Git in a practical way: clone the project, keep local changes organized, and write down how the setup was done.
+The first week started with the environment. Since I was new to Qt/C++, I first had to understand how Qt Creator, Kit selection, qmake, compiler, and paths fit together. After cloning Seamly2D locally, the immediate task was to make it start reliably on my machine.
 
-功能上，第一周从注册和登录开始。注册界面把用户信息存到 `QSettings`，后来又把密码从明文改成加盐哈希验证。登录界面接进 `main` 流程后，软件启动时就会先经过注册/登录，再进入原本的 Seamly2D。
+功能上，第一周从注册和登录入口开始。注册界面用 `QSettings` 保存用户信息，后来把密码从明文改成加盐哈希校验。登录界面接进 `main` 流程后，软件启动时会先经过注册/登录，再进入原来的 Seamly2D 主界面。
 
-这一周还补了很多小交互：用户已存在、用户不存在、密码错误这些提示；回车键默认从“取消”改成“确认”；密码输入改成隐藏显示。还有一个很具体的坑：登录界面输入密码时，如果当前是中文输入法，程序可能闪退。后来通过限制用户名和密码输入框的输入法提示，把这个问题绕开了。
+On the feature side, the first week began with registration and login. The registration UI stored user information through `QSettings`, and the password logic later moved from plaintext storage to salted hash verification. After the login screen was connected into `main`, the application passed through registration/login before entering the original Seamly2D interface.
 
-## Week 2 / 第二周：用户管理和角色限制
+这一周还有很多小交互：用户已存在、用户不存在、密码错误的提示；回车键从“取消”改成“确认”；密码输入改成隐藏显示。最具体的坑是中文输入法状态下输密码可能闪退，后来通过限制用户名和密码框的输入法提示绕过去。
 
-第二周继续围着登录后的控制面板做。先把控制面板窗口调大，然后增加“用户管理”入口。第一次注册的账号必须叫 `admin`，这个提示直接放在首次注册页面里，避免一开始就注册错。
+That week also had many small interaction fixes: prompts for existing users, missing users, and incorrect passwords; changing Enter from cancel to confirm; and masking password input. The most concrete bug was a crash when typing a password with a Chinese input method active. Restricting input-method hints for the username and password fields worked around it.
 
-之后开始区分用户类型：普通用户和管理员。只有管理员能看到“用户管理”，普通用户登录后看不到这个入口。用户管理界面里能查看当前所有注册用户，也能做删除、提升为管理员、降级为普通用户这些操作。
+## Week 2: User Management And Roles / 第二周：用户管理和角色限制
 
-这里真正麻烦的不是把按钮画出来，而是限制条件。删除用户前要弹确认框；管理员只能删除普通用户，不能删其他管理员；提升操作只能对普通用户做；降级操作只有 `admin` 账号能做，其他管理员之间不能互相降级。
+第二周继续围着登录后的控制面板做。先把控制面板窗口调大，再加“用户管理”入口。第一次注册的账号必须叫 `admin`，这个规则直接写在首次注册页面，避免一开始就把管理员账号建错。
 
-这些规则都不算复杂，但放在桌面软件里就会牵出很多细节：当前登录用户是谁，目标用户是什么角色，按钮什么时候显示，点错了能不能取消，提示信息有没有说清楚。第二周的工作基本是在把这个小权限系统补完整。
+The second week continued around the control panel after login. I enlarged the control panel window and added a user-management entry. The first registered account had to be `admin`, and that rule was shown on the first-registration page to avoid creating the wrong initial account.
 
-## Week 3 / 第三周：从功能转到 Release
+之后开始区分普通用户和管理员。管理员能看到用户管理入口，普通用户登录后看不到。用户管理界面里可以查看已注册用户，也能删除普通用户、提升普通用户、把管理员降级为普通用户。
 
-第三周先看了一下 `.sm2d` 文件的 XML 格式，用样例文件初步观察数据结构。随后把 `develop` 分支彻底跑通，把功能固定下来，方向从继续加功能转到 Release。
+Then the user types were split into normal users and administrators. Administrators could see user management; normal users could not. The user-management screen allowed viewing registered users, deleting normal users, promoting normal users, and demoting administrators to normal users.
 
-Windows 侧的 Release 过程比想象中长。先配置编译环境，处理电脑上编译器版本冲突；再回头研究程序编译的底层逻辑，把 MSVC、CMake、Ninja、Qt 包发现这些内容整理成学习文档。接着试 `windeployqt`，把 Qt 依赖收集到可独立运行的程序目录里。
+真正要细想的是限制条件。删除用户前要确认；管理员只能删除普通用户；提升只能作用在普通用户；降级只有 `admin` 账号能做，其他管理员之间不能互相降级。规则本身不复杂，放进桌面软件后会变成一堆具体判断：当前是谁，目标是谁，按钮什么时候显示，点错了能不能取消，提示文字有没有说清楚。
 
-打包时又遇到签名和安装包问题。先研究 Windows 数字证书，创建自签名证书并给程序签名；然后学 Inno Setup，把散落的 Release 文件整理成安装包。最后把“Release 编译、收集依赖、数字签名、打包安装包”这条流程打通，并写成流程文档。
+The careful part was the restrictions. Deletion needed confirmation. Administrators could delete normal users. Promotion applied to normal users. Demotion could be performed by `admin`, so other administrators had no demotion path. The rules are simple, and desktop software turns them into concrete checks: current user, target role, button visibility, cancellation path, and prompt wording.
 
-后半段切到 macOS。把 Windows 上已经开发过的代码移到 Mac，重新配置 Qt 和编译环境。Homebrew 装的 Qt 和官方渠道的 Qt 路径、架构不完全一样，也会引出编译器版本冲突。先跑通 Debug，再切到 Release。
+## Week 3: Release And Packaging / 第三周：Release 和打包
 
-macOS 打包时试了 `macdeployqt`，把依赖收进 `.app`，然后研究证书和签名。自签名证书创建成功，但完整签注流程没有完全做到正式发布级别。最后写了 shell 自动化脚本，把编译、打包、依赖收集和签名检查尽量串起来；除了签名本身，其他部分基本能跑。
+第三周先看 `.sm2d` XML 样例，用它观察 Seamly2D 的数据结构。随后把 `develop` 分支完整跑通，把前两周的功能固定下来，工作重心转到 Release。
 
-实习收尾时，把这三周产生的文件按类别整理，补了开发日志和 README，方便以后交接或回头看。
+The third week started with reading a `.sm2d` XML sample to observe Seamly2D's data structure. After that, I brought up the `develop` branch fully, stabilized the previous feature work, and shifted toward Release.
+
+Windows 侧的 Release 比预想长很多。先配置编译环境、处理电脑上的编译器版本冲突，再回头补 MSVC、CMake、Ninja、Qt 包发现这些底层编译逻辑。然后用 `windeployqt` 收 Qt 依赖，把程序整理成一个能独立运行的目录。
+
+The Windows Release path took longer than expected. I configured the build environment, handled compiler-version conflicts, then studied the build logic around MSVC, CMake, Ninja, and Qt package discovery. After that I used `windeployqt` to collect Qt dependencies into a standalone runnable folder.
+
+后面继续碰到签名和安装包。先研究 Windows 数字证书，创建自签名证书并给程序签名；再学 Inno Setup，把散落的 Release 文件整理成安装包。到这里，Release 编译、依赖收集、数字签名和安装包制作才连成一条可复述的流程。
+
+Packaging brought signing and installer work. I studied Windows digital certificates, created a self-signed certificate, and signed the program. Then I learned Inno Setup and turned the loose Release folder into an installer. At that point Release build, dependency collection, signing, and installer packaging became one explainable workflow.
+
+后半段切到 macOS。把 Windows 上已经开发过的代码搬到 Mac，重新配置 Qt 和编译环境。Homebrew Qt 和官方 Qt 的路径、架构不一样，Debug 先跑通，Release 再重新处理。`macdeployqt` 可以把依赖收进 `.app`，自签名证书也能创建，但正式发布级别的签名流程还没有完全走完。后来写了 shell 脚本，把编译、打包、依赖收集和签名检查尽量串起来。
+
+The second half moved to macOS. I moved the Windows-side code to a Mac and reconfigured Qt and the compiler environment. Homebrew Qt and official Qt differed in paths and architecture, so I got Debug running first and then worked through Release again. `macdeployqt` collected dependencies into the `.app`, and a self-signed certificate could be created, while the full formal signing flow remained unfinished. I wrote shell scripts to connect build, packaging, dependency collection, and signature checks as far as possible.
+
+实习收尾时，把这三周产生的文件按类别整理，补了开发日志和 README。那一步现在看挺重要，因为环境、脚本、包和日志如果不放回同一条线，过一段时间就很难讲清楚当时到底做了什么。
+
+At the end of the internship, I sorted the files created during the three weeks by category and filled in the development logs and README. Looking back, that mattered: environment notes, scripts, packages, and logs need to sit on the same line, or the work becomes hard to explain later.
 
 ## Looking Back / 回头看
 
-这三周的线索其实很清楚：第一周是“能不能跑起来”，第二周是“入口和用户管理能不能用”，第三周是“能不能离开开发环境交给别人运行”。每一步都不算华丽，但都很真实。
+这三周的线索其实很清楚：第一周是“项目能不能跑起来”，第二周是“入口和用户管理能不能用”，第三周是“程序能不能离开开发机”。每一步都很普通，但它们加起来就是桌面软件开发里真实会遇到的事。
 
-The useful lesson was that desktop software work is not only UI code. Toolchains, local configs, release folders, missing DLLs, signing, and platform differences all become part of the job once the program has to leave the developer machine.
+The three-week thread is clear: week one asked whether the project could run, week two asked whether the entry point and user management could be used, and week three asked whether the program could leave the development machine. Each step was ordinary, and together they are close to real desktop software work.
+
+现在回头看，最有用的经验是第一次把源码、工具链、本地配置、Release 文件夹、缺失 DLL、签名和平台差异放到同一个问题里看。Qt 项目离开开发机以后，打包和环境就变成项目本身的一部分。
+
+Looking back, the useful experience was seeing source code, toolchain, local configuration, Release folder, missing DLLs, signing, and platform differences as one problem. Once a Qt project leaves the development machine, packaging and environment become part of the project itself.

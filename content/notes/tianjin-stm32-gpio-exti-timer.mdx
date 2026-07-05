@@ -1,8 +1,8 @@
 ---
 title: "GPIO, EXTI, Encoder, And Timer Basics"
 titleZh: "STM32 GPIO、中断、编码器与定时器基础"
-summary: "A note on moving from simple GPIO output to interrupt inputs, encoder counting, timer counts, and OLED-based observation."
-summaryZh: "从 GPIO 输出继续往外部中断、编码器计数、定时器计数和 OLED 观察推进的一组基础练习。"
+summary: "A STM32 basics note about moving from GPIO output to button input, EXTI encoder counting, timer counts, and OLED-based observation."
+summaryZh: "STM32 基础笔记：从 GPIO 输出推进到按键输入、EXTI 编码器计数、定时器计数和 OLED 观察。"
 date: "2025-02-07"
 status: "Completed"
 tags: ["STM32", "GPIO", "EXTI", "Timer", "Encoder"]
@@ -16,23 +16,23 @@ projectSlug: "tianjin-metro-stm32-foundation"
 
 ## From Output To Input / 从输出到输入
 
-LED 闪起来以后，下一步就是输入。按钮、蜂鸣器、编码器这些模块看起来简单，但它们会把 GPIO 模式、上拉输入、消抖、外部中断线、NVIC 优先级都带出来。
+LED 闪起来以后，下一步就是让板子对外部动作有反应。按钮、蜂鸣器、编码器这些模块看起来简单，但它们会把 GPIO 模式、上拉输入、消抖、外部中断线、NVIC 优先级都带出来。
 
-This was the point where the board stopped being only an output device. External events started to change the program state.
+This was the point where the board started reacting to the outside world. Button presses and encoder movement began to change program state instead of only watching an LED blink.
 
 ## Polling And Interrupts / 轮询和中断
 
-Polling a button in the main loop was enough to change LED state at first, but an encoder felt much more natural with EXTI. One channel can trigger on an edge, and the other channel can decide the direction. The excerpt keeps `EXTI15_10_IRQHandler`, where each interrupt checks the B-phase level and increments or decrements the count.
+Polling a button in the main loop was enough for the first LED-state change. The encoder felt much more natural with EXTI: one channel triggers on an edge, and the other channel decides the direction. The excerpt keeps `EXTI15_10_IRQHandler`, where each interrupt checks the B-phase level and increments or decrements the count.
 
-An interrupt is not just "a better poll." It brings trigger edges, flag clearing, priority, and shared variables between the interrupt handler and the main loop. The code was still simple, but the timing problems were already real.
+An interrupt brings trigger edges, flag clearing, priority, and shared variables between the interrupt handler and the main loop. The code was still simple, and the timing problems were already real.
 
 一开始用主循环轮询按键就能改变 LED 状态，但编码器这种输入更顺手的做法是用 EXTI 捕捉边沿，再根据另一路相位判断方向。代码里保留了 `EXTI15_10_IRQHandler`，每次中断根据 B 相电平对计数加减。
 
-中断不是“更高级的轮询”。它还要考虑触发边沿、标志位清除、优先级，以及中断服务函数和主循环之间共享变量的问题。这个阶段的代码还很入门，但已经开始碰到嵌入式里很常见的节奏问题。
+中断要考虑触发边沿、标志位清除、优先级，以及中断服务函数和主循环之间共享变量的问题。这个阶段的代码还很入门，但已经开始碰到嵌入式里很常见的节奏问题。
 
 ## Timers / 定时器
 
-The timer exercise moved delay away from pure software loops. Prescaler, auto-reload, and counter value sounded abstract at first. Once they were tied to LED blinking frequency and OLED count display, they became much easier to understand.
+The timer exercise moved delay away from pure software loops. Prescaler, auto-reload, and counter value sounded abstract at first. Once they were tied to LED blinking frequency and OLED count display, they became much easier to see.
 
 定时器练习把延时从纯软件循环里拿出来。预分频、自动重装载、计数值这些词一开始有点抽象，但只要和 LED 闪烁频率、OLED 上的计数显示连起来，就会好理解很多。
 
@@ -44,6 +44,6 @@ The encoder-to-servo-speed excerpt keeps the core idea: map knob count into spee
 
 ## Looking Back / 回头看
 
-The value here is turning input events into visible numbers. Once encoder count, timer count, and OLED display were connected, debugging stopped relying only on "it seems to move." PWM dimming and the later environment-monitoring demo were built on top of this.
+The value here was turning input events into visible numbers. Once encoder count, timer count, and OLED display were connected, debugging had something more solid than "it seems to move." PWM dimming and the later environment-monitoring demo were built on top of this.
 
-这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就不再只靠“好像动了”。后面的 PWM 调光和环境监测小系统，也是在这个基础上继续叠。
+这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就有了比“好像动了”更扎实的依据。后面的 PWM 调光和环境监测小系统，也是在这个基础上继续叠。

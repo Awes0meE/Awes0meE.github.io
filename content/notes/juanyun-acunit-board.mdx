@@ -1,8 +1,8 @@
 ---
 title: "Juanyun AC Unit Control Board"
 titleZh: "卷云外机板 V2.0 / V2.1 开发笔记"
-summary: "Notes on the AC unit control board split into main, power, and interaction PCBs with compressor, fan, sensor, OLED, Wi-Fi, and EEV interfaces."
-summaryZh: "卷云外机板 V2.0/V2.1 整理：从单板需求扩展到主控板、分电板、交互板三块 PCB，覆盖压缩机、风扇、传感器、OLED、Wi-Fi 和电子膨胀阀接口。"
+summary: "A board-splitting note for the Juanyun AC unit control platform, following the move from a crowded interface set toward main, power, and interaction boards."
+summaryZh: "卷云外机控制平台的拆板笔记，记录一组拥挤接口怎样逐步拆到主控板、分电板和交互板。"
 date: "2026-05-06"
 tags: ["PCB", "STM32", "Thermal", "Interface"]
 projectSlug: "juanyun-thermal-hardware"
@@ -10,37 +10,53 @@ visibility: public
 ---
 ## Starting Point / 起点
 
-The AC unit control-board line felt crowded from the beginning, but it could not be treated as a random pile of ports. The same board concept had to cover 24 V input, 12 V fan power, the compressor driver board, electronic expansion valve, NTC, DHT, pressure transmitter, OLED, encoder, and reserved Wi-Fi. If I simply drew every connector onto one PCB, it would look busy, but later integration would almost certainly become painful.
+外机板一开始最明显的感觉就是接口太挤。24 V 输入、12 V 风扇、压缩机驱动板、电子膨胀阀、NTC、DHT、压力变送器、OLED、编码器、Wi-Fi 预留，全都塞进“外机板”这个概念里。真正要先想清楚的是每个接口属于哪条链路，而不是先把连接器画满。
 
-卷云外机板这条线一开始给人的感觉就是东西很多，但不能乱。24 V 输入、12 V 风扇、压缩机驱动板、电子膨胀阀、NTC、DHT、压力变送器、OLED、编码器、Wi-Fi 预留，全都挤在一个“外机板”的概念里面。如果只是把接口一股脑画到板子上，看起来像是在干活，实际上后面联调的时候一定会出事。
+The AC unit board line was crowded from the beginning. The same board concept had to cover 24 V input, 12 V fan power, the compressor driver board, electronic expansion valve, NTC, DHT, pressure transmitter, OLED, encoder, and reserved Wi-Fi. The first useful question was where each interface belonged, before filling a PCB with connectors.
 
-真正麻烦的不是元件数量，而是这些接口彼此影响。V2.0 更像把核心链路跑通，V2.1 开始拆成主控板、分电板、交互板三块板。这个变化挺关键：板子不是把元件堆上去就结束，更多是在拆电源、接口、调试和装配约束。
+麻烦来自接口之间的互相影响。V2.0 更像把核心链路先收拢，V2.1 开始拆成主控板、分电板、交互板。这个变化很关键：主控负责 MCU 周围的信号，分电板把电源路径单独拿出来，交互板处理 OLED、编码器和按键，后面调试时才有比较清楚的下手位置。
+
+The difficulty came from interaction between interfaces. V2.0 collected the main links first. V2.1 separated them into main, power, and interaction boards. That split gave MCU-side signals, power distribution, and user interaction their own places, which matters a lot once debugging starts.
 
 ![AC Unit V2.1 system block diagram / 外机板 V2.1 系统框图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
 ## Board-Splitting Logic / 拆板思路
 
-If I followed a student-demo mindset, I might have stopped at "it can run." But this external unit board was not a small demo. It needed to connect compressor, fan, sensors, and user interaction, while still leaving firmware room for debugging. So I started reading the requirement as several separate questions: how power enters, how interfaces are divided, which signals cross boards, which later software can measure, which ports are only reserved, and where noise or high current needs extra care.
+I read the requirement as several separate questions:
 
-如果只按学生项目的思路，可能会觉得“能跑就行”。但外机板不是一个小 demo，它要接压缩机、风扇、传感器和用户交互，还要给固件留调试空间。于是需求被拆成几块看：电源怎么走，接口怎么分，哪些东西要跨板，哪些信号后续软件能测，哪些接口只是预留，哪些地方要小心噪声和大电流。
+- How does power enter and branch?
+- Which signals cross boards?
+- Which interfaces need firmware-side measurement or status reporting?
+- Which ports are reserved for later modules?
+- Where do high current and noise need distance or special attention?
 
-为什么 V2.1 要拆三块板，不能一块板解决？
+我当时把需求拆成几个问题看：
 
-一块板当然也能画，但问题会集中在一起。大电流、电源分配、用户按键、OLED、传感器输入、调试接口全挤在一起，后面改一个接口可能影响一片。拆成主控、分电、交互之后，问题更容易定位：电源归电源，交互归交互，MCU 周围的信号也少一点被大电流路径打扰。
+- 电源怎么进来、怎么分出去？
+- 哪些信号需要跨板？
+- 哪些接口后续固件要测量或上报状态？
+- 哪些端口只是给之后预留？
+- 大电流和噪声路径需要和哪些小信号拉开？
+
+一块板也能画，但风险会集中。大电流、电源分配、用户按键、OLED、传感器输入、调试接口全在一起，后面改一个接口可能牵动一片。拆成主控、分电、交互之后，问题更容易定位：电源归电源，交互归交互，MCU 周围信号也少一点被大电流路径干扰。
+
+A single board would concentrate too many risks. Separating the boards made later reasoning easier: power issues stay closer to the power board, user-facing issues stay closer to the interaction board, and MCU-side signals have less high-current noise around them.
 
 ## Records Still Missing / 还要补的记录
 
-The next useful records are not more pretty renders, but the evidence that explains how the board changed and how it behaves during bring-up.
+The next useful records should explain how the board changed and how it behaved during bring-up:
 
 - Organize the V2.0 / V2.1 system diagrams, PCB renders, and three-board split relationship.
 - Explain the responsibilities of the main board, power board, and interaction board.
 - Write down the interface risks for the compressor, fan, pressure transmitter, and electronic expansion valve.
-- Add physical photos, power-on records, and version comparisons later so the page does not stop at "there are many files."
+- Add physical photos, power-on records, and version comparisons later.
+
+后面更该补的是这些记录：
 
 - 把 V2.0 / V2.1 的系统框图、PCB 渲染图和三板拆分关系整理出来。
 - 把主控板、分电板、交互板各自承担的职责说清楚。
 - 把压缩机、风扇、压力变送器、电子膨胀阀这些接口风险写进笔记。
-- 后续补实物照片、上电记录和版本对比，不要让页面只停留在“文件很多”的状态。
+- 补实物照片、上电记录和版本对比。
 
 ## Files And Screenshots / 文件和截图
 
@@ -58,9 +74,12 @@ The next useful records are not more pretty renders, but the evidence that expla
 
 
 
-## Current Writing Boundary / 现在的写法
+## Current Reading / 现在怎么看
 
-This line keeps the board-level structure and system-splitting record, but does not publish Gerber files, schematics, BOM, placement coordinates, or source downloads. The next stronger evidence should be power-on checks, interface tests, and revision comparisons. Only when those debugging records catch up will the external-unit board be more than a few clean render images.
+Right now this note is strongest at structure: what the board had to connect, why V2.1 became three boards, and which diagrams/renders make that split visible. The next stronger layer is bring-up evidence: power-on checks, interface tests, and revision comparison.
 
+现在这篇笔记最强的是结构：外机板要接什么，为什么 V2.1 拆成三块板，哪些框图和渲染图能把这个拆法看出来。再往下一层，就要靠上电检查、接口测试和版本对比来补。
 
-这条线保留板级结构和系统拆分的记录，不放 Gerber、原理图、BOM、贴片坐标或源码下载。后面更该补的是上电检查、接口测试和版本对比。只有这些调试记录跟上，外机板才不只是几张漂亮渲染图。
+Looking back, this task taught me to treat connectors as decisions. Every connector says something about power, signal direction, firmware visibility, mechanical placement, and future debugging. The board render only becomes useful when those decisions are written down.
+
+现在回头看，这条线让我更认真地把连接器当成决策。每个接口背后都有电源、信号方向、固件可见性、结构摆放和后续调试。渲染图只有和这些决策放在一起，才真正有用。

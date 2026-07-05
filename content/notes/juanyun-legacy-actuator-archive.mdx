@@ -1,8 +1,8 @@
 ---
 title: "Solenoid Valve and BLDC Fan Archive Notes"
 titleZh: "螺线管阀门与 BLDC 风扇归档笔记"
-summary: "Archive notes for smaller actuator and fan-driver materials: solenoid-valve control, OLED and encoder interaction, ULN2003 references, and a single-phase BLDC quiet-fan driver board."
-summaryZh: "执行器与风扇驱动材料归档笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料、单相 BLDC 静音风扇驱动板，以及筛选后的文件线索。"
+summary: "A note for scattered actuator and fan-driver materials: solenoid-valve control, OLED/encoder interaction, ULN2003 references, and a small BLDC quiet-fan board."
+summaryZh: "执行器与风扇驱动零散材料笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料，以及一块小型 BLDC 静音风扇板。"
 date: "2026-05-06"
 tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-thermal-hardware"
@@ -11,19 +11,23 @@ visibility: public
 
 ## Starting Point / 起点
 
-This set of material is scattered. One side is solenoid-valve control, with an STM32F103 project, an electromagnetic-valve driver board, OLED, EC11 encoder, keys, and ULN2003 / stepper-driver references. The other side is a single-phase BLDC quiet-fan driver board, where the available material is mainly a BOM and an EDA project. They all relate to actuators, motors, and driving circuits, but they have not yet formed one complete main line.
+这组材料比较散。一边是螺线管阀门控制：STM32F103 工程、电磁阀驱动板、OLED、EC11 编码器、按键、ULN2003 / 步进驱动参考。另一边是单相 BLDC 静音风扇驱动板，目前主要留下 BOM 和 EDA 工程。它们都指向执行器、电机和驱动电路。
 
-这部分材料比较散。一边是螺线管阀门控制，里面有 STM32F103 工程、电磁阀驱动板、OLED、EC11 编码器、按键和 ULN2003 / 步进驱动参考；另一边是单相 BLDC 静音风扇驱动板，材料只有 BOM 和 EDA 项目。它们都和执行器、电机、驱动有关，但还没有形成一条很完整的主线。
+This material is scattered. One side is solenoid-valve control, with an STM32F103 project, an electromagnetic-valve driver board, OLED, EC11 encoder, keys, and ULN2003 / stepper-driver references. The other side is a single-phase BLDC quiet-fan driver board, where the available material is mainly a BOM and an EDA project. They all point toward actuators, motors, and driver circuits.
 
-所以先留下来。它现在还不是完整项目，更像一组线索：负载驱动、人机交互、小电机和简单执行器。至少以后回头看时，不会把这些小材料混在大项目旁边悄悄丢掉。
+我先把它们留下来，因为这些小材料和热管理硬件的主线相邻：负载驱动、人机交互、小电机、简单执行器。以后回头看时，至少知道这些碎片分别落在哪个方向。
 
-## Why Not Delete These Side Materials? / 为什么不直接删掉这些边角料？
+I kept them because they sit near the main thermal-hardware line: load driving, human interaction, small motors, and simple actuators. Later, it will be easier to see which direction each fragment belongs to.
 
-Because they may become useful capability clues later. Actuator driving, OLED display, encoder input, and fan driving are all common fragments in embedded hardware. Individually they look small, but together they form the basic skills behind many control boards.
+## Why Keep Them / 为什么保留
 
-因为它们可能是后续能力线索。执行器驱动、OLED 显示、编码器输入、风扇驱动，这些都是嵌入式硬件里很常见的碎片。单个看起来不大，但组合起来就是很多控制板的基本功。
+Actuator driving, OLED display, encoder input, and fan driving are common fragments in embedded hardware. Each one looks small alone. Together they form a useful set of control-board building blocks.
 
-问题在于记录还不够完整。现在如果硬写成成熟项目，会显得假。缺少的东西很明确：实物照片、接线图、状态机、测试日志、故障处理、波形或至少一张清楚的运行截图。
+执行器驱动、OLED 显示、编码器输入、风扇驱动，这些都是嵌入式硬件里很常见的碎片。单个看起来不大，组合起来就是很多控制板的基本功。
+
+现在缺的是运行记录。还需要实物照片、接线图、状态机、测试日志、故障处理、波形，或者至少一张清楚的运行截图。没有这些，页面只能先作为方向笔记。
+
+The missing layer is runtime evidence: physical photos, wiring diagram, state machine, test logs, fault handling, waveform, or at least one clear running screenshot. Until then, this page works as a direction note.
 
 
 
@@ -31,20 +35,20 @@ Because they may become useful capability clues later. Actuator driving, OLED di
 
 - The solenoid-valve directory has an STM32F103 control project, driver-board EDA files, and OLED / encoder / key-related material.
 - ULN2003 and stepper expansion-board material can serve as references for low-side drive, coil loads, and simple actuator control.
-- The BLDC quiet-fan board currently has only a BOM and EDA project, so it is best kept as a direction clue rather than a complete case.
-- Vendor examples and tool packages are numerous, but they are not suitable for direct publication on the public site.
+- The BLDC quiet-fan board currently has a BOM and EDA project, so it is best kept as a direction clue.
+- Vendor examples and tool packages are numerous, and they stay outside the public page.
 
 
 - 螺线管阀门目录里有 STM32F103 控制工程、驱动板 EDA 文件、OLED / 编码器 / 按键相关资料。
 - ULN2003 和步进扩展板资料可以作为低侧驱动、线圈负载和简单执行器控制的参考。
-- BLDC 静音风扇板目前只有 BOM 和 EDA 项目，适合先作为方向线索，暂时不当成完整 case。
-- Vendor examples 和工具包很多，但不适合直接搬到公开站点。
+- BLDC 静音风扇板目前有 BOM 和 EDA 项目，适合先作为方向线索。
+- Vendor examples 和工具包很多，暂时留在公开页面之外。
 
 ## Files / 文件
 
-The page currently provides screened legacy files.
+The page currently provides files that help identify the direction:
 
-页面现在提供筛选后的 legacy 文件：
+页面现在提供这些能看出方向的文件：
 
 - [Solenoid main.c](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)
 - [Solenoid valve control source](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)
@@ -55,7 +59,7 @@ The page currently provides screened legacy files.
 - [BLDC quiet fan BOM](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-bom.xlsx)
 - [BLDC quiet fan EasyEDA project](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-easyeda.epro)
 
-供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包不放。这里留的是能看出方向的文件，不是完整工程发布。
+供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包暂时不放。这里留的是能看出方向的文件。
 
 ## Records Still Missing / 还要补的记录
 
@@ -73,7 +77,7 @@ The page currently provides screened legacy files.
 
 ## Looking Back Now / 现在回头看
 
-This kind of material easily falls into two extremes: delete it because it looks small, or inflate it into a large project. Keeping it in the middle is better. It is only a set of clues, but the clues connect to actuator and motor-control work. Once photos, wiring, and runtime records are filled in, it can become a fuller page.
+This kind of material is easy to overlook because it is small. Keeping it as a direction note is more useful than forcing it into a finished case. Once photos, wiring, and runtime records are added, the actuator and fan-drive branch can become a fuller page.
 
 
-这类材料最容易陷入两个极端：要么觉得小就删掉，要么硬凑成大项目。现在放在中间更合适：承认它们只是线索，但把它们和执行器 / 电机控制方向关联起来。以后照片、接线和运行记录补齐，再写成更完整的页面。
+这类材料很容易因为小而被忽略。现在先把它放成方向笔记，比硬凑成完整项目更合适。以后照片、接线和运行记录补齐，执行器和风扇驱动这条支线就能写得更完整。
