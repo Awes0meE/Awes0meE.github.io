@@ -26,6 +26,7 @@ Rule: do not move past a gate until the checklist is satisfied. If a gate fails,
 - [ ] One primary archetype is selected.
 - [ ] A timeline spine or system spine is written before prose.
 - [ ] The first section starts from a concrete situation, file, symptom, or project need.
+- [ ] The title/summary/opening does not describe the note as a "重新整理", "处理后", or "归档后" document artifact.
 - [ ] The ending has a real looking-back point or next evidence gap.
 - [ ] File/evidence lists explain why the evidence matters.
 
@@ -41,6 +42,7 @@ Rule: do not move past a gate until the checklist is satisfied. If a gate fails,
 
 - [ ] No corporate filler: `赋能`, `闭环`, `抓手`, `沉淀`, `落地成效`.
 - [ ] No AI handoff filler: `本次仅公开`, `公开证据边界`, `功能改动没有故意扩大`.
+- [ ] No meta-document openings: `这是一次对...重新整理后的学习笔记`, `这是一篇...重新整理...`, `重新整理的一篇学习记录`, `处理后的总结文档`, `归档后的学习笔记`.
 - [ ] No scaffold filler: `首先 / 其次 / 最后` unless a real numbered method needs it.
 - [ ] No negation-then-reframe templates: `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, `not only...but...`.
 - [ ] Any broad claim has been replaced with a concrete file, decision, symptom, or limitation.
@@ -48,7 +50,7 @@ Rule: do not move past a gate until the checklist is satisfied. If a gate fails,
 Useful scan for MDX or Markdown targets:
 
 ```powershell
-rg -n "赋能|闭环|抓手|沉淀|落地成效|本次仅公开|公开证据边界|功能改动没有故意扩大|首先|其次|最后|不是.*而是|不是为了.*而是|并不是.*而是|不只是.*而|not .* but |not only" <target-file>
+rg -n "赋能|闭环|抓手|沉淀|落地成效|本次仅公开|公开证据边界|功能改动没有故意扩大|这是一次.*重新整理|这是一篇.*重新整理|这篇.*重新整理|本文.*重新整理|本篇.*重新整理|重新整理的一篇|重新梳理.*学习|整理后.*学习笔记|处理后的总结|总结文档归档|归档后的学习笔记|首先|其次|最后|不是.*而是|不是为了.*而是|并不是.*而是|不只是.*而|not .* but |not only" <target-file>
 ```
 
 ## Gate 5 - Bilingual Equivalence Passed

@@ -54,8 +54,25 @@ Avoid:
 - "This work provides valuable experience..."
 - `赋能`, `抓手`, `闭环`, `沉淀`, `落地`, `价值转化`
 - `本次仅公开`, `公开证据边界`, `交付物`, `功能改动没有故意扩大`
+- `这是一次对...重新整理后的学习笔记`, `这是一篇...重新整理...`, `重新整理的一篇学习记录`, `处理后的总结文档`, `归档后的学习笔记`
 - `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`
 - English versions of the same move: `not X but Y`, `not only...but...`
+
+## Forbidden Meta-Document Openings
+
+Do not begin a summary or note by describing the page as a processed artifact:
+
+```text
+这是一次对课件重新整理后的学习笔记...
+重新整理的一篇课件学习报告...
+从 Smart Car 课件重新整理的一篇学习记录...
+```
+
+That framing sounds like an AI received a "整理一下" instruction and filed the result. Start from the concrete thing the user was facing instead:
+
+- `MEC104 Digital Clock 课件先给的是一个两位计数器要求...`
+- `Smart Car 课件一开始把任务压到焊接、电源、传感器和电机驱动上...`
+- `这份报告里真正有用的是 A17 组的归零规则和按键接法...`
 
 ## Forbidden Contrast Frame
 

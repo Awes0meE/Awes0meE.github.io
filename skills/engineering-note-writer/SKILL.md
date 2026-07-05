@@ -1,6 +1,6 @@
 ---
 name: engineering-note-writer
-description: Generate and revise XJTLU Portfolio engineering-note copy in the user's Chinese-first practical learning-log style. Use when the user provides bullet points, rough project details, timelines, technical stacks, screenshots/files, oral notes, project import materials, or asks to write/rewrite/polish project notes, project page body copy, media captions, summaries, bilingual Chinese/English portfolio prose, or "make this sound like my own engineering notes" for this portfolio.
+description: Use when XJTLU Portfolio work involves rough project bullets, timelines, technical stacks, screenshots, evidence files, source folders, oral notes, project import materials, or requests to write, rewrite, polish, or humanize project notes, project page body copy, summaries, media captions, bilingual Chinese/English portfolio prose, or the user's engineering-note voice.
 ---
 
 # Engineering Note Writer
@@ -136,6 +136,7 @@ Write the Chinese main draft first.
 Rules:
 
 - Use concrete files, tools, symptoms, boards, commands, screenshots, videos, and dates.
+- Start from the concrete material, question, file, symptom, or build step. Do not open with meta-document framing such as "这是一次对课件重新整理后的学习笔记", "重新整理的一篇学习记录", "处理后的总结文档", or "归档后的学习笔记".
 - Use "我" only when the evidence supports personal action. Otherwise use neutral action phrasing.
 - Keep mild self-reflection when it explains the engineering work.
 - Prefer "卡在..." / "先把...跑起来" / "现在回头看..." over formal delivery language.
@@ -206,6 +207,7 @@ Do not:
 - turn the note into a resume achievement list;
 - use corporate words such as `赋能`, `闭环`, `抓手`, `沉淀`, `落地成效` unless quoting source text;
 - use AI handoff phrases such as `本次仅公开`, `公开证据边界`, `功能改动没有故意扩大`;
+- use meta-document openings such as `这是一次对...重新整理后的学习笔记`, `这是一篇...重新整理...`, `重新整理的一篇学习记录`, `处理后的总结文档`, or `归档后的学习笔记`; start from the course material, file, symptom, or engineering question instead;
 - flatten everything into `首先 / 其次 / 最后`;
 - use negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, or `not only...but...`; state the positive engineering point directly or split it into concrete evidence sentences;
 - write a tiny English summary when Chinese has a real article body;

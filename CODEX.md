@@ -214,15 +214,17 @@ Maintain the current engineering-academic identity:
 
 Portfolio notes should keep the user's current practical learning-log texture: concrete, casual, close to the debugging scene, and comfortable with small human details. Avoid AI handoff / delivery-report phrasing such as "only these two evidence types are public" or "the change was not intentionally expanded"; write closer to first-hand learning and debugging traces. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
-Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. Before drafting or finalizing, read its `references/hard-gated-checklist.md`; the checklist gates fact sheet, structure, voice, banned wording, bilingual equivalence, public boundary, and MDX readiness. The skill drafts Chinese first, then creates an English counterpart that matches the Chinese substance without turning the note into a resume, paper abstract, corporate report, or AI handoff.
+Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. Before drafting or finalizing, read its `references/hard-gated-checklist.md`; the checklist gates fact sheet, structure, voice, banned wording and contrast frames, bilingual equivalence, public boundary, and MDX readiness. The skill drafts Chinese first, then creates an English counterpart that matches the Chinese substance without turning the note into a resume, paper abstract, corporate report, or AI handoff.
 
 For `content/notes/*.mdx`:
 
 - describe the system, constraint, question, file, and next step directly;
 - use natural sections such as `起点`, `怎么卡住`, `怎么改`, `文件`, `还要补的记录`, and `现在回头看` when they fit;
 - keep mild self-reflection only when it clarifies the work;
+- start summaries and openings from the concrete course material, file, symptom, or engineering question; avoid meta-document openings like `这是一次对课件重新整理后的学习笔记`, `重新整理的一篇学习记录`, `处理后的总结文档`, or `归档后的学习笔记`;
 - explain why a direction changed, not only what was done;
 - avoid repetitive `我负责 / 我参与 / 我整理` bullet-heavy writing unless the note genuinely needs a checklist;
+- avoid negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, and `not only...but...`; state the concrete engineering point directly;
 - keep evidence links, files, and technical constraints concrete;
 - use bilingual headings or paired English/Chinese paragraphs on public pages when a section would otherwise be Chinese-only.
 

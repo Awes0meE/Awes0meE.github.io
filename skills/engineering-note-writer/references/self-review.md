@@ -21,6 +21,7 @@ Check:
 - Is there a clear timeline or system spine?
 - Does each paragraph advance the note?
 - Is the first section grounded in a concrete starting point?
+- Does the opening avoid describing itself as a reorganized, processed, or archived learning note?
 - Is the ending a real looking-back point, not generic conclusion filler?
 - Are file/evidence lists connected to the story?
 
@@ -32,6 +33,7 @@ Check:
 
 - Does it sound like a practical engineering note?
 - Did it avoid resume/pitch/corporate language?
+- Did it avoid meta-document openings such as `这是一次对...重新整理后的学习笔记`, `重新整理的一篇学习记录`, and `处理后的总结文档`?
 - Are there concrete symptoms and files?
 - Is there mild human texture without fake drama?
 - Did it avoid `首先/其次/最后` scaffolding unless a numbered method is genuinely needed?

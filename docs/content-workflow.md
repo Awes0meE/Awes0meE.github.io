@@ -183,7 +183,9 @@ Notes should keep the user's practical learning-log texture. Public pages should
 - start from `起点` or the first confusing symptom when the motivation matters;
 - use sections like `怎么卡住`, `怎么改`, `文件`, `还要补的记录`, and `现在回头看` when they fit;
 - keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
+- start from the actual course material, file, symptom, or engineering question, not from meta-document openings such as `这是一次对课件重新整理后的学习笔记`, `重新整理的一篇学习记录`, `处理后的总结文档`, or `归档后的学习笔记`;
 - avoid phrases like `这次只公开...`, `功能改动没有故意扩大`, `公开证据边界`, and repetitive `我负责了... / 我参与了...` lists;
+- avoid negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, and `not only...but...`; split the thought into direct evidence sentences instead;
 - write in a plain learning-log voice, often beginning from the action or observation instead of a formal subject;
 - add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
 - if an uploaded public `.txt`, `.md`, or self-authored document is the real artifact, publish it as a proper note page with the original wording rendered as article text; project `assetPaths` can still link the file, but should not be the only readable copy.
