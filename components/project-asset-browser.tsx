@@ -8,30 +8,28 @@ import { ContentRenderer } from "@/components/content-renderer";
 import { cn } from "@/lib/utils";
 import type { ProjectAsset } from "@/components/project-assets";
 
-type IconType = typeof FileText;
-
-function getAssetIcon(asset: ProjectAsset): IconType {
+function AssetIcon({ asset, size }: { asset: ProjectAsset; size: number }) {
   if (asset.kind === "image") {
-    return ImageIcon;
+    return <ImageIcon size={size} />;
   }
 
   if (asset.kind === "video") {
-    return Video;
+    return <Video size={size} />;
   }
 
   if (asset.kind === "text") {
-    return FileCode2;
+    return <FileCode2 size={size} />;
   }
 
   if (asset.kind === "pdf") {
-    return FileType2;
+    return <FileType2 size={size} />;
   }
 
   if (asset.kind === "document") {
-    return FileText;
+    return <FileText size={size} />;
   }
 
-  return FileArchive;
+  return <FileArchive size={size} />;
 }
 
 function renderAssetName(asset: ProjectAsset) {
@@ -202,7 +200,6 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
     return null;
   }
 
-  const SelectedIcon = getAssetIcon(selectedAsset);
   const opensAsDownload = selectedAsset.extension === ".html" || selectedAsset.extension === ".svg";
 
   function handleSelect(href: string) {
@@ -232,7 +229,6 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
           </div>
           <div className="max-h-[340px] overflow-auto p-2 lg:max-h-[720px]">
             {assets.map((asset) => {
-              const Icon = getAssetIcon(asset);
               const isSelected = asset.href === selectedAsset.href;
 
               return (
@@ -250,7 +246,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
                   )}
                 >
                   <span className={cn("mt-0.5 text-pine", isSelected && "text-copper")}>
-                    <Icon size={17} />
+                    <AssetIcon asset={asset} size={17} />
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-sm font-semibold">{renderAssetName(asset)}</span>
@@ -268,7 +264,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
           <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-line text-pine">
-                <SelectedIcon size={18} />
+                <AssetIcon asset={selectedAsset} size={18} />
               </span>
               <div className="min-w-0">
                 <h3 className="truncate text-sm font-semibold text-ink">{renderAssetName(selectedAsset)}</h3>

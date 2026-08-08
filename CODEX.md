@@ -9,7 +9,7 @@ Project operating guide for AI agents working on the XJTLU Portfolio.
 - Public site: `https://www.66ccff-labs.com/`
 - Vercel preview/base deployment: `https://awes0mee-portfolio.vercel.app/`
 - Deployment target: Vercel. GitHub Pages for this username repository is only a redirect fallback: keep Pages source on `gh-pages:/`, never `main:/`. Keep root `.nojekyll` committed because the repository name can trigger GitHub Pages, and this Next.js site should not let Jekyll/Liquid parse uploaded Markdown or code evidence under `public/uploads/`.
-- Stack: Next.js App Router, TypeScript, React, Tailwind CSS, local MDX-like content files, JSON media metadata.
+- Stack: Next.js 16.3 App Router, TypeScript, React 19.2, Tailwind CSS, local MDX-like content files, JSON media metadata.
 - Package manager: npm.
 - Main content folders:
   - `content/projects/*.mdx`
@@ -47,8 +47,8 @@ Full setup details live in `docs/environment-toolchain.md`. Use the Node.js inst
 
 Baseline:
 
-- Node.js 22 LTS or newer; this machine is verified with `v24.15.0`.
-- npm 10 or newer; this machine is verified with `11.12.1`.
+- Node.js 22 LTS or newer; this machine is verified with `v24.19.0`.
+- npm 10 or newer; this machine is verified with `11.17.0`.
 - `.nvmrc` pins the portable baseline to Node `22`.
 - Use npm only; do not introduce pnpm, yarn, Bun, or extra lockfiles.
 

@@ -8,8 +8,8 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 
 ## Runtime Stack
 
-- Next.js App Router
-- React
+- Next.js 16.3 App Router
+- React 19.2
 - TypeScript
 - Tailwind CSS
 - local file content via `gray-matter`

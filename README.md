@@ -15,7 +15,7 @@ Public site:
 
 ## Tech Stack
 
-- Framework: Next.js App Router
+- Framework: Next.js 16.3 App Router
 - Language: TypeScript
 - UI: React 19, Tailwind CSS
 - Content: local MDX files with typed frontmatter
@@ -213,7 +213,7 @@ git push origin v0.7.1
 
 ## 技术栈
 
-- 框架：Next.js App Router
+- 框架：Next.js 16.3 App Router
 - 语言：TypeScript
 - UI：React 19、Tailwind CSS
 - 内容：本地 MDX 文件 + typed frontmatter

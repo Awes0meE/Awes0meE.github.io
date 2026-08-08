@@ -47,3 +47,13 @@ Before making non-trivial changes, read:
 5. `docs/memory-system.md`
 
 Keep `AGENTS.md` short. Put detailed project rules in `CODEX.md` so all agents have one source of truth.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# Next.js version-matched docs
+
+This project uses Next.js 16.3. Before changing Next.js APIs, conventions, or file structure, read the relevant guide in `node_modules/next/dist/docs/` and follow deprecation notices.
+
+The bundled docs are installed with the project's dependencies. If they are missing, run `npm.cmd install` first.
+
+<!-- END:nextjs-agent-rules -->

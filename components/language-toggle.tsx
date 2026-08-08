@@ -19,7 +19,11 @@ export function LanguageToggle() {
   const [language, setLanguage] = useState<Language | null>(null);
 
   useEffect(() => {
-    setLanguage(readDocumentLanguage());
+    const frame = window.requestAnimationFrame(() => {
+      setLanguage(readDocumentLanguage());
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   function handleLanguageChange(nextLanguage: Language) {
