@@ -52,6 +52,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-07-05`: Refreshed `engineering-note-writer` discovery metadata so the skill description is trigger-only, then synchronized project writing docs with its hard-gated bans on AI-like negation-then-reframe templates such as `不是...而是...` / `not X but Y` and meta-document openings such as `这是一次对课件重新整理后的学习笔记`.
 - `2026-07-05`: Rewrote older project and related-note body copy with `engineering-note-writer`: Juanyun, Nanjing Turing project homepage, Tianjin STM32, Claude Chime, FOC, and DIY cooling pages now lean more on concrete engineering traces. The newly added Smart Car and Digital Clock project/note bodies were left unchanged, and Nanjing Turing original uploaded notes (`turing-cmake-build-logic`, `turing-qt-seamly2d-first-run`, `turing-release-packaging-cross-platform`, `turing-sm2d-xml-data-format`) were preserved.
 - `2026-07-04`: Investigated failed GitHub Pages deployment run `28677991122` at commit `f1371d0`. Vercel and local builds were healthy; the problem was the username repository still had legacy GitHub Pages configured to publish `main:/`, so Pages tried to deploy the raw Next.js source repository. Direct Pages deactivation returned HTTP 422, so the repository now uses a dedicated `gh-pages` branch containing only `index.html`, `404.html`, and `.nojekyll` as a redirect fallback to `https://www.66ccff-labs.com/`, with Pages source set to `gh-pages:/`.
+- `2026-08-09`: Verified the migrated checkout on `D:\Develop\Project_Final_Collation\XJTLU_Portfolio`: `main` matched `origin/main`, GitHub HTTPS authentication used account `Awes0meE`, the Pages fallback remained on `gh-pages:/`, and the production domain returned a Vercel `200` response. Repository-local Git safeguards now require fast-forward pulls, prune deleted remote branches, and automatically establish upstreams for new topic branches.
+- `2026-08-09`: Prepared `build/upgrade-next-16` to restore the dependency security baseline after new 2026-07/08 advisories. The branch upgrades Next.js to `16.3.0`, React/React DOM to `19.2.8`, ESLint to compatible `9.39.5`, and the locked PostCSS, Sharp, js-yaml, and nanoid dependency chain to patched versions.
 
 ## Stable Decisions
 
@@ -83,6 +85,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - When editing the `gh-pages` redirect branch from Windows PowerShell, avoid piping PowerShell-generated tree text directly into `git mktree`; CRLF can become literal `\r` in filenames. Use a temporary worktree or temporary `GIT_INDEX_FILE` plus `git update-index` instead.
 - Keep `vercel.json` on both `main` and `gh-pages` with `git.deploymentEnabled.gh-pages = false`. Vercel otherwise tries to build the redirect-only `gh-pages` branch as a Next.js app and fails with `Couldn't find any pages or app directory`.
 - Keep root `.nojekyll` committed so incidental GitHub Pages builds do not run Jekyll/Liquid over Next.js source files and uploaded Markdown/code archives.
+- Keep daily Git work on topic branches. Update `main` with `git pull --ff-only origin main`, push the topic branch for a Vercel preview, and merge only after the project quality checks pass.
 
 ## Site Identity
 
@@ -124,7 +127,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Known-good checks as of `2026-07-05` on Windows PowerShell:
+Known-good checks as of `2026-08-09` on Windows PowerShell:
 
 ```powershell
 npm.cmd run lint

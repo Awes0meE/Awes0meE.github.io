@@ -5,9 +5,9 @@ This page is the portable setup checklist for a new computer, a WPS-cloud-synced
 ## Baseline
 
 - OS: Windows is the primary local development environment; PowerShell is the default shell.
-- Git: any current Git for Windows release is fine. This machine is verified with `git version 2.53.0.windows.2`.
-- Node.js: use Node.js 22 LTS or newer. This machine is verified with `v24.15.0`.
-- npm: use npm 10 or newer. This machine is verified with `11.12.1`.
+- Git: any current Git for Windows release is fine. This machine is verified with `git version 2.55.0.windows.3`.
+- Node.js: use Node.js 22 LTS or newer. This machine is verified with `v24.19.0`.
+- npm: use npm 10 or newer. This machine is verified with `11.17.0`.
 - Package manager: npm only. Do not introduce pnpm, yarn, Bun, or lockfiles for those tools.
 - Deployment: Vercel builds the Next.js app; Cloudflare only manages DNS.
 - GitHub Pages: redirect fallback only. Keep repository Pages source on `gh-pages:/`, not `main:/`.
@@ -21,6 +21,7 @@ Run these commands from the repository root:
 ```powershell
 git status --short --branch
 git remote -v
+gh auth status
 node --version
 npm.cmd --version
 where.exe node
@@ -36,6 +37,33 @@ If Node.js is installed but the current shell cannot find it, restart PowerShell
 ```powershell
 $env:Path='C:\Program Files\nodejs;' + $env:Path
 ```
+
+## GitHub Sync Workflow
+
+The repository remote is `https://github.com/Awes0meE/Awes0meE.github.io.git`. Keep local work on topic branches and update `main` only with fast-forward pulls:
+
+```powershell
+git switch main
+git pull --ff-only origin main
+git switch -c content/my-portfolio-update
+```
+
+Configure these repository-local safeguards once on a new checkout:
+
+```powershell
+git config --local pull.ff only
+git config --local fetch.prune true
+git config --local push.default simple
+git config --local push.autoSetupRemote true
+```
+
+After the quality checks pass, publish the current topic branch:
+
+```powershell
+git push
+```
+
+GitHub authentication uses `gh` with HTTPS on this machine. Vercel is connected directly to the GitHub repository: pushed topic branches receive preview deployments, and updates to `main` receive production deployments. A local Vercel CLI login or `.vercel/project.json` link is not required for this workflow.
 
 ## Restoring A WPS-Synced Folder Without `.git`
 

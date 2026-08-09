@@ -423,3 +423,9 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Summary: Rewrote older project pages and related notes with `engineering-note-writer` to reduce AI-archive phrasing and bring the copy closer to practical engineering notes.
 - Files changed: updated 6 older project pages and 15 related note pages covering Juanyun, Nanjing Turing, Tianjin STM32, Claude Chime, FOC, and DIY cooling; left the newly added Smart Car and Digital Clock project/note bodies unchanged; preserved the Nanjing Turing original uploaded notes and only rewrote the later `turing-three-week-development-log` note.
 - Verification: target-file banned-phrase scan passed; `npm.cmd run validate-content`, `npm.cmd run validate-encoding`, `npm.cmd run lint`, `npm.cmd run typecheck`, `git diff --check`, and `npm.cmd run build` passed.
+
+## 2026-08-09
+
+- Summary: Reconnected the migrated checkout to the existing GitHub and Vercel workflow, then refreshed the dependency security baseline on `build/upgrade-next-16`.
+- Files changed: configured repository-local fast-forward/prune/upstream Git safeguards; upgraded Next.js to `16.3.0`, React/React DOM to `19.2.8`, and ESLint to compatible `9.39.5`; refreshed patched transitive dependencies and version-matched Next.js agent guidance; synchronized environment, architecture, README, and durable memory documentation.
+- Verification: local/remote divergence was `0 0`; `git pull --ff-only` and `git push --dry-run` succeeded; GitHub Pages remained on `gh-pages:/`; the production domain and Pages fallback returned `200`; lint, content/encoding validation, typecheck, Next 16 Turbopack build, and full dependency audit passed with `0 vulnerabilities`; production route smoke checks and Playwright language/file-browser interactions passed.
