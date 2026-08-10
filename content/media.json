@@ -409,39 +409,39 @@
   },
   {
     "id": "stm32f103c8t6-pinout",
-    "title": "STM32F103C8T6 pinout reference",
-    "titleZh": "STM32F103C8T6 引脚定义参考",
+    "title": "STM32F103C8T6 LQFP48 Pin Map",
+    "titleZh": "STM32F103C8T6 LQFP48 引脚图",
     "type": "image",
     "src": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "thumbnail": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "date": "2025-02-06",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "Pinout image repeatedly used while starting STM32F103C8T6 peripheral work.",
-    "captionZh": "开始摸 STM32F103C8T6 外设时反复对照的引脚图。"
+    "caption": "The LQFP48 map places GPIO, USART, ADC, and timer alternate functions around the package, providing a reference for reading the peripheral exercises.",
+    "captionZh": "这张 LQFP48 图把 GPIO、USART、ADC 与定时器复用功能排在封装四周，可用于对照各项外设练习。"
   },
   {
     "id": "tianjin-rail-transit-cover",
-    "title": "Tianjin Rail Transit cover",
-    "titleZh": "天津轨道交通封面图",
+    "title": "Tianjin Rail Transit Training Cover",
+    "titleZh": "天津轨道交通实训封面",
     "type": "image",
     "src": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "thumbnail": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "date": "2025-02-05",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "Processed Tianjin Rail Transit logo cover for the STM32 foundation internship archive.",
-    "captionZh": "天津轨道交通 STM32 入门实习档案页使用的 Logo 封面图。"
+    "caption": "The processed Tianjin Rail Transit logo gives the STM32 training archive its internship context and visual cover.",
+    "captionZh": "处理后的天津轨道交通 Logo 为 STM32 实训档案标明实习语境，也构成项目封面的视觉主体。"
   },
   {
     "id": "servo-pwm-180-parameters",
-    "title": "180 degree servo PWM parameter reference",
-    "titleZh": "180 度舵机 PWM 控制参数参考",
+    "title": "180° Servo Pulse Reference Table",
+    "titleZh": "180° 舵机脉宽参考表",
     "type": "image",
     "src": "/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png",
     "thumbnail": "/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png",
     "date": "2025-02-12",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "Servo PWM parameter sheet used while connecting timer output to actuator movement.",
-    "captionZh": "把定时器 PWM 输出接到舵机动作时用到的参数图。"
+    "caption": "Across 0°–180°, the reference table keeps a 20 ms period and steps the high time from 0.5 ms to 2.5 ms to present the pulse-to-angle mapping.",
+    "captionZh": "参考表覆盖 0°–180°，周期保持 20 ms，高电平时间从 0.5 ms 递增到 2.5 ms，呈现脉宽到角度的对应关系。"
   },
   {
     "id": "turing-cmake-notion-flow-reference",

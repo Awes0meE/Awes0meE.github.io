@@ -1,8 +1,8 @@
 ---
-title: "PWM, UART, ADC, And Sensor Data Path"
-titleZh: "STM32 PWM、串口、ADC 与传感器数据通路"
-summary: "A STM32 note about PWM output, UART/OLED observation, ADC sampling, and using a small lookup table to map light readings into LED brightness."
-summaryZh: "STM32 笔记：PWM 输出、串口/OLED 观察、ADC 采样，以及用小查表把光敏读数映射到 LED 亮度。"
+title: "Duty Cycles, Serial Bytes, and Samples Are Different Signals"
+titleZh: "占空比、串行字节与采样值不是同一种信号"
+summary: "An interface note separating PWM actuation, UART observability, and ADC sampling, then mapping light targets to a TIM4 channel-1 compare value capped at 999."
+summaryZh: "一篇接口笔记：区分 PWM 执行、UART 可观察性与 ADC 采样，再看光照目标怎样映射为上限为 999 的 TIM4 通道 1 比较值。"
 date: "2025-02-08"
 status: "Completed"
 tags: ["STM32", "PWM", "UART", "ADC", "Sensor"]
@@ -14,32 +14,46 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## PWM First / 先看 PWM
+## PWM Describes How Long an Output Stays Active / PWM 描述输出保持有效的时间比例
 
-PWM 是第一次把“高低电平”变成“连续效果”的地方。LED 亮度、舵机角度、电机速度都可以从占空比开始理解。只写一句 `SetCompare` 很简单，真正要想清楚的是频率、周期、预分频、占空比和通道之间的关系。
+`Set_LED_Brightness()` does not write an analog voltage. It clamps `brightness` to 999 and passes the result to `TIM_SetCompare1(TIM4, brightness)`. That call writes TIM4 channel 1's compare value. In PWM generally, the compare value works with the counter period, output polarity, and mode to determine the active-time proportion; this excerpt exposes only the compare update.
 
-PWM made the board feel less binary. The same timer idea could drive LED dimming, servo pulses, and motor-speed experiments, which made the timer exercises feel less abstract.
+`Set_LED_Brightness()` 并没有写出一个模拟电压。它先把 `brightness` 限制到 999，再交给 `TIM_SetCompare1(TIM4, brightness)`，写入 TIM4 通道 1 的比较值。一般来说，PWM 的有效时间比例由比较值、计数周期、输出极性和模式共同决定；这段摘录只公开了比较值更新。
+
+The servo parameter image describes another PWM interpretation: a 20 ms period with high times from 0.5 ms to 2.5 ms paired with angles from 0° to 180°. It is a reference table, not a run record for the public code.
+
+舵机参数图展示了 PWM 的另一种解释：周期统一为 20 ms，高电平时间从 0.5 ms 到 2.5 ms，对应 0° 到 180°。它是一张参数参考表，不是公开代码的运行记录。
 
 ![180 degree servo PWM parameter reference / 180 度舵机 PWM 控制参数参考](/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png)
 
-## ADC And UART / 采样和观察
+## ADC Produces a Sample, Not an Output Command / ADC 产生采样值，不产生输出指令
 
-ADC 练习把光敏传感器的模拟量变成数字。串口和 OLED 负责把这些数字显示出来。这个阶段我才更明显地感觉到：嵌入式调试只看硬件有没有动很不够，中间数据也要能吐出来。
+The lookup excerpt stores 16 pairs named `pwm` and `adc`. Their ADC side descends from 1600 to 480 while the PWM side rises from 0 to 1000. `Lookup_PWM_For_Target()` finds the two surrounding points and linearly interpolates between them, with endpoint handling for targets outside the table.
 
-ADC converted the light sensor's analog voltage into a number, and UART/OLED made that number visible. That was the first point where I felt debugging should expose intermediate data rather than visible movement alone.
+查表摘录保存了 16 组名为 `pwm` 与 `adc` 的数据：ADC 一侧从 1600 下降到 480，PWM 一侧从 0 上升到 1000。`Lookup_PWM_For_Target()` 找到目标两侧的数据点并做线性插值，超出表格范围时则直接使用端点。
 
-In the metro environment-monitoring demo, brightness control used a plain lookup table. LED PWM values were paired with light-sensor ADC values, then linear interpolation estimated the PWM needed for the target brightness. The method was simple, and it pushed the exercise from "the peripheral can output a waveform" toward "data participates in control."
+Those names keep input and output separate. An ADC value is a sampled number associated with the light-sensor path; a PWM compare value is a command for TIM4. The table links the two domains, but it does not report physical units, fitting error, or achieved brightness accuracy.
 
-在地铁环境监测小系统里，亮度控制用了一个很朴素的查表。表里记录 LED PWM 值和光敏 ADC 值的对应关系，再用线性插值估算目标亮度需要的 PWM。方法不复杂，但它把“外设能出波形”往“数据参与控制”推进了一步。
+这些名字把输入和输出分开了：ADC 值是光照传感路径里的采样数字，PWM 比较值是交给 TIM4 的输出指令。查表把两个域连接起来，却没有给出物理单位、拟合误差或最终亮度精度。
 
-## File / 文件
+[PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
 
-The public excerpt keeps the calibration table, PWM limits, and lookup-table interpolation logic: [PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c).
+## UART Carries Bytes So Internal Values Can Leave the MCU / UART 搬运字节，让内部数值离开 MCU
 
-公开摘录保留了校准表、PWM 限幅和查表插值逻辑：[PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。
+UART solves a different problem again. It serializes data for another device or terminal; it neither samples an analog voltage nor generates a duty cycle. In an embedded debugging path, that makes UART useful for exposing intermediate values and timestamps while PWM and ADC remain attached to physical interfaces.
 
-## Looking Back / 回头看
+UART 解决的又是另一类问题：它把数据序列化后交给另一个设备或终端，既不采样模拟电压，也不生成占空比。在嵌入式调试链里，它适合把中间数值和时间信息送出来，而 PWM 与 ADC 继续连接物理接口。
 
-Sensor values are usually messy, and a control output continues beyond one function call. Even LED dimming needs sampling range, target value, clamping, and real response. Later, when PID came back into view, these small exercises made the formulas feel less detached.
+The Tianjin public directory contains no standalone UART source excerpt. UART therefore belongs here as the observability role in the learning route; the demonstrated display path in the environment loop is OLED, through calls such as `OLED_ShowNum()`.
 
-传感器值通常不干净，控制输出也不是一句函数调用就结束。即使只是 LED 调光，也要考虑采样范围、目标值、限幅和实际响应。后面再看 PID 时，这些小练习会让公式没那么悬空。
+天津公开目录没有独立 UART 源码摘录。因此，这里保留的是串口在学习路线中的“可观察性”角色；环境循环里真正展示出来的数据出口是 OLED，例如 `OLED_ShowNum()`。
+
+## The Three Interfaces Meet Without Becoming One / 三类接口可以协作，却不会变成同一种信号
+
+In the small brightness path, a light-related numeric domain and a target feed the lookup, the result becomes a bounded TIM4 compare value, and OLED makes current, target, and output values visible. UART could serve a similar observation role in another exercise, but it does not replace the sampler or actuator.
+
+在这条小型亮度路径里，光照相关数值域与目标值进入查表，结果变成带限幅的 TIM4 比较值，OLED 再把当前值、目标值和输出值显示出来。UART 可以在另一项练习里承担相似的观察角色，但它不会替代采样器或执行输出。
+
+Keeping those roles separate is what makes the data path readable: ADC measures, PWM acts, and UART communicates.
+
+把角色分开，数据通路才容易阅读：ADC 采样，PWM 执行，UART 通信。

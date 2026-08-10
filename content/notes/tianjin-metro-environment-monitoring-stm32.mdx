@@ -1,8 +1,8 @@
 ---
-title: "Metro Environment Monitoring Demo On STM32"
-titleZh: "基于 STM32 的地铁环境监测小综合"
-summary: "A small STM32 integration note combining OLED, LDR, DHT11, encoder input, timers, PWM brightness control, tricolor LEDs, and servo movement."
-summaryZh: "STM32 小综合笔记：把 OLED、光敏电阻、DHT11、编码器、定时器、PWM 调光、三色灯和舵机动作放进同一个循环里。"
+title: "How One Main Loop Joined Sensing, Display, and PWM"
+titleZh: "一个主循环怎样接住传感、显示与 PWM"
+summary: "The demo joins light and DHT11 readings, encoder input, OLED updates, TIM3/TIM4 setup, and lookup-based LED PWM in one STM32F103C8T6 main loop."
+summaryZh: "这个 STM32F103C8T6 demo 在一个主循环里接入光照与 DHT11 读取、编码器输入、OLED 更新、TIM3/TIM4 配置和查表式 LED PWM。"
 date: "2025-02-11"
 status: "Completed"
 tags: ["STM32", "Rail Transit", "Sensor", "PWM", "OLED"]
@@ -14,40 +14,40 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## Small Integration / 小综合
+## Six Initializers Put the Interfaces on One Page / 六个初始化把接口摆上了同一页
 
-前面的练习都是单点：LED、按键、定时器、PWM、ADC。到了“地铁环境智能检测系统”这个题目，重点变成把这些单点放进同一个主循环里。名字听起来比较大，实际训练的是一块 STM32 板上多个外设怎么一起跑。
+`CLED_Init()`, `OLED_Init()`, `LightSensor_Init()`, `TIM3_Config()`, `TIM4_PWM_Config()`, and `Encoder_EXTI_Config()` appear together before the loop begins. That one group is the clearest change from the earlier single-peripheral exercises: display, sensing, timing, PWM, and edge input now have to share one program state.
 
-This demo used a metro scenario to connect peripherals into one observable embedded loop. The work stayed close to the board: sensing, display, timed update, interrupt input, and PWM output.
+`CLED_Init()`、`OLED_Init()`、`LightSensor_Init()`、`TIM3_Config()`、`TIM4_PWM_Config()` 与 `Encoder_EXTI_Config()` 在进入循环前依次出现。和前面的单外设练习相比，变化就在这一组函数里：显示、传感、计时、PWM 和边沿输入现在要共享同一个程序状态。
 
-## What Ran Together / 接在一起的模块
+The OLED labels reveal what that state contains: current brightness, target brightness, LED brightness, temperature, and humidity. The screen is not decoration here; it gives each data path somewhere visible to land.
 
-- OLED displayed current brightness, target brightness, LED PWM, temperature, and humidity.
-- The LDR read ambient light through ADC.
-- The encoder adjusted target brightness through external interrupts.
-- DHT11 refreshed temperature and humidity on a fixed cadence.
-- TIM4 generated PWM for white LED brightness control.
-- Tricolor LEDs simulated status lamps, and the servo simulated door movement.
+OLED 上的四行标签也把状态拆得很清楚：当前亮度、目标亮度、LED 亮度，以及温湿度。显示屏在这里不是装饰，它给每条数据路径都留了一个可见的落点。
 
-- OLED 实时显示当前亮度、目标亮度、LED PWM 和温湿度。
-- LDR 通过 ADC 获取环境亮度。
-- 编码器通过外部中断调整目标亮度。
-- DHT11 按固定节奏读取温湿度。
-- TIM4 输出 PWM 控制白色 LED 亮度。
-- 三色 LED 模拟状态灯，舵机模拟车门开合动作。
+## The Loop Has a Fast Path and a Flag-Gated Path / 主循环里有快路径，也有 flag 控制的路径
 
-The fragile part was the mix of rhythms: OLED refresh, DHT11 timing, encoder interrupts, PWM output, and light-sensor ADC sampling all running together. For a short exercise, debugging and delays could hold it together. If the system grew, the scheduling and module boundaries would need to become much clearer.
+Every pass updates `set_light_value` from the encoder value and writes the target to the OLED. Light and DHT11 reads happen only when `dht_read_flag` is set; when `DHT11_Read()` enters its true branch, temperature and humidity are stored, and a second flag controls when those two numbers are refreshed on screen.
 
-最容易出问题的是几个节奏混在一起：OLED 刷新、DHT11 时序、编码器中断、PWM 输出、光敏 ADC 采样都在跑。短期可以靠调试和延时顶住，但如果系统继续变大，就需要更清楚的任务调度和模块分层。
+每次循环都会根据编码器值更新 `set_light_value`，并把目标值写到 OLED。光照与 DHT11 读取只在 `dht_read_flag` 置位时发生；`DHT11_Read()` 进入 true 分支后保存温度和湿度，再由第二个 flag 决定何时刷新这两个显示值。
 
-## File / 文件
+This is still a small polling loop, but the flags keep the slower sensor branch from looking identical to the target and display updates. `TIM3_Config()` and the consumption of `dht_read_flag` are both visible; the flag's source and update period are not present in the public excerpt.
 
-The main-loop excerpt keeps the module initialization, DHT11 update flag, ADC reading, OLED refresh, and PWM lookup output: [metro environment main loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c).
+它仍然是一个小型轮询循环，不过 flag 已经把较慢的传感器分支和目标值、显示更新区分开来。公开摘录同时呈现了 `TIM3_Config()` 与 `dht_read_flag` 的消费位置，但没有给出这个 flag 的来源和更新周期。
 
-主循环摘录保留了模块初始化、DHT11 更新标志、ADC 读数、OLED 更新和 PWM 查表输出：[metro environment main loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c)。
+## A Lookup Table Connects the Target to TIM4 PWM / 查表结果接到了 TIM4 PWM
 
-## Looking Back / 回头看
+The main loop makes the call relationship visible: `set_light_value` enters `Lookup_PWM_For_Target()`, the returned `ideal_pwm` is displayed, and `Set_LED_Brightness()` receives the same value for LED output.
 
-This kind of small integration exposes the gap between "I can use one peripheral" and "I can keep several peripherals running together." It connected brightness, temperature, humidity, input, output, and display into one loop. For a first internship, that is sturdier than listing a set of STM32 peripherals learned.
+主循环把函数调用关系摆在了一起：`set_light_value` 进入 `Lookup_PWM_For_Target()`，返回的 `ideal_pwm` 被显示出来，同一个值再交给 `Set_LED_Brightness()` 作为 LED 输出。
 
-这类小综合最大的价值是暴露“会一个外设”和“能把几个外设一起跑”之间的差距。它把亮度、温湿度、输入、输出和显示串进同一个循环。对于第一次实习来说，这比单独列一串“学习了 STM32 外设”更扎实。
+The mapping makes sensing, a setpoint, an observable display, and an output meet in one loop. It does not calculate an error between measured light and target light, so the excerpt supports a lookup-based brightness demo rather than a demonstrated closed-loop controller.
+
+这条映射让传感值、设定值、可观察显示和输出在一个循环里相遇。不过代码没有计算实测光照与目标光照之间的误差，因此它支持的是查表式亮度 demo，不是已经证明的闭环控制器。
+
+[Environment-monitoring main loop](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c) · [PWM lookup](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
+
+## One Loop Carries Several Update Rhythms / 一个循环开始承载几种更新节奏
+
+The target calculation runs on every pass, light and DHT11 reads wait behind a flag, OLED refresh uses current or stored values, and the LED output is recomputed from the lookup call. Add another slow sensor, and the useful question is no longer which initializer to call; it is who owns each update and how long that work may hold the loop.
+
+目标值计算在每轮循环里发生，光照与 DHT11 读取等在 flag 后面，OLED 刷新使用当前值或已保存的值，LED 输出则根据查表调用重新计算。如果再接入一个较慢的传感器，值得追问的就不再是调用哪个初始化函数，而是谁负责每次更新、这段工作会占住循环多久。

@@ -1,8 +1,8 @@
 ---
-title: "STM32 Environment Setup During The Tianjin Metro Internship"
-titleZh: "天津轨道交通实习：STM32 环境搭建"
-summary: "The first STM32 setup note from the Tianjin internship: Keil MDK, ST-Link, startup files, GPIOC13 blinking, OLED power wiring, and the first stable board loop."
-summaryZh: "天津实习里的第一篇 STM32 环境笔记：Keil MDK、ST-Link、启动文件、GPIOC13 点灯、OLED 供电，以及第一次跑稳开发板。"
+title: "Before GPIOC13 Blinks: The Keil-to-ST-Link Bring-Up Chain"
+titleZh: "GPIOC13 点亮之前：Keil 到 ST-Link 的 Bring-up 链"
+summary: "A bring-up note tracing Keil project setup, STM32F103C8T6 clocks, ST-Link download checks, GPIOB OLED power, and a 300 ms GPIOC13 blink loop."
+summaryZh: "一篇 bring-up 笔记：串起 Keil 工程、STM32F103C8T6 时钟、ST-Link 下载检查、GPIOB OLED 供电与 300 ms GPIOC13 点灯循环。"
 date: "2025-02-06"
 status: "Completed"
 tags: ["STM32", "Keil MDK", "ST-Link", "GPIO"]
@@ -14,46 +14,36 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## First Day / 第一天
+## “Build Succeeded” Covers Only the First Link / “Build Succeeded” 只覆盖第一段链路
 
-刚开始接触 STM32 时，问题都很小，也很现实：电脑能不能识别下载器，Keil 工程能不能编译，程序能不能烧进板子，LED 能不能按预期闪。Keil MDK、ST-Link、启动文件、标准外设库、工程路径、下载设置，每个单独看都不难，第一次串起来却很容易卡。
+A Keil project can compile while the target remains untouched. Bring-up therefore has at least four links to distinguish: project and startup configuration, STM32F103C8T6 clock and GPIO setup, ST-Link target/download settings, and a board-level observable that can confirm the program reached the MCU.
 
-The first useful milestone was modest: connect the STM32F103C8T6 board to the PC, build in Keil, flash through ST-Link, and confirm the board by blinking the onboard LED. That small loop decided whether every later peripheral exercise had a stable base.
+Keil 工程可以顺利编译，目标板却完全没有变化。bring-up 至少要拆成四段来看：工程与启动配置、STM32F103C8T6 时钟和 GPIO 初始化、ST-Link 目标与下载设置，以及一个能确认程序确实到达 MCU 的板级现象。
 
-第一个有用节点就是把最小链路跑稳：STM32F103C8T6 接到电脑，Keil 能编译，ST-Link 能下载，板载 LED 能闪。这个小循环稳了，后面外设练习才有基础。
+This separation matters because each link fails differently. A compiler error points back into the project; a download failure belongs to the programmer/target connection; a flashed program with no expected output sends the check toward clocks, pins, power, or control flow. The workflow becomes useful when those possibilities stop being one vague “the board does not work.”
 
-## What I Set Up / 配了哪些东西
+这样拆开之后，每一段失败的样子也不同：编译错误回到工程，下载失败检查下载器与目标连接，程序已经写入却没有预期输出时，再转向时钟、引脚、供电或控制流。“板子不工作”这句话，终于能被拆成几个可检查的问题。
 
-- Keil5 MDK and an STM32F103C8T6 project.
-- Startup file, clock enable, and GPIO initialization.
-- GPIOC13 onboard LED blinking.
-- OLED power wiring and basic display output.
-- Debugger download settings and register observation.
+## GPIOB Powers the Display Before It Displays Anything / OLED 显示之前，GPIOB 先把供电电平放好
 
-- Keil5 MDK 和 STM32F103C8T6 工程。
-- 启动文件、时钟使能和 GPIO 初始化。
-- GPIOC13 板载 LED 闪烁。
-- OLED 的供电和基础显示。
-- 调试器下载和寄存器观察。
+The public excerpt enables the GPIOB clock and configures pins 4 and 5 as 50 MHz push-pull outputs. It sets PB5 high and PB4 low before calling `OLED_Init()`, then writes two status strings. That order records an easy-to-miss dependency: a display API cannot compensate for missing module power levels.
 
-The important part was closing the loop between the PC, IDE, programmer, and board. If that loop is unstable, every later symptom becomes hard to judge.
+公开摘录先使能 GPIOB 时钟，把 4、5 号引脚配置为 50 MHz 推挽输出；PB5 拉高、PB4 拉低之后，才调用 `OLED_Init()` 并写入两行状态文字。这个顺序记住了一个很容易被函数名遮住的依赖：模块供电电平没有就位时，显示 API 再完整也补不上。
 
-这里最重要的是把电脑、IDE、下载器和板子连起来。只要这个链路不稳，后面所有现象都会变得很难判断。
+`GPIO_Init()` looks compact, while the structure passed into it still carries mode, pin mask, and speed. The library call shortens the syntax; it does not remove the hardware choices.
 
-## File / 文件
+`GPIO_Init()` 看起来很短，传入的结构体却仍然装着模式、引脚掩码和速度。库函数压缩了写法，没有替硬件选择消失。
 
-The public excerpt keeps GPIOB/OLED power setup, GPIOC13 onboard LED configuration, and the main blinking loop: [basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c).
+## GPIOC13 Is the End-to-End Check / GPIOC13 是端到端检查
 
-公开摘录保留了 GPIOB/OLED 供电、GPIOC13 板载 LED 和主循环闪烁逻辑：[basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)。
+After enabling GPIOC, the excerpt configures pin 13 as another push-pull output. The loop sets the pin, waits 300 ms, resets it, and waits another 300 ms. Unlike a successful build message, that intended pattern crosses the entire chain from source and toolchain to a physical output pin.
+
+使能 GPIOC 后，摘录把 13 号引脚配置成推挽输出。主循环依次置位、等待 300 ms、复位、再等待 300 ms。和“编译成功”相比，这个预期节奏跨过了源码、工具链、下载与物理输出引脚，适合作为端到端检查。
+
+[Basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)
 
 ![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
 
-## Looking Back / 回头看
+The public artifact preserves the code and check sequence rather than a flashing log or oscilloscope capture. Its most durable contribution is the bring-up order: establish the project, reach the target, then choose the smallest output that can tell those two facts apart.
 
-The confusing part at the time was the relationship between library calls and registers. `GPIO_Init` looks like one function call, but behind it are port mode, speed, output type, and clock configuration. The same pattern came back later with EXTI, TIM, and ADC.
-
-当时最容易混乱的是“库函数”和“寄存器”的关系。`GPIO_Init` 看起来只是一行函数调用，背后其实是在配端口模式、速度、输出类型和时钟。后面看 EXTI、TIM、ADC 时，这个理解一直在用。
-
-The result of that day was small: stable blinking and display output. For a first internship, blinking an LED was the proof that the whole development chain was alive.
-
-这一天结果很小，就是稳定点灯和显示。但对第一次实习来说，点灯是在确认整套开发链路真的通了。
+公开材料保留的是代码与检查顺序，不是下载日志或示波器波形。它最耐用的部分正是 bring-up 次序：先建立工程，再到达目标，最后选择一个足够小的输出，把这两件事区分开。

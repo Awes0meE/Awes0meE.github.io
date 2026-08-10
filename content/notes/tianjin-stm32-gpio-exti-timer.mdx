@@ -1,8 +1,8 @@
 ---
-title: "GPIO, EXTI, Encoder, And Timer Basics"
-titleZh: "STM32 GPIO、中断、编码器与定时器基础"
-summary: "A STM32 basics note about moving from GPIO output to button input, EXTI encoder counting, timer counts, and OLED-based observation."
-summaryZh: "STM32 基础笔记：从 GPIO 输出推进到按键输入、EXTI 编码器计数、定时器计数和 OLED 观察。"
+title: "Levels, Edges, and Ticks: Reading GPIO, EXTI, and Timers Apart"
+titleZh: "电平、边沿与计时：分别读懂 GPIO、EXTI 与 Timer"
+summary: "An STM32F103C8T6 note using code examples to separate GPIO levels, EXTI edge configuration, and timer questions about clocks, counters, and updates."
+summaryZh: "一篇 STM32F103C8T6 笔记：借代码示例区分 GPIO 电平、EXTI 边沿配置，以及 Timer 的时钟、计数器与更新问题。"
 date: "2025-02-07"
 status: "Completed"
 tags: ["STM32", "GPIO", "EXTI", "Timer", "Encoder"]
@@ -14,36 +14,40 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## From Output To Input / 从输出到输入
+## GPIO Answers “What Level Is It Now?” / GPIO 回答“现在是什么电平”
 
-LED 闪起来以后，下一步就是让板子对外部动作有反应。按钮、蜂鸣器、编码器这些模块看起来简单，但它们会把 GPIO 模式、上拉输入、消抖、外部中断线、NVIC 优先级都带出来。
+The first excerpt shows the state model in its simplest form. GPIOC pin 13 is configured as a push-pull output, then explicitly set and reset. For an input, the direction reverses: software reads a level that already exists outside the MCU. Either way, GPIO describes a state at the moment it is accessed.
 
-This was the point where the board started reacting to the outside world. Button presses and encoder movement began to change program state instead of only watching an LED blink.
+第一段摘录把状态模型写得很直接：GPIOC13 配成推挽输出，然后被明确置位、复位。换成输入时，方向反过来——软件读取 MCU 外部已经存在的电平。无论输入还是输出，GPIO 回答的都是访问那一刻的状态。
 
-## Polling And Interrupts / 轮询和中断
+This matters because a level and an event are not interchangeable. Repeatedly reading a high level tells the program that the signal remains high; it does not by itself identify the instant when the signal changed.
 
-Polling a button in the main loop was enough for the first LED-state change. The encoder felt much more natural with EXTI: one channel triggers on an edge, and the other channel decides the direction. The excerpt keeps `EXTI15_10_IRQHandler`, where each interrupt checks the B-phase level and increments or decrements the count.
+这里最关键的区别是，电平和事件不能互换。反复读到高电平，只能说明信号仍然为高；它本身并没有指出信号在哪一刻发生了变化。
 
-An interrupt brings trigger edges, flag clearing, priority, and shared variables between the interrupt handler and the main loop. The code was still simple, and the timing problems were already real.
+## EXTI Turns a Selected Edge Into an Event / EXTI 把指定边沿变成事件
 
-一开始用主循环轮询按键就能改变 LED 状态，但编码器这种输入更顺手的做法是用 EXTI 捕捉边沿，再根据另一路相位判断方向。代码里保留了 `EXTI15_10_IRQHandler`，每次中断根据 B 相电平对计数加减。
+The environment-demo excerpt calls `Encoder_EXTI_Config()` before entering its loop, then consumes `Get_Encoder_Value()` while calculating `set_light_value`. These are two visible positions—a configuration entry and a value-consumption point—not a complete event chain.
 
-中断要考虑触发边沿、标志位清除、优先级，以及中断服务函数和主循环之间共享变量的问题。这个阶段的代码还很入门，但已经开始碰到嵌入式里很常见的节奏问题。
+环境 demo 在进入循环前调用 `Encoder_EXTI_Config()`，主循环随后在计算 `set_light_value` 时消费 `Get_Encoder_Value()`。这是两个可见位置——一个配置入口和一个数值消费点——还不是完整的事件链。
 
-## Timers / 定时器
+The public files do not include the interrupt handler, edge selection, direction decoding, or the code that updates the encoder count. The function names locate where to inspect next, but they do not establish which handler or edge produced the consumed value.
 
-The timer exercise moved delay away from pure software loops. Prescaler, auto-reload, and counter value sounded abstract at first. Once they were tied to LED blinking frequency and OLED count display, they became much easier to see.
+公开文件没有中断服务函数、边沿选择、方向判定，也没有更新编码器计数的代码。函数名能提示下一步该检查哪里，却不能确认消费到的数值由哪个 handler 或哪种边沿产生。
 
-定时器练习把延时从纯软件循环里拿出来。预分频、自动重装载、计数值这些词一开始有点抽象，但只要和 LED 闪烁频率、OLED 上的计数显示连起来，就会好理解很多。
+The linked encoder-servo excerpt begins at the consumer: it reads `encoder_count` and turns that value into an output command. It identifies where the count is used, not the handler or edge that updates it: [encoder count consumer excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c).
 
-## File / 文件
+链接中的编码器—舵机摘录从消费端开始：代码读取 `encoder_count`，再把这个值变成输出指令。它说明计数在哪里被使用，却不能补出更新计数的 handler 或边沿：[编码器计数消费端摘录](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
 
-The encoder-to-servo-speed excerpt keeps the core idea: map knob count into speed and clamp the upper and lower limits: [encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c).
+## Timers Answer “When Should It Happen Again?” / Timer 回答“下一次何时发生”
 
-编码器控制舵机速度的摘录保留了“旋钮计数映射到速度，并做上下限保护”的核心逻辑：[encoder and servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
+A timer introduces a third question. GPIO gives a level and EXTI marks a transition; a timer counts from a clock so that work can be paced or a waveform can repeat. The integration excerpt initializes both `TIM3_Config()` and `TIM4_PWM_Config()`, separating a general timing setup from the timer configuration used for PWM output.
 
-## Looking Back / 回头看
+定时器又带来第三个问题。GPIO 给出电平，EXTI 标记变化；Timer 从时钟计数，让任务获得节奏，也让波形可以重复。综合摘录同时初始化 `TIM3_Config()` 与 `TIM4_PWM_Config()`，把一般计时配置和 PWM 所需的定时器配置放在了两个入口。
 
-The value here was turning input events into visible numbers. Once encoder count, timer count, and OLED display were connected, debugging had something more solid than "it seems to move." PWM dimming and the later environment-monitoring demo were built on top of this.
+The excerpt does not show TIM3's callback or connect TIM3 to a particular flag or interval. It records the configuration entry only. TIM4 has a separate PWM configuration entry and a public channel-1 compare write, but its counter period and update timing are not exposed here.
 
-这部分训练的价值在于把输入事件变成可观察的数字。编码器计数、定时器计数和 OLED 显示连在一起之后，调试就有了比“好像动了”更扎实的依据。后面的 PWM 调光和环境监测小系统，也是在这个基础上继续叠。
+摘录没有展开 TIM3 回调，也没有把 TIM3 与某个 flag 或周期连接起来；这里能看到的只有配置入口。TIM4 另有 PWM 配置入口和公开的通道 1 比较值写入，但计数周期与更新时间同样没有在这里展开。
+
+That distinction changes the next debugging question. For GPIO, inspect the level and direction; for EXTI, inspect the selected edge and handler; for a timer, inspect its clock, counter, and update event. Seeing the three initialization names together does not make their mechanisms interchangeable.
+
+这个区别会直接改变下一步的调试问题：GPIO 要看电平和方向，EXTI 要看选中的边沿与 handler，Timer 要看时钟、计数器和更新事件。三个初始化名称出现在同一工程里，也不会让三种机制变成一回事。
