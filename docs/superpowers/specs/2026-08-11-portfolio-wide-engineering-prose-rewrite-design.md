@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-11
 
-**Status:** Approved in conversation; awaiting written-spec review
+**Status:** Approved in conversation and after written-spec review
 
 **Branch:** `agent/rewrite-ai-authored-portfolio-copy`
 
