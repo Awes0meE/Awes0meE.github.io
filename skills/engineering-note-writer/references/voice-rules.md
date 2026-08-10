@@ -1,135 +1,67 @@
-# Voice Rules
+# Voice And Rhythm
 
-Use this before drafting or rewriting portfolio prose.
+Use this before drafting or humanizing Chinese portfolio prose.
 
-## One-Sentence Voice
-
-```text
-认真整理工程经历的人，在讲一个自己真实摸过、卡过、改过、留下证据的项目。
-```
-
-It should sound practical, slightly informal, and specific. It should not sound like a recruiter pitch, thesis abstract, AI delivery note, or corporate report.
-
-## What To Preserve
-
-- The first confusing symptom or starting motivation.
-- The concrete toolchain: STM32, Qt, CMake, ESP32, PCB, Gerber, KiCad/EasyEDA, Vercel, etc.
-- File names, commands, screenshots, PDFs, videos, logs, and board names.
-- The user's uncertainty when it matters.
-- Small "looking back" lessons that explain how later work improved.
-- Limits and unfinished parts.
-
-## Sentence Rhythm
-
-Use varied rhythm:
-
-- some short sentences for turning points;
-- medium sentences for explanation;
-- occasional longer sentences when connecting cause and effect.
-
-Do not make every paragraph balanced and polished. Human notes have small unevenness.
-
-## Good Moves
-
-Use these patterns naturally:
-
-- `一开始...`
-- `真正卡住的是...`
-- `后来发现...`
-- `这个阶段比较有用的地方是...`
-- `现在回头看...`
-- `这个原型还不完整，比较有价值的是它留下了...`
-- `文件里真正能说明问题的是...`
-- `后面还应该补...`
-
-## Bad Moves
-
-Avoid:
-
-- "This project demonstrates my strong ability to..."
-- "The project successfully realizes..."
-- "Through this project, I deeply understood..."
-- "It is worth noting that..."
-- "In conclusion..."
-- "This work provides valuable experience..."
-- `赋能`, `抓手`, `闭环`, `沉淀`, `落地`, `价值转化`
-- `本次仅公开`, `公开证据边界`, `交付物`, `功能改动没有故意扩大`
-- `这是一次对...重新整理后的学习笔记`, `这是一篇...重新整理...`, `重新整理的一篇学习记录`, `处理后的总结文档`, `归档后的学习笔记`
-- `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`
-- English versions of the same move: `not X but Y`, `not only...but...`
-
-## Forbidden Meta-Document Openings
-
-Do not begin a summary or note by describing the page as a processed artifact:
+## Voice Target
 
 ```text
-这是一次对课件重新整理后的学习笔记...
-重新整理的一篇课件学习报告...
-从 Smart Car 课件重新整理的一篇学习记录...
+一个认真做过东西的人，把当时哪里奇怪、哪里好笑、哪里终于想通了，连同证据一起讲清楚。
 ```
 
-That framing sounds like an AI received a "整理一下" instruction and filed the result. Start from the concrete thing the user was facing instead:
+The user chose roughly 75% of `khazix-writer`'s narrative energy for Chinese. Treat that percentage as a direction: livelier than the current report-like notes, calmer and more technical than a public-account entertainment article.
 
-- `MEC104 Digital Clock 课件先给的是一个两位计数器要求...`
-- `Smart Car 课件一开始把任务压到焊接、电源、传感器和电机驱动上...`
-- `这份报告里真正有用的是 A17 组的归零规则和按键接法...`
+## Put Reaction Next To Its Cause
 
-## Forbidden Contrast Frame
-
-Do not use the negation-then-reframe habit where a sentence first rejects one framing and then announces the "real" framing. It reads like AI polishing.
-
-Instead:
-
-- lead with the concrete claim;
-- name the evidence;
-- split the contrast into two plain factual sentences when needed.
-
-## First Person
-
-Use first person when it is grounded:
+Do not save all personality for a final reflection. Place a reaction where the friction happens:
 
 ```text
-我当时先把 qmake 跑起来，结果卡在 core5compat。
+DLL 已经铺满了整个目录，程序换台电脑还是打不开。这个画面多少有点喜剧效果，问题是它笑完还得继续查。
 ```
 
-Do not fake first person:
+The joke works because the directory and failure are real. Without evidence, omit the reaction.
 
-```text
-我深刻感受到团队协作的重要性。
-```
+## Vary Rhythm Without Performing
 
-If evidence is thin, write:
+- Mix short turns with medium technical explanation.
+- Let a short sentence stand alone when an assumption genuinely breaks.
+- Use a question when it is the question the writer actually had.
+- Allow an interruption, correction, or mild unevenness when it sounds natural.
+- Keep paragraphs focused on one movement, but do not force equal length.
 
-```text
-从留下的文件看，这条线主要是在验证...
-```
+Do not require a fixed number of fragments, questions, jokes, colloquial phrases, or emotional punctuation. Quotas produce another template.
 
-## Evidence Over Decoration
+## Find Humor In Engineering Friction
 
-A good sentence usually contains at least one concrete anchor:
+Useful sources include:
 
-- a file;
-- a tool;
-- a symptom;
-- a decision;
-- a measured/visible result;
-- a screenshot/video/PDF/source path.
+- a filename confidently called `final2`;
+- an executable surrounded by DLLs that still refuses to launch;
+- code and hardware taking turns looking guilty;
+- a beginner assumption disproved by a small test;
+- a tool whose convenient default points at the wrong environment.
 
-If a paragraph has no anchor, ask whether it is filler.
+Aim jokes at the situation, the tool, or the writer's own mistaken assumption. Do not ridicule a colleague, client, company, or identifiable person. Avoid forced profanity; use stronger language only when the user's source voice clearly supports it.
 
-## Tone Boundaries
+## Let Technical Detail Carry The Personality
 
-Allowed:
+Specific names feel more human than generic confidence:
 
-- mild self-reflection;
-- honest limits;
-- casual technical phrasing;
-- "有点野", "先跑起来", "靠文件名考古" when it fits.
+- write `windeployqt`, `LM7805`, `74HC165`, `EXTI15_10_IRQHandler`, or `final2`;
+- show the error, file, path mismatch, measurement, or visible result;
+- explain why that detail changed the next action.
 
-Not allowed:
+Knowledge should arrive beside the moment it becomes useful, not under “下面介绍一下.”
 
-- exaggerated confidence;
-- fake humility;
-- dramatic inspiration;
-- generic self-promotion;
-- jokes that distract from evidence.
+## Make Judgments At The Right Strength
+
+Allow `我觉得`, `当时有点懵`, `看起来很像那么回事`, or `这个目录确实有点野` when supported. Keep uncertainty honest. A clear personal judgment is better than corporate neutrality, but it must not overstate the evidence.
+
+## Treat Repeated AI Patterns As Smells, Not Syntax Errors
+
+Remove empty corporate or handoff language such as `赋能`, `闭环`, `抓手`, `落地成效`, `本次仅公开`, and `公开证据边界`.
+
+Ordinary contrast and sequencing words are not forbidden in isolation. Rewrite them when they become a repeated scaffold—several paragraphs built from `首先/其次/最后`, or habitual `不是...而是...` reframing that delays the concrete point.
+
+## Preserve Li Zhiyi's Identity
+
+Borrow transferable mechanics: concrete entry, curiosity, rhythm, supported emotion, light self-mockery, and callbacks. Do not copy Khazix's catchphrases, audience calls, vulgarity level, cultural references, fixed endings, or creator persona. The result should sound like Li Zhiyi enjoying the process of understanding an engineering problem.

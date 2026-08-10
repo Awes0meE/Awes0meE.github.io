@@ -1,214 +1,67 @@
 ---
 name: engineering-note-writer
-description: Use when XJTLU Portfolio work involves rough project bullets, timelines, technical stacks, screenshots, evidence files, source folders, oral notes, project import materials, or requests to write, rewrite, polish, or humanize project notes, project page body copy, summaries, media captions, bilingual Chinese/English portfolio prose, or the user's engineering-note voice.
+description: Use when XJTLU Portfolio work requires writing, rewriting, polishing, translating, or humanizing project pages, learning notes, summaries, captions, or MDX prose from rough bullets, timelines, technical stacks, source folders, screenshots, evidence files, or oral notes in Li Zhiyi's engineering-note voice.
 ---
 
 # Engineering Note Writer
 
-This skill writes portfolio copy for `Awes0meE / Li Zhiyi`.
+Write as Li Zhiyi: an engineering learner who can explain what he touched, what behaved strangely, what finally became clear, and why the record is worth keeping. Keep the facts exact. Let the material decide the shape.
 
-Core output: a Chinese-first engineering note that reads like the user personally wrote it, plus an accurate English counterpart for the bilingual site.
+## Non-Negotiables
 
-Use this skill with `AddProject.skill` during the writing phase of project imports, and use it directly when the user asks for note/project/media copy from rough bullet points.
+- Treat `references/evidence-and-boundaries.md` as the authority for factual, authorship, uncertainty, and publication claims; style never overrides it.
+- Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
+- Match the Chinese and English substance on public bilingual pages.
 
-## Required Context
+## Load Context By Stage
 
-Before writing for this repository, read the task-relevant parts of:
-
-- `CODEX.md`
-- `MEMORY.md`
-- `docs/content-workflow.md`
-- representative existing notes under `content/notes/`
+Before writing for this repository, read the task-relevant parts of `CODEX.md`, `docs/content-workflow.md`, the target page, and representative notes when style continuity matters.
 
 Use these bundled references:
 
-- `references/hard-gated-checklist.md`: read first and keep open as the mandatory writing checklist.
-- `references/voice-rules.md`: read before drafting or rewriting prose.
-- `references/note-archetypes.md`: read before choosing structure.
-- `references/bilingual-writing.md`: read before producing English counterpart text or MDX-ready bilingual sections.
-- `references/self-review.md`: read before claiming a draft is ready.
+- Read `references/evidence-and-boundaries.md` before making first-person, result, or publication claims.
+- Read `references/material-led-composition.md` before arranging a multi-section note or replacing a rigid draft.
+- Read `references/voice-rules.md` before drafting or humanizing Chinese prose.
+- Read `references/bilingual-writing.md` before producing English or bilingual MDX.
+- Read `references/style-examples.md` when calibrating voice or repairing template-like prose.
+- Read `references/self-review.md` before calling a draft ready.
 
-## Hard-Gated Writing
+## Workflow
 
-Before drafting or rewriting, read `references/hard-gated-checklist.md` and use it as the live checklist.
+### 1. Bound The Facts
 
-Rules:
+Separate supported action, artifact evidence, inference, unknowns, and public constraints. Ask a focused question only when the missing fact changes what can safely be claimed. If the user needs a draft immediately, keep it provisional rather than filling gaps.
 
-- Do not draft before the evidence/fact gate has enough concrete anchors or explicit unknowns.
-- Do not use first person unless the evidence supports personal action.
-- Do not produce final copy before the voice gate checks banned wording and AI-like patterns.
-- Do not produce English copy as a short marketing summary; it must match the Chinese substance.
-- Do not hand off MDX-ready text until public-boundary and path checks pass.
-- If a gate fails, revise or ask a focused question before continuing.
+### 2. Find The Narrative Force
 
-## Working Principle
+Find what makes this material move: an odd symptom, a failed assumption, a constraint, an unexpected file, a sequence of experiments, or a concept that became concrete. Do not assign a named note archetype.
 
-The note should feel like:
+### 3. Map Information Moves
 
-```text
-一个正在整理自己工程经历的人，把当时怎么开始、怎么卡住、怎么改、留下了哪些证据、现在回头怎么看，认真但不端着地写下来。
-```
+Plan a few moves in the writer's changing understanding. Each move must add a fact, question, interpretation, reaction, or piece of evidence. Explain knowledge where it becomes useful. Let brief detours return naturally to the active engineering question.
 
-Do not write a resume, press release, academic paper, AI handoff report, or generic product case study.
+### 4. Draft Chinese With Controlled Energy
 
-## Input Intake
+Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Keep Li Zhiyi's calmer learning-note identity; do not copy another writer's catchphrases or public-account persona.
 
-Accept messy input. The user may only provide:
+### 5. Derive Headings From The Finished Draft
 
-- bullet points;
-- a source folder path;
-- a few technologies;
-- "I want to emphasize X";
-- screenshots/videos/PDF/source snippets;
-- rough Chinese oral notes.
+Add a heading only when one real subject ends and another begins. Name the component, conflict, experiment, or finding below it. Use no more than 15 headings. Do not use framework labels such as `起点`, `怎么卡住`, `怎么改`, `文件`, `回头看`, or `还要补`.
 
-Extract or ask for only what is missing and important:
+### 6. Adapt English At Lower Intensity
 
-- project/time range;
-- what triggered the work;
-- what the user actually did;
-- what got stuck;
-- what changed;
-- what evidence exists;
-- what is still missing;
-- what must not be claimed or published.
+Keep the same facts, discovery order, important reactions, and humor targets. Aim for roughly 60% of the same Khazix reference energy used to calibrate Chinese at 75%; this is not 60% of the Chinese draft. Use natural English engineering-blog prose without shrinking it into a summary or translating slang literally.
 
-Do not block for polished wording. Turn rough details into structure.
+### 7. Stop Where The Material Resolves
 
-## Drafting Workflow
+End on the last useful verification, remaining question, concrete observation, or quiet callback. Do not add a retrospective, evidence list, future-work section, or philosophical elevation merely to complete a pattern.
 
-### 1. Build The Fact Sheet
+## Output
 
-Before prose, write an internal fact sheet:
+Return the form the user actually requested: finished prose, MDX-ready body and metadata, a rewrite, captions, or a short review. Keep internal fact sheets and process labels internal unless the user asks for an audit. Surface only the uncertainties that affect the user's next decision.
 
-```text
-Project:
-Time range:
-Context:
-User role/action:
-Technical stack:
-Timeline:
-Key stuck points:
-Key decisions:
-Evidence files:
-Public/private constraints:
-Current result:
-Looking-back point:
-Uncertainties:
-```
-
-Never invent facts to fill blanks. If something is unknown, write around it or mark it as a question.
-
-### 2. Choose A Note Archetype
-
-Read `references/note-archetypes.md`, then choose one primary archetype:
-
-- debugging recap;
-- environment setup;
-- hardware/archive note;
-- project build log;
-- learning path;
-- evidence/file explanation;
-- project overview.
-
-Use the archetype to decide section order. Do not force every section into every note.
-
-### 3. Create A Timeline Spine
-
-Turn bullet points into an ordered spine:
-
-```text
-起点 -> 第一个问题 -> 试过的方向 -> 真正卡住的点 -> 改法 -> 结果 -> 留下的证据 -> 现在回头看
-```
-
-If the project is not chronological, use a system spine:
-
-```text
-目标 -> 结构/模块 -> 关键约束 -> 证据 -> 还缺什么 -> 回头看
-```
-
-The draft must have a visible reason why one paragraph follows another.
-
-### 4. Draft Chinese First
-
-Write the Chinese main draft first.
-
-Rules:
-
-- Use concrete files, tools, symptoms, boards, commands, screenshots, videos, and dates.
-- Start from the concrete material, question, file, symptom, or build step. Do not open with meta-document framing such as "这是一次对课件重新整理后的学习笔记", "重新整理的一篇学习记录", "处理后的总结文档", or "归档后的学习笔记".
-- Use "我" only when the evidence supports personal action. Otherwise use neutral action phrasing.
-- Keep mild self-reflection when it explains the engineering work.
-- Prefer "卡在..." / "先把...跑起来" / "现在回头看..." over formal delivery language.
-- Let paragraphs breathe. One paragraph should usually carry one move.
-- Use bullets only for file lists, evidence lists, or genuinely parallel items.
-
-### 5. Add The English Counterpart
-
-Read `references/bilingual-writing.md`.
-
-English must match the Chinese content, not summarize it into a smaller marketing blurb. It should be clear, technical, and natural. Keep the Chinese voice as the source of truth.
-
-### 6. Produce MDX-Ready Output When Needed
-
-When the output is meant for `content/notes/*.mdx` or `content/projects/*.mdx`, include:
-
-- suggested `title/titleZh`;
-- suggested `summary/summaryZh`;
-- suggested tags;
-- suggested section headings;
-- body text in the repository's bilingual heading style, such as `## Starting Point / 起点`;
-- links or placeholders for concrete evidence paths.
-
-Do not fabricate upload paths. Use provided paths or mark placeholders clearly.
-
-### 7. Self-Review
-
-Read `references/self-review.md`, then run the checks before finalizing:
-
-- fact integrity;
-- timeline/system structure;
-- voice;
-- bilingual equivalence;
-- public boundary language;
-- MDX readiness.
-
-If the draft fails, revise it before showing it as final.
+When the requested deliverable is MDX-ready, return raw MDX that can be pasted into the target file; do not wrap the whole artifact in an outer code fence unless the user explicitly asks for a fenced example.
 
 ## Cooperation With AddProject.skill
 
-When `AddProject.skill` is importing a project:
-
-1. Use AddProject for source audit, public-safety decisions, file copying, media metadata, validation, Git workflow, and release.
-2. Use this skill for project/note prose, summaries, captions, and rewriting user bullet points into engineering notes.
-3. If writing reveals missing evidence or public-risk ambiguity, return that question to AddProject's audit/review flow.
-
-## Output Shapes
-
-For a standalone writing request, return:
-
-```text
-Draft type:
-Assumptions:
-Chinese draft:
-English counterpart:
-Suggested title/summary/tags:
-Open questions:
-```
-
-For a project import, return MDX-ready sections and metadata that AddProject can place into the content files.
-
-## Hard No
-
-Do not:
-
-- invent first-person experiences;
-- overstate project impact;
-- turn the note into a resume achievement list;
-- use corporate words such as `赋能`, `闭环`, `抓手`, `沉淀`, `落地成效` unless quoting source text;
-- use AI handoff phrases such as `本次仅公开`, `公开证据边界`, `功能改动没有故意扩大`;
-- use meta-document openings such as `这是一次对...重新整理后的学习笔记`, `这是一篇...重新整理...`, `重新整理的一篇学习记录`, `处理后的总结文档`, or `归档后的学习笔记`; start from the course material, file, symptom, or engineering question instead;
-- flatten everything into `首先 / 其次 / 最后`;
-- use negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, or `not only...but...`; state the positive engineering point directly or split it into concrete evidence sentences;
-- write a tiny English summary when Chinese has a real article body;
-- remove technical constraints just to sound smoother.
+Use AddProject for source audit, public/private file decisions, copying, media metadata, validation, Git handoff, and release. Use this skill for prose. If writing reveals uncertain evidence or publication risk, return the specific issue to AddProject's audit flow.

@@ -178,16 +178,17 @@ Every serious project should eventually include:
 - links to source, demo, release, or paper if available;
 - English and Chinese summaries.
 
-Notes should keep the user's practical learning-log texture. Public pages should read like direct engineering notes, not AI handoff reports or self-promotional summaries:
+Notes should keep the user's practical learning-log texture. Public pages should stay technically rigorous while letting real confusion, amusement, failed assumptions, and small discoveries appear beside the evidence:
 
-- start from `起点` or the first confusing symptom when the motivation matters;
-- use sections like `怎么卡住`, `怎么改`, `文件`, `还要补的记录`, and `现在回头看` when they fit;
+- begin from the actual course material, file, symptom, command, or engineering question rather than a meta-document introduction;
+- let the material's question or friction decide the order instead of forcing a standard build-log sequence;
+- derive headings after drafting, make each one describe the following technical subject, and follow the limit defined in `engineering-note-writer`;
+- avoid reusable framework headings that name the writing process rather than the technical subject;
 - keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
-- start from the actual course material, file, symptom, or engineering question, not from meta-document openings such as `这是一次对课件重新整理后的学习笔记`, `重新整理的一篇学习记录`, `处理后的总结文档`, or `归档后的学习笔记`;
-- avoid phrases like `这次只公开...`, `功能改动没有故意扩大`, `公开证据边界`, and repetitive `我负责了... / 我参与了...` lists;
-- avoid negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, and `not only...but...`; split the thought into direct evidence sentences instead;
-- write in a plain learning-log voice, often beginning from the action or observation instead of a formal subject;
-- add English headings or paired English paragraphs on public content when a section would otherwise be Chinese-only.
+- use first person and emotion only when the user or evidence supports them;
+- let humor come from real tool, file, hardware, code, or mistaken-assumption friction rather than an invented scene;
+- avoid AI handoff phrasing, repetitive resume lists, and repeated contrast/sequence scaffolds;
+- adapt English with the same facts and narrative nodes at slightly lower emotional intensity;
 - if an uploaded public `.txt`, `.md`, or self-authored document is the real artifact, publish it as a proper note page with the original wording rendered as article text; project `assetPaths` can still link the file, but should not be the only readable copy.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
