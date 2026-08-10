@@ -6,7 +6,7 @@ These files are qualitative behavioral regression fixtures, not a deterministic 
 
 - Capture date: 2026-08-10, Asia/Shanghai.
 - Baseline runtime source: repository commit `995a2eba53f8568d70628c697c90c4213c650ce9`; the pre-redesign skill can be recovered with `git show <commit>:skills/engineering-note-writer/<path>`.
-- Revised runtime source: the final uncommitted redesign snapshot recorded below. A later commit will bind the same files in Git if the user approves them.
+- Revised runtime source: repository commit `85460fb1867ffc683ff9e4a6e135d3b247d86d0b`; the approved redesign is bound to the same runtime files recorded below.
 - Inputs: the five versioned files under `tests/inputs/`.
 - Outputs: the model response body was preserved without prose edits. The small YAML block at the top of each file was added only as trial provenance.
 
