@@ -1,14 +1,17 @@
 export const site = {
-  name: "Awes0meE / Li Zhiyi",
-  title: "Awes0meE / Li Zhiyi | XJTLU Engineering Portfolio",
+  name: "Zhiyi Li / Awes0meE / 66CCFF Labs",
+  title: "Zhiyi Li | Robotic Systems Hardware Portfolio",
   description:
-    "Bilingual undergraduate engineering portfolio for control systems, embedded hardware, robotics, notes, and media.",
-  descriptionZh: "面向控制、嵌入式硬件、机器人、学习笔记和实验媒体的本科工程作品集。",
+    "Robotic systems hardware portfolio by Zhiyi Li, an NTU MSc (Robotics and Intelligent Systems) student working across embedded control, PCB design, board bring-up, motor drives, and power electronics.",
+  descriptionZh: "Zhiyi Li 的机器人系统硬件作品集：现为南洋理工大学机器人与智能系统硕士生，关注嵌入式控制、原理图与 PCB、板级 bring-up、电机驱动和电力电子。",
   url: "https://www.66ccff-labs.com",
-  email: "lizhiyi20030401@gmail.com",
-  github: "https://github.com/Awes0meE",
-  location: "Suzhou, China",
-  locationZh: "中国苏州"
+  github: "https://github.com/Awes0meE"
+};
+
+export const openGraphBase = {
+  siteName: site.name,
+  locale: "en_US",
+  type: "website" as const
 };
 
 export const navItems = [

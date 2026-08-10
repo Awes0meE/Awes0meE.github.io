@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { ContentRenderer } from "@/components/content-renderer";
 import { getNote, getNotes, getProject } from "@/lib/content";
+import { openGraphBase, site } from "@/lib/site";
 
 type NotePageProps = {
   params: Promise<{ slug: string }>;
@@ -24,9 +25,21 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
     return {};
   }
 
+  const socialTitle = `${note.title} | Zhiyi Li`;
+
   return {
     title: note.title,
-    description: note.summary
+    description: note.summary,
+    openGraph: {
+      ...openGraphBase,
+      title: socialTitle,
+      description: note.summary,
+      url: new URL(`/notes/${slug}`, site.url)
+    },
+    twitter: {
+      title: socialTitle,
+      description: note.summary
+    }
   };
 }
 

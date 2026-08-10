@@ -8,7 +8,7 @@ import { navItems } from "@/lib/site";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-8">
+      <div className="mx-auto flex min-w-0 max-w-7xl items-center justify-between gap-2 px-5 py-4 sm:gap-4 lg:px-8">
         <Logo />
         <nav className="hidden items-center gap-8 text-sm font-medium text-ink md:flex">
           {navItems.map((item) => (
@@ -21,7 +21,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <LanguageToggle />
           <Link
             href="/work"
