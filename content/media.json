@@ -1,159 +1,159 @@
 [
   {
     "id": "juanyun-acunit-v20-block",
-    "title": "AC Unit V2.0 system block",
-    "titleZh": "外机板 V2.0 系统框图",
+    "title": "Power and signal routes in the V2.0 ACUnit diagram",
+    "titleZh": "V2.0 ACUnit 图里的电源与信号路径",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v20-system-block.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v20-system-block.png",
     "date": "2026-04-10",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Earlier AC unit architecture sketch kept for version comparison.",
-    "captionZh": "外机板早期系统拆分图，用来对照后来的 V2.1 结构。"
+    "caption": "The titled V2.0 diagram traces power, sensing, control, display, and user-interface paths across power, main-control, and interaction boards.",
+    "captionZh": "这张自带 V2.0 标题的图跨分电板、主控板与交互板，追踪电源、传感、控制、显示和用户交互路径。"
   },
   {
     "id": "juanyun-acunit-v21-block",
-    "title": "AC Unit V2.1 system block",
-    "titleZh": "外机板 V2.1 系统框图",
+    "title": "V2.1 ACUnit interface mind map",
+    "titleZh": "V2.1 ACUnit 接口思维图",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-system-block.png",
     "date": "2026-04-26",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "System-level block diagram for the three-board AC unit direction.",
-    "captionZh": "三板拆分后的外机控制平台系统层级图。"
+    "caption": "A Chinese branch map listing power buses, STM32, fan, EEV, sensor, UART, wireless, SWD, interaction, and OLED connections around three boards.",
+    "captionZh": "中文分支图围绕三块板列出电源总线、STM32、风扇、EEV、传感器、UART、无线、SWD、交互与 OLED 连接。"
   },
   {
     "id": "juanyun-acunit-main-front",
-    "title": "AC Unit V2.1 main board front",
-    "titleZh": "外机板 V2.1 主控板正面",
+    "title": "Connectors around the ACUnit main board",
+    "titleZh": "围住 ACUnit 主控板的连接器",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Main control board render for MCU, sensing, communication, and debug interfaces.",
-    "captionZh": "主控板渲染图，对应 MCU、传感、通信和调试接口这条主线。"
+    "caption": "Front-side render with an STM32 package, labeled sensor and display headers, edge connectors, reset, and a Wi-Fi module position.",
+    "captionZh": "正面渲染可见 STM32 封装、带标签的传感与显示排针、板边连接器、复位键和 Wi-Fi 模块位置。"
   },
   {
     "id": "juanyun-acunit-main-back",
-    "title": "AC Unit V2.1 main board back",
-    "titleZh": "外机板 V2.1 主控板背面",
+    "title": "Main-board routing from the back",
+    "titleZh": "从背面看主控板走线",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-main-back.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Back-side render of the main control board.",
-    "captionZh": "主控板背面渲染图，和正面一起看板级布局。"
+    "caption": "The back render exposes mounting holes, through-hole pads, vias, and routing that the component-heavy front view hides.",
+    "captionZh": "背面渲染露出安装孔、通孔焊盘、过孔与走线，补上器件密集正面看不到的部分。"
   },
   {
     "id": "juanyun-acunit-power-front",
-    "title": "AC Unit V2.1 power board front",
-    "titleZh": "外机板 V2.1 分电板正面",
+    "title": "DC input and 12 V terminal on the power board",
+    "titleZh": "分电板上的 DC 输入与 12 V 端子",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Power-distribution board render for the AC unit platform.",
-    "captionZh": "外机平台分电板渲染图，主要对应电源分配和大电流接口。"
+    "caption": "Front render grouping a DC jack, blade fuse, conversion components, a 470-marked inductor, and the +12V/PGND screw terminal.",
+    "captionZh": "正面渲染把 DC 插座、片式保险丝、变换器件、标着 470 的电感与 +12V/PGND 螺钉端子放在一起。"
   },
   {
     "id": "juanyun-acunit-power-back",
-    "title": "AC Unit V2.1 power board back",
-    "titleZh": "外机板 V2.1 分电板背面",
+    "title": "Wide copper on the power-board back",
+    "titleZh": "分电板背面的宽铜箔",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-power-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-power-back.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Back-side render of the power board.",
-    "captionZh": "分电板背面渲染图，用来补齐板卡双面视角。"
+    "caption": "Back-side view of the same board, where broad copper shapes, mounting holes, and the DC-jack connection are visible without component clutter.",
+    "captionZh": "同一块板的背面视角，宽铜箔、安装孔与 DC 插座连接不再被正面器件遮住。"
   },
   {
     "id": "juanyun-acunit-ui-front",
-    "title": "AC Unit V2.1 interaction board front",
-    "titleZh": "外机板 V2.1 交互板正面",
+    "title": "Encoder and two buttons on the interaction board",
+    "titleZh": "交互板上的编码器与两个按键",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Interaction board render for buttons, encoder, OLED-facing controls, and wiring.",
-    "captionZh": "交互板渲染图，对应按键、编码器、OLED 和用户侧走线。"
+    "caption": "The front render reduces the user-input surface to one rotary encoder, two push buttons, six header pads/holes, and four mounting holes.",
+    "captionZh": "正面渲染把用户输入收在一只旋转编码器、两个按键、六个连接焊盘 / 孔与四个安装孔上。"
   },
   {
     "id": "juanyun-acunit-ui-back",
-    "title": "AC Unit V2.1 interaction board back",
-    "titleZh": "外机板 V2.1 交互板背面",
+    "title": "Interaction-header labels from the back",
+    "titleZh": "从背面读交互板排针标签",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-ui-back.png",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-ui-back.png",
     "date": "2026-05-05",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Back-side render of the interaction board.",
-    "captionZh": "交互板背面渲染图，补充前面板接口的空间关系。"
+    "caption": "The rear view makes the six header labels A, B, G, EK, KP, and KN legible beside the encoder and button footprints.",
+    "captionZh": "背面视角让 A、B、G、EK、KP、KN 六个排针标签与编码器、按键焊盘的对应关系更清楚。"
   },
   {
     "id": "juanyun-acunit-pressure-transmitter-params",
-    "title": "Pressure transmitter parameter notes",
-    "titleZh": "压力变送器参数截图",
+    "title": "5 V pressure-sensor specification screenshot",
+    "titleZh": "5 V 压力传感器规格截图",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg",
     "date": "2026-04-28",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Parameter screenshot used while checking sensor input constraints.",
-    "captionZh": "检查压力传感输入约束时留下的参数截图。"
+    "caption": "The product image labels a Sanhua YCQB02H31 with 5 V supply, 0-20 bar range, 0.5-4.5 V output, and a two-metre lead; it does not show selection or testing.",
+    "captionZh": "产品图标注三花 YCQB02H31、5 V 供电、0-20 bar、0.5-4.5 V 输出和两米线长；画面不说明它已经选型或测试。"
   },
   {
     "id": "juanyun-acunit-pwm-fan-params",
-    "title": "PWM fan parameter notes",
-    "titleZh": "PWM 风机参数截图",
+    "title": "140 mm four-pin PWM fan specification screenshot",
+    "titleZh": "140 mm 四针 PWM 风扇规格截图",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg",
     "date": "2026-04-28",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Fan-control parameter screenshot tied to firmware-facing interface checks.",
-    "captionZh": "和固件接口确认有关的 PWM 风机参数截图。"
+    "caption": "The screenshot lists 140 x 140 x 25 mm, 12 V, 1800+/-10% RPM, and a four-pin PWM connector as candidate interface constraints, not measured platform results.",
+    "captionZh": "截图列出 140 x 140 x 25 mm、12 V、1800+/-10% RPM 与四针 PWM 接口，可作候选约束，不能当作平台实测结果。"
   },
   {
     "id": "juanyun-dht-breakout-plan-cover",
-    "title": "DHT11 / AM2302 breakout plan cover",
-    "titleZh": "温湿度小板规划封面",
+    "title": "Six-page DHT11 / AM2302 board task plan",
+    "titleZh": "六页 DHT11 / AM2302 小板任务计划",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png",
     "thumbnail": "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png",
     "date": "2026-05-06",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Cover image for the small DHT11 / AM2302 breakout-board plan.",
-    "captionZh": "DHT11 / AM2302 温湿度传感器小板任务计划书封面。"
+    "caption": "The cover belongs to an assigned plan for two sensor breakouts, with another development owner named and board, soldering, and MCU checks listed as later milestones in the plan.",
+    "captionZh": "封面来自两种传感器小板的分配任务，署名另一位开发负责人，并在计划中把发板、焊接与 MCU 检查列为后续节点。"
   },
   {
     "id": "juanyun-hardware-sop-cover",
-    "title": "Hardware development SOP cover",
-    "titleZh": "硬件开发 SOP 封面",
+    "title": "Cover image for the separate hardware SOP",
+    "titleZh": "独立硬件 SOP 的封面图",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/hardware-sop-cover.jpeg",
     "thumbnail": "/uploads/projects/juanyun-public/hardware-sop-cover.jpeg",
     "date": "2026-05-06",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Cover image for the self-written hardware development SOP.",
-    "captionZh": "自写硬件开发 SOP 的封面图。"
+    "caption": "This image marks the separate self-authored SOP preserved as its own note and PDF; the cover itself does not summarize the document.",
+    "captionZh": "这张图指向以独立笔记与 PDF 保留的自写 SOP；单看封面并不能概括文档内容。"
   },
   {
     "id": "juanyun-cirro-tech-cover",
-    "title": "Cirro Tech project cover",
-    "titleZh": "卷云科技项目封面图",
+    "title": "Cirro Tech archive cover",
+    "titleZh": "卷云科技归档封面",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg",
     "thumbnail": "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg",
     "date": "2026-05-07",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Processed Cirro Tech logo cover used for the larger Juanyun thermal-management archive.",
-    "captionZh": "整理后的卷云科技 Logo 封面，用在卷云热管理硬件与固件开发档案页。"
+    "caption": "A company logo and wordmark used to identify the Juanyun archive context; the mark is not presented as personal design work.",
+    "captionZh": "用于标识卷云归档语境的公司 Logo 与字标，不把这套标识呈现为个人设计作品。"
   },
   {
     "id": "juanyun-diy-cooling-demo",
@@ -301,27 +301,27 @@
   },
   {
     "id": "juanyun-eev-board-render",
-    "title": "EEV driver board render",
-    "titleZh": "EEV 驱动小板渲染图",
+    "title": "U2 package between the EEV headers",
+    "titleZh": "EEV 接口之间的 U2 封装",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png",
     "thumbnail": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png",
     "date": "2026-03-17",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Small ULN2003A EEV driver board render kept with the Juanyun actuator archive.",
-    "captionZh": "放在卷云执行器归档里的 ULN2003A EEV 驱动小板渲染图。"
+    "caption": "The render shows a four-signal header, an SOP16 U2 package, a five-position output connector, and four LED footprints; the paired schematic identifies U2 as ULN2003A.",
+    "captionZh": "渲染显示四路信号排针、SOP16 的 U2 封装、五位输出连接器与四个 LED 位置；配套原理图才把 U2 标为 ULN2003A。"
   },
   {
     "id": "juanyun-eev-schematic",
-    "title": "EEV driver board schematic",
-    "titleZh": "EEV 驱动小板电路图",
+    "title": "Four EEV channels through a ULN2003A",
+    "titleZh": "穿过 ULN2003A 的四路 EEV 通道",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png",
     "thumbnail": "/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png",
     "date": "2026-03-17",
     "projectSlug": "juanyun-thermal-hardware",
-    "caption": "Schematic for the small EEV driver board.",
-    "captionZh": "EEV 驱动小板的电路图，用来说明执行器支线的驱动关系。"
+    "caption": "The schematic routes four inputs through ULN2003A channels to the output connector and attaches an LED-resistor branch to each driven node.",
+    "captionZh": "原理图让四路输入穿过 ULN2003A 通道到达输出连接器，并在每个驱动节点上接一支 LED 电阻支路。"
   },
   {
     "id": "claude-chime-logo",

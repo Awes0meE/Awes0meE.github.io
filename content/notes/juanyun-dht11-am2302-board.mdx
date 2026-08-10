@@ -1,81 +1,70 @@
 ---
-title: "DHT11 / AM2302 Sensor Board Plan"
-titleZh: "DHT11 / AM2302 温湿度小板计划"
-summary: "A small sensor-board note for DHT11 / AM2302, focused on pin order, pull-up, decoupling, power-on wait, sampling interval, and STM32-side verification."
-summaryZh: "DHT11 / AM2302 温湿度小板笔记，重点是引脚顺序、上拉、去耦、上电等待、采样间隔和 STM32 侧验证。"
+title: "Resolve the AM2302 Pinout Conflict Before the Board Leaves the Plan"
+titleZh: "DHT 小板离开计划书之前，先解决 AM2302 脚位冲突"
+summary: "An archived DHT board plan and the AM2302 manual expose a GND/NC conflict that must be resolved before approving a footprint or claiming verification."
+summaryZh: "对读归档 DHT 小板计划与 AM2302 原厂手册，发现一处 GND / NC 冲突；批准封装或声称完成验证前，必须先解决这处冲突。"
 date: "2026-05-06"
 tags: ["Sensor", "PCB", "DHT11", "AM2302"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## Starting Point / 起点
+## The Cover Describes an Assigned Plan / 封面写的是一份分配任务
 
-这块 DHT11 / AM2302 温湿度小板很小：`30 mm x 14 mm`，三针 `3V3 / DATA / GND`，一个单总线传感器接口。刚看任务时很容易觉得它只是“接个传感器”，真正做起来才会发现细节都藏在小地方。
+The archived PDF is a six-page development task plan for DHT11 and AM2302/DHT22 breakout boards. Its cover names another person as development owner and gives future board-release, soldering, and MCU-verification deadlines. Reviewing its interface constraints does not turn that assignment into personal board-design credit or a completed result.
 
-The DHT11 / AM2302 breakout is tiny: `30 mm x 14 mm`, three pins, and one single-wire sensor interface. At first it looks like a simple sensor hookup. The useful details hide in the small decisions.
+归档 PDF 是一份六页的 DHT11 与 AM2302 / DHT22 小板开发任务计划。封面明确把另一位成员写作开发负责人，并列出后续发板、焊接与 MCU 验证截止日期。复核其中的接口约束，不会把那份分配任务变成个人板卡设计署名或完成结果。
 
-任务书里写了尺寸、接口、电源、上拉、电缆长度、采样周期、固件读取和焊后验证。这些都不炫，但每一项都会影响焊好后能不能稳定读到温湿度。
+![DHT11 / AM2302 task-plan cover / DHT11 / AM2302 任务计划封面](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
 
-The task brief covered size, connector, power, pull-up, cable behavior, sampling interval, firmware readout, and post-solder verification. None of those are flashy, but each one can affect whether the sensor reads reliably.
+The full plan remains available here: [DHT11 / AM2302 breakout-board task plan](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf).
 
-![DHT11 / AM2302 breakout plan cover / DHT11/AM2302 小板计划封面](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png)
+完整计划书保留在这里：[DHT11 / AM2302 温湿度小板任务计划](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf)。
 
+## GND and NC Change Places Between Two Documents / 两份文档里的 GND 与 NC 对不上
 
+The plan proposes the same host-side header for both boards: `+3V3 / DATA / GND`. Its sensor tables then assign DHT11 pin 3 to NC and pin 4 to GND, but assign AM2302 pin 3 to GND and pin 4 to NC. A warning below the tables says the two footprints cannot be exchanged.
 
-## Small Boards Can Still Fail / 小板也会出问题
+计划书让两块板共用同一组主控侧接口：`+3V3 / DATA / GND`。接下来的传感器表格把 DHT11 pin 3 写成 NC、pin 4 写成 GND，却把 AM2302 pin 3 写成 GND、pin 4 写成 NC；表格下方还据此提醒两种封装不能混用。
 
-Small boards fail in very ordinary ways: pin order reversed, pull-up value chosen lazily, sensor read too soon after power-on, sampling interval too short, or cable length making the data edge messy. Those problems look small on paper and cost real time on the bench.
+The [manufacturer's AM2302 technical manual](https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf) gives a different AM2302 interface table: pin 1 VDD, pin 2 SDA, pin 3 NC, and pin 4 GND. That directly conflicts with the archived task plan's AM2302 row. The plan therefore cannot be used by itself to approve the sensor footprint.
 
-小板最常见的问题也很普通：引脚顺序反了，上拉阻值随便选，传感器上电后马上读，采样间隔太短，线太长导致 DATA 边沿变差。这些问题纸面上很小，上板以后很吃时间。
+[AM2302 原厂技术手册](https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf)给出的接口表却不同：pin 1 是 VDD，pin 2 是 SDA，pin 3 是 NC，pin 4 是 GND。这与归档任务计划中的 AM2302 行直接冲突，因此不能只凭任务书批准传感器封装。
 
-So the note treats the board as a small interface task. The goal is to keep the requirement, hardware choice, and STM32 verification connected.
+This review does not show that a PCB was drawn with the wrong footprint, nor that anyone found and corrected it during the original task. It identifies a document conflict that must be resolved against the exact sensor package and current manufacturer data before schematic capture or board release.
 
-所以这篇笔记把它当成一个小接口任务来写：需求、硬件选择和 STM32 验证要连起来。
+这次复核并不能说明 PCB 曾经画错，也不能说明原任务中有人发现并修过它；它只定位了一处文档冲突。进入原理图封装或发板之前，还必须对照实际传感器封装与当前原厂资料重新确认。
 
-## Points Already Clear In The Task Brief / 任务书里已经明确的点
+## Pull-Up, Supply, and Timing Also Need a Datasheet Pass / 上拉、供电与节拍也要再过一遍手册
 
-- PCB size: `30 mm x 14 mm`.
-- Connector: `PZ2.54` angled 3-pin header.
-- Pin definition: `3V3 / DATA / GND`.
-- Communication: single-wire bus.
-- Onboard peripherals: pull-up resistor, power decoupling, optional signal damping / filtering.
-- Resistor/capacitor package: maximum `0603`.
-- Mounting: one `M2` screw positioning hole.
-- Power: prefer `3.3 V`.
-- Verification: breadboard pre-check first, then MCU verification after soldering.
+The archived plan specifies a 4.7 kOhm DATA pull-up to 3.3 V and a 100 nF supply decoupling capacitor. It leaves a 1 uF supply capacitor and a 10 ohm DATA series resistor optional, while reserving a DATA-to-GND capacitor as DNP because excessive capacitance can slow the single-wire edge.
 
-- PCB 尺寸：`30 mm x 14 mm`。
-- 接口：`PZ2.54` 弯针 3P。
-- 接口定义：`3V3 / DATA / GND`。
-- 通信方式：单总线。
-- 板载外围：上拉电阻、电源去耦、可选信号阻尼 / 滤波。
-- 阻容封装：最大 `0603`。
-- 固定：一个 `M2` 螺丝定位孔。
-- 供电：优先 `3.3 V`。
-- 验证：可先面包板预验证，再焊后单片机验证。
+归档计划给 DATA 到 3.3 V 配了 4.7 kOhm 上拉与 100 nF 电源去耦；1 uF 电源电容和 10 ohm DATA 串联电阻为可选项，DATA 到 GND 的电容则默认 DNP，因为过大电容可能拖慢单总线边沿。
 
+The AM2302 manual allows 3.3-5.5 V supply, recommends 5.0 V, gives about 5.1 kOhm as the typical pull-up for a lead shorter than 30 m, and limits a 3.3 V connection to no more than 1 m. The task plan's 3.3 V preference and 4.7 kOhm value are not automatically invalid, but supply drop, cable length, and logic-level compatibility need to be checked as one interface rather than copied from a table.
 
+AM2302 手册允许 3.3-5.5 V 供电，推荐 5.0 V；线长小于 30 m 时，典型上拉约为 5.1 kOhm；使用 3.3 V 时，连接线又被限制在不超过 1 m。任务书偏好的 3.3 V 与 4.7 kOhm 并不会因此自动失效，但压降、线长与逻辑电平兼容性必须作为同一条接口一起核对，不能各抄一格就算完成。
 
-## Sampling And Verification / 采样和验证
+Both documents call for at least two seconds after power-on before reading and at least two seconds between AM2302 reads. Those matching numbers strengthen the timing requirement, but still do not show that firmware or a physical board observed it.
 
-AM2302 / DHT22 is fussy about timing, and that fuss belongs in the task plan. After power-on, wait at least 2 seconds before reading, and keep the read interval no shorter than 2 seconds. During verification, serial output is only the first check. The better check is to move a hand close, breathe toward the sensor, watch whether temperature and humidity change reasonably, and leave it running for several minutes to see whether failures repeat.
+两份文档都要求上电后至少等待两秒再读取，AM2302 两次读取间隔也至少两秒。数字在两边能对上，说明这条时序要求值得保留，却仍不能证明固件或实体板已经做到。
 
+## A 15.4 mm Sensor Meets a 14 mm Board / 15.4 mm 本体遇上 14 mm 板宽
 
-AM2302 / DHT22 对时间要求比较烦，但这类烦正是应该写进任务计划的地方。上电后至少等 2 秒再读，读取间隔不要小于 2 秒。验证时不只看串口有没有数字，还要看手靠近、吹气后温湿度有没有合理变化，并连续跑几分钟观察是否频繁失败。
+The proposed board outline is `30 mm x 14 mm`, with one M2 locating hole. The plan recommends a 2.2 mm hole, at least 4.5 mm keepout diameter, and at least 2 mm from hole edge to board edge. It also says the AM2302 body is about 15.4 mm wide, allowing the body to protrude slightly while the board remains 14 mm wide.
 
-这听起来很基础，但很多硬件调试时间就是被这些基础问题吃掉的。
+拟议板框是 `30 mm x 14 mm`，带一个 M2 定位孔；计划建议孔径 2.2 mm、keepout 直径至少 4.5 mm、孔边到板边至少 2 mm。它还写到 AM2302 本体约宽 15.4 mm，因此在保持 14 mm 板宽时允许本体轻微探出。
 
-## Files / 文件
+The sensor airflow opening and M2 mounting-hole clearance remain layout checks. For a future 3D preview, the plan specifically calls out connector direction and the AM2302 body's slight overhang. The PDF contains no reviewed 3D result, so these are requirements rather than confirmed clearances.
 
-- [DHT11 / AM2302 breakout plan PDF](/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf)
-- [Juanyun thermal hardware project](/work/juanyun-thermal-hardware)
+传感器通风开口与 M2 安装孔间隙属于布局检查。对于后续 3D 预览，计划书特别要求确认连接器方向与 AM2302 本体的轻微探出。PDF 没有附评审后的 3D 结果，因此这里记录的是要求，而不是已经确认的间隙。
 
+## The Five-Minute Run Is Still an Acceptance Item / 连续五分钟仍是一条验收项
 
+The plan's optional breadboard check asks for serial output, a response when a hand or breath changes the local environment, and five minutes without frequent read failures. Its final checklist repeats MCU reading, interval, and five-minute conditions, then requests schematic, PCB, Gerber, BOM, 3D view, soldering photos, and test records.
 
-## Why I Kept This Note / 记下来
+计划中的可选面包板检查要求串口输出、手靠近或吹气后环境读数产生合理变化，以及连续五分钟不频繁读取失败。最终验收清单又重复 MCU 读取、间隔与五分钟条件，并要求提交原理图、PCB、Gerber、BOM、3D 图、焊接照片与测试记录。
 
-The useful thing about this board is the small loop it forces: define the connector, choose pull-up and decoupling, respect power-on wait, read at the right interval, and verify with an MCU instead of only trusting the datasheet.
+They are acceptance instructions, not acceptance evidence. None of those deliverables or logs is attached to this archive. The immediate engineering result of reading the plan is therefore narrower and more useful: resolve the AM2302 GND/NC conflict first, then verify the remaining electrical and mechanical assumptions before the board leaves paper.
 
-
-这个小板有价值，是因为它逼着人走完一个小循环：接口定义，上拉和去耦选择，上电等待，按正确间隔读取，再用 MCU 验证，而不是只相信数据手册里那几行参数。
+这些都是验收指令，不是验收证据；当前归档没有附上上述交付物或日志。读完计划后，眼前真正得到的工程结论反而更窄也更有用：先解决 AM2302 的 GND / NC 冲突，再逐项确认其余电气与机械假设，最后才让小板离开纸面。

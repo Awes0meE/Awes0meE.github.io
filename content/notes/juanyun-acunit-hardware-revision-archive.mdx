@@ -1,45 +1,44 @@
 ---
-title: "AC Unit Hardware Revision Archive"
-titleZh: "外机板早期硬件版本归档"
-summary: "A short revision note for earlier AC unit PCB versions, keeping V1.0 and V2.0 as clues for how the later board split took shape."
-summaryZh: "外机板早期版本小笔记，把 V1.0 和 V2.0 留作后续三板拆分成形前的线索。"
+title: "Two ACUnit Diagrams, Two Ways to Read the Same Three Boards"
+titleZh: "两张 ACUnit 框图，两种三板阅读方式"
+summary: "A comparison of the V2.0 routed block diagram and V2.1 interface mind map, limited to visible connections, labels, and unanswered revision questions."
+summaryZh: "比较 V2.0 连线框图与 V2.1 接口思维图，只讨论可见连接、标签，以及两张图没有回答的版本问题。"
 date: "2026-05-06"
 tags: ["PCB", "Revision", "Manufacturing", "Archive"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
-## Starting Point / 起点
 
-整理 V2.1 时，我一开始差点只留下最终版本。后来发现这样会把过程切掉：只看最终截图，很难看出板形、接口和拆板方式是怎么一步步变清楚的。V1.0 和 V2.0 可能不漂亮，但它们保留了外机板早期的方向。
+## V2.0 Uses Routes to Explain the System / V2.0 用连线解释系统
 
-When I organized V2.1, I almost kept only the final version. That would cut away the process. With only final screenshots, it is hard to see how board shape, interfaces, and board splitting became clearer. V1.0 and V2.0 preserve the early direction of the external unit board.
+The earlier public image carries its own title: `Cirro V2.0 AC Unit Control System`. It already contains three board blocks. The power board accepts the 24 V input and branches power toward the compressor, pressure transmitter, and main board. The main board collects sensing, fan, compressor, EEV, OLED, and interaction functions, while colored lines mark what crosses toward external loads and the interaction board.
 
-V1.0 is closer to early mechanical and fabrication context. V2.0 already shows the beginning of the three-board idea. Keeping them gives the later V2.1 note a timeline instead of relying on memory.
+较早的一张公开图在画面里直接写着 `Cirro V2.0 AC Unit Control System`，而且已经包含三块板。分电板接收 24 V 输入，把电源分往压缩机、压力变送器与主控板；主控板收拢传感、风扇、压缩机、EEV、OLED 与交互功能，再用彩色连线标出哪些信号跨向外部负载和交互板。
 
-V1.0 更像早期机械和制造记录，V2.0 已经能看到三板拆分的雏形。把它们留下来，后面写 V2.1 时才有时间线，不用全靠回忆。
+![ACUnit V2.0 routed block diagram / ACUnit V2.0 连线框图](/uploads/projects/juanyun-tech/acunit-v20-system-block.png)
 
-## Is It Worth Keeping Old Versions? / 旧版本有必要放吗？
+This drawing is route-oriented. Its legend separates power, sensor, control/communication, and UI/display paths, while arrow direction and line labels carry much of the explanation. A reader can follow `Analog Pressure`, `Shared PWM`, `EEV_A/B/C/D`, `OLED_SCL/SDA`, and the seven-pin UI link without seeing a PCB.
 
-Old versions are useful when they answer a question. Here the question is how the board moved from early shape/interface exploration toward the later main, power, and interaction split.
+这张图偏向“沿线追踪”。图例把电源、传感、控制 / 通信、UI / 显示分色，箭头方向与线名承担了大部分说明。即使不看 PCB，也能顺着 `Analog Pressure`、`Shared PWM`、`EEV_A/B/C/D`、`OLED_SCL/SDA` 和七针 UI 连接一路读下去。
 
-旧版本有用，前提是它们能回答问题。这里的问题就是：外机板怎样从早期板形和接口探索，慢慢走到后面的主控板、分电板、交互板拆分。
+## V2.1 Uses Branches to Inventory Interfaces / V2.1 用分支清点接口
 
-## Revision Files / 版本文件
+The other image is a Chinese mind map. It starts with the power board and main board, then fans outward into labeled interfaces: two power buses, STM32F103C8T6, two PWM fans, a five-pin EEV connector, five NTC channels, a linear pressure-sensor input, DHT11, compressor UART, Wi-Fi, Bluetooth, SWD, interaction inputs, and an OLED branch.
 
-V1.0 先保留为早期版本线索。
+另一张图是一棵中文思维图：从分电板与主控板开始，向外展开两条电源总线、STM32F103C8T6、两把 PWM 风扇、五针 EEV、五路 NTC、线性压力传感器输入、DHT11、压缩机 UART、Wi-Fi、蓝牙、SWD、交互输入与 OLED 支路。
 
-V2.0 已经按主控、分电、交互三块板整理。
+![ACUnit V2.1 interface mind map / ACUnit V2.1 接口思维图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-V1.0 stays as an early revision clue.
+This version is inventory-oriented. It gives each interface its own branch, but most connections no longer carry the directional detail or color categories visible in V2.0. The three-board split is therefore not a V2.1 invention; it is visible in both images, expressed in two different visual grammars.
 
-V2.0 is already organized around main, power, and interaction boards.
+这张图偏向“逐项清点”。每个接口都有自己的分支，但多数连接不再保留 V2.0 那样的方向细节与颜色分类。因此，三板拆分并不是 V2.1 才突然出现的东西；两张图里都能看到它，只是用了两套不同的图形语法。
 
-## Notes To Add Later / 后面要补
+## The Revision Reason Is Not in Either Image / 改图原因不在任何一张图里
 
-The missing piece is a revision comparison table: what changed from V1.0 to V2.0 to V2.1, why each change happened, which changes came from power issues, which came from interface issues, and which were made for later firmware integration. Once that table exists, the hardware line will be clearer than a page of renders alone.
+What changed visibly is the emphasis: routes and signal categories in V2.0, interface breadth and Chinese labels in V2.1. Neither image records a change request, review comment, electrical failure, mechanical constraint, fabrication result, or bring-up outcome. It would be tempting to turn the cleaner inventory into a story of design maturity, but that story is not inside these artifacts.
 
-后面最该补的是版本对比表：V1.0 到 V2.0 到 V2.1 到底改了什么，为什么改，哪些是电源问题，哪些是接口问题，哪些是为了后续固件联调。表格补上以后，这条硬件线会比单纯放渲染图清楚很多。
+真正可见的变化只是侧重点：V2.0 看连线与信号类别，V2.1 看接口广度与中文标签。两张图都没有改版需求、评审意见、电气故障、机械约束、制造结果或 bring-up 结论。面对一张更容易清点的图，很容易顺手写成“设计成熟了”；可这段故事并不在材料里。
 
-Looking back, this note is small, but it keeps an important habit: do not erase early versions too quickly. Old files can be messy, yet they often explain why the final board looks the way it does.
+A stronger revision archive would pair each drawing with a dated change note and the board or test record affected by that change. Until those records appear, the safest comparison is also the most useful one: these are two documented views of a three-board ACUnit system, not a reconstructed development timeline.
 
-现在回头看，这篇笔记很小，但保留了一个重要习惯：不要太快把早期版本擦掉。旧文件可能乱，却经常能解释最终板子为什么长成这样。
+更完整的版本归档应当把每张图与带日期的修改说明、受影响板卡或测试记录配在一起。在那些记录出现之前，最稳妥也最有用的结论就是：这是同一套三板 ACUnit 系统的两种已归档视图，不是一条被补写出来的开发时间线。

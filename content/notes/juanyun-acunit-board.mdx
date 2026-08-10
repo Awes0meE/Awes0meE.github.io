@@ -1,85 +1,55 @@
 ---
-title: "Juanyun AC Unit Control Board"
-titleZh: "卷云外机板 V2.0 / V2.1 开发笔记"
-summary: "A board-splitting note for the Juanyun AC unit control platform, following the move from a crowded interface set toward main, power, and interaction boards."
-summaryZh: "卷云外机控制平台的拆板笔记，记录一组拥挤接口怎样逐步拆到主控板、分电板和交互板。"
+title: "Power, Signals, and User Controls Across Three ACUnit Boards"
+titleZh: "电源、信号与交互怎样分布在三块外机板上"
+summary: "A close reading of the ACUnit interface map and six board renders, tracing visible power, sensor, actuator, communication, and user-interface connections."
+summaryZh: "细读 ACUnit 接口图与六张板卡渲染，追踪画面中可见的电源、传感、执行器、通信与用户交互连接。"
 date: "2026-05-06"
 tags: ["PCB", "STM32", "Thermal", "Interface"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
-## Starting Point / 起点
 
-外机板一开始最明显的感觉就是接口太挤。24 V 输入、12 V 风扇、压缩机驱动板、电子膨胀阀、NTC、DHT、压力变送器、OLED、编码器、Wi-Fi 预留，全都塞进“外机板”这个概念里。真正要先想清楚的是每个接口属于哪条链路，而不是先把连接器画满。
+## Three Board Names Anchor the Interface Set / 三个板名把接口收在一起
 
-The AC unit board line was crowded from the beginning. The same board concept had to cover 24 V input, 12 V fan power, the compressor driver board, electronic expansion valve, NTC, DHT, pressure transmitter, OLED, encoder, and reserved Wi-Fi. The first useful question was where each interface belonged, before filling a PCB with connectors.
+The V2.1 image reads more like a Chinese interface mind map. `24V_COM_BUS / MAX 10A` and `+12V_MAIN / MAX 2A` run from the power board toward the main board. Around the main-board node are labels for an STM32F103C8T6, two 12 V four-wire PWM fans, a five-pin electronic expansion valve, five NTC channels, a three-pin linear pressure-sensor input, DHT11, compressor Modbus UART, ESP-01S Wi-Fi, HC-05 Bluetooth, and an ST-Link SWD port. The interaction branch reaches page buttons and an EC11 encoder with a push switch; a separate branch lists an I2C 0.96-inch OLED.
 
-麻烦来自接口之间的互相影响。V2.0 更像把核心链路先收拢，V2.1 开始拆成主控板、分电板、交互板。这个变化很关键：主控负责 MCU 周围的信号，分电板把电源路径单独拿出来，交互板处理 OLED、编码器和按键，后面调试时才有比较清楚的下手位置。
+V2.1 图更像一张中文接口思维图。`24V_COM_BUS / MAX 10A` 与 `+12V_MAIN / MAX 2A` 从分电板指向主控板；主控板节点周围依次标出 STM32F103C8T6、两把 12 V 四线 PWM 风扇、五针电子膨胀阀、五路 NTC、三针线性压力传感器输入、DHT11、压缩机 Modbus UART、ESP-01S Wi-Fi、HC-05 蓝牙与 ST-Link SWD。交互支路连到翻页按键和带按键的 EC11 编码器，另一支则标出 I2C 的 0.96 英寸 OLED。
 
-The difficulty came from interaction between interfaces. V2.0 collected the main links first. V2.1 separated them into main, power, and interaction boards. That split gave MCU-side signals, power distribution, and user interaction their own places, which matters a lot once debugging starts.
+![ACUnit V2.1 interface map / ACUnit V2.1 接口思维图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-![AC Unit V2.1 system block diagram / 外机板 V2.1 系统框图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
+The map identifies which board each interface is drawn around, but it leaves connector part numbers, trace widths, assembly state, and test results open. The separate [diagram revision archive](/notes/juanyun-acunit-hardware-revision-archive) follows how this branch map differs from the routed V2.0 drawing.
 
-## Board-Splitting Logic / 拆板思路
+这张图能定位每个接口围绕哪块板展开，却没有连接器料号、走线宽度、装配状态或测试结果。另一篇[框图版本归档](/notes/juanyun-acunit-hardware-revision-archive)再单独追踪这棵分支图与 V2.0 连线图在表达方式上的差异。
 
-I read the requirement as several separate questions:
+## The Main Board Is Dense Around Its Edges / 主控板的密度集中在板边
 
-- How does power enter and branch?
-- Which signals cross boards?
-- Which interfaces need firmware-side measurement or status reporting?
-- Which ports are reserved for later modules?
-- Where do high current and noise need distance or special attention?
+On the main-board front render, the STM32 package sits near the centre-right. Headers and connectors occupy most edges; visible labels include fan, NTC, OLED, DHT, interaction-board, Wi-Fi, and reset positions. The back render is much quieter, showing mounting holes, through-hole pads, and routing rather than a second field of components.
 
-我当时把需求拆成几个问题看：
+主控板正面渲染里，STM32 封装位于中间偏右，排针与连接器几乎围住板边；能辨认的标签包括风扇、NTC、OLED、DHT、交互板、Wi-Fi 与复位。背面安静得多，主要是安装孔、通孔焊盘与走线，并没有再铺一层同样密集的器件。
 
-- 电源怎么进来、怎么分出去？
-- 哪些信号需要跨板？
-- 哪些接口后续固件要测量或上报状态？
-- 哪些端口只是给之后预留？
-- 大电流和噪声路径需要和哪些小信号拉开？
+![ACUnit V2.1 main-board front / ACUnit V2.1 主控板正面](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
+![ACUnit V2.1 main-board back / ACUnit V2.1 主控板背面](/uploads/projects/juanyun-tech/acunit-v21-main-back.png)
 
-一块板也能画，但风险会集中。大电流、电源分配、用户按键、OLED、传感器输入、调试接口全在一起，后面改一个接口可能牵动一片。拆成主控、分电、交互之后，问题更容易定位：电源归电源，交互归交互，MCU 周围信号也少一点被大电流路径干扰。
+## Power and Interaction Use Narrower Layouts / 分电与交互各自收窄了布局
 
-A single board would concentrate too many risks. Separating the boards made later reasoning easier: power issues stay closer to the power board, user-facing issues stay closer to the interaction board, and MCU-side signals have less high-current noise around them.
+The power-board front render visibly groups a DC jack, a blade fuse, an inductor marked `470`, conversion components, and a screw terminal marked `+12V / PGND`; wide copper is visible on the back. The interaction-board front shows an encoder and two push buttons. Its back header is labeled `A / B / G / EK / KP / KN`, making the user-input signals easier to inventory than they are in the front view.
 
-## Records Still Missing / 还要补的记录
+分电板正面把 DC 插座、片式保险丝、标着 `470` 的电感、变换器件与 `+12V / PGND` 螺钉端子放在一起，背面则能看到较宽的铜箔。交互板正面是一只编码器和两个按键；背面排针标着 `A / B / G / EK / KP / KN`，用户输入信号反而在背面更容易点清。
 
-The next useful records should explain how the board changed and how it behaved during bring-up:
+![ACUnit V2.1 power-board front / ACUnit V2.1 分电板正面](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
+![ACUnit V2.1 power-board back / ACUnit V2.1 分电板背面](/uploads/projects/juanyun-tech/acunit-v21-power-back.png)
+![ACUnit V2.1 interaction-board front / ACUnit V2.1 交互板正面](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
+![ACUnit V2.1 interaction-board back / ACUnit V2.1 交互板背面](/uploads/projects/juanyun-tech/acunit-v21-ui-back.png)
 
-- Organize the V2.0 / V2.1 system diagrams, PCB renders, and three-board split relationship.
-- Explain the responsibilities of the main board, power board, and interaction board.
-- Write down the interface risks for the compressor, fan, pressure transmitter, and electronic expansion valve.
-- Add physical photos, power-on records, and version comparisons later.
+## Parameter Screenshots Define Candidate Constraints / 参数截图给出候选约束
 
-后面更该补的是这些记录：
+One product screenshot labels a Sanhua YCQB02H31 pressure sensor with 5 V supply, 0-20 bar range, 0.5-4.5 V output, and a two-metre lead. Another labels a 140 x 140 x 25 mm, 12 V, four-pin PWM fan and lists speed, airflow, pressure, current, and power figures. These values are useful when thinking about connector power, input range, and PWM/feedback pins, but the screenshots do not show that either item was selected, purchased, connected, or measured in this platform.
 
-- 把 V2.0 / V2.1 的系统框图、PCB 渲染图和三板拆分关系整理出来。
-- 把主控板、分电板、交互板各自承担的职责说清楚。
-- 把压缩机、风扇、压力变送器、电子膨胀阀这些接口风险写进笔记。
-- 补实物照片、上电记录和版本对比。
+一张产品截图给三花 YCQB02H31 压力传感器标出 5 V 供电、0-20 bar 量程、0.5-4.5 V 输出和两米线长；另一张给 140 x 140 x 25 mm、12 V、四针 PWM 风扇列出转速、风量、风压、电流与功率。它们适合拿来考虑连接器供电、输入范围以及 PWM / 反馈引脚，却不能说明这两个器件已经被选型、采购、接入或实测。
 
-## Files And Screenshots / 文件和截图
+![Pressure-sensor product screenshot / 压力传感器产品截图](/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg)
+![PWM-fan product screenshot / PWM 风扇产品截图](/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg)
 
-- [V2.0 system block](/uploads/projects/juanyun-tech/acunit-v20-system-block.png)
-- [V1.0 / V2.0 hardware revision archive](/notes/juanyun-acunit-hardware-revision-archive)
-- [V2.1 system block](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
-- [V2.1 main board front render](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
-- [V2.1 main board back render](/uploads/projects/juanyun-tech/acunit-v21-main-back.png)
-- [V2.1 power board front render](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
-- [V2.1 interaction board front render](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
+Taken together, the diagrams and renders answer a narrow but useful question: where the labeled power, sensing, actuator, communication, and user-interface connections appear. Electrical checks, physical clearances, startup behavior, and reliability still need records from a real board.
 
-![AC Unit V2.1 power board front render / 外机板 V2.1 电源板正面渲染图](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
-
-![AC Unit V2.1 interaction board front render / 外机板 V2.1 交互板正面渲染图](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
-
-
-
-## Current Reading / 现在怎么看
-
-Right now this note is strongest at structure: what the board had to connect, why V2.1 became three boards, and which diagrams/renders make that split visible. The next stronger layer is bring-up evidence: power-on checks, interface tests, and revision comparison.
-
-现在这篇笔记最强的是结构：外机板要接什么，为什么 V2.1 拆成三块板，哪些框图和渲染图能把这个拆法看出来。再往下一层，就要靠上电检查、接口测试和版本对比来补。
-
-Looking back, this task taught me to treat connectors as decisions. Every connector says something about power, signal direction, firmware visibility, mechanical placement, and future debugging. The board render only becomes useful when those decisions are written down.
-
-现在回头看，这条线让我更认真地把连接器当成决策。每个接口背后都有电源、信号方向、固件可见性、结构摆放和后续调试。渲染图只有和这些决策放在一起，才真正有用。
+把这些图放在一起，能回答一个窄却有用的问题：标注过的电源、传感、执行器、通信与用户交互连接分别出现在哪里。电气检查、实物间隙、启动表现与可靠性，仍要等真实板卡记录来回答。
