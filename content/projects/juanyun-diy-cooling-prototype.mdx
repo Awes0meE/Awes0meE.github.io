@@ -1,8 +1,8 @@
 ---
 title: "DIY Pressure-Flow Cooling Prototype"
 titleZh: "DIY 压风式散热器原型"
-summary: "An early pressure-flow cooling prototype that moved through 3D printed air ducts, fan control, ESP32 PWM, PCB output, and a small Windows desktop demo."
-summaryZh: "早期压风式散热器原型，从 3D 打印风道、风扇控制、ESP32 PWM、PCB 输出一路摸到一个 Windows 桌面端演示。"
+summary: "A prototype archive joining slicer-prepared duct parts, a Windows-to-ESP32 temperature link, PWM/OLED control, and later STM32 board design artifacts."
+summaryZh: "一组原型归档：从切片准备的风道零件、Windows 到 ESP32 的温度文字链路与 PWM / OLED 控制，一路读到后来留下的 STM32 板卡设计文件。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
 tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
@@ -18,62 +18,63 @@ assetPaths:
   - "/uploads/projects/juanyun-public/diy-cooling"
 ---
 
-## Project Brief / 项目简述
+## Nine Build Plates Before Any Airflow Claim / 九块切片板还不是风量证据
 
-This prototype has the texture of an idea being pushed into the real world before the folder structure caught up. There are 3D-printed air-channel parts, acrylic and cardboard routes, fan-selection experiments, ESP32 PWM control, a desktop monitoring program, PCB output, slicing files, a demo video, and a parts list all living close together.
+Three Bambu Studio screenshots show the same group of orange enclosure and duct parts from different preparation views. One highlights automatic tree supports, another the brim and skirt settings, and the third manual tree supports and several part orientations. The linked 3MF carries nine build plates and names such as `上盖右.STL`, `下盖左.STL`, and `右上type-c接口.STL`. Together they record how split shell parts were arranged for an A1 mini-class build volume.
 
-这个原型很有早期项目的味道：风道结构还在试，控制链路也在试，桌面端显示也被塞进来。源目录里能看到 3D 打印版本、亚克力切割版本、纸箱低成本版本、ESP32 程序、桌面端程序、PCB 文件、演示视频和零件清单。它还没有到很规整的阶段，但已经把“风怎么走、风扇怎么控、数据怎么给人看”这几个问题拉到同一张桌子上。
+三张 Bambu Studio 截图其实盯着同一组橙色壳体与风道零件，只是准备视角不同：一张圈出树状自动支撑，一张停在 Brim 与 Skirt 参数，另一张换成树状手动支撑并标出几种摆放姿态。相邻的 3MF 里有九块切片板，还能读到 `上盖右.STL`、`下盖左.STL`、`右上type-c接口.STL` 这些分件名。它们合在一起，能说明拆分后的壳体怎样塞进 A1 mini 一类的成形空间。
 
-![DIY pressure-flow cooling STM32 PCB 3D render / DIY 压风式散热器 STM32 版 PCB 3D 渲染图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
-![DIY pressure-flow cooling STM32 schematic / DIY 压风式散热器 STM32 版原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
+![Automatic tree-support view for the same part set / 同一组零件的树状自动支撑视图](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
+![Brim and skirt settings for the same part set / 同一组零件的 Brim 与 Skirt 设置](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
+![Manual tree-support view and part orientations / 树状手动支撑与零件摆放视图](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
 
-## What Was In The Archive / 归档里有什么
+These are slicing and support records, not three proven mechanical revisions. They also contain no printed-dimension check, pressure or flow measurement, or comparison between duct geometries. The [A1 mini 3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf) preserves print preparation; it cannot show whether the assembled duct moved air as intended.
 
-The source folder reads like several routes were active at the same time:
+所以，这三张图更适合叫“切片与支撑设置比较”，还不能叫三个已经验证过的机械版本。材料里也没有打印尺寸检查、风压 / 风量测量，或不同风道几何之间的对照。[A1 mini 3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)保住了打印准备过程，却回答不了装起来以后风是不是按设想流动。
 
-- Structure route: Bambu Studio slicing previews, A1 mini / A1 / P1 / X1 print targets, split top and bottom shell parts, fan bracket, DC or Type-C interface covers, and support-setting screenshots.
-- Low-cost route: acrylic-cutting and cardboard versions, useful for seeing how the airflow idea was tried before a cleaner enclosure existed.
-- Control route: ESP32 PWM fan control, OLED-related dependencies, and a Windows desktop monitoring path.
-- PCB route: EasyEDA projects, schematic export, Gerber package, acrylic parts list, and a Bambu Studio 3MF slicing file.
-- Demo route: a Windows video shows the desktop side running; the installer and generated build output stay out of the site because they add noise rather than understanding.
+## Two Text Prefixes Join Windows and ESP32 / 两个文字前缀把 Windows 与 ESP32 接起来
 
-源目录读起来像几条路线同时在跑：
+The desktop endpoint is small enough to follow in one source file. [Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) asks LibreHardwareMonitor for CPU and GPU temperature sensors. Every 5000 ms, a WinForms timer schedules one monitor task and an independent send task. The sender alternates between `CPU{value}` and `GPU{value}`, but writes only when the corresponding cached value exists and the selected 115200-baud port is open; because the two tasks are not ordered, it may reuse the previous sample. [Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs) only starts the form, and the project file targets .NET Framework 4.7.2.
 
-- 结构路线：Bambu Studio 切片预览、A1 mini / A1 / P1 / X1 打印目标、上下壳拆件、风扇支架、DC 或 Type-C 接口盖，以及支撑设置截图。
-- 低成本路线：亚克力切割和纸箱版本，用来观察风道想法在更粗糙条件下怎么被试出来。
-- 控制路线：ESP32 PWM 风扇控制、OLED 相关依赖，以及 Windows 桌面监控程序。
-- PCB 路线：EasyEDA 工程、原理图导出、Gerber、亚克力零件清单和 Bambu Studio 3MF 切片文件。
-- 演示路线：桌面端运行视频可以说明链路曾经跑起来；安装包和生成的 build 输出不放进站点，它们增加的是噪声，不增加理解。
+桌面端小到可以沿着一个源码文件读完。[Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)通过 LibreHardwareMonitor 查找 CPU 与 GPU 温度传感器；WinForms 定时器每 5000 ms 分别调度一次温度扫描与发送任务。发送端轮流检查 `CPU{value}` 和 `GPU{value}`，但只有对应缓存值存在、选中的 115200 波特率串口也已打开时才真正写出；两个任务没有先后保证，因此也可能复用上一次样本。[Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)只负责启动窗体，工程文件则把目标框在 .NET Framework 4.7.2。
 
-## Files / 文件
+At the other end, the [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) uses `BluetoothSerial`, accepts those same two prefixes, and displays the current readings beside mode, duty cycle, and PWM frequency on a 128 × 64 SSD1306 OLED. Its initial PWM setup is 15 kHz, 8-bit resolution, and GPIO 5. The PlatformIO `.cpp` and Arduino `.ino` in the archive are byte-identical, so they are two filenames for one implementation rather than independent versions. The declared one-second long-press path is also empty in this code.
 
-- [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
-- [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
-- [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
-- [3D printing preview 3](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
-- [STM32-version PCB 3D render](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
-- [STM32-version PCB schematic](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
-- [ESP32 PlatformIO main.cpp](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)
-- [ESP32 PlatformIO configuration](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio.ini)
-- [ESP32 Arduino PWM sketch](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)
-- [Desktop C# Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)
-- [Desktop C# Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)
-- [Desktop C# project file](/uploads/projects/juanyun-public/diy-cooling/desktop-cpuwenduhuoqu.csproj)
-- [PCB schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)
-- [PCB Gerber archive](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)
-- [EasyEDA 2024 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro)
-- [EasyEDA 2026 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)
-- [Acrylic parts list](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx)
-- [Bambu A1 mini slicing file](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)
+另一端的 [ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)使用 `BluetoothSerial`，正好接收这两个前缀，再把当前读数与模式、占空比、PWM 频率一起显示在 128 × 64 的 SSD1306 OLED 上。PWM 初始配置是 15 kHz、8 位分辨率与 GPIO 5。归档里的 PlatformIO `.cpp` 和 Arduino `.ino` 逐字节相同，所以它们只是同一份实现的两个文件名，不是两套相互印证的版本。代码虽然声明了 1 秒长按分支，处理函数里却还没有逻辑。
 
-## What Stayed Out / 没放上来的东西
+## The Video Makes the Interface Chain Visible / 视频把接口链放到了同一段画面里
 
-The useful material here is the part that explains the prototype chain. PlatformIO / Arduino snippets, C# entry points, PCB files, Gerber, EasyEDA, and 3MF are small enough to inspect and tied to the work. Installers, dependency folders, generated output, duplicate exports, vendor folders, and the uncurated full source tree would only make the page harder to read.
+The 3:57 [desktop demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) moves from an installer and Windows discovering `ESP32_Bluetooth`, to a Hardware Monitor window with CPU/GPU values and COM-port selection, and then to a physical acrylic-and-foam prototype. Its OLED shows `Quiet`, `Normal`, and `Manual` modes, a 15000 Hz frequency, changing temperature values, and duty-cycle changes while the front buttons are pressed.
 
-这条线真正有用的是能解释原型链路的材料。PlatformIO / Arduino 片段、C# 入口、PCB 文件、Gerber、EasyEDA 和 3MF 都比较小，也和项目直接相关。安装器、依赖目录、生成输出、重复导出、vendor 文件和没有整理过的完整工程树会把页面变得更难读。
+3 分 57 秒的[桌面端演示](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)从安装界面和 Windows 发现 `ESP32_Bluetooth` 开始，随后出现带 CPU / GPU 数值与 COM 口选择的 Hardware Monitor 窗口，最后镜头转到一台亚克力与泡棉结构的实体原型。OLED 上能看到 `Quiet`、`Normal`、`Manual` 模式、15000 Hz 频率、变化的温度值，以及按动前面板按钮时变化的占空比。
 
-## Looking Back / 现在回头看
+That sequence makes the intended interface chain more than a pair of matching source files. It is still a visible demonstration, not a serial packet log or a controlled thermal test. The [control note](/notes/juanyun-diy-cooling) follows the less obvious timing inside the code: the desktop schedules a conditional send attempt every five seconds, while the ESP32 waits for a 30-second maximum before revising automatic PWM.
 
-The valuable trace is the collision between structure, airflow, electronics control, desktop display, and written instructions. That is exactly where early hardware prototypes become messy. Reading the hardware SOP later makes more sense after seeing this folder: small prototypes still need versions, interfaces, and verification notes. Without those traces, reopening the project becomes file-name archaeology.
+这段连续画面让接口链不再只是“两份代码刚好对得上”，但它仍是可见演示，不是串口报文日志，更不是受控热测试。[控制笔记](/notes/juanyun-diy-cooling)继续追代码里更容易忽略的节拍：桌面端每五秒调度一次有条件的发送尝试，ESP32 却要等 30 秒峰值窗口结束，才改一次自动 PWM。
 
-这条线最值得保留的，是结构、风道、电子控制、桌面端显示和说明文档互相撞在一起的过程。早期硬件原型就是容易在这里变乱。后面再看硬件 SOP，会更容易理解为什么小项目也要留版本、接口和验证记录。没有这些痕迹，几个月后再打开项目，就只能靠文件名考古。
+## A Later STM32 Archive Changes the Board Boundary / 后来的 STM32 归档换了板卡边界
+
+The public electronics files contain two distinct snapshots. The earlier [schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf), [EasyEDA project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro), and [Gerber package](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip) are organized around an ESP32 development board, fan/PWM connectors, 12 V conversion, OLED, and five buttons. File presence proves that design and fabrication outputs were exported; it does not prove fabrication or board bring-up.
+
+公开电子文件里能分出两个不同快照。较早的[原理图 PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)、[EasyEDA 工程](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro)与 [Gerber 包](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)围绕 ESP32 开发板、风扇 / PWM 接口、12 V 变换、OLED 与五个按键展开。文件存在能证明设计与制造输出已经导出，却不能替代打板和 bring-up 记录。
+
+The later-dated render shows an STM32 module outline surrounded by two fan connectors, a 12 V input and power-conversion area, a USB-C interface area, Bluetooth and OLED headers, and five adjustment buttons. The schematic separately identifies the module as `STM32F103C8T6`, labels U14 as `CH340N`, and groups the USB data path, 12 V-to-5 V conversion, fan outputs, and the same central module and headers. The two artifacts agree on the shared connectors, module outline, and buttons, but the archive does not establish why the controller changed or how this board relates to the earlier physical demo.
+
+日期更晚的渲染图里，STM32 模块轮廓周围排着两路风扇接口、12 V 输入与电源变换区域、USB-C 接口区域、蓝牙和 OLED 排针，以及五个调节按键。原理图才把模块准确标成 `STM32F103C8T6`，并将 U14 标成 `CH340N`，再展开 USB 数据路径、12 V 转 5 V、风扇输出，以及同一组中央模块与排针。两份材料只能在共同可见的连接器、模块轮廓与按键上互相对应；归档没有说明为什么更换主控，也没有交代这块板与前面实体演示之间的确切版本关系。
+
+![Later STM32 control-board render / 后续 STM32 控制板渲染](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
+![Later STM32 control-board schematic / 后续 STM32 控制板原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
+
+The corresponding [EasyEDA archive](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2), the linked [acrylic parts list](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx), and the other public artifacts keep the design trail inspectable. None supplies assembly photos, power-on observations, or fan-output waveforms for the later board.
+
+对应的 [EasyEDA 归档](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)、关联的[亚克力零件表](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx)和其余公开文件让设计线索还能继续往下查，但其中没有后续板卡的装配照片、上电观察或风扇输出波形。
+
+## A Temperature Number Is Not a Cooling Curve / 温度数字还不是散热曲线
+
+The archive reaches a useful prototype boundary: prepared duct geometry, a desktop temperature sender, ESP32-side PWM/OLED logic, a visible physical demo, and two board-design snapshots can all be inspected together. What it does not contain is the evidence needed to judge cooling: no before/after temperature curves, air-pressure or flow readings, noise or power measurements, steady-state thermal comparison, or controlled workload record.
+
+这组归档已经抵达一个很具体的原型边界：风道几何的打印准备、桌面温度发送端、ESP32 侧 PWM / OLED 逻辑、一段实体演示，以及两套板卡设计快照可以放在一起读。它没有抵达的，是判断散热效果所需的证据：没有温度前后曲线、风压 / 风量、噪声、功耗、稳态热对比，也没有受控负载记录。
+
+The OLED temperature and duty-cycle values show what the controller was displaying. They do not reveal how much heat the duct removed. That question begins with a repeatable test setup, not another render.
+
+OLED 上的温度与占空比能说明控制器当时显示了什么，却还说明不了风道带走了多少热量。这个问题的下一步应该是一套可重复的测试条件，而不是再添一张渲染图。

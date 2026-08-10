@@ -157,75 +157,75 @@
   },
   {
     "id": "juanyun-diy-cooling-demo",
-    "title": "DIY cooling desktop demo",
-    "titleZh": "DIY 散热器桌面端演示",
+    "title": "From Windows Temperatures to an OLED Mode Display",
+    "titleZh": "从 Windows 温度值到 OLED 模式显示",
     "type": "video",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Desktop demo video for the early pressure-flow cooling prototype.",
-    "captionZh": "早期压风式散热器原型的桌面端演示视频。"
+    "caption": "The 3:57 recording moves from installation and ESP32 Bluetooth discovery and selection to the monitor window, COM selection, and button-driven OLED mode changes on a physical prototype; it is a visible demo rather than a packet trace or thermal test.",
+    "captionZh": "这段 3 分 57 秒的录像依次拍到安装、ESP32 Bluetooth 设备的发现与选择、监控窗口与 COM 口选择，以及实体原型上由按键触发的 OLED 模式变化；它是可见演示，不是报文 trace 或热测试。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-1",
-    "title": "DIY cooling 3D print preview 1",
-    "titleZh": "DIY 散热器 3D 打印预览 1",
+    "title": "Automatic Tree Supports Across Nine Build Plates",
+    "titleZh": "九块切片板上的树状自动支撑",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Early slicing preview for the printed air-channel structure.",
-    "captionZh": "压风式散热器风道结构的早期切片预览。"
+    "caption": "A Bambu Studio screenshot highlights automatic tree-support settings and supported orientations across nine numbered build plates.",
+    "captionZh": "Bambu Studio 截图在九块编号切片板中标出树状自动支撑设置与受支撑姿态。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-2",
-    "title": "DIY cooling 3D print preview 2",
-    "titleZh": "DIY 散热器 3D 打印预览 2",
+    "title": "Brim and Skirt Settings for the Same Plate Group",
+    "titleZh": "同一组切片板的 Brim 与 Skirt 设置",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Second print-preparation screenshot for the cooling prototype.",
-    "captionZh": "散热器结构打印准备过程中的第二张预览图。"
+    "caption": "The same Bambu Studio plate group highlights three skirt loops, a 5 mm outer brim, and a 0.1 mm brim gap.",
+    "captionZh": "同一组 Bambu Studio 切片板突出显示三圈 Skirt、5 mm 外侧 Brim 与 0.1 mm 间隙。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-3",
-    "title": "DIY cooling support and sliced parts",
-    "titleZh": "DIY 散热器支撑与切片预览",
+    "title": "Manual Tree Supports and Part Orientations",
+    "titleZh": "树状手动支撑与零件摆放姿态",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Support settings and sliced parts for the printed prototype shell.",
-    "captionZh": "打印外壳时留下的支撑设置和切片零件预览。"
+    "caption": "A third view switches the same shell-part preparation to manual tree supports and highlights several part orientations.",
+    "captionZh": "第三张视图把同一组壳体零件切换为树状手动支撑，并标出若干零件摆放姿态。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-pcb-render",
-    "title": "DIY cooling STM32 PCB render",
-    "titleZh": "DIY 压风式散热器 STM32 版 PCB 渲染图",
+    "title": "Later STM32 Control-Board Design Render",
+    "titleZh": "后续 STM32 控制板设计渲染",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-cover.jpg",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "STM32-version PCB render now used as the DIY pressure-flow cooling prototype cover.",
-    "captionZh": "STM32 版 PCB 渲染图，现在作为 DIY 压风式散热器原型项目封面使用。"
+    "caption": "The render shows a 12 V input, USB-C interface area, two fan connectors, an STM32 module outline, OLED/BT headers, and five buttons.",
+    "captionZh": "渲染图可见 12 V 输入、USB-C 接口区域、两路风扇接口、STM32 模块轮廓、OLED / BT 排针与五个按键。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-schematic",
-    "title": "DIY cooling STM32 schematic",
-    "titleZh": "DIY 压风式散热器 STM32 版原理图",
+    "title": "Later STM32 Board Interfaces on One Sheet",
+    "titleZh": "一张图上的后续 STM32 板卡接口",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "Schematic image for the STM32-version cooling prototype board.",
-    "captionZh": "STM32 版散热器控制板的原理图，用来补齐这条原型线的硬件证据。"
+    "caption": "The schematic identifies U14 as CH340N and groups fan outputs, Type-C, 12 V-to-5 V conversion, STM32, five adjustment buttons, Bluetooth, OLED, and 12 V input without recording bring-up.",
+    "captionZh": "原理图把 U14 标成 CH340N，并将风扇输出、Type-C、12 V 转 5 V、STM32、五个调节按键、Bluetooth、OLED 与 12 V 输入分区展开，但没有记录 bring-up。"
   },
   {
     "id": "juanyun-foc-board-render",
