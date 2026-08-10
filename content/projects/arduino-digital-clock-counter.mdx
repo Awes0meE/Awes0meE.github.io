@@ -1,8 +1,8 @@
 ---
 title: "Arduino Breadboard Digital Clock Counter"
 titleZh: "Arduino 面包板两位数码管计数器"
-summary: "A sophomore-year MEC104 breadboard build around Arduino Nano, SN54LS47 decoder chips, two seven-segment displays, BCD digit splitting, and pause/reset switch logic."
-summaryZh: "大二 MEC104 工程实训里的面包板小项目：Arduino Nano、SN54LS47 译码芯片、两位七段数码管、BCD 拆位显示，以及暂停/复位开关逻辑。"
+summary: "An MEC104 A17 group counter using Arduino Nano, twin SN54LS47 BCD paths, two seven-segment displays, pause/reset inputs, and an A17 rollover requirement."
+summaryZh: "MEC104 A17 小组的面包板计数器：Arduino Nano、两路 SN54LS47 BCD、两位七段数码管、暂停/复位输入，以及 A17 归零要求。"
 date: "2024.04 to 2024.05"
 status: "Completed"
 tags: ["Arduino", "Embedded", "Seven-Segment Display", "BCD", "Breadboard", "Course Project"]
@@ -30,84 +30,48 @@ assetPaths:
   - "/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png"
 ---
 
-## Project Brief / 项目简介
+## Two Digits Turn One Count Into Two Decoder Paths / 两位显示把一个计数值拆给两条译码链路
 
-This page is for a sophomore-year MEC104 engineering practice project. The final report describes the build as an Arduino-controlled decoder system: the Arduino writes BCD signals, the SN54LS47 / 7447-style chips decode them, and two seven-segment displays show the count. The breadboard also had two button inputs for reset and pause.
+Group A17 completed this MEC104 breadboard project. The bench photograph shows an Arduino Nano beside two decoder ICs, two seven-segment displays, segment resistors, and two self-locking buttons. That physical topology answers the two-digit part of the brief: each display needs its own four-bit BCD route into an SN54LS47 decoder.
 
-这页整理的是大二 MEC104 工程实训里留下的一个面包板项目。作业报告里把它写成一个 Arduino 控制译码器的系统：Arduino 输出 BCD 信号，SN54LS47 / 7447 这一类芯片负责译码，两位七段数码管负责显示计数值，旁边再接两个按键输入，用来做复位和暂停。
-
-当时我对嵌入式和电子元器件还很新，项目也还没有走到 PCB。所有东西都摊在面包板上，反而把问题暴露得很直接：译码芯片怎么接，个位和十位怎么分，按键电平怎么读，限流和数码管公共端怎么处理。报告现在看起来有些英语表达不顺，但里面留下的实现细节比单纯一张成品照有用。
+这是 MEC104 A17 小组完成的面包板项目。现场照片里，Arduino Nano 旁边排着两颗译码芯片、两位七段数码管、各段限流电阻和两个自锁按键。两位显示因此变成了很具体的拓扑：每位数码管各有一组四位 BCD 信号，分别送入一颗 SN54LS47。
 
 ![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
 
-## Rules Became Wiring / 规则落到接线
+The course requirement and the A17 report do not describe the count in quite the same way. The slides require the counter to return to `00` whenever it reaches the group number. The report instead records an initial `16 -> 17 -> 00` sequence, then says the value continues toward 99 when neither switch is operated. Without the complete final program, it is not possible to tell whether that second sentence describes a startup sequence or a recurring rollover rule.
 
-The course brief asked for two-digit display, roll-over counting, pause, and reset. The report makes the wiring split more concrete: `unitInputs[4]` connects to D9, D10, D11, and D12 for the units digit, while `tensInputs[4]` connects to D5, D6, D7, and D8 for the tens digit. The two switches use D2 and D3. Once the project is written that way, the "digital clock" is really a few small paths that have to agree with each other.
-
-课件里的要求是两位显示、到指定数字后归零、暂停和复位。作业报告把接线拆得更具体：`unitInputs[4]` 接 D9、D10、D11、D12，负责个位；`tensInputs[4]` 接 D5、D6、D7、D8，负责十位；两个开关接 D2 和 D3。这样一写，“数字钟”就被拆成了几条必须互相对上的小链路。
-
-报告里还提到一个当时会拖时间的点：七段数码管公共端和课件示意不完全一致。实物按阳极数码管去接时，中间公共脚要接到 VCC；课件里更像是在讲阴极数码管接法。这个差异不大，但对刚开始接线的人来说很容易让显示结果变得莫名其妙。
+课程要求与 A17 报告对计数过程的描述并不完全一致。课件要求计数每次到达组号时回到 `00`；报告则写下首次 `16 -> 17 -> 00`，随后又说不操作开关时继续向 99 计数。缺少完整最终程序，无法判断后一句描述的是启动阶段，还是反复执行的归零规则。
 
 ![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
 ![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
+
+## Modulo and Integer Division Split One Count Across Two BCD Paths / 取余与整数除法把一个计数值拆给两条 BCD 支路
+
+The report maps `unitInputs[4]` to D9-D12 and `tensInputs[4]` to D5-D8. `unitNum = Num % 10` selects the units digit; `tensNum = (Num / 10) % 10` selects the tens digit. Each result indexes a BCD row and writes four bits to its own decoder. The report illustration uses an Arduino Uno, while the photographed bench build uses a Nano; the diagram records the branch layout rather than the exact controller board.
+
+报告把 `unitInputs[4]` 映射到 D9-D12，把 `tensInputs[4]` 映射到 D5-D8。`unitNum = Num % 10` 取个位，`tensNum = (Num / 10) % 10` 取十位；两个结果各自索引一行 BCD，再把四个 bit 写给对应译码器。报告接线图画的是 Arduino Uno，现场照片用的是 Nano，因此这张图记录的是双支路布局，不是控制板型号完全一致的实物复刻。
+
 ![Two-digit wiring from the homework report / 作业报告里的两位数码管接线图](/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png)
-
-## Circuit Pieces / 电路拆分
-
-The circuit became easier to debug once I stopped seeing it as one pile of jumper wires. Arduino pins generate BCD signals, the SN54LS47 maps those four bits to seven-segment outputs, the display shows the decoded digit, and the buttons feed state changes back into the program. With that split, "the number is wrong," "the decoder wiring is wrong," and "the button level is unstable" become three different checks.
-
-后来把电路拆开看会好调很多。Arduino 引脚输出 BCD 信号，SN54LS47 把四位输入译码成七段输出，数码管负责显示，按键再把暂停和复位状态送回程序。这样一拆，“数字不对”“译码器接错”“按键电平不稳”就不是同一个问题，可以一段一段查。
-
-![Course system structure / 课程中的系统结构拆分](/uploads/projects/arduino-digital-clock-counter/course-system-structure.png)
-![BCD decoder notes / BCD 到七段译码器说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
-![Button pull-up and pull-down notes / 按键上下拉说明](/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png)
-
-## Program Logic From The Report / 报告里的程序逻辑
-
-The report records the part that the smaller sketch does not show: the finished two-digit counter separates a number into units and tens. `unitNum = Num % 10` takes the units digit, and `tensNum = (Num / 10) % 10` takes the tens digit. Each digit then writes four BCD bits to its own decoder path. The `delay(1000)` call gives the visible one-second rhythm.
-
-报告里补上了小 sketch 里没有完全展开的两位计数逻辑：先把一个数字拆成个位和十位。`unitNum = Num % 10` 取个位，`tensNum = (Num / 10) % 10` 取十位，然后每一位都按自己的 BCD 四位输出到对应译码器。`delay(1000)` 则让显示节奏变成肉眼能看到的一秒一次。
-
 ![Digit split code from the homework report / 作业报告里的个位和十位拆分代码](/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png)
 
-The report also gives the group-specific behavior: group A17 counted from 16 to 17, then returned to zero and continued counting if the switches were not touched. That detail matters because the roll-over point was not just a generic `99 -> 00` display exercise; it came from the course rule tied to the group number.
+## D2 and D3 Leave the Pressed Level Unresolved / D2 与 D3 留下未决的按下电平
 
-报告里还写了小组规则：A17 组从 16 增加到 17，然后回到 0；如果不操作开关，后面继续往 99 计数。这个细节给普通的 `99 -> 00` 显示练习加了一层课程规则：归零点跟小组号有关。
+The report assigns the reset and pause inputs to D2 and D3, but its polarity description is inconsistent. One paragraph calls a pressed switch high; the code excerpt checks switch 1 against `HIGH` and switch 2 against `LOW`; the closing paragraph describes a 10k-ohm pull-up that makes the input low when pressed. The `switch1Pressed` and `switch2Pressed` flags record software state, but they cannot resolve the wiring convention by themselves.
 
-## Switch Logic / 开关逻辑
-
-The switch part is where the report feels closest to the actual debugging scene. One paragraph describes using the switch level to decide the state, and the later note says the six-pin key switch took time to figure out. The final wiring used a 10k ohm pull-up resistor to VCC, with the other side grounded, so the Arduino pin reads low when the switch is pressed.
-
-开关这一段最接近真实调试现场。报告前面写的是用开关电平判断状态，后面又补了一句：6-pin 按键按下时到底哪条路径导通，当时并不确定，花了一些时间才弄清楚。实际接法是用 10k 欧姆上拉电阻接到 VCC，另一端接地，所以按下时 Arduino 引脚读到低电平。
+报告把复位和暂停输入分配到 D2、D3，但对有效电平的描述并不一致：一段正文把按下写成高电平，代码截图分别用 `HIGH` 判断 switch 1、用 `LOW` 判断 switch 2，末段又写 10k 欧姆上拉、按下时为低电平。`switch1Pressed` 和 `switch2Pressed` 标志位记录的是软件状态，单靠变量名无法反推出接线约定。
 
 ![Switch logic code from the homework report / 作业报告里的开关逻辑代码](/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png)
 
-This also explains why the separate `digital-read-key.ino` file is worth keeping. It only reads the pause and reset inputs and prints them through Serial, but that small test turns the switch wiring into something observable before the full counter logic gets mixed in.
+Because the complete final source is missing, the exact pressed level for each input remains unresolved. The report still records the intended reset/pause roles and the work around a six-pin self-locking switch, but it cannot support a cleaner electrical story than the one written there.
 
-这也解释了为什么 `digital-read-key.ino` 这个单独的小文件值得留着。它只读取暂停和复位输入，再通过串口打印出来，但这个小测试能在完整计数逻辑混进来之前，先把开关接线变成可观察的东西。
+由于缺少完整最终源码，两路输入各自采用什么按下电平仍然无法确定。报告能够说明复位/暂停的角色，也记录了六脚自锁按键带来的接线问题，但不能据此整理出一套比原文更整齐的电气结论。
 
-The other sketch, `single-digit-bcd-counter.ino`, checks the display side. It maps pins 9, 10, 11, and 12 to BCD inputs, uses a lookup table for digits 0 to 9, and increments once per second. The final build is the two-digit counter in the photo and demo video, but this one-digit sketch is where the decoder logic is easiest to see.
+## The Bench Video Shows the Display Changing / 现场视频拍到了两位显示持续变化
 
-另一个 sketch `single-digit-bcd-counter.ino` 则是在查显示这边。它把 9、10、11、12 号引脚接成 BCD 输入，用查表数组表示 0 到 9，再每秒递增一次。最终成品是照片和演示视频里的两位计数器，但这一位数码管的 sketch 最容易看清译码逻辑。
+The [17-second bench video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) follows the Nano build while the two illuminated digits change. That is the clearest visible result left by the project. No pause or reset action appears in the clip, so those functions remain described by the [A17 report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) rather than demonstrated on camera.
 
-## Files And Evidence / 文件和证据
+这段 [17 秒现场视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 跟着 Nano 面包板拍下了持续变化的两位发光数字，这是项目留下的最直接运行画面。视频里没有暂停或复位操作，因此这两项功能仍停留在 [A17 报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) 的描述中，没有得到镜头验证。
 
-- [Demo video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) shows the breadboard counter running on the desk.
-- [Original homework report PDF](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) records the final pin split, group A17 roll-over rule, and switch wiring notes.
-- [SN54LS47 datasheet](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf) is the chip reference I used while checking the decoder pins.
-- [Button test sketch](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino) is the pause/reset input probe.
-- [Single-digit BCD counter sketch](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino) is the small decoder lookup-table test.
-- The homework-report excerpts on this page show the two-digit wiring, digit-splitting code, and switch logic.
+The two archived `.ino` files are the handout's one-digit BCD demo and D7/D6 Serial input test, not the final two-digit program. Together, the files leave a practical snapshot rather than a complete source tree: the Nano breadboard drives two changing displays, the report records the pin map, and pause/reset cannot be fully reconstructed from the remaining code.
 
-- [演示视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 可以直接看到面包板计数器在桌面上跑起来。
-- [作业报告 PDF 原件](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) 记录了最终引脚拆分、A17 组归零规则和开关接线说明。
-- [SN54LS47 数据手册](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf) 是当时查译码芯片引脚时会用到的资料。
-- [按键测试 sketch](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino) 是暂停和复位输入的小探针。
-- [一位 BCD 计数 sketch](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino) 是译码查表逻辑的小测试。
-- 页面里的作业报告截图补上了两位接线、拆位代码和开关逻辑。
-
-## Looking Back / 现在回头看
-
-This project came before my later STM32 and PCB work. I still did not draw PCBs at that point, and many component-level ideas were fuzzy. Looking back, the useful part is that the whole system stayed visible: jumper wires, decoder chips, current-limiting resistors, common-anode/cathode confusion, button levels, Serial prints, and two digits changing in front of me.
-
-这条项目线发生在后来的 STM32 和 PCB 经历之前。那时我还不会画 PCB，对很多元器件原理也比较模糊。现在回头看，它有价值的地方正是所有东西都看得见：跳线、译码芯片、限流电阻、共阳/共阴接法的困惑、按键电平、串口打印，还有眼前真的在变化的两位数字。嵌入式里的输入、输出、状态和调试，在这个阶段第一次具体了一点。
+两份存档 `.ino` 只是课件的一位 BCD 示例和 D7/D6 串口输入测试，并非最终两位程序。它们留下的是一张实用快照，而不是完整源码树：Nano 面包板驱动着两位变化的显示，报告记下了引脚映射，暂停/复位却无法由剩余代码完整复原。
