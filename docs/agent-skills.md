@@ -31,17 +31,19 @@ Source:
 
 - `skills/engineering-note-writer/SKILL.md`
 - focused references:
-  - `skills/engineering-note-writer/references/hard-gated-checklist.md`
+  - `skills/engineering-note-writer/references/evidence-and-boundaries.md`
+  - `skills/engineering-note-writer/references/material-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
-  - `skills/engineering-note-writer/references/note-archetypes.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
+  - `skills/engineering-note-writer/references/style-examples.md`
 
 Purpose:
 
 - Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and oral notes into Chinese-first engineering-note prose with accurate English counterparts.
-- Preserve the portfolio's practical learning-log voice: concrete files, symptoms, decisions, evidence, and looking-back reflection rather than resume, paper, corporate, AI handoff language, meta-document openings about "重新整理/处理后/归档后" notes, or negation-then-reframe polishing.
-- Use the hard-gated checklist for evidence/fact sheet, structure, banned wording and contrast frames, bilingual equivalence, MDX readiness, and self-review before final copy.
+- Keep facts and authorship evidence-gated while letting the material's own question, failure, constraint, or discovery determine the structure.
+- Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
+- Derive content-specific headings after drafting and follow the skill's heading limit instead of reusable framework headings or fixed closing sections.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.

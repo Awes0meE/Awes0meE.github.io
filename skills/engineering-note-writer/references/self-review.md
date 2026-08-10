@@ -1,90 +1,55 @@
 # Self Review
 
-Run this before claiming the draft is ready.
+Run this on the finished draft before calling it ready.
 
-## L1 Fact Integrity
+## Pass 1: Facts And Unknowns
 
-Check:
+- Does every personal action and reaction have support?
+- Are tools, files, paths, dates, measurements, and results accurate?
+- Did any plausible engineering assumption quietly become a fact?
+- Is each important uncertainty placed near the claim it limits?
+- Are publication paths real or clearly provisional?
 
-- Did every claimed action come from user input, project files, or existing content?
-- Are dates/time ranges explicit or honestly unknown?
-- Are filenames, tools, commands, and paths real?
-- Are uncertain claims marked as questions instead of invented?
-- Does the draft avoid claiming polished product outcomes when the evidence only shows exploration?
+Remove or qualify unsupported claims. Do not compensate with a longer disclaimer section.
 
-Fix: remove or soften unsupported claims. Add "从留下的文件看..." when evidence is indirect.
+## Pass 2: Material-Led Flow
 
-## L2 Structure
+- Does the opening stand on a concrete artifact, action, symptom, or question?
+- Does every section add information or change the reader's understanding?
+- Did a detour return to the active engineering problem?
+- Do headings name the content below them and obey the heading constraints in `SKILL.md`?
+- Does the ending stop at the last useful beat instead of completing a template?
 
-Check:
+Delete repeated lessons and rename generic headings from the content underneath them.
 
-- Is there a clear timeline or system spine?
-- Does each paragraph advance the note?
-- Is the first section grounded in a concrete starting point?
-- Does the opening avoid describing itself as a reorganized, processed, or archived learning note?
-- Is the ending a real looking-back point, not generic conclusion filler?
-- Are file/evidence lists connected to the story?
+## Pass 3: Voice And Humor
 
-Fix: reorder around `起点 -> 卡住 -> 改法 -> 证据 -> 回头看`.
+- Is personality present beside the actual friction, not only in the conclusion?
+- Does humor come from a real tool, file, symptom, mismatch, or mistaken assumption?
+- Does the prose vary rhythm without using a style quota?
+- Is technical detail doing more work than broad praise?
+- Does this sound like Li Zhiyi rather than a recruiter, academic abstract, compliance report, or imitation of another creator?
 
-## L3 Voice
+If a joke could survive after replacing every technical noun with `某工具`, it is probably generic. Ground it or remove it.
 
-Check:
+## Pass 4: Bilingual And MDX
 
-- Does it sound like a practical engineering note?
-- Did it avoid resume/pitch/corporate language?
-- Did it avoid meta-document openings such as `这是一次对...重新整理后的学习笔记`, `重新整理的一篇学习记录`, and `处理后的总结文档`?
-- Are there concrete symptoms and files?
-- Is there mild human texture without fake drama?
-- Did it avoid `首先/其次/最后` scaffolding unless a numbered method is genuinely needed?
-- Did it avoid negation-then-reframe templates such as `不是...而是...`, `不是为了...而是...`, `并不是...而是...`, `不只是...而...`, `not X but Y`, and `not only...but...`?
-
-Fix: replace broad claims with specific observations.
-
-## L4 Bilingual Equivalence
-
-Check:
-
-- Does English cover the same content as Chinese?
-- Does English avoid becoming more grandiose?
+- Do Chinese and English contain the same facts, uncertainty, narrative nodes, and ending?
+- Is English slightly calmer without becoming flat or shorter in substance?
 - Are technical terms stable?
-- Are bilingual headings clear?
-- Are language-scoped code fences used only when needed?
+- Do paired headings name the same subject?
+- Are frontmatter, links, captions, code fences, and visibility accurate for the target file?
 
-Fix: align paragraph by paragraph.
+## Report Only When Useful
 
-## L5 Public Boundary
-
-Check:
-
-- Does the draft mention private/sensitive material too explicitly?
-- Does it avoid AI handoff language such as `公开证据边界`?
-- Does it avoid implying unlinked public files are private?
-- Are placeholders for missing upload paths clear?
-
-Fix: describe public evidence naturally as "这里保留..." / "页面里主要能看到..." without sounding like a compliance report.
-
-## L6 MDX Readiness
-
-Check:
-
-- Frontmatter suggestions include `title/titleZh`, `summary/summaryZh`, `tags`, and `visibility` when needed.
-- Markdown links use public paths or clear placeholders.
-- Consecutive image lines are used for galleries.
-- Code fences are language-neutral unless a whole listing belongs to one language.
-- No raw HTML comments are needed for visible content.
-
-## Output Review Report
-
-When useful, provide:
+Return the finished prose by default. If the user requests a review, keep it short:
 
 ```text
-Writing review:
-- Fact risk:
-- Voice risk:
-- Missing evidence:
-- Bilingual mismatch:
-- Suggested fix:
+Fact risk:
+Flow break:
+Voice/humor issue:
+Bilingual mismatch:
+Recommended revision:
 ```
 
-Keep the report short. The user usually needs the draft, not a lecture about the draft.
+Do not wrap normal writing output in an assumptions report, archetype label, or full checklist.

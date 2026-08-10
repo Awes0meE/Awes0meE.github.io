@@ -1,4 +1,4 @@
 interface:
   display_name: "Engineering Note Writer"
-  short_description: "Write portfolio engineering notes in the user's style."
-  default_prompt: "Use this skill when XJTLU Portfolio prose work involves rough project bullets, timelines, technical stacks, evidence files, source folders, or oral notes. Read references/hard-gated-checklist.md before drafting, translating, or finalizing; preserve concrete evidence, public-boundary limits, and bilingual equivalence."
+  short_description: "Write lively, evidence-grounded portfolio learning notes."
+  default_prompt: "Use $engineering-note-writer to turn these rough engineering materials into a lively, evidence-grounded bilingual learning note."
