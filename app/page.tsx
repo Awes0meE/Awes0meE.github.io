@@ -39,8 +39,8 @@ export default function Home() {
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
               <BilingualText
-                en="I’m Zhiyi Li, building experience across robot control hardware, flight-control electronics, schematic and PCB design, and hardware–firmware integration."
-                zh="我是 Zhiyi Li，正在机器人主控、飞控电子、原理图与 PCB 设计和软硬件联调等方面逐步积累经验。"
+                en="I’m Alvin Li, building experience across robot control hardware, flight-control electronics, schematic and PCB design, and hardware–firmware integration."
+                zh="我是 Alvin Li，正在机器人主控、飞控电子、原理图与 PCB 设计和软硬件联调等方面逐步积累经验。"
               />
             </p>
             <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
@@ -181,7 +181,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
           <div className="grid gap-6 sm:grid-cols-[120px_1fr]">
             <div className="relative h-28 w-28 overflow-hidden rounded-full border border-line bg-chalk">
-              <Image src="/uploads/projects/avatar.jpg" alt="Portrait of Zhiyi Li" fill sizes="112px" className="object-cover" />
+              <Image src="/uploads/projects/avatar.jpg" alt="Portrait of Alvin Li" fill sizes="112px" className="object-cover" />
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-ink">
@@ -189,8 +189,8 @@ export default function Home() {
               </h2>
               <p className="mt-4 leading-7 text-graphite">
                 <BilingualText
-                  en="I’m Zhiyi Li, a first-year student in NTU’s Master of Science (Robotics and Intelligent Systems) programme and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University."
-                  zh="我是 Zhiyi Li，现为南洋理工大学机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
+                  en="I’m Alvin Li, a first-year student in NTU’s Master of Science (Robotics and Intelligent Systems) programme and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University."
+                  zh="我是 Alvin Li，现为南洋理工大学机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
                 />
               </p>
               <p className="mt-3 leading-7 text-graphite">
