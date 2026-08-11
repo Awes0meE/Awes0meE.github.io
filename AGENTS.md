@@ -29,6 +29,8 @@ When starting work on a new computer or a fresh Codex session:
 4. Check whether external Codex skills exist:
    - `karpathy-guidelines`
    - `neat-freak`
+   - `grill-me`
+   - `grilling`
    If missing, install them from the sources listed in `docs/agent-skills.md`, or fall back to the rules already summarized in `CODEX.md`.
 5. Run verification before substantial edits:
    - `npm.cmd install` if `node_modules/` is missing or stale.

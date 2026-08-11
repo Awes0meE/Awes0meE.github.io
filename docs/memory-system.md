@@ -15,6 +15,7 @@ This is a lightweight project-local memory system inspired by `claude-mem`, adap
 | --- | --- | --- | --- |
 | Agent guide | `CODEX.md` | AI agents | How to work in this repository |
 | Compatibility pointer | `AGENTS.md` | AI agents | Short pointer to `CODEX.md` |
+| Active rewrite handoff | `docs/active-work/portfolio-copy-rewrite.md` | AI agents and the user | Current project, branch, interview state, and next action |
 | Durable memory | `MEMORY.md` | AI agents and maintainers | Current facts, decisions, open work |
 | Chronology | `docs/session-log.md` | AI agents and maintainers | Append-only event history |
 | Environment | `docs/environment-toolchain.md` | developers and agents | Local setup, Node/npm, PowerShell, Git, preview, and deployment tooling |
@@ -26,10 +27,11 @@ This is a lightweight project-local memory system inspired by `claude-mem`, adap
 At the start of a substantial session:
 
 1. Read `CODEX.md`.
-2. Read `MEMORY.md`.
-3. Read `docs/environment-toolchain.md` when setting up or verifying a machine.
-4. Read task-relevant docs under `docs/`.
-5. Inspect the live code before making changes.
+2. If `docs/active-work/portfolio-copy-rewrite.md` exists, read it before resuming a portfolio rewrite.
+3. Read `MEMORY.md`.
+4. Read `docs/environment-toolchain.md` when setting up or verifying a machine.
+5. Read task-relevant docs under `docs/`.
+6. Inspect the live code before making changes.
 
 Do not rely on memory when the code can cheaply verify the fact.
 
@@ -83,5 +85,6 @@ Use absolute dates and concise language.
 
 - `karpathy-guidelines`: reduce LLM coding mistakes through assumptions, simplicity, surgical edits, and verifiable goals.
 - `neat-freak`: reconcile project docs, agent memory, and code at development milestones.
+- `grill-me` and `grilling`: interview the user one project at a time and turn voice answers into shared understanding before the repository-local writer is used.
 
 Restart Codex after installing external skills so they appear in the tool's native skill list.

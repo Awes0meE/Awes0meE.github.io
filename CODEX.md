@@ -168,7 +168,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 The current working content state extends release `v0.7.0` on `main`, including the media/cover refresh, the two-pane public project-file browser for project archives, and the imported Digital Clock and Smart Car course projects.
 
-As of `2026-07-05`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
+As of `2026-08-12`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
 ```text
 D:\XJTLU\工作相关\卷云科技有限责任公司
@@ -188,6 +188,7 @@ Current content count in this workspace:
 - 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF and source description TXT stay out of `public/uploads/`, while selected course screenshots without the top-right XJTLU logo, cropped homework-report excerpts, the original homework report PDF, Arduino sketches, demo video, and SN54LS47 datasheet are public.
 - 1 Arduino Smart Car line-tracking course project and 1 related note were added from `C:\Users\123\Desktop\Smart Car Project`; the original course tutorial PDF and project-description TXT stay reference-only, while selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code are public.
 - 73 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
+- The DIY pressure-flow cooling project, note, and six media records completed the one-project-at-a-time `grill-me` rewrite on `2026-08-12`; its remembered temperature and frame-rate changes remain explicitly personal observations rather than controlled benchmark results.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.

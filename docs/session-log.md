@@ -443,3 +443,10 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Files changed: merged the bilingual DIY cooling project page, learning note, and six media-copy updates; then replaced the stale Draft PR state in `docs/active-work/portfolio-copy-rewrite.md`, returned the macOS relay guide to a `main`-first workflow, removed machine-specific checkout paths from current agent memory, and recorded the final privacy and writing decisions.
 - Git state: pull request #5 merged into `main` at `83ca508`; local `main` fast-forwarded to the same commit before the documentation cleanup. The merged topic branch was removed after synchronization.
 - Verification: PR Vercel checks passed before merge; lint, content/encoding validation, typecheck, production build, diff checks, local/remote synchronization, and final clean-worktree checks passed.
+
+## 2026-08-12
+
+- Summary: Synchronized the Windows checkout with the Mac-completed DIY rewrite and ran a second `/neat` pass for Windows-side handoff hygiene.
+- Files changed: corrected the homepage-only Alvin Li documentation boundary; added the completed DIY interview rewrite to current content summaries; registered `grill-me` and `grilling` in the bootstrap and memory layers; removed machine-specific external-skill paths; and documented the active rewrite handoff as a first-class memory layer. Portfolio MDX, media data, and public uploads were unchanged.
+- Git state: Windows `main` fast-forwarded from `dc386bb` to remote `8002e2d`; the merged, remotely deleted `agent/rewrite-ai-authored-portfolio-copy` worktree and local branch were removed. Documentation cleanup continued on `agent/neat-windows-sync`.
+- Verification: Node `v24.19.0`, npm `11.17.0`, dependency install, lint, content validation for 8 projects / 21 notes / 73 media records, encoding validation for 261 files, typecheck, the 36-route production build, dependency audit with 0 vulnerabilities, current-doc relative-time scan, cross-device invariants, and `git diff --check` passed.
