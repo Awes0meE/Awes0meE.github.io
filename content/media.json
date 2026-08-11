@@ -733,146 +733,146 @@
   },
   {
     "id": "arduino-smart-car-cover",
-    "title": "Smart car wide project cover",
-    "titleZh": "Smart Car 横版项目封面",
+    "title": "Course Reference Smart-Car Assembly",
+    "titleZh": "课程参考车装配示意",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/cover-wide.jpg",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/cover-wide.jpg",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Wide project cover created from the new source image by adding white space on both sides so the full car remains visible in horizontal cards.",
-    "captionZh": "由新封面图处理出的横版项目封面，通过左右补白让车体在横向卡片里完整显示。"
+    "caption": "The green reference car shows the kit's intended layout—Nano-format controller, two driven wheels, battery holder, and front collision arms—but is not the purple build documented in this project.",
+    "captionZh": "绿色参考车展示套件的预期布局：Nano 尺寸控制板、两只驱动轮、电池盒和前缘碰撞拨杆；它并非本项目记录的紫色实物。"
   },
   {
     "id": "arduino-smart-car-back",
-    "title": "Assembled smart car back side",
-    "titleZh": "焊接完成后的小车背面",
+    "title": "Purple Chassis From Below",
+    "titleZh": "紫色小车底面",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/car-back.jpg",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/car-back.jpg",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Back-side view showing the underside layout and line-tracking sensor side of the assembled car.",
-    "captionZh": "小车背面视角，展示底部布局和循迹传感器一侧。"
+    "caption": "The underside of the assembled purple chassis exposes the through-hole joints, six downward-facing IR tracking sensors, two drive wheels, ball caster, and long-arm collision switches around the edge.",
+    "captionZh": "装配后的紫色底盘翻到背面，通孔焊点、六个朝下的红外循迹传感器、两只驱动轮、滚珠万向轮和沿板边布置的长臂碰撞开关都直接可见。"
   },
   {
     "id": "arduino-smart-car-soldering",
-    "title": "Smart car soldering bench",
-    "titleZh": "Smart Car 焊接现场",
+    "title": "Populating the Purple PCB at the Bench",
+    "titleZh": "在焊台上装配紫色 PCB",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Lab-bench photo from the soldering and assembly stage before the car became a runnable line tracker.",
-    "captionZh": "焊接和装配阶段的实验桌照片，那时小车还没有变成能跑的循迹车。"
+    "caption": "The assembly record catches the board mid-solder, with its circular parts map open on the monitor and a multimeter beside the iron.",
+    "captionZh": "装配记录停在焊接进行时：显示器上打开圆形元件布局图，电烙铁旁放着万用表。"
   },
   {
     "id": "arduino-smart-car-system-diagram",
-    "title": "Teas smart-car system diagram",
-    "titleZh": "Teas 智能小车系统框图",
+    "title": "Power, Inputs, and Motion in One Diagram",
+    "titleZh": "一张图串起电源、输入与运动",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-system-diagram.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/manual-system-diagram.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Manual page splitting the kit into power, controller, motor-driver, sensor, switch, shift-register, and LED blocks.",
-    "captionZh": "manual 中的系统框图，把套件拆成电源、主控、电机驱动、传感器、开关、移位寄存器和 LED 等模块。"
+    "caption": "The manual connects four AAA cells through a power IC to the controller, routes PWM through L293 to two motors, and returns six IR inputs, six switches, and two keys through 74XX165.",
+    "captionZh": "手册把四节 AAA 电池经电源芯片接到控制器，再让 PWM 经 L293 驱动双电机；六路红外、六个开关和两个按键则通过 74XX165 返回主控。"
   },
   {
     "id": "arduino-smart-car-course-objectives",
-    "title": "Smart car tutorial objectives",
-    "titleZh": "Smart Car 课程目标页",
+    "title": "From Soldering to Troubleshooting",
+    "titleZh": "从焊接走到故障排查",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-objectives.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-objectives.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed tutorial slide defining the project as soldering practice, circuit reading, troubleshooting, teamwork, and report writing.",
-    "captionZh": "去掉校徽后的课件页，说明项目目标包括焊接练习、电路阅读、故障排查、团队协作和报告写作。"
+    "caption": "The course frame separates four aims: practise soldering; build the car from the given circuit; troubleshoot and solve problems; and work as a team while writing a professional report.",
+    "captionZh": "课程把目标拆成四项：练习焊接；按给定电路完成小车装配；开展故障排查与问题解决；以团队协作完成专业报告。"
   },
   {
     "id": "arduino-smart-car-power-supply",
-    "title": "Smart car power-supply slide",
-    "titleZh": "Smart Car 电源课件页",
+    "title": "LM7805 Sets the 5 V Rail",
+    "titleZh": "LM7805 建立 5 V 电源轨",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed slide explaining the LM7805 regulator path and capacitor question for the smart-car power supply.",
-    "captionZh": "去掉校徽后的课件页，用 LM7805 稳压路径和电容问题解释小车电源部分。"
+    "caption": "The course slide's schematic places 100 µF and 0.01 µF capacitors on both sides of the LM7805 and labels a 5 V output, linking the regulator stage to supply filtering.",
+    "captionZh": "课件页原理图在 LM7805 输入、输出两侧各放置 100 µF 与 0.01 µF 电容，并标出 5 V 输出，把稳压级与电源滤波联系起来。"
   },
   {
     "id": "arduino-smart-car-sensors-switches",
-    "title": "Smart car sensors and switches",
-    "titleZh": "Smart Car 传感器和开关",
+    "title": "Reflection, Collision, and Wheel Speed",
+    "titleZh": "反射、碰撞与轮速",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed tutorial slide showing IR tracking sensors, impact switches, keys, and speed sensing.",
-    "captionZh": "去掉校徽后的课件页，展示红外循迹传感器、碰撞开关、按键和测速传感器。"
+    "caption": "The course slide separates contact inputs from optical ones: an impact switch and a key, an emitter–receiver pair for black/white tracking, and a striped wheel read by an IR speed sensor.",
+    "captionZh": "课件页把接触输入与光学输入分开：碰撞开关与按键负责触发，收发一体的红外对管辨别黑白，条纹轮盘则由红外测速传感器读取。"
   },
   {
     "id": "arduino-smart-car-shift-register",
-    "title": "Smart car shift-register note",
-    "titleZh": "Smart Car 移位寄存器课件页",
+    "title": "Fourteen Inputs, One Serial Read Path",
+    "titleZh": "十四路输入，一条串行读取路径",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-shift-register.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-shift-register.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed slide explaining why the many switches and sensors are read through a shift-register path.",
-    "captionZh": "去掉校徽后的课件页，解释为什么大量开关和传感器需要通过移位寄存器读取。"
+    "caption": "The course slide counts six collision switches, six IR channels, and two keys as fourteen inputs; its parallel-in/serial-out model explains why the kit cascades two 74HC165s before the controller.",
+    "captionZh": "课件页把六个碰撞开关、六路红外和两个按键合计为十四路输入；并入串出的模型解释了套件为何在主控前级联两颗 74HC165。"
   },
   {
     "id": "arduino-smart-car-motor-driver",
-    "title": "Smart car motor driver",
-    "titleZh": "Smart Car 电机驱动课件页",
+    "title": "L293 Reverses the Geared Motors",
+    "titleZh": "L293 让减速电机正反转",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-motor-driver.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-motor-driver.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed slide around the L293 motor-driver path and direction-control question.",
-    "captionZh": "去掉校徽后的课件页，对应 L293 电机驱动和电机方向控制问题。"
+    "caption": "On the course slide, the H-bridge sketches show how reversing the applied polarity changes motor direction; L293 packages that drive stage between the controller and two geared motors.",
+    "captionZh": "课件页中的 H 桥示意图说明反转施加极性会改变电机方向；L293 把这一级驱动封装在控制器与两只减速电机之间。"
   },
   {
     "id": "arduino-smart-car-pwm-control",
-    "title": "Smart car PWM speed control",
-    "titleZh": "Smart Car PWM 调速",
+    "title": "Duty Cycle Sets Average Motor Drive",
+    "titleZh": "占空比设定电机平均驱动",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed slide explaining how PWM duty cycle controls DC motor speed.",
-    "captionZh": "去掉校徽后的课件页，说明 PWM 占空比如何控制直流电机速度。"
+    "caption": "The course slide's 50% and 80% pulse trains, plus 10/50/90% examples, show how duty cycle changes the average drive applied to a motor; the project code then adjusts the left- and right-wheel PWM commands separately.",
+    "captionZh": "课件页用 50% 与 80% 脉冲列和 10/50/90% 示例说明占空比如何改变施加到电机的平均驱动；项目代码随后分别调整左右轮的 PWM 指令。"
   },
   {
     "id": "arduino-smart-car-basic-tests",
-    "title": "Smart car basic function tests",
-    "titleZh": "Smart Car 基础功能测试",
+    "title": "Six Tests Before Full Line Tracking",
+    "titleZh": "完整循迹前的六项测试",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-basic-function-tests.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-basic-function-tests.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed tutorial slide listing the staged tests for LEDs, keys, switches, IR sensors, motors, and speed sensors.",
-    "captionZh": "去掉校徽后的课件页，列出 LED、按键、碰撞开关、红外传感器、电机和测速传感器的分段测试。"
+    "caption": "The course slide prescribes separate checks for LED, keys, collision switches, IR tracking channels, motors, and IR speed sensing; the supplied code also offered variants with and without the RGB LED.",
+    "captionZh": "课件页规定逐项检查 LED、按键、碰撞开关、红外循迹通道、电机和红外测速；配套代码还提供带 RGB LED 与不带 LED 两种版本。"
   },
   {
     "id": "arduino-smart-car-racing-challenge",
-    "title": "Smart car final racing challenge",
-    "titleZh": "Smart Car 圈速挑战",
+    "title": "One Lap Brings the Signal Chain Together",
+    "titleZh": "一圈赛道把整条链路接起来",
     "type": "image",
     "src": "/uploads/projects/arduino-smart-car-line-tracker/course-racing-challenge.png",
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-racing-challenge.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "Logo-removed slide describing the optional line-tracking lap-speed challenge.",
-    "captionZh": "去掉校徽后的课件页，说明沿黑线跑完一圈的圈速挑战。"
+    "caption": "The optional course slide asks the car to follow one black-line lap, awarding a 3% bonus within 70 s and another 2% for beating half the groups; the project record later reports a top-5% finish.",
+    "captionZh": "可选挑战课件页要求小车沿黑线跑完一圈：70 秒内完成可获 3% 额外加分，超过半数小组再获 2%；项目记录显示这台车最终进入圈速前 5%。"
   }
 ]
