@@ -28,6 +28,14 @@ These rules incorporate the installed `karpathy-guidelines` skill:
 - Define success criteria for non-trivial tasks and verify them with commands or browser checks.
 - If a simpler approach is better than the requested approach, explain the tradeoff and proceed pragmatically.
 
+## Git Workflow
+
+- Use Conventional Commits for every commit: `<type>(optional-scope): <short summary>`.
+- Name topic branches `<semantic-prefix>/<kebab-case-purpose>`, using the Conventional Commits type that best matches the work, such as `feat/note-visibility`, `docs/update-handoff`, `refactor/content-renderer`, or `build/upgrade-next`.
+- Treat Codex-authored changes exactly like ordinary human-authored development. Never use identity-based branch prefixes such as `agent/`, `codex/`, `ai/`, or `bot/`.
+- Keep the existing worktree placement convention or use the platform's native worktree mechanism. When choosing a worktree directory manually, the kebab-case purpose may be used without the semantic prefix.
+- Keep commits scoped to one completed feature, fix, documentation update, test addition, or coherent checkpoint. Do not hide features, fixes, tests, or docs inside `chore`.
+
 ## Knowledge Hygiene
 
 These rules incorporate the installed `neat-freak` skill:
