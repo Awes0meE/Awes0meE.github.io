@@ -163,7 +163,7 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
         <figcaption className="border-b border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-normal text-[#b9d2ca]">
           {asset.language}
         </figcaption>
-        <pre className="max-h-[680px] overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
+        <pre tabIndex={0} className="max-h-[680px] overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
           <code>{asset.content}</code>
         </pre>
       </figure>
@@ -220,7 +220,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
       <div className="grid lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="border-b border-line bg-paper lg:border-b-0 lg:border-r">
           <div className="border-b border-line px-4 py-3">
-            <p className="text-xs font-semibold uppercase tracking-normal text-copper">
+            <p className="text-xs font-semibold uppercase tracking-normal text-[#914315]">
               <BilingualText en="Project Index" zh="项目索引" />
             </p>
             <p className="mt-1 text-xs text-graphite">

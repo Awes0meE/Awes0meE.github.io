@@ -4,9 +4,26 @@ import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { getMediaItems, getProjects } from "@/lib/content";
+import { openGraphBase, site } from "@/lib/site";
+
+const pageTitle = "Media";
+const pageDescription =
+  "Board photos, schematic sheets, renders, videos, and test captures connected to Zhiyi Li’s engineering projects.";
+const socialTitle = `${pageTitle} | Zhiyi Li`;
 
 export const metadata: Metadata = {
-  title: "Media"
+  title: pageTitle,
+  description: pageDescription,
+  openGraph: {
+    ...openGraphBase,
+    title: socialTitle,
+    description: pageDescription,
+    url: new URL("/media", site.url)
+  },
+  twitter: {
+    title: socialTitle,
+    description: pageDescription
+  }
 };
 
 export default function MediaPage() {
@@ -20,8 +37,8 @@ export default function MediaPage() {
       </h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-graphite">
         <BilingualText
-          en="Images, videos, board renders, lab notes, and experiment visuals connected to portfolio projects."
-          zh="这里集中放和作品集项目相关的图片、视频、板卡渲染图、实验记录和可视化材料。"
+          en="Board photos, schematic sheets, renders, videos, and test captures linked to the projects and engineering stages they document."
+          zh="这里集中整理板卡照片、原理图分页、渲染图、视频和测试截图，并关联到它们所记录的项目与工程阶段。"
         />
       </p>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -48,6 +48,32 @@ Purpose:
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
 
+## grill-me and grilling
+
+Source:
+
+- `https://github.com/mattpocock/skills`
+
+Global Codex install:
+
+```bash
+npx skills@latest add mattpocock/skills -g -a codex -s grill-me grilling -y
+```
+
+Purpose:
+
+- Interview the user before each remaining portfolio project is rewritten.
+- Work through the current decision frontier in numbered rounds rather than
+  asking every possible follow-up at once.
+- Turn disordered voice answers into shared understanding before invoking the
+  repository-local `engineering-note-writer`.
+- Keep factual inspection as the agent's responsibility and reserve personal
+  motivations, decisions, reactions, and remembered observations for the user.
+
+These skills are machine-global and do not travel with the Git clone. Install
+them separately on each device; the active interview state travels through
+`docs/active-work/portfolio-copy-rewrite.md`.
+
 ## karpathy-guidelines
 
 Source:

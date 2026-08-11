@@ -3,9 +3,26 @@ import Link from "next/link";
 import { ArrowRight, ScrollText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { getNotes } from "@/lib/content";
+import { openGraphBase, site } from "@/lib/site";
+
+const pageTitle = "Notes";
+const pageDescription =
+  "Engineering notes on embedded control, hardware debugging, board bring-up, build systems, and the evidence behind project decisions.";
+const socialTitle = `${pageTitle} | Zhiyi Li`;
 
 export const metadata: Metadata = {
-  title: "Notes"
+  title: pageTitle,
+  description: pageDescription,
+  openGraph: {
+    ...openGraphBase,
+    title: socialTitle,
+    description: pageDescription,
+    url: new URL("/notes", site.url)
+  },
+  twitter: {
+    title: socialTitle,
+    description: pageDescription
+  }
 };
 
 export default function NotesPage() {
@@ -18,8 +35,8 @@ export default function NotesPage() {
       </h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-graphite">
         <BilingualText
-          en="A growing archive for control, embedded systems, robotics, hardware practice, and engineering writing."
-          zh="这里用文件持续管理控制、嵌入式、机器人、硬件实践和工程写作记录。"
+          en="Engineering notes that follow specific questions through source files, build failures, circuit behavior, board bring-up, and verification."
+          zh="这些工程笔记从具体问题出发，沿着源文件、构建故障、电路现象、板级 bring-up 和验证过程继续追下去。"
         />
       </p>
       <div className="mt-10 divide-y divide-line rounded-lg border border-line bg-white">

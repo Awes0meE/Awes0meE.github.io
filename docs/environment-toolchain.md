@@ -38,6 +38,59 @@ If Node.js is installed but the current shell cannot find it, restart PowerShell
 $env:Path='C:\Program Files\nodejs;' + $env:Path
 ```
 
+## macOS Relay Setup
+
+The active portfolio rewrite uses a single-device-at-a-time relay on
+`agent/rewrite-ai-authored-portfolio-copy`. The outgoing device must commit and
+push before the incoming device starts.
+
+For a fresh Mac checkout:
+
+```bash
+git clone https://github.com/Awes0meE/Awes0meE.github.io.git XJTLU_Portfolio
+cd XJTLU_Portfolio
+git fetch --prune origin
+git switch --track origin/agent/rewrite-ai-authored-portfolio-copy
+```
+
+For an existing checkout:
+
+```bash
+git status --short --branch
+git fetch --prune origin
+git switch agent/rewrite-ai-authored-portfolio-copy
+git pull --ff-only origin agent/rewrite-ai-authored-portfolio-copy
+```
+
+Stop if `git status --short` reports local changes. Inspect and preserve them
+before pulling; do not reset or overwrite them.
+
+Use Node.js 22 or newer and npm 10 or newer, then restore and verify the local
+environment:
+
+```bash
+node --version
+npm --version
+npm install
+npm run lint
+npm run validate-encoding
+npm run typecheck
+```
+
+Install the interview skills globally for Codex on the Mac:
+
+```bash
+npx skills@latest add mattpocock/skills -g -a codex -s grill-me grilling -y
+```
+
+The portfolio writer is repository-local at
+`skills/engineering-note-writer/SKILL.md`; it arrives with the clone. Do not
+substitute a similarly named global writing skill.
+
+Before resuming, read `AGENTS.md`, `CODEX.md`, and
+`docs/active-work/portfolio-copy-rewrite.md`. Confirm the branch is clean, then
+continue from the handoff file's `Next Action` section.
+
 ## GitHub Sync Workflow
 
 The repository remote is `https://github.com/Awes0meE/Awes0meE.github.io.git`. Keep local work on topic branches and update `main` only with fast-forward pulls:

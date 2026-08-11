@@ -3,11 +3,9 @@ import Link from "next/link";
 import {
   ArrowRight,
   Building2,
-  CalendarDays,
   Code2,
   Github,
-  Mail,
-  MapPin,
+  GraduationCap,
   Microchip,
   PlayCircle,
   ScrollText,
@@ -17,7 +15,7 @@ import { BilingualText } from "@/components/bilingual-text";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { TechnicalVisual } from "@/components/technical-visual";
-import { formatDateRange, formatDateRangeZh, getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
+import { getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function Home() {
@@ -34,40 +32,48 @@ export default function Home() {
             style={{ maxWidth: "calc(100vw - 40px)" }}
           >
             <h1 className="max-w-80 text-balance text-4xl font-semibold tracking-normal text-ink sm:max-w-full sm:text-5xl md:text-6xl">
-              Awes0meE / 66CCFF Labs
+              <BilingualText
+                en="Building the hardware behind intelligent machines."
+                zh="构建智能机器背后的硬件。"
+              />
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
               <BilingualText
-                en="Communication Engineering undergraduate focused on control, embedded systems, and robotics practice."
-                zh="通信工程本科生，专注于控制、嵌入式系统与机器人技术的学习与实践。"
+                en="I’m Alvin Li, building experience across robot control hardware, flight-control electronics, schematic and PCB design, and hardware–firmware integration."
+                zh="我是 Alvin Li，正在机器人主控、飞控电子、原理图与 PCB 设计和软硬件联调等方面逐步积累经验。"
               />
             </p>
             <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
               <BilingualText
-                en="I build control systems, embedded hardware, and robotics solutions with engineering rigor and curiosity."
-                zh="关注能测量、能复现、能解释、能持续改进的工程系统。"
+                en="My projects follow boards from design into bring-up and debugging, with growing interests in motor-drive electronics and power electronics."
+                zh="我的项目会把板卡从设计带到 bring-up 和调试，并继续向电机驱动与电力电子延伸。"
               />
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
             <div className="mt-8 grid gap-5 text-sm text-ink sm:grid-cols-2">
-              <div className="flex items-start gap-3">
-                <Building2 className="mt-1 text-ink" size={26} strokeWidth={1.7} />
-                <div>
+              <div className="flex min-w-0 items-start gap-3">
+                <Building2 className="mt-1 shrink-0 text-ink" size={26} strokeWidth={1.7} />
+                <div className="min-w-0">
+                  <p className="font-semibold">
+                    <BilingualText en="Nanyang Technological University" zh="南洋理工大学" />
+                  </p>
+                  <p className="mt-1 min-w-0 break-words text-xs text-graphite">
+                    <BilingualText
+                      en="MAE · MSc (Robotics and Intelligent Systems) · First year"
+                      zh="机械与航空航天工程学院 · 机器人与智能系统硕士 · 一年级"
+                    />
+                  </p>
+                </div>
+              </div>
+              <div className="flex min-w-0 items-start gap-3">
+                <GraduationCap className="mt-1 shrink-0 text-ink" size={26} strokeWidth={1.7} />
+                <div className="min-w-0">
                   <p className="font-semibold">
                     <BilingualText en="Xi'an Jiaotong-Liverpool University" zh="西交利物浦大学" />
                   </p>
                   <p className="mt-1 text-xs text-graphite">
-                    <BilingualText en="School of Advanced Technology" zh="智能工程学院" />
+                    <BilingualText en="Communication Engineering graduate" zh="通信工程毕业生" />
                   </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Code2 className="mt-1 text-ink" size={26} strokeWidth={1.7} />
-                <div>
-                  <p className="font-semibold">
-                    <BilingualText en="Next.js Full-Stack" zh="Next.js 全栈" />
-                  </p>
-                  <p className="mt-1 text-xs text-graphite">TypeScript · Tailwind · MDX</p>
                 </div>
               </div>
             </div>
@@ -175,7 +181,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
           <div className="grid gap-6 sm:grid-cols-[120px_1fr]">
             <div className="relative h-28 w-28 overflow-hidden rounded-full border border-line bg-chalk">
-              <Image src="/uploads/projects/avatar.jpg" alt="Li Zhiyi profile visual" fill sizes="112px" className="object-cover" />
+              <Image src="/uploads/projects/avatar.jpg" alt="Portrait of Alvin Li" fill sizes="112px" className="object-cover" />
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-ink">
@@ -183,14 +189,14 @@ export default function Home() {
               </h2>
               <p className="mt-4 leading-7 text-graphite">
                 <BilingualText
-                  en="I am interested in engineering and building real systems, especially control, embedded systems, and robotics."
-                  zh="热爱工程与创造，关注控制、嵌入式与机器人方向。喜欢从原理出发，把想法变成可运行的系统。"
+                  en="I’m Alvin Li, a first-year student in NTU’s Master of Science (Robotics and Intelligent Systems) programme and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University."
+                  zh="我是 Alvin Li，现为南洋理工大学机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
                 />
               </p>
               <p className="mt-3 leading-7 text-graphite">
                 <BilingualText
-                  en="This portfolio records projects, notes, media evidence, and the process of improving the website itself."
-                  zh="这个作品集会持续记录项目、笔记、媒体证据和网站本身的完善过程。"
+                  en="This portfolio records schematics, PCB work, embedded control, board bring-up, and the measurements, debugging, revisions, and unfinished validation behind each project."
+                  zh="这个作品集记录原理图与 PCB、嵌入式控制、板级 bring-up，以及项目中的测量、调试、修改和尚未完成的验证。"
                 />
               </p>
               <Link href="/about" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine hover:text-copper">
@@ -201,21 +207,13 @@ export default function Home() {
           </div>
           <div className="border-line md:border-l md:pl-8">
             <h2 className="text-xl font-semibold text-ink">
-              <BilingualText en="Let's connect" zh="联系我" />
+              <BilingualText en="Contact" zh="联系" />
             </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
-              <a className="flex items-center gap-3 hover:text-pine" href={`mailto:${site.email}`}>
-                <Mail size={18} />
-                {site.email}
-              </a>
               <a className="flex items-center gap-3 hover:text-pine" href={site.github}>
                 <Github size={18} />
                 github.com/Awes0meE
               </a>
-              <p className="flex items-center gap-3">
-                <MapPin size={18} />
-                <BilingualText en={site.location} zh={site.locationZh} />
-              </p>
             </div>
           </div>
           <div className="border-line md:border-l md:pl-8">
@@ -223,10 +221,9 @@ export default function Home() {
               <BilingualText en="Currently" zh="当前" />
             </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
-              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="Embedded hardware archive expansion" zh="嵌入式硬件档案扩展中" /></p>
-              <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Robotics learning" zh="Robotics 学习中" /></p>
-              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Project evidence curation" zh="项目证据整理中" /></p>
-              <p className="flex items-center gap-3"><CalendarDays size={18} /><BilingualText en={formatDateRange("2025.08 to Now")} zh={formatDateRangeZh("2025.08 to Now")} /></p>
+              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="Robot control and flight-control electronics" zh="机器人主控与飞控电子" /></p>
+              <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Board bring-up and hardware–firmware debugging" zh="板级 bring-up 与软硬件调试" /></p>
+              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Motor drives and power electronics" zh="电机驱动与电力电子" /></p>
             </div>
           </div>
         </div>

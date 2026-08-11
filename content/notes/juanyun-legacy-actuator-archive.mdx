@@ -1,83 +1,58 @@
 ---
-title: "Solenoid Valve and BLDC Fan Archive Notes"
-titleZh: "螺线管阀门与 BLDC 风扇归档笔记"
-summary: "A note for scattered actuator and fan-driver materials: solenoid-valve control, OLED/encoder interaction, ULN2003 references, and a small BLDC quiet-fan board."
-summaryZh: "执行器与风扇驱动零散材料笔记：螺线管阀门控制、OLED/编码器交互、ULN2003 参考资料，以及一块小型 BLDC 静音风扇板。"
+title: "Four EEV Phases Through a ULN2003A Archive"
+titleZh: "四路 EEV 相线怎样穿过 ULN2003A 归档"
+summary: "An archive reading of the EEV driver board, ULN2003A schematic, STM32F103 phase mapping, blocking valve routines, and the thinner BLDC file trail."
+summaryZh: "沿 EEV 驱动小板、ULN2003A 原理图、STM32F103 相线映射与阻塞式阀控制函数阅读一组历史归档，并标出较薄的 BLDC 文件线索。"
 date: "2026-05-06"
 tags: ["Actuator", "BLDC", "STM32", "Archive"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## Starting Point / 起点
+## Four Inputs Enter, Four Driven Nodes Leave / 四路输入进来，四路驱动节点出去
 
-这组材料比较散。一边是螺线管阀门控制：STM32F103 工程、电磁阀驱动板、OLED、EC11 编码器、按键、ULN2003 / 步进驱动参考。另一边是单相 BLDC 静音风扇驱动板，目前主要留下 BOM 和 EDA 工程。它们都指向执行器、电机和驱动电路。
+The EEV board render is small enough to read almost at a glance. A pin header marked `H2` sits on one side, an SOP16 package marked `U2` in the centre, a five-position connector opposite, and four LED positions along the output edge. The paired schematic supplies U2's identity as ULN2003A; the render shows placement, not an assembled board.
 
-This material is scattered. One side is solenoid-valve control, with an STM32F103 project, an electromagnetic-valve driver board, OLED, EC11 encoder, keys, and ULN2003 / stepper-driver references. The other side is a single-phase BLDC quiet-fan driver board, where the available material is mainly a BOM and an EDA project. They all point toward actuators, motors, and driver circuits.
+EEV 小板渲染很小，几乎一眼就能读完：一侧是标着 `H2` 的排针，中间是标为 `U2` 的 SOP16 封装，另一侧是一只五位连接器，四个 LED 位置沿输出侧排开。配套原理图才把 U2 标为 ULN2003A；渲染展示的是布局，并非装配成板。
 
-我先把它们留下来，因为这些小材料和热管理硬件的主线相邻：负载驱动、人机交互、小电机、简单执行器。以后回头看时，至少知道这些碎片分别落在哪个方向。
+![EEV driver-board render / EEV 驱动小板渲染](/uploads/projects/juanyun-public/actuator-fan/eev-driver-board-render.png)
 
-I kept them because they sit near the main thermal-hardware line: load driving, human interaction, small motors, and simple actuators. Later, it will be easier to see which direction each fragment belongs to.
+The schematic fills in the path. H2 carries four input nets into `1B` through `4B` of the ULN2003A. The matching `1C` through `4C` nodes leave through pins 2-5 of the output connector, whose pin 1 is tied to `VM`. Each output node also meets an LED and 10 kOhm resistor branch. `COM` is drawn to `VM`, and a 100 nF capacitor is shown between the supply/common side and ground.
 
-## Why Keep Them / 为什么保留
+原理图把路径补完整：H2 的四路输入进入 ULN2003A 的 `1B` 到 `4B`，对应的 `1C` 到 `4C` 再从输出连接器 2-5 脚引出，连接器 1 脚接 `VM`。每条输出节点还接一支 LED 与 10 kOhm 电阻；`COM` 被画到 `VM`，供电 / 公共端一侧与地之间则画有 100 nF 电容。
 
-Actuator driving, OLED display, encoder input, and fan driving are common fragments in embedded hardware. Each one looks small alone. Together they form a useful set of control-board building blocks.
+![EEV driver-board schematic / EEV 驱动小板原理图](/uploads/projects/juanyun-public/actuator-fan/eev-driver-schematic.png)
 
-执行器驱动、OLED 显示、编码器输入、风扇驱动，这些都是嵌入式硬件里很常见的碎片。单个看起来不大，组合起来就是很多控制板的基本功。
+What is not drawn matters too. The sheet does not identify a valve model, supply value, coil current, connector rating, clamp behavior under a specific load, or measured waveform. The four LEDs express intended node indication in the drawing; only a hardware record could show whether the board drove a valve.
 
-现在缺的是运行记录。还需要实物照片、接线图、状态机、测试日志、故障处理、波形，或者至少一张清楚的运行截图。没有这些，页面只能先作为方向笔记。
+没画出来的部分同样重要：图里没有阀型号、供电数值、线圈电流、连接器额定值、特定负载下的钳位表现或实测波形。四个 LED 表达的是预期节点指示；板子是否带动过阀，只能由硬件记录回答。
 
-The missing layer is runtime evidence: physical photos, wiring diagram, state machine, test logs, fault handling, waveform, or at least one clear running screenshot. Until then, this page works as a direction note.
+## PB12-PB15 Carry an Eight-Step Sequence / PB12-PB15 承担八拍序列
 
+The public CubeMX configuration names an STM32F103C8T6 and labels PB12-PB15 as valve phases A-D. The linked [`solenoid-valve.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c) maps those four pins to an eight-entry mask sequence: A, A+B, B, B+C, C, C+D, D, D+A. `_apply_mask()` writes set and reset bits through GPIOB `BSRR`, matching a four-phase low-side drive model.
 
+公开的 CubeMX 配置写明 STM32F103C8T6，并把 PB12-PB15 标为阀相 A-D。链接中的 [`solenoid-valve.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)把四个引脚映射到八项 mask 序列：A、A+B、B、B+C、C、C+D、D、D+A；`_apply_mask()` 再通过 GPIOB `BSRR` 同时置位与复位，对应四相低侧驱动模型。
 
-## What They Can Show For Now / 目前能说明什么
+The filenames still say “solenoid”, while the code expresses stepped position, full-open steps, homing, percent conversion, and a four-phase sequence. That mismatch is worth keeping visible: the implementation reads like a step-driven valve archive, not a simple on/off solenoid case.
 
-- The solenoid-valve directory has an STM32F103 control project, driver-board EDA files, and OLED / encoder / key-related material.
-- ULN2003 and stepper expansion-board material can serve as references for low-side drive, coil loads, and simple actuator control.
-- The BLDC quiet-fan board currently has a BOM and EDA project, so it is best kept as a direction clue.
-- Vendor examples and tool packages are numerous, and they stay outside the public page.
+文件名仍写着 “solenoid”，代码里却出现步进位置、全开步数、归零、百分比换算与四相序列。这个命名错位很值得保留：实现读起来更像步进阀归档，而不是简单的通断电磁阀案例。
 
+## The Control Path Is Deliberately Blocking / 控制路径明确采用阻塞式调用
 
-- 螺线管阀门目录里有 STM32F103 控制工程、驱动板 EDA 文件、OLED / 编码器 / 按键相关资料。
-- ULN2003 和步进扩展板资料可以作为低侧驱动、线圈负载和简单执行器控制的参考。
-- BLDC 静音风扇板目前有 BOM 和 EDA 项目，适合先作为方向线索。
-- Vendor examples 和工具包很多，暂时留在公开页面之外。
+The source defines `Valve_StepNBlocking()`, `Valve_HomeBlocking()`, `Valve_MoveToStepsBlocking()`, and `Valve_MoveToUnit500Blocking()`. In the linked [`main.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c), startup calls `Valve_Init(70)`, sets 530 full-open steps, and invokes blocking home. Encoder input changes a 0-500 set value; the `ENC_BTN_EVT_SHORT` branch commands a blocking move, while `ENC_BTN_EVT_LONG` calls soft home. K1/K2 store or recall two setpoints. OLED refresh is rate-limited to 30 ms when the UI is dirty, followed by a 2 ms loop delay.
 
-## Files / 文件
+源码定义了 `Valve_StepNBlocking()`、`Valve_HomeBlocking()`、`Valve_MoveToStepsBlocking()` 与 `Valve_MoveToUnit500Blocking()`。链接中的 [`main.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)在启动时调用 `Valve_Init(70)`，设定 530 个全开步数，再执行阻塞归零；编码器修改 0-500 设定值，`ENC_BTN_EVT_SHORT` 分支触发阻塞移动，`ENC_BTN_EVT_LONG` 分支调用软归零，K1 / K2 则保存或召回两组设定。UI 变脏时，OLED 刷新被限制到至少间隔 30 ms，循环末尾还有 2 ms 延时。
 
-The page currently provides files that help identify the direction:
+Those constants and calls are source facts, not calibration results. The archive has no matching valve specification, physical zero sensor, current trace, missed-step count, motion video, or timing capture. In particular, a function called `HomeBlocking` cannot prove that the mechanical zero was found repeatably.
 
-页面现在提供这些能看出方向的文件：
+这些常量与调用是源码事实，不是校准结果。归档没有配套阀规格、机械零点传感器、电流曲线、丢步统计、动作视频或时序抓取；尤其是一个叫 `HomeBlocking` 的函数，并不能证明机械零点可以重复找到。
 
-- [Solenoid main.c](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c)
-- [Solenoid valve control source](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c)
-- [Solenoid valve IOC configuration](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve-control.ioc)
-- [OLED module schematic](/uploads/projects/juanyun-public/actuator-fan/oled-module-schematic.pdf)
-- [EC11 encoder schematic](/uploads/projects/juanyun-public/actuator-fan/ec11-encoder-schematic.pdf)
-- [ULN2003 datasheet](/uploads/projects/juanyun-public/actuator-fan/uln2003-datasheet-en.pdf)
-- [BLDC quiet fan BOM](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-bom.xlsx)
-- [BLDC quiet fan EasyEDA project](/uploads/projects/juanyun-public/actuator-fan/bldc-quiet-fan-easyeda.epro)
+## The BLDC Branch Is Two Files Wide / BLDC 支线目前只有两类文件
 
-供应商示例包、可执行工具、完整工程目录、构建输出和重复资料包暂时不放。这里留的是能看出方向的文件。
+The same public folder also contains a quiet-fan BOM and an EasyEDA project. Their presence records a neighboring BLDC board direction, but no accompanying public render, schematic excerpt, topology description, voltage target, noise measurement, or bring-up log is present.
 
-## Records Still Missing / 还要补的记录
+同一公开目录还放着一份静音风扇 BOM 与一个 EasyEDA 工程。它们记录了相邻的 BLDC 板卡方向，但没有配套渲染、原理图摘录、拓扑说明、目标电压、噪声测量或 bring-up 日志。
 
-- Add a state diagram for the solenoid valve: open, close, hold, fault, and manual input.
-- Add a redrawn wiring diagram for the actuator drive, showing MCU, driver chip, load, and protection positions.
-- Add one running screenshot or physical photo for the OLED / encoder interaction.
-- For the BLDC fan board, later add target voltage, topology, noise target, and bring-up record.
+That leaves the archive with two different evidence strengths: the EEV side can be read from a board render, schematic, CubeMX configuration, and C source; the BLDC side currently stops at file presence. Neither side should be promoted into a current production or validated-performance claim.
 
-- 给螺线管阀门补一张状态图：打开、关闭、保持、故障、手动输入。
-- 给执行器驱动补一张重画接线图，说明 MCU、驱动芯片、负载和保护位置。
-- 给 OLED / 编码器交互补一张运行截图或实物照片。
-- BLDC 风扇板后续需要补目标电压、拓扑、噪声目标和 bring-up 记录。
-
-
-
-## Looking Back Now / 现在回头看
-
-This kind of material is easy to overlook because it is small. Keeping it as a direction note is more useful than forcing it into a finished case. Once photos, wiring, and runtime records are added, the actuator and fan-drive branch can become a fuller page.
-
-
-这类材料很容易因为小而被忽略。现在先把它放成方向笔记，比硬凑成完整项目更合适。以后照片、接线和运行记录补齐，执行器和风扇驱动这条支线就能写得更完整。
+所以这组归档存在两档证据强度：EEV 一侧可以沿渲染、原理图、CubeMX 配置与 C 源码阅读；BLDC 一侧目前停在文件存在。两边都不能被升级成当前生产状态或性能验证结论。

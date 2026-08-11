@@ -1,93 +1,74 @@
 ---
-title: "DIY Pressure-Flow Cooling Prototype Notes"
-titleZh: "DIY 压风式散热器开发笔记"
-summary: "A pressure-flow cooling prototype note following the 3D printed structure, fan-control code, desktop demo, PCB files, and fabrication traces left in the early folder."
-summaryZh: "DIY 压风式散热器原型笔记，顺着早期目录里的 3D 打印结构、风扇控制代码、桌面端 demo、PCB 文件和制作痕迹往回读。"
+title: "PID Went Nowhere for Half a Week, So I Made Temperature Move the Fan First"
+titleZh: "半周没写成 PID，我先让温度真正带动风扇"
+summary: "In my first C# desktop controller, CPU/GPU temperatures crossed Bluetooth through a 5-second sender, a 30-second maximum, and four mode-dependent PWM ratios after PID proved too difficult to finish."
+summaryZh: "第一次写 C# 上位机时，我把 CPU/GPU 温度送过蓝牙串口，再用 5 秒发送、30 秒峰值和四档比例映射驱动 PWM；原本想做的 PID，最后输给了当时的算法与调试能力。"
 date: "2026-05-06"
-tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool"]
+tags: ["ESP32", "C#", "WinForms", "Bluetooth", "PWM", "Cooling"]
 projectSlug: "juanyun-diy-cooling-prototype"
 visibility: public
 ---
 
-## Starting Point / 起点
+## My First Windows App Started With a Connect Button / 第一次写上位机，先从一个能点的“连接”开始
 
-这个压风式散热器原型现在看起来很有早期探索味道。3D 打印、亚克力切割、纸箱低成本版本、显卡拆机风扇、ESP32 控制、桌面端程序、PCB 文件、安装包和演示视频全挤在一个目录里。动手范围很广，文件也确实有点野。
+My original plan was generous: a user would open a Windows application, click Connect, choose automatic or manual control, and let the interface handle everything else. The problem was that I had never written a desktop controller. I had not properly learned C++, Qt, or Windows GUI development either. If I wanted other people to avoid opening VS Code, attaching a serial cable, and typing fan commands manually, I first had to learn the part I did not know.
 
-Looking back, the pressure-flow cooling prototype has a strong early-exploration flavor. 3D printing, acrylic cutting, a low-cost cardboard version, a fan taken from a graphics card, ESP32 control, a desktop app, PCB files, installers, and a demo video were all squeezed into one directory. The hands-on range was broad, and the folder was definitely messy.
+我最开始想得很理想：用户打开一个 Windows 程序，点连接，再选自动或手动，剩下的事情都由界面处理。现实是，我此前根本没有写过上位机，C++、Qt 或 Windows 图形界面也都没有真正学过。为了不让别人也跟我一样打开 VS Code、接串口线、手动发送风扇命令，我只能先把自己不会的这一块补起来。
 
-它的价值在于这个想法真的被推过几种形态：风道结构、供电、PWM 控制、桌面显示和使用说明都摸过一遍。很多东西早期、粗糙、命名混乱，但这些痕迹能说明它当时怎样从一句想法变成实物和程序。
+The result was a C# WinForms application targeting .NET Framework 4.7.2. I learned the basics from CSDN material and used AI assistance to connect temperature reading, serial-port selection, and the Connect event in [Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs). The GUI scans COM ports, connects, displays CPU/GPU temperatures, and sends them automatically. Mode and PWM adjustment remained on five physical buttons. That division turned out to be useful: automatic temperature-based speed changes require the app, but after power-on the user can still change mode and speed without finding the software first.
 
-The useful part is that the idea moved through several forms: airflow structure, power, PWM control, desktop display, and usage notes. Many parts were early and rough, but the traces show how the idea became parts, code, and a running demo.
+I did not add an external temperature sensor. The computer already has several highly integrated measurement points, and LibreHardwareMonitor can read CPU-package and GPU temperatures directly. Paying for a probe that guesses through the chassis could cost more and measure less accurately. The application rounds each value to one decimal place and produces a line such as `CPU62.7` or `GPU71.3`. The protocol is almost comically short, but it is enough to join Windows and the ESP32.
 
-![DIY pressure-flow cooling 3D print preview / DIY 压风式散热器 3D 打印预览](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
+最后做出来的是一个目标为 .NET Framework 4.7.2 的 C# WinForms 程序。我一边在 CSDN 补基础，一边借助 AI 把 [Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) 里的温度读取、串口选择和连接事件接起来。界面负责扫描 COM 口、点击连接、显示 CPU/GPU 温度并自动发送；模式与 PWM 调整没有全塞进软件，而是留给实体板上的五个按键。反过来看，这种分工也很实用：自动随温度调速需要上位机，通电后的快慢和模式却不必先找软件，伸手按一下就有反应。
 
-## Reading The Folder / 怎么读这个目录
+温度来源也没有另外加传感器。电脑内部已经有多个高度集成的测温点，LibreHardwareMonitor 甚至能直接读取 CPU 封装和 GPU 温度；再花钱装一颗隔着外壳猜温度的探头，成本更高，结果还未必更准确。上位机只需要把读数四舍五入到一位小数，再拼成 `CPU62.7` 或 `GPU71.3` 这样的一行。协议短得像还没来得及正式上班，但它已经足够把 Windows 和 ESP32 接起来。
 
-The folder is easiest to read as several routes:
+One timing detail was easy to miss at the time. Every timer tick starts temperature monitoring and serial transmission in separate `Task.Run` calls. The sender does not wait for the current scan before reading the shared variables, so a line may contain the previous value rather than the sample started on that tick. The prototype still runs, but “execute every five seconds” is not the same promise as “produce one synchronized new sample every five seconds.”
 
-- Structure route: 3D printed shell pieces, fan bracket, support settings, and slicing previews.
-- Low-cost route: acrylic and cardboard versions used to test the airflow idea quickly.
-- Control route: ESP32 PWM code, Arduino/PlatformIO versions, and OLED-related dependencies.
-- Desktop route: C# entry points and the demo video showing the control/display path.
-- PCB route: schematic, Gerber, EasyEDA, and 3MF files that keep the hardware side readable.
+代码里还藏着一个当时没有特别注意的时序细节。每次 timer tick 会把温度扫描和串口发送分别塞进两个 `Task.Run`，发送任务没有等本轮扫描结束，就直接读取共享变量。因此，发出去的不一定是这一拍刚采到的温度，也可能是上一次留下的值。它不妨碍原型跑起来，却提醒我“每五秒执行一次”和“每五秒得到一份同步新数据”并不是同一句话。
 
-这个目录按几条路线读会更清楚：
+## One Packet Every Five Seconds, Each Temperature Every Ten / 五秒发一条，每个温度约十秒轮到一次
 
-- 结构路线：3D 打印壳体、风扇支架、支撑设置和切片预览。
-- 低成本路线：亚克力和纸箱版本，用来快速试风道想法。
-- 控制路线：ESP32 PWM 代码、Arduino / PlatformIO 两种形态，以及 OLED 相关依赖。
-- 桌面端路线：C# 入口文件和能看出控制/显示链路的演示视频。
-- PCB 路线：原理图、Gerber、EasyEDA 和 3MF，让硬件部分能被重新读。
+The WinForms timer attempts one transmission every five seconds and alternates CPU and GPU. When a cached value exists and the 115200-baud virtual COM port is open, each sensor gets a nominal opportunity every ten seconds. The [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) reads through `BluetoothSerial` until a newline, separates `CPU` from `GPU` with `startsWith()`, and converts the remaining text into a number.
 
-![DIY pressure-flow cooling support settings and sliced parts / DIY 压风式散热器支撑设置和切片预览](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
+Five seconds is not a Bluetooth serial performance limit. Each message contains only a few characters and comes nowhere near filling the link. It was simply a comfortable balance between fresh data, program overhead, and communication stability: the temperature would not become badly stale, and there was no reason to refresh faster than the value was usefully changing.
 
+WinForms 定时器每五秒只尝试发送一条数据，并在 CPU 与 GPU 之间交替；缓存值存在、115200 波特率的虚拟 COM 口也已经打开时，每个传感器名义上约十秒轮到一次。[ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)通过 `BluetoothSerial` 读到换行，再用 `startsWith("CPU")` 或 `startsWith("GPU")` 分流，最后把后半段转成数值。
 
+五秒不是蓝牙串口的性能极限。这些报文只有几个字符，远谈不上把链路塞满。它更像我当时在数据新鲜度、程序负担和通信稳定性之间选出的一个舒服节奏：温度不会旧得离谱，也没有必要把刷新写得比实际变化更密。
 
-## Files That Explain The Prototype / 能说明原型的文件
+The ESP32 places each current value on the OLED while a separate pair of variables retains the highest CPU and GPU temperatures seen in the window. Every 30000 ms, the program chooses the larger maximum, calls `updatePWM()`, clears both values, and starts again. The intention was to stop one short thermal peak from being immediately erased by a lower reading and to prevent the fan from chasing every small fluctuation. At the nominal cadence, each sensor gets about three opportunities inside one 30-second window.
 
-The useful files are the ones that explain the prototype chain. 3MF, Gerber, EasyEDA, and source snippets show structure, PCB, and control logic. Installers, dependency folders, build outputs, duplicate versions, vendor files, and unexplained full project dumps make the page harder to read.
+ESP32 收到当前值后先把它送上 OLED，同时用另一组变量只记住窗口内见过的 CPU 与 GPU 最高值。每过 30000 ms，程序再从两个峰值里选更高的那个，调用 `updatePWM()`，随后清零等待下一轮。这样做是为了不让一次短时高负载马上被后面的低读数盖掉，也避免风扇跟着每个小波动来回变速。按名义节拍计算，一个 30 秒窗口里每个传感器大约有三次发送机会。
 
+The current temperature and PWM duty shown together on the OLED therefore do not have to describe the same instant. One is the latest received line; the other may still carry the highest temperature from the previous window. The display looks real-time, but the control logic deliberately lags behind by half a step.
 
-真正有用的是能解释原型链路的文件。3MF、Gerber、EasyEDA 和源码片段能说明结构、PCB 和控制逻辑；安装包、依赖目录、构建输出、重复版本、vendor 文件和没解释的整包工程会让页面越来越像文件堆。
+所以 OLED 上并排显示的“当前温度”和 PWM 占空比，不一定属于同一个瞬间：前者是最近收到的一行，后者可能还背着前一个窗口留下的最高温度。它看起来像实时联动，内部其实故意慢了半拍。
 
-If this small prototype is cleaned as an open project later, it should get license text, consistent naming, README, version history, and a build method first.
+## PID Tuned Me for Half a Week; Four Ratios Survived / PID 先把我调了半周，代码留下了四档比例
 
-以后如果真的把这个小原型整理成开源项目，要先补许可、统一命名、README、版本历史和构建方法。
+I originally wanted PID here. That plan occupied roughly half a week. Three letters looked simple in a plan; choosing the setpoint, handling the error, containing the integral term, and tuning everything until the fan stopped wandering made the problem much larger. I eventually admitted that I could not manage it yet and stepped back to a simpler rule that actually ran.
 
+`processBluetoothValue()` contains neither PID nor a lookup table. It applies four fixed ratios: `Quiet` multiplies the 30-second maximum by 0.5, `Normal` by 0.7, `High Speed` uses the value directly, and `Manual` keeps the current duty. That result is mapped into the 8-bit LEDC output on GPIO 5 at an initial 15 kHz. It is not sophisticated, but it reliably translates “temperature increased” into “fan goes faster.” For this prototype, completing the chain was more useful than letting an untuned PID improvise on the board.
 
-## What Is Still Missing / 还缺什么
+我本来想在这里做 PID。这个念头让我前后纠结了大约半周：三个字写在计划里很轻松，真要决定设定温度、处理误差、压住积分、再把参数调到风扇不会乱窜，事情一下就复杂了。最后我承认当时还驾驭不了它，先退回一套简单但能运行的规则。
 
-- Preserve the structure route: what the 3D-printed, acrylic-cut, and cardboard low-cost versions were each for.
-- Preserve the control route: how ESP32 PWM, fan speed control, desktop display, and the demo video connect.
-- Later add airflow interpretation, temperature comparison, and usage limits so the page does not rely only on a demo video to hold the scene.
+`processBluetoothValue()` 留下的不是 PID，也不是查表，而是四种模式下的固定比例映射：`Quiet` 把 30 秒峰值乘 0.5，`Normal` 乘 0.7，`High Speed` 原样使用，`Manual` 保留当前占空比。结果再从名义上的 0–100% 映射到 GPIO 5、15 kHz、8 位分辨率的 LEDC 输出。这个办法谈不上精巧，但它能把“温度升高”稳定地翻译成“风扇更快”。在原型阶段，先让整条链跑通，比让一个没调好的 PID 在板子上自由发挥更有用。
 
+Looking back at the code, I can also see how far this rule was from the PID I had imagined. There is no target temperature, error term, integral, derivative, hysteresis, or fan-speed feedback. Automatic values are not explicitly clamped to 0–100 before `map()`, and the floating-point maximum passes through an integer parameter. Calling it a closed-loop thermal controller would stretch what I built. What I had was a direct rule for turning a temperature maximum into PWM duty—and, for the first time, enough of a system to learn why the more ambitious idea was difficult.
 
-- 保留结构路线：3D 打印、亚克力切割、纸箱低成本版本各自是什么用途。
-- 保留控制路线：ESP32 PWM、风扇调速、桌面端显示和演示视频如何串起来。
-- 后续补风道解释、温度对比和使用限制，不要只靠视频撑场面。
+现在回头看代码，我也更清楚它离设想中的 PID 还有多远：没有目标温度、误差项、积分、微分、滞回或风扇转速反馈；自动结果进入 `map()` 前没有显式限制到 0–100，浮点峰值还会先经过整型参数。把它叫作闭环温控器就说过头了，它只是一条“温度峰值怎样变成占空比”的直接规则。但我第一次真的把系统跑了起来，也正因为跑起来了，才知道那个更野心勃勃的想法难在哪里。
 
-## Files / 文件
+Five physical buttons take over the controls that never made it into the application. One cycles the mode, two change frequency in 200 Hz steps, and two adjust manual duty in ten-percentage-point steps. Every short press ends in `updatePWM()`. The code also reserves a one-second long-press path, but its handler is empty. The GUI plan was not fully realized and the buttons still have an unfinished edge, yet the modes and everyday speed control no longer require opening the app.
 
-- [Desktop demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)
-- [3D printing preview 1](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
-- [3D printing preview 2](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
-- [3D printing preview 3](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
-- [ESP32 PlatformIO main.cpp](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)
-- [ESP32 Arduino PWM sketch](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)
-- [Desktop C# Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)
-- [PCB schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)
-- [PCB Gerber archive](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)
-- [EasyEDA 2026 project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)
-- [Bambu A1 mini slicing file](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)
-- [Project page](/work/juanyun-diy-cooling-prototype)
+五个实体按键把没有塞进上位机的操作接了过去：一个轮换模式，两个以 200 Hz 步长加减频率，两个在手动模式下以 10 个百分点调整占空比。每次短按最后都会调用 `updatePWM()`。代码还为一秒长按留了分支，处理函数却是空的——界面设想没有全部实现，按键功能也留着没收完的边角，但最常用的模式和快慢已经不需要打开软件才能改。
 
-![DIY pressure-flow cooling second 3D print preview / DIY 压风式散热器第二版 3D 打印预览](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
+## After Connect, the Temperature on Screen Reached the Real World / 点下连接以后，屏幕里的温度吹进了现实
 
+The 3:57 [demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) begins with Windows discovering `ESP32_Bluetooth`, continues through the CPU/GPU readings and COM-port list in the application, and ends at the acrylic machine showing temperature, 15000 Hz, and `Quiet`, `Normal`, or `Manual`. The first time I clicked Connect and watched temperature change the fan speed, I was genuinely excited. A mouse action and a few characters had crossed Bluetooth and landed on a physical board on my desk.
 
+3 分 57 秒的[演示视频](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)从 Windows 发现 `ESP32_Bluetooth` 开始，随后是上位机里的 CPU/GPU 温度与 COM 口，再转到亚克力整机上的 OLED、15000 Hz 和 `Quiet`、`Normal`、`Manual`。第一次点下连接、看到温度开始带动风扇转速时，我是真的兴奋。Windows 里的鼠标动作和几个字符，终于穿过蓝牙落到了桌上的实体电路板上。
 
-## Looking Back Now / 现在回头看
+I was too busy enjoying that first success to stop and capture packets, PWM waveforms, or a synchronized temperature curve. What stayed with me was simpler: the OLED values changed, and the fan responded to temperature and the buttons. For my first desktop controller, that was already thrilling. The window was no longer a collection of controls; it had touched the physical world.
 
-The most useful reminder from this project is that "it runs" is a weak record. The structure changes, fan choice, ESP32 control path, desktop communication, and failed versions all need short notes. Otherwise, reopening the folder a few months later becomes file-name archaeology.
-
-
-这个项目最有用的提醒是：“能跑”这个记录太弱了。结构怎么改、风扇为什么这样选、ESP32 控制链路怎么走、程序和桌面端怎么通信、失败版本在哪里，这些都应该写几句。不然几个月后再打开文件夹，就只能靠文件名考古。
+第一次成功的时候，我只顾着兴奋，没有停下来记录报文、PWM 波形或同步温度曲线。真正留在我记忆里的事情更简单：OLED 数值变了，风扇也跟着温度与按键作出反应。对第一次写上位机的我来说，这已经足够鼓舞人心——那个窗口不再只是几个控件，它真的碰到了物理世界。

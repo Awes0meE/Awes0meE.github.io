@@ -373,7 +373,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
                   {displayLanguage}
                 </figcaption>
               ) : null}
-              <pre className="overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
+              <pre tabIndex={0} className="overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
                 <code>{code}</code>
               </pre>
             </figure>

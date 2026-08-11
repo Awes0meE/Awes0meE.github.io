@@ -15,6 +15,7 @@ import {
   getProject,
   getProjects
 } from "@/lib/content";
+import { openGraphBase, site } from "@/lib/site";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -34,9 +35,21 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     return {};
   }
 
+  const socialTitle = `${project.title} | Zhiyi Li`;
+
   return {
     title: project.title,
-    description: project.summary
+    description: project.summary,
+    openGraph: {
+      ...openGraphBase,
+      title: socialTitle,
+      description: project.summary,
+      url: new URL(`/work/${slug}`, site.url)
+    },
+    twitter: {
+      title: socialTitle,
+      description: project.summary
+    }
   };
 }
 
@@ -113,8 +126,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-graphite">
                   <BilingualText
-                    en="Project notes connected to hardware, firmware, documentation, and archive material."
-                    zh="和这个项目相关的硬件、固件、文档和归档笔记。"
+                    en="Debugging records and technical notes tied to the decisions and artifacts on this project page."
+                    zh="与这个项目页面中的设计决策和工程材料直接关联的调试记录与技术笔记。"
                   />
                 </p>
               </div>
@@ -152,8 +165,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-graphite">
                   <BilingualText
-                    en="Images, videos, board renders, and public evidence connected to this project."
-                    zh="和这个项目相关的图片、视频、板卡渲染图和公开证据。"
+                    en="Board photos, schematic sheets, videos, and test captures that show this project at specific stages."
+                    zh="展示这个项目具体阶段的板卡照片、原理图分页、视频和测试截图。"
                   />
                 </p>
               </div>

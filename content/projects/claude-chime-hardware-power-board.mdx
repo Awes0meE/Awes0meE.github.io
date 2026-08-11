@@ -1,8 +1,8 @@
 ---
 title: "Claude Chime Hardware Power Board"
 titleZh: "Claude Chime 单路电磁锁电源管理板"
-summary: "A small single-channel electromagnetic-lock power board record, centered on the ESP32-S3 control direction, power-stage choices, and the files needed to read the board back later."
-summaryZh: "单路电磁锁电源管理板的小型记录，重点放在 ESP32-S3 控制方向、电源级选择，以及以后能重新读懂这块板的文件。"
+summary: "A six-pin external-control header joins battery charging, two TLV61048 boost rails, gated ADC sensing, and one lock switch while bring-up remains unverified."
+summaryZh: "六针外部控制接口把电池充电、两路 TLV61048 升压、受控 ADC 采样和单路锁开关接在一起；现有材料仍未确认上电联调结果。"
 date: "2026-04 to 2026-05"
 status: "Public Hardware Archive"
 tags: ["PCB", "Power", "ESP32-S3", "EasyEDA", "Hardware"]
@@ -12,46 +12,56 @@ assetPaths:
   - "/uploads/projects/claude-chime-hardware"
 ---
 
-## Starting Point / 起点
+The schematic begins with a six-pin `ZX-SH1.0-6PWT` header. Its nets are `ESP_5V_BUS`, `SOL_CTRL`, `CHARGE_CTRL`, `ADC_ENABLE`, `ADC_BAT`, and GND. That connector is the control boundary of this board: the schematic and BOM contain no ESP32 device. The ESP32-S3 and ESP32-S3-Zero PDFs in the folder are controller references, not evidence of an onboard MCU. In the drawn switch logic, all three control lines are active high: `CHARGE_CTRL` turns on Q4 in the charger PROG path, `ADC_ENABLE` turns on Q2 to pull Q1’s gate low, and `SOL_CTRL` drives the Q3 low-side switch.
 
-Claude Chime 这块板的资料量不大，反而适合把它写得具体一点。它围绕的是单路电磁锁电源管理：ESP32-S3 负责控制和连接，外围再把升压、充电、MOSFET 开关和锁端输出这些东西放到一块小板上。
+原理图从一组六针 `ZX-SH1.0-6PWT` 排线座开始，六根网线分别是 `ESP_5V_BUS`、`SOL_CTRL`、`CHARGE_CTRL`、`ADC_ENABLE`、`ADC_BAT` 和 GND。它才是这块板与主控的边界：原理图和 BOM 里都没有 ESP32 器件。目录里的 ESP32-S3 数据手册与 ESP32-S3-Zero 原理图只能说明外部主控方向，不能把 MCU 凭空搬到这块电源板上。按图中的开关逻辑，三路控制信号都是高有效：`CHARGE_CTRL` 打开充电器 PROG 支路里的 Q4，`ADC_ENABLE` 打开 Q2 并拉低 Q1 栅极，`SOL_CTRL` 则驱动 Q3 低边开关。
 
-The folder is small enough that the board can be read from its own files: logo image, schematic and PCB PDF exports, BOM, Gerber package, EasyEDA source, and the ESP32-S3 / power-stage datasheets. The useful part is seeing how a compact access-control board leaves enough evidence for someone to understand it again without opening a private chat history or guessing from a screenshot.
+The uploaded orange-and-black cover graphic reads “Clawdy Family.” It serves as a project visual; the electrical record starts with the schematic, PCB export, and component files.
 
-源文件里能看见 LOGO 图、原理图和 PCB PDF、BOM、Gerber、EasyEDA 工程，以及 ESP32-S3 和电源级器件的数据手册。这个项目的价值不在资料很多，而在于一块小的门锁控制板也把“以后怎么看懂它”这件事留下来了。
+上传的橙黑色封面图写着 “Clawdy Family”。它负责项目展示，真正能解释电路的材料则从原理图、PCB 导出和器件文件开始。
 
-![Claude Chime logo / Claude Chime 标识](/uploads/projects/claude-chime-hardware/claude-chime-logo.png)
+![Clawdy Family project graphic / Clawdy Family 项目标识](/uploads/projects/claude-chime-hardware/claude-chime-logo.png)
 
-## Hardware Shape / 硬件形状
+## Two TLV61048 Paths Split the Battery Load / 两路 TLV61048 分开承担电池负载
 
-I read this board along four lines:
+Both boost paths begin at `BAT+`, but they leave under different net names. U2 passes through an SS12 diode to a node labeled `4.984V`, then through a second SS12 to `ESP_5V_BUS`; the sheet marks this converter path `FREQ1MHz`. U3 passes through an SS34 diode to the separate `SOL_5V` rail, also labeled `4.984V`, with `FREQ600kHz` beside it. The paired 523 kΩ / 100 kΩ feedback dividers and the BOM entries for two `TLV61048DBVR` devices agree with those two channels.
 
-- Controller: ESP32-S3 gives the board a small MCU and connectivity center.
-- Power path: boost, charging, and MOSFET switching decide how the lock side is driven.
-- Output side: the design is scoped to one electromagnetic-lock channel, so the interface story stays clear.
-- File trail: PDF exports are quick to read, while Gerber, EasyEDA, BOM, and datasheets preserve the manufacturing and component context.
+两路升压都从 `BAT+` 起步，但最后落在不同的电源网上。U2 经过 SS12 到达标注为 `4.984V` 的节点，再穿过第二颗 SS12 接到 `ESP_5V_BUS`，旁边写着 `FREQ1MHz`；U3 则经过 SS34 接到独立的 `SOL_5V`，同样标着 `4.984V`，旁边是 `FREQ600kHz`。两组 523 kΩ / 100 kΩ 反馈分压，以及 BOM 里的两颗 `TLV61048DBVR`，都能与这两条通道对上。
 
-我会按四条线看这块板：
+Those voltage and frequency labels describe the schematic’s intended configuration, not measured output values.
 
-- 控制：ESP32-S3 是主控和连接能力的中心。
-- 电源：升压、充电和 MOSFET 开关决定锁端怎么被驱动。
-- 输出：范围收在单路电磁锁，接口故事比较清楚。
-- 文件：PDF 适合快速读图，Gerber、EasyEDA、BOM 和数据手册负责保留制造和器件依据。
+这些电压和频率标签描述的是图纸上的预期配置，并不是实测输出。
 
-## Files / 文件
+## CHARGE_CTRL and ADC_ENABLE Gate Two Battery Paths / CHARGE_CTRL 与 ADC_ENABLE 各守一条电池支路
 
-The file browser below is useful because the board can be checked from several angles instead of from one final render. The schematic PDF answers the circuit question, the PCB PDF shows placement and routing, the BOM explains the component choices, and the Gerber / EasyEDA files keep the manufacturing trail.
+The MCP73831 charger connects `ESP_5V_BUS` to its VDD pin and `BAT+` to VBAT. Its PROG path runs through a 3.3 kΩ resistor and Q4, a 2N7002. The topology is readable; charge-cycle behavior remains unrecorded.
 
-下面的文件浏览器很有用，因为它让这块板可以从几个角度重新检查，而不是只看一张最终渲染图。原理图 PDF 回答电路问题，PCB PDF 能看摆放和走线，BOM 说明器件选择，Gerber 和 EasyEDA 则保留制造线索。
+MCP73831 充电芯片的 VDD 接 `ESP_5V_BUS`，VBAT 接 `BAT+`。它的 PROG 支路经过 3.3 kΩ 电阻和 Q4 这颗 2N7002。拓扑能读清楚，充电周期行为仍没有记录。
 
-## What Stayed Out / 没放上来的东西
+`ADC_ENABLE` drives Q2, a 2N7002, which pulls Q1’s gate low; Q1, an AO3401, then connects `BAT+` to the 15 kΩ / 22 kΩ divider. The sheet annotates the resulting relation as `VBAT = Vadc × 1.682` and routes the divided node back through `ADC_BAT`. The intended conversion is readable; ADC calibration and firmware sampling remain unrecorded.
 
-The source folder also had `工程文件密码.txt`. I left it out. Board files can be useful on a portfolio page; passwords and credentials belong outside `public/uploads`.
+`ADC_ENABLE` 驱动 Q2 这颗 2N7002，由它拉低 Q1 的栅极；Q1 这颗 AO3401 再把 `BAT+` 接到 15 kΩ / 22 kΩ 分压。图纸把换算关系标成 `VBAT = Vadc × 1.682`，分压后的节点再通过 `ADC_BAT` 回到外部主控。预期换算能读懂，ADC 校准与固件采样仍没有记录。
 
-源目录里还有 `工程文件密码.txt`。这个文件没有放进网站。板卡资料可以作为作品集证据，密码和凭据不能进 `public/uploads`。
+## SOL_CTRL Ends at One Low-Side MOSFET / SOL_CTRL 最后落在一颗低边 MOSFET 上
 
-## Looking Back / 现在回头看
+The lock-output path is short. `SOL_5V` reaches the `SOL+` test point. `SOL-` returns through Q3, an AO3400A N-channel MOSFET with a 33 Ω gate resistor and a 10 kΩ pull-down. An SS34 diode spans the two lock terminals as the visible flyback path. The BOM independently lists Q3 as `AO3400A` and D4 as `SS34`.
 
-This is a small hardware item, but it reminds me of a basic documentation habit: even a compact board needs enough context to be reopened later. A logo alone is presentation, a Gerber alone is manufacturing output, and a BOM alone is a table. When schematic, PCB, BOM, Gerber, EasyEDA, and datasheets sit together, the board starts to become readable engineering work.
+锁输出这一段很短。`SOL_5V` 直接走到 `SOL+` 测试点，`SOL-` 则通过 Q3 回到地；Q3 是 AO3400A N 沟道 MOSFET，栅极串着 33 Ω，并由 10 kΩ 下拉。D4 这颗 SS34 跨在锁的两端，构成图上可见的续流路径。BOM 也分别把 Q3 和 D4 列成 `AO3400A` 与 `SS34`。
 
-这块板不大，但它提醒我一个很基础的记录习惯：小板也要留下能被重新打开的上下文。只有 LOGO 是展示，只有 Gerber 是制造输出，只有 BOM 是表格。原理图、PCB、BOM、Gerber、EasyEDA 和数据手册放在一起，它才比较像一件能被读懂的工程工作。
+This identifies one low-side switching channel, not a successful lock bring-up.
+
+这能确认一条单路低边开关通道，但不能证明锁已经成功完成上电联调。
+
+## The Archive Does Not Reach Power-On Evidence / 这组归档还没有走到上电证据
+
+The [schematic PDF](/uploads/projects/claude-chime-hardware/power-board-schematic.pdf) carries the readable signal and power paths. The 14-page [PCB PDF](/uploads/projects/claude-chime-hardware/power-board-pcb.pdf) adds board outline, component references, top and bottom views, layer previews, and a BOM rendering; its dimension view labels the board at roughly 27 × 28 mm. The standalone [BOM](/uploads/projects/claude-chime-hardware/power-board-bom.xlsx) lists 21 component groups, and the [Gerber archive](/uploads/projects/claude-chime-hardware/power-board-gerber.zip) contains copper, silkscreen, solder-mask, paste-mask, outline, document, drill-drawing, and drill outputs.
+
+[原理图 PDF](/uploads/projects/claude-chime-hardware/power-board-schematic.pdf)负责说明信号与电源路径；14 页的 [PCB PDF](/uploads/projects/claude-chime-hardware/power-board-pcb.pdf)补上板框、位号、顶底视图、分层预览和 BOM 渲染，其中尺寸页把板框标成约 27 × 28 mm；独立 [BOM](/uploads/projects/claude-chime-hardware/power-board-bom.xlsx)列出 21 组器件；[Gerber 压缩包](/uploads/projects/claude-chime-hardware/power-board-gerber.zip)则包含铜层、丝印、阻焊、钢网、板框、文档、钻孔图和钻孔输出。
+
+The [EasyEDA container](/uploads/projects/claude-chime-hardware/single-channel-lock-power-board.epro2) exposes its outer file list but requires a passphrase before its internal project data can be extracted, so this page does not use the unreadable interior to strengthen any claim. The part datasheets for [TLV61048](/uploads/projects/claude-chime-hardware/datasheets/tlv61048dbvr-dcdc-datasheet.pdf), [MCP73831](/uploads/projects/claude-chime-hardware/datasheets/mcp73831-battery-charger-datasheet.pdf), [AO3400A](/uploads/projects/claude-chime-hardware/datasheets/ao3400a-mosfet-datasheet.pdf), and the [six-pin connector](/uploads/projects/claude-chime-hardware/datasheets/zx-sh10-6pwt-connector-datasheet.pdf) explain device behavior and ratings, not this board’s measured performance. The [ESP32-S3 datasheet](/uploads/projects/claude-chime-hardware/datasheets/esp32-s3-datasheet-en.pdf) and [ESP32-S3-Zero schematic](/uploads/projects/claude-chime-hardware/datasheets/esp32-s3-zero-corepcb-schematic.pdf) remain references for the external control side.
+
+[EasyEDA 容器](/uploads/projects/claude-chime-hardware/single-channel-lock-power-board.epro2)可以列出外层文件，但抽取内部工程数据时会要求口令，因此页面不会拿无法核读的内部内容去加强结论。[TLV61048](/uploads/projects/claude-chime-hardware/datasheets/tlv61048dbvr-dcdc-datasheet.pdf)、[MCP73831](/uploads/projects/claude-chime-hardware/datasheets/mcp73831-battery-charger-datasheet.pdf)、[AO3400A](/uploads/projects/claude-chime-hardware/datasheets/ao3400a-mosfet-datasheet.pdf)和[六针连接器](/uploads/projects/claude-chime-hardware/datasheets/zx-sh10-6pwt-connector-datasheet.pdf)数据手册解释的是器件行为与额定值，不是这块板的实测性能；[ESP32-S3 数据手册](/uploads/projects/claude-chime-hardware/datasheets/esp32-s3-datasheet-en.pdf)与 [ESP32-S3-Zero 原理图](/uploads/projects/claude-chime-hardware/datasheets/esp32-s3-zero-corepcb-schematic.pdf)则保留为外部控制侧参考。
+
+Taken together, the files make the intended path inspectable, but they do not establish assembled, working hardware.
+
+这些文件已经让预期路径可以被检查，但还不能证明硬件已经装配并正常工作。

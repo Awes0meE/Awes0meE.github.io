@@ -1,65 +1,56 @@
 ---
-title: "STM32 External Unit Firmware"
-titleZh: "STM32 外机固件整理笔记"
-summary: "A firmware-structure note for the external unit: task timing, App/Service/BSP layering, CMake/OpenOCD setup, and the records still needed for bring-up."
-summaryZh: "外机固件结构笔记：任务节拍、App/Service/BSP 分层、CMake/OpenOCD 配置，以及后续 bring-up 还要补的记录。"
+title: "Five Firmware Cadences Around the ACUnit Main Loop"
+titleZh: "五档节拍怎样围住 ACUnit 固件主循环"
+summary: "A timing-map reading of the ACUnit firmware record: five periodic cadences, main-loop responsibilities, communication surfaces, and unmeasured timing."
+summaryZh: "从公开摘录读取 ACUnit 固件的时间地图：五档周期节拍、主循环职责、通信接口，以及尚未实测的时序表现。"
 date: "2026-05-06"
 tags: ["STM32", "Firmware", "CMake", "BSP"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
-## Starting Point / 起点
 
-外机固件一开始看起来就是典型 STM32 工程：CubeMX 生成 `Core`，然后功能一点点往主循环里加。压缩机逻辑、FG 测速、电子膨胀阀、NTC、DHT22、OLED、编码器、按键，全都能先用最直接的方法塞进去，但时间一长主循环就会变成一团线。
+## One Main Loop, Five Cadences / 一个主循环，五档节拍
 
-At first glance, the firmware looked like a normal STM32 project: CubeMX generated `Core`, then functions accumulated in the main loop. Compressor logic, FG speed sensing, electronic expansion valve stepping, NTC, DHT22, OLED, encoder, and keys can all be added directly, but the loop quickly becomes tangled once several of them run together.
+The existing public note does not expose source files, but it does preserve a clear schedule. Electronic-expansion-valve work is assigned a 1 ms cadence; FG maintenance and encoder/key input sit at 10 ms; NTC updates at 100 ms; OLED refresh at 500 ms; and DHT22 reads at 2000 ms.
 
-这条线更像一套联调用的 STM32 平台：要能烧录，要能看懂任务节拍，要能改接口和显示内容。很多逻辑还在早期阶段，但已经暴露了一个很实际的问题：如果没有分层和说明，换台电脑或换个人维护都会很痛苦。
+既有公开笔记没有展开源码，却保留了一张很清楚的节拍表：电子膨胀阀任务放在 1 ms，FG 维护与编码器 / 按键输入放在 10 ms，NTC 更新是 100 ms，OLED 刷新是 500 ms，DHT22 读取则是 2000 ms。
 
-This line felt like a bring-up platform. It needed flashing, readable task timing, interface changes, and display changes. Even before the logic became polished, it already showed why layering and short documents matter when the project moves across machines or people.
+| Cadence | Responsibility |
+| --- | --- |
+| `1 ms` | Electronic expansion valve stepping |
+| `10 ms` | FG maintenance, encoder/key scan, UI input |
+| `100 ms` | NTC update |
+| `500 ms` | OLED refresh |
+| `2000 ms` | DHT22 read |
 
-## Layering / 分层
+| 节拍 | 职责 |
+| --- | --- |
+| `1 ms` | 电子膨胀阀步进 |
+| `10 ms` | FG 维护、编码器 / 按键扫描与 UI 输入 |
+| `100 ms` | NTC 更新 |
+| `500 ms` | OLED 刷新 |
+| `2000 ms` | DHT22 读取 |
 
-The project was organized into `Core`, `App`, `Service`, and `BSP_drivers`. The point was simple: low-level drivers stay low-level, scheduling stays in the application layer, and UI refresh or sensor update logic should have a place to live.
+Read as a main-loop map, the table keeps fast actuator work away from slow environmental sensing. It also exposes a practical pressure point: a blocking operation in a slow path can still delay a faster responsibility if the loop has no stronger scheduling mechanism. The excerpt gives intended intervals, not measured jitter or deadline evidence.
 
-工程被拆成 `Core`、`App`、`Service`、`BSP_drivers` 几层。目的很直接：底层驱动归底层，任务调度归应用层，UI 刷新和传感器更新都要有自己的位置。
+把表格当作主循环地图看，快速执行器任务与慢速环境采样被分到了不同档位；它也顺手暴露一个很实际的压力点——如果慢路径里出现阻塞，而循环又没有更强的调度机制，快任务一样可能被拖住。这里记录的是预期间隔，不是抖动实测或 deadline 证明。
 
-VSCode + CMake + OpenOCD 这一套也有类似作用。它把“怎么编译、怎么烧录、引脚在哪里、这个版本改过什么”写在 IDE 之外。CubeIDE 当然能跑，但只靠一个 IDE 的工程状态，交接和复现会变脆。
+## `Core`, `App`, `Service`, and `BSP_drivers` Name the Boundaries / 四个目录名先划开职责
 
-VSCode, CMake, OpenOCD, README, PINOUT, and release notes make the workflow visible outside one IDE. They record how to build, flash, find pins, and understand what changed between versions.
+The same record names four layers: `Core`, `App`, `Service`, and `BSP_drivers`. `Core` is associated with the generated STM32 project, while application scheduling and reusable peripheral-facing work are separated into the other directories. The names are enough to express an intended boundary, although the files behind them are not linked here.
 
-## Task Rhythm / 任务节拍
+同一份记录给出四层目录名：`Core`、`App`、`Service` 与 `BSP_drivers`。`Core` 对应生成的 STM32 工程，其余目录把应用调度与可复用的外设侧工作分开。只看目录名已经能读出预期边界，但目录里的文件并未公开链接。
 
-The firmware needed a visible timing rhythm because each peripheral has its own natural update rate.
+Two optimizations are described beside the schedule. OLED refresh can be skipped when display content is unchanged, reducing repeated I2C traffic and formatting. The NTC lookup is described as moving from a linear search to binary search. Both ideas target repeated work inside periodic paths; without a trace or benchmark, their timing effect remains unknown.
 
-- 1 ms task: electronic expansion valve step control.
-- 10 ms task: FG maintenance, encoder/key scanning, and UI input.
-- 100 ms task: NTC temperature update.
-- 500 ms task: OLED refresh.
-- 2000 ms task: DHT22 temperature-and-humidity read.
-- Skip OLED refresh when the content has not changed to reduce I2C traffic and unnecessary formatting.
-- Change the NTC lookup from linear search to binary search; periodic tasks should waste less work wherever possible.
+节拍旁边还写了两项优化：OLED 内容没变化时跳过刷新，减少重复 I2C 传输与格式化；NTC 查表则从线性搜索改成二分搜索。两项都在削减周期路径里的重复工作，但没有 trace 或 benchmark，实际省下多少时间仍然未知。
 
-- 1 ms 任务用于电子膨胀阀步进控制。
-- 10 ms 任务用于 FG 维护、编码器按键扫描和 UI 输入。
-- 100 ms 任务用于 NTC 温度更新。
-- 500 ms 任务用于 OLED 刷新。
-- 2000 ms 任务用于 DHT22 温湿度读取。
-- OLED 内容不变时跳过刷新，少一点 I2C 传输和无意义格式化。
-- NTC 查表从线性搜索改成二分搜索，周期任务里能少耗一点就少耗一点。
+## Communication Labels Do Not Supply the Protocol Code / 通信标签补不出协议代码
 
-## File Handling / 文件处理
+The V2.1 ACUnit map labels compressor Modbus UART, ESP-01S Wi-Fi, HC-05 Bluetooth, and an ST-Link SWD port around the main board. Those labels identify firmware-facing surfaces. They do not reveal UART framing, retry behavior, module commands, fault handling, or the OpenOCD flashing sequence.
 
-This note explains the firmware structure and debugging direction. The `README`, `PINOUT`, `.ioc`, release notes, and `.c` sources stay in the private project archive for now.
+V2.1 ACUnit 接口图在主控板周围标出压缩机 Modbus UART、ESP-01S Wi-Fi、HC-05 蓝牙与 ST-Link SWD。这些标签能定位固件要面对的接口，却不会自动补出 UART 帧、重试策略、模块命令、故障处理或 OpenOCD 烧录过程。
 
-页面只写固件结构和调试思路。README、PINOUT、IOC、release notes 和 `.c` 源码暂时留在私有项目归档里。
+The schedule is therefore the most concrete part of the record. It shows how control, sensing, display, and input were meant to take turns in one firmware structure. Source listings, serial logs, valve traces, and on-target timing measurements would be needed to say how that structure behaved on hardware.
 
-## Notes To Add Later / 后面要补
-
-The most useful follow-up records would be flashing screenshots and debugging logs: OpenOCD connection, OLED refresh before and after optimization, DHT22 read-failure handling, and the stepping rhythm of the electronic expansion valve.
-
-这条线后面最该补烧录截图和调试日志，比如 OpenOCD 连接、OLED 刷新前后、DHT22 读取失败时的处理、电子膨胀阀步进节拍。
-
-Looking back, the lesson here is practical: firmware structure starts to matter as soon as several slow and fast tasks share one board. If the rhythm is clear, later debugging has something to hold onto.
-
-现在回头看，这条线给我的提醒很实际：只要快慢不同的任务开始共用一块板，固件结构就会变重要。节拍写清楚，后面调试才有东西可抓。
+因此，节拍是这份记录里最具体的一层：它说明控制、传感、显示与输入准备怎样在同一套固件结构里轮流工作。要判断这套结构在硬件上表现如何，还需要源码清单、串口日志、阀动作曲线与目标板时序测量。

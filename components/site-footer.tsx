@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Mail, Rss } from "lucide-react";
+import { Github, Rss } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { site } from "@/lib/site";
 
@@ -16,9 +16,6 @@ export function SiteFooter() {
         <div className="flex items-center gap-5 text-ink">
           <a href={site.github} aria-label="GitHub" className="transition hover:text-pine">
             <Github size={18} />
-          </a>
-          <a href={`mailto:${site.email}`} aria-label="Email" className="transition hover:text-pine">
-            <Mail size={18} />
           </a>
           <Link href="/notes" aria-label="Notes" className="transition hover:text-pine">
             <Rss size={18} />

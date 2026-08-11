@@ -11,7 +11,7 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
       <div className="relative min-h-[330px] overflow-hidden rounded-lg border border-line bg-chalk">
         <Image
           src="/uploads/visuals/circuit-board.svg"
-          alt="Circuit board on engineering notes"
+          alt="Robotic control board illustration"
           fill
           priority
           sizes="(min-width: 1024px) 45vw, 100vw"
@@ -22,7 +22,7 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
         <div className="relative min-h-[158px] overflow-hidden rounded-lg border border-line bg-[#13201b]">
           <Image
             src="/uploads/visuals/dashboard.svg"
-            alt="Control dashboard visualization"
+            alt="Embedded control dashboard illustration"
             fill
             sizes="(min-width: 1024px) 20vw, 100vw"
             className="object-cover"
@@ -31,7 +31,7 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
         <div className="relative min-h-[158px] overflow-hidden rounded-lg border border-line bg-chalk">
           <Image
             src="/uploads/visuals/lab-notes.svg"
-            alt="Engineering notebook"
+            alt="Hardware bring-up notebook illustration"
             fill
             sizes="(min-width: 1024px) 20vw, 100vw"
             className="object-cover"

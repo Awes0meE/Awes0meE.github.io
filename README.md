@@ -1,10 +1,12 @@
-# XJTLU Portfolio / 西浦个人作品集网站
+# Robotic Systems Hardware Portfolio / 机器人系统硬件作品集
 
 English | [中文](#中文说明)
 
 ## Overview
 
-This repository contains the source code for Li Zhiyi / Awes0meE's bilingual engineering portfolio. It replaces an old Hexo-generated static export with a maintainable Next.js application designed for projects, notes, media, and future full-stack extensions.
+This repository contains the source code for Zhiyi Li's bilingual robotic systems hardware portfolio, with Awes0meE / 66CCFF Labs as a secondary brand. It organizes projects, notes, and media around embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, motor drives, and power electronics.
+
+Zhiyi Li is a first-year student in the Master of Science (Robotics and Intelligent Systems) programme at Nanyang Technological University's School of Mechanical and Aerospace Engineering and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University.
 
 The old deployed Hexo output is preserved under `legacy/hexo-export/` for reference only. It is not served by the new application.
 
@@ -12,6 +14,11 @@ Public site:
 
 - Production: `https://www.66ccff-labs.com/`
 - Vercel deployment: `https://awes0mee-portfolio.vercel.app/`
+
+## Identity And Privacy
+
+- The public site leads with the robotic systems hardware direction; student status provides current-stage context rather than the primary headline.
+- Public static configuration deliberately omits personal email and location. GitHub is the only public contact route.
 
 ## Tech Stack
 
@@ -138,6 +145,8 @@ Important privacy rule: `visibility: private` hides a note from the website, but
 
 Current workspace content state:
 
+- Homepage, About, and SEO copy now present Zhiyi Li as an early-career robotic systems hardware developer and current NTU MSc (Robotics and Intelligent Systems) student, with his XJTLU Communication Engineering degree as prior education.
+- Reader-facing contact surfaces expose GitHub only; personal email and location are not stored in the public site constants.
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
@@ -202,7 +211,9 @@ git push origin v0.7.1
 
 ## 项目概览
 
-这个仓库是 Li Zhiyi / Awes0meE 的英中双语工程作品集网站源码。它把原来由 Hexo 教程生成的静态输出，重构成一个可长期维护的 Next.js 应用，用于展示项目、学习笔记、媒体材料，并为未来的全栈功能预留空间。
+这个仓库是 Zhiyi Li 的英中双语机器人系统硬件作品集源码，Awes0meE / 66CCFF Labs 作为辅助品牌。项目、笔记和媒体内容围绕嵌入式控制、原理图与 PCB 设计、板级 bring-up、软硬件联调、电机驱动和电力电子展开。
+
+Zhiyi Li 现为南洋理工大学机械与航空航天工程学院机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。
 
 旧版 Hexo 输出保存在 `legacy/hexo-export/`，只作为历史参考，不再作为新网站的服务内容。
 
@@ -210,6 +221,11 @@ git push origin v0.7.1
 
 - 生产域名：`https://www.66ccff-labs.com/`
 - Vercel 部署地址：`https://awes0mee-portfolio.vercel.app/`
+
+## 身份定位与隐私
+
+- 公开站点首先呈现机器人系统硬件方向，学生身份只用于说明当前阶段，不作为主标题。
+- 公开静态配置不保存个人邮箱或所在地，GitHub 是唯一公开联系渠道。
 
 ## 技术栈
 
@@ -307,6 +323,8 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 当前工作区内容状态：
 
+- 首页、About 和 SEO 文案已将 Zhiyi Li 定位为正处于职业起步阶段的机器人系统硬件开发者和南洋理工大学机器人与智能系统硕士在读学生，并将西交利物浦大学通信工程学历作为既往教育背景。
+- 面向读者的联系入口只保留 GitHub；公开站点常量不保存个人邮箱或所在地。
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。

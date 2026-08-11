@@ -1,8 +1,8 @@
 ---
 title: "Nanjing Turing Qt, Build, and Packaging Learning Log"
 titleZh: "南京图灵 Qt、编译与打包学习记录"
-summary: "A Nanjing Turing internship record around getting Seamly2D running, adding a small account-management layer, studying CMake/build logic, and packaging Qt releases on Windows and macOS."
-summaryZh: "南京图灵实习记录：跑通 Seamly2D，补一个轻量账号管理层，学习 CMake/编译逻辑，并摸索 Windows 与 macOS 上的 Qt Release 打包。"
+summary: "An internship learning trail from bringing Seamly2D up on Qt 6 and adding a local role layer to tracing CMake logic and testing release packaging."
+summaryZh: "南京图灵实习学习链：在 Qt 6 上跑通 Seamly2D、补本地角色层，再沿 CMake 与依赖关系把 Release 打包推进到已验证边界。"
 date: "2025-08"
 status: "Completed"
 tags: ["Qt", "C++", "CMake", "Packaging", "Internship"]
@@ -49,86 +49,50 @@ assetPaths:
   - "/uploads/projects/nanjing-turing/other-materials/image-20230309130644912.png"
 ---
 
-## Starting Point / 起点
+## A Matched qmake Kit Brought the Upstream App Up / 配对后的 qmake Kit 跑起了上游应用
 
-这段南京图灵实习是我第一次比较集中地和一个真实 Qt/C++ 桌面项目打交道。项目本体是 Seamly2D，一个服装纸样设计软件。刚开始的任务很朴素：把项目拉到 Windows 电脑上，用 Qt Creator 跑起来，弄清楚 Kit、qmake、MSVC 和依赖之间到底怎么配。
+The run-up matched the checked-out Seamly2D branch to Qt 6.5.3 MSVC2019 64-bit and the v142 toolchain. Once qmake, the full build, the deployment path, and the runtime agreed, the upstream application ran on the Windows 11 development machine. The mismatch trail and recovery steps remain in the [Qt6 first-run note](/notes/turing-qt-seamly2d-first-run).
 
-This internship moved in a very practical order: first make Seamly2D run, then add a light registration/login and user-management layer, then learn why a Qt program that runs inside Qt Creator still needs a separate release and packaging process before it can run on another machine.
+这次 run-up 把检出的 Seamly2D 分支与 Qt 6.5.3 MSVC2019 64-bit、v142 工具链配到一起。等 qmake、完整构建、部署路径与运行时彼此一致，上游应用才在 Windows 11 开发机上运行；错配与恢复过程保留在 [Qt6 首跑笔记](/notes/turing-qt-seamly2d-first-run) 中。
 
-这条线的顺序很实际：先让 Seamly2D 跑起来，再加一层轻量注册/登录和用户管理，接着开始理解为什么 Qt Creator 里能点绿色运行按钮，离“换台机器也能跑”还有一整套 Release 和打包流程。
+Seamly2D is the upstream open-source pattern-design application used for this learning work. Its wordmark identifies the software being studied; it is not a personal visual design.
 
-![Seamly2D banner / Seamly2D 项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
+Seamly2D 是这次学习所基于的上游开源服装纸样软件。下面的标识用来说明软件来源，不是个人视觉设计作品。
 
-## Source Folder / 源目录里有什么
+![Upstream Seamly2D wordmark / Seamly2D 上游项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
 
-源目录里有周日志、我当时写下的学习笔记、脚本、样例文件，也有很多生成物。页面只放小的阅读材料和清理过的摘录；完整上游源码树、build 目录、安装包、DLL 堆和大压缩包都留在网站之外。
+## The Role Artifact Stayed at the Desktop Entrance / 角色代码停留在桌面入口
 
-The useful material now falls into a few tracks:
+The next experiment placed a small local registration, login, and user-management layer before the upstream interface. Its public excerpt contains `Role::User`, `Role::Admin`, the `admin` special case, and a `QSettings` role lookup. The public excerpt shows only the local role lookup, so this remained a desktop account layer.
 
-- Three weekly development logs: Qt setup, registration/login, user management, Windows Release, signing, and macOS packaging.
-- Windows 11 first-run note: Qt5 failed, Qt6/MSVC2019 worked, and the right qmake / Kit combination mattered.
-- Windows Release packaging note: `windeployqt`, third-party DLLs, self-signing, and Inno Setup.
-- Two Notion-exported CMake/build-logic notes: one starts from CMake basics, the other connects MSVC, SDK, CMake, Ninja, and Qt package discovery.
-- macOS packaging scripts: `macdeployqt`, DMG creation, and self-signing attempts.
-- `Seamly2D_addon/`: login, registration, control panel, user management, password hashing, and role-control files.
-- `sm2d` and `smis` samples: small XML files for reading Seamly2D's data shape.
+接下来的实验在上游界面前加入小型本地注册、登录与用户管理层。公开摘录包含 `Role::User`、`Role::Admin`、`admin` 特判与 `QSettings` 角色查询；它只展示本地角色读取，因此这里仍是一层桌面账号入口。
 
-源目录里比较有用的是这些东西：
+[Open the local role-model excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)
 
-- 三周开发日志：从 Qt 环境、注册登录、用户管理，到 Release、签名和 macOS 打包。
-- Windows 11 跑 Seamly2D 的流程记录：主要是 Qt5 失败、Qt6/MSVC2019 跑通、qmake 和 Kit 的选择。
-- Release 打包 PDF：Windows 下 `windeployqt`、第三方 DLL、自签名、Inno Setup 的步骤。
-- Notion 导出的 CMake 和编译底层逻辑原文：一份从 CMake 入门开始搭地基，一份把 MSVC、SDK、CMake、Ninja、Qt 包发现这些概念串起来。
-- macOS 打包脚本：尝试用 `macdeployqt`、DMG 和自签名把流程自动化。
-- `Seamly2D_addon/`：登录、注册、控制面板、用户管理、密码哈希和角色控制相关新增文件。
-- `sm2d` 和 `smis` 样例文件：用来观察 Seamly2D 的 XML 数据格式。
+[打开本地角色模型摘录](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)
 
-## What I Actually Worked On / 实际做过的事
+## qmake Built Seamly2D; CMake and Ninja Explained the Layers / qmake 构建 Seamly2D，CMake 与 Ninja 拆解层次
 
-第一周主要是把环境跑通，同时把最基本的账号入口接上。注册和登录用 `QDialog`、`QSettings` 做起来，密码从明文存储改成加盐 SHA-256 校验，输入框改成隐藏显示。登录界面还有一个很具体的坑：中文输入法状态下输密码可能导致程序闪退，后来通过限制用户名和密码框的输入法提示绕过去。
+The recorded Seamly2D route remained qmake. The CMake/Ninja material was a parallel study of the layers beneath Qt builds: compiler and linker, CMake configure and generate stages, the native build tool, Qt package discovery, and runtime deployment. It does not claim that this upstream project was migrated to CMake.
 
-The first week felt like keeping the project alive before doing anything fancy: which Kit Qt Creator should use, where registration/login enters `main`, and how prompts should behave for existing users, missing users, and wrong passwords. The changes were small, but they had to connect cleanly before the original Seamly2D interface could be reached.
+记录中的 Seamly2D 路线始终使用 qmake；CMake/Ninja 材料是并行展开的构建分层学习，把编译器与链接器、CMake 的 Configure 与 Generate、本机构建工具、Qt 包发现和运行时部署拆开来看，并不表示这个上游项目已经迁移到 CMake。
 
-第二周继续补登录后的控制面板。第一次注册的账号必须叫 `admin`；管理员能看到用户管理入口，普通用户看不到。删除、提升为管理员、降级为普通用户这些操作都加了确认和角色限制，其中只有 `admin` 能降级其他管理员。
+That distinction also determines how the public artifacts should be read. The first-run note records the qmake/Qt route; the [CMake and build-logic note](/notes/turing-cmake-build-logic) holds the parallel tutorial sources and translations. Its diagrams include an upstream tutorial image and the same image embedded in a Notion export, alongside DeepSeek-generated explanations. The archive toolchain sketch below has no author identified in the source record.
 
-This did not touch Seamly2D's main drawing workflow deeply. It added a small permission layer in front of the original application, and the value was mostly in the details: current user, target role, visible buttons, confirmation prompts, and clear error messages.
+这一区分也决定了公开材料该怎样阅读：首跑笔记记录 qmake/Qt 路线，[CMake 与编译逻辑笔记](/notes/turing-cmake-build-logic)则保留并行学习所用的教程来源与翻译。相关图示包括一张上游教程图、它在 Notion 导出中的同图副本，以及由 DeepSeek 生成的解释图；下方档案草图的原始记录没有注明作者。
 
-这部分没有深入改 Seamly2D 的制图主流程，更多是在原应用入口前加一层轻量权限。真正要细想的是当前登录用户是谁、目标用户是什么角色、哪些按钮该显示、误操作能不能取消、提示信息有没有说清楚。
+![Build-toolchain sketch from the internship archive / 实习档案中的构建工具链草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
 
-## Build And Release / 编译与发布
+## Windows Closed Locally, While macOS Signing Stayed Open / Windows 本机闭环，macOS 签名仍未收口
 
-最耗时间的部分其实在编译和打包。Qt5 和 Qt6 不能随便互换，`core5compat` 会影响项目能否通过，MSVC v142 要和 Qt 包匹配，旧 `.pro.user` 也可能把环境带偏。Qt Creator 里 Debug 能跑，只说明开发机上的那套配置当下可用，Release 文件夹还要单独整理。
+The Windows record reaches a specific local result: a Release build, Qt dependency collection with `windeployqt`, a manual copy of `xerces-c_3_2.dll`, self-signing, an Inno Setup installer, installation, and a successful launch on the same machine. The accompanying workflow also states the missing check plainly: the installer was not tested on a clean Windows device without Visual Studio or Qt. Local installation therefore closed the learning loop, but did not establish a generally distributable or production release.
 
-On Windows, the path went through `windeployqt`, missing third-party DLLs such as `xerces-c_3_2.dll`, self-signed certificates, and Inno Setup. On macOS, the same idea turned into `.app`, frameworks, `macdeployqt`, signing checks, and DMG packaging. This was the part where "runs on my machine" finally became a concrete engineering problem instead of a joke.
+Windows 记录走到了一个明确的本机结果：Release 构建、用 `windeployqt` 收集 Qt 依赖、手动补 `xerces-c_3_2.dll`、自签名、Inno Setup 安装包、安装并在同一台机器启动成功。配套流程也把缺口写得很直白：没有在一台不装 Visual Studio 和 Qt 的干净 Windows 设备上验证。因此，本机安装闭合了学习流程，却还不能推出“已经可普遍分发”或“生产发布完成”。
 
-Windows 侧要用 `windeployqt` 收依赖，还要补 `xerces-c_3_2.dll` 这类第三方库；再往后才是自签名、Inno Setup 和安装包。macOS 侧也一样，`.app`、frameworks、`macdeployqt`、签名检查、DMG 都要重新过一遍。到这里，“我电脑上能跑”终于变成了一个具体工程问题。
+On macOS, the records support Debug and Release builds, `macdeployqt`, and an unsigned DMG path. A self-signed certificate was created, while the weekly log says the automation worked except for signing. The second shell script contains `codesign`, `spctl`, and DMG steps, but a script that describes the intended sequence is not a completed signing result. Apple signing and notarization remained unfinished.
 
-![Handwritten build logic sketch / 编译逻辑手绘草图](/uploads/projects/nanjing-turing/compile-logic-sketch.jpg)
+macOS 侧有记录支持 Debug、Release、`macdeployqt` 与无签名 DMG 路线；自签名证书创建成功，但周日志明确写着自动化“除签注外功能均实现”。另一份 shell 脚本虽然列出了 `codesign`、`spctl` 和 DMG 步骤，它记录的仍是目标顺序，不等于签名已经跑通。Apple 签名与 notarization 都停在未完成状态。
 
-## Public Files / 页面里保留的文件
+The [Release packaging note](/notes/turing-release-packaging-cross-platform) keeps the Windows commands and local verification. The two macOS artifacts separate the [working unsigned DMG path](/uploads/projects/nanjing-turing/macos-build-package.sh) from the [unfinished signing sequence](/uploads/projects/nanjing-turing/macos-build-package-sign.sh). The [three-week log](/notes/turing-three-week-development-log) owns the chronological change in what “working” meant, while the [XML sample note](/notes/turing-sm2d-xml-data-format) keeps the separate `.sm2d` and `.smis` reading trail.
 
-These files are the parts worth reading on the website:
-
-- [CMake and build-logic note page](/notes/turing-cmake-build-logic)
-- [CMake primer Notion Markdown](/uploads/projects/nanjing-turing/other-materials/CMake%20%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20250669c3f4008099a6d6c614a4ca6937.md)
-- [Compiler/build logic Notion Markdown](/uploads/projects/nanjing-turing/other-materials/%E5%85%B3%E4%BA%8E%E7%BC%96%E8%AF%91%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%EF%BC%88Qt%20%E5%AD%A6%E4%B9%A0%E5%AF%BC%E5%90%91%EF%BC%89%2024f669c3f4008089bc2df266992845de.md)
-- [Windows Release packaging note](/notes/turing-release-packaging-cross-platform)
-- [Windows Release packaging PDF](/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf)
-- [macOS unsigned packaging script](/uploads/projects/nanjing-turing/macos-build-package.sh)
-- [macOS signing packaging script](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)
-- [role-management code excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)
-- [Seamly2D first-run note](/notes/turing-qt-seamly2d-first-run)
-- [sm2d XML sample note](/notes/turing-sm2d-xml-data-format)
-- [three-week development log](/notes/turing-three-week-development-log)
-
-这里的 CMake、Qt 首跑、Release 打包、sm2d XML 样例等笔记，大部分是当时写下的原文或原文型材料。它们已经作为页面内容保留，我这次只改项目主页和后来整理出来的三周开发日志，不再重写那些原始笔记本身。
-
-## Looking Back / 回头看
-
-This internship is useful to keep because it shows the path from "I can open the source" to "I can explain why the built program fails somewhere else." Some pieces were feature work, and some pieces were simply the moment when Qt's environment, compiler, SDK, qmake/CMake rules, runtime libraries, and deployment tools became less blurry.
-
-这段实习值得保留，是因为它展示了从“我能打开源码”到“我能解释为什么构建出来的程序换台机器会失败”的过程。有些地方是功能开发，有些地方只是 Qt 环境、编译器、SDK、qmake/CMake 规则、运行时库和部署工具终于没那么模糊的瞬间。
-
-Looking back, the most useful trace is the first fairly complete pass from local development to files another machine might run. Broken environments, compiler conflicts, missing DLLs, signing, and platform moves are less pretty than a final screenshot. They are much closer to what the internship felt like.
-
-现在再看，最有用的线索是第一次比较完整地经历桌面软件从本机开发到整理成可运行文件的过程。环境不通、编译器冲突、打包缺 DLL、签名、换平台重来，这些细节没有最终截图漂亮，但更接近当时真实的实习状态。
+[Release 打包笔记](/notes/turing-release-packaging-cross-platform)保留 Windows 命令与本机验证；两份 macOS 材料分别对应[已跑通的无签名 DMG 路线](/uploads/projects/nanjing-turing/macos-build-package.sh)与[尚未完成的签名顺序](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)。[三周开发记录](/notes/turing-three-week-development-log)负责“能跑”含义变化的时间线，[XML 样例笔记](/notes/turing-sm2d-xml-data-format)则单独保留 `.sm2d` 与 `.smis` 的阅读线索。

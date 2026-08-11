@@ -1,63 +1,40 @@
 ---
-title: "STM32 Base Unit Firmware"
-titleZh: "STM32 底座板固件整理笔记"
-summary: "A base-unit firmware note about DHT sensing, IR presence detection, fan PWM, OLED UI, Bluetooth reporting, and saving user settings through Flash."
-summaryZh: "底座板固件笔记，记录 DHT 温湿度、红外在位检测、风扇 PWM、OLED UI、蓝牙上报，以及通过 Flash 保存用户设定。"
+title: "Read, Display, Report, Remember: The BaseUnit Responsibility Loop"
+titleZh: "读取、显示、上报、记住：BaseUnit 的职责循环"
+summary: "A BaseUnit firmware record connecting two DHT inputs, presence sensing, fan PWM, OLED state, Bluetooth messages, and Flash-backed settings recovery."
+summaryZh: "一份 BaseUnit 固件职责记录：连接两路 DHT、在位检测、风扇 PWM、OLED 状态、蓝牙报文与 Flash 设定恢复。"
 date: "2026-05-06"
 tags: ["STM32", "Firmware", "Flash", "OLED"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
-## Starting Point / 起点
 
-底座板固件没有外机那么多“大件”，但它更像一个完整的小设备。它要读环境温湿度和出风口温湿度，要判断设备在不在位，要让用户调风扇，要在 OLED 上显示状态，还要通过蓝牙上报数据。每个功能单独看都不大，放进同一个主循环后就开始考验节奏。
+## Six Responsibilities Share the Loop / 六类职责共用主循环
 
-The base-unit firmware has fewer large parts than the external-unit firmware, but it feels closer to a complete small device. It reads ambient and outlet temperature/humidity, checks whether the device is in position, lets the user adjust the fan, shows state on OLED, and reports data over Bluetooth. Each feature is small by itself. Together they need timing and state handling.
+The existing public note records a compact BaseUnit responsibility set. DHT11 is assigned to ambient temperature and humidity; DHT22 to outlet temperature and humidity. An infrared input represents whether the device is in position, fan PWM carries a 0-100% setting, the OLED shows `ENV / OUT / FAN` plus a shutdown countdown, Bluetooth reports data, and Flash holds settings across a restart.
 
-一开始最担心的是它变成“能跑但很乱”的工程。风扇能转、OLED 能亮只是第一步，真实使用还要考虑关机确认、掉电记忆、传感器读取失败、按键误触发、蓝牙发送会不会卡住主循环。
+既有公开笔记记录了一组紧凑的 BaseUnit 职责：DHT11 对应环境温湿度，DHT22 对应出风口温湿度；红外输入表示设备是否在位，风扇 PWM 接收 0-100% 设定，OLED 显示 `ENV / OUT / FAN` 与关机倒计时，蓝牙负责上报，Flash 则跨重启保留设定。
 
-The part that made it feel like a device was persistence. Fan setting, shutdown confirmation, sensor failure handling, and communication timing all ask what should happen after the user stops looking at the screen or after power is lost.
+That list reads less like the ACUnit's five-cadence table and more like a state loop. Sensor values enter, presence and key state affect the current mode, a fan command leaves, the screen mirrors selected state, a message summarizes it, and persistent data must be recovered at startup. No periodic intervals are attached to this record, so assigning ACUnit timing values here would only make the two firmware lines look tidier than the material allows.
 
-## Code Structure / 代码怎么分
+这份清单不像 ACUnit 的五档周期表，更像一条状态循环：传感值进来，在位与按键状态影响当前模式，风扇命令出去，屏幕映射选中的状态，报文把它压缩后发送，持久化数据还要在启动时恢复。记录没有给这些职责配周期值，硬把 ACUnit 的节拍搬来，只会让两套固件显得比材料本身更整齐。
 
-底座固件按 `App + BSP_drivers + Core` 整理。`Core` 保留 CubeMX 生成的外设初始化，`BSP_drivers` 处理 DHT、IR、风扇、OLED、蓝牙、Flash，`App` 负责状态机和任务调度。这样后续看代码时，至少知道该去哪里找问题。
+## Flash Turns One Setting Into a Recovery Problem / Flash 把一个设定值变成恢复问题
 
-The firmware is organized as `App + BSP_drivers + Core`. `Core` keeps CubeMX peripheral initialization, `BSP_drivers` handles DHT, IR, fan, OLED, Bluetooth, and Flash, and `App` owns the state machine and task scheduling.
+The persistence description names a header, records, CRC32, and a commit mark, with the most recent valid setting recovered after restart. Those nouns already reveal the intended failure cases: a record can be incomplete, corrupt, older than another record, or absent. A delayed write is also mentioned in the earlier public description, which would reduce writes when a setting changes repeatedly.
 
-风扇设定值也要做掉电记忆，是因为真实设备会被反复使用。每次断电再上电都回到默认值，体验会很粗糙。Flash 保存看起来只是一个小功能，却会把擦写次数、延迟写入、CRC 和最近一次有效记录恢复都带出来。
+持久化描述里出现了页头、记录、CRC32 与 commit 标记，并写到重启后恢复最近一条有效设定。光是这些名词，就把预期故障摊开了：一条记录可能没写完、校验失败、比另一条更旧，或者根本不存在。此前公开描述还提到延迟写入，用来避免设定值连续变化时反复落 Flash。
 
-Saving a fan setting in Flash sounds tiny, but it brings real firmware questions: erase count, delayed writes, CRC, and recovery of the most recent valid record. That is a much better exercise than only lighting the OLED once.
+There is no linked BaseUnit source, erased-page trace, corruption test, or power-cut recovery log. The record therefore supports the data shape and intended recovery rule, not endurance figures or proof that interrupted writes were handled on a device.
 
-## Key Functions / 关键功能
+目前没有可链接的 BaseUnit 源码、擦页轨迹、损坏注入测试或掉电恢复日志。因此能保留的是数据形状与预期恢复规则，不能继续推出擦写寿命数字，也不能说设备已经处理过写入中断。
 
-The useful part of this note is the boundary between small functions and product behavior.
+## `DATA:<envT>,<outT>,<fan>` Is the Communication Boundary / 一条 `DATA` 报文划出通信边界
 
-- `DHT11` reads ambient temperature and humidity; `DHT22` reads outlet temperature and humidity.
-- Infrared detection judges whether the device is in position.
-- Fan PWM is set within a 0 to 100% range.
-- OLED displays `ENV / OUT / FAN`, and the shutdown confirmation page shows a countdown.
-- Bluetooth messages use a shape like `DATA:<envT>,<outT>,<fan>`.
-- Flash persistence uses a header, record, CRC32, and commit mark to recover the most recent valid setting.
+The Bluetooth format is recorded as `DATA:<envT>,<outT>,<fan>`. It packages two temperature fields and one fan field into a short outbound message. The format says nothing about delimiters between frames, numeric precision, humidity fields, acknowledgement, retries, timeout, or what the receiver does with the message.
 
-- `DHT11` 负责环境温湿度，`DHT22` 负责出风口温湿度。
-- 红外检测用于判断设备是否在位。
-- 风扇 PWM 设定范围为 0 到 100%。
-- OLED 显示 `ENV / OUT / FAN`，关机确认页显示倒计时。
-- 蓝牙报文形如 `DATA:<envT>,<outT>,<fan>`。
-- Flash 参数区用页头、记录、CRC32 和 commit 标记恢复最近一次有效设定。
+蓝牙格式记录为 `DATA:<envT>,<outT>,<fan>`，把两路温度字段与一路风扇字段压成一条短报文。单看这个格式，还不知道帧与帧如何分隔、数字精度如何处理、湿度是否另发、有没有应答与重试、超时怎么办，也不知道接收端拿到数据后做什么。
 
-## File Handling / 文件处理
+Together, the six responsibilities connect sensing, presence, fan control, display, communication, and persistence as one state problem. Exact timing and on-device behavior remain open until source and logs are available.
 
-This note keeps the firmware-structure explanation. The base-unit source code and device constraint lists stay in the private project archive for now.
-
-页面只保留固件结构说明。底座板源码和器件约束清单暂时留在私有项目归档里。
-
-## Debugging Reflection / 调试感受
-
-This project made me pay more attention to what a device should remember. Earlier, I cared more about whether a feature could run. Here I had to think about power loss, accidental key presses, failed sensor reads, and Bluetooth sending inside the main loop.
-
-这个工程让我开始重视“设备应该记得什么”。以前更关注功能能不能跑，这里会多想一步：断电以后怎么办，用户误触怎么办，传感器失败怎么办，通信会不会阻塞。
-
-The base unit is small, but that is why it is useful. A small device gives enough room to practice writing features as things people may use repeatedly: read, display, adjust, remember, report, and recover.
-
-底座板很小，也正因为小，它很适合练习把功能写得像会被人反复使用的设备：读取、显示、调节、记住、上报、恢复。
+这六类职责把传感、在位、风扇控制、显示、通信与持久化连成一个状态问题；精确节拍与目标板行为仍要等源码与日志回答。

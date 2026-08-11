@@ -1,26 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { site } from "@/lib/site";
+import { openGraphBase, site } from "@/lib/site";
+
+const pageTitle = "About";
+const pageDescription =
+  "About Zhiyi Li, an NTU MSc (Robotics and Intelligent Systems) student focused on robotic systems hardware, PCB design, bring-up, and hardware–firmware integration.";
+const socialTitle = `${pageTitle} | Zhiyi Li`;
 
 export const metadata: Metadata = {
-  title: "About"
+  title: pageTitle,
+  description: pageDescription,
+  openGraph: {
+    ...openGraphBase,
+    title: socialTitle,
+    description: pageDescription,
+    url: new URL("/about", site.url)
+  },
+  twitter: {
+    title: socialTitle,
+    description: pageDescription
+  }
 };
 
 const skills = [
-  { en: "Control systems", zh: "控制系统" },
-  { en: "Embedded C/C++", zh: "嵌入式 C/C++" },
-  { en: "Robotics", zh: "机器人" },
-  { en: "Microcontrollers", zh: "单片机" },
-  { en: "STM32", zh: "STM32" },
-  { en: "Free-RTOS", zh: "Free-RTOS" },
-  { en: "LVGL", zh: "LVGL" },
-  { en: "PCB", zh: "PCB" },
-  { en: "Low-voltage electronics", zh: "弱电" },
-  { en: "Python tooling", zh: "Python 工具" },
-  { en: "Next.js full-stack", zh: "Next.js 全栈" },
-  { en: "Technical writing", zh: "技术写作" }
+  { en: "Robotic systems hardware", zh: "机器人系统硬件" },
+  { en: "Robot control hardware", zh: "机器人主控硬件" },
+  { en: "Flight-control electronics", zh: "飞控电子" },
+  { en: "Schematic & PCB design", zh: "原理图与 PCB 设计" },
+  { en: "Board bring-up & debugging", zh: "板级 bring-up 与调试" },
+  { en: "Hardware–firmware integration", zh: "软硬件联调" },
+  { en: "Motor-drive electronics", zh: "电机驱动电子" },
+  { en: "Power electronics", zh: "电力电子" },
+  { en: "Embedded C/C++", zh: "嵌入式 C/C++" }
 ];
 
 export default function AboutPage() {
@@ -33,20 +46,26 @@ export default function AboutPage() {
         <section>
           <p className="text-xl leading-9 text-ink">
             <BilingualText
-              en="I am Awes0meE, a Communication Engineering undergraduate at Xi'an Jiaotong-Liverpool University."
-              zh="我是 Awes0meE，西交利物浦大学通信工程本科生。"
+              en="I’m Zhiyi Li, a first-year student in the Master of Science (Robotics and Intelligent Systems) programme at Nanyang Technological University’s School of Mechanical and Aerospace Engineering. I graduated from Xi'an Jiaotong-Liverpool University in Communication Engineering."
+              zh="我是 Zhiyi Li，现为南洋理工大学机械与航空航天工程学院机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
             />
           </p>
           <p className="mt-5 leading-8 text-graphite">
             <BilingualText
-              en="I am interested in systems that connect theory, hardware, and software: control loops that can be measured, embedded tools that can be reused, and robot behaviors that can be explained through evidence."
-              zh="兴趣主要集中在理论、硬件和软件之间的连接：能被测量的控制回路、能复用的嵌入式工具，以及能用证据解释的机器人行为。"
+              en="My direction is robotic systems hardware. I am building experience across robot control and flight-control electronics, schematic and PCB design, board bring-up, and hardware–firmware integration."
+              zh="我的长期方向是机器人系统硬件。目前，我正在机器人主控与飞控电子、原理图与 PCB 设计、板级 bring-up 和软硬件联调等方面逐步积累经验。"
             />
           </p>
           <p className="mt-5 leading-8 text-graphite">
             <BilingualText
-              en="This website will gradually record engineering projects, learning notes, experiment media, and the process of building the portfolio itself."
-              zh="这个网站会逐步记录工程项目、学习笔记、实验媒体和作品集本身的建设过程。"
+              en="The project pages stay close to the work itself: schematics, board renders, firmware, measurements, bring-up notes, and test media. Where a prototype or validation step is unfinished, the limitation stays visible."
+              zh="项目页面尽量贴近工作本身：原理图、板卡渲染、固件、测量结果、bring-up 记录和测试媒体。原型或验证尚未完成时，限制也会明确保留下来。"
+            />
+          </p>
+          <p className="mt-5 leading-8 text-graphite">
+            <BilingualText
+              en="I am especially interested in motor-drive electronics and power electronics, where control decisions become voltage, current, heat, and physical motion."
+              zh="我也特别关注电机驱动和电力电子，因为控制决策最终会在这里变成真实的电压、电流、温升和机械运动。"
             />
           </p>
           <Link href="/work" className="mt-8 inline-flex items-center gap-2 rounded-md bg-pine px-5 py-3 text-sm font-semibold text-white hover:bg-ink">
@@ -69,18 +88,10 @@ export default function AboutPage() {
             <BilingualText en="Contact" zh="联系" />
           </h2>
           <div className="mt-5 space-y-4 text-sm text-graphite">
-            <a href={`mailto:${site.email}`} className="flex items-center gap-3 hover:text-pine">
-              <Mail size={18} />
-              {site.email}
-            </a>
             <a href={site.github} className="flex items-center gap-3 hover:text-pine">
               <Github size={18} />
               github.com/Awes0meE
             </a>
-            <p className="flex items-center gap-3">
-              <MapPin size={18} />
-              <BilingualText en={site.location} zh={site.locationZh} />
-            </p>
           </div>
         </aside>
       </div>
