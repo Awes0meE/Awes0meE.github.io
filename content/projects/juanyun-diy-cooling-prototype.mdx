@@ -1,11 +1,11 @@
 ---
-title: "DIY Pressure-Flow Cooling Prototype"
-titleZh: "DIY 压风式散热器原型"
-summary: "A prototype archive joining slicer-prepared duct parts, a Windows-to-ESP32 temperature link, PWM/OLED control, and later STM32 board design artifacts."
-summaryZh: "一组原型归档：从切片准备的风道零件、Windows 到 ESP32 的温度文字链路与 PWM / OLED 控制，一路读到后来留下的 STM32 板卡设计文件。"
+title: "DIY Sealed-Airflow Laptop Cooler: From a Windows App to Two Control Boards"
+titleZh: "DIY 压风式散热器：从上位机到两代控制板"
+summary: "CSGO heat and frame drops led me to seal the gap beneath my laptop with foam and build a Windows-to-Bluetooth-to-ESP32 PWM chain; I later redesigned the controller as an assembled and power-tested STM32 board."
+summaryZh: "玩 CSGO 高温掉帧后，我用泡棉收住笔记本底部的漏风，并让 Windows 上位机、蓝牙串口、ESP32 与 PWM 风扇先跑成一条完整控制链；后来又把控制板重构成经过焊接上电验证的 STM32 版本。"
 date: "2024-08 to 2024-09"
 status: "Archived Prototype"
-tags: ["ESP32", "3D Printing", "Cooling", "Desktop Tool", "CAD"]
+tags: ["ESP32", "STM32", "PCB", "PWM", "Bluetooth", "Cooling", "Desktop Tool", "CAD"]
 cover: "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-cover.jpg"
 featured: false
 links:
@@ -18,63 +18,81 @@ assetPaths:
   - "/uploads/projects/juanyun-public/diy-cooling"
 ---
 
-## Nine Build Plates Before Any Airflow Claim / 九块切片板还不是风量证据
+## CSGO Frame Drops Made the Escaping Air Impossible to Ignore / CSGO 掉帧以后，风不能再从四周跑掉
 
-Three Bambu Studio screenshots show the same group of orange enclosure and duct parts from different preparation views. One highlights automatic tree supports, another the brim and skirt settings, and the third manual tree supports and several part orientations. The linked 3MF carries nine build plates and names such as `上盖右.STL`, `下盖左.STL`, and `右上type-c接口.STL`. Together they record how split shell parts were arranged for an A1 mini-class build volume.
+This project did not begin with a duct model. It began with CSGO dropping frames. As the game loaded the laptop, the temperature climbed and the frame rate fell with it. I tried the usual fixes, including tuning the machine and cleaning dust from the cooling system, but none improved the situation as much as I hoped.
 
-三张 Bambu Studio 截图其实盯着同一组橙色壳体与风道零件，只是准备视角不同：一张圈出树状自动支撑，一张停在 Brim 与 Skirt 参数，另一张换成树状手动支撑并标出几种摆放姿态。相邻的 3MF 里有九块切片板，还能读到 `上盖右.STL`、`下盖左.STL`、`右上type-c接口.STL` 这些分件名。它们合在一起，能说明拆分后的壳体怎样塞进 A1 mini 一类的成形空间。
+The weakness of an ordinary cooling pad was easy to feel: its fans were spinning, yet plenty of air escaped around the laptop instead of entering its bottom intakes. My response was deliberately simple. I built an acrylic base and used foam against the underside of the laptop to create a relatively enclosed supply space. This was not a calculated aerodynamic design. I was trying to reduce bypass leakage and give the intake as much air as I could manage.
+
+这个项目不是从一张风道图开始的，而是从 CSGO 掉帧开始的。游戏一跑起来，笔记本温度很快升高，帧率也跟着往下掉。我试过调整机器设置、清理散热器灰尘，能做的常规操作基本都碰了一遍，改善却没有想象中明显。
+
+普通散热底座的问题也很直观：风扇确实在转，风却从笔记本四周跑掉了不少。于是我的想法变得很朴素——用亚克力搭出主体，再让泡棉贴住笔记本底部，围出一个相对封闭的送风空间。它不是什么经过计算的空气动力学设计，只是尽量减少旁路漏风，让送进电脑进风口的空气“量大管饱”。
 
 ![Automatic tree-support view for the same part set / 同一组零件的树状自动支撑视图](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg)
 ![Brim and skirt settings for the same part set / 同一组零件的 Brim 与 Skirt 设置](/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg)
 ![Manual tree-support view and part orientations / 树状手动支撑与零件摆放视图](/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg)
 
-These are slicing and support records, not three proven mechanical revisions. They also contain no printed-dimension check, pressure or flow measurement, or comparison between duct geometries. The [A1 mini 3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf) preserves print preparation; it cannot show whether the assembled duct moved air as intended.
+The acrylic-and-foam version did become a physical machine. These three Bambu Studio screenshots belong to a separate mechanical revision that stopped earlier. To fit the long enclosure inside an A1 mini build volume, I split it into smaller parts and arranged them across nine plates in the [3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf). I finished the modeling and slicing, but never printed the parts. All nine plates remained on the screen.
 
-所以，这三张图更适合叫“切片与支撑设置比较”，还不能叫三个已经验证过的机械版本。材料里也没有打印尺寸检查、风压 / 风量测量，或不同风道几何之间的对照。[A1 mini 3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf)保住了打印准备过程，却回答不了装起来以后风是不是按设想流动。
+亚克力与泡棉版本后来确实做成了整机。至于这三张 Bambu Studio 截图，它们来自另一条没有走到底的机械改进：为了适应 A1 mini 的成形空间，我把长外壳拆成多块，并在 [3MF](/uploads/projects/juanyun-public/diy-cooling/bambu-a1-mini-auto-slice.3mf) 里排成九块切片板。建模和切片做完了，我却没有再把它们打印出来。九块板最后都停在了屏幕里。
 
-## Two Text Prefixes Join Windows and ESP32 / 两个文字前缀把 Windows 与 ESP32 接起来
+## Windows Had to Tell the Fan Why to Speed Up / 我得先让 Windows 知道风扇为什么要加速
 
-The desktop endpoint is small enough to follow in one source file. [Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) asks LibreHardwareMonitor for CPU and GPU temperature sensors. Every 5000 ms, a WinForms timer schedules one monitor task and an independent send task. The sender alternates between `CPU{value}` and `GPU{value}`, but writes only when the corresponding cached value exists and the selected 115200-baud port is open; because the two tasks are not ordered, it may reuse the previous sample. [Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs) only starts the form, and the project file targets .NET Framework 4.7.2.
+I could have added another temperature sensor to the cooler, but the laptop already contained several highly integrated sensors, including a direct CPU-package reading. Paying for an external probe to make a less accurate guess through the chassis did not make sense. The [Windows app](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) therefore reads CPU and GPU temperatures through LibreHardwareMonitor, then alternates `CPU{value}` and `GPU{value}` lines over a 115200-baud Bluetooth virtual serial port.
 
-桌面端小到可以沿着一个源码文件读完。[Form1.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)通过 LibreHardwareMonitor 查找 CPU 与 GPU 温度传感器；WinForms 定时器每 5000 ms 分别调度一次温度扫描与发送任务。发送端轮流检查 `CPU{value}` 和 `GPU{value}`，但只有对应缓存值存在、选中的 115200 波特率串口也已打开时才真正写出；两个任务没有先后保证，因此也可能复用上一次样本。[Program.cs](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)只负责启动窗体，工程文件则把目标框在 .NET Framework 4.7.2。
+This was my first Windows desktop application. I had never learned WinForms or how a GUI should connect temperatures, COM ports, and a physical controller. I worked through CSDN material and used AI assistance to assemble a C# application targeting .NET Framework 4.7.2. It is modest: scan the ports, choose a device, click Connect, show the temperatures, and send them automatically. For someone who should not need to open VS Code, attach a UART-TTL adapter, and type fan commands by hand, that clickable window removed the largest barrier.
 
-At the other end, the [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) uses `BluetoothSerial`, accepts those same two prefixes, and displays the current readings beside mode, duty cycle, and PWM frequency on a 128 × 64 SSD1306 OLED. Its initial PWM setup is 15 kHz, 8-bit resolution, and GPIO 5. The PlatformIO `.cpp` and Arduino `.ino` in the archive are byte-identical, so they are two filenames for one implementation rather than independent versions. The declared one-second long-press path is also empty in this code.
+散热器当然也可以再挂一颗温度传感器，但电脑内部本来就有一整套传感器，甚至能直接给出 CPU 封装温度。我没有理由再花一笔钱，让外置探头隔着外壳猜里面到底有多热。[Windows 上位机](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)因此直接调用 LibreHardwareMonitor 读取 CPU 与 GPU 温度，再通过 115200 波特率的蓝牙虚拟串口轮流发出 `CPU{value}` 和 `GPU{value}`。
 
-另一端的 [ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)使用 `BluetoothSerial`，正好接收这两个前缀，再把当前读数与模式、占空比、PWM 频率一起显示在 128 × 64 的 SSD1306 OLED 上。PWM 初始配置是 15 kHz、8 位分辨率与 GPIO 5。归档里的 PlatformIO `.cpp` 和 Arduino `.ino` 逐字节相同，所以它们只是同一份实现的两个文件名，不是两套相互印证的版本。代码虽然声明了 1 秒长按分支，处理函数里却还没有逻辑。
+这是我第一次写 Windows 图形上位机。此前别说 WinForms，我连这种程序应该怎样把温度、COM 口和实体设备接到一起都没有概念。最后是边看 CSDN，边借助 AI，把这个目标为 .NET Framework 4.7.2 的 C# 程序一点点拼起来。它并不华丽：扫描串口、选择设备、点击连接、显示温度、自动发送。可对不想打开 VS Code、接 UART-TTL 再手敲命令的人来说，一个能点开的界面已经跨过了最麻烦的门槛。
 
-## The Video Makes the Interface Chain Visible / 视频把接口链放到了同一段画面里
+At the other end, the [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) receives both prefixes through `BluetoothSerial` and places the temperatures beside the mode, duty cycle, and PWM frequency on a 128 × 64 SSD1306 OLED. GPIO 5 starts with a 15 kHz, 8-bit PWM control signal. Five physical buttons switch modes, adjust frequency, and change manual duty. I had imagined putting Connect, Automatic, and every adjustment into the GUI. The final division was more direct: the app handles temperature and automatic transmission; the buttons handle mode and PWM. Once powered, one button makes the fan faster and another makes it slower. That is not a bad interface.
 
-The 3:57 [desktop demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) moves from an installer and Windows discovering `ESP32_Bluetooth`, to a Hardware Monitor window with CPU/GPU values and COM-port selection, and then to a physical acrylic-and-foam prototype. Its OLED shows `Quiet`, `Normal`, and `Manual` modes, a 15000 Hz frequency, changing temperature values, and duty-cycle changes while the front buttons are pressed.
+另一端的 [ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)用 `BluetoothSerial` 接住这两个前缀，再把温度、模式、占空比和 PWM 频率显示在 128 × 64 的 SSD1306 OLED 上。GPIO 5 输出初始为 15 kHz、8 位分辨率的 PWM 控制信号，板上的五个按键负责切换模式、调整频率与手动占空比。理想状态下，我本来想把“连接、自动、调整”全塞进图形界面；实际做出来的分工却更直接：上位机管温度与自动发送，实体按键管模式和 PWM。插上电就能按，一个高、一个低，风扇快慢马上有反应，这个结果并不差。
 
-3 分 57 秒的[桌面端演示](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)从安装界面和 Windows 发现 `ESP32_Bluetooth` 开始，随后出现带 CPU / GPU 数值与 COM 口选择的 Hardware Monitor 窗口，最后镜头转到一台亚克力与泡棉结构的实体原型。OLED 上能看到 `Quiet`、`Normal`、`Manual` 模式、15000 Hz 频率、变化的温度值，以及按动前面板按钮时变化的占空比。
+## One Click on Connect Brought the Whole Chain to Life / 鼠标点下“连接”，整条控制链第一次活了
 
-That sequence makes the intended interface chain more than a pair of matching source files. It is still a visible demonstration, not a serial packet log or a controlled thermal test. The [control note](/notes/juanyun-diy-cooling) follows the less obvious timing inside the code: the desktop schedules a conditional send attempt every five seconds, while the ESP32 waits for a 30-second maximum before revising automatic PWM.
+The 3:57 [demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) preserves the first complete version of that chain: Windows discovers `ESP32_Bluetooth`; the app lists COM ports and shows CPU/GPU temperatures; the OLED on the acrylic-and-foam machine displays `Quiet`, `Normal`, or `Manual`. Pressing the front buttons changes the 15000 Hz setting and duty cycle, while incoming temperatures make the fan follow the control rule.
 
-这段连续画面让接口链不再只是“两份代码刚好对得上”，但它仍是可见演示，不是串口报文日志，更不是受控热测试。[控制笔记](/notes/juanyun-diy-cooling)继续追代码里更容易忽略的节拍：桌面端每五秒调度一次有条件的发送尝试，ESP32 却要等 30 秒峰值窗口结束，才改一次自动 PWM。
+3 分 57 秒的[演示视频](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)保留了这条链第一次完整跑起来的样子：Windows 发现 `ESP32_Bluetooth`，上位机列出 COM 口并显示 CPU / GPU 温度，亚克力与泡棉整机的 OLED 则亮着 `Quiet`、`Normal` 或 `Manual`。按下前面板按钮，15000 Hz 和占空比跟着变化；温度数据进来以后，风扇也开始按规则改变转速。
 
-## A Later STM32 Archive Changes the Board Boundary / 后来的 STM32 归档换了板卡边界
+When I clicked Connect and the temperature on Windows made the physical fan change speed, I was genuinely excited. It was my first desktop controller and my first clear experience of a mouse click and a few characters crossing Bluetooth, then becoming a physical action on an embedded board. The hours spent untangling the GUI, serial port, and message format suddenly had an answer I could see and hear.
 
-The public electronics files contain two distinct snapshots. The earlier [schematic PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf), [EasyEDA project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro), and [Gerber package](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip) are organized around an ESP32 development board, fan/PWM connectors, 12 V conversion, OLED, and five buttons. File presence proves that design and fabrication outputs were exported; it does not prove fabrication or board bring-up.
+点下“连接”以后，Windows 里的温度真的让物理世界里的风扇动了起来。那一刻我非常兴奋——这是我第一次写上位机，也是第一次清楚地看到鼠标和一串数字穿过蓝牙，最后变成嵌入式板卡上的实际动作。此前折腾界面、串口和数据格式花掉的时间，突然都有了一个能看见、能听见的回答。
 
-公开电子文件里能分出两个不同快照。较早的[原理图 PDF](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)、[EasyEDA 工程](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro)与 [Gerber 包](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)围绕 ESP32 开发板、风扇 / PWM 接口、12 V 变换、OLED 与五个按键展开。文件存在能证明设计与制造输出已经导出，却不能替代打板和 bring-up 记录。
+## PID Tuned Me for Half a Week / PID 先把我调了半周
 
-The later-dated render shows an STM32 module outline surrounded by two fan connectors, a 12 V input and power-conversion area, a USB-C interface area, Bluetooth and OLED headers, and five adjustment buttons. The schematic separately identifies the module as `STM32F103C8T6`, labels U14 as `CH340N`, and groups the USB data path, 12 V-to-5 V conversion, fan outputs, and the same central module and headers. The two artifacts agree on the shared connectors, module outline, and buttons, but the archive does not establish why the controller changed or how this board relates to the earlier physical demo.
+I originally wanted automatic speed control to use PID. I spent roughly half a week circling that idea before realizing that choosing a setpoint, handling error, and tuning the integral and derivative terms into something usable was much harder than writing down a PID formula. PID never managed to tune the fan; it tuned my patience first. I dropped that path and kept a simpler rule that actually ran.
 
-日期更晚的渲染图里，STM32 模块轮廓周围排着两路风扇接口、12 V 输入与电源变换区域、USB-C 接口区域、蓝牙和 OLED 排针，以及五个调节按键。原理图才把模块准确标成 `STM32F103C8T6`，并将 U14 标成 `CH340N`，再展开 USB 数据路径、12 V 转 5 V、风扇输出，以及同一组中央模块与排针。两份材料只能在共同可见的连接器、模块轮廓与按键上互相对应；归档没有说明为什么更换主控，也没有交代这块板与前面实体演示之间的确切版本关系。
+The [ESP32 code](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) uses a mode-dependent proportional mapping, not PID and not a lookup table. The app attempts one transmission every five seconds and alternates CPU and GPU. The ESP32 retains their maxima for 30 seconds, then chooses the larger value. `Quiet` multiplies it by 0.5, `Normal` by 0.7, `High Speed` uses the value directly, and `Manual` keeps the current duty. Five seconds keeps the data reasonably fresh; the 30-second maximum prevents a short thermal peak from being immediately erased and reduces constant fan-speed changes. The pace also matched my preference at the time to keep the Bluetooth serial exchange sparse and stable, although these tiny messages were nowhere near its throughput limit.
+
+自动调速原本想做成 PID。我围着这个想法纠结了大约半周，最后发现，以当时的理解把设定温度、误差、积分和微分真正调到可用，比“写出一个 PID 函数”难得多。PID 还没来得及把风扇调好，先把我调得够呛。最后我放弃了这条路线，先保住一套简单、能运行的规则。
+
+[ESP32 代码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)最终采用的是分模式比例映射，不是 PID，也不是查表。上位机每五秒尝试发送一条数据，在 CPU 与 GPU 之间交替；ESP32 在本地记住 30 秒内两者的最高值，再取更高的那个。`Quiet` 乘 0.5，`Normal` 乘 0.7，`High Speed` 直接使用该温度数值，`Manual` 则保留手动占空比。五秒让数据不至于太旧，三十秒峰值避免短时高温立刻被低读数盖掉，也减少风扇频繁来回变速。这个节奏还符合我当时对蓝牙串口“少发一点、稳定一点”的取舍，但这些短报文本身远没有碰到蓝牙吞吐上限。
+
+## The ESP32 Became a Full Build; STM32 Tightened the Board / ESP32 跑成整机，STM32 把板子重新收紧
+
+The ESP32 version was the first board that became a complete machine. I went from the [schematic](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf) to the [EasyEDA project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro), exported the [Gerber package](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip), then manufactured, assembled, and powered the PCB. I installed it in the acrylic-and-foam structure and used it for two or three days. The board carries two fan/PWM interfaces, 12 V conversion, the OLED, and five buttons. There is no separate fan-driver IC; the ESP32 produces the PWM control signal that changes fan speed.
+
+第一块真正跑起来的是 ESP32 版本。我从[原理图](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)画到 [EasyEDA 工程](/uploads/projects/juanyun-public/diy-cooling/easyeda-2024-project.epro)，导出 [Gerber](/uploads/projects/juanyun-public/diy-cooling/pcb-gerber.zip)，再完成 PCB 制造、装配和上电，最后把它装进亚克力与泡棉结构里连续用了两三天。板上留了两路风扇 / PWM 接口、12 V 变换、OLED 和五个按键；风扇没有另加驱动芯片，ESP32 输出 PWM 控制信号来改变转速。
+
+I later redrew the controller around STM32. The point was not to swap microcontrollers for its own sake; I wanted to clean up the traces and layout that felt rough on the ESP32 board. I widened the routing where it made sense, tightened the placement, and reduced the overall board size. The [schematic](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png) identifies an `STM32F103C8T6`, a `CH340N` USB-UART path, two fan interfaces, five buttons, OLED, and an external Bluetooth header.
+
+后来我又把控制板重画成 STM32 版本。目标不是凭空换一颗主控，而是把 ESP32 板上不够舒服的走线重新整理：线宽放得更合理，布局收紧，整板体积也更小。[原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)里的主控是 `STM32F103C8T6`，`CH340N` 负责 USB-UART，旁边还有两路风扇、五个按键、OLED 与外接蓝牙排针。
 
 ![Later STM32 control-board render / 后续 STM32 控制板渲染](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png)
 ![Later STM32 control-board schematic / 后续 STM32 控制板原理图](/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png)
 
-The corresponding [EasyEDA archive](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2), the linked [acrylic parts list](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx), and the other public artifacts keep the design trail inspectable. None supplies assembly photos, power-on observations, or fan-output waveforms for the later board.
+This STM32 board did not stop at a render. I soldered and powered it, wrote the firmware, and sent fan-speed commands from VS Code over serial. The board responded, replied, and changed the fan speed. The [EasyEDA project](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2) preserves the tighter layout. What I did not do was reconnect the Windows temperature application through an ESP32-style built-in wireless link or build another acrylic machine. The second version tightened the hardware, but the full system stopped at serial control.
 
-对应的 [EasyEDA 归档](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)、关联的[亚克力零件表](/uploads/projects/juanyun-public/diy-cooling/acrylic-auto-parts-list.xlsx)和其余公开文件让设计线索还能继续往下查，但其中没有后续板卡的装配照片、上电观察或风扇输出波形。
+这块 STM32 PCB 也不是只停在渲染图。我实际完成了焊接、上电和固件测试；从 VS Code 经串口发送风扇转速命令，板子能够响应、回复并改变风扇。[EasyEDA 工程](/uploads/projects/juanyun-public/diy-cooling/easyeda-2026-project.epro2)把这一版更紧凑的布局留了下来。只是 STM32 本身没有 ESP32 那套内置无线链路，我没有继续把 Windows 温度上位机接回来，也没有再做一台亚克力整机。第二版把板卡收紧了，整条系统却停在了串口控制这一步。
 
-## A Temperature Number Is Not a Cooling Curve / 温度数字还不是散热曲线
+## Eight or Nine Degrees in Memory Are Not a Thermal Curve / 回忆里的八九度，不是一条温度曲线
 
-The archive reaches a useful prototype boundary: prepared duct geometry, a desktop temperature sender, ESP32-side PWM/OLED logic, a visible physical demo, and two board-design snapshots can all be inspected together. What it does not contain is the evidence needed to judge cooling: no before/after temperature curves, air-pressure or flow readings, noise or power measurements, steady-state thermal comparison, or controlled workload record.
+During those two or three days, I did feel that the cooler helped. The numbers I still remember are roughly 20–30 more FPS in CSGO and a maximum temperature falling from about 92–93°C to around 84°C. Unfortunately, I was more interested in playing and watching the result than in saving screenshots or running a controlled on/off comparison. I want to keep those numbers because they are the scale of improvement I genuinely remember, but they must remain where they belong: in my memory.
 
-这组归档已经抵达一个很具体的原型边界：风道几何的打印准备、桌面温度发送端、ESP32 侧 PWM / OLED 逻辑、一段实体演示，以及两套板卡设计快照可以放在一起读。它没有抵达的，是判断散热效果所需的证据：没有温度前后曲线、风压 / 风量、噪声、功耗、稳态热对比，也没有受控负载记录。
+那两三天里，我确实觉得它对笔记本散热有帮助。按现在还能记住的量级，玩 CSGO 时帧率大约提高了 20–30 FPS，最高温度也从约 92–93°C 降到约 84°C。可惜当时只顾着玩和看结果，没有留下截图，也没有认真做同一负载下的开关对比。这些数字我愿意保留，因为它们是我真实记得的改善；但它们也只能留在“我记得”的位置。
 
-The OLED temperature and duty-cycle values show what the controller was displaying. They do not reveal how much heat the duct removed. That question begins with a repeatable test setup, not another render.
+If someone asks exactly how much pressure or airflow the enclosure added, I cannot answer now. I also did not measure noise, power, or a steady-state temperature curve. What I did complete was concrete in a different way: foam guided air toward the intake, Windows read the temperatures, Bluetooth carried the numbers to the ESP32, and PWM made the fan respond. The later STM32 board also accepted commands and controlled the fan on its own. What I remember most is still the first click on Connect, when the temperature on screen finally stopped being only a number.
 
-OLED 上的温度与占空比能说明控制器当时显示了什么，却还说明不了风道带走了多少热量。这个问题的下一步应该是一套可重复的测试条件，而不是再添一张渲染图。
+如果再问这套结构到底增加了多少风压、多少风量，我现在答不上来；当时也没有测噪声、功耗或稳态温度曲线。我真正跑通的是另一件很具体的事：泡棉把风收向进风口，Windows 读出温度，蓝牙把数字送给 ESP32，PWM 再让实体风扇作出反应。后来 STM32 板也能独立接收命令控制风扇。至于我最愿意记住的，仍然是第一次点下连接的那一刻——屏幕里的温度终于不再只是一个数字。

@@ -157,75 +157,75 @@
   },
   {
     "id": "juanyun-diy-cooling-demo",
-    "title": "From Windows Temperatures to an OLED Mode Display",
-    "titleZh": "从 Windows 温度值到 OLED 模式显示",
+    "title": "The First Time Windows Temperature Reached the Physical Fan",
+    "titleZh": "第一次把 Windows 温度送进实体风扇",
     "type": "video",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The 3:57 recording moves from installation and ESP32 Bluetooth discovery and selection to the monitor window, COM selection, and button-driven OLED mode changes on a physical prototype; it is a visible demo rather than a packet trace or thermal test.",
-    "captionZh": "这段 3 分 57 秒的录像依次拍到安装、ESP32 Bluetooth 设备的发现与选择、监控窗口与 COM 口选择，以及实体原型上由按键触发的 OLED 模式变化；它是可见演示，不是报文 trace 或热测试。"
+    "caption": "This 3:57 recording keeps the first complete chain in one sequence: Windows connects to the ESP32 Bluetooth virtual serial port, the app reads CPU/GPU temperatures, and the OLED and fan respond to data and physical buttons. I did not record a synchronized performance curve at the time.",
+    "captionZh": "这段 3 分 57 秒的录像保留了整条链第一次跑起来的样子：Windows 连接 ESP32 Bluetooth 虚拟串口，上位机读取 CPU/GPU 温度，实体原型的 OLED 与风扇随后响应数据和按键；当时没有同步记录性能曲线。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-1",
-    "title": "Automatic Tree Supports Across Nine Build Plates",
-    "titleZh": "九块切片板上的树状自动支撑",
+    "title": "Nine Build Plates Split for the A1 mini",
+    "titleZh": "为 A1 mini 拆开的九块切片板",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "A Bambu Studio screenshot highlights automatic tree-support settings and supported orientations across nine numbered build plates.",
-    "captionZh": "Bambu Studio 截图在九块编号切片板中标出树状自动支撑设置与受支撑姿态。"
+    "caption": "I split the long enclosure across nine build plates to fit the A1 mini build volume and prepared automatic tree supports. The model was never printed or assembled.",
+    "captionZh": "为了把长外壳放进 A1 mini 的成形空间，我把零件拆开并排成九块切片板；这张图记录树状自动支撑方案，模型最终没有打印和装配。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-2",
-    "title": "Brim and Skirt Settings for the Same Plate Group",
-    "titleZh": "同一组切片板的 Brim 与 Skirt 设置",
+    "title": "Brim and Skirt Settings That Never Reached the Printer",
+    "titleZh": "没有走到打印的 Brim 与 Skirt 设置",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The same Bambu Studio plate group highlights three skirt loops, a 5 mm outer brim, and a 0.1 mm brim gap.",
-    "captionZh": "同一组 Bambu Studio 切片板突出显示三圈 Skirt、5 mm 外侧 Brim 与 0.1 mm 间隙。"
+    "caption": "The same plate group uses three skirt loops, a 5 mm outer brim, and a 0.1 mm gap. The preparation was complete, but the enclosure never reached physical assembly.",
+    "captionZh": "同一组 Bambu Studio 切片板设置了三圈 Skirt、5 mm 外侧 Brim 与 0.1 mm 间隙；参数准备已经完成，但这套外壳没有进入实体装配。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-3",
-    "title": "Manual Tree Supports and Part Orientations",
-    "titleZh": "树状手动支撑与零件摆放姿态",
+    "title": "Reorienting the Enclosure Parts With Manual Tree Supports",
+    "titleZh": "手动支撑下重新摆放外壳分件",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "A third view switches the same shell-part preparation to manual tree supports and highlights several part orientations.",
-    "captionZh": "第三张视图把同一组壳体零件切换为树状手动支撑，并标出若干零件摆放姿态。"
+    "caption": "I switched the same enclosure parts to manual tree supports and compared their orientations. This mechanical revision remained a model.",
+    "captionZh": "第三张视图把同一组壳体分件切换为树状手动支撑，并重新比较摆放姿态；它属于未打印机械方案的切片准备。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-pcb-render",
-    "title": "Later STM32 Control-Board Design Render",
-    "titleZh": "后续 STM32 控制板设计渲染",
+    "title": "The STM32 Board That Tightened the ESP32 Layout",
+    "titleZh": "把 ESP32 版本重新收紧的 STM32 控制板",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-cover.jpg",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The render shows a 12 V input, USB-C interface area, two fan connectors, an STM32 module outline, OLED/BT headers, and five buttons.",
-    "captionZh": "渲染图可见 12 V 输入、USB-C 接口区域、两路风扇接口、STM32 模块轮廓、OLED / BT 排针与五个按键。"
+    "caption": "I reorganized the routing and reduced the board size while keeping 12 V input, USB-C, two fan interfaces, OLED/Bluetooth headers, and five buttons. The corresponding PCB was later soldered, powered, and tested for fan control.",
+    "captionZh": "我在这版设计里重新整理走线、缩小板卡，并保留 12 V 输入、USB-C、两路风扇、OLED / Bluetooth 排针和五个按键；对应 PCB 后来完成了焊接与上电控制测试。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-schematic",
-    "title": "Later STM32 Board Interfaces on One Sheet",
-    "titleZh": "一张图上的后续 STM32 板卡接口",
+    "title": "USB-UART and Dual-Fan Interfaces on the STM32 Version",
+    "titleZh": "STM32 版的 USB-UART 与双风扇接口",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The schematic identifies U14 as CH340N and groups fan outputs, Type-C, 12 V-to-5 V conversion, STM32, five adjustment buttons, Bluetooth, OLED, and 12 V input without recording bring-up.",
-    "captionZh": "原理图把 U14 标成 CH340N，并将风扇输出、Type-C、12 V 转 5 V、STM32、五个调节按键、Bluetooth、OLED 与 12 V 输入分区展开，但没有记录 bring-up。"
+    "caption": "The CH340N provides USB-UART alongside dual fan outputs, 12 V-to-5 V conversion, STM32, five buttons, Bluetooth, and OLED interfaces. The board responded to serial fan commands but was not reconnected to the Windows automatic-temperature chain.",
+    "captionZh": "原理图用 CH340N 接出 USB-UART，并展开双风扇、12 V 转 5 V、STM32、五个按键、Bluetooth 与 OLED 接口；板卡能够通过串口命令控制风扇，但没有再接入 Windows 自动温度链路。"
   },
   {
     "id": "juanyun-foc-board-render",
