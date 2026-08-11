@@ -325,15 +325,15 @@
   },
   {
     "id": "claude-chime-logo",
-    "title": "Claude Chime logo",
-    "titleZh": "Claude Chime 标识",
+    "title": "Clawdy Family Project Mark",
+    "titleZh": "Clawdy Family 项目标识",
     "type": "image",
     "src": "/uploads/projects/claude-chime-hardware/claude-chime-logo.png",
     "thumbnail": "/uploads/projects/claude-chime-hardware/claude-chime-logo.png",
     "date": "2026-05-05",
     "projectSlug": "claude-chime-hardware-power-board",
-    "caption": "Logo image shown on the Claude Chime hardware power-board archive.",
-    "captionZh": "Claude Chime 硬件电源板归档页使用的标识图。"
+    "caption": "The uploaded orange-and-black “Clawdy Family” graphic is used as the Claude Chime archive cover; it is a presentation asset rather than hardware evidence.",
+    "captionZh": "上传的橙黑色 “Clawdy Family” 图形用于 Claude Chime 归档封面；它是展示素材，不是硬件验证证据。"
   },
   {
     "id": "seamly2d-banner",
