@@ -1,90 +1,60 @@
 ---
-title: "FOC Driver Board Archive Notes"
-titleZh: "慧驱动 FOC 驱动板开发归档笔记"
-summary: "A sensorless FOC board note around STM32F4, DRV8301, board files, selected motor-control source snippets, and the missing startup, sampling, and waveform records."
-summaryZh: "STM32F4 / DRV8301 无感 FOC 驱动板笔记，记录板卡文件、选出的电机控制源码片段，以及还缺的起转、采样和波形记录。"
+title: "Why One Theta Input Has Two Rotor-Feedback Paths"
+titleZh: "同一个 theta，为什么接了两条转子反馈路径"
+summary: "Reading one theta input through Hall and EKF branches connects phase-current sampling, dq control, and PWM updates while leaving runtime status unresolved."
+summaryZh: "从 Hall 与 EKF 两条分支读取同一个 theta 入口，把相电流采样、dq 电流环和 PWM 更新串起来，同时保留运行状态尚未确认的边界。"
 date: "2026-05-06"
 tags: ["FOC", "Motor Control", "PCB", "STM32F4"]
 projectSlug: "juanyun-foc-driver-board"
 visibility: public
 ---
 
-## Starting Point / 起点
+The EasyEDA project is named `FOC无感控制驱动板`. That label initially makes the control route sound settled. Then `motor-adc.c` places two branches almost side by side: `HALL_FOC_SELECT` reads `hall_angle` and `hall_speed`, while `SENSORLESS_FOC_SELECT` reads angle and speed from `FOC_Output.EKF`. Both eventually write the same `FOC_Input.theta` and `FOC_Input.speed_fdk` fields.
 
-FOC 这条线一看就很适合放作品集：STM32F4、DRV8301、PMSM、无感控制、FOC 算法、电流采样、速度环、OLED、上位机通信。也正因为关键词漂亮，写的时候更要小心。真正能说明水平的是电机怎样起转、采样怎样进控制链路、DRV8301 fault 怎么处理、PWM 和电流波形有没有留下记录。
+EasyEDA 工程名叫 `FOC无感控制驱动板`，这个名字第一眼会让控制路线显得已经定死。可一打开 `motor-adc.c`，两段条件编译几乎前后脚出现：`HALL_FOC_SELECT` 读取 `hall_angle` 和 `hall_speed`，`SENSORLESS_FOC_SELECT` 则从 `FOC_Output.EKF` 取角度与速度。两条路最后写入的是同一组 `FOC_Input.theta` 与 `FOC_Input.speed_fdk`。
 
-The FOC line looks strong on a portfolio page: STM32F4, DRV8301, PMSM, sensorless control, FOC algorithm, current sampling, speed loop, OLED, and host communication. The useful writing has to stay close to startup, sampling path, DRV8301 fault handling, PWM, and current waveform evidence.
+That changes how the archive should be read. “Sensorless” is one route expressed by the code, not an operating mode already demonstrated by the available material.
 
-源目录确实很厚。能看到 PCB、BOM、PickAndPlace、InteractiveBOM、STEP、EasyEDA 工程、DRV8301 和 STM32F4 资料、IAR / Keil 工程、`motor` 目录下的 `adc`、`drv8301`、`foc_algorithm`、`hall_sensor`、`speed_pid` 等模块。只列这些文件还不够，还要把启动、采样、保护、失败和测试写出来。
+这一下，“无感”就不能继续当整份归档的默认答案了。它是代码里的一条路径，不是材料已经证明的运行模式。
 
-The folder is substantial: PCB, BOM, PickAndPlace, InteractiveBOM, STEP, EasyEDA project, DRV8301 and STM32F4 references, IAR / Keil projects, and `motor` modules such as `adc`, `drv8301`, `foc_algorithm`, `hall_sensor`, and `speed_pid`. The next layer is explaining startup, sampling, protection, failure cases, and tests.
+## Current Starts With an Offset, Not a Clarke Transform / 电流先过偏置，不是上来就做 Clarke
 
-## Reading It As Clues / 先按线索读
+The data path begins before the familiar FOC equations. In `board-config.c`, the injected ADC sequence assigns its four positions to bus voltage, phase A current, phase B current, and total current. A timer compare event is configured as the injected trigger, and the end-of-injected-conversion interrupt is enabled. That is source-level intent for a timer-related sampling point; without a waveform or runtime trace, it is not evidence that the intended sampling instant was achieved on the board.
 
-Gerber and STEP look solid, and they are useful. They show that the board exists and can be inspected. They still leave the harder questions open: startup logic, sampling path, PWM modulation, protection conditions, and tuning process.
+数据链路开始得比熟悉的 FOC 公式更早。`board-config.c` 把 ADC 注入组的四个位置依次分给母线电压、A 相电流、B 相电流和总电流，又配置了定时器比较事件作为注入触发源，并打开注入组转换完成中断。这能说明源码打算把采样点挂在定时器事件上；没有波形或运行轨迹，仍不能证明板上真的采到了预期时刻。
 
-The missing records are clear:
+Inside `get_offset()`, 128 readings from `JDR2` and `JDR3` are accumulated and then divided by 128. PWM outputs are disabled when that averaging step completes. Only after `get_offset_flag` reaches the run state does the ADC interrupt call `motor_run()`. There, the code forms the differences `A_offset - JDR2` and `B_offset - JDR3`, conversion factors produce `Ia` and `Ib`, and the third current is reconstructed as `Ic = -Ia - Ib`.
 
-- current-sampling path and ADC trigger timing;
-- a simplified signal-flow diagram for Clarke / Park / PI / SVPWM;
-- DRV8301 fault handling and register-configuration reasoning;
-- waveforms or logs for failed and successful startup;
-- division of work among speed loop, low-speed task, and parameter identification.
+`get_offset()` 里会累计 `JDR2` 和 `JDR3` 的 128 次读数，再除以 128；完成平均时，代码还会关闭 PWM 输出。只有 `get_offset_flag` 进入运行状态后，ADC 中断才调用 `motor_run()`。此时先按 `A_offset - JDR2`、`B_offset - JDR3` 将保存的偏置与两路读数求差，再用换算系数得到 `Ia`、`Ib`，第三相则按 `Ic = -Ia - Ib` 重建。
 
-Gerber 和 STEP 看起来很硬，也确实有用。它们说明这块板存在，也能被检查。但更难的问题还在后面：启动逻辑、采样链路、PWM 调制、保护条件和调参过程。
+The 128 samples make the intended startup sequence more concrete, but the constants come from headers that are not part of this public selection. The archive therefore shows the offset procedure, not that the offset or current scale was calibrated correctly.
 
-后面要补的记录很明确：
+这 128 次采样把预期启动顺序写得很具体，但换算系数来自未包含在公开精选中的头文件。归档能说明“代码怎样求偏置”，还说明不了“偏置和电流比例已经校准正确”。
 
-- 电流采样路径和 ADC 触发时序；
-- Clarke / Park / PI / SVPWM 的简化信号流；
-- DRV8301 fault 处理和寄存器配置思路；
-- 起转失败和成功的波形或日志；
-- 速度环、低速任务、参数辨识之间怎么分工。
+## Hall and EKF Meet at the Same Two Fields / Hall 与 EKF 在同两个字段会合
 
-## Current State / 现在的状态
+The Hall route is not a dormant name in a file list. `board-config.c` enables three Hall GPIO inputs, configures the Hall timer, and enables its capture interrupt. `motor-hall-sensor.c` reads the three-bit Hall state, maps six valid states to angles spaced by one electrical sixth-turn, and derives speed and angle increment from the capture period. The connector sheet also exposes `A_H1`, `B_H2`, and `C_H3` on a Hall header.
 
-Right now this is a development line with many materials and several unanswered runtime questions. A fuller FOC case should answer when the motor starts reliably, whether the current waveform is reasonable, how faults are triggered, how sampling noise is handled, how parameters are tuned, and what happens at low speed or high load.
+Hall 路径并不是文件清单里一个躺平的名字。`board-config.c` 真的配置了三路 Hall GPIO、Hall 定时器和捕获中断；`motor-hall-sensor.c` 读取三位 Hall 状态，把六个有效状态映射到每电角周六个位置，再由捕获周期计算速度与角度增量；连接器页也把 `A_H1`、`B_H2`、`C_H3` 引到 Hall 排针上。
 
-现在它更像一条材料很多、运行问题还没有讲透的开发线。更完整的 FOC 案例应该能回答：电机什么时候能稳定起转，电流波形是否合理，fault 怎么触发，采样噪声怎么处理，参数怎么调，低速和高负载时会发生什么。
+The EKF route is equally visible in the selected source. `motor-foc-algorithm.c` supplies alpha-beta voltage, alpha-beta current, resistance, inductance, and flux inputs to the EKF wrapper, then exposes the resulting state array through `FOC_Output.EKF`. Under `SENSORLESS_FOC_SELECT`, elements `[3]` and `[2]` become the angle and speed feedback consumed by the next control step.
 
-## Files / 文件
+EKF 路径在精选源码里也同样清楚。`motor-foc-algorithm.c` 把 alpha-beta 电压、电流以及电阻、电感、磁链参数送进 EKF wrapper，再通过 `FOC_Output.EKF` 暴露状态数组。启用 `SENSORLESS_FOC_SELECT` 时，其中 `[3]` 和 `[2]` 会成为下一次控制步骤使用的角度与速度反馈。
 
-The site currently provides these files for reading the board and selected firmware pieces:
+The two selectors are independent `#ifdef` blocks, not an `#if` / `#elif` pair. If both were defined, the later EKF assignments would overwrite the Hall assignments. If neither were defined, this excerpt would not assign those feedback fields in the selector section. The missing build definitions are therefore not a small administrative gap; they decide what this source actually asks the controller to use.
 
-站点现在提供这些文件，用来读板卡和选出的固件片段：
+这两个选择器是彼此独立的 `#ifdef`，并不是互斥的 `#if` / `#elif`。如果两个宏同时定义，后面的 EKF 赋值会覆盖前面的 Hall 赋值；如果两个都没定义，这段选择器就不会给反馈字段赋值。所以缺失的构建宏并不是一条无关紧要的目录信息，它直接决定这份源码究竟要求控制器信哪一路。
 
-- [EasyEDA project](/uploads/projects/juanyun-public/foc-driver/easyeda-project.epro2)
-- [Gerber archive](/uploads/projects/juanyun-public/foc-driver/gerber.zip)
-- [BOM table](/uploads/projects/juanyun-public/foc-driver/bom.xlsx)
-- [Pick-and-place table](/uploads/projects/juanyun-public/foc-driver/pick-and-place.csv)
-- [Interactive BOM](/uploads/projects/juanyun-public/foc-driver/interactive-bom.html)
-- [PCB 3D STEP model](/uploads/projects/juanyun-public/foc-driver/pcb-3d.step)
-- [Board configuration source](/uploads/projects/juanyun-public/foc-driver/board-config.c)
-- [Motor ADC source](/uploads/projects/juanyun-public/foc-driver/motor-adc.c)
-- [DRV8301 driver source](/uploads/projects/juanyun-public/foc-driver/motor-drv8301.c)
-- [FOC algorithm source](/uploads/projects/juanyun-public/foc-driver/motor-foc-algorithm.c)
-- [Speed PID source](/uploads/projects/juanyun-public/foc-driver/motor-speed-pid.c)
-- [DRV8301 datasheet](/uploads/projects/juanyun-public/foc-driver/drv8301-datasheet.pdf)
+## The Angle Turns dq Current Into Three Compare Values / 角度把 dq 电流送到三个比较值
 
-IAR / Keil 工程、完整 STM32F4 源码树、vendor library、Debug / Release 构建产物和重复工具输出暂时留在原始归档里。完整工程树太重，也替代不了对起转、采样、调制、保护和测试的解释。
+Once `theta`, speed feedback, phase currents, bus voltage, and motor parameters are filled, `foc_algorithm_step()` makes the control path readable. Clarke transform compresses the three phase currents into alpha-beta components. `theta` supplies sine and cosine for the Park transform. Separate d- and q-axis PI controllers produce `Vd` and `Vq`; inverse Park returns an alpha-beta voltage vector; `SVPWM_Calc()` turns that vector and the bus voltage into `Tcmp1`, `Tcmp2`, and `Tcmp3`.
 
-## Records Still Missing / 还要补的记录
+当 `theta`、速度反馈、三相电流、母线电压和电机参数填好后，`foc_algorithm_step()` 里的控制链就能顺着读下去。Clarke 变换先把三相电流压成 alpha-beta 分量，`theta` 为 Park 变换提供正余弦；d、q 两轴 PI 分别给出 `Vd`、`Vq`，反 Park 再还原 alpha-beta 电压矢量，`SVPWM_Calc()` 最后结合母线电压算出 `Tcmp1`、`Tcmp2`、`Tcmp3`。
 
-- Keep it as a material trail for now.
-- Add one desensitized FOC signal-chain diagram.
-- Find or redo minimal test records: PWM, phase current, speed response, and fault logs.
-- Continue adding short snippets, redrawn diagrams, and test records later.
+Back in `motor_run()`, those three values are written to timer registers `CCR1`, `CCR2`, and `CCR3` when `motor_start_stop` is set. The same function calls `drv8301_protection()`, whose visible action is modest and specific: when the DRV8301 fault input is low, it pulls `EN_GATE` low and sets a software flag. Elsewhere, the source passes `PWM_DEAD_TIME` into the timer setup and writes DRV8301 options for latched over-current shutdown and `OC_ADJ_SET_14`. What remains absent is the concrete dead-time value, waveform verification, actual trip threshold, fault-injection and recovery records, and the motor response.
 
-- 暂时把它当材料线索。
-- 补一张脱敏 FOC 信号链图。
-- 找到或重做最小测试记录：PWM、相电流、速度响应、fault 日志。
-- 后续继续补短片段、重画图和测试记录。
+回到 `motor_run()`，当 `motor_start_stop` 置位时，这三个值会写进定时器的 `CCR1`、`CCR2`、`CCR3`。同一个函数还调用 `drv8301_protection()`，而这段可见动作很朴素：检测到 DRV8301 fault 输入为低，就拉低 `EN_GATE` 并置一个软件标志。别处的源码还把 `PWM_DEAD_TIME` 送进定时器配置，并写入 DRV8301 的过流锁存关断选项与 `OC_ADJ_SET_14`。目前仍缺的是具体死区数值、波形验证、实际触发阈值、故障注入与恢复记录，以及电机响应。
 
+The chain from ADC registers to timer compare values is coherent enough to study. What it cannot settle is whether this exact selection compiled, reached hardware, sampled at the intended instant, closed either feedback loop, or turned a motor. By the end of the reading, `theta` has become the more useful label: it is the narrow interface where two possible accounts of rotor position compete. “Sensorless” can wait until the build and runtime evidence choose one.
 
-
-## Looking Back Now / 现在回头看
-
-The more advanced a topic sounds, the more it needs plain evidence. If the FOC line is made solid later, the focus should be startup, sampling, modulation, protection, and testing, with waveforms or logs close by.
-
-
-越“高级”的题目越要靠朴素证据。FOC 这条线以后如果要写扎实，重点应该是起转、采样、调制、保护和测试，而且最好有波形或日志跟在旁边。现在先留材料和问题，别把还没调透的东西写成结论。
+从 ADC 寄存器一路读到定时器比较值，这条链已经足够完整，值得学习。它仍回答不了这组精选源码是否按原样编译、烧录，是否在预期时刻采样，是否闭合了任一反馈环，更回答不了电机有没有转起来。读到最后，反而是 `theta` 这个小字段更有解释力：两种转子位置来源在这里争夺同一个入口。至于“无感”，等构建配置和运行证据真正选边以后再下结论也不迟。

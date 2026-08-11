@@ -229,75 +229,75 @@
   },
   {
     "id": "juanyun-foc-board-render",
-    "title": "FOC driver board render",
-    "titleZh": "慧驱动 FOC 测试板渲染图",
+    "title": "FOC Test Board Layout Render",
+    "titleZh": "FOC 测试板布局渲染图",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-driver-board-render.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-driver-cover.jpg",
     "date": "2025-11-25",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "3D render for the sensorless PMSM FOC driver board archive.",
-    "captionZh": "无感 PMSM FOC 驱动板归档页使用的 3D 板卡渲染图。"
+    "caption": "The V1 render maps the three-phase terminal, USB-C, keys, encoder, OLED header, and power devices; it records layout rather than electrical behavior.",
+    "captionZh": "V1 渲染图标出三相端子、USB-C、按键、编码器、OLED 排针与功率器件位置；它记录的是布局，不是电气运行结果。"
   },
   {
     "id": "juanyun-foc-schematic-mcu",
-    "title": "FOC MCU schematic sheet",
-    "titleZh": "FOC MCU 分页原理图",
+    "title": "STM32F446RET6 Control and Timing Sheet",
+    "titleZh": "STM32F446RET6 控制与时序分页",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mcu.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mcu.png",
     "date": "2026-05-07",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "MCU sheet from the FOC driver board schematic export.",
-    "captionZh": "FOC 驱动板原理图导出的 MCU 分页。"
+    "caption": "The STM32F446RET6 sheet gathers six PWM outputs, ADC inputs, Hall and encoder signals, SPI, USB, SWD, EN_GATE, DC_CAL, FAULT, and OCTW.",
+    "captionZh": "STM32F446RET6 分页汇集六路 PWM、ADC 输入、Hall 与编码器信号、SPI、USB、SWD、EN_GATE、DC_CAL、FAULT 和 OCTW。"
   },
   {
     "id": "juanyun-foc-schematic-conn",
-    "title": "FOC connector schematic sheet",
-    "titleZh": "FOC 连接器分页原理图",
+    "title": "Motor, Hall, Power, and Service Connectors",
+    "titleZh": "电机、Hall、电源与调试接口分页",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-conn.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-conn.png",
     "date": "2026-05-07",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "Connector sheet from the FOC driver board schematic export.",
-    "captionZh": "FOC 驱动板原理图导出的连接器分页。"
+    "caption": "The connector sheet routes U/V/W, Hall A_H1/B_H2/C_H3, 12 V input, OLED, serial, fan PWM, ST-Link, and USB-C interfaces.",
+    "captionZh": "连接器分页引出 U/V/W、Hall A_H1/B_H2/C_H3、12 V 输入、OLED、串口、风扇 PWM、ST-Link 与 USB-C 接口。"
   },
   {
     "id": "juanyun-foc-schematic-adc",
-    "title": "FOC ADC schematic sheet",
-    "titleZh": "FOC ADC 分页原理图",
+    "title": "Current, Voltage, and Temperature Sampling",
+    "titleZh": "电流、电压与温度采样分页",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-adc.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-adc.png",
     "date": "2026-05-07",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "ADC sheet from the FOC driver board schematic export.",
-    "captionZh": "FOC 驱动板原理图导出的 ADC 采样分页。"
+    "caption": "This sheet shows two phase-current inputs, bus current and voltage, three phase-voltage dividers, PCB temperature, and a labeled 1.65 V bias path.",
+    "captionZh": "该分页展示两相电流、母线电流与电压、三相电压分压、PCB 温度，以及标注为 1.65 V 的偏置通路。"
   },
   {
     "id": "juanyun-foc-schematic-mos",
-    "title": "FOC MOSFET stage schematic sheet",
-    "titleZh": "FOC MOS 功率级分页原理图",
+    "title": "HY3010D Three-Phase Half-Bridge",
+    "titleZh": "HY3010D 三相半桥功率级",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mos.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-mos.png",
     "date": "2026-05-07",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "MOSFET power-stage sheet from the FOC driver board schematic export.",
-    "captionZh": "FOC 驱动板原理图导出的 MOS 功率级分页。"
+    "caption": "Six HY3010D MOSFETs form the U/V/W half-bridges, with 20 mΩ phase shunts and a 4 mΩ bus shunt visible in the same power-stage sheet.",
+    "captionZh": "六颗 HY3010D 组成 U/V/W 三组半桥，同页还能看到 20 mΩ 相电流采样电阻与 4 mΩ 母线采样电阻。"
   },
   {
     "id": "juanyun-foc-schematic-driver",
-    "title": "FOC driver schematic sheet",
-    "titleZh": "FOC 驱动分页原理图",
+    "title": "DRV8301 Gate Driver and 5 V Supply",
+    "titleZh": "DRV8301 栅极驱动与 5 V 电源分页",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-driver.png",
     "thumbnail": "/uploads/projects/juanyun-public/foc-driver/foc-schematic-driver.png",
     "date": "2026-05-07",
     "projectSlug": "juanyun-foc-driver-board",
-    "caption": "Driver sheet from the FOC driver board schematic export.",
-    "captionZh": "FOC 驱动板原理图导出的驱动分页。"
+    "caption": "The DRV8301DCAR sheet connects six PWM inputs to three gate pairs and exposes SPI, EN_GATE, nFAULT, OCTW, current-shunt outputs, and a 5 V buck stage.",
+    "captionZh": "DRV8301DCAR 分页把六路 PWM 接到三组栅极，并引出 SPI、EN_GATE、nFAULT、OCTW、电流采样放大输出和 5 V 降压级。"
   },
   {
     "id": "juanyun-eev-board-render",
