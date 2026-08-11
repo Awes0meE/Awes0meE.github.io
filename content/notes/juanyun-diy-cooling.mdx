@@ -15,9 +15,9 @@ visibility: public
 
 `CPU62.7` 只有几个字符，短得像协议还没来得及正式上班。可在这份归档里，桌面监控端与 ESP32 之间的桥，确实就是这个前缀加数值。
 
-The [Windows form source](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) asks LibreHardwareMonitor for CPU and GPU temperature sensors and rounds each available value to one decimal place. Its WinForms timer fires every 5000 ms and schedules separate monitor and send tasks. On even counts, the send task checks whether a cached CPU value exists before attempting a `CPU{value}` line; odd counts do the same for `GPU{value}`. The helper reaches `SerialPort.WriteLine` only when the selected port exists and is open at 115200 baud.
+The [Windows form source](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) asks LibreHardwareMonitor for CPU and GPU temperature sensors and rounds each available value to one decimal place. The archived [desktop entry point](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs) launches that form inside the accompanying [.NET Framework project](/uploads/projects/juanyun-public/diy-cooling/desktop-cpuwenduhuoqu.csproj). Its WinForms timer fires every 5000 ms and schedules separate monitor and send tasks. On even counts, the send task checks whether a cached CPU value exists before attempting a `CPU{value}` line; odd counts do the same for `GPU{value}`. The helper reaches `SerialPort.WriteLine` only when the selected port exists and is open at 115200 baud.
 
-[Windows 窗体源码](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)通过 LibreHardwareMonitor 查找 CPU 与 GPU 温度传感器，再把可用读数四舍五入到一位小数。WinForms 定时器每 5000 ms 触发一次，并分别调度温度扫描与发送任务。偶数拍只有在 CPU 缓存值存在时才尝试写出 `CPU{value}`，奇数拍对 `GPU{value}` 做同样检查；辅助函数还要确认选中的 115200 波特率串口已经存在且打开，才会走到 `SerialPort.WriteLine`。
+[Windows 窗体源码](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)通过 LibreHardwareMonitor 查找 CPU 与 GPU 温度传感器，再把可用读数四舍五入到一位小数。归档中的[桌面程序入口](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)在配套的 [.NET Framework 项目](/uploads/projects/juanyun-public/diy-cooling/desktop-cpuwenduhuoqu.csproj)内启动这个窗体。WinForms 定时器每 5000 ms 触发一次，并分别调度温度扫描与发送任务。偶数拍只有在 CPU 缓存值存在时才尝试写出 `CPU{value}`，奇数拍对 `GPU{value}` 做同样检查；辅助函数还要确认选中的 115200 波特率串口已经存在且打开，才会走到 `SerialPort.WriteLine`。
 
 One detail changes how fresh that message can be. Each timer tick launches monitoring and sending in two separate `Task.Run` calls, without waiting for the sensor scan to finish before reading the shared temperature fields. The outgoing line is therefore not guaranteed to contain the sample started on the same tick; it may use the last stored value. The archive contains no timestamped log to show which ordering occurred during the demo.
 
@@ -25,9 +25,9 @@ One detail changes how fresh that message can be. Each timer tick launches monit
 
 ## Alternating Prefixes Give Each Sensor About Ten Seconds / 前缀轮流出现，每个传感器约十秒一拍
 
-Each five-second timer event schedules one send attempt and alternates which prefix it considers. When the cached-value and open-port checks pass, successive attempts nominally give each sensor one opportunity every ten seconds. The [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) reads through `BluetoothSerial` until `\n`, checks `startsWith("CPU")` or `startsWith("GPU")`, and converts the remaining text with `toFloat()`.
+Each five-second timer event schedules one send attempt and alternates which prefix it considers. When the cached-value and open-port checks pass, successive attempts nominally give each sensor one opportunity every ten seconds. The [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) reads through `BluetoothSerial` until `\n`, checks `startsWith("CPU")` or `startsWith("GPU")`, and converts the remaining text with `toFloat()`. The same folder also preserves the [PlatformIO configuration](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio.ini) and a [byte-identical Arduino sketch copy](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino) of that source.
 
-每个五秒定时事件只调度一次发送尝试，并轮换本次检查哪个前缀。缓存值存在且串口已打开时，连续尝试名义上给每个传感器约十秒一次的发送机会。[ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)通过 `BluetoothSerial` 一直读到 `\n`，再用 `startsWith("CPU")` 或 `startsWith("GPU")` 分流，最后把后半段交给 `toFloat()`。
+每个五秒定时事件只调度一次发送尝试，并轮换本次检查哪个前缀。缓存值存在且串口已打开时，连续尝试名义上给每个传感器约十秒一次的发送机会。[ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)通过 `BluetoothSerial` 一直读到 `\n`，再用 `startsWith("CPU")` 或 `startsWith("GPU")` 分流，最后把后半段交给 `toFloat()`。同一目录还保留了 [PlatformIO 配置](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio.ini)，以及与该源码[逐字节一致的 Arduino sketch 副本](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)。
 
 The current value goes to the OLED, but a second pair of variables keeps only the largest CPU and GPU readings seen so far. Every 30000 ms, the loop selects the larger of those two maxima, calls `updatePWM()`, and then clears both maxima for the next window. A 30-second window therefore contains roughly three opportunities per sensor under the nominal sender cadence. Missing lines, task ordering, and Bluetooth timing can change that count; no receive log is present to measure it.
 
@@ -60,9 +60,3 @@ The 3:57 [demo video](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp
 It is not a packet trace. It also contains no controlled workload, synchronized temperature curve, fan waveform, pressure or flow reading, acoustic result, or power measurement. The text protocol and 30-second maximum strategy explain the control intent; timestamped transmit/receive logs and PWM captures would be needed to explain timing behavior, and a repeatable thermal test would still be needed to explain cooling effect.
 
 但它不是报文 trace，也没有受控负载、同步温度曲线、风扇波形、风压 / 风量、噪声或功耗数据。文字协议与 30 秒峰值策略已经足够解释控制意图；要解释时序行为，还得补带时间戳的收发日志与 PWM 捕获；要解释散热效果，则仍然要从可重复的热测试开始。
-
-- [ESP32 PlatformIO configuration](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio.ini)
-- [Byte-identical Arduino sketch copy](/uploads/projects/juanyun-public/diy-cooling/esp32-arduino-pwm-control.ino)
-- [Desktop entry point](/uploads/projects/juanyun-public/diy-cooling/desktop-program.cs)
-- [Desktop .NET Framework project file](/uploads/projects/juanyun-public/diy-cooling/desktop-cpuwenduhuoqu.csproj)
-- [Project archive page](/work/juanyun-diy-cooling-prototype)
