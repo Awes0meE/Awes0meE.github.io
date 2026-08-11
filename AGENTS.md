@@ -12,6 +12,8 @@ When starting work on a new computer or a fresh Codex session:
    - list root files and `docs/`
 2. Read project context in this order:
    - `CODEX.md`
+   - if `docs/active-work/portfolio-copy-rewrite.md` exists, read it before
+     resuming the active rewrite;
    - `MEMORY.md`
    - `docs/environment-toolchain.md`
    - `docs/memory-system.md`

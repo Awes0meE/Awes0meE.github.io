@@ -117,26 +117,40 @@ and facts:
 
 ## Current `grill-me` Frontier
 
-1. What concrete cooling problem or experience caused the project to begin?
-2. In the user's own engineering model, what does “压风式” mean, and what role
-   does the foam seal play?
-3. Which physical/electronic version is the completed main story, and how do
-   the ESP32 PCB, A1 mini print split, and STM32 design relate to it?
-4. Why did the user read internal CPU/GPU temperatures on Windows and send them
-   to the controller instead of using an external temperature sensor?
-5. Why were 5-second desktop updates and a 30-second maximum-temperature window
-   chosen?
-6. What thermal effect was actually observed, under what load or comparison,
-   and which results were only subjective?
-7. Which mechanical, airflow, Bluetooth, sensing, PWM, noise, assembly, or
-   printing problem consumed the most effort, and how was the initial judgment
-   corrected?
-8. What was the first moment when the user felt the prototype had genuinely
-   come alive?
+1. **Q1 - 项目最初为什么会出现：** 当时是什么具体问题让你决定自己做散热器？是现成散热底座效果差、笔记本进风不足、游戏时温度高，还是单纯想验证“集中送风”这个想法？请尽量讲一个真实场景。
 
-The full conversational wording and recommended answer directions remain in
-the current Codex chat. On another device, ask these eight questions in this
-order and let the user answer by voice without forcing polished prose.
+   **推荐回答方向：** 如果符合事实，从一次明确的不满写起：普通散热底座只是把风吹向机器底部，大量气流从周围漏掉，因此你想做一个能把风集中送到笔记本进风口的结构。
+
+2. **Q2 - “压风式”到底是什么意思：** 在你的理解里，它与普通散热底座最核心的差别是什么？泡棉承担了什么作用？你当时是在追求更高静压、减少漏风、对准进风口，还是几项都有？
+
+   **推荐回答方向：** 把它解释成一个朴素的工程直觉：用泡棉把笔记本底部围成相对封闭的送风空间，减少旁路漏风，迫使风扇送出的空气更集中地经过进风区域；除非确实测过，否则不写成经过验证的空气动力学结论。
+
+3. **Q3 - 哪个版本才是这篇故事的主角：** 实体演示使用亚克力板、泡棉、ESP32、OLED 和五个按键；此外还有 A1 mini 拆件打印方案、ESP32 PCB，以及后来的 STM32 PCB。你心里真正“完成并使用过”的是哪一版？其余版本分别是什么定位？
+
+   **推荐回答方向：** 把实体 ESP32 原型作为主线，因为它有完整演示；3D 打印方案作为机械结构改进，STM32 PCB 如果没有实际焊接运行，就诚实写成后续重构尝试，不把它冒充成已经验证的成品。
+
+4. **Q4 - 温度为什么要经过电脑再传给 ESP32：** 你为什么选择由 Windows 程序读取 CPU/GPU 温度，再通过蓝牙发送，而不是让控制器自己接温度传感器？这个方案当时解决了什么问题，又带来了什么麻烦？
+
+   **推荐回答方向：** 可能的关键判断是电脑内部温度已经可以由 LibreHardwareMonitor 直接读取，没必要再用外置传感器猜测机身温度；代价是系统依赖桌面程序、蓝牙配对和通信状态。必须按用户的真实想法纠正或补充。
+
+5. **Q5 - 五秒与三十秒是怎么定下来的：** 桌面程序每五秒刷新并交替发送 CPU/GPU 温度，ESP32 则在三十秒窗口内保留两者峰值，再据此调 PWM。为什么没有直接使用最新温度？你是为了避免转速频繁跳动、抓住短时峰值，还是这些数字主要来自调试经验？
+
+   **推荐回答方向：** 可以写成对“响应速度”和“风扇来回变速”之间的折中：五秒保证数据不会太陈旧，三十秒峰值窗口让短时高负载不会马上被后一个低读数覆盖，但必须以用户的真实理由为准。
+
+6. **Q6 - 实际散热效果究竟怎样：** 你有没有做过同一负载下的开关机对比、温度下降记录、稳定温度观察，或者哪怕是明显的主观体验？如果没有正式数据，也请说明实际看到、听到或摸到的变化。
+
+   **推荐回答方向：** 最理想的是提供一个仍记得的测试条件和大致结果；如果确实没有受控测试，就明确写成“控制链与实体送风已经跑通，但没有形成可比较的温度曲线”，绝不硬编性能提升。
+
+7. **Q7 - 最折磨你的问题是什么：** 机械密封、亚克力装配、泡棉选型、风道漏风、风扇噪声、蓝牙连接、温度读取、PWM 调速、3D 打印支撑——哪一个最费时间？你最初怎么判断错了，后来又怎么改？
+
+   **推荐回答方向：** 只挑一到两个最具体的坑深写，例如“结构看起来封住了，实际风从缝里跑掉”或“长零件为了塞进 A1 mini，不得不重新拆件和调整支撑”。真实失误会成为学习笔记最有个人味道的部分。
+
+8. **Q8 - 第一次觉得‘这东西真的活了’是什么瞬间：** 是 Windows 程序第一次读出 CPU/GPU 温度，ESP32 第一次收到蓝牙数据，OLED 上第一次出现真实温度，按键切换 Quiet/Normal/High Speed/Manual，还是把笔记本放上去后真正感觉到风被压进去了？
+
+   **推荐回答方向：** 可以用一个可视化瞬间做开头：电脑端温度终于出现在实体 OLED 上，按下按钮后模式和转速随之变化。必须由用户补充当时真实发生的细节和反应。
+
+On another device, ask these eight questions in this order and let the user
+answer by voice without forcing polished prose.
 
 ## Next Action
 
@@ -383,11 +397,11 @@ Expected: both commands exit 0.
 - [ ] **Step 5: Commit the implementation checkpoint**
 
 ```powershell
-git add -- AGENTS.md docs/active-work/portfolio-copy-rewrite.md docs/agent-skills.md docs/environment-toolchain.md docs/superpowers/specs/2026-08-11-cross-device-portfolio-rewrite-handoff-design.md
+git add -- AGENTS.md docs/active-work/portfolio-copy-rewrite.md docs/agent-skills.md docs/environment-toolchain.md docs/superpowers/plans/2026-08-11-cross-device-portfolio-rewrite-handoff.md docs/superpowers/specs/2026-08-11-cross-device-portfolio-rewrite-handoff-design.md
 git commit -m "docs(collab): add cross-device rewrite handoff"
 ```
 
-Expected: one documentation commit containing only the five planned files.
+Expected: one documentation commit containing only the six planned files.
 
 - [ ] **Step 6: Push and verify synchronization**
 
