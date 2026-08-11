@@ -40,9 +40,11 @@ $env:Path='C:\Program Files\nodejs;' + $env:Path
 
 ## macOS Relay Setup
 
-The active portfolio rewrite uses a single-device-at-a-time relay on
-`agent/rewrite-ai-authored-portfolio-copy`. The outgoing device must commit and
-push before the incoming device starts.
+Between project rewrites, `main` is the cross-device source of truth. Each new
+project should start from updated `main` on a topic branch. If
+`docs/active-work/portfolio-copy-rewrite.md` names an active topic branch, both
+devices use that branch sequentially: the outgoing device commits and pushes
+before the incoming device starts.
 
 For a fresh Mac checkout:
 
@@ -50,7 +52,8 @@ For a fresh Mac checkout:
 git clone https://github.com/Awes0meE/Awes0meE.github.io.git XJTLU_Portfolio
 cd XJTLU_Portfolio
 git fetch --prune origin
-git switch --track origin/agent/rewrite-ai-authored-portfolio-copy
+git switch main
+git pull --ff-only origin main
 ```
 
 For an existing checkout:
@@ -58,8 +61,8 @@ For an existing checkout:
 ```bash
 git status --short --branch
 git fetch --prune origin
-git switch agent/rewrite-ai-authored-portfolio-copy
-git pull --ff-only origin agent/rewrite-ai-authored-portfolio-copy
+git switch main
+git pull --ff-only origin main
 ```
 
 Stop if `git status --short` reports local changes. Inspect and preserve them
@@ -88,8 +91,9 @@ The portfolio writer is repository-local at
 substitute a similarly named global writing skill.
 
 Before resuming, read `AGENTS.md`, `CODEX.md`, and
-`docs/active-work/portfolio-copy-rewrite.md`. Confirm the branch is clean, then
-continue from the handoff file's `Next Action` section.
+`docs/active-work/portfolio-copy-rewrite.md`. Confirm the branch is clean. If
+the handoff names an active topic branch, fetch and fast-forward that branch;
+otherwise continue from its `Next Action` section on synchronized `main`.
 
 ## GitHub Sync Workflow
 

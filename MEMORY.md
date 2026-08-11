@@ -1,6 +1,6 @@
 # MEMORY.md
 
-Durable project memory for the XJTLU Portfolio repository. Current local path in this session: `D:\Develop\Project_Final_Collation\XJTLU_Portfolio`.
+Durable project memory for the XJTLU Portfolio repository. The checkout path varies by device; repository-relative paths are canonical.
 
 This file is for future AI sessions and long-running portfolio maintenance. Keep it concise and current; edit stale facts instead of blindly appending duplicates.
 
@@ -13,7 +13,6 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-05-06`: Cloudflare DNS points the domain to Vercel. `www.66ccff-labs.com` resolves through a Vercel DNS CNAME, and the apex domain redirects to `www`.
 - `2026-05-06`: External skills installed into Codex user skills: `karpathy-guidelines` and `neat-freak`. Restart Codex to expose them as first-class skills.
 - `2026-05-06`: `AGENTS.md` gained a cross-device bootstrap section so a new Codex session on another computer can quickly inspect the repo, restore missing environment context, and install or emulate required skills.
-- `2026-05-06`: Public identity was normalized to `Awes0meE / Li Zhiyi`; contact email is `lizhiyi20030401@gmail.com`; degree wording is Communication Engineering.
 - `2026-05-06`: Branch `content/juanyun-tech` was created for draft portfolio content from `F:\XJTLU\工作相关\卷云科技有限责任公司`.
 - `2026-05-06`: Juanyun technical materials were expanded into 7 Juanyun project pages, 13 Juanyun notes, media entries, and a broad draft public asset set. That early draft later became too permissive for company work.
 - `2026-05-06`: Branch `feature/note-visibility` was created from `main` to test note-level public/private visibility. Missing note visibility defaults to private.
@@ -50,9 +49,11 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-07-05`: Imported `C:\Users\123\Desktop\Smart Car Project` as the `arduino-smart-car-line-tracker` portfolio project: 1 project page, 1 public learning note, 12 media entries, normalized public uploads under `public/uploads/projects/arduino-smart-car-line-tracker/`, selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, Arduino testing code, and a padded horizontal `cover-wide.jpg` from the user's replacement cover. The original course tutorial PDF and project-description TXT remain reference-only and should not be copied into `public/uploads/`.
 - `2026-07-05`: Rewrote older project and related-note body copy with `engineering-note-writer`: Juanyun, Nanjing Turing project homepage, Tianjin STM32, Claude Chime, FOC, and DIY cooling pages now lean more on concrete engineering traces. The newly added Smart Car and Digital Clock project/note bodies were left unchanged, and Nanjing Turing original uploaded notes (`turing-cmake-build-logic`, `turing-qt-seamly2d-first-run`, `turing-release-packaging-cross-platform`, `turing-sm2d-xml-data-format`) were preserved.
 - `2026-07-04`: Investigated failed GitHub Pages deployment run `28677991122` at commit `f1371d0`. Vercel and local builds were healthy; the problem was the username repository still had legacy GitHub Pages configured to publish `main:/`, so Pages tried to deploy the raw Next.js source repository. Direct Pages deactivation returned HTTP 422, so the repository now uses a dedicated `gh-pages` branch containing only `index.html`, `404.html`, and `.nojekyll` as a redirect fallback to `https://www.66ccff-labs.com/`, with Pages source set to `gh-pages:/`.
-- `2026-08-09`: Verified the migrated checkout on `D:\Develop\Project_Final_Collation\XJTLU_Portfolio`: `main` matched `origin/main`, GitHub HTTPS authentication used account `Awes0meE`, the Pages fallback remained on `gh-pages:/`, and the production domain returned a Vercel `200` response. Repository-local Git safeguards now require fast-forward pulls, prune deleted remote branches, and automatically establish upstreams for new topic branches.
+- `2026-08-09`: Verified a migrated Windows checkout: `main` matched `origin/main`, GitHub HTTPS authentication used account `Awes0meE`, the Pages fallback remained on `gh-pages:/`, and the production domain returned a Vercel `200` response. Repository-local Git safeguards now require fast-forward pulls, prune deleted remote branches, and automatically establish upstreams for new topic branches.
 - `2026-08-09`: Pull request #3 merged `build/upgrade-next-16` into `main` at `995a2eb`, upgrading Next.js to `16.3.0`, React/React DOM to `19.2.8`, ESLint to `9.39.5`, and the locked vulnerable transitive dependency chain to patched versions. Local checks, the production deployment, and representative live routes passed.
 - `2026-08-10`: Pull request #4 merged the rebuilt `engineering-note-writer` into `main` at `dc34522`. The skill is now material-led rather than archetype-led, treats evidence boundaries as authoritative, derives at most 15 content-specific headings from the finished argument, calibrates Chinese toward roughly 75% and English toward roughly 60% of the Khazix Writer reference voice without numeric phrase quotas, and includes five baseline/revised snapshot pairs with provenance. The Vercel preview and full local validation passed; the existing 21 published note files were not rewritten. The merged local and remote topic branch `agent/engineering-note-writer-redesign` was removed after `main` synchronized.
+- `2026-08-11`: The homepage public display name is `Alvin Li`. Reader-facing contact surfaces remain GitHub-only; email and location stay hidden. Existing site/SEO naming outside that approved homepage change remains unchanged until separately reviewed.
+- `2026-08-12`: Pull request #5 merged the portfolio prose rewrite into `main` at `83ca508`. The final DIY cooling pass rewrote its bilingual project page, learning note, and six media records around the CSGO motivation, first Windows/ESP32 control chain, abandoned PID attempt, assembled ESP32 prototype, serial-tested STM32 board, and unprinted A1 mini enclosure. Remembered CSGO temperature/FPS changes remain personal observations rather than a controlled benchmark. The approved Smart Car project/note/media copy and all public uploads remained unchanged.
 
 ## Stable Decisions
 
@@ -67,6 +68,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Use `BilingualText` for fixed UI labels and paired metadata. Do not return to mixed labels such as `Work / 项目` now that the site has a global language toggle.
 - Use `visibility: public` or `visibility: private` on every note. Treat missing `visibility` as private so draft notes do not accidentally publish.
 - Keep the current project/note prose style for future content. The user likes the plain practical self-study / internship-log texture now used in notes and projects: concrete, casual, close to the debugging scene, less formal logic, not AI handoff or delivery-report phrasing.
+- Continue future portfolio rewrites one project family at a time. Inspect existing public material, interview with `grill-me`, confirm shared understanding with the user, draft Chinese through the repository-local `engineering-note-writer`, then adapt English at lower intensity. Do not reopen the approved Smart Car family unless the user explicitly requests it.
 - When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, prefer making it a real note page with the original wording rendered as readable article content. Do not hide the only copy under a project asset frame or replace it with a short summary.
 - Keep English body sections equivalent to Chinese body sections on public project/note pages. Do not rely on `title/titleZh` and `summary/summaryZh` alone when the article body has real content in both languages.
 - Treat normal fenced code blocks as language-neutral rendered evidence. When a whole code/listing block belongs to only one language view, use a scoped fence prefix such as `en-text`, `en-powershell`, `zh-text`, or `zh-powershell`; the renderer hides it with the same language CSS and displays the suffix as the code label.
@@ -131,15 +133,15 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Known-good checks as of `2026-08-10` on Windows PowerShell:
+Known-good checks as of `2026-08-12` on macOS; use the equivalent `npm.cmd` form on Windows PowerShell:
 
-```powershell
-npm.cmd run lint
-npm.cmd run validate-content
-npm.cmd run validate-encoding
-npm.cmd run typecheck
-npm.cmd run build
-npm.cmd audit --omit=dev
+```bash
+npm run lint
+npm run validate-content
+npm run validate-encoding
+npm run typecheck
+npm run build
+npm audit --omit=dev
 ```
 
 Expected result:

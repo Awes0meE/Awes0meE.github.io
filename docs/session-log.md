@@ -436,3 +436,10 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Files changed: replaced the writer's fixed archetypes and writer-specific hard-gated checklist with focused evidence, material-led composition, voice, bilingual, examples, and self-review references; added five real baseline/revised snapshot pairs with provenance and a reproducible SHA-256 manifest; synchronized `CODEX.md`, content workflow, agent-skill documentation, durable memory, and this chronology. Existing portfolio notes were intentionally left unchanged. The untracked Chinese review copy was removed after approval and was never part of the pull request.
 - Git state: pull request #4 merged into `main` at `dc34522` after its new head passed Vercel; local `main` was fast-forwarded to the merge, and the merged local and remote topic branch was removed. Pull request #3 had already merged the Next.js 16 dependency update into `main` at `995a2eb`.
 - Verification: the skill validator, 20-file SHA-256 manifest, five snapshot/provenance pairs, lint, content validation, encoding validation, typecheck, production build, dependency audit, diff checks, and final clean-worktree checks passed.
+
+## 2026-08-12
+
+- Summary: Completed the one-project-at-a-time DIY cooling interview/rewrite, merged pull request #5, and ran `/neat` for the cross-device handoff.
+- Files changed: merged the bilingual DIY cooling project page, learning note, and six media-copy updates; then replaced the stale Draft PR state in `docs/active-work/portfolio-copy-rewrite.md`, returned the macOS relay guide to a `main`-first workflow, removed machine-specific checkout paths from current agent memory, and recorded the final privacy and writing decisions.
+- Git state: pull request #5 merged into `main` at `83ca508`; local `main` fast-forwarded to the same commit before the documentation cleanup. The merged topic branch was removed after synchronization.
+- Verification: PR Vercel checks passed before merge; lint, content/encoding validation, typecheck, production build, diff checks, local/remote synchronization, and final clean-worktree checks passed.
