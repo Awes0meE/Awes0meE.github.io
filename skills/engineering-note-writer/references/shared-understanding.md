@@ -6,6 +6,8 @@ Use this gate for a new project, a substantial rewrite, or humanization of first
 
 Do not draft until the user has confirmed a compact brief of the shared understanding. Detailed files, an apparently complete artifact inventory, or pressure to move quickly cannot waive this gate. Producing any article prose in the same turn before confirmation is a failure.
 
+A request framed as a `review` does not waive the gate when it also asks for replacement or humanized first-person prose. Without a confirmed current brief, you may give the requested verdict, but do not draft the replacement in that turn; the next user-facing action must establish shared understanding.
+
 When no confirmed current brief exists:
 
 1. Inspect the available files and find public facts yourself.
