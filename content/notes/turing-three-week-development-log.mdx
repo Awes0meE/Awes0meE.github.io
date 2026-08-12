@@ -1,66 +1,134 @@
 ---
 title: "What “Working” Meant Across Three Weeks of Seamly2D Development"
 titleZh: "“能跑”改了三次意思：Seamly2D 三周开发记录"
-summary: "Three weekly logs trace how “working” came to require a matched Qt kit, explicit local role rules, and release-packaging tests on Windows and macOS."
-summaryZh: "三份周日志记录“能跑”的含义如何变化：先匹配 Qt Kit，再约束本地用户角色，最后分别试验 Windows 与 macOS 的 Release 打包。"
+summary: "Three full-time internship weeks turned “working” into a series of increasingly specific checks: align the branch, Qt package, and compiler; bring local account rules into the interface; then verify Release, a Windows installer, and an unsigned macOS DMG."
+summaryZh: "三周全职实习把“能跑”拆成越来越具体的检查：先让分支、Qt 与编译器对齐，再让本地账户规则进入界面，最后验证 Release、Windows 安装包与 macOS 无签名 DMG。"
 date: "2025-08-29"
 tags: ["Qt", "Seamly2D", "Internship", "Packaging"]
 visibility: public
 projectSlug: "nanjing-turing-qt-embedded-learning"
 ---
 
-## qmake Passed, but the Kit Still Did Not Match / qmake 过了，Kit 还是没配对
+## Ten Percent into the Progress Bar, I Learned What a Mirror Was / 进度条走了 10%，我先学会了镜像是什么
 
-Week one began with what looked like an installation checklist: Git, MSVC v142, a Windows SDK, Qt Creator, CDB, and a Qt kit. The first choice was Qt 5.15.2. Making `core5compat` conditional allowed qmake to finish, which briefly looked like progress, until the full build produced more than thirty errors from Qt6-side APIs and headers in the current Seamly2D branch.
+The first week of August had just ended with the 2025 National Undergraduate Electronics Design Contest in Nanjing. In the second week, I began three consecutive weeks as a full-time intern at the institute. I arrived at eight in the morning and left at five; the supervising engineer set a clear task each day, and I reported back when it was complete. The structure was formal, while my starting point was unmistakably junior: some C/C++ syntax, no Qt, and no experience inside a large open-source repository.
 
-第一周开始时，环境看上去像一张安装清单：Git、MSVC v142、Windows SDK、Qt Creator、CDB，再选一个 Qt Kit。最初选的是 Qt 5.15.2；把 `core5compat` 改成条件加载以后，qmake 顺利结束，场面一度很乐观。然后完整构建扔出三十多个 Qt6 侧 API 与头文件错误，提醒我“工程文件生成成功”跟“这套源码能编译”根本不是一句话。
+八月第一周刚在南京打完 2025 年全国大学生电子设计竞赛，第二周我就坐进研究院办公室，开始连续三周的全职实习。每天早上八点到、下午五点走，带教工程师给出当天任务，我做完再去汇报。节奏很正式，起点却很初学者：我知道一点 C/C++ 语法，从没用过 Qt，也没进过这种体量的开源项目。
 
-Switching to Qt 6.5.3 MSVC2019 64-bit, selecting the v142 compiler, deleting the old build directory and `.pro.user`, and configuring the kit again made the parts line up. A later post-link failure at `windeployqt` exposed another hidden dependency: Qt Creator had a Run button, but the build environment still needed the correct Qt `bin` path and a Release-only deploy rule.
+The first task was to assemble the development environment. Git, MSVC v142, the Windows SDK, CDB, Qt Creator, and a Qt Kit formed a long but manageable list. The Qt Online Installer was slower: after three hours against the overseas server, it was about ten percent complete. I did not yet realize there was another route. “Large tools probably take this long” seemed plausible enough, so I spent most of a day waiting. The supervising engineer told me about the Tsinghua mirror the next morning, and the remaining installation finished in a little over an hour.
 
-改到 Qt 6.5.3 MSVC2019 64-bit，选好 v142 编译器，删掉旧 build 目录与 `.pro.user`，再重新配置 Kit，几块拼图才对上。随后 post-link 又在 `windeployqt` 处停下：Qt Creator 虽然一直有绿色运行按钮，构建环境却仍要知道 Qt `bin` 在哪，部署规则也该只在 Release 阶段触发。
+第一天的任务是把开发环境装起来。Git、MSVC v142、Windows SDK、CDB、Qt Creator 和 Qt Kit 一项项排开，看上去像安装清单；真正耗时间的是 Qt 在线安装器。海外服务器下载三个小时，进度大约 10%。我没有意识到这件事还有别的解法，只觉得“大软件可能就是要下这么久”，于是非常老实地陪了它一天。带教工程师第二天问清情况，告诉我可以换清华镜像。切过去以后，一个多小时就结束了。
 
-By the end of that bring-up, “the environment works” no longer meant that every installer had completed. It meant that the branch, Qt package, compiler toolset, architecture, paths, qmake step, and full build agreed with one another. The [week-one raw log](/uploads/projects/nanjing-turing/week-1-development-log.txt) is short; the longer [Qt6 first-run note](/notes/turing-qt-seamly2d-first-run) keeps the route through those mismatches.
+The episode is still funny in retrospect. I had left an electronics competition expecting complicated desktop UI work, and my first durable lesson was that the download source belongs to the development environment too. The current [TUNA Qt mirror guide](https://mirrors.tuna.tsinghua.edu.cn/help/qt/) gives the Online Installer's `--mirror` argument directly. I learned it one day late, which was enough to pay a small beginner's fee.
 
-这轮 bring-up 结束时，“环境能用”已经不再等于“每个安装器都点完了”，而是分支、Qt 包、编译器工具集、架构、路径、qmake 与完整构建终于彼此同意。[第一周原始日志](/uploads/projects/nanjing-turing/week-1-development-log.txt)很短，更完整的错配过程保留在 [Qt6 首跑笔记](/notes/turing-qt-seamly2d-first-run) 里。
+这件事现在想起来仍然很好笑。我从电赛现场出来，自以为马上要学复杂的桌面 UI，结果第一份有效经验是：下载源也属于开发环境。清华 TUNA 现在的 [Qt 镜像说明](https://mirrors.tuna.tsinghua.edu.cn/help/qt/)直接给出了在线安装器的 `--mirror` 用法；当时的我晚一天才知道，刚好交了一点新人学费。
 
-## A Login Window Turned Rules into State Transitions / 一个登录窗口把规则变成了状态转换
+## qmake Passed, but the Source Still Stood on the Qt 6 Side / qmake 通过了，源码还站在 Qt 6 那边
 
-The next part of week one added local registration and login before the upstream Seamly2D interface. The log records `QSettings` storage, a move from plaintext comparison to hash-based verification, masked password fields, and prompts for existing users, missing users, and incorrect passwords. Pressing Enter was changed from the cancel path to confirmation. The log separately says username input suggestions were disabled. It also records a password-field crash under a Chinese input method as fixed, while the public excerpt does not include that patch. Desktop UI had found a decidedly non-permission-shaped way to remind me that input state was part of the problem too.
+Once the environment was installed, I cloned Seamly2D for the first time, inspected its upstream branches, and brought the source onto the company's internship development line. The initial choice was Qt 5.15.2 because the installation and Kit appeared complete. `core5compat` first stopped qmake; I made the module conditional, cleaned the project, ran qmake again, and finally saw `qmake_all finished successfully`.
 
-第一周后半段在上游 Seamly2D 界面前接入本地注册与登录。日志记录了 `QSettings` 存储、从明文比较改到哈希校验、密码隐藏，以及用户已存在、用户不存在和密码错误提示；回车键也从取消改到确认。日志另记用户名输入关闭了联想与提示词。密码框在中文输入法下的闪退也被记为已修复，但公开摘录没有包含对应补丁。桌面 UI 有时确实会挑一条完全不像“权限问题”的路来提醒你，它也是状态的一部分。
+环境装好后，我第一次 clone Seamly2D，查看上游分支，再把代码拉到公司为实习生准备的开发线上。最初选择 Qt 5.15.2，是因为那套安装与 Kit 看起来已经齐全。工程里的 `core5compat` 先让 qmake 报错；我把它改成条件加载，清理后再次执行，终于看见 `qmake_all finished successfully`。
 
-Week two made that state explicit. The first account had to be named `admin`; administrators could see user management while normal users could not. Deletion required confirmation and applied only to normal users. Promotion also targeted normal users, while demotion was reserved for the `admin` account, preventing other administrators from demoting one another.
+Then the full build produced more than thirty errors.
 
-第二周把这些状态写得更明确：首次账号必须叫 `admin`；管理员看得到用户管理，普通用户看不到；删除前要确认，而且只能删除普通用户；升级也只针对普通用户；降级则只留给 `admin`，其他管理员不能互相降级。
+然后完整构建冒出三十多个错误。
 
-At first these sounded like a list of buttons. In practice each action asks for the current user, target user, target role, allowed transition, cancellation path, and message. The [week-two raw log](/uploads/projects/nanjing-turing/week-2-development-log.txt) preserves that full sequence; the published excerpt isolates the local role lookup used at the application entrance.
+`QStringConverter`, Qt 6 headers, and Qt 6-style calls were already distributed through the current source. qmake had processed the `.pro` files and generated build rules; it had not promised that Qt 5 could compile the source behind those rules. Staying on that route meant adding Qt 5 conditional compatibility across many files. For a three-week intern who had only just met Qt, the cost was high and the direction was wrong for the task.
 
-刚读日志时，这些内容很像一串按钮；真正接进窗口后，每个动作都要回答当前用户是谁、目标用户是谁、目标角色是什么、这次转换能不能发生、能不能取消、提示该怎么说。[第二周原始日志](/uploads/projects/nanjing-turing/week-2-development-log.txt)按当时顺序保留完整规则，公开摘录则只截取应用入口处的本地角色查询。
+`QStringConverter`、Qt6 侧头文件和调用方式已经散在当前源码里。qmake 能生成构建文件，只证明 `.pro` 文件已经被处理，并没有替编译器承诺“这条分支兼容 Qt 5”。如果坚持原路线，就要给一批代码补 Qt 5 条件编译。对一个刚认识 Qt 的三周实习生来说，这条路既慢，也偏离任务。
 
-## The Release Folder Added a Third Meaning of “Working” / Release 目录给“能跑”加了第三层意思
+I installed Qt 6.5.3 MSVC2019 64-bit and the Qt 5 Compatibility Module, selected the v142 compiler, deleted the stale build directory and `Seamly2D.pro.user`, and configured the Kit again. Only after another qmake and full build did the source and toolchain agree. The [Qt 6 first-run record](/notes/turing-qt-seamly2d-first-run) keeps those modifications and the feeling that each solved error revealed how little the previous success had actually covered.
 
-Week three opened with a `.sm2d` XML sample and a first pass at its data shape, then shifted to Release once the `develop` branch and the earlier features were running. Release made the toolchain questions return in a less forgiving form. Compiler-version conflicts, MSVC, CMake, Ninja, and Qt package discovery were studied together, even though the recorded Seamly2D build itself still followed qmake.
+我改装 Qt 6.5.3 MSVC2019 64-bit 与 Qt 5 Compatibility Module，选择 v142 编译器，删除旧 build 目录和 `Seamly2D.pro.user`，重新配 Kit。再次 qmake、完整构建，源码与工具链才终于站到同一边。[Qt6 首跑原始记录](/notes/turing-qt-seamly2d-first-run)保留了这些修改，也保留了我当时那种“每解决一个错误，才发现前一个成功只负责一小段”的推进方式。
 
-第三周先从 `.sm2d` XML 样例读起，初步观察数据结构；等 `develop` 分支与前两周功能跑通后，重心转向 Release。工具链问题马上以更不讲情面的方式回来：编译器版本冲突、MSVC、CMake、Ninja、Qt 包发现被放到一起补课，尽管这份 Seamly2D 构建记录本身仍走 qmake。
+Qt 6.5's official [supported Windows configurations](https://doc.qt.io/qt-6.5/windows.html) list Windows, x86-64, and MSVC 2019 as one configuration. That investigation was the first time I saw version, compiler, and architecture as a single binary agreement rather than three unrelated labels in an installer.
 
-On Windows, the local chain reached a Release executable, Qt dependency collection with `windeployqt`, a manual `xerces-c_3_2.dll` copy, self-signing, an Inno Setup installer, installation, and launch on the same machine. That result was concrete, but narrower than “ready for distribution”: the workflow note says there was no clean Windows device without Visual Studio or Qt available for a second-machine test.
+现在查 Qt 6.5 的[支持配置](https://doc.qt.io/qt-6.5/windows.html)，Windows、x86-64 与 MSVC 2019 本来就被并列写在同一组条件里。那次排查让我第一次意识到，版本号、编译器和架构不是安装界面里三条互不相干的信息，它们共同决定一个二进制世界能不能接上另一个。
 
-Windows 本机链路走到了 Release 可执行文件、`windeployqt` 收集 Qt 依赖、手动补 `xerces-c_3_2.dll`、自签名、Inno Setup 安装包、安装并在同一台机器启动。这个结果很具体，但比“已经可分发”窄得多：流程文档注明手头没有一台不装 Visual Studio 与 Qt 的干净 Windows 设备做第二台机器验证。
+## Enter Still Meant Cancel Before Permissions Became Complicated / 回车键连着“取消”，权限还没来得及复杂
 
-That distinction changed the meaning of the green Run button again. Debug inside Qt Creator, a Release executable in its build directory, a dependency-filled folder, and an installer that runs locally are four different checkpoints. The [week-three raw log](/uploads/projects/nanjing-turing/week-3-development-log.txt) compresses them into a timeline; the [Release packaging note](/notes/turing-release-packaging-cross-platform) keeps the Windows commands and the untested clean-machine boundary.
+In the second half of week one, I began placing local registration and login before the Seamly2D main interface. The first version stored user information in `QSettings` and compared plaintext passwords. I then changed it to store and verify password hashes, masked the password input, and added separate prompts for existing users, missing users, and incorrect passwords. At that point it still resembled an ordinary window-development task.
 
-绿色运行按钮的含义因此又变了一次：Qt Creator 里的 Debug、构建目录里的 Release 可执行文件、收齐依赖的目录、本机能安装运行的安装包，是四个不同检查点。[第三周原始日志](/uploads/projects/nanjing-turing/week-3-development-log.txt)把它们压成时间线，[Release 打包笔记](/notes/turing-release-packaging-cross-platform)则保留 Windows 命令和未做干净机验证的边界。
+第一周后半段，我开始在 Seamly2D 主界面前增加本地注册与登录。最初版本用 `QSettings` 保存用户信息，密码也只是明文存储和字符串比较；随后我把它改成哈希值存储与校验，并将密码框设为遮蔽显示。用户已经存在、用户不存在、密码错误，各自需要明确提示。到这里看起来仍然像一项普通的窗口开发任务。
 
-## macOS Reopened the Signing Question / 到了 macOS，签名问题重新打开
+The windows quickly found less ordinary ways to fail. Enter activated Cancel rather than Confirm; username fields offered suggestions that needed disabling; and the password field could crash when a Chinese input method was active. None of these looked like the central permission logic, yet any one of them could break the entrance before the permission code had a chance to run.
 
-Moving the Windows-side code to a Mac did not preserve the environment. Homebrew Qt and the official Qt installation differed in paths and architecture, so Debug was brought up first and Release was handled again. The unsigned script copies the Release `.app`, runs `macdeployqt`, and creates a compressed DMG with `hdiutil`; the weekly log records those non-signing steps as working.
+窗口很快证明自己没有那么普通。登录和注册界面的回车键默认连到了取消，用户名输入会弹联想，密码框在中文输入法状态下还发生过闪退。它们都不是“核心功能”，却会在用户真正操作时抢先出现。尤其是中文输入法崩溃，问题完全没有长成权限逻辑的样子，却能让整个入口当场消失。
 
-把 Windows 侧代码移到 Mac，并不会顺便搬走原来的环境。Homebrew Qt 与官方 Qt 的路径、架构不同，只能先跑 Debug，再重新处理 Release。无签名脚本会复制 Release `.app`，用 `macdeployqt` 收依赖，再通过 `hdiutil` 创建压缩 DMG；周日志把这些不涉及签名的步骤记为已实现。
+I corrected the input behavior and reorganized the registration, login, and application-entry sequence around `main()`. `QSettings` provides local persistence rather than a remote user system; Qt likewise describes [`QSettings`](https://doc.qt.io/qt-6.5/qsettings.html) as an abstraction for persistent platform-independent application settings. A database and online authentication would be a different architecture, outside this internship. The question here was narrower: could the existing C++ desktop application support a reliable local entrance?
 
-Signing stopped earlier. A self-signed certificate was created, and a second script lays out `codesign`, `spctl`, and DMG steps, but the log says the automation worked except for signing. There is no completed Apple signing or notarization result in the record. The script is useful because it shows the intended order; it does not turn that order into a finished release.
+我逐项修正输入行为，再在 `main()` 附近整理注册、登录和进入主程序的顺序。`QSettings` 负责的是本机持久化，不是远程用户系统；Qt 官方也把 [`QSettings`](https://doc.qt.io/qt-6.5/qsettings.html)描述为跨平台应用设置抽象。数据库与在线鉴权会是另一套架构，不在这次实习范围内。这三周验证的只是：现有 C++ 桌面程序能不能先多一层可靠的本地入口。
 
-签名停得更早：自签名证书创建成功，第二份脚本也排好了 `codesign`、`spctl` 与 DMG 步骤，但日志明确写着自动化“除签注外功能均实现”。记录中没有完成 Apple 签名，更没有 notarization。脚本的价值在于把目标顺序写清楚，不会因为步骤都列在里面，就自动变成一次成功发布。
+## An Administrator Was a Set of Forbidden Transitions, Not a Menu / 管理员不是一个菜单，而是一组不允许发生的转换
 
-By the end of the third week, saying “it works” required one more noun: the source works with which Qt kit, the role transition works for which account, the package works on which machine, and the signature was checked by which platform service. That extra noun is the part of the log I would keep.
+In week two, the account question moved from “can this user log in?” to “what can this user do afterward?” The first registered username had to be `admin`; roles were normal user and administrator; and only administrators could see user management. Deletion required confirmation and applied only to normal users. Promotion also targeted normal users, while demotion belonged exclusively to `admin`, preventing other administrators from demoting one another.
 
-到第三周结束，“能跑”后面必须再补一个名词：源码配哪套 Qt Kit 能跑，角色转换对哪个账号能跑，安装包在哪台机器能跑，签名又经过哪个平台服务检查。这几个补语，才是三周日志里最值得留下的部分。
+第二周，账户从“能不能登录”继续长到“登录以后能做什么”。首次注册的用户名必须是 `admin`；角色分为普通用户和管理员；只有管理员看得到用户管理。删除操作要二次确认，而且管理员只能删除普通用户。升级同样只对普通用户开放，降级则只能由 `admin` 执行，避免其他管理员互相改回普通用户。
+
+The weekly log made these look like a list of features: view, delete, promote, demote. Implementation turned each one into a question about the active user, target user, target role, and permitted next state. My understanding of GUI work shifted slightly here. Controls expose the state; the more important job is guarding the transitions that must never happen.
+
+这些需求写在周日志里很像一列功能：查看、删除、升级、降级。真正实现时，每一项都在问当前用户、目标用户、目标角色和允许的下一状态。到了这里，我对 GUI 的理解才从“页面上有哪些控件”稍微转了一下：界面只是状态露出来的地方，真正需要守住的是哪些转换根本不该发生。
+
+The [public role excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp) retains only `Role::User`, `Role::Admin`, and the local role lookup; the full account source is not republished. The [raw week-two log](/uploads/projects/nanjing-turing/week-2-development-log.txt) preserves the complete set of constraints in their original order.
+
+[公开角色摘录](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)只保留本地 `Role::User`、`Role::Admin` 与角色查询，没有重发完整账户源码。[第二周原始日志](/uploads/projects/nanjing-turing/week-2-development-log.txt)则按当时顺序留下了整组限制条件。
+
+## `windeployqt` Was on Disk, and the Build Still Could Not See It / `windeployqt` 明明在电脑里，构建就是看不见
+
+Week three moved from Develop to Release. I could already launch the application with its account entrance in Qt Creator, so “export it next” seemed reasonable. `windeployqt` stopped that plan for three days. The deployment step could not find the command even though the executable was plainly inside the Qt installation. I no longer remember every reinstallation and path experiment in sequence; I do remember the frustration.
+
+第三周的目标从 Develop 转向 Release。此前我已经能在 Qt Creator 里启动带账户入口的程序，于是很自然地觉得“接下来就是把它导出来”。`windeployqt` 很快把这个理解卡了三天：部署步骤说找不到命令，可执行文件却明明躺在 Qt 安装目录里。重装、查路径、重新配置，我已经记不清所有尝试的顺序，只记得这三天确实很烦。
+
+The document I wrote at the time preserves the final route. Qt Creator's Build Environment had to see Qt's `bin` directory. The post-link rules in the two `.pro` files were also changed to resolve `windeployqt` through `QT_INSTALL_BINS` and execute only under the Release configuration. An environment variable is not merely a long entry in the Windows settings dialog; it must reach the process that launches the build. A tool can exist on disk and remain invisible to that process.
+
+好在当时的文档留下了最终方案。Qt Creator 的 Build Environment 需要看到 Qt `bin`；两个 `.pro` 文件里的 post-link 规则也改成通过 `QT_INSTALL_BINS` 定位 `windeployqt`，并限制在 Release 配置下执行。环境变量不只是系统设置窗口里的一长串路径，它还要真的进入启动构建任务的那个进程。工具存在于硬盘，并不等于当前构建环境有能力找到它。
+
+Qt's [Windows deployment guide](https://doc.qt.io/qt-6.5/windows-deployment.html) describes `windeployqt` as scanning an `.exe` and collecting Qt libraries, plugins, translations, and runtime files. It also notes that additional third-party libraries are outside that automatic scope. The next failure therefore became intelligible: the deployment directory was full of DLLs, while the application still lacked `xerces-c_3_2.dll`. Seamly2D stores pattern data in XML, and Xerces-C++ is its separate XML library, so it still had to be copied manually.
+
+Qt 6.5 的 [Windows 部署说明](https://doc.qt.io/qt-6.5/windows-deployment.html)把 `windeployqt` 的工作描述为扫描 `.exe`，收集 Qt 库、插件、翻译和运行时文件。它还特意提醒第三方库不在自动处理范围内。于是部署目录铺满 DLL 后，程序仍然缺 `xerces-c_3_2.dll`，就不再是一件反常的事：Seamly2D 用 XML 保存纸样数据，Xerces-C++ 是它另外依赖的 XML 库，当然还要手动补进来。
+
+The `.sm2d` and `.smis` samples I had examined earlier in week three now returned to the same problem. Their pattern points, lines, curves, and measurement variables ultimately had to pass through a real parser. The [XML sample note](/notes/turing-sm2d-xml-data-format) preserves those structures. The [CMake and build-logic note](/notes/turing-cmake-build-logic) records the parallel study I used to separate compiler, linker, generator, Ninja, Qt package discovery, and runtime dependencies. Seamly2D itself remained a qmake build; I did not migrate it to CMake.
+
+这时第三周前面读过的 `.sm2d` 与 `.smis` XML 样例又回到了眼前。文件里的纸样点、线、曲线和量体变量，最后都要穿过实际解析库才能被程序读取。[XML 样例笔记](/notes/turing-sm2d-xml-data-format)保留数据结构，[CMake 与编译逻辑笔记](/notes/turing-cmake-build-logic)则是我为了分清编译器、链接器、生成器、Ninja、Qt 包发现和运行时依赖而补的另一条学习线。Seamly2D 本身始终使用 qmake；我没有把它迁移到 CMake。
+
+## Launching the Installer on the Development Machine Was Not the End / 安装包在开发机启动，不等于故事已经结束
+
+After collecting the dependencies, I created a Windows self-signed certificate, used Inno Setup to turn the deployment folder into an installer, and signed the application and installer. Release build, dependency collection, signing, packaging, installation, and launch all ran on the internship machine. During final acceptance, the supervising engineer checked the account functions and the Windows deployment result step by step.
+
+依赖补齐后，我继续创建 Windows 自签名证书，用 Inno Setup 把零散文件做成安装程序，再给程序和安装包签名。编译、依赖收集、签名、打包、安装、启动，这条链在实习电脑上完整跑过；带教工程师也在最终验收里逐项看了账户功能和 Windows 部署结果。
+
+The [packaging-flow document](/notes/turing-release-packaging-cross-platform) ended with an honest limitation: I did not have another Windows machine without Visual Studio and Qt, so the formal internship record established only a same-machine installation. The README's claim that the folder could run on any computer moved slightly faster than the evidence available at the time.
+
+当时的[打包流程文档](/notes/turing-release-packaging-cross-platform)在结尾写得很诚实：手头没有一台既无 Visual Studio、也无 Qt 的 Windows 设备，所以正式实习记录只证明开发机本地安装成功。README 里那句“移植到任意电脑都可以运行”写得比当时证据快了一步。
+
+About two weeks after the internship, I completed that missing test at home on a newly installed Windows desktop. It had neither Qt nor Visual Studio. I ran the Inno Setup installer, then opened the modified application and exercised its registration, login, and role functions. The test happened after the original document was finished, so I never added it back or returned to the company for another acceptance. It is not part of the formal internship result, but it did turn “another machine” from an expectation into a result I personally verified.
+
+实习结束约半个月后，我回到家，在一台新装的 Windows 台式机上补了这次验证。那台机器没有 Qt，也没有 Visual Studio；我运行 Inno Setup 生成的安装程序，安装后实际打开了带注册、登录和权限功能的版本。这次测试发生在旧文档完成以后，没有补回文档，也没有再找导师复验。它不是公司正式验收的一部分，但确实把“另一台机器”从一句预期变成了我亲自做过的结果。
+
+## Moving to My Mac Did Not Bring a Distribution Identity with the Source / 换成自己的 Mac，源码没有顺便带来信任身份
+
+After Windows, I moved the same source to my own Mac. Homebrew Qt and the official Qt installation differed in paths and architecture, and the Windows Kit clearly did not travel with the repository. I brought up Debug and Release again, collected Qt frameworks and plugins with `macdeployqt`, launched the resulting application, and generated an unsigned DMG that I opened on that Mac. The supervising engineer watched the demonstration in person.
+
+Windows 完成以后，我把同一份代码搬到自己的 Mac。Homebrew Qt 与官方 Qt 的路径和架构不同，原来的 Windows Kit 更不会跟着源码一起过来。我重新跑通 Debug、Release，用 `macdeployqt` 收集 Qt framework 和插件，应用实际启动，无签名 DMG 也生成并在这台 Mac 上打开过。带教工程师现场看了演示。
+
+Signing stopped at the next step. I created a self-signed certificate and wrote a script containing the intended `codesign`, `spctl`, and DMG sequence, but application signing never completed and notarization was not attempted. Qt's [`macdeployqt` documentation](https://doc.qt.io/qt-6.5/macos-deployment.html) addresses frameworks and plugins inside the application bundle. Apple's [Developer ID guidance](https://developer.apple.com/support/developer-id/) addresses a different question: how the system establishes the distributor's identity and whether Apple has checked the software for distribution.
+
+签名停在下一步。我创建了自签名证书，又写了一份包含 `codesign`、`spctl` 和 DMG 生成顺序的脚本，但应用签名始终没有完成，更没有进入 notarization。Qt 的 [`macdeployqt` 文档](https://doc.qt.io/qt-6.5/macos-deployment.html)解决的是应用包里的 framework 与插件；Apple 的 [Developer ID 说明](https://developer.apple.com/support/developer-id/)处理的是另一件事——系统怎样确认分发者身份，以及软件是否经过 Apple 的公证检查。
+
+The distance between “the DMG exists” and “the application is ready for distribution” was therefore more than a compression command. The first script retains the [working unsigned path](/uploads/projects/nanjing-turing/macos-build-package.sh); the second retains the [unfinished signing attempt](/uploads/projects/nanjing-turing/macos-build-package-sign.sh). A script can preserve the order, but it cannot apply for a Developer ID or turn a failed signature into a successful one.
+
+所以“DMG 已经生成”和“这个应用可以正式分发”之间并不只差一个压缩命令。第一份脚本保住了[实际跑通的无签名路线](/uploads/projects/nanjing-turing/macos-build-package.sh)，第二份脚本保住了[没有完成的签名尝试](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)。脚本能记住顺序，不能替我申请 Developer ID，也不能自动把一次失败写成成功。
+
+## The Three Weeks Landed in `develop`; the Green Triangle Returned to the Start / 三周最后提交进 `develop`，绿色三角留在了起点
+
+This internship was also my first time using Git as more than a way to download GitHub code. I practiced cloning, inspecting and switching upstream branches, creating a development branch, committing, pushing, merging, opening a pull request, forking, and tagging. The company maintained a dedicated `develop` branch for interns, and I committed the final source changes, logs, and handoff material there. I do not know whether the work was later adopted or productized, so the record stops at handoff.
+
+这也是我第一次把 Git 从“下载 GitHub 代码”用成协作工具。clone、查看和切换上游分支、建立自己的开发分支、commit、push、merge、pull request、fork 和 tag，我都在实战里走过。公司专门为实习生设置了 `develop` 分支；最终源码、修改、日志和交接材料提交到这条分支。离开以后公司是否继续采用或产品化，我不知道，也不会替后续补结论。
+
+During formal acceptance, the supervising engineer checked registration and login, role management, Windows installation, and the Mac demonstration. He made a point of how far the work had moved in three weeks: from not knowing what Qt was to carrying a large application through feature changes, build problems, and deployment. He praised the progress at length, and I was genuinely excited. I had not suddenly become a Qt expert; I had proved for the first time that I could enter an unfamiliar large codebase, follow its errors, branches, and dependencies, and hand off my own changes.
+
+正式验收时，带教工程师从注册登录、角色管理一路检查到 Windows 安装与 Mac 演示。他最后特意说，从三周前完全不知道 Qt，到现在能把一个大型项目推进到这个程度，进步很大。他确实夸了我很久，我也确实兴奋。那不是因为我突然成了 Qt 专家，而是我第一次确认：面对一套陌生的大型代码，我可以沿着错误、分支和依赖慢慢进去，最后把自己的改动交出去。
+
+Before the internship, “working” meant that a command-line program produced the expected output. Three weeks later, it needed qualifiers: which branch, which Qt package, which role, which build, which machine, and which platform trust. Qt Creator's green triangle did not become useless. It simply moved from the finish line back to its proper place—the beginning of a longer verification chain.
+
+在这之前，“能跑”差不多就是命令行程序给出正确输出。三周以后，它必须带上条件：哪个分支、哪套 Qt、哪个角色、哪种构建、哪台机器、有没有平台信任。Qt Creator 的绿色三角没有失效，只是从终点退回了它本来应该待的位置——一条更长验证链的起点。

@@ -337,63 +337,63 @@
   },
   {
     "id": "seamly2d-banner",
-    "title": "Upstream Seamly2D wordmark",
-    "titleZh": "Seamly2D 上游项目标识",
+    "title": "The upstream application behind the internship",
+    "titleZh": "这段实习所基于的 Seamly2D 上游项目",
     "type": "image",
     "src": "/uploads/projects/nanjing-turing/seamly2d-banner.png",
     "thumbnail": "/uploads/projects/nanjing-turing/seamly2d-banner.png",
     "date": "2025-08-10",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
-    "caption": "The upstream Seamly2D wordmark identifies the pattern-design application used for the Qt/C++ learning work.",
-    "captionZh": "Seamly2D 上游项目标识说明这次 Qt/C++ 学习所基于的服装纸样应用。"
+    "caption": "Seamly2D is the open-source patternmaking application I brought up, extended with a local account layer, and packaged during the three-week Qt internship; the upstream software and wordmark are not my work.",
+    "captionZh": "三周 Qt 实习围绕 Seamly2D 展开：我跑通上游工程、加入本地账户层并尝试打包；软件本体与项目标识并非我的作品。"
   },
   {
     "id": "turing-ai-institute-cover",
-    "title": "Nanjing Turing institute mark",
-    "titleZh": "南京图灵人工智能研究院标识",
+    "title": "Three weeks of full-time Qt development in Nanjing",
+    "titleZh": "南京三周全职 Qt 实习",
     "type": "image",
     "src": "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg",
     "thumbnail": "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg",
     "date": "2025-08-10",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
-    "caption": "A portfolio cover built around the institute's existing mark; it locates the internship context rather than representing personal logo design.",
-    "captionZh": "围绕研究院既有标识整理的作品集封面，用来交代实习背景，并非个人 Logo 设计。"
+    "caption": "The portfolio cover places the work in its Nanjing internship context. The institute mark is existing institutional material, not a personal logo design.",
+    "captionZh": "这张封面交代南京线下实习背景；研究院标识属于既有机构材料，并非个人 Logo 设计。"
   },
   {
     "id": "qt-logo-study-folder",
-    "title": "Qt mark from the study archive",
-    "titleZh": "Qt 学习档案中的品牌标识",
+    "title": "The Qt Kit that finally matched the source",
+    "titleZh": "终于与源码配对的 Qt Kit",
     "type": "image",
     "src": "/uploads/projects/nanjing-turing/qt-logo.png",
     "thumbnail": "/uploads/projects/nanjing-turing/qt-logo.png",
     "date": "2025-08-12",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
-    "caption": "Qt's existing mark sits beside the first-run notes, where Qt 6.5.3, MSVC v142, qmake, and Kit selection had to align.",
-    "captionZh": "Qt 既有品牌标识与首跑笔记一同保留；那次排查需要对齐 Qt 6.5.3、MSVC v142、qmake 与 Kit。"
+    "caption": "The first full build worked only after Qt 6.5.3 MSVC2019 64-bit, the v142 compiler, qmake, architecture, and Kit selection agreed. The Qt mark itself is upstream brand material.",
+    "captionZh": "Qt 6.5.3 MSVC2019 64-bit、v142 编译器、qmake、架构与 Kit 对齐后，完整构建才通过；Qt 标识本身属于上游品牌材料。"
   },
   {
     "id": "cmake-logo-study-folder",
-    "title": "CMake mark from the study archive",
-    "titleZh": "CMake 学习档案中的品牌标识",
+    "title": "CMake study beside a qmake project",
+    "titleZh": "在 qmake 项目旁展开的 CMake 学习",
     "type": "image",
     "src": "/uploads/projects/nanjing-turing/cmake-logo.jpeg",
     "thumbnail": "/uploads/projects/nanjing-turing/cmake-logo.jpeg",
     "date": "2025-08-18",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
-    "caption": "The CMake project's existing mark accompanies the Notion-exported study track on generators, toolchains, and package discovery.",
-    "captionZh": "CMake 项目既有标识与 Notion 学习记录一同保留，后者梳理了生成器、工具链与包发现。"
+    "caption": "I studied CMake, generators, toolchains, and package discovery in parallel while Seamly2D itself remained on qmake; the CMake mark is upstream brand material.",
+    "captionZh": "我并行学习了 CMake、生成器、工具链与包发现，但 Seamly2D 本身始终使用 qmake；CMake 标识属于上游品牌材料。"
   },
   {
     "id": "cmake-make-flow",
-    "title": "CMake-to-Make tutorial diagram",
-    "titleZh": "CMake 到 Make 的教程参考图",
+    "title": "Separating rule generation from build execution",
+    "titleZh": "把规则生成与构建执行分开",
     "type": "image",
     "src": "/uploads/projects/nanjing-turing/cmake-make-flow.png",
     "thumbnail": "/uploads/projects/nanjing-turing/cmake-make-flow.png",
     "date": "2025-08-18",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
-    "caption": "An upstream tutorial diagram saved with the CMake notes; it separates CMake's generation of a Makefile from make's execution of the build.",
-    "captionZh": "随 CMake 笔记保存的上游教程图，把 CMake 生成 Makefile 与 make 执行构建分开表示。"
+    "caption": "This upstream tutorial diagram helped separate CMake's generation of a Makefile from make's execution of the resulting rules; it was saved as study material, not drawn by me.",
+    "captionZh": "这张上游教程图把 CMake 生成 Makefile 与 make 执行规则分开表示；它是我保存的学习资料，并非个人绘图。"
   },
   {
     "id": "compile-logic-sketch",
