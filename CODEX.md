@@ -223,18 +223,21 @@ Maintain the current engineering-academic identity:
 
 Portfolio notes should keep the user's practical learning-log texture: technically rigorous, close to the debugging scene, and comfortable carrying real frustration, amusement, uncertainty, and small human details beside the evidence. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
-Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. Bound facts with `references/evidence-and-boundaries.md`, let `references/material-led-composition.md` derive structure from the material, then use the voice, bilingual, and self-review references. Draft Chinese with the stronger emotional/humorous register and adapt English at slightly lower intensity without changing the substance.
+Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass both the Truth gate and Li Zhiyi gate. Follow `references/evidence-and-boundaries.md` and `references/cognition-led-composition.md`, then the voice, bilingual, and self-review references.
+
+Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight after the brief is confirmed; it must never be written as invented project history, action, result, or measurement.
 
 For `content/notes/*.mdx`:
 
 - describe the system, constraint, question, file, and next step directly;
 - begin from a concrete course detail, file, symptom, command, or engineering question instead of describing the page as a reorganized document;
-- let the writer's changing understanding determine the paragraph and section order instead of selecting a note archetype;
+- let the writer's changing understanding determine the paragraph and section order instead of selecting a note archetype; attention may jump across subsystems or chronology and synthesize later when that reflects genuine understanding, with no mandatory cognition template;
 - derive headings after drafting, name the actual technical subject below them, and follow the heading constraints in `engineering-note-writer`;
 - avoid reusable framework headings that expose the writing process instead of the technical subject;
 - place supported reactions and light humor beside the real engineering friction rather than saving all personality for a conclusion;
 - avoid repetitive resume lists and repeated contrast/sequence scaffolds, while allowing ordinary phrasing when it is natural and concrete;
 - keep evidence links, files, and technical constraints specific;
+- require first-person learning-note prose to pass both the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, and apply the gates only to claims and voice within that scope;
 - use bilingual headings or paired English/Chinese paragraphs on public pages when a section would otherwise be single-language.
 
 ## Verification Policy

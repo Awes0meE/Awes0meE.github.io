@@ -10,17 +10,23 @@
 
 - Leave the approved Arduino Smart Car project, note, and media copy unchanged.
 - Rewrite every other project family one at a time, never as a batch.
-- Before writing each project, inspect its uploaded public materials and run a
-  `grill-me` interview.
+- Before writing each project, inspect its uploaded public materials, then
+  reuse a user-confirmed brief for the same scope or run a `grill-me` interview.
 - Treat the user's voice answers as primary first-person material. They may be
   disordered; extract engineering decisions, mistakes, reactions, and changes
   in understanding before drafting.
-- Use `skills/engineering-note-writer/SKILL.md` only after the interview has
-  reached shared understanding.
-- Draft Chinese first in the user's personal engineering-note voice, then
-  adapt English with the same facts and calmer intensity.
-- Evidence sets the factual boundary but must not become the reader-facing
-  structure. Keep the user's experience and engineering judgment in front.
+- Store confirmed understanding as a compact, non-sensitive brief rather than
+  an interview transcript.
+- Only after confirmation, research current reliable knowledge beyond the
+  uploaded material; use nearby links lightly and keep new first-person insight
+  in the present, never as invented project history, action, result, or measurement.
+- Use `skills/engineering-note-writer/SKILL.md` to draft Chinese through the
+  user's cognition trail, allowing genuine cross-subsystem or non-strictly
+  chronological attention without imposing a cognition template.
+- Adapt English with the same facts and calmer intensity, then require
+  first-person prose to pass both the Truth gate and Li Zhiyi gate.
+- Evidence bounds project facts, authorship, results, and publication claims,
+  but must not choose the reader-facing structure.
 
 ## Confirmed Global Decisions
 
@@ -56,8 +62,15 @@ No project is active. When the user selects the next project:
 3. inspect the project's existing page, note, media, and public materials;
 4. update this file with the branch, project, evidence boundary, interview
    frontier, and explicit next action;
-5. run `grill-me` one core question at a time and do not draft before the user
-   confirms the shared project understanding.
+5. reuse a confirmed brief for the same scope, or run `grill-me` one core
+   question at a time; do not draft before the user confirms the shared project
+   understanding;
+6. research current reliable knowledge beyond the uploaded material, keeping
+   links light and project-history claims inside the confirmed evidence boundary;
+7. draft Chinese through the user's cognition trail without a mandatory template;
+8. adapt English with the same substance and calmer intensity;
+9. pass the Truth gate and Li Zhiyi gate, then request bilingual copy review and
+   explicit merge approval.
 
 ## Updating This File
 
