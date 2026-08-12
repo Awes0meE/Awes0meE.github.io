@@ -10,7 +10,7 @@ Prefer official documentation, datasheets, standards, vendor application notes, 
 
 ## Integrate Only What Changes Understanding
 
-Bring in a principle, trade-off, failure mode, subsystem connection, or term only where it changes the active understanding. Use a light inline link when useful; a references section is not mandatory. No source earns a section merely because it was found.
+Bring in a principle, trade-off, failure mode, subsystem connection, or term only where it changes the active understanding. Give factual knowledge introduced from external research a natural nearby inline link. Link sources lightly and accurately: do not require a references section or impose an academic citation burden. Pure user-provided or project-specific facts need no external source. No source earns a section merely because it was found.
 
 Research can explain how the writer understands the project now. Suitable first-person turns include:
 
