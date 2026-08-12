@@ -29,6 +29,8 @@ When starting work on a new computer or a fresh Codex session:
 4. Check whether external Codex skills exist:
    - `karpathy-guidelines`
    - `neat-freak`
+   - `grill-me`
+   - `grilling`
    If missing, install them from the sources listed in `docs/agent-skills.md`, or fall back to the rules already summarized in `CODEX.md`.
 5. Run verification before substantial edits:
    - `npm.cmd install` if `node_modules/` is missing or stale.
@@ -37,6 +39,8 @@ When starting work on a new computer or a fresh Codex session:
    - `npm.cmd run build`
 
 Do not assume another device has the same global memory, PATH, installed plugins, or uncommitted files. Use the project-local docs as the portable source of truth and rebuild missing context quickly.
+
+Use Conventional Commits for commit messages. Name topic branches with a Conventional Commits-aligned semantic prefix and a concise kebab-case purpose, such as `docs/update-handoff` or `fix/mobile-overflow`. Treat Codex-authored work like ordinary human-authored development: never use identity prefixes such as `agent/`, `codex/`, `ai/`, or `bot/`.
 
 This repository uses `CODEX.md` as the canonical AI-agent operating guide.
 

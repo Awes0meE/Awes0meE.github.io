@@ -97,13 +97,15 @@ otherwise continue from its `Next Action` section on synchronized `main`.
 
 ## GitHub Sync Workflow
 
-The repository remote is `https://github.com/Awes0meE/Awes0meE.github.io.git`. Keep local work on topic branches and update `main` only with fast-forward pulls:
+The repository remote is `https://github.com/Awes0meE/Awes0meE.github.io.git`. Keep local work on topic branches and update `main` only with fast-forward pulls. Use a Conventional Commits-aligned semantic prefix plus a concise kebab-case purpose for every topic branch. Do not use author or tool identity prefixes such as `agent/`, `codex/`, `ai/`, or `bot/`:
 
 ```powershell
 git switch main
 git pull --ff-only origin main
-git switch -c content/my-portfolio-update
+git switch -c docs/update-portfolio-handoff
 ```
+
+Use prefixes such as `feat/`, `fix/`, `docs/`, `refactor/`, `test/`, `build/`, `ci/`, or `chore/` according to the actual work. Existing worktree placement does not change; a manually selected worktree directory may use only the kebab-case purpose, such as `update-portfolio-handoff` for branch `docs/update-portfolio-handoff`.
 
 Configure these repository-local safeguards once on a new checkout:
 

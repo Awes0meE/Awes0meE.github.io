@@ -50,7 +50,9 @@
 No project is active. When the user selects the next project:
 
 1. synchronize local `main` with `origin/main` using `--ff-only`;
-2. create a new topic branch from that checkpoint;
+2. create a new topic branch from that checkpoint using a Conventional
+   Commits-aligned semantic prefix and kebab-case purpose; never use an
+   identity prefix such as `agent/`;
 3. inspect the project's existing page, note, media, and public materials;
 4. update this file with the branch, project, evidence boundary, interview
    frontier, and explicit next action;

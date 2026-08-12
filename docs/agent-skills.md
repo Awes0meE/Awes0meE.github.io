@@ -1,6 +1,6 @@
 # Agent Skills Used
 
-This project has incorporated guidance from three external sources.
+This project uses two repository-local workflows and guidance from four external sources.
 
 ## repo-local add-project
 
@@ -80,9 +80,9 @@ Source:
 
 - `https://github.com/forrestchang/andrej-karpathy-skills`
 
-Installed local skill:
+Expected user-level Codex skill:
 
-- `C:\Users\123\.codex\skills\karpathy-guidelines`
+- `karpathy-guidelines`
 
 Rules incorporated into `CODEX.md`:
 
@@ -98,9 +98,9 @@ Source:
 
 - `https://github.com/KKKKhazix/khazix-skills/blob/main/neat-freak/SKILL.md`
 
-Installed local skill:
+Expected user-level Codex skill:
 
-- `C:\Users\123\.codex\skills\neat-freak`
+- `neat-freak`
 
 Rules incorporated into `CODEX.md` and `docs/memory-system.md`:
 
