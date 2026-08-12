@@ -2,17 +2,17 @@
 
 These files are qualitative behavioral regression fixtures, not a deterministic benchmark. Language-model output can vary between runs even when the input and skill snapshot are identical.
 
-## Captured Material
+## Legacy 2026-08-10 Trials 01–05 Capture
 
 - Capture date: 2026-08-10, Asia/Shanghai.
 - Baseline runtime source: repository commit `995a2eba53f8568d70628c697c90c4213c650ce9`; the pre-redesign skill can be recovered with `git show <commit>:skills/engineering-note-writer/<path>`.
 - Revised runtime source: repository commit `85460fb1867ffc683ff9e4a6e135d3b247d86d0b`; the approved redesign is bound to the same runtime files recorded below.
-- Inputs: the five versioned files under `tests/inputs/`.
-- Outputs: the model response body was preserved without prose edits. The small YAML block at the top of each file was added only as trial provenance.
+- Inputs: the five legacy files from `tests/inputs/01-smart-car.md` through `tests/inputs/05-bilingual-rewrite.md`.
+- Outputs: the matching Trials 01–05 model response bodies were preserved without prose edits. The small YAML block at the top of each file was added only as trial provenance.
 
-## Fresh-Agent Protocol
+## Legacy 2026-08-10 Trials 01–05 Fresh-Agent Protocol
 
-Each case was run in a fresh subagent context with one input. Trial agents were told not to inspect baseline outputs, revised outputs, `comparison.md`, or this provenance file.
+Each of Trials 01–05 was run in a fresh subagent context with one input. Trial agents were told not to inspect baseline outputs, revised outputs, `comparison.md`, or this provenance file.
 
 The canonical wrapper was:
 
@@ -20,14 +20,15 @@ The canonical wrapper was:
 Read skills/engineering-note-writer/SKILL.md and only the context and references it routes for this task. Execute <matching input file>. Return only the requested final deliverable, with no analysis or test commentary. Do not inspect any baseline outputs, revised outputs, comparison.md, or provenance.md.
 ```
 
-Final-snapshot revised outputs additionally record `trial_agent` in their provenance header. Earlier diagnostic reruns used the same isolation rule but were replaced after they exposed a behavior-changing rule failure, as required by the implementation plan.
+The Trials 01–05 final-snapshot revised outputs additionally record `trial_agent` in their provenance header. Earlier diagnostic reruns for that legacy capture used the same isolation rule but were replaced after they exposed a behavior-changing rule failure, as required by the implementation plan.
 
-## Cognition-Led Red Baseline Capture
+## 2026-08-12 Trials 06–10 Cognition-Led Red Baseline Capture
 
 - Capture date: 2026-08-12, Asia/Shanghai.
 - Runtime commit before every trial: `663116c8587de716a5eb701548d4dc74e1222511`.
 - Runtime skill SHA-256 before and after the trials: `306d21ed971a367ac69abdb25f1080be033dc05fa2d93b004aa2c9b96e7e42d8`.
 - Trial agents: `/root/task1_red_fixtures/baseline_06`, `/root/task1_red_fixtures/baseline_07`, `/root/task1_red_fixtures/baseline_08`, `/root/task1_red_fixtures/baseline_09`, and `/root/task1_red_fixtures/baseline_10`.
+- Output provenance: each Trials 06–10 header records `trial: baseline`, the matching `tests/inputs/<filename>.md` path, the capture phase, the exact runtime commit, the canonical trial-agent identity, and the capture date.
 
 The exact fresh-agent wrapper was the text below, with only `<matching-input>` replaced by the matching path from `06-cross-subsystem-confirmed-brief.md` through `10-small-edit-exception.md`:
 
@@ -43,13 +44,13 @@ Observed behavior was mixed, so the retained files should not be read as five un
 - `baseline_09` correctly diagnosed the audit voice and added first-person judgment, but the replacement remained an evidence-led catalog with little lived reaction, emotional movement, or learning beyond epistemic restraint. This is the clearest RED voice failure.
 - `baseline_10` made only the duplicated-word and Markdown-spacing corrections and returned one sentence. No RED failure was observed in this sample.
 
-## Audit Limits
+## Legacy 2026-08-10 Trials 01–05 Audit Limits
 
-The baseline capture did not persist platform run IDs, full conversation traces, or exact per-agent wrapper wording. Its bodies remain useful for qualitative old/new comparison, but they are not a cryptographically auditable external benchmark. Claims in `comparison.md` are intentionally limited to observable text in the retained files.
+The legacy Trials 01–05 capture did not persist platform run IDs, full conversation traces, or exact per-agent wrapper wording. Its bodies remain useful for qualitative old/new comparison, but they are not a cryptographically auditable external benchmark. Claims in `comparison.md` are intentionally limited to observable text in the retained Trials 01–05 files. These limits do not describe the separately recorded Trials 06–10 capture above.
 
-## Final Runtime Snapshot
+## Legacy 2026-08-10 Trials 01–05 Final Runtime Snapshot
 
-The SHA-256 manifest below covers the runtime skill, routed repository guidance, five test inputs, and five retained final-snapshot outputs:
+The unchanged legacy manifest below covers the 2026-08-10 runtime skill, routed repository guidance, Trials 01–05 inputs, and the five retained Trials 01–05 final-snapshot revised outputs:
 
 ```text
 2c9ed235774ef0cba7e7f7647917c6e42a49388d2320a27ff14d77af2a3b07f8  CODEX.md

@@ -1,5 +1,6 @@
 ---
-trial: baseline_07
+trial: baseline
+input: tests/inputs/07-missing-shared-understanding.md
 phase: baseline-before-cognition-led-redesign
 runtime_commit: 663116c8587de716a5eb701548d4dc74e1222511
 trial_agent: /root/task1_red_fixtures/baseline_07

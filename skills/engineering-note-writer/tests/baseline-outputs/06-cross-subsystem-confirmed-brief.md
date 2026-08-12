@@ -1,5 +1,6 @@
 ---
-trial: baseline_06
+trial: baseline
+input: tests/inputs/06-cross-subsystem-confirmed-brief.md
 phase: baseline-before-cognition-led-redesign
 runtime_commit: 663116c8587de716a5eb701548d4dc74e1222511
 trial_agent: /root/task1_red_fixtures/baseline_06
