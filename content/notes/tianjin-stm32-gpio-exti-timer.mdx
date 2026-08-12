@@ -1,8 +1,8 @@
 ---
-title: "Levels, Edges, and Ticks: Reading GPIO, EXTI, and Timers Apart"
-titleZh: "电平、边沿与计时：分别读懂 GPIO、EXTI 与 Timer"
-summary: "An STM32F103C8T6 note using code examples to separate GPIO levels, EXTI edge configuration, and timer questions about clocks, counters, and updates."
-summaryZh: "一篇 STM32F103C8T6 笔记：借代码示例区分 GPIO 电平、EXTI 边沿配置，以及 Timer 的时钟、计数器与更新问题。"
+title: "Looking Below SetBits Separated GPIO, EXTI, and Timers"
+titleZh: "从一行 SetBits 往下，GPIO、EXTI 和 Timer 分开了"
+summary: "Arduino high/low calls were once my entire model of a microcontroller. Following the F103 through peripheral clocks, pin modes, edge routing, and counters turned GPIO, EXTI, and timers into three distinct hardware mechanisms."
+summaryZh: "Arduino 的高低电平函数曾是我对单片机的全部理解；沿着 F103 的外设时钟、引脚模式、边沿映射和计数器继续往下追，GPIO、EXTI 与 Timer 才成为三种不同的硬件机制。"
 date: "2025-02-07"
 status: "Completed"
 tags: ["STM32", "GPIO", "EXTI", "Timer", "Encoder"]
@@ -14,40 +14,48 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## GPIO Answers “What Level Is It Now?” / GPIO 回答“现在是什么电平”
+## SetBits Was Only the Last Visible Step / SetBits 只是最后露出来的一步
 
-The first excerpt shows the state model in its simplest form. GPIOC pin 13 is configured as a push-pull output, then explicitly set and reset. For an input, the direction reverses: software reads a level that already exists outside the MCU. Either way, GPIO describes a state at the moment it is accessed.
+On the Arduino Nano, I had treated a pin as a function argument: choose its number, write HIGH or LOW, and the LED changes. Following `GPIO_SetBits()` downward on the STM32F103 exposed at least two earlier conditions. RCC must supply the port's peripheral clock, and the configuration registers must decide whether the pin is an input, push-pull output, open-drain output, or alternate function.
 
-第一段摘录把状态模型写得很直接：GPIOC13 配成推挽输出，然后被明确置位、复位。换成输入时，方向反过来——软件读取 MCU 外部已经存在的电平。无论输入还是输出，GPIO 回答的都是访问那一刻的状态。
+In the code excerpt, PC13 is configured as a 50 MHz push-pull output before it is set and reset. Here, “50 MHz” is an output-speed class, not the LED's blink frequency. The STM32 [reference manual](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf) places these choices in the RCC and GPIO configuration registers; the Standard Peripheral Library merely packages the bit operations into readable structures and calls.
 
-This matters because a level and an event are not interchangeable. Repeatedly reading a high level tells the program that the signal remains high; it does not by itself identify the instant when the signal changed.
+在 Arduino Nano 上，我习惯把引脚理解成一个函数参数：选好编号，写 HIGH 或 LOW，灯就变化。到了 STM32F103，我第一次顺着 `GPIO_SetBits()` 往下看，才发现函数调用之前至少还有两层条件：RCC 必须先把对应 GPIO 外设的时钟送进来，配置寄存器再决定这个引脚是输入、推挽输出、开漏输出，还是交给某个复用外设。
 
-这里最关键的区别是，电平和事件不能互换。反复读到高电平，只能说明信号仍然为高；它本身并没有指出信号在哪一刻发生了变化。
+公开摘录里的 PC13 先被配置为 50 MHz 推挽输出，再被置位和复位。这里的“50 MHz”描述的是输出模式可选的最大翻转速度等级，不代表这只 LED 正在以 50 MHz 闪烁。STM32 的[参考手册](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf)把这些选择落实到 RCC 与 GPIO 配置寄存器；标准外设库只是用结构体和函数把位操作包装得更容易阅读。
 
-## EXTI Turns a Selected Edge Into an Event / EXTI 把指定边沿变成事件
+With an input, the CPU can sample an external level at a particular instant. Repeatedly finding it high says only that it is still high; it does not identify when the transition occurred. That is why I moved from GPIO to EXTI—not to memorize another initializer, but to make the change itself an event.
 
-The environment-demo excerpt calls `Encoder_EXTI_Config()` before entering its loop, then consumes `Get_Encoder_Value()` while calculating `set_light_value`. These are two visible positions—a configuration entry and a value-consumption point—not a complete event chain.
+换成输入后，CPU 可以在某一刻读取外部电平；但反复读到高电平，只能说明“现在仍然高”，并没有告诉程序信号是什么时候从低变高的。这正是我从 GPIO 继续学 EXTI 的原因：不是为了再记一组初始化函数，而是为了让变化本身成为事件。
 
-环境 demo 在进入循环前调用 `Encoder_EXTI_Config()`，主循环随后在计算 `set_light_value` 时消费 `Get_Encoder_Value()`。这是两个可见位置——一个配置入口和一个数值消费点——还不是完整的事件链。
+## An Encoder Needs Edges, Not a Still Photograph / 编码器要的是边沿，不是一张静止照片
 
-The public files do not include the interrupt handler, edge selection, direction decoding, or the code that updates the encoder count. The function names locate where to inspect next, but they do not establish which handler or edge produced the consumed value.
+A rotary encoder's two phases produce edges in different orders as the shaft turns. Sampling their levels only occasionally in the main loop can miss transitions and makes direction difficult to infer from a single still state. EXTI maps a chosen GPIO line to an external interrupt, selects rising, falling, or both edges, and transfers execution to an interrupt handler. Direction still has to be decoded from the other phase or from a state machine.
 
-公开文件没有中断服务函数、边沿选择、方向判定，也没有更新编码器计数的代码。函数名能提示下一步该检查哪里，却不能确认消费到的数值由哪个 handler 或哪种边沿产生。
+旋转编码器的两个相位在转动时按先后顺序产生边沿。如果主循环只偶尔读一次电平，既可能错过变化，也很难从一张静止的高低电平照片判断方向。EXTI 的作用是把选定 GPIO 线映射到外部中断，选择上升沿、下降沿或双边沿，并在事件到来时把执行带到中断服务函数；方向仍要结合另一相的状态或状态机来判断。
 
-The linked encoder-servo excerpt begins at the consumer: it reads `encoder_count` and turns that value into an output command. It identifies where the count is used, not the handler or edge that updates it: [encoder count consumer excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c).
+In the integrated demo, the encoder changed the target light setting and, after a button-mode switch, the servo speed. The archived code retains `Encoder_EXTI_Config()`, `Get_Encoder_Value()`, and the points where `encoder_count` is consumed, but not the selected edges or complete handler. I no longer pretend to remember which phase and edge updated the count. The durable lesson was to separate edge capture, direction decoding, and value consumption.
 
-链接中的编码器—舵机摘录从消费端开始：代码读取 `encoder_count`，再把这个值变成输出指令。它说明计数在哪里被使用，却不能补出更新计数的 handler 或边沿：[编码器计数消费端摘录](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
+我在综合 demo 中用编码器改变目标光照，也通过按键切换模式后改变舵机速度。现在留下的代码只有 `Encoder_EXTI_Config()`、`Get_Encoder_Value()` 和 `encoder_count` 的消费位置，边沿选择与完整 handler 已经不在归档里。当时究竟在哪一相、哪一种边沿里更新计数，我没有必要假装还能记得；更重要的是，我从这里学会了把边沿捕获、方向判断和数值消费分成三段。
 
-## Timers Answer “When Should It Happen Again?” / Timer 回答“下一次何时发生”
+The encoder–servo excerpt begins at the consumer: it multiplies `encoder_count` by 50, clamps the result to ±500, and passes it to `servo_set_speed()`. This preserves how the count became a bounded speed command and reinforces the separation between producing and using a count: [encoder count consumer excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c).
 
-A timer introduces a third question. GPIO gives a level and EXTI marks a transition; a timer counts from a clock so that work can be paced or a waveform can repeat. The integration excerpt initializes both `TIM3_Config()` and `TIM4_PWM_Config()`, separating a general timing setup from the timer configuration used for PWM output.
+编码器—舵机摘录从消费端开始：`encoder_count` 乘以 50 后被限制在 ±500，再交给 `servo_set_speed()`。这条路径完整保留了计数怎样变成有边界的速度指令，也提醒我把“产生计数”和“使用计数”分开阅读：[编码器计数消费端摘录](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)。
 
-定时器又带来第三个问题。GPIO 给出电平，EXTI 标记变化；Timer 从时钟计数，让任务获得节奏，也让波形可以重复。综合摘录同时初始化 `TIM3_Config()` 与 `TIM4_PWM_Config()`，把一般计时配置和 PWM 所需的定时器配置放在了两个入口。
+## A Timer Split “Wait a While” into Clocks and Counts / Timer 把“等一会儿”拆成时钟和计数
 
-The excerpt does not show TIM3's callback or connect TIM3 to a particular flag or interval. It records the configuration entry only. TIM4 has a separate PWM configuration entry and a public channel-1 compare write, but its counter period and update timing are not exposed here.
+My first delays simply held the program inside `delay` for a while. A hardware timer decomposed “how long?” into a configurable process: it receives an input clock, divides that clock with a prescaler, counts from zero to the auto-reload value, and then produces an update event or begins the next period. In the general case, the update frequency depends on the timer clock, `PSC + 1`, and `ARR + 1`. On the F103, a timer clock may also run at twice its APB clock when the APB prescaler is not one, so the system clock alone is not enough to choose those values.
 
-摘录没有展开 TIM3 回调，也没有把 TIM3 与某个 flag 或周期连接起来；这里能看到的只有配置入口。TIM4 另有 PWM 配置入口和公开的通道 1 比较值写入，但计数周期与更新时间同样没有在这里展开。
+The integrated program used TIM3 to pace slower work and TIM4 to generate PWM. A flag kept the light sensor and DHT11 from being read on every pass through the main loop; the PWM timer repeated a counter period and changed its output at a compare point. Both relied on timers, but one primarily answered “when should data be updated?” while the other answered “for how much of each period is the output active?”
 
-That distinction changes the next debugging question. For GPIO, inspect the level and direction; for EXTI, inspect the selected edge and handler; for a timer, inspect its clock, counter, and update event. Seeing the three initialization names together does not make their mechanisms interchangeable.
+我最初写延时，只知道程序在 `delay` 里等一会儿。Timer 则把“多久”拆成可配置的硬件过程：定时器取得自己的输入时钟，预分频器降低计数频率，计数器从 0 走到自动重装值，随后产生更新事件或重新开始。一般情况下，更新频率由定时器时钟、`PSC + 1` 与 `ARR + 1` 共同决定；若 APB 预分频不为 1，F103 定时器时钟还可能是对应 APB 时钟的两倍，所以不能只看系统主频就直接填两个数字。
 
-这个区别会直接改变下一步的调试问题：GPIO 要看电平和方向，EXTI 要看选中的边沿与 handler，Timer 要看时钟、计数器和更新事件。三个初始化名称出现在同一工程里，也不会让三种机制变成一回事。
+综合工程用 TIM3 提供较慢任务的节奏，用 TIM4 生成 PWM。前者通过 flag 让光敏与 DHT11 不必在主循环每一轮都读取，后者让计数周期重复，并在比较点改变输出。它们都以 Timer 为基础，却一个主要回答“何时更新数据”，另一个回答“每个周期内保持有效多久”。
+
+The archived main loop shows `TIM3_Config()` and the consumption of `dht_read_flag`, but not the interrupt that sets the flag or its interval. The TIM4 side retains `TIM_SetCompare1()`, while `PSC`, `ARR`, and the output polarity are no longer in the archive. The full demo ran, but any exact timer frequency written today would be a guess. The clock–counter–update relationship matters more than an invented number.
+
+现存主循环能看到 `TIM3_Config()` 和 `dht_read_flag` 的消费位置，却没有留下 TIM3 中断如何置位该 flag，也没有实际周期；TIM4 一侧保留了 `TIM_SetCompare1()`，`PSC`、`ARR` 与输出极性已经缺失。完整 demo 确实运行过，但今天若要写出每个定时器的精确频率，就只能靠猜。与其补数字，不如保留当时真正建立起来的时钟—计数—更新关系。
+
+These peripherals left me with a more concrete debugging order. For a static GPIO, inspect the clock, mode, and physical level. For a silent encoder, inspect AFIO/EXTI routing, the selected edge, NVIC, and the handler. For an incorrect timing rhythm, inspect the clock tree, prescaler, auto-reload value, and update flag. The microcontroller stopped being a black box where function calls somehow produced effects; it became a set of hardware paths I could check section by section.
+
+这三块外设最后给了我一套更具体的调试顺序：GPIO 不动，先看时钟、模式与实际电平；编码器不计数，看 AFIO/EXTI 映射、触发边沿、NVIC 和 handler；定时节奏不对，看时钟树、预分频、自动重装值与更新标志。单片机从“调用函数就会发生事情”的黑箱，变成了几条可以逐段检查的硬件路径。

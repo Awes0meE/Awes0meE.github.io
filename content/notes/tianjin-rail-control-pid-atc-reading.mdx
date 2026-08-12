@@ -1,8 +1,8 @@
 ---
-title: "From a ±500 Clamp to Feedback and ATC Layers"
-titleZh: "从 ±500 限幅走到反馈与 ATC 层级"
-summary: "A reading note using a bounded encoder-to-servo command path to separate feedback concepts, PID roles, and ATP/ATO/ATS from actual train control."
-summaryZh: "从一条带 ±500 限幅的编码器到舵机指令路径出发，区分反馈概念、PID 作用和 ATP/ATO/ATS 层级，不把阅读理解写成真实列车控制。"
+title: "±500 Is Not PID, and a Blue Pill Is Not a Train Controller"
+titleZh: "±500 不是 PID，Blue Pill 也不是列车控制器"
+summary: "The engineer's training material introduced me to PID, ATP, ATO, and ATS. Starting from a ±500 encoder-to-servo command path, I learned how far command limiting, feedback control, and a railway signalling system sit from one another."
+summaryZh: "工程师给的培训材料第一次让我接触 PID、ATP、ATO 与 ATS；从编码器到舵机的 ±500 指令路径出发，我逐步分清限幅、反馈控制和轨道交通信号系统之间相差多少层。"
 date: "2025-02-16"
 status: "Completed"
 tags: ["PID", "ATC", "ATP", "ATO", "ATS", "Rail Transit"]
@@ -14,38 +14,46 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## The Excerpt Starts With a Command, Not Feedback / 摘录从指令开始，还没有形成反馈
+## encoder_count × 50 Is Still Only a Command / encoder_count × 50 仍然只是一条指令
 
-The public servo excerpt contains three operations: multiply `encoder_count` by 50, clamp the result to ±500, and pass it to `servo_set_speed()`. It is a useful command path because every transformation is visible. It is not yet a feedback loop: no measured speed returns, no target-minus-measurement error is formed, and no controller updates the command from that error.
+The servo excerpt multiplies `encoder_count` by 50, clamps the result to ±500, and passes it to `servo_set_speed()`. Turn the encoder forward and the command rises; turn it backward and the command falls. The clamp keeps the number inside the chosen range. Every transformation is readable and the servo did respond, but this remains an open command path: a person supplies an input, software maps it, and the actuator receives the result.
 
-公开舵机摘录只有三个动作：把 `encoder_count` 乘以 50，把结果限制在 ±500，再交给 `servo_set_speed()`。这是一条很适合阅读的指令路径，因为每一步变换都看得见；但它还不是反馈环：没有实测速率返回，没有形成“目标值减实测值”的误差，也没有控制器根据误差更新指令。
+舵机摘录把 `encoder_count` 乘以 50，超出范围时限制在 ±500，最后交给 `servo_set_speed()`。编码器向前拧，指令增大；反向拧，指令减小；限幅保证送入函数的数字不越过设定范围。每一步都可读，也确实能让舵机动作，但这仍是一条“人给输入，程序做映射，执行器接收命令”的开环路径。
 
 [Encoder-to-servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)
 
-That distinction prevents a small STM32 mapping exercise from doing too much conceptual work. An input-to-output path may be bounded and repeatable without being closed loop.
+Feedback would require measured speed or position to return, a target-minus-measurement error to be formed, and a controller to update the output over time. This excerpt has no return measurement. The ±500 clamp constrains the command; it says nothing about response time, overshoot, steady-state error, or disturbance rejection.
 
-这个区别能防止一段 STM32 映射练习承担过多概念。输入到输出的路径可以有限幅、可以重复执行，却不因此自动变成闭环。
+如果要叫反馈，程序至少还需要一个实测速率或位置，形成“目标 − 实测”的误差，并让控制器随时间根据误差更新输出。这段代码没有回传量。±500 也只说明指令范围被约束，不能说明响应速度、超调、稳态误差或抗扰能力。
 
-## PID Begins When the Error Has Somewhere to Return / 误差能够返回时，PID 才有了位置
+## I Was Fascinated That a Formula Could Pull a System toward Its Target / 当时我觉得，一个公式能把东西拉回目标非常神奇
 
-In the reading model, proportional action responds to the present error, integral action accumulates persistent error, and derivative action reacts to how quickly the error changes. Those roles only make sense beside a target, a measured quantity, and a sampling rhythm. The earlier encoder, timer, PWM, and sensor exercises provide analogies for those pieces, not evidence that a PID controller was implemented or tuned here.
+PID was one of the most compelling ideas in the engineer's training material. It was my first encounter with a controller that could use the error between target and measurement to bring a system toward the desired state quickly and stably. Proportional action reacts to present error, integral action accumulates persistent residual error, and derivative action responds to its rate of change. These are not three numbers to add by feel; they depend on sampling time, plant dynamics, actuator limits, and noise.
 
-在阅读模型里，比例项响应当前误差，积分项累积持续误差，微分项关注误差变化的速度。它们必须和目标值、实测量、采样节奏放在一起才有意义。前面的编码器、定时器、PWM 与传感器练习可以帮助理解这些部件，却不能证明这里已经实现或整定了 PID 控制器。
+The encoder, Timer, ADC, and PWM exercises gave me physical places for the blocks in that diagram. An encoder or ADC can provide measurement, a timer defines the update rhythm, the controller calculates a new command, and PWM passes it to an actuator. I did not write or tune PID during the Tianjin internship and recorded no step response. What I gained was the first connection between a control concept and MCU peripherals, not a control-performance result.
 
-This also separates limiting from control quality. The ±500 clamp protects the command range in the excerpt; it says nothing about rise time, overshoot, steady-state error, or robustness.
+PID 是工程师培训资料里最吸引我的概念之一。当时我第一次看见，一个控制器可以用目标与实测之间的误差，通过数学关系让系统更快、更稳定地逼近目标。比例项对当前误差作出反应，积分项累积长期残差，微分项关注误差变化趋势；它们并不是三个凭经验相加的数字，而要依赖采样周期、对象动态、输出限幅和噪声一起理解。
 
-这也把“限幅”和“控制品质”分开了。±500 只限制摘录里的指令范围，并不能说明上升时间、超调、稳态误差或鲁棒性。
+前面做过的编码器、Timer、ADC 与 PWM，让我至少能给这张框图找到物理位置：编码器或 ADC 提供测量，Timer 决定更新节奏，控制器计算新指令，PWM 把指令交给执行器。但我在天津实习中没有写 PID、没有调参，也没有记录阶跃响应。这里留下的是控制概念第一次与 MCU 外设对上号的阅读过程，不是控制性能结果。
 
-## ATP, ATO, and ATS Answer Different System Questions / ATP、ATO 与 ATS 回答的是不同系统问题
+The same distinction keeps the 16-point light mapping from becoming “PID” by association. The target maps directly to PWM, while measured light is only displayed and printed. The exercise assembled target, measurement, actuation, and sampling rhythm, but did not close the error-return path.
 
-The ATC reading becomes clearer when its names are not compressed into one controller. ATP is read as the protection layer that constrains unsafe train movement; ATO concerns automated operation within those constraints; ATS supervises and coordinates traffic at a wider system level. Their inputs, decisions, safety obligations, and verification burden are far beyond a board-level encoder and PWM exercise.
+这也是为什么光照 demo 的 16 点查表不能被叫作 PID：目标直接映射到 PWM，实测光照只显示和打印，并未回到控制计算。它最多给未来的反馈控制准备了目标、测量、执行与采样节奏四种材料，缺少真正闭合的误差返回路径。
 
-阅读 ATC 时，先不把几个缩写压成一个“控制器”，层级会清楚很多：ATP 对应限制不安全列车运动的防护层，ATO 关注约束内的自动运行，ATS 则在更大的系统范围做监督与协调。它们的输入、决策、安全责任和验证负担，都远超板级编码器与 PWM 练习。
+## ATP, ATO, and ATS Are Not Three Larger Peripheral Calls / ATP、ATO、ATS 不是三个更大的外设函数
 
-The useful bridge is vocabulary, not equivalence. A microcontroller exercise makes “input, state, output, timing” tangible; rail control asks how those ideas are distributed, protected, supervised, and proven across a safety-critical system.
+The railway setting led the engineer to include ATP, ATO, and ATS in the training material. China's [operational technical specification for urban rail signal systems](https://xxgk.mot.gov.cn/jigou/ysfws/202201/P020220121613617393399.pdf) keeps their responsibilities distinct. ATP calculates and supervises safe movement conditions, including speed protection, train position, and separation. ATO handles starting, acceleration, cruising, coasting, braking, accurate stopping, and door-related operation within those constraints. ATS monitors trains and equipment at the system level, tracks services, controls routes, and adjusts operations.
 
-真正成立的桥梁是词汇和模型，不是等价关系。单片机练习让“输入、状态、输出、时序”变得具体；轨道控制继续追问的是，这些概念如何在安全关键系统里被分布、约束、监督和验证。
+These layers share the basic language of input, decision, output, and timing, but they are not a Blue Pill demo enlarged by swapping in a faster MCU. The specification also addresses fail-safe behaviour, redundancy, records, testing, and fault handling. Real deployments add distributed communication, authority boundaries, and lifecycle verification. My exercise connected to no railway equipment and contributed to none of those production systems.
 
-Read in that order, the change in scale becomes useful: the bounded command path separates input, limiting, and output; PID adds measurement, error, and time; ATC adds protection, automation, and supervision across a wider system. The abbreviations become clearer once each layer is allowed to stay its own size.
+天津轨道交通的实习语境让工程师把 ATP、ATO、ATS 也放进了培训资料。交通运输部发布的[城市轨道交通信号系统运营技术规范](https://xxgk.mot.gov.cn/jigou/ysfws/202201/P020220121613617393399.pdf)把三者分得很清楚：ATP 计算与监督安全行车条件，包括速度防护、列车位置和安全间隔等；ATO 在防护约束下完成启动、加速、巡航、惰行、制动、精确停车和车门等自动运行功能；ATS 则在系统层面对列车与设备状态进行监视、追踪、进路控制和运行调整。
 
-按这个顺序阅读，尺度变化反而更有用：有限幅指令路径先分清输入、限幅与输出，PID 再加入实测量、误差与时间，ATC 则把防护、自动运行和监督放到更大的系统里。每一层都保留自己的尺寸后，这些缩写才更容易读懂。
+这三个层级共享“输入—判断—输出—时序”的基本语言，却绝不是把 Blue Pill 换成性能更高的 MCU 就能得到的放大版 demo。规范同时要求故障安全、冗余、记录、测试与故障处置；真实系统还面对跨设备通信、权限边界和全生命周期验证。我的练习没有连接任何轨道设备，也没有参与这些系统的工程实现。
+
+The connection that did hold was more modest. A small board made abstract terms tangible: sensors produced inputs, software held state, timers established rhythm, GPIO or PWM created outputs, and UART moved information outside the controller. Railway engineering then asks how those functions are distributed across devices and how safe boundaries survive a failure. That difference in scale is more useful than simply noticing that train lights and fans also need controllers.
+
+真正成立的联系，是我通过一块小板第一次把抽象名词落到可触摸的信号：传感器提供输入，程序保存状态，Timer 规定节奏，PWM 或 GPIO 输出动作，UART 让内部信息离开控制器。轨道交通继续追问的，是这些功能怎样跨设备分布，又怎样在任何单点故障下仍维持安全边界。这个尺度差异，比“车厢灯和风扇也由单片机控制”更值得记住。
+
+In hindsight, the reading sequence resembles my later technical growth. The ±500 command path separated input, mapping, limiting, and output. PID added measurement, error, and time. ATP, ATO, and ATS moved protection, automated operation, and supervision to a system scale. The internship did not carry me across those layers, but it gave me a vocabulary I would no longer collapse into one vague idea of “control.”
+
+回头看，这篇阅读笔记的顺序很像我后来的成长线：±500 指令路径先让我分清输入、映射、限幅与输出；PID 再加入测量、误差和时间；ATP、ATO、ATS 则把安全防护、自动运行和系统监督放到更大的工程层级。天津实习没有让我跨过这些层级，却给了我一组不会再轻易混用的基础词汇。

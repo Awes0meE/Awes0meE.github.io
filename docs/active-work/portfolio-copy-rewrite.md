@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-13
-**Branch:** `main`
-**Current project:** None selected
+**Branch:** `docs/rewrite-tianjin-stm32`
+**Current project:** `天津轨道交通 STM32 基础实习记录`
 **Last completed project:** `Arduino 面包板两位数码管计数器`
-**State:** Digital Clock is merged and verified; select the next project from synchronized `main`
+**State:** Final bilingual rewrite approved and verified; branch ready for pull-request review and merge
 
 ## Working Contract
 
@@ -65,12 +65,58 @@
 - Smart Car, DIY Cooling, and all public uploads were unchanged by pull request
   #10. The verified content counts remain 8 projects, 21 notes, and 73 media items.
 
+## Current Confirmed Brief: Tianjin STM32
+
+- In 2025-02, Alvin completed a one-month embedded-intern placement with
+  Tianjin Jintie Communications while working in the Tianjin Rail Transit Group
+  headquarters. A Jintie engineer provided materials and informal guidance;
+  the work was self-directed training, not production rail-system development.
+- He began with Arduino Nano course-project experience but no working knowledge
+  of Keil, ST-Link, the STM32 Standard Peripheral Library, interrupts, timers,
+  PWM, UART, or ADC. GPIO modes, peripheral clocks, registers, and timers first
+  made the behavior behind Arduino-style high/low calls visible.
+- The bench used an STM32F103C8T6 Blue Pill plus breadboarded OLED, encoder,
+  buttons, DHT11, light sensor, LED, and servo modules. He wrote the application
+  logic and adapted the peripheral drivers from ST and public examples; do not
+  describe those drivers as clean-room originals.
+- Keil/device-pack/ST-Link setup was the first substantial friction. A later
+  OLED no-display case was resolved by moving to other GPIO pins and software
+  I2C. Hardware-I2C lockup is only a present-day hypothesis, not a proven root
+  cause, because no pin record, register trace, or waveform survives.
+- Across roughly 20 workdays he first ran the peripherals separately, then
+  integrated them in one bare-metal demo. Buttons switched the encoder between
+  target-light and servo-speed modes; UART sent light data and debug output;
+  GPIOC13 acted as a status LED. The code used a superloop, interrupts/timer
+  flags, and some blocking delays rather than an RTOS.
+- He measured the 16-point ADC-to-PWM table and used linear interpolation. The
+  surviving excerpt supports target-to-PWM feedforward plus displayed measured
+  light, not automatic feedback correction; a closed-loop extension was
+  considered but should not be claimed as implemented.
+- The demo ran on the bench. The supervising engineer viewed it, heard Alvin's
+  explanation, and said the learning was solid; this was informal feedback, not
+  a formal acceptance, field deployment, or production handoff.
+- PID and ATP/ATO/ATS came from the engineer's training material and were read
+  conceptually. Alvin did not implement or tune PID and did not control railway
+  equipment. The later FOC project is the preferred ending: timer, ADC,
+  interrupt, and PWM concepts first learned separately reappeared together in a
+  stricter motor-control chain.
+
 ## Next Action
 
-1. Start from clean, synchronized `main` and ask the user to select the next
-   project family. Do not infer a selection from the previous ordering.
-2. Create a new semantic topic branch for that one family, inspect its public
-   artifacts, and run the shared-understanding workflow before prose edits.
+1. Review the approved bilingual project page, five notes, and three media
+   records through the pull request for `docs/rewrite-tianjin-stm32`.
+2. Keep all four public C excerpts unchanged and merge only after the branch
+   checks and preview remain healthy.
+3. After merge, synchronize local `main`, verify the clean merged state, and
+   select the next project family rather than extending this branch.
+
+## Current Verification
+
+- `npm run lint` passed on 2026-08-13.
+- `npm run typecheck` passed on 2026-08-13.
+- `npm run build` passed on 2026-08-13 with 36 static pages.
+- Content validation remains 8 projects, 21 notes, and 73 media records; UTF-8
+  validation covers 283 text files.
 
 ## Updating This File
 

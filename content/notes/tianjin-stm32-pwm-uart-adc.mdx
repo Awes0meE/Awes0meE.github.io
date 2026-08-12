@@ -1,8 +1,8 @@
 ---
-title: "Duty Cycles, Serial Bytes, and Samples Are Different Signals"
-titleZh: "占空比、串行字节与采样值不是同一种信号"
-summary: "An interface note separating PWM actuation, UART observability, and ADC sampling, then mapping light targets to a TIM4 channel-1 compare value capped at 999."
-summaryZh: "一篇接口笔记：区分 PWM 执行、UART 可观察性与 ADC 采样，再看光照目标怎样映射为上限为 999 的 TIM4 通道 1 比较值。"
+title: "Sixteen Calibration Points Carried an ADC Target into TIM4"
+titleZh: "16 个标定点，把 ADC 数字送到 TIM4"
+summary: "I measured 16 ADC–PWM pairs and used linear interpolation to map a target-light domain into a TIM4 compare value, while learning to keep ADC measurement, PWM actuation, and UART observability as three distinct data paths."
+summaryZh: "我逐点测出 16 组 ADC–PWM 数据，再用线性插值把目标光照域映射到 TIM4 比较值；这条练习也让我第一次把 ADC 采样、PWM 执行与 UART 观察分成三条不同的数据路径。"
 date: "2025-02-08"
 status: "Completed"
 tags: ["STM32", "PWM", "UART", "ADC", "Sensor"]
@@ -14,46 +14,54 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## PWM Describes How Long an Output Stays Active / PWM 描述输出保持有效的时间比例
+## PWM Changes Pulse Timing, Not an “Analogue Voltage Variable” / PWM 改的是脉冲时间，不是“模拟电压变量”
 
-`Set_LED_Brightness()` does not write an analog voltage. It clamps `brightness` to 999 and passes the result to `TIM_SetCompare1(TIM4, brightness)`. That call writes TIM4 channel 1's compare value. In PWM generally, the compare value works with the counter period, output polarity, and mode to determine the active-time proportion; this excerpt exposes only the compare update.
+`Set_LED_Brightness()` does not ask the MCU to output a continuous analogue voltage. It clamps `brightness` to 999, passes the value to `TIM_SetCompare1(TIM4, brightness)`, and updates TIM4 channel 1's compare register. The counter repeatedly runs between zero and its auto-reload value; the compare point determines when the output changes within each period. A complete duty-cycle interpretation also depends on `ARR`, PWM mode, and output polarity. Because the excerpt preserves only the compare update, I do not infer the missing timer setup from the number `999`.
 
-`Set_LED_Brightness()` 并没有写出一个模拟电压。它先把 `brightness` 限制到 999，再交给 `TIM_SetCompare1(TIM4, brightness)`，写入 TIM4 通道 1 的比较值。一般来说，PWM 的有效时间比例由比较值、计数周期、输出极性和模式共同决定；这段摘录只公开了比较值更新。
+For an LED, the load's electrical and visual response turns rapid switching into an apparent brightness change. A servo interprets similar-looking pulses as position or continuous-rotation commands. Sharing the name PWM does not mean that the loads understand the signal in the same way.
 
-The servo parameter image describes another PWM interpretation: a 20 ms period with high times from 0.5 ms to 2.5 ms paired with angles from 0° to 180°. It is a reference table, not a run record for the public code.
+`Set_LED_Brightness()` 没有让 MCU 直接输出某个连续模拟电压。它把 `brightness` 限制到 999，再交给 `TIM_SetCompare1(TIM4, brightness)`，更新 TIM4 通道 1 的捕获比较寄存器。计数器在 0 与自动重装值之间重复运行，比较值决定一个周期内输出何时翻转；占空比还要结合 `ARR`、PWM 模式与输出极性解释。公开摘录只留下比较值更新，因此我不会从 `999` 倒推出未公开的完整定时器配置。
 
-舵机参数图展示了 PWM 的另一种解释：周期统一为 20 ms，高电平时间从 0.5 ms 到 2.5 ms，对应 0° 到 180°。它是一张参数参考表，不是公开代码的运行记录。
+对 LED 来说，负载的视觉与电气响应会把快速开关表现成亮度变化；对舵机来说，同样叫 PWM 的脉冲却被解读为位置或连续舵机的运动指令。外设名称相同，不代表负载理解信号的方式相同。
+
+The servo reference fixes a 20 ms period and maps high times from 0.5 ms to 2.5 ms onto 0° through 180°. I used it to translate a servo pulse specification into timer parameters. It is a setup reference rather than an oscilloscope measurement, and it cannot replace the datasheet for a particular servo.
+
+舵机参考图固定 20 ms 周期，把高电平时间从 0.5 ms 增到 2.5 ms，对应 0° 到 180°。我把它作为定时器参数与舵机脉宽之间的换算参考；它不是示波器实测记录，也不能替代具体舵机的数据手册。
 
 ![180 degree servo PWM parameter reference / 180 度舵机 PWM 控制参数参考](/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png)
 
-## ADC Produces a Sample, Not an Output Command / ADC 产生采样值，不产生输出指令
+## The Sixteen Points Came from the Breadboard, Not a Formula / 16 个点来自面包板，不来自公式
 
-The lookup excerpt stores 16 pairs named `pwm` and `adc`. Their ADC side descends from 1600 to 480 while the PWM side rises from 0 to 1000. `Lookup_PWM_For_Target()` finds the two surrounding points and linearly interpolates between them, with endpoint handling for targets outside the table.
+I increased the PWM setting and read the ADC point by point using the same Blue Pill, LED, light sensor, breadboard, and ambient conditions. The resulting 16 `(pwm, adc)` pairs run from PWM 0 / ADC 1600 to PWM 1000 / ADC 480. The direction follows the light-dependent divider and sampling arrangement. This table captures the response of that physical setup; it was not copied from a theoretical sensor curve.
 
-查表摘录保存了 16 组名为 `pwm` 与 `adc` 的数据：ADC 一侧从 1600 下降到 480，PWM 一侧从 0 上升到 1000。`Lookup_PWM_For_Target()` 找到目标两侧的数据点并做线性插值，超出表格范围时则直接使用端点。
+`Lookup_PWM_For_Target()` first handles values beyond the two endpoints, then finds the interval surrounding the target ADC code. It computes `fraction = (target_adc - adc1) / (adc2 - adc1)`, linearly interpolates from `pwm1` to `pwm2`, and rounds the result. That is smoother than switching among 16 discrete levels and avoids claiming that one global line describes the sensor over its entire range.
 
-Those names keep input and output separate. An ADC value is a sampled number associated with the light-sensor path; a PWM compare value is a command for TIM4. The table links the two domains, but it does not report physical units, fitting error, or achieved brightness accuracy.
+我把 PWM 从 0 往上调，在当时那套 Blue Pill、LED、光敏传感器、面包板和环境光条件下逐点读取 ADC，得到 16 组 `(pwm, adc)`：PWM 从 0 增到 1000，ADC 从 1600 降到 480。方向相反来自光敏分压与采样接法；表格记录的是这套实物链路的响应，不是从器件参数里抄出的一条理论曲线。
 
-这些名字把输入和输出分开了：ADC 值是光照传感路径里的采样数字，PWM 比较值是交给 TIM4 的输出指令。查表把两个域连接起来，却没有给出物理单位、拟合误差或最终亮度精度。
+`Lookup_PWM_For_Target()` 先处理表格两端，再找到目标 ADC 所在的相邻区间。区间比例按 `fraction = (target_adc - adc1) / (adc2 - adc1)` 计算，随后在 `pwm1` 与 `pwm2` 之间线性插值并四舍五入。这样做比 16 档硬切换平滑，也不需要假设整段传感器响应可以由一个全局线性公式描述。
+
+The calibration has deliberate limits. The ADC values remain sample codes rather than lux. I did not perform repeated measurements, error bars, or temperature-drift testing. Interpolation assumes only that adjacent measured points can be approximated locally by a straight line. That was sufficient for a low-frequency demo, not for metrology.
+
+这次标定仍有明确边界：ADC 只是量化后的采样码，没有换算成 lux；16 个点没有重复测量、误差条或温漂测试；插值只假设相邻两点之间可以近似成直线。它足以驱动一个低频 demo，却不是传感器计量标定。
 
 [PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
 
-## UART Carries Bytes So Internal Values Can Leave the MCU / UART 搬运字节，让内部数值离开 MCU
+## UART Let Me See What the MCU Was Doing / UART 让我看见 MCU 里面正在发生什么
 
-UART solves a different problem again. It serializes data for another device or terminal; it neither samples an analog voltage nor generates a duty cycle. In an embedded debugging path, that makes UART useful for exposing intermediate values and timestamps while PWM and ADC remain attached to physical interfaces.
+UART addressed observability. Once its baud rate, data bits, and stop bits were configured, the MCU serialized bytes to a computer. In the final demo I used it for light readings and debug prints, not incoming control commands. It neither sampled the light-sensor voltage nor changed LED duty cycle; it let internal values leave the board so I could see where the program had reached.
 
-UART 解决的又是另一类问题：它把数据序列化后交给另一个设备或终端，既不采样模拟电压，也不生成占空比。在嵌入式调试链里，它适合把中间数值和时间信息送出来，而 PWM 与 ADC 继续连接物理接口。
+UART 解决的是可观察性。配置波特率、数据位、停止位等参数后，单片机把字节按串行帧送到电脑；我在最终 demo 里发送光照数据和调试打印，没有把电脑端字符做成控制指令。它既不采样光敏电压，也不改变 LED 占空比，只是让 MCU 内部的数字离开板子，便于核对程序走到了哪里。
 
-The Tianjin public directory contains no standalone UART source excerpt. UART therefore belongs here as the observability role in the learning route; the demonstrated display path in the environment loop is OLED, through calls such as `OLED_ShowNum()`.
+No standalone UART source remains, and the condensed main loop omits that branch. I remember the complete demo sending its light data and debug output to the computer; the display path that can still be followed line by line is `OLED_ShowNum()`. Keeping those statements separate avoids using an absent implementation to embellish the code that remains.
 
-天津公开目录没有独立 UART 源码摘录。因此，这里保留的是串口在学习路线中的“可观察性”角色；环境循环里真正展示出来的数据出口是 OLED，例如 `OLED_ShowNum()`。
+当前归档没有留下独立 UART 源码，主循环摘录也裁掉了串口分支。完整 demo 当时确实向电脑发送过光照数据和调试打印；今天还能沿代码逐行读下去的显示出口则是 `OLED_ShowNum()`。我把这两件事分开写，不用一段已经缺失的实现去装饰仍然存在的代码。
 
-## The Three Interfaces Meet Without Becoming One / 三类接口可以协作，却不会变成同一种信号
+## The Three Paths Met Without Closing the Loop / 三条数据路径相遇，但没有形成闭环
 
-In the small brightness path, a light-related numeric domain and a target feed the lookup, the result becomes a bounded TIM4 compare value, and OLED makes current, target, and output values visible. UART could serve a similar observation role in another exercise, but it does not replace the sampler or actuator.
+In the integrated demo, the encoder provided a target in the ADC-value domain; the calibration table mapped it to a TIM4 compare value; and PWM drove the LED. Light-sensor sampling, the OLED, and UART exposed the current light, target, and output. ADC, PWM, and UART therefore met in one program as measurement, actuation, and communication.
 
-在这条小型亮度路径里，光照相关数值域与目标值进入查表，结果变成带限幅的 TIM4 比较值，OLED 再把当前值、目标值和输出值显示出来。UART 可以在另一项练习里承担相似的观察角色，但它不会替代采样器或执行输出。
+综合 demo 里，编码器给出目标 ADC 域数值，标定表把目标映射成 TIM4 比较值，PWM 驱动 LED；光敏传感器的 ADC 采样、OLED 与 UART 则让我看到当前光照、目标和输出。于是 ADC、PWM、UART 第一次在一个程序里相遇：一个读物理世界，一个驱动物理世界，一个把内部状态送出去。
 
-Keeping those roles separate is what makes the data path readable: ADC measures, PWM acts, and UART communicates.
+The measured ADC value did not return to the mapping function to form an error. The implemented path was “target → lookup → PWM,” not “target − measurement → controller → PWM.” I considered using the light feedback for further correction, but the final result remained feedforward calibration with measurement display. Once stated that way, the exercise shows exactly where the missing return path of a closed loop would have to go.
 
-把角色分开，数据通路才容易阅读：ADC 采样，PWM 执行，UART 通信。
+不过实测 ADC 没有回到映射函数里参与误差计算。代码路径是“目标 → 查表 → PWM”，不是“目标 − 实测 → 控制器 → PWM”。我当时考虑过继续根据光敏反馈修正亮度，但最终留下的是前馈标定与实测显示。把这点说清以后，这段练习反而更有价值：它展示了闭环还缺的那条返回路径究竟在哪里。

@@ -1,8 +1,8 @@
 ---
-title: "Before GPIOC13 Blinks: The Keil-to-ST-Link Bring-Up Chain"
-titleZh: "GPIOC13 点亮之前：Keil 到 ST-Link 的 Bring-up 链"
-summary: "A bring-up note tracing Keil project setup, STM32F103C8T6 clocks, ST-Link download checks, GPIOB OLED power, and a 300 ms GPIOC13 blink loop."
-summaryZh: "一篇 bring-up 笔记：串起 Keil 工程、STM32F103C8T6 时钟、ST-Link 下载检查、GPIOB OLED 供电与 300 ms GPIOC13 点灯循环。"
+title: "Before the Magic Wand Worked, GPIOC13 Had Nothing to Tell Me"
+titleZh: "魔术棒配置完之前，GPIOC13 什么也不会告诉我"
+summary: "My first Keil, device-pack, and ST-Link setup taught me to separate a successful build from a successful download and a real board-level result, using GPIOC13's 300 ms blink as the end-to-end test."
+summaryZh: "第一次配置 Keil、器件支持包和 ST-Link 时，我把“编译成功”拆成工程、下载与板级输出三段，再用 GPIOC13 的 300 ms 闪烁验证整条链路。"
 date: "2025-02-06"
 status: "Completed"
 tags: ["STM32", "Keil MDK", "ST-Link", "GPIO"]
@@ -14,36 +14,40 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## “Build Succeeded” Covers Only the First Link / “Build Succeeded” 只覆盖第一段链路
+## The First Click on the Magic Wand Opened a Wall of New Terms / 第一次打开魔术棒，所有名词都挤在一起
 
-A Keil project can compile while the target remains untouched. Bring-up therefore has at least four links to distinguish: project and startup configuration, STM32F103C8T6 clock and GPIO setup, ST-Link target/download settings, and a board-level observable that can confirm the program reached the MCU.
+Moving from the Arduino IDE to Keil, I encountered a whole layer of project setup before reaching GPIO: the STM32F103C8T6 device pack, compiler version, startup file, include and library paths, target memory regions, flash algorithm, and ST-Link. Keil's Magic Wand icon was small; the settings behind it felt like a wall. Keil still distributes an [STM32F1 Device Family Pack](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/) for device descriptions, startup support, and debugging. At the time, I understood these mainly as unfamiliar options where one missing piece could stop the download.
 
-Keil 工程可以顺利编译，目标板却完全没有变化。bring-up 至少要拆成四段来看：工程与启动配置、STM32F103C8T6 时钟和 GPIO 初始化、ST-Link 目标与下载设置，以及一个能确认程序确实到达 MCU 的板级现象。
+I eventually split bring-up into three questions. Can the computer compile and link an image for the target device? Can ST-Link identify the MCU and write that image? Can the program produce an unambiguous effect on the board? Build Succeeded answers only the first. Treating all three as one vague “the environment is broken” problem had sent me editing unrelated settings in circles.
 
-This separation matters because each link fails differently. A compiler error points back into the project; a download failure belongs to the programmer/target connection; a flashed program with no expected output sends the check toward clocks, pins, power, or control flow. The workflow becomes useful when those possibilities stop being one vague “the board does not work.”
+第一次从 Arduino IDE 转到 Keil，我最先遇到的不是 GPIO，而是一整套此前不存在于我视野里的工程配置：STM32F103C8T6 器件包、编译器版本、启动文件、头文件与库路径、目标存储区、下载算法和 ST-Link。Keil 的“魔术棒”图标很小，点开以后却像一面墙。官方现在仍用独立的 [STM32F1 Device Family Pack](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/)提供器件描述、启动与调试支持；对当时的我来说，这些内容还只是“少一项就烧不进去”的陌生选项。
 
-这样拆开之后，每一段失败的样子也不同：编译错误回到工程，下载失败检查下载器与目标连接，程序已经写入却没有预期输出时，再转向时钟、引脚、供电或控制流。“板子不工作”这句话，终于能被拆成几个可检查的问题。
+我后来把 bring-up 拆成三段：电脑能否把工程编译、链接成适合目标芯片的映像；ST-Link 能否识别并把它写入 MCU；程序能否在板上产生一个明确现象。Build Succeeded 只回答第一问。目标板完全没有变化时，把三段混成一句“环境坏了”只会让我来回乱改。
 
-## GPIOB Powers the Display Before It Displays Anything / OLED 显示之前，GPIOB 先把供电电平放好
+The failures also look different. Compiler errors lead back to source files and project configuration. Programmer-detection failures point toward SWD wiring, target power, or download settings. A successfully flashed program with no output shifts attention to startup, clocks, pin configuration, and control flow. I did not arrive with this model; I assembled it only after spending time getting that first Keil environment to work.
 
-The public excerpt enables the GPIOB clock and configures pins 4 and 5 as 50 MHz push-pull outputs. It sets PB5 high and PB4 low before calling `OLED_Init()`, then writes two status strings. That order records an easy-to-miss dependency: a display API cannot compensate for missing module power levels.
+每一段的失败形态并不相同：编译错误先回到源文件和工程；下载器识别失败检查 SWD 连接、目标供电和下载配置；程序成功写入却没有预期输出，再去看启动、时钟、引脚模式或控制流。这套分法不是我一开始就会的，而是花了一段时间把 Keil 环境配通后，才从第一次混乱里整理出来的。
 
-公开摘录先使能 GPIOB 时钟，把 4、5 号引脚配置为 50 MHz 推挽输出；PB5 拉高、PB4 拉低之后，才调用 `OLED_Init()` 并写入两行状态文字。这个顺序记住了一个很容易被函数名遮住的依赖：模块供电电平没有就位时，显示 API 再完整也补不上。
+## The Module Needed Real Power Before OLED_Init() Could Help / 调用 OLED_Init() 之前，模块先要真的有电
 
-`GPIO_Init()` looks compact, while the structure passed into it still carries mode, pin mask, and speed. The library call shortens the syntax; it does not remove the hardware choices.
+The code excerpt enables the GPIOB clock, configures PB4 and PB5 as push-pull outputs, and uses one high and one low level to power the OLED module before calling `OLED_Init()`. Powering a small module directly from GPIO was acceptable only for this low-current breadboard exercise; production hardware would demand more care around current capability, sequencing, and the power rail. As a learning device, however, it exposed a dependency clearly: an initialization routine can configure communication, but it cannot operate an unpowered module.
 
-`GPIO_Init()` 看起来很短，传入的结构体却仍然装着模式、引脚掩码和速度。库函数压缩了写法，没有替硬件选择消失。
+公开摘录先使能 GPIOB 时钟，把 PB4、PB5 配成推挽输出，再用一高一低给 OLED 模块建立电源电平，之后才调用 `OLED_Init()`。这种从 GPIO 给小模块供电的接法只适合当时的低功耗面包板练习，正式硬件会更关注电流能力、上电时序和独立电源设计；但它在学习阶段把一个依赖暴露得非常直接：初始化函数只能配置通信，不能替一个尚未上电的模块工作。
 
-## GPIOC13 Is the End-to-End Check / GPIOC13 是端到端检查
+`GPIO_Init()` occupies one line, yet its structure still specifies the pin mask, push-pull mode, and 50 MHz output-speed setting. Before it, `RCC_APB2PeriphClockCmd()` must enable the GPIOB peripheral clock. ST's [Standard Peripheral Library description](https://www.st.com/resource/en/application_note/an3268-stm32vldiscovery-firmware-package-stmicroelectronics.pdf) separates register mappings, structures, macros, and access routines. The library shortens the syntax without removing decisions about clocks and pin electrical behaviour.
 
-After enabling GPIOC, the excerpt configures pin 13 as another push-pull output. The loop sets the pin, waits 300 ms, resets it, and waits another 300 ms. Unlike a successful build message, that intended pattern crosses the entire chain from source and toolchain to a physical output pin.
+`GPIO_Init()` 看起来只是一行，传入的结构体却仍然指定引脚掩码、推挽模式和 50 MHz 输出速度；它前面还必须用 `RCC_APB2PeriphClockCmd()` 给 GPIOB 打开外设时钟。ST 的[标准外设库说明](https://www.st.com/resource/en/application_note/an3268-stm32vldiscovery-firmware-package-stmicroelectronics.pdf)把库分成寄存器映射、数据结构、宏和访问例程。库函数缩短了语法，并没有让“时钟是否存在、引脚按什么电气方式工作”这些选择消失。
 
-使能 GPIOC 后，摘录把 13 号引脚配置成推挽输出。主循环依次置位、等待 300 ms、复位、再等待 300 ms。和“编译成功”相比，这个预期节奏跨过了源码、工具链、下载与物理输出引脚，适合作为端到端检查。
+## A 300 ms Blink Tested the Whole Chain / 300 ms 闪烁是我给整条链路出的考题
+
+After enabling GPIOC, the excerpt configures PC13 as a push-pull output. The loop sets the pin, waits 300 ms, resets it, and waits another 300 ms. Depending on the Blue Pill's LED wiring, the visible LED may be active low; either way, it should alternate at a steady pace. That observation crosses source code, compilation, ST-Link download, startup execution, RCC, and a physical pin—one whole board beyond Build Succeeded.
+
+使能 GPIOC 后，摘录把 PC13 配成推挽输出。主循环置位、等待 300 ms、复位、再等待 300 ms；板载 LED 因接法可能表现为低电平点亮，但无论视觉极性如何，它都应该以稳定节奏翻转。这个现象跨过源码、编译链接、ST-Link 下载、启动执行、RCC 时钟和物理引脚，比绿色的 Build Succeeded 多验证了整整一块目标板。
 
 [Basic GPIO and OLED loop](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)
 
 ![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
 
-The public artifact preserves the code and check sequence rather than a flashing log or oscilloscope capture. Its most durable contribution is the bring-up order: establish the project, reach the target, then choose the smallest output that can tell those two facts apart.
+GPIOC13 did blink, and the OLED subsequently displayed its text. I did not retain download logs or oscilloscope traces, but the exercise left me with a bring-up order I still use: reach the target first, choose the smallest observable that can confirm execution, and only then add communication and sensors. On later STM32 boards, I still look for an end-to-end result small enough to have almost no excuse to fail.
 
-公开材料保留的是代码与检查顺序，不是下载日志或示波器波形。它最耐用的部分正是 bring-up 次序：先建立工程，再到达目标，最后选择一个足够小的输出，把这两件事区分开。
+我当时确实让 GPIOC13 闪了起来，随后 OLED 也显示了内容。没有保存下载日志或示波器波形并不妨碍这段练习留下一个长期可复用的顺序：先让工具链抵达目标，再选一个最小、最明确的输出验证执行，最后才增加通信和传感器。后来换到新的 STM32 板卡时，我仍会先找这样一个“小到几乎没有借口失败”的端到端现象。
