@@ -1,0 +1,14 @@
+---
+trial: baseline
+input: tests/inputs/09-safe-but-voiceless-review.md
+phase: baseline-before-cognition-led-redesign
+runtime_commit: 663116c8587de716a5eb701548d4dc74e1222511
+trial_agent: /root/task1_red_fixtures/baseline_09
+captured_at: 2026-08-12 Asia/Shanghai
+---
+
+结论：事实边界准确，但语气像证据审计，缺少“我如何理解这些材料、又在哪里收住判断”的个人在场感。
+
+替换稿：
+
+重新看这份归档，ESP32 控制板、上位机代码、串口通信实现和外壳模型都在，演示视频里的风扇也确实会响应控制指令。材料一齐摆出来，很容易让我顺手把它读成一套已经收尾的控制系统。可视频真正替我确认的，其实只到这里：它没有给出散热性能数据，现有归档也不足以证明 PID 控制已经实现。电子、电气、软件和机械四部分都留下了痕迹，这本身已经很有价值；只是从“这些部分存在”跨到“这些功能已经完成”，中间还缺证据，我不能替它把这一步补上。

@@ -32,7 +32,9 @@ Source:
 - `skills/engineering-note-writer/SKILL.md`
 - focused references:
   - `skills/engineering-note-writer/references/evidence-and-boundaries.md`
-  - `skills/engineering-note-writer/references/material-led-composition.md`
+  - `skills/engineering-note-writer/references/shared-understanding.md`
+  - `skills/engineering-note-writer/references/research-expansion.md`
+  - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
@@ -40,10 +42,11 @@ Source:
 
 Purpose:
 
-- Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and oral notes into Chinese-first engineering-note prose with accurate English counterparts.
-- Keep facts and authorship evidence-gated while letting the material's own question, failure, constraint, or discovery determine the structure.
+- Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and a user-confirmed brief into cognition-led Chinese-first engineering-note prose with accurate English counterparts.
+- Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
+- Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
-- Derive content-specific headings after drafting and follow the skill's heading limit instead of reusable framework headings or fixed closing sections.
+- Require first-person learning-note prose to pass both the Truth gate and Li Zhiyi gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
@@ -62,13 +65,15 @@ npx skills@latest add mattpocock/skills -g -a codex -s grill-me grilling -y
 
 Purpose:
 
-- Interview the user before each remaining portfolio project is rewritten.
+- Treat `grill-me` as a required runtime dependency for substantial new project prose, rewrites, or humanization when no user-confirmed brief exists.
+- Reuse a confirmed brief for the same project and scope. A new interview is not required for a narrow neutral audit, summary, or caption that introduces no personal claims.
 - Work through the current decision frontier in numbered rounds rather than
   asking every possible follow-up at once.
 - Turn disordered voice answers into shared understanding before invoking the
   repository-local `engineering-note-writer`.
-- Keep factual inspection as the agent's responsibility and reserve personal
-  motivations, decisions, reactions, and remembered observations for the user.
+- Keep public and artifact fact investigation as the agent's responsibility;
+  ask the user only for personal motivations, decisions, reactions, and
+  remembered observations.
 
 These skills are machine-global and do not travel with the Git clone. Install
 them separately on each device; the active interview state travels through

@@ -1,26 +1,32 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-12
-**Branch:** `main`
+**Branch:** `docs/cognition-led-engineering-writer`
 **Current project:** None selected
 **Last completed project:** `DIY 压风式散热器原型`
-**State:** Between projects; the DIY cooling rewrite is approved and merged
+**State:** Cognition-led writer redesign is complete on Windows; continue from the pushed topic branch on macOS
 
 ## Working Contract
 
 - Leave the approved Arduino Smart Car project, note, and media copy unchanged.
 - Rewrite every other project family one at a time, never as a batch.
-- Before writing each project, inspect its uploaded public materials and run a
-  `grill-me` interview.
+- Before writing each project, inspect its uploaded public materials, then
+  reuse a user-confirmed brief for the same scope or run a `grill-me` interview.
 - Treat the user's voice answers as primary first-person material. They may be
   disordered; extract engineering decisions, mistakes, reactions, and changes
   in understanding before drafting.
-- Use `skills/engineering-note-writer/SKILL.md` only after the interview has
-  reached shared understanding.
-- Draft Chinese first in the user's personal engineering-note voice, then
-  adapt English with the same facts and calmer intensity.
-- Evidence sets the factual boundary but must not become the reader-facing
-  structure. Keep the user's experience and engineering judgment in front.
+- Store confirmed understanding as a compact, non-sensitive brief rather than
+  an interview transcript.
+- Only after confirmation, research current reliable knowledge beyond the
+  uploaded material; use nearby links lightly and keep new first-person insight
+  in the present, never as invented project history, action, result, or measurement.
+- Use `skills/engineering-note-writer/SKILL.md` to draft Chinese through the
+  user's cognition trail, allowing genuine cross-subsystem or non-strictly
+  chronological attention without imposing a cognition template.
+- Adapt English with the same facts and calmer intensity, then require
+  first-person prose to pass both the Truth gate and Li Zhiyi gate.
+- Evidence bounds project facts, authorship, results, and publication claims,
+  but must not choose the reader-facing structure.
 
 ## Confirmed Global Decisions
 
@@ -45,19 +51,50 @@
 - The approved Smart Car family and the DIY cooling demonstration video were
   not changed by the final DIY pass.
 
+## Cognition-Led Writer Checkpoint
+
+- The repository-local writer now treats evidence as the factual floor instead
+  of the article structure. Substantive first-person writing requires a
+  user-confirmed shared-understanding brief or a `grill-me` interview first.
+- After confirmation, the workflow researches relevant current knowledge beyond
+  uploaded artifacts, keeps source links light and nearby, and writes new
+  knowledge as present understanding rather than invented project history.
+- Composition follows the writer's changing attention. It may move among
+  circuits, firmware, desktop software, mechanics, fabrication, and later
+  synthesis without pretending to follow strict chronology or a fixed template.
+- Truth and Li Zhiyi voice are independent release gates. A factually careful
+  compliance report still fails if the reader cannot follow a human learning
+  route.
+- Behavioral Trials 06-11 run against final runtime commit `9eab429`; the final
+  manifest contains 34 hashed runtime/input/output files. The retained GREEN
+  outputs pass every applicable gate.
+- No `content/**/*.mdx`, `content/media.json`, or `public/uploads/` file changed.
+  The existing 21 published notes remain outside this redesign.
+
 ## Next Action
 
-No project is active. When the user selects the next project:
+On the Mac, preserve any local work and then resume the pushed topic branch:
 
-1. synchronize local `main` with `origin/main` using `--ff-only`;
-2. create a new topic branch from that checkpoint using a Conventional
-   Commits-aligned semantic prefix and kebab-case purpose; never use an
-   identity prefix such as `agent/`;
-3. inspect the project's existing page, note, media, and public materials;
-4. update this file with the branch, project, evidence boundary, interview
-   frontier, and explicit next action;
-5. run `grill-me` one core question at a time and do not draft before the user
-   confirms the shared project understanding.
+```bash
+git status --short --branch
+git fetch --prune origin
+git switch --track origin/docs/cognition-led-engineering-writer
+```
+
+If the local branch already exists, use:
+
+```bash
+git switch docs/cognition-led-engineering-writer
+git pull --ff-only origin docs/cognition-led-engineering-writer
+```
+
+Then read `AGENTS.md`, `CODEX.md`, this file, and the draft PR before editing.
+Restore dependencies and run at least `npm run lint` and `npm run typecheck`.
+Continue writer work on this branch until the PR is reviewed; do not merge it
+without the user's explicit approval. No portfolio project is currently active.
+After this writer PR is resolved, select the next project from synchronized
+`main`, create a semantic topic branch, and resume the one-project interview and
+writing contract above.
 
 ## Updating This File
 
