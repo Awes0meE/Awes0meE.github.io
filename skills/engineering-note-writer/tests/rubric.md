@@ -5,8 +5,8 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | ID | Check | Pass condition |
 |---|---|---|
 | G1 | Truth gate | Project actions and results, researched claims and nearby links, and uncertainty and publication claims independently pass factual review. |
-| G2 | Li Zhiyi gate | Independently passes only when a person is visibly noticing, switching focus where relevant, correcting himself or learning, and combining ideas where the source supports it. Evaluate the genuine route available in the source rather than requiring every move. |
-| G3 | Compliance-report rejection | A factually safe archive description, audit, recruiter summary, neutral survey, or project handoff fails overall and must be rebuilt at the cognition level. |
+| G2 | Li Zhiyi gate | For a first-person learning note, the available source-supported cognition route is traceable through the writer's selection, judgment, or change in understanding. Unsupported move categories are never mandatory or manufactured. |
+| G3 | Compliance-report rejection | For a target first-person learning note, a factually safe compliance-report, archive-description, project-handoff, recruiter-summary, academic-abstract, or neutral-survey voice fails overall and must be rebuilt at the cognition level. A requested factual summary, caption, audit, or review may remain neutral when appropriate. |
 | F1 | Facts | Every action, tool, result, and emotion is supported by the input. |
 | F2 | Unknowns | Missing authorship, dates, results, and paths stay unknown or are clearly qualified. |
 | C1 | Composition | Section order follows the material rather than a named note type or mandatory sequence. |
@@ -26,7 +26,7 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | K1 | Research expansion | For a research-required task, the retained output adds relevant technical knowledge absent from the uploaded input and includes a direct nearby source link; record `not applicable` when the task needs no external expansion. |
 | K2 | Research boundary | Sources are linked lightly and accurately; researched principles express present understanding and never fabricate a project action, result, measurement, or memory. |
 
-Any applicable G1-G3 failure makes the whole trial fail. Factual safety cannot compensate for missing voice. Record `not applicable` for a move unsupported by the source; never manufacture it.
+For a first-person learning-note trial, any applicable G1-G3 failure makes the whole trial fail. Factual safety cannot compensate for missing voice. Record `not applicable` for a move unsupported by the source; never manufacture it. For other requested forms, judge whether the output matches that form rather than falsely applying the learning-note voice gate.
 
 ## Recording Results
 

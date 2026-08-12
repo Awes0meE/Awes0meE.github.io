@@ -78,14 +78,9 @@ End where the writer's current understanding reaches its last useful verificatio
 
 ### 11. Run Two Independent Gates
 
-Follow `references/self-review.md`. Both gates must pass before release.
+Follow `references/self-review.md`; detailed review mechanics live only there. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
-- **Truth gate:** independently verify project actions and results, researched claims and nearby links, the strength of uncertainty, bilingual factual equivalence, and publication paths. Repair unsupported claims without growing a visible disclaimer.
-- **Li Zhiyi gate:** independently verify that the reader can follow a person noticing, questioning, switching focus where relevant, correcting himself or changing his understanding, and recombining earlier learning where the source supports it. Judge the genuine route available; do not require or manufacture every move type.
-
-If the Li Zhiyi gate fails, return to the cognition trail and rebuild the composition around attention and changed understanding. Adding pronouns or jokes, or merely making formal terms casual, is not a repair. No factually safe draft can pass overall on truth alone.
-
-Ask `Li Zhiyi or compliance report?` as the operational release decision. A compliance report, archive description, project handoff, recruiter summary, academic abstract, neutral survey, or imitation of another creator fails release even when factually safe.
+Use `Li Zhiyi or compliance report?` as the operational release decision for first-person learning-note prose. A requested factual summary, caption, audit, or review may remain neutral when that matches the requested form.
 
 ## Output
 
