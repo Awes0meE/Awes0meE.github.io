@@ -13,9 +13,9 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | B1 | English | English preserves the Chinese facts and narrative nodes, uses natural phrasing, and reads near the user's qualitative 60%-of-reference target beside Chinese at 75%, without treating either value as a quota. |
 | R1 | Reader flow | Each paragraph or section adds a fact, question, interpretation, emotion, or piece of evidence. Brief detours return naturally. |
 | T1 | Template residue | The output does not require a retrospective, file section, future-work section, archetype label, or visible checklist wrapper. |
-| I1 | Shared understanding | A substantial first-person draft starts only from a user-confirmed brief; when no confirmed brief exists, the agent runs `grill-me` / `grilling` and does not draft. |
+| I1 | Shared understanding | For a new project, substantial rewrite, or humanization request, substantive first-person drafting starts only from a user-confirmed brief; when no confirmed brief exists, the agent runs `grill-me` / `grilling` and does not draft. |
 | I2 | Interview scope | The agent finds artifact and public facts itself, and asks the user only about motives, changes in attention, decisions, reactions, recollections, and interpretations. |
-| I3 | Reuse and exception | The agent reuses a confirmed current brief; typo fixes, formatting-only edits, and faithful translations of approved prose do not trigger `grill-me`. |
+| I3 | Reuse and exception | The agent reuses a confirmed current brief; typo fixes, formatting-only edits, and faithful translations of approved prose do not trigger `grill-me`, while an edit that introduces a new first-person interpretation reactivates the shared-understanding gate. |
 | K1 | Research expansion | The agent searches beyond uploaded artifacts for a real question exposed by the confirmed brief. |
 | K2 | Research boundary | Research uses light, accurate sources; researched principles express present understanding and never fabricate a project action, result, measurement, or memory. |
 

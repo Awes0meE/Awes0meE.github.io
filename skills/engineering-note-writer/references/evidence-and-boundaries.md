@@ -1,6 +1,6 @@
 # Evidence And Boundaries
 
-Read this before making first-person, result, or publication claims. This reference decides only whether project-specific actions, results, uncertainties, and publication claims are supported. It does not choose article structure, headings, emotion, or external knowledge.
+Read this before making first-person, result, or publication claims. This reference decides only whether project-specific actions, results, uncertainties, and publication claims are supported. It does not choose the opening, order, headings, emotion, external knowledge, or research questions.
 
 ## Classify What You Know
 
@@ -57,11 +57,10 @@ This skill describes reviewed evidence. `AddProject.skill` decides what is copie
 - Avoid compliance-report phrases such as `公开证据边界`, `本次仅公开`, and `功能改动没有故意扩大` in reader-facing prose.
 - For company, internship, client, or third-party material, describe only the approved public evidence and return ambiguous publication decisions to AddProject.
 
-## Minimum Pre-Draft Check
+## Minimum Supportability Check
 
 Before drafting, be able to answer:
 
-- What concrete thing can the opening stand on?
 - Which actions are personally attributable?
 - Which technical result is actually demonstrated?
 - Which unknown would change the claim?
