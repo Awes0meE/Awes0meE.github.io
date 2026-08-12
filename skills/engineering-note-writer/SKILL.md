@@ -42,6 +42,8 @@ Read the task-relevant repository context, target material, available artifacts,
 
 For a new project, substantial rewrite, or humanization request, follow `references/shared-understanding.md`. If there is no confirmed current brief, run `grill-me` / `grilling`, ask only for the user's personal knowledge, summarize a compact brief, and explicitly obtain confirmation. The brief is a source, not an outline. Do not draft article prose before confirmation.
 
+A review that asks for a humanized or first-person replacement still passes through this gate. You may diagnose the supplied prose, but the paragraph being reviewed is not a confirmed brief: without one, do not write the replacement in the same turn; return the next shared-understanding interview action.
+
 Reuse a confirmed current brief. Typo correction, formatting-only changes, and faithful translation of approved prose are the only narrow exceptions; a new interpretation reactivates the gate.
 
 ### 3. Research Beyond Artifacts
