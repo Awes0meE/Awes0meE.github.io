@@ -80,25 +80,27 @@ ff1424ece805546d0efcdb09fbed5f61806e7b5cd2c784638610b86ebb632ecb  skills/enginee
 - Capture date: 2026-08-12, Asia/Shanghai.
 - Initial candidate runtime commit: `352c82878db75c2b27c0912b40eadd9dcf096181`.
 - Runtime-fix commits: `580bb6ee95e185a8cc7698316a1c0c6db0b2ac63` added the review-specific counter to `references/shared-understanding.md`; `9eab429041e3478d3c58c6fc730828d02366477d` promoted the same prohibition into the main workflow after the first fix was bypassed.
-- Final runtime commit for affected Trials 09 and 11: `9eab429041e3478d3c58c6fc730828d02366477d`.
-- Unchanged retained agents at the original cognition-led runtime: `/root/task6_green_trials/green_06`, `/root/task6_green_trials/green_07`, `/root/task6_green_trials/green_08`, and `/root/task6_green_trials/green_10`.
-- Retained affected-case agents at the final runtime: `/root/task6_green_trials/green_09_gate_fix_final_3` and `/root/task6_green_trials/green_11_final`.
+- Common final runtime commit for every retained Trial 06–11 output: `9eab429041e3478d3c58c6fc730828d02366477d`.
+- Final retained agents: `/root/task6_green_trials/final_06`, `/root/task6_green_trials/final_07`, `/root/task6_green_trials/final_08`, `/root/task6_green_trials/green_09_gate_fix_final_3`, `/root/task6_green_trials/final_10`, and `/root/task6_green_trials/green_11_final`.
+- Snapshot-consistency reruns: after review found that Trials 06, 07, 08, and 10 still named the pre-fix runtime, those four cases were rerun with fresh `final_06`, `final_07`, `final_08`, and `final_10` agents. Before dispatch, `git diff --exit-code 9eab429041e3478d3c58c6fc730828d02366477d -- skills/engineering-note-writer/SKILL.md skills/engineering-note-writer/references skills/engineering-note-writer/agents/openai.yaml` verified that the current runtime files were byte-identical to `9eab429` despite the later evidence-only commit.
 - Trial 09 replacements: the earlier retained `/root/task6_green_trials/green_09` was invalidated because the input had no confirmed brief. `/root/task6_green_trials/green_09_gate_fix` at the initial candidate runtime and `/root/task6_green_trials/green_09_gate_fix_final` after the first fix both diagnosed the voice problem but still drafted replacement prose. `/root/task6_green_trials/green_09_gate_fix_final_2` was an additional passing gate run at the final runtime; `/root/task6_green_trials/green_09_gate_fix_final_3` is the verbatim body retained for the final fixture.
 - Trial 11 replacements: `/root/task6_green_trials/green_11` passed after the first fix but was superseded after the second runtime commit; `/root/task6_green_trials/green_11_final` is the fresh run retained at the final runtime.
 - Body handling: retained response bodies were copied below their YAML provenance headers without prose edits. Manual comparison against the delivered agent messages found no body change.
-- Trial 08 web rule: its wrapper explicitly required current external web research, reliable primary sources/direct URLs, and the runtime's light nearby-link rule. The retained body uses direct AMCA, Oriental Motor, and Eaton links.
+- Trial 08 web rule: its final wrapper explicitly required current external web research, reliable primary sources/direct URLs, and the runtime's light nearby-link rule. The retained body uses direct ebm-papst, Greenheck, and Eaton links.
 
-For Trials 06, 07, 09, 10, and 11, the normal fresh-agent wrapper was the text below, with only `<matching-input>` replaced by the matching input path:
-
-```text
-You are a fresh GREEN behavioral trial agent. Work read-only in D:\Develop\Project_Final_Collation\XJTLU_Portfolio. Do not delegate or spawn any agent. Read skills/engineering-note-writer/SKILL.md and only the context and references it explicitly routes for this task. Then execute <matching-input>. Return only the requested user-facing deliverable, with no analysis, test commentary, provenance, or wrapper text. Do not inspect any baseline output, revised output, comparison.md, provenance.md, rubric.md, design spec, implementation plan, git history, memory file, or any other test input. Do not edit or create files.
-```
-
-Trial 08 used this exact web-required variant:
+The final-snapshot wrapper for rerun Trials 06, 07, and 10 was the text below, with only `<matching-input>` replaced by the matching input path:
 
 ```text
-You are a fresh GREEN behavioral trial agent. Work read-only in D:\Develop\Project_Final_Collation\XJTLU_Portfolio. Do not delegate or spawn any agent. Read skills/engineering-note-writer/SKILL.md and only the context and references it explicitly routes for this task. Then execute skills/engineering-note-writer/tests/inputs/08-research-expansion.md. This task explicitly requires current external research: use web browsing, prefer reliable primary sources and direct URLs, and comply with the runtime's light nearby-link rule. Return only the requested user-facing deliverable, with no analysis, test commentary, provenance, or wrapper text. Do not inspect any baseline output, revised output, comparison.md, provenance.md, rubric.md, design spec, implementation plan, git history, memory file, or any other test input. Do not edit or create files.
+You are a fresh final-snapshot behavioral trial agent. Work read-only in D:\Develop\Project_Final_Collation\XJTLU_Portfolio. The runtime files in the current worktree are byte-identical to stabilized runtime commit 9eab429041e3478d3c58c6fc730828d02366477d. Do not delegate or spawn any agent. Read skills/engineering-note-writer/SKILL.md and only the context and references it explicitly routes for this task. Then execute <matching-input>. Return only the requested user-facing deliverable, with no analysis, test commentary, provenance, or wrapper text. Do not inspect any baseline output, revised output, comparison.md, provenance.md, rubric.md, design spec, implementation plan, git history, memory file, or any other test input. Do not edit or create files.
 ```
+
+Final Trial 08 used this exact web-required variant:
+
+```text
+You are a fresh final-snapshot behavioral trial agent. Work read-only in D:\Develop\Project_Final_Collation\XJTLU_Portfolio. The runtime files in the current worktree are byte-identical to stabilized runtime commit 9eab429041e3478d3c58c6fc730828d02366477d. Do not delegate or spawn any agent. Read skills/engineering-note-writer/SKILL.md and only the context and references it explicitly routes for this task. Then execute skills/engineering-note-writer/tests/inputs/08-research-expansion.md. This task explicitly requires current external research: use web browsing, prefer reliable primary sources and direct URLs, and comply with the runtime's light nearby-link rule. Return only the requested user-facing deliverable, with no analysis, test commentary, provenance, or wrapper text. Do not inspect any baseline output, revised output, comparison.md, provenance.md, rubric.md, design spec, implementation plan, git history, memory file, or any other test input. Do not edit or create files.
+```
+
+The retained Trials 09 and 11 used the normal fresh-agent wrapper recorded for their earlier final-runtime reruns: it differs only by saying `fresh GREEN behavioral trial agent`, omitting the byte-identity sentence, and naming the matching input. Both output headers independently record runtime `9eab429041e3478d3c58c6fc730828d02366477d`.
 
 ### Trial 11 True Old-Runtime Baseline
 
@@ -143,7 +145,7 @@ Return only the requested user-facing deliverable, with no analysis, test commen
 
 ### GREEN Audit Limits
 
-Canonical agent names, exact wrappers, per-output runtime commits, retained response bodies, and repository hashes are recorded. Platform-internal run IDs and full hidden reasoning are not persisted. Trial 08 source links and claim placement are auditable from the retained body, but the repository does not archive the browser trace. Trials 06, 07, 08, and 10 were intentionally not replaced during the 09/11 test-design correction, so their headers continue to identify runtime `352c82878db75c2b27c0912b40eadd9dcf096181`; Trials 09 and 11 identify final runtime `9eab429041e3478d3c58c6fc730828d02366477d`. The fixtures remain qualitative and may vary on a future model rerun.
+Canonical agent names, exact final wrappers, one common runtime commit, retained response bodies, and repository hashes are recorded. Platform-internal run IDs and full hidden reasoning are not persisted. Trial 08 source links and claim placement are auditable from the retained body, but the repository does not archive the browser trace. Every retained Trial 06–11 output header identifies runtime `9eab429041e3478d3c58c6fc730828d02366477d`. The fixtures remain qualitative and may vary on a future model rerun.
 
 ## Final Cognition-Led Runtime Snapshot
 
@@ -178,10 +180,10 @@ d0f1d0248102780e37c052c6659c05687a33abd0ad9cb925b9f4ba7048ceb76a  skills/enginee
 84b4a3a145bb87155ee203f08bd01913ead422d5e7296d87a1b069073df6df50  skills/engineering-note-writer/tests/revised-outputs/03-hardware-archive.md
 ff1424ece805546d0efcdb09fbed5f61806e7b5cd2c784638610b86ebb632ecb  skills/engineering-note-writer/tests/revised-outputs/04-sparse-unknowns.md
 128d991b3c42c0c4db64838bf6125cfe07c225a1c36c20c1509abc0bc2692ec7  skills/engineering-note-writer/tests/revised-outputs/05-bilingual-rewrite.md
-f3b1d63e9df5f74d3877884fbd0a80bb952e0426730aed05029cca09698b5e2e  skills/engineering-note-writer/tests/revised-outputs/06-cross-subsystem-confirmed-brief.md
-be7b74794222fdc2be3f42a8bcec715f8408bd6a62c5e46d45dcd82db8865f24  skills/engineering-note-writer/tests/revised-outputs/07-missing-shared-understanding.md
-1e5a503489cc296093b0a158e5d13efd2c88d266cd7849e0ed6b4b6c7a3dd452  skills/engineering-note-writer/tests/revised-outputs/08-research-expansion.md
+9abe6978002cc59f767ea944f9732cda859ddeba2b1684b14f1c8b6967b7acb5  skills/engineering-note-writer/tests/revised-outputs/06-cross-subsystem-confirmed-brief.md
+1f9277a8f251f81eae3e40430290032f58e5ffb2ff8a593f9a5bd5d235b3a3f9  skills/engineering-note-writer/tests/revised-outputs/07-missing-shared-understanding.md
+d35759b7b8dc9de9dd7f65c794d8941ba650c07120bb3e679d9df5ec5054d4b6  skills/engineering-note-writer/tests/revised-outputs/08-research-expansion.md
 1a9d14051c3fbe55db567dd6cf39cdeac5006ea3adbee2bf7106448cecb54a10  skills/engineering-note-writer/tests/revised-outputs/09-safe-but-voiceless-review.md
-8f4aa621b9f6b5440dbdaa2ef564bf25fc4ea2ea5bb995e54d3b1c94148a3193  skills/engineering-note-writer/tests/revised-outputs/10-small-edit-exception.md
+b02783f8634e404fceffea1928c3bd5a15c8580db6f86e09014fc9dbede3548a  skills/engineering-note-writer/tests/revised-outputs/10-small-edit-exception.md
 f6764f59c4522498e23d4c3fa144d90ff35cfb0b397aca701b582a6cbfca42e5  skills/engineering-note-writer/tests/revised-outputs/11-confirmed-brief-voiceless-review.md
 ```

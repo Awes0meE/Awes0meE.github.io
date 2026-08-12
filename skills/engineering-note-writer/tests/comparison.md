@@ -339,27 +339,27 @@ The RED result is mixed, not uniform. Trial 06 partially misses cognition-led co
 
 | Check | Result | Evidence |
 |---|---|---|
-| G1 | pass | Project facts, the three nearby technical links, and “只能算个人体验，不能叫作经过验证的性能结论” independently preserve truth and uncertainty. |
-| G2 | pass | The route is traceable from “最大 PWM，持续 30 秒” through PID doubt, cross-chain questions, **Connect**, and the later airflow correction. |
-| G3 | pass | Reactions such as “它们第一次不再像四份互不相干的作业” make this a learning note rather than a system handoff or evidence report. |
-| F1 | pass | The note preserves the half-week PID false start, proportional fallback, confirmed artifacts, system response, and **Connect** payoff without inventing a measurement. |
-| F2 | pass | “准确温度和 FPS 没有作为测量记录保存下来” keeps recollection distinct from validation. |
-| C1 | pass | The order follows the writer's changing control question, not a circuit/desktop/Bluetooth/enclosure inventory. |
-| C2 | pass | `PID 把问题推回了链路中间`, `Connect 之后，零件第一次不再各说各话`, and `泡棉缝隙给 PWM 补了一课` describe the thought below them. |
-| C3 | pass | “PID 一卡住，注意力就开始在几个部分之间来回跳” introduces specific questions, and the later duct passage explains what changed. |
-| C4 | pass | One paragraph moves among ESP32 reception, Bluetooth delivery, and `Form1.cs`, then later reconnects that signal path to airflow. |
-| C5 | pass | “即使信号已经走通，热量仍然有自己的路要走” coherently synthesizes **Connect** with the enclosure insight. |
-| C6 | pass | Three content-bearing headings act as sparse thought bookmarks rather than a full taxonomy. |
-| V1 | pass | “结果并不体面，也没必要假装体面” and the **Connect** reaction keep Chinese concrete and emotionally present. |
-| V2 | pass | “记忆很擅长在事后把曲线画得漂亮，可惜硬盘没有替它签字” is grounded in the confirmed missing measurements. |
+| G1 | pass | Project and routed repository facts, the nearby NI/Greenheck/AMCA links, and “只能是我对使用体验的回忆，不能写成经过验证的性能提升” independently preserve truth and uncertainty. |
+| G2 | pass | The route is traceable from “最大 PWM 连续运行 30 秒” through Windows, PID, **Connect**, and the later airflow correction. |
+| G3 | pass | Reactions such as “PID 没把风扇调明白，倒先把我调了半周” and the **Connect** payoff make this a learning note rather than a handoff or audit. |
+| F1 | pass | The note preserves the half-week PID false start, proportional fallback, confirmed artifacts, system response, and **Connect** payoff; added app/code details and public paths are supported by the routed current project and note. |
+| F2 | pass | “没有留下足以复核的温度和 FPS 数据，更没有受控对照” keeps recollection distinct from validated performance. |
+| C1 | pass | “注意力就这样离开了 GPIO，跳到了 Windows” makes the order follow the changing question rather than a subsystem inventory. |
+| C2 | pass | `Form1.cs 把温度送进了蓝牙链路`, `PID 先把我调了半周`, and `占空比不会替空气选择方向` describe the thought below them. |
+| C3 | pass | The local bridges explicitly show why attention moves from PWM to Windows, PID, **Connect**, and the enclosure. |
+| C4 | pass | The route crosses ESP32 output, C# and Bluetooth, the physical fan, and the duct without imposing a fake strict chronology. |
+| C5 | pass | “控制并没有终止在占空比上” recombines the completed signal chain with the later airflow-path lesson. |
+| C6 | pass | Five content-bearing section headings are thought bookmarks rather than a complete subsystem taxonomy. |
+| V1 | pass | “它一句也没回答”, “PID 先把我调了半周”, and the **Connect** reaction keep Chinese concrete and emotionally present. |
+| V2 | pass | The PID line is grounded in the confirmed half-week false start and targets the writer's own difficulty. |
 | B1 | pass | English preserves all facts, questions, research, synthesis, humor target, and uncertainty at calmer intensity. |
 | R1 | pass | Each paragraph changes the active question, adds an evidence boundary, or returns research to the controller-and-duct interpretation. |
 | T1 | pass | There is no artifact inventory, reference section, retrospective heading, future-work block, or visible checklist. |
 | I1 | pass | The approved brief is reused; no reinterview occurs. |
 | I2 | not applicable | No interview is required for a confirmed brief. |
 | I3 | pass | The current brief is treated as the source of viewpoint rather than a reason to restart the gate. |
-| K1 | pass | “实际工作点由风机曲线与系统阻力曲线的交点决定” adds absent AMCA knowledge with a direct nearby link; the Greenheck link adds system-effect context. |
-| K2 | pass | Research is framed as “我现在更愿意” and is immediately bounded by the absence of airflow, static-pressure, and complete temperature data. |
+| K1 | pass | The NI-linked proportional-error distinction and Greenheck/AMCA fan-system explanations add relevant knowledge beyond the approved brief. |
+| K2 | pass | “它们没有替这台原型提供测量结果” keeps research in present interpretation and prevents it from creating project results. |
 
 #### 07 Missing shared understanding — pass
 
@@ -369,7 +369,7 @@ The RED result is mixed, not uniform. Trial 06 partially misses cognition-led co
 | G2 | not applicable | It correctly withholds all first-person article prose. |
 | G3 | not applicable | The requested form is an interview action. |
 | F1 | pass | Motive, authorship, false start, reaction, attention path, and interpretation remain questions rather than invented facts. |
-| F2 | pass | “不确定就直接说‘不确定’” keeps unresolved personal knowledge unresolved. |
+| F2 | pass | Q2 explicitly tells the user to mark forgotten contribution details `不确定`, and Q7 separates measured, demonstrated, remembered, and unknown results. |
 | C1 | not applicable | No note is composed. |
 | C2 | not applicable | Interview labels are not article headings. |
 | C3 | not applicable | The cognition route is being elicited, not asserted. |
@@ -382,7 +382,7 @@ The RED result is mixed, not uniform. Trial 06 partially misses cognition-led co
 | R1 | not applicable | Article reader flow does not apply. |
 | T1 | not applicable | The numbered prompts belong to the requested interview, not a note template. |
 | I1 | pass | It returns only the next interview action and drafts no article prose despite “今天直接写完.” |
-| I2 | pass | Q1–Q7 ask only for motivation, contribution boundaries, abandoned reasoning, attention changes, reactions, interpretation, and learning. |
+| I2 | pass | Q1–Q7 ask for motivation, contribution boundaries, prior understanding, false starts, attention changes, reactions, and interpretation rather than an artifact inventory. |
 | I3 | pass | No brief or narrow exception exists, so the gate stays active. |
 | K1 | not applicable | Research waits for confirmation. |
 | K2 | not applicable | No external knowledge is introduced. |
@@ -391,27 +391,27 @@ The RED result is mixed, not uniform. Trial 06 partially misses cognition-led co
 
 | Check | Result | Evidence |
 |---|---|---|
-| G1 | pass | Direct AMCA, Oriental Motor, and Eaton links support the general principles, while the last paragraph withholds all unmeasured project results. |
-| G2 | pass | “我现在更愿意把风扇和外壳看成同一个系统” makes the current learning route explicit without pretending it was known during the build. |
+| G1 | pass | Direct ebm-papst, Greenheck, and Eaton links support the general principles, while the last paragraph withholds all unmeasured project results. |
+| G2 | pass | “现在我更愿意用‘工作点’理解这件事” makes the current learning route explicit without pretending it was known during the build. |
 | G3 | pass | The explanation remains attached to what the writer first focused on and what the enclosure changed, not a detached neutral survey. |
 | F1 | pass | The artifacts establish only a four-wire fan, speed-command response, and a printed duct. |
-| F2 | pass | “没有测过静压、风量、泄漏或散热效果” preserves every specified unknown. |
+| F2 | pass | “静压、体积流量、漏风和冷却效果都还没有测量” preserves every specified unknown. |
 | C1 | pass | The section moves from the earlier PWM focus to fan/system interaction and then leakage as the live question requires. |
-| C2 | pass | `占空比之后，风还得穿过外壳` names the active relationship. |
+| C2 | pass | `占空比只是风扇这一侧` names the active relationship. |
 | C3 | pass | “直到打印风道装上去，我才意识到” is supported by the confirmed brief, and the next two paragraphs explain the changed interpretation. |
 | C4 | not applicable | This compact section only needs the control-to-enclosure connection supplied by the input. |
-| C5 | pass | The final sentence recombines PWM, intake, resistance, sealing, and the desired cooling path without adding a measurement. |
+| C5 | pass | The final paragraph recombines controllable fan response with the still-unknown installed operating point without adding a measurement. |
 | C6 | pass | One heading is enough and does not expose a framework. |
-| V1 | pass | “它未必只是‘漏一点风’” and “我还不能说这版结构把风‘送对了’” keep the explanation personal and exact. |
-| V2 | pass | The quoted “漏一点风” and “送对了” provide restrained humor from the real design misconception. |
+| V1 | pass | “不能把实际风量顺手也一起签收” and “不会再把……直接翻译成” keep the explanation personal and technically exact. |
+| V2 | pass | “顺手也一起签收” lightly mocks the writer's earlier inference without inventing an event. |
 | B1 | not applicable | The requested section is Chinese only. |
 | R1 | pass | Each of three paragraphs adds artifact scope, fan/system knowledge, or the leakage boundary and returns to the active interpretation. |
 | T1 | pass | Sources are linked nearby with no bibliography or references wall. |
 | I1 | pass | Confirmed shared understanding is supplied in the input. |
 | I2 | not applicable | No interview is needed. |
 | I3 | pass | The confirmed brief is reused without delay. |
-| K1 | pass | The AMCA-linked operating-point sentence, Oriental Motor-linked resistance sentence, and Eaton-linked bypass sentence add technical knowledge absent from the uploads. |
-| K2 | pass | The research is present understanding, and “我还不能说这版结构把风‘送对了’” blocks pressure, flow, leakage, and cooling claims. |
+| K1 | pass | The ebm-papst-linked operating-point sentence, Greenheck-linked installation-effects sentence, and Eaton-linked bypass sentence add technical knowledge absent from the uploads. |
+| K2 | pass | The research is present understanding, and “真实工作点仍然是空白” blocks pressure, flow, leakage, and cooling claims. |
 
 #### 09 Safe but voiceless review — pass
 
@@ -497,7 +497,7 @@ Trial 09 now passes by refusing the requested replacement until shared understan
 
 All six retained GREEN cases from Trials 06–11 pass every applicable rubric row, with no `partial` or `fail` result in the final tables. Factual safety is not the main new result: the retained baseline prose was already careful about measurements and PID. The new separation is behavioral. Trial 09 now stops for shared understanding instead of inventing cognition, while Trial 11 demonstrates cognition-level rejection and repair only after the brief is confirmed. Trial 06 supplies cross-subsystem cognition and later synthesis. The already-correct behaviors remain unchanged: Trial 07 stops for `grill-me`, Trial 08 integrates current research with nearby links and measurement boundaries, and Trial 10 applies the small-edit exception exactly.
 
-Trials 06, 07, 08, and 10 remain the verbatim outputs captured at runtime `352c82878db75c2b27c0912b40eadd9dcf096181`; the test-design correction did not replace them. Trials 09 and 11 are the final affected-case reruns at runtime `9eab429041e3478d3c58c6fc730828d02366477d`. Two observed Trial 09 candidates still drafted before confirmation, so the runtime received two minimal gate-strengthening commits before the retained final rerun.
+All six retained outputs, Trials 06–11, now come from fresh agents against the one stabilized runtime `9eab429041e3478d3c58c6fc730828d02366477d`. Trials 06, 07, 08, and 10 were rerun as `final_06`, `final_07`, `final_08`, and `final_10` after the snapshot-consistency review; Trials 09 and 11 retain the already-fresh final-runtime agents. Two earlier Trial 09 candidates still drafted before confirmation, so the runtime received two minimal gate-strengthening commits before this common final snapshot.
 
 Remaining risks are qualitative. Voice can still drift toward a polished house style; post-brief research can become over-research or force links into a note whose cognition does not need them; and a model can make cross-subsystem thought look too tidy after the fact. Trial 09 demonstrates a hard source limit: without a confirmed cognition route, a correct verdict cannot authorize a personal replacement. Trial 11 shows the complementary boundary: once that route is confirmed, the repair can be personal without inventing a richer journey than the brief supports.
 

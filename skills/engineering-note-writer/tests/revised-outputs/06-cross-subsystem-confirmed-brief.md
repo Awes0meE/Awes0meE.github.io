@@ -2,85 +2,95 @@
 trial: revised
 input: tests/inputs/06-cross-subsystem-confirmed-brief.md
 phase: final-cognition-led-runtime
-runtime_commit: 352c82878db75c2b27c0912b40eadd9dcf096181
-trial_agent: /root/task6_green_trials/green_06
+runtime_commit: 9eab429041e3478d3c58c6fc730828d02366477d
+trial_agent: /root/task6_green_trials/final_06
 captured_at: 2026-08-12 Asia/Shanghai
 ---
 
-# 当 **Connect** 把四件事连成一个系统
+# Connect 亮起以后，四个子系统才变成一台散热器
 
-游戏一跑起来，笔记本的热量就像在提醒我：散热这件事，光忍着似乎有点亏。于是我想试试，能不能做一个外置控制器，让风扇不只是插电猛转，而是根据电脑端读到的状态调整输出。
+## 最大 PWM 跑了 30 秒，问题却跑出了电路板
 
-最直接的起点是一段 ESP32 测试：最大 PWM，持续 30 秒。风扇确实转起来了，输出链路也确实存在，但这离“控制住温度”还差得很远。ESP32 的 LEDC 外设能按设定的频率和占空比在 GPIO 上生成 PWM；它解决的是怎样发出信号，并不会替我证明热量真的被有效带走。[Espressif 的 LEDC 文档](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html)后来帮我把这层区别看得更清楚：占空比是命令，不是散热结果。
+项目最初没有什么宏大的控制目标。笔记本一玩游戏就热，过程也跟着变得不痛快。我想知道，一套外置散热控制器能不能让这件事少一点烦躁。
 
-## PID 把问题推回了链路中间
+最先吸引我的是最容易改变的数字：PWM 占空比。那段让 ESP32 以最大 PWM 连续运行 30 秒的测试很直接，至少证明板子能够把输出拉起来并保持住。可风扇全速运行，只回答了“能不能转”；游戏体验会不会改善，温度为什么变化，空气最后进了哪里，它一句也没回答。
 
-为了让输出看起来更像一个真正的温度控制器，我花了差不多半周尝试 PID。结果并不体面，也没必要假装体面：我没有得到一个值得信任的闭环控制器。
+注意力就这样离开了 GPIO，跳到了 Windows。
 
-PID 一卡住，注意力就开始在几个部分之间来回跳。ESP32 能不能稳定接收新的 PWM？蓝牙有没有把命令送到正确的位置？`Form1.cs` 里的 C# reader 与控制界面传递的，究竟是不是我以为的那个状态？这些问题没法被干净地分进“上位机一章”“通信一章”“硬件一章”，因为其中任何一段含糊，最后都会表现成同一个结果——风扇在转，但我无法确信它为什么这样转。
+## `Form1.cs` 把温度送进了蓝牙链路
 
-因此，演示版本退回到了比例控制。它没有实现我最初想象中的 PID 闭环，却至少保留了一条能够解释的关系：输入变化，控制量随之变化，ESP32 再把它变成 PWM 输出。这个退让有点遗憾，但比给一个不可靠的 PID 套上“完成”标签诚实得多。
+[`Form1.cs`](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)读取 CPU 和 GPU 温度，列出串口，并在点击 **Connect** 后发送数据。单看它只是一个并不复杂的 C# 界面；接到 ESP32 以后，屏幕里的读数才有机会变成 PWM 输出。
 
-## **Connect** 之后，零件第一次不再各说各话
+这里最容易让人误判的是：每一段单独看都像已经完成。上位机能读温度，蓝牙能传字符，ESP32 能输出 PWM，风扇也能转。然而只要串口没有连上、消息没有被正确接住，或者控制规则没有更新占空比，这些“能运行”的零件依然互不相干。
 
-真正让我满意的是 **Connect** 那一刻。
+也正是在这里，我把注意力拐进了 PID。
 
-C# 桌面端、蓝牙通信、ESP32 PWM 板和风扇终于沿着同一条链路作出响应。单看其中任何一个都不算惊艳：一个界面、一块板、一段无线连接、一个会转的风扇。但系统演示跑起来时，它们第一次不再像四份互不相干的作业。
+## PID 先把我调了半周
 
-那种满足感并不来自某个算法突然变高级，而是来自“这边发生变化，那边真的接住了”。软件读到状态，控制关系给出输出，命令跨过蓝牙到达板端，风扇再把电信号变成空气运动。**Connect** 连接起来的不是几个文件，而是一条终于能从头走到尾的因果链。
+我花了大约半周尝试 PID，最后没有得到一套值得信任的闭环控制器。困难远不只是把三个公式写进代码：目标温度怎么定，误差怎样进入控制，积分如何避免越积越多，微分又会不会追着温度噪声乱跑，每个问题都比“让风扇快一点”大得多。
 
-## 泡棉缝隙给 PWM 补了一课
+我当时退回了比例控制；更准确地说，演示版留下的是一条把温度直接映射为 PWM 占空比的比例规则。按照我后来重新查到的 [PID 控制说明](https://www.ni.com/en/shop/labview/pid-theory-explained.html)，标准的比例项建立在设定值与过程变量之间的误差上。我的实现没有形成这样一套经过验证的闭环，所以把它写成“调通了 P 控制”仍然太满。它完成的是一件更朴素、也更重要的事：温度升高时，让风扇确实得到更高的输出命令。
 
-后来做泡棉和亚克力风道时，我对这套系统的理解又变了一次。
+PID 没把风扇调明白，倒先把我调了半周。好在退一步之后，整条链终于有机会往前走。
 
-此前我很容易盯着占空比：数值更大，风扇更快，散热应该更强。可外壳迭代把一个更朴素的问题摆到了面前——风到底去了哪里？如果进风口受阻，或者空气从缝隙提前泄掉，那么再积极的 PWM 也不能替气流选择路线。
+## 点下 Connect，软件、板子和风道同时回答
 
-我现在更愿意把风扇和风道看成同一个空气系统。AMCA 对风机系统的说明指出，实际工作点由风机曲线与系统阻力曲线的交点决定；改变系统阻力，也会改变最终风量。[AMCA 201](https://www.amca.org/assets/resources/public/pdf/Education%20Modules/AMCA%20201-02%20%28R2011%29.pdf)给了我一个比“转得更快”完整得多的解释。风机入口或出口附近的障碍还可能带来额外损失，使安装后的表现偏离理想测试条件，[Greenheck 对 system effect 的说明](https://webcontent.greenheck.com/atg-cms-prod/docs/default-source/pdf-downloads/application-articles/system_eff.pdf?sfvrsn=fca6cf37_14)正好对应了外壳和进风几何为什么不能被当成最后才补上的包装。
+[系统演示](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)里最让我满足的不是某一行 C#，也不是 ESP32 上的一次 PWM 更新，而是点下 **Connect** 以后，温度数据穿过桌面程序与蓝牙，落到控制板上，再让安装在泡棉与亚克力结构里的风扇作出反应。
 
-项目里没有保留下来可供核对的风量、静压或完整温度曲线，所以这些资料不能替这台装置补出一组性能数据。它们只是让我明白，外壳并非控制器外面的一只盒子；它本身就在参与控制结果。
+那一刻，几个此前轮流出问题的部分终于同时回答了。界面不再只是一个读数窗口，PCB 也不再只是会输出波形的板子；软件、电子电路、无线通信和实体风路第一次像同一套系统那样工作。
 
-我记得实际玩游戏时，笔记本温度降了一些，帧率也感觉更稳。但准确温度和 FPS 没有作为测量记录保存下来，因此这里只能算个人体验，不能叫作经过验证的性能结论。记忆很擅长在事后把曲线画得漂亮，可惜硬盘没有替它签字。
+这种满足感也解释了为什么 PID 的失败没有毁掉整个项目。比例规则并不漂亮，却让连接完整地发生了。对当时的我来说，这个 **Connect** 比单独完成任何一个文件都更像“做成了”。
 
-最后留在我脑子里的，也就不再是“PID 没调出来”或者“PWM 能跑满 30 秒”这两个孤立结论。那次 **Connect** 真正连上的，是软件、电子、无线通信和空气路径；而泡棉与亚克力又提醒我，即使信号已经走通，热量仍然有自己的路要走。
+## 占空比不会替空气选择方向
 
-下一次再看到占空比升高，我大概不会急着把它叫作散热增强了。我会先看风到底去了哪里。
+后来的泡棉与亚克力风道迭代，又把我从控制板旁边拉开了一次。占空比当然重要，但它只能要求风扇怎样工作，不能替空气决定往哪里走。泡棉有没有漏风、风扇与笔记本进风口是否对齐、截面和转折怎样安排，都会改变相同 PWM 命令最终产生的效果。
 
----
+我现在更愿意用风机与系统共同作用来理解这件事。[Greenheck 的风机性能说明](https://webcontent.greenheck.com/atg-cms-prod/docs/default-source/pdf-downloads/application-articles/perf_basics.pdf?sfvrsn=6df9b7ac_16)把实际工作点描述为风机曲线与系统阻力曲线的交点；[AMCA 对 system effect 的说明](https://www.amca.org/educate/articles-and-technical-papers/amca-inmotion-articles/mitigating-system-effect-to-optimize-fan-performance-efficiency.html)也指出，风机入口或出口附近不理想的流动条件会损失系统性能。它们没有替这台原型提供测量结果，却让我重新读懂了那次外壳修改：更高的 PWM 不是风道问题的万能答案。
 
-# When **Connect** Turned Four Parts into One System
+我记得玩游戏时温度有所下降，帧率也感觉稳定了一些，但没有留下足以复核的温度和 FPS 数据，更没有受控对照。因此，这只能是我对使用体验的回忆，不能写成经过验证的性能提升。
 
-A hot laptop made gaming more frustrating than it needed to be, so I wanted to find out whether an external cooling controller could improve the experience. The idea was to make the fan respond to information from the computer rather than simply run at full speed whenever power was available.
+真正留下来的理解反而更清楚：控制并没有终止在占空比上。下一次再看到 PWM 已经拉满，我大概会先把视线从代码移开，看看空气到底被送去了哪里。
 
-The most direct starting point was an ESP32 test that held maximum PWM for 30 seconds. The fan ran and the output path existed, but that was still far from controlling temperature. The ESP32 LEDC peripheral generates a PWM signal on a GPIO with configured frequency and duty settings; it establishes the command signal, not evidence that heat is being removed effectively. The distinction became clearer to me through [Espressif’s LEDC documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html): duty cycle is a command, not a cooling result.
+# When Connect Lit Up, Four Subsystems Became One Cooler
 
-## PID Sent My Attention Back into the Chain
+## A 30-Second Maximum-PWM Test Pushed the Question Beyond the Board
 
-I spent roughly half a week trying PID control. The outcome was simple, if disappointing: I did not get a closed-loop controller that I could trust.
+The project began with a laptop that ran hot during gaming. I wanted to find out whether an external cooling controller could make that experience less frustrating.
 
-Once PID stalled, my attention kept moving between subsystems. Could the ESP32 receive new PWM commands consistently? Was Bluetooth carrying the intended command? Did the C# reader and control interface in `Form1.cs` represent the state I thought they did? These questions did not fit neatly into separate software, communication, and hardware chapters. Uncertainty anywhere in the chain produced the same uncomfortable result: the fan was spinning, but I could not confidently explain why it was spinning that way.
+PWM duty was the first obvious variable to watch. One ESP32 test held the output at maximum PWM for 30 seconds, confirming that the board could issue and sustain the command. But full-speed operation answered only whether the fan could run. It did not explain whether the gaming experience would improve, why the temperature might change, or where the air would actually travel.
 
-The demonstrated build therefore fell back to proportional control. It did not deliver the PID loop I had originally imagined, but it preserved a relationship I could explain: the input changed, the control value followed, and the ESP32 converted that value into PWM. Calling that a fallback felt less impressive, but it was more honest than calling an untrustworthy PID controller finished.
+That moved my attention away from the GPIO and toward Windows.
 
-## After **Connect**, the Parts Stopped Speaking Separately
+## `Form1.cs` Put Temperature onto the Bluetooth Link
 
-The most satisfying point was **Connect**.
+[`Form1.cs`](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs) reads CPU and GPU temperatures, lists serial ports, and begins sending data after **Connect** is clicked. On its own, it is a modest C# interface. Connected to the ESP32, its readings can become PWM commands in the physical controller.
 
-The C# desktop side, Bluetooth communication, the ESP32 PWM board, and the fan finally responded along one connected path. None of the parts looked remarkable in isolation: an interface, a board, a wireless link, and a spinning fan. During the system demonstration, however, they stopped feeling like four unrelated exercises.
+Each part could look finished in isolation: the application could read temperatures, Bluetooth could carry characters, the ESP32 could generate PWM, and the fan could spin. Yet a missing serial connection, an unrecognized message, or a duty value that never updated was enough to leave those working pieces unrelated.
 
-The satisfaction came from seeing a change on one side actually reach the other. Software read a state, the control relationship produced an output, Bluetooth carried the command to the board, and the fan turned an electrical signal into moving air. **Connect** joined more than a few artifacts; it completed a causal chain that could finally be followed from end to end.
+That gap was what pulled me toward PID.
 
-## The Foam Gaps Taught PWM Its Missing Lesson
+## PID Occupied Half a Week; a Proportional Rule Survived
 
-A later foam-and-acrylic duct iteration changed my interpretation again.
+I spent roughly half a week trying PID and never produced a closed-loop controller I could trust. The difficulty went well beyond placing three terms in code. I still had to choose a temperature target, define the error, contain the integral term, and decide whether the derivative response would simply chase noisy readings.
 
-Until then, it was easy to focus on duty cycle: a larger value meant a faster fan, which seemed to imply stronger cooling. The enclosure raised a more basic question—where was the air actually going? If the intake was restricted or air escaped through gaps, more aggressive PWM could not choose the airflow path for me.
+The demonstrated build fell back to proportional control—or, more precisely, a direct proportional mapping from temperature to PWM duty. As [NI’s PID overview](https://www.ni.com/en/shop/labview/pid-theory-explained.html) explains, the standard proportional response is based on the error between a setpoint and a process variable. My implementation did not establish and validate that complete loop, so describing it as a tuned P controller would overstate the result. What it did achieve was simpler: a higher temperature produced a higher fan command.
 
-I now prefer to think of the fan and duct as one air system. AMCA explains that the actual operating point is set by the intersection of the fan curve and the system-resistance curve, so changing resistance changes the resulting airflow. [AMCA Publication 201](https://www.amca.org/assets/resources/public/pdf/Education%20Modules/AMCA%20201-02%20%28R2011%29.pdf) gave me a more complete model than “faster rotation means more cooling.” Obstructions near a fan inlet or outlet can also introduce additional losses and make installed performance differ from ideal test conditions, as described in [Greenheck’s explanation of system effects](https://webcontent.greenheck.com/atg-cms-prod/docs/default-source/pdf-downloads/application-articles/system_eff.pdf?sfvrsn=fca6cf37_14).
+PID did not tune the fan successfully, but it did consume half a week of my patience. Stepping back gave the rest of the system a chance to move forward.
 
-The project did not retain airflow, static-pressure, or complete temperature curves, so those sources cannot manufacture performance data for this device. They only helped me understand why the enclosure was not packaging around the controller; it was participating in the result.
+## Connect Made the Software, Board, and Air Path Answer Together
 
-I remember the laptop temperature dropping and the frame rate feeling steadier during a game. The exact temperature and FPS values were not retained as measurements, so that remains a personal recollection rather than validated performance evidence. Memory is quite capable of smoothing a curve after the fact; the disk left no data to sign off on it.
+The most satisfying part of the [system demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) was not an individual line of C# or a single PWM update. It was clicking **Connect**, watching temperature data cross the desktop application and Bluetooth link, reach the controller, and make the fan respond inside the foam-and-acrylic structure.
 
-What stayed with me was no longer just that PID had failed or that PWM could run at maximum for 30 seconds. **Connect** had joined software, electronics, wireless communication, and the physical airflow path. The foam and acrylic then added the final correction: even when the signal path is complete, heat still has a route of its own.
+For the first time, the parts that had taken turns exposing problems answered together. The interface was no longer only a temperature display, and the PCB was no longer only a board that generated a waveform. Software, electronics, wireless communication, and the physical airflow path were behaving as one system.
 
-The next time I see duty cycle increase, I will probably hesitate before calling it improved cooling. First, I will look at where the air actually goes.
+That moment also explains why the failed PID attempt did not invalidate the project. The proportional rule was limited, but it completed the connection. At that stage, **Connect** felt more significant than finishing any artifact in isolation.
+
+## Duty Cycle Cannot Choose the Air’s Destination
+
+A later foam-and-acrylic duct iteration pulled my attention away from the controller again. Duty cycle mattered, but it could only command the fan. It could not decide where the air went. Leakage around the foam, alignment with the laptop intakes, and the geometry of the flow path all affected what the same PWM command could accomplish.
+
+I now understand this more clearly as an interaction between the fan and the air system. Greenheck’s [guide to fan performance](https://webcontent.greenheck.com/atg-cms-prod/docs/default-source/pdf-downloads/application-articles/perf_basics.pdf?sfvrsn=6df9b7ac_16) describes the operating point as the intersection of the fan curve and the system-resistance curve. AMCA’s discussion of [system effect](https://www.amca.org/educate/articles-and-technical-papers/amca-inmotion-articles/mitigating-system-effect-to-optimize-fan-performance-efficiency.html) likewise explains how unfavorable inlet or outlet flow conditions can reduce system performance. Those sources do not provide measurements for my prototype, but they changed how I interpret the enclosure revision: more PWM could not solve the airflow path by itself.
+
+I remember the laptop temperature dropping and the frame rate feeling steadier during gaming. I did not retain measurements or run a controlled comparison, so that remains a remembered experience rather than validated performance evidence.
+
+The more durable lesson is that control did not end at the duty value. The next time I see PWM already at maximum, I will probably look away from the code first and ask where the air is actually going.

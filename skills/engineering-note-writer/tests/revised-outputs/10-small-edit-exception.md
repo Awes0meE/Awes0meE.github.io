@@ -2,8 +2,8 @@
 trial: revised
 input: tests/inputs/10-small-edit-exception.md
 phase: final-cognition-led-runtime
-runtime_commit: 352c82878db75c2b27c0912b40eadd9dcf096181
-trial_agent: /root/task6_green_trials/green_10
+runtime_commit: 9eab429041e3478d3c58c6fc730828d02366477d
+trial_agent: /root/task6_green_trials/final_10
 captured_at: 2026-08-12 Asia/Shanghai
 ---
 
