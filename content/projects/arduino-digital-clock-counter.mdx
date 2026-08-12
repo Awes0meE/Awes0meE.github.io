@@ -1,8 +1,8 @@
 ---
-title: "Arduino Breadboard Digital Clock Counter"
+title: "Arduino Breadboard Two-Digit Seven-Segment Counter"
 titleZh: "Arduino 面包板两位数码管计数器"
-summary: "An MEC104 A17 group counter using Arduino Nano, twin SN54LS47 BCD paths, two seven-segment displays, pause/reset inputs, and an A17 rollover requirement."
-summaryZh: "MEC104 A17 小组的面包板计数器：Arduino Nano、两路 SN54LS47 BCD、两位七段数码管、暂停/复位输入，以及 A17 归零要求。"
+summary: "In my second embedded project, I handled A17's breadboard build, decoder wiring, Arduino firmware, and integration. A display-polarity mismatch and an undocumented six-pin switch taught me to measure the hardware before trusting the diagram."
+summaryZh: "我在第二次嵌入式实践里承担 A17 组的面包板、译码接线、Arduino 程序与联调；数码管极性错配和六脚按键故障，逼着我第一次先测实物，再相信图纸。"
 date: "2024.04 to 2024.05"
 status: "Completed"
 tags: ["Arduino", "Embedded", "Seven-Segment Display", "BCD", "Breadboard", "Course Project"]
@@ -30,48 +30,52 @@ assetPaths:
   - "/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png"
 ---
 
-## Two Digits Turn One Count Into Two Decoder Paths / 两位显示把一个计数值拆给两条译码链路
+## Grounding the Common Pin Turned the Display into Gibberish / 公共端接地以后，数码管开始乱码
 
-Group A17 completed this MEC104 breadboard project. The bench photograph shows an Arduino Nano beside two decoder ICs, two seven-segment displays, segment resistors, and two self-locking buttons. That physical topology answers the two-digit part of the brief: each display needs its own four-bit BCD route into an SN54LS47 decoder.
+A friend invited me to join MEC104 Group A17, and this became only my second embedded project. My entire mental model was simple: write a counter, flash it to an Arduino, and it should run like a stopwatch. I took on most of the technical implementation—breadboard construction, pin research, decoder and display wiring, Arduino firmware, button debugging, and final integration—while other group members handled the report, video, and general group work.
 
-这是 MEC104 A17 小组完成的面包板项目。现场照片里，Arduino Nano 旁边排着两颗译码芯片、两位七段数码管、各段限流电阻和两个自锁按键。两位显示因此变成了很具体的拓扑：每位数码管各有一组四位 BCD 信号，分别送入一颗 SN54LS47。
+朋友邀请我加入 MEC104 A17 组时，这是我第二次接触嵌入式。我对任务的全部理解很朴素：写一个计数程序，烧进 Arduino，它就该像秒表一样走起来。组内的面包板搭建、引脚查找、译码器与数码管接线、Arduino 程序、按键调试和最终联调主要由我完成；报告和视频由其他组员负责。
 
 ![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
 
-The course requirement and the A17 report do not describe the count in quite the same way. The slides require the counter to return to `00` whenever it reaches the group number. The report instead records an initial `16 -> 17 -> 00` sequence, then says the value continues toward 99 when neither switch is operated. Without the complete final program, it is not possible to tell whether that second sentence describes a startup sequence or a recurring rollover rule.
+The display overturned that model before the code did. The course slides showed a CD4511 simulation driving a common-cathode display, but our physical display path had to operate as common-anode, with the common pin connected to VCC. Following the slide and grounding that pin produced either darkness or scrambled digits, and the TA could not explain it either. I eventually worked out the direction by moving jumpers and testing individual segment behavior on the breadboard. When we reported the finding to the professor, he announced the issue to the class over the microphone—A17 was not the only group stuck there.
 
-课程要求与 A17 报告对计数过程的描述并不完全一致。课件要求计数每次到达组号时回到 `00`；报告则写下首次 `16 -> 17 -> 00`，随后又说不操作开关时继续向 99 计数。缺少完整最终程序，无法判断后一句描述的是启动阶段，还是反复执行的归零规则。
+真正先把这个理解推翻的不是代码，而是数码管。课程 PPT 给的是 CD4511 驱动共阴数码管的仿真接法，我们手里的显示链路却要按共阳方式工作，公共端最终接到 VCC。照着 PPT 把公共端接地时，数码管不是不亮，就是显示乱码，TA 也解释不了。最后是我在面包板上逐段换线、试高低电平，才摸出正确方向。我们把这个现象告诉教授后，他用麦克风把问题告诉了全班——当时不止 A17 卡在这里。
 
 ![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
 ![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
 
-## Modulo and Integer Division Split One Count Across Two BCD Paths / 取余与整数除法把一个计数值拆给两条 BCD 支路
+## One Count Actually Travels Through Two Display Paths / 一个计数值，实际上要穿过两条显示链
 
-The report maps `unitInputs[4]` to D9-D12 and `tensInputs[4]` to D5-D8. `unitNum = Num % 10` selects the units digit; `tensNum = (Num / 10) % 10` selects the tens digit. Each result indexes a BCD row and writes four bits to its own decoder. The report illustration uses an Arduino Uno, while the photographed bench build uses a Nano; the diagram records the branch layout rather than the exact controller board.
+Once the displays agreed to light, the hidden path behind “write a counter” became visible. `Num % 10` extracts the units digit, while `(Num / 10) % 10` extracts the tens digit. Each value selects a four-bit BCD row, then passes through its own SN54LS47 to become seven segment signals. The report maps those branches to D9-D12 and D5-D8; on the bench, they spread out beside an Arduino Nano as two decoders, two displays, and a generous quantity of jumper wire.
 
-报告把 `unitInputs[4]` 映射到 D9-D12，把 `tensInputs[4]` 映射到 D5-D8。`unitNum = Num % 10` 取个位，`tensNum = (Num / 10) % 10` 取十位；两个结果各自索引一行 BCD，再把四个 bit 写给对应译码器。报告接线图画的是 Arduino Uno，现场照片用的是 Nano，因此这张图记录的是双支路布局，不是控制板型号完全一致的实物复刻。
+数码管肯亮以后，“写一个计数程序”才露出它后面的链路。一个 `Num` 先用 `Num % 10` 取个位，再用 `(Num / 10) % 10` 取十位；每个数字各自查一行四位 BCD，经一颗 SN54LS47 变成七路段信号。报告把两组 BCD 输出分别画在 D9-D12 和 D5-D8，现场实物则是在 Arduino Nano 旁边铺开两颗译码器、两位数码管和一大片杜邦线。
 
 ![Two-digit wiring from the homework report / 作业报告里的两位数码管接线图](/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png)
 ![Digit split code from the homework report / 作业报告里的个位和十位拆分代码](/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png)
 
-## D2 and D3 Leave the Pressed Level Unresolved / D2 与 D3 留下未决的按下电平
+## The Six-Pin Switch Would Not Reveal Its Wiring / 六脚按键不肯把内部连线写在脸上
 
-The report assigns the reset and pause inputs to D2 and D3, but its polarity description is inconsistent. One paragraph calls a pressed switch high; the code excerpt checks switch 1 against `HIGH` and switch 2 against `LOW`; the closing paragraph describes a 10k-ohm pull-up that makes the input low when pressed. The `switch1Pressed` and `switch2Pressed` flags record software state, but they cannot resolve the wiring convention by themselves.
+The two six-pin self-locking switches caused a different kind of trouble. We had no datasheet and did not yet know where to search by part number, so the six pins initially became a guessing exercise. Sometimes a press did nothing; sometimes the readings jumped; occasionally one press registered twice. Changing more code could not answer the basic electrical question: which pins were connected before and after the switch was pressed?
 
-报告把复位和暂停输入分配到 D2、D3，但对有效电平的描述并不一致：一段正文把按下写成高电平，代码截图分别用 `HIGH` 判断 switch 1、用 `LOW` 判断 switch 2，末段又写 10k 欧姆上拉、按下时为低电平。`switch1Pressed` 和 `switch2Pressed` 标志位记录的是软件状态，单靠变量名无法反推出接线约定。
+两个六脚自锁按键是另一种折磨：没有数据手册，也不知道去哪里按型号找资料，六只脚只能靠猜。结果有时按下没反应，有时读数乱跳，还有过按一次却触发两次。继续换代码并不能回答最基本的问题——开关按下前后，究竟是哪几只脚导通。
 
 ![Switch logic code from the homework report / 作业报告里的开关逻辑代码](/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png)
 
-Because the complete final source is missing, the exact pressed level for each input remains unresolved. The report still records the intended reset/pause roles and the work around a six-pin self-locking switch, but it cannot support a cleaner electrical story than the one written there.
+I eventually borrowed a multimeter from the instructor and checked continuity across the pins one pair at a time. That gave me a map of the internal connections, which I used to reconnect pause and reset to D2 and D3. Both buttons worked in the final build. The surviving report, however, contradicts itself across `HIGH`, `LOW`, and pull-up descriptions, and the final source is gone. I can stand behind the functional result, but I cannot retrofit a neat polarity or debounce implementation that the record no longer proves.
 
-由于缺少完整最终源码，两路输入各自采用什么按下电平仍然无法确定。报告能够说明复位/暂停的角色，也记录了六脚自锁按键带来的接线问题，但不能据此整理出一套比原文更整齐的电气结论。
+后来我向老师借来万用表，用通断档挨个测量六只脚，才把按下前后的内部连接关系画出来，再把暂停和复位接回 D2、D3。最终两个按键都能正常工作。不过，现存报告对 `HIGH`、`LOW` 和上拉接法的描述彼此冲突，最终源码也没有留下；所以我可以确认功能结果，却不能把今天看来更整齐的按键极性或消抖方案倒写回去。
 
-## The Bench Video Shows the Display Changing / 现场视频拍到了两位显示持续变化
+## Full Marks Survived; the Complete Source Tree Did Not / 最后留下的是满分，不是完整源码树
 
-The [17-second bench video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) follows the Nano build while the two illuminated digits change. That is the clearest visible result left by the project. No pause or reset action appears in the clip, so those functions remain described by the [A17 report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) rather than demonstrated on camera.
+The assessment used two separately flashed programs. One rolled over after the A17 group number, while the other counted through `99` before returning to `00`. They were not runtime modes: I changed the threshold, flashed each version, and the instructor verified them separately. In the final classroom demonstration, the two-digit display, pause, and reset all worked, and the TA awarded full marks.
 
-这段 [17 秒现场视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 跟着 Nano 面包板拍下了持续变化的两位发光数字，这是项目留下的最直接运行画面。视频里没有暂停或复位操作，因此这两项功能仍停留在 [A17 报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) 的描述中，没有得到镜头验证。
+考核包含两个分别烧录的版本：一个按 A17 组号在 `17` 后归零，另一个一直计数到 `99` 再归零。它们不是运行时切换的两种模式，而是改动阈值后分别烧录、分别让老师验证。最终课堂演示时，两位显示、暂停和复位都正常工作，TA 给了满分。
 
-The two archived `.ino` files are the handout's one-digit BCD demo and D7/D6 Serial input test, not the final two-digit program. Together, the files leave a practical snapshot rather than a complete source tree: the Nano breadboard drives two changing displays, the report records the pin map, and pause/reset cannot be fully reconstructed from the remaining code.
+What survived is less complete. The [17-second bench video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) shows the digits changing but contains no button operation, and I did not write the [A17 report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf). The archived `main.c` is my own early draft that was flashed and run; it preserves the `15 -> 16 -> 17 -> 00` development trace, but its second button is unfinished and some syntax and comments are wrong. It cannot stand in for the final program. Xcode appears in the archive only because macOS used it as the default application for `.c` files after my earlier basic C exercises, not because it was the embedded toolchain.
 
-两份存档 `.ino` 只是课件的一位 BCD 示例和 D7/D6 串口输入测试，并非最终两位程序。它们留下的是一张实用快照，而不是完整源码树：Nano 面包板驱动着两位变化的显示，报告记下了引脚映射，暂停/复位却无法由剩余代码完整复原。
+Looking back, I now read the system as one continuous path: Arduino state, two BCD inputs, active-low decoder outputs, and LED current. I did not have that complete map at the time; I was learning between the course slides, CSDN posts, and the breadboard. The firmware relied on polling and blocking `delay()` calls, which looks distinctly beginner-level today. It still moved me past the idea that flashing the program was the end of the job. When the documentation and the hardware disagree, I now trace the current before deciding which line of code deserves the blame.
+
+如今留下的 [17 秒现场视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 只拍到两位数字变化，没有拍下按键操作；[A17 报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) 也不是我写的。Mac 上那份 `main.c` 是我写并烧录运行过的早期草稿，它保留了 `15 -> 16 -> 17 -> 00` 的开发痕迹，但第二个按键尚未完成，注释和语法也有问题，不能冒充最终版本。Xcode 出现在归档里，只是因为 macOS 当时默认用它打开 `.c` 文件，并不代表它是项目的嵌入式工具链。
+
+现在回看，我会把这个系统理解成 Arduino 状态、两组 BCD 输入、译码器低有效输出和 LED 电流路径的连续链条；当时的我还没有这张完整地图，只是在课件、CSDN 和面包板之间边查边学。代码采用轮询和阻塞式 `delay()`，从今天的标准看很稚嫩，但它也把我从“程序烧进去就结束”推到了另一个起点：文档和实物打架时，先看电流怎么走，再决定该改哪一行代码。
