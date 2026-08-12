@@ -32,6 +32,8 @@ Source:
 - `skills/engineering-note-writer/SKILL.md`
 - focused references:
   - `skills/engineering-note-writer/references/evidence-and-boundaries.md`
+  - `skills/engineering-note-writer/references/shared-understanding.md`
+  - `skills/engineering-note-writer/references/research-expansion.md`
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`

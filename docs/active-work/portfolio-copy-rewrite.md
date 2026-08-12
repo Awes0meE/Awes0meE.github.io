@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-12
-**Branch:** `main`
+**Branch:** `docs/cognition-led-engineering-writer`
 **Current project:** None selected
 **Last completed project:** `DIY 压风式散热器原型`
-**State:** Between projects; the DIY cooling rewrite is approved and merged
+**State:** Cognition-led writer redesign is complete on Windows; continue from the pushed topic branch on macOS
 
 ## Working Contract
 
@@ -51,26 +51,50 @@
 - The approved Smart Car family and the DIY cooling demonstration video were
   not changed by the final DIY pass.
 
+## Cognition-Led Writer Checkpoint
+
+- The repository-local writer now treats evidence as the factual floor instead
+  of the article structure. Substantive first-person writing requires a
+  user-confirmed shared-understanding brief or a `grill-me` interview first.
+- After confirmation, the workflow researches relevant current knowledge beyond
+  uploaded artifacts, keeps source links light and nearby, and writes new
+  knowledge as present understanding rather than invented project history.
+- Composition follows the writer's changing attention. It may move among
+  circuits, firmware, desktop software, mechanics, fabrication, and later
+  synthesis without pretending to follow strict chronology or a fixed template.
+- Truth and Li Zhiyi voice are independent release gates. A factually careful
+  compliance report still fails if the reader cannot follow a human learning
+  route.
+- Behavioral Trials 06-11 run against final runtime commit `9eab429`; the final
+  manifest contains 34 hashed runtime/input/output files. The retained GREEN
+  outputs pass every applicable gate.
+- No `content/**/*.mdx`, `content/media.json`, or `public/uploads/` file changed.
+  The existing 21 published notes remain outside this redesign.
+
 ## Next Action
 
-No project is active. When the user selects the next project:
+On the Mac, preserve any local work and then resume the pushed topic branch:
 
-1. synchronize local `main` with `origin/main` using `--ff-only`;
-2. create a new topic branch from that checkpoint using a Conventional
-   Commits-aligned semantic prefix and kebab-case purpose; never use an
-   identity prefix such as `agent/`;
-3. inspect the project's existing page, note, media, and public materials;
-4. update this file with the branch, project, evidence boundary, interview
-   frontier, and explicit next action;
-5. reuse a confirmed brief for the same scope, or run `grill-me` one core
-   question at a time; do not draft before the user confirms the shared project
-   understanding;
-6. research current reliable knowledge beyond the uploaded material, keeping
-   links light and project-history claims inside the confirmed evidence boundary;
-7. draft Chinese through the user's cognition trail without a mandatory template;
-8. adapt English with the same substance and calmer intensity;
-9. pass the Truth gate and Li Zhiyi gate, then request bilingual copy review and
-   explicit merge approval.
+```bash
+git status --short --branch
+git fetch --prune origin
+git switch --track origin/docs/cognition-led-engineering-writer
+```
+
+If the local branch already exists, use:
+
+```bash
+git switch docs/cognition-led-engineering-writer
+git pull --ff-only origin docs/cognition-led-engineering-writer
+```
+
+Then read `AGENTS.md`, `CODEX.md`, this file, and the draft PR before editing.
+Restore dependencies and run at least `npm run lint` and `npm run typecheck`.
+Continue writer work on this branch until the PR is reviewed; do not merge it
+without the user's explicit approval. No portfolio project is currently active.
+After this writer PR is resolved, select the next project from synchronized
+`main`, create a semantic topic branch, and resume the one-project interview and
+writing contract above.
 
 ## Updating This File
 

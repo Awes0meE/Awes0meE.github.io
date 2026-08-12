@@ -1,7 +1,7 @@
 # Cognition-Led Engineering Note Writer Design
 
 **Date:** 2026-08-12
-**Status:** Awaiting user review
+**Status:** Approved in conversation and after written-spec review
 **Scope:** Redesign `skills/engineering-note-writer/` and its behavioral trials. Do not bulk-rewrite the existing portfolio.
 
 ## Problem
