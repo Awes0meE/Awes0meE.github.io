@@ -1,67 +1,67 @@
 ---
-title: "How One Count Travels Through Two BCD Display Paths"
-titleZh: "一个计数值怎样走过两条 BCD 显示链路"
-summary: "How one count splits into units and tens, how four-bit BCD drives each display, why switch levels must be defined, and how block tests guide integration."
-summaryZh: "从一个计数值拆出个位与十位：四位 BCD 怎样驱动每位显示、按键电平为何必须先确定，以及分块测试怎样引导集成。"
+title: "When the Display Stays Dark, Do Not Edit the Arduino Code Yet"
+titleZh: "数码管不亮，先别急着改 Arduino"
+summary: "The course's common-cathode CD4511 simulation met a physical common-anode LS47 path. That failure was where I first connected BCD logic, LED current flow, and multimeter measurements into one explanation."
+summaryZh: "课件里的 CD4511 共阴仿真，遇上了实物里的 LS47 共阳链路；这次故障让我第一次把 BCD 逻辑、LED 电流路径和万用表测量接到了一起。"
 date: "2024.04 to 2024.05"
 tags: ["Arduino", "BCD", "Seven-Segment Display", "Course Note", "Embedded"]
 visibility: public
 projectSlug: "arduino-digital-clock-counter"
 ---
 
-## Four BCD Bits Choose One Visible Digit / 四个 BCD bit 选择一位可见数字
+## The Real Conflict Was Between Two Device Assumptions / 真正冲突的是两套器件前提
 
-The MEC104 block diagram reduces the system to Arduino, decoder, and display, then notes that resistors and switches have been left out. That simplification is useful once each arrow is read as an interface. Arduino supplies four BCD bits on A-D; the 7447-style decoder converts them into a-g segment outputs; the display turns that pattern into one digit.
+The most confusing symptom was not a display that stayed completely dark. The code was counting, yet the digits alternated between darkness and nonsense. I naturally suspected the Arduino program and my jumper wiring first; the course diagram seemed more trustworthy than my own judgment. But with the common pin grounded as shown, checking the BCD table again and again did not make the display behave.
 
-MEC104 框图把系统压成 Arduino、译码器和显示三段，下面也注明电阻、开关都没画全。把每条箭头当成接口来读，这种简化才真正有用：Arduino 在 A-D 上给出四位 BCD，7447 一类译码器把它转换成 a-g 段输出，数码管再把这组段码变成一位数字。
+最让人困惑的画面不是“完全不亮”，而是代码明明在计数，数码管却时而全黑、时而乱码。我最初当然先怀疑 Arduino 程序和杜邦线，因为课件上的接法看起来比我的判断可靠。可我按图把公共端接地以后，无论怎么复查 BCD 表，显示都不肯正常工作。
 
 ![Course system structure / 课程中的系统结构拆分](/uploads/projects/arduino-digital-clock-counter/course-system-structure.png)
+![TinkerCAD one-digit demo / TinkerCAD 一位归零计数 demo](/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png)
 
-The decoder slide fills in the electrical conditions around that interface: 330-ohm segment resistors, the IC orientation mark, Vcc on pin 16, and GND on pin 8. A correct BCD row is only half the job; power, orientation, and current limiting still decide whether the digit appears.
+I only found the correct datasheet while organizing this portfolio, and it finally gave the old symptom a clean explanation. TI describes the [SN74LS47](https://www.ti.com/product/SN74LS47) as an active-low, open-collector driver intended for common-anode LEDs. The [CD4511B](https://www.ti.com/lit/ds/symlink/cd4511b.pdf) used in the course simulation directly drives common-cathode LEDs. Both translate BCD into seven segments, but they do not share the same current-direction assumption. By treating the CD4511 as a close reference for the lab device, the slide stepped over exactly the difference most likely to stop a beginner cold.
 
-译码器页面继续补上接口周围的电气条件：330 欧姆段限流、芯片方向标记、16 脚 Vcc 和 8 脚 GND。写对一行 BCD 只完成了一半，供电、方向和限流仍然决定数字能不能亮出来。
+我后来整理作品集时才找到正确的数据手册，也才把当年的现象说清楚。TI 对 [SN74LS47](https://www.ti.com/product/SN74LS47) 的说明是低有效、开集电极输出，用来直接驱动共阳 LED；课件仿真里的 [CD4511B](https://www.ti.com/lit/ds/symlink/cd4511b.pdf) 则能直接驱动共阴 LED。它们都能把 BCD 变成七段显示，却不共享同一个电流方向前提。课件把 CD4511 当作接近实验器件的参考，恰好漏掉了最会让初学者卡死的差异。
 
 ![BCD decoder notes / BCD 到七段译码器说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
 
-## Two Digits Duplicate the Interface, Not the Count / 两位显示复制的是接口，不是计数状态
+## Four BCD Bits Are Not a Complete Display Path / 四个 BCD bit 还不是一位完整的显示
 
-The handout's one-digit sketch makes the interface easy to see: D9-D12 stand in for A-D, one row of the `BCD` table is written at a time, and the value advances once per second. Moving to two digits does not require two independent counters. It requires the same counter state to be separated into two decimal digits, then sent through two copies of the four-bit interface.
+At the time, I had only just learned the logical part. `Num % 10` produced the units digit; `(Num / 10) % 10` produced the tens digit. Each result selected a BCD row and sent four bits to one decoder. That was enough to make the numbers move, but I had not yet connected those bits to decoder polarity, LED orientation, and the common-pin voltage in one mental picture.
 
-课件的一位 sketch 很适合观察这层接口：D9-D12 对应 A-D，每次写入 `BCD` 表的一行，数值每秒推进一次。扩展成两位显示时，不需要再造一个独立计数器；同一个计数状态先拆成两个十进制数字，再分别走过两份四位接口。
+当时我刚学会的只是逻辑关系：`Num % 10` 得到个位，`(Num / 10) % 10` 得到十位；两个结果各自查 BCD 表，再把四个 bit 写给两颗译码器。这个办法能让数字跑起来，但我脑子里还没有把它与译码器输出极性、LED 方向和公共端电位连成一张图。
 
-`Num % 10` extracts the units digit, while `(Num / 10) % 10` uses integer division before extracting the tens digit. Each result selects its own BCD row. This is display routing, separate from whatever rule increments, pauses, or resets `Num`.
+Looking back, the four BCD bits only say which number should appear; they do not guarantee that current can reach the LEDs. In the LS47 path, a low segment output sinks current. With the common-anode display tied to VCC, current can travel from VCC through an LED and its limiting resistor into the driver. Ground the common pin as if the display were common-cathode, and the software state can keep changing while the physical path is already broken. The apparently magical fix—moving the common pin to VCC—simply allowed current to flow.
 
-`Num % 10` 取出个位，`(Num / 10) % 10` 则先做整数除法，再取出十位；两个结果各自选择一行 BCD。这是在给显示分路，与 `Num` 如何递增、暂停或复位是两件事。
+现在回看，四位 BCD 只负责“想显示哪个数字”，并不保证 LED 有电流。对 LS47 这条链路来说，段输出拉低时负责吸收电流；共阳数码管的公共端接到 VCC 后，电流才能从 VCC 经过 LED 和限流电阻流向驱动器。公共端一旦按共阴方案接到 GND，代码里的数字仍在变化，物理链路却已经断了。那次看似神奇的“把公共端改接 VCC 就正常”，其实只是电流终于走通。
 
 ![Digit split code from the homework report / 作业报告里的个位和十位拆分代码](/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png)
 
-## A `...Pressed` Flag Cannot Define the Voltage / `...Pressed` 标志位决定不了电压
+## A Multimeter Says More Than `...Pressed` / 万用表比 `...Pressed` 更接近真相
 
-The switch slide starts one layer below the variable name. A pull-up or pull-down keeps the pin away from a floating state; only then does `digitalRead()` return a stable level. The D7/D6 demo prints two raw readings through Serial, which is enough to observe the inputs before attaching pause or reset semantics.
+The six-pin self-locking switch repeated the same lesson. A variable can be named `switch1Pressed`, but the name says nothing about which of six pins connect before and after a press. Without a datasheet, I began by moving wires around. I saw no response, unstable readings, and sometimes two reactions to one press. Borrowing a multimeter and checking every pin pair for continuity turned that guesswork into a connection map I could actually verify.
 
-按键页面从变量名下面那一层讲起：上拉或下拉先把引脚从悬空状态里拉出来，`digitalRead()` 才能返回稳定电平。D7/D6 示例把两路原始读数打印到串口，先观察输入，再赋予暂停或复位含义。
+六脚自锁按键把同一件事又演了一遍：变量可以叫 `switch1Pressed`，但它不会告诉我六只脚在按下前后怎样导通。没有数据手册时，我先靠换线试，遇到过没反应、读数乱跳和一次触发两次。后来我借来万用表，用通断测试把每一对引脚量过去，才把内部连接关系从猜测变成可以复查的结果。
 
 ![Button pull-up and pull-down notes / 按键上下拉说明](/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png)
 
-The report excerpt checks `switch1Pressed` after a `HIGH` reading and `switch2Pressed` after a `LOW` reading; elsewhere, its prose also disagrees about the pressed level. A `...Pressed` flag describes the program's interpretation, not the voltage at the pin. Without the matching final wiring and full source, the polarity cannot be recovered from the identifier.
+That measurement answered which pins were connected; it did not automatically settle every input problem. The surviving report checks one switch with `HIGH`, another with `LOW`, and also mentions a pull-up, so it cannot reconstruct the final polarity. A double trigger resembles ordinary mechanical contact bounce, and Arduino's [Debounce example](https://docs.arduino.cc/built-in-examples/digital/Debounce/) likewise waits for an input to remain stable before accepting a state change. The final source is gone, however, so I will not claim that I used a particular debounce algorithm. What I can confirm is narrower: I mapped the switch topology, and both pause and reset passed the classroom demonstration.
 
-报告截图在读到 `HIGH` 后设置 `switch1Pressed`，却在读到 `LOW` 后设置 `switch2Pressed`；报告其他文字对按下电平也没有统一说法。`...Pressed` 标志位描述的是程序解释，不是引脚电压。缺少对应的最终接线和完整源码，不能从变量名反推极性。
+这次测量解决的是“哪几只脚相连”，不等于它自动解决了所有输入问题。现存报告一处用 `HIGH` 判断，另一处用 `LOW`，文字又提到上拉，无法还原最终极性；而“按一次反应两次”与机械触点抖动的典型表现相似，[Arduino 的 Debounce 示例](https://docs.arduino.cc/built-in-examples/digital/Debounce/) 也要求输入稳定一段时间后再承认状态变化。但最终源码没有保存下来，所以我不会声称当时已经采用了哪种消抖算法。能确认的是：我测出了开关拓扑，最终暂停和复位都通过了课堂演示。
 
 ![Switch logic code from the homework report / 作业报告里的开关逻辑代码](/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png)
 
-## Independent Blocks Make Integration Observable / 独立功能块让集成过程可观察
+## I Now Start by Asking Which Part Is Actually on the Bench / 我现在会先问：手里到底是哪颗器件
 
-The milestone slide orders timing, decoder, display, programming, and testing as separate blocks. The two demo sketches fit that order: one exercises a single BCD display route, and the other exposes two button levels through Serial. The handout explicitly says these are not the final program.
+The original firmware advanced the count through polling and blocking `delay()` calls. That was enough for a simple counter, but it squeezed timing, display updates, and button handling into one loop. Arduino's own [`delay()` reference](https://docs.arduino.cc/language-reference/en/functions/time/delay/) warns that most other activity stops during the wait. This is a judgment I formed while looking back, not an architecture I understood during the project.
 
-里程碑页面把计时、译码、显示、编程和测试列成独立功能块。两份 demo sketch 正好落在这个顺序里：一份检查单路 BCD 显示，另一份通过串口暴露两路按键电平。课件明确说明，它们不是最终程序。
+当年的程序主要靠轮询和阻塞式 `delay()` 推进计数。它足够让一个简单计数器跑起来，却把计时、显示更新和按键响应都挤在同一个循环里；[Arduino 对 `delay()` 的说明](https://docs.arduino.cc/language-reference/en/functions/time/delay/) 也明确提醒，等待期间大部分其他活动都会停下来。这是我现在回看才形成的判断，不是当时就有的架构意识。
 
 ![Milestone breakdown / 课程里程碑拆分](/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png)
-![TinkerCAD one-digit demo / TinkerCAD 一位归零计数 demo](/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png)
 
-The TinkerCAD example sits even earlier in the sequence: an Uno and CD4511 drive one digit in a simulation that the slide labels unassessed and not identical to the lab project. Its role is to make one interface legible before integration, not to stand in for the two-digit circuit.
+If I met the same board now, I would identify the decoder and display common first, map the switch contacts with a multimeter, then verify one segment, one digit, and one button before integrating both display paths with the counter state. That does not make the course material useless. It means the slide is a model, while the part on the bench decides where current can actually flow.
 
-TinkerCAD 示例位于更早的阶段：Uno 和 CD4511 在仿真里驱动一位数码管，课件同时注明它不计入考核、也不等同于实验项目。它的作用是在集成前把一条接口讲清楚，而不是代替最终两位电路。
+如果现在再遇到同样的板子，我会先确认器件型号和公共端，用万用表找出开关拓扑，再分别验证一个段、一位显示和一个按键，最后才把两条显示链与计数状态合起来。这个顺序并不否定课件的教学价值，只是承认课件画的是模型，手里的器件才决定电流实际往哪里走。
 
-The resulting verification order is compact: establish one BCD display route, define and observe the button levels, duplicate the display interface, then integrate the counter state. If the voltage convention is still inconsistent, the next step is to recheck the circuit rather than let a flag name decide it.
+The project began in my head as “finish the Arduino program.” What stayed with me was a more practical debugging habit: when the display stays dark, do not edit the code yet. First identify the part in front of you, then measure how it actually conducts.
 
-由此得到的验证顺序很紧凑：先建立一条 BCD 显示链，确定并观察按键电平，再复制显示接口，最后集成计数状态。如果电平约定仍不一致，下一步应回到电路复查，而不是让标志位名称替硬件下结论。
+这个项目最早在我眼里只是“写完 Arduino 程序”；最后真正留下来的，却是一条更实用的调试习惯：数码管不亮时，先别急着改代码。先问手里的器件是什么，再量它实际上怎样导通。

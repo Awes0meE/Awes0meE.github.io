@@ -457,3 +457,10 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Files changed: made shared-understanding / `grill-me` confirmation a hard gate for substantive first-person writing; added post-confirmation web research with light nearby links; replaced artifact-led composition with optional cross-subsystem cognition trails and later synthesis; separated Truth and Li Zhiyi release gates; added and reran behavioral Trials 06-11; refreshed portable writer guidance, active-work state, skill references, and durable memory. The temporary Chinese audit copy was removed after approval and was never committed.
 - Git state: topic branch `docs/cognition-led-engineering-writer` is the Mac continuation source until its draft pull request is reviewed. Existing portfolio content and public uploads remain unchanged.
 - Verification: skill validation, the final 34-file SHA-256 manifest, retained GREEN gate scoring, lint, content validation for 8 projects / 21 notes / 73 media records, encoding validation, typecheck, the 36-route production build, scope checks, and review-copy fidelity checks passed before the handoff cleanup.
+
+## 2026-08-12
+
+- Summary: Reconciled the repository after pull requests #8 and #9 merged, then selected Arduino Digital Clock as the next one-project rewrite without starting its prose.
+- Files changed: replaced the stale cognition-writer branch handoff with the active `docs/rewrite-digital-clock` state; recorded the merged writer and DIY checkpoints; corrected the remote-branch claim in durable memory; and established the Digital Clock scope, evidence boundary, and pre-interview next action.
+- Git state: `main` and `origin/main` matched at `baa7c98` before creating `docs/rewrite-digital-clock`; the old cognition-writer branch remains fully merged but was not deleted as part of this documentation cleanup.
+- Verification: `git diff --check`, memory-link checks, current-doc relative-time scanning, lint, content validation for 8 projects / 21 notes / 73 media records, encoding validation for 283 UTF-8 files, typecheck, and the 36-route production build passed.
