@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-13
-**Branch:** `docs/rewrite-nanjing-turing-internship`
-**Current project:** `南京图灵 Qt、编译与打包实习记录`
-**Last completed project:** `天津津铁通信 STM32 嵌入式实习记录`
-**State:** Nanjing Turing bilingual rewrite is approved and published in Draft PR #14; awaiting preview review before merge
+**Branch:** `main`
+**Current project:** None selected
+**Last completed project:** `南京图灵 Qt、编译与打包实习记录`
+**State:** Nanjing Turing bilingual rewrite merged through pull request #14; awaiting the next one-project selection
 
 ## Working Contract
 
@@ -76,66 +76,37 @@
   hardware-I2C lockup explanation remains a present-day hypothesis; PID and
   ATP/ATO/ATS remain reading-layer concepts rather than implemented control.
   All four public C excerpts and all public uploads were unchanged.
-
-## Confirmed Nanjing Turing Brief
-
-- The internship was three full-time, in-person weeks in August 2025, directly
-  after the 2025 National Undergraduate Electronics Design Contest. Alvin
-  entered with school-level C/C++ fundamentals but no Qt, GUI, large-codebase,
-  or collaborative Git experience.
-- The company was prototyping secondary development on the upstream open-source
-  Seamly2D desktop application. Alvin's scope was a local `QSettings`
-  account/role entrance plus the build, deployment, documentation, and handoff
-  path; no server, database, or online authentication system was built.
-- Alvin personally completed the Qt/MSVC/qmake bring-up, local registration and
-  login, hash-based password storage and verification, role rules, UI edge-case
-  fixes, XML reading, Windows packaging, macOS migration, scripts, and documents.
-  The supervising engineer assigned direction, reviewed daily progress, watched
-  the final demonstrations, and completed the formal internship acceptance.
-- The development trail includes a Qt 5/Qt 6 source mismatch, more than thirty
-  subsequent compile errors, and a roughly three-day `windeployqt` failure. The
-  preserved first-run document supplies the recoverable technical route: align
-  Qt 6.5.3 MSVC2019 64-bit with v142, clear stale build/user state, expose the
-  Qt `bin` path, and make the qmake deploy rule resolve `QT_INSTALL_BINS` for
-  Release builds. A slow overseas Qt download also became an early lesson when
-  the Tsinghua mirror reduced the remaining installation time substantially.
-- Windows reached Release compilation, Qt and Xerces dependency collection,
-  self-signing, an Inno Setup installer, installation, and launch. About two
-  weeks after the internship, Alvin separately verified that installer and the
-  modified login/role functions on a newly installed home Windows desktop with
-  neither Qt nor Visual Studio. This later clean-machine test was not part of
-  the company's formal acceptance and was not added back to the earlier guide.
-- On Alvin's own Mac, Debug and Release builds, `macdeployqt`, application
-  launch, and an unsigned DMG were demonstrated. A self-signed certificate was
-  created, but application signing and notarization remained unfinished; no
-  second clean Mac was tested.
-- Git was practical work, not terminology-only study: clone, upstream branch
-  inspection/switching, a development branch, commit, push, merge, pull request,
-  fork, and tag were all exercised. The final handoff was committed to the
-  company's intern `develop` branch. Later adoption or productization is unknown.
-- The cognition route expands what “working” means: entering a large repository;
-  aligning branch, Qt package, compiler, ABI, Kit, paths, and dependencies;
-  treating GUI behavior as state and permissions; separating IDE, Release,
-  deploy-folder, installer, and clean-machine results; then meeting the new
-  dependency and signing rules on macOS. Preserve the real frustration around
-  `windeployqt`, the self-mockery around the mirror discovery, the excitement of
-  the supervisor's strong final praise, and the unfinished signing boundary.
+- Nanjing Turing completed the same workflow on 2026-08-13. Pull request #14
+  merged the approved bilingual project page, three-week note, and five
+  media-copy records into `main` at
+  `f5e1082e778a49cb4a740f42e483a17c397a7eac`.
+- The final account covers a three-week full-time Qt internship beginning with
+  school-level C++ and no Qt or large-repository experience, then moving through
+  Seamly2D bring-up, a local `QSettings` account/role layer, Git practice,
+  Windows packaging, and a bounded macOS packaging attempt.
+- Keep the validation boundaries distinct: company acceptance covered the
+  development-machine demonstration; the clean Windows installation test happened
+  later on a separate home PC; macOS reached a launched unsigned DMG but not
+  completed signing/notarization; later adoption after handoff is unknown. The
+  four source-document notes and every public upload were unchanged.
 
 ## Next Action
 
-1. Review the deployed preview and checks from Draft PR
-   [#14](https://github.com/Awes0meE/Awes0meE.github.io/pull/14), including both
-   language routes and representative desktop/mobile layouts.
-2. Address any preview findings, then wait for explicit user approval before
-   merging into `main`.
-3. Keep the four source-document notes and every public upload unchanged through
-   preview and merge checks.
+1. Ask the user to select the next remaining project family: Juanyun thermal and
+   control hardware, the Juanyun FOC driver archive, or the Claude Chime power
+   board archive.
+2. Start the selected project from synchronized `main` on a new semantic topic
+   branch, inspect its evidence, then reuse a confirmed brief or run `grill-me`.
+3. Do not reopen Smart Car, DIY Cooling, Arduino Digital Clock, Tianjin STM32,
+   or Nanjing Turing unless the user explicitly requests it.
 
 ## Current Verification
 
 - `npm run lint` passed on 2026-08-13 for the Nanjing Turing bilingual draft.
 - `npm run typecheck` passed on 2026-08-13 for the Nanjing Turing bilingual draft.
 - `npm run build` passed on 2026-08-13 with 36 static pages.
+- Pull request #14's two Vercel checks passed before the approved merge; its
+  preview required an authenticated Vercel session.
 - Content validation remains 8 projects, 21 notes, and 73 media records; UTF-8
   validation covers 283 text files.
 - English/Chinese paragraph counts match within all 14 rewritten sections.
