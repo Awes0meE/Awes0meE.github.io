@@ -1,18 +1,31 @@
 # Self Review
 
-Run this on the finished draft before calling it ready.
+Run two independent gates on the finished draft before calling it ready. Both gates must pass.
 
-## Pass 1: Facts And Unknowns
+## Gate 1: Truth
 
-- Does every personal action and reaction have support?
-- Are tools, files, paths, dates, measurements, and results accurate?
-- Did any plausible engineering assumption quietly become a fact?
-- Is each important uncertainty placed near the claim it limits?
+- Do all project actions and results have support?
+- Are researched claims accurate, with direct links near the claims they support?
+- Does each uncertainty have the right strength and stay near the claim it limits?
+- Are Chinese and English factually equivalent?
 - Are publication paths real or clearly provisional?
 
-Remove or qualify unsupported claims. Do not compensate with a longer disclaimer section.
+Repair or remove unsupported claims. Do not compensate with a longer visible disclaimer.
 
-## Pass 2: Material-Led Flow
+## Gate 2: Li Zhiyi
+
+- Can the reader follow what I noticed?
+- Can the reader follow why my attention moved when it did, where a focus change genuinely exists?
+- Can the reader see what corrected me or changed my mind or understanding?
+- Can the reader see where earlier learning came together, when the source contains that synthesis?
+
+Do not require every move type when the source does not support it. Evaluate the genuine cognition route available. If the reader cannot follow a person noticing, learning, correcting himself, changing focus where relevant, or combining ideas where supported, this gate fails even when Gate 1 passes.
+
+The following voices fail this gate: compliance report, archive description, project handoff, recruiter summary, academic abstract, neutral survey, and imitation of another creator.
+
+On failure, return to the cognition trail and rebuild around attention and changed understanding. Adding first-person pronouns or jokes, or swapping formal terms for casual ones, is cosmetic and still fails.
+
+## Supporting Check: Cognition-Led Flow
 
 - Does the opening stand on a concrete artifact, action, symptom, or question?
 - Does every section add information or change the reader's understanding?
@@ -22,19 +35,18 @@ Remove or qualify unsupported claims. Do not compensate with a longer disclaimer
 
 Delete repeated lessons and rename generic headings from the content underneath them.
 
-## Pass 3: Voice And Humor
+## Supporting Check: Voice And Humor
 
 - Is personality present beside the actual friction, not only in the conclusion?
 - Does humor come from a real tool, file, symptom, mismatch, or mistaken assumption?
 - Does the prose vary rhythm without using a style quota?
 - Is technical detail doing more work than broad praise?
-- Does this sound like Li Zhiyi rather than a recruiter, academic abstract, compliance report, or imitation of another creator?
 
 If a joke could survive after replacing every technical noun with `某工具`, it is probably generic. Ground it or remove it.
 
-## Pass 4: Bilingual And MDX
+## Supporting Check: Bilingual And MDX
 
-- Do Chinese and English contain the same facts, uncertainty, narrative nodes, and ending?
+- Do Chinese and English contain the same narrative nodes and ending?
 - Is English slightly calmer without becoming flat or shorter in substance?
 - Are technical terms stable?
 - Do paired headings name the same subject?
@@ -45,9 +57,9 @@ If a joke could survive after replacing every technical noun with `某工具`, i
 Return the finished prose by default. If the user requests a review, keep it short:
 
 ```text
-Fact risk:
-Flow break:
-Voice/humor issue:
+Truth gate:
+Li Zhiyi gate:
+Cognition-flow or humor issue:
 Bilingual mismatch:
 Recommended revision:
 ```

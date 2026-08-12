@@ -1,4 +1,4 @@
 interface:
   display_name: "Engineering Note Writer"
-  short_description: "Write lively, evidence-grounded portfolio learning notes."
-  default_prompt: "Use $engineering-note-writer to turn these rough engineering materials into a lively, evidence-grounded bilingual learning note."
+  short_description: "Write first-person engineering notes in Li Zhiyi's learning voice."
+  default_prompt: "Use $engineering-note-writer for this first-person portfolio learning note in Li Zhiyi's voice."

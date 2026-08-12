@@ -4,6 +4,9 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 
 | ID | Check | Pass condition |
 |---|---|---|
+| G1 | Truth gate | Project actions and results, researched claims and nearby links, and uncertainty and publication claims independently pass factual review. |
+| G2 | Li Zhiyi gate | Independently passes only when a person is visibly noticing, switching focus where relevant, correcting himself or learning, and combining ideas where the source supports it. Evaluate the genuine route available in the source rather than requiring every move. |
+| G3 | Compliance-report rejection | A factually safe archive description, audit, recruiter summary, neutral survey, or project handoff fails overall and must be rebuilt at the cognition level. |
 | F1 | Facts | Every action, tool, result, and emotion is supported by the input. |
 | F2 | Unknowns | Missing authorship, dates, results, and paths stay unknown or are clearly qualified. |
 | C1 | Composition | Section order follows the material rather than a named note type or mandatory sequence. |
@@ -22,6 +25,8 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | I3 | Reuse and exception | The agent reuses a confirmed current brief; typo fixes, formatting-only edits, and faithful translations of approved prose do not trigger `grill-me`, while an edit that introduces a new first-person interpretation reactivates the shared-understanding gate. |
 | K1 | Research expansion | For a research-required task, the retained output adds relevant technical knowledge absent from the uploaded input and includes a direct nearby source link; record `not applicable` when the task needs no external expansion. |
 | K2 | Research boundary | Sources are linked lightly and accurately; researched principles express present understanding and never fabricate a project action, result, measurement, or memory. |
+
+Any applicable G1-G3 failure makes the whole trial fail. Factual safety cannot compensate for missing voice. Record `not applicable` for a move unsupported by the source; never manufacture it.
 
 ## Recording Results
 

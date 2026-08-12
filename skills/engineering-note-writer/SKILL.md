@@ -76,6 +76,17 @@ Keep the same facts, attention jumps, researched explanations, later synthesis, 
 
 End where the writer's current understanding reaches its last useful verification, remaining question, new connection, concrete observation, or quiet callback. Do not add a retrospective, evidence list, future-work section, or philosophical elevation merely to complete a pattern.
 
+### 11. Run Two Independent Gates
+
+Follow `references/self-review.md`. Both gates must pass before release.
+
+- **Truth gate:** independently verify project actions and results, researched claims and nearby links, the strength of uncertainty, bilingual factual equivalence, and publication paths. Repair unsupported claims without growing a visible disclaimer.
+- **Li Zhiyi gate:** independently verify that the reader can follow a person noticing, questioning, switching focus where relevant, correcting himself or changing his understanding, and recombining earlier learning where the source supports it. Judge the genuine route available; do not require or manufacture every move type.
+
+If the Li Zhiyi gate fails, return to the cognition trail and rebuild the composition around attention and changed understanding. Adding pronouns or jokes, or merely making formal terms casual, is not a repair. No factually safe draft can pass overall on truth alone.
+
+Ask `Li Zhiyi or compliance report?` as the operational release decision. A compliance report, archive description, project handoff, recruiter summary, academic abstract, neutral survey, or imitation of another creator fails release even when factually safe.
+
 ## Output
 
 Return the form the user actually requested: finished prose, MDX-ready body and metadata, a rewrite, captions, or a short review. Keep internal fact sheets and process labels internal unless the user asks for an audit. Surface only the uncertainties that affect the user's next decision.
