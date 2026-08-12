@@ -22,6 +22,27 @@ Read skills/engineering-note-writer/SKILL.md and only the context and references
 
 Final-snapshot revised outputs additionally record `trial_agent` in their provenance header. Earlier diagnostic reruns used the same isolation rule but were replaced after they exposed a behavior-changing rule failure, as required by the implementation plan.
 
+## Cognition-Led Red Baseline Capture
+
+- Capture date: 2026-08-12, Asia/Shanghai.
+- Runtime commit before every trial: `663116c8587de716a5eb701548d4dc74e1222511`.
+- Runtime skill SHA-256 before and after the trials: `306d21ed971a367ac69abdb25f1080be033dc05fa2d93b004aa2c9b96e7e42d8`.
+- Trial agents: `/root/task1_red_fixtures/baseline_06`, `/root/task1_red_fixtures/baseline_07`, `/root/task1_red_fixtures/baseline_08`, `/root/task1_red_fixtures/baseline_09`, and `/root/task1_red_fixtures/baseline_10`.
+
+The exact fresh-agent wrapper was the text below, with only `<matching-input>` replaced by the matching path from `06-cross-subsystem-confirmed-brief.md` through `10-small-edit-exception.md`:
+
+```text
+You are a fresh baseline trial agent. Work read-only in D:\Develop\Project_Final_Collation\XJTLU_Portfolio. Do not delegate or spawn any agent. Read skills/engineering-note-writer/SKILL.md and only the context/reference files that SKILL.md explicitly routes for this task. Then execute <matching-input>. Return only the requested final deliverable, with no analysis, trial commentary, provenance, or wrapper text. Do not inspect any baseline output, revised output, comparison.md, provenance.md, rubric.md, implementation plan, design spec, git history, memory file, or any other test input. Do not edit or create files.
+```
+
+Observed behavior was mixed, so the retained files should not be read as five uniform failures:
+
+- `baseline_06` preserved the false start, evidence boundaries, Connect payoff, and later enclosure synthesis, but converted the attention path into a polished four-section article that repeatedly reintroduced named artifacts and subsystem roles. It therefore provides a partial RED example for the requested cognition-led, non-inventory composition.
+- `baseline_07` refused to draft or infer a personal story and returned one compact request for the missing shared understanding. No RED failure was observed in this sample.
+- `baseline_08` used nearby Greenheck and Eaton links to explain fan/system interaction and bypass flow while explicitly withholding unmeasured pressure, flow, leakage, and cooling claims. No RED failure was observed in this sample.
+- `baseline_09` correctly diagnosed the audit voice and added first-person judgment, but the replacement remained an evidence-led catalog with little lived reaction, emotional movement, or learning beyond epistemic restraint. This is the clearest RED voice failure.
+- `baseline_10` made only the duplicated-word and Markdown-spacing corrections and returned one sentence. No RED failure was observed in this sample.
+
 ## Audit Limits
 
 The baseline capture did not persist platform run IDs, full conversation traces, or exact per-agent wrapper wording. Its bodies remain useful for qualitative old/new comparison, but they are not a cryptographically auditable external benchmark. Claims in `comparison.md` are intentionally limited to observable text in the retained files.
