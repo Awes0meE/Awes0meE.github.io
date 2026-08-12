@@ -150,7 +150,7 @@ Current workspace content state:
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The site includes real internship material from Juanyun, Nanjing Turing, Tianjin rail-transit STM32 study work, and a Claude Chime hardware power-board archive.
-- The site also includes an Arduino Digital Clock course project from MEC104, with a project page, one related learning note, selected public course screenshots without the top-right XJTLU logo, selected homework-report excerpts plus the original homework report PDF, Arduino sketches, a cleaned demo video, and the SN54LS47 datasheet.
+- The site also includes an Arduino Digital Clock course project from MEC104, with an approved bilingual first-person project page, one related learning note, 11 media records, selected public course/report evidence, Arduino sketches, a cleaned demo video, and the SN54LS47 datasheet. The copy preserves personal contribution boundaries, treats the rollover thresholds as separately flashed versions, and does not overstate what the surviving video, early `main.c`, or unresolved final switch implementation proves.
 - The site also includes an Arduino Smart Car line-tracking course project from MEC104, with a project page, one related learning note, selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code.
 - The DIY pressure-flow cooling project page, learning note, and six media records now use the approved first-person engineering story gathered through the one-project-at-a-time interview workflow; remembered temperature and frame-rate changes remain explicitly personal observations rather than a controlled benchmark.
 - The media gallery covers 73 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
@@ -329,7 +329,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并新增 Claude Chime 硬件电源管理板档案。
-- 站点还新增了 MEC104 Arduino Digital Clock 课程项目，包括项目页、1 篇学习笔记、去掉右上角西浦校徽的精选公开课件截图、精选作业报告截图和作业报告 PDF 原件、Arduino sketch、清理过元数据的演示视频和 SN54LS47 数据手册。
+- 站点还包括已确认双语第一人称文案的 MEC104 Arduino Digital Clock 课程项目：项目页、1 篇学习笔记、11 条媒体记录、精选课件与报告证据、Arduino sketch、清理过元数据的演示视频和 SN54LS47 数据手册。文案保留个人贡献边界，将两个计数上限写成分别烧录的版本，并且不夸大现存视频、早期 `main.c` 或尚未确认的最终按键实现所能证明的内容。
 - 站点还新增了 MEC104 Arduino Smart Car 循迹小车课程项目，包括项目页、1 篇学习笔记、去掉学校 logo 区域的精选公开课件截图、公开套件 manual PDF、项目报告 PDF、清理过元数据的小车照片和 Arduino 测试代码。
 - DIY 压风式散热器的项目页、学习笔记和 6 条媒体文案现已采用逐项目访谈后确认的第一人称工程故事；回忆中的温度与帧率变化仍明确写作个人观察，不作为受控性能测试。
 - 媒体页覆盖 73 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体，以及 Smart Car 照片和课件截图。
