@@ -1,6 +1,6 @@
 # Evidence And Boundaries
 
-Read this before making first-person, result, or publication claims.
+Read this before making first-person, result, or publication claims. This reference decides only whether project-specific actions, results, uncertainties, and publication claims are supported. It does not choose article structure, headings, emotion, or external knowledge.
 
 ## Classify What You Know
 
@@ -14,6 +14,12 @@ Use four evidence levels internally:
 | Unknown | The material does not answer the question. | Leave it open or ask one focused question. |
 
 Never upgrade an artifact fact into personal authorship. A Gerber archive proves that fabrication files exist; it does not prove who drew the PCB, ordered it, assembled it, or brought it up.
+
+## Project Evidence And Research Are Different
+
+Project evidence supports what Li or the device did. External sources support general principles and current technical facts. A source may help interpret an observation, but it cannot upgrade a recollection into a measurement or an artifact into authorship.
+
+Qualify a claim only nearby and only when the distinction changes its meaning. Do not narrate the whole evidence audit in reader-facing prose.
 
 ## Ground First Person And Emotion
 
