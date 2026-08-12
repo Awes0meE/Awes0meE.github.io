@@ -4,7 +4,7 @@
 **Branch:** `docs/rewrite-nanjing-turing-internship`
 **Current project:** `南京图灵 Qt、编译与打包实习记录`
 **Last completed project:** `天津津铁通信 STM32 嵌入式实习记录`
-**State:** Nanjing Turing bilingual rewrite is approved and locally verified; Git handoff is in progress
+**State:** Nanjing Turing bilingual rewrite is approved and published in Draft PR #14; awaiting preview review before merge
 
 ## Working Contract
 
@@ -123,10 +123,11 @@
 
 ## Next Action
 
-1. Commit and push the approved bilingual project page, three-week note, five
-   aligned media-copy records, and this handoff record.
-2. Open a Draft PR for preview and record its URL here. Do not merge into `main`
-   until the user explicitly approves the deployed preview.
+1. Review the deployed preview and checks from Draft PR
+   [#14](https://github.com/Awes0meE/Awes0meE.github.io/pull/14), including both
+   language routes and representative desktop/mobile layouts.
+2. Address any preview findings, then wait for explicit user approval before
+   merging into `main`.
 3. Keep the four source-document notes and every public upload unchanged through
    preview and merge checks.
 
