@@ -409,27 +409,27 @@
   },
   {
     "id": "stm32f103c8t6-pinout",
-    "title": "STM32F103C8T6 LQFP48 Pin Map",
-    "titleZh": "STM32F103C8T6 LQFP48 引脚图",
+    "title": "STM32F103C8T6 Pins and Alternate-Function Reference",
+    "titleZh": "STM32F103C8T6 引脚与复用功能参考",
     "type": "image",
     "src": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "thumbnail": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "date": "2025-02-06",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "The LQFP48 map places GPIO, USART, ADC, and timer alternate functions around the package, providing a reference for reading the peripheral exercises.",
-    "captionZh": "这张 LQFP48 图把 GPIO、USART、ADC 与定时器复用功能排在封装四周，可用于对照各项外设练习。"
+    "caption": "After moving from Arduino pin numbers to STM32 alternate functions, this LQFP48 map became my desk reference: GPIO, USART, ADC, and timers were no longer just function names but real pins whose ports, channels, and alternate mappings had to agree.",
+    "captionZh": "从 Arduino 的引脚编号转到 STM32 外设复用后，这张 LQFP48 引脚图成了我的桌面地图：GPIO、USART、ADC 与 Timer 不再只是函数名，而是需要同时核对端口、通道和复用关系的真实引脚。"
   },
   {
     "id": "tianjin-rail-transit-cover",
-    "title": "Tianjin Rail Transit Training Cover",
-    "titleZh": "天津轨道交通实训封面",
+    "title": "Tianjin Jintie Communications Embedded Internship Cover",
+    "titleZh": "天津津铁通信嵌入式实习项目封面",
     "type": "image",
     "src": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "thumbnail": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "date": "2025-02-05",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "The processed Tianjin Rail Transit logo gives the STM32 training archive its internship context and visual cover.",
-    "captionZh": "处理后的天津轨道交通 Logo 为 STM32 实训档案标明实习语境，也构成项目封面的视觉主体。"
+    "caption": "This processed Tianjin Rail Transit mark records the setting of the work: I was an Embedded Systems Intern at Tianjin Jintie Communications, based in the Group headquarters, completing self-directed STM32 training and a bench demo rather than production rail-system development.",
+    "captionZh": "这张处理后的天津轨道交通标志记录项目发生的实习语境：我以天津津铁通信嵌入式实习生身份在集团总部办公，完成的是 STM32 自学与培训 demo，并未参与生产轨道系统开发。"
   },
   {
     "id": "servo-pwm-180-parameters",
@@ -440,8 +440,8 @@
     "thumbnail": "/uploads/projects/tianjin-metro/servo-pwm-180-parameters.png",
     "date": "2025-02-12",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "Across 0°–180°, the reference table keeps a 20 ms period and steps the high time from 0.5 ms to 2.5 ms to present the pulse-to-angle mapping.",
-    "captionZh": "参考表覆盖 0°–180°，周期保持 20 ms，高电平时间从 0.5 ms 递增到 2.5 ms，呈现脉宽到角度的对应关系。"
+    "caption": "The servo exercise used this table to map a 0.5–2.5 ms high time within a 20 ms period onto 0°–180°. It is a Timer/PWM setup reference, not an oscilloscope measurement.",
+    "captionZh": "舵机练习用这张表把 20 ms 周期内的 0.5–2.5 ms 高电平时间对应到 0°–180°。它是配置 Timer/PWM 时使用的参数参考，不是示波器实测波形。"
   },
   {
     "id": "turing-cmake-notion-flow-reference",
