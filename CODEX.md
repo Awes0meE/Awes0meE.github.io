@@ -176,7 +176,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 The current working content state extends release `v0.7.0` on `main`, including the media/cover refresh, the two-pane public project-file browser for project archives, and the imported Digital Clock and Smart Car course projects.
 
-As of `2026-08-12`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
+As of `2026-08-13`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
 ```text
 D:\XJTLU\工作相关\卷云科技有限责任公司
@@ -197,6 +197,7 @@ Current content count in this workspace:
 - 1 Arduino Smart Car line-tracking course project and 1 related note were added from `C:\Users\123\Desktop\Smart Car Project`; the original course tutorial PDF and project-description TXT stay reference-only, while selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code are public.
 - 73 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
 - The DIY pressure-flow cooling project, note, and six media records completed the one-project-at-a-time `grill-me` rewrite on `2026-08-12`, then received the final cognition-led pass after the redesigned writer merged through pull request #8; pull request #9 merged that prose into `main` at `baa7c98`. Remembered temperature and frame-rate changes remain explicitly personal observations rather than controlled benchmark results.
+- The Arduino Digital Clock project, note, and 11 media records completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #10 merged that prose into `main` at `80c3743`. The account preserves individual ownership, treats the two rollover thresholds as separately flashed versions, and keeps the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet within their verified evidence boundaries.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
