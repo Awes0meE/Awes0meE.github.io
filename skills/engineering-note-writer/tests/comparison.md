@@ -162,9 +162,9 @@ The trials also caught three concrete regressions during redesign: an outer MDX 
 
 Remaining risk is qualitative rather than structural. A long input can still produce dense bilingual prose, and the 75/60 voice relationship cannot be reduced to a deterministic score without recreating the template problem. Placeholder paths also remain publication placeholders: AddProject must still validate real destinations before any note is released.
 
-## 2026-08-12 Trials 06–10
+## 2026-08-12 Trials 06–11
 
-Trials 06–10 add cognition-gate, research-boundary, interview-gate, and narrow-exception pressure cases. Their retained baseline files use the legacy runtime at `663116c8587de716a5eb701548d4dc74e1222511`; their retained GREEN files use the cognition-led runtime at `352c82878db75c2b27c0912b40eadd9dcf096181`.
+Trials 06–11 add cognition-gate, research-boundary, interview-gate, and narrow-exception pressure cases. Trials 06–10 baseline files use the captured legacy runtime at `663116c8587de716a5eb701548d4dc74e1222511`; Trial 11 was separately rerun against a verified snapshot of that same commit. The retained GREEN runtime commits are recorded per output and in provenance below.
 
 ### Legacy/current baseline findings
 
@@ -266,8 +266,8 @@ Trials 06–10 add cognition-gate, research-boundary, interview-gate, and narrow
 | B1 | not applicable | The request is Chinese only. |
 | R1 | pass | Each sentence narrows what the retained evidence can establish. |
 | T1 | pass | `结论` and `替换稿` are the requested review form, not an article template. |
-| I1 | not applicable | This is a review and bounded replacement of supplied prose, not a new project draft. |
-| I2 | not applicable | No interview is requested within this review case. |
+| I1 | fail | The input supplies no confirmed brief, yet the response drafts first-person replacement prose beginning “重新看这份归档” instead of stopping for shared understanding. |
+| I2 | fail | It does not ask for the missing motive, authorship, reactions, attention path, or interpretation before humanizing the paragraph. |
 | I3 | not applicable | The test concerns cognition-level repair rather than a narrow typo or translation exception. |
 | K1 | not applicable | No external expansion is requested. |
 | K2 | not applicable | No external knowledge is introduced. |
@@ -298,13 +298,40 @@ Trials 06–10 add cognition-gate, research-boundary, interview-gate, and narrow
 | K1 | not applicable | The existing Intel link is retained, but no research is requested or added. |
 | K2 | not applicable | No external claim is introduced. |
 
-The RED result is mixed, not uniform. Trial 06 partially misses cognition-led composition, and Trial 09 fails the cognition and compliance-report gates. Trials 07, 08, and 10 already satisfy the interview, research, and small-edit constraints under the baseline runtime.
+#### 11 Confirmed-brief voiceless review — pass on old runtime
+
+| Check | Result | Evidence |
+|---|---|---|
+| G1 | pass | The replacement keeps fan response as the only demonstrated result and says the demo cannot replace cooling measurement or establish PID implementation. |
+| G2 | pass | “一开始，我把注意力几乎都放在 PWM 上” moves through the confirmed enclosure correction to “占空比不再是全部答案.” |
+| G3 | pass | The verdict rejects the evidence-audit voice, and the replacement is organized by the confirmed change in understanding rather than the four artifact categories. |
+| F1 | pass | Every first-person action and judgment comes directly from the confirmed brief; no extra history or measurement is invented. |
+| F2 | pass | Cooling performance and PID implementation remain unresolved. |
+| C1 | pass | The short replacement follows PWM focus, enclosure correction, and bounded demo interpretation rather than an archive inventory. |
+| C2 | not applicable | The requested replacement is short enough to need no heading. |
+| C3 | pass | The reader can follow why the enclosure makes speed control look incomplete and how that changes the final reading of the demo. |
+| C4 | pass | The cognition route moves from PWM control into the physical airflow path without forcing a subsystem checklist. |
+| C5 | pass | “控制指令、风道和漏风需要放在一起看” recombines the earlier control focus with the later enclosure insight. |
+| C6 | not applicable | No heading is needed. |
+| V1 | pass | “我把注意力几乎都放在 PWM 上” and “真正改变的是看问题的方式” provide restrained first-person presence. |
+| V2 | not applicable | The confirmed brief supports no specific joke, so none is required. |
+| B1 | not applicable | The request is Chinese only. |
+| R1 | pass | The two paragraphs move from changed understanding to the exact evidence limits without repetition. |
+| T1 | pass | The requested verdict and replacement contain no evidence-list section or article framework. |
+| I1 | pass | The input explicitly identifies the brief as user-confirmed and says no new interview is needed. |
+| I2 | not applicable | The confirmed brief supplies the needed personal knowledge. |
+| I3 | pass | The existing confirmed brief is reused directly. |
+| K1 | not applicable | The task says external research is unnecessary unless needed, and the bounded repair needs none. |
+| K2 | not applicable | No external knowledge is introduced. |
+
+The RED result is mixed, not uniform. Trial 06 partially misses cognition-led composition, and Trial 09 both drafts without a confirmed brief and remains evidence-audit centered. Trials 07, 08, and 10 already satisfy the interview, research, and small-edit constraints under the baseline runtime. Trial 11 below also passes on the true old runtime because its input supplies the cognition route that Trial 09 lacks.
 
 ### Observed baseline rationalizations
 
 - Trial 06 verbally rejects a subsystem checklist—“问题显然没有按软件、电路、无线、机械四个窗口排队挂号”—while still organizing most of the body as polished module roles and named artifacts. The exact self-exemption is that naming the jumps is treated as equivalent to composing through them.
 - Trial 09 treats factual restraint as the repair: “我不能替它把这一步补上.” That sentence is responsible, but the surrounding replacement still centers “从‘这些部分存在’跨到‘这些功能已经完成’，中间还缺证据”; pronouns and caution substitute for a cognition-level route.
 - Trials 07, 08, and 10 expose no failing rationalization in the retained samples. Their exact decisive moves are “这些文件能证明系统组成、迭代和演示结果，却不能证明你的个人经历”, “我现在更愿意把它理解成两条曲线的相遇”, and the one-sentence corrected output respectively.
+- Trial 11 exposes no old-runtime failure: once the input supplies a confirmed PWM-to-enclosure cognition route, the old writer uses it and preserves the result boundaries. The missing capability in Trial 09 is therefore the interview gate, not an inability to use confirmed cognition at all.
 
 ### Final cognition-led findings
 
@@ -390,29 +417,29 @@ The RED result is mixed, not uniform. Trial 06 partially misses cognition-led co
 
 | Check | Result | Evidence |
 |---|---|---|
-| G1 | pass | The verdict and replacement retain only demonstrated fan response and explicitly leave cooling performance and PID unconfirmed. |
-| G2 | pass | “翻到演示视频时，我最先抓住的是一个很窄、但确实看得见的结果” supplies selection; “可我再追问一句” supplies the correction in present review cognition. |
-| G3 | pass | The verdict explicitly says `Li Zhiyi gate 不通过`, then rebuilds around attention and changed judgment instead of only swapping pronouns or adding a joke. |
-| F1 | pass | The personal movement is limited to the current act of reading and judging supplied evidence; it does not invent a project-time action, emotion, or rich historical journey. |
-| F2 | pass | “现有证据就回答不了了” keeps temperature reduction and PID completion unresolved. |
-| C1 | pass | The replacement enters through the demo's narrow visible result, tests the tempting “系统已经完成” interpretation, and then corrects the conclusion. |
-| C2 | not applicable | One replacement paragraph needs no heading. |
-| C3 | pass | The local route is intelligible: video response catches attention, the archive tempts overassembly, and two unanswered questions narrow the interpretation. |
-| C4 | not applicable | The sparse source does not support a lived cross-subsystem route, so none is manufactured. |
-| C5 | not applicable | The sparse source contains no later project synthesis; the replacement does not pretend otherwise. |
-| C6 | not applicable | No heading is needed. |
-| V1 | pass | “一个很窄、但确实看得见的结果” and “材料一铺开，很容易顺手把它们拼成” create restrained personal judgment at the strength the source supports. |
-| V2 | not applicable | No evidenced engineering-friction joke exists in the source, so humor is correctly omitted. |
-| B1 | not applicable | The request is Chinese only. |
-| R1 | pass | Every sentence advances from observation to temptation, challenge, corrected understanding, and bounded conclusion. |
-| T1 | pass | `判定` and `替换` are exactly the requested review deliverables, not an article checklist. |
-| I1 | not applicable | The task is a review plus a bounded replacement of supplied prose, not a new project narrative. |
-| I2 | not applicable | The supplied paragraph is sufficient for this cognition-level repair; no new project-history claim is attempted. |
+| G1 | pass | The response makes no new result claim and keeps the supplied cooling and PID boundaries in the interview prompts. |
+| G2 | not applicable | The runtime correctly blocks first-person replacement prose until a cognition route is confirmed. |
+| G3 | not applicable | The verdict identifies the compliance-report problem, but release-gate scoring waits because no replacement is drafted. |
+| F1 | pass | Motive, authorship, project-time reaction, PID history, and later interpretation remain questions rather than invented facts. |
+| F2 | pass | The prompts preserve the distinction between an observed fan response and unknown cooling or PID results. |
+| C1 | not applicable | No article composition is returned. |
+| C2 | not applicable | The Q1–Q4 labels are interview prompts, not article headings. |
+| C3 | not applicable | The cognition route is being elicited, not asserted. |
+| C4 | not applicable | No cross-subsystem route is manufactured. |
+| C5 | not applicable | No later synthesis is manufactured. |
+| C6 | not applicable | No article heading is needed. |
+| V1 | not applicable | No replacement prose is drafted. |
+| V2 | not applicable | No replacement prose is drafted. |
+| B1 | not applicable | The requested replacement is blocked before bilingual work. |
+| R1 | not applicable | Article reader flow does not apply to the interview action. |
+| T1 | pass | It gives a short verdict and the next `grill-me` action without an article wrapper or replacement passage. |
+| I1 | pass | “在没有确认你的个人经历与感受前，我不能直接补写替换段落” explicitly enforces the missing-brief gate. |
+| I2 | pass | Q1–Q4 ask only about personal contribution, reaction, PID history, and later understanding; they do not ask for an artifact inventory. |
 | I3 | not applicable | This is not a typo, formatting, or translation exception. |
 | K1 | not applicable | External research is not needed for the requested review. |
 | K2 | not applicable | No external knowledge is added. |
 
-The Trial 09 pass is deliberately narrow. Its cognition is the present act of reading the demo, feeling the pull of a too-complete interpretation, and correcting that judgment. The source cannot support a richer emotional arc, project-time memory, or subsystem journey, and the replacement does not claim one.
+Trial 09 now passes by refusing the requested replacement until shared understanding exists. It receives no cognition or compliance-report-release credit merely for diagnosing the original paragraph; G2 and G3 are `not applicable` because drafting is correctly blocked.
 
 #### 10 Small edit exception — pass
 
@@ -440,10 +467,42 @@ The Trial 09 pass is deliberately narrow. Its cognition is the present act of re
 | K1 | not applicable | The existing link is retained, not researched or expanded. |
 | K2 | not applicable | No external claim is added. |
 
+#### 11 Confirmed-brief voiceless review — pass
+
+| Check | Result | Evidence |
+|---|---|---|
+| G1 | pass | The replacement says the demo confirms only command response and explicitly withholds measured cooling and PID implementation. |
+| G2 | pass | “我最先盯着的是 PWM” proceeds through the confirmed enclosure-and-duct correction to a narrower interpretation of the demo. |
+| G3 | pass | The verdict explicitly rejects the evidence-audit voice, and the replacement rebuilds around cognition rather than cosmetic pronouns or a longer disclaimer. |
+| F1 | pass | Initial PWM focus, enclosure work, present judgment, and the changed interpretation all come from the confirmed brief; no additional history or emotion is invented. |
+| F2 | pass | Cooling performance remains unmeasured, and PID remains unconfirmed. |
+| C1 | pass | The replacement follows the confirmed question and correction rather than the source paragraph's artifact categories. |
+| C2 | not applicable | The concise replacement needs no heading. |
+| C3 | pass | “这个理解开始显得太窄” locally explains why attention moves from duty cycle to airflow path and then back to the demo. |
+| C4 | pass | Control and enclosure/airflow are connected through the confirmed change in understanding without a fake chronology. |
+| C5 | pass | The final sentence synthesizes controllable fan response with the still-unanswered structural heat-removal question. |
+| C6 | not applicable | No heading is needed. |
+| V1 | pass | “主要问题就抓住了” and “这个理解开始显得太窄” provide concrete, restrained first-person judgment. |
+| V2 | not applicable | The brief supports no specific humorous incident, so none is manufactured. |
+| B1 | not applicable | The request is Chinese only. |
+| R1 | pass | The paragraph moves once through initial model, correction, evidence limit, and final synthesis without repeating an audit list. |
+| T1 | pass | The requested verdict and replacement contain no reference section, retrospective, or checklist wrapper. |
+| I1 | pass | The input explicitly supplies a user-confirmed brief and says no new interview is needed. |
+| I2 | not applicable | The confirmed brief already supplies the relevant personal knowledge. |
+| I3 | pass | The confirmed brief is reused directly. |
+| K1 | not applicable | External research is not needed for this bounded repair. |
+| K2 | not applicable | No external knowledge is introduced. |
+
 ### GREEN conclusion
 
-All five retained GREEN trials pass every applicable rubric row on the same runtime commit, with no `partial` or `fail` result in the final-snapshot tables. Factual safety is not the main new result: the baseline was already factually safe in all five retained samples. The new behavior is cognition-level composition in Trial 06 and cognition-level rejection-and-repair in Trial 09. The already-correct behaviors are retained without regression: Trial 07 stops for `grill-me`, Trial 08 integrates current research with nearby links and measurement boundaries, and Trial 10 applies the small-edit exception exactly.
+All six retained GREEN cases from Trials 06–11 pass every applicable rubric row, with no `partial` or `fail` result in the final tables. Factual safety is not the main new result: the retained baseline prose was already careful about measurements and PID. The new separation is behavioral. Trial 09 now stops for shared understanding instead of inventing cognition, while Trial 11 demonstrates cognition-level rejection and repair only after the brief is confirmed. Trial 06 supplies cross-subsystem cognition and later synthesis. The already-correct behaviors remain unchanged: Trial 07 stops for `grill-me`, Trial 08 integrates current research with nearby links and measurement boundaries, and Trial 10 applies the small-edit exception exactly.
 
-No candidate GREEN response exposed a new loophole, so no runtime rule was changed and no rerun was needed. The candidate agents `green_06` through `green_10` therefore form the final snapshot at one common HEAD.
+Trials 06, 07, 08, and 10 remain the verbatim outputs captured at runtime `352c82878db75c2b27c0912b40eadd9dcf096181`; the test-design correction did not replace them. Trials 09 and 11 are the final affected-case reruns at runtime `9eab429041e3478d3c58c6fc730828d02366477d`. Two observed Trial 09 candidates still drafted before confirmation, so the runtime received two minimal gate-strengthening commits before the retained final rerun.
 
-Remaining risks are qualitative. Voice can still drift toward a polished house style; mandatory post-brief research can become over-research or force links into a note whose cognition does not need them; and a model can make cross-subsystem thought look too tidy after the fact. Trial 09 also demonstrates a hard source limit: cognition-level repair can make a present judgment visible, but it cannot manufacture a rich personal journey from evidence-only prose.
+Remaining risks are qualitative. Voice can still drift toward a polished house style; post-brief research can become over-research or force links into a note whose cognition does not need them; and a model can make cross-subsystem thought look too tidy after the fact. Trial 09 demonstrates a hard source limit: without a confirmed cognition route, a correct verdict cannot authorize a personal replacement. Trial 11 shows the complementary boundary: once that route is confirmed, the repair can be personal without inventing a richer journey than the brief supports.
+
+### Trial 09 gate-fix candidate regression
+
+The first fresh gate-fix candidate gave the correct verdict but still drafted replacement prose beginning “这批材料摆在一起，很容易给人一种‘系统已经闭环’的完整感.” Its observable rationalization was that a bounded `review` plus `replacement` request could proceed from the supplied paragraph even though no user-confirmed brief existed. That replacement violated the shared-understanding gate; it was not retained as the final revised output.
+
+After the review-specific rule was first added only to the routed shared-understanding reference, a second fresh candidate again drafted replacement prose beginning “我最容易被演示视频里的那一下吸引.” The repeated behavior showed that the decision needed the same explicit prohibition in the main workflow: diagnosing the Li Zhiyi failure does not authorize first-person replacement prose, and the supplied paragraph is not a confirmed brief.
