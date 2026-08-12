@@ -4,7 +4,7 @@
 **Branch:** `docs/rewrite-digital-clock`
 **Current project:** `Arduino 面包板两位数码管计数器`
 **Last completed project:** `DIY 压风式散热器原型`
-**State:** The bilingual rewrite is approved; Git handoff is in progress and merge still requires separate user approval
+**State:** The bilingual rewrite is approved and Draft PR #10 is open; merge still requires separate user approval
 
 ## Working Contract
 
@@ -160,13 +160,14 @@
 - `npm run lint`, `npm run typecheck`, and `npm run build` pass. Content validation
   reports 8 projects, 21 notes, and 73 media items; encoding validation reports
   283 UTF-8 text files; the production build generates 36 static pages.
+- Draft pull request #10 targets `main` from `docs/rewrite-digital-clock` and
+  contains the approved rewrite plus the preceding `/neat` handoff reconciliation.
 
 ## Next Action
 
-1. Commit and push the approved bilingual Digital Clock rewrite without touching
-   the Smart Car or DIY Cooling content families.
-2. Open or update the Draft PR for review and preserve the verified branch state.
-3. Merge only after the user's separate explicit merge approval.
+1. Let Draft PR #10 finish its remote checks and address only actionable failures
+   or review comments.
+2. Merge only after the user's separate explicit merge approval.
 
 ## Updating This File
 
