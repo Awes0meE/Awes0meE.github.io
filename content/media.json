@@ -157,27 +157,27 @@
   },
   {
     "id": "juanyun-diy-cooling-demo",
-    "title": "The First Time Windows Temperature Reached the Physical Fan",
-    "titleZh": "第一次把 Windows 温度送进实体风扇",
+    "title": "One Click Connected Windows Temperature to Fan Duty",
+    "titleZh": "一次点击，把 Windows 温度接到风扇占空比",
     "type": "video",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "This 3:57 recording keeps the first complete chain in one sequence: Windows connects to the ESP32 Bluetooth virtual serial port, the app reads CPU/GPU temperatures, and the OLED and fan respond to data and physical buttons. I did not record a synchronized performance curve at the time.",
-    "captionZh": "这段 3 分 57 秒的录像保留了整条链第一次跑起来的样子：Windows 连接 ESP32 Bluetooth 虚拟串口，上位机读取 CPU/GPU 温度，实体原型的 OLED 与风扇随后响应数据和按键；当时没有同步记录性能曲线。"
+    "caption": "The 3:57 recording demonstrates the integrated Windows–Bluetooth SPP–ESP32 chain: temperatures appear in the app, duty and mode appear on the OLED, and the fan responds to data and buttons. It does not contain synchronized temperature, RPM, or performance logs.",
+    "captionZh": "这段 3 分 57 秒录像演示了 Windows–Bluetooth SPP–ESP32 完整链路：上位机显示温度，OLED 显示占空比与模式，风扇响应数据和按键；录像不包含同步温度、RPM 或性能日志。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-1",
-    "title": "Nine Build Plates Split for the A1 mini",
-    "titleZh": "为 A1 mini 拆开的九块切片板",
+    "title": "Nine A1 mini Build Plates That Remained Digital",
+    "titleZh": "停留在数字阶段的九块 A1 mini 切片板",
     "type": "image",
     "src": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "I split the long enclosure across nine build plates to fit the A1 mini build volume and prepared automatic tree supports. The model was never printed or assembled.",
-    "captionZh": "为了把长外壳放进 A1 mini 的成形空间，我把零件拆开并排成九块切片板；这张图记录树状自动支撑方案，模型最终没有打印和装配。"
+    "caption": "The long enclosure was split across nine A1 mini build plates with automatic tree supports. Modeling and slicing were completed; printing and assembly were not.",
+    "captionZh": "长外壳被拆分到九块 A1 mini 切片板，并配置自动树状支撑；建模与切片完成，打印和装配没有进行。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-2",
@@ -188,8 +188,8 @@
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-2.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The same plate group uses three skirt loops, a 5 mm outer brim, and a 0.1 mm gap. The preparation was complete, but the enclosure never reached physical assembly.",
-    "captionZh": "同一组 Bambu Studio 切片板设置了三圈 Skirt、5 mm 外侧 Brim 与 0.1 mm 间隙；参数准备已经完成，但这套外壳没有进入实体装配。"
+    "caption": "The unprinted enclosure used three skirt loops, a 5 mm outer brim, and a 0.1 mm gap in this slicing pass. These settings record preparation, not a fabricated result.",
+    "captionZh": "这次切片为未打印外壳设置了三圈 Skirt、5 mm 外侧 Brim 与 0.1 mm 间隙；这些参数只记录准备过程，不代表制造结果。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-3",
@@ -200,20 +200,20 @@
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "I switched the same enclosure parts to manual tree supports and compared their orientations. This mechanical revision remained a model.",
-    "captionZh": "第三张视图把同一组壳体分件切换为树状手动支撑，并重新比较摆放姿态；它属于未打印机械方案的切片准备。"
+    "caption": "A manual-tree-support pass compares orientations for the same enclosure parts. This mechanical revision remained a model and slicing study.",
+    "captionZh": "手动树状支撑方案比较了同一组外壳分件的摆放姿态；这版机械结构停留在模型与切片研究阶段。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-pcb-render",
-    "title": "The STM32 Board That Tightened the ESP32 Layout",
-    "titleZh": "把 ESP32 版本重新收紧的 STM32 控制板",
+    "title": "A Tighter STM32 Board Without the Complete Wireless Chain",
+    "titleZh": "更紧凑、但未接回完整无线链路的 STM32 板",
     "type": "image",
     "src": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png",
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-cover.jpg",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "I reorganized the routing and reduced the board size while keeping 12 V input, USB-C, two fan interfaces, OLED/Bluetooth headers, and five buttons. The corresponding PCB was later soldered, powered, and tested for fan control.",
-    "captionZh": "我在这版设计里重新整理走线、缩小板卡，并保留 12 V 输入、USB-C、两路风扇、OLED / Bluetooth 排针和五个按键；对应 PCB 后来完成了焊接与上电控制测试。"
+    "caption": "The STM32 revision reorganized routing and reduced board size while retaining 12 V input, USB-C, two fan interfaces, OLED/Bluetooth headers, and five buttons. The PCB was soldered, powered, and tested by serial fan commands, but not installed in the cooler.",
+    "captionZh": "STM32 版本重新整理走线并缩小板卡，同时保留 12 V 输入、USB-C、两路风扇、OLED / Bluetooth 排针和五个按键；PCB 完成焊接、上电与串口风扇命令测试，但没有装入散热器。"
   },
   {
     "id": "juanyun-diy-cooling-stm32-schematic",
@@ -224,8 +224,8 @@
     "thumbnail": "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png",
     "date": "2026-03-17",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The CH340N provides USB-UART alongside dual fan outputs, 12 V-to-5 V conversion, STM32, five buttons, Bluetooth, and OLED interfaces. The board responded to serial fan commands but was not reconnected to the Windows automatic-temperature chain.",
-    "captionZh": "原理图用 CH340N 接出 USB-UART，并展开双风扇、12 V 转 5 V、STM32、五个按键、Bluetooth 与 OLED 接口；板卡能够通过串口命令控制风扇，但没有再接入 Windows 自动温度链路。"
+    "caption": "The schematic combines an STM32F103C8T6, CH340N USB-UART, dual fan interfaces, 12 V-to-5 V conversion, five buttons, and OLED/Bluetooth headers. Serial fan control was tested; the Windows automatic-temperature path was not restored.",
+    "captionZh": "原理图组合了 STM32F103C8T6、CH340N USB-UART、双风扇接口、12 V 转 5 V、五个按键及 OLED / Bluetooth 排针；串口风扇控制完成测试，Windows 自动温度链路没有恢复。"
   },
   {
     "id": "juanyun-foc-board-render",
