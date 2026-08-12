@@ -8,18 +8,23 @@ Draft Chinese first. Treat it as the factual and narrative source of truth. Rewr
 
 The user chose roughly 75% of the Khazix reference energy in Chinese and 60% of that same reference energy in English. These are qualitative anchors, not measurable quotas and not a rule that English should contain 60% of the Chinese draft. English should keep the experience and humor target while reducing Chinese-specific particles, slang, repeated emphasis, and exaggerated punctuation.
 
-## Preserve Narrative Nodes
+## Preserve The Cognition Route
 
 Both languages must retain:
 
 - the same actions and evidence;
-- the same order of discovery when order matters;
+- the same shifts in attention, including cross-subsystem jumps and later returns;
+- the same researched explanation where it changes the writer's understanding;
+- the same later synthesis that recombines earlier learning;
 - the same uncertainty and public limits;
+- the same boundary between documented project work and knowledge researched later;
 - the same technical explanation;
 - the same important reaction or joke target;
 - the same ending beat.
 
-English may change sentence boundaries and phrasing. It may not become a smaller marketing summary.
+English may change sentence boundaries and phrasing, and it may smooth a local transition when needed. It may not become a smaller marketing summary or reorder the note into a cleaner artifact taxonomy.
+
+Keep source links close to the researched sentence in both languages when the target format permits it. Make the link placement natural; do not collect sources into a detached section that breaks the attention route.
 
 ## Translate The Comic Mechanism
 

@@ -10,6 +10,12 @@ Use this before drafting or humanizing Chinese portfolio prose.
 
 The user chose roughly 75% of `khazix-writer`'s narrative energy for Chinese. Treat that percentage as a direction: livelier than the current report-like notes, calmer and more technical than a public-account entertainment article.
 
+## Keep The Person In The Route
+
+First person is not a quota for `我`. The person becomes visible through selection and judgment: what detail they noticed, why it left a real question, which misunderstanding sent them to research later, and how one subsystem altered their reading of another.
+
+Keep those choices close to the technical facts. A sentence can feel personal without a pronoun when its attention, uncertainty, or changed interpretation clearly belongs to the writer.
+
 ## Put Reaction Next To Its Cause
 
 Do not save all personality for a final reflection. Place a reaction where the friction happens:
@@ -20,12 +26,14 @@ DLL 已经铺满了整个目录，程序换台电脑还是打不开。这个画�
 
 The joke works because the directory and failure are real. Without evidence, omit the reaction.
 
-## Vary Rhythm Without Performing
+## Allow Natural Unevenness
 
 - Mix short turns with medium technical explanation.
 - Let a short sentence stand alone when an assumption genuinely breaks.
 - Use a question when it is the question the writer actually had.
 - Allow an interruption, correction, or mild unevenness when it sounds natural.
+- Pause on a real question, follow a connection into another subsystem, and return later when that is how understanding moved.
+- Use a short local bridge when a jump needs orientation; do not rebuild the note into a forced chronology.
 - Keep paragraphs focused on one movement, but do not force equal length.
 
 Do not require a fixed number of fragments, questions, jokes, colloquial phrases, or emotional punctuation. Quotas produce another template.
@@ -61,6 +69,10 @@ Allow `我觉得`, `当时有点懵`, `看起来很像那么回事`, or `这个�
 Remove empty corporate or handoff language such as `赋能`, `闭环`, `抓手`, `落地成效`, `本次仅公开`, and `公开证据边界`.
 
 Ordinary contrast and sequencing words are not forbidden in isolation. Rewrite them when they become a repeated scaffold—several paragraphs built from `首先/其次/最后`, or habitual `不是...而是...` reframing that delays the concrete point.
+
+## Cognition-Level Repair
+
+A safe compliance report does not become a human learning note when decorated with pronouns, questions, or jokes. Rebuild it around attention and changed understanding: what the writer noticed, why it mattered, what new knowledge disturbed the first explanation, and how a later passage recombines the learning. Keep every project action and technical claim grounded while changing the route.
 
 ## Preserve Li Zhiyi's Identity
 

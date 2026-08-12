@@ -8,6 +8,10 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | F2 | Unknowns | Missing authorship, dates, results, and paths stay unknown or are clearly qualified. |
 | C1 | Composition | Section order follows the material rather than a named note type or mandatory sequence. |
 | C2 | Headings | Headings describe the content below them, total no more than 15, and avoid framework labels such as `起点`, `怎么卡住`, `文件`, `回头看`, and `还要补`. |
+| C3 | Cognition trail | Order follows what caught the writer's attention, the question it raised, the changed interpretation, and later recombination. |
+| C4 | Cross-subsystem movement | The note may jump among electronics, firmware, desktop software, mechanics, fabrication, and research without imposing a fake strict chronology. |
+| C5 | Later synthesis | A later passage reuses an earlier learning or makes a new connection; sections are not isolated artifact summaries. |
+| C6 | Thought-bookmark headings | Headings mark the current subject or thought without becoming a complete taxonomy or writing framework. |
 | V1 | Chinese voice | The Chinese is concrete, emotionally present, lightly humorous where the evidence supports it, and technically exact. |
 | V2 | Humor | Humor comes from observed friction, with no invented scene and no ridicule aimed at another person or organization. |
 | B1 | English | English preserves the Chinese facts and narrative nodes, uses natural phrasing, and reads near the user's qualitative 60%-of-reference target beside Chinese at 75%, without treating either value as a quota. |
