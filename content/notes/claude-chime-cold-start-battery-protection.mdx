@@ -1,0 +1,93 @@
+---
+title: "From 4.03 V to 1.49 V: Do Not Convict the PCB of a Short Yet"
+titleZh: "4.03 V 掉到 1.49 V，先别急着给 PCB 判短路"
+summary: "The same board produced two unloaded 5 V rails from a 3.8 V, 50 mA limited supply, yet pulled a protected lithium cell down to 1.49–1.57 V. Static resistance, the battery-terminal waveform, disconnect recovery, and external unlock made a persistent hard short less likely and supported a bounded cold-start protection hypothesis—not a claimed inrush measurement."
+summaryZh: "同一块板在 3.8 V、50 mA 限流电源下能升出两路 5 V，接入带 DW01A/8205A 保护的小锂电池后却跌到 1.49–1.57 V；我沿静态阻值、端电压波形、断开恢复与外部解锁逐步排除持续硬短路，并把结论收在“冷启动浪涌触发保护”的工程判断，而不是未经测流的定论。"
+date: "2026-08-13"
+tags: ["Battery Protection", "Boost Converter", "Inrush Current", "Bring-up", "Oscilloscope", "Power Path"]
+visibility: public
+projectSlug: "claude-chime-hardware-power-board"
+---
+
+## I Connected 4.03 V and Got 1.49 V / 4.03 V 接上去，只剩 1.49 V
+
+The Claude Chime power board behaved normally from the bench supply. With 3.8 V input, a 50 mA current limit, and no load, both boost converters started and the multimeter showed about 5.12 V and 5.08 V. Replacing that supply with a small protected 3.7 V lithium cell made the board look disastrous: the battery measured 4.03 V before connection and only 1.49–1.57 V afterward. Neither 5 V rail could rise from there.
+
+Claude Chime 电源板用台式电源时很正常。3.8 V 输入、50 mA 限流、空载，两路 Boost 都能启动，万用表分别读到约 5.12 V 和 5.08 V。可我换成一块带保护板的 3.7 V 小锂电池，现象突然变得很像灾难：接板前电池是 4.03 V，接上后只剩 1.49–1.57 V，两路 5 V 自然也升不起来。
+
+![Board connected to the protected battery / 电池接入后的整板状态](/uploads/projects/claude-chime-hardware/hardware-test/assembled-board-with-battery.jpg)
+
+A PCB short was the obvious first suspect. I had hand-soldered the board, and the parts were packed into roughly 28 × 27 mm. A solder bridge, reversed part, or bridged pad was easier to imagine than a battery-protection state machine.
+
+第一反应当然是 PCB 短路。毕竟板子是我手焊的，元件又挤在约 28 × 27 mm 的面积里，连锡、反件或焊盘桥接都比“电池保护状态机”更容易让人想到。
+
+## A 50 mA Limited Supply Made a Persistent Hard Short Less Likely / 50 mA 限流电源先替持续硬短路洗清了嫌疑
+
+I began with static checks across the power nets, then measured the boost-converter pins and configuration states. A later retrospective reconstructed from the project-time chat records retains approximate resistances to ground of 86 kΩ at `BAT+`, 330 kΩ at `SOL_5V`, 330 kΩ at the other 5 V branch, and 1.5 MΩ at `ESP_5V_BUS`. They are not a point-by-point original lab log, but they are consistent with the judgment I made at the time: I did not find a stable low-resistance short.
+
+我先沿电源网做静态检查，再量升压芯片各引脚与配置状态。后来依据当时聊天记录整理的复盘里，保留下来的对地阻值约为：`BAT+` 86 kΩ、`SOL_5V` 330 kΩ、另一条 5 V 支路 330 kΩ、`ESP_5V_BUS` 1.5 MΩ。它们不是一份原始实验日志里的逐项记录，但与当时的判断一致：没有看到一条稳定存在的低阻短路。
+
+The stronger counterexample was the 50 mA limited supply. A persistent hard short would have difficulty coexisting with two unloaded 5 V outputs under such a small input-current limit. This did not prove loaded operation was fault-free. It narrowed the question from “what anywhere on the PCB is wrong?” to “what happens at the moment the battery is connected?”
+
+更直接的反证来自那台 50 mA 限流电源。如果板上存在持续硬短路，它很难在这么小的输入电流限制下同时维持两路空载 5 V。现在回看，这一步没有证明板子在真实负载下没有任何问题，却把故障范围从“所有可能”缩小到了“电池接入瞬间发生了什么”。
+
+![One unloaded output measurement: 5.12 V / 两路空载输出实测之一：5.12 V](/uploads/projects/claude-chime-hardware/hardware-test/output-measurement-5-12v.jpg)
+![One unloaded output measurement: 5.08 V / 两路空载输出实测之一：5.08 V](/uploads/projects/claude-chime-hardware/hardware-test/output-measurement-5-08v.jpg)
+
+## The Oscilloscope Captured Voltage Collapse, Not Inrush Current / 示波器抓到的是电压塌陷，不是浪涌电流
+
+I probed the battery terminals while making the connection. The waveform fell deeply, showed a small intermediate attempt to recover, then remained clamped low. Disconnecting the board allowed the cell to recover. Applying the bench supply across the battery pack output could also clear the locked state and let the cell power the board normally.
+
+我把示波器接在电池端，观察焊接接入的一瞬间。波形先出现很深的掉压，中间有一小段想恢复的凹槽，随后被压在低位。断开负载后，电池可以恢复；把台式电源重新加在电池保护板输出端，又能解除锁定，让电池正常带起这块板。
+
+Those observations moved my attention to the small protection PCB attached to the cell, built around the familiar DW01A and 8205A combination. Both boost converters wake at power-up. Their input capacitance must charge, and each converter then has to raise its output storage capacitors from zero. The branches can therefore combine into a large, brief demand at cold start. Capacitance added to support solenoid transients during normal operation also becomes energy that must be supplied at the first battery connection.
+
+这组现象把注意力转向了电池自带的小保护板。它使用常见的 DW01A 与 8205A 组合。两颗 Boost 在上电时同时醒来，输入电容需要充电，转换器还要把两路输出储能电容从零拉起；这些支路叠在一起，完全可能只在冷启动的一瞬间向电池索取很大的电流。电磁铁动作时需要的储能电容原本是为了支撑瞬态，到了第一次接电池时，却也成为必须被充满的负担。
+
+That explanation remains an engineering inference, not a measured current waveform. My oscilloscope probe was on battery voltage; I had neither a current probe nor a shunt in the path. The [DW01A datasheet](https://www.ic-fortune.com/upload/Download/DW01A-DS-13_EN.pdf) specifies overcurrent and short-circuit detection as sense-voltage thresholds. Converting them into amperes depends on the combined resistance of the 8205A, tabs, wiring, and contacts. The voltage collapse, disconnect recovery, and external-supply unlock are highly consistent with cold-start inrush triggering the protection path, but the existing measurements neither prove that cause directly nor establish the current peak.
+
+但“可能”不能偷换成“已经测到”。我的示波器探头量的是电池端电压，没有电流探头，也没有在回路里串取样电阻。[DW01A 数据手册](https://www.ic-fortune.com/upload/Download/DW01A-DS-13_EN.pdf)给出的过流与短路门限本质上是检测电压，换算成多少安培还取决于 8205A、焊片、导线和连接点的总电阻。因此我能写的结论是：电压塌陷、断开恢复和外部电源解锁的组合，高度符合冷启动浪涌触发保护板的行为；现有测量不能直接证明触发原因，也不能给出浪涌峰值。
+
+## Why Both Boost Converters Wake Together / 两颗 Boost 为什么偏偏会一起醒来
+
+Looking only at the fault might suggest deleting one boost converter. The two rails, however, were not duplication for its own sake: one backs up the ESP32 supply and the other drives the 5 V push-pull solenoid. Sharing a converter would make the controller and inductive load share the same transient, allowing each solenoid movement to pull the ESP32 into the same voltage dip.
+
+如果只看这次故障，最简单的反应是删掉一颗 Boost。可回到系统工作状态，这两路电源并不是为了堆料：一路给 ESP32 备用供电，另一路负责 5 V 推拉式电磁铁。共用一颗转换器会让主控与感性负载共享瞬态，电磁铁每次动作都可能把 ESP32 拉进同一场压降。
+
+The TLV61048 includes a typical 2 ms internal soft start, but soft start inside each IC does not by itself establish inrush control for the complete board. The battery still sees two converters and their input and output capacitors, while the protection board responds only to the transient at its own terminals. After the protected pack was unlocked, V1.0 operated normally; the client engineer also reported normal repeated actuation with the real solenoid. The cold-connection event nevertheless separated two questions for me: steady-state load allocation and power-up sequencing.
+
+TLV61048 本身有典型 2 ms 的内部软启动，但“芯片有软启动”不等于整块板已经完成浪涌管理。电池仍要面对两颗转换器及其输入、输出电容，保护板也只看自己端口上的瞬态。V1.0 最终在解锁后可以正常工作，客户工程师也反馈真实电磁铁连续动作时整机正常；然而那个只发生在冷接入时的问题提醒我，稳态负载分配与上电顺序是两道不同的题。
+
+If I rebuilt this path now, I would first capture connection current with a current probe or a known low-resistance shunt. Only then would I choose between sequencing the two converters, adding a controlled-slew load switch, using a pre-charge path, or another inrush-limiting method. Without a waveform and an energy estimate, adding a capacitor to a gate is an experiment, not yet a soft-start design.
+
+如果今天重做，我会先用电流探头或已知低阻分流器把接入峰值量出来，再决定是分时使能两路 Boost，还是加入受控斜率的负载开关、预充路径或其他限浪涌措施。没有波形和能量估算以前，随手在栅极加一颗电容只能叫尝试，不能叫软启动设计。
+
+## Compensating to 5.5 V Nearly Let the Backup Supply Take Control / 5.5 V 补偿差点让备用电源抢走主导权
+
+The cold-start investigation returned me to the complete power path. Type-C on the ESP32 core board and the battery boost supply both meet at `ESP_5V_BUS`. I had considered setting the converter to 5.5 V to offset the series Schottky drop. But once the battery path is higher than USB 5 V, it stops behaving as a source that takes over after disconnection and instead overpowers Type-C.
+
+冷启动排查又把我带回了整条电源路径。ESP32 核心板上的 Type-C 与电池升压会同时碰到 `ESP_5V_BUS`。我曾考虑把升压设为 5.5 V，补偿串联肖特基二极管的压降；问题是，当电池路径高于 USB 5 V，它就不再是“拔线后接手”的备用电源，而会主动压过 Type-C。
+
+The final schematic target is about 4.984 V, isolated through an SS12. It does not try to make the voltage after the diode read exactly 5.000 V. It first preserves source priority: USB supplies the board while present; the battery path steps back, then provides enough input for the core board LDO after USB disappears. This correction made the Schottky drop more than a number to subtract. It could decide which of two supplies conducted first.
+
+最后的图纸计算值是约 4.984 V，并用 SS12 做路径隔离。它没有追求让二极管后的电压看起来正好等于 5.000 V，而是先守住供电优先级：USB 存在时由 USB 供电，电池路径退后；USB 消失后，核心板上的 LDO 仍能从电池升压路径获得足够输入。这个改动让我第一次很具体地意识到，肖特基压降不是只拿来做减法的数字，它会改变两个电源谁先导通。
+
+## The PROG Pin Tells the Charger When to Stop / PROG 脚让充电器知道什么时候闭嘴
+
+The MCP73831 input shares that same bus. If the battery boosts `ESP_5V_BUS` while the charger remains unconditionally enabled, current can leave the battery, pass through the boost converter and diode, enter the charger, and return to the same cell. The loop cannot create energy; it only spends battery energy in a useless cycle.
+
+同一条总线还连接 MCP73831 的输入。如果电池经过 Boost 把 `ESP_5V_BUS` 抬起来，而充电器又无条件工作，电流就可能从电池出发，升压、过二极管、进充电器，再回到原来的电池。这条路当然不能凭损耗创造能量，只会把电量消耗在一次没有意义的循环里。
+
+I controlled the PROG branch instead of interrupting the main charge-current path. When `CHARGE_CTRL` is high, a 2N7002 connects the 3.3 kΩ resistor to ground. After Type-C is removed, firmware drives the control low, leaves PROG open, and disables charging. The MCP73831 documentation explicitly supports this disable method. The small switch does not change the charger itself; it adds the missing system state of when charging is permitted.
+
+我的解决办法是控制 PROG 支路，而不是切断充电大电流主路径。`CHARGE_CTRL` 拉高后，2N7002 才把 3.3 kΩ 电阻接到地；Type-C 拔掉后，固件把它拉低，让 PROG 悬空并关闭充电。MCP73831 的原厂资料明确支持这种禁用方式。这个小开关没有改变充电芯片是什么，却给“什么时候允许充电”补上了系统状态。
+
+## After the Client Connected the Real Solenoid / 客户接上真实电磁铁以后
+
+On my own bench I verified the two unloaded boost rails, the presence of charging current followed by a rising battery voltage, the gated ADC divider, and repeated switching from simulated 3.3 V `SOL_CTRL` logic. I neither connected the real solenoid nor wrote the ESP32 firmware. The client's firmware engineer later reported in chat that repeated real-solenoid actuation, ADC battery reading, charging control, ESP32 communication, and complete-device operation were normal.
+
+我在自己的桌上确认了两路空载升压、充电电流确实存在且电池电压随时间上升、受控 ADC 分压，以及模拟 3.3 V `SOL_CTRL` 下的重复开关；我没有接过真实电磁铁，也没有编写 ESP32 固件。客户的固件工程师后来在聊天里反馈，实际电磁铁重复动作、ADC 电量读取、充电控制、ESP32 通信和整机运行都没有问题。
+
+That boundary clarifies the debugging rather than diminishing it. I owned the board architecture, implementation, and basic bring-up; the client owned firmware and real-load system integration. The first PCB completed delivery without a revision, but first-spin success does not mean every transient was fully measured. The drop from 4.03 V to 1.49 V left me with a more useful habit: when a battery terminal suddenly falls into the 1 V range, do not convict the PCB of a short immediately. First ask which protection device may have interrupted the current path—and whether the instrument captured the voltage or the cause.
+
+这个边界不削弱排查，反而让它更清楚：我解决的是一块电源板的架构、实现与基础 bring-up，客户完成的是带真实负载和固件的系统集成。第一版 PCB 没有改板就完成交付，但“第一次成功”不是“每一种瞬态都已经测透”。4.03 V 掉到 1.49 V 的那一刻给我留下了一条更有用的习惯：电池端突然只剩 1.x V 时，先别急着给 PCB 判短路；先问清楚，是哪一个保护器件主动切断了电流路径，以及自己究竟量到了电压、还是量到了原因。

@@ -332,8 +332,8 @@
     "thumbnail": "/uploads/projects/claude-chime-hardware/claude-chime-logo.png",
     "date": "2026-05-05",
     "projectSlug": "claude-chime-hardware-power-board",
-    "caption": "The uploaded orange-and-black “Clawdy Family” graphic is used as the Claude Chime archive cover; it is a presentation asset rather than hardware evidence.",
-    "captionZh": "上传的橙黑色 “Clawdy Family” 图形用于 Claude Chime 归档封面；它是展示素材，不是硬件验证证据。"
+    "caption": "The orange-and-black “Clawdy Family” graphic is one of the commissioning team's project marks for Claude Chime; the PCB render now serves as the page cover.",
+    "captionZh": "橙黑色 “Clawdy Family” 图形是委托团队用于 Claude Chime 的项目标识之一；当前页面封面已改为 PCB 渲染。"
   },
   {
     "id": "seamly2d-banner",
