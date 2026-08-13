@@ -64,9 +64,9 @@ Media:
 Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-13`:
 
 - 8 project files total;
-- 21 public note files total;
+- 22 public note files total;
 - 3 Juanyun project pages and 9 Juanyun notes;
-- 1 Claude Chime hardware power-board archive;
+- 1 Claude Chime commissioned hardware case study and 1 related note;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
 - 1 Arduino Digital Clock course project and 1 related note from `C:\Users\123\Desktop\Digital Clock`, with selected course screenshots re-rendered without the top-right XJTLU logo and the original homework report PDF published as project evidence;
@@ -76,6 +76,7 @@ Current content state in this workspace, extending release `v0.7.0`, as of `2026
 - the Arduino Digital Clock project, note, and 11 media records now use the approved bilingual first-person account; the two rollover thresholds remain separately flashed versions, while the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet retain their documented evidence limits;
 - the Tianjin Jintie Communications STM32 project and five notes now use the approved bilingual first-person account; the 16-point ADC-to-PWM mapping remains feedforward, the hardware-I2C lockup remains a present-day hypothesis, PID and ATP/ATO/ATS remain reading-layer concepts, and all four public C excerpts remain unchanged;
 - the Nanjing Turing Qt/Seamly2D project and three-week note now use the approved bilingual first-person account; the `QSettings` account/role layer remains a local desktop feasibility prototype, formal acceptance remains separate from the later clean Windows PC test, macOS remains bounded at a launched unsigned DMG without completed signing/notarization, and post-handoff adoption remains unknown;
+- the Claude Chime project and cold-start note now use the approved bilingual first-person account; direct no-load and analog-path checks remain separate from client-reported real-solenoid integration, while the protected-cell startup explanation remains an inference without a measured inrush waveform;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
