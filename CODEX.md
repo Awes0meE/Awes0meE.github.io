@@ -25,6 +25,7 @@ These rules incorporate the installed `karpathy-guidelines` skill:
 - Prefer the minimum working change. Do not add speculative abstractions, hidden CMS complexity, or unnecessary framework changes.
 - Make surgical edits. Every changed line should trace to the current request.
 - Preserve unrelated user work. Never revert or rewrite unrelated changes.
+- Treat project covers and other visual-identity choices as user-controlled. A prose or content rewrite must preserve `cover`, visual assets, and their presentation role unless the user explicitly authorizes that visual change.
 - Define success criteria for non-trivial tasks and verify them with commands or browser checks.
 - If a simpler approach is better than the requested approach, explain the tradeoff and proceed pragmatically.
 

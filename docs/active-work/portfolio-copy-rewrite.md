@@ -34,6 +34,9 @@
 - Public contact remains GitHub-only; email and location stay hidden.
 - Project demonstration media remains unchanged unless the user explicitly
   requests an asset edit.
+- Project covers and other visual-identity choices remain unchanged during
+  prose/content rewrites unless the user explicitly requests or approves the
+  visual change.
 - A project rewrite reaches `main` only after the user reviews its bilingual
   copy and explicitly approves the merge.
 
