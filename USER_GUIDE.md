@@ -339,9 +339,10 @@ npm run build
 2. Modify content or pages.
 3. Check the website in the browser.
 4. Run `npm run lint`, `npm run validate-content`, `npm run validate-encoding`, `npm run typecheck`, and `npm run build`.
-5. Commit changes to Git.
-6. Push to GitHub.
-7. Let Vercel deploy the public version.
+5. Commit the reviewed changes on a topic branch.
+6. Push the topic branch and open a pull request.
+7. Review the pull-request diff and Vercel preview, then merge after checks pass.
+8. Fast-forward local `main` from GitHub; Vercel deploys the merged version automatically.
 
 ## 推荐维护流程
 
@@ -349,6 +350,7 @@ npm run build
 2. 修改内容或页面。
 3. 在浏览器检查网站效果。
 4. 运行 `npm run lint`、`npm run validate-content`、`npm run validate-encoding`、`npm run typecheck` 和 `npm run build`。
-5. 提交 Git 版本。
-6. 推送到 GitHub。
-7. 让 Vercel 自动部署公开版本。
+5. 在 topic branch 上提交已经检查过的改动。
+6. 推送 topic branch，并创建 pull request。
+7. 检查 PR diff 与 Vercel 预览，所有检查通过后再合并。
+8. 从 GitHub 快进同步本地 `main`；Vercel 会自动部署合并后的公开版本。
