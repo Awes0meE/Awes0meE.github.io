@@ -244,18 +244,23 @@ npm.cmd run build
 npm.cmd audit --omit=dev
 ```
 
-Then push the branch you are working on. For `main` releases:
+Commit on a topic branch, push that branch, and open a pull request. Do not push
+release commits directly to `main`:
 
 ```powershell
-git add -A
-git commit -m "Add portfolio content"
-git push origin main
+git add -- <reviewed-paths>
+git commit -m "docs(content): add portfolio project"
+git push -u origin <topic-branch>
 ```
 
-Vercel will redeploy automatically.
-
-For draft content branches, push the branch and review attachments before merging:
+Review the pull-request diff and Vercel preview, then merge only after the
+required checks pass. Synchronize and prune the local checkout afterward:
 
 ```powershell
-git push origin my-content-branch
+git switch main
+git fetch --prune origin
+git pull --ff-only origin main
 ```
+
+Vercel deploys pushed topic branches as previews and merged `main` commits to
+production automatically.
