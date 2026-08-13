@@ -264,3 +264,8 @@ git pull --ff-only origin main
 
 Vercel deploys pushed topic branches as previews and merged `main` commits to
 production automatically.
+
+For prose or content-only rewrites, keep the project's `cover`, visual assets,
+and established presentation role unchanged. Covers are user-controlled visual
+identity choices; replace one only when the user explicitly requests or approves
+that visual change.
