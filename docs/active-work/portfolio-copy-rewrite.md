@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-13
-**Branch:** `main`
-**Current project:** None selected
+**Branch:** `docs/rewrite-claude-chime`
+**Current project:** `Claude Chime Hardware Power Board`
 **Last completed project:** `南京图灵 Qt、编译与打包实习记录`
-**State:** Nanjing Turing bilingual rewrite merged through pull request #14; awaiting the next one-project selection
+**State:** Chinese and English copy approved; public integration and local verification complete; release approved and ready to merge
 
 ## Working Contract
 
@@ -36,6 +36,41 @@
   requests an asset edit.
 - A project rewrite reaches `main` only after the user reviews its bilingual
   copy and explicitly approves the merge.
+
+## Claude Chime Confirmed Brief
+
+- `Claude Chime` is the product, `Clawdy Family` is the mascot/family, and
+  `Accele AI` is the commissioning company. Public copy may describe this as a
+  paid, independent hardware commission.
+- The product is a 3D-printed crab on a 5 V push-pull solenoid. An external
+  ESP32-S3 core board receives a computer-side Claude completion event and
+  makes the crab jump as a physical notification.
+- Alvin independently completed requirements breakdown, architecture,
+  calculations and selection, schematic, PCB layout, BOM/Gerber, ordering,
+  hand assembly, basic hardware bring-up, debugging, and the software-interface
+  handoff. He did not write the ESP32 firmware or personally perform the final
+  integrated-system acceptance test. All archived EDA author marks refer to him.
+- V1.0 was the only board spin. It required no flywires, cuts, component-value
+  changes, added capacitors, or PCB revision after assembly and scoped bring-up.
+- Alvin directly verified two no-load boost outputs at about 5.12 V and 5.08 V
+  from a 3.8 V / 50 mA limited bench supply, but no longer remembers which
+  reading belongs to which rail. He also verified charge current plus later
+  battery-voltage rise, the manually enabled ADC divider, and repeated no-load
+  SOL_CTRL switching from a simulated 3.3 V logic signal.
+- The client firmware engineer later reported successful ESP32 communication,
+  ADC battery reading, charging control, repeated real-solenoid actuation, and
+  full-device operation. This remains customer chat feedback, not a result Alvin
+  personally witnessed.
+- A protected cell measured 4.03 V before connection and 1.49-1.57 V afterward.
+  Battery-terminal voltage collapse, disconnect recovery, and external-supply
+  unlock are highly consistent with cold-start inrush triggering its DW01A/8205A
+  protection path, but no current waveform or exact threshold was measured.
+- The public software handoff is Alvin's original delivery work. The later DOCX
+  design retrospective was reconstructed from contemporaneous chat records and
+  must not be described as an original project-time log.
+- Narrative route: a local solenoid-driver request expanded into a full power-
+  path problem; the learning note closes on the debugging move from suspected
+  PCB short to a bounded battery-protection/cold-start hypothesis.
 
 ## Completed Rewrite Checkpoints
 
@@ -92,16 +127,27 @@
 
 ## Next Action
 
-1. Ask the user to select the next remaining project family: Juanyun thermal and
-   control hardware, the Juanyun FOC driver archive, or the Claude Chime power
-   board archive.
-2. Start the selected project from synchronized `main` on a new semantic topic
-   branch, inspect its evidence, then reuse a confirmed brief or run `grill-me`.
+1. Commit, push, open, verify, and merge the approved Claude Chime rewrite.
+2. After merge, synchronize `main`, confirm the deployment checks, and update
+   this relay for the next remaining project selection.
 3. Do not reopen Smart Car, DIY Cooling, Arduino Digital Clock, Tianjin STM32,
-   or Nanjing Turing unless the user explicitly requests it.
+   Nanjing Turing, or Claude Chime unless explicitly requested.
 
 ## Current Verification
 
+- `npm run lint` passed on 2026-08-13 for the final Claude Chime bilingual
+  project page, learning note, media caption, assets, and software handoff.
+- `npm run typecheck` passed on 2026-08-13.
+- `next build --webpack` passed with 37 static pages, including the new Claude
+  Chime learning-note route. The default Turbopack build was attempted twice but
+  its CSS worker could not bind a local port in the current Codex environment;
+  both failures occurred before content compilation.
+- Local production-preview browser checks passed for the project and note in
+  English and Chinese at 1440 × 1000 and 390 × 844. There was no horizontal
+  overflow, error overlay, broken loaded image, or page error; the related-media
+  logo also loaded after entering its lazy-load viewport.
+- Content validation now covers 8 projects, 22 notes, and 73 media records;
+  UTF-8 validation covers 286 text files.
 - `npm run lint` passed on 2026-08-13 for the Nanjing Turing bilingual draft.
 - `npm run typecheck` passed on 2026-08-13 for the Nanjing Turing bilingual draft.
 - `npm run build` passed on 2026-08-13 with 36 static pages.
