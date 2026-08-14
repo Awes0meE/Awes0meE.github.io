@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
-**Updated:** 2026-08-13
+**Updated:** 2026-08-14
 **Branch:** `main`
 **Current project:** None selected
 **Last completed project:** `Claude Chime Hardware Power Board`
-**State:** Pull request #16 merged and its production deployment succeeded; waiting for the next remaining project selection
+**State:** Pull request #20 merged the hardened writer plus refreshed Claude Chime note and project-page prose; waiting for the next remaining project selection
 
 ## Working Contract
 
@@ -77,9 +77,10 @@
   client chat feedback; cold-start protection triggering remains a bounded
   inference without a measured inrush waveform. V1.0 needed no rework or respin.
 - On 2026-08-14, the Claude Chime cold-start note became the first real forward
-  test for the hardened reader-prose L1 gate. The rewrite preserved the same
-  evidence boundaries while passing zero-hit wording, punctuation, and
-  canned-structure scans in both languages.
+  test for the hardened reader-prose L1 gate. The project-page body then received
+  the same pass. Pull request #20 merged both rewrites and the hardened skill at
+  `b3dc51cbc1620163fbfdcac0c8ca624d08a2434f`, without changing the project
+  frontmatter, cover, media, public artifacts, or evidence boundaries.
 - The verified published content count is 8 projects, 22 notes, and 73 media items.
 
 ## Next Action
@@ -93,15 +94,14 @@
 
 ## Current Verification
 
-- Pull request #16's Vercel and preview-comment checks passed before merge; the
-  production deployment for merge commit `03f5ba5` reported `success`.
-- `npm run lint` and `npm run typecheck` passed for the final Claude Chime release.
-- `next build --webpack` passed with 37 static pages, including the new note.
-  The default Turbopack build was attempted twice but its CSS worker could not
-  bind a local port in the Codex environment before content compilation.
-- Local production-preview checks passed for English and Chinese project/note
-  views at desktop and mobile widths, without overflow, an error overlay, broken
-  loaded images, or page errors.
+- Pull request #20 was mergeable and its Vercel deployment plus preview-comment
+  checks passed before the exact head `6197e8e` was merged.
+- `npm run lint` and `npm run typecheck` passed for the hardened skill and both
+  refreshed Claude Chime pages.
+- `next build --webpack` passed with 37 static pages, including the project and note.
+- Pull request #16 remains the latest desktop/mobile bilingual browser sweep.
+  This copy-only refresh used the static build and successful Vercel preview
+  rather than repeating that full interaction pass.
 - Content validation covers 8 projects, 22 notes, and 73 media records; UTF-8
   validation covers 287 text files.
 - The public interactive BOM has empty customer/order metadata fields; the
