@@ -1,15 +1,19 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
-**Updated:** 2026-08-14
+**Updated:** 2026-08-15
 **Branch:** `main`
-**Current project:** none selected
+**Current project:** Juanyun FOC driver-board family, planned but not started
 **Last completed project:** `卷云相变散热器系统：两套控制器与一条完整制冷链`
-**State:** Juanyun copy approved and merged through pull request #22 at `e473b8c13f99308398a9c3221e1402d78634498d`; no portfolio rewrite is currently active
+**State:** pull request #23 merged the approved five-family L1 surface cleanup and the narrower direct-prose follow-up into `main` at `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`; the planned new FOC writing pass has not started
 
 ## Working Contract
 
-- Leave the approved Arduino Smart Car project, note, and media copy unchanged.
-- Rewrite every other project family one at a time, never as a batch.
+- Leave approved project families unchanged unless the user explicitly reopens a
+  narrow scope. Pull request #23 was a one-time explicit exception for surface
+  cleanup, including Smart Car.
+- Handle substantive project rewrites one family at a time. A cross-project
+  wording audit is allowed only when the user explicitly limits it to a narrow,
+  evidence-preserving cleanup.
 - Before writing each project, inspect its uploaded public materials, then
   reuse a user-confirmed brief for the same scope or run a `grill-me` interview.
 - Treat the user's voice answers as primary first-person material. They may be
@@ -193,52 +197,49 @@
   `卷云相变散热器系统：两套控制器与一条完整制冷链`, its canonical date
   range is `2025-11 to 2026-05`, and the merged public set contains 8 projects,
   24 notes, and 78 media items.
+- Pull request #23 merged the user-approved maintenance pass at
+  `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`. Digital Clock, Smart Car, DIY
+  Cooling, Tianjin STM32, and the model-authored Nanjing Turing copy first
+  received the post-PR20 L1 surface cleanup. The writer then gained a tested
+  preference for direct assertions, no Chinese corner quotes in scoped normal
+  narration, and preservation of ordinary factual negation. The follow-up
+  content pass was narrowed during review to the Digital Clock and Smart Car
+  project/note pairs plus the Nanjing Turing project page. This was not a new
+  cognition-led rewrite.
+- FOC, Claude Chime, Juanyun thermal, the four Nanjing source-document notes,
+  public uploads, covers, application code, and confirmed evidence boundaries
+  remained outside that maintenance scope.
 
 ## Next Action
 
-1. Wait for the user to select the next project family. Start it from a clean,
-   synchronized `main` on a semantic topic branch.
-2. Inspect its evidence and obtain or reuse a confirmed project brief before
-   drafting substantial first-person prose.
+1. Start the Juanyun FOC driver-board family from a clean, synchronized `main`
+   only when the user asks to begin that writing pass.
+2. Inspect the FOC evidence and obtain or reuse a confirmed project brief before
+   drafting substantial first-person prose. Pull request #23 did not apply this
+   L1/direct-prose pass to FOC or approve a new FOC version.
 3. Do not reopen Smart Car, DIY Cooling, Arduino Digital Clock, Tianjin STM32,
    Nanjing Turing, Claude Chime, or Juanyun thermal unless explicitly requested.
 
 ## Current Verification
 
-- Pull request #22 merged the approved Juanyun content into `main` at
-  `e473b8c13f99308398a9c3221e1402d78634498d` after its current-head Vercel
-  preview reached Ready with no unresolved feedback.
-- On merged `main`, content validation passes with 8 projects, 24 notes, and
-  78 media items; UTF-8 validation passes for 291 text files.
-- The five imported JPEGs are pixel-identical to the approved archive sources
-  after lossless optimization, and their public copies contain no EXIF tags.
-- The thermal project now has exactly nine related public notes, including two
-  new notes for automatic control and the ControlPanel/maintenance phase.
-- The six rewritten or added reader-facing bodies pass the scoped L1 wording,
-  punctuation, and canned-structure scan with zero applicable hits.
-- The Truth and Li Zhiyi reviews keep direct work, artifact facts, company
-  reports, and present-day research separate; Chinese and English carry the same
-  ownership, result, uncertainty, limitation, and emotional claims.
-- Every ACUnit board-note image path resolves, and public project/note bodies
-  contain no links to the two private firmware repositories.
-- The final project title and rendered date range are fixed at
-  `卷云相变散热器系统：两套控制器与一条完整制冷链` and
-  `2025.11 - 2026.05`.
-- Fresh `git diff --check`, full lint, independent content/encoding validation,
-  TypeScript checking, and the Next.js production build all pass. The build
-  prerenders 39 pages, including both new Juanyun note routes.
-- `npm.cmd audit --omit=dev` reports zero known production vulnerabilities.
-- A local production server was reviewed at 1440 by 1000 in Chinese and 390 by
-  844 in English across `/`, `/work`, `/media`, the Juanyun project, and all five
-  rewritten or added Juanyun notes. Every route had meaningful content, the
-  expected translated heading, no framework overlay, no browser or console
-  error, no horizontal overflow, no failed image request, and no private
-  firmware link.
-- The language controls changed the ControlPanel note between its Chinese and
-  English headings without leaving the route, and a project-to-firmware-note
-  link plus browser return both resolved correctly. Visual screenshots of the
-  project, the photograph-heavy ACUnit board note, and the longest mobile note
-  title showed no layout or image defect.
+- Pull request #23 used head
+  `bc1b154da3fc4a77c215925bc3ee1fd35275eef5`; its Vercel status passed before
+  GitHub merged it into `main` at
+  `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`.
+- The merge changes 5 project pages, 9 notes, selected related media copy, the
+  repository-local writer, its references, and one regression fixture. It does
+  not change application code, frontmatter, covers, public uploads, or FOC.
+- The post-PR20 L1 scan passed across the five approved maintenance families.
+  The direct-prose follow-up passed its narrower final scope and the writer
+  regression preserves direct factual negation plus the user-approved qualified
+  `不是说……不行，而是说……` exception.
+- Content validation remains at 8 projects, 24 public notes, and 78 media items;
+  UTF-8 validation passes for 296 text files.
+- Fresh `git diff --check`, full lint, TypeScript checking, the 39-page Next.js
+  production build, writer validation, frozen-trial guard, and production
+  dependency audit all pass. The audit reports zero known vulnerabilities.
+- Before the documentation reconciliation began, local `main` and `origin/main`
+  matched the exact PR #23 merge commit with a clean worktree.
 
 ## Updating This File
 

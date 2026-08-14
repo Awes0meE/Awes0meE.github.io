@@ -190,6 +190,7 @@ Notes should keep the user's practical learning-log texture. Public pages should
 - avoid reusable framework headings that name the writing process rather than the technical subject;
 - keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
 - use natural spoken transitions where they fit; thought-bookmark headings, real parallel bullet lists, and ordinary sequence words retain their existing rules;
+- state scoped normal narration directly and do not use Chinese corner quotes there; write exact technical tokens as inline code. Avoid a bare `不是 A，而是 B` / `not A but B` correction. Keep ordinary factual negation, and use only the exact user-confirmed `不是说 A 不行，而是说 B` form when it genuinely prevents a false reading;
 - use first person and emotion only when the user or evidence supports them; when a real event and emotional direction are both confirmed, reconstruct the scene naturally without adding surrounding facts;
 - let humor come from real tool, file, hardware, code, or mistaken-assumption friction rather than an invented scene;
 - avoid AI handoff phrasing, repetitive resume lists, and repeated contrast/sequence scaffolds;

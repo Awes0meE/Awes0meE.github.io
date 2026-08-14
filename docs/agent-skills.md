@@ -40,6 +40,8 @@ Source:
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
   - `skills/engineering-note-writer/references/style-examples.md`
+- direct-prose regression fixture:
+  - `skills/engineering-note-writer/tests/direct-prose-regression.md`
 
 Purpose:
 
@@ -48,6 +50,7 @@ Purpose:
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1 gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
+- Use direct assertions and normal sentence syntax in scoped normal narration, with no Chinese corner quotes there and inline code for exact technical tokens. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.

@@ -2,6 +2,14 @@
 
 **Date:** 2026-08-14
 **Branch:** `docs/rewrite-pre-pr20-projects`
+**Outcome:** Scope changed during user review. The writer rule, the Digital
+Clock and Smart Car project/note pairs, and the Nanjing Turing project page
+received the direct-prose pass; the user accepted the remaining L1-cleaned copy
+without continuing the broader second pass. The approved result merged through
+pull request #23 on 2026-08-15 at
+`c89b3b0df031cc2cacfd519c95fb2de522c0b54d`.
+The remaining sections preserve the pre-execution design and do not describe
+the repository's current state or an active task queue.
 
 ## Context
 
