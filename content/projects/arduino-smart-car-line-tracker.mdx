@@ -16,28 +16,28 @@ assetPaths:
 
 ## The Car Arrived As A Bare PCB / 小车到手时还只是一块裸 PCB
 
-The kit arrived looking much more like a parts list than a robot. On the bench were one bare purple PCB, bags of through-hole parts, a few surface-mount devices, a circuit manual, and some Arduino test programs. Before it could follow a black line, every resistor, socket, switch, sensor, and motor connector first had to land in the right place.
+The kit arrived as one bare purple PCB, bags of through-hole parts, a few surface-mount devices, a circuit manual, and some Arduino test programs spread across the bench. Every resistor, socket, switch, sensor, and motor connector first had to land in the right place before the car could follow a black line.
 
-这套东西刚拿到手时，与其说是小车，不如说是一张物料清单摊在桌上。一块紫色裸 PCB、几袋插件元件、少量贴片器件、一份电路 manual，再加若干 Arduino 测试程序。它离「循迹」还很远，电阻、IC 座、开关、传感器和电机接口得先一个个落到正确的位置。
+这套东西刚拿到手时，桌上摊着一块紫色裸 PCB、几袋插件元件、少量贴片器件、一份电路 manual，再加若干 Arduino 测试程序。电阻、IC 座、开关、传感器和电机接口得先一个个落到正确的位置，小车才具备循迹的条件。
 
 ![Soldering bench during assembly / 焊接和装配现场](/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg)
 ![Assembled smart car front side / 焊接完成后的小车正面](/uploads/projects/arduino-smart-car-line-tracker/cover-front.jpg)
 
-This was my first embedded-systems project. At the time, even the ideas behind a PCB, a regulator, or the capacitors around it were new to me. My beginner rule was reassuringly simple. Solder every component correctly and the functions should appear. The rule was not exactly wrong; the board simply had a rather demanding definition of correctly. That gap was what made me want to keep digging.
+This was my first embedded-systems project. At the time, even the ideas behind a PCB, a regulator, or the capacitors around it were new to me. My beginner rule was reassuringly simple. Solder every component correctly and the functions should appear. The PCB demanded much more precision than I understood at the time, across polarity, orientation, joint quality, socket placement, power, and staged testing. That gap was what made me want to keep digging.
 
-这是我第一次接触嵌入式。那时连 PCB 到底是什么、电源芯片为什么存在、旁边那几颗电阻电容各自管什么，我都还在现学。脑子里的入门规则倒是很简单。只要把所有元件正确焊上去，功能自然就会出现。这个逻辑不能说错，只能说 PCB 对「正确」两个字的要求，比我想象中细得多。也正是这点让我越做越有兴趣。
+这是我第一次接触嵌入式。那时连 PCB 到底是什么、电源芯片为什么存在、旁边那几颗电阻电容各自管什么，我都还在现学。脑子里的入门规则倒是很简单。只要把所有元件正确焊上去，功能自然就会出现。PCB 所要求的正确焊接，比我当时理解的细得多，极性、方向、焊点质量、IC 座、电源和分模块测试都算在里面。也正是这点让我越做越有兴趣。
 
-## The Board Stopped Looking Like A Purple Mystery / 这块紫色 PCB 终于不再是一整团
+## Reading the Purple PCB as a Signal Chain / 把紫色 PCB 读成一条信号链
 
-The finished board did not become understandable merely because it was populated. The [Smart Car manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) supplied the map I needed. It placed an Arduino Nano-compatible controller area in the middle, then connected a power path, an L293 motor driver, two motors and their speed sensing, WS2812 LEDs, a shift-register path, IR sensors, collision switches, and two keys. Once those blocks had names, the crowded PCB stopped looking like one purple mystery and started reading as a signal chain.
+The [Smart Car manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) gave me the map I needed to read the finished board. It names an Arduino Nano-compatible controller area in the middle, a power path, an L293 motor driver, two motors and their speed sensing, WS2812 LEDs, a shift-register path, IR sensors, collision switches, and two keys. Once I could name those modules by function, the crowded purple PCB read as a signal chain.
 
-元件焊满以后，板子并不会自动变得好懂。[Smart Car Manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 给了我一张真正有用的地图。中间是 Arduino Nano 兼容主控区，旁边依次接着电源、L293 电机驱动、双电机和测速、WS2812 灯、移位寄存器、红外传感器、碰撞开关与两个按键。模块有了名字以后，这块密密麻麻的紫色 PCB 才不再是一整团元件，而开始像一条能顺着读下去的信号链。
+元件焊满以后，我靠 [Smart Car Manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 才读懂这块板子。中间是 Arduino Nano 兼容主控区，旁边依次接着电源、L293 电机驱动、双电机和测速、WS2812 灯、移位寄存器、红外传感器、碰撞开关与两个按键。按功能给模块命名以后，这块密密麻麻的紫色 PCB 就呈现为一条能顺着读下去的信号链。
 
 ![Teas smart-car system diagram / 小车系统框图](/uploads/projects/arduino-smart-car-line-tracker/manual-system-diagram.png)
 
-The power block was the first useful correction to my just-solder-it model. The LM7805 path regulates the input to a 5 V rail, while the surrounding capacitors filter disturbances that logic and sensors would otherwise have to tolerate. The project report even leaves a blunt warning that CP1, CM3, and CM4 were easy to damage during testing. Power was no longer a pair of labels on a schematic; it could decide whether every block after it behaved sensibly.
+The power block was the first useful correction to my just-solder-it model. The LM7805 path regulates the input to a 5 V rail, and the surrounding capacitors filter disturbances before they reach the logic and sensors. The project report even leaves a blunt warning that CP1, CM3, and CM4 were easy to damage during testing. That supply path directly affects the behaviour of every downstream module.
 
-电源部分最先修正了我「焊上去就行」的理解。LM7805 把输入稳到 5 V，周围的电容负责过滤电源扰动，不然逻辑和传感器就得一起承受后果。项目报告还很直接地提醒，CP1、CM3、CM4 在测试中比较容易损坏。到这里，「电源」不再只是原理图上的两根线，它完全有能力决定后面所有模块讲不讲道理。
+电源部分最先修正了我焊上去就行的理解。LM7805 把输入稳到 5 V，周围的电容在扰动到达逻辑和传感器前先把它滤掉。项目报告还很直接地提醒，CP1、CM3、CM4 在测试中比较容易损坏。这条电源路径会直接影响后面所有模块的工作状态。
 
 ![Power-supply slide with the school logo removed / 去掉校徽后的电源课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)
 
@@ -45,14 +45,14 @@ The power block was the first useful correction to my just-solder-it model. The 
 
 The manual groups six collision switches, six IR tracking inputs, and two keys into fourteen digital signals. An Arduino Nano has only thirteen digital I/O pins, and the rest of the car still needs pins of its own. Two 74HC165 devices therefore collect those parallel states and shift them back to the controller serially. In the uploaded code, `reload_shift_reg()` is the moment that circuit becomes software. It refreshes the named switch and sensor fields before the program decides what the car has seen.
 
-manual 把 6 个碰撞开关、6 路红外循迹输入和 2 个按键合成了 14 路数字信号。Arduino Nano 总共只有 13 个数字 I/O，车上其他功能还要继续用引脚，于是两颗 74HC165 先把这些并行状态收进来，再串行送回主控。到了上传的代码里，`reload_shift_reg()` 就是电路和软件真正接上的那一下。它先刷新每个开关与传感器字段，程序才知道小车刚刚「看见」了什么。
+manual 把 6 个碰撞开关、6 路红外循迹输入和 2 个按键合成了 14 路数字信号。Arduino Nano 总共只有 13 个数字 I/O，车上其他功能还要继续用引脚，于是两颗 74HC165 先把这些并行状态收进来，再串行送回主控。到了上传的代码里，`reload_shift_reg()` 就是电路和软件真正接上的那一下。它先刷新每个开关与传感器字段，程序才知道小车刚刚读到了什么。
 
 ![Sensors and switches slide / 传感器和开关课件页](/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png)
 ![Shift-register slide / 移位寄存器课件页](/uploads/projects/arduino-smart-car-line-tracker/course-shift-register.png)
 
 The inputs serve two different kinds of contact with the outside world. The downward-facing IR sensors distinguish the dark line from the surrounding surface by reflection; the long-arm switches around the body register a physical collision. Both eventually arrive as bits, but one begins with reflected light and the other with a lever touching an obstacle. Seeing them share the same input path made the phrase digital signal feel much less detached from the physical car.
 
-这些输入对应的是两种完全不同的现实接触。朝下的红外传感器靠反射区分黑线与周围地面，车身四周的长臂开关则要真的碰到障碍物才动作。它们进程序以后都是 bit，但一个起点是反射光，另一个起点是拨杆碰到了东西。看到它们最后走进同一条读取路径，「数字信号」这四个字也就没那么悬空了。
+这些输入对应的是两种完全不同的现实接触。朝下的红外传感器靠反射区分黑线与周围地面，车身四周的长臂开关则要真的碰到障碍物才动作。它们进程序以后都是 bit，但一个起点是反射光，另一个起点是拨杆碰到了东西。看到它们最后走进同一条读取路径，数字信号这四个字也就没那么悬空了。
 
 ## L293 Turned PWM Into Wheel Speed / L293 把 PWM 变成轮速
 
@@ -63,9 +63,9 @@ On the output side, the Arduino cannot supply motor current directly. The L293 s
 ![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
 ![PWM control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
 
-That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. Turning left was no longer one magical instruction. It was a choice about two motor values, made after reading which sensor had found the line.
+That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. A left turn follows from the active sensor position and the commands sent to both motors.
 
-这个接口也把「转弯」变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。「左转」不再是一条神秘指令，而是先看哪只传感器压到了黑线，再决定两只电机各自该拿什么数值。
+这个接口也把转弯变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。左转由传感器所在的位置和两只电机收到的指令共同决定。
 
 ## Six Small Tests Before One Fast Lap / 跑圈之前，先过六个小测试
 
@@ -77,7 +77,7 @@ The [testing-code folder](/uploads/projects/arduino-smart-car-line-tracker/testi
 
 That order matters on a soldered kit. If the IR test cannot distinguish black from the desk, or the motor test does not drive the expected wheel, a full line-tracking loop only gives hardware and code more opportunities to take turns looking guilty. The small tests narrowed the question before speed entered the picture.
 
-这个顺序对焊接套件尤其重要。如果红外测试连黑线和桌面都分不出来，或者电机测试没有带动预期的轮子，直接跑完整循迹程序，只会让硬件和代码轮流看起来很可疑。六个小测试先把问题范围缩小，之后才轮到「能不能跑快」。
+这个顺序对焊接套件尤其重要。如果红外测试连黑线和桌面都分不出来，或者电机测试没有带动预期的轮子，直接跑完整循迹程序，只会让硬件和代码轮流看起来很可疑。六个小测试先把问题范围缩小，之后才检查小车能跑多快。
 
 ## Three Steering Grades And A Lighter Battery / 三档转向和一块更轻的电池
 
