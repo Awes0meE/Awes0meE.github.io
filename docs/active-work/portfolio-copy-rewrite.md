@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-14
-**Branch:** `feat/expand-juanyun-thermal-archive`
-**Current project:** `Juanyun Thermal Management Hardware and Firmware Archive`
-**Last completed project:** `Claude Chime Hardware Power Board`
-**State:** source audit, public-safety decisions, Q1–Q17 brief, design, bilingual draft, Truth/Li Zhiyi/L1 review, and full static/browser verification complete; uncommitted copy awaits user review
+**Branch:** `main`
+**Current project:** none selected
+**Last completed project:** `卷云相变散热器系统：两套控制器与一条完整制冷链`
+**State:** Juanyun copy approved and merged through pull request #22 at `e473b8c13f99308398a9c3221e1402d78634498d`; no portfolio rewrite is currently active
 
 ## Working Contract
 
@@ -188,23 +188,28 @@
   the same pass. Pull request #20 merged both rewrites and the hardened skill at
   `b3dc51cbc1620163fbfdcac0c8ca624d08a2434f`, without changing the project
   frontmatter, cover, media, public artifacts, or evidence boundaries.
-- Before the current Juanyun import branch, `main` contained 8 projects, 22 notes,
-  and 73 media items.
+- Juanyun thermal completed the same workflow through pull request #22 at
+  `e473b8c13f99308398a9c3221e1402d78634498d`. Its final public title is
+  `卷云相变散热器系统：两套控制器与一条完整制冷链`, its canonical date
+  range is `2025-11 to 2026-05`, and the merged public set contains 8 projects,
+  24 notes, and 78 media items.
 
 ## Next Action
 
-1. Hand the uncommitted bilingual copy to the user for review. Do not commit,
-   push, open a pull request, or merge until the user explicitly approves it.
-2. If the user requests copy changes, keep claims inside the confirmed evidence
-   boundaries and rerun the affected static and browser checks.
+1. Wait for the user to select the next project family. Start it from a clean,
+   synchronized `main` on a semantic topic branch.
+2. Inspect its evidence and obtain or reuse a confirmed project brief before
+   drafting substantial first-person prose.
 3. Do not reopen Smart Car, DIY Cooling, Arduino Digital Clock, Tianjin STM32,
-   Nanjing Turing, or Claude Chime unless explicitly requested.
+   Nanjing Turing, Claude Chime, or Juanyun thermal unless explicitly requested.
 
 ## Current Verification
 
-- On `feat/expand-juanyun-thermal-archive`, content validation passes with
-  8 projects, 24 notes, and 78 media items; UTF-8 validation passes for 291
-  text files.
+- Pull request #22 merged the approved Juanyun content into `main` at
+  `e473b8c13f99308398a9c3221e1402d78634498d` after its current-head Vercel
+  preview reached Ready with no unresolved feedback.
+- On merged `main`, content validation passes with 8 projects, 24 notes, and
+  78 media items; UTF-8 validation passes for 291 text files.
 - The five imported JPEGs are pixel-identical to the approved archive sources
   after lossless optimization, and their public copies contain no EXIF tags.
 - The thermal project now has exactly nine related public notes, including two
@@ -216,6 +221,9 @@
   ownership, result, uncertainty, limitation, and emotional claims.
 - Every ACUnit board-note image path resolves, and public project/note bodies
   contain no links to the two private firmware repositories.
+- The final project title and rendered date range are fixed at
+  `卷云相变散热器系统：两套控制器与一条完整制冷链` and
+  `2025.11 - 2026.05`.
 - Fresh `git diff --check`, full lint, independent content/encoding validation,
   TypeScript checking, and the Next.js production build all pass. The build
   prerenders 39 pages, including both new Juanyun note routes.

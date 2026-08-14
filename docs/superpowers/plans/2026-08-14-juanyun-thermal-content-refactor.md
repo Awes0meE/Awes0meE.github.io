@@ -8,6 +8,8 @@
 
 **Tech Stack:** Next.js 16 content repository, bilingual MDX-like project/note files, JSON media metadata, static assets under `public/uploads`, private STM32F1 C firmware as reference-only evidence, npm validation/build scripts.
 
+**Outcome:** Completed, approved, and merged through pull request #22 at `e473b8c13f99308398a9c3221e1402d78634498d` on 2026-08-14. The user's final public title and canonical `2025-11 to 2026-05` date range supersede the earlier planning language about extending the project through July 2026.
+
 ---
 
 ## File Map

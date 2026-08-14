@@ -1,8 +1,10 @@
 # Juanyun Thermal Management Content Refactor Design
 
 **Date:** 2026-08-14
-**Branch:** `feat/expand-juanyun-thermal-archive`
-**Status:** design implemented and fully verified as an uncommitted bilingual draft; user copy review remains
+**Branch:** merged from `feat/expand-juanyun-thermal-archive`
+**Status:** approved and merged through pull request #22 at `e473b8c13f99308398a9c3221e1402d78634498d`
+
+**Final user override:** Public title `卷云相变散热器系统：两套控制器与一条完整制冷链`; canonical date range `2025-11 to 2026-05`. These values supersede the earlier design language about a range through July 2026.
 
 ## Objective
 

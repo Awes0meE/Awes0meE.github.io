@@ -61,22 +61,23 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-13`:
+Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-14`:
 
 - 8 project files total;
-- 22 public note files total;
+- 24 public note files total;
 - 3 Juanyun project pages and 9 Juanyun notes;
 - 1 Claude Chime commissioned hardware case study and 1 related note;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
 - 1 Arduino Digital Clock course project and 1 related note from `C:\Users\123\Desktop\Digital Clock`, with selected course screenshots re-rendered without the top-right XJTLU logo and the original homework report PDF published as project evidence;
 - 1 Arduino Smart Car line-tracking course project and 1 related note from `C:\Users\123\Desktop\Smart Car Project`, with selected course screenshots re-rendered without the school logo area, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code published as project evidence;
-- 73 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, the DIY demo video, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots;
+- 78 media gallery items covering project/note images, Notion-exported Nanjing Turing build diagrams, processed project covers, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, the DIY demo video, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots;
 - the DIY pressure-flow cooling project, note, and six media records now use the approved first-person account from the one-project-at-a-time interview workflow, while remembered temperature and frame-rate changes stay marked as personal observations rather than controlled benchmark results;
 - the Arduino Digital Clock project, note, and 11 media records now use the approved bilingual first-person account; the two rollover thresholds remain separately flashed versions, while the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet retain their documented evidence limits;
 - the Tianjin Jintie Communications STM32 project and five notes now use the approved bilingual first-person account; the 16-point ADC-to-PWM mapping remains feedforward, the hardware-I2C lockup remains a present-day hypothesis, PID and ATP/ATO/ATS remain reading-layer concepts, and all four public C excerpts remain unchanged;
 - the Nanjing Turing Qt/Seamly2D project and three-week note now use the approved bilingual first-person account; the `QSettings` account/role layer remains a local desktop feasibility prototype, formal acceptance remains separate from the later clean Windows PC test, macOS remains bounded at a launched unsigned DMG without completed signing/notarization, and post-handoff adoption remains unknown;
 - the Claude Chime project and cold-start note now use the approved bilingual first-person account; direct no-load and analog-path checks remain separate from client-reported real-solenoid integration, while the protected-cell startup explanation remains an inference without a measured inrush waveform;
+- the Juanyun thermal project now presents BaseUnit and the three-board ACUnit as one phase-change laptop-cooling system across its original controller work and later automatic-control/maintenance phase; its nine related notes keep hardware, bare-metal scheduling, refrigeration control, and ControlPanel evolution separate, while company-reported test results remain explicitly unverified by Alvin;
 - the old portfolio rebuild project, PID starter-kit project, Juanyun ACUnit/BaseUnit/DHT standalone pages, and actuator/fan standalone page have been removed or merged.
 - the Nanjing Turing CMake/build-logic note renders the user's Notion-exported Markdown originals directly instead of relying on PDF text extraction;
 - public project/note body content has an English coverage pass so the language toggle does not hide key article sections.
