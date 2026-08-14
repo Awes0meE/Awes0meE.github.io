@@ -800,8 +800,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/cover-wide.jpg",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The green reference car shows the kit's intended layout—Nano-format controller, two driven wheels, battery holder, and front collision arms—but is not the purple build documented in this project.",
-    "captionZh": "绿色参考车展示套件的预期布局：Nano 尺寸控制板、两只驱动轮、电池盒和前缘碰撞拨杆；它并非本项目记录的紫色实物。"
+    "caption": "The green reference car shows the kit's intended layout with a Nano-format controller, two driven wheels, a battery holder, and front collision arms. It is not the purple build documented in this project.",
+    "captionZh": "绿色参考车展示套件的预期布局，包括 Nano 尺寸控制板、两只驱动轮、电池盒和前缘碰撞拨杆；它并非本项目记录的紫色实物。"
   },
   {
     "id": "arduino-smart-car-back",
@@ -825,7 +825,7 @@
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
     "caption": "The assembly record catches the board mid-solder, with its circular parts map open on the monitor and a multimeter beside the iron.",
-    "captionZh": "装配记录停在焊接进行时：显示器上打开圆形元件布局图，电烙铁旁放着万用表。"
+    "captionZh": "装配记录停在焊接进行时。显示器上打开圆形元件布局图，电烙铁旁放着万用表。"
   },
   {
     "id": "arduino-smart-car-system-diagram",
@@ -848,8 +848,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-objectives.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The course frame separates four aims: practise soldering; build the car from the given circuit; troubleshoot and solve problems; and work as a team while writing a professional report.",
-    "captionZh": "课程把目标拆成四项：练习焊接；按给定电路完成小车装配；开展故障排查与问题解决；以团队协作完成专业报告。"
+    "caption": "The course frame separates four aims. These were to practise soldering, build the car from the given circuit, troubleshoot problems, and work as a team while writing a professional report.",
+    "captionZh": "课程把目标拆成四项。练习焊接，按给定电路完成小车装配，开展故障排查与问题解决，并以团队协作完成专业报告。"
   },
   {
     "id": "arduino-smart-car-power-supply",
@@ -872,8 +872,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The course slide separates contact inputs from optical ones: an impact switch and a key, an emitter–receiver pair for black/white tracking, and a striped wheel read by an IR speed sensor.",
-    "captionZh": "课件页把接触输入与光学输入分开：碰撞开关与按键负责触发，收发一体的红外对管辨别黑白，条纹轮盘则由红外测速传感器读取。"
+    "caption": "The course slide separates contact inputs from optical ones. An impact switch and a key provide contact inputs, an emitter-receiver pair tracks black and white, and an IR speed sensor reads a striped wheel.",
+    "captionZh": "课件页把接触输入与光学输入分开。碰撞开关与按键负责触发，收发一体的红外对管辨别黑白，条纹轮盘则由红外测速传感器读取。"
   },
   {
     "id": "arduino-smart-car-shift-register",
@@ -933,6 +933,6 @@
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
     "caption": "The optional course slide asks the car to follow one black-line lap, awarding a 3% bonus within 70 s and another 2% for beating half the groups; the project record later reports a top-5% finish.",
-    "captionZh": "可选挑战课件页要求小车沿黑线跑完一圈：70 秒内完成可获 3% 额外加分，超过半数小组再获 2%；项目记录显示这台车最终进入圈速前 5%。"
+    "captionZh": "可选挑战课件页要求小车沿黑线跑完一圈。70 秒内完成可获 3% 额外加分，超过半数小组再获 2%；项目记录显示这台车最终进入圈速前 5%。"
   }
 ]

@@ -11,46 +11,46 @@ projectSlug: "arduino-smart-car-line-tracker"
 
 ## Before It Followed A Line, It Needed Every Joint / 会循迹之前，先得把每个焊点交代清楚
 
-Before the car could follow black tape, it spent a long while being a bare PCB under a soldering iron. The bench photo captures that stage better than the finished-car pictures do: the Arduino Nano was not yet the center of a “robot”; it was one future part of a board that still needed resistors, sockets, switches, sensors, and connectors placed in the right order.
+Before the car could follow black tape, it spent a long while being a bare PCB under a soldering iron. The bench photo captures that stage better than the finished-car pictures do. The Arduino Nano was not yet the center of a robot; it was one future part of a board that still needed resistors, sockets, switches, sensors, and connectors placed in the right order.
 
-小车会沿黑线跑之前，先在烙铁下面当了很久的裸 PCB。焊台照片比成品照更能说明当时的状态：Arduino Nano 还谈不上是什么“机器人核心”，它只是板上未来会出现的一部分；电阻、IC 座、开关、传感器和接口，都得先按顺序装到位。
+小车会沿黑线跑之前，先在烙铁下面当了很久的裸 PCB。焊台照片比成品照更能说明当时的状态。Arduino Nano 还谈不上是什么「机器人核心」，它只是板上未来会出现的一部分；电阻、IC 座、开关、传感器和接口，都得先按顺序装到位。
 
 ![Soldering bench during assembly / 焊接和装配现场](/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg)
 
-The [manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) recommends assembling from low components to tall ones and from the center outward. That advice becomes obvious once a few sockets and mechanical parts are already standing on the board: a flat resistor is much easier to reach before taller hardware starts turning the PCB into a small obstacle course. The course slide adds the equally practical first step of checking the component list before heating the iron.
+The [manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) recommends assembling from low components to tall ones and from the center outward. That advice becomes obvious once a few sockets and mechanical parts are already standing on the board. A flat resistor is much easier to reach before taller hardware starts turning the PCB into a small obstacle course. The course slide adds the equally practical first step of checking the component list before heating the iron.
 
-[Manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 建议按元件从低到高、位置从中间到外围的顺序安装。等几个 IC 座和机械件已经立在板上，这条建议就会显得非常诚实：矮电阻最好趁周围还没长出一圈障碍物时先焊。课件给的第一步更朴素——烙铁加热之前先核对元件清单，缺东西就别急着开工。
+[Manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 建议按元件从低到高、位置从中间到外围的顺序安装。等几个 IC 座和机械件已经立在板上，这条建议就会显得非常诚实。矮电阻最好趁周围还没长出一圈障碍物时先焊。课件给的第一步更朴素，烙铁加热之前先核对元件清单，缺东西就别急着开工。
 
 ![Soldering process slide / 焊接过程课件页](/uploads/projects/arduino-smart-car-line-tracker/course-soldering-process.png)
 
-At the time, my mental model was basically “put every part in the correct place and the car should work.” It was a reasonable first approximation, and also a wonderfully compact way to hide every detail inside the word “correct.” This build was where that word started expanding into polarity, orientation, joint quality, socket placement, power, and one-block-at-a-time testing.
+At the time, my mental model was basically to put every part in the correct place and expect the car to work. It was a reasonable first approximation, and also a wonderfully compact way to hide every detail inside the word correctly. This build was where that word started expanding into polarity, orientation, joint quality, socket placement, power, and one-block-at-a-time testing.
 
-那时我脑子里的模型基本就是：“把所有元件焊到正确位置，小车应该就能工作。”作为第一版理解，它相当合理；作为工程方法，它又很会偷懒——极性、方向、焊点质量、IC 座、电源和分模块测试，全都被塞进了“正确”两个字里。这次实训，就是这两个字一点点被拆开的过程。
+那时我脑子里的模型基本就是「把所有元件焊到正确位置，小车应该就能工作」。作为第一版理解，它相当合理；作为工程方法，它又很会偷懒。极性、方向、焊点质量、IC 座、电源和分模块测试，全都被塞进了「正确」两个字里。这次实训，就是这两个字一点点被拆开的过程。
 
-## LM7805 Made Power Less Abstract / LM7805 让“电源”不再只是两个字
+## LM7805 Made Power Less Abstract / LM7805 让「电源」不再只是两个字
 
-The LM7805 slide asked what the capacitors around the regulator were doing. That question was useful because it prevented the power block from collapsing into “input on this side, 5 V on the other.” The regulator establishes the 5 V rail; the larger and smaller capacitors around it filter different disturbances so the controller and sensors receive something steadier than the motors and battery would otherwise offer.
+The LM7805 slide asked what the capacitors around the regulator were doing. That question was useful because it prevented the power block from collapsing into input on one side and 5 V on the other. The regulator establishes the 5 V rail; the larger and smaller capacitors around it filter different disturbances so the controller and sensors receive something steadier than the motors and battery would otherwise offer.
 
-LM7805 那页课件专门问了一句：稳压器旁边的电容是干什么的？这个问题很有用，它不让电源模块被压缩成“这边输入、那边 5 V”。LM7805 建立 5 V 电源轨，旁边一大一小的电容分别处理不同频段的扰动，让主控和传感器拿到的电源，比电池和电机直接搅在一起时稳定得多。
+LM7805 那页课件专门问了一句，稳压器旁边的电容是干什么的？这个问题很有用，它不让电源模块被压缩成「这边输入、那边 5 V」。LM7805 建立 5 V 电源轨，旁边一大一小的电容分别处理不同频段的扰动，让主控和传感器拿到的电源，比电池和电机直接搅在一起时稳定得多。
 
 ![Power-supply block / 电源模块课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)
 
-The [project report](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) makes the same block less academic with one red warning: CP1, CM3, and CM4 were easy to damage during testing. It does not record one exact failure sequence, so there is no heroic repair story to invent here. The useful lesson is simpler: if the supply path is fragile, every strange sensor reading or controller reset downstream has to be interpreted with that possibility still open.
+The [project report](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) makes the same block less academic with one red warning. CP1, CM3, and CM4 were easy to damage during testing. It does not record one exact failure sequence, so there is no heroic repair story to invent here. The useful lesson is simpler. If the supply path is fragile, every strange sensor reading or controller reset downstream has to be interpreted with that possibility still open.
 
-[项目报告](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) 用一条红色 warning 把这部分从课本里拽了出来：CP1、CM3、CM4 在测试中比较容易损坏。报告没有留下某一次故障的完整经过，所以这里也没有必要凭空补一段英勇维修史。真正有用的提醒更简单：电源路径如果不可靠，后面的传感器读数和主控状态再奇怪，都不能只盯着代码解释。
+[项目报告](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) 用一条红色 warning 把这部分从课本里拽了出来。CP1、CM3、CM4 在测试中比较容易损坏。报告没有留下某一次故障的完整经过，所以这里也没有必要凭空补一段英勇维修史。真正有用的提醒更简单。电源路径如果不可靠，后面的传感器读数和主控状态再奇怪，都不能只盯着代码解释。
 
 ## Fourteen Inputs, Thirteen Arduino Pins / 十四路输入，Arduino 只有十三个数字引脚
 
 The board needs to read six collision switches, six IR tracking inputs, and two keys. That makes fourteen digital states before counting what the motors, LEDs, and speed sensing still require, while the Arduino Nano exposes only thirteen digital I/O pins. Reading every input directly was not merely inelegant; the pin count had already rejected the idea.
 
-板子要读取 6 个碰撞开关、6 路红外循迹输入和 2 个按键，光这里就是 14 路数字状态，还没算电机、LED 和测速要用的接口。Arduino Nano 只有 13 个数字 I/O。每一路都直接接回主控，已经不只是“布线不优雅”的问题，引脚数量先替这个方案说了不行。
+板子要读取 6 个碰撞开关、6 路红外循迹输入和 2 个按键，光这里就是 14 路数字状态，还没算电机、LED 和测速要用的接口。Arduino Nano 只有 13 个数字 I/O。每一路都直接接回主控，已经不只是「布线不优雅」的问题，引脚数量先替这个方案说了不行。
 
 ![Sensors and switches / 传感器和开关](/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png)
 ![74HC165 shift-register role / 74HC165 移位寄存器作用](/uploads/projects/arduino-smart-car-line-tracker/course-shift-register.png)
 
 Two 74HC165 shift registers solve that constraint by loading the parallel switch and sensor states, then shifting them back serially. The [testing code](/uploads/projects/arduino-smart-car-line-tracker/testing-code) makes the transaction concrete. `reload_shift_reg()` clocks fresh values into named fields such as `sensor.ir_left_3` and `sensor.switcher_front_left_1`; only then does the sketch decide which LED to light or which response to test. A function name that first looked like library ceremony turned out to be the board taking attendance.
 
-两颗 74HC165 先并行收下开关和传感器状态，再把它们串行移回主控，正好绕开这个接口约束。[Testing code](/uploads/projects/arduino-smart-car-line-tracker/testing-code) 把过程写得很具体：`reload_shift_reg()` 先把新状态刷新到 `sensor.ir_left_3`、`sensor.switcher_front_left_1` 这类字段里，程序才决定亮哪颗灯、检查哪一路。最初看着像库函数仪式的名字，其实是在让整块板子排队报数。
+两颗 74HC165 先并行收下开关和传感器状态，再把它们串行移回主控，正好绕开这个接口约束。[Testing code](/uploads/projects/arduino-smart-car-line-tracker/testing-code) 把过程写得很具体。`reload_shift_reg()` 先把新状态刷新到 `sensor.ir_left_3`、`sensor.switcher_front_left_1` 这类字段里，程序才决定亮哪颗灯、检查哪一路。最初看着像库函数仪式的名字，其实是在让整块板子排队报数。
 
 ## L293 Sat Between A Number And A Wheel / L293 夹在一个数字和一只轮子之间
 
@@ -61,9 +61,9 @@ The input path ends in bits; the output path has to move two motors. An Arduino 
 ![L293 motor-driver slide / L293 电机驱动课件页](/uploads/projects/arduino-smart-car-line-tracker/course-motor-driver.png)
 ![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
 
-The uploaded `motor_set_PWM(left, right)` code completes the translation. Positive and negative values select direction; magnitudes up to 255 become PWM commands for the left and right motors. A pair such as `(255, 255)` means something mechanically different from `(255, 180)`, and opposite signs can produce an in-place correction. This was the point where an integer stopped being “a value in Arduino” and started becoming a wheel accelerating, slowing, or reversing on the desk.
+The uploaded `motor_set_PWM(left, right)` code completes the translation. Positive and negative values select direction; magnitudes up to 255 become PWM commands for the left and right motors. A pair such as `(255, 255)` means something mechanically different from `(255, 180)`, and opposite signs can produce an in-place correction. This was the point where an integer stopped being an abstract Arduino value and started becoming a wheel accelerating, slowing, or reversing on the desk.
 
-上传代码里的 `motor_set_PWM(left, right)` 把翻译过程补完了。数值正负决定方向，最大到 255 的绝对值变成左右电机的 PWM 指令。`(255, 255)` 和 `(255, 180)` 在机械上会走出不同的路径，两边异号还可以做更强的原地修正。到这里，一个整数终于不再只是“Arduino 里的数值”，它会变成桌面上一只轮子的加速、减速或者反转。
+上传代码里的 `motor_set_PWM(left, right)` 把翻译过程补完了。数值正负决定方向，最大到 255 的绝对值变成左右电机的 PWM 指令。`(255, 255)` 和 `(255, 180)` 在机械上会走出不同的路径，两边异号还可以做更强的原地修正。到这里，一个整数终于不再只是「Arduino 里的数值」，它会变成桌面上一只轮子的加速、减速或者反转。
 
 ![PWM speed-control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
 
@@ -71,22 +71,22 @@ The uploaded `motor_set_PWM(left, right)` code completes the translation. Positi
 
 A complete car is a terrible first test because it can be wrong in too many ways at once. The course therefore separates bring-up into LEDs, keys, collision switches, IR tracking sensors, motors, and IR speed sensors. The code archive mirrors that list and even keeps `with-led` and `without-led` variants, so one display choice does not have to block every other check.
 
-整台车并不是一个友好的“第一次测试”，因为它可以同时从太多地方出错。课件把 bring-up 拆成 LED、按键、碰撞开关、红外循迹传感器、电机和红外测速六项；代码目录也照着这条线分开，还保留 `with-led` 与 `without-led` 两套版本，不让一种显示方式卡住后面所有检查。
+整台车并不是一个友好的「第一次测试」，因为它可以同时从太多地方出错。课件把 bring-up 拆成 LED、按键、碰撞开关、红外循迹传感器、电机和红外测速六项；代码目录也照着这条线分开，还保留 `with-led` 与 `without-led` 两套版本，不让一种显示方式卡住后面所有检查。
 
 ![Basic function-test list / 基础功能测试列表](/uploads/projects/arduino-smart-car-line-tracker/course-basic-function-tests.png)
 
-The manual's IR procedure is especially concrete: place the car on a light-colored desk, lay down black tape about 2.5 cm wide, move each sensor over it, and use the LEDs to see which channel changes. If a sensor cannot distinguish black from white, the manual points back toward emitter strength, resistor choice, soldering heat, and sensor condition. That is a much better question than loading the racing program and asking the entire car why it left the line.
+The manual's IR procedure is especially concrete. Place the car on a light-colored desk, lay down black tape about 2.5 cm wide, move each sensor over it, and use the LEDs to see which channel changes. If a sensor cannot distinguish black from white, the manual points back toward emitter strength, resistor choice, soldering heat, and sensor condition. That is a much better question than loading the racing program and asking the entire car why it left the line.
 
-manual 里的红外测试尤其具体：把车放在浅色桌面上，贴一条大约 2.5 cm 宽的黑胶带，让每个传感器依次越过黑线，再通过 LED 看哪一路状态变化。如果某一路分不清黑白，manual 会把问题拉回发射强度、电阻、焊接受热和传感器状态。这个问题比直接烧进赛道程序、然后追问整台车为什么跑丢了，要好回答得多。
+manual 里的红外测试尤其具体。把车放在浅色桌面上，贴一条大约 2.5 cm 宽的黑胶带，让每个传感器依次越过黑线，再通过 LED 看哪一路状态变化。如果某一路分不清黑白，manual 会把问题拉回发射强度、电阻、焊接受热和传感器状态。这个问题比直接烧进赛道程序、然后追问整台车为什么跑丢了，要好回答得多。
 
 ## The Track Joined The Chain / 上赛道，整条链路终于接起来
 
-The racing report turns those isolated blocks into one control loop. It uses strong, medium, and small steering corrections according to which IR sensor sees the line: the outer channels demand the largest response, the inner channels a smaller wheel-speed difference, and the middle grade bridges the two. It also records replacing four dry cells with a lighter 12 V lithium-battery setup, then repeatedly tuning wheel-speed differences and RPM until straight-line speed and cornering response could coexist.
+The racing report turns those isolated blocks into one control loop. It uses strong, medium, and small steering corrections according to which IR sensor sees the line. The outer channels demand the largest response, the inner channels a smaller wheel-speed difference, and the middle grade bridges the two. It also records replacing four dry cells with a lighter 12 V lithium-battery setup, then repeatedly tuning wheel-speed differences and RPM until straight-line speed and cornering response could coexist.
 
-比赛报告把这些分开的模块重新接成一个控制回路。它根据哪一路红外传感器检测到黑线，把修正分成大、中、小三档：外侧通道要求最强响应，内侧通道只需要较小轮速差，中间档负责过渡。报告还记录了把 4 节干电池换成更轻的 12 V 锂电方案，再反复调整轮速差和转速，直到直道速度与弯道响应能同时成立。
+比赛报告把这些分开的模块重新接成一个控制回路。它根据哪一路红外传感器检测到黑线，把修正分成大、中、小三档。外侧通道要求最强响应，内侧通道只需要较小轮速差，中间档负责过渡。报告还记录了把 4 节干电池换成更轻的 12 V 锂电方案，再反复调整轮速差和转速，直到直道速度与弯道响应能同时成立。
 
 ![Smart car final racing challenge / Smart Car 圈速挑战页](/uploads/projects/arduino-smart-car-line-tracker/course-racing-challenge.png)
 
-Our car reached the top 5 percent in the campus lap-speed challenge. By then, a car leaving the line no longer looked like one large, mysterious failure. It was a clue that could be followed backward: from wheel motion to L293 current, from two motor values to the `sensor` fields refreshed by `reload_shift_reg()`, and finally to the signal produced by a component soldered onto the board.
+Our car reached the top 5 percent in the campus lap-speed challenge. By then, a car leaving the line no longer looked like one large, mysterious failure. It was a clue that could be followed backward, from wheel motion to L293 current, from two motor values to the `sensor` fields refreshed by `reload_shift_reg()`, and finally to the signal produced by a component soldered onto the board.
 
-我们的小车最后跑进了校内圈速挑战前 5%。到那时，小车跑偏已经不再像一个笼统又神秘的“整车故障”，而是一条可以倒着追的线索：从车轮动作追到 L293 输出，从两路电机数值追到 `reload_shift_reg()` 刷新的 `sensor` 字段，最后再落回焊在板上的元件究竟给出了什么信号。
+我们的小车最后跑进了校内圈速挑战前 5%。到那时，小车跑偏已经不再像一个笼统又神秘的「整车故障」，而是一条可以倒着追的线索。从车轮动作追到 L293 输出，从两路电机数值追到 `reload_shift_reg()` 刷新的 `sensor` 字段，最后再落回焊在板上的元件究竟给出了什么信号。
