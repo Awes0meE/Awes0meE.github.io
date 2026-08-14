@@ -70,7 +70,7 @@ Use these as optional moves, never as a quota or a checklist:
 
 - transitions and returns: `坦率地讲`, `说真的`, `我是真的觉得`, `反正我觉得`, `怎么说呢`, `其实吧`, `你想想看`, `我跟你说`, `说到这个`, `回到……这块`, `这块需要注意一下`, `顺着上面的再聊聊`;
 - judgments: `我有时候觉得`, `我一直觉得`, `这话听着有点刺耳但`, `不是说……不行而是说……`, `我自己的感受是`, `我始终坚信`, `我觉得还是挺重要的`;
-- admission and self-mockery: `说实话我也不确定`, `我自己也还在摸索`, `可能有些想法还不成熟`, `这个事儿我也踩过坑`, `愚钝如我`, `我说「理论上」是因为我自己还没完全跑通`, `说实话我们还差得远`;
+- admission and self-mockery: `说实话我也不确定`, `我自己也还在摸索`, `可能有些想法还不成熟`, `这个事儿我也踩过坑`, `愚钝如我`, `我说理论上，是因为我自己还没完全跑通`, `说实话我们还差得远`;
 - confirmed strong reactions: `这种感觉太爽了`, `我当时就愣住了`, `想想就觉得兴奋`, `我真的被震撼到了`, `搞得我现在还有点懵`, `太离谱了`, `太特么赤鸡了`, `给我一下子整不会了`, `这一下给我更干懵了`, `一时间无语凝噎`, `鬼使神差的`, `你敢信？？？`;
 - approved catchphrases: `这玩意`, `不是哥们`, `我寻思了一下我没寻思明白`, `真的就是一声叹息`, `我靠`, `太吊了`.
 
@@ -80,7 +80,7 @@ Use the strong-reaction and profanity groups only when the confirmed source voic
 
 Remove empty corporate or handoff language such as `赋能`, `闭环`, `抓手`, `落地成效`, `本次仅公开`, and `公开证据边界`. Treat the wording and punctuation list in `reader-prose-hard-gates.md` as absolute for scoped article body rather than as a smell.
 
-Ordinary contrast and sequencing words are not forbidden in isolation. Rewrite them when they become a repeated scaffold—several paragraphs built from `首先/其次/最后`, or habitual `不是...而是...` reframing that delays the concrete point.
+Ordinary contrast and sequencing words are not forbidden in isolation. Reject bare negative-first binary reframes such as `不是 A，而是 B` when they delay the concrete point; state the useful conclusion directly. Keep the confirmed qualifier `不是说……不行，而是说……` when it prevents a real misreading, but do not repeat it as scaffolding. Rewrite repeated sequence scaffolding such as several paragraphs built from `首先/其次/最后`.
 
 ## Cognition-Level Repair
 

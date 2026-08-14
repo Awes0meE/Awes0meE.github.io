@@ -7,7 +7,7 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 | G1 | Truth gate | Project actions and results, researched claims and nearby links, and uncertainty and publication claims independently pass factual review. |
 | G2 | Li Zhiyi gate | For a first-person learning note, the available source-supported cognition route is traceable through the writer's selection, judgment, or change in understanding. Unsupported move categories are never mandatory or manufactured. |
 | G3 | Compliance-report rejection | For a target first-person learning note, a factually safe compliance-report, archive-description, project-handoff, recruiter-summary, academic-abstract, or neutral-survey voice fails overall and must be rebuilt at the cognition level. A requested factual summary, caption, audit, or review may remain neutral when appropriate. |
-| G4 | Reader-prose L1 gate | Model-authored reader-facing project and note body passes the scoped L1-1 wording, L1-2 punctuation, and L1-3 canned-structure scans with zero hits in both languages. Metadata, Markdown syntax, links, code, paths, raw logs, verbatim artifacts, and exact technical strings stay outside the scan. Existing thought-bookmark heading, genuine-parallel bullet, and ordinary sequencing-word rules remain unchanged. |
+| G4 | Reader-prose L1 gate | Model-authored reader-facing project and note body passes the scoped L1-1 wording, L1-2 punctuation, and L1-3 canned-structure scans with zero hits in both languages. It uses direct assertions instead of bare negative-first binary reframes, while retaining ordinary factual negation and the confirmed Chinese qualifier only when it protects real nuance. Metadata, Markdown syntax, links, code, paths, raw logs, verbatim artifacts, and exact technical strings stay outside the scan. Existing thought-bookmark heading, genuine-parallel bullet, and ordinary sequencing-word rules remain unchanged. |
 | F1 | Facts | Every action, tool, result, and emotion is supported by the input. A confirmed real event plus confirmed emotional direction may be reconstructed in natural first person, but no new time, place, action, dialogue, participant, technical result, or causal order is added. |
 | F2 | Unknowns | Missing authorship, dates, results, and paths stay unknown or are clearly qualified. |
 | C1 | Composition | Section order follows the material rather than a named note type or mandatory sequence. |
@@ -29,7 +29,7 @@ Use this rubric to compare baseline and revised outputs produced from the same i
 
 For a first-person learning-note trial produced under a runtime containing `reader-prose-hard-gates.md`, any applicable G1-G4 failure makes the whole trial fail. Factual safety cannot compensate for missing voice or an L1 hit. Record `not applicable` for a move unsupported by the source; never manufacture it. For other requested forms, judge whether the output matches that form rather than falsely applying the learning-note voice gate.
 
-Historical retained Trials 01-11 predate G4 and remain frozen evidence for their recorded runtimes. Do not retroactively claim that they passed the new reader-prose L1 gate.
+Frozen Trials 01-11 remain historical evidence for their recorded runtimes and are not current-rule fixtures. Do not retroactively claim that they passed the new reader-prose L1 gate.
 
 ## Recording Results
 
