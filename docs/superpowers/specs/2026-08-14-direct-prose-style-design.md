@@ -1,6 +1,6 @@
 # Direct Prose Style Cleanup Design
 
-**Date:** 2026-08-14  
+**Date:** 2026-08-14
 **Branch:** `docs/rewrite-pre-pr20-projects`
 
 ## Context
