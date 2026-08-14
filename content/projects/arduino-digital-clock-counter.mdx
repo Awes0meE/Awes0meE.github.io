@@ -38,9 +38,9 @@ A friend invited me to join MEC104 Group A17, and this became only my second emb
 
 ![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
 
-The seven-segment display was the first thing to overturn my software-only explanation. The course slides showed a CD4511 simulation driving a common-cathode display, but our physical display path had to operate as common-anode, with the common pin connected to VCC. Following the slide and grounding that pin produced either darkness or scrambled digits, and the TA could not explain it either. I eventually worked out the direction by moving jumpers and testing individual segment behavior on the breadboard. When we reported the finding to the professor, he announced the issue to the class over the microphone. Other groups were stuck there too.
+The display behavior pushed me to inspect the hardware path. The course slides showed a CD4511 simulation driving a common-cathode display, but our physical display path had to operate as common-anode, with the common pin connected to VCC. Following the slide and grounding that pin produced either darkness or scrambled digits, and the TA could not explain it either. I eventually worked out the direction by moving jumpers and testing individual segment behavior on the breadboard. When we reported the finding to the professor, he announced the issue to the class over the microphone. Other groups were stuck there too.
 
-最先推翻我只盯着软件这个解释的是数码管。课程 PPT 给的是 CD4511 驱动共阴数码管的仿真接法，我们手里的显示链路却要按共阳方式工作，公共端最终接到 VCC。照着 PPT 把公共端接地时，数码管会全黑或显示乱码，TA 也解释不了。最后是我在面包板上逐段换线、试高低电平，才摸出正确方向。我们把这个现象告诉教授后，他用麦克风把问题告诉了全班。其他组当时也卡在这里。
+数码管的表现逼着我去查硬件链路。课程 PPT 给的是 CD4511 驱动共阴数码管的仿真接法，我们手里的显示链路却要按共阳方式工作，公共端最终接到 VCC。照着 PPT 把公共端接地时，数码管会全黑或显示乱码，TA 也解释不了。最后是我在面包板上逐段换线、试高低电平，才摸出正确方向。我们把这个现象告诉教授后，他用麦克风把问题告诉了全班。其他组当时也卡在这里。
 
 ![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
 ![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
