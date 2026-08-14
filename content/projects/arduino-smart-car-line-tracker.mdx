@@ -23,9 +23,9 @@ The kit arrived as one bare purple PCB, bags of through-hole parts, a few surfac
 ![Soldering bench during assembly / 焊接和装配现场](/uploads/projects/arduino-smart-car-line-tracker/soldering-bench.jpg)
 ![Assembled smart car front side / 焊接完成后的小车正面](/uploads/projects/arduino-smart-car-line-tracker/cover-front.jpg)
 
-This was my first embedded-systems project. At the time, even the ideas behind a PCB, a regulator, or the capacitors around it were new to me. My beginner rule was reassuringly simple. Solder every component correctly and the functions should appear. The PCB demanded much more precision than I understood at the time, across polarity, orientation, joint quality, socket placement, power, and staged testing. That gap was what made me want to keep digging.
+This was my first embedded-systems project. At the time, even the ideas behind a PCB, a regulator, or the capacitors around it were new to me. My beginner rule was reassuringly simple. Solder every component correctly and the functions should appear. The PCB demanded much more care than I understood at the time. Polarity, orientation, joint quality, and socket placement determined whether a part was installed correctly. Power checks and staged testing then verified the assembled board. That gap was what made me want to keep digging.
 
-这是我第一次接触嵌入式。那时连 PCB 到底是什么、电源芯片为什么存在、旁边那几颗电阻电容各自管什么，我都还在现学。脑子里的入门规则倒是很简单。只要把所有元件正确焊上去，功能自然就会出现。PCB 所要求的正确焊接，比我当时理解的细得多，极性、方向、焊点质量、IC 座、电源和分模块测试都算在里面。也正是这点让我越做越有兴趣。
+这是我第一次接触嵌入式。那时连 PCB 到底是什么、电源芯片为什么存在、旁边那几颗电阻电容各自管什么，我都还在现学。脑子里的入门规则倒是很简单。只要把所有元件正确焊上去，功能自然就会出现。PCB 所要求的正确焊接，比我当时理解的细得多。极性、方向、焊点质量和 IC 座的位置决定了元件有没有装对。电源检查和分模块测试接着验证装好的板子。也正是这点让我越做越有兴趣。
 
 ## Reading the Purple PCB as a Signal Chain / 把紫色 PCB 读成一条信号链
 
@@ -63,9 +63,9 @@ On the output side, the Arduino cannot supply motor current directly. The L293 s
 ![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
 ![PWM control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
 
-That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. A left turn follows from the active sensor position and the commands sent to both motors.
+That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. Which IR sensor detects the black line determines the correction grade and steering strategy. Commands sent to both motors then execute that correction.
 
-这个接口也把转弯变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。左转由传感器所在的位置和两只电机收到的指令共同决定。
+这个接口也把转弯变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。哪一路红外传感器检测到黑线，决定修正等级和转向策略。两只电机收到的指令再执行这次修正。
 
 ## Six Small Tests Before One Fast Lap / 跑圈之前，先过六个小测试
 

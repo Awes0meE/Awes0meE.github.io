@@ -23,9 +23,9 @@ The [manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-t
 
 ![Soldering process slide / 焊接过程课件页](/uploads/projects/arduino-smart-car-line-tracker/course-soldering-process.png)
 
-At the time, my mental model was basically to put every part in the correct place and expect the car to work. It was a reasonable first approximation, and also a wonderfully compact way to hide every detail inside the word correctly. This build was where that word started expanding into polarity, orientation, joint quality, socket placement, power, and one-block-at-a-time testing.
+At the time, my mental model was basically to put every part in the correct place and expect the car to work. It was a reasonable first approximation, and also a wonderfully compact way to hide every detail inside the word correctly. I learned that polarity, orientation, joint quality, and socket placement define correct assembly. Power checks and one-block-at-a-time testing verify the assembled board.
 
-那时我脑子里的模型基本就是把所有元件焊到正确位置，小车应该就能工作。作为第一版理解，它相当合理；作为工程方法，它又很会偷懒。极性、方向、焊点质量、IC 座、电源和分模块测试，全都被塞进了正确两个字里。这次实训，就是这两个字一点点被拆开的过程。
+那时我脑子里的模型基本就是把所有元件焊到正确位置，小车应该就能工作。作为第一版理解，它相当合理；作为工程方法，它又很会偷懒。原来所谓焊对，还包括极性、方向、焊点质量和 IC 座的位置。电源检查和分模块测试再验证装好的板子。这次实训，就是我把这些要求一点点拆开的过程。
 
 ## LM7805 Put Power Into Circuit Terms / LM7805 把电源拆成稳压与滤波
 
@@ -35,9 +35,9 @@ LM7805 那页课件专门问了一句，稳压器旁边的电容是干什么的�
 
 ![Power-supply block / 电源模块课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)
 
-The [project report](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) makes the same block less academic with one red warning. CP1, CM3, and CM4 were easy to damage during testing. The report does not record a complete failure sequence, so a repair story would go beyond the evidence. A fragile supply path remains a live explanation for strange downstream sensor readings or controller resets.
+The [project report](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) makes the same block less academic with one red warning. CP1, CM3, and CM4 were easy to damage during testing. It does not identify a damaged part or the symptoms that followed. A fragile supply path remains a general troubleshooting possibility when checking strange downstream sensor readings or controller resets. The report does not record either symptom as a project event.
 
-[项目报告](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) 用一条红色 warning 把这部分从课本里拽了出来。CP1、CM3、CM4 在测试中比较容易损坏。报告没有留下完整故障经过，凭空补一段维修史会越过现有证据。电源路径不可靠时，后面的传感器读数和主控状态都要把它当作一个待查因素。
+[项目报告](/uploads/projects/arduino-smart-car-line-tracker/smart-car-report.pdf) 用一条红色 warning 把这部分从课本里拽了出来。CP1、CM3、CM4 在测试中比较容易损坏。报告没有记录具体损坏了哪一个元件，也没有记录随后出现的症状。排查异常传感器读数或主控复位时，电源路径不可靠仍是一般可能性。报告没有把这些症状记为项目中实际发生的情况。
 
 ## Fourteen Inputs, Thirteen Arduino Pins / 十四路输入，Arduino 只有十三个数字引脚
 
@@ -61,9 +61,9 @@ The input path ends in bits; the output path has to move two motors. An Arduino 
 ![L293 motor-driver slide / L293 电机驱动课件页](/uploads/projects/arduino-smart-car-line-tracker/course-motor-driver.png)
 ![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
 
-The uploaded `motor_set_PWM(left, right)` code completes the translation. Positive and negative values select direction; magnitudes up to 255 become PWM commands for the left and right motors. A pair such as `(255, 255)` means something mechanically different from `(255, 180)`, and opposite signs can produce an in-place correction. Each integer directly controls a wheel accelerating, slowing, or reversing on the desk.
+The uploaded `motor_set_PWM(left, right)` code completes the translation. Positive and negative values select direction; magnitudes up to 255 become PWM commands for the left and right motors. A pair such as `(255, 255)` means something mechanically different from `(255, 180)`, and opposite signs can produce an in-place correction. Each input number resolves into a direction and PWM command for one wheel.
 
-上传代码里的 `motor_set_PWM(left, right)` 把翻译过程补完了。数值正负决定方向，最大到 255 的绝对值变成左右电机的 PWM 指令。`(255, 255)` 和 `(255, 180)` 在机械上会走出不同的路径，两边异号还可以做更强的原地修正。每个整数都会直接控制桌面上一只轮子的加速、减速或者反转。
+上传代码里的 `motor_set_PWM(left, right)` 把翻译过程补完了。数值正负决定方向，最大到 255 的绝对值变成左右电机的 PWM 指令。`(255, 255)` 和 `(255, 180)` 在机械上会走出不同的路径，两边异号还可以做更强的原地修正。每个输入数值都会落实为一只轮子的方向与 PWM 命令。
 
 ![PWM speed-control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
 
