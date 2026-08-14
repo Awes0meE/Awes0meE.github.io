@@ -33,7 +33,7 @@ Reject these characters in scoped Chinese and English prose:
 
 - Chinese or ASCII colon, `：` or `:` -> use a comma, period, or recast the sentence;
 - any em dash or Chinese dash, `—` or `——` -> use a comma or period;
-- straight, curly, or full-width double quotation marks, `"`, `“”`, or `＂` -> use `「」`, inline code for an exact technical token, or no marks.
+- straight, curly, full-width, or corner quotation marks, `"`, `“”`, `＂`, or `「」` -> recast the sentence, use no marks, or use inline code for an exact technical token.
 
 The exclusions above protect syntax and verbatim technical evidence. They do not permit decorative colons, dashes, or double quotes in normal prose.
 
@@ -44,6 +44,8 @@ Reject textbook openings such as `在当今……的时代`, `在当今……背
 Do not use bold as paragraph-level structure. More than two consecutive source lines of bold prose, or a full prose paragraph whose main structure depends on bold, fails this check. Short emphasis remains available when it genuinely helps.
 
 Keep the current heading and list rules. Do not add a fixed heading count below the existing ceiling, and do not reject a genuine parallel bullet list merely because it has more than three items.
+
+Reject bare negative-first binary reframes such as `不是 A，而是 B`, `这不是 A，这是 B`, `问题不在 A，而在 B`, `难点不是 A，而是 B`, `not A but B`, and `was not A; it was B`. State the useful conclusion directly. Ordinary factual negation remains allowed. The confirmed qualifier `不是说 A 不行，而是说 B` remains allowed when it prevents a real misreading and is not repeated as scaffolding.
 
 ## Do Not Manufacture A Scene
 

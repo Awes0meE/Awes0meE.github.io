@@ -26,6 +26,8 @@ English may change sentence boundaries and phrasing, and it may smooth a local t
 
 Apply `reader-prose-hard-gates.md` to both language bodies. Avoid direct English equivalents of the banned Chinese scaffolds. Keep metadata, links, code, paths, logs, verbatim artifacts, and exact technical strings outside that prose scan.
 
+Use direct English assertions instead of literal `not A but B` reframes. Keep factual limits explicit, but express Chinese nuance naturally in English rather than copying its wording literally.
+
 Keep source links close to the researched sentence in both languages when the target format permits it. Make the link placement natural; do not collect sources into a detached section that breaks the attention route.
 
 ## Translate The Comic Mechanism

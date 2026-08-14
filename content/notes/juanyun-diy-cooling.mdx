@@ -11,17 +11,17 @@ visibility: public
 
 ## The OLED Said Fan Speed; the Board Never Counted RPM / OLED 写着 Fan Speed，板子却没数过转速
 
-The OLED in the demonstration shows `Fan Speed: 50%`. I wrote that label myself, and for a long time I read it without hesitation. Reopening the [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) now makes the problem almost embarrassingly plain: the value is `dutyCycle`. No tachometer pin is read anywhere. The screen is showing how strongly I asked the fan to run, not how fast it actually ran.
+The OLED in the demonstration shows `Fan Speed: 50%`. I wrote that label myself, and for a long time I read it without hesitation. Reopening the [ESP32 source](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) now makes the problem almost embarrassingly plain. The value is `dutyCycle`, and no tachometer pin is read anywhere. The screen is showing how strongly I asked the fan to run, not how fast it actually ran.
 
-演示里的 OLED 写着 `Fan Speed: 50%`。这个标签是我自己写的，很长一段时间里也看得理所当然。现在重新打开 [ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)，问题直白得有点尴尬：它显示的变量就是 `dutyCycle`，整份代码里没有读取任何 tachometer 引脚。屏幕显示的是“我让风扇多用力”，不是“风扇实际转了多快”。
+演示里的 OLED 写着 `Fan Speed: 50%`。这个标签是我自己写的，很长一段时间里也看得理所当然。现在重新打开 [ESP32 源码](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)，问题直白得有点尴尬。它显示的变量就是 `dutyCycle`，整份代码里没有读取任何 tachometer 引脚。屏幕显示的是「我让风扇多用力」，不是「风扇实际转了多快」。
 
 That distinction is built into a four-wire PWM fan. A [manufacturer guide to microcontroller PWM and RPM monitoring](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring) separates the PWM command from the tach signal and recommends a 25 kHz control frequency. My code begins at 15 kHz and even lets two buttons move the frequency in 200 Hz steps. The fan visibly responded, so the prototype did control it; without the exact fan specification, an oscilloscope capture, or tach feedback, I cannot turn that observation into a verified frequency range or RPM curve.
 
 四线 PWM 风扇本来就把这两件事分开。[厂商的微控制器 PWM 与 RPM 监测说明](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring)把 PWM 命令和 tach 转速信号列成两条通道，并建议使用 25 kHz。我的代码从 15 kHz 起步，甚至允许两个按键以 200 Hz 为步长调频。风扇确实会跟着变化，所以原型完成了控制；但没有具体风扇规格、示波器波形和 tach 反馈，我不能把这段观察继续写成经过验证的频率范围或 RPM 曲线。
 
-This is the first thing the old code teaches me now: a variable name can quietly promote a command into a measurement. Hardware usually notices the difference even when the UI does not.
+This is the first thing the old code teaches me now. A variable name can quietly promote a command into a measurement. Hardware usually notices the difference even when the UI does not.
 
-这是旧代码现在先教我的第一件事：一个变量名可以悄悄把“命令”抬成“测量”，硬件却不会因为界面写得自信就配合演出。
+这是旧代码现在先教我的第一件事。一个变量名可以悄悄把「命令」抬成「测量」，硬件却不会因为界面写得自信就配合演出。
 
 ## `CPU62.7` Was Not Necessarily `CPU Package` / `CPU62.7` 未必就是 `CPU Package`
 
@@ -29,9 +29,9 @@ My decision to reuse the laptop's internal sensors still makes sense to me. Addi
 
 我仍然认同当时复用笔记本内部传感器的决定。再加一颗外置探头要增加成本，还会离真正的热源更远。[WinForms 代码](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)通过 [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 打开 CPU 与 GPU 监控，遍历硬件树，再把温度四舍五入到一位小数，拼成 `CPU62.7` 或 `GPU71.3`。
 
-The implementation, however, does not select a sensor by `Name` or `Identifier`. It loops over every temperature sensor under CPU hardware and overwrites `cpuTemperature` each time; the last matching sensor wins. LibreHardwareMonitor's [`ISensor` interface](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs) exposes both fields, but I did not use them. The same issue applies to multiple GPU temperature sensors. My rationale was “use the computer's own measurements.” My code was not precise enough to promise “this value is CPU Package.”
+The implementation, however, does not select a sensor by `Name` or `Identifier`. It loops over every temperature sensor under CPU hardware and overwrites `cpuTemperature` each time; the last matching sensor wins. LibreHardwareMonitor's [`ISensor` interface](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs) exposes both fields, but I did not use them. The same issue applies to multiple GPU temperature sensors. My rationale was to use the computer's own measurements. My code was not precise enough to promise that the value was `CPU Package`.
 
-但实现里没有按 `Name` 或 `Identifier` 选择传感器。程序遍历 CPU 硬件下面所有温度项，每遇到一个就覆盖一次 `cpuTemperature`，最后留下的是最后一个匹配项。LibreHardwareMonitor 的 [`ISensor` 接口](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs)其实同时提供了这两个字段，我却没有用；GPU 存在多个温度项时也有同样的问题。我的思路是“使用电脑自己的测量”，代码却还不够精确，不能保证“这个值就是 CPU Package”。
+但实现里没有按 `Name` 或 `Identifier` 选择传感器。程序遍历 CPU 硬件下面所有温度项，每遇到一个就覆盖一次 `cpuTemperature`，最后留下的是最后一个匹配项。LibreHardwareMonitor 的 [`ISensor` 接口](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs)其实同时提供了这两个字段，我却没有用；GPU 存在多个温度项时也有同样的问题。我的思路是使用电脑自己的测量，代码却还不够精确，不能保证这个值就是 `CPU Package`。
 
 If I rebuilt the application, the first improvement would not be a prettier gauge. I would enumerate the available sensors, show their names, select the intended CPU and GPU readings explicitly, and keep that identity beside every logged sample. Otherwise a temperature with one decimal place only looks more certain than it is.
 
@@ -39,17 +39,17 @@ If I rebuilt the application, the first improvement would not be a prettier gaug
 
 ## Every Five Seconds Did Not Mean a Fresh Pair / 每五秒执行，不等于每五秒得到一对新数据
 
-The application timer ticks every five seconds. Inside that tick, `Monitor()` and serial transmission are launched in two separate `Task.Run` calls. The sender does not wait for the current scan; it reads whichever shared value is already available. A line sent on this tick may therefore contain the previous scan. “Run both jobs every five seconds” is not the same contract as “sample, label, and send one fresh value every five seconds.”
+The application timer ticks every five seconds. Inside that tick, `Monitor()` and serial transmission are launched in two separate `Task.Run` calls. The sender does not wait for the current scan; it reads whichever shared value is already available. A line sent on this tick may therefore contain the previous scan. Running both jobs every five seconds is not the same contract as sampling, labelling, and sending one fresh value every five seconds.
 
-上位机定时器每五秒触发一次，但同一个 tick 里，`Monitor()` 与串口发送被分别丢进两个 `Task.Run`。发送任务不会等待本轮扫描结束，而是直接读取共享变量里现成的值。因此这一拍发出去的，可能还是上一轮温度。“每五秒执行两个任务”和“每五秒采集、标记并发送一个新值”，不是同一份时序合同。
+上位机定时器每五秒触发一次，但同一个 tick 里，`Monitor()` 与串口发送被分别丢进两个 `Task.Run`。发送任务不会等待本轮扫描结束，而是直接读取共享变量里现成的值。因此这一拍发出去的，可能还是上一轮温度。每五秒执行两个任务，与每五秒采集、标记并发送一个新值，并不是同一份时序合同。
 
 The sender also alternates CPU and GPU, so each side gets a nominal opportunity about every ten seconds. These tiny lines are nowhere near the throughput limit of a 115200-baud virtual COM port. Espressif's [Bluetooth SPP documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_spp.html) describes the link as serial communication over a virtual connection; my five-second rhythm was a conservative application decision, not a Bluetooth requirement.
 
 发送端还会在 CPU 与 GPU 之间交替，所以每一路名义上大约十秒才轮到一次。这种只有几个字符的短报文离 115200 波特率虚拟串口的吞吐上限很远。Espressif 的 [Bluetooth SPP 文档](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_spp.html)把它描述为虚拟串行链路；五秒节奏是我当时保守的应用选择，不是蓝牙协议要求。
 
-The choice still had a useful effect. It kept communication sparse and made the prototype easier to observe. What I would change now is the causality: complete one scan, attach a timestamp and sensor identity, then enqueue the exact sample for transmission. Slow data can be deliberate. Ambiguous data should not be.
+The choice still had a useful effect. It kept communication sparse and made the prototype easier to observe. What I would change now is the causality. I would complete one scan, attach a timestamp and sensor identity, then enqueue the exact sample for transmission. Slow data can be deliberate. Ambiguous data should not be.
 
-这个选择仍然有用：通信足够稀疏，原型也更容易观察。现在我会改的是因果顺序——先完成一次扫描，给数据附上时间戳和传感器身份，再把这份确定的样本排队发送。数据可以故意慢，但不该慢得含糊。
+这个选择仍然有用。通信足够稀疏，原型也更容易观察。现在我会改的是因果顺序。先完成一次扫描，给数据附上时间戳和传感器身份，再把这份确定的样本排队发送。数据可以故意慢，但不该慢得含糊。
 
 ## The Thirty-Second Maximum Deliberately Lagged / 三十秒峰值故意慢了半拍
 
@@ -57,13 +57,13 @@ On the ESP32, `cpuValue` and `gpuValue` hold the latest received lines for the O
 
 ESP32 端的 `cpuValue` 与 `gpuValue` 保存最近收到的数据，供 OLED 显示；另一组 `maxCpuValue` 与 `maxGpuValue` 专门记峰值。每过 30000 ms，固件取两边峰值中更大的一个，调用 `updatePWM()`，然后清零进入下一窗口。按名义节拍计算，每个窗口里每一路温度只有大约三次发送机会。
 
-That means the temperature and duty shown together do not necessarily belong to the same moment. The temperature may be the newest line; the duty may still be the result of the previous peak window. At the time, I liked this because a short high load would not be erased immediately and the fan would not chase every small change. Re-reading it now, I would call it a crude peak-hold filter with a 30-second update period—not real-time synchronized control.
+The temperature and duty shown together do not necessarily belong to the same moment. The temperature may be the newest line; the duty may still be the result of the previous peak window. At the time, I liked this because a short high load would not be erased immediately and the fan would not chase every small change. Re-reading it now, I would call it a crude peak-hold filter with a 30-second update period, not real-time synchronized control.
 
-这意味着 OLED 上并排出现的温度与占空比，不一定属于同一个瞬间：温度可能是刚收到的一行，占空比却还背着上一个峰值窗口的结果。当时我喜欢这种效果，因为短时高负载不会立刻被低读数盖掉，风扇也不必追着每个小波动跑。现在重读，我会把它叫作一个带 30 秒更新周期的粗糙峰值保持，而不是实时同步控制。
+OLED 上并排出现的温度与占空比，不一定属于同一个瞬间。温度可能是刚收到的一行，占空比却还背着上一个峰值窗口的结果。当时我喜欢这种效果，因为短时高负载不会立刻被低读数盖掉，风扇也不必追着每个小波动跑。现在重读，我会把它叫作一个带 30 秒更新周期的粗糙峰值保持，而不是实时同步控制。
 
 The phrase matters because it points to the next experiment. I would log raw CPU/GPU samples, selected maxima, duty commands, tach RPM, and temperature response on one timeline. Then the 30-second window could be judged against evidence instead of defended by how calm the fan sounded.
 
-这个叫法很重要，因为它直接指向下一次该做的实验：把 CPU/GPU 原始样本、窗口峰值、占空比命令、tach RPM 和温度响应放到同一条时间线上。到那时，30 秒窗口是否合理就能由数据判断，而不是靠“听起来没有乱转”替它辩护。
+这个叫法很重要，因为它直接指向下一次该做的实验。把 CPU/GPU 原始样本、窗口峰值、占空比命令、tach RPM 和温度响应放到同一条时间线上。到那时，30 秒窗口是否合理就能由数据判断，而不是靠风扇听起来没有乱转替它辩护。
 
 ## PID Was Waiting for a System I Had Not Defined / PID 在等一套我还没定义清楚的系统
 
@@ -71,19 +71,19 @@ I spent roughly half a week trying to make PID happen. The final `processBluetoo
 
 我花了大约半周想把 PID 做出来，最终的 `processBluetoothValue()` 里却一个 PID 项也没有。`Quiet` 把 30 秒峰值乘 0.5，`Normal` 乘 0.7，`High Speed` 原样使用，`Manual` 保留手动占空比，结果再映射到 GPIO 5 的 8 位 LEDC 输出。
 
-At the time, I understood the retreat as “PID is too difficult.” The code gives me a more useful diagnosis now. There was no target temperature, no explicit sensor identity, no measured RPM, no actuator curve, no thermal-response log, and no synchronized sampling path. The fan could affect the temperature, so a feedback path physically existed, but the program had not defined the variables needed to tune that path as a PID controller.
+At the time, I dismissed the retreat as PID being too difficult. The code gives me a more useful diagnosis now. There was no target temperature, no explicit sensor identity, no measured RPM, no actuator curve, no thermal-response log, and no synchronized sampling path. The fan could affect the temperature, so a feedback path physically existed, but the program had not defined the variables needed to tune that path as a PID controller.
 
-当时我把这次退让理解成“PID 太难了”。现在代码给出的诊断更具体：没有目标温度，没有明确传感器身份，没有实测 RPM，没有执行器曲线，没有热响应日志，也没有同步采样链。风扇会反过来影响温度，所以物理上确实存在反馈；但程序还没有定义好调 PID 所需的那些变量。
+当时我把这次退让归结为 PID 太难。现在代码给出的诊断更具体。没有目标温度，没有明确传感器身份，没有实测 RPM，没有执行器曲线，没有热响应日志，也没有同步采样链。风扇会反过来影响温度，所以物理上确实存在反馈；但程序还没有定义好调 PID 所需的那些变量。
 
-The fixed ratios survived because they answered a smaller question: can a temperature arriving from Windows make a physical fan change in the expected direction? Yes. That was not the controller I had imagined, but it was enough to turn disconnected pieces into a working prototype. The mistake was not choosing the simple rule. It was reaching for PID before writing down what “controlled” was supposed to mean.
+The fixed ratios survived because they answered a smaller question. Could a temperature arriving from Windows make a physical fan change in the expected direction? Yes. That was not the controller I had imagined, but it was enough to turn disconnected pieces into a working prototype. The mistake was not choosing the simple rule. It was reaching for PID before defining the intended controlled state.
 
-固定比例能留下来，是因为它回答了一个更小的问题：Windows 送来的温度，能不能让实体风扇按预期方向变化？能。它不是我最初设想的控制器，却足以把原本分散的部件接成一台能运行的原型。问题不在于用了简单规则，而在于我还没写清“控制住”到底是什么意思，就先伸手去拿 PID。
+固定比例能留下来，是因为它回答了一个更小的问题。Windows 送来的温度，能不能让实体风扇按预期方向变化？能。它不是我最初设想的控制器，却足以把原本分散的部件接成一台能运行的原型。问题不在于用了简单规则，而在于我还没写清怎样才算控制住，就先伸手去拿 PID。
 
 ## Connect Still Mattered / 那个 Connect 仍然重要
 
-The 3:57 [demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) begins with Windows finding `ESP32_Bluetooth`, passes through the COM-port list and temperature labels, and reaches the OLED and fan. The five buttons take over the mode and manual adjustments that never made it into the GUI. One button changes the mode; two alter frequency; two change manual duty. The long-press handler remains empty, another small edge that never got finished.
+The 3 min 57 s [demo](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4) begins with Windows finding `ESP32_Bluetooth`, passes through the COM-port list and temperature labels, and reaches the OLED and fan. The five buttons take over the mode and manual adjustments that never made it into the GUI. One button changes the mode; two alter frequency; two change manual duty. The long-press handler remains empty, another small edge that never got finished.
 
-3 分 57 秒的[演示视频](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)从 Windows 找到 `ESP32_Bluetooth` 开始，经过 COM 口与温度显示，最后落到 OLED 和风扇。没有做进 GUI 的模式与手动调整被五个实体按键接走：一个切模式，两个调频率，两个调手动占空比；长按处理函数还是空的，又是一块没有收完的边角。
+3 分 57 秒的[演示视频](/uploads/projects/juanyun-tech/diy-cooling-desktop-demo.mp4)从 Windows 找到 `ESP32_Bluetooth` 开始，经过 COM 口与温度显示，最后落到 OLED 和风扇。没有做进 GUI 的模式与手动调整被五个实体按键接走。一个切模式，两个调频率，两个调手动占空比；长按处理函数还是空的，又是一块没有收完的边角。
 
 None of the issues above cancels what I felt when Connect first worked. The screen values changed, Bluetooth carried them, embedded code interpreted them, and the fan responded. That moment was real. Re-reading the code has not made it smaller; it has finally given every part the right name. Next time, before asking PID to save the project, I would first name the sensor, the sample, the command, and the measurement.
 

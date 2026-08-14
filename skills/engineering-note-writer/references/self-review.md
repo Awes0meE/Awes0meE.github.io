@@ -32,6 +32,11 @@ For model-authored project and note article body, run every scoped check in `rea
 
 Do not scan frontmatter, metadata, Markdown syntax, URL or link destinations, code, commands, file paths, raw errors or logs, verbatim artifacts, or exact technical strings. Do not use these exclusions to shelter ordinary prose. Any applicable hit blocks release.
 
+- Are corner quotation marks absent from scoped reader prose?
+- Are bare negative-first binary reframes absent in both languages?
+- If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
+- Are factual, evidence, authorship, and publication boundaries explicit and kept near the claims they limit? When a supported positive fact exists, it may lead; when the negative boundary is itself the fact, state it directly without inventing a positive lead.
+
 ## Supporting Check: Cognition-Led Flow
 
 - Does the opening stand on a concrete artifact, action, symptom, or question?

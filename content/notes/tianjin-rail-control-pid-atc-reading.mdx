@@ -16,15 +16,15 @@ projectSlug: "tianjin-metro-stm32-foundation"
 
 ## encoder_count × 50 Is Still Only a Command / encoder_count × 50 仍然只是一条指令
 
-The servo excerpt multiplies `encoder_count` by 50, clamps the result to ±500, and passes it to `servo_set_speed()`. Turn the encoder forward and the command rises; turn it backward and the command falls. The clamp keeps the number inside the chosen range. Every transformation is readable and the servo did respond, but this remains an open command path: a person supplies an input, software maps it, and the actuator receives the result.
+The servo excerpt multiplies `encoder_count` by 50, clamps the result to ±500, and passes it to `servo_set_speed()`. Turn the encoder forward and the command rises; turn it backward and the command falls. The clamp keeps the number inside the chosen range. Every transformation is readable and the servo did respond, but this remains an open command path. A person supplies an input, software maps it, and the actuator receives the result.
 
-舵机摘录把 `encoder_count` 乘以 50，超出范围时限制在 ±500，最后交给 `servo_set_speed()`。编码器向前拧，指令增大；反向拧，指令减小；限幅保证送入函数的数字不越过设定范围。每一步都可读，也确实能让舵机动作，但这仍是一条“人给输入，程序做映射，执行器接收命令”的开环路径。
+舵机摘录把 `encoder_count` 乘以 50，超出范围时限制在 ±500，最后交给 `servo_set_speed()`。编码器向前拧，指令增大；反向拧，指令减小；限幅保证送入函数的数字不越过设定范围。每一步都可读，也确实能让舵机动作，但这仍是一条由人给出输入、程序完成映射、执行器接收命令的开环路径。
 
 [Encoder-to-servo speed excerpt](/uploads/projects/tianjin-metro/encoder-servo-speed-excerpt.c)
 
 Feedback would require measured speed or position to return, a target-minus-measurement error to be formed, and a controller to update the output over time. This excerpt has no return measurement. The ±500 clamp constrains the command; it says nothing about response time, overshoot, steady-state error, or disturbance rejection.
 
-如果要叫反馈，程序至少还需要一个实测速率或位置，形成“目标 − 实测”的误差，并让控制器随时间根据误差更新输出。这段代码没有回传量。±500 也只说明指令范围被约束，不能说明响应速度、超调、稳态误差或抗扰能力。
+如果要叫反馈，程序至少还需要一个实测速率或位置，形成目标减实测的误差，并让控制器随时间根据误差更新输出。这段代码没有回传量。±500 也只说明指令范围被约束，不能说明响应速度、超调、稳态误差或抗扰能力。
 
 ## I Was Fascinated That a Formula Could Pull a System toward Its Target / 当时我觉得，一个公式能把东西拉回目标非常神奇
 
@@ -34,11 +34,11 @@ The encoder, Timer, ADC, and PWM exercises gave me physical places for the block
 
 PID 是工程师培训资料里最吸引我的概念之一。当时我第一次看见，一个控制器可以用目标与实测之间的误差，通过数学关系让系统更快、更稳定地逼近目标。比例项对当前误差作出反应，积分项累积长期残差，微分项关注误差变化趋势；它们并不是三个凭经验相加的数字，而要依赖采样周期、对象动态、输出限幅和噪声一起理解。
 
-前面做过的编码器、Timer、ADC 与 PWM，让我至少能给这张框图找到物理位置：编码器或 ADC 提供测量，Timer 决定更新节奏，控制器计算新指令，PWM 把指令交给执行器。但我在天津实习中没有写 PID、没有调参，也没有记录阶跃响应。这里留下的是控制概念第一次与 MCU 外设对上号的阅读过程，不是控制性能结果。
+前面做过的编码器、Timer、ADC 与 PWM，让我至少能给这张框图找到物理位置。编码器或 ADC 提供测量，Timer 决定更新节奏，控制器计算新指令，PWM 把指令交给执行器。但我在天津实习中没有写 PID、没有调参，也没有记录阶跃响应。这里留下的是控制概念第一次与 MCU 外设对上号的阅读过程，不是控制性能结果。
 
-The same distinction keeps the 16-point light mapping from becoming “PID” by association. The target maps directly to PWM, while measured light is only displayed and printed. The exercise assembled target, measurement, actuation, and sampling rhythm, but did not close the error-return path.
+The same distinction keeps the 16-point light mapping from becoming PID by association. The target maps directly to PWM, while measured light is only displayed and printed. The exercise assembled target, measurement, actuation, and sampling rhythm, but did not close the error-return path.
 
-这也是为什么光照 demo 的 16 点查表不能被叫作 PID：目标直接映射到 PWM，实测光照只显示和打印，并未回到控制计算。它最多给未来的反馈控制准备了目标、测量、执行与采样节奏四种材料，缺少真正闭合的误差返回路径。
+这也是为什么光照 demo 的 16 点查表不能被叫作 PID。目标直接映射到 PWM，实测光照只显示和打印，并未回到控制计算。它最多给未来的反馈控制准备了目标、测量、执行与采样节奏四种材料，缺少真正闭合的误差返回路径。
 
 ## ATP, ATO, and ATS Are Not Three Larger Peripheral Calls / ATP、ATO、ATS 不是三个更大的外设函数
 
@@ -46,14 +46,14 @@ The railway setting led the engineer to include ATP, ATO, and ATS in the trainin
 
 These layers share the basic language of input, decision, output, and timing, but they are not a Blue Pill demo enlarged by swapping in a faster MCU. The specification also addresses fail-safe behaviour, redundancy, records, testing, and fault handling. Real deployments add distributed communication, authority boundaries, and lifecycle verification. My exercise connected to no railway equipment and contributed to none of those production systems.
 
-天津轨道交通的实习语境让工程师把 ATP、ATO、ATS 也放进了培训资料。交通运输部发布的[城市轨道交通信号系统运营技术规范](https://xxgk.mot.gov.cn/jigou/ysfws/202201/P020220121613617393399.pdf)把三者分得很清楚：ATP 计算与监督安全行车条件，包括速度防护、列车位置和安全间隔等；ATO 在防护约束下完成启动、加速、巡航、惰行、制动、精确停车和车门等自动运行功能；ATS 则在系统层面对列车与设备状态进行监视、追踪、进路控制和运行调整。
+天津轨道交通的实习语境让工程师把 ATP、ATO、ATS 也放进了培训资料。交通运输部发布的[城市轨道交通信号系统运营技术规范](https://xxgk.mot.gov.cn/jigou/ysfws/202201/P020220121613617393399.pdf)把三者分得很清楚。ATP 计算与监督安全行车条件，包括速度防护、列车位置和安全间隔等；ATO 在防护约束下完成启动、加速、巡航、惰行、制动、精确停车和车门等自动运行功能；ATS 则在系统层面对列车与设备状态进行监视、追踪、进路控制和运行调整。
 
-这三个层级共享“输入—判断—输出—时序”的基本语言，却绝不是把 Blue Pill 换成性能更高的 MCU 就能得到的放大版 demo。规范同时要求故障安全、冗余、记录、测试与故障处置；真实系统还面对跨设备通信、权限边界和全生命周期验证。我的练习没有连接任何轨道设备，也没有参与这些系统的工程实现。
+这三个层级共享输入、判断、输出与时序的基本语言，却绝不是把 Blue Pill 换成性能更高的 MCU 就能得到的放大版 demo。规范同时要求故障安全、冗余、记录、测试与故障处置；真实系统还面对跨设备通信、权限边界和全生命周期验证。我的练习没有连接任何轨道设备，也没有参与这些系统的工程实现。
 
-The connection that did hold was more modest. A small board made abstract terms tangible: sensors produced inputs, software held state, timers established rhythm, GPIO or PWM created outputs, and UART moved information outside the controller. Railway engineering then asks how those functions are distributed across devices and how safe boundaries survive a failure. That difference in scale is more useful than simply noticing that train lights and fans also need controllers.
+The connection that did hold was more modest. A small board made abstract terms tangible. Sensors produced inputs, software held state, timers established rhythm, GPIO or PWM created outputs, and UART moved information outside the controller. Railway engineering then asks how those functions are distributed across devices and how safe boundaries survive a failure. That difference in scale is more useful than simply noticing that train lights and fans also need controllers.
 
-真正成立的联系，是我通过一块小板第一次把抽象名词落到可触摸的信号：传感器提供输入，程序保存状态，Timer 规定节奏，PWM 或 GPIO 输出动作，UART 让内部信息离开控制器。轨道交通继续追问的，是这些功能怎样跨设备分布，又怎样在任何单点故障下仍维持安全边界。这个尺度差异，比“车厢灯和风扇也由单片机控制”更值得记住。
+真正成立的联系，是我通过一块小板第一次把抽象名词落到可触摸的信号。传感器提供输入，程序保存状态，Timer 规定节奏，PWM 或 GPIO 输出动作，UART 让内部信息离开控制器。轨道交通继续追问的，是这些功能怎样跨设备分布，又怎样在任何单点故障下仍维持安全边界。这个尺度差异，比注意到车厢灯和风扇也由单片机控制更值得记住。
 
-In hindsight, the reading sequence resembles my later technical growth. The ±500 command path separated input, mapping, limiting, and output. PID added measurement, error, and time. ATP, ATO, and ATS moved protection, automated operation, and supervision to a system scale. The internship did not carry me across those layers, but it gave me a vocabulary I would no longer collapse into one vague idea of “control.”
+In hindsight, the reading sequence resembles my later technical growth. The ±500 command path separated input, mapping, limiting, and output. PID added measurement, error, and time. ATP, ATO, and ATS moved protection, automated operation, and supervision to a system scale. The internship did not carry me across those layers, but it gave me a vocabulary I would no longer collapse into one vague idea of control.
 
-回头看，这篇阅读笔记的顺序很像我后来的成长线：±500 指令路径先让我分清输入、映射、限幅与输出；PID 再加入测量、误差和时间；ATP、ATO、ATS 则把安全防护、自动运行和系统监督放到更大的工程层级。天津实习没有让我跨过这些层级，却给了我一组不会再轻易混用的基础词汇。
+回头看，这篇阅读笔记的顺序很像我后来的成长线。±500 指令路径先让我分清输入、映射、限幅与输出；PID 再加入测量、误差和时间；ATP、ATO、ATS 则把安全防护、自动运行和系统监督放到更大的工程层级。天津实习没有让我跨过这些层级，却给了我一组不会再轻易混用的基础词汇。

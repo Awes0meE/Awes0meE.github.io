@@ -224,8 +224,8 @@
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The 3:57 recording demonstrates the integrated Windows–Bluetooth SPP–ESP32 chain: temperatures appear in the app, duty and mode appear on the OLED, and the fan responds to data and buttons. It does not contain synchronized temperature, RPM, or performance logs.",
-    "captionZh": "这段 3 分 57 秒录像演示了 Windows–Bluetooth SPP–ESP32 完整链路：上位机显示温度，OLED 显示占空比与模式，风扇响应数据和按键；录像不包含同步温度、RPM 或性能日志。"
+    "caption": "The 3 min 57 s recording demonstrates the integrated Windows, Bluetooth SPP, and ESP32 chain. Temperatures appear in the app, duty and mode appear on the OLED, and the fan responds to data and buttons. The recording does not contain synchronized temperature, RPM, or performance logs.",
+    "captionZh": "这段 3 分 57 秒录像演示了 Windows、Bluetooth SPP 与 ESP32 完整链路。上位机显示温度，OLED 显示占空比与模式，风扇响应数据和按键；录像不包含同步温度、RPM 或性能日志。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-1",
@@ -405,7 +405,7 @@
     "date": "2025-08-10",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
     "caption": "Seamly2D is the open-source patternmaking application I brought up, extended with a local account layer, and packaged during the three-week Qt internship; the upstream software and wordmark are not my work.",
-    "captionZh": "三周 Qt 实习围绕 Seamly2D 展开：我跑通上游工程、加入本地账户层并尝试打包；软件本体与项目标识并非我的作品。"
+    "captionZh": "三周 Qt 实习围绕 Seamly2D 展开。我跑通上游工程、加入本地账户层并尝试打包；软件本体与项目标识并非我的作品。"
   },
   {
     "id": "turing-ai-institute-cover",
@@ -476,8 +476,8 @@
     "thumbnail": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "date": "2025-02-06",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "After moving from Arduino pin numbers to STM32 alternate functions, this LQFP48 map became my desk reference: GPIO, USART, ADC, and timers were no longer just function names but real pins whose ports, channels, and alternate mappings had to agree.",
-    "captionZh": "从 Arduino 的引脚编号转到 STM32 外设复用后，这张 LQFP48 引脚图成了我的桌面地图：GPIO、USART、ADC 与 Timer 不再只是函数名，而是需要同时核对端口、通道和复用关系的真实引脚。"
+    "caption": "After moving from Arduino pin numbers to STM32 alternate functions, this LQFP48 map became my desk reference. GPIO, USART, ADC, and timers were no longer just function names but real pins whose ports, channels, and alternate mappings had to agree.",
+    "captionZh": "从 Arduino 的引脚编号转到 STM32 外设复用后，这张 LQFP48 引脚图成了我的桌面地图。GPIO、USART、ADC 与 Timer 不再只是函数名，而是需要同时核对端口、通道和复用关系的真实引脚。"
   },
   {
     "id": "tianjin-rail-transit-cover",
@@ -488,8 +488,8 @@
     "thumbnail": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "date": "2025-02-05",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "This processed Tianjin Rail Transit mark records the setting of the work: I was an Embedded Systems Intern at Tianjin Jintie Communications, based in the Group headquarters, completing self-directed STM32 training and a bench demo rather than production rail-system development.",
-    "captionZh": "这张处理后的天津轨道交通标志记录项目发生的实习语境：我以天津津铁通信嵌入式实习生身份在集团总部办公，完成的是 STM32 自学与培训 demo，并未参与生产轨道系统开发。"
+    "caption": "This processed Tianjin Rail Transit mark records the setting of the work. I was an Embedded Systems Intern at Tianjin Jintie Communications, based in the Group headquarters, completing self-directed STM32 training and a bench demo rather than production rail-system development.",
+    "captionZh": "这张处理后的天津轨道交通标志记录项目发生的实习语境。我以天津津铁通信嵌入式实习生身份在集团总部办公，完成的是 STM32 自学与培训 demo，并未参与生产轨道系统开发。"
   },
   {
     "id": "servo-pwm-180-parameters",
@@ -581,8 +581,8 @@
     "titleZh": "Ninja 编译与链接时序图",
     "src": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png",
     "date": "2025-08-18",
-    "caption": "This DeepSeek-generated Mermaid export makes the division visible: Ninja schedules the DAG, compiler jobs produce objects, and the linker emits the executable.",
-    "captionZh": "DeepSeek 生成的 Mermaid 图把分工画开：Ninja 调度依赖图，编译器生成目标文件，链接器再产出可执行程序。",
+    "caption": "This DeepSeek-generated Mermaid export makes the division visible. Ninja schedules the DAG, compiler jobs produce objects, and the linker emits the executable.",
+    "captionZh": "DeepSeek 生成的 Mermaid 图把分工画开。Ninja 调度依赖图，编译器生成目标文件，链接器再产出可执行程序。",
     "type": "image",
     "thumbnail": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png",
     "projectSlug": "nanjing-turing-qt-embedded-learning"
@@ -593,8 +593,8 @@
     "titleZh": "Qt 6 包发现时序图",
     "src": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png",
     "date": "2025-08-18",
-    "caption": "The generated find_package(Qt6) sequence follows CMake to Qt6Config.cmake and imported targets such as Qt6::Core, or to an error when the config is absent.",
-    "captionZh": "生成式 find_package(Qt6) 时序图跟随 CMake 查找 Qt6Config.cmake、创建 Qt6::Core 等导入目标，未找到配置时则报错终止。",
+    "caption": "The generated Qt 6 package-discovery sequence follows CMake to Qt6Config.cmake and imported targets such as the Qt 6 Core target, or to an error when the config is absent.",
+    "captionZh": "生成式 Qt 6 包发现时序图跟随 CMake 查找 Qt6Config.cmake、创建 Qt 6 Core 等导入目标，未找到配置时则报错终止。",
     "type": "image",
     "thumbnail": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png",
     "projectSlug": "nanjing-turing-qt-embedded-learning"
@@ -692,8 +692,8 @@
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
-    "caption": "This slide defines the group-number build: two digits, rollover after 17, plus pause and reset. Counting through 99 was a separate version that I produced by changing the threshold, then flashed and demonstrated independently.",
-    "captionZh": "这页课件定义了小组号版本：两位显示，到 17 后归零，并支持暂停和复位。计数到 99 再归零是另一个改完阈值后单独烧录、单独验证的版本。"
+    "caption": "This slide defines the group-number build with two digits, rollover after 17, plus pause and reset. Counting through 99 was a separate version that I produced by changing the threshold, then flashed and demonstrated independently.",
+    "captionZh": "这页课件定义了小组号版本，两位显示，到 17 后归零，并支持暂停和复位。计数到 99 再归零是另一个改完阈值后单独烧录、单独验证的版本。"
   },
   {
     "id": "arduino-digital-clock-structure",
@@ -740,8 +740,8 @@
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
-    "caption": "Development roughly followed the course sequence: read the material, run a one-digit BCD example, wire two digits, split units and tens, add the buttons, then integrate the system. The two demo sketches were early checkpoints, not the final program.",
-    "captionZh": "实际开发大致沿着课件顺序推进：先读资料和跑一位 BCD 示例，再铺两位接线、拆分个位与十位、加入按键，最后联调。两份 demo sketch 都只是前期检查点。"
+    "caption": "Development roughly followed the course sequence. I read the material, ran a one-digit BCD example, wired two digits, split units and tens, added the buttons, then integrated the system. The two demo sketches were early checkpoints, not the final program.",
+    "captionZh": "实际开发大致沿着课件顺序推进。我先读资料和跑一位 BCD 示例，再铺两位接线、拆分个位与十位、加入按键，最后联调。两份 demo sketch 都只是前期检查点。"
   },
   {
     "id": "arduino-digital-clock-tinkercad-demo",
@@ -800,8 +800,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/cover-wide.jpg",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The green reference car shows the kit's intended layout—Nano-format controller, two driven wheels, battery holder, and front collision arms—but is not the purple build documented in this project.",
-    "captionZh": "绿色参考车展示套件的预期布局：Nano 尺寸控制板、两只驱动轮、电池盒和前缘碰撞拨杆；它并非本项目记录的紫色实物。"
+    "caption": "The green reference car shows the kit's intended layout with a Nano-format controller, two driven wheels, a battery holder, and front collision arms. It is not the purple build documented in this project.",
+    "captionZh": "绿色参考车展示套件的预期布局，包括 Nano 尺寸控制板、两只驱动轮、电池盒和前缘碰撞拨杆；它并非本项目记录的紫色实物。"
   },
   {
     "id": "arduino-smart-car-back",
@@ -825,7 +825,7 @@
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
     "caption": "The assembly record catches the board mid-solder, with its circular parts map open on the monitor and a multimeter beside the iron.",
-    "captionZh": "装配记录停在焊接进行时：显示器上打开圆形元件布局图，电烙铁旁放着万用表。"
+    "captionZh": "装配记录停在焊接进行时。显示器上打开圆形元件布局图，电烙铁旁放着万用表。"
   },
   {
     "id": "arduino-smart-car-system-diagram",
@@ -848,8 +848,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-objectives.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The course frame separates four aims: practise soldering; build the car from the given circuit; troubleshoot and solve problems; and work as a team while writing a professional report.",
-    "captionZh": "课程把目标拆成四项：练习焊接；按给定电路完成小车装配；开展故障排查与问题解决；以团队协作完成专业报告。"
+    "caption": "The course frame separates four aims. These were to practise soldering, build the car from the given circuit, troubleshoot problems, and work as a team while writing a professional report.",
+    "captionZh": "课程把目标拆成四项。练习焊接，按给定电路完成小车装配，开展故障排查与问题解决，并以团队协作完成专业报告。"
   },
   {
     "id": "arduino-smart-car-power-supply",
@@ -872,8 +872,8 @@
     "thumbnail": "/uploads/projects/arduino-smart-car-line-tracker/course-sensors-switches.png",
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
-    "caption": "The course slide separates contact inputs from optical ones: an impact switch and a key, an emitter–receiver pair for black/white tracking, and a striped wheel read by an IR speed sensor.",
-    "captionZh": "课件页把接触输入与光学输入分开：碰撞开关与按键负责触发，收发一体的红外对管辨别黑白，条纹轮盘则由红外测速传感器读取。"
+    "caption": "The course slide separates contact inputs from optical ones. An impact switch and a key provide contact inputs, an emitter-receiver pair tracks black and white, and an IR speed sensor reads a striped wheel.",
+    "captionZh": "课件页把接触输入与光学输入分开。碰撞开关与按键负责触发，收发一体的红外对管辨别黑白，条纹轮盘则由红外测速传感器读取。"
   },
   {
     "id": "arduino-smart-car-shift-register",
@@ -933,6 +933,6 @@
     "date": "2024.03 to 2024.04",
     "projectSlug": "arduino-smart-car-line-tracker",
     "caption": "The optional course slide asks the car to follow one black-line lap, awarding a 3% bonus within 70 s and another 2% for beating half the groups; the project record later reports a top-5% finish.",
-    "captionZh": "可选挑战课件页要求小车沿黑线跑完一圈：70 秒内完成可获 3% 额外加分，超过半数小组再获 2%；项目记录显示这台车最终进入圈速前 5%。"
+    "captionZh": "可选挑战课件页要求小车沿黑线跑完一圈。70 秒内完成可获 3% 额外加分，超过半数小组再获 2%；项目记录显示这台车最终进入圈速前 5%。"
   }
 ]

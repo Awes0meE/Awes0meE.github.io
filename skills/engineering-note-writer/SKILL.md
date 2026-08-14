@@ -13,6 +13,7 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
 - Match the Chinese and English substance on public bilingual pages.
 - Require model-authored reader-facing project and note body to pass the zero-hit L1 wording, punctuation, and canned-structure gates in `references/reader-prose-hard-gates.md`.
+- Prefer direct assertions over bare negative-first binary reframes; preserve ordinary factual negation and the confirmed `不是说……不行，而是说……` qualifier when it protects real nuance.
 
 Do not let an artifact inventory substitute for the user's point of view. Do not begin a substantial draft until the shared understanding is confirmed.
 

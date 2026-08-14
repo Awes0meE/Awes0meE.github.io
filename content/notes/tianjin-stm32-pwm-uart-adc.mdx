@@ -14,7 +14,7 @@ visibility: public
 projectSlug: "tianjin-metro-stm32-foundation"
 ---
 
-## PWM Changes Pulse Timing, Not an “Analogue Voltage Variable” / PWM 改的是脉冲时间，不是“模拟电压变量”
+## PWM Changes Pulse Timing, Not an Analogue Voltage Variable / PWM 改的是脉冲时间，不是模拟电压变量
 
 `Set_LED_Brightness()` does not ask the MCU to output a continuous analogue voltage. It clamps `brightness` to 999, passes the value to `TIM_SetCompare1(TIM4, brightness)`, and updates TIM4 channel 1's compare register. The counter repeatedly runs between zero and its auto-reload value; the compare point determines when the output changes within each period. A complete duty-cycle interpretation also depends on `ARR`, PWM mode, and output polarity. Because the excerpt preserves only the compare update, I do not infer the missing timer setup from the number `999`.
 
@@ -36,13 +36,13 @@ I increased the PWM setting and read the ADC point by point using the same Blue 
 
 `Lookup_PWM_For_Target()` first handles values beyond the two endpoints, then finds the interval surrounding the target ADC code. It computes `fraction = (target_adc - adc1) / (adc2 - adc1)`, linearly interpolates from `pwm1` to `pwm2`, and rounds the result. That is smoother than switching among 16 discrete levels and avoids claiming that one global line describes the sensor over its entire range.
 
-我把 PWM 从 0 往上调，在当时那套 Blue Pill、LED、光敏传感器、面包板和环境光条件下逐点读取 ADC，得到 16 组 `(pwm, adc)`：PWM 从 0 增到 1000，ADC 从 1600 降到 480。方向相反来自光敏分压与采样接法；表格记录的是这套实物链路的响应，不是从器件参数里抄出的一条理论曲线。
+我把 PWM 从 0 往上调，在当时那套 Blue Pill、LED、光敏传感器、面包板和环境光条件下逐点读取 ADC，得到 16 组 `(pwm, adc)`。PWM 从 0 增到 1000，ADC 从 1600 降到 480。方向相反来自光敏分压与采样接法；表格记录的是这套实物链路的响应，不是从器件参数里抄出的一条理论曲线。
 
 `Lookup_PWM_For_Target()` 先处理表格两端，再找到目标 ADC 所在的相邻区间。区间比例按 `fraction = (target_adc - adc1) / (adc2 - adc1)` 计算，随后在 `pwm1` 与 `pwm2` 之间线性插值并四舍五入。这样做比 16 档硬切换平滑，也不需要假设整段传感器响应可以由一个全局线性公式描述。
 
 The calibration has deliberate limits. The ADC values remain sample codes rather than lux. I did not perform repeated measurements, error bars, or temperature-drift testing. Interpolation assumes only that adjacent measured points can be approximated locally by a straight line. That was sufficient for a low-frequency demo, not for metrology.
 
-这次标定仍有明确边界：ADC 只是量化后的采样码，没有换算成 lux；16 个点没有重复测量、误差条或温漂测试；插值只假设相邻两点之间可以近似成直线。它足以驱动一个低频 demo，却不是传感器计量标定。
+这次标定仍有明确边界。ADC 只是量化后的采样码，没有换算成 lux；16 个点没有重复测量、误差条或温漂测试；插值只假设相邻两点之间可以近似成直线。它足以驱动一个低频 demo，却不是传感器计量标定。
 
 [PWM lookup excerpt](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
 
@@ -60,8 +60,8 @@ No standalone UART source remains, and the condensed main loop omits that branch
 
 In the integrated demo, the encoder provided a target in the ADC-value domain; the calibration table mapped it to a TIM4 compare value; and PWM drove the LED. Light-sensor sampling, the OLED, and UART exposed the current light, target, and output. ADC, PWM, and UART therefore met in one program as measurement, actuation, and communication.
 
-综合 demo 里，编码器给出目标 ADC 域数值，标定表把目标映射成 TIM4 比较值，PWM 驱动 LED；光敏传感器的 ADC 采样、OLED 与 UART 则让我看到当前光照、目标和输出。于是 ADC、PWM、UART 第一次在一个程序里相遇：一个读物理世界，一个驱动物理世界，一个把内部状态送出去。
+综合 demo 里，编码器给出目标 ADC 域数值，标定表把目标映射成 TIM4 比较值，PWM 驱动 LED；光敏传感器的 ADC 采样、OLED 与 UART 则让我看到当前光照、目标和输出。于是 ADC、PWM、UART 第一次在一个程序里相遇。一个读物理世界，一个驱动物理世界，一个把内部状态送出去。
 
-The measured ADC value did not return to the mapping function to form an error. The implemented path was “target → lookup → PWM,” not “target − measurement → controller → PWM.” I considered using the light feedback for further correction, but the final result remained feedforward calibration with measurement display. Once stated that way, the exercise shows exactly where the missing return path of a closed loop would have to go.
+The measured ADC value did not return to the mapping function to form an error. The implemented path was `target → lookup → PWM`, not `target − measurement → controller → PWM`. I considered using the light feedback for further correction, but the final result remained feedforward calibration with measurement display. Once stated that way, the exercise shows exactly where the missing return path of a closed loop would have to go.
 
-不过实测 ADC 没有回到映射函数里参与误差计算。代码路径是“目标 → 查表 → PWM”，不是“目标 − 实测 → 控制器 → PWM”。我当时考虑过继续根据光敏反馈修正亮度，但最终留下的是前馈标定与实测显示。把这点说清以后，这段练习反而更有价值：它展示了闭环还缺的那条返回路径究竟在哪里。
+不过实测 ADC 没有回到映射函数里参与误差计算。代码路径是 `目标 → 查表 → PWM`，不是 `目标 − 实测 → 控制器 → PWM`。我当时考虑过继续根据光敏反馈修正亮度，但最终留下的是前馈标定与实测显示。把这点说清以后，这段练习反而更有价值。它展示了闭环还缺的那条返回路径究竟在哪里。

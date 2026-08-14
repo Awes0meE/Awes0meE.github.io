@@ -113,7 +113,7 @@ Template ending:
 Cognition-led ending:
 
 ```text
-下一次再看到「开发机上能跑」，我大概不会那么快把它叫作 Release 了。
+下一次再看到开发机上能跑的结果，我大概不会那么快把它叫作 Release 了。
 ```
 
 Why it works: the ending resolves the current understanding by calling back to the note's actual packaging problem. It does not claim vague growth or add a mandatory retrospective heading.
