@@ -17,7 +17,7 @@ Work on the reader-facing prose for these project families:
 3. DIY Cooling: project page, related learning note, and 6 media records.
 4. Tianjin STM32: project page, five related learning notes, and 3 media records.
 5. Nanjing Turing: project page, the model-authored three-week development note,
-   and 5 media records.
+   and all 19 currently related media records.
 
 The four Nanjing Turing notes that directly render or closely preserve original
 source documents remain unchanged. Their artifact prose is outside the
