@@ -1,56 +1,121 @@
 ---
-title: "Five Firmware Cadences Around the ACUnit Main Loop"
-titleZh: "五档节拍怎样围住 ACUnit 固件主循环"
-summary: "A timing-map reading of the ACUnit firmware record: five periodic cadences, main-loop responsibilities, communication surfaces, and unmeasured timing."
-summaryZh: "从公开摘录读取 ACUnit 固件的时间地图：五档周期节拍、主循环职责、通信接口，以及尚未实测的时序表现。"
-date: "2026-05-06"
-tags: ["STM32", "Firmware", "CMake", "BSP"]
+title: "My Bare-Metal Exam on the ACUnit Main Loop"
+titleZh: "把 ACUnit 主循环当成一次裸机考试"
+summary: "Before coding the ACUnit firmware, I planned its App/Service/BSP boundaries and 1/10/100/500/2000 ms cooperative schedule, then used deadline-driven state machines to keep EEV timing and communication progress from blocking one another."
+summaryZh: "写 ACUnit 固件以前，我先规划 App、Service、BSP 边界与 1/10/100/500/2000 ms 协作式调度，再用 deadline 状态机避免 EEV 时序与通信过程互相阻塞。"
+date: "2026-05-23"
+tags: ["STM32", "Bare Metal", "Firmware", "Scheduler", "State Machine", "BSP"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## One Main Loop, Five Cadences / 一个主循环，五档节拍
+## I Wanted to Know Whether My Bare-Metal Fundamentals Were Real / 我想知道自己的裸机基本功到底是不是真的
 
-The existing public note does not expose source files, but it does preserve a clear schedule. Electronic-expansion-valve work is assigned a 1 ms cadence; FG maintenance and encoder/key input sit at 10 ms; NTC updates at 100 ms; OLED refresh at 500 ms; and DHT22 reads at 2000 ms.
+The ACUnit firmware felt like an exam I had set for myself. The STM32F103 did not have generous resources, the board exposed many peripherals, and I knew the concepts behind an RTOS without having used one in a real project. I was not choosing bare metal because an RTOS was somehow wrong. I chose it because the concurrency was still manageable through an explicit cooperative schedule, and because I wanted to learn what timing discipline feels like before an operating system hides part of it for me.
 
-既有公开笔记没有展开源码，却保留了一张很清楚的节拍表：电子膨胀阀任务放在 1 ms，FG 维护与编码器 / 按键输入放在 10 ms，NTC 更新是 100 ms，OLED 刷新是 500 ms，DHT22 读取则是 2000 ms。
+ACUnit 固件很像我给自己安排的一场考试。STM32F103 的资源不算宽裕，板上外设很多，我知道 RTOS 的一些概念与原理，却没有在真实项目里用过，也谈不上熟练。我不是因为 RTOS 有什么问题才选择裸机，而是这套并发仍能用明确的协作式调度控制，同时我也想在操作系统替我藏起一部分细节以前，先亲手感受一次时序纪律到底是什么。
 
-| Cadence | Responsibility |
+Before writing the functions, I planned the App, Service, and BSP boundaries. `Core` would retain generated startup and peripheral initialization. App would decide when work became due. Service would combine devices into sensing, control, UI, and network behavior. BSP would stay close to the board and its concrete peripherals. The functions changed while I decomposed features, but those responsibilities did not appear only after the code became tangled.
+
+在真正写函数以前，我先规划了 App、Service 与 BSP 的边界。`Core` 保留生成的启动和外设初始化，App 决定任务何时到期，Service 把器件组织成传感、控制、UI 与网络行为，BSP 则尽量贴近板卡和具体外设。功能往下拆时，函数当然一直在变化，但这些职责不是等代码缠在一起以后才临时补出来的。
+
+## Five Cadences Were a Budget, Not Decoration / 五档节拍是一张预算表，不是装饰
+
+I estimated how often each responsibility needed attention before coding. The first complete schedule used five cadences.
+
+写代码以前，我先估计每类责任多久需要被照看一次。第一套完整调度用了五档节拍。
+
+| Cadence | Main responsibility |
 | --- | --- |
-| `1 ms` | Electronic expansion valve stepping |
-| `10 ms` | FG maintenance, encoder/key scan, UI input |
-| `100 ms` | NTC update |
-| `500 ms` | OLED refresh |
-| `2000 ms` | DHT22 read |
+| `1 ms` | EEV step service |
+| `10 ms` | Fan feedback, keys, encoder, and immediate UI input |
+| `100 ms` | Compressor service, delayed parameter save, ADC sensing, and network progress |
+| `500 ms` | OLED page refresh |
+| `2000 ms` | DHT environmental reading when the EEV is not busy |
 
-| 节拍 | 职责 |
+| 节拍 | 主要职责 |
 | --- | --- |
-| `1 ms` | 电子膨胀阀步进 |
-| `10 ms` | FG 维护、编码器 / 按键扫描与 UI 输入 |
-| `100 ms` | NTC 更新 |
-| `500 ms` | OLED 刷新 |
-| `2000 ms` | DHT22 读取 |
+| `1 ms` | EEV 步进服务 |
+| `10 ms` | 风扇反馈、按键、编码器与即时 UI 输入 |
+| `100 ms` | 压缩机服务、延迟参数保存、ADC 传感与网络推进 |
+| `500 ms` | OLED 页面刷新 |
+| `2000 ms` | EEV 不忙时读取 DHT 环境数据 |
 
-Read as a main-loop map, the table keeps fast actuator work away from slow environmental sensing. It also exposes a practical pressure point: a blocking operation in a slow path can still delay a faster responsibility if the loop has no stronger scheduling mechanism. The excerpt gives intended intervals, not measured jitter or deadline evidence.
+The scheduler used `HAL_GetTick()` as its millisecond time base. The [STM32F1 reference manual](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-microcontrollers-stmicroelectronics.pdf) describes the Cortex system timer and its HCLK or HCLK/8 clock choices. In this project, the important software decision sat one layer above that hardware. Every visit to the main loop asked which deadlines had elapsed, then advanced only the work that was due.
 
-把表格当作主循环地图看，快速执行器任务与慢速环境采样被分到了不同档位；它也顺手暴露一个很实际的压力点——如果慢路径里出现阻塞，而循环又没有更强的调度机制，快任务一样可能被拖住。这里记录的是预期间隔，不是抖动实测或 deadline 证明。
+调度器把 `HAL_GetTick()` 当作毫秒时间基准。[STM32F1 参考手册](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-microcontrollers-stmicroelectronics.pdf)说明了 Cortex 系统计时器，以及 HCLK 或 HCLK/8 两种时钟选择。这个项目更关键的软件决定在硬件计时器之上。主循环每转一遍，只检查哪些 deadline 已经过期，再推进到期的工作。
 
-## `Core`, `App`, `Service`, and `BSP_drivers` Name the Boundaries / 四个目录名先划开职责
+The following excerpt removes the three middle cadences but keeps the real structure that mattered.
 
-The same record names four layers: `Core`, `App`, `Service`, and `BSP_drivers`. `Core` is associated with the generated STM32 project, while application scheduling and reusable peripheral-facing work are separated into the other directories. The names are enough to express an intended boundary, although the files behind them are not linked here.
+下面这段删去了中间三档任务，保留真正关键的调度结构。
 
-同一份记录给出四层目录名：`Core`、`App`、`Service` 与 `BSP_drivers`。`Core` 对应生成的 STM32 工程，其余目录把应用调度与可复用的外设侧工作分开。只看目录名已经能读出预期边界，但目录里的文件并未公开链接。
+```c
+uint32_t now = HAL_GetTick();
 
-Two optimizations are described beside the schedule. OLED refresh can be skipped when display content is unchanged, reducing repeated I2C traffic and formatting. The NTC lookup is described as moving from a linear search to binary search. Both ideas target repeated work inside periodic paths; without a trace or benchmark, their timing effect remains unknown.
+if ((now - t1) >= 1U)
+{
+    t1 = now;
+    SVC_Control_Task1ms();
+}
 
-节拍旁边还写了两项优化：OLED 内容没变化时跳过刷新，减少重复 I2C 传输与格式化；NTC 查表则从线性搜索改成二分搜索。两项都在削减周期路径里的重复工作，但没有 trace 或 benchmark，实际省下多少时间仍然未知。
+if (((now - t2000) >= 2000U) && !SVC_Control_IsEEVBusy())
+{
+    t2000 = now;
+    SVC_Sensor_Task2000ms();
+}
+```
 
-## Communication Labels Do Not Supply the Protocol Code / 通信标签补不出协议代码
+That last condition carries more of the design than its size suggests. DHT timing is slow and includes short busy-wait sections. Bare-metal cooperation did not magically make every driver asynchronous. I instead kept the slow environmental read out of the loop while EEV motion needed the fast path. The 1 ms job was checked first, and the 2000 ms read was allowed to wait.
 
-The V2.1 ACUnit map labels compressor Modbus UART, ESP-01S Wi-Fi, HC-05 Bluetooth, and an ST-Link SWD port around the main board. Those labels identify firmware-facing surfaces. They do not reveal UART framing, retry behavior, module commands, fault handling, or the OpenOCD flashing sequence.
+最后那条判断比它看起来承担了更多设计。DHT 时序慢，驱动里也存在短暂忙等。裸机协作并不会神奇地让每个驱动都变成异步，我做的是在 EEV 动作需要快路径时，先不让慢环境采样进入循环。1 ms 任务先被检查，2000 ms 读取可以继续等。
 
-V2.1 ACUnit 接口图在主控板周围标出压缩机 Modbus UART、ESP-01S Wi-Fi、HC-05 蓝牙与 ST-Link SWD。这些标签能定位固件要面对的接口，却不会自动补出 UART 帧、重试策略、模块命令、故障处理或 OpenOCD 烧录过程。
+These are intended dispatch periods, not measured execution-time guarantees. I did not preserve a worst-case execution-time trace, jitter histogram, or deadline-miss log. The schedule expresses the order and budget I designed. It does not turn a cooperative main loop into a proven hard real-time system.
 
-The schedule is therefore the most concrete part of the record. It shows how control, sensing, display, and input were meant to take turns in one firmware structure. Source listings, serial logs, valve traces, and on-target timing measurements would be needed to say how that structure behaved on hardware.
+这些数字是预期调度周期，不是实测执行时间保证。我没有保留下来的最坏执行时间 trace、抖动分布或 deadline miss 日志。这张表说明我设计的顺序与预算，不会因为写得整齐，就自动把协作式主循环变成已经证明过的硬实时系统。
 
-因此，节拍是这份记录里最具体的一层：它说明控制、传感、显示与输入准备怎样在同一套固件结构里轮流工作。要判断这套结构在硬件上表现如何，还需要源码清单、串口日志、阀动作曲线与目标板时序测量。
+## Homing Had to Progress Without Owning the CPU / 回零要继续走，但不能把 CPU 整段占住
+
+The EEV created a stricter rule. Its saved target was meaningless until the valve had established a physical zero. Startup therefore began with Home, and the target could be restored only after homing completed. A blocking loop that walked every step in one call would have frozen keys, display, sensing, and communication for the whole travel.
+
+EEV 提出了更严格的规则。阀还没有建立物理零点以前，Flash 里的目标开度没有意义。上电先 Home，回零完成后才能恢复目标。如果用一个阻塞循环在单次调用里把所有步数走完，按键、显示、传感与通信都会在整个行程里一起停住。
+
+I split homing into stages and let the 1 ms service advance it when each deadline arrived. This short real excerpt shows the settle stage refusing to move early, then preparing the seating stage and returning control to the main loop.
+
+我把回零拆成多个阶段，让 1 ms 服务在各自 deadline 到来时逐步推进。下面这段真实节选展示了 settle 阶段怎样在时间未到时直接退出，时间到后再准备 seating 阶段，并把控制权还给主循环。
+
+```c
+if (s_home_stage == EEV_HOME_SETTLE)
+{
+    if ((int32_t)(now - s_home_settle_until_ms) < 0)
+    {
+        return;
+    }
+
+    s_home_stage = EEV_HOME_SEAT;
+    s_home_left = BOARD_EEV_HOME_SEAT_PULSE;
+    s_last_step_ms = now - BOARD_EEV_HOME_SEAT_INTERVAL_MS;
+    return;
+}
+```
+
+The same style appeared in ESP initialization, retries, Wi-Fi application, compressor startup delays, and deferred parameter saving. A state held what had already happened. A deadline said when the next transition was legal. The loop remained free to serve the rest of the machine between those transitions.
+
+同一种写法后来出现在 ESP 初始化与重试、Wi-Fi 配置应用、压缩机启动等待和参数延迟保存里。状态记录已经走到哪里，deadline 决定下一次转换何时才合法，两次转换之间，主循环仍然可以照看机器的其他部分。
+
+```text
+every loop
+  service due 1 ms actuator work
+  advance communication states whose deadlines have arrived
+  run other due cadences
+  defer slow sensing while actuator timing is active
+```
+
+## The Exam Did Not End with a Scheduler Table / 这场考试没有停在一张调度表上
+
+Planning the layers did not spare me from changing them. EEV homing grew more careful, communication gained deadlines and retries, parameters moved into a delayed two-page journal, and the later production branch added 200 ms compressor control plus 1 s automatic EEV and safety decisions. The original structure mattered because those additions had somewhere to go without turning `main.c` into the entire product.
+
+提前规划分层并没有免掉后面的修改。EEV 回零变得更谨慎，通信补上 deadline 与重试，参数进入延迟写入的双页日志，后来的 production 分支又加入 200 ms 压缩机控制和 1 s EEV 自动与安全决策。原始结构真正有用的地方，是这些新责任还能找到位置，不必把整个产品都堆进 `main.c`。
+
+I still would not claim that this was the only correct architecture. An RTOS could provide stronger tools once concurrency, isolation, and timing demands grow. What this project gave me was the missing ground underneath those concepts. Tasks, waiting, state, time slices, and scheduling stopped being words from an operating-systems chapter. I had already felt the problems they were trying to organize.
+
+我仍然不会说这是唯一正确的架构。并发、隔离与时序要求继续增长时，RTOS 能提供更强的工具。这个项目补给我的，是那些概念下面原本缺少的地面。任务、等待、状态、时间片和调度不再只是操作系统章节里的词，我已经亲手碰过它们试图整理的问题。

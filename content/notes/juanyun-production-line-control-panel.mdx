@@ -1,0 +1,86 @@
+---
+title: "Looking Back Through 102 Commits of ControlPanel and Production-Line Maintenance"
+titleZh: "回看 102 条提交，ControlPanel 与交付维护怎样长出来"
+summary: "A present-day reading of the ACUnit production-line history, from raw telemetry to a Windows ControlPanel, separated monitoring and control authority, safer startup, diagnostics, and clock fallback without inventing forgotten field incidents."
+summaryZh: "从现在回看 ACUnit production-line 的 102 条提交，追踪原始遥测怎样发展成 Windows ControlPanel、监测与控制权怎样分离，以及安全启动、诊断和时钟回退如何补齐，不虚构已经忘记的现场故事。"
+date: "2026-07-22"
+tags: ["PowerShell", "ControlPanel", "Telemetry", "Diagnostics", "Maintenance", "STM32"]
+projectSlug: "juanyun-thermal-hardware"
+visibility: public
+---
+
+## A Line of Telemetry Was Not Yet a Test Interface / 一行遥测还不是测试界面
+
+The first useful milestone was seeing compressor state and ADC temperatures arrive on the PC. That proved the chain could speak. It did not yet make the refrigeration system easy to inspect. A line of comma-separated values may contain everything, while still forcing the person beside the machine to remember field order, units, validity rules, and which actuator is currently allowed to move.
+
+最早真正有用的节点，是在电脑上看到压缩机状态与 ADC 温度传回来。它证明整条链能说话，却还没有让制冷系统变得容易观察。一行逗号分隔数据可以什么都带着，同时继续要求机器旁边的人记住字段顺序、单位、有效性规则，以及此刻究竟允许哪一个执行器动作。
+
+The official [Modbus serial-line guide](https://www.modbus.org/docs/Modbus_over_serial_line_V1_02.pdf) describes a master issuing explicit requests and processing slave responses. The ACUnit used that request and response relationship to poll the compressor driver. On the PC side, the problem was broader. Pressure, temperature, speed, current, fan feedback, EEV state, automatic status, and faults had to be read together rather than as unrelated frames.
+
+官方 [Modbus 串行线路指南](https://www.modbus.org/docs/Modbus_over_serial_line_V1_02.pdf)描述了主站发出明确请求、再处理从站响应的关系。ACUnit 用这条关系轮询压缩机驱动板。到了电脑端，问题又更宽一些。压力、温度、转速、电流、风扇反馈、EEV 状态、自动控制状态和故障，必须放在一起读，而不是继续作为互不相干的帧存在。
+
+## The ControlPanel Made Time Visible / ControlPanel 让时间也变得可见
+
+The Windows PowerShell tool grew from a status viewer into a large ControlPanel. Live values filled the immediate state. Trend plots showed whether a number was settling, drifting, oscillating, or disappearing. CSV export preserved a session for later comparison. Monitor logs kept the production-facing fields concise, while Debug logs retained the noisier control, arbitration, and protection details.
+
+Windows PowerShell 工具从状态查看器一路长成了完整 ControlPanel。实时数值负责眼前状态，趋势图让人看到一个量正在收敛、漂移、振荡还是突然消失，CSV 把一轮会话留给后续比较。Monitor 日志保留产线真正需要的精简字段，Debug 日志则留下更吵闹的控制、仲裁和保护细节。
+
+That changed what a test could ask. A single pressure value could be plausible at one instant and still reveal a dropout over time. An EEV command could be delivered successfully while superheat moved in the wrong direction. A compressor target could change while the actual speed stayed behind. The panel did not create those physical relationships, but it put them on the same screen long enough for someone to notice.
+
+这一下改变了测试能问什么。某个压力值在一个瞬间看着合理，拉成曲线后仍可能暴露掉线。EEV 命令可以成功送达，过热度却朝错误方向移动。压缩机目标已经改变，实际转速还可能落在后面。面板没有制造这些物理关系，它只是把它们放到同一块屏幕上，放得足够久，让人能够看见。
+
+## Monitoring and Control Could Not Share the Same Default / 监测与控制不能共用同一个默认权限
+
+An early all-in-one tool naturally accumulated sliders and automatic experiments. That convenience also created a control-ownership problem. If the board-side algorithm and the PC-side experiment both believed they owned the EEV or compressor, a useful test interface could become a second controller fighting the first one.
+
+早期一体化工具很自然地不断加入滑条和上位机自动实验，这份方便也带来了控制权问题。如果板端算法与电脑端实验都觉得 EEV 或压缩机归自己管，一套好用的测试界面就会变成第二个控制器，与第一个控制器互相打架。
+
+The later panel opened in Monitor mode. It could display telemetry, select board-side run modes, and adjust the independent fan override, while direct EEV and compressor outputs stayed closed. Entering Control mode was an explicit action for a person who had already accepted responsibility for the refrigeration system. The firmware mirrored the same idea by starting in `AUTO + STOP` and waiting for valid compressor state before allowing a nonzero speed command.
+
+后来的面板默认进入 Monitor 模式，可以查看遥测、切换板端运行模式，也可以使用独立风扇覆盖，但不会直接开放 EEV 与压缩机输出。进入 Control 模式需要操作者明确动作，也要求这个人已经承担制冷系统的现场安全责任。固件用 `AUTO + STOP` 表达同一思路，并在收到有效压缩机状态以前拒绝非零转速命令。
+
+I now see that split as more than a UI choice. It made authority visible. A person could tell whether the board was controlling itself, whether the PC was merely watching, and when a development tool had crossed into direct actuation.
+
+现在再看，这个拆分不只是 UI 选择，它把控制权本身显示了出来。操作者能够分清板卡是否正在自控，电脑是否只在旁观，以及一套开发工具从哪一步开始进入直接执行。
+
+## The 102 Commits Do Not Form One Neat Incident Story / 102 条提交并没有组成一条整齐的事故故事
+
+I no longer remember the exact conversation or bench event behind every change. Reconstructing a clean chain of test feedback and fixes would be fiction. Looking back through the 102 commits, I can still see several engineering lines clearly because the code and commit subjects keep returning to them.
+
+我已经记不清每次修改背后的具体对话和工作台现场。硬把它们复原成一条整齐的测试反馈与修复因果链，只会变成虚构。现在回看这 102 条提交，仍然有几条工程路线很清楚，因为代码和提交标题一直在反复碰它们。
+
+The first line was observability. The panel gained charts, CSV export, layout repairs, saved connection state, Monitor and Debug profiles, derived superheat and subcooling fields, and clearer separation between EEV and compressor diagnostics.
+
+第一条是可观测性。面板逐步加入曲线、CSV 导出、布局修复、连接记忆、Monitor 与 Debug 日志、过热度与过冷度派生字段，也把 EEV 和压缩机诊断拆得更清楚。
+
+The second line was control ownership. PC-side experiments arrived first, then arbitration and safety layers grew around them. A portable EEV and compressor core was extracted, ported onto the STM32, and given board-side automatic modes. Monitor mode later became the default handoff surface so the PC could inspect that core without silently competing with it.
+
+第二条是控制权。上位机实验先出现，随后仲裁与安全层不断包上去。EEV 与压缩机核心被抽成可移植模块，再接回 STM32 形成板端自动模式。后来 Monitor 成为默认交接界面，让电脑可以观察板端核心，而不是悄悄与它争夺输出。
+
+The third line was physical disagreement. EEV travel, Home target restoration, phase order, low-opening oscillation, superheat source, startup grace, and compressor minimum-speed behavior all received repeated changes. I do not assign each change an invented field failure. The repeated revisions themselves show where software had to negotiate with a valve, harness, sensor interpretation, and refrigeration loop that were less tidy than the first abstraction.
+
+第三条是软件与实物之间的分歧。EEV 行程、Home 后目标恢复、相序、低开度振荡、过热度来源、启动宽限与压缩机最低转速，都经历了反复修改。我不会给每一次修改补写一个不存在的现场故障，但这些重复变化已经说明，软件一直在与阀、线束、传感语义和制冷回路协商。真实系统比第一版抽象更不整齐。
+
+## A Clock Failure Needed a Visible Degraded State / 时钟失败以后，降级状态也得被看见
+
+The last major line was production robustness. The firmware first tried the external HSE path for 72 MHz. If that startup configuration failed, it could rebuild the clock from HSI and PLL at 64 MHz, keep the application running, and show the fallback on the OLED. The UI retained its other pages so the failure state did not erase the diagnostics needed to investigate it.
+
+最后一条明显路线是产线健壮性。固件先尝试外部 HSE 的 72 MHz 路径，启动配置失败时，再用 HSI 与 PLL 建立 64 MHz 时钟，让应用继续运行，并在 OLED 上显示回退状态。UI 仍保留其他页面，故障提示不会反过来抹掉排查它需要的诊断信息。
+
+The [STM32F1 reference manual](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-microcontrollers-stmicroelectronics.pdf) documents the HSI and PLL clock tree and separately describes the clock security system for a running HSE failure. This branch implemented a startup-time fallback after HSE initialization failed. I do not treat that code as evidence that CSS and NMI recovery from a runtime crystal failure were enabled and tested.
+
+[STM32F1 参考手册](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-microcontrollers-stmicroelectronics.pdf)说明了 HSI 与 PLL 时钟树，也另外描述了运行中 HSE 失效时的时钟安全系统。这条分支实现的是 HSE 初始化失败后的启动回退。我不会把这段代码当成 CSS 与 NMI 已经启用，并且运行期晶振故障恢复已经实测的证据。
+
+## Mock Data Kept the Window Testable, Not the Refrigerator Proven / MockData 让窗口可测试，不让制冷系统自动获证
+
+The ControlPanel included MockData and regression tooling. Those assets were useful for checking parsing, charts, layout, logs, and parts of the portable control core without connecting the refrigeration system. They were not substitutes for compressor, pressure, EEV, and thermal behavior on hardware.
+
+ControlPanel 带有 MockData 与回归工具。它们适合在不连接制冷系统时检查解析、曲线、布局、日志和部分可移植控制核心，却不能代替压缩机、压力、EEV 与热行为的硬件测试。
+
+The branch documentation also warned that the earlier control harness no longer matched the final snapshot completely. An old PASS could not serve as the current release gate until the reference model, snapshots, status codes, and 200 ms compressor path were aligned again. I like that warning because it prevents a green word from becoming stronger evidence than the code it no longer covers.
+
+分支文档也明确提醒，早期控制 harness 已经不能完整覆盖最后的代码快照。参考模型、快照结构、状态码与 200 ms 压缩机路径重新对齐以前，一条旧 PASS 不能继续充当当前发布门禁。我很喜欢这条提醒，因为它避免一个绿色单词变成比自己实际覆盖的代码更强的证据。
+
+The company test team later used the real system and reported successful telemetry, manual control, automatic modes, and protection triggers. Those results are attributed and bounded on the [project page](/work/juanyun-thermal-hardware). My own strongest ControlPanel memory remains the first complete connection. Compressor data and ADC temperatures appeared together, and a three-board controller stopped being a collection of checked interfaces. It became a machine someone else could inspect, operate, and continue testing.
+
+公司测试团队后来在真实系统上运行并反馈了遥测、手动控制、自动模式和保护触发，具体边界与数字放在[项目主页](/work/juanyun-thermal-hardware)。我对 ControlPanel 最强的记忆仍是第一次完整连接。压缩机数据和 ADC 温度同时出现，一套三板控制器不再只是若干已经检查过的接口，而是变成了别人也能观察、操作和继续测试的机器。
