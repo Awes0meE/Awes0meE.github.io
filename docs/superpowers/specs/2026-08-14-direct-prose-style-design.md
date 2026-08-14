@@ -166,12 +166,13 @@ The runtime writer guidance will be updated before the content pass.
    rewriting examples that normalize decorative `「」`.
 5. Add the new checks to `references/self-review.md`, bilingual guidance, and
    the skill test rubric.
-6. Add one narrow regression fixture that distinguishes the rejected binary
-   reframe, the accepted conversational qualifier, and ordinary factual
+6. Add one narrow current-rule regression case that distinguishes the rejected
+   binary reframe, the accepted conversational qualifier, and ordinary factual
    negation.
-7. Scan runtime references and revised-output fixtures for conflicting examples.
-   Historical inputs and baseline outputs remain unchanged because they are
-   comparison evidence rather than release-ready behavior.
+7. Scan runtime references for conflicting examples. Historical inputs,
+   baseline outputs, revised outputs, comparison notes, and provenance records
+   remain unchanged because Trials 01–11 are frozen evidence for their recorded
+   runtimes rather than release-ready fixtures for the new rule.
 
 The interview, evidence, cognition-led composition, truth, and bilingual parity
 workflows remain unchanged.
@@ -201,16 +202,17 @@ as much as needed for natural rhythm.
 - Zero applicable bare binary-reframe patterns in Chinese and English.
 - The accepted `不是说 A 不行，而是说 B` form is exempted explicitly rather
   than hidden by a broad regex exclusion.
-- Runtime writer guidance and revised outputs contain no instruction or example
-  that conflicts with the new rule.
+- Runtime writer guidance and the new current-rule regression case contain no
+  instruction or expected output that conflicts with the new rule.
 
 Automated pattern scans are candidate finders. Every negative sentence still
 receives semantic review so factual boundaries are not deleted.
 
 ### Scope guards
 
-- The 14 approved MDX files, selected media values, writer files, design, and
-  implementation plan are the only allowed changes.
+- The 14 approved MDX files, selected media values, writer runtime files, test
+  rubric, new current-rule regression case, design, and implementation plan are
+  the only allowed changes.
 - FOC, Claude Chime, Juanyun Thermal, and the four Nanjing source-document notes
   must have zero diff.
 - Covers, assets, dates, tags, links, visibility, code, and public uploads must
