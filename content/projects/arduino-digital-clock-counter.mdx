@@ -32,33 +32,33 @@ assetPaths:
 
 ## Grounding the Common Pin Turned the Display into Gibberish / 公共端接地以后，数码管开始乱码
 
-A friend invited me to join MEC104 Group A17, and this became only my second embedded project. My entire mental model was simple: write a counter, flash it to an Arduino, and it should run like a stopwatch. I took on most of the technical implementation—breadboard construction, pin research, decoder and display wiring, Arduino firmware, button debugging, and final integration—while other group members handled the report, video, and general group work.
+A friend invited me to join MEC104 Group A17, and this became only my second embedded project. My mental model fit in one line. Write a counter, flash it to an Arduino, and it should run like a stopwatch. I handled most of the technical implementation, from breadboard construction and pin research through decoder wiring, Arduino firmware, button debugging, and final integration. Other group members handled the report, video, and general group work.
 
-朋友邀请我加入 MEC104 A17 组时，这是我第二次接触嵌入式。我对任务的全部理解很朴素：写一个计数程序，烧进 Arduino，它就该像秒表一样走起来。组内的面包板搭建、引脚查找、译码器与数码管接线、Arduino 程序、按键调试和最终联调主要由我完成；报告和视频由其他组员负责。
+朋友邀请我加入 MEC104 A17 组时，这是我第二次接触嵌入式。当时我把任务想得很简单。写一个计数程序，烧进 Arduino，它就该像秒表一样走起来。组内的面包板搭建、引脚查找、译码器与数码管接线、Arduino 程序、按键调试和最终联调主要由我完成；报告和视频由其他组员负责。
 
 ![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
 
-The display overturned that model before the code did. The course slides showed a CD4511 simulation driving a common-cathode display, but our physical display path had to operate as common-anode, with the common pin connected to VCC. Following the slide and grounding that pin produced either darkness or scrambled digits, and the TA could not explain it either. I eventually worked out the direction by moving jumpers and testing individual segment behavior on the breadboard. When we reported the finding to the professor, he announced the issue to the class over the microphone—A17 was not the only group stuck there.
+The display overturned that model before the code did. The course slides showed a CD4511 simulation driving a common-cathode display, but our physical display path had to operate as common-anode, with the common pin connected to VCC. Following the slide and grounding that pin produced either darkness or scrambled digits, and the TA could not explain it either. I eventually worked out the direction by moving jumpers and testing individual segment behavior on the breadboard. When we reported the finding to the professor, he announced the issue to the class over the microphone. A17 was not the only group stuck there.
 
-真正先把这个理解推翻的不是代码，而是数码管。课程 PPT 给的是 CD4511 驱动共阴数码管的仿真接法，我们手里的显示链路却要按共阳方式工作，公共端最终接到 VCC。照着 PPT 把公共端接地时，数码管不是不亮，就是显示乱码，TA 也解释不了。最后是我在面包板上逐段换线、试高低电平，才摸出正确方向。我们把这个现象告诉教授后，他用麦克风把问题告诉了全班——当时不止 A17 卡在这里。
+真正先把这个理解推翻的不是代码，而是数码管。课程 PPT 给的是 CD4511 驱动共阴数码管的仿真接法，我们手里的显示链路却要按共阳方式工作，公共端最终接到 VCC。照着 PPT 把公共端接地时，数码管不是不亮，就是显示乱码，TA 也解释不了。最后是我在面包板上逐段换线、试高低电平，才摸出正确方向。我们把这个现象告诉教授后，他用麦克风把问题告诉了全班。当时不止 A17 卡在这里。
 
 ![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
 ![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
 
 ## One Count Actually Travels Through Two Display Paths / 一个计数值，实际上要穿过两条显示链
 
-Once the displays agreed to light, the hidden path behind “write a counter” became visible. `Num % 10` extracts the units digit, while `(Num / 10) % 10` extracts the tens digit. Each value selects a four-bit BCD row, then passes through its own SN54LS47 to become seven segment signals. The report maps those branches to D9-D12 and D5-D8; on the bench, they spread out beside an Arduino Nano as two decoders, two displays, and a generous quantity of jumper wire.
+Once the displays agreed to light, the hidden path behind a simple counter program became visible. `Num % 10` extracts the units digit, while `(Num / 10) % 10` extracts the tens digit. Each value selects a four-bit BCD row, then passes through its own SN54LS47 to become seven segment signals. The report maps those branches to D9-D12 and D5-D8; on the bench, they spread out beside an Arduino Nano as two decoders, two displays, and a generous quantity of jumper wire.
 
-数码管肯亮以后，“写一个计数程序”才露出它后面的链路。一个 `Num` 先用 `Num % 10` 取个位，再用 `(Num / 10) % 10` 取十位；每个数字各自查一行四位 BCD，经一颗 SN54LS47 变成七路段信号。报告把两组 BCD 输出分别画在 D9-D12 和 D5-D8，现场实物则是在 Arduino Nano 旁边铺开两颗译码器、两位数码管和一大片杜邦线。
+数码管肯亮以后，「写一个计数程序」才露出它后面的链路。一个 `Num` 先用 `Num % 10` 取个位，再用 `(Num / 10) % 10` 取十位；每个数字各自查一行四位 BCD，经一颗 SN54LS47 变成七路段信号。报告把两组 BCD 输出分别画在 D9-D12 和 D5-D8，现场实物则是在 Arduino Nano 旁边铺开两颗译码器、两位数码管和一大片杜邦线。
 
 ![Two-digit wiring from the homework report / 作业报告里的两位数码管接线图](/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png)
 ![Digit split code from the homework report / 作业报告里的个位和十位拆分代码](/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png)
 
 ## The Six-Pin Switch Would Not Reveal Its Wiring / 六脚按键不肯把内部连线写在脸上
 
-The two six-pin self-locking switches caused a different kind of trouble. We had no datasheet and did not yet know where to search by part number, so the six pins initially became a guessing exercise. Sometimes a press did nothing; sometimes the readings jumped; occasionally one press registered twice. Changing more code could not answer the basic electrical question: which pins were connected before and after the switch was pressed?
+The two six-pin self-locking switches caused a different kind of trouble. We had no datasheet and did not yet know where to search by part number, so the six pins initially became a guessing exercise. Sometimes a press did nothing; sometimes the readings jumped; occasionally one press registered twice. Changing more code could not answer the basic electrical question. Which pins were connected before and after the switch was pressed?
 
-两个六脚自锁按键是另一种折磨：没有数据手册，也不知道去哪里按型号找资料，六只脚只能靠猜。结果有时按下没反应，有时读数乱跳，还有过按一次却触发两次。继续换代码并不能回答最基本的问题——开关按下前后，究竟是哪几只脚导通。
+两个六脚自锁按键是另一种折磨。没有数据手册，也不知道去哪里按型号找资料，六只脚只能靠猜。结果有时按下没反应，有时读数乱跳，还有过按一次却触发两次。继续换代码并不能回答最基本的问题。开关按下前后，究竟是哪几只脚导通？
 
 ![Switch logic code from the homework report / 作业报告里的开关逻辑代码](/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png)
 
@@ -68,14 +68,14 @@ I eventually borrowed a multimeter from the instructor and checked continuity ac
 
 ## Full Marks Survived; the Complete Source Tree Did Not / 最后留下的是满分，不是完整源码树
 
-The assessment used two separately flashed programs. One rolled over after the A17 group number, while the other counted through `99` before returning to `00`. They were not runtime modes: I changed the threshold, flashed each version, and the instructor verified them separately. In the final classroom demonstration, the two-digit display, pause, and reset all worked, and the TA awarded full marks.
+The assessment used two separately flashed programs. One rolled over after the A17 group number, while the other counted through `99` before returning to `00`. They were not runtime modes. I changed the threshold, flashed each version, and the instructor verified them separately. In the final classroom demonstration, the two-digit display, pause, and reset all worked, and the TA awarded full marks.
 
-考核包含两个分别烧录的版本：一个按 A17 组号在 `17` 后归零，另一个一直计数到 `99` 再归零。它们不是运行时切换的两种模式，而是改动阈值后分别烧录、分别让老师验证。最终课堂演示时，两位显示、暂停和复位都正常工作，TA 给了满分。
+考核包含两个分别烧录的版本。一个按 A17 组号在 `17` 后归零，另一个一直计数到 `99` 再归零。它们不是运行时切换的两种模式，而是改动阈值后分别烧录、分别让老师验证。最终课堂演示时，两位显示、暂停和复位都正常工作，TA 给了满分。
 
 What survived is less complete. The [17-second bench video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) shows the digits changing but contains no button operation, and I did not write the [A17 report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf). The archived `main.c` is my own early draft that was flashed and run; it preserves the `15 -> 16 -> 17 -> 00` development trace, but its second button is unfinished and some syntax and comments are wrong. It cannot stand in for the final program. Xcode appears in the archive only because macOS used it as the default application for `.c` files after my earlier basic C exercises, not because it was the embedded toolchain.
 
-Looking back, I now read the system as one continuous path: Arduino state, two BCD inputs, active-low decoder outputs, and LED current. I did not have that complete map at the time; I was learning between the course slides, CSDN posts, and the breadboard. The firmware relied on polling and blocking `delay()` calls, which looks distinctly beginner-level today. It still moved me past the idea that flashing the program was the end of the job. When the documentation and the hardware disagree, I now trace the current before deciding which line of code deserves the blame.
+Looking back, I now read the system as one continuous path. Arduino state becomes two BCD inputs, then active-low decoder outputs, and finally LED current. I did not have that complete map at the time; I was learning between the course slides, CSDN posts, and the breadboard. The firmware relied on polling and blocking `delay()` calls, which looks distinctly beginner-level today. It still moved me past the idea that flashing the program was the end of the job. When the documentation and the hardware disagree, I now trace the current before deciding which line of code deserves the blame.
 
 如今留下的 [17 秒现场视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4) 只拍到两位数字变化，没有拍下按键操作；[A17 报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf) 也不是我写的。Mac 上那份 `main.c` 是我写并烧录运行过的早期草稿，它保留了 `15 -> 16 -> 17 -> 00` 的开发痕迹，但第二个按键尚未完成，注释和语法也有问题，不能冒充最终版本。Xcode 出现在归档里，只是因为 macOS 当时默认用它打开 `.c` 文件，并不代表它是项目的嵌入式工具链。
 
-现在回看，我会把这个系统理解成 Arduino 状态、两组 BCD 输入、译码器低有效输出和 LED 电流路径的连续链条；当时的我还没有这张完整地图，只是在课件、CSDN 和面包板之间边查边学。代码采用轮询和阻塞式 `delay()`，从今天的标准看很稚嫩，但它也把我从“程序烧进去就结束”推到了另一个起点：文档和实物打架时，先看电流怎么走，再决定该改哪一行代码。
+现在回看，我会把这个系统理解成 Arduino 状态、两组 BCD 输入、译码器低有效输出和 LED 电流路径的连续链条；当时的我还没有这张完整地图，只是在课件、CSDN 和面包板之间边查边学。代码采用轮询和阻塞式 `delay()`，从今天的标准看很稚嫩，但它也把我从「程序烧进去就结束」推到了另一个起点。文档和实物打架时，先看电流怎么走，再决定该改哪一行代码。

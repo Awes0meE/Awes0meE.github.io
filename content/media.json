@@ -692,8 +692,8 @@
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
-    "caption": "This slide defines the group-number build: two digits, rollover after 17, plus pause and reset. Counting through 99 was a separate version that I produced by changing the threshold, then flashed and demonstrated independently.",
-    "captionZh": "这页课件定义了小组号版本：两位显示，到 17 后归零，并支持暂停和复位。计数到 99 再归零是另一个改完阈值后单独烧录、单独验证的版本。"
+    "caption": "This slide defines the group-number build with two digits, rollover after 17, plus pause and reset. Counting through 99 was a separate version that I produced by changing the threshold, then flashed and demonstrated independently.",
+    "captionZh": "这页课件定义了小组号版本，两位显示，到 17 后归零，并支持暂停和复位。计数到 99 再归零是另一个改完阈值后单独烧录、单独验证的版本。"
   },
   {
     "id": "arduino-digital-clock-structure",
@@ -740,8 +740,8 @@
     "thumbnail": "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png",
     "date": "2024.04 to 2024.05",
     "projectSlug": "arduino-digital-clock-counter",
-    "caption": "Development roughly followed the course sequence: read the material, run a one-digit BCD example, wire two digits, split units and tens, add the buttons, then integrate the system. The two demo sketches were early checkpoints, not the final program.",
-    "captionZh": "实际开发大致沿着课件顺序推进：先读资料和跑一位 BCD 示例，再铺两位接线、拆分个位与十位、加入按键，最后联调。两份 demo sketch 都只是前期检查点。"
+    "caption": "Development roughly followed the course sequence. I read the material, ran a one-digit BCD example, wired two digits, split units and tens, added the buttons, then integrated the system. The two demo sketches were early checkpoints, not the final program.",
+    "captionZh": "实际开发大致沿着课件顺序推进。我先读资料和跑一位 BCD 示例，再铺两位接线、拆分个位与十位、加入按键，最后联调。两份 demo sketch 都只是前期检查点。"
   },
   {
     "id": "arduino-digital-clock-tinkercad-demo",
