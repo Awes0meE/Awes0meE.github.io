@@ -1,5 +1,12 @@
 # Direct Prose Style Cleanup Implementation Plan
 
+**Execution status:** Superseded in part by user review. The writer rule, the
+Digital Clock and Smart Car project/note pairs, and the Nanjing Turing project
+page completed this pass; the remaining L1-cleaned copy was accepted without
+the planned broader second pass. Pull request #23 merged the approved result on
+2026-08-15 at `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`. Unchecked steps below
+are the preserved original scaffold, not active work.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Remove decorative Chinese corner quotes and bare negative-first binary reframes from five bilingual project families, then make the same preference a tested rule in the repository-local engineering writer.

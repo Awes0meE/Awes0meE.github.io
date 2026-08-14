@@ -1,5 +1,9 @@
 # Pre-PR20 Project Prose L1 Cleanup Design
 
+**Outcome:** Completed as the approved five-family surface cleanup and merged
+through pull request #23 on 2026-08-15 at
+`c89b3b0df031cc2cacfd519c95fb2de522c0b54d`.
+
 ## Goal
 
 Apply the reader-prose L1 rules introduced through pull request #20 to the five

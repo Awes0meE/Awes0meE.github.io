@@ -1,5 +1,9 @@
 # Pre-PR20 Project Prose L1 Cleanup Implementation Plan
 
+**Execution status:** Completed and merged through pull request #23 on
+2026-08-15 at `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`. The checkboxes below are
+the preserved implementation scaffold, not an active task list.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Apply the pull request #20 reader-prose L1 rules and local style polish to five older project families without changing their facts, structure, metadata, or assets.
