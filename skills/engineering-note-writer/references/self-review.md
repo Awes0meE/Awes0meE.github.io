@@ -35,7 +35,7 @@ Do not scan frontmatter, metadata, Markdown syntax, URL or link destinations, co
 - Are corner quotation marks absent from scoped reader prose?
 - Are bare negative-first binary reframes absent in both languages?
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
-- When a supported fact needs a factual, evidence, authorship, or publication limit, is the supported fact stated before its limit?
+- Are factual, evidence, authorship, and publication boundaries explicit and kept near the claims they limit? When a supported positive fact exists, it may lead; when the negative boundary is itself the fact, state it directly without inventing a positive lead.
 
 ## Supporting Check: Cognition-Led Flow
 

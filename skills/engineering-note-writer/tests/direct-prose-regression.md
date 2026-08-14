@@ -22,6 +22,10 @@ Input: `The screen did not show fan speed; it showed duty cycle.`
 
 Expected repair: `The screen showed a duty command. The code did not measure fan speed.`
 
+## Accepted English Factual Negation
+
+`I did not write the firmware.`
+
 ## Release Expectation
 
 - Reader prose contains no `「」`.
@@ -32,10 +36,15 @@ Expected repair: `The screen showed a duty command. The code did not measure fan
 ## Verification
 
 Run the red scan before edits and report its hits:
-`rg -n -S 'use `「」`|我说「理论上」|下一次再看到「|habitual `不是\.\.\.而是\.\.\.`' skills/engineering-note-writer/SKILL.md skills/engineering-note-writer/references skills/engineering-note-writer/tests/rubric.md`
+
+```text
+rg -n -S 'use `「」`|我说「理论上」|下一次再看到「|habitual `不是\.\.\.而是\.\.\.`' skills/engineering-note-writer/SKILL.md skills/engineering-note-writer/references skills/engineering-note-writer/tests/rubric.md
+```
 
 After edits, the same conflict scan must return no hits. Also run:
 
-- `py -3.12 -X utf8 C:\Users\123\.codex\skills\.system\skill-creator\scripts\quick_validate.py skills\engineering-note-writer`
+- `python -X utf8 C:\Users\123\.codex\skills\.system\skill-creator\scripts\quick_validate.py skills\engineering-note-writer`
 - `git diff --check`
 - a commit-local diff guard proving the frozen trial paths did not change.
+
+Use `py -3.12 -X utf8 ...` only when the Python Launcher has a registered Python 3.12 runtime.
