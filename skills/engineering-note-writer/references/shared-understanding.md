@@ -26,10 +26,13 @@ Do not ask the user to inventory files or look up public technical facts. Ask ab
 - jumps in attention and what caused them;
 - false starts, decisions, and trade-offs;
 - reactions to symptoms, evidence, and outcomes;
+- the real event that anchors a reaction and how strong that reaction was;
 - later interpretation or synthesis;
 - whether a result is measured, demonstrated, remembered, or unknown.
 
 These answers establish what the writer noticed and how the understanding changed. They do not override contrary evidence or turn a recollection into a measurement.
+
+A confirmed event plus a confirmed emotional direction may support natural first-person scene reconstruction. Confirmation does not authorize invented time, place, action, dialogue, participants, technical results, or causal order.
 
 ## Reuse And Handoff
 

@@ -36,6 +36,7 @@ Source:
   - `skills/engineering-note-writer/references/research-expansion.md`
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
+  - `skills/engineering-note-writer/references/reader-prose-hard-gates.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
   - `skills/engineering-note-writer/references/style-examples.md`
@@ -46,7 +47,7 @@ Purpose:
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
-- Require first-person learning-note prose to pass both the Truth gate and Li Zhiyi gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
+- Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1 gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.

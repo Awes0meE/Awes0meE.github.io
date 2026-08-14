@@ -168,7 +168,7 @@ The website has a top-right English / Simplified Chinese language switch. The de
 
 ## Writing Standard
 
-For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer` and its `references/cognition-led-composition.md` guidance. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass both the Truth gate and Li Zhiyi gate.
+For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md` guidance, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass the Truth gate, Li Zhiyi gate, and the scoped zero-hit reader-prose L1 gate.
 
 Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
 
@@ -189,10 +189,13 @@ Notes should keep the user's practical learning-log texture. Public pages should
 - derive headings after drafting, make each one describe the following technical subject, and follow the limit defined in `engineering-note-writer`;
 - avoid reusable framework headings that name the writing process rather than the technical subject;
 - keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
-- use first person and emotion only when the user or evidence supports them;
+- use natural spoken transitions where they fit; thought-bookmark headings, real parallel bullet lists, and ordinary sequence words retain their existing rules;
+- use first person and emotion only when the user or evidence supports them; when a real event and emotional direction are both confirmed, reconstruct the scene naturally without adding surrounding facts;
 - let humor come from real tool, file, hardware, code, or mistaken-assumption friction rather than an invented scene;
 - avoid AI handoff phrasing, repetitive resume lists, and repeated contrast/sequence scaffolds;
-- require first-person learning-note prose to pass both the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, applying the gates only to claims and voice within that scope;
+- name known tools and models exactly, and never guess an unknown product name;
+- require model-authored project and note body to pass the L1 wording, punctuation, and canned-structure scans with zero applicable hits in both languages; exclude frontmatter, Markdown syntax, links, code, paths, logs, verbatim artifacts, and exact technical strings;
+- require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, applying the gates only to claims and voice within that scope;
 - adapt English with the same facts and narrative nodes at slightly lower emotional intensity;
 - if an uploaded public `.txt`, `.md`, or self-authored document is the real artifact, publish it as a proper note page with the original wording rendered as article text; project `assetPaths` can still link the file, but should not be the only readable copy.
 
