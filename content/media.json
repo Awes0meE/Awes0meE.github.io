@@ -224,8 +224,8 @@
     "thumbnail": "/uploads/projects/juanyun-tech/diy-cooling-3d-print-preview-1.jpg",
     "date": "2024-08-03",
     "projectSlug": "juanyun-diy-cooling-prototype",
-    "caption": "The 3:57 recording demonstrates the integrated Windows–Bluetooth SPP–ESP32 chain: temperatures appear in the app, duty and mode appear on the OLED, and the fan responds to data and buttons. It does not contain synchronized temperature, RPM, or performance logs.",
-    "captionZh": "这段 3 分 57 秒录像演示了 Windows–Bluetooth SPP–ESP32 完整链路：上位机显示温度，OLED 显示占空比与模式，风扇响应数据和按键；录像不包含同步温度、RPM 或性能日志。"
+    "caption": "The 3 min 57 s recording demonstrates the integrated Windows, Bluetooth SPP, and ESP32 chain. Temperatures appear in the app, duty and mode appear on the OLED, and the fan responds to data and buttons. The recording does not contain synchronized temperature, RPM, or performance logs.",
+    "captionZh": "这段 3 分 57 秒录像演示了 Windows、Bluetooth SPP 与 ESP32 完整链路。上位机显示温度，OLED 显示占空比与模式，风扇响应数据和按键；录像不包含同步温度、RPM 或性能日志。"
   },
   {
     "id": "juanyun-diy-cooling-print-preview-1",
