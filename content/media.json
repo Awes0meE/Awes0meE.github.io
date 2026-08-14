@@ -476,8 +476,8 @@
     "thumbnail": "/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png",
     "date": "2025-02-06",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "After moving from Arduino pin numbers to STM32 alternate functions, this LQFP48 map became my desk reference: GPIO, USART, ADC, and timers were no longer just function names but real pins whose ports, channels, and alternate mappings had to agree.",
-    "captionZh": "从 Arduino 的引脚编号转到 STM32 外设复用后，这张 LQFP48 引脚图成了我的桌面地图：GPIO、USART、ADC 与 Timer 不再只是函数名，而是需要同时核对端口、通道和复用关系的真实引脚。"
+    "caption": "After moving from Arduino pin numbers to STM32 alternate functions, this LQFP48 map became my desk reference. GPIO, USART, ADC, and timers were no longer just function names but real pins whose ports, channels, and alternate mappings had to agree.",
+    "captionZh": "从 Arduino 的引脚编号转到 STM32 外设复用后，这张 LQFP48 引脚图成了我的桌面地图。GPIO、USART、ADC 与 Timer 不再只是函数名，而是需要同时核对端口、通道和复用关系的真实引脚。"
   },
   {
     "id": "tianjin-rail-transit-cover",
@@ -488,8 +488,8 @@
     "thumbnail": "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg",
     "date": "2025-02-05",
     "projectSlug": "tianjin-metro-stm32-foundation",
-    "caption": "This processed Tianjin Rail Transit mark records the setting of the work: I was an Embedded Systems Intern at Tianjin Jintie Communications, based in the Group headquarters, completing self-directed STM32 training and a bench demo rather than production rail-system development.",
-    "captionZh": "这张处理后的天津轨道交通标志记录项目发生的实习语境：我以天津津铁通信嵌入式实习生身份在集团总部办公，完成的是 STM32 自学与培训 demo，并未参与生产轨道系统开发。"
+    "caption": "This processed Tianjin Rail Transit mark records the setting of the work. I was an Embedded Systems Intern at Tianjin Jintie Communications, based in the Group headquarters, completing self-directed STM32 training and a bench demo rather than production rail-system development.",
+    "captionZh": "这张处理后的天津轨道交通标志记录项目发生的实习语境。我以天津津铁通信嵌入式实习生身份在集团总部办公，完成的是 STM32 自学与培训 demo，并未参与生产轨道系统开发。"
   },
   {
     "id": "servo-pwm-180-parameters",

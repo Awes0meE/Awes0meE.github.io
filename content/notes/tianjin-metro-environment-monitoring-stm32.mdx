@@ -26,7 +26,7 @@ Before entering `while (1)`, the archived main loop calls `CLED_Init()`, `OLED_I
 
 The OLED's four rows separated that state into measured light, target light, LED output, temperature, and humidity. The display was not decorative; it let me compare sensing, commands, and actuation without halting the program. In the complete project, UART also sent light readings and debug text to a computer, while GPIOC13 acted as a status indicator.
 
-OLED 的四行标签恰好给状态做了分层：当前光照、目标光照、LED 输出、温度与湿度。屏幕不是为了让 demo 看起来热闹；它让我在不暂停程序的情况下同时核对传感、设定与执行结果。完整工程里 UART 还把光照数据和调试文字发送到电脑，GPIOC13 则承担状态提示。
+OLED 的四行标签恰好给状态做了分层。当前光照、目标光照、LED 输出、温度与湿度都能同时看到。屏幕不是为了让 demo 看起来热闹；它让我在不暂停程序的情况下核对传感、设定与执行结果。完整工程里 UART 还把光照数据和调试文字发送到电脑，GPIOC13 则承担状态提示。
 
 ## Fast State Updated Every Pass; Slow Sensors Waited for a Flag / 快变量每轮更新，慢传感器等 flag
 
@@ -34,23 +34,23 @@ Every pass through the loop reads the encoder, updates `set_light_value`, and wr
 
 主循环每次经过都会读取编码器并更新 `set_light_value`，目标值随即写到 OLED。光敏传感器和 DHT11 则等 `dht_read_flag` 置位后才读取；DHT11 成功返回时，温湿度先保存到变量，再通过 `dht_updated` 控制屏幕刷新。这样，旋钮与目标显示可以快速响应，较慢的传感器分支不必在每一轮都执行。
 
-The excerpt shows `TIM3_Config()` and where the flag is consumed, but not the interrupt that sets it or the interval. The structure is still clear: the timer or interrupt announces that slower work is due, while the actual sensor transaction remains in the main loop. This avoids placing the DHT11 timing and display update inside an interrupt handler.
+The excerpt shows `TIM3_Config()` and where the flag is consumed, but not the interrupt that sets it or the interval. The structure is still clear. The timer or interrupt announces that slower work is due, while the actual sensor transaction remains in the main loop. This avoids placing the DHT11 timing and display update inside an interrupt handler.
 
 It is not a non-blocking scheduler. The drivers still contain blocking delays, and the branches have no stated worst-case execution times. For low-frequency work around a rotary knob, temperature, humidity, and lighting, that was enough for every feature to run together. With a faster control object, I would first remove the blocking delays and define each task's period, deadline, and shared state instead of continuing to add calls to `while (1)`.
 
-公开摘录能看到 `TIM3_Config()` 和 flag 的消费端，看不到 TIM3 中断里怎样置位，也没有留下具体周期。完整 demo 当时确实运行，但参数不能靠函数名恢复。能确定的结构是：中断或定时器只发出“该做一次慢任务了”的信号，真正的传感器读取留在主循环执行，避免把 DHT11 的时序和显示更新全部塞进中断服务函数。
+公开摘录能看到 `TIM3_Config()` 和 flag 的消费端，看不到 TIM3 中断里怎样置位，也没有留下具体周期。完整 demo 当时确实运行，但参数不能靠函数名恢复。能确定的结构是，中断或定时器只发出「该做一次慢任务了」的信号，真正的传感器读取留在主循环执行，避免把 DHT11 的时序和显示更新全部塞进中断服务函数。
 
 这还不是非阻塞调度框架。驱动里仍有阻塞式 delay，主循环分支也没有明确的最坏执行时间；只是对旋钮、温湿度与灯光这类低频任务而言，当前节奏足以让所有功能同时工作。若换成更快的控制对象，我会先拆掉阻塞延时，再明确每个任务的周期、截止时间和共享状态，而不是继续往 `while (1)` 里堆函数。
 
 ## The Target Went Directly through the Table into TIM4 / 目标值查表后直接送进 TIM4
 
-In light mode, the encoder changes a target expressed in the ADC-value domain. `Lookup_PWM_For_Target(set_light_value)` uses the 16 measured points and linear interpolation to produce `ideal_pwm`; that value appears on the OLED and enters `Set_LED_Brightness()`, which updates TIM4 channel 1. After a button-mode switch, the same encoder changes the servo speed. The button therefore does more than add another input—it selects which command path owns the encoder.
+In light mode, the encoder changes a target expressed in the ADC-value domain. `Lookup_PWM_For_Target(set_light_value)` uses the 16 measured points and linear interpolation to produce `ideal_pwm`; that value appears on the OLED and enters `Set_LED_Brightness()`, which updates TIM4 channel 1. After a button-mode switch, the same encoder changes the servo speed. The button therefore does more than add another input. It selects which command path owns the encoder.
 
 光照模式下，编码器改变 ADC 数值域里的目标；`Lookup_PWM_For_Target(set_light_value)` 用 16 点标定表和线性插值得到 `ideal_pwm`；这个数既显示在 OLED 上，也传给 `Set_LED_Brightness()`，最终更新 TIM4 通道 1 的比较值。模式切换后，同一只编码器改为控制舵机速度。按钮由此不是增加一个孤立输入，而是在两条命令路径之间切换控制对象。
 
 Two paths must remain distinct. Target light enters the lookup and determines PWM. Measured light comes from ADC and goes to the OLED and UART. The code neither subtracts the measurement from the target nor uses that error to correct PWM, so this is feedforward mapping with sensor observability rather than closed-loop brightness control. Closing the loop was an idea I considered, not a completed feature.
 
-这里必须把两条容易混在一起的路径拆开：目标光照参与查表并决定 PWM；实测光照由 ADC 读取，用于 OLED 显示和 UART 输出。当前代码没有计算二者误差，也没有让实测值继续修正 PWM，所以这是带传感观察的前馈映射，不是闭环亮度控制。闭环是我当时想过的下一步，不是已经完成的功能。
+这里必须把两条容易混在一起的路径拆开。目标光照参与查表并决定 PWM；实测光照由 ADC 读取，用于 OLED 显示和 UART 输出。当前代码没有计算二者误差，也没有让实测值继续修正 PWM，所以这是带传感观察的前馈映射，不是闭环亮度控制。闭环是我当时想过的下一步，不是已经完成的功能。
 
 [Environment-monitoring main loop](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c) · [PWM lookup](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)
 
@@ -58,7 +58,7 @@ Two paths must remain distinct. Target light enters the lookup and determines PW
 
 The final demo ran the OLED, encoder, button-mode switching, DHT11 and light sensing, LED PWM, servo motion, UART output, and status LED together. I wrote the application logic, encoder mappings, calibration interpolation, mode switching, and integrated superloop. The peripheral drivers were modified and connected from Standard Peripheral Library material and public examples. I did not originate every communication routine from its first timing edge, but understanding those references, resolving their interfaces, and making the physical modules work together was the engineering work of this exercise.
 
-At the end, the supervising engineer watched the hardware and listened to my explanation of the peripheral chain, then said I had learned the material solidly. That was not formal acceptance or delivery of a railway product. It confirmed something more appropriate to the placement: in roughly 20 working days, I had moved from writing high/low calls to explaining why each peripheral path worked. That change lasted longer than the demo itself in every later STM32-based controller project.
+At the end, the supervising engineer watched the hardware and listened to my explanation of the peripheral chain, then said I had learned the material solidly. That was not formal acceptance or delivery of a railway product. It confirmed something more appropriate to the placement. In roughly 20 working days, I had moved from writing high/low calls to explaining why each peripheral path worked. That change lasted longer than the demo itself in every later STM32-based controller project.
 
 这个 demo 最终能同时完成 OLED 显示、编码器输入、按钮模式切换、DHT11 与光照读取、LED PWM、舵机动作、UART 打印和状态灯提示。应用逻辑、编码器映射、标定插值、模式切换与综合主循环由我完成；各外设驱动则在标准库和公开例程基础上修改、拼接并调通。它们不是我从通信时序第一行开始独立创造的库，但把参考驱动真正放进同一工程、处理接口冲突并让实物一起运行，本身就是这次训练的工程工作。
 
