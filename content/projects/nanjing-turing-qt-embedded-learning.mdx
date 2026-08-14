@@ -77,7 +77,7 @@ The checked-out source required Qt 6, and extending Qt 5 compatibility across a 
 
 This was also my first real use of Git as a collaboration system. I practiced cloning, inspecting and switching upstream branches, creating a development branch, committing, pushing, merging, opening a pull request, forking, and tagging during the internship. Until then, GitHub was mostly a place where code could be downloaded. Inside a changing codebase, a branch began to tell me which history I was building on.
 
-这也是我第一次真正使用 Git 协作。clone、查看和切换上游分支、创建开发分支、commit、push、merge、pull request、fork 和 tag，都在这三周里实际走过一遍。过去我把 GitHub 理解成下载代码的网站；进入一个持续演进的大型仓库以后，分支开始告诉我自己正基于哪段历史工作。
+这也是我第一次真正使用 Git 协作。clone、查看和切换上游分支、创建开发分支、commit、push、merge、pull request、fork 和 tag，都在这三周里实际走过一遍。过去我把 GitHub 理解成下载代码的网站；进入一个持续演进的大型仓库以后，分支开始告诉我，我正基于哪段历史工作。
 
 ## A Login Window Grew into a Role State Machine / 一个登录框，最后长成了角色状态机
 
@@ -85,7 +85,7 @@ Once the application ran, the local account entrance finally resembled the UI wo
 
 把程序跑起来以后，本地账户入口看上去终于接近我原先想象的 UI 工作。我加入注册和登录窗口，用 `QSettings` 保存本地账户数据，把密码从明文比较改成哈希值存储与校验，再补上密码遮蔽、用户已存在、用户不存在和密码错误等状态提示。Qt 对 [`QSettings`](https://doc.qt.io/qt-6.5/qsettings.html)的定义本来就是跨平台持久化应用设置，这很适合为本地桌面原型保存账户数据。项目没有数据库，也没有线上鉴权。
 
-Enter initially activated Cancel, username fields needed their suggestions disabled, and the password field could crash under a Chinese input method. Adding normal and administrator roles in the second week put a condition behind every action. The first account had to be `admin`; normal users could not see user management; administrators could delete or promote only normal users; and only `admin` could demote another administrator. As I wrote further into the feature, I began breaking each action down into the current user, the target user, and the allowed state transition.
+Enter initially activated Cancel, username fields needed their suggestions disabled, and the password field could crash under a Chinese input method. Adding normal and administrator roles in the second week put a condition behind every action. The first account had to be `admin`; normal users could not see user management; administrators could delete or promote only normal users; and only `admin` could demote another administrator. As the feature grew, I began breaking each action down into the current user, the target user, and the allowed state transition.
 
 回车键最初连到了取消，用户名输入要关掉联想，密码框遇到中文输入法还会闪退。第二周再加入普通用户与管理员后，每个按钮后面都跟着条件。首次账号必须是 `admin`，普通用户看不到用户管理，管理员只能删除或升级普通用户，只有 `admin` 能把其他管理员降级。写到后面，我开始把每个动作拆成当前用户、目标用户和允许的状态转换。
 
@@ -109,9 +109,9 @@ The formal internship acceptance took place on the development machine. The supe
 
 ## The DMG Existed; macOS Still Had Not Approved Distribution / DMG 已经生成，macOS 还没有同意分发
 
-After the Windows path worked, I moved the code to my own Mac. Homebrew Qt and the official Qt installation did not share paths or architecture assumptions, so Debug, Release, and deployment had to be handled again. The application launched after `macdeployqt` collected its dependencies, and I generated and tested an unsigned DMG on that Mac. Qt's [macOS deployment documentation](https://doc.qt.io/qt-6.5/macos-deployment.html) describes `macdeployqt` as placing Qt frameworks and plugins inside a deployable application bundle. It handles the Qt runtime dependencies inside the application bundle. Platform trust still depended on signing and notarization.
+After the Windows path worked, I moved the code to my own Mac. Homebrew Qt and the official Qt installation did not share paths or architecture assumptions, so Debug, Release, and deployment had to be handled again. The application launched after `macdeployqt` collected its dependencies, and I generated and tested an unsigned DMG on that Mac. Qt's [macOS deployment documentation](https://doc.qt.io/qt-6.5/macos-deployment.html) describes `macdeployqt` as placing Qt frameworks and plugins inside a deployable application bundle. Platform trust still depended on signing and notarization.
 
-Windows 路线跑通以后，我把代码移到自己的 Mac。Homebrew Qt 与官方安装版本的路径、架构并不会自动对齐，只能重新处理 Debug、Release 和依赖。最终，`macdeployqt` 收集依赖后的应用能够启动，无签名 DMG 也实际生成并在这台 Mac 上验证过。Qt 的 [macOS 部署文档](https://doc.qt.io/qt-6.5/macos-deployment.html)把 `macdeployqt` 的职责写得很清楚。它处理应用包里的 Qt 运行时依赖。平台信任仍取决于签名与公证。
+Windows 路线跑通以后，我把代码移到自己的 Mac。Homebrew Qt 与官方安装版本的路径、架构并不会自动对齐，只能重新处理 Debug、Release 和依赖。最终，`macdeployqt` 收集依赖后的应用能够启动，无签名 DMG 也实际生成并在这台 Mac 上验证过。Qt 的 [macOS 部署文档](https://doc.qt.io/qt-6.5/macos-deployment.html)说明，`macdeployqt` 会把 Qt framework 和插件放进可部署的应用包。平台信任仍取决于签名与公证。
 
 I created a self-signed certificate and wrote a second script containing `codesign`, `spctl`, and DMG steps, but application signing never completed. Apple's current guidance requires a valid [Developer ID and notarization](https://developer.apple.com/support/developer-id/) for direct distribution to users. A self-signed certificate helped me examine the sequence; it could not stand in for Apple's trust chain. The macOS boundary therefore remains exact. Debug, Release, dependency collection, application launch, and an unsigned DMG were exercised, while distribution signing, notarization, and a second clean-Mac test were not.
 
@@ -127,10 +127,10 @@ During the final acceptance, the supervising engineer pointed out how far the wo
 
 最后验收时，带教工程师特意提到，从三周前连 Qt 是什么都不知道，到能够在 Seamly2D 里加功能、处理构建、做出 Windows 安装程序并迁到 macOS，这个推进幅度让他很意外。他确实认真夸了我一顿，我当时也确实非常兴奋。更重要的是，这是我第一次确认自己能够进入一个陌生的大型代码库，找到工作起点并完成自己的改动。
 
-About two weeks after the internship, I ran one more test on a newly installed Windows desktop at home. It had neither Qt nor Visual Studio. The Inno Setup installer completed, and the modified application opened with its registration, login, and role functions. This personal test completed the missing cross-machine verification. It took place after the internship and was not brought back to the company for re-acceptance, so it was outside the formal internship acceptance.
+About two weeks after the internship, I ran one more test on a newly installed Windows desktop at home. It had neither Qt nor Visual Studio. The Inno Setup installer completed, and the modified application opened with its registration, login, and role functions. This personal test completed the missing cross-machine verification. It took place after the packaging guide was written and was not brought back to the company for re-acceptance, so it remained outside formal internship acceptance.
 
-实习结束约半个月后，我又在家里一台新装的 Windows 台式机上补了一次测试。那台机器没有 Qt，也没有 Visual Studio；运行 Inno Setup 安装程序后，带注册、登录和权限功能的修改版本能够直接打开。这次个人测试完成了当时缺少的换机验证，发生在实习结束后，也没有再拿回公司复验，因此不属于正式验收。
+实习结束约半个月后，我又在家里一台新装的 Windows 台式机上补了一次测试。那台机器没有 Qt，也没有 Visual Studio；运行 Inno Setup 安装程序后，带注册、登录和权限功能的修改版本能够直接打开。这次个人测试完成了当时缺少的换机验证。它发生在流程文档写完以后，也没有再拿回公司复验，因此不属于正式验收。
 
-Across the three weeks, a working result kept acquiring another qualifier. Which branch compiled, which Qt Kit built, which role could act, which directory launched, which installer survived another machine, and which platform trusted it? The next time I see Qt Creator's green triangle, I will probably think about where it runs, under which identity, and where its verification boundary lies.
+By the end of those three weeks, I judged a working result through its branch, Qt Kit, role, launch directory, behaviour on another machine, and platform trust. The next time I see Qt Creator's green triangle, I will probably ask where it runs, under which identity, and how far it has been verified.
 
-三周里，程序是否能运行不断被迫加上新的条件。哪条分支能编译，哪套 Qt Kit 能构建，哪个角色能操作，哪个目录能启动，哪个安装包能换机运行，哪个平台愿意信任它。下一次再看到 Qt Creator 里的绿色三角，我大概会同时想到它在哪里运行、以什么身份运行，以及验证边界在哪里。
+三周结束时，我判断一个结果是否真的可用，会同时看分支、Qt Kit、角色、启动目录、换机运行和平台信任。下一次再看到 Qt Creator 里的绿色三角，我大概还会问它在哪里运行、以什么身份运行，以及已经验证到哪一步。
