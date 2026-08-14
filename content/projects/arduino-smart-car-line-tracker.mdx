@@ -35,9 +35,9 @@ The [Smart Car manual](/uploads/projects/arduino-smart-car-line-tracker/smart-ca
 
 ![Teas smart-car system diagram / 小车系统框图](/uploads/projects/arduino-smart-car-line-tracker/manual-system-diagram.png)
 
-The power block was the first useful correction to my just-solder-it model. The LM7805 path regulates the input to a 5 V rail, and the surrounding capacitors filter disturbances before they reach the logic and sensors. The project report even leaves a blunt warning that CP1, CM3, and CM4 were easy to damage during testing. That supply path directly affects the behaviour of every downstream module.
+The power block first made me realise that soldered components still depend on the condition of their supply. The LM7805 path regulates the input to a 5 V rail, and the surrounding capacitors filter disturbances before they reach the logic and sensors. The project report even leaves a blunt warning that CP1, CM3, and CM4 were easy to damage during testing. That supply path directly affects the behaviour of every downstream module.
 
-电源部分最先修正了我焊上去就行的理解。LM7805 把输入稳到 5 V，周围的电容在扰动到达逻辑和传感器前先把它滤掉。项目报告还很直接地提醒，CP1、CM3、CM4 在测试中比较容易损坏。这条电源路径会直接影响后面所有模块的工作状态。
+电源部分最先让我意识到，元件焊上去只是开始，供电状态还会影响后面所有模块。LM7805 把输入稳到 5 V，周围的电容在扰动到达逻辑和传感器前先把它滤掉。项目报告还很直接地提醒，CP1、CM3、CM4 在测试中比较容易损坏。这条电源路径会直接影响后面所有模块的工作状态。
 
 ![Power-supply slide with the school logo removed / 去掉校徽后的电源课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)
 
@@ -63,9 +63,9 @@ On the output side, the Arduino cannot supply motor current directly. The L293 s
 ![H-bridge motor-control principle / H 桥电机控制原理](/uploads/projects/arduino-smart-car-line-tracker/manual-h-bridge-motor-control.png)
 ![PWM control slide / PWM 调速课件页](/uploads/projects/arduino-smart-car-line-tracker/course-pwm-control.png)
 
-That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. Which IR sensor detects the black line determines the correction grade and steering strategy. Commands sent to both motors then execute that correction.
+That interface also turned steering into something I could tune. Equal wheel commands drive the car forward; a smaller command on one side bends the path; opposite directions produce a much stronger correction. Which IR sensor detects the black line determines the correction grade and steering strategy. The program turns that correction into separate drive commands for the two motors.
 
-这个接口也把转弯变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。哪一路红外传感器检测到黑线，决定修正等级和转向策略。两只电机收到的指令再执行这次修正。
+这个接口也把转弯变成了可以调的东西。左右轮给相同指令，小车直走；一侧降速，路径开始弯；两侧反向，则会得到更强的原地修正。哪一路红外传感器检测到黑线，决定修正等级和转向策略。程序再把这次修正转换成两只电机各自的驱动指令。
 
 ## Six Small Tests Before One Fast Lap / 跑圈之前，先过六个小测试
 
