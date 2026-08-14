@@ -405,7 +405,7 @@
     "date": "2025-08-10",
     "projectSlug": "nanjing-turing-qt-embedded-learning",
     "caption": "Seamly2D is the open-source patternmaking application I brought up, extended with a local account layer, and packaged during the three-week Qt internship; the upstream software and wordmark are not my work.",
-    "captionZh": "三周 Qt 实习围绕 Seamly2D 展开：我跑通上游工程、加入本地账户层并尝试打包；软件本体与项目标识并非我的作品。"
+    "captionZh": "三周 Qt 实习围绕 Seamly2D 展开。我跑通上游工程、加入本地账户层并尝试打包；软件本体与项目标识并非我的作品。"
   },
   {
     "id": "turing-ai-institute-cover",
@@ -581,8 +581,8 @@
     "titleZh": "Ninja 编译与链接时序图",
     "src": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png",
     "date": "2025-08-18",
-    "caption": "This DeepSeek-generated Mermaid export makes the division visible: Ninja schedules the DAG, compiler jobs produce objects, and the linker emits the executable.",
-    "captionZh": "DeepSeek 生成的 Mermaid 图把分工画开：Ninja 调度依赖图，编译器生成目标文件，链接器再产出可执行程序。",
+    "caption": "This DeepSeek-generated Mermaid export makes the division visible. Ninja schedules the DAG, compiler jobs produce objects, and the linker emits the executable.",
+    "captionZh": "DeepSeek 生成的 Mermaid 图把分工画开。Ninja 调度依赖图，编译器生成目标文件，链接器再产出可执行程序。",
     "type": "image",
     "thumbnail": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png",
     "projectSlug": "nanjing-turing-qt-embedded-learning"
@@ -593,8 +593,8 @@
     "titleZh": "Qt 6 包发现时序图",
     "src": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png",
     "date": "2025-08-18",
-    "caption": "The generated find_package(Qt6) sequence follows CMake to Qt6Config.cmake and imported targets such as Qt6::Core, or to an error when the config is absent.",
-    "captionZh": "生成式 find_package(Qt6) 时序图跟随 CMake 查找 Qt6Config.cmake、创建 Qt6::Core 等导入目标，未找到配置时则报错终止。",
+    "caption": "The generated Qt 6 package-discovery sequence follows CMake to Qt6Config.cmake and imported targets such as the Qt 6 Core target, or to an error when the config is absent.",
+    "captionZh": "生成式 Qt 6 包发现时序图跟随 CMake 查找 Qt6Config.cmake、创建 Qt 6 Core 等导入目标，未找到配置时则报错终止。",
     "type": "image",
     "thumbnail": "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png",
     "projectSlug": "nanjing-turing-qt-embedded-learning"
