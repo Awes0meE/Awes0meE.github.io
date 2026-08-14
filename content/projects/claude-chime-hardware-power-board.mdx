@@ -12,78 +12,90 @@ assetPaths:
   - "/uploads/projects/claude-chime-hardware"
 ---
 
-## Replacing the Relay with a MOSFET Made the Problem Larger / 继电器换成 MOSFET 以后，问题反而变大了
+## One Jumping Crab Turned a MOSFET Job into a Power System / 一只会跳的螃蟹，把一颗 MOSFET 逼成了电源系统
 
-Claude Chime first sounded like a very small peripheral. Accele AI had made a 3D-printed crab from the Clawdy Family and mounted it on a 5 V push-pull solenoid. When Claude finished a task on the computer, an ESP32 would receive the event and make the crab jump several times. Even someone looking down at a phone would have difficulty missing the physical notification.
+Claude Chime had one very physical job. When Claude finished a task on the computer, an ESP32 would drive a 5 V push-pull solenoid and make Accele AI's 3D-printed Clawdy Family crab jump several times. The movement was supposed to be difficult to miss, even when someone was looking down at a phone.
 
-Claude Chime 最初听起来只是一个很小的外设。Accele AI 做了一只 Clawdy Family 的 3D 打印螃蟹，把它装在 5 V 推拉式电磁铁上；电脑里的 Claude 完成任务后，ESP32 收到消息，让桌上的螃蟹连续跳几下。人就算正在低头刷手机，也很难错过这个物理提醒。
+Claude Chime 要做的事很直接。电脑里的 Claude 完成任务以后，ESP32 驱动 5 V 推拉式电磁铁，让 Accele AI 做的 Clawdy Family 3D 打印螃蟹连续跳几下。哪怕人正在低头看手机，这个物理提醒也很难错过。
 
-The original proposal used a relay to drive the solenoid, while the product was also supposed to be compact. At this voltage and current, a MOSFET could already perform the switching directly; reserving space for a relay was unnecessary. After accepting the paid independent hardware commission, I changed the driver to a low-side MOSFET: `SOL_CTRL` reaches an AO3400A through a 33 Ω gate resistor, a 10 kΩ resistor holds the default state low, and an SS34 provides the flyback path for the inductive load.
+Their early proposal used a relay. I accepted the paid independent hardware commission and changed that part of the design to a low-side MOSFET, because the product was meant to stay compact and the relay volume was unnecessary here. `SOL_CTRL` reaches an AO3400A through a 33 Ω gate resistor, a 10 kΩ resistor keeps the default state low, and an SS34 gives the inductive load a flyback path.
 
-他们原先想用继电器驱动电磁铁，但产品又要求小型化。对这一级别的低压直流负载来说，MOSFET 已经能够直接完成开关，没有必要再为继电器留出那块体积。我接下这次付费独立硬件委托后，先把方案换成低边 MOSFET：`SOL_CTRL` 通过 33 Ω 栅极电阻驱动 AO3400A，10 kΩ 下拉保证默认关断，SS34 给感性负载留下续流路径。
+他们最初打算用继电器驱动电磁铁。我接下这次付费独立硬件委托后，先把这一段换成低边 MOSFET。产品本来就要做小，这里再给继电器留位置有点浪费。`SOL_CTRL` 经过 33 Ω 栅极电阻驱动 AO3400A，10 kΩ 下拉让它默认关断，SS34 则给感性负载留下续流路径。
 
-If the requirements had stopped there, the board really would have been one MOSFET and a few supporting parts. Three later constraints turned it into a power system: the device had to run wirelessly from a single-cell battery, it needed Type-C charging, and the client's firmware engineer had to keep using an existing ESP32-S3 core board. Type-C, the battery, the controller, and the solenoid were no longer four independent modules. Insertion, removal, and actuation could each change where current came from and where it went.
+If the requirements had ended there, one MOSFET and a few supporting parts would have been enough. The device also had to run wirelessly from a single-cell battery, charge through Type-C, and keep the client's existing ESP32-S3 core board. At that point the cable state mattered as much as the switch. Insertion, removal, and solenoid actuation could each change where current came from and where it went.
 
-如果需求到这里就停，板子确实只是一颗 MOSFET 加几个外围器件。真正让它变成一个电源系统的，是后面陆续出现的三个条件：设备要靠单节锂电池无线工作，要能从 Type-C 充电，而且客户的固件工程师必须继续使用现成的 ESP32-S3 核心板。Type-C、电池、主控和电磁铁因此不再是四个独立模块；每一种插线、拔线和动作状态，都可能改变电流从哪里来、又流向哪里。
+如果需求到这里就停，一颗 MOSFET 加几个外围器件确实够了。可设备还要靠单节锂电池无线运行，要能从 Type-C 充电，又要继续使用客户现成的 ESP32-S3 核心板。做到这里，插没插线已经和开没开电磁铁一样重要。插入、拔出和动作状态都会改变电流从哪里来，又流到哪里去。
 
 ![Claude Chime power-board 3D render / Claude Chime 电源板 3D 渲染](/uploads/projects/claude-chime-hardware/board-3d-render.png)
 
-## One Boost Converter Would Make the ESP32 and Solenoid Share Their Problems / 一颗 Boost 会让 ESP32 和电磁铁共命运
+## One Boost Converter Would Tie the ESP32 to the Solenoid / 一颗 Boost 会把 ESP32 和电磁铁绑在一起
 
-I first considered an integrated power-bank device such as the IP5306, and also considered asking one boost converter to supply both the ESP32 and the solenoid. The loads wanted very different things from the rail: the ESP32 wanted continuous, quiet power, while the solenoid could demand a large transient current at actuation. My project-time estimate around a 5 V, 1.5 A load already implied 7.5 W at the output. From a 3.7 V cell at an assumed 85% efficiency, that is about 2.38 A at the input, with the demand rising further at lower battery voltage and efficiency. On a shared converter, every solenoid movement could also become an ESP32 voltage dip.
+I considered an integrated power-bank device such as the IP5306, and I also considered using one boost converter for both loads. The project-time estimate around a 5 V, 1.5 A solenoid load already came to 7.5 W. From a 3.7 V cell at an assumed 85 percent efficiency, the input estimate was about 2.38 A, with more current required as battery voltage or efficiency fell. Those were design estimates, not load measurements.
 
-我最早考虑过 IP5306 一类集成电源方案，也想过让一颗 Boost 同时承担 ESP32 和电磁铁。问题在于，这两个负载对电源的要求很不一样：ESP32 希望电源安静、连续；电磁铁则会在动作瞬间猛拉电流。按当时围绕 5 V、1.5 A 负载所做的功率估算，输出已经是 7.5 W；若从 3.7 V 电池取电并按 85% 效率估算，输入约为 2.38 A，低电压和更差效率下还会继续上升。把两者绑在同一路升压上，电磁铁每跳一次，主控都有机会跟着经历一次压降。
+我最早考虑过 IP5306 一类集成电源方案，也想过让一颗 Boost 同时承担两个负载。按项目期间围绕 5 V、1.5 A 电磁铁负载做的估算，输出功率已经到 7.5 W。若从 3.7 V 电池取电并暂按 85% 效率计算，输入约为 2.38 A，电池电压和效率继续下降时，电流还会往上走。这些数字是设计估算，不是负载实测。
 
-I settled on two [TLV61048](https://www.ti.com/product/TLV61048/part-details/TLV61048DBVT) converters. One supplies `SOL_5V`; the other provides the ESP32's battery-backed 5 V. They become separate boost branches after `BAT+`, while a six-pin SH1.0 cable carries `ESP_5V_BUS`, `SOL_CTRL`, `CHARGE_CTRL`, `ADC_ENABLE`, `ADC_BAT`, and GND to the core board. The drawing configures the solenoid branch for 600 kHz and the ESP32 branch for 1 MHz. TI associates 600 kHz with higher efficiency and 1 MHz with smaller magnetics and output capacitance plus somewhat better transient behavior. For my PCB, the more immediate consequence was physical: the switch nodes and the input–rectifier–output-capacitor loops had to remain compact, not merely appear as two tidy blocks on the schematic.
+The ESP32 and the solenoid wanted different behavior from the rail. The controller needed continuous power, while the inductive load could pull a much sharper transient during actuation. Putting them on one converter would save a branch, but every movement of the crab could also become a supply dip for the ESP32. I split the problem across two [TLV61048](https://www.ti.com/product/TLV61048) converters instead. One supplies `SOL_5V`, and the other provides the battery-backed path for the ESP32.
 
-最后我用了两颗 [TLV61048](https://www.ti.com/product/TLV61048/part-details/TLV61048DBVT)。一路专门给 `SOL_5V`，一路作为 ESP32 的电池备用 5 V；它们在 `BAT+` 之后分成两条独立升压支路，最后只通过六针 SH1.0 排线把 `ESP_5V_BUS`、`SOL_CTRL`、`CHARGE_CTRL`、`ADC_ENABLE`、`ADC_BAT` 和 GND 交给核心板。图纸把电磁铁支路配置为 600 kHz，把 ESP32 支路配置为 1 MHz。TI 的数据手册把 600 kHz 与较高效率联系在一起，把 1 MHz 与更小的磁性器件、输出电容和较好的瞬态表现联系在一起；对我来说，更重要的是这次布局必须把开关节点和输入—整流—输出电容回路尽量收短，而不是只在原理图上画出两只相同方框。
+ESP32 和电磁铁对电源的要求并不一样。主控希望供电连续，感性负载动作时却可能猛拉一段瞬态电流。把两边塞进同一颗转换器确实能少一条支路，可螃蟹每跳一下，ESP32 都可能跟着吃一次压降。最后我把问题拆给两颗 [TLV61048](https://www.ti.com/product/TLV61048)。一路专门提供 `SOL_5V`，另一路负责 ESP32 的电池备用供电。
+
+After `BAT+`, the two rails remain separate. A six-pin SH1.0 cable carries `ESP_5V_BUS`, `SOL_CTRL`, `CHARGE_CTRL`, `ADC_ENABLE`, `ADC_BAT`, and GND to the core board. The schematic configures the solenoid branch for 600 kHz and the ESP32 branch for 1 MHz. Texas Instruments associates 600 kHz with higher efficiency and 1 MHz with smaller magnetics and output capacitance. On my PCB, the practical consequence was keeping both switch nodes and their input, rectifier, and output-capacitor loops compact.
+
+两路电源在 `BAT+` 之后各走各的，最后再用六针 SH1.0 排线把 `ESP_5V_BUS`、`SOL_CTRL`、`CHARGE_CTRL`、`ADC_ENABLE`、`ADC_BAT` 和 GND 交给核心板。图纸把电磁铁支路配置为 600 kHz，把 ESP32 支路配置为 1 MHz。[Texas Instruments 的 TLV61048 资料](https://www.ti.com/product/TLV61048)把 600 kHz 与较高效率联系在一起，把 1 MHz 与更小的磁性器件和输出电容联系在一起。落到这块 PCB 上，更直接的要求是把两边的开关节点以及输入、整流、输出电容回路都收紧。
 
 ![Claude Chime power-board schematic / Claude Chime 电源板原理图](/uploads/projects/claude-chime-hardware/power-board-schematic.png)
 
-## A Backup 5 V Rail Is Not Safer Just Because It Is Higher / 备用 5 V 不是越高越保险
+## A 5.5 V Backup Rail Nearly Overpowered Type-C / 5.5 V 的备用电源，差点反过来压住 Type-C
 
-The ESP32 core board had to retain its Type-C connector, so `ESP_5V_BUS` could face both USB 5 V and a battery-derived source. I briefly planned to set the boost converter to 5.5 V and use the extra voltage to compensate for the Schottky drop. Following the current path farther exposed the conflict: the supposedly backup supply could overpower Type-C and defeat the intended USB priority.
+The ESP32 core board had to keep its Type-C connector, so USB 5 V and the battery-derived source could both reach `ESP_5V_BUS`. I briefly planned to set the backup converter to 5.5 V and use the extra voltage to compensate for the series Schottky drop. The number looked comfortable. The current path did not. Once the battery side sat above USB 5 V, the source intended for backup could take priority while Type-C was still present.
 
-ESP32 核心板的 Type-C 不能移走，于是 `ESP_5V_BUS` 同时面对 USB 5 V 和电池升压两种来源。我一度想把 Boost 设到 5.5 V，用较高电压抵消肖特基二极管的压降；继续沿电流方向检查后才发现，这会让“备用电源”反过来压过 Type-C，破坏原本希望保留的 USB 优先关系。
+ESP32 核心板上的 Type-C 不能移走，USB 5 V 和电池升压都会碰到 `ESP_5V_BUS`。我一度想把备用升压设成 5.5 V，用多出来的电压补偿串联肖特基二极管的压降。这个数字看着挺安心，顺着电流路径走一遍就不太对了。电池侧一旦高过 USB 5 V，原本负责备用的电源会在 Type-C 还插着时抢到前面。
 
-The final feedback network targets a schematic-calculated output of about 4.984 V before an SS12 connects it to `ESP_5V_BUS`. The diode drop varies with operating current, so 4.984 V is not a precise measured bus voltage. It is a power-priority decision: Type-C should supply the system while present, and the battery path should take over after removal. The important quantity was no longer simply “how much drop should I compensate?” It was which source should be allowed to conduct in each state.
+The final feedback network targets a schematic-calculated output of about 4.984 V before an SS12 isolates the battery path. That value is not a measured bus voltage, and it does not promise exactly 5.000 V after the diode. It preserves the intended order. Type-C supplies the system while connected, then the battery path takes over after removal.
 
-最终反馈网络把升压输出设为图纸计算值约 4.984 V，再经 SS12 接入 `ESP_5V_BUS`。二极管的实际压降会随电流变化，所以 4.984 V 不是一条精确的总线实测值，而是一项电源优先级设计：插入 Type-C 时由 USB 侧承担系统供电，拔掉以后电池侧才接住核心板。这里真正要控制的不是“补多少伏”，而是谁在什么状态下有资格供电。
+最终反馈网络把 SS12 前的目标输出计算为约 4.984 V。这个数不是总线实测值，也不承诺经过二极管以后正好得到 5.000 V。它先把供电顺序守住。Type-C 插着时由 USB 供电，拔掉以后再让电池路径接手。
 
-The charger created the same kind of state problem. The MCP73831 takes VDD from `ESP_5V_BUS` while VBAT returns to the cell. If both ends were left uncontrolled, the cell could be boosted onto the bus and then make the charger attempt to charge the original cell. Instead of adding a larger power mux, I made `CHARGE_CTRL` connect or disconnect the 3.3 kΩ PROG path through a 2N7002. The [MCP73831 datasheet](https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf) maps 3.3 kΩ to a design charge current of about 303 mA and allows charging to be disabled by leaving PROG open. Firmware can therefore enable charging only while Type-C is present and explicitly close that path after disconnection.
+The same bus also feeds the MCP73831 input while its VBAT output returns to the cell. Leaving that charger unconditionally enabled could send battery energy through the boost path and diode, into the charger, and back toward the same battery. I used `CHARGE_CTRL` and a 2N7002 to connect the 3.3 kΩ PROG resistor only when charging was permitted. [Microchip documents](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf) that an open or floating PROG pin disables the MCP73831.
 
-同一个问题也出现在充电器上。MCP73831 的 VDD 来自 `ESP_5V_BUS`，VBAT 又回到电池；如果只看两端的网络名，电池升压以后完全可能绕一圈，再让充电器尝试给原来的电池充电。我没有再塞入一颗更大的 Power Mux，而是让 `CHARGE_CTRL` 通过 2N7002 接通或断开 3.3 kΩ 的 PROG 支路。按照 [MCP73831 数据手册](https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf)给出的关系，3.3 kΩ 对应约 303 mA 的设计充电电流；PROG 悬空则关闭充电。这样，固件可以只在 Type-C 存在时允许充电，并在拔线后明确关掉这条回路。
+同一条总线还给 MCP73831 的输入供电，它的 VBAT 输出又回到电池。如果充电器一直保持开启，电池能量就可能经过升压和二极管进入充电器，再绕回原来的电池。我用 `CHARGE_CTRL` 和 2N7002 控制 3.3 kΩ 的 PROG 电阻，只在允许充电时接通。[Microchip 的 MCP73831 数据手册](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf)明确写了 PROG 开路或悬空会关闭充电器。
 
-## The Battery Divider Could Not Stay Connected Forever / 电量分压也不能一直挂在电池上
+This was the point where the board stopped looking like several separate modules to me. USB presence, battery takeover, charger permission, and solenoid actuation were all states of one power path.
 
-Battery sensing looks like two resistors, but leaving 15 kΩ and 22 kΩ permanently across the cell would also create a continuous leakage path. I used an AO3401 and a 2N7002 to place the divider behind `ADC_ENABLE`: assert it for a measurement, then disconnect it while idle. The schematic relation is `VBAT = VADC × 1.682`.
+做到这里，我已经不太能把它看成几个互不相干的小模块了。USB 有没有插着，电池该不该接手，充电器能不能工作，电磁铁什么时候动作，这些都是同一条电源路径里的状态。
 
-电池电量采样看起来只有两个电阻，但 15 kΩ 与 22 kΩ 如果一直跨在电池两端，也会成为一条永久漏电路径。我用 AO3401 和 2N7002 把分压器做成受 `ADC_ENABLE` 控制的支路：需要测量时拉高，平时断开。图纸上的换算关系为 `VBAT = VADC × 1.682`。
+## Two Divider Resistors Would Keep Taking Current / 两颗分压电阻，也会一直消耗电量
 
-My bench validation stopped at that analog boundary. With `ADC_ENABLE` driven high manually, the divided voltage matched the calculated relation; I did not have the ESP32 core board and did not write the ADC firmware. Re-reading the path now adds a calibration concern: [Espressif's ESP32-S3 ADC documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html) notes chip-to-chip variation in the nominal reference voltage, so final digital accuracy cannot come from the ideal resistor ratio alone. That is a present-day conclusion, not a test result I am retroactively adding to the project.
+Battery sensing looked almost too simple. A 15 kΩ and 22 kΩ divider could scale the cell voltage, but leaving both resistors permanently across the battery would create a continuous leakage path. I used an AO3401 and a 2N7002 to put the divider behind `ADC_ENABLE`. Firmware could connect it for a measurement and disconnect it while idle. The schematic relation is `VBAT = VADC × 1.682`.
 
-我在桌上做的基础测试停在模拟接口这一层：手动拉高 `ADC_ENABLE` 后，分压节点与计算关系一致；我没有 ESP32 核心板，也没有编写 ADC 固件。现在重看这条链，我还会补上一层校准意识——[Espressif 的 ESP32-S3 ADC 文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html)说明标称参考电压会存在芯片间偏差，最终数字精度不能只靠一条理想电阻比保证。这个判断来自现在的复盘，不是我要倒写进当年的测试结果。
+电池电量采样看起来简单得有点过头。15 kΩ 与 22 kΩ 可以把电池电压分下来，但它们如果一直跨在电池两端，也会留下一条持续漏电路径。我用 AO3401 和 2N7002 把分压器放到 `ADC_ENABLE` 后面，需要测量时接通，空闲时再断开。图纸上的换算关系是 `VBAT = VADC × 1.682`。
 
-## The First PCB Needed No Rework, but the Crab Was Not on My Bench / 第一块板没有飞线，但我的桌上也没有那只螃蟹
+My bench test stopped at that analog boundary. I drove `ADC_ENABLE` high manually and confirmed that the divided voltage followed the calculated relation. I did not have the ESP32 core board and did not write the ADC firmware. Re-reading the path now adds another layer. [Espressif's ESP32-S3 ADC documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html) describes chip-to-chip reference-voltage variation and the need for calibration, so the ideal resistor ratio alone cannot establish final digital accuracy. That is present-day understanding, not a test result added retroactively.
 
-V1.0 was the project's first and only PCB spin. I completed the schematic, component calculations and selection, PCB layout, BOM and Gerber outputs, ordering, hand assembly, and basic bring-up. The roughly 28 × 27 mm board, about 4.75 mm at its highest point, came up without cuts, flywires, value changes, added capacitors, or another PCB order.
+我在桌上的测试停在模拟接口这一层。手动拉高 `ADC_ENABLE` 以后，我确认分压节点符合图纸计算关系。我没有 ESP32 核心板，也没有编写 ADC 固件。现在再看这条链，还要多考虑一层。[Espressif 的 ESP32-S3 ADC 文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html)提到芯片之间存在参考电压差异，也提供了校准方法。最终数字精度不能只靠理想电阻比保证。这个判断来自现在的复盘，不是后来补写成的项目测试结果。
 
-V1.0 是这个项目唯一一次打板。我完成了原理图、器件选型与计算、PCB 布局、BOM 与 Gerber、下单、手工焊接和基础 bring-up。约 28 × 27 mm、最高约 4.75 mm 的板子一次装配完成，没有割线、飞线、换阻值、补电容或重新投板。
+## The First PCB Had No Flywires, but the Crab Was Not on My Bench / 第一块板没有飞线，但我的桌上也没有那只螃蟹
+
+V1.0 was the first and only PCB spin. I completed the requirements breakdown, power architecture, calculations and component selection, schematic, PCB layout, BOM and Gerber outputs, ordering, hand assembly, basic bring-up, debugging, and the software handoff. The drawing marks a board of roughly 28 × 27 mm and about 4.75 mm at its highest point. It required no cuts, flywires, component-value changes, added capacitors, or second PCB order.
+
+V1.0 是这个项目第一次也是唯一一次打板。我完成了需求拆解、电源架构、计算与器件选型、原理图、PCB 布局、BOM 与 Gerber、下单、手工焊接、基础 bring-up、排查和软件交接。图纸标注的板子约 28 × 27 mm，最高约 4.75 mm。它没有割线、飞线、换阻值、补电容，也没有再投第二版。
 
 ![Hand-assembled Claude Chime power board / 手工焊接完成的 Claude Chime 电源板](/uploads/projects/claude-chime-hardware/hardware-test/pcb-front-photo.jpg)
 
-The scope of my direct validation was specific. From a 3.8 V bench supply limited to 50 mA, the unloaded converters measured about 5.12 V and 5.08 V. I can no longer reliably assign those readings to individual rails, so I do not force a mapping. I used an ammeter to confirm that charging current flowed through the MCP73831 and later used a multimeter to observe the battery voltage rise. I manually enabled the ADC branch and verified the divider, then repeatedly drove `SOL_CTRL` with simulated 3.3 V logic; the unloaded output switched continuously without an observed boost-rail drop. No real solenoid was attached, so this was not an actuation test.
+My direct validation had a clear edge. From a 3.8 V bench supply limited to 50 mA, the unloaded boost outputs measured about 5.12 V and 5.08 V. I can no longer assign those readings reliably to individual rails. I confirmed charging current through the MCP73831 and later observed the battery voltage rise. I manually enabled the ADC branch and verified the divider, then repeatedly drove `SOL_CTRL` with simulated 3.3 V logic. The unloaded output switched continuously without an observed boost-rail drop.
 
-我亲自确认的范围很具体：用 3.8 V、50 mA 限流的台式电源做空载测试时，两路升压分别读到约 5.12 V 与 5.08 V；现在已经无法可靠回忆哪一个数字属于哪一路，因此不再强行配对。我用电流表确认 MCP73831 存在充电电流，并在一段时间后用万用表看到电池电压上升；手动打开 ADC 支路后确认分压正常；再用 3.3 V 高低电平反复模拟 `SOL_CTRL`，空载输出能连续切换且没有观察到升压轨掉压。这里没有接真实电磁铁，所以这些测试不能冒充负载吸合验证。
+我亲自确认的范围有一条很清楚的边。用 3.8 V、限流 50 mA 的台式电源做空载测试时，两路升压读到约 5.12 V 和 5.08 V，现在已经无法可靠回忆哪一个数字属于哪一路。我用电流表确认 MCP73831 存在充电电流，随后用万用表看到电池电压上升。我还手动打开 ADC 支路检查分压，再用模拟 3.3 V 的 `SOL_CTRL` 高低电平反复控制开关。空载输出能够连续切换，也没有观察到升压轨掉压。
 
-The client's firmware engineer performed the final system integration and later reported in chat that ESP32 communication, ADC battery reading, charging control, repeated real-solenoid actuation, and the complete Claude Chime device all worked. This was a customer-side result rather than an acceptance test I personally witnessed. What I can establish is that the first board required no revision, and the client said its compact size and six-pin cable saved enclosure space. The company discussed productizing it, but later production or sales were outside my one-off contract and I did not follow them.
+The protected battery added one surprise. Its terminal voltage fell from 4.03 V to 1.49–1.57 V during cold connection, even though the board had started from the 50 mA limited supply. The measurements support a bounded hypothesis that startup demand triggered the battery protection path, but I did not capture the current peak or prove the trigger directly. I kept that investigation in a separate [cold-start note](/notes/claude-chime-cold-start-battery-protection).
 
-最终整机联调由客户的固件工程师完成。他后来在聊天中反馈：ESP32 通信、ADC 电量读取、充电控制、实际电磁铁的重复动作和 Claude Chime 整机都正常。那是客户侧的集成结果，不是我亲眼完成的一次验收；我能确定的是，对方拿到的第一版硬件不需要改板，并评价小尺寸与六针排线给外壳设计省下了空间。客户当时提过继续产品化，后续是否量产或售卖则不在这次一次性合同的范围内，我也没有继续跟进。
+带保护的小电池还给了我一个意外。冷接入时，端电压从 4.03 V 掉到 1.49–1.57 V，可同一块板此前又能从限流 50 mA 的电源启动。现有测量支持冷启动需求触发电池保护路径这个有限推断，但我没有量到电流峰值，也没有直接证明触发原因。完整排查放在单独的[冷启动笔记](/notes/claude-chime-cold-start-battery-protection)里。
 
-I did not write the ESP32 firmware, but the hardware still needed a precise software boundary to be deliverable. I therefore prepared a separate [software handoff](/uploads/projects/claude-chime-hardware/software-handoff.md) covering the six-pin interface, three active-high controls, ADC conversion, charge control, and the expected states around Type-C insertion and removal.
+I did not connect the real solenoid and I did not write the ESP32 firmware. The client's firmware engineer later reported in project-time chat that ESP32 communication, ADC battery reading, charging control, repeated real-solenoid actuation, and complete-device operation were normal. Those were client-side integration results rather than an acceptance test I personally witnessed. The client also said that the compact board and six-pin cable saved enclosure space.
 
-我没有写 ESP32 固件，但硬件只有被软件正确接住才算交付完整。为此我另外整理了[软件交接文档](/uploads/projects/claude-chime-hardware/software-handoff.md)，把六针接口、三路高有效控制、ADC 换算、充电控制和 Type-C 拔插后的状态要求交给客户工程师。
+我没有接真实电磁铁，也没有编写 ESP32 固件。客户的固件工程师后来在项目期间的聊天里反馈，ESP32 通信、ADC 电量读取、充电控制、实际电磁铁重复动作和整机运行都正常。这些是客户侧的联调结果，不是我亲眼完成的验收。对方还提到，小尺寸电源板和六针排线给外壳设计省下了空间。
 
-The first PCB completed bring-up within my scope. The useful result is more than “first-spin success.” A request to make one solenoid jump forced me to answer, state by state: who supplies the system while USB is connected, who takes over after removal, which rail must not dip with the load, which sensing path must disconnect afterward, and how the battery might protect itself at cold start. A MOSFET can switch one load. The power architecture has to explain every state around it.
+The hardware still needed a precise software boundary before it could leave my hands. I prepared a separate [software handoff](/uploads/projects/claude-chime-hardware/software-handoff.md) covering the six-pin interface, three active-high controls, ADC conversion, charge control, and the expected states around Type-C insertion and removal.
 
-这块板第一次打样就完成了我负责范围内的 bring-up，真正留下来的却不是“一版成功”四个字。项目从“怎样让电磁铁跳一下”开始，最后迫使我逐个回答：USB 插着时谁供电，USB 拔掉后谁接手，负载跳动时谁不该跟着掉压，采样结束后谁必须断开，电池又会在冷启动时怎样保护自己。MOSFET 只负责开关一个负载；电源架构必须解释每一种状态。
+硬件要交到别人手里，软件边界也得说清楚。我另外整理了[软件交接文档](/uploads/projects/claude-chime-hardware/software-handoff.md)，把六针接口、三路高有效控制、ADC 换算、充电控制和 Type-C 拔插后的状态要求交给客户工程师。
+
+The project began with one solenoid switch. By delivery, the harder question was no longer how to make the load move. It was who supplied the system in each state, which path had to step back, and which measurement still stopped short of a proof. The MOSFET switched the solenoid. The power architecture had to explain everything around it.
+
+这个项目从怎样开关一只电磁铁开始，交付时更难的问题已经变成了每一种状态下谁来供电，哪条路径必须退后，还有哪一项测量离证明仍然差一步。MOSFET 负责让电磁铁动作，电源架构得把它周围的事情都解释清楚。
