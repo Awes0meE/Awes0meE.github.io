@@ -1,40 +1,54 @@
 ---
-title: "Read, Display, Report, Remember: The BaseUnit Responsibility Loop"
-titleZh: "读取、显示、上报、记住：BaseUnit 的职责循环"
-summary: "A BaseUnit firmware record connecting two DHT inputs, presence sensing, fan PWM, OLED state, Bluetooth messages, and Flash-backed settings recovery."
-summaryZh: "一份 BaseUnit 固件职责记录：连接两路 DHT、在位检测、风扇 PWM、OLED 状态、蓝牙报文与 Flash 设定恢复。"
-date: "2026-05-06"
-tags: ["STM32", "Firmware", "Flash", "OLED"]
+title: "BaseUnit First: Make One Complete Controller Behave Before Building the ACUnit"
+titleZh: "先把 BaseUnit 做通：一套完整控制器跑稳以后，再去碰 ACUnit"
+summary: "I built the laptop-side BaseUnit before the more complicated ACUnit, coordinating two DHT sensors, presence detection, fan PWM, OLED interaction, DMA Bluetooth telemetry, and two-page Flash persistence as one verified controller."
+summaryZh: "我先于更复杂的 ACUnit 完成笔记本侧 BaseUnit，把两路 DHT、在位检测、风扇 PWM、OLED 交互、DMA 蓝牙上报与双页 Flash 持久化组织成一套经过实机验证的控制器。"
+date: "2026-04-23"
+tags: ["STM32", "Firmware", "State Machine", "DMA", "Flash", "OLED"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## Six Responsibilities Share the Loop / 六类职责共用主循环
+## The Simpler Controller Was Still a Complete System / 相对简单，不等于只点亮几个外设
 
-The existing public note records a compact BaseUnit responsibility set. DHT11 is assigned to ambient temperature and humidity; DHT22 to outlet temperature and humidity. An infrared input represents whether the device is in position, fan PWM carries a 0-100% setting, the OLED shows `ENV / OUT / FAN` plus a shutdown countdown, Bluetooth reports data, and Flash holds settings across a restart.
+I chose to finish the BaseUnit before moving on to the ACUnit. The reason was not that it could be treated as a throwaway prototype. It already had every kind of responsibility that makes a controller feel complete. Sensors entered the system, a user changed state, a fan responded, the display reflected the current mode, telemetry left the board, and one setting had to survive a restart.
 
-既有公开笔记记录了一组紧凑的 BaseUnit 职责：DHT11 对应环境温湿度，DHT22 对应出风口温湿度；红外输入表示设备是否在位，风扇 PWM 接收 0-100% 设定，OLED 显示 `ENV / OUT / FAN` 与关机倒计时，蓝牙负责上报，Flash 则跨重启保留设定。
+我决定先把 BaseUnit 做完，再去做 ACUnit。原因不是它可以随便当成一块过渡原型，而是它已经包含了一套控制器该有的完整责任。传感器把状态送进来，用户改变模式，风扇作出响应，屏幕映射当前状态，遥测离开板子，一个设定值还得跨过重启保留下来。
 
-That list reads less like the ACUnit's five-cadence table and more like a state loop. Sensor values enter, presence and key state affect the current mode, a fan command leaves, the screen mirrors selected state, a message summarizes it, and persistent data must be recovered at startup. No periodic intervals are attached to this record, so assigning ACUnit timing values here would only make the two firmware lines look tidier than the material allows.
+DHT11 measured the surrounding air, while DHT22 measured the outlet side. An infrared input represented whether the laptop was in position. The encoder selected a fan setting from 0 to 100 percent, and the OLED displayed `ENV`, `OUT`, and `FAN`. Those parts were not six independent demos. Presence, UI state, and the saved setpoint jointly decided whether the PWM output should exist at all.
 
-这份清单不像 ACUnit 的五档周期表，更像一条状态循环：传感值进来，在位与按键状态影响当前模式，风扇命令出去，屏幕映射选中的状态，报文把它压缩后发送，持久化数据还要在启动时恢复。记录没有给这些职责配周期值，硬把 ACUnit 的节拍搬来，只会让两套固件显得比材料本身更整齐。
+DHT11 负责环境温湿度，DHT22 负责出风侧温湿度，红外输入表示笔记本是否在位，编码器把风扇设定调在 0 到 100%，OLED 再显示 `ENV`、`OUT` 与 `FAN`。这些并不是六个互不相干的外设 demo。在位状态、UI 状态和保存下来的设定值，要一起决定 PWM 此刻究竟该不该输出。
 
-## Flash Turns One Setting Into a Recovery Problem / Flash 把一个设定值变成恢复问题
+## A Black Screen Was One State, Not an Empty Display / 黑屏是一种状态，不是屏幕没内容
 
-The persistence description names a header, records, CRC32, and a commit mark, with the most recent valid setting recovered after restart. Those nouns already reveal the intended failure cases: a record can be incomplete, corrupt, older than another record, or absent. A delayed write is also mentioned in the earlier public description, which would reduce writes when a setting changes repeatedly.
+The application moved among `UI_OFF`, `UI_BOOT`, `UI_NORMAL`, and `UI_CONFIRM`. In the off and boot states, the fan stayed at zero. Boot displayed a logo before normal sensing and control began. A shutdown request did not immediately cut the interface away. It entered a five-second confirmation state, then returned the display and fan to their off behavior.
 
-持久化描述里出现了页头、记录、CRC32 与 commit 标记，并写到重启后恢复最近一条有效设定。光是这些名词，就把预期故障摊开了：一条记录可能没写完、校验失败、比另一条更旧，或者根本不存在。此前公开描述还提到延迟写入，用来避免设定值连续变化时反复落 Flash。
+应用在 `UI_OFF`、`UI_BOOT`、`UI_NORMAL` 和 `UI_CONFIRM` 之间切换。关机与启动阶段都把风扇压在 0，启动先显示 Logo，再进入正常采样与控制。关机请求也不是立刻把界面掐掉，而是先进入五秒确认状态，随后让显示和风扇回到关机行为。
 
-There is no linked BaseUnit source, erased-page trace, corruption test, or power-cut recovery log. The record therefore supports the data shape and intended recovery rule, not endurance figures or proof that interrupted writes were handled on a device.
+This state machine also stopped one input from being interpreted the same way everywhere. A button that woke the unit in `UI_OFF` did not automatically become another event just because the loop saw it again before release. That small latch and release rule is the kind of detail that separates a button read from an interface people can actually use.
 
-目前没有可链接的 BaseUnit 源码、擦页轨迹、损坏注入测试或掉电恢复日志。因此能保留的是数据形状与预期恢复规则，不能继续推出擦写寿命数字，也不能说设备已经处理过写入中断。
+状态机还避免了同一个输入在任何时候都被解释成同一件事。`UI_OFF` 里负责唤醒的按键，不会因为手指还没松开、主循环又读到一次，就自动变成下一次操作。这个 latch 与松手规则看着很小，却正好把读到按键和真正能用的交互分开了。
 
-## `DATA:<envT>,<outT>,<fan>` Is the Communication Boundary / 一条 `DATA` 报文划出通信边界
+## Bluetooth Stopped Holding the Loop While It Spoke / 蓝牙上报不再占着主循环慢慢说
 
-The Bluetooth format is recorded as `DATA:<envT>,<outT>,<fan>`. It packages two temperature fields and one fan field into a short outbound message. The format says nothing about delimiters between frames, numeric precision, humidity fields, acknowledgement, retries, timeout, or what the receiver does with the message.
+The first public description reduced Bluetooth to one line, `DATA:<envT>,<outT>,<fan>`. The finished firmware gave that line a clearer execution boundary. `USART1` used `DMA1_Channel4` for asynchronous transmission, so starting a report did not require the application to wait while every byte left the UART. The board sent the compact record every three seconds while active and skipped it in `UI_OFF`.
 
-蓝牙格式记录为 `DATA:<envT>,<outT>,<fan>`，把两路温度字段与一路风扇字段压成一条短报文。单看这个格式，还不知道帧与帧如何分隔、数字精度如何处理、湿度是否另发、有没有应答与重试、超时怎么办，也不知道接收端拿到数据后做什么。
+早期公开描述把蓝牙压成了一条 `DATA:<envT>,<outT>,<fan>`。完成后的固件又给这条报文补上了更清楚的执行边界。`USART1` 通过 `DMA1_Channel4` 异步发送，应用启动一次上报以后，不必站在原地等每个字节离开串口。设备工作时每三秒发送一次，进入 `UI_OFF` 后则停止上报。
 
-Together, the six responsibilities connect sensing, presence, fan control, display, communication, and persistence as one state problem. Exact timing and on-device behavior remain open until source and logs are available.
+The format deliberately stayed small. It did not yet include humidity, protocol versioning, acknowledgement, or a complete fault report. I now read that limitation less as a missing string field and more as a boundary between a bring-up link and a maintainable product protocol. BaseUnit needed the first one to work. It did not pretend the second one was already finished.
 
-这六类职责把传感、在位、风扇控制、显示、通信与持久化连成一个状态问题；精确节拍与目标板行为仍要等源码与日志回答。
+报文本身有意保持得很小，没有带湿度、协议版本、应答和完整故障上报。现在再看，我更愿意把这个缺口理解成联调链路与可维护产品协议之间的边界。BaseUnit 先把前一件事做通，没有假装后一件事也已经完成。
+
+## One Fan Setting Turned into a Two-Page Journal / 一个风扇设定值，最后占了两页 Flash
+
+Saving one percentage sounded much easier than designing the failure cases around it. The implementation reserved two Flash pages and wrote records with sequence information, CRC32, and a commit marker. A new setting waited four seconds after the last change before being written. At startup, the firmware scanned for the newest valid record rather than trusting the final bytes it happened to find.
+
+只保存一个百分比，听起来比它周围的故障情况简单多了。实际实现预留了两页 Flash，记录里带序号、CRC32 和 commit 标记。设定变化后先等待四秒，没有新的调整才写入。重新上电时，固件扫描并恢复最后一条有效记录，而不是碰到地址末尾的几个字节就直接相信。
+
+The design accounts for incomplete or corrupted records in its data structure. I do not have a preserved power-cut injection log or an endurance measurement, so I do not turn that structure into a claim that every interrupted write was proven on hardware. What I can say directly is that I implemented the journal, brought the BaseUnit hardware and firmware up, and verified the complete controller on the real machine.
+
+这套数据结构考虑了记录没写完或校验失败的情况，但我没有保留下来的掉电注入日志，也没有擦写寿命实测，所以不会把结构设计直接写成每一种写入中断都已在实机证明。我能直接确认的是，我实现了这套日志，完成了 BaseUnit 的硬件与固件，并在真实机器上把整套控制器跑通。
+
+The BaseUnit did not solve compressor control, EEV timing, or refrigeration safety. It did something that mattered before all three. It proved that I could make sensing, interaction, actuation, communication, and persistence cooperate in one embedded product. After that, opening the ACUnit project no longer felt like starting from zero.
+
+BaseUnit 没有解决压缩机控制、EEV 时序和制冷安全，但它先完成了一件对后三者都很重要的事。传感、交互、执行、通信和持久化真的可以在我写的一套嵌入式产品里协作。做到这里，再打开 ACUnit 工程时，我已经不觉得自己是从零开始了。

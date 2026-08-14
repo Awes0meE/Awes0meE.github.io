@@ -1,55 +1,67 @@
 ---
-title: "Power, Signals, and User Controls Across Three ACUnit Boards"
-titleZh: "电源、信号与交互怎样分布在三块外机板上"
-summary: "A close reading of the ACUnit interface map and six board renders, tracing visible power, sensor, actuator, communication, and user-interface connections."
-summaryZh: "细读 ACUnit 接口图与六张板卡渲染，追踪画面中可见的电源、传感、执行器、通信与用户交互连接。"
-date: "2026-05-06"
-tags: ["PCB", "STM32", "Thermal", "Interface"]
+title: "Three ACUnit Boards from PCB Renders to Staged Bring-up"
+titleZh: "三块 ACUnit 板从 PCB 渲染走到分阶段 bring-up"
+summary: "I independently designed, assembled, soldered, and brought up the V2.1 ACUnit power, main-control, and interaction boards, verifying their rails and peripherals while keeping the unfinished initial pressure test visible."
+summaryZh: "我独立完成了 V2.1 ACUnit 分电板、主控板与交互板的设计、装配、焊接和 bring-up，在验证电源轨与各路外设的同时，也保留了初期压力变送器测试尚未完成的边界。"
+date: "2026-05-18"
+tags: ["PCB", "STM32", "Bring-up", "Power", "Sensor", "Interface"]
 projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## Three Board Names Anchor the Interface Set / 三个板名把接口收在一起
+## The Three-Board Split Made Bring-up Less Reckless / 三板拆分，让 bring-up 不必一次赌上所有东西
 
-The V2.1 image reads more like a Chinese interface mind map. `24V_COM_BUS / MAX 10A` and `+12V_MAIN / MAX 2A` run from the power board toward the main board. Around the main-board node are labels for an STM32F103C8T6, two 12 V four-wire PWM fans, a five-pin electronic expansion valve, five NTC channels, a three-pin linear pressure-sensor input, DHT11, compressor Modbus UART, ESP-01S Wi-Fi, HC-05 Bluetooth, and an ST-Link SWD port. The interaction branch reaches page buttons and an EC11 encoder with a push switch; a separate branch lists an I2C 0.96-inch OLED.
+The ACUnit needed a 24 V entry, a 12 V branch, an STM32 controller, five NTC channels, pressure inputs, two four-wire fans, an electronic expansion valve, compressor communication, local controls, an OLED, and wireless interfaces. I split those responsibilities across a power board, a main-control board, and a narrower interaction board. The [V2.0 and V2.1 diagram note](/notes/juanyun-acunit-hardware-revision-archive) compares how the two archived drawings expressed that split. My concern here is what happened after the drawings became boards.
 
-V2.1 图更像一张中文接口思维图。`24V_COM_BUS / MAX 10A` 与 `+12V_MAIN / MAX 2A` 从分电板指向主控板；主控板节点周围依次标出 STM32F103C8T6、两把 12 V 四线 PWM 风扇、五针电子膨胀阀、五路 NTC、三针线性压力传感器输入、DHT11、压缩机 Modbus UART、ESP-01S Wi-Fi、HC-05 蓝牙与 ST-Link SWD。交互支路连到翻页按键和带按键的 EC11 编码器，另一支则标出 I2C 的 0.96 英寸 OLED。
+ACUnit 要接 24 V 输入、12 V 支路、STM32 主控、五路 NTC、压力输入、两把四线风扇、电子膨胀阀、压缩机通信、本地交互、OLED 和无线接口。我把这些责任拆到分电板、主控板和更窄的交互板上。[V2.0 与 V2.1 框图笔记](/notes/juanyun-acunit-hardware-revision-archive)单独比较两份归档图怎样表达三板关系，这里更关心的是图纸变成实物以后发生了什么。
+
+The power board could be energized and checked before it supplied the rest of the controller. The main board could then receive known rails before sensors, communications, and actuators were attached one path at a time. The interaction board remained a small, replaceable surface for the encoder and page buttons. That order did not remove risk. It stopped a wrong result on one board from immediately becoming a mystery across all three.
+
+分电板可以先独立上电，在给其余控制器供电以前把电压查清。随后主控板先接收已经确认过的电源，再让传感、通信和执行器一条条加入。交互板则保持成一块较小的编码器与翻页按键界面。这套顺序没有消灭风险，只是避免一块板上的错误立刻扩散成三块板共同制造的谜题。
 
 ![ACUnit V2.1 interface map / ACUnit V2.1 接口思维图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
 
-The map identifies which board each interface is drawn around, but it leaves connector part numbers, trace widths, assembly state, and test results open. The separate [diagram revision archive](/notes/juanyun-acunit-hardware-revision-archive) follows how this branch map differs from the routed V2.0 drawing.
+## Renders Became Boards I Had to Solder and Power / 渲染图最后变成了要亲手焊、亲手上电的板
 
-这张图能定位每个接口围绕哪块板展开，却没有连接器料号、走线宽度、装配状态或测试结果。另一篇[框图版本归档](/notes/juanyun-acunit-hardware-revision-archive)再单独追踪这棵分支图与 V2.0 连线图在表达方式上的差异。
+I independently completed the schematic and PCB work for all three boards, prepared them for fabrication, assembled and soldered them, and carried out the bring-up. The populated main board placed the STM32 among its edge connectors, ESP-01S module, sensor headers, and control outputs. The power board brought the input, fuse, conversion stage, and terminals into a much smaller test surface. The interaction board reduced the human interface to an encoder and two buttons.
 
-## The Main Board Is Dense Around Its Edges / 主控板的密度集中在板边
+三块板的原理图与 PCB、投板准备、装配焊接和 bring-up 都由我独立完成。装配后的主控板把 STM32 放在板边连接器、ESP-01S、传感接口和控制输出之间，分电板把输入、保险、变换电路和端子收进一块更小的测试面，交互板则把人机输入压到一个编码器和两个按键上。
 
-On the main-board front render, the STM32 package sits near the centre-right. Headers and connectors occupy most edges; visible labels include fan, NTC, OLED, DHT, interaction-board, Wi-Fi, and reset positions. The back render is much quieter, showing mounting holes, through-hole pads, and routing rather than a second field of components.
+![Populated V2.1 main board / 完成装配的 V2.1 主控板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-main-board-assembled.jpg)
+![Populated V2.1 power board / 完成装配的 V2.1 分电板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-assembled.jpg)
+![Populated V2.1 interaction board / 完成装配的 V2.1 交互板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-interaction-board-assembled.jpg)
 
-主控板正面渲染里，STM32 封装位于中间偏右，排针与连接器几乎围住板边；能辨认的标签包括风扇、NTC、OLED、DHT、交互板、Wi-Fi 与复位。背面安静得多，主要是安装孔、通孔焊盘与走线，并没有再铺一层同样密集的器件。
+The photographs matter because they close a gap the earlier portfolio page left open. These were not only PCB renders or an interface map. They were populated boards on my bench, and the next question was whether power reached the right places before anything expensive was allowed to move.
 
-![ACUnit V2.1 main-board front / ACUnit V2.1 主控板正面](/uploads/projects/juanyun-tech/acunit-v21-main-front.png)
-![ACUnit V2.1 main-board back / ACUnit V2.1 主控板背面](/uploads/projects/juanyun-tech/acunit-v21-main-back.png)
+这些照片补上了旧版作品集一直空着的一段。它们不只是 PCB 渲染和接口图，而是我桌上已经完成装配的板。接下来真正要问的是，在允许更昂贵的部件动作以前，电有没有先到达正确的位置。
 
-## Power and Interaction Use Narrower Layouts / 分电与交互各自收窄了布局
+## The Meter Had to Agree Before the Compressor Joined / 压缩机加入以前，万用表得先同意
 
-The power-board front render visibly groups a DC jack, a blade fuse, an inductor marked `470`, conversion components, and a screw terminal marked `+12V / PGND`; wide copper is visible on the back. The interaction-board front shows an encoder and two push buttons. Its back header is labeled `A / B / G / EK / KP / KN`, making the user-input signals easier to inventory than they are in the front view.
+One workbench photograph captured 24.21 V during a power-board check. The formal bring-up table from another recorded pass listed 24.07 V at the 24 V input and bus, 12.03 V at the converted output, and about 18 mA of no-load current. On the main board, I recorded 12.03 V, 4.99 V, and 3.32 V across the three rails.
 
-分电板正面把 DC 插座、片式保险丝、标着 `470` 的电感、变换器件与 `+12V / PGND` 螺钉端子放在一起，背面则能看到较宽的铜箔。交互板正面是一只编码器和两个按键；背面排针标着 `A / B / G / EK / KP / KN`，用户输入信号反而在背面更容易点清。
+一张工作台照片记录了分电板检查时的 24.21 V。另一轮正式 bring-up 表格里，24 V 输入与总线记录为 24.07 V，变换输出为 12.03 V，空载电流约 18 mA。主控板三条电源轨则分别记录到 12.03 V、4.99 V 和 3.32 V。
 
-![ACUnit V2.1 power-board front / ACUnit V2.1 分电板正面](/uploads/projects/juanyun-tech/acunit-v21-power-front.png)
-![ACUnit V2.1 power-board back / ACUnit V2.1 分电板背面](/uploads/projects/juanyun-tech/acunit-v21-power-back.png)
-![ACUnit V2.1 interaction-board front / ACUnit V2.1 交互板正面](/uploads/projects/juanyun-tech/acunit-v21-ui-front.png)
-![ACUnit V2.1 interaction-board back / ACUnit V2.1 交互板背面](/uploads/projects/juanyun-tech/acunit-v21-ui-back.png)
+![12 V power-board check / 分电板 12 V 检查](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-12v-test.jpg)
+![24 V power-board check / 分电板 24 V 检查](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-24v-test.jpg)
 
-## Parameter Screenshots Define Candidate Constraints / 参数截图给出候选约束
+The two 24 V readings belong to separate recorded checks, so I do not compress them into one supposedly exact rail value. Their useful role is more modest. Together with the 12 V and logic-rail checks, they show the staged power path reaching the intended voltage regions before the full system was connected.
 
-One product screenshot labels a Sanhua YCQB02H31 pressure sensor with 5 V supply, 0-20 bar range, 0.5-4.5 V output, and a two-metre lead. Another labels a 140 x 140 x 25 mm, 12 V, four-pin PWM fan and lists speed, airflow, pressure, current, and power figures. These values are useful when thinking about connector power, input range, and PWM/feedback pins, but the screenshots do not show that either item was selected, purchased, connected, or measured in this platform.
+两个 24 V 数字来自不同的已记录检查，我不会把它们压成一个看似唯一精确的电源值。它们更实际的作用，是与 12 V 和逻辑电源轨一起说明，整机接入以前，分阶段电源路径已经进入预期电压区间。
 
-一张产品截图给三花 YCQB02H31 压力传感器标出 5 V 供电、0-20 bar 量程、0.5-4.5 V 输出和两米线长；另一张给 140 x 140 x 25 mm、12 V、四针 PWM 风扇列出转速、风量、风压、电流与功率。它们适合拿来考虑连接器供电、输入范围以及 PWM / 反馈引脚，却不能说明这两个器件已经被选型、采购、接入或实测。
+## Each Peripheral Got Its Own Chance to Fail / 每一路外设都先获得一次单独失败的机会
 
-![Pressure-sensor product screenshot / 压力传感器产品截图](/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg)
-![PWM-fan product screenshot / PWM 风扇产品截图](/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg)
+After the rails, I tested the peripheral paths separately. The NTC check read about 24.7 °C while nearby references were about 24.8–24.9 °C, and the DHT reading stayed consistent with the same environment. Fan PWM and TACH, the EEV drive, MCU functions, ESP, OLED, interaction inputs, and basic compressor UART communication all passed their scoped checks.
 
-Taken together, the diagrams and renders answer a narrow but useful question: where the labeled power, sensing, actuator, communication, and user-interface connections appear. Electrical checks, physical clearances, startup behavior, and reliability still need records from a real board.
+电源轨之后，我把外设路径拆开测试。NTC 读到约 24.7 °C，附近参考读数约为 24.8–24.9 °C，DHT 也与同一环境保持一致。风扇 PWM 与 TACH、EEV 驱动、MCU、ESP、OLED、交互输入和基础压缩机 UART 通信，都完成了各自范围内的检查。
 
-把这些图放在一起，能回答一个窄却有用的问题：标注过的电源、传感、执行器、通信与用户交互连接分别出现在哪里。电气检查、实物间隙、启动表现与可靠性，仍要等真实板卡记录来回答。
+The pressure-transmitter item did not reach the same point in the initial SOP. Its supply and interface could be inspected, but the recorded pressure test remained unfinished. Later company testing used real pressure telemetry, yet that later result belongs to the company's system test rather than this first bring-up pass.
+
+压力变送器在初期 SOP 里没有走到同样的位置。供电和接口可以检查，正式压力测试却仍然没有完成。公司后续系统测试使用了真实压力遥测，但那属于公司的后期测试，不是这轮初始 bring-up 的结果。
+
+The interaction board also exposed a connector-order mismatch around its cable. Swapping the cable order restored the expected controls, and the board did not need a respin. I like that result because it is neither a fake perfect-first-time story nor a dramatic PCB failure. A real interface was wrong, the fault was narrowed to the connection order, and the hardware could continue without another fabrication round.
+
+交互板还暴露过一次排线连接顺序不匹配。调整线序以后，交互恢复正常，板卡不需要重新投板。我反而很喜欢这个结果，因为它既不是一次成功的完美故事，也不是夸张的 PCB 灾难。真实接口确实有问题，排查把范围缩到连接顺序，硬件则不必再等一轮制造。
+
+The three boards passed the electrical and peripheral behavior I personally checked, then joined the compressor driver, compressor, power supply, and PC for full-chain integration. These measurements do not prove long-term refrigeration performance. They prove something earlier and necessary. The controller survived the transition from a diagram, to soldered boards, to a system that could finally exchange real data and commands.
+
+三块板完成我亲自执行的电气与外设验证以后，又与压缩机驱动板、压缩机、电源和电脑接成完整链路。这些测量没有证明长期制冷性能，它们证明的是更早也更必要的一层。控制器从图纸变成焊好的板，再变成终于能交换真实数据与命令的系统。

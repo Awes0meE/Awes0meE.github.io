@@ -120,6 +120,66 @@
     "captionZh": "截图列出 140 x 140 x 25 mm、12 V、1800+/-10% RPM 与四针 PWM 接口，可作候选约束，不能当作平台实测结果。"
   },
   {
+    "id": "juanyun-acunit-v21-main-board-assembled",
+    "title": "Populated V2.1 ACUnit main board",
+    "titleZh": "完成装配的 V2.1 ACUnit 主控板",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-main-board-assembled.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-main-board-assembled.jpg",
+    "date": "2026-05-18",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "The assembled main board shows the populated STM32, edge connectors, ESP-01S module, and labeled sensor and control headers that had previously appeared only in renders.",
+    "captionZh": "装配后的主控板实物可见 STM32、板边连接器、ESP-01S 模块，以及此前只出现在渲染图中的传感与控制接口。"
+  },
+  {
+    "id": "juanyun-acunit-v21-power-board-assembled",
+    "title": "Populated V2.1 ACUnit power board",
+    "titleZh": "完成装配的 V2.1 ACUnit 分电板",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-assembled.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-assembled.jpg",
+    "date": "2026-05-18",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "The populated power board brings the DC input, fuse, conversion stage, terminal block, and board-level indicators into one workbench view.",
+    "captionZh": "装配后的分电板把 DC 输入、保险丝、变换电路、接线端子和板上指示器件落到了同一张工作台实拍中。"
+  },
+  {
+    "id": "juanyun-acunit-v21-interaction-board-assembled",
+    "title": "Populated V2.1 ACUnit interaction board",
+    "titleZh": "完成装配的 V2.1 ACUnit 交互板",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-interaction-board-assembled.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-interaction-board-assembled.jpg",
+    "date": "2026-05-18",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "The assembled interaction board shows the rotary encoder and two push buttons as soldered hardware rather than PCB-render placeholders.",
+    "captionZh": "交互板实拍把旋转编码器与两个按键呈现为已经焊接完成的硬件，不再只是 PCB 渲染中的器件位置。"
+  },
+  {
+    "id": "juanyun-acunit-v21-power-board-12v-test",
+    "title": "12 V reading during power-board bring-up",
+    "titleZh": "分电板上电时的 12 V 测量",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-12v-test.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-12v-test.jpg",
+    "date": "2026-05-18",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "With the power board energized on the bench, the multimeter display reads 12.03 V during the recorded output check.",
+    "captionZh": "分电板在工作台上通电后，万用表在这次输出检查中显示 12.03 V。"
+  },
+  {
+    "id": "juanyun-acunit-v21-power-board-24v-test",
+    "title": "24 V reading during power-board bring-up",
+    "titleZh": "分电板上电时的 24 V 测量",
+    "type": "image",
+    "src": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-24v-test.jpg",
+    "thumbnail": "/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-24v-test.jpg",
+    "date": "2026-05-18",
+    "projectSlug": "juanyun-thermal-hardware",
+    "caption": "A second energized-board check records 24.21 V on the multimeter display; the accompanying development record provides the rail context.",
+    "captionZh": "另一张上电检查照片记录了万用表显示的 24.21 V；具体测量节点由配套开发记录提供语境。"
+  },
+  {
     "id": "juanyun-dht-breakout-plan-cover",
     "title": "Six-page DHT11 / AM2302 board task plan",
     "titleZh": "六页 DHT11 / AM2302 小板任务计划",

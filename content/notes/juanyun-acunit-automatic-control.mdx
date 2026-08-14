@@ -1,0 +1,64 @@
+---
+title: "From Manual EEV Steps to Bounded Automatic Refrigeration Control"
+titleZh: "从手动拧 EEV，到带约束的自动制冷控制"
+summary: "The later ACUnit firmware moved EEV and compressor decisions onto a portable board-side control core with STOP, QUIET, PERF, and ZERO modes, while keeping sensor validity, superheat, pressure, and startup protection above the temperature target."
+summaryZh: "后期 ACUnit 固件把 EEV 与压缩机决策移到可移植的板端控制核心，形成 STOP、QUIET、PERF、ZERO 模式，并让传感有效性、过热度、压力与启动保护始终优先于温度目标。"
+date: "2026-07-22"
+tags: ["STM32", "Control", "EEV", "Compressor", "Refrigeration", "Safety"]
+projectSlug: "juanyun-thermal-hardware"
+visibility: public
+---
+
+## A Command Could Move the Valve Without Controlling the System / 一条命令能让阀动，却还不能叫系统控制
+
+The first ACUnit firmware could Home the electronic expansion valve, move it to a target pulse, adjust the fans, and send a compressor speed command. Those abilities were necessary for bring-up, but they still left the operator in the loop. A target opening did not explain whether refrigerant flow was appropriate, and a compressor RPM did not explain whether the outlet temperature was approaching a safe operating point.
+
+第一阶段 ACUnit 固件可以让电子膨胀阀 Home、走到目标脉冲，可以调风扇，也可以给压缩机发送目标转速。这些能力是 bring-up 的前提，却仍然把操作者留在控制回路里。一个目标开度没有说明冷媒流量是否合适，一个压缩机 RPM 也没有说明出风温度是否正在接近安全工作点。
+
+The later `production-line` branch changed the question. Manual control stayed available for testing, while a board-side core began deciding EEV movement and compressor speed from sensor state and operating mode. The control code was extracted into a portable core with a reference model and regression assets around it. That separation made the algorithm easier to reason about outside UART, OLED, and board-driver details.
+
+后来的 `production-line` 分支改变了问题。手动控制继续保留给测试使用，板端核心则开始根据传感状态和运行模式决定 EEV 动作与压缩机转速。控制逻辑被抽成一套可移植核心，旁边还有参考模型和回归资产。这样一来，算法可以暂时离开 UART、OLED 和板级驱动细节，单独接受推演。
+
+## Two Control Rates Watched Different Kinds of Change / 两个控制周期盯着两种不同变化
+
+The compressor path ran every 200 ms. It adjusted speed continuously around the outlet-control temperature and the limit assigned to the current mode. The EEV and safety path made decisions every second. Valve movement and refrigeration state respond on a different time scale from a UART command, so separating the two loops kept a fast compressor update from turning every EEV observation into another immediate step.
+
+压缩机路径每 200 ms 运行一次，围绕出风调控温度与当前模式上限连续调整转速。EEV 与安全路径则每秒作一次决策。阀动作和制冷状态的变化速度与一条 UART 命令不同，把两个循环拆开，避免压缩机快速更新时顺手把每次 EEV 观测都变成立即动作。
+
+The operating modes gave those loops bounded targets. `STOP` held the machine in a safe stopped state. `QUIET` limited compressor speed for lower noise. `PERF` allowed more cooling authority, and `ZERO` pursued the lowest outlet-temperature region with its own low-temperature stop behavior. On power-up, the firmware entered `AUTO + STOP` rather than restoring a previous nonzero fan or compressor output. EEV still had to Home before a saved opening could become meaningful.
+
+运行模式给两个循环套上不同边界。`STOP` 把机器保持在安全停机状态，`QUIET` 限制压缩机转速以优先照顾噪声，`PERF` 允许更高制冷能力，`ZERO` 则追求更低的出风温区，并带有自己的低温停机行为。每次上电，固件先进入 `AUTO + STOP`，不会恢复上次保存的非零风扇或压缩机输出。EEV 仍然必须先 Home，保存开度才有物理意义。
+
+## Superheat Turned Two Sensors into One Control Question / 过热度把两类传感器变成了一个控制问题
+
+The branch calculated superheat from suction temperature and the evaporating saturation temperature inferred from suction pressure. In compact form, the relationship was `SH = Ts - Tevap_sat(Ps)`. The pressure-to-temperature table in this firmware was an R134a approximation, so a different refrigerant or a changed sensor range would require another table and another validation pass.
+
+分支固件用吸气温度减去吸气压力推算的蒸发饱和温度来得到过热度，紧凑写法是 `SH = Ts - Tevap_sat(Ps)`。这版固件里的压力温度表是 R134a 近似表，实际冷媒不同或传感器量程变化时，都需要替换表格并重新验证。
+
+Reading refrigeration-control material now makes the branch's repeated low-opening and superheat work easier to understand. [Danfoss explains](https://www.danfoss.com/en-us/service-and-support/case-stories/dcs/the-pioneer-in-electronic-expansion-valve-control/) that too little superheat can move the system toward wet return and compressor risk, while the minimum stable region shifts with load and suction pressure. A fixed opening or a single aggressive target therefore cannot be treated as correct under every condition.
+
+现在再读制冷控制资料，分支里反复出现的低开度与过热度修改就更容易理解。[Danfoss 的电子膨胀阀控制说明](https://www.danfoss.com/en-us/service-and-support/case-stories/dcs/the-pioneer-in-electronic-expansion-valve-control/)提到，过热度太低会把系统推向湿回流和压缩机风险，而最低稳定区域又会随负载与吸气压力变化。固定开度或单个激进目标不能在所有工况下都被当成正确答案。
+
+That source explains a general refrigeration principle. It does not validate this product's thresholds. In the Cirro branch, I can support that the code added low-opening damping, trend and prediction guards, low and negative-superheat handling, and coordinated compressor limits. I cannot turn those implementation choices into a claim that the final parameters were fully calibrated.
+
+这份资料解释的是通用制冷原理，不会替这套产品验证阈值。对卷云分支，我能确认代码加入了低开度阻尼、趋势与预测约束、低过热度与负过热度处理，以及压缩机协同限制，却不能把这些实现直接写成最终参数已经完整标定。
+
+## Safety Had to Be Able to Overrule the Temperature Target / 安全层必须有权推翻温度目标
+
+A controller that only chases temperature can make a bad sensor look like a reason to push harder. The later core placed validity and protection decisions above the ordinary target. Invalid sensing could prevent automatic operation. Low or negative superheat could restrict valve and compressor behavior. High condensing pressure could reduce the permitted compressor speed. A persistently low compressor-control temperature could stop the run.
+
+只追温度的控制器，很容易把坏传感器误读成继续加力的理由。后期核心把有效性与保护判断放在普通目标之上。传感无效时可以阻止自动运行，低过热度或负过热度会限制阀与压缩机，高冷凝压力会压低允许转速，压缩机调控温度持续过低时则可以停机。
+
+Startup needed different treatment from steady operation. EEV first moved through Home and a pre-open stage, the compressor waited for valid status and restart constraints, and severe conditions could still override the grace period. This was not one elegant formula governing everything. It was an arbitration problem where ordinary temperature control had to yield whenever the machine lacked a trustworthy state.
+
+启动阶段也不能直接照搬稳态逻辑。EEV 先完成 Home 与预开，压缩机等待有效状态和重启约束，严重条件仍可以越过宽限阶段直接接管。这不是一条漂亮公式统治所有事情，而是一组仲裁关系。机器状态不可信时，普通温控必须让路。
+
+## Real-Hardware Results Came Back Through the Test Team / 实机结果由测试团队反馈回来
+
+The company test team later reported running `QUIET`, `PERF`, and `ZERO` on the real refrigeration system. They also reported observable changes from EEV superheat control and continuous compressor-speed adjustment, plus real triggers of low superheat, negative superheat, and high condensing-pressure protection. I did not personally run or witness those complete later tests, and I did not receive the raw logs needed to verify each event independently.
+
+公司测试团队后来反馈，`QUIET`、`PERF` 与 `ZERO` 都在真实制冷系统上运行过，EEV 过热度控制和压缩机连续调速也产生过可观察变化，低过热度、负过热度与高冷凝压力保护均有实机触发。我没有亲自执行或旁观这些完整后期测试，也没有拿到足以独立核对每次事件的原始日志。
+
+The repository's own boundary is equally important. Automatic control could run, while its mode targets, thresholds, minimum opening, and response times still required long-term calibration on the actual refrigerant loop, load, and environment. Historical regression assets also lagged behind the final snapshot. Working control and finished production calibration were two different milestones, and this project reached the first without honestly claiming the second.
+
+仓库自己留下的边界同样重要。自动控制已经能够运行，但模式目标、阈值、最低开度和响应时间仍需在真实冷媒回路、负载与环境下长期标定，早期回归资产也落后于最后的代码快照。控制能工作和量产参数已经完成是两个不同里程碑，这个项目到达了前一个，没有冒充后一个。

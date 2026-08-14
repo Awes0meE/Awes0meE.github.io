@@ -1,6 +1,6 @@
 # Juanyun Technology Source Inventory
 
-Date: 2026-05-07
+Date: 2026-08-14
 
 Source path inspected:
 
@@ -8,11 +8,13 @@ Source path inspected:
 D:\XJTLU\工作相关\卷云科技有限责任公司
 ```
 
+The 2026-08-14 refresh also inspected the user's completed internship archive copy at `C:\Users\123\Desktop\卷云科技有限责任公司`.
+
 This document records how the raw Juanyun source folder is represented in the portfolio. It is a source-to-portfolio map, not permission to publish the raw source tree.
 
 ## Current Public Boundary
 
-On `main` release `v0.7.0`, the website keeps Juanyun public writing in:
+The website keeps Juanyun public writing in:
 
 ```text
 content/projects/juanyun-*.mdx
@@ -48,12 +50,13 @@ public/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf
 public/uploads/projects/juanyun-public/diy-cooling-3d-print-preview-3.jpg
 public/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf
 public/uploads/projects/juanyun-public/hardware-sop-cover.jpeg
+public/uploads/projects/juanyun-public/acunit-v21-bringup/
 public/uploads/projects/juanyun-public/diy-cooling/
 public/uploads/projects/juanyun-public/foc-driver/
 public/uploads/projects/juanyun-public/actuator-fan/
 ```
 
-The three `juanyun-public/` subfolders contain selected legacy evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. This is allowed only for non-Current_Product legacy folders after pruning installers, dependency folders, vendor packages, generated build outputs, invoices, reimbursements, billing records, internship proof documents, and duplicate raw dumps.
+The three legacy `juanyun-public/` subfolders contain selected evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. The separate `acunit-v21-bringup/` folder is a tightly scoped exception for five assembled-board and bench-measurement photographs that the user explicitly confirmed were cleared for publication on 2026-08-14. Raw current-product packages remain excluded.
 
 Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/`, and `scripts/validate-content.mjs` fails if non-allowlisted files reappear there. This matters because WPS-synced ignored ACUnit/BaseUnit raw files would still be static public files if they were left under `public/`, even when no page lists them.
 
@@ -80,7 +83,7 @@ Current Juanyun project-page structure focuses on three larger public archives i
 
 | Source folder | Approx. files | Portfolio treatment |
 | --- | ---: | --- |
-| `Current_Product_ACUnit_Project` | 1210 | Sensitive current-product material. Used only for high-level writing and already-approved screenshots/renders. Raw schematic, Gerber, BOM/PnP, EDA/CAD, firmware source, and manufacturing exports are not served by the website. |
+| `Current_Product_ACUnit_Project` | 2437 | Reference archive for the completed internship project. Five explicitly approved V2.1 assembled-board and bench-measurement photographs are public; the development SOP, requirements, Git history, and firmware documents are writing evidence only. Raw schematic, Gerber, BOM/PnP, EDA/CAD, complete firmware source, and manufacturing exports are not served by the website. |
 | `Current_Product_BaseUnit_Project` | 1659 | Sensitive current-product material. Used only for public narrative where appropriate. Raw STM32 project files, source code, vendor packages, and build output are not served. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Public small-board planning document. Copied as `dht11-am2302-breakout-plan.pdf` with a rendered cover image. Used for the DHT11 / AM2302 project and note. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Public legacy material. Published selected preview images, demo video, ESP32/Arduino snippets, C# desktop snippets, schematic PDF, Gerber archive, EasyEDA projects, acrylic list, and one 3MF slice. Installers, dependency folders, generated output, duplicate exports, and uncurated full project dumps are not served. |
@@ -106,6 +109,8 @@ The source folder was inspected to create portfolio notes. Current-product and p
 - executable installers;
 - vendor package folders;
 - generated build artifacts.
+
+The user confirmed on 2026-08-14 that the five selected ACUnit V2.1 photographs and derived high-level bring-up results may be published, and that the board design, assembly, firmware, bring-up, and development SOP were independently completed by the user. This permits first-person derived writing; it does not permit publishing the complete firmware tree or the internal SOP and requirements files verbatim. A future firmware note should explain the bare-metal control reasoning through small reviewed excerpts or pseudocode rather than a source dump.
 
 Non-Current_Product legacy folders can publish selected evidence when the file is small, relevant, and linked from the corresponding portfolio page. Do not publish entire raw folder dumps.
 
