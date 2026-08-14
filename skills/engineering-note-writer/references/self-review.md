@@ -1,6 +1,6 @@
 # Self Review
 
-Run two independent gates on the finished draft before calling it ready. Both gates must pass.
+Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose L1 gate where it applies. Every applicable gate must pass before calling the draft ready.
 
 ## Gate 1: Truth
 
@@ -9,6 +9,7 @@ Run two independent gates on the finished draft before calling it ready. Both ga
 - Does each uncertainty have the right strength and stay near the claim it limits?
 - Are Chinese and English factually equivalent?
 - Are publication paths real or clearly provisional?
+- If a first-person scene was reconstructed, are its event and emotional direction confirmed, with no invented surrounding facts?
 
 Repair or remove unsupported claims. Do not compensate with a longer visible disclaimer.
 
@@ -24,6 +25,12 @@ Do not require every move type when the source does not support it. Evaluate the
 The following voices fail this gate: compliance report, archive description, project handoff, recruiter summary, academic abstract, neutral survey, and imitation of another creator.
 
 On failure, return to the cognition trail and rebuild around attention and changed understanding. Adding first-person pronouns or jokes, or swapping formal terms for casual ones, is cosmetic and still fails.
+
+## Gate 3: Reader-Prose L1
+
+For model-authored project and note article body, run every scoped check in `reader-prose-hard-gates.md`. L1-1 banned wording, L1-2 banned punctuation, and L1-3 canned structure must all reach zero hits in both languages.
+
+Do not scan frontmatter, metadata, Markdown syntax, URL or link destinations, code, commands, file paths, raw errors or logs, verbatim artifacts, or exact technical strings. Do not use these exclusions to shelter ordinary prose. Any applicable hit blocks release.
 
 ## Supporting Check: Cognition-Led Flow
 
@@ -41,6 +48,7 @@ Delete repeated lessons and rename generic headings from the content underneath 
 - Does humor come from a real tool, file, symptom, mismatch, or mistaken assumption?
 - Does the prose vary rhythm without using a style quota?
 - Is technical detail doing more work than broad praise?
+- Are known tools and models named exactly, with unknown names left unguessed?
 
 If a joke could survive after replacing every technical noun with `某工具`, it is probably generic. Ground it or remove it.
 
@@ -59,6 +67,7 @@ Return the finished prose by default. If the user requests a review, keep it sho
 ```text
 Truth gate:
 Li Zhiyi gate:
+Reader-prose L1 gate:
 Cognition-flow or humor issue:
 Bilingual mismatch:
 Recommended revision:

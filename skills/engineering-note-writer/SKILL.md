@@ -12,6 +12,7 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Treat `references/evidence-and-boundaries.md` as the authority for factual, authorship, uncertainty, and publication claims; style never overrides it.
 - Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
 - Match the Chinese and English substance on public bilingual pages.
+- Require model-authored reader-facing project and note body to pass the zero-hit L1 wording, punctuation, and canned-structure gates in `references/reader-prose-hard-gates.md`.
 
 Do not let an artifact inventory substitute for the user's point of view. Do not begin a substantial draft until the shared understanding is confirmed.
 
@@ -28,6 +29,7 @@ Use these bundled references:
 - Read `references/evidence-and-boundaries.md` before making first-person, result, or publication claims.
 - Read `references/cognition-led-composition.md` before arranging a multi-section note or replacing a rigid draft.
 - Read `references/voice-rules.md` before drafting or humanizing Chinese prose.
+- Read `references/reader-prose-hard-gates.md` before drafting project or note body and before final release review.
 - Read `references/bilingual-writing.md` before producing English or bilingual MDX.
 - Read `references/style-examples.md` when calibrating voice or repairing template-like prose.
 - Read `references/self-review.md` before calling a draft ready.
@@ -62,9 +64,11 @@ Sketch how attention and understanding moved: a noticed detail, the real questio
 
 Follow what caught the writer's attention rather than forcing a strict timeline or artifact inventory. The route may move from circuit behavior to firmware, desktop software, mechanics, fabrication, or research, then return and recombine what those systems revealed. Keep each jump locally intelligible with a short bridge when needed: show why attention is here and what this changes. Let artifacts support sentences; they do not automatically earn sections, determine order, or become the protagonist.
 
+Prefer a short, natural spoken bridge when a transition needs help. Keep the existing thought-bookmark heading and genuine-parallel-list rules; do not replace them with a rigid no-heading or no-list policy.
+
 ### 7. Draft Chinese With Controlled Energy
 
-Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Keep Li Zhiyi's calmer learning-note identity; do not copy another writer's catchphrases or public-account persona.
+Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Use the user-approved phrase palette in `references/voice-rules.md` naturally. Do not copy another writer's audience calls, public-account persona, or fixed performance patterns.
 
 ### 8. Add Thought-Bookmark Headings After Drafting
 
@@ -74,13 +78,17 @@ Use headings as thought bookmarks only when attention changes enough that the re
 
 Keep the same facts, attention jumps, researched explanations, later synthesis, important reactions, and humor targets. Aim for roughly 60% of the same Khazix reference energy used to calibrate Chinese at 75%; this is not 60% of the Chinese draft. Use natural English engineering-blog prose without shrinking it into a summary or translating slang literally.
 
+Apply the reader-prose hard gates to the English article body as well as the Chinese body. Preserve excluded technical syntax and verbatim evidence exactly.
+
 ### 10. Stop Where The Cognition Resolves
 
 End where the writer's current understanding reaches its last useful verification, remaining question, new connection, concrete observation, or quiet callback. Do not add a retrospective, evidence list, future-work section, or philosophical elevation merely to complete a pattern.
 
-### 11. Run Two Independent Gates
+### 11. Run The Release Gates
 
 Follow `references/self-review.md`; detailed review mechanics live only there. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
+
+For model-authored project and note body, the reader-prose L1 gate must also pass with zero applicable hits. This gate does not scan metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, or exact technical strings.
 
 Use `Li Zhiyi or compliance report?` as the operational release decision for first-person learning-note prose. A requested factual summary, caption, audit, or review may remain neutral when that matches the requested form.
 

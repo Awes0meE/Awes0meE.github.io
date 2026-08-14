@@ -61,7 +61,7 @@ Archive route:
 Cognition-led route:
 
 ```text
-我最先盯着的是 PWM，觉得风扇转得更快，控制就算做完了。后来画外壳时，这个理解突然不够用了：如果风从泡棉缝里提前跑掉，占空比再积极，也只是让桌面更热闹。再回来看上位机里的温度映射，我才开始把它当成“热量怎样经过结构和控制一起被搬走”的问题，而不只是一个输出数值。
+我最先盯着的是 PWM，觉得风扇转得更快，控制就算做完了。后来画外壳时，这个理解突然不够用了。如果风从泡棉缝里提前跑掉，占空比再积极，也只是让桌面更热闹。再回来看上位机里的温度映射，我才开始把它当成热量怎样经过结构和控制一起被搬走的问题，而不只是一个输出数值。
 ```
 
 Why it works: the route crosses control, enclosure leakage, and temperature mapping, then synthesizes them into a changed systems-level question. It does not claim that pressure was measured or turn the three artifacts into isolated summaries.
@@ -113,7 +113,7 @@ Template ending:
 Cognition-led ending:
 
 ```text
-下一次再看到“开发机上能跑”，我大概不会那么快把它叫作 Release 了。
+下一次再看到「开发机上能跑」，我大概不会那么快把它叫作 Release 了。
 ```
 
 Why it works: the ending resolves the current understanding by calling back to the note's actual packaging problem. It does not claim vague growth or add a mandatory retrospective heading.

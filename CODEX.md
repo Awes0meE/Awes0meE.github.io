@@ -228,9 +228,9 @@ Maintain the current engineering-academic identity:
 
 Portfolio notes should keep the user's practical learning-log texture: technically rigorous, close to the debugging scene, and comfortable carrying real frustration, amusement, uncertainty, and small human details beside the evidence. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
-Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass both the Truth gate and Li Zhiyi gate. Follow `references/evidence-and-boundaries.md` and `references/cognition-led-composition.md`, then the voice, bilingual, and self-review references.
+Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass the Truth gate, Li Zhiyi gate, and the scoped zero-hit reader-prose L1 gate. Follow `references/evidence-and-boundaries.md`, `references/cognition-led-composition.md`, and `references/reader-prose-hard-gates.md`, then the voice, bilingual, and self-review references.
 
-Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight after the brief is confirmed; it must never be written as invented project history, action, result, or measurement.
+Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight after the brief is confirmed; it must never be written as invented project history, action, result, or measurement. A confirmed real event plus a confirmed emotional direction may be reconstructed in natural first person, but the prose may not add time, place, action, dialogue, participants, technical results, or causal order.
 
 For `content/notes/*.mdx`:
 
@@ -240,9 +240,11 @@ For `content/notes/*.mdx`:
 - derive headings after drafting, name the actual technical subject below them, and follow the heading constraints in `engineering-note-writer`;
 - avoid reusable framework headings that expose the writing process instead of the technical subject;
 - place supported reactions and light humor beside the real engineering friction rather than saving all personality for a conclusion;
-- avoid repetitive resume lists and repeated contrast/sequence scaffolds, while allowing ordinary phrasing when it is natural and concrete;
+- use natural spoken transitions where they fit, avoid repetitive resume lists and repeated contrast/sequence scaffolds, and continue allowing ordinary `首先` / `其次` / `最后` phrasing when it is concrete rather than structural filler;
 - keep evidence links, files, and technical constraints specific;
-- require first-person learning-note prose to pass both the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, and apply the gates only to claims and voice within that scope;
+- name known tools and models exactly without guessing unknown names;
+- require model-authored project and note body to pass the scoped zero-hit wording, punctuation, and canned-structure rules in `reader-prose-hard-gates.md`; frontmatter, Markdown syntax, links, code, paths, logs, verbatim artifacts, and exact technical strings stay outside this scan;
+- require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, and apply the gates only to claims and voice within that scope;
 - use bilingual headings or paired English/Chinese paragraphs on public pages when a section would otherwise be single-language.
 
 ## Verification Policy

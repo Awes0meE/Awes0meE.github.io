@@ -24,6 +24,8 @@ Both languages must retain:
 
 English may change sentence boundaries and phrasing, and it may smooth a local transition when needed. It may not become a smaller marketing summary or reorder the note into a cleaner artifact taxonomy.
 
+Apply `reader-prose-hard-gates.md` to both language bodies. Avoid direct English equivalents of the banned Chinese scaffolds. Keep metadata, links, code, paths, logs, verbatim artifacts, and exact technical strings outside that prose scan.
+
 Keep source links close to the researched sentence in both languages when the target format permits it. Make the link placement natural; do not collect sources into a detached section that breaks the attention route.
 
 ## Translate The Comic Mechanism
@@ -31,11 +33,12 @@ Keep source links close to the researched sentence in both languages when the ta
 Translate why something is funny, not the surface idiom.
 
 ```text
-中文：计数器偶尔会多跳几格，编码器像是在偷偷给自己加戏。
-English: The count occasionally jumped a few extra steps, as if the encoder had added a small flourish of its own.
+计数器偶尔会多跳几格，编码器像是在偷偷给自己加戏。
+
+The count occasionally jumped a few extra steps, as if the encoder had added a small flourish of its own.
 ```
 
-The English is calmer, but contact bounce remains the target. Do not replace the joke with generic “unexpected behavior occurred.”
+The English is calmer, but contact bounce remains the target. Do not replace the joke with generic unexpected behavior occurred.
 
 ## Keep Technical Terms Stable
 

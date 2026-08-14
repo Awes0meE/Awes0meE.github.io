@@ -24,7 +24,8 @@
   user's cognition trail, allowing genuine cross-subsystem or non-strictly
   chronological attention without imposing a cognition template.
 - Adapt English with the same facts and calmer intensity, then require
-  first-person prose to pass both the Truth gate and Li Zhiyi gate.
+  first-person prose to pass the Truth gate and Li Zhiyi gate, and require
+  model-authored article body to pass the scoped zero-hit reader-prose L1 gate.
 - Evidence bounds project facts, authorship, results, and publication claims,
   but must not choose the reader-facing structure.
 
@@ -75,6 +76,10 @@
   no-load control switching. Real-solenoid and complete-device operation remain
   client chat feedback; cold-start protection triggering remains a bounded
   inference without a measured inrush waveform. V1.0 needed no rework or respin.
+- On 2026-08-14, the Claude Chime cold-start note became the first real forward
+  test for the hardened reader-prose L1 gate. The rewrite preserved the same
+  evidence boundaries while passing zero-hit wording, punctuation, and
+  canned-structure scans in both languages.
 - The verified published content count is 8 projects, 22 notes, and 73 media items.
 
 ## Next Action
@@ -98,7 +103,7 @@
   views at desktop and mobile widths, without overflow, an error overlay, broken
   loaded images, or page errors.
 - Content validation covers 8 projects, 22 notes, and 73 media records; UTF-8
-  validation covers 286 text files.
+  validation covers 287 text files.
 - The public interactive BOM has empty customer/order metadata fields; the
   credential/password source file was excluded from public uploads.
 

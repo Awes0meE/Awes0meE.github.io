@@ -27,6 +27,8 @@ A real train of thought may move from a circuit to desktop code and then to an e
 
 Use a short local bridge when the connection would otherwise be hard to follow. A later passage may combine ideas introduced under earlier headings. Do not force every section to be self-contained; isolation can erase the synthesis that made the learning useful.
 
+When a bridge is useful, prefer a natural spoken turn such as `说到这个`, `回到……这块`, or `顺着上面的再聊聊`. Use only the turn that matches the actual attention shift. Do not rotate through a phrase list mechanically.
+
 ## Let Artifacts Support Sentences
 
 Boards, screenshots, source files, measurements, and fabrication outputs support specific sentences and claim boundaries. Their existence does not earn them a section, choose the article order, or make them the protagonist. Remove inventory-shaped paragraphs that do not change the writer's question, interpretation, decision, or confidence.
@@ -35,7 +37,7 @@ Boards, screenshots, source files, measurements, and fabrication outputs support
 
 Begin close to the material: a command that chose the wrong Qt, a counter that jumped, a `final2` file beside another `final`, a bare PCB, a waveform, or a question the course brief made physical.
 
-Avoid meta-document openings such as “这是一篇重新整理后的学习记录.” Also avoid manufactured drama. The first concrete fact only needs to make the next sentence worth reading.
+Avoid meta-document and textbook openings. Follow `reader-prose-hard-gates.md` for the exact patterns. Also avoid manufactured drama. The first concrete fact only needs to make the next sentence worth reading.
 
 ## Let Knowledge Arrive Beside The Problem
 
