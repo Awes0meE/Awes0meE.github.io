@@ -1,0 +1,132 @@
+---
+title: "The Speed Estimate Looked Right—Why Couldn't the Loop Take Over?"
+titleZh: "速度估计对了，闭环为什么还是接不住？"
+summary: "A plausible EKF speed estimate exposed the real handoff problem: rotor angle, observer convergence, and reference-frame continuity were not yet reliable enough to control the current vector."
+summaryZh: "EKF 速度估计接近开环频率后，失败仍指向更深的接管条件：转子角、观测器收敛与参考系连续性还不足以让电流矢量闭环。"
+date: "2026-05-09"
+tags: ["FOC", "Motor Control", "SVPWM", "EKF", "Sensorless Control"]
+projectSlug: "sensorless-foc-learning-route"
+visibility: public
+---
+
+## The Sound Made Me Stop and Ask / 声音让我停下来追问
+
+Before this board ran, I had already tried the same compressor with a low-cost sensorless controller sold for small fan motors. A knob changed its speed, and the oscilloscope trace showed ordinary six-step square-wave commutation. On my bench it sounded rougher, heated the compressor more, and felt weaker at the suction inlet. When the custom FOC board later ran the compressor quietly and pulled much harder, the physical contrast was difficult to ignore.
+
+在这块板跑起来以前，我已经用同一台压缩机试过一块面向小风扇电机的低价无感驱动板。旋钮负责调速，示波器波形则确认它采用普通六步换相方波。放在我的台架上，它听起来更粗糙，压缩机也更热，吸气口感受到的吸力更弱。后来自制 FOC 板让压缩机安静运行，吸力也明显变强，这个物理反差很难忽略。
+
+I did not record controlled pressure, flow, winding temperature, sound level, or efficiency data. The comparison cannot support a performance ratio, and the two drives were not tuned as equivalent controllers. Its value was motivational. It made me ask what had changed between six voltage steps and a current vector that could rotate continuously.
+
+我没有记录受控的压力、流量、绕组温度、声压级或效率数据，两套驱动也没有做成参数等价的控制器。这次比较无法支持性能比例。它真正留下的价值是一个追问，六个离散电压状态与连续旋转的电流矢量之间，究竟发生了什么变化。
+
+## I Had Been Mixing Four Waveforms / 我曾把四层波形混在一起
+
+Early in the study, I used several waveform words too loosely. A six-step drive, a saddle-shaped modulation trace, a triangular PWM carrier, a MOSFET gate pulse, and a motor phase current could all appear in one explanation as though they were variations of the same signal. They belong to different layers.
+
+刚开始学时，我对几种波形的称呼很松。六步换相波形、马鞍形调制轨迹、三角载波、MOSFET 栅极脉冲与电机相电流，有时会在同一段解释里出现，像是同一种信号的不同画法。后来我才把它们分到不同层次。
+
+The cheap controller selected inverter states in six broad electrical sectors. The phase command changes in discrete steps, so the stator voltage vector advances around the hexagon in jumps. FOC asks a different control question. It estimates or supplies an electrical angle, expresses measured current in a rotating frame, and continuously regulates the current components associated with that frame. TI's [commutation comparison](https://www.ti.com/video/6216805428001) helped me place trapezoidal, sinusoidal, and field-oriented methods on the same map.
+
+低价驱动板在六个较宽的电角扇区内选择逆变状态，相指令以离散台阶变化，定子电压矢量也沿六边形跳着前进。FOC 追问的是另一层问题。它先获得电角度，再把测得电流放进随转子旋转的参考系，持续调节这个参考系里的电流分量。TI 的[换相方式对照](https://www.ti.com/video/6216805428001)帮助我把梯形、正弦与磁场定向控制放进同一张地图。
+
+This also corrected a naming mistake in my head. `BLDC` is often used for a motor family, back-EMF shape, or a familiar six-step drive combination. FOC is a control strategy. They are not two mutually exclusive motor species. The same permanent-magnet machine can be discussed through its construction and through the way an inverter controls it.
+
+这也纠正了我脑中的一个命名误区。`BLDC` 常被用来指一类电机、反电动势形状，或一套常见的六步驱动组合；FOC 则是一种控制策略。二者并不是互斥的电机物种。同一台永磁电机既可以从结构来命名，也可以从逆变器怎样控制它来讨论。
+
+## The Vector Became Stationary in dq / 旋转矢量在 dq 里停了下来
+
+The firmware measures `Ia` and `Ib`, then reconstructs the third current with `Ic = -Ia - Ib`. That relation comes from the three-wire system's instantaneous current sum. Clarke transformation maps the three phase quantities onto the stationary orthogonal `αβ` plane. Park transformation then rotates that plane by the electrical angle into `dq` coordinates.
+
+固件先测量 `Ia` 与 `Ib`，再按 `Ic = -Ia - Ib` 重建第三相电流。这个关系来自三线制系统瞬时电流和为零。Clarke 变换把三相量映射到静止正交的 `αβ` 平面，Park 变换再用电角度把这个平面旋转到 `dq` 坐标。
+
+That second rotation was the point at which FOC became intuitive to me. In the stator frame, balanced current components keep tracing sinusoids. In the rotor-aligned frame, the same rotating vector can appear nearly stationary. The d-axis component describes current along the chosen flux axis, while the q-axis component describes the orthogonal torque-producing direction in this learning model. Two PI controllers can then regulate nearly constant targets instead of chasing three sinusoids.
+
+第二次旋转是 FOC 在我脑中真正变得直观的地方。站在定子坐标里，平衡电流不断画出正弦；跟着转子参考系一起旋转，同一个电流矢量却可以近似停住。这个学习模型里，d 轴电流沿选定磁链方向，q 轴电流落在正交的转矩方向。两只 PI 因而可以调节近似恒定的目标，不必直接追着三条正弦跑。
+
+The controllers output `Vd` and `Vq`. Inverse Park transforms that request back to `Vα` and `Vβ`, which describe the voltage vector the inverter should realise during the next PWM interval. The chain in this repository is concrete enough to follow from ADC values to compare registers.
+
+电流控制器输出 `Vd` 与 `Vq`，反 Park 再把请求送回 `Vα`、`Vβ`，形成逆变器在下一个 PWM 周期内要实现的电压矢量。这份代码把链路写得足够具体，可以从 ADC 数值一直追到比较寄存器。
+
+`Ia / Ib / Ic → Clarke → Iα / Iβ → Park → Id / Iq → current PI → Vd / Vq → inverse Park → Vα / Vβ → SVPWM → Tcmp1-3 → CCR1-3`
+
+## The Saddle Wave Was a Compare Trajectory / 马鞍波其实是比较值轨迹
+
+[Zhihui Jun's FOC and SVPWM note](https://zhuanlan.zhihu.com/p/147659820) helped me greatly when I first tried to connect PWM area, coordinate transforms, voltage vectors, and compare registers. I later returned to those ideas with my own firmware open beside them. The most useful change was to stop searching the code for a stored saddle-wave array.
+
+[稚晖君的 FOC 与 SVPWM 笔记](https://zhuanlan.zhihu.com/p/147659820)曾经帮我把 PWM 面积、坐标变换、电压矢量与比较寄存器接到一起。后来我带着自己的固件重新回看这些知识，最重要的变化是停止在代码里寻找一张预先存好的马鞍波数组。
+
+`SVPWM_Calc()` begins with the requested `Vαβ` vector. Three sign tests identify its sector. The function then computes the dwell times `Tx` and `Ty` for two adjacent active vectors. If their sum exceeds the PWM period, both are scaled down. The remaining zero-vector time is shared symmetrically through `Ta`, `Tb`, and `Tc`, then the sector table maps those values into `Tcmp1`, `Tcmp2`, and `Tcmp3`.
+
+`SVPWM_Calc()`从目标 `Vαβ` 矢量开始，用三个符号判断确定扇区，再计算相邻两个有效矢量的驻留时间 `Tx`、`Ty`。两者之和超过 PWM 周期时会一起缩放，余下的零矢量时间通过 `Ta`、`Tb`、`Tc` 对称分配，最后由扇区映射生成 `Tcmp1`、`Tcmp2`、`Tcmp3`。
+
+When I plot those three compare values while the reference vector turns through one electrical cycle, each curve acquires the familiar saddle shape. The common-mode shift created by zero-vector allocation lets the inverter use the DC bus efficiently while preserving the requested line-to-line voltage. In this implementation the shape emerges from sector dwell-time arithmetic. There is no named third-harmonic lookup table and no explicit saddle-wave buffer.
+
+让参考矢量走完一个电角周期，再把三个比较值画出来，每条曲线就会出现熟悉的马鞍形。零矢量分配带来的共模移动提高了母线电压利用率，同时保持目标线电压关系。这份实现里的形状来自扇区与驻留时间运算，并没有具名的三次谐波查表，也没有单独的马鞍波缓存。
+
+![FOC and SVPWM signal chain derived from this firmware / 依据本项目固件重建的 FOC 与 SVPWM 信号链](/uploads/projects/sensorless-foc-learning-route/foc-svpwm-signal-chain.svg)
+
+The diagram is generated from the same sector and dwell-time mapping used by the firmware. Imperix's [space-vector modulation reference](https://imperix.com/doc/implementation/space-vector-modulation) provides a useful external check on active vectors, zero vectors, dwell times, and symmetric switching. The plotted saddle curves remain duty or compare references. They are not literal phase voltage and they are not motor current.
+
+图中的扇区与驻留时间映射来自本项目固件，Imperix 的[空间矢量调制资料](https://imperix.com/doc/implementation/space-vector-modulation)则用于交叉检查有效矢量、零矢量、驻留时间与对称开关序列。画出的马鞍曲线始终是占空比或比较值参考，并非字面意义上的相电压，更不是电机电流。
+
+## The Triangle Lived Inside TIM1 / 三角波藏在 TIM1 的计数器里
+
+The triangle came from a different layer. `board_config.c` configures TIM1 with `TIM_CounterMode_CenterAligned1`. The timer counts up to its period and then down again, so its digital counter state behaves like a triangular carrier. The CPU does not calculate and store a triangle sample array on every control cycle.
+
+三角波来自另一个层次。`board_config.c`把 TIM1 配置为 `TIM_CounterMode_CenterAligned1`。定时器先向上计数到周期值，再反向向下计数，因此数字计数状态表现得像三角载波。CPU 并不会在每个控制周期里计算并保存一组三角采样点。
+
+After `foc_algorithm_step()` returns, `adc.c` writes `Tcmp1-3` into `CCR1-3`. Hardware comparison between the up/down counter and each register produces center-aligned PWM. TIM1 also enables complementary outputs for the high-side and low-side devices, so three compare channels become six gate-control outputs before dead time and driver behaviour are considered. A general [center-aligned PWM explanation](https://onlinedocs.microchip.com/oxy/GUID-D6315DA4-4399-4D39-80F4-F1F66A173640-en-US-3/GUID-8459C371-D993-4FDC-B6F5-616B365E930A.html) helped me verify the up/down counter interpretation independently of the STM32 code.
+
+`foc_algorithm_step()`返回后，`adc.c`把 `Tcmp1-3`写入 `CCR1-3`。上下计数器与比较寄存器之间的硬件比较生成中心对齐 PWM。TIM1 同时启用高低桥臂互补输出，因此三个比较通道会在计入死区和驱动器行为以前形成六路栅极控制输出。[中心对齐 PWM 的通用说明](https://onlinedocs.microchip.com/oxy/GUID-D6315DA4-4399-4D39-80F4-F1F66A173640-en-US-3/GUID-8459C371-D993-4FDC-B6F5-616B365E930A.html)也让我能够独立于 STM32 代码检查这套上下计数解释。
+
+The layer sequence is now clear in my head. `Tcmp1-3` are slowly changing references over electrical angle. The timer counter is the fast triangular carrier. Their comparison creates digital gate pulses. The inverter and motor turn those pulses into terminal voltages and continuous phase currents. Calling all four of them PWM waveforms hides the control structure I actually need when debugging.
+
+这几层现在在我脑中已经分开。`Tcmp1-3`是随电角度缓慢变化的参考，定时器计数器是快速三角载波，二者比较后形成数字栅极脉冲，逆变器与电机再把脉冲变成端电压和连续相电流。把四层东西都笼统叫作 PWM 波形，会遮住调试时真正需要追踪的控制结构。
+
+## Speed Was Only One Projection of the State / 速度只是状态的一道投影
+
+The observer problem became visible only after open-loop operation was trustworthy. Stable 45 Hz operation gave me a reference point. Repeating 30, 45, and 60 Hz runs showed consistent mechanical behaviour and electrical trends. I then investigated EKF sign conventions, motor resistance, inductance and flux parameters, and code defects that could corrupt the estimate.
+
+只有开环运行足够可信以后，观测器问题才真正显形。45 Hz 稳定运行给了我一个参照点，反复测试 30、45、60 Hz 又留下相对一致的机械响应和电气趋势。接下来我开始检查 EKF 符号、电阻、电感、磁链参数，以及会破坏估计的代码问题。
+
+I worked with Codex during that phase. It assisted with the RAM trace implementation, EKF parameter edits, and inspection that found Kalman-gain values being overwritten. I chose the operating points, ran the compressor, judged vibration, sound and startup behaviour, and decided whether each change improved the physical system. The collaboration made internal state visible; it did not replace the bench experiment.
+
+这一阶段我与 Codex 协作。它协助实现 RAM trace、修改 EKF 参数，并在代码检查中找到 Kalman 增益被覆盖的问题。我负责选择运行点、操作压缩机、判断振动、声音与启动状态，再决定每次修改是否真正改善了物理系统。协作让内部状态变得可见，没有替代台架实验本身。
+
+After those corrections, the estimated speed could follow the imposed open-loop frequency closely enough to look convincing. The handoff still collapsed. I had been treating speed agreement as if it authorised the whole observer state. It only checked one projection.
+
+修正以后，估计速度已经能够贴近外加开环频率，看上去很有说服力，接管却仍然崩掉。我此前把速度一致当成了整个观测器状态的授权，实际上它只检查了一道投影。
+
+Speed is the rate at which angle changes. A plausible average rate can coexist with a fixed angle offset, ripple, lag, or a sudden phase jump. Park transformation consumes the instantaneous angle. If the angle used by the controller differs from the real rotor frame by `Δθ`, the measured current vector is rotated into the wrong d and q components. The PI loops may then push voltage in a direction that no longer matches the intended flux and torque axes.
+
+速度是角度变化的速率。平均速率看起来合理时，角度仍可能带着固定偏差、纹波、延迟，甚至在切换瞬间跳相。Park 变换消耗的是瞬时角度。控制器使用的角度若与真实转子参考系相差 `Δθ`，测得的电流矢量就会被旋进错误的 d、q 分量，PI 随后可能把电压推向偏离目标磁链与转矩轴的方向。
+
+`[Id_used, Iq_used] = R(Δθ) · [Id_true, Iq_true]`
+
+That one line explains why a speed plot can look calm while the current loop loses authority at the switching instant.
+
+这一行关系解释了为什么速度曲线可以看起来很平静，电流环却会在切换瞬间失去控制依据。
+
+## A Handoff Needs More Than Agreement / 接管条件比数值接近更苛刻
+
+A credible handoff now means more to me than putting two frequency curves within a tolerance band. The observer state needs time to converge. The estimated angle must remain phase-consistent with the open-loop angle. The transition needs bounded angle error and a continuous reference, while current, voltage, and torque commands stay inside safe margins. A lock decision also needs hysteresis so one noisy sample cannot grant or revoke authority.
+
+现在我理解的可靠接管，已经不只是让两条频率曲线进入误差带。观测器状态要有时间收敛，估计角与开环角要保持相位一致，切换过程还要限制角度误差并保证参考连续，同时让电流、电压和转矩指令留在安全余量内。锁定判断也需要滞回，不能让单个噪声采样随意授予或撤回控制权。
+
+At low speed and standstill, back-EMF information is weak. High-frequency injection is one possible future route for extracting position-related saliency information before an ordinary observer becomes reliable. ST's [PMSM FOC documentation](https://www.st.com/resource/en/user_manual/cd00298474-stm32f-pmsm-singledual-foc-sdk-v43-stmicroelectronics.pdf) places startup, observer reliability, and high-frequency injection in that wider control problem. I have not implemented HFI in this project.
+
+低速与静止时，反电动势提供的信息很弱。高频注入可能成为未来方向，用电机凸极相关信息在普通观测器可靠以前获取位置线索。ST 的 [PMSM FOC 文档](https://www.st.com/resource/en/user_manual/cd00298474-stm32f-pmsm-singledual-foc-sdk-v43-stmicroelectronics.pdf)把启动、观测器可靠性与高频注入放在同一套更大的控制问题里。本项目目前没有实现 HFI。
+
+The May 2026 freeze therefore records a useful open-loop stage, not a disguised closed-loop success. The compressor ran at 12 V over the bounded 30-80 Hz EC11 range, and the 30, 45, and 60 Hz points gave me a repeatable base for diagnosis. Sensorless takeover remains the next control problem.
+
+因此，2026 年 5 月的封存记录的是一个有价值的开环阶段，并不是换个说法包装出的闭环成功。压缩机在 12 V 下跑过有边界的 30-80 Hz EC11 范围，30、45、60 Hz 三个点也给后续诊断留下可重复基础。无感接管仍是下一道控制问题。
+
+## The Compressor Was a Gentle Attempt / 压缩机只是一次温柔的尝试
+
+I began because I wanted to learn sensorless FOC and did not own the right motor. The compressor appeared by chance and forced the learning route to become physical. It made me design the inverter, operate the SMT equipment, calibrate sampling, manage faults, feel load through a suction port, and finally admit that a believable speed estimate was still short of a trustworthy angle.
+
+我最初只是想学无感 FOC，却没有合适的电机。压缩机偶然出现以后，这条学习路线被迫变得具体。我画了逆变器，操作 SMT 设备，校准采样，处理故障，从吸气口感受负载，最后也不得不承认，看起来可信的速度离可以托付电流矢量的角度仍有距离。
+
+The longer route points beyond compressors. I want to carry this understanding toward general brushless and servo drives, robot-joint motors, closed-loop force interaction, and startup strategies that work where back EMF is weakest. The compressor's open-loop run was a gentle attempt. It was also a compact image of sensorless FOC itself, because each layer only became real when the next one refused to cooperate.
+
+更长的路线会走出压缩机，面向更普适的无刷与伺服驱动、机器人关节电机、闭环力交互，以及反电动势最弱时仍能工作的启动策略。压缩机开环只是一次温柔的尝试，也是无感 FOC 的一个缩影。每一层理解，都是下一层不肯配合时才真正变得具体。

@@ -127,7 +127,7 @@ export function formatDateRange(value: string) {
 }
 
 export function formatDateRangeZh(value: string) {
-  return formatDateRange(value).replaceAll("Now", "至今");
+  return formatDateRange(value).replaceAll("Now", "至今").replaceAll("Present", "至今");
 }
 
 export function formatStatusZh(value: string) {
@@ -140,6 +140,7 @@ export function formatStatusZh(value: string) {
     "Planning Archive": "计划归档",
     "Archived Prototype": "原型归档",
     "Public Overview": "公开概览",
+    "Ongoing Learning Route": "持续学习 / 阶段原型",
     Draft: "草稿",
     Complete: "已完成",
     Completed: "已完成",
