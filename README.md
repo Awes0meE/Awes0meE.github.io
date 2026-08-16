@@ -153,14 +153,15 @@ Current workspace content state:
 - The site includes real internship material from Juanyun, Nanjing Turing, and Tianjin rail-transit STM32 study work, plus an approved bilingual Claude Chime commissioned-hardware case study, a related cold-start debugging note, and reviewed public design/bring-up evidence.
 - The site also includes an Arduino Digital Clock course project from MEC104, with an approved bilingual first-person project page, one related learning note, 11 media records, selected public course/report evidence, Arduino sketches, a cleaned demo video, and the SN54LS47 datasheet. The copy preserves personal contribution boundaries, treats the rollover thresholds as separately flashed versions, and does not overstate what the surviving video, early `main.c`, or unresolved final switch implementation proves.
 - The site also includes an Arduino Smart Car line-tracking course project from MEC104, with a project page, one related learning note, selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code.
+- The sensorless FOC project is an independent personal motor-control learning route. Its project page, observer-handoff note, 12 media records, and 22 curated public files cover the custom STM32F446/DRV8301 board, onsite SMT, 12 V compressor operation, and code-grounded SVPWM interpretation while keeping completed sensorless takeover outside the claimed result.
 - The DIY pressure-flow cooling project page, learning note, and six media records now use the approved first-person engineering story gathered through the one-project-at-a-time interview workflow; remembered temperature and frame-rate changes remain explicitly personal observations rather than a controlled benchmark.
 - The Tianjin Jintie Communications STM32 project page, five learning notes, and three media records now use the approved bilingual first-person learning story: Keil/ST-Link bring-up, peripheral-level GPIO/EXTI/timer reasoning, distinct ADC/PWM/UART roles, and one bare-metal integrated demo. The 16-point map remains feedforward, hardware-I2C lockup remains a present-day hypothesis, and PID plus ATP/ATO/ATS remain reading-layer concepts rather than implemented railway control.
 - The Nanjing Turing Qt/Seamly2D project page, three-week note, and five media records now use the approved bilingual first-person internship story: starting with school-level C++ and no Qt, bringing up the large upstream codebase, adding a local `QSettings` account/role entrance, practising the Git workflow, and packaging on Windows and macOS. The copy keeps online authentication out of scope, separates formal development-machine acceptance from the later clean Windows PC test, stops macOS at a launched unsigned DMG with signing/notarization unfinished, and leaves later adoption after handoff unknown.
-- The media gallery covers 78 project/note images and videos, including processed project covers, board renders, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
+- The media gallery covers 84 project/note images and videos, including 12 independent FOC learning-route records, processed project covers, board renders, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
 - The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
 - Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
 - Public project files render through a two-pane browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, and a `juanyun-tech` allowlist checked by `npm run validate-content`.
-- Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence.
+- Juanyun Current_Product ACUnit/BaseUnit files stay public-safe only; non-Current_Product legacy DIY cooling, solenoid valve, BLDC quiet fan, DHT planning, and the self-authored hardware SOP can use selected reviewed public evidence. FOC is maintained under its separate personal-project boundary.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, or build-output files.
 
 ## Deployment
@@ -335,14 +336,15 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 - 站点已整理卷云、南京图灵、天津轨道交通 STM32 学习材料，并发布确认后的 Claude Chime 双语受委托硬件案例、冷启动排障笔记，以及经过公开性审查的设计与 bring-up 证据。
 - 站点还包括已确认双语第一人称文案的 MEC104 Arduino Digital Clock 课程项目：项目页、1 篇学习笔记、11 条媒体记录、精选课件与报告证据、Arduino sketch、清理过元数据的演示视频和 SN54LS47 数据手册。文案保留个人贡献边界，将两个计数上限写成分别烧录的版本，并且不夸大现存视频、早期 `main.c` 或尚未确认的最终按键实现所能证明的内容。
 - 站点还新增了 MEC104 Arduino Smart Car 循迹小车课程项目，包括项目页、1 篇学习笔记、去掉学校 logo 区域的精选公开课件截图、公开套件 manual PDF、项目报告 PDF、清理过元数据的小车照片和 Arduino 测试代码。
+- 无感 FOC 项目是一条独立的个人电机控制学习路线。项目页、观测器接管笔记、12 条媒体记录和 22 个精选公开文件覆盖自制 STM32F446/DRV8301 驱动板、现场 SMT、12 V 压缩机运行和基于代码的 SVPWM 理解，同时明确没有把无感闭环接管写成已完成结果。
 - DIY 压风式散热器的项目页、学习笔记和 6 条媒体文案现已采用逐项目访谈后确认的第一人称工程故事；回忆中的温度与帧率变化仍明确写作个人观察，不作为受控性能测试。
 - 天津津铁通信 STM32 项目页、5 篇学习笔记和 3 条媒体文案现已采用确认后的双语第一人称成长线：从 Keil/ST-Link bring-up 进入 GPIO、EXTI、Timer 的外设级理解，再区分 ADC/PWM/UART 并完成一个裸机综合 demo。16 点映射仍明确写作前馈，硬件 I²C 锁死只是现今回看的可能解释，PID 与 ATP/ATO/ATS 仍是阅读层概念而非真实轨道控制实现。
 - 南京图灵 Qt/Seamly2D 项目页、三周开发笔记和 5 条媒体文案现已采用确认后的双语第一人称实习故事：从学校入门课水平的 C++ 和零 Qt 经验开始，拉起大型上游代码库，加入本地 `QSettings` 账户与角色入口，实战 Git 流程，再分别推进 Windows 与 macOS 打包。文案不把它写成在线鉴权系统，明确区分公司在开发机上的正式验收与后来家中新 Windows 台式机的干净环境测试；macOS 只到可启动的无签名 DMG，签名与公证未完成，交接后的采用情况未知。
-- 媒体页覆盖 78 个项目 / 笔记图片和视频，包括处理后的项目封面、板卡渲染图、FOC 分页原理图、DIY STM32 板图、EEV 驱动小板图、5 张已批准的 ACUnit V2.1 bring-up 照片、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体，以及 Smart Car 照片和课件截图。
+- 媒体页覆盖 84 个项目 / 笔记图片和视频，其中包括 12 条独立 FOC 学习路线记录，以及处理后的项目封面、板卡渲染图、DIY STM32 板图、EEV 驱动小板图、5 张已批准的 ACUnit V2.1 bring-up 照片、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体和 Smart Car 照片 / 课件截图。
 - 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
 - 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
 - 项目公开资料通过双栏文件浏览器展示，并在服务端做路径归一化、严格 UTF-8 读取、目录/文件/预览体积上限，以及由 `npm run validate-content` 检查的 `juanyun-tech` allowlist。
-- 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、FOC、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。
+- 卷云 Current_Product ACUnit/BaseUnit 资料仍然只保留脱敏叙述和截图；非 Current_Product 的 legacy DIY 散热、螺线管阀门、BLDC 静音风扇、DHT 计划书和自写硬件 SOP 可以使用筛选后的公开证据。FOC 按独立个人项目边界维护。
 - 不要发布私密财务、开票、证明、凭据、安装包、vendor、依赖或 build 输出文件。
 
 ## 部署

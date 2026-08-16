@@ -1,249 +1,106 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
-**Updated:** 2026-08-15
+**Updated:** 2026-08-16
 **Branch:** `main`
-**Current project:** Juanyun FOC driver-board family, planned but not started
-**Last completed project:** `卷云相变散热器系统：两套控制器与一条完整制冷链`
-**State:** pull request #23 merged the approved five-family L1 surface cleanup and the narrower direct-prose follow-up into `main` at `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`; the planned new FOC writing pass has not started
+**Current project:** none selected
+**Last completed project:** `从自制驱动板到压缩机运行：我的无感 FOC 学习路线`
+**State:** pull request #25 merged the user-approved FOC refactor into `main` at `df5b91322a09f00cf0f813dacd8b871f91cba47f`; the project is closed unless the user explicitly reopens it
 
 ## Working Contract
 
-- Leave approved project families unchanged unless the user explicitly reopens a
-  narrow scope. Pull request #23 was a one-time explicit exception for surface
-  cleanup, including Smart Car.
-- Handle substantive project rewrites one family at a time. A cross-project
-  wording audit is allowed only when the user explicitly limits it to a narrow,
-  evidence-preserving cleanup.
-- Before writing each project, inspect its uploaded public materials, then
-  reuse a user-confirmed brief for the same scope or run a `grill-me` interview.
-- Treat the user's voice answers as primary first-person material. They may be
-  disordered; extract engineering decisions, mistakes, reactions, and changes
-  in understanding before drafting.
-- Store confirmed understanding as a compact, non-sensitive brief rather than
-  an interview transcript.
-- Only after confirmation, research current reliable knowledge beyond the
-  uploaded material; use nearby links lightly and keep new first-person insight
-  in the present, never as invented project history, action, result, or measurement.
-- Use `skills/engineering-note-writer/SKILL.md` to draft Chinese through the
-  user's cognition trail, allowing genuine cross-subsystem or non-strictly
-  chronological attention without imposing a cognition template.
-- Adapt English with the same facts and calmer intensity, then require
-  first-person prose to pass the Truth gate and Li Zhiyi gate, and require
-  model-authored article body to pass the scoped zero-hit reader-prose L1 gate.
-- Evidence bounds project facts, authorship, results, and publication claims,
-  but must not choose the reader-facing structure.
+- Handle substantive portfolio rewrites one project family at a time.
+- Start each new family from a clean, synchronized `main` on a semantic topic
+  branch.
+- Inspect the available evidence before drafting. Reuse a user-confirmed brief
+  for the same project and scope or run a `grill-me` interview.
+- Research current reliable knowledge only after shared understanding is
+  confirmed. Use external sources for present-day interpretation, never for
+  invented project history, actions, results, or measurements.
+- Draft Chinese through the user's cognition trail with the repository-local
+  `skills/engineering-note-writer/SKILL.md`, then adapt English with equivalent
+  facts and uncertainty.
+- Require the Truth gate, Li Zhiyi gate, bilingual gate, and scoped reader-prose
+  L1 gate before review.
+- Preserve user-controlled covers and demonstration media unless the user
+  explicitly requests or approves a visual change.
+- Merge only after the user reviews the bilingual copy and explicitly approves
+  publication.
 
-## Confirmed Global Decisions
+## Completed Sensorless FOC Checkpoint
 
-- Public display name: Alvin Li.
-- Public contact remains GitHub-only; email and location stay hidden.
-- Project demonstration media remains unchanged unless the user explicitly
-  requests an asset edit.
-- Project covers and other visual-identity choices remain unchanged during
-  prose/content rewrites unless the user explicitly requests or approves the
-  visual change.
-- A project rewrite reaches `main` only after the user reviews its bilingual
-  copy and explicitly approves the merge.
+- FOC is an independent personal motor-control learning route. It is not a
+  Juanyun or company project.
+- The public project is `content/projects/sensorless-foc-learning-route.mdx`;
+  its related learning note is `content/notes/sensorless-foc-handoff.mdx`.
+- The project page follows the hardware and manufacturing evidence. The note
+  follows the change in understanding from six-step commutation through
+  Clarke/Park, SVPWM compare trajectories, TIM1 center-aligned PWM, and the
+  failed sensorless handoff.
+- Alvin independently completed the schematic, component selection, PCB layout,
+  Gerber/BOM export, ordering, onsite SMT setup and operation, rework, assembly,
+  and power-on checks.
+- Firmware began from an open-source FOC example. Alvin led pin mapping,
+  sampling conversion, OLED/buttons/EC11, protection logic, physical testing,
+  and engineering judgment. Codex assistance is limited to RAM tracing, EKF
+  parameter work, and inspection of the Kalman-gain overwrite problem.
+- The final demonstrated stage is 12 V, 30–80 Hz EC11-controlled open-loop
+  compressor operation with both ports open. Manual inlet restriction is a
+  disturbance observation, not pressure, flow, acoustic, thermal, efficiency,
+  or refrigeration-loop validation.
+- The comparison with a low-cost six-step fan controller remains subjective and
+  uncontrolled. Remembered differences in noise, heating, suction, and feel do
+  not establish a performance ratio.
+- A plausible EKF speed estimate does not prove rotor-angle accuracy,
+  full-state convergence, reference-frame continuity, or successful sensorless
+  takeover. Sensorless closed loop, HFI, robot joints, servo control, and force
+  feedback remain future directions.
+- The reviewed public set contains 12 media records and 22 files under
+  `public/uploads/projects/sensorless-foc-learning-route/`. The complete firmware
+  tree remains external at `https://github.com/Awes0meE/STM32_Sensorless_FOC`.
+- Legacy routes redirect permanently:
+  - `/work/juanyun-foc-driver-board` → `/work/sensorless-foc-learning-route`
+  - `/notes/juanyun-foc-driver` → `/notes/sensorless-foc-handoff`
 
-## Confirmed Juanyun Decisions
+## Protected Completed Families
 
-- On 2026-08-14, the user confirmed publication permission for three assembled
-  ACUnit V2.1 board photographs and two power-board measurement photographs.
-- Derived high-level bring-up outcomes may be public, including measured rails,
-  passed module checks, the unfinished pressure-sensor test, the interaction-board
-  cable-order correction, and the no-respin outcome.
-- The user independently completed the three-board PCB design, assembly and
-  soldering, firmware, bring-up, and V2.1 development SOP.
-- The complete firmware tree, internal SOP, requirements, manufacturing files,
-  and network/setup documents remain reference-only. The firmware note should
-  explain the user's bare-metal control reasoning with reviewed excerpts or
-  pseudocode instead of publishing the full source.
-- The product is one phase-change laptop-cooling system with two controllers:
-  BaseUnit delivers cold air and handles local UI, while the three-board ACUnit
-  controls the compressor, EEV, sensing, communications, and refrigeration logic.
-- BaseUnit was completed first. The user independently completed its hardware,
-  firmware, and real-machine bring-up, then independently completed ACUnit PCB
-  design, assembly, firmware, staged bring-up, full-chain integration, and SOP.
-- The ACUnit firmware was a deliberate bare-metal “exam.” App/Service/BSP and
-  the 1/10/100/500/2000 ms cooperative schedule were planned before coding;
-  individual responsibilities matured while functions were decomposed.
-- The direct personal validation boundary includes the three boards' electrical
-  behavior, individual peripherals, and seeing real compressor Modbus state plus
-  ADC temperature telemetry after connecting the complete system.
-- Later mode, control, protection, user-trial, performance, and endurance results
-  came from the boss or company test team. The user did not see the raw logs or
-  complete tests and cannot independently verify the reported 25–40% improvement,
-  more-than-ten-user trial, or single-unit run beyond 150 hours.
-- Treat the `production-line` branch as the same project's later internship and
-  post-delivery maintenance phase. Read its 102 commits retrospectively; do not
-  invent forgotten incident stories or feedback-to-change causal sequences.
-- Preserve both firmware repositories as private. Public notes may use only two
-  or three short reviewed excerpts plus diagrams or pseudocode, each explaining
-  a decision rather than reconstructing the firmware.
-- Use a project-spine plus bounded-note structure with fewer than ten related
-  notes. Preserve the cover and keep automatic control separate from ControlPanel
-  observability and maintenance.
+Do not reopen these approved families unless the user explicitly requests it:
 
-## Juanyun Writing Fact Matrix
+- Arduino Smart Car;
+- DIY pressure-flow cooling;
+- Arduino Digital Clock;
+- Tianjin STM32;
+- Nanjing Turing;
+- Claude Chime;
+- Juanyun phase-change thermal management;
+- sensorless FOC learning route.
 
-### Direct personal work and observation
-
-- The user independently completed BaseUnit hardware, firmware, and real-machine
-  bring-up, then independently completed the ACUnit three-board PCB design,
-  assembly, soldering, firmware, staged bring-up, full-chain integration, and SOP.
-- Personal validation covers the three ACUnit boards' electrical behavior,
-  individual peripherals, and the complete connection among the boards,
-  compressor driver, compressor, power supply, and PC.
-- The user personally saw compressor state/data arriving over Modbus and ADC
-  temperatures appearing in the ControlPanel. This is the confirmed emotional
-  anchor for the “the board came alive” moment.
-
-### Artifact-supported implementation detail
-
-- `App/Src/app.c` directly records the original 1/10/100/500/2000 ms cooperative
-  dispatch and defers the 2000 ms DHT task while the EEV is busy.
-- `BSP_drivers/Src/bsp_eev.c` directly records a deadline-driven, nonblocking EEV
-  homing state machine. Reviewed public excerpts may show the due-time checks and
-  state transitions, but not a complete function or full phase table.
-- The BaseUnit repository records App/BSP restructuring, USART1 DMA telemetry,
-  a UI state machine, incremental OLED work, and two-page CRC/commit-marker Flash
-  persistence. Its seven commits all date to 2026-04-23.
-- GitHub comparison rechecked on 2026-08-14 shows `production-line` 102 commits
-  ahead of `main` and zero behind. The largest additions are the Windows
-  ControlPanel, `branchNewFeatures.md`, the portable EEV/compressor core,
-  `svc_control.c`, and control regression/reference assets.
-- The production branch records STOP/QUIET/PERF/ZERO, 200 ms compressor control,
-  1 s EEV/safety decisions, superheat and pressure guards, safe AUTO+STOP startup,
-  data-validity checks, and HSE-startup failure fallback to an HSI-derived 64 MHz
-  clock with visible diagnostics.
-- The branch README explicitly says automatic control can run while final
-  long-term calibration and production parameters remain unfinished. It also
-  says the historical control harness no longer covers the current snapshot
-  completely, so an old PASS is not a current release result.
-
-### Company-reported, not independently verified
-
-- The boss or test team reported real-machine manual control, automatic modes,
-  observable EEV/compressor changes, and triggered low/negative-superheat and
-  high-condensing-pressure protection paths.
-- The company reported a real external trial with more than ten campus students
-  and faculty using heavy workloads such as large renders and AAA games.
-- The company reported roughly 25–40% improvement in some sustained workloads
-  and one unit running continuously for more than 150 hours.
-- The user did not witness those complete tests or receive their raw logs and
-  unified benchmark records. Reader-facing prose must attribute the reports and
-  state that the numbers cannot be independently verified by the user.
-
-### Present-day technical interpretation from official research
-
-- The STM32F1 [RM0008 reference manual](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-microcontrollers-stmicroelectronics.pdf)
-  confirms that STM32F1 SysTick can use HCLK or HCLK/8 and that an HSI/2 PLL input
-  can produce a 64 MHz system clock. It also documents CSS behavior when a running
-  HSE source fails. The project branch separately implements startup-time HSE
-  initialization fallback; do not conflate that code path with proof that CSS/NMI
-  runtime recovery was enabled and tested.
-- The official [Modbus serial-line guide](https://www.modbus.org/docs/Modbus_over_serial_line_V1_02.pdf)
-  describes a master issuing explicit requests and processing slave responses.
-  It supports the general communication explanation, not a claim that every
-  project timeout or retry path was tested on hardware.
-- Danfoss's [electronic expansion-valve control explanation](https://www.danfoss.com/en-us/service-and-support/case-stories/dcs/the-pioneer-in-electronic-expansion-valve-control/)
-  connects low superheat with liquid-return/compressor risk and explains why the
-  stable superheat point changes with load and suction pressure. Use this only to
-  explain the current engineering interpretation of the branch's safeguards;
-  it does not validate Cirro's parameters or results.
-
-## Completed Rewrite Checkpoints
-
-- Arduino Smart Car is approved and remains protected from unsolicited rewrites.
-- DIY Cooling completed its interview-led and cognition-led passes through pull
-  requests #5 and #9. Remembered thermal and frame-rate effects remain personal
-  recollection rather than controlled benchmark results.
-- The cognition-led `engineering-note-writer` reached `main` through pull request
-  #8. It requires confirmed shared understanding, post-confirmation research,
-  Chinese-first drafting, equivalent English adaptation, and independent Truth
-  and Li Zhiyi release gates.
-- Arduino Digital Clock completed the same workflow through pull request #10 at
-  `80c3743d938236ed36968c5b5adb6047a3edd3ce`; the surviving video, early
-  `main.c`, final switch polarity/debounce, and later-found datasheet retain their
-  documented evidence limits.
-- Tianjin STM32 completed the same workflow through pull request #12 at
-  `bb06ad81304643f8eb3afe4badf06fa04f828bfe`; the 16-point map remains
-  feedforward, hardware-I2C lockup remains a present-day hypothesis, and PID plus
-  ATP/ATO/ATS remain reading-layer concepts.
-- Nanjing Turing completed the same workflow through pull request #14 at
-  `f5e1082e778a49cb4a740f42e483a17c397a7eac`; formal development-machine
-  acceptance, the later clean Windows test, the unsigned macOS DMG, and unknown
-  post-handoff adoption remain separate claims.
-- Claude Chime completed the same workflow through pull request #16 at
-  `03f5ba5a22cfc5be1d67a5e489c519ccb77154c9`. The approved release adds the
-  bilingual commissioned-hardware case study, one cold-start note, one media-copy
-  update, and 10 reviewed public artifacts including the original software handoff.
-- Alvin owned the Claude Chime board requirements breakdown, architecture,
-  calculations and selection, schematic, PCB, manufacturing outputs, ordering,
-  hand assembly, and scoped bring-up. ESP32 firmware and final real-load system
-  integration remained with the client.
-- Direct Claude Chime evidence covers two no-load 5 V readings, charge current
-  plus later battery-voltage rise, the manually enabled ADC divider, and repeated
-  no-load control switching. Real-solenoid and complete-device operation remain
-  client chat feedback; cold-start protection triggering remains a bounded
-  inference without a measured inrush waveform. V1.0 needed no rework or respin.
-- On 2026-08-14, the Claude Chime cold-start note became the first real forward
-  test for the hardened reader-prose L1 gate. The project-page body then received
-  the same pass. Pull request #20 merged both rewrites and the hardened skill at
-  `b3dc51cbc1620163fbfdcac0c8ca624d08a2434f`, without changing the project
-  frontmatter, cover, media, public artifacts, or evidence boundaries.
-- Juanyun thermal completed the same workflow through pull request #22 at
-  `e473b8c13f99308398a9c3221e1402d78634498d`. Its final public title is
-  `卷云相变散热器系统：两套控制器与一条完整制冷链`, its canonical date
-  range is `2025-11 to 2026-05`, and the merged public set contains 8 projects,
-  24 notes, and 78 media items.
-- Pull request #23 merged the user-approved maintenance pass at
-  `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`. Digital Clock, Smart Car, DIY
-  Cooling, Tianjin STM32, and the model-authored Nanjing Turing copy first
-  received the post-PR20 L1 surface cleanup. The writer then gained a tested
-  preference for direct assertions, no Chinese corner quotes in scoped normal
-  narration, and preservation of ordinary factual negation. The follow-up
-  content pass was narrowed during review to the Digital Clock and Smart Car
-  project/note pairs plus the Nanjing Turing project page. This was not a new
-  cognition-led rewrite.
-- FOC, Claude Chime, Juanyun thermal, the four Nanjing source-document notes,
-  public uploads, covers, application code, and confirmed evidence boundaries
-  remained outside that maintenance scope.
+Pull request #23 was a one-time explicitly authorized surface-cleanup exception,
+not standing permission to bulk-rewrite approved content.
 
 ## Next Action
 
-1. Start the Juanyun FOC driver-board family from a clean, synchronized `main`
-   only when the user asks to begin that writing pass.
-2. Inspect the FOC evidence and obtain or reuse a confirmed project brief before
-   drafting substantial first-person prose. Pull request #23 did not apply this
-   L1/direct-prose pass to FOC or approve a new FOC version.
-3. Do not reopen Smart Car, DIY Cooling, Arduino Digital Clock, Tianjin STM32,
-   Nanjing Turing, Claude Chime, or Juanyun thermal unless explicitly requested.
+1. Wait for the user to select the next project family or a narrow maintenance
+   scope.
+2. Before starting, fetch/prune and fast-forward local `main`; stop if the
+   worktree is dirty.
+3. Reuse the one-project interview, evidence, cognition-led writing, bilingual
+   review, and explicit merge-approval workflow.
 
 ## Current Verification
 
-- Pull request #23 used head
-  `bc1b154da3fc4a77c215925bc3ee1fd35275eef5`; its Vercel status passed before
-  GitHub merged it into `main` at
-  `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`.
-- The merge changes 5 project pages, 9 notes, selected related media copy, the
-  repository-local writer, its references, and one regression fixture. It does
-  not change application code, frontmatter, covers, public uploads, or FOC.
-- The post-PR20 L1 scan passed across the five approved maintenance families.
-  The direct-prose follow-up passed its narrower final scope and the writer
-  regression preserves direct factual negation plus the user-approved qualified
-  `不是说……不行，而是说……` exception.
-- Content validation remains at 8 projects, 24 public notes, and 78 media items;
-  UTF-8 validation passes for 296 text files.
-- Fresh `git diff --check`, full lint, TypeScript checking, the 39-page Next.js
-  production build, writer validation, frozen-trial guard, and production
-  dependency audit all pass. The audit reports zero known vulnerabilities.
-- Before the documentation reconciliation began, local `main` and `origin/main`
-  matched the exact PR #23 merge commit with a clean worktree.
+- Pull request #25 used exact head
+  `049aa57209a14776f2a7a7da9ee8dca5deb957d9`; its Vercel status passed before
+  GitHub merged it at `df5b91322a09f00cf0f813dacd8b871f91cba47f`.
+- Content validation passes for 8 projects, 24 public notes, and 84 media items.
+- UTF-8 validation passes for 289 text files.
+- Lint, TypeScript checking, the 39-page Next.js production build, and the
+  production dependency audit pass.
+- Desktop/mobile English and Chinese views, both videos, all 22 public files,
+  the media route, the responsive FOC/SVPWM SVG, and both legacy redirects were
+  verified before release.
 
 ## Updating This File
 
-Replace stale current-state sections at each device handoff; do not append an
-endless transcript. Keep durable writing rules and confirmed decisions. Never
-commit credentials, private email addresses, private locations, tokens, or
-machine-specific absolute paths.
+Replace the current-state sections at each handoff. Keep durable writing rules
+and confirmed boundaries; do not append interview transcripts, secrets,
+credentials, or machine-specific checkout paths.
