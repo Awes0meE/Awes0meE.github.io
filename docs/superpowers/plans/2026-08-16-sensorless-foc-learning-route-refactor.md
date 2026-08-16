@@ -673,6 +673,8 @@ Run all Task 10 checks again against the exact commit head before any later push
 
 Execution note: on 2026-08-16 the user approved the bilingual copy and explicitly authorized commits, pull-request merge, `/neat`, remote/local synchronization, and workspace cleanup.
 
+Release note: pull request #25 used exact head `049aa57209a14776f2a7a7da9ee8dca5deb957d9`, passed its Vercel status, and merged into `main` at `df5b91322a09f00cf0f813dacd8b871f91cba47f`.
+
 ## Plan Self-Review
 
 - [x] Every section of the approved design is represented by an implementation task.
