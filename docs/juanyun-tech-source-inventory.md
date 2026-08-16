@@ -1,6 +1,6 @@
 # Juanyun Technology Source Inventory
 
-Date: 2026-08-14
+Date: 2026-08-16
 
 Source path inspected:
 
@@ -52,11 +52,12 @@ public/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf
 public/uploads/projects/juanyun-public/hardware-sop-cover.jpeg
 public/uploads/projects/juanyun-public/acunit-v21-bringup/
 public/uploads/projects/juanyun-public/diy-cooling/
-public/uploads/projects/juanyun-public/foc-driver/
 public/uploads/projects/juanyun-public/actuator-fan/
 ```
 
-The three legacy `juanyun-public/` subfolders contain selected evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. The separate `acunit-v21-bringup/` folder is a tightly scoped exception for five assembled-board and bench-measurement photographs that the user explicitly confirmed were cleared for publication on 2026-08-14. Raw current-product packages remain excluded.
+The remaining legacy `juanyun-public/` subfolders contain selected evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. The separate `acunit-v21-bringup/` folder is a tightly scoped exception for five assembled-board and bench-measurement photographs that the user explicitly confirmed were cleared for publication on 2026-08-14. Raw current-product packages remain excluded.
+
+FOC is no longer classified as Juanyun material. The independent learning route uses `content/projects/sensorless-foc-learning-route.mdx`, `content/notes/sensorless-foc-handoff.mdx`, and `public/uploads/projects/sensorless-foc-learning-route/`. Its 2026-08-16 user-curated handoff is authoritative for portfolio publication, and its full firmware repository remains external.
 
 Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/`, and `scripts/validate-content.mjs` fails if non-allowlisted files reappear there. This matters because WPS-synced ignored ACUnit/BaseUnit raw files would still be static public files if they were left under `public/`, even when no page lists them.
 
@@ -70,10 +71,9 @@ content/notes/juanyun-*.mdx
 content/media.json
 ```
 
-Current Juanyun project-page structure focuses on three larger public archives instead of many thin pages:
+Current Juanyun project-page structure focuses on two larger public archives instead of many thin pages:
 
 - `juanyun-diy-cooling-prototype` and `juanyun-diy-cooling`;
-- `juanyun-foc-driver-board` and `juanyun-foc-driver`;
 - `juanyun-thermal-hardware` as the main archive for ACUnit overview, BaseUnit firmware overview, DHT11 / AM2302 planning, actuator/fan evidence, and SOP material;
 - `juanyun-legacy-actuator-archive`, `juanyun-dht11-am2302-board`, ACUnit notes, and BaseUnit notes now point to `juanyun-thermal-hardware`;
 - `juanyun-hardware-sop`;
@@ -87,7 +87,6 @@ Current Juanyun project-page structure focuses on three larger public archives i
 | `Current_Product_BaseUnit_Project` | 1659 | Sensitive current-product material. Used only for public narrative where appropriate. Raw STM32 project files, source code, vendor packages, and build output are not served. |
 | `DHT11 AM2302 温湿度传感器模块小板开发任务计划书.pdf` | 1 | Public small-board planning document. Copied as `dht11-am2302-breakout-plan.pdf` with a rendered cover image. Used for the DHT11 / AM2302 project and note. |
 | `Legacy_DIY压风式散热器_Project` | 536 | Public legacy material. Published selected preview images, demo video, ESP32/Arduino snippets, C# desktop snippets, schematic PDF, Gerber archive, EasyEDA projects, acrylic list, and one 3MF slice. Installers, dependency folders, generated output, duplicate exports, and uncurated full project dumps are not served. |
-| `Legacy_慧驱动FOC_Project` | 4762 | Public legacy material. Published selected Gerber, BOM/PnP, InteractiveBOM, EasyEDA, STEP, datasheets, board config, and motor-control source snippets. Full STM32F4 source tree, IAR/Keil projects, vendor libraries, generated output, and duplicate tool exports are not served. |
 | `Legacy_螺线管阀门开发_Project` | 818 | Public legacy material. Published selected solenoid source files, IOC configuration, OLED/EC11 schematics, and ULN2003 reference. Vendor examples, executable tools, generated output, and uncurated full project folders are not served. |
 | `Legacy_BLDC_QuietFan_Project` | 2 | Public legacy material. Published selected BOM and EasyEDA evidence under the actuator/fan archive. |
 | `卷云硬件开发SOP_Awes0meE.pdf` | 1 | Public self-authored SOP. Copied as `hardware-development-sop-awes0mee.pdf` and linked from the SOP note. |

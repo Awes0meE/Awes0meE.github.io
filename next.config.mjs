@@ -25,6 +25,16 @@ const nextConfig = {
         source: "/work/juanyun-actuator-fan-archive",
         destination: "/work/juanyun-thermal-hardware",
         permanent: false
+      },
+      {
+        source: "/work/juanyun-foc-driver-board",
+        destination: "/work/sensorless-foc-learning-route",
+        permanent: true
+      },
+      {
+        source: "/notes/juanyun-foc-driver",
+        destination: "/notes/sensorless-foc-handoff",
+        permanent: true
       }
     ];
   }
