@@ -177,7 +177,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 The current working content state extends release `v0.7.0` on `main`, including the media/cover refresh, the two-pane public project-file browser for project archives, and the imported Digital Clock and Smart Car course projects.
 
-As of `2026-08-15`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
+As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
 ```text
 D:\XJTLU\工作相关\卷云科技有限责任公司
@@ -190,13 +190,14 @@ Current content count in this workspace:
 
 - 8 project pages total;
 - 24 public notes total;
-- 3 Juanyun project pages and 9 Juanyun notes remain;
+- 2 Juanyun project pages and 10 Juanyun-prefixed notes remain;
+- 1 independent sensorless FOC learning-route project and 1 related note replace the former Juanyun-labelled FOC archive;
 - 1 Claude Chime commissioned hardware case study and 1 related note;
 - 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
 - 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF and source description TXT stay out of `public/uploads/`, while selected course screenshots without the top-right XJTLU logo, cropped homework-report excerpts, the original homework report PDF, Arduino sketches, demo video, and SN54LS47 datasheet are public.
 - 1 Arduino Smart Car line-tracking course project and 1 related note were added from `C:\Users\123\Desktop\Smart Car Project`; the original course tutorial PDF and project-description TXT stay reference-only, while selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code are public.
-- 78 media gallery items cover images/videos referenced by project and note pages, including the Notion-exported Nanjing Turing build-logic diagrams, processed Juanyun / Turing / Tianjin cover images, FOC schematic sheets, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
+- 84 media gallery items cover images/videos referenced by project and note pages, including 12 independent FOC learning-route records for board renders, five schematic sheets, onsite SMT, the compressor bench, open-loop runtime, and the generated FOC/SVPWM signal-chain visual.
 - The DIY pressure-flow cooling project, note, and six media records completed the one-project-at-a-time `grill-me` rewrite on `2026-08-12`, then received the final cognition-led pass after the redesigned writer merged through pull request #8; pull request #9 merged that prose into `main` at `baa7c98`. Remembered temperature and frame-rate changes remain explicitly personal observations rather than controlled benchmark results.
 - The Arduino Digital Clock project, note, and 11 media records completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #10 merged that prose into `main` at `80c3743`. The account preserves individual ownership, treats the two rollover thresholds as separately flashed versions, and keeps the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet within their verified evidence boundaries.
 - The Tianjin Jintie Communications STM32 project and five notes completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #12 merged the project page, five notes, and three media-copy updates into `main` at `bb06ad8`. The account follows the self-directed path from Arduino abstractions to peripheral-level reasoning, keeps the 16-point ADC-to-PWM mapping feedforward, treats the hardware-I2C lockup as a present-day hypothesis, and leaves PID plus ATP/ATO/ATS in the reading layer. All four public C excerpts and public uploads were unchanged.
@@ -204,6 +205,7 @@ Current content count in this workspace:
 - The Claude Chime project completed the same workflow on `2026-08-13`; pull request #16 merged the approved bilingual commissioned-hardware case study, cold-start battery-protection note, one media-copy update, and 10 new public artifacts into `main` at `03f5ba5`. The account attributes the board architecture, calculations, schematic, PCB, manufacturing outputs, hand assembly, and scoped bring-up to Alvin while keeping ESP32 firmware and final real-load integration with the client. The two no-load 5 V readings, charge-current/battery-voltage check, gated divider check, and no-load control switching are direct tests; real-solenoid operation is client chat feedback; cold-start protection triggering remains a bounded inference rather than a directly proven trigger or measured inrush-current peak.
 - The Juanyun thermal project completed the confirmed bilingual cognition-led refactor on `2026-08-14`; pull request #22 merged the product-spine rewrite, three revised core notes, two new automatic-control/maintenance notes, five approved ACUnit V2.1 bring-up photographs, and updated media/inventory records into `main` at `e473b8c`. The public project title is `卷云相变散热器系统：两套控制器与一条完整制冷链`, and its canonical date range is `2025-11 to 2026-05`. Direct personal bring-up remains separate from company-reported later tests, and complete firmware plus reconstructable product source remain private.
 - Pull request #23 merged the approved pre-PR20 prose maintenance into `main` on `2026-08-15` at `c89b3b0`. Five older project families received an L1 surface cleanup; the direct-prose follow-up then covered the Digital Clock and Smart Car project/note pairs plus the Nanjing Turing project page after user review. This was not a new cognition-led rewrite. FOC, Claude Chime, Juanyun thermal, the four Nanjing source-document notes, covers, public uploads, and application code were unchanged.
+- The `feat/sensorless-foc-learning-route` topic branch reclassifies FOC as an independent personal learning route. It replaces the legacy project and note slugs, curates the user-updated 2026-08-16 public handoff under `public/uploads/projects/sensorless-foc-learning-route/`, keeps the full firmware repository external, and preserves the unfinished sensorless handoff boundary.
 - The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
 - The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
 - Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
@@ -212,8 +214,14 @@ Current content count in this workspace:
 Juanyun public boundary:
 
 - Sensitive: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. Do not publish raw Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source, complete firmware source, internal product requirements, manufacturing packages, invoices, reimbursements, billing records, credentials, executable installers, vendor folders, or generated build outputs from those folders.
-- Public after pruning: legacy Juanyun DIY cooling, FOC, solenoid valve, BLDC quiet fan, DHT breakout planning, and the self-authored `卷云硬件开发SOP_Awes0meE.pdf`.
+- Public after pruning: legacy Juanyun DIY cooling, solenoid valve, BLDC quiet fan, DHT breakout planning, and the self-authored `卷云硬件开发SOP_Awes0meE.pdf`.
 - Static public assets for the expanded public Juanyun material live under `public/uploads/projects/juanyun-public/`; `main` may include selected legacy Gerber, EDA, BOM/PnP, STEP/3MF, source snippets, schematics, PDFs, and images from non-Current_Product folders after pruning installers, dependency folders, vendor folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
+
+Independent FOC public boundary:
+
+- The FOC project is a personal learning route and must not be attributed to Juanyun or treated as a company archive.
+- Its reviewed public artifacts live under `public/uploads/projects/sensorless-foc-learning-route/` and include selected design, manufacturing, bench, and explanatory evidence from the user's 2026-08-16 handoff.
+- The complete firmware tree, vendor libraries, IDE caches, build output, and raw diagnostic logs stay out of `public/uploads/`; `https://github.com/Awes0meE/STM32_Sensorless_FOC` remains the external firmware evidence link.
 
 ## Visual Direction
 
