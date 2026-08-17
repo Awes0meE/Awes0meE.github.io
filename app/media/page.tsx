@@ -8,8 +8,8 @@ import { openGraphBase, site } from "@/lib/site";
 
 const pageTitle = "Media";
 const pageDescription =
-  "Board photos, schematic sheets, renders, videos, and test captures connected to Zhiyi Li’s engineering projects.";
-const socialTitle = `${pageTitle} | Zhiyi Li`;
+  "Board photos, schematic sheets, renders, videos, and test captures connected to Alvin Li’s engineering projects.";
+const socialTitle = `${pageTitle} | Alvin Li`;
 
 export const metadata: Metadata = {
   title: pageTitle,

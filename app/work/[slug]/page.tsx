@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     return {};
   }
 
-  const socialTitle = `${project.title} | Zhiyi Li`;
+  const socialTitle = `${project.title} | Alvin Li`;
 
   return {
     title: project.title,

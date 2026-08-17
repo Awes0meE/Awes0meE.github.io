@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowRight, Github, Mail } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { openGraphBase, site } from "@/lib/site";
 
 const pageTitle = "About";
 const pageDescription =
-  "About Zhiyi Li, an NTU MSc (Robotics and Intelligent Systems) student focused on robotic systems hardware, PCB design, bring-up, and hardware–firmware integration.";
-const socialTitle = `${pageTitle} | Zhiyi Li`;
+  "About Alvin Li, an NTU Master of Science (Robotics and Intelligent Systems) student focused on embedded control hardware, PCB design, board bring-up, motor drives, and power electronics.";
+const socialTitle = `${pageTitle} | Alvin Li`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -25,14 +25,13 @@ export const metadata: Metadata = {
 };
 
 const skills = [
-  { en: "Robotic systems hardware", zh: "机器人系统硬件" },
-  { en: "Robot control hardware", zh: "机器人主控硬件" },
-  { en: "Flight-control electronics", zh: "飞控电子" },
-  { en: "Schematic & PCB design", zh: "原理图与 PCB 设计" },
-  { en: "Board bring-up & debugging", zh: "板级 bring-up 与调试" },
+  { en: "Embedded control hardware", zh: "嵌入式控制硬件" },
+  { en: "STM32 & ESP32 firmware", zh: "STM32 与 ESP32 固件" },
+  { en: "Schematic capture & PCB layout", zh: "原理图设计与 PCB 布局" },
+  { en: "Board bring-up & failure analysis", zh: "板级 bring-up 与故障分析" },
   { en: "Hardware–firmware integration", zh: "软硬件联调" },
-  { en: "Motor-drive electronics", zh: "电机驱动电子" },
-  { en: "Power electronics", zh: "电力电子" },
+  { en: "Motor drives, FOC & SVPWM", zh: "电机驱动、FOC 与 SVPWM" },
+  { en: "Power conversion & sensing", zh: "电源变换与采样" },
   { en: "Embedded C/C++", zh: "嵌入式 C/C++" }
 ];
 
@@ -46,14 +45,14 @@ export default function AboutPage() {
         <section>
           <p className="text-xl leading-9 text-ink">
             <BilingualText
-              en="I’m Zhiyi Li, a first-year student in the Master of Science (Robotics and Intelligent Systems) programme at Nanyang Technological University’s School of Mechanical and Aerospace Engineering. I graduated from Xi'an Jiaotong-Liverpool University in Communication Engineering."
-              zh="我是 Zhiyi Li，现为南洋理工大学机械与航空航天工程学院机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
+              en="I’m Alvin Li, currently pursuing the Master of Science (Robotics and Intelligent Systems) at the School of Mechanical and Aerospace Engineering, Nanyang Technological University, Singapore. I hold a BEng (Hons) in Telecommunications Engineering with First Class Honours from Xi'an Jiaotong-Liverpool University."
+              zh="我是 Alvin Li，现于新加坡南洋理工大学机械与航空航天工程学院攻读机器人与智能系统理学硕士；本科毕业于西交利物浦大学通信工程专业，获一等荣誉学位。"
             />
           </p>
           <p className="mt-5 leading-8 text-graphite">
             <BilingualText
-              en="My direction is robotic systems hardware. I am building experience across robot control and flight-control electronics, schematic and PCB design, board bring-up, and hardware–firmware integration."
-              zh="我的长期方向是机器人系统硬件。目前，我正在机器人主控与飞控电子、原理图与 PCB 设计、板级 bring-up 和软硬件联调等方面逐步积累经验。"
+              en="My engineering work focuses on embedded control hardware, schematic capture and PCB layout, board bring-up, firmware integration, motor-drive electronics, and power conversion."
+              zh="我的工程实践集中在嵌入式控制硬件、原理图设计与 PCB 布局、板级 bring-up、固件联调、电机驱动和电源变换。"
             />
           </p>
           <p className="mt-5 leading-8 text-graphite">
@@ -90,7 +89,11 @@ export default function AboutPage() {
           <div className="mt-5 space-y-4 text-sm text-graphite">
             <a href={site.github} className="flex items-center gap-3 hover:text-pine">
               <Github size={18} />
-              github.com/Awes0meE
+              <BilingualText en="GitHub profile" zh="GitHub 主页" />
+            </a>
+            <a href={`mailto:${site.email}`} className="flex items-center gap-3 hover:text-pine">
+              <Mail size={18} />
+              {site.email}
             </a>
           </div>
         </aside>

@@ -4,9 +4,9 @@ English | [中文](#中文说明)
 
 ## Overview
 
-This repository contains the source code for Zhiyi Li's bilingual robotic systems hardware portfolio, with Awes0meE / 66CCFF Labs as a secondary brand. It organizes projects, notes, and media around embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, motor drives, and power electronics.
+This repository contains the source code for Alvin Li's bilingual robotic systems hardware portfolio, with iRidium / 铱 as the engineering archive brand. It organizes projects, notes, and media around embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, motor drives, and power electronics.
 
-Zhiyi Li is a first-year student in the Master of Science (Robotics and Intelligent Systems) programme at Nanyang Technological University's School of Mechanical and Aerospace Engineering and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University.
+Alvin Li is currently pursuing the Master of Science (Robotics and Intelligent Systems) at the School of Mechanical and Aerospace Engineering, Nanyang Technological University, Singapore. He holds a BEng (Hons) in Telecommunications Engineering with First Class Honours from Xi'an Jiaotong-Liverpool University.
 
 The old deployed Hexo output is preserved under `legacy/hexo-export/` for reference only. It is not served by the new application.
 
@@ -18,7 +18,7 @@ Public site:
 ## Identity And Privacy
 
 - The public site leads with the robotic systems hardware direction; student status provides current-stage context rather than the primary headline.
-- Public static configuration deliberately omits personal email and location. GitHub is the only public contact route.
+- Reader-facing contact surfaces expose GitHub and the public NTU student email `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
 
 ## Tech Stack
 
@@ -145,8 +145,10 @@ Important privacy rule: `visibility: private` hides a note from the website, but
 
 Current workspace content state:
 
-- The homepage self-introduction uses Alvin Li. About and sitewide SEO metadata continue to use Zhiyi Li because the approved naming change was homepage-only; both retain the current NTU MSc (Robotics and Intelligent Systems) stage and XJTLU Communication Engineering degree.
-- Reader-facing contact surfaces expose GitHub only; personal email and location are not stored in the public site constants.
+- The sitewide public identity and SEO metadata use Alvin Li. The exact English brand spelling is always `iRidium`—lowercase `i`, uppercase `R`, then lowercase `idium`. iRidium / 铱 is the engineering archive brand; the previous public aliases no longer appear as reader-facing identity labels.
+- The approved iRidium mark uses five rectilinear outlined blocks inside a square boundary: two left blocks, one uninterrupted full-height centre rectangle, and two right blocks. The transparent lockup and square header mark live under `public/brand/`; the header uses the square mark beside the responsive bilingual wordmark.
+- Education labels use the official programme names: NTU's Master of Science (Robotics and Intelligent Systems) at the School of Mechanical and Aerospace Engineering, and XJTLU's BEng (Hons) Telecommunications Engineering with First Class Honours.
+- Reader-facing contact surfaces expose GitHub and `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
 - The approved Juanyun thermal refactor presents BaseUnit and the three-board ACUnit as one phase-change laptop-cooling system, adds distinct automatic-control and ControlPanel/maintenance notes, and includes five reviewed ACUnit V2.1 bring-up photographs. Complete firmware and reconstructable product source remain private; later performance, endurance, and user-test results stay attributed to the company and unverified by Alvin.
@@ -216,9 +218,9 @@ git push origin v0.7.1
 
 ## 项目概览
 
-这个仓库是 Zhiyi Li 的英中双语机器人系统硬件作品集源码，Awes0meE / 66CCFF Labs 作为辅助品牌。项目、笔记和媒体内容围绕嵌入式控制、原理图与 PCB 设计、板级 bring-up、软硬件联调、电机驱动和电力电子展开。
+这个仓库是 Alvin Li 的英中双语机器人系统硬件作品集源码，iRidium / 铱 作为工程档案品牌。项目、笔记和媒体内容围绕嵌入式控制、原理图与 PCB 设计、板级 bring-up、软硬件联调、电机驱动和电力电子展开。
 
-Zhiyi Li 现为南洋理工大学机械与航空航天工程学院机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。
+Alvin Li 现于新加坡南洋理工大学机械与航空航天工程学院攻读机器人与智能系统理学硕士；本科毕业于西交利物浦大学通信工程专业，获一等荣誉学位。
 
 旧版 Hexo 输出保存在 `legacy/hexo-export/`，只作为历史参考，不再作为新网站的服务内容。
 
@@ -230,7 +232,7 @@ Zhiyi Li 现为南洋理工大学机械与航空航天工程学院机器人与�
 ## 身份定位与隐私
 
 - 公开站点首先呈现机器人系统硬件方向，学生身份只用于说明当前阶段，不作为主标题。
-- 公开静态配置不保存个人邮箱或所在地，GitHub 是唯一公开联系渠道。
+- 面向读者的联系入口公开 GitHub 与南洋理工大学学生邮箱 `ZHIYI012@e.ntu.edu.sg`，不公开所在地。
 
 ## 技术栈
 
@@ -328,8 +330,10 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 当前工作区内容状态：
 
-- 首页自我介绍使用 Alvin Li；About 与全站 SEO 元数据仍保留 Zhiyi Li，因为已批准的改名范围仅限首页。两处都保留南洋理工大学机器人与智能系统硕士在读和西交利物浦大学通信工程毕业背景。
-- 面向读者的联系入口只保留 GitHub；公开站点常量不保存个人邮箱或所在地。
+- 全站公开姓名与 SEO 元数据统一使用 Alvin Li；英文品牌必须严格写作 `iRidium`，即小写 `i`、大写 `R`、其余 `idium` 小写。iRidium / 铱 作为工程档案品牌，旧公开别名不再作为面向读者的身份标签。
+- 已确认的 iRidium 图形由正方形边界内的五个直角矩形轮廓构成：左侧两块、中央一根不分割的通长矩形、右侧两块。透明完整锁定稿与页头正方形标记保存在 `public/brand/`；页头使用正方形标记，并保留响应式双语品牌文字。
+- 教育经历采用正式项目名称：南洋理工大学机械与航空航天工程学院机器人与智能系统理学硕士在读，以及西交利物浦大学通信工程本科、一等荣誉学位。
+- 面向读者的联系入口公开 GitHub 与 `ZHIYI012@e.ntu.edu.sg`，不公开所在地。
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
 - 已确认的卷云热管理重构把 BaseUnit 与三板 ACUnit 写成同一套相变笔记本散热系统，新增自动控制与 ControlPanel / 维护阶段笔记，并公开 5 张经过审核的 ACUnit V2.1 bring-up 照片。完整固件与可还原产品的连续源码继续保持私有；后期性能、耐久与用户测试结果仍明确归因于公司，Alvin 无法独立验证。

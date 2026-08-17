@@ -10,7 +10,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
       <div className="mx-auto flex min-w-0 max-w-7xl items-center justify-between gap-2 px-5 py-4 sm:gap-4 lg:px-8">
         <Logo />
-        <nav className="hidden items-center gap-8 text-sm font-medium text-ink md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-8 text-sm font-medium text-ink md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -32,6 +32,19 @@ export function SiteHeader() {
           </Link>
         </div>
       </div>
+      <nav aria-label="Mobile navigation" className="border-t border-line/80 md:hidden">
+        <div className="mx-auto grid max-w-7xl grid-cols-4 px-3">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="py-2.5 text-center text-xs font-semibold text-ink transition hover:text-pine"
+            >
+              <BilingualText en={item.labelEn} zh={item.labelZh} />
+            </Link>
+          ))}
+        </div>
+      </nav>
     </header>
   );
 }
