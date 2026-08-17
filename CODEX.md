@@ -5,6 +5,8 @@ Project operating guide for AI agents working on the XJTLU Portfolio.
 ## Project Snapshot
 
 - Repository: `Awes0meE/Awes0meE.github.io`
+- Public identity: `Alvin Li`; engineering archive brand: `iRidium / 铱`.
+- Brand spelling is immutable: lowercase `i`, uppercase `R`, then lowercase `idium`.
 - Current local path varies by device. Treat the repository root as the working directory and do not hard-code a Windows or macOS checkout path.
 - Public site: `https://www.66ccff-labs.com/`
 - Vercel preview/base deployment: `https://awes0mee-portfolio.vercel.app/`
@@ -228,6 +230,8 @@ Independent FOC public boundary:
 Maintain the current engineering-academic identity:
 
 - precise, calm, credible, portfolio-grade;
+- Alvin Li is the sole reader-facing personal identity; `iRidium / 铱` is the engineering archive brand;
+- keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header and preserve the exact `iRidium` capitalization;
 - bilingual Chinese/English content;
 - white/paper background, fine grid, pine green, graphite, and copper accents;
 - 6-8px radius, fine borders, restrained shadows;

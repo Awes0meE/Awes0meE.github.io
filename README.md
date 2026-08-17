@@ -41,6 +41,7 @@ content/notes/          Learning notes in MDX
 content/media.json      Media gallery metadata
 lib/                    Content loaders and site constants
 public/uploads/         Public images, videos, and generated visuals
+public/brand/           Approved iRidium identity assets
 docs/                   Architecture, content workflow, and memory docs
 CODEX.md                AI-agent operating guide for this repository
 MEMORY.md               Durable project memory and decisions
@@ -255,6 +256,7 @@ content/notes/          MDX 学习笔记
 content/media.json      媒体图库数据
 lib/                    内容读取和站点常量
 public/uploads/         公开图片、视频和视觉素材
+public/brand/           已确认的 iRidium 品牌识别资源
 docs/                   架构、内容维护和记忆系统文档
 CODEX.md                本仓库的 AI 协作指南
 MEMORY.md               项目长期记忆和决策记录

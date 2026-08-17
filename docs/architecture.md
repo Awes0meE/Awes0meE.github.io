@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a Next.js App Router portfolio site for `Awes0meE / Li Zhiyi`, deployed on Vercel with DNS managed through Cloudflare.
+This is Alvin Li's Next.js App Router portfolio, with `iRidium / 铱` as the engineering archive brand. It is deployed on Vercel with DNS managed through Cloudflare.
 
 The implementation is deliberately file-based. Projects, notes, and media are versioned with Git so the portfolio can grow gradually without needing a database or admin backend.
 
@@ -21,7 +21,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 
 | Route | Purpose | Source |
 | --- | --- | --- |
-| `/` | Homepage with hero, featured projects, notes, media, about | `app/page.tsx` |
+| `/` | Concise homepage with hero, education, featured projects, notes, media, and contact | `app/page.tsx` |
 | `/work` | Project list | `app/work/page.tsx` |
 | `/work/[slug]` | Project detail | `app/work/[slug]/page.tsx` |
 | `/notes` | Notes list | `app/notes/page.tsx` |
@@ -34,7 +34,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 1. Content files live under `content/`.
 2. `lib/content.ts` reads project and note frontmatter with `gray-matter`.
 3. Route components call the content helpers.
-4. Static assets are served from `public/uploads/`.
+4. Project/media assets are served from `public/uploads/`; approved identity assets are isolated under `public/brand/`.
 5. Next.js prerenders static pages during `npm run build`. Project and note detail routes use `generateStaticParams()` with `dynamicParams = false`, so unknown slugs resolve as generated 404s instead of depending on runtime route fallback behavior.
 
 ## Content Types
@@ -61,8 +61,10 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-16`:
+Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-17`:
 
+- public identity and metadata use `Alvin Li`; the engineering archive brand is `iRidium / 铱`, with exact capitalization fixed as lowercase `i`, uppercase `R`, then lowercase `idium`;
+- the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, desktop navigation, and a compact mobile navigation row;
 - 8 project files total;
 - 24 public note files total;
 - 2 Juanyun project pages and 10 Juanyun-prefixed notes;
