@@ -8,7 +8,7 @@ import { openGraphBase, site } from "@/lib/site";
 const pageTitle = "Notes";
 const pageDescription =
   "Engineering notes on embedded control, hardware debugging, board bring-up, build systems, and the evidence behind project decisions.";
-const socialTitle = `${pageTitle} | Zhiyi Li`;
+const socialTitle = `${pageTitle} | Alvin Li`;
 
 export const metadata: Metadata = {
   title: pageTitle,

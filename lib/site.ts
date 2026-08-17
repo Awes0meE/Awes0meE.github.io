@@ -1,11 +1,12 @@
 export const site = {
-  name: "Zhiyi Li / Awes0meE / 66CCFF Labs",
-  title: "Zhiyi Li | Robotic Systems Hardware Portfolio",
+  name: "Alvin Li",
+  title: "Alvin Li | Robotic Systems Hardware Portfolio",
   description:
-    "Robotic systems hardware portfolio by Zhiyi Li, an NTU MSc (Robotics and Intelligent Systems) student working across embedded control, PCB design, board bring-up, motor drives, and power electronics.",
-  descriptionZh: "Zhiyi Li 的机器人系统硬件作品集：现为南洋理工大学机器人与智能系统硕士生，关注嵌入式控制、原理图与 PCB、板级 bring-up、电机驱动和电力电子。",
+    "Robotic systems hardware portfolio by Alvin Li, currently pursuing the Master of Science (Robotics and Intelligent Systems) at NTU Singapore and working across embedded control, PCB design, board bring-up, motor drives, and power electronics.",
+  descriptionZh: "Alvin Li 的机器人系统硬件作品集：现于新加坡南洋理工大学攻读机器人与智能系统理学硕士，实践方向覆盖嵌入式控制、原理图与 PCB、板级 bring-up、电机驱动和电力电子。",
   url: "https://www.66ccff-labs.com",
-  github: "https://github.com/Awes0meE"
+  github: "https://github.com/Awes0meE",
+  email: "ZHIYI012@e.ntu.edu.sg"
 };
 
 export const openGraphBase = {

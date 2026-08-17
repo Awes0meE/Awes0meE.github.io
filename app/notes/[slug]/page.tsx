@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
     return {};
   }
 
-  const socialTitle = `${note.title} | Zhiyi Li`;
+  const socialTitle = `${note.title} | Alvin Li`;
 
   return {
     title: note.title,

@@ -6,6 +6,7 @@ import {
   Code2,
   Github,
   GraduationCap,
+  Mail,
   Microchip,
   PlayCircle,
   ScrollText,
@@ -33,20 +34,20 @@ export default function Home() {
           >
             <h1 className="max-w-80 text-balance text-4xl font-semibold tracking-normal text-ink sm:max-w-full sm:text-5xl md:text-6xl">
               <BilingualText
-                en="Building the hardware behind intelligent machines."
-                zh="构建智能机器背后的硬件。"
+                en="Engineering embedded control, power, and motor-drive hardware."
+                zh="设计嵌入式控制、电源与电机驱动硬件。"
               />
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
               <BilingualText
-                en="I’m Alvin Li, building experience across robot control hardware, flight-control electronics, schematic and PCB design, and hardware–firmware integration."
-                zh="我是 Alvin Li，正在机器人主控、飞控电子、原理图与 PCB 设计和软硬件联调等方面逐步积累经验。"
+                en="I’m Alvin Li. I develop embedded control hardware from schematic capture and PCB layout through board bring-up, firmware integration, and bench validation."
+                zh="我是 Alvin Li，围绕嵌入式控制硬件开展原理图设计、PCB 布局、板级 bring-up、固件联调与台架验证。"
               />
             </p>
             <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
               <BilingualText
-                en="My projects follow boards from design into bring-up and debugging, with growing interests in motor-drive electronics and power electronics."
-                zh="我的项目会把板卡从设计带到 bring-up 和调试，并继续向电机驱动与电力电子延伸。"
+                en="My current work spans STM32 and ESP32 systems, power conversion, motor-drive electronics, and FOC/SVPWM experiments, with validation limits documented alongside each result."
+                zh="当前实践覆盖 STM32 与 ESP32 系统、电源变换、电机驱动和 FOC/SVPWM 实验；每项结果都会同时说明验证范围与尚未完成的边界。"
               />
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
@@ -55,12 +56,12 @@ export default function Home() {
                 <Building2 className="mt-1 shrink-0 text-ink" size={26} strokeWidth={1.7} />
                 <div className="min-w-0">
                   <p className="font-semibold">
-                    <BilingualText en="Nanyang Technological University" zh="南洋理工大学" />
+                    <BilingualText en="Nanyang Technological University, Singapore" zh="新加坡南洋理工大学" />
                   </p>
                   <p className="mt-1 min-w-0 break-words text-xs text-graphite">
                     <BilingualText
-                      en="MAE · MSc (Robotics and Intelligent Systems) · First year"
-                      zh="机械与航空航天工程学院 · 机器人与智能系统硕士 · 一年级"
+                      en="School of Mechanical and Aerospace Engineering · Master of Science (Robotics and Intelligent Systems) · Current student"
+                      zh="机械与航空航天工程学院 · 机器人与智能系统理学硕士在读"
                     />
                   </p>
                 </div>
@@ -72,7 +73,13 @@ export default function Home() {
                     <BilingualText en="Xi'an Jiaotong-Liverpool University" zh="西交利物浦大学" />
                   </p>
                   <p className="mt-1 text-xs text-graphite">
-                    <BilingualText en="Communication Engineering graduate" zh="通信工程毕业生" />
+                    <BilingualText
+                      en="School of Advanced Technology · BEng (Hons) Telecommunications Engineering"
+                      zh="智能工程学院 · 通信工程本科"
+                    />
+                  </p>
+                  <p className="mt-1 text-xs font-semibold text-copper">
+                    <BilingualText en="First Class Honours" zh="一等荣誉学位" />
                   </p>
                 </div>
               </div>
@@ -178,52 +185,30 @@ export default function Home() {
       </section>
 
       <section className="border-b border-line bg-paper">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-[120px_1fr]">
-            <div className="relative h-28 w-28 overflow-hidden rounded-full border border-line bg-chalk">
-              <Image src="/uploads/projects/avatar.jpg" alt="Portrait of Alvin Li" fill sizes="112px" className="object-cover" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-semibold text-ink">
-                <BilingualText en="About" zh="关于" />
-              </h2>
-              <p className="mt-4 leading-7 text-graphite">
-                <BilingualText
-                  en="I’m Alvin Li, a first-year student in NTU’s Master of Science (Robotics and Intelligent Systems) programme and a Communication Engineering graduate of Xi'an Jiaotong-Liverpool University."
-                  zh="我是 Alvin Li，现为南洋理工大学机器人与智能系统硕士一年级学生，本科毕业于西交利物浦大学通信工程专业。"
-                />
-              </p>
-              <p className="mt-3 leading-7 text-graphite">
-                <BilingualText
-                  en="This portfolio records schematics, PCB work, embedded control, board bring-up, and the measurements, debugging, revisions, and unfinished validation behind each project."
-                  zh="这个作品集记录原理图与 PCB、嵌入式控制、板级 bring-up，以及项目中的测量、调试、修改和尚未完成的验证。"
-                />
-              </p>
-              <Link href="/about" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine hover:text-copper">
-                <BilingualText en="More about me" zh="了解更多" />
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-          <div className="border-line md:border-l md:pl-8">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-9 md:grid-cols-[0.72fr_1.28fr] lg:px-8">
+          <div>
             <h2 className="text-xl font-semibold text-ink">
               <BilingualText en="Contact" zh="联系" />
             </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
               <a className="flex items-center gap-3 hover:text-pine" href={site.github}>
                 <Github size={18} />
-                github.com/Awes0meE
+                <BilingualText en="GitHub profile" zh="GitHub 主页" />
+              </a>
+              <a className="flex items-center gap-3 hover:text-pine" href={`mailto:${site.email}`}>
+                <Mail size={18} />
+                {site.email}
               </a>
             </div>
           </div>
           <div className="border-line md:border-l md:pl-8">
             <h2 className="text-xl font-semibold text-ink">
-              <BilingualText en="Currently" zh="当前" />
+              <BilingualText en="Engineering Stack" zh="工程技术栈" />
             </h2>
             <div className="mt-5 space-y-4 text-sm text-graphite">
-              <p className="flex items-center gap-3"><Microchip size={18} /><BilingualText en="Robot control and flight-control electronics" zh="机器人主控与飞控电子" /></p>
-              <p className="flex items-center gap-3"><SquareActivity size={18} /><BilingualText en="Board bring-up and hardware–firmware debugging" zh="板级 bring-up 与软硬件调试" /></p>
-              <p className="flex items-center gap-3"><Code2 size={18} /><BilingualText en="Motor drives and power electronics" zh="电机驱动与电力电子" /></p>
+              <p className="flex items-start gap-3"><Microchip className="mt-0.5 shrink-0" size={18} /><BilingualText en="Embedded control and firmware — STM32, ESP32, C/C++, and bare-metal peripheral development" zh="嵌入式控制与固件——STM32、ESP32、C/C++ 与裸机外设开发" /></p>
+              <p className="flex items-start gap-3"><SquareActivity className="mt-0.5 shrink-0" size={18} /><BilingualText en="Hardware development — schematic capture, PCB layout, hand assembly, and staged board bring-up" zh="硬件开发——原理图设计、PCB 布局、手工装配与分阶段板级 bring-up" /></p>
+              <p className="flex items-start gap-3"><Code2 className="mt-0.5 shrink-0" size={18} /><BilingualText en="Motor drives and power electronics — PWM, SVPWM, FOC, gate driving, sensing, and power conversion" zh="电机驱动与电力电子——PWM、SVPWM、FOC、栅极驱动、采样与电源变换" /></p>
             </div>
           </div>
         </div>
