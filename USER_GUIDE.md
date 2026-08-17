@@ -4,7 +4,7 @@ English | 中文
 
 ## What This Website Is
 
-This is Li Zhiyi / Awes0meE's personal engineering portfolio. It is designed for HR, supervisors, classmates, collaborators, and reviewers who want to understand the author's projects, technical direction, notes, and media evidence.
+This is Alvin Li's personal engineering portfolio, with iRidium / 铱 as the engineering archive brand. It is designed for HR, supervisors, classmates, collaborators, and reviewers who want to understand his projects, technical direction, notes, and media evidence.
 
 The site contains:
 
@@ -16,7 +16,7 @@ The site contains:
 
 ## 这个网站是什么
 
-这是 Li Zhiyi / Awes0meE 的个人工程作品集网站，面向 HR、导师、同学、合作方和评审者，用来展示项目、技术方向、学习笔记和图片/视频等证据材料。
+这是 Alvin Li 的个人工程作品集网站，iRidium / 铱 作为工程档案品牌。网站面向 HR、导师、同学、合作方和评审者，用来展示项目、技术方向、学习笔记和图片/视频等证据材料。
 
 网站包含：
 

@@ -8,7 +8,7 @@ This document explains how to add real portfolio content without changing the ap
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` stay public-safe only; other legacy Juanyun material can use reviewed public evidence.
 3. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
 4. Expand project archive pages with direct evidence, inline source/text previews, and internal links.
-5. Improve `About`, media gallery polish, and smaller notes.
+5. Keep `About`, education, technical-stack, contact, and media-gallery details aligned with the current public identity.
 6. Keep public English and Chinese body sections equivalent. Frontmatter translation alone is not enough when an article body contains substantial Chinese or English content.
 
 ## Add Or Edit A Project
@@ -109,6 +109,8 @@ public/uploads/projects/my-project/
 public/uploads/media/
 public/uploads/profile/
 ```
+
+Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization and treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
 
 Reference files with public paths:
 

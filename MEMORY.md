@@ -65,7 +65,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-08-14`: Pull request #22 merged the approved Juanyun phase-change cooling-system refactor into `main` at `e473b8c13f99308398a9c3221e1402d78634498d`, bringing the public set to 8 projects, 24 notes, and 78 media items. The public title is `卷云相变散热器系统：两套控制器与一条完整制冷链`, with canonical date range `2025-11 to 2026-05`. The project now connects BaseUnit, the three-board ACUnit, bare-metal scheduling, later automatic refrigeration control, and the 102-commit ControlPanel/maintenance phase without publishing complete firmware or reconstructable product source. Preserve the claim boundary: Alvin directly completed and observed the stated board, firmware, bring-up, and full-chain work; later mode/protection, more-than-ten-user, 25–40% performance, and 150+ hour results are company-reported without raw data available for his independent verification.
 - `2026-08-15`: Pull request #23 merged the approved pre-PR20 prose maintenance into `main` at `c89b3b0df031cc2cacfd519c95fb2de522c0b54d`. Digital Clock, Smart Car, DIY Cooling, Tianjin STM32, and the model-authored Nanjing Turing copy received an evidence-preserving L1 surface cleanup. The writer then gained a tested direct-prose rule, followed by the user-reviewed second pass on the Digital Clock and Smart Car project/note pairs plus the Nanjing Turing project page. This was narrow cleanup rather than a new cognition-led rewrite. FOC, Claude Chime, Juanyun thermal, the four Nanjing source-document notes, covers, public uploads, and application code were unchanged. The published set remains 8 projects, 24 notes, and 78 media items.
 - `2026-08-16`: Pull request #25 merged the approved bilingual sensorless FOC refactor into `main` at `df5b91322a09f00cf0f813dacd8b871f91cba47f`, bringing the public set to 8 projects, 24 notes, and 84 media items. FOC is now an independent personal learning route with project slug `sensorless-foc-learning-route`, note slug `sensorless-foc-handoff`, 22 curated public files, and permanent redirects from the two legacy slugs. The demonstrated boundary is 12 V, 30–80 Hz EC11-controlled open-loop compressor operation; the same-compressor six-step comparison remains subjective, plausible EKF speed does not prove rotor-angle takeover, and sensorless closed loop remains future work. The full firmware stays external at `https://github.com/Awes0meE/STM32_Sensorless_FOC`.
-- `2026-08-17`: The first homepage optimization stage unified the public identity and SEO metadata under `Alvin Li`, adopted `iRidium / 铱` as the engineering archive brand, added a compact mobile navigation row, removed the duplicate homepage About block, and replaced broad direction labels with an evidence-backed engineering stack. The English brand spelling is fixed as `iRidium`: lowercase `i`, uppercase `R`, lowercase `idium`. Previous personal aliases and the old lab label no longer appear as reader-facing identity names; the existing GitHub URL remains functional behind a generic GitHub label. Education labels now use NTU's official `Master of Science (Robotics and Intelligent Systems)` and XJTLU's `BEng (Hons) Telecommunications Engineering`; the user-confirmed classification is `First Class Honours`. Public contact surfaces now include GitHub and `ZHIYI012@e.ntu.edu.sg`, superseding the prior GitHub-only boundary. The user approved the square five-rectangle iRidium mark reconstructed from the supplied sketch; transparent lockup and square header assets now live under `public/brand/`, and the square mark replaces the previous temporary header graphic.
+- `2026-08-17`: Pull request #27 merged the first homepage optimization stage into `main` at `e4e3b3ef11c8ac49fbe7c343492822e28bb4650b`. It unified public identity and SEO metadata under `Alvin Li`, adopted `iRidium / 铱` as the engineering archive brand, added a compact mobile navigation row, removed the duplicate homepage About block, and replaced broad direction labels with an evidence-backed engineering stack. The English brand spelling is fixed as `iRidium`: lowercase `i`, uppercase `R`, lowercase `idium`. Previous personal aliases and the old lab label no longer appear as reader-facing identity names; the existing GitHub URL remains functional behind a generic GitHub label. Education labels now use NTU's official `Master of Science (Robotics and Intelligent Systems)` and XJTLU's `BEng (Hons) Telecommunications Engineering`; the user-confirmed classification is `First Class Honours`. Public contact surfaces now include GitHub and `ZHIYI012@e.ntu.edu.sg`, superseding the prior GitHub-only boundary. The user approved the square five-rectangle iRidium mark reconstructed from the supplied sketch; transparent lockup and square header assets now live under `public/brand/`, and the square mark replaces the previous temporary header graphic.
 
 ## Stable Decisions
 
@@ -114,6 +114,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 - `app/page.tsx`: homepage layout and major public-facing sections.
 - `app/layout.tsx`: root layout, metadata, language bootstrap script, header/footer shell.
+- `components/logo.tsx`: approved iRidium header mark and responsive bilingual wordmark.
+- `components/site-header.tsx`: desktop and compact mobile navigation shell.
 - `components/language-toggle.tsx`: client-side EN/简中 language switch.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: server-side resolver for project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
@@ -127,6 +129,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `content/notes/`: learning note source files.
 - `content/media.json`: gallery metadata.
 - `public/uploads/`: images, videos, and downloadable assets.
+- `public/brand/`: approved transparent iRidium mark and full logo lockup.
 - `docs/content-workflow.md`: how to add and maintain portfolio content.
 - `docs/environment-toolchain.md`: Node/npm, Git restore, PowerShell, local preview, screenshot tooling, encoding, and Vercel setup.
 - `docs/juanyun-tech-source-inventory.md`: mapping from the raw Juanyun source folder to public portfolio content and excluded private material.
@@ -153,7 +156,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Known-good checks as of `2026-08-16` on Windows PowerShell; use the plain `npm` form on macOS:
+Known-good checks as of `2026-08-17` on macOS; use the `npm.cmd` form on Windows PowerShell:
 
 ```bash
 npm run lint
@@ -180,8 +183,6 @@ Expected result:
 - Browser-review each future deployment on `https://www.66ccff-labs.com/`, prioritizing the routes changed by that release and representative `/work`, `/notes`, and `/media` navigation.
 - Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
 - Re-evaluate thesis content later only after the user provides real project evidence.
-- Improve `About` with real biography, skills, education, and contact details.
-- Decide how `66ccff Labs` should appear in the visual identity without diluting the personal portfolio.
 
 ## Memory Update Rules
 
