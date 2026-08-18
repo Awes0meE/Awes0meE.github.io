@@ -2,10 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Building2,
   Code2,
   Github,
-  GraduationCap,
   Mail,
   Microchip,
   PlayCircle,
@@ -18,6 +16,21 @@ import { SectionHeading } from "@/components/section-heading";
 import { TechnicalVisual } from "@/components/technical-visual";
 import { getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
 import { site } from "@/lib/site";
+
+function EducationMark({ school }: { school: "ntu" | "xjtlu" | "liverpool" }) {
+  const marks = {
+    ntu: { src: "/education/ntu-logo.png", width: 839, height: 1079 },
+    xjtlu: { src: "/education/xjtlu-logo.png", width: 56, height: 69 },
+    liverpool: { src: "/education/liverpool-crest.svg", width: 97, height: 145 }
+  } as const;
+  const mark = marks[school];
+
+  return (
+    <span className="mt-0.5 flex h-11 w-9 shrink-0 items-start justify-center" aria-hidden="true">
+      <Image src={mark.src} alt="" width={mark.width} height={mark.height} className="h-11 w-auto object-contain" />
+    </span>
+  );
+}
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
@@ -51,36 +64,54 @@ export default function Home() {
               />
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
-            <div className="mt-8 grid gap-5 text-sm text-ink sm:grid-cols-2">
+            <div className="mt-8 grid gap-5 text-sm text-ink">
               <div className="flex min-w-0 items-start gap-3">
-                <Building2 className="mt-1 shrink-0 text-ink" size={26} strokeWidth={1.7} />
+                <EducationMark school="ntu" />
                 <div className="min-w-0">
                   <p className="font-semibold">
-                    <BilingualText en="Nanyang Technological University, Singapore" zh="新加坡南洋理工大学" />
+                    <BilingualText en="Nanyang Technological University, Singapore" zh="南洋理工大学·新加坡" />
                   </p>
                   <p className="mt-1 min-w-0 break-words text-xs text-graphite">
                     <BilingualText
-                      en="School of Mechanical and Aerospace Engineering · Master of Science (Robotics and Intelligent Systems) · Current student"
-                      zh="机械与航空航天工程学院 · 机器人与智能系统理学硕士在读"
+                      en="Master of Science (Robotics and Intelligent Systems) · Current student"
+                      zh="机器人与智能系统理学硕士 · 在读"
                     />
                   </p>
                 </div>
               </div>
-              <div className="flex min-w-0 items-start gap-3">
-                <GraduationCap className="mt-1 shrink-0 text-ink" size={26} strokeWidth={1.7} />
-                <div className="min-w-0">
-                  <p className="font-semibold">
-                    <BilingualText en="Xi'an Jiaotong-Liverpool University" zh="西交利物浦大学" />
-                  </p>
-                  <p className="mt-1 text-xs text-graphite">
-                    <BilingualText
-                      en="School of Advanced Technology · BEng (Hons) Telecommunications Engineering"
-                      zh="智能工程学院 · 通信工程本科"
-                    />
-                  </p>
-                  <p className="mt-1 text-xs font-semibold text-copper">
-                    <BilingualText en="First Class Honours" zh="一等荣誉学位" />
-                  </p>
+              <div className="border-t border-line pt-4">
+                <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-copper">
+                  <BilingualText en="Dual-degree undergraduate awards" zh="本科双学位" />
+                </p>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <EducationMark school="xjtlu" />
+                    <div className="min-w-0">
+                      <p className="font-semibold">
+                        <BilingualText en="Xi'an Jiaotong-Liverpool University, China" zh="西交利物浦大学·中国" />
+                      </p>
+                      <p className="mt-1 min-w-0 break-words text-xs text-graphite">
+                        <BilingualText en="BEng Telecommunications Engineering" zh="通信工程工学学士" />
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex min-w-0 items-start gap-3">
+                    <EducationMark school="liverpool" />
+                    <div className="min-w-0">
+                      <p className="font-semibold">
+                        <BilingualText en="University of Liverpool, United Kingdom" zh="利物浦大学·英国" />
+                      </p>
+                      <p className="mt-1 min-w-0 break-words text-xs text-graphite">
+                        <BilingualText
+                          en="BEng (Hons) Telecommunications Engineering"
+                          zh="通信工程工学学士（荣誉）"
+                        />
+                      </p>
+                      <p className="mt-1 text-xs font-semibold text-copper">
+                        <BilingualText en="First Class Honours" zh="一等荣誉学位" />
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

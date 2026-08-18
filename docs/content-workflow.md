@@ -108,9 +108,12 @@ Recommended structure:
 public/uploads/projects/my-project/
 public/uploads/media/
 public/uploads/profile/
+public/uploads/hero/
 ```
 
-Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization and treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
+Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization in both language modes, keep the mark's upper-left and lower-right square bounds equal, and retain the user-selected B-style transparent wordmark at its approved compact 26px header height. Treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
+
+`public/uploads/hero/` contains only the five final assets consumed by `components/technical-visual.tsx`. Keep the approved two-over-three order: OLED and TFT-display assemblies above, then battery power, multi-rail power, and AD831 mixer below. AI background-replacement outputs are presentation derivatives; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
 
 Reference files with public paths:
 

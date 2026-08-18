@@ -45,8 +45,8 @@ export default function AboutPage() {
         <section>
           <p className="text-xl leading-9 text-ink">
             <BilingualText
-              en="I’m Alvin Li, currently pursuing the Master of Science (Robotics and Intelligent Systems) at the School of Mechanical and Aerospace Engineering, Nanyang Technological University, Singapore. I hold a BEng (Hons) in Telecommunications Engineering with First Class Honours from Xi'an Jiaotong-Liverpool University."
-              zh="我是 Alvin Li，现于新加坡南洋理工大学机械与航空航天工程学院攻读机器人与智能系统理学硕士；本科毕业于西交利物浦大学通信工程专业，获一等荣誉学位。"
+              en="I’m Alvin Li, currently pursuing the Master of Science (Robotics and Intelligent Systems) at Nanyang Technological University, Singapore. Through XJTLU’s dual-degree programme, I hold a BEng in Telecommunications Engineering from Xi'an Jiaotong-Liverpool University and a BEng (Hons) in Telecommunications Engineering with First Class Honours from the University of Liverpool."
+              zh="我是 Alvin Li，现于新加坡南洋理工大学攻读机器人与智能系统理学硕士。本科阶段通过西交利物浦大学双学位项目，获得西交利物浦大学通信工程工学学士学位，以及英国利物浦大学通信工程荣誉工学学士学位（一等荣誉）。"
             />
           </p>
           <p className="mt-5 leading-8 text-graphite">

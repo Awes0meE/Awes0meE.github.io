@@ -231,7 +231,8 @@ Maintain the current engineering-academic identity:
 
 - precise, calm, credible, portfolio-grade;
 - Alvin Li is the sole reader-facing personal identity; `iRidium / 铱` is the engineering archive brand;
-- keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header and preserve the exact `iRidium` capitalization;
+- keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header, preserve equal square bounds for its upper-left and lower-right blocks, pair it with the user-selected B-style `public/brand/iridium-wordmark-script.png`, render that wordmark at the user-approved compact 26px height, and preserve the exact `iRidium` capitalization in both language modes;
+- keep the homepage hardware hero in `components/technical-visual.tsx` as the approved five-card mosaic: the 0.96-inch OLED and TFT-display assemblies occupy the two-card upper row, while the battery/USB power board, 12 V / 5 V / 3.3 V power-supply board, and AD831 mixer occupy the three-card lower row; use the warm-paper presentation derivatives under `public/uploads/hero/`, but never treat AI background-replacement derivatives as exact component, silkscreen, or fabrication evidence;
 - bilingual Chinese/English content;
 - white/paper background, fine grid, pine green, graphite, and copper accents;
 - 6-8px radius, fine borders, restrained shadows;
