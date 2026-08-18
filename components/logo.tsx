@@ -4,7 +4,7 @@ import { BilingualText } from "@/components/bilingual-text";
 
 export function Logo() {
   return (
-    <Link href="/" className="group flex min-w-0 items-center gap-3" aria-label="Home">
+    <Link href="/" className="group flex min-w-0 items-center gap-3" aria-label="iRidium home">
       <Image
         src="/brand/iridium-mark.png"
         alt=""
@@ -15,8 +15,16 @@ export function Logo() {
         className="h-11 w-11 shrink-0 object-contain transition-transform duration-300 group-hover:scale-105"
       />
       <span className="min-w-0 leading-tight">
-        <span className="block truncate text-sm font-semibold text-ink">
-          <BilingualText en="iRidium" zh="铱" />
+        <span className="block h-[26px]">
+          <Image
+            src="/brand/iridium-wordmark-script.png"
+            alt=""
+            width={1417}
+            height={363}
+            sizes="102px"
+            loading="eager"
+            className="h-[26px] w-auto object-contain object-left"
+          />
         </span>
         <span className="block truncate text-xs text-graphite">
           <BilingualText en="Alvin Li · Robotic systems hardware" zh="Alvin Li · 机器人系统硬件" />
