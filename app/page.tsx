@@ -47,20 +47,14 @@ export default function Home() {
           >
             <h1 className="max-w-80 text-balance text-4xl font-semibold tracking-normal text-ink sm:max-w-full sm:text-5xl md:text-6xl">
               <BilingualText
-                en="Engineering embedded control, power, and motor-drive hardware."
-                zh="设计嵌入式控制、电源与电机驱动硬件。"
+                en="Embedded systems, control, power, and motor drives"
+                zh="嵌入式、控制、电源与电驱"
               />
             </h1>
             <p className="text-wrap-safe mt-7 w-full max-w-80 text-lg leading-8 text-ink sm:max-w-xl">
               <BilingualText
-                en="I’m Alvin Li. I develop embedded control hardware from schematic capture and PCB layout through board bring-up, firmware integration, and bench validation."
-                zh="我是 Alvin Li，围绕嵌入式控制硬件开展原理图设计、PCB 布局、板级 bring-up、固件联调与台架验证。"
-              />
-            </p>
-            <p className="text-wrap-safe mt-3 w-full max-w-80 text-base leading-7 text-graphite sm:max-w-xl">
-              <BilingualText
-                en="My current work spans STM32 and ESP32 systems, power conversion, motor-drive electronics, and FOC/SVPWM experiments, with validation limits documented alongside each result."
-                zh="当前实践覆盖 STM32 与 ESP32 系统、电源变换、电机驱动和 FOC/SVPWM 实验；每项结果都会同时说明验证范围与尚未完成的边界。"
+                en="This is Alvin Li. I develop embedded systems across hardware and firmware. I draw schematics, lay out PCBs, write firmware, and handle board bring-up, hardware-software integration, and bench validation."
+                zh="这里是 Alvin Li，主要做嵌入式软硬件全栈开发。平时会画原理图、布 PCB、写固件，也会做板级调试、软硬件联调和台架验证。"
               />
             </p>
             <div className="mt-8 h-px w-12 bg-copper" />
