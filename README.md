@@ -204,14 +204,14 @@ Expected result for this version:
 
 ## Release Tags
 
-Latest released tag: `v0.7.0`.
+Latest released tag: `v0.8.0`.
 
 Use semantic version tags. Replace the version in these commands for the next release:
 
 ```bash
-git tag -a v0.7.1 -m "v0.7.1 portfolio update"
+git tag -a v0.8.1 -m "v0.8.1 portfolio update"
 git push origin main
-git push origin v0.7.1
+git push origin v0.8.1
 ```
 
 ---
@@ -396,12 +396,12 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.7.0`。
+最新已发布标签：`v0.8.0`。
 
 使用语义化版本标签。下一次发布时替换下面命令里的版本号：
 
 ```bash
-git tag -a v0.7.1 -m "v0.7.1 portfolio update"
+git tag -a v0.8.1 -m "v0.8.1 portfolio update"
 git push origin main
-git push origin v0.7.1
+git push origin v0.8.1
 ```

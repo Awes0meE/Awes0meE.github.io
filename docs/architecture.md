@@ -61,7 +61,7 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state in this workspace, extending release `v0.7.0`, as of `2026-08-18`:
+Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-19`:
 
 - public identity and metadata use `Alvin Li`; the engineering archive brand is `iRidium / 铱`, with exact capitalization fixed as lowercase `i`, uppercase `R`, then lowercase `idium`;
 - the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices, alongside desktop navigation and a compact mobile navigation row;

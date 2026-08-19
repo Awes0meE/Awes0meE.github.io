@@ -177,7 +177,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current working content state extends release `v0.7.0` on `main`, including the media/cover refresh, the two-pane public project-file browser for project archives, and the imported Digital Clock and Smart Car course projects.
+The current working content state extends release `v0.8.0` on `main`, including the media/cover refresh, the two-pane public project-file browser, the imported Digital Clock and Smart Car course projects, and the released iRidium header, education, and five-card hardware-hero refinement.
 
 As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
