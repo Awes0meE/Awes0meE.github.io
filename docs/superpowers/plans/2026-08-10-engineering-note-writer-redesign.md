@@ -1,5 +1,7 @@
 # Engineering Note Writer Redesign Implementation Plan
 
+> **Historical status / 历史状态:** Completed and merged through pull request #4. The material-led runtime described below was later superseded by the cognition-led redesign merged through pull request #8. This document is retained only as a historical implementation record and is not active work.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `subagent-driven-development` for independent old/new behavior trials and `executing-plans` for the repository edits. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the template-driven portfolio writing skill with an evidence-grounded, material-led learning-note writer that carries approximately 75 percent narrative energy in Chinese and 60 percent in English.

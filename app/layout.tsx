@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { openGraphBase, site } from "@/lib/site";
 
 const languageBootstrapScript = `try{var l=localStorage.getItem("portfolio-language");if(l!=="zh"&&l!=="en"){l="zh";}document.documentElement.dataset.lang=l;document.documentElement.lang=l==="zh"?"zh-CN":"en";}catch(e){document.documentElement.dataset.lang="zh";document.documentElement.lang="zh-CN";}`;
+
+const signalDisplay = localFont({
+  src: "./fonts/BarlowCondensed-SemiBold.ttf",
+  variable: "--font-signal-display",
+  display: "swap",
+  weight: "600"
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -31,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" data-lang="zh" suppressHydrationWarning>
+    <html lang="zh-CN" data-lang="zh" className={signalDisplay.variable} suppressHydrationWarning>
       <body>
         <script
           id="portfolio-language-bootstrap"

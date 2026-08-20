@@ -1,5 +1,7 @@
 # Cognition-Led Engineering Note Writer Implementation Plan
 
+> **Historical status / 历史状态:** Completed and merged through pull request #8 at merge commit `39a1129`. This document is retained only as a historical implementation record; the unchecked steps below are not an active task list.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the portfolio writer interview for Li Zhiyi's project understanding, research beyond uploaded artifacts, compose through his changing attention, and reject factually safe prose that still reads like a compliance report.

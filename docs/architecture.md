@@ -61,12 +61,15 @@ Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-19`:
+Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-20`:
 
 - public identity and metadata use `Alvin Li`; the engineering archive brand is `iRidium / 铱`, with exact capitalization fixed as lowercase `i`, uppercase `R`, then lowercase `idium`;
 - the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices, alongside desktop navigation and a compact mobile navigation row;
 - the homepage education block uses one full-width NTU master's row followed by a two-column undergraduate dual-degree row for Xi'an Jiaotong-Liverpool University and the University of Liverpool; the Liverpool `BEng (Hons) Telecommunications Engineering` carries the `First Class Honours` classification;
-- `components/technical-visual.tsx` renders the homepage hardware hero as a responsive two-over-three card grid. Its five final warm-paper assets live under `public/uploads/hero/`; the two display-equipped assemblies stay on the upper row, and background-replaced presentation derivatives are not treated as project evidence;
+- `components/technical-visual.tsx` and `components/technical-visual.module.css` render the homepage's atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly clockwise rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware development, and engineering tools;
+- the atom's prototype images and third-party technology marks are representative presentation material, not project evidence or claims of fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance lives in `public/skills/icons/README.md`, and institution-mark provenance lives in `public/education/README.md`;
+- the client component uses `IntersectionObserver`, document visibility, and the system `prefers-reduced-motion` preference to pause offscreen or hidden animation and to provide a static reduced-motion state;
+- the frontend refresh is isolated on the `feat/frontend-refresh` topic branch and is not part of `main` or the released site. Its redesign scope is the homepage and homepage-scoped shared-shell presentation; `/work`, `/work/[slug]`, `/notes`, `/notes/[slug]`, `/media`, and `/about` retain their existing information architecture and page implementations;
 - 8 project files total;
 - 24 public note files total;
 - 2 Juanyun project pages and 10 Juanyun-prefixed notes;

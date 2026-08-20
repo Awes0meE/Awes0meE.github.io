@@ -1,5 +1,7 @@
 # Cross-Device Portfolio Rewrite Handoff Design
 
+> **Historical status / 历史状态:** Implemented and merged through pull request #5, then reconciled during the later cross-device cleanup merged through pull request #7. This specification is retained only as a historical design record; the branch and relay state below are not current work.
+
 **Date:** 2026-08-11
 
 **Status:** Approved in conversation and after written-spec review

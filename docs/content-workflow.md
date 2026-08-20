@@ -113,7 +113,11 @@ public/uploads/hero/
 
 Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization in both language modes, keep the mark's upper-left and lower-right square bounds equal, and retain the user-selected B-style transparent wordmark at its approved compact 26px header height. Treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
 
-`public/uploads/hero/` contains only the five final assets consumed by `components/technical-visual.tsx`. Keep the approved two-over-three order: OLED and TFT-display assemblies above, then battery power, multi-rail power, and AD831 mixer below. AI background-replacement outputs are presentation derivatives; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
+`public/uploads/hero/` contains the five prototype images consumed by the homepage atom visual in `components/technical-visual.tsx`. Keep all five in the rotating nucleus. The three equal-sized orbits remain separated by 60 degrees and each carries five evenly spaced technology marks, grouped as embedded systems, firmware development, and engineering tools. Do not treat the nucleus images or orbit marks as project evidence, proof of fabrication or validation, an affiliation or endorsement claim, or a proficiency scale; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
+
+Keep technology-mark source and trademark notes current in `public/skills/icons/README.md`, and keep institution-mark provenance current in `public/education/README.md`. Do not add a mark to the visual without recording its source and confirming that its public use remains appropriate.
+
+The homepage animation must retain its non-visual fallbacks: pause the orbit, dash, tail, nucleus, and background motion while the visual is offscreen or the document is hidden, and preserve the static composition selected by `prefers-reduced-motion`. Changes to this homepage visual do not imply that the Work, Notes, Media, About, or detail-route layouts have been redesigned.
 
 Reference files with public paths:
 

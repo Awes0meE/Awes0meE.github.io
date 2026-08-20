@@ -14,6 +14,8 @@ When starting work on a new computer or a fresh Codex session:
    - `CODEX.md`
    - if `docs/active-work/portfolio-copy-rewrite.md` exists, read it before
      resuming the active rewrite;
+   - `PRODUCT.md` for product, scope, and evidence constraints;
+   - `DESIGN.md` for visual, layout, interaction, or motion work;
    - `MEMORY.md`
    - `docs/environment-toolchain.md`
    - `docs/memory-system.md`
@@ -31,6 +33,7 @@ When starting work on a new computer or a fresh Codex session:
    - `neat-freak`
    - `grill-me`
    - `grilling`
+   - `impeccable`
    If missing, install them from the sources listed in `docs/agent-skills.md`, or fall back to the rules already summarized in `CODEX.md`.
 5. Run verification before substantial edits:
    - `npm.cmd install` if `node_modules/` is missing or stale.
@@ -47,19 +50,21 @@ This repository uses `CODEX.md` as the canonical AI-agent operating guide.
 Before making non-trivial changes, read:
 
 1. `CODEX.md`
-2. `MEMORY.md`
-3. `docs/architecture.md`
-4. `docs/content-workflow.md`
-5. `docs/memory-system.md`
+2. `PRODUCT.md` when the task affects product scope or public evidence.
+3. `DESIGN.md` when the task affects visuals, layout, interaction, or motion.
+4. `MEMORY.md`
+5. `docs/architecture.md`
+6. `docs/content-workflow.md`
+7. `docs/memory-system.md`
 
 Keep `AGENTS.md` short. Put detailed project rules in `CODEX.md` so all agents have one source of truth.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-# Next.js version-matched docs
+# This is NOT the Next.js you know
 
-This project uses Next.js 16.3. Before changing Next.js APIs, conventions, or file structure, read the relevant guide in `node_modules/next/dist/docs/` and follow deprecation notices.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-The bundled docs are installed with the project's dependencies. If they are missing, run `npm.cmd install` first.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->

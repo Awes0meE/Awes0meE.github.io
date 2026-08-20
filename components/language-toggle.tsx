@@ -32,8 +32,8 @@ export function LanguageToggle() {
   }
 
   return (
-    <div className="inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-white p-1 shadow-sm">
-      <span className="grid h-8 w-8 place-items-center rounded-full text-graphite">
+    <div className="language-toggle inline-flex shrink-0 items-center gap-1 rounded-full border border-line bg-white p-1 shadow-sm">
+      <span className="language-toggle-icon grid h-8 w-8 place-items-center rounded-full text-graphite">
         <Languages size={16} />
       </span>
       <button

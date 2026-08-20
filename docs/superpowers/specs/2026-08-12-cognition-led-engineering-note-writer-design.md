@@ -1,5 +1,7 @@
 # Cognition-Led Engineering Note Writer Design
 
+> **Historical status / 历史状态:** Implemented and merged through pull request #8 at merge commit `39a1129`. This specification is retained only as a historical design record and is not an active implementation request.
+
 **Date:** 2026-08-12
 **Status:** Approved in conversation and after written-spec review
 **Scope:** Redesign `skills/engineering-note-writer/` and its behavioral trials. Do not bulk-rewrite the existing portfolio.

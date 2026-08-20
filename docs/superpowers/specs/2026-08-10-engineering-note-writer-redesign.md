@@ -1,5 +1,7 @@
 # Engineering Note Writer Redesign
 
+> **Historical status / 历史状态:** Implemented and merged through pull request #4. The material-led runtime specified below was later superseded by the cognition-led redesign merged through pull request #8. This specification is retained only as a historical design record and is not current runtime guidance.
+
 Date: 2026-08-10
 
 ## Purpose

@@ -118,21 +118,29 @@ Long note or project body text is not automatically machine-translated. If a lon
 
 长篇项目正文和笔记正文不会自动机翻。如果某篇文章需要完整中英双语，需要手动编辑对应的 MDX 内容。
 
-## Header Brand And Homepage Education
+## Header Brand, Homepage Education, And Atom Visual
 
 The header brand is always the English wordmark `iRidium`; switching the site to Chinese does not replace it with `铱`. Its approved mark and transparent B-style script wordmark live under `public/brand/`. Keep the upper-left and lower-right blocks of the mark equal in size and preserve the compact 26px wordmark height.
 
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
-The homepage hardware hero is maintained in `components/technical-visual.tsx` as a fixed two-over-three mosaic. The OLED and TFT-display images belong on the upper row; the battery power board, multi-rail power board, and AD831 mixer belong on the lower row. Final web assets live under `public/uploads/hero/`. The warm-background versions are visual presentation derivatives and should not be reused as close-up engineering evidence.
+The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
 
-## 页头品牌与首页学校信息
+The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
+
+The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. The frontend refresh is maintained on the separate `feat/frontend-refresh` topic branch and is not released: only the homepage has been redesigned, while Work, Notes, Media, About, and their detail pages keep their existing structures.
+
+## 页头品牌、首页学校信息与原子可视化
 
 页头品牌名始终使用英文 `iRidium`，切换到中文界面也不会变成“铱”。已确认的图形标记和 B 款透明花体字标保存在 `public/brand/`；维护时要保持图形左上角与右下角方块等大，并保留字标 26px 的紧凑显示高度。
 
 首页教育区第一行显示南洋理工大学及硕士在读信息，第二行以双栏明确展示西交利物浦大学与英国利物浦大学授予的本科双学位；“一等荣誉学位”归在英国利物浦大学学位下。
 
-首页硬件 Hero 固定为“上二下三”拼贴，由 `components/technical-visual.tsx` 维护：OLED 与 TFT 彩屏项目放在上排，电池电源板、多路电源板和 AD831 混频板放在下排。最终网页素材保存在 `public/uploads/hero/`。暖白背景版本属于视觉展示衍生图，不应作为工程细节证据重复使用。
+首页技术可视化由 `components/technical-visual.tsx` 和 `components/technical-visual.module.css` 维护。`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团；三条尺寸一致的轨道互成 60 度，每条轨道上有五个等距技术标识，分别代表嵌入式系统、固件开发或工程工具。
+
+prototype 图片和技术标识只用于展示。它们不能证明某块板卡已经制造或完成验证，标识也不表示关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
+
+当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。当前前端刷新保存在独立的 `feat/frontend-refresh` 主题分支，尚未发布：只有首页完成了重构，Work、Notes、Media、About 及其详情页继续使用原有结构。
 
 ## How To Modify Text
 

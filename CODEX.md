@@ -43,8 +43,10 @@ These rules incorporate the installed `karpathy-guidelines` skill:
 
 These rules incorporate the installed `neat-freak` skill:
 
-- Treat project knowledge as three layers with different audiences:
+- Treat project knowledge as distinct layers with different audiences:
   - `CODEX.md` / `AGENTS.md`: instructions for AI agents inside this repo.
+  - `PRODUCT.md`: durable product purpose, audience, scope, evidence, and constraints.
+  - `DESIGN.md`: durable visual-system and interaction decisions for the active design direction.
   - `MEMORY.md`: durable project memory and decision history.
   - `docs/` plus `README.md` and `USER_GUIDE.md`: human-facing documentation.
 - At the end of meaningful milestones, reconcile docs against code. Do not only append new facts.
@@ -177,7 +179,9 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The current working content state extends release `v0.8.0` on `main`, including the media/cover refresh, the two-pane public project-file browser, the imported Digital Clock and Smart Car course projects, and the released iRidium header, education, and five-card hardware-hero refinement.
+The published baseline is release `v0.8.0` on `main`, including the media/cover refresh, the two-pane public project-file browser, the imported Digital Clock and Smart Car course projects, and the released iRidium header, education, and five-card hardware-hero refinement.
+
+As of `2026-08-20`, the active checkout is a homepage-only topic-branch checkpoint on `feat/frontend-refresh`. It replaces the released five-card hero in the branch preview with an atom-orbit composition while preserving the five presentation derivatives. This checkpoint is not a release, merge, deployment, or redesign of `/work`, `/notes`, `/media`, `/about`, or project-detail content.
 
 As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -232,10 +236,12 @@ Maintain the current engineering-academic identity:
 - precise, calm, credible, portfolio-grade;
 - Alvin Li is the sole reader-facing personal identity; `iRidium / 铱` is the engineering archive brand;
 - keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header, preserve equal square bounds for its upper-left and lower-right blocks, pair it with the user-selected B-style `public/brand/iridium-wordmark-script.png`, render that wordmark at the user-approved compact 26px height, and preserve the exact `iRidium` capitalization in both language modes;
-- keep the homepage hardware hero in `components/technical-visual.tsx` as the approved five-card mosaic: the 0.96-inch OLED and TFT-display assemblies occupy the two-card upper row, while the battery/USB power board, 12 V / 5 V / 3.3 V power-supply board, and AD831 mixer occupy the three-card lower row; use the warm-paper presentation derivatives under `public/uploads/hero/`, but never treat AI background-replacement derivatives as exact component, silkscreen, or fabrication evidence;
+- preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
+- for the `2026-08-20` local `feat/frontend-refresh` checkpoint, keep those five presentation derivatives as a compact prototype nucleus in `components/technical-visual.tsx`; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
+- keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
+- treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
-- white/paper background, fine grid, pine green, graphite, and copper accents;
-- 6-8px radius, fine borders, restrained shadows;
+- the current homepage-only design uses a near-black engineering field, warm white information, fine rules, and ember-orange signal accents; do not infer that this local treatment has been released across the other routes;
 - project evidence over decoration;
 - no generic template blog styling, no Hexo identity, no stock marketing hero.
 
@@ -283,9 +289,10 @@ For visual/layout edits:
 
 - run local dev server;
 - inspect `http://127.0.0.1:3000`;
-- check desktop and mobile widths;
+- check both languages at desktop and mobile widths;
 - verify no horizontal overflow;
-- verify links and dynamic content routes.
+- verify links and dynamic content routes;
+- verify visibility pausing and `prefers-reduced-motion` behavior for the atom animation.
 
 For dependency changes:
 

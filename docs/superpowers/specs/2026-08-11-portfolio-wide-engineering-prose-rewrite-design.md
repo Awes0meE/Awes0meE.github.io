@@ -1,5 +1,7 @@
 # Portfolio-Wide Engineering Prose Rewrite Design
 
+> **Historical status / 历史状态:** Implemented and merged through pull request #5 at merge commit `83ca508`. This specification is retained only as a historical design record; its old branch, homepage identity scope, and corpus baseline are not current work.
+
 **Date:** 2026-08-11
 
 **Status:** Approved in conversation and after written-spec review

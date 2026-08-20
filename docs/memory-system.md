@@ -15,6 +15,8 @@ This is a lightweight project-local memory system inspired by `claude-mem`, adap
 | --- | --- | --- | --- |
 | Agent guide | `CODEX.md` | AI agents | How to work in this repository |
 | Compatibility pointer | `AGENTS.md` | AI agents | Short pointer to `CODEX.md` |
+| Product definition | `PRODUCT.md` | user, product/design contributors, AI agents | Durable audience, purpose, scope, evidence, and constraints |
+| Design system | `DESIGN.md` | user, designers, developers, AI agents | Durable visual direction, interaction rules, tokens, and component behavior |
 | Active rewrite handoff | `docs/active-work/portfolio-copy-rewrite.md` | AI agents and the user | Current project, branch, interview state, and next action |
 | Durable memory | `MEMORY.md` | AI agents and maintainers | Current facts, decisions, open work |
 | Chronology | `docs/session-log.md` | AI agents and maintainers | Append-only event history |
@@ -28,10 +30,12 @@ At the start of a substantial session:
 
 1. Read `CODEX.md`.
 2. If `docs/active-work/portfolio-copy-rewrite.md` exists, read it before resuming a portfolio rewrite.
-3. Read `MEMORY.md`.
-4. Read `docs/environment-toolchain.md` when setting up or verifying a machine.
-5. Read task-relevant docs under `docs/`.
-6. Inspect the live code before making changes.
+3. Read `PRODUCT.md` for product, evidence, scope, or public-surface work.
+4. Read `DESIGN.md` for visual, interaction, layout, responsive, or motion work.
+5. Read `MEMORY.md`.
+6. Read `docs/environment-toolchain.md` when setting up or verifying a machine.
+7. Read task-relevant docs under `docs/`.
+8. Inspect the live code before making changes.
 
 Do not rely on memory when the code can cheaply verify the fact.
 
@@ -41,10 +45,12 @@ At the end of a milestone:
 
 1. Update `MEMORY.md` with durable facts and decisions.
 2. Append a short entry to `docs/session-log.md`.
-3. Update `docs/environment-toolchain.md` if Node/npm, shell, local preview, or deployment tooling changed.
-4. Update `docs/architecture.md` if routes, data flow, deployment, or dependencies changed.
-5. Update `docs/content-workflow.md` if content operations changed.
-6. Update `README.md` or `USER_GUIDE.md` if human-facing usage changed.
+3. Update `PRODUCT.md` if audience, purpose, scope, evidence on hand, or product constraints changed.
+4. Update `DESIGN.md` if the durable visual system, interaction behavior, motion, or component rules changed.
+5. Update `docs/environment-toolchain.md` if Node/npm, shell, local preview, or deployment tooling changed.
+6. Update `docs/architecture.md` if routes, data flow, deployment, or dependencies changed.
+7. Update `docs/content-workflow.md` if content operations changed.
+8. Update `README.md` or `USER_GUIDE.md` if human-facing usage changed.
 
 ## What Belongs In MEMORY.md
 
@@ -86,5 +92,6 @@ Use absolute dates and concise language.
 - `karpathy-guidelines`: reduce LLM coding mistakes through assumptions, simplicity, surgical edits, and verifiable goals.
 - `neat-freak`: reconcile project docs, agent memory, and code at development milestones.
 - `grill-me` and `grilling`: interview the user one project at a time and turn voice answers into shared understanding before the repository-local writer is used.
+- `impeccable`: external web-design workflow from `https://github.com/pbakaus/impeccable`, installed machine-locally at `.agents/skills/impeccable`. Its `.agents/` tooling and `.impeccable/` session state do not travel with Git; durable product and design decisions belong in `PRODUCT.md` and `DESIGN.md`.
 
 Restart Codex after installing external skills so they appear in the tool's native skill list.

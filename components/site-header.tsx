@@ -7,15 +7,18 @@ import { navItems } from "@/lib/site";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex min-w-0 max-w-7xl items-center justify-between gap-2 px-5 py-4 sm:gap-4 lg:px-8">
+    <header className="site-header sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+      <div className="site-header-inner mx-auto flex min-w-0 max-w-7xl items-center justify-between gap-2 px-5 py-4 sm:gap-4 lg:px-8">
         <Logo />
-        <nav aria-label="Primary navigation" className="hidden items-center gap-8 text-sm font-medium text-ink md:flex">
+        <nav
+          aria-label="Primary navigation"
+          className="site-primary-nav hidden items-center gap-8 text-sm font-medium text-ink md:flex"
+        >
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="underline-offset-[10px] transition hover:text-pine hover:underline"
+              className="site-nav-link underline-offset-[10px] transition hover:text-pine hover:underline"
             >
               <BilingualText en={item.labelEn} zh={item.labelZh} />
             </Link>
@@ -25,20 +28,20 @@ export function SiteHeader() {
           <LanguageToggle />
           <Link
             href="/work"
-            className="hidden items-center gap-2 rounded-md border border-pine px-4 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white lg:flex"
+            className="site-header-cta hidden items-center gap-2 rounded-md border border-pine px-4 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white lg:flex"
           >
             <BilingualText en="View Projects" zh="查看项目" />
             <ArrowRight size={16} />
           </Link>
         </div>
       </div>
-      <nav aria-label="Mobile navigation" className="border-t border-line/80 md:hidden">
+      <nav aria-label="Mobile navigation" className="site-mobile-nav border-t border-line/80 md:hidden">
         <div className="mx-auto grid max-w-7xl grid-cols-4 px-3">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="py-2.5 text-center text-xs font-semibold text-ink transition hover:text-pine"
+              className="site-mobile-nav-link py-2.5 text-center text-xs font-semibold text-ink transition hover:text-pine"
             >
               <BilingualText en={item.labelEn} zh={item.labelZh} />
             </Link>
