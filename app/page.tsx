@@ -53,7 +53,7 @@ export default function Home() {
   const media = getMediaItems().slice(0, 6);
 
   return (
-    <main className="signal-home">
+    <main className="signal-theme signal-home">
       <section className="signal-hero" aria-labelledby="signal-hero-title">
         <div className="signal-hero-grid">
           <div className="signal-hero-atmosphere atmosphereConveyor" aria-hidden="true">
@@ -176,7 +176,11 @@ export default function Home() {
           </header>
           <div className="signal-media-grid">
             {media.map((item) => (
-              <Link key={item.id} href="/media" className="signal-media-item">
+              <Link
+                key={item.id}
+                href={item.projectSlug ? `/media?project=${encodeURIComponent(item.projectSlug)}` : "/media"}
+                className="signal-media-item"
+              >
                 <Image
                   src={item.thumbnail}
                   alt=""

@@ -1,14 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { PlayCircle } from "lucide-react";
+import { Suspense } from "react";
+import { ArrowRight, ExternalLink, Play } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { getMediaItems, getProjects } from "@/lib/content";
+import {
+  formatDateRange,
+  formatDateRangeZh,
+  formatStatusZh,
+  getMediaItems,
+  getProjects,
+  type MediaItem,
+  type Project
+} from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
+import {
+  MediaFocusAperture,
+  MediaFocusApertureFromQuery,
+  type MediaFocusGroup
+} from "./media-focus-aperture";
+import styles from "./media.module.css";
 
 const pageTitle = "Media";
 const pageDescription =
-  "Board photos, schematic sheets, renders, videos, and test captures connected to Alvin Li’s engineering projects.";
+  "Board photos, schematic sheets, renders, videos, and test captures grouped by Alvin Li’s engineering projects.";
 const socialTitle = `${pageTitle} | Alvin Li`;
 
 export const metadata: Metadata = {
@@ -26,78 +41,343 @@ export const metadata: Metadata = {
   }
 };
 
+export const viewport: Viewport = {
+  themeColor: "#080808",
+  colorScheme: "dark"
+};
+
+const mediaProjectConfig = [
+  {
+    slug: "juanyun-thermal-hardware",
+    shortTitle: "Cirro thermal hardware",
+    shortTitleZh: "卷云相变散热系统",
+    featuredId: "juanyun-acunit-v20-block"
+  },
+  {
+    slug: "sensorless-foc-learning-route",
+    shortTitle: "Sensorless FOC",
+    shortTitleZh: "无感 FOC 学习路线",
+    featuredId: "sensorless-foc-cover"
+  },
+  {
+    slug: "juanyun-diy-cooling-prototype",
+    shortTitle: "DIY cooling",
+    shortTitleZh: "DIY 压风式散热器",
+    featuredId: "juanyun-diy-cooling-stm32-pcb-render"
+  },
+  {
+    slug: "nanjing-turing-qt-embedded-learning",
+    shortTitle: "Nanjing Qt log",
+    shortTitleZh: "南京图灵 Qt 实习",
+    featuredId: "turing-ai-institute-cover"
+  },
+  {
+    slug: "tianjin-metro-stm32-foundation",
+    shortTitle: "Tianjin STM32",
+    shortTitleZh: "天津津铁 STM32 实习",
+    featuredId: "tianjin-rail-transit-cover"
+  },
+  {
+    slug: "arduino-digital-clock-counter",
+    shortTitle: "Digital counter",
+    shortTitleZh: "Arduino 数码管计数器",
+    featuredId: "arduino-digital-clock-cover"
+  },
+  {
+    slug: "arduino-smart-car-line-tracker",
+    shortTitle: "Line-tracking car",
+    shortTitleZh: "Arduino 循迹小车",
+    featuredId: "arduino-smart-car-cover"
+  },
+  {
+    slug: "claude-chime-hardware-power-board",
+    shortTitle: "Claude Chime power",
+    shortTitleZh: "Claude Chime 电源板",
+    featuredId: "claude-chime-logo"
+  }
+] as const;
+
+type MediaProjectGroup = {
+  slug: string;
+  shortTitle: string;
+  shortTitleZh: string;
+  featuredId: string;
+  project?: Project;
+  items: MediaItem[];
+};
+
+function count(value: number) {
+  return String(value).padStart(3, "0");
+}
+
+function mediaType(type: MediaItem["type"]) {
+  return type === "video"
+    ? { en: "Video", zh: "视频" }
+    : { en: "Image", zh: "图像" };
+}
+
+const htmlDatePattern = /^\d{4}(?:-\d{2}(?:-\d{2})?)?$/;
+
+function buildMediaGroups(media: MediaItem[], projects: Project[]) {
+  const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));
+  const itemsByProject = new Map<string, MediaItem[]>();
+
+  for (const item of media) {
+    const slug = item.projectSlug ?? "unassigned";
+    const items = itemsByProject.get(slug) ?? [];
+    items.push(item);
+    itemsByProject.set(slug, items);
+  }
+
+  const configuredSlugs = new Set<string>(mediaProjectConfig.map((entry) => entry.slug));
+  const configuredGroups: MediaProjectGroup[] = mediaProjectConfig.flatMap((entry) => {
+    const items = itemsByProject.get(entry.slug) ?? [];
+
+    if (!items.length) {
+      return [];
+    }
+
+    return [{
+      ...entry,
+      project: projectsBySlug.get(entry.slug),
+      items
+    }];
+  });
+
+  const additionalGroups: MediaProjectGroup[] = [...itemsByProject.entries()]
+    .filter(([slug]) => slug !== "unassigned" && !configuredSlugs.has(slug))
+    .map(([slug, items]) => {
+      const project = projectsBySlug.get(slug);
+
+      return {
+        slug,
+        shortTitle: project?.title ?? slug,
+        shortTitleZh: project?.titleZh ?? project?.title ?? slug,
+        featuredId: items[0].id,
+        project,
+        items
+      };
+    });
+
+  const unassignedItems = itemsByProject.get("unassigned") ?? [];
+  const unassignedGroup: MediaProjectGroup[] = unassignedItems.length
+    ? [{
+        slug: "unassigned",
+        shortTitle: "Unassigned records",
+        shortTitleZh: "待归类记录",
+        featuredId: unassignedItems[0].id,
+        items: unassignedItems
+      }]
+    : [];
+
+  return [...configuredGroups, ...additionalGroups, ...unassignedGroup];
+}
+
+function groupTitle(group: MediaProjectGroup) {
+  return {
+    en: group.project?.title ?? group.shortTitle,
+    zh: group.project?.titleZh ?? group.shortTitleZh
+  };
+}
+
 export default function MediaPage() {
   const media = getMediaItems();
-  const projectsBySlug = new Map(getProjects().map((project) => [project.slug, project]));
+  const projects = getProjects();
+  const groups = buildMediaGroups(media, projects);
+  const archiveIndexById = new Map(media.map((item, index) => [item.id, index + 1]));
+  const totals = {
+    records: media.length,
+    images: media.filter((item) => item.type === "image").length,
+    videos: media.filter((item) => item.type === "video").length,
+    projects: groups.filter((group) => group.project).length
+  };
+  const focusGroups: MediaFocusGroup[] = groups.map((group) => {
+    const featured = group.items.find((item) => item.id === group.featuredId) ?? group.items[0];
+    const title = groupTitle(group);
+
+    return {
+      slug: group.slug,
+      shortTitle: group.shortTitle,
+      shortTitleZh: group.shortTitleZh,
+      title: title.en,
+      titleZh: title.zh,
+      mediaCount: group.items.length,
+      imageCount: group.items.filter((item) => item.type === "image").length,
+      videoCount: group.items.filter((item) => item.type === "video").length,
+      projectHref: group.project ? `/work/${group.slug}` : undefined,
+      featured: {
+        ...featured,
+        archiveIndex: archiveIndexById.get(featured.id) ?? 1
+      }
+    };
+  });
 
   return (
-    <main className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
-      <h1 className="text-5xl font-semibold text-ink">
-        <BilingualText en="Media" zh="媒体" />
-      </h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-graphite">
-        <BilingualText
-          en="Board photos, schematic sheets, renders, videos, and test captures linked to the projects and engineering stages they document."
-          zh="这里集中整理板卡照片、原理图分页、渲染图、视频和测试截图，并关联到它们所记录的项目与工程阶段。"
+    <main className={`signal-theme ${styles.page}`}>
+      <Suspense
+        fallback={(
+          <MediaFocusAperture
+            groups={focusGroups}
+            totals={totals}
+            initialSlug={focusGroups[0]?.slug ?? ""}
+          />
+        )}
+      >
+        <MediaFocusApertureFromQuery
+          groups={focusGroups}
+          totals={totals}
+          initialSlug={focusGroups[0]?.slug ?? ""}
         />
-      </p>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {media.map((item) => {
-          const sourceProject = item.projectSlug ? projectsBySlug.get(item.projectSlug) : undefined;
+      </Suspense>
 
-          return (
-          <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white">
-            <div className="relative aspect-[4/3] bg-chalk">
-              <Image
-                src={item.thumbnail}
-                alt={item.title}
-                fill
-                sizes="(min-width: 1024px) 30vw, 100vw"
-                className="object-cover"
+      <section className={styles.library} aria-labelledby="project-library-title">
+        <header className={styles.libraryHeader}>
+          <div>
+            <h2 id="project-library-title">
+              <BilingualText en="Media, grouped by project" zh="按项目分类的媒体库" />
+            </h2>
+            <p>
+              <BilingualText
+                en="Each chapter keeps its source project, engineering context, and records together."
+                zh="每一个分区都把项目来源、工程背景和对应媒体放在一起，不再混成一张总图墙。"
               />
-              {item.type === "video" ? (
-                <span className="absolute bottom-3 left-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-pine">
-                  <PlayCircle size={24} />
-                </span>
-              ) : null}
-            </div>
-            <div className="p-5">
-              <h2 className="text-lg font-semibold text-ink">
-                <BilingualText en={item.title} zh={item.titleZh ?? item.title} />
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-graphite">
-                <BilingualText en={item.caption} zh={item.captionZh ?? item.caption} />
-              </p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-normal text-copper">
-                {sourceProject ? (
-                  <Link href={`/work/${sourceProject.slug}`} className="hover:text-pine">
-                    <BilingualText
-                      en={`From ${sourceProject.title}`}
-                      zh={`来自项目：${sourceProject.titleZh}`}
-                    />
-                  </Link>
-                ) : (
-                  <BilingualText en="From site visual system" zh="来自网站视觉系统" />
-                )}
-              </p>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-graphite">
-                <span>{item.date}</span>
-                <div className="flex items-center gap-3">
-                  <a href={item.src} className="font-semibold text-pine hover:text-copper">
-                    <BilingualText en="Open media" zh="打开媒体" />
-                  </a>
-                  {item.projectSlug ? (
-                    <Link href={`/work/${item.projectSlug}`} className="font-semibold text-pine hover:text-copper">
-                      <BilingualText en="Related project" zh="相关项目" />
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </article>
-        );
-        })}
-      </div>
+            </p>
+          </div>
+          <div className={styles.libraryScope} aria-label="Archive scope / 档案范围">
+            <span>{count(totals.projects)} <BilingualText en="projects" zh="个项目" /></span>
+            <span>{count(totals.records)} <BilingualText en="records" zh="条记录" /></span>
+          </div>
+        </header>
+
+        <div className={styles.projectGroups}>
+          {groups.map((group, groupIndex) => {
+            const title = groupTitle(group);
+            const imageCount = group.items.filter((item) => item.type === "image").length;
+            const videoCount = group.items.length - imageCount;
+
+            return (
+              <section
+                key={group.slug}
+                id={`media-project-${group.slug}`}
+                className={styles.projectGroup}
+                aria-labelledby={`media-project-title-${group.slug}`}
+              >
+                <header className={styles.projectHeader}>
+                  <div className={styles.projectSequence} aria-hidden="true">
+                    <span>{String(groupIndex + 1).padStart(2, "0")}</span>
+                    <span>/</span>
+                    <span>{String(groups.length).padStart(2, "0")}</span>
+                  </div>
+                  <div className={styles.projectIdentity}>
+                    <h3 id={`media-project-title-${group.slug}`}>
+                      <BilingualText en={title.en} zh={title.zh} />
+                    </h3>
+                    {group.project ? (
+                      <p>
+                        <BilingualText en={group.project.summary} zh={group.project.summaryZh} />
+                      </p>
+                    ) : (
+                      <p>
+                        <BilingualText
+                          en="Records awaiting a confirmed project relationship."
+                          zh="这些记录仍在等待确认对应的项目关系。"
+                        />
+                      </p>
+                    )}
+                  </div>
+                  <dl className={styles.projectFacts}>
+                    <div>
+                      <dt><BilingualText en="Records" zh="记录" /></dt>
+                      <dd>{count(group.items.length)}</dd>
+                    </div>
+                    <div>
+                      <dt><BilingualText en="Images" zh="图像" /></dt>
+                      <dd>{count(imageCount)}</dd>
+                    </div>
+                    <div>
+                      <dt><BilingualText en="Videos" zh="视频" /></dt>
+                      <dd>{count(videoCount)}</dd>
+                    </div>
+                  </dl>
+                  <div className={styles.projectContext}>
+                    {group.project ? (
+                      <>
+                        <span>
+                          <BilingualText en={group.project.status} zh={formatStatusZh(group.project.status)} />
+                        </span>
+                        <span>
+                          <BilingualText
+                            en={formatDateRange(group.project.date)}
+                            zh={formatDateRangeZh(group.project.date)}
+                          />
+                        </span>
+                        <Link href={`/work/${group.slug}`}>
+                          <BilingualText en="Open project" zh="打开项目" />
+                          <ArrowRight size={16} aria-hidden="true" />
+                        </Link>
+                      </>
+                    ) : null}
+                  </div>
+                </header>
+
+                <ol className={styles.mediaGrid}>
+                  {group.items.map((item, itemIndex) => {
+                    const type = mediaType(item.type);
+
+                    return (
+                      <li key={item.id}>
+                        <a
+                          href={item.src}
+                          className={styles.mediaCell}
+                          aria-label={`${item.titleZh ?? item.title} / ${item.title}`}
+                        >
+                          <div className={styles.mediaVisual}>
+                            <Image
+                              src={item.thumbnail}
+                              alt=""
+                              fill
+                              sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                              className={styles.mediaImage}
+                            />
+                            {item.type === "video" ? (
+                              <span className={styles.videoMarker}>
+                                <Play size={14} aria-hidden="true" />
+                                <BilingualText en="Video" zh="视频" />
+                              </span>
+                            ) : null}
+                            <span className={styles.mediaOpenIcon} aria-hidden="true">
+                              <ExternalLink size={15} />
+                            </span>
+                          </div>
+                          <div className={styles.mediaMetadata}>
+                            <span>{String(groupIndex + 1).padStart(2, "0")}.{String(itemIndex + 1).padStart(2, "0")}</span>
+                            <span><BilingualText en={type.en} zh={type.zh} /></span>
+                            <time dateTime={htmlDatePattern.test(item.date) ? item.date : undefined}>
+                              <BilingualText en={formatDateRange(item.date)} zh={formatDateRangeZh(item.date)} />
+                            </time>
+                          </div>
+                          <h4>
+                            <BilingualText en={item.title} zh={item.titleZh ?? item.title} />
+                          </h4>
+                          <p>
+                            <BilingualText en={item.caption} zh={item.captionZh ?? item.caption} />
+                          </p>
+                          <span className={styles.mediaSource}>
+                            <BilingualText
+                              en={`Project source · ${group.shortTitle}`}
+                              zh={`项目来源 · ${group.shortTitleZh}`}
+                            />
+                          </span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </section>
+            );
+          })}
+        </div>
+      </section>
     </main>
   );
 }

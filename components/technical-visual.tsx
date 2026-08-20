@@ -149,7 +149,6 @@ function AtomOrbit({
                   alt=""
                   width={30}
                   height={30}
-                  loading="eager"
                   className={styles.stackLogo}
                 />
               </span>

@@ -1,0 +1,25 @@
+工程笔记
+数码管不亮，先别急着改 Arduino
+从焊点到循迹：Smart Car 的第一次完整 Bring-up
+4.03 V 掉到 1.49 V，先别急着给 PCB 判短路
+从手动拧 EEV，到带约束的自动制冷控制
+三块 ACUnit 板从 PCB 渲染走到分阶段 bring-up
+把 ACUnit 主循环当成一次裸机考试
+两张 ACUnit 框图，两种三板阅读方式
+先把 BaseUnit 做通：一套完整控制器跑稳以后，再去碰 ACUnit
+DHT 小板离开计划书之前，先解决 AM2302 脚位冲突
+“Fan Speed”其实只是占空比：重读第一套 Windows–ESP32 控制链
+硬件开发 SOP 整理
+四路 EEV 相线怎样穿过 ULN2003A 归档
+回看 102 条提交，ControlPanel 与交付维护怎样长出来
+速度估计对了，闭环为什么还是接不住？
+所有外设终于挤进同一个 main()
+±500 不是 PID，Blue Pill 也不是列车控制器
+魔术棒配置完之前，GPIOC13 什么也不会告诉我
+从一行 SetBits 往下，GPIO、EXTI 和 Timer 分开了
+16 个标定点，把 ADC 数字送到 TIM4
+CMake 与编译底层逻辑学习笔记
+Qt6 环境跑通 Seamly2D 的记录
+Windows 与 macOS Release 打包记录
+sm2d XML 样例文件观察笔记
+“能跑”改了三次意思：Seamly2D 三周开发记录

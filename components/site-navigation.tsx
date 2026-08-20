@@ -50,7 +50,7 @@ export function SiteNavigation({ variant }: SiteNavigationProps) {
   if (isDesktop) {
     return (
       <nav
-        aria-label="Primary navigation"
+        aria-label="Primary navigation / 主导航"
         className="site-primary-nav hidden items-center gap-8 text-sm font-medium text-ink md:flex"
       >
         {links}
@@ -59,7 +59,7 @@ export function SiteNavigation({ variant }: SiteNavigationProps) {
   }
 
   return (
-    <nav aria-label="Mobile navigation" className="site-mobile-nav border-t border-line/80 md:hidden">
+    <nav aria-label="Mobile navigation / 移动导航" className="site-mobile-nav border-t border-line/80 md:hidden">
       <div className="mx-auto grid max-w-7xl grid-cols-4 px-3">{links}</div>
     </nav>
   );

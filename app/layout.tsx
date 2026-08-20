@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     template: "%s | Alvin Li"
   },
   description: site.description,
+  icons: {
+    icon: [{ url: "/brand/iridium-mark.png", type: "image/png" }]
+  },
   openGraph: {
     ...openGraphBase,
     title: site.title,
