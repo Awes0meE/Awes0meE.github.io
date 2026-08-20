@@ -1,5 +1,7 @@
 # Sensorless FOC Learning Route Refactor Implementation Plan
 
+> **Historical status — completed:** Pull request #25 completed this work at `df5b91322a09f00cf0f813dacd8b871f91cba47f`; follow-up commit `9f80eab` closed the handoff. The instructions below are retained as implementation history and are not an active plan.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (- [ ]) syntax for tracking.
 
 **Goal:** Replace the legacy Juanyun-labelled FOC archive with an independent, bilingual personal learning route that proves the custom hardware and open-loop compressor result, explains the observer-handoff lesson, and preserves every confirmed evidence boundary.

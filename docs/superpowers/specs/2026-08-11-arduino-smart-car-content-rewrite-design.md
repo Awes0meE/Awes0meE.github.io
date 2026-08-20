@@ -1,5 +1,7 @@
 # Arduino Smart Car Content Rewrite Design
 
+> **Historical status / 历史状态:** Implemented in project and note commits `1db6758` and `dc386bb`, with later prose refinements recorded separately. This specification is retained only as a historical design record; its material-led terminology and old branch name are not current guidance.
+
 ## Goal
 
 Rewrite the Arduino smart-car project page and its related learning note with the refactored repository-local `engineering-note-writer` skill. The result should read as a material-led engineering record rather than a report template, while preserving the existing evidence, bilingual coverage, routes, and project identity.

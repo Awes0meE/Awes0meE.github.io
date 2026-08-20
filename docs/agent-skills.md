@@ -1,6 +1,6 @@
 # Agent Skills Used
 
-This project uses two repository-local workflows and guidance from four external sources.
+This project uses two repository-local workflows and guidance from five external sources.
 
 ## repo-local add-project
 
@@ -54,6 +54,24 @@ Purpose:
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
+
+## impeccable
+
+Source:
+
+- `https://github.com/pbakaus/impeccable`
+
+Machine-local Codex path:
+
+- `.agents/skills/impeccable`
+
+Purpose:
+
+- Audit, critique, redesign, and polish web interfaces with explicit product context, visual direction, responsive behavior, accessibility, and meaningful motion.
+- Keep the portfolio's evidence boundary intact while improving hierarchy, layout, typography, color, interaction, and visual coherence.
+- Treat `PRODUCT.md` as the durable product contract and `DESIGN.md` as the durable visual and interaction contract for future sessions and other machines.
+
+The `.agents/` skill installation and `.impeccable/` tool/session state are machine-local and excluded from version control. They may be recreated on another device from the upstream source, but they are not durable project memory and must not replace `PRODUCT.md` or `DESIGN.md`.
 
 ## grill-me and grilling
 

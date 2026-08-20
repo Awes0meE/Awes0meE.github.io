@@ -1,5 +1,7 @@
 # Portfolio-Wide Engineering Prose Rewrite Implementation Plan
 
+> **Historical status / 历史状态:** Completed and merged through pull request #5 at merge commit `83ca508`. This document is retained only as a historical implementation record; its old branch, identity copy, corpus counts, routes, and unchecked steps are not current state or active work.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Rewrite every approved AI-composed portfolio surface into an evidence-led bilingual engineering narrative, update the public identity to the user's current NTU robotics MSc stage, remove public email and location, and preserve all protected notes and assets.

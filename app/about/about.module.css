@@ -1,0 +1,1045 @@
+.about {
+  min-height: 100dvh;
+  overflow: clip;
+  background: var(--signal-canvas);
+  color: var(--signal-text);
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(500px, 0.94fr);
+  min-height: calc(100svh - 78px);
+  max-width: 1536px;
+  margin-inline: auto;
+  border-right: 1px solid var(--signal-line-soft);
+  border-bottom: 1px solid var(--signal-line);
+  border-left: 1px solid var(--signal-line-soft);
+  isolation: isolate;
+}
+
+.hero::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 14px,
+    rgba(255, 116, 0, 0.68) 14px 15px,
+    transparent 15px 28px
+  );
+  content: "";
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(5.5rem, 8vw, 8.5rem) clamp(2.4rem, 6vw, 6.5rem) clamp(4.5rem, 7vw, 7rem);
+  border-right: 1px solid var(--signal-line);
+  animation: aboutFieldReveal 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.heroCopy::after {
+  position: absolute;
+  right: -1px;
+  bottom: 12%;
+  width: 1px;
+  height: 22%;
+  background: var(--signal-orange);
+  box-shadow: 0 14px 28px rgba(255, 116, 0, 0.22);
+  content: "";
+}
+
+.name {
+  max-width: 8ch;
+  color: var(--signal-warm-white);
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-size: clamp(5.5rem, 8.6vw, 8.2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.78;
+  text-wrap: balance;
+}
+
+.heroStatement {
+  max-width: 18ch;
+  margin-top: clamp(1.75rem, 3vw, 2.6rem);
+  color: var(--signal-warm-white);
+  font-size: clamp(2rem, 3.4vw, 3.55rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+:global(html[data-lang="en"]) .heroStatement {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+:global(html[data-lang="zh"]) .heroStatement {
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+}
+
+.narrative {
+  display: grid;
+  max-width: 72ch;
+  margin-top: clamp(1.7rem, 3vw, 2.7rem);
+  gap: 1rem;
+  color: #c7c0b7;
+  font-size: clamp(0.94rem, 1.15vw, 1.08rem);
+  line-height: 1.72;
+}
+
+.narrative p:first-child {
+  color: #e1d9d0;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-top: clamp(2rem, 3vw, 2.8rem);
+  gap: 0.75rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.68rem;
+  padding: 0.8rem 1.05rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease-out,
+    color 180ms ease-out,
+    border-color 180ms ease-out,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryAction {
+  border: 1px solid var(--signal-orange);
+  color: var(--signal-orange-soft);
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.secondaryAction {
+  border: 1px solid var(--signal-line);
+  color: var(--signal-warm-white);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+}
+
+.mailRoute {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  max-width: 31rem;
+  min-height: 58px;
+  align-items: center;
+  margin-top: 1.25rem;
+  gap: 0.8rem;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--signal-line);
+  border-bottom: 1px solid var(--signal-line-soft);
+  color: var(--signal-muted);
+  text-decoration: none;
+  transition: color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.mailRoute span {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.mailRoute small {
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.025em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tensionColumn {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  padding: clamp(4.7rem, 6vw, 6.5rem) clamp(2rem, 4vw, 4.75rem) clamp(4rem, 6vw, 5.5rem);
+  background:
+    linear-gradient(90deg, transparent 0 49.9%, rgba(250, 250, 250, 0.035) 50%, transparent 50.1%),
+    #0a0a09;
+  animation: aboutFieldReveal 880ms 90ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tensionColumn::before,
+.tensionColumn::after {
+  position: absolute;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: var(--signal-line-soft);
+  content: "";
+}
+
+.tensionColumn::before {
+  top: 3.4rem;
+}
+
+.tensionColumn::after {
+  bottom: 3.4rem;
+}
+
+.tensionHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.85fr);
+  align-items: end;
+  gap: 1.5rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid var(--signal-line);
+}
+
+.tensionHeader h2 {
+  color: var(--signal-warm-white);
+  font-size: clamp(1.45rem, 2vw, 2.1rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+:global(html[data-lang="en"]) .tensionHeader h2 {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.tensionHeader p {
+  color: var(--signal-muted);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.tensionGraph {
+  display: grid;
+  grid-template-columns: minmax(185px, 0.88fr) minmax(235px, 1.12fr);
+  min-height: 500px;
+  align-items: center;
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+}
+
+.portraitPlate {
+  position: relative;
+  align-self: center;
+  margin: 0;
+  background: #ffffff;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.42);
+}
+
+.portraitPlate::before,
+.portraitPlate::after {
+  position: absolute;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border-color: var(--signal-muted);
+  content: "";
+  pointer-events: none;
+}
+
+.portraitPlate::before {
+  top: -8px;
+  left: -8px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.portraitPlate::after {
+  right: -8px;
+  bottom: -8px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.portraitImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  background: #ffffff;
+  filter: none;
+  mix-blend-mode: normal;
+  object-fit: contain;
+  opacity: 1;
+}
+
+.portraitPlate figcaption {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 0.72rem;
+  background: #ffffff;
+  color: #080808;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+.portraitPlate figcaption span {
+  color: #5d5d5d;
+}
+
+.tensionTrack {
+  --pulse-travel: 410px;
+  position: relative;
+}
+
+.tensionStages {
+  position: relative;
+  display: grid;
+  min-height: 470px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tensionStages::before {
+  position: absolute;
+  top: 27px;
+  bottom: 27px;
+  left: 22px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--signal-line), #8e877f 48%, var(--signal-line));
+  content: "";
+}
+
+.tensionStage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+}
+
+.tensionStage::after {
+  position: absolute;
+  right: 0;
+  left: 44px;
+  z-index: -1;
+  height: 1px;
+  background: var(--signal-line-soft);
+  content: "";
+  transition: background-color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left;
+}
+
+.tensionNode {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 45px;
+  height: 45px;
+  place-items: center;
+  border: 1px solid #69635d;
+  border-radius: 50%;
+  background: #0a0a09;
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.3);
+  transition: border-color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tensionNode::before {
+  width: 17px;
+  height: 17px;
+  border: 1px solid #625d57;
+  border-radius: 50%;
+  content: "";
+}
+
+.tensionNode span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal-orange);
+  box-shadow: 0 0 12px rgba(255, 116, 0, 0.38);
+}
+
+.tensionStage > div {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.8rem 0.9rem 0.8rem 0;
+  background: #0a0a09;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stageIndex {
+  color: var(--signal-orange-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.tensionStage strong {
+  color: var(--signal-warm-white);
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-size: clamp(1.18rem, 1.65vw, 1.58rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+:global(html[data-lang="zh"]) .tensionStage strong {
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.tensionStage small {
+  color: var(--signal-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.025em;
+  line-height: 1.45;
+}
+
+.tensionPulse {
+  position: absolute;
+  top: 22px;
+  left: 17px;
+  z-index: 3;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--signal-orange-soft);
+  border-radius: 50%;
+  background: var(--signal-orange);
+  box-shadow:
+    0 0 0 5px rgba(255, 116, 0, 0.09),
+    0 8px 24px rgba(255, 116, 0, 0.42);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.tensionColumn[data-motion="running"] .tensionPulse {
+  animation: tensionTravel 5.8s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+  opacity: 1;
+  will-change: transform;
+}
+
+.nextLedgerCue {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  width: 47%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-inline: clamp(2rem, 4vw, 4rem);
+  border-top: 1px solid var(--signal-line-soft);
+  background: rgba(8, 8, 8, 0.86);
+  color: var(--signal-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease-out;
+}
+
+.nextLedgerCue svg {
+  color: var(--signal-orange-soft);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.routeSection,
+.currentSection {
+  max-width: 1536px;
+  margin-inline: auto;
+  border-right: 1px solid var(--signal-line-soft);
+  border-bottom: 1px solid var(--signal-line);
+  border-left: 1px solid var(--signal-line-soft);
+}
+
+.routeSection {
+  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5.5rem);
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(18rem, 0.68fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 7rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  border-bottom: 1px solid var(--signal-line);
+}
+
+.sectionHeader h2,
+.currentLead h2 {
+  max-width: 15ch;
+  color: var(--signal-warm-white);
+  font-size: clamp(2.8rem, 5.2vw, 5.2rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+:global(html[data-lang="en"]) .sectionHeader h2,
+:global(html[data-lang="en"]) .currentLead h2 {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.sectionHeader p {
+  max-width: 58ch;
+  color: var(--signal-muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.practiceList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.practiceRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70px minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  padding-block: clamp(2rem, 4vw, 3.3rem);
+  border-bottom: 1px solid var(--signal-line-soft);
+  transition: background-color 180ms ease-out;
+}
+
+.practiceRow::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: var(--signal-orange);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.practiceIndex {
+  color: var(--signal-orange-soft);
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 0.9;
+}
+
+.practiceTitle {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.practiceTitle h3 {
+  max-width: 18ch;
+  color: var(--signal-warm-white);
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  font-weight: 720;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+:global(html[data-lang="en"]) .practiceTitle h3 {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+
+.practiceTitle > span {
+  color: var(--signal-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.practiceRow > p {
+  max-width: 68ch;
+  color: #beb7ae;
+  font-size: clamp(0.9rem, 1.1vw, 1.02rem);
+  line-height: 1.72;
+}
+
+.currentSection {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.currentLead,
+.coordinateLedger {
+  padding: clamp(4rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5.5rem);
+}
+
+.currentLead {
+  display: grid;
+  min-height: 520px;
+  align-content: space-between;
+  border-right: 1px solid var(--signal-line);
+}
+
+.currentLead p {
+  max-width: 60ch;
+  color: #c7c0b7;
+  font-size: clamp(1rem, 1.5vw, 1.28rem);
+  line-height: 1.72;
+}
+
+.coordinateLedger {
+  display: grid;
+  align-content: space-between;
+  gap: clamp(3rem, 6vw, 6rem);
+  background: var(--signal-surface);
+}
+
+.educationList {
+  display: grid;
+}
+
+.educationList > div {
+  display: grid;
+  gap: 0.65rem;
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--signal-line-soft);
+}
+
+.educationList > div:first-child {
+  border-top: 1px solid var(--signal-line);
+}
+
+.educationList dt {
+  color: var(--signal-warm-white);
+  font-size: clamp(1.08rem, 1.6vw, 1.4rem);
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+.educationList dd {
+  color: var(--signal-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.contactRoutes {
+  display: grid;
+  border-top: 1px solid var(--signal-line);
+}
+
+.contactRoutes a {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-inline: 0.2rem;
+  border-bottom: 1px solid var(--signal-line-soft);
+  color: var(--signal-warm-white);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primaryAction:hover,
+  .primaryAction:focus-visible {
+    background: var(--signal-orange);
+    color: var(--signal-canvas);
+    transform: translateY(-2px);
+  }
+
+  .secondaryAction:hover,
+  .secondaryAction:focus-visible {
+    border-color: var(--signal-muted);
+    color: var(--signal-orange-soft);
+    transform: translateY(-2px);
+  }
+
+  .mailRoute:hover,
+  .mailRoute:focus-visible {
+    border-color: var(--signal-orange);
+    color: var(--signal-orange-soft);
+  }
+
+  .tensionStage:hover .tensionNode {
+    border-color: var(--signal-orange-soft);
+    transform: scale(1.08);
+  }
+
+  .tensionStage:hover::after {
+    background: var(--signal-orange);
+    transform: scaleX(1.02);
+  }
+
+  .tensionStage:hover > div {
+    transform: translateX(5px);
+  }
+
+  .practiceRow:hover {
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .practiceRow:hover::after {
+    transform: scaleX(1);
+  }
+
+  .contactRoutes a:hover,
+  .contactRoutes a:focus-visible {
+    color: var(--signal-orange-soft);
+    transform: translateX(5px);
+  }
+
+  .nextLedgerCue:hover,
+  .nextLedgerCue:focus-visible {
+    color: var(--signal-warm-white);
+  }
+
+  .nextLedgerCue:hover svg,
+  .nextLedgerCue:focus-visible svg {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes aboutFieldReveal {
+  from {
+    opacity: 0.78;
+    filter: blur(2px);
+    clip-path: inset(0 0 8% 0);
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes tensionTravel {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  92%,
+  100% {
+    transform: translateY(var(--pulse-travel));
+  }
+}
+
+@media (max-width: 1180px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(440px, 0.88fr);
+  }
+
+  .heroCopy {
+    padding-inline: clamp(2.4rem, 4vw, 4rem);
+  }
+
+  .tensionColumn {
+    padding-inline: 2rem;
+  }
+
+  .tensionGraph {
+    grid-template-columns: minmax(125px, 0.65fr) minmax(230px, 1.35fr);
+    gap: 1.7rem;
+  }
+
+  .tensionStage strong {
+    font-size: 1.22rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .heroCopy {
+    min-height: calc(100svh - 142px);
+    border-right: 0;
+    border-bottom: 1px solid var(--signal-line);
+  }
+
+  .heroCopy::after {
+    right: 12%;
+    bottom: -1px;
+    width: 24%;
+    height: 1px;
+  }
+
+  .name {
+    max-width: none;
+  }
+
+  .tensionColumn {
+    min-height: 680px;
+  }
+
+  .tensionGraph {
+    grid-template-columns: minmax(180px, 0.72fr) minmax(300px, 1.28fr);
+  }
+
+  .nextLedgerCue {
+    position: static;
+    grid-column: 1;
+    width: auto;
+    min-height: 64px;
+    padding-inline: 2rem;
+  }
+
+  .currentLead {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero::before {
+    width: 10px;
+  }
+
+  .heroCopy {
+    min-height: auto;
+    padding: 5.6rem 1.5rem 4rem;
+  }
+
+  .name {
+    font-size: clamp(4.25rem, 21vw, 6rem);
+  }
+
+  .heroStatement {
+    max-width: 14ch;
+    font-size: clamp(2.3rem, 10.5vw, 3.8rem);
+  }
+
+  :global(html[data-lang="zh"]) .heroStatement {
+    max-width: 9ch;
+  }
+
+  .narrative {
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+
+  .heroActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    justify-content: space-between;
+  }
+
+  .tensionColumn {
+    min-height: auto;
+    padding: 4.6rem 1.5rem;
+  }
+
+  .nextLedgerCue {
+    padding-inline: 1.5rem;
+  }
+
+  .tensionColumn::before,
+  .tensionColumn::after {
+    right: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .tensionHeader {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.8rem;
+  }
+
+  .tensionHeader p {
+    max-width: 42ch;
+  }
+
+  .tensionGraph {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 3.5rem;
+    padding-top: 3rem;
+  }
+
+  .portraitPlate {
+    width: min(68vw, 300px);
+    justify-self: center;
+  }
+
+  .tensionTrack {
+    --pulse-travel: 335px;
+  }
+
+  .tensionStages {
+    min-height: 395px;
+  }
+
+  .sectionHeader,
+  .currentSection {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    align-items: start;
+  }
+
+  .practiceRow {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .practiceRow > p {
+    grid-column: 2;
+  }
+
+  .practiceIndex {
+    font-size: 1.65rem;
+  }
+
+  .currentLead {
+    min-height: 440px;
+    border-right: 0;
+    border-bottom: 1px solid var(--signal-line);
+  }
+
+  .currentLead p {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .heroCopy,
+  .tensionColumn,
+  .routeSection,
+  .currentLead,
+  .coordinateLedger {
+    padding-inline: 1.1rem;
+  }
+
+  .name {
+    font-size: clamp(3.85rem, 20vw, 5rem);
+  }
+
+  .heroStatement {
+    font-size: clamp(2.15rem, 10.5vw, 3.1rem);
+  }
+
+  .mailRoute small {
+    max-width: 14rem;
+  }
+
+  .portraitPlate {
+    width: min(76vw, 280px);
+  }
+
+  .tensionStage {
+    gap: 0.85rem;
+  }
+
+  .tensionStage > div {
+    padding-right: 0;
+  }
+
+  .tensionStage strong {
+    font-size: 1.12rem;
+  }
+
+  .tensionStage small {
+    font-size: 0.56rem;
+  }
+
+  .sectionHeader h2,
+  .currentLead h2 {
+    font-size: clamp(2.55rem, 13vw, 3.8rem);
+  }
+
+  .practiceRow {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .practiceTitle h3 {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy,
+  .tensionColumn,
+  .tensionPulse {
+    animation: none !important;
+  }
+
+  .heroCopy,
+  .tensionColumn {
+    filter: none;
+    clip-path: none;
+    transform: none;
+  }
+
+  .primaryAction,
+  .secondaryAction,
+  .mailRoute,
+  .tensionNode,
+  .tensionStage::after,
+  .tensionStage > div,
+  .practiceRow,
+  .practiceRow::after,
+  .contactRoutes a,
+  .nextLedgerCue,
+  .nextLedgerCue svg {
+    transition: none !important;
+  }
+
+  .tensionStage:hover .tensionNode,
+  .tensionStage:hover::after,
+  .tensionStage:hover > div,
+  .primaryAction:hover,
+  .primaryAction:focus-visible,
+  .secondaryAction:hover,
+  .secondaryAction:focus-visible,
+  .nextLedgerCue:hover svg,
+  .nextLedgerCue:focus-visible svg {
+    transform: none !important;
+  }
+}

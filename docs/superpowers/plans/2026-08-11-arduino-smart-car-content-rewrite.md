@@ -1,5 +1,7 @@
 # Arduino Smart Car Content Rewrite Implementation Plan
 
+> **Historical status / 历史状态:** Completed in project and note commits `1db6758` and `dc386bb`, with later prose refinements recorded separately. This document is retained only as a historical implementation record; its unchecked steps, material-led terminology, and old branch name are not active work.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Rewrite the Arduino smart-car project page and learning note as distinct, evidence-bound bilingual engineering narratives while preserving the project title and existing public routes/assets.

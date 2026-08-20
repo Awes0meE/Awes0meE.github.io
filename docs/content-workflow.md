@@ -4,11 +4,11 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review the current `main` deployment in the browser: Juanyun public legacy material, Nanjing Turing Qt/CMake/Notion source notes, Tianjin STM32 internship notes, and the media gallery.
-2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` stay public-safe only; other legacy Juanyun material can use reviewed public evidence.
-3. Replace remaining placeholder visuals with real project photos, screenshots, videos, or diagrams.
-4. Expand project archive pages with direct evidence, inline source/text previews, and internal links.
-5. Keep `About`, education, technical-stack, contact, and media-gallery details aligned with the current public identity.
+1. Review the current eight-project archive and every route changed by the release candidate or active maintenance branch in both languages and at desktop/mobile widths.
+2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` remain sensitive; only individually reviewed and explicitly approved desensitized derivatives may be published. Other legacy Juanyun material can use selected reviewed public evidence.
+3. Prefer real project photos, screenshots, videos, diagrams, logs, and selected files over placeholders or generated evidence imagery.
+4. Expand project archive pages with direct evidence, inline source/text previews, and internal links while preserving claim and privacy boundaries.
+5. Keep Work, Notes, Media, About, education, technical-stack, and contact details aligned with the current public identity and the route scope in `DESIGN.md`.
 6. Keep public English and Chinese body sections equivalent. Frontmatter translation alone is not enough when an article body contains substantial Chinese or English content.
 
 ## Add Or Edit A Project
@@ -33,7 +33,7 @@ title: "English title"
 titleZh: "中文标题"
 summary: "English summary"
 summaryZh: "中文摘要"
-date: "2026.05 to Now"
+date: "2026.05"
 status: "In Progress"
 tags: ["Control", "Embedded", "Next.js"]
 cover: "/uploads/projects/my-project/cover.jpg"
@@ -80,7 +80,7 @@ projectSlug: "my-project-slug"
 ---
 ```
 
-`projectSlug` is optional. Add it when a note should appear automatically on a project detail page.
+`projectSlug` is optional in the note schema. Add it when a note should appear automatically on a project detail page. The current `/notes` Routed Signal Map has only real-project channels, so a public note also needs a valid matching `projectSlug` to enter that index.
 
 The value must match a file slug in `content/projects/`. Example: `projectSlug: "juanyun-thermal-hardware"` connects the note to `/work/juanyun-thermal-hardware`.
 
@@ -88,11 +88,13 @@ On project detail pages, related development notes appear above the public proje
 
 `visibility` controls whether the note is served publicly:
 
-- `visibility: public` makes the note appear on the homepage, `/notes`, project detail related-note sections, and `/notes/[slug]`.
+- `visibility: public` makes the detail route available and lets the note participate in public homepage selection. It appears on `/notes` and in a project detail related-note section only when `projectSlug` resolves to a real project.
 - `visibility: private` hides the note from those public surfaces and makes the public detail route return 404.
 - missing `visibility` is treated as private. Use this for drafts.
 
 This is website-level hiding only. If the GitHub repository is public, private note source can still be visible in the repository. Truly confidential notes should stay outside the public repo or move to a future authenticated storage layer.
+
+The `/notes` Chinese display face is a local subset. When a new note title introduces missing Chinese glyphs, update `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.txt`, regenerate `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.woff2` with the documented command in `app/fonts/README.md`, and keep the bundled SIL OFL record intact.
 
 ## Add Images Or Videos
 
@@ -113,7 +115,11 @@ public/uploads/hero/
 
 Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization in both language modes, keep the mark's upper-left and lower-right square bounds equal, and retain the user-selected B-style transparent wordmark at its approved compact 26px header height. Treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
 
-`public/uploads/hero/` contains only the five final assets consumed by `components/technical-visual.tsx`. Keep the approved two-over-three order: OLED and TFT-display assemblies above, then battery power, multi-rail power, and AD831 mixer below. AI background-replacement outputs are presentation derivatives; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
+`public/uploads/hero/` contains the five prototype images consumed by the homepage atom visual in `components/technical-visual.tsx`. Keep all five in the rotating nucleus. The three equal-sized orbits remain separated by 60 degrees and each carries five evenly spaced technology marks, grouped as embedded systems, firmware development, and engineering tools. Do not treat the nucleus images or orbit marks as project evidence, proof of fabrication or validation, an affiliation or endorsement claim, or a proficiency scale; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
+
+Keep technology-mark source and trademark notes current in `public/skills/icons/README.md`, and keep institution-mark provenance current in `public/education/README.md`. Do not add a mark to the visual without recording its source and confirming that its public use remains appropriate.
+
+The homepage animation must retain its non-visual fallbacks: pause the orbit, dash, tail, nucleus, and background motion while the visual is offscreen or the document is hidden, and preserve the static composition selected by `prefers-reduced-motion`. Surface-specific rules for Work, Notes, Media, and About live in `DESIGN.md`; never infer one route's composition or evidence meaning from another route's visual language.
 
 Reference files with public paths:
 
@@ -129,7 +135,7 @@ In project and note bodies, one standalone Markdown image renders as a clickable
 
 For company work, be stricter: do not put Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source files, full firmware source dumps, or internal requirement/manufacturing packages under `public/uploads/` unless they are explicitly reviewed and desensitized. For Juanyun, the user explicitly approved non-Current_Product legacy folders for selected public evidence; `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive. Files under `public/uploads/` are public static assets even when no page links to them. `public/uploads/projects/juanyun-tech` is intentionally allowlisted by `scripts/validate-content.mjs`; if WPS or a local copy restores ignored raw files there, move them outside the repo before building.
 
-## Add Media Gallery Items
+## Add Project-Linked Media Records
 
 Edit:
 
@@ -156,7 +162,7 @@ Example:
 
 Use `titleZh` and `captionZh` when a media card should switch cleanly between English and Simplified Chinese.
 
-Every project/note image or video that should be discoverable from the media page needs a matching `content/media.json` entry. Use `projectSlug` whenever the media belongs to a project; the media page displays that source project on each card.
+Every project/note image or video that should be discoverable from the media page needs a matching `content/media.json` entry. Set `projectSlug` for every project-owned record; `/media` uses it to build the source chooser and the server-rendered project chapters, and repeats the source project on each record. The unassigned group is a defensive fallback, not a substitute for confirming provenance.
 
 ## Language Switching
 

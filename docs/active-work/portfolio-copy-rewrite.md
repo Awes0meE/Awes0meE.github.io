@@ -1,7 +1,7 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-08-16
-**Branch:** `main`
+**Copy-rewrite active branch:** none; the next rewrite starts from synchronized `main`
 **Current project:** none selected
 **Last completed project:** `从自制驱动板到压缩机运行：我的无感 FOC 学习路线`
 **State:** pull request #25 merged the user-approved FOC refactor into `main` at `df5b91322a09f00cf0f813dacd8b871f91cba47f`; the project is closed unless the user explicitly reopens it
@@ -86,7 +86,7 @@ not standing permission to bulk-rewrite approved content.
 3. Reuse the one-project interview, evidence, cognition-led writing, bilingual
    review, and explicit merge-approval workflow.
 
-## Current Verification
+## 2026-08-16 FOC Release Verification
 
 - Pull request #25 used exact head
   `049aa57209a14776f2a7a7da9ee8dca5deb957d9`; its Vercel status passed before

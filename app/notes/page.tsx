@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, ScrollText } from "lucide-react";
-import { BilingualText } from "@/components/bilingual-text";
-import { getNotes } from "@/lib/content";
+import type { Metadata, Viewport } from "next";
+import {
+  NotesSignalIndex,
+  type NotesIndexItem,
+  type NotesIndexProject
+} from "@/components/notes-signal-index";
+import { getNotes, getProjects } from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
 
 const pageTitle = "Notes";
@@ -25,48 +27,73 @@ export const metadata: Metadata = {
   }
 };
 
-export default function NotesPage() {
-  const notes = getNotes();
+export const viewport: Viewport = {
+  themeColor: "#090b0a",
+  colorScheme: "dark"
+};
 
-  return (
-    <main className="mx-auto max-w-5xl px-5 py-12 lg:px-8">
-      <h1 className="text-5xl font-semibold text-ink">
-        <BilingualText en="Notes" zh="学习笔记" />
-      </h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-graphite">
-        <BilingualText
-          en="Engineering notes that follow specific questions through source files, build failures, circuit behavior, board bring-up, and verification."
-          zh="这些工程笔记从具体问题出发，沿着源文件、构建故障、电路现象、板级 bring-up 和验证过程继续追下去。"
-        />
-      </p>
-      <div className="mt-10 divide-y divide-line rounded-lg border border-line bg-white">
-        {notes.map((note) => (
-          <Link key={note.slug} href={`/notes/${note.slug}`} className="grid gap-4 p-5 transition hover:bg-chalk md:grid-cols-[44px_1fr_auto]">
-            <span className="grid h-11 w-11 place-items-center rounded-md border border-line text-pine">
-              <ScrollText size={19} />
-            </span>
-            <span>
-              <span className="block text-xl font-semibold text-ink">
-                <BilingualText en={note.title} zh={note.titleZh} />
-              </span>
-              <span className="mt-3 block leading-7 text-graphite">
-                <BilingualText en={note.summary} zh={note.summaryZh} />
-              </span>
-              <span className="mt-3 flex flex-wrap gap-2">
-                {note.tags.map((tag) => (
-                  <span key={tag} className="rounded border border-line bg-paper px-2 py-1 text-xs text-graphite">
-                    {tag}
-                  </span>
-                ))}
-              </span>
-            </span>
-            <span className="flex items-center gap-3 text-sm text-graphite">
-              {note.date}
-              <ArrowRight size={16} />
-            </span>
-          </Link>
-        ))}
-      </div>
-    </main>
+function getNoteDateSortTime(value: string) {
+  const match = value.match(/\d{4}(?:[.-]\d{1,2})?(?:[.-]\d{1,2})?/);
+
+  if (!match) {
+    return 0;
+  }
+
+  const [year, month = "1", day = "1"] = match[0].split(/[.-]/);
+  return Date.UTC(Number(year), Number(month) - 1, Number(day));
+}
+
+export default function NotesPage() {
+  const projectMap = new Map(
+    getProjects().map((project) => [project.slug, project] as const)
   );
+  const sortedNotes = [...getNotes()].sort(
+    (a, b) =>
+      getNoteDateSortTime(b.date) - getNoteDateSortTime(a.date) ||
+      a.slug.localeCompare(b.slug)
+  );
+
+  const notes: NotesIndexItem[] = sortedNotes.flatMap((note, index) => {
+    const project = note.projectSlug ? projectMap.get(note.projectSlug) : undefined;
+
+    if (!project) {
+      return [];
+    }
+
+    return [
+      {
+        slug: note.slug,
+        title: note.title,
+        titleZh: note.titleZh,
+        summary: note.summary,
+        summaryZh: note.summaryZh,
+        date: note.date,
+        tags: note.tags,
+        projectSlug: project.slug,
+        projectTitle: project.title,
+        projectTitleZh: project.titleZh,
+        sequence: index + 1
+      }
+    ];
+  });
+
+  const linkedProjectSlugs = [...new Set(notes.map((note) => note.projectSlug))];
+  const projects: NotesIndexProject[] = linkedProjectSlugs.flatMap((slug) => {
+    const project = projectMap.get(slug);
+
+    if (!project) {
+      return [];
+    }
+
+    return [
+      {
+        slug: project.slug,
+        title: project.title,
+        titleZh: project.titleZh,
+        noteCount: notes.filter((note) => note.projectSlug === project.slug).length
+      }
+    ];
+  });
+
+  return <NotesSignalIndex notes={notes} projects={projects} />;
 }

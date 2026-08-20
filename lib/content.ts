@@ -139,6 +139,8 @@ export function formatStatusZh(value: string) {
     "Private Evidence Review": "私有证据审查",
     "Planning Archive": "计划归档",
     "Archived Prototype": "原型归档",
+    "Commissioned Hardware": "委托硬件项目",
+    "Completed Internship Project": "已完成实习项目",
     "Public Overview": "公开概览",
     "Ongoing Learning Route": "持续学习 / 阶段原型",
     Draft: "草稿",

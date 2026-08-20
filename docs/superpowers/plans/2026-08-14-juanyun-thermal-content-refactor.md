@@ -1,5 +1,7 @@
 # Juanyun Thermal Content Refactor Implementation Plan
 
+> **Historical status — completed:** Pull request #22 completed this work at `e473b8c13f99308398a9c3221e1402d78634498d` on 2026-08-14. The instructions below are retained as implementation history and are not an active plan.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Turn the Juanyun thermal-management archive into an evidence-bounded bilingual project narrative plus distinct hardware, firmware, automatic-control, and maintenance notes without exposing reconstructable private source.

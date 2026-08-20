@@ -1,5 +1,7 @@
 # Sensorless FOC Learning Route Refactor Design
 
+> **Historical status / 历史状态:** Implemented and merged through pull request #25 at merge commit `df5b913`; the release handoff was later closed in commit `9f80eab`. This specification is retained only as a historical design record and is not active work.
+
 **Date:** 2026-08-16
 **Branch:** `feat/sensorless-foc-learning-route`
 **Status:** approved in conversation; implementation authorized on 2026-08-16
