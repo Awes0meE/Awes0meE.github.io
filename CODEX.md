@@ -56,12 +56,12 @@ These rules incorporate the installed `neat-freak` skill:
 
 ## Commands
 
-Full setup details live in `docs/environment-toolchain.md`. Use the Node.js install on PATH if available. On this Windows machine, Node was installed under `C:\Program Files\nodejs`.
+Full setup details live in `docs/environment-toolchain.md`. Use the Node.js and npm installations on PATH; machine-specific snapshots belong in `docs/session-log.md`, not in this portable guide.
 
 Baseline:
 
-- Node.js 22 LTS or newer; this machine is verified with `v24.19.0`.
-- npm 10 or newer; this machine is verified with `11.17.0`.
+- Node.js 22 LTS or newer.
+- npm 10 or newer.
 - `.nvmrc` pins the portable baseline to Node `22`.
 - Use npm only; do not introduce pnpm, yarn, Bun, or extra lockfiles.
 
@@ -114,10 +114,10 @@ Local Next.js cache rule:
 - `/` homepage
 - `/work` project list
 - `/work/[slug]` project detail
-- `/notes` note list
+- `/notes` Routed Signal Map note index
 - `/notes/[slug]` note detail
-- `/media` media gallery
-- `/about` profile and contact
+- `/media` project-grouped media evidence archive
+- `/about` CV-grounded Tension Signal Column identity, method, and contact route
 
 ## Content Model
 
@@ -144,9 +144,11 @@ Notes require:
 - `date`
 - `tags`
 - `visibility`: `public` or `private`
-- optional `projectSlug`
+- optional `projectSlug` at schema level; the current `/notes` Routed Signal Map requires it to resolve to a real project before the note can enter an index channel
 
 Notes without `visibility: public` are treated as private. Private notes are not listed on the homepage, `/notes`, or project detail pages, and `/notes/[slug]` returns 404 for them through the public route helpers.
+
+An unlinked public note can still have a public `/notes/[slug]` route and remain eligible for homepage selection, but it is omitted from the current `/notes` project-channel index and from project-detail related-note lists. Do not invent an “unassigned” Notes channel to hide a missing or invalid join.
 
 Media items live in `content/media.json` and require:
 
@@ -161,7 +163,7 @@ Media items live in `content/media.json` and require:
 - optional `captionZh`
 - optional `projectSlug`
 
-`projectSlug` powers two reverse-link surfaces: project detail pages show related notes/media, and note detail pages show the related project card. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can render a two-pane public file browser: the server component resolves reviewed files with path normalization, directory/file caps, strict UTF-8 reads, aggregate preview-size caps, and the Juanyun allowlist; the client component handles left-index selection plus right-side previews for images/videos, Markdown/text, source code, PDFs, and binary fallback cards. Uploaded Markdown previews resolve relative links/images against the source file path. HTML and SVG uploads are download-only artifacts, not inline previews. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
+`projectSlug` powers project grouping on `/media` and the reverse-link surfaces on project and note detail pages. Every project-owned media record should carry it; the unassigned media group is a defensive fallback, not the intended archive structure. Project `assetPaths` entries point to files or directories under `public/uploads/` so project pages can render a two-pane public file browser: the server component resolves reviewed files with path normalization, directory/file caps, strict UTF-8 reads, aggregate preview-size caps, and the Juanyun allowlist; the client component handles left-index selection plus right-side previews for images/videos, Markdown/text, source code, PDFs, and binary fallback cards. Uploaded Markdown previews resolve relative links/images against the source file path. HTML and SVG uploads are download-only artifacts, not inline previews. Project detail pages intentionally render in this order: project body, development notes, public project files, then related media.
 
 ## Language Switching
 
@@ -181,7 +183,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 The published baseline is release `v0.8.0` on `main`, including the media/cover refresh, the two-pane public project-file browser, the imported Digital Clock and Smart Car course projects, and the released iRidium header, education, and five-card hardware-hero refinement.
 
-As of `2026-08-20`, the active checkout is a homepage-only topic-branch checkpoint on `feat/frontend-refresh`. It replaces the released five-card hero in the branch preview with an atom-orbit composition while preserving the five presentation derivatives. Its selected desktop navigation combines low-opacity `01`–`04` indices with the homepage display typography and one Ember interaction line across each number and label; mobile stays compact and unnumbered. This checkpoint is not a release, merge, deployment, or redesign of `/work`, `/notes`, `/media`, `/about`, or project-detail content.
+As of `2026-08-21`, the integrated route-scoped implementation is committed at `28b0a8f` on `feat/frontend-refresh`. It replaces the released five-card homepage hero with an atom-orbit composition and uses the shared `.signal-theme` marker to opt approved surfaces into the Ember Black shell. `/work` is separately defined as Project Aperture Sequence: a locating rail leads eight evidence-first project chapters, with seven generous Ember-tick intervals between them. `/media` is separately defined as Focus Aperture: eight named project sources select one lead record, a validated `project` query initializes the selected source, and the complete 84-record archive stays server-rendered in project chapters. `/notes` is separately defined as Routed Signal Map: the server projects 24 linked public notes into eight real-project channels, while a small client island handles metadata search plus project/year filtering and reset. `/about` is separately defined as Tension Signal Column: CV-grounded bilingual copy traces Alvin's identity and working method, the original white-background black-line portrait remains unaltered, and four route nodes plus one restrained pulse communicate connection without implying score, status, progress, or validation. `/work/[slug]` and `/notes/[slug]` remain paper-themed. This topic-branch checkpoint is not a release, merge, deployment, or redesign of project or note detail content.
 
 As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -203,7 +205,7 @@ Current content count in this workspace:
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
 - 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF and source description TXT stay out of `public/uploads/`, while selected course screenshots without the top-right XJTLU logo, cropped homework-report excerpts, the original homework report PDF, Arduino sketches, demo video, and SN54LS47 datasheet are public.
 - 1 Arduino Smart Car line-tracking course project and 1 related note were added from `C:\Users\123\Desktop\Smart Car Project`; the original course tutorial PDF and project-description TXT stay reference-only, while selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code are public.
-- 84 media gallery items cover images/videos referenced by project and note pages, including 12 independent FOC learning-route records for board renders, five schematic sheets, onsite SMT, the compressor bench, open-loop runtime, and the generated FOC/SVPWM signal-chain visual.
+- 84 project-bound media records comprise 80 images and 4 videos across 8 projects, including 12 independent FOC learning-route records for board renders, five schematic sheets, onsite SMT, the compressor bench, open-loop runtime, and the generated FOC/SVPWM signal-chain visual.
 - The DIY pressure-flow cooling project, note, and six media records completed the one-project-at-a-time `grill-me` rewrite on `2026-08-12`, then received the final cognition-led pass after the redesigned writer merged through pull request #8; pull request #9 merged that prose into `main` at `baa7c98`. Remembered temperature and frame-rate changes remain explicitly personal observations rather than controlled benchmark results.
 - The Arduino Digital Clock project, note, and 11 media records completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #10 merged that prose into `main` at `80c3743`. The account preserves individual ownership, treats the two rollover thresholds as separately flashed versions, and keeps the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet within their verified evidence boundaries.
 - The Tianjin Jintie Communications STM32 project and five notes completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #12 merged the project page, five notes, and three media-copy updates into `main` at `bb06ad8`. The account follows the self-directed path from Arduino abstractions to peripheral-level reasoning, keeps the 16-point ADC-to-PWM mapping feedforward, treats the hardware-I2C lockup as a present-day hypothesis, and leaves PID plus ATP/ATO/ATS in the reading layer. All four public C excerpts and public uploads were unchanged.
@@ -236,13 +238,17 @@ Maintain the current engineering-academic identity:
 - precise, calm, credible, portfolio-grade;
 - Alvin Li is the sole reader-facing personal identity; `iRidium / 铱` is the engineering archive brand;
 - keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header, preserve equal square bounds for its upper-left and lower-right blocks, pair it with the user-selected B-style `public/brand/iridium-wordmark-script.png`, render that wordmark at the user-approved compact 26px height, and preserve the exact `iRidium` capitalization in both language modes;
-- keep the shared navigation's exact-route `aria-current="page"` and nested-route `aria-current="location"` semantics. On the homepage desktop header only, retain the `01`–`04` prefixes, English Barlow Condensed display face, Ember line spanning number and label, visible focus/current state, and short press response; omit indices on mobile and remove movement under reduced motion;
+- keep the shared navigation's exact-route `aria-current="page"` and nested-route `aria-current="location"` semantics. On `.signal-theme` desktop headers, retain the `01`–`04` prefixes, English Barlow Condensed display face, Ember line spanning number and label, visible focus/current state, and short press response; omit indices on mobile and remove movement under reduced motion;
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
 - for the `2026-08-20` local `feat/frontend-refresh` checkpoint, keep those five presentation derivatives as a compact prototype nucleus in `components/technical-visual.tsx`; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
+- on `/work`, keep the sticky `01`–`08` rail, eight complete semantic project links, and exactly seven black signal intervals whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
+- on `/notes`, keep eight real-project channel stems feeding one continuous Ember reading path, with native search plus project and year controls above 24 semantic note rows. Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, keep `/notes/[slug]` on the paper system, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
+- on `/media`, keep the project-first Focus Aperture with eight source choices, one authentic lead record, and all 84 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
+- on `/about`, keep the CV-grounded identity-and-method narrative distinct from the homepage capability list; preserve the complete original `public/uploads/projects/avatar.jpg` white field and black line art without crop, inversion, recoloring, filtering, blending, fading, tracing, or generated replacement. Treat the four stages as a route rather than a score, allow exactly one non-status pulse only while visible, and preserve the full static structure under `prefers-reduced-motion`;
 - treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
-- the current homepage-only design uses a near-black engineering field, warm white information, fine rules, and ember-orange signal accents; do not infer that this local treatment has been released across the other routes;
+- the current `.signal-theme` shell uses a near-black engineering field, warm white information, fine rules, and ember-orange signal accents only on explicitly opted-in routes; do not infer that this local treatment has been released or that every route shares the same surface composition;
 - project evidence over decoration;
 - no generic template blog styling, no Hexo identity, no stock marketing hero.
 
@@ -293,7 +299,7 @@ For visual/layout edits:
 - check both languages at desktop and mobile widths;
 - verify no horizontal overflow;
 - verify links and dynamic content routes;
-- verify visibility pausing and `prefers-reduced-motion` behavior for the atom animation.
+- verify visibility pausing and `prefers-reduced-motion` behavior for every changed route motion, including the homepage atom, Work intervals, Notes route motion, Media reveal/scan, and About pulse when those surfaces are in scope.
 
 For dependency changes:
 

@@ -22,12 +22,12 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 | Route | Purpose | Source |
 | --- | --- | --- |
 | `/` | Concise homepage with hero, education, featured projects, notes, media, and contact | `app/page.tsx` |
-| `/work` | Project list | `app/work/page.tsx` |
+| `/work` | Evidence-first Project Aperture Sequence index | `app/work/page.tsx` |
 | `/work/[slug]` | Project detail | `app/work/[slug]/page.tsx` |
-| `/notes` | Notes list | `app/notes/page.tsx` |
+| `/notes` | Project-routed engineering note index with metadata search and project/year filters | `app/notes/page.tsx` |
 | `/notes/[slug]` | Note detail | `app/notes/[slug]/page.tsx` |
-| `/media` | Media gallery | `app/media/page.tsx` |
-| `/about` | Profile and contact | `app/about/page.tsx` |
+| `/media` | Project-grouped media evidence archive with an interactive lead aperture | `app/media/page.tsx` |
+| `/about` | CV-grounded identity, working method, and contact in the Tension Signal Column | `app/about/page.tsx` |
 
 ## Data Flow
 
@@ -53,23 +53,27 @@ Note:
 - metadata from frontmatter;
 - markdown-like body content;
 - `visibility` controls public routing;
-- optional `projectSlug` for project-detail related-note sections.
+- optional `projectSlug` at schema level; a valid matching project is required for the current `/notes` project-channel index and project-detail related-note sections.
 
-The public note helpers intentionally filter to `visibility: public`. Missing `visibility` is normalized to private in `lib/content.ts`, so a newly added draft note is hidden unless it is explicitly published.
+The public note helpers intentionally filter to `visibility: public`. Missing `visibility` is normalized to private in `lib/content.ts`, so a newly added draft note is hidden unless it is explicitly published. An unlinked public note can still generate its detail route, but the Routed Signal Map does not place it into an invented unassigned channel.
 
 Media:
 
 - JSON object with thumbnail, source path, caption, optional Chinese title/caption, date, and optional related project.
 
-Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-20`:
+Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-21`:
 
 - public identity and metadata use `Alvin Li`; the engineering archive brand is `iRidium / 铱`, with exact capitalization fixed as lowercase `i`, uppercase `R`, then lowercase `idium`;
-- the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices. `components/site-navigation.tsx` reads `usePathname()` to expose exact routes as `aria-current="page"` and nested routes as `aria-current="location"`; the homepage desktop treatment adds `01`–`04` indices and Ember interaction feedback, while the mobile row stays compact and unnumbered;
+- the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices. `components/site-navigation.tsx` reads `usePathname()` to expose exact routes as `aria-current="page"` and nested routes as `aria-current="location"`; `.signal-theme` desktop headers add `01`–`04` indices and Ember interaction feedback, while the mobile row stays compact and unnumbered;
 - the homepage education block uses one full-width NTU master's row followed by a two-column undergraduate dual-degree row for Xi'an Jiaotong-Liverpool University and the University of Liverpool; the Liverpool `BEng (Hons) Telecommunications Engineering` carries the `First Class Honours` classification;
 - `components/technical-visual.tsx` and `components/technical-visual.module.css` render the homepage's atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly clockwise rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware development, and engineering tools;
 - the atom's prototype images and third-party technology marks are representative presentation material, not project evidence or claims of fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance lives in `public/skills/icons/README.md`, and institution-mark provenance lives in `public/education/README.md`;
 - the client component uses `IntersectionObserver`, document visibility, and the system `prefers-reduced-motion` preference to pause offscreen or hidden animation and to provide a static reduced-motion state;
-- the frontend refresh is isolated on the `feat/frontend-refresh` topic branch and is not part of `main` or the released site. Its redesign scope is the homepage and homepage-scoped shared-shell presentation; `/work`, `/work/[slug]`, `/notes`, `/notes/[slug]`, `/media`, and `/about` retain their existing information architecture and page implementations;
+- the frontend refresh is isolated on the `feat/frontend-refresh` topic branch and is not part of `main` or the released site. Ember Black is an opt-in shell rooted by `.signal-theme`; the homepage, `/work`, `/notes`, `/media`, and `/about` currently use it, while `/work/[slug]` and `/notes/[slug]` retain their existing paper-system implementations;
+- `/work` remains statically generated and evidence-first: `app/work/page.tsx` loads all eight repository projects on the server, renders each chapter as one complete semantic link, and places exactly seven signal intervals between adjacent chapters. The small `WorkProjectRail` client island observes chapter and interval visibility to update the locating rail and pause offscreen or document-hidden tick motion; `/work/[slug]` detail pages are unchanged;
+- `/notes` remains statically generated and metadata-light: `app/notes/page.tsx` sorts public notes deterministically, keeps only records whose `projectSlug` resolves to one of the eight repository projects, and projects 24 note metadata records into `NotesSignalIndex`. The client island searches bilingual titles, summaries, tags, and project names and filters by project/year; note bodies stay on the server-side detail routes and are not shipped in the index payload;
+- `/media` remains statically generated and project-first: `app/media/page.tsx` loads and groups all 84 repository records across eight projects on the server, renders the archive totals and complete project chapters, and passes only the eight lead records into the small `MediaFocusAperture` client island for source selection. A validated `project` query initializes the matching lead without moving archive truth to the client. The current content set is 80 images and four videos with no unassigned media;
+- `/about` remains statically generated and fact-led: `app/about/page.tsx` owns the bilingual CV-grounded identity, method, practice-ledger, current-study, and contact content. `app/about/about.module.css` owns the route-local Tension Signal Column geometry and responsive layout, while the small `AboutTensionColumn` client island in `components/about-tension-column.tsx` only coordinates the original `public/uploads/projects/avatar.jpg` portrait plate, four route nodes, viewport/document visibility, and the single non-status pulse. Reduced-motion mode preserves the complete static route;
 - 8 project files total;
 - 24 public note files total;
 - 2 Juanyun project pages and 10 Juanyun-prefixed notes;
@@ -79,7 +83,7 @@ Current content state in this workspace, extending release `v0.8.0`, as of `2026
 - 1 Tianjin rail-transit STM32 foundation project and 5 related notes;
 - 1 Arduino Digital Clock course project and 1 related note from `C:\Users\123\Desktop\Digital Clock`, with selected course screenshots re-rendered without the top-right XJTLU logo and the original homework report PDF published as project evidence;
 - 1 Arduino Smart Car line-tracking course project and 1 related note from `C:\Users\123\Desktop\Smart Car Project`, with selected course screenshots re-rendered without the school logo area, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code published as project evidence;
-- 84 media gallery items covering project/note images, including 12 independent FOC records for renders, schematic sheets, onsite SMT, the assembled compressor bench, open-loop runtime, and an original code-grounded FOC/SVPWM visual;
+- 84 project-bound media records covering project/note images and videos, including 12 independent FOC records for renders, schematic sheets, onsite SMT, the assembled compressor bench, open-loop runtime, and an original code-grounded FOC/SVPWM visual;
 - the DIY pressure-flow cooling project, note, and six media records now use the approved first-person account from the one-project-at-a-time interview workflow, while remembered temperature and frame-rate changes stay marked as personal observations rather than controlled benchmark results;
 - the Arduino Digital Clock project, note, and 11 media records now use the approved bilingual first-person account; the two rollover thresholds remain separately flashed versions, while the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet retain their documented evidence limits;
 - the Tianjin Jintie Communications STM32 project and five notes now use the approved bilingual first-person account; the 16-point ADC-to-PWM mapping remains feedforward, the hardware-I2C lockup remains a present-day hypothesis, PID and ATP/ATO/ATS remain reading-layer concepts, and all four public C excerpts remain unchanged;

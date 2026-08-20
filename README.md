@@ -6,7 +6,7 @@ English | [中文](#中文说明)
 
 This repository contains the source code for Alvin Li's bilingual robotic systems hardware portfolio, with iRidium / 铱 as the engineering archive brand. It organizes projects, notes, and media around embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, motor drives, and power electronics.
 
-Alvin Li is currently pursuing the Master of Science (Robotics and Intelligent Systems) at Nanyang Technological University, Singapore. Through XJTLU's dual-degree programme, he holds a BEng in Telecommunications Engineering from Xi'an Jiaotong-Liverpool University and a BEng (Hons) in Telecommunications Engineering with First Class Honours from the University of Liverpool.
+As of `2026-08-21`, Alvin Li is pursuing the Master of Science (Robotics and Intelligent Systems) at Nanyang Technological University, Singapore. Through XJTLU's dual-degree programme, he holds a BEng in Telecommunications Engineering from Xi'an Jiaotong-Liverpool University and a BEng (Hons) in Telecommunications Engineering with First Class Honours from the University of Liverpool.
 
 The old deployed Hexo output is preserved under `legacy/hexo-export/` for reference only. It is not served by the new application.
 
@@ -38,7 +38,7 @@ app/                    Next.js routes and pages
 components/             Reusable UI components
 content/projects/       Project case studies in MDX
 content/notes/          Learning notes in MDX
-content/media.json      Media gallery metadata
+content/media.json      Project-linked media archive metadata
 lib/                    Content loaders and site constants
 public/uploads/         Public images, videos, and generated visuals
 public/brand/           Approved iRidium identity assets
@@ -116,7 +116,7 @@ title: "Example Hardware Archive"
 titleZh: "示例硬件档案"
 summary: "English summary"
 summaryZh: "中文摘要"
-date: "2024.10 to Now"
+date: "2024.10"
 status: "In Progress"
 tags: ["STM32", "Control", "PCB"]
 cover: "/uploads/projects/example-hardware/cover.jpg"
@@ -128,9 +128,9 @@ assetPaths:
 ---
 ```
 
-Notes are stored in `content/notes/*.mdx`. Each note should include `visibility: public` or `visibility: private`. Missing visibility is treated as private, so drafts do not accidentally appear on the public site.
+Notes are stored in `content/notes/*.mdx`. Each note should include `visibility: public` or `visibility: private`. Missing visibility is treated as private, so drafts do not accidentally appear on the public site. `projectSlug` is optional in the content schema, but a public note needs a valid matching project to enter the current `/notes` Routed Signal Map.
 
-Media items are stored in `content/media.json`, with assets under `public/uploads/`. Use optional `titleZh` and `captionZh` when the media card needs Chinese text for the global language switch, and add `projectSlug` so the media page can show which project the image or video comes from.
+Media items are stored in `content/media.json`, with assets under `public/uploads/`. Use optional `titleZh` and `captionZh` when the media record needs Chinese text for the global language switch, and add `projectSlug` to every project-owned record so `/media` can keep it inside the correct project chapter.
 
 All source, content, docs, and public-upload text files must be UTF-8. Convert legacy GBK, UTF-16, EDA, Notion, and manufacturing text exports before placing them under `content/` or `public/uploads/`; `npm run lint` includes the encoding gate.
 
@@ -138,7 +138,7 @@ The site has a top-right English / Simplified Chinese toggle. Fixed UI labels us
 
 Normal fenced code blocks are rendered as shared technical evidence. If a whole listing belongs only to one language view, prefix the fence language with `en-` or `zh-`, such as `en-text` or `zh-powershell`; the visible code label drops the prefix while the language toggle hides the inactive block.
 
-Use `projectSlug` on notes and media items when they should appear as related material on a project page.
+Use `projectSlug` on notes and media items when they should appear as related material on a project page. A public note without a valid project join can still have a detail route, but it is not placed into a fabricated “unassigned” channel on `/notes`.
 
 Use optional project `assetPaths` to list uploaded evidence from `public/uploads/` on project pages. The project page shows a left-side file index and a right-side preview panel. Images and videos preview inline; Markdown and text documents render as readable page content; source/code files render in code frames; PDFs embed from page one where the browser supports it; binary files such as spreadsheets, Gerber archives, STEP, EasyEDA, and Word documents keep direct open links. Uploaded Markdown previews resolve relative links/images from the source file path. HTML and SVG uploads are treated as download-only artifacts rather than inline previews.
 
@@ -148,10 +148,14 @@ Current workspace content state:
 
 - The sitewide public identity and SEO metadata use Alvin Li. The exact English brand spelling is always `iRidium`—lowercase `i`, uppercase `R`, then lowercase `idium`. iRidium / 铱 is the engineering archive brand; the previous public aliases no longer appear as reader-facing identity labels.
 - The approved iRidium mark uses five rectilinear outlined blocks inside a square boundary: two left blocks, one uninterrupted full-height centre rectangle, and two right blocks, with equal square bounds for the upper-left and lower-right blocks. The transparent lockup, square header mark, and user-selected B-style script wordmark live under `public/brand/`; the header serves the wordmark as a portable transparent asset so it stays visually identical in both language modes and across devices.
-- On `feat/frontend-refresh`, the homepage desktop navigation adds low-key `01`–`04` indices, uses the same English display face as `Project evidence index`, and reveals one Ember line across each index and label for hover, focus, and current-route feedback. The shared route state remains semantic, while the compact mobile navigation stays unnumbered.
+- On `feat/frontend-refresh`, each `.signal-theme` desktop header adds low-key `01`–`04` indices, uses the same English display face as `Project evidence index`, and reveals one Ember line across each index and label for hover, focus, and current-route feedback. The shared route state remains semantic, while the compact mobile navigation stays unnumbered.
 - The homepage education block uses one full-width NTU row and a second two-column row for XJTLU's dual-degree undergraduate awards. It lists `BEng Telecommunications Engineering` from Xi'an Jiaotong-Liverpool University and `BEng (Hons) Telecommunications Engineering` with `First Class Honours` from the University of Liverpool.
 - The `feat/frontend-refresh` topic branch replaces the homepage's former five-card mosaic with an atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware, and engineering tools. The prototype images and third-party marks are representative presentation material only: they do not prove fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance is recorded in `public/skills/icons/README.md`, and institution-mark provenance is recorded in `public/education/README.md`.
-- The atom motion pauses when the visual leaves the viewport or the document is hidden, and it falls back to a static composition when the operating system requests reduced motion. This refresh remains isolated from `main` and is not released; the homepage is the redesigned surface, while `/work`, `/notes`, `/media`, `/about`, and their detail routes retain their existing page structures.
+- The atom motion pauses when the visual leaves the viewport or the document is hidden, and it falls back to a static composition when the operating system requests reduced motion. This refresh remains isolated from `main` and is not released. Ember Black is an opt-in shared shell rather than a global replacement; `/work`, `/notes`, `/media`, and `/about` now have their own approved Project Aperture Sequence, Routed Signal Map, Focus Aperture, and Tension Signal Column structures, while project and note detail routes retain the paper system. Current route scope is authoritative in `DESIGN.md`.
+- The `/work` Project Aperture Sequence presents all eight projects as complete evidence-first chapter links. A sticky `01`–`08` rail locates the current chapter on desktop and becomes horizontal on mobile. Seven spacious black intervals separate adjacent projects; their short orange ticks move right to left, pause offscreen or while the document is hidden, and remain static under reduced-motion preferences.
+- The `/notes` Routed Signal Map places all 24 currently linked public notes across eight real-project channels and one continuous reading ledger. Visitors can search bilingual titles, summaries, tags, and project names, filter by project or frontmatter year, reset the controls, and open any complete row; its dates describe archive coverage rather than a strict engineering-activity timeline.
+- The `/media` Focus Aperture keeps all 84 records attached to eight project sources. Choosing a source updates one authentic lead record, homepage media thumbnails initialize the matching source, and complete server-rendered project chapters remain below; technical evidence uses contain fitting and motion stops under reduced-motion preferences.
+- The `/about` Tension Signal Column uses CV-grounded bilingual copy to trace Alvin's path from telecommunications study into hardware, firmware, bring-up, measurement, and handoff without repeating the homepage capability list. The portrait remains the original complete white field with black line art; four route nodes and one restrained pulse describe connection only, not rank, progress, or validation.
 - Reader-facing contact surfaces expose GitHub and `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
 - `main` has removed the old portfolio rebuild project, PID Starter Kit placeholder project, and several thin Juanyun standalone project pages.
 - The Juanyun ACUnit, BaseUnit, DHT11 / AM2302, actuator/fan, and SOP material is consolidated into the larger Juanyun thermal-management archive.
@@ -163,7 +167,7 @@ Current workspace content state:
 - The DIY pressure-flow cooling project page, learning note, and six media records now use the approved first-person engineering story gathered through the one-project-at-a-time interview workflow; remembered temperature and frame-rate changes remain explicitly personal observations rather than a controlled benchmark.
 - The Tianjin Jintie Communications STM32 project page, five learning notes, and three media records now use the approved bilingual first-person learning story: Keil/ST-Link bring-up, peripheral-level GPIO/EXTI/timer reasoning, distinct ADC/PWM/UART roles, and one bare-metal integrated demo. The 16-point map remains feedforward, hardware-I2C lockup remains a present-day hypothesis, and PID plus ATP/ATO/ATS remain reading-layer concepts rather than implemented railway control.
 - The Nanjing Turing Qt/Seamly2D project page, three-week note, and five media records now use the approved bilingual first-person internship story: starting with school-level C++ and no Qt, bringing up the large upstream codebase, adding a local `QSettings` account/role entrance, practising the Git workflow, and packaging on Windows and macOS. The copy keeps online authentication out of scope, separates formal development-machine acceptance from the later clean Windows PC test, stops macOS at a launched unsigned DMG with signing/notarization unfinished, and leaves later adoption after handoff unknown.
-- The media gallery covers 84 project/note images and videos, including 12 independent FOC learning-route records, processed project covers, board renders, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
+- The project-grouped media archive contains 84 records across eight projects: 80 images and four videos. It includes 12 independent FOC learning-route records, processed project covers, board renders, DIY STM32 board images, EEV driver-board images, five approved ACUnit V2.1 bring-up photographs, the Notion-exported Nanjing Turing build diagrams, Digital Clock screenshots/demo/report media, and Smart Car photos/tutorial screenshots.
 - The Juanyun SOP / Nanjing Turing text logs render as webpage notes rather than raw code blocks; the CMake/build-logic note now uses the user's Notion-exported Markdown originals instead of PDF text extraction.
 - Public project/note bodies have an English coverage pass so the language switch does not drop important article sections.
 - Public project files render through a two-pane browser with server-side path normalization, strict UTF-8 reads, directory/file/preview-size caps, and a `juanyun-tech` allowlist checked by `npm run validate-content`.
@@ -197,22 +201,25 @@ npm run build
 npm audit --omit=dev
 ```
 
-Expected result for this version:
+Expected result for a release candidate:
 
 - Lint passes
 - Encoding validation passes
 - Production build passes
-- `npm audit --omit=dev` reports 0 vulnerabilities
+- Review the current `npm audit --omit=dev` output; do not reuse an older vulnerability count
 
 ## Release Tags
 
 Latest released tag: `v0.8.0`.
 
-Use semantic version tags. Replace the version in these commands for the next release:
+Use semantic version tags only after the topic branch has passed review and its pull request has merged. Synchronize `main`, verify the exact release commit, then create and push only the tag:
 
 ```bash
+git fetch --prune origin
+git switch main
+git pull --ff-only origin main
+git status --short --branch
 git tag -a v0.8.1 -m "v0.8.1 portfolio update"
-git push origin main
 git push origin v0.8.1
 ```
 
@@ -224,7 +231,7 @@ git push origin v0.8.1
 
 这个仓库是 Alvin Li 的英中双语机器人系统硬件作品集源码，iRidium / 铱 作为工程档案品牌。项目、笔记和媒体内容围绕嵌入式控制、原理图与 PCB 设计、板级 bring-up、软硬件联调、电机驱动和电力电子展开。
 
-Alvin Li 现于新加坡南洋理工大学攻读机器人与智能系统理学硕士；本科阶段通过西交利物浦大学双学位项目，获得西交利物浦大学通信工程工学学士学位，以及英国利物浦大学通信工程荣誉工学学士学位（一等荣誉）。
+截至 `2026-08-21`，Alvin Li 在新加坡南洋理工大学攻读机器人与智能系统理学硕士；本科阶段通过西交利物浦大学双学位项目，获得西交利物浦大学通信工程工学学士学位，以及英国利物浦大学通信工程荣誉工学学士学位（一等荣誉）。
 
 旧版 Hexo 输出保存在 `legacy/hexo-export/`，只作为历史参考，不再作为新网站的服务内容。
 
@@ -256,7 +263,7 @@ app/                    Next.js 路由和页面
 components/             可复用 UI 组件
 content/projects/       MDX 项目案例
 content/notes/          MDX 学习笔记
-content/media.json      媒体图库数据
+content/media.json      按项目关联的媒体档案数据
 lib/                    内容读取和站点常量
 public/uploads/         公开图片、视频和视觉素材
 public/brand/           已确认的 iRidium 品牌识别资源
@@ -317,9 +324,9 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 项目内容放在 `content/projects/*.mdx`。每个项目使用 frontmatter 描述元数据。
 
-学习笔记放在 `content/notes/*.mdx`。每篇笔记都应该设置 `visibility: public` 或 `visibility: private`。缺失 `visibility` 会被当作 private，避免草稿误发布。
+学习笔记放在 `content/notes/*.mdx`。每篇笔记都应该设置 `visibility: public` 或 `visibility: private`。缺失 `visibility` 会被当作 private，避免草稿误发布。`projectSlug` 在内容结构里仍是可选字段，但公开笔记只有关联到真实项目后，才会进入当前 `/notes` Routed Signal Map。
 
-媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体卡片需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`；如果媒体来自某个项目，补上 `projectSlug`，媒体页会显示来源项目。
+媒体内容维护在 `content/media.json`，图片和视频资源放在 `public/uploads/`。如果媒体记录需要随全站语言切换显示中文，使用可选字段 `titleZh` 和 `captionZh`；每一条属于具体项目的媒体都要补上 `projectSlug`，这样 `/media` 才会把它保留在正确的项目分区中。
 
 所有源码、内容、文档和公开上传文本都统一使用 UTF-8。旧资料里的 GBK、UTF-16、EDA/Notion/制造导出文本要先转成 UTF-8，再放进 `content/` 或 `public/uploads/`；`npm run lint` 会连带运行编码校验。
 
@@ -327,7 +334,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 普通代码块会按共享技术证据处理，不会自动跟随英文 / 中文正文隐藏。如果整段列表或代码只属于某一个语言视图，围栏语言前面加 `en-` 或 `zh-`，例如 `en-text`、`zh-text`、`en-powershell`。页面右上角仍然只显示 `text` 或 `powershell`，语言切换时会隐藏另一侧。
 
-如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。
+如果笔记或媒体需要自动显示在某个项目页面上，使用 `projectSlug` 关联对应项目 slug。未正确关联项目的公开笔记仍可拥有详情路由，但 `/notes` 不会为它虚构“未分配”通道。
 
 项目可以使用可选的 `assetPaths` 字段，把 `public/uploads/` 下的公开资料放进项目页的文件浏览器。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，表格、Gerber、STEP、EasyEDA、Word 等二进制资料保留直接打开链接。上传 Markdown 里的相对链接和图片会按源文件路径解析；HTML 和 SVG 上传物只作为下载附件处理，不做内嵌预览。
 
@@ -337,10 +344,14 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 - 全站公开姓名与 SEO 元数据统一使用 Alvin Li；英文品牌必须严格写作 `iRidium`，即小写 `i`、大写 `R`、其余 `idium` 小写。iRidium / 铱 作为工程档案品牌，旧公开别名不再作为面向读者的身份标签。
 - 已确认的 iRidium 图形由正方形边界内的五个直角矩形轮廓构成：左侧两块、中央一根不分割的通长矩形、右侧两块，其中左上角与右下角使用相同的正方形边界。透明完整锁定稿、页头正方形标记和用户选定的 B 款花体字标保存在 `public/brand/`；页头直接加载透明字标资产，因此在中英文模式和不同设备上都保持同一个英文 `iRidium` 外观。
-- 在 `feat/frontend-refresh` 上，首页桌面导航会显示低透明度的 `01`–`04` 编号，英文标签复用 `Project evidence index` 的展示字体；悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线。共享导航保留语义化的当前路由状态，紧凑的移动端导航不显示编号。
+- 在 `feat/frontend-refresh` 上，每个 `.signal-theme` 桌面页头都会显示低透明度的 `01`–`04` 编号，英文标签复用 `Project evidence index` 的展示字体；悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线。共享导航保留语义化的当前路由状态，紧凑的移动端导航不显示编号。
 - 首页教育区第一行显示“南洋理工大学·新加坡”及机器人与智能系统理学硕士在读；第二行以双栏展示本科双学位：西交利物浦大学通信工程工学学士，以及英国利物浦大学通信工程荣誉工学学士（一等荣誉）。
 - `feat/frontend-refresh` 主题分支已把首页原来的五图拼贴替换为原子式技术可视化：`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团，三条尺寸一致、互成 60 度的轨道分别承载嵌入式系统、固件开发和工程工具三类技术栈，每条轨道上有五个等距标识。prototype 图片和第三方标识只用于代表性视觉展示，不能证明制造、验证、关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
-- 原子动效在可视化离开视口或页面被隐藏时暂停；当操作系统启用“减少动态效果”时，页面会降级为静态构图。这次刷新与 `main` 保持隔离，尚未发布；当前重构范围是首页，`/work`、`/notes`、`/media`、`/about` 及其详情路由继续使用原有页面结构。
+- 原子动效在可视化离开视口或页面被隐藏时暂停；当操作系统启用“减少动态效果”时，页面会降级为静态构图。这次刷新与 `main` 保持隔离，尚未发布。Ember Black 是按路由主动启用的共享外壳，不是全站强制替换；`/work`、`/notes`、`/media` 与 `/about` 已分别采用批准后的项目检视窗序列、路由信号图、深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
+- `/work` 项目检视窗序列把 8 个真实项目分别做成可整体点击的证据章节。桌面端用粘性的 `01`–`08` rail 标记当前位置，移动端将其改为横向 rail；相邻项目之间共有 7 段留白更大的黑色间隔，橙色短竖线由右向左移动，离开视口或页面隐藏时暂停，并在“减少动态效果”模式下保持静态。
+- `/notes` 路由信号图把当前 24 篇已关联的公开笔记分布到 8 个真实项目通道和一条连续阅读台账中。访客可以搜索中英文标题、摘要、标签与项目名，按项目或 frontmatter 年份筛选，重置条件，并点击完整记录行进入详情；日期只描述档案覆盖，不代表严格的工程活动时间线。
+- `/media` 深焦检视窗把 84 条记录绑定到 8 个项目来源。选择来源会更新一条真实主记录，首页媒体缩略图会初始化对应来源，完整的服务端项目分组仍保留在下方；技术证据使用 contain 适配，“减少动态效果”模式会停止检视窗动效。
+- `/about` 张力信号柱使用以简历事实为边界的双语文案，梳理 Alvin 从通信工程学习走向硬件、固件、bring-up、测量与交接的路径，避免重复首页的能力清单。头像保留原图完整白底与黑色线稿；四个节点与一次克制的脉冲只表达连接，不表示排名、进度或验证。
 - 面向读者的联系入口公开 GitHub 与 `ZHIYI012@e.ntu.edu.sg`，不公开所在地。
 - `main` 已删除旧的作品集重构项目、PID Starter Kit 占位项目，以及几个较薄的卷云独立项目页。
 - 卷云 ACUnit、BaseUnit、DHT11 / AM2302、执行器 / 风扇和 SOP 材料已合并到更大的热管理硬件与固件开发档案页。
@@ -352,7 +363,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 - DIY 压风式散热器的项目页、学习笔记和 6 条媒体文案现已采用逐项目访谈后确认的第一人称工程故事；回忆中的温度与帧率变化仍明确写作个人观察，不作为受控性能测试。
 - 天津津铁通信 STM32 项目页、5 篇学习笔记和 3 条媒体文案现已采用确认后的双语第一人称成长线：从 Keil/ST-Link bring-up 进入 GPIO、EXTI、Timer 的外设级理解，再区分 ADC/PWM/UART 并完成一个裸机综合 demo。16 点映射仍明确写作前馈，硬件 I²C 锁死只是现今回看的可能解释，PID 与 ATP/ATO/ATS 仍是阅读层概念而非真实轨道控制实现。
 - 南京图灵 Qt/Seamly2D 项目页、三周开发笔记和 5 条媒体文案现已采用确认后的双语第一人称实习故事：从学校入门课水平的 C++ 和零 Qt 经验开始，拉起大型上游代码库，加入本地 `QSettings` 账户与角色入口，实战 Git 流程，再分别推进 Windows 与 macOS 打包。文案不把它写成在线鉴权系统，明确区分公司在开发机上的正式验收与后来家中新 Windows 台式机的干净环境测试；macOS 只到可启动的无签名 DMG，签名与公证未完成，交接后的采用情况未知。
-- 媒体页覆盖 84 个项目 / 笔记图片和视频，其中包括 12 条独立 FOC 学习路线记录，以及处理后的项目封面、板卡渲染图、DIY STM32 板图、EEV 驱动小板图、5 张已批准的 ACUnit V2.1 bring-up 照片、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体和 Smart Car 照片 / 课件截图。
+- 按项目分类的媒体档案包含 8 个项目的 84 条记录，其中有 80 张图像和 4 段视频；内容包括 12 条独立 FOC 学习路线记录、处理后的项目封面、板卡渲染图、DIY STM32 板图、EEV 驱动小板图、5 张已批准的 ACUnit V2.1 bring-up 照片、南京图灵 Notion 导出的编译逻辑图、Digital Clock 截图 / 演示 / 作业报告媒体和 Smart Car 照片 / 课件截图。
 - 卷云 SOP、南京图灵文字日志和 CMake / 编译底层逻辑 Notion 原文都以网页笔记形式展示，不再只放在冰冷的代码框或 PDF 抽取结果里。
 - 公开项目和笔记正文已经做过英文覆盖检查，语言切换时不应丢失关键内容。
 - 项目公开资料通过双栏文件浏览器展示，并在服务端做路径归一化、严格 UTF-8 读取、目录/文件/预览体积上限，以及由 `npm run validate-content` 检查的 `juanyun-tech` allowlist。
@@ -391,21 +402,24 @@ npm run build
 npm audit --omit=dev
 ```
 
-预期结果：
+发布候选的预期结果：
 
 - lint 通过
 - 编码校验通过
 - 生产构建通过
-- `npm audit --omit=dev` 显示 0 vulnerabilities
+- 检查本次 `npm audit --omit=dev` 输出，不复用旧的漏洞数量
 
 ## 版本标签
 
 最新已发布标签：`v0.8.0`。
 
-使用语义化版本标签。下一次发布时替换下面命令里的版本号：
+主题分支通过评审并由 Pull Request 合并后，再创建语义化版本标签。先同步 `main` 并核对准确发布提交，然后只推送标签：
 
 ```bash
+git fetch --prune origin
+git switch main
+git pull --ff-only origin main
+git status --short --branch
 git tag -a v0.8.1 -m "v0.8.1 portfolio update"
-git push origin main
 git push origin v0.8.1
 ```

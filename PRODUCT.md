@@ -28,7 +28,15 @@ Visitors enter through the homepage or the project index, then move between proj
 
 The public site is deployed on Vercel and uses `https://www.66ccff-labs.com/` as its production domain. The source repository is also part of the public evidence surface, so material that is private cannot be protected merely by hiding it from site navigation.
 
-The design iteration active on the separate `feat/frontend-refresh` topic branch as of `2026-08-20` is intentionally homepage-only and is not released. It must not be described as a redesign of the project index, project details, notes, media, about page, or production site.
+The design iteration active on the separate `feat/frontend-refresh` topic branch as of `2026-08-21` remains unreleased and follows an opt-in, route-by-route rollout rather than a site-wide theme switch. The homepage and only the separately approved surfaces recorded in `DESIGN.md` may use the Ember Black system. In particular, the `/work` index uses its approved Project Aperture Sequence, the `/notes` index uses its approved Routed Signal Map treatment, `/media` uses Focus Aperture, and `/about` uses Tension Signal Column, while every `/work/[slug]` and `/notes/[slug]` detail page remains on the paper system; unrecorded routes and the production site must not be described as redesigned.
+
+The `/work` index keeps all eight repository projects in one evidence-first sequence. A locating rail and complete linked chapters expose authentic project imagery, status, dates, focus, summary, and evidence availability; seven spacious orange-tick intervals separate adjacent chapters without representing progress, telemetry, or project completion.
+
+The separately approved `/notes` index uses a Routed Signal Map for all 24 public notes linked to eight real projects. Visitors can search bilingual metadata and filter by project or frontmatter year before opening a semantic note row; dates remain archive metadata, route motion never claims telemetry or progress, and every `/notes/[slug]` detail stays on the paper reading surface.
+
+The separately approved `/media` index uses a project-first Focus Aperture: visitors choose one of eight named project sources, inspect its lead record, and then enter the corresponding project chapter. The 84-record archive remains tied to repository evidence rather than becoming a loose gallery; project and note detail routes are outside this media-surface decision.
+
+The separately approved `/about` surface gives a time-constrained reader a CV-grounded identity-and-method route from telecommunications study into embedded hardware, firmware, bring-up, measurement, and handoff. It complements rather than repeats the homepage capability summary. Its original white-background, black-line portrait remains unaltered, and its four-stage route and single restrained pulse are presentation structure only, never a score, status, telemetry, or stronger evidence claim.
 
 ## Capabilities and Constraints
 
@@ -40,7 +48,7 @@ The design iteration active on the separate `feat/frontend-refresh` topic branch
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, build-output, complete reconstructable product source, or other restricted material.
 - Do not fabricate outcomes, measurements, benchmarks, customers, testimonials, ownership, deployment, or validation. Keep incomplete work and evidentiary limits visible.
 - Page structure, information architecture, hierarchy, and copy density may be refactored as long as the confirmed product truth and evidence boundaries remain intact.
-- Animated homepage presentation must retain a useful static state under reduced-motion preferences and must not make evidence claims through motion alone.
+- Animated interface presentation must retain a useful static state under reduced-motion preferences and must not make evidence claims through motion alone.
 
 ## Brand Commitments
 

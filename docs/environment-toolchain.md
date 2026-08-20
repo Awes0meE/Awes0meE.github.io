@@ -4,10 +4,10 @@ This page is the portable setup checklist for a new computer, a WPS-cloud-synced
 
 ## Baseline
 
-- OS: Windows is the primary local development environment; PowerShell is the default shell.
-- Git: any current Git for Windows release is fine. This machine is verified with `git version 2.55.0.windows.3`.
-- Node.js: use Node.js 22 LTS or newer. This machine is verified with `v24.19.0`.
-- npm: use npm 10 or newer. This machine is verified with `11.17.0`.
+- OS: the repository is maintained on both macOS and Windows; use the shell-specific commands below.
+- Git: use a current Git release with fast-forward-only pulls and pruning enabled.
+- Node.js: use Node.js 22 LTS or newer.
+- npm: use npm 10 or newer.
 - Package manager: npm only. Do not introduce pnpm, yarn, Bun, or lockfiles for those tools.
 - Deployment: Vercel builds the Next.js app; Cloudflare only manages DNS.
 - GitHub Pages: redirect fallback only. Keep repository Pages source on `gh-pages:/`, not `main:/`.
@@ -16,7 +16,7 @@ The repo includes `.nvmrc` with `22` as the portable baseline, and `package.json
 
 ## First Machine Check
 
-Run these commands from the repository root:
+Run these commands from the repository root on Windows PowerShell:
 
 ```powershell
 git status --short --branch
@@ -29,6 +29,18 @@ where.exe npm.cmd
 ```
 
 Use `npm.cmd` in PowerShell. On many Windows machines, `npm` resolves to `npm.ps1`, and PowerShell execution policy can block it even when Node.js is installed correctly.
+
+On macOS or Linux, use:
+
+```bash
+git status --short --branch
+git remote -v
+gh auth status
+node --version
+npm --version
+command -v node
+command -v npm
+```
 
 This repo is often maintained from Windows PowerShell rather than PowerShell 7. Avoid shell syntax and .NET APIs that only work in newer environments: use separate commands instead of `&&`, and do not assume `[System.IO.Path]::GetRelativePath` exists for safety-critical file moves. For file quarantines or public-folder cleanup, use `$ErrorActionPreference = 'Stop'`, verify source/target roots, copy with hash checks, then remove originals only after the copy is confirmed.
 

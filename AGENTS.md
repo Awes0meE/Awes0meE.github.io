@@ -24,9 +24,8 @@ When starting work on a new computer or a fresh Codex session:
    - `README.md`
 3. Check local environment:
    - `node --version`
-   - `npm.cmd --version` on Windows PowerShell
-   - `where.exe node`
-   - `where.exe npm.cmd`
+   - `npm --version`, `command -v node`, and `command -v npm` on macOS/Linux
+   - `npm.cmd --version`, `where.exe node`, and `where.exe npm.cmd` on Windows PowerShell
    - if PowerShell cannot find npm, check `C:\Program Files\nodejs` and refresh PATH.
 4. Check whether external Codex skills exist:
    - `karpathy-guidelines`
@@ -36,10 +35,9 @@ When starting work on a new computer or a fresh Codex session:
    - `impeccable`
    If missing, install them from the sources listed in `docs/agent-skills.md`, or fall back to the rules already summarized in `CODEX.md`.
 5. Run verification before substantial edits:
-   - `npm.cmd install` if `node_modules/` is missing or stale.
-   - `npm.cmd run lint`
-   - `npm.cmd run typecheck`
-   - `npm.cmd run build`
+   - use `npm` on macOS/Linux and `npm.cmd` on Windows PowerShell;
+   - install if `node_modules/` is missing or stale;
+   - run lint, typecheck, and the production build.
 
 Do not assume another device has the same global memory, PATH, installed plugins, or uncommitted files. Use the project-local docs as the portable source of truth and rebuild missing context quickly.
 

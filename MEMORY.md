@@ -4,7 +4,14 @@ Durable project memory for the XJTLU Portfolio repository. The checkout path var
 
 This file is for future AI sessions and long-running portfolio maintenance. Keep it concise and current; edit stale facts instead of blindly appending duplicates.
 
-## Current State
+## Current Baseline
+
+- Production remains release `v0.8.0` on `main` at `fd8b429a2944`, served from `https://www.66ccff-labs.com/`; the topic-branch refresh has not been merged, tagged, or deployed.
+- The current repository content set is 8 projects, 24 public notes, and 84 media records (80 images and 4 videos). Project and note detail routes retain the paper system.
+- The integrated homepage, `/work`, `/notes`, `/media`, and `/about` Ember Black refresh is committed at `28b0a8f` on `feat/frontend-refresh`. The branch remains the review boundary; its final documentation reconciliation is separate from the implementation commit.
+- Public identity is Alvin Li, the archive brand is `iRidium / 铱`, and reader-facing contact routes are the reviewed GitHub and NTU email links already present in the site.
+
+## Milestone History
 
 - `2026-05-03`: The old Hexo deployment output from `Awes0meE/Awes0meE.github.io` was archived under `legacy/hexo-export/`.
 - `2026-05-03`: The site was rebuilt as a Next.js App Router portfolio with TypeScript, Tailwind CSS, local content files, and Vercel deployment as the target.
@@ -68,7 +75,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-08-17`: Pull request #27 merged the first homepage optimization stage into `main` at `e4e3b3ef11c8ac49fbe7c343492822e28bb4650b`. It unified public identity and SEO metadata under `Alvin Li`, adopted `iRidium / 铱` as the engineering archive brand, added a compact mobile navigation row, removed the duplicate homepage About block, and replaced broad direction labels with an evidence-backed engineering stack. The English brand spelling is fixed as `iRidium`: lowercase `i`, uppercase `R`, lowercase `idium`. Previous personal aliases and the old lab label no longer appear as reader-facing identity names; the existing GitHub URL remains functional behind a generic GitHub label. Education labels now use NTU's official `Master of Science (Robotics and Intelligent Systems)` and XJTLU's `BEng (Hons) Telecommunications Engineering`; the user-confirmed classification is `First Class Honours`. Public contact surfaces now include GitHub and `ZHIYI012@e.ntu.edu.sg`, superseding the prior GitHub-only boundary. The user approved the square five-rectangle iRidium mark reconstructed from the supplied sketch; transparent lockup and square header assets now live under `public/brand/`, and the square mark replaces the previous temporary header graphic.
 - `2026-08-18`: Pull request #29 merged the homepage header, education, institution-mark, and hardware-hero refinement into `main` at `668ab0b0adc3edf92d2526dc03e238609e046063`, tagged `v0.8.0`. The upper-left and lower-right blocks in the iRidium mark have equal `156 × 156` pixel bounds. The header uses the user-selected B-style transparent script asset `public/brand/iridium-wordmark-script.png`, displayed at a compact 26px height, and always reads `iRidium` in both language modes. The education block uses a full-width NTU master's row above a two-column undergraduate dual-degree row: XJTLU `BEng Telecommunications Engineering` and University of Liverpool `BEng (Hons) Telecommunications Engineering`, with `First Class Honours` attached only to the Liverpool degree; transparent institution marks replace the generic icons. The homepage hero is a five-card hardware mosaic: the 0.96-inch OLED and TFT-display assemblies form the upper row, with the battery/USB power board, 12 V / 5 V / 3.3 V power-supply board, and AD831 mixer below. Its warm-paper background-replacement derivatives are presentation assets rather than exact technical evidence.
 - `2026-08-19`: Release `v0.8.0` now includes the concise bilingual homepage introduction prepared in commits `d4349bc0106a568a390e7ed50b894583d528072d` and `d26c288130133882d797d3401163cf5d5d2b5925`. The heading is `Embedded systems, control, power, and motor drives` / `嵌入式、控制、电源与电驱`, without terminal punctuation. The former two supporting paragraphs are now one direct hardware-to-firmware introduction beginning `This is Alvin Li.` / `这里是 Alvin Li`. To keep the requested release number, the existing annotated `v0.8.0` tag was deliberately retargeted from the earlier PR #29 merge baseline to the final release commit after `main` was fast-forwarded.
-- `2026-08-20`: Branch `feat/frontend-refresh` contains a homepage-only visual checkpoint kept separate from `main`; it is not merged, tagged, deployed, or a redesign of the project, note, media, about, or detail routes. In the branch homepage preview, the five `v0.8.0` hardware presentation derivatives now form a compact prototype nucleus. Three same-size ellipses begin at `0deg`, `60deg`, and `120deg`; each carries five evenly spaced technology marks for embedded systems, firmware development, or engineering tools. The orbits and nucleus use slow meaningful motion, pause when the visual is out of view, and expose a stable reduced-motion state. The selected desktop navigation adds low-opacity `01`–`04` indices, uses the homepage display voice, and reveals one Ember line across the number and label for hover, focus, and current-route feedback; the compact mobile row remains unnumbered. The prototype images and sourced technology marks are presentation/identification assets, not technical evidence, endorsement, or affiliation.
+- `2026-08-21`: The homepage and four route-scoped index refreshes were consolidated in implementation commit `28b0a8f` on `feat/frontend-refresh`. The homepage keeps its five-image atom-orbit direction and numbered Ember navigation, while `.signal-theme` is the explicit opt-in boundary for approved dark surfaces. `/work` is Project Aperture Sequence / 检视窗序列; `/media` is Focus Aperture / 深焦检视窗 with eight sources, validated query initialization, and all 84 records server-rendered; `/notes` is Routed Signal Map / 路由信号图 with 24 notes across eight real-project channels; `/about` is Tension Signal Column / 张力信号柱 with the unaltered portrait and one non-status pulse. Work and note detail routes remain paper-themed. The branch remains unreleased and separate from `main`; no merge, tag, deployment, or detail-route redesign is claimed.
 
 ## Stable Decisions
 
@@ -81,9 +88,14 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Treat project covers and other visual-identity choices as user-controlled. Preserve `cover`, visual assets, and their presentation role during prose/content rewrites unless the user explicitly requests or approves a visual change.
 - Keep `public/uploads/hero/` limited to the five homepage hardware presentation derivatives referenced by `components/technical-visual.tsx`. Release `v0.8.0` presented them as a five-card mosaic; the separate `2026-08-20` topic-branch checkpoint reuses them as the prototype nucleus. Neither presentation supports project-level technical claims; use original photographs, drawings, Gerbers, logs, or other direct artifacts for evidence.
 - Keep the current atom-orbit geometry explicit: three same-size ellipses with long axes at `0deg`, `60deg`, and `120deg`, five evenly spaced marks per orbit, and a compact five-image nucleus. Keep motion slow, pause it outside the viewport, and preserve a deterministic `prefers-reduced-motion` layout.
-- Keep shared navigation route semantics deterministic: exact destinations use `aria-current="page"`, nested detail routes use `aria-current="location"`, and `/` does not select a fabricated item. The homepage desktop treatment uses `01`–`04`, Barlow Condensed for English, the established Chinese display stack, and one Ember line spanning number and label; mobile omits the indices, and reduced motion keeps state without movement.
+- Keep shared navigation route semantics deterministic: exact destinations use `aria-current="page"`, nested detail routes use `aria-current="location"`, and `/` does not select a fabricated item. The `.signal-theme` desktop treatment uses `01`–`04`, Barlow Condensed for English, the established Chinese display stack, and one Ember line spanning number and label; mobile omits the indices, and reduced motion keeps state without movement.
+- Keep the Ember Black shell opt-in through a route-root `.signal-theme` marker and `body:has(.signal-theme)` shared-shell rules. Do not fork the header/footer or apply the dark treatment to paper-system detail routes. Each opted-in index still needs its own approved surface structure in `DESIGN.md`.
+- Keep `/work` as Project Aperture Sequence: one desktop sticky or mobile horizontal `01`–`08` rail, eight complete semantic project links, and seven spacious signal intervals. The orange ticks mean “next record,” move right to left only while visible, and stay static under reduced motion; use repository project truth and reviewed `public/uploads/projects/` imagery only.
+- Keep `/notes` as Routed Signal Map: project eight real channels into one continuous Ember ledger for the 24 currently linked public notes; keep client behavior limited to lightweight bilingual metadata search plus project/year filtering and reset. Treat frontmatter dates as archive coverage rather than a strict engineering timeline, keep every row as a semantic detail link, retain a fully visible static reduced-motion state, and leave `/notes/[slug]` on the paper system.
+- Keep `/media` project-first: `projectSlug` is the provenance join, the source chooser precedes the focus record in mobile DOM order, and every server-rendered record repeats its source project. The unassigned group is a defensive fallback only; generated decision comps never ship as media evidence.
+- Keep `/about` as Tension Signal Column: the server-owned bilingual narrative must remain CV-grounded and distinct from the homepage capability inventory; preserve the complete original white-background, black-line portrait; keep the four stages semantic and non-scoring; and limit motion to one visibility-aware, non-status pulse with a complete reduced-motion fallback.
 - Keep technology-mark source and trademark notes in `public/skills/icons/README.md`. The marks identify representative technologies only and do not establish skill level, project use, endorsement, affiliation, or engineering evidence.
-- Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links.
+- Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links. For notes, the field remains optional in the schema, but the current `/notes` Routed Signal Map includes only public notes whose join resolves to a real project; do not fabricate an unassigned channel.
 - Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. Keep filesystem resolution, path normalization, strict UTF-8 reads, Juanyun allowlist filtering, directory recursion caps, file-count caps, and aggregate preview-size caps server-side in `components/project-assets.tsx`; pass only serializable asset metadata/content into the client-side browser. The browser previews images/videos, Markdown/text, source code, and PDFs, while binary documents / CAD / EDA / fabrication archives keep direct open links.
 - Keep project detail sections ordered as project body, development notes, public project files, then related media. This keeps the narrative and note trail above the file archive.
 - Use `BilingualText` for fixed UI labels and paired metadata. Do not return to mixed labels such as `Work / 项目` now that the site has a global language toggle.
@@ -124,8 +136,20 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/logo.tsx`: approved iRidium header mark and the user-selected B-style script wordmark from `public/brand/iridium-wordmark-script.png`; the wordmark is a portable transparent asset and does not switch to `铱` in Chinese mode.
 - `components/technical-visual.tsx`: homepage atom composition, the five prototype-nucleus assets, the three five-item technology groups, deterministic phase placement, visibility pausing, and bilingual accessible description.
 - `components/technical-visual.module.css`: same-size `0deg` / `60deg` / `120deg` orbit geometry, nucleus and orbit motion, counter-rotation, comet trails, responsive scaling, and reduced-motion behavior.
+- `app/work/page.tsx`: server-rendered eight-project sequence, chapter links, authentic project imagery, and the seven adjacent signal intervals.
+- `components/work-project-rail.tsx`: small client island for active chapter state and visibility-aware interval motion.
+- `app/notes/page.tsx`: server-side stable note ordering, real-project joins, and lightweight Routed Signal Map index projection.
+- `components/notes-signal-index.tsx`: metadata-only client search, project/year filters, reset, result state, channel controls, and semantic note rows.
+- `app/notes/notes.module.css`: Notes routing topology, Ember interaction, responsive reflow, and reduced-motion behavior.
+- `app/fonts/README.md`, `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.woff2`, `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.txt`, and `app/fonts/OFL-ZCOOL-QingKe-HuangYou.txt`: Notes Chinese display-face runtime subset, regeneration record, source-text inventory, and license.
+- `app/media/page.tsx`: server-side media/project grouping, archive totals, and the eight complete project chapters.
+- `app/media/media-focus-aperture.tsx`: the small client island for project-source selection and the active lead record.
+- `app/media/media.module.css`: Focus Aperture geometry, project contact sheets, responsive order, contrast, and reduced-motion behavior.
+- `app/about/page.tsx`: server-owned bilingual identity, working-method, practice-ledger, current-study, and contact content.
+- `app/about/about.module.css`: route-local Tension Signal Column composition, portrait plate, ledger, responsive reflow, and reduced-motion presentation.
+- `components/about-tension-column.tsx`: small client island for the original portrait, four-stage route, intersection/document visibility, and single-pulse state.
 - `components/site-header.tsx`: shared header, brand, language control, and project CTA shell.
-- `components/site-navigation.tsx`: pathname-aware desktop/mobile navigation, semantic exact/nested current state, and the numbered homepage desktop label structure.
+- `components/site-navigation.tsx`: pathname-aware desktop/mobile navigation, semantic exact/nested current state, and the numbered `.signal-theme` desktop label structure.
 - `components/language-toggle.tsx`: client-side EN/简中 language switch.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: server-side resolver for project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
@@ -137,7 +161,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `scripts/validate-encoding.mjs`: Git-managed text encoding gate. Keep it strict so PowerShell/GBK/UTF-16 regressions fail locally before deployment.
 - `content/projects/`: project case-study source files.
 - `content/notes/`: learning note source files.
-- `content/media.json`: gallery metadata.
+- `content/media.json`: project-linked media archive metadata.
 - `public/uploads/`: images, videos, and downloadable assets.
 - `public/brand/`: approved transparent iRidium mark, user-selected B-style script wordmark, and matching full logo lockup.
 - `public/skills/icons/README.md`: source, derivative, trademark, and non-affiliation record for technology marks used in the homepage orbit.
@@ -169,7 +193,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Known-good checks as of `2026-08-20` on macOS; use the `npm.cmd` form on Windows PowerShell:
+Known-good checks as of `2026-08-21` on macOS; use the `npm.cmd` form on Windows PowerShell:
 
 ```bash
 npm run lint
@@ -184,10 +208,14 @@ Expected result:
 
 - lint passes;
 - content validation passes for 8 projects, 24 public notes, 84 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
-- encoding validation passes for 307 Git-managed source/content/docs/public text files;
+- encoding validation passes for 310 UTF-8 text files; use the current command output after future file additions or removals;
 - the production build passes and prerenders 39 pages;
-- the selected homepage navigation passed English/Chinese review at desktop, tablet, and mobile widths before the `/neat` closeout; the closeout itself revalidated source, types, content, encoding, the production build, and a local HTTP 200 response but did not obtain a fresh browser screenshot because the browser control layer rejected the localhost reload;
-- the last completed production audit reported `0 vulnerabilities`; it was not refreshed for `v0.8.0` because npm-registry access was blocked, and no dependency or lockfile changed in the homepage work;
+- the integrated homepage, `/work`, `/notes`, `/media`, and `/about` indexes passed English/Chinese review at 1440 × 900 and 390 × 844 with no horizontal overflow, broken images, or console errors; representative work and note details remained on the paper system;
+- the `/work` Project Aperture Sequence passed desktop, mobile, reduced-motion, semantic-link, keyboard, project-count, interval-count, and horizontal-overflow review before its local closeout; the closeout revalidated diff whitespace, lint, content, encoding, and TypeScript without rebuilding the shared `.next` directory used by neighboring page threads;
+- the `/notes` Routed Signal Map passed English/Chinese browser review at 320, 390, 768, 1024, and 1440 pixel widths with no horizontal overflow, plus search/filter/reset, semantic-link, reduced-motion, console, and HTTP-error checks. Its isolated 39-page webpack build passed, and the terminal Impeccable review returned `disposition: ship` with remaining issues `clear`;
+- the `/media` Focus Aperture passed eight-source and 84-record checks, query-initialized project selection, concise live-status output, valid machine-readable date handling, English/Chinese desktop/mobile review, and reduced-motion review;
+- the `/about` Tension Signal Column passed route-specific English/Chinese desktop and mobile structural review, original-portrait source/computed-style checks, reduced-motion and visibility-source review, lint, TypeScript, and the 39-page Next.js webpack build. Its terminal Impeccable review returned `disposition: pass`;
+- `npm audit --omit=dev` reported `0 vulnerabilities` on `2026-08-21`; no dependency or lockfile changed in the frontend refresh;
 - the current `engineering-note-writer` skill validator and direct-prose regression pass; the retained Trials 06-11 and 34-file SHA-256 manifest remain historical evidence for runtime commit `9eab429`, not a claim that the later reader-prose runtime is byte-identical to that snapshot.
 
 ## Open Content Work
