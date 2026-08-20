@@ -122,6 +122,8 @@ Long note or project body text is not automatically machine-translated. If a lon
 
 The header brand is always the English wordmark `iRidium`; switching the site to Chinese does not replace it with `铱`. Its approved mark and transparent B-style script wordmark live under `public/brand/`. Keep the upper-left and lower-right blocks of the mark equal in size and preserve the compact 26px wordmark height.
 
+On the homepage desktop header, each navigation label has a subdued `01`–`04` prefix. English labels use the same display face as `Project evidence index`; hover, keyboard focus, and the current section reveal one Ember line across both the number and label, while pressing gives a short tactile response. The mobile navigation remains unnumbered. Reduced-motion mode keeps the current/focus signal but removes movement and transition effects.
+
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
 The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
@@ -133,6 +135,8 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 ## 页头品牌、首页学校信息与原子可视化
 
 页头品牌名始终使用英文 `iRidium`，切换到中文界面也不会变成“铱”。已确认的图形标记和 B 款透明花体字标保存在 `public/brand/`；维护时要保持图形左上角与右下角方块等大，并保留字标 26px 的紧凑显示高度。
+
+首页桌面页头会在四个导航标签前显示低透明度的 `01`–`04` 编号。英文标签使用与 `Project evidence index` 相同的展示字体；鼠标悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线，按下时提供短促反馈。移动端导航不显示编号；“减少动态效果”模式仍保留当前项和焦点提示，但取消位移与过渡动画。
 
 首页教育区第一行显示南洋理工大学及硕士在读信息，第二行以双栏明确展示西交利物浦大学与英国利物浦大学授予的本科双学位；“一等荣誉学位”归在英国利物浦大学学位下。
 

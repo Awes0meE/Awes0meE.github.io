@@ -89,6 +89,7 @@ These colors identify orbit membership only. They may tint the corresponding orb
 The local Barlow Condensed SemiBold face is the English display voice. Chinese display copy uses PingFang SC, then Microsoft YaHei and the system sans stack. Body copy uses the native UI sans stack; indices, dates, tags, and instrument labels use the native monospace stack.
 
 - English hero and section headings use the display token; Chinese headings use `display-cjk` with independent line-height and width tuning.
+- On the homepage, English desktop navigation reuses the same display token as `Project evidence index`; Chinese navigation keeps the CJK display stack. The `01`–`04` prefixes remain compact monospace metadata rather than part of the label voice.
 - The hero keeps one concise personal introduction in ember orange beneath the primary direction statement.
 - Long paragraphs remain in the body face. Mono is for compact technical metadata, not novelty body copy.
 - English and Chinese may wrap differently, but factual meaning and visual hierarchy must remain equivalent.
@@ -159,6 +160,10 @@ Animation pauses whenever the technical visual is outside the viewport or the do
 ### Shared header and footer
 
 `SiteHeader` and `SiteFooter` remain shared components. Homepage-only Ember Black styling is scoped through the homepage body state; do not fork the components or apply the dark treatment to paper-system routes.
+
+Desktop homepage navigation places a low-opacity `01`–`04` index before each label. Hover, keyboard focus, and the current route brighten the item and reveal one ember line spanning both index and label; press feedback is brief and restrained. Exact routes expose `aria-current="page"`, nested routes expose `aria-current="location"`, and the homepage itself does not invent a current item. The compact mobile row omits the indices.
+
+Under `prefers-reduced-motion: reduce`, navigation state remains visible but lift, press, and line-growth transitions become immediate. The numbered display treatment is homepage-only; semantic current-route state remains available on the shared navigation across routes.
 
 Preserve `public/brand/iridium-mark.png` and `public/brand/iridium-wordmark-script.png` with their intrinsic proportions. The wordmark always reads exactly `iRidium` in both languages. The middle separator repeats the mark glyph, not a replacement text logo. Filtering may adapt an existing transparent asset to the homepage theme, but must not alter its geometry.
 

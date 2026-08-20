@@ -181,7 +181,7 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 The published baseline is release `v0.8.0` on `main`, including the media/cover refresh, the two-pane public project-file browser, the imported Digital Clock and Smart Car course projects, and the released iRidium header, education, and five-card hardware-hero refinement.
 
-As of `2026-08-20`, the active checkout is a homepage-only topic-branch checkpoint on `feat/frontend-refresh`. It replaces the released five-card hero in the branch preview with an atom-orbit composition while preserving the five presentation derivatives. This checkpoint is not a release, merge, deployment, or redesign of `/work`, `/notes`, `/media`, `/about`, or project-detail content.
+As of `2026-08-20`, the active checkout is a homepage-only topic-branch checkpoint on `feat/frontend-refresh`. It replaces the released five-card hero in the branch preview with an atom-orbit composition while preserving the five presentation derivatives. Its selected desktop navigation combines low-opacity `01`–`04` indices with the homepage display typography and one Ember interaction line across each number and label; mobile stays compact and unnumbered. This checkpoint is not a release, merge, deployment, or redesign of `/work`, `/notes`, `/media`, `/about`, or project-detail content.
 
 As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
 
@@ -236,6 +236,7 @@ Maintain the current engineering-academic identity:
 - precise, calm, credible, portfolio-grade;
 - Alvin Li is the sole reader-facing personal identity; `iRidium / 铱` is the engineering archive brand;
 - keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header, preserve equal square bounds for its upper-left and lower-right blocks, pair it with the user-selected B-style `public/brand/iridium-wordmark-script.png`, render that wordmark at the user-approved compact 26px height, and preserve the exact `iRidium` capitalization in both language modes;
+- keep the shared navigation's exact-route `aria-current="page"` and nested-route `aria-current="location"` semantics. On the homepage desktop header only, retain the `01`–`04` prefixes, English Barlow Condensed display face, Ember line spanning number and label, visible focus/current state, and short press response; omit indices on mobile and remove movement under reduced motion;
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
 - for the `2026-08-20` local `feat/frontend-refresh` checkpoint, keep those five presentation derivatives as a compact prototype nucleus in `components/technical-visual.tsx`; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;

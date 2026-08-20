@@ -39,7 +39,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" data-lang="zh" className={signalDisplay.variable} suppressHydrationWarning>
+    <html
+      lang="zh-CN"
+      data-lang="zh"
+      data-scroll-behavior="smooth"
+      className={signalDisplay.variable}
+      suppressHydrationWarning
+    >
       <body>
         <script
           id="portfolio-language-bootstrap"

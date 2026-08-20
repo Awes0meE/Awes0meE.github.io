@@ -64,7 +64,7 @@ Media:
 Current content state in this workspace, extending release `v0.8.0`, as of `2026-08-20`:
 
 - public identity and metadata use `Alvin Li`; the engineering archive brand is `iRidium / 铱`, with exact capitalization fixed as lowercase `i`, uppercase `R`, then lowercase `idium`;
-- the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices, alongside desktop navigation and a compact mobile navigation row;
+- the shared header uses the approved transparent five-rectangle mark from `public/brand/iridium-mark.png`, with equal `156 × 156` pixel bounds for the upper-left and lower-right blocks; the user-selected B-style `iRidium` script is served from `public/brand/iridium-wordmark-script.png` at a compact 26px display height so its appearance remains fixed in both language modes and across devices. `components/site-navigation.tsx` reads `usePathname()` to expose exact routes as `aria-current="page"` and nested routes as `aria-current="location"`; the homepage desktop treatment adds `01`–`04` indices and Ember interaction feedback, while the mobile row stays compact and unnumbered;
 - the homepage education block uses one full-width NTU master's row followed by a two-column undergraduate dual-degree row for Xi'an Jiaotong-Liverpool University and the University of Liverpool; the Liverpool `BEng (Hons) Telecommunications Engineering` carries the `First Class Honours` classification;
 - `components/technical-visual.tsx` and `components/technical-visual.module.css` render the homepage's atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly clockwise rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware development, and engineering tools;
 - the atom's prototype images and third-party technology marks are representative presentation material, not project evidence or claims of fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance lives in `public/skills/icons/README.md`, and institution-mark provenance lives in `public/education/README.md`;
@@ -102,9 +102,10 @@ Project pages can also render public project-file archives through `components/p
 
 ## Language Layer
 
-The language toggle is intentionally lightweight:
+The language layer is intentionally lightweight:
 
-- `components/language-toggle.tsx` is the only interactive control.
+- `components/language-toggle.tsx` is the only control that owns language state.
+- `components/site-navigation.tsx` is a small client component whose only runtime input is the current pathname; it renders the shared desktop/mobile links and their semantic current-route state without changing content delivery.
 - The selected value is persisted in `localStorage` and reflected on `html[data-lang]`.
 - `components/bilingual-text.tsx` renders paired English/Simplified Chinese text.
 - `app/layout.tsx` runs a small bootstrap script at the start of `<body>` so saved language state is applied before the main UI renders.

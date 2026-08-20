@@ -61,6 +61,26 @@ button {
   overflow-wrap: anywhere;
 }
 
+.site-nav-link {
+  position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: inherit;
+  text-underline-offset: 10px;
+  transition: color 180ms ease-out;
+}
+
+.site-nav-link:hover,
+.site-nav-link[data-active="true"] {
+  color: #1f563f;
+  text-decoration: underline;
+}
+
+.site-nav-index {
+  display: none;
+}
+
 /* Homepage: Kinetic Signal Ledger / Ember Black */
 
 .signal-home {
@@ -113,9 +133,112 @@ body:has(.signal-home) .site-mobile-nav-link {
   color: #f7f0e8;
 }
 
-body:has(.signal-home) .site-nav-link:hover,
 body:has(.signal-home) .site-mobile-nav-link:hover {
   color: #ff8a2b;
+}
+
+body:has(.signal-home) .site-nav-link {
+  min-height: 48px;
+  gap: 0.48rem;
+  padding-inline: 0.1rem;
+  text-decoration: none;
+  transform-origin: center;
+  transition: color 160ms ease-out, transform 120ms ease-out;
+}
+
+body:has(.signal-home) .site-primary-nav {
+  transform: translateY(3px);
+}
+
+body:has(.signal-home) .site-nav-link::after {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 5px;
+  left: 0.1rem;
+  height: 2px;
+  background: #ff7400;
+  box-shadow: 0 5px 14px rgba(255, 116, 0, 0.18);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 210ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body:has(.signal-home) .site-nav-index {
+  display: inline-block;
+  min-width: 1.12rem;
+  color: #aaa39a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  opacity: 0.42;
+  transition: color 160ms ease-out, opacity 160ms ease-out;
+}
+
+html[data-lang="en"] body:has(.signal-home) .site-nav-label {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-size: clamp(1.12rem, 1.35vw, 1.28rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+html[data-lang="zh"] body:has(.signal-home) .site-nav-label {
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  font-size: clamp(1.04rem, 1.22vw, 1.16rem);
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  line-height: 1;
+}
+
+body:has(.signal-home) .site-nav-link[data-active="true"],
+body:has(.signal-home) .site-nav-link:focus-visible {
+  color: #ff9a4a;
+  text-decoration: none;
+}
+
+body:has(.signal-home) .site-nav-link[data-active="true"]::after,
+body:has(.signal-home) .site-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+body:has(.signal-home) .site-nav-link[data-active="true"] .site-nav-index,
+body:has(.signal-home) .site-nav-link:focus-visible .site-nav-index {
+  opacity: 0.82;
+}
+
+body:has(.signal-home) .site-nav-link:focus-visible {
+  outline-color: #ffb36b;
+}
+
+body:has(.signal-home) .site-nav-link:active {
+  color: #ff9a4a;
+  transform: translateY(1px) scale(0.97);
+}
+
+body:has(.signal-home) .site-nav-link:active::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body:has(.signal-home) .site-nav-link:hover {
+    color: #ff9a4a;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  body:has(.signal-home) .site-nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  body:has(.signal-home) .site-nav-link:hover .site-nav-index {
+    color: #aaa39a;
+    opacity: 0.82;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -1222,5 +1345,16 @@ html[data-lang="zh"] .signal-stack h2 {
   .iridium-divider-marks,
   .signal-hero-copy::before {
     animation: none !important;
+  }
+
+  body:has(.signal-home) .site-nav-link,
+  body:has(.signal-home) .site-nav-link::after,
+  body:has(.signal-home) .site-nav-index {
+    transition: none !important;
+  }
+
+  body:has(.signal-home) .site-nav-link:hover,
+  body:has(.signal-home) .site-nav-link:active {
+    transform: none;
   }
 }
