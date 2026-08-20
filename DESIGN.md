@@ -2,7 +2,7 @@
 name: Kinetic Signal Ledger
 description: Ember Black opt-in visual system for Alvin Li's bilingual, evidence-calibrated iRidium engineering portfolio.
 scope:
-  branch: feat/frontend-refresh
+  release: v0.9.0
   appliesTo: "routes rooted by .signal-theme: homepage, work, notes, media, and about"
   excludes: project and note detail routes retain the existing paper system
 colors:
@@ -48,7 +48,7 @@ motion:
 
 ## Scope
 
-This document is the design authority for the Kinetic Signal Ledger implementation on the separate `feat/frontend-refresh` topic branch. Ember Black is no longer homepage-only: the homepage, `/work`, `/notes`, `/media`, and `/about` currently opt into the shared system. Project and note detail routes retain the existing light paper system unless a future, separately approved redesign changes their scope. The branch remains distinct from the released production site until it is merged and deployed.
+This document is the design authority for the Kinetic Signal Ledger implementation released in `v0.9.0`. Ember Black is not sitewide: the homepage, `/work`, `/notes`, `/media`, and `/about` opt into the shared system. Project and note detail routes retain the existing light paper system unless a future, separately approved redesign changes their scope.
 
 The opt-in boundary is the shared `.signal-theme` shell marker on a route's root content. `body:has(.signal-theme)` adapts the shared body, header, navigation, language control, focus treatment, selection, and footer without forking those components. A route that remains in the paper system must not receive the marker, and surface-specific composition still belongs to that route's approved brief rather than becoming a global template.
 
@@ -225,7 +225,7 @@ Keyboard focus is always visible. Interactions do not depend on hover, color, or
 
 ## `/work` — Project Aperture Sequence
 
-This section governs the `/work` project index on `feat/frontend-refresh`. Project detail routes remain outside this surface decision. The route uses **Experience mode**: authentic project evidence leads, while the archive interface recedes into a precise locating and inspection system.
+This section governs the `/work` project index in release `v0.9.0`. Project detail routes remain outside this surface decision. The route uses **Experience mode**: authentic project evidence leads, while the archive interface recedes into a precise locating and inspection system.
 
 **Direction record.** The approved direction is **Project Aperture Sequence / 检视窗序列**, selected from three visualized structures with surface seed `c576f6e6`. Machine-local Impeccable comps may preserve the review process, but they are excluded from Git and are not portable design authority. This section and the shipping implementation are the durable record; generated review rasters never ship as project imagery.
 
@@ -275,7 +275,7 @@ Motion is bounded to the focus-aperture model: a 460ms aperture reveal, an eight
 
 ## `/notes` — Routed Signal Map
 
-This section governs the separately approved Ember Black treatment for the `/notes` index on `feat/frontend-refresh`. Individual `/notes/[slug]` pages remain outside this decision and retain their existing design until the page-by-page rollout reaches them. The index uses **Read mode**: its routing form helps visitors locate an engineering question or project thread, while the note record remains the destination.
+This section governs the Ember Black treatment for the `/notes` index in release `v0.9.0`. Individual `/notes/[slug]` pages remain outside this decision and retain their existing design until the page-by-page rollout reaches them. The index uses **Read mode**: its routing form helps visitors locate an engineering question or project thread, while the note record remains the destination.
 
 **Direction record.** The approved direction is **Routed Signal Map**, candidate `7 / 7` from surface seed `be3086ea`. Machine-local Impeccable comps and screenshots may record the review process, but `.impeccable/` is excluded from Git and cannot serve as cross-device evidence. This section, the bundled font provenance, and the shipping implementation are the durable record; generated review images never ship as interface or note evidence.
 

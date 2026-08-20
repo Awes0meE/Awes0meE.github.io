@@ -148,10 +148,10 @@ Current workspace content state:
 
 - The sitewide public identity and SEO metadata use Alvin Li. The exact English brand spelling is always `iRidium`—lowercase `i`, uppercase `R`, then lowercase `idium`. iRidium / 铱 is the engineering archive brand; the previous public aliases no longer appear as reader-facing identity labels.
 - The approved iRidium mark uses five rectilinear outlined blocks inside a square boundary: two left blocks, one uninterrupted full-height centre rectangle, and two right blocks, with equal square bounds for the upper-left and lower-right blocks. The transparent lockup, square header mark, and user-selected B-style script wordmark live under `public/brand/`; the header serves the wordmark as a portable transparent asset so it stays visually identical in both language modes and across devices.
-- On `feat/frontend-refresh`, each `.signal-theme` desktop header adds low-key `01`–`04` indices, uses the same English display face as `Project evidence index`, and reveals one Ember line across each index and label for hover, focus, and current-route feedback. The shared route state remains semantic, while the compact mobile navigation stays unnumbered.
+- In release `v0.9.0`, each `.signal-theme` desktop header adds low-key `01`–`04` indices, uses the same English display face as `Project evidence index`, and reveals one Ember line across each index and label for hover, focus, and current-route feedback. The shared route state remains semantic, while the compact mobile navigation stays unnumbered.
 - The homepage education block uses one full-width NTU row and a second two-column row for XJTLU's dual-degree undergraduate awards. It lists `BEng Telecommunications Engineering` from Xi'an Jiaotong-Liverpool University and `BEng (Hons) Telecommunications Engineering` with `First Class Honours` from the University of Liverpool.
-- The `feat/frontend-refresh` topic branch replaces the homepage's former five-card mosaic with an atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware, and engineering tools. The prototype images and third-party marks are representative presentation material only: they do not prove fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance is recorded in `public/skills/icons/README.md`, and institution-mark provenance is recorded in `public/education/README.md`.
-- The atom motion pauses when the visual leaves the viewport or the document is hidden, and it falls back to a static composition when the operating system requests reduced motion. This refresh remains isolated from `main` and is not released. Ember Black is an opt-in shared shell rather than a global replacement; `/work`, `/notes`, `/media`, and `/about` now have their own approved Project Aperture Sequence, Routed Signal Map, Focus Aperture, and Tension Signal Column structures, while project and note detail routes retain the paper system. Current route scope is authoritative in `DESIGN.md`.
+- Release `v0.9.0` replaces the homepage's former five-card mosaic with an atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware, and engineering tools. The prototype images and third-party marks are representative presentation material only: they do not prove fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance is recorded in `public/skills/icons/README.md`, and institution-mark provenance is recorded in `public/education/README.md`.
+- The atom motion pauses when the visual leaves the viewport or the document is hidden, and it falls back to a static composition when the operating system requests reduced motion. Ember Black is an opt-in shared shell rather than a global replacement; `/work`, `/notes`, `/media`, and `/about` have their own approved Project Aperture Sequence, Routed Signal Map, Focus Aperture, and Tension Signal Column structures, while project and note detail routes retain the paper system. Current route scope is authoritative in `DESIGN.md`.
 - The `/work` Project Aperture Sequence presents all eight projects as complete evidence-first chapter links. A sticky `01`–`08` rail locates the current chapter on desktop and becomes horizontal on mobile. Seven spacious black intervals separate adjacent projects; their short orange ticks move right to left, pause offscreen or while the document is hidden, and remain static under reduced-motion preferences.
 - The `/notes` Routed Signal Map places all 24 currently linked public notes across eight real-project channels and one continuous reading ledger. Visitors can search bilingual titles, summaries, tags, and project names, filter by project or frontmatter year, reset the controls, and open any complete row; its dates describe archive coverage rather than a strict engineering-activity timeline.
 - The `/media` Focus Aperture keeps all 84 records attached to eight project sources. Choosing a source updates one authentic lead record, homepage media thumbnails initialize the matching source, and complete server-rendered project chapters remain below; technical evidence uses contain fitting and motion stops under reduced-motion preferences.
@@ -210,7 +210,7 @@ Expected result for a release candidate:
 
 ## Release Tags
 
-Latest released tag: `v0.8.0`.
+Latest released tag: `v0.9.0`.
 
 Use semantic version tags only after the topic branch has passed review and its pull request has merged. Synchronize `main`, verify the exact release commit, then create and push only the tag:
 
@@ -219,8 +219,8 @@ git fetch --prune origin
 git switch main
 git pull --ff-only origin main
 git status --short --branch
-git tag -a v0.8.1 -m "v0.8.1 portfolio update"
-git push origin v0.8.1
+git tag -a v0.9.1 -m "v0.9.1 portfolio update"
+git push origin v0.9.1
 ```
 
 ---
@@ -344,10 +344,10 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 - 全站公开姓名与 SEO 元数据统一使用 Alvin Li；英文品牌必须严格写作 `iRidium`，即小写 `i`、大写 `R`、其余 `idium` 小写。iRidium / 铱 作为工程档案品牌，旧公开别名不再作为面向读者的身份标签。
 - 已确认的 iRidium 图形由正方形边界内的五个直角矩形轮廓构成：左侧两块、中央一根不分割的通长矩形、右侧两块，其中左上角与右下角使用相同的正方形边界。透明完整锁定稿、页头正方形标记和用户选定的 B 款花体字标保存在 `public/brand/`；页头直接加载透明字标资产，因此在中英文模式和不同设备上都保持同一个英文 `iRidium` 外观。
-- 在 `feat/frontend-refresh` 上，每个 `.signal-theme` 桌面页头都会显示低透明度的 `01`–`04` 编号，英文标签复用 `Project evidence index` 的展示字体；悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线。共享导航保留语义化的当前路由状态，紧凑的移动端导航不显示编号。
+- 在 `v0.9.0` 中，每个 `.signal-theme` 桌面页头都会显示低透明度的 `01`–`04` 编号，英文标签复用 `Project evidence index` 的展示字体；悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线。共享导航保留语义化的当前路由状态，紧凑的移动端导航不显示编号。
 - 首页教育区第一行显示“南洋理工大学·新加坡”及机器人与智能系统理学硕士在读；第二行以双栏展示本科双学位：西交利物浦大学通信工程工学学士，以及英国利物浦大学通信工程荣誉工学学士（一等荣誉）。
-- `feat/frontend-refresh` 主题分支已把首页原来的五图拼贴替换为原子式技术可视化：`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团，三条尺寸一致、互成 60 度的轨道分别承载嵌入式系统、固件开发和工程工具三类技术栈，每条轨道上有五个等距标识。prototype 图片和第三方标识只用于代表性视觉展示，不能证明制造、验证、关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
-- 原子动效在可视化离开视口或页面被隐藏时暂停；当操作系统启用“减少动态效果”时，页面会降级为静态构图。这次刷新与 `main` 保持隔离，尚未发布。Ember Black 是按路由主动启用的共享外壳，不是全站强制替换；`/work`、`/notes`、`/media` 与 `/about` 已分别采用批准后的项目检视窗序列、路由信号图、深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
+- `v0.9.0` 已把首页原来的五图拼贴替换为原子式技术可视化：`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团，三条尺寸一致、互成 60 度的轨道分别承载嵌入式系统、固件开发和工程工具三类技术栈，每条轨道上有五个等距标识。prototype 图片和第三方标识只用于代表性视觉展示，不能证明制造、验证、关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
+- 原子动效在可视化离开视口或页面被隐藏时暂停；当操作系统启用“减少动态效果”时，页面会降级为静态构图。Ember Black 是按路由主动启用的共享外壳，不是全站强制替换；`/work`、`/notes`、`/media` 与 `/about` 分别采用批准后的项目检视窗序列、路由信号图、深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
 - `/work` 项目检视窗序列把 8 个真实项目分别做成可整体点击的证据章节。桌面端用粘性的 `01`–`08` rail 标记当前位置，移动端将其改为横向 rail；相邻项目之间共有 7 段留白更大的黑色间隔，橙色短竖线由右向左移动，离开视口或页面隐藏时暂停，并在“减少动态效果”模式下保持静态。
 - `/notes` 路由信号图把当前 24 篇已关联的公开笔记分布到 8 个真实项目通道和一条连续阅读台账中。访客可以搜索中英文标题、摘要、标签与项目名，按项目或 frontmatter 年份筛选，重置条件，并点击完整记录行进入详情；日期只描述档案覆盖，不代表严格的工程活动时间线。
 - `/media` 深焦检视窗把 84 条记录绑定到 8 个项目来源。选择来源会更新一条真实主记录，首页媒体缩略图会初始化对应来源，完整的服务端项目分组仍保留在下方；技术证据使用 contain 适配，“减少动态效果”模式会停止检视窗动效。
@@ -411,7 +411,7 @@ npm audit --omit=dev
 
 ## 版本标签
 
-最新已发布标签：`v0.8.0`。
+最新已发布标签：`v0.9.0`。
 
 主题分支通过评审并由 Pull Request 合并后，再创建语义化版本标签。先同步 `main` 并核对准确发布提交，然后只推送标签：
 
@@ -420,6 +420,6 @@ git fetch --prune origin
 git switch main
 git pull --ff-only origin main
 git status --short --branch
-git tag -a v0.8.1 -m "v0.8.1 portfolio update"
-git push origin v0.8.1
+git tag -a v0.9.1 -m "v0.9.1 portfolio update"
+git push origin v0.9.1
 ```

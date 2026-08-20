@@ -4,7 +4,7 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review the current eight-project archive and every route changed by the active topic branch in both languages and at desktop/mobile widths.
+1. Review the current eight-project archive and every route changed by the release candidate or active maintenance branch in both languages and at desktop/mobile widths.
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` remain sensitive; only individually reviewed and explicitly approved desensitized derivatives may be published. Other legacy Juanyun material can use selected reviewed public evidence.
 3. Prefer real project photos, screenshots, videos, diagrams, logs, and selected files over placeholders or generated evidence imagery.
 4. Expand project archive pages with direct evidence, inline source/text previews, and internal links while preserving claim and privacy boundaries.

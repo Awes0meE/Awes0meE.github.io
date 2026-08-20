@@ -130,7 +130,7 @@ The homepage technical visual is maintained in `components/technical-visual.tsx`
 
 The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
 
-The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. The frontend refresh is maintained on the separate `feat/frontend-refresh` topic branch and is not released. Ember Black is enabled per route through `.signal-theme`; Work, Notes, Media, and About now use their own Project Aperture Sequence, Routed Signal Map, project-first Focus Aperture, and Tension Signal Column, while project and note detail pages keep the paper system. See `DESIGN.md` for the current route scope.
+The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. Release `v0.9.0` enables Ember Black per route through `.signal-theme`; Work, Notes, Media, and About use their own Project Aperture Sequence, Routed Signal Map, project-first Focus Aperture, and Tension Signal Column, while project and note detail pages keep the paper system. See `DESIGN.md` for the current route scope.
 
 ## 页头品牌、共享导航、首页学校信息与原子可视化
 
@@ -144,7 +144,7 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 
 prototype 图片和技术标识只用于展示。它们不能证明某块板卡已经制造或完成验证，标识也不表示关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
 
-当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。当前前端刷新保存在独立的 `feat/frontend-refresh` 主题分支，尚未发布。Ember Black 通过 `.signal-theme` 按路由启用；Work、Notes、Media 与 About 已分别采用项目检视窗序列、路由信号图、项目优先的深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
+当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。`v0.9.0` 通过 `.signal-theme` 按路由启用 Ember Black；Work、Notes、Media 与 About 分别采用项目检视窗序列、路由信号图、项目优先的深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
 
 ## Using The Work Project Aperture
 
