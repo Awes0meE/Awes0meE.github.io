@@ -49,15 +49,15 @@ Purpose:
 - Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and a user-confirmed brief into cognition-led Chinese-first engineering-note prose with accurate English counterparts.
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
-- Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
+- Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.
 - Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1 gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
-- Use direct assertions and normal sentence syntax in scoped normal narration, with no Chinese corner quotes there and inline code for exact technical tokens. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
+- Use direct assertions and normal sentence syntax in scoped normal narration, with inline code for exact technical tokens. Keep model-authored em dashes off by default; allow semantic colons and grounded quotations, while rejecting template-label colons, decorative quotation, dense repetition, and correctly scoped article-local bans. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
 
-Dated five-way comparison inputs, blind candidates, mappings, and fact audits live under `docs/experiments/`. They are maintenance evidence for the repository-local writer and are not imported into the website or promoted into public content automatically.
+Dated five-way comparisons and direct fusion trials live under `docs/experiments/`. They are maintenance evidence for the repository-local writer, are not imported into the website, and may enter public content only after explicit user approval.
 
 ## impeccable
 
