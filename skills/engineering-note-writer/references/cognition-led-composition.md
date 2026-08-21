@@ -45,20 +45,48 @@ Explain `74HC165`, EXTI, `windeployqt`, or a fabrication file when it changes th
 
 A detour is useful when it gives the reader a tool for the next move. Return with a short connection to the board, error, file, or decision that opened the detour.
 
-## Use Headings As Thought Bookmarks
+## Use Titles As Learning-Note Indexes
 
-Finish the rough body first. Then add a heading only where attention changes enough that a bookmark helps. A heading names the current subject or thought; it does not announce a complete taxonomy of the work.
+Finish the rough body first. Then name the page and its sections. A title helps the
+reader locate the subject; it does not need to carry the paragraph's surprise,
+friction, interpretation, or final lesson.
 
-Good headings name what follows:
+For the page title:
 
-- `74HC165 把十四路输入塞进了几根线`
-- `DLL 都在，程序还是打不开`
-- `final2 到底 final 在哪里`
-- `触点抖动先替 NVIC 背了锅`
+- name the exact project, component, method, problem, or study subject;
+- add only the stage, duration, experiment, or record type needed to bound it;
+- keep it as short as the exact technical name permits, without a fixed
+  character quota;
+- prefer one direct title over a quotation-led hook, metaphor, thesis sentence,
+  mechanical contrast, or colon-separated title plus subtitle.
 
-Framework headings hide the thought by naming a generic phase or compulsory retrospective instead of the subject. Apply the heading limit and banned generic labels defined in `SKILL.md`; 15 is a ceiling, never a target. Short notes may need one heading or none. On bilingual pages, make both sides describe the same current thought rather than translating a generic label.
+For example, use `Seamly2D 三周开发记录` when that identifies the note. Do not
+expand it into a sentence that also explains how the writer's definition of
+success changed. That change belongs in the body.
 
-Treat the page title as a heading too. If a draft is provisional, mark that status separately or pair it with a content-bearing title; `暂定稿 / Provisional Draft` is not enough on its own.
+For section headings, use a short noun phrase or exact technical label for the
+current work or study block. Suitable forms include:
+
+- `环境配置`
+- `开发尝试`
+- `角色管理`
+- `Release 打包`
+- `macOS 部署`
+- `触点抖动`
+
+Do not turn a heading into a compressed anecdote, punchline, abstract judgment,
+or miniature conclusion. `回车键连着取消，权限还没来得及复杂` belongs in
+the paragraph; `开发尝试` is enough for the heading when that is the actual
+block.
+
+Add a section heading only where the reader benefits from a new block. Do not
+force one heading per cognition node, paragraph, artifact, or timeline step.
+Short notes may need one heading or none, and 15 remains a ceiling rather than a
+target. A provisional status does not replace a subject-bearing title.
+
+On bilingual pages, make both titles identify the same subject and scope. Keep
+each language concise and natural instead of translating word for word or
+adding an explanation on only one side.
 
 ## Use Lists Only For Real Parallelism
 

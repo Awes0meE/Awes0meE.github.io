@@ -66,27 +66,64 @@ Cognition-led route:
 
 Why it works: the route crosses control, enclosure leakage, and temperature mapping, then synthesizes them into a changed systems-level question. It does not claim that pressure was measured or turn the three artifacts into isolated summaries.
 
-## Replace Framework Headings With Subject Headings
+## Keep Titles Shorter Than The Story
 
-Framework:
-
-```markdown
-## 怎么卡住
-## 怎么改
-## 回头看
-```
-
-Thought bookmarks:
+Overwritten page title:
 
 ```markdown
-## Homebrew Qt 和官方 Qt 不在一条路径上
-## `macdeployqt` 能收依赖，签名还没走完
-## 脚本保住的是顺序，不是魔法
+# “能跑”改了三次意思：Seamly2D 三周开发记录
 ```
 
-Why it works: each heading bookmarks the thought currently in view. Together they help the reader follow attention without exposing a complete writing framework.
+Learning-note page title:
 
-## Keep English Calmer, Not Flatter
+```markdown
+# Seamly2D 三周开发记录
+```
+
+Overwritten section heading:
+
+```markdown
+## 回车键连着取消，权限还没来得及复杂
+```
+
+Learning-note section heading:
+
+```markdown
+## 开发尝试
+```
+
+Why it works: the title identifies the note, and the section heading indexes the
+current work block. The body keeps the failed input behavior, permission logic,
+reaction, and changed understanding instead of compressing them into a heading.
+Short does not mean vague: `Release 打包`, `角色管理`, and `触点抖动` are useful
+only when each one accurately bounds what follows.
+
+## Let A Paragraph Carry Related Layers
+
+Fragmented:
+
+```text
+第三周开始做 Release。
+
+`windeployqt` 找不到。
+
+这件事让我很烦。
+
+后来我检查了 Build Environment。
+```
+
+Thicker, still natural:
+
+```text
+第三周开始做 Release，`windeployqt` 却连续几天找不到。可执行文件明明躺在 Qt 安装目录里，我重装过，也查过路径，那几天确实很烦。重装没有解决进程环境的问题，最后可用的方案是让 Qt Creator 的 Build Environment 真正拿到 Qt `bin`。
+```
+
+Why it works: the action, symptom, supported reaction, and technical correction
+belong to one movement. A separate one-sentence paragraph is still welcome when
+an assumption genuinely breaks; the rule rejects automatic fragmentation, not
+shortness itself.
+
+## Keep English Natural Without Lowering Emotion
 
 Chinese:
 
@@ -100,7 +137,7 @@ English:
 The count occasionally jumped a few extra steps, as if the encoder had added a small flourish of its own. The investigation eventually cleared the NVIC setup and traced the behavior to ordinary mechanical contact bounce.
 ```
 
-Why it works: both versions keep the same joke target and technical conclusion. English lowers the slang intensity without erasing the writer's reaction.
+Why it works: both versions keep the same joke target, technical conclusion, and reaction strength. English adapts the idiom and rhythm instead of translating the Chinese wording literally.
 
 ## End On The Last Useful Beat
 

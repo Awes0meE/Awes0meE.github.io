@@ -10,6 +10,8 @@ Use this before drafting or humanizing Chinese portfolio prose.
 
 The user chose roughly 75% of `khazix-writer`'s narrative energy for Chinese. Treat that percentage as a direction: livelier than the current report-like notes, calmer and more technical than a public-account entertainment article. The phrase palette below is user-approved for Li Zhiyi's voice; it is not permission to copy another creator's audience relationship or persona.
 
+Editorial fusion does not lower or amplify this emotional setting. A denser paragraph or a cleaner sentence may change where a reaction appears, but it must not mute, formalize, exaggerate, or remove a supported reaction merely to resemble another writer.
+
 ## Keep The Person In The Route
 
 First person is not a quota for `我`. The person becomes visible through selection and judgment: what detail they noticed, why it left a real question, which misunderstanding sent them to research later, and how one subsystem altered their reading of another.
@@ -26,17 +28,20 @@ DLL 已经铺满了整个目录，程序换台电脑还是打不开。这个画�
 
 The joke works because the directory and failure are real. Without evidence, omit the reaction.
 
-## Allow Natural Unevenness
+## Prefer Thick, Naturally Uneven Paragraphs
 
-- Mix short turns with medium technical explanation.
+- Let one substantial paragraph carry several related layers of the same movement: what happened, the relevant technical explanation, what the writer noticed, and the judgment or reaction that followed.
+- Merge adjacent thin paragraphs when they continue the same subject or cognition movement and gain nothing from the break.
+- Mix substantial paragraphs with shorter turns and medium technical explanation.
 - Let a short sentence stand alone when an assumption genuinely breaks.
+- Allow a one-sentence paragraph when a real interruption, failed assumption, confirmed result, or quiet ending earns the pause.
 - Use a question when it is the question the writer actually had.
 - Allow an interruption, correction, or mild unevenness when it sounds natural.
 - Pause on a real question, follow a connection into another subsystem, and return later when that is how understanding moved.
 - Use a short local bridge when a jump needs orientation; do not rebuild the note into a forced chronology.
-- Keep paragraphs focused on one movement, but do not force equal length.
+- Keep a paragraph inside one intelligible movement, but do not reduce every movement to one point, force equal length, or make every paragraph thick.
 
-Do not require a fixed number of fragments, questions, jokes, colloquial phrases, or emotional punctuation. Quotas produce another template.
+Do not require a fixed number or length of paragraphs, sentences, fragments, questions, jokes, colloquial phrases, or emotional punctuation. Quotas produce another template.
 
 ## Find Humor In Engineering Friction
 
@@ -78,7 +83,7 @@ Use the strong-reaction and profanity groups only when the confirmed source voic
 
 ## Treat Repeated AI Patterns As Smells, Not Syntax Errors
 
-Remove empty corporate or handoff language such as `赋能`, `闭环`, `抓手`, `落地成效`, `本次仅公开`, and `公开证据边界`. Treat the wording and punctuation list in `reader-prose-hard-gates.md` as absolute for scoped article body rather than as a smell.
+Remove empty corporate or handoff language such as `赋能`, `闭环`, `抓手`, `落地成效`, `本次仅公开`, and `公开证据边界`. Treat the actual violations defined in `reader-prose-hard-gates.md` as absolute for scoped article body. A semantically necessary colon or a grounded quotation allowed by that reference is not a violation.
 
 Ordinary contrast and sequencing words are not forbidden in isolation. Reject bare negative-first binary reframes such as `不是 A，而是 B` when they delay the concrete point; state the useful conclusion directly. Keep the confirmed qualifier `不是说……不行，而是说……` when it prevents a real misreading, but do not repeat it as scaffolding. Rewrite repeated sequence scaffolding such as several paragraphs built from `首先/其次/最后`.
 
@@ -88,4 +93,4 @@ A safe compliance report does not become a human learning note when decorated wi
 
 ## Preserve Li Zhiyi's Identity
 
-Borrow transferable mechanics: concrete entry, curiosity, rhythm, supported emotion, light self-mockery, and callbacks. The approved palette above may be used as Li Zhiyi's own calibration. Still prohibit audience calls such as `朋友们`, `小伙伴`, `兄弟们`, or `把公屏打在弹幕上`, and do not copy another creator's audience relationship, cultural references, fixed endings, or creator persona. The result should sound like Li Zhiyi enjoying the process of understanding an engineering problem.
+Borrow transferable mechanics only: concrete entry, curiosity, rhythm, thicker paragraphs where useful, fact density, supported emotion, light self-mockery, and callbacks. The approved palette above may be used as Li Zhiyi's own calibration. Do not import another writer's signature vocabulary, semi-classical register, audience relationship, cultural references, fixed endings, cadence, or creator persona. Still prohibit audience calls such as `朋友们`, `小伙伴`, `兄弟们`, or `把公屏打在弹幕上`. The result should sound like Li Zhiyi enjoying the process of understanding an engineering problem.

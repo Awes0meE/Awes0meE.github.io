@@ -6,7 +6,7 @@ Use this before producing English or bilingual MDX.
 
 Draft Chinese first. Treat it as the factual and narrative source of truth. Rewrite the English around the same information moves rather than translating sentence by sentence.
 
-The user chose roughly 75% of the Khazix reference energy in Chinese and 60% of that same reference energy in English. These are qualitative anchors, not measurable quotas and not a rule that English should contain 60% of the Chinese draft. English should keep the experience and humor target while reducing Chinese-specific particles, slang, repeated emphasis, and exaggerated punctuation.
+The user chose roughly 75% of the Khazix reference energy in Chinese and 60% of that same reference energy in English. These are qualitative surface-style anchors, not measurable quotas and not a rule that English should contain 60% of the Chinese draft. English may reduce Chinese-specific particles, literal slang, repeated emphasis, and exaggerated punctuation, but it must keep the confirmed emotional intensity, reaction, and humor target. A different English surface is not permission to weaken or exaggerate what the writer felt.
 
 ## Preserve The Cognition Route
 
@@ -24,7 +24,7 @@ Both languages must retain:
 
 English may change sentence boundaries and phrasing, and it may smooth a local transition when needed. It may not become a smaller marketing summary or reorder the note into a cleaner artifact taxonomy.
 
-Apply `reader-prose-hard-gates.md` to both language bodies. Avoid direct English equivalents of the banned Chinese scaffolds. Keep metadata, links, code, paths, logs, verbatim artifacts, and exact technical strings outside that prose scan.
+Apply `reader-prose-hard-gates.md` to both language bodies and to reader-visible `title` and `titleZh`. Avoid direct English equivalents of the banned Chinese scaffolds. Keep other metadata, links, code, paths, logs, verbatim artifacts, and exact technical strings outside that prose scan.
 
 Use direct English assertions instead of literal `not A but B` reframes. Keep factual limits explicit, but express Chinese nuance naturally in English rather than copying its wording literally.
 
@@ -40,7 +40,7 @@ Translate why something is funny, not the surface idiom.
 The count occasionally jumped a few extra steps, as if the encoder had added a small flourish of its own.
 ```
 
-The English is calmer, but contact bounce remains the target. Do not replace the joke with generic unexpected behavior occurred.
+The English uses a calmer surface rhythm, but the reaction and contact-bounce joke keep their strength. Do not replace the joke with generic unexpected behavior occurred.
 
 ## Keep Technical Terms Stable
 
@@ -54,16 +54,22 @@ Preserve exact terms such as:
 
 Translate around the term. Do not rename commands or normalize away useful filenames.
 
-## Derive Bilingual Headings From The Same Subject
+## Keep Bilingual Titles As Learning-Note Indexes
 
-Use headings such as:
+Keep both languages short, accurate, and equal in scope. Translate the subject,
+not the surface word order. Suitable pairs include:
 
 ```markdown
-## The DLL Folder Looked Complete / DLL 看起来已经齐了
-## Contact Bounce Took the Blame Off NVIC / 触点抖动先替 NVIC 背了锅
+# Seamly2D Three-Week Development Log / Seamly2D 三周开发记录
+## Development Attempts / 开发尝试
+## Release Packaging / Release 打包
+## Contact Bounce / 触点抖动
 ```
 
-Do not pair a specific English heading with a generic Chinese framework label.
+Do not turn the English title into an explanatory subtitle when Chinese uses a
+short label, or vice versa. The body in each language carries the friction,
+judgment, and cognition change. Avoid turning a compact Chinese learning-note
+heading into a marketing title, metaphor, or complete sentence.
 
 ## Match The Target File's Pairing
 
