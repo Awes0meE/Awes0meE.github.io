@@ -43,6 +43,7 @@ lib/                    Content loaders and site constants
 public/uploads/         Public images, videos, and generated visuals
 public/brand/           Approved iRidium identity assets
 docs/                   Architecture, content workflow, and memory docs
+docs/experiments/       Read-only writing-tool comparison archives
 CODEX.md                AI-agent operating guide for this repository
 MEMORY.md               Durable project memory and decisions
 legacy/hexo-export/     Archived old Hexo deployment output
@@ -57,6 +58,7 @@ legacy/hexo-export/     Archived old Hexo deployment output
 - `docs/memory-system.md`: how memory should be read and updated.
 - `docs/content-workflow.md`: how to add projects, notes, images, and videos.
 - `docs/architecture.md`: routes, data flow, deployment, and non-goals.
+- `docs/experiments/`: dated, non-production writing-tool comparisons and their fact audits.
 
 ## Local Development
 
@@ -134,7 +136,7 @@ Media items are stored in `content/media.json`, with assets under `public/upload
 
 All source, content, docs, and public-upload text files must be UTF-8. Convert legacy GBK, UTF-16, EDA, Notion, and manufacturing text exports before placing them under `content/` or `public/uploads/`; `npm run lint` includes the encoding gate.
 
-The site has a top-right English / Simplified Chinese toggle. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
+The site has a top-right English / Simplified Chinese toggle. A first visit starts in English; a valid saved choice in browser `localStorage` wins on later visits. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
 Normal fenced code blocks are rendered as shared technical evidence. If a whole listing belongs only to one language view, prefix the fence language with `en-` or `zh-`, such as `en-text` or `zh-powershell`; the visible code label drops the prefix while the language toggle hides the inactive block.
 
@@ -148,12 +150,13 @@ Current workspace content state:
 
 - The sitewide public identity and SEO metadata use Alvin Li. The exact English brand spelling is always `iRidium`—lowercase `i`, uppercase `R`, then lowercase `idium`. iRidium / 铱 is the engineering archive brand; the previous public aliases no longer appear as reader-facing identity labels.
 - The approved iRidium mark uses five rectilinear outlined blocks inside a square boundary: two left blocks, one uninterrupted full-height centre rectangle, and two right blocks, with equal square bounds for the upper-left and lower-right blocks. The transparent lockup, square header mark, and user-selected B-style script wordmark live under `public/brand/`; the header serves the wordmark as a portable transparent asset so it stays visually identical in both language modes and across devices.
-- In release `v0.9.0`, each `.signal-theme` desktop header adds low-key `01`–`04` indices, uses the same English display face as `Project evidence index`, and reveals one Ember line across each index and label for hover, focus, and current-route feedback. The shared route state remains semantic, while the compact mobile navigation stays unnumbered.
+- Desktop paper and Ember headers share the same low-key `01`–`04` indices, sizing, typography, lift, press feedback, and line-growth motion; only their pine/graphite and orange/warm-white palettes differ. The shared route state remains semantic, the compact mobile navigation stays unnumbered, and the first keyboard stop is a bilingual skip link. Standalone header and archive controls keep at least 44px touch targets across themes.
 - The homepage education block uses one full-width NTU row and a second two-column row for XJTLU's dual-degree undergraduate awards. It lists `BEng Telecommunications Engineering` from Xi'an Jiaotong-Liverpool University and `BEng (Hons) Telecommunications Engineering` with `First Class Honours` from the University of Liverpool.
 - Release `v0.9.0` replaces the homepage's former five-card mosaic with an atom-like technical visual. Five prototype images from `public/uploads/hero/` form a slowly rotating nucleus; three equal-sized orbits separated by 60 degrees each carry five evenly spaced technology marks for embedded systems, firmware, and engineering tools. The prototype images and third-party marks are representative presentation material only: they do not prove fabrication, validation, affiliation, endorsement, or proficiency. Technology-mark provenance is recorded in `public/skills/icons/README.md`, and institution-mark provenance is recorded in `public/education/README.md`.
 - The atom motion pauses when the visual leaves the viewport or the document is hidden, and it falls back to a static composition when the operating system requests reduced motion. Ember Black is an opt-in shared shell rather than a global replacement; `/work`, `/notes`, `/media`, and `/about` have their own approved Project Aperture Sequence, Routed Signal Map, Focus Aperture, and Tension Signal Column structures, while project and note detail routes retain the paper system. Current route scope is authoritative in `DESIGN.md`.
 - The `/work` Project Aperture Sequence presents all eight projects as complete evidence-first chapter links. A sticky `01`–`08` rail locates the current chapter on desktop and becomes horizontal on mobile. Seven spacious black intervals separate adjacent projects; their short orange ticks move right to left, pause offscreen or while the document is hidden, and remain static under reduced-motion preferences.
-- The `/notes` Routed Signal Map places all 24 currently linked public notes across eight real-project channels and one continuous reading ledger. Visitors can search bilingual titles, summaries, tags, and project names, filter by project or frontmatter year, reset the controls, and open any complete row; its dates describe archive coverage rather than a strict engineering-activity timeline.
+- The `/notes` Routed Signal Map places all 24 currently linked public notes across eight real-project channels and one continuous reading ledger. The selected orange route follows the existing graphite stem and zig-zag bus to a project-specific ledger endpoint. On wide screens the Project channels and Route controls keep a stable shared depth while only the note ledger follows result height; titles use the available ledger width without overflowing smaller screens. Visitors can search bilingual titles, summaries, tags, and project names, filter by project or frontmatter year, reset the controls, and open any complete row; its dates describe archive coverage rather than a strict engineering-activity timeline.
+- Work chapters, Notes ledger rows, and homepage note rows use one bounded dark-to-paper handoff: the live dark surface fades to black, black interpolates to paper white over the same duration, the destination mounts below an opaque paper mask, and the complete paper page is revealed after first-viewport assets are ready. Direct visits, refreshes, browser history, paper-to-paper links, and reduced-motion navigation remain immediate.
 - The `/media` Focus Aperture keeps all 84 records attached to eight project sources. Choosing a source updates one authentic lead record, homepage media thumbnails initialize the matching source, and complete server-rendered project chapters remain below; technical evidence uses contain fitting and motion stops under reduced-motion preferences.
 - The `/about` Tension Signal Column uses CV-grounded bilingual copy to trace Alvin's path from telecommunications study into hardware, firmware, bring-up, measurement, and handoff without repeating the homepage capability list. The portrait remains the original complete white field with black line art; four route nodes and one restrained pulse describe connection only, not rank, progress, or validation.
 - Reader-facing contact surfaces expose GitHub and `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
@@ -268,6 +271,7 @@ lib/                    内容读取和站点常量
 public/uploads/         公开图片、视频和视觉素材
 public/brand/           已确认的 iRidium 品牌识别资源
 docs/                   架构、内容维护和记忆系统文档
+docs/experiments/       只读写作工具对照实验档案
 CODEX.md                本仓库的 AI 协作指南
 MEMORY.md               项目长期记忆和决策记录
 legacy/hexo-export/     旧版 Hexo 输出归档
@@ -330,7 +334,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 所有源码、内容、文档和公开上传文本都统一使用 UTF-8。旧资料里的 GBK、UTF-16、EDA/Notion/制造导出文本要先转成 UTF-8，再放进 `content/` 或 `public/uploads/`；`npm run lint` 会连带运行编码校验。
 
-网站右上角有 English / 简体中文切换按钮。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
+网站右上角有 English / 简体中文切换按钮。首次访问默认进入英文；之后浏览器 `localStorage` 中有效的已保存选择优先。固定 UI 文案通过 `components/bilingual-text.tsx` 成对维护；项目和笔记使用 `title/titleZh`、`summary/summaryZh`。长篇 MDX 正文不会自动翻译，需要双语正文时手动补充。
 
 普通代码块会按共享技术证据处理，不会自动跟随英文 / 中文正文隐藏。如果整段列表或代码只属于某一个语言视图，围栏语言前面加 `en-` 或 `zh-`，例如 `en-text`、`zh-text`、`en-powershell`。页面右上角仍然只显示 `text` 或 `powershell`，语言切换时会隐藏另一侧。
 
@@ -344,12 +348,13 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 - 全站公开姓名与 SEO 元数据统一使用 Alvin Li；英文品牌必须严格写作 `iRidium`，即小写 `i`、大写 `R`、其余 `idium` 小写。iRidium / 铱 作为工程档案品牌，旧公开别名不再作为面向读者的身份标签。
 - 已确认的 iRidium 图形由正方形边界内的五个直角矩形轮廓构成：左侧两块、中央一根不分割的通长矩形、右侧两块，其中左上角与右下角使用相同的正方形边界。透明完整锁定稿、页头正方形标记和用户选定的 B 款花体字标保存在 `public/brand/`；页头直接加载透明字标资产，因此在中英文模式和不同设备上都保持同一个英文 `iRidium` 外观。
-- 在 `v0.9.0` 中，每个 `.signal-theme` 桌面页头都会显示低透明度的 `01`–`04` 编号，英文标签复用 `Project evidence index` 的展示字体；悬浮、键盘聚焦和当前栏目状态会显示一条贯穿编号与文字的橙色信号线。共享导航保留语义化的当前路由状态，紧凑的移动端导航不显示编号。
+- 纸白与 Ember 两套桌面页头现在共用低透明度的 `01`–`04` 编号、尺寸、字体、抬升、按压反馈和信号线生长动画，只保留松绿/石墨与橙色/暖白的配色差异。共享导航保留语义化的当前路由状态，紧凑移动导航不显示编号；键盘第一个焦点是双语 Skip link，页头和档案中的独立控件在两种主题里都保持至少 44px 的触控尺寸。
 - 首页教育区第一行显示“南洋理工大学·新加坡”及机器人与智能系统理学硕士在读；第二行以双栏展示本科双学位：西交利物浦大学通信工程工学学士，以及英国利物浦大学通信工程荣誉工学学士（一等荣誉）。
 - `v0.9.0` 已把首页原来的五图拼贴替换为原子式技术可视化：`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团，三条尺寸一致、互成 60 度的轨道分别承载嵌入式系统、固件开发和工程工具三类技术栈，每条轨道上有五个等距标识。prototype 图片和第三方标识只用于代表性视觉展示，不能证明制造、验证、关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
 - 原子动效在可视化离开视口或页面被隐藏时暂停；当操作系统启用“减少动态效果”时，页面会降级为静态构图。Ember Black 是按路由主动启用的共享外壳，不是全站强制替换；`/work`、`/notes`、`/media` 与 `/about` 分别采用批准后的项目检视窗序列、路由信号图、深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
 - `/work` 项目检视窗序列把 8 个真实项目分别做成可整体点击的证据章节。桌面端用粘性的 `01`–`08` rail 标记当前位置，移动端将其改为横向 rail；相邻项目之间共有 7 段留白更大的黑色间隔，橙色短竖线由右向左移动，离开视口或页面隐藏时暂停，并在“减少动态效果”模式下保持静态。
-- `/notes` 路由信号图把当前 24 篇已关联的公开笔记分布到 8 个真实项目通道和一条连续阅读台账中。访客可以搜索中英文标题、摘要、标签与项目名，按项目或 frontmatter 年份筛选，重置条件，并点击完整记录行进入详情；日期只描述档案覆盖，不代表严格的工程活动时间线。
+- `/notes` 路由信号图把当前 24 篇已关联的公开笔记分布到 8 个真实项目通道和一条连续阅读台账中。选中的橙色路径会沿既有灰色 stem 与折线 bus 前进，并落到对应项目的台账端点。宽屏下“项目通道”和“路由控制”保持固定的共同深度，只让右侧笔记台账随结果高度变化；标题会利用完整台账宽度，并在小屏安全换行。访客可以搜索中英文标题、摘要、标签与项目名，按项目或 frontmatter 年份筛选，重置条件，并点击完整记录行进入详情；日期只描述档案覆盖，不代表严格的工程活动时间线。
+- Work 项目章节、Notes 台账行和首页笔记行共用一套受限的暗色到纸白交接：暗色内容先渐隐到黑场，再用相同时长从黑场过渡到纸白；目标页在不透明纸白遮罩下完成首屏加载，随后整页一次显现。直接访问、刷新、浏览器历史、纸白页之间的链接，以及“减少动态效果”模式都保持即时导航。
 - `/media` 深焦检视窗把 84 条记录绑定到 8 个项目来源。选择来源会更新一条真实主记录，首页媒体缩略图会初始化对应来源，完整的服务端项目分组仍保留在下方；技术证据使用 contain 适配，“减少动态效果”模式会停止检视窗动效。
 - `/about` 张力信号柱使用以简历事实为边界的双语文案，梳理 Alvin 从通信工程学习走向硬件、固件、bring-up、测量与交接的路径，避免重复首页的能力清单。头像保留原图完整白底与黑色线稿；四个节点与一次克制的脉冲只表达连接，不表示排名、进度或验证。
 - 面向读者的联系入口公开 GitHub 与 `ZHIYI012@e.ntu.edu.sg`，不公开所在地。

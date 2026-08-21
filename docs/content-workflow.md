@@ -94,7 +94,7 @@ On project detail pages, related development notes appear above the public proje
 
 This is website-level hiding only. If the GitHub repository is public, private note source can still be visible in the repository. Truly confidential notes should stay outside the public repo or move to a future authenticated storage layer.
 
-The `/notes` Chinese display face is a local subset. When a new note title introduces missing Chinese glyphs, update `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.txt`, regenerate `app/fonts/ZCOOLQingKeHuangYou-NotesSubset.woff2` with the documented command in `app/fonts/README.md`, and keep the bundled SIL OFL record intact.
+The `/notes` Chinese headings and ledger titles use the shared explicit CJK system stack (`PingFang SC`, `Microsoft YaHei`, then the system sans fallback), matching the Media title treatment. The former ZCOOL subset remains archived under `app/fonts/` for provenance and does not require regeneration for new note titles.
 
 ## Add Images Or Videos
 
@@ -166,7 +166,7 @@ Every project/note image or video that should be discoverable from the media pag
 
 ## Language Switching
 
-The website has a top-right English / Simplified Chinese language switch. The default language is Simplified Chinese unless the visitor has saved English in browser `localStorage`.
+The website has a top-right English / Simplified Chinese language switch. A first visit defaults to English; an explicit saved English or Simplified Chinese choice in browser `localStorage` takes precedence on later visits.
 
 - Use `BilingualText` for fixed labels in TSX files.
 - Keep `title/titleZh` and `summary/summaryZh` complete for projects and notes.
@@ -179,7 +179,7 @@ The website has a top-right English / Simplified Chinese language switch. The de
 
 ## Writing Standard
 
-For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md` guidance, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; adapt English with the same substance and calmer intensity; then pass the Truth gate, Li Zhiyi gate, and the scoped zero-hit reader-prose L1 gate.
+For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md`, `references/editorial-fusion.md`, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; draft Chinese through the user's cognition trail; run one voice-preserving editorial pass; adapt English with the same substance and confirmed emotional intensity in natural English; then pass the Truth, Li Zhiyi, editorial-conservation, and scoped reader-prose gates.
 
 Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
 
@@ -197,18 +197,20 @@ Notes should keep the user's practical learning-log texture. Public pages should
 
 - begin from the actual course material, file, symptom, command, or engineering question rather than a meta-document introduction;
 - let the user's changing understanding decide the order instead of forcing a standard build-log sequence; attention may jump across subsystems or chronology and synthesize later when genuine, with no mandatory cognition template;
-- derive headings after drafting, make each one describe the following technical subject, and follow the limit defined in `engineering-note-writer`;
-- avoid reusable framework headings that name the writing process rather than the technical subject;
+- derive titles after drafting. Keep the page title short, accurate, and precise, naming the engineering subject plus only the scope needed to identify the learning note;
+- use concise section labels for the following task, stage, component, experiment, or problem domain. A label such as `开发尝试` is valid when it accurately indexes the block; keep the anecdote and cognition change in the body;
+- prefer substantial paragraphs when related facts, explanations, reactions, and judgments belong to one cognition movement. Keep paragraph lengths naturally uneven and allow a one-sentence paragraph when a real pause earns it;
 - keep links to files, images, videos, source snippets, PDFs, and datasets concrete;
-- use natural spoken transitions where they fit; thought-bookmark headings, real parallel bullet lists, and ordinary sequence words retain their existing rules;
-- state scoped normal narration directly and do not use Chinese corner quotes there; write exact technical tokens as inline code. Avoid a bare `不是 A，而是 B` / `not A but B` correction. Keep ordinary factual negation, and use only the exact user-confirmed `不是说 A 不行，而是说 B` form when it genuinely prevents a false reading;
+- use natural spoken transitions where they fit; learning-note headings, real parallel bullet lists, and ordinary sequence words retain their existing rules;
+- state scoped normal narration directly. Model-authored em dashes remain off by default. Allow semantically necessary colons and quotation marks for traceable source wording, real utterances, UI labels, document claims, and terms genuinely being discussed; repair template-label colons, decorative quotation, and dense repetition. Write code-like technical tokens as inline code. Avoid a bare `不是 A，而是 B` / `not A but B` correction. Keep ordinary factual negation, and use only the exact user-confirmed `不是说 A 不行，而是说 B` form when it genuinely prevents a false reading;
 - use first person and emotion only when the user or evidence supports them; when a real event and emotional direction are both confirmed, reconstruct the scene naturally without adding surrounding facts;
+- preserve Li Zhiyi's identity and established voice, and keep the confirmed emotional intensity unchanged, neither flattened nor amplified. External style systems may contribute paragraph and review mechanics, never another writer's vocabulary, register, cadence, cultural pose, audience relationship, or persona;
 - let humor come from real tool, file, hardware, code, or mistaken-assumption friction rather than an invented scene;
 - avoid AI handoff phrasing, repetitive resume lists, and repeated contrast/sequence scaffolds;
 - name known tools and models exactly, and never guess an unknown product name;
-- require model-authored project and note body to pass the L1 wording, punctuation, and canned-structure scans with zero applicable hits in both languages; exclude frontmatter, Markdown syntax, links, code, paths, logs, verbatim artifacts, and exact technical strings;
+- require model-authored project and note body to reach zero applicable violations for L1 wording, prohibited punctuation use, canned structure, and note-specific user bans in both languages. Semantic colons and grounded quotations are allowed. Reader-visible `title` and `titleZh` stay in scope even when stored in frontmatter; exclude other metadata, Markdown syntax, links, code, paths, logs, verbatim artifacts, and exact technical strings;
 - require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate; keep specifically requested neutral audits, summaries, and captions neutral, applying the gates only to claims and voice within that scope;
-- adapt English with the same facts and narrative nodes at slightly lower emotional intensity;
+- adapt English with the same facts, narrative nodes, reactions, and confirmed emotional intensity. English may change surface rhythm and idiom, but it must neither weaken nor exaggerate what the writer felt;
 - if an uploaded public `.txt`, `.md`, or self-authored document is the real artifact, publish it as a proper note page with the original wording rendered as article text; project `assetPaths` can still link the file, but should not be the only readable copy.
 
 Keep the tone honest, specific, and slightly informal when appropriate. Do not remove technical evidence or constraints just to make the writing more casual.
