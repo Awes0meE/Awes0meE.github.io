@@ -11,6 +11,7 @@ import {
   SquareActivity
 } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { PaperTransitionLink } from "@/components/paper-route-transition";
 import { ProjectEvidenceRow } from "@/components/project-evidence-row";
 import { TechnicalVisual } from "@/components/technical-visual";
 import { getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
@@ -156,7 +157,11 @@ export default function Home() {
           </header>
           <div className="signal-notes-list">
             {notes.map((note, index) => (
-              <Link key={note.slug} href={`/notes/${note.slug}`} className="signal-note-row">
+              <PaperTransitionLink
+                key={note.slug}
+                href={`/notes/${note.slug}`}
+                className="signal-note-row"
+              >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <span>
                   <strong><BilingualText en={note.title} zh={note.titleZh} /></strong>
@@ -164,7 +169,7 @@ export default function Home() {
                 </span>
                 <time>{note.date}</time>
                 <ArrowRight size={16} aria-hidden="true" />
-              </Link>
+              </PaperTransitionLink>
             ))}
           </div>
         </div>
