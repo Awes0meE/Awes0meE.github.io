@@ -2,9 +2,9 @@
 
 import type { CSSProperties, FormEvent } from "react";
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { ArrowRight, RotateCcw, Search, SearchX } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { PaperTransitionLink } from "@/components/paper-route-transition";
 import styles from "@/app/notes/notes.module.css";
 
 export type NotesIndexItem = {
@@ -38,17 +38,56 @@ const allYears = "all";
 const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 const routeBusContinuation = "V 96 H 443 V 180 H 457 V 264 H 443 V 352 H 477";
 const routeBusPath = `M 457 20 ${routeBusContinuation}`;
+const routeBusTurns = [
+  { y: 96, x: 443 },
+  { y: 180, x: 457 },
+  { y: 264, x: 443 },
+  { y: 352, x: 477 }
+] as const;
+
+function getRouteCoordinates(index: number) {
+  return {
+    sourceY: 32 + index * 64,
+    stepX: 238 + index * 14,
+    mergeY: 18 + index * 5,
+    endpointY: 72 + index * 40
+  };
+}
 
 function getRouteStemPath(index: number) {
-  const sourceY = 32 + index * 64;
-  const stepX = 238 + index * 14;
-  const mergeY = 18 + index * 5;
+  const { sourceY, stepX, mergeY } = getRouteCoordinates(index);
 
   return `M 210 ${sourceY} H ${stepX} V ${mergeY} H 457 V 20`;
 }
 
 function getActiveRoutePath(index: number) {
-  return `${getRouteStemPath(index)} ${routeBusContinuation}`;
+  const { sourceY, stepX, mergeY, endpointY } = getRouteCoordinates(index);
+  let path = `M 210 ${sourceY} H ${stepX} V ${mergeY} H 457`;
+
+  for (const turn of routeBusTurns) {
+    if (endpointY <= turn.y) {
+      return `${path} V ${endpointY} H 477`;
+    }
+
+    path += ` V ${turn.y} H ${turn.x}`;
+  }
+
+  return path;
+}
+
+function getRouteBranchPath(index: number) {
+  const { endpointY } = getRouteCoordinates(index);
+  let branchX = 457;
+
+  for (const turn of routeBusTurns) {
+    if (endpointY <= turn.y) {
+      break;
+    }
+
+    branchX = turn.x;
+  }
+
+  return `M ${branchX} ${endpointY} H 477`;
 }
 
 function getYear(date: string) {
@@ -125,6 +164,12 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
     activeProject !== allProjects ||
     activeYear !== allYears;
   const listMotionKey = `${activeProject}-${activeYear}`;
+  const activeRoutePath = hasProjectRoute
+    ? getActiveRoutePath(activeProjectIndex)
+    : null;
+  const activeRouteEndpointY = hasProjectRoute
+    ? getRouteCoordinates(activeProjectIndex).endpointY
+    : null;
 
   function resetFilters() {
     setQuery("");
@@ -138,7 +183,6 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
 
   return (
     <main className={`signal-theme signal-notes-index ${styles.root}`}>
-      <span className={styles.entrySweep} aria-hidden="true" />
       <div className={styles.shell}>
         <header className={styles.intro}>
           <div className={styles.introCopy}>
@@ -186,17 +230,48 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
               ))}
             </g>
             <path className={styles.routeBus} d={routeBusPath} />
-            <g className={styles.routeJunctions}>
-              <circle cx="443" cy="96" r="4" />
-              <circle cx="457" cy="180" r="4" />
-              <circle cx="443" cy="264" r="4" />
-              <rect x="472" y="347" width="9" height="9" />
+            <g className={styles.routeBranches}>
+              {projects.map((project, index) => (
+                <path key={project.slug} d={getRouteBranchPath(index)} />
+              ))}
             </g>
-            {hasProjectRoute ? (
-              <path
-                className={styles.activeRoute}
-                d={getActiveRoutePath(activeProjectIndex)}
+            <g className={styles.routeJunctions}>
+              <circle
+                cx="443"
+                cy="96"
+                r="4"
+                data-route-reached={activeProjectIndex >= 1 ? "true" : undefined}
               />
+              <circle
+                cx="457"
+                cy="180"
+                r="4"
+                data-route-reached={activeProjectIndex >= 3 ? "true" : undefined}
+              />
+              <circle
+                cx="443"
+                cy="264"
+                r="4"
+                data-route-reached={activeProjectIndex >= 5 ? "true" : undefined}
+              />
+              <rect
+                x="472"
+                y="347"
+                width="9"
+                height="9"
+                data-route-reached={activeProjectIndex >= 7 ? "true" : undefined}
+              />
+            </g>
+            {activeRoutePath ? (
+              <>
+                <path className={styles.activeRoute} d={activeRoutePath} />
+                <circle
+                  className={styles.activeRouteEndpoint}
+                  cx="477"
+                  cy={activeRouteEndpointY ?? 0}
+                  r="4"
+                />
+              </>
             ) : null}
           </svg>
           <section className={styles.projectPanel} aria-labelledby="project-channels-title">
@@ -381,7 +456,10 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                         "--row-delay": `${Math.min(index, 7) * 28}ms`
                       } as CSSProperties}
                     >
-                      <Link href={`/notes/${note.slug}`} className={styles.noteRow}>
+                      <PaperTransitionLink
+                        href={`/notes/${note.slug}`}
+                        className={styles.noteRow}
+                      >
                         <span className={styles.noteSequence} aria-hidden="true">
                           {String(note.sequence).padStart(2, "0")}
                           <span />
@@ -409,7 +487,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                         <span className={styles.noteArrow} aria-hidden="true">
                           <ArrowRight size={18} strokeWidth={1.7} />
                         </span>
-                      </Link>
+                      </PaperTransitionLink>
                     </li>
                   );
                 })}

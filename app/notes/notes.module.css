@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "Notes Signal CJK";
-  src: url("../fonts/ZCOOLQingKeHuangYou-NotesSubset.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-}
-
 .root {
   position: relative;
   min-width: 0;
@@ -26,18 +18,6 @@
     linear-gradient(90deg, transparent 0 72%, rgba(247, 240, 232, 0.018) 72% calc(72% + 1px), transparent calc(72% + 1px) 100%);
   content: "";
   pointer-events: none;
-}
-
-.entrySweep {
-  position: absolute;
-  inset: 0 auto 0 0;
-  z-index: 4;
-  width: 1px;
-  background: var(--signal-orange);
-  box-shadow: 8px 0 28px rgba(255, 116, 0, 0.24);
-  opacity: 0;
-  pointer-events: none;
-  animation: map-sweep 820ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
 }
 
 .shell {
@@ -74,9 +54,9 @@
 }
 
 html[data-lang="zh"] .intro h1 {
-  font-family: "Notes Signal CJK", "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
   font-size: clamp(2.8rem, 4.25vw, 4rem);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 0.9;
 }
@@ -151,6 +131,13 @@ html[data-lang="zh"] .intro h1 {
   border-right: 1px solid var(--signal-line);
 }
 
+@media (min-width: 1121px) {
+  .projectPanel,
+  .routingPanel {
+    min-height: 37.625rem;
+  }
+}
+
 .routeMap {
   position: absolute;
   top: 58px;
@@ -163,6 +150,7 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .routeStems path,
+.routeBranches path,
 .routeBus,
 .activeRoute {
   fill: none;
@@ -171,6 +159,11 @@ html[data-lang="zh"] .intro h1 {
 
 .routeStems path {
   stroke: rgba(247, 240, 232, 0.12);
+  stroke-width: 1;
+}
+
+.routeBranches path {
+  stroke: rgba(247, 240, 232, 0.14);
   stroke-width: 1;
 }
 
@@ -195,10 +188,17 @@ html[data-lang="zh"] .intro h1 {
   animation: route-flow 1.7s linear infinite;
 }
 
-.workspace[data-project-route="true"] .routeJunctions circle,
-.workspace[data-project-route="true"] .routeJunctions rect {
+.routeJunctions [data-route-reached="true"] {
   fill: var(--signal-orange);
   stroke: var(--signal-orange);
+}
+
+.activeRouteEndpoint {
+  fill: var(--signal-orange);
+  stroke: var(--signal-orange);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 5px rgba(255, 116, 0, 0.38));
+  vector-effect: non-scaling-stroke;
 }
 
 .regionHeader,
@@ -384,17 +384,6 @@ html[data-lang="zh"] .intro h1 {
   margin: 0;
   padding: 0;
   border: 0;
-}
-
-.controlGroup::after,
-.yearGroup::after {
-  position: absolute;
-  top: calc(50% + 0.65rem);
-  right: -2.15rem;
-  width: 2.15rem;
-  height: 1px;
-  background: var(--signal-line);
-  content: "";
 }
 
 .controlGroup label,
@@ -699,7 +688,7 @@ html[data-lang="zh"] .intro h1 {
 
 .noteTitle {
   display: block;
-  max-width: 38ch;
+  max-width: none;
   margin-top: 0.35rem;
   color: var(--signal-warm-white);
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
@@ -712,12 +701,17 @@ html[data-lang="zh"] .intro h1 {
 }
 
 html[data-lang="zh"] .noteTitle {
-  max-width: 28ch;
-  font-family: "Notes Signal CJK", "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
   font-size: clamp(1.12rem, 1.33vw, 1.28rem);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.005em;
   line-height: 1.18;
+}
+
+@media (min-width: 1280px) {
+  .noteTitle {
+    white-space: nowrap;
+  }
 }
 
 .noteSummary {
@@ -994,9 +988,7 @@ html[data-lang="zh"] .noteTitle {
   }
 
   .routingPanel::before,
-  .routingPanel::after,
-  .controlGroup::after,
-  .yearGroup::after {
+  .routingPanel::after {
     display: none;
   }
 
@@ -1023,6 +1015,8 @@ html[data-lang="zh"] .noteTitle {
 
   .noteTitle {
     max-width: none;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .noteArrow {
@@ -1114,7 +1108,6 @@ html[data-lang="zh"] .noteTitle {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entrySweep,
   .channel,
   .noteList > li,
   .channel[data-active="true"] .channelNode,
@@ -1147,20 +1140,6 @@ html[data-lang="zh"] .noteTitle {
   .noteRow:hover .noteArrow,
   .noteRow:focus-visible .noteArrow {
     transform: none;
-  }
-}
-
-@keyframes map-sweep {
-  0% {
-    opacity: 0;
-    transform: translateX(0);
-  }
-  12% {
-    opacity: 0.78;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100vw);
   }
 }
 

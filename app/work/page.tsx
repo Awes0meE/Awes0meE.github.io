@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { PaperTransitionLink } from "@/components/paper-route-transition";
 import {
   WorkProjectRail,
   type WorkRailProject
@@ -101,7 +101,7 @@ function WorkProjectChapter({
       data-work-chapter={project.slug}
       aria-labelledby={titleId}
     >
-      <Link
+      <PaperTransitionLink
         href={`/work/${project.slug}`}
         className="signal-work-chapter-link"
         aria-labelledby={titleId}
@@ -159,7 +159,7 @@ function WorkProjectChapter({
             zh={`状态：${statusZh}。时间：${timelineZh}。方向：${focus.join("、")}。证据：${evidenceZh}。`}
           />
         </span>
-      </Link>
+      </PaperTransitionLink>
     </article>
   );
 }

@@ -36,6 +36,7 @@ Source:
   - `skills/engineering-note-writer/references/research-expansion.md`
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
+  - `skills/engineering-note-writer/references/editorial-fusion.md`
   - `skills/engineering-note-writer/references/reader-prose-hard-gates.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
@@ -49,11 +50,14 @@ Purpose:
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry stronger emotion, rhythm, and evidence-grounded humor in Chinese, with a slightly calmer but substantively equivalent English version.
+- Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1 gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Use direct assertions and normal sentence syntax in scoped normal narration, with no Chinese corner quotes there and inline code for exact technical tokens. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
+
+Dated five-way comparison inputs, blind candidates, mappings, and fact audits live under `docs/experiments/`. They are maintenance evidence for the repository-local writer and are not imported into the website or promoted into public content automatically.
 
 ## impeccable
 
