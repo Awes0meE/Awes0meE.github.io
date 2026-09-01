@@ -13,7 +13,8 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Preserve Li Zhiyi's identity and keep the user-confirmed emotional intensity unchanged. Neither flatten nor amplify it. Borrow editing mechanics, never another writer's persona, vocabulary, audience relationship, or signature performance.
 - Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
 - Match the Chinese and English substance on public bilingual pages.
-- Require model-authored reader-facing project and note body to pass the scoped reader-prose gates in `references/reader-prose-hard-gates.md`. Prohibited patterns and note-specific bans must reach zero hits; semantically necessary colons and grounded quotations are not violations.
+- Require model-authored reader-facing project and note body to pass the scoped reader-prose gates in `references/reader-prose-hard-gates.md`, including the L1-5 syntax and collocation layer. Prohibited patterns, note-specific bans, and L1-5 calque patterns must reach zero hits; semantically necessary colons and grounded quotations are not violations.
+- Compose Chinese as Chinese, not rendered English. Each bilingual pair keeps semantic equality; the Chinese is derived from the content, and one-to-one structural mirroring of the English is a release blocker.
 - Prefer direct assertions over bare negative-first binary reframes; preserve ordinary factual negation and the confirmed `不是说……不行，而是说……` qualifier when it protects real nuance.
 
 Do not let an artifact inventory substitute for the user's point of view. Do not begin a substantial draft until the shared understanding is confirmed.
@@ -71,6 +72,8 @@ Prefer a short, natural spoken bridge when a transition needs help. Keep the lea
 
 ### 7. Draft Chinese With Controlled Energy
 
+Run the three-pass bilingual protocol from `references/bilingual-writing.md` in this order: Chinese composed from the brief, evidence, and cognition route first; English derived from the Chinese second; the L1-5 calque and pair-divergence check third. On a rewrite, re-derive each preserved passage from its locked claims; the old page surface is a claim source, not a skeleton.
+
 Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Use the user-approved phrase palette in `references/voice-rules.md` naturally. Do not copy another writer's audience calls, public-account persona, or fixed performance patterns.
 
 Prefer substantial paragraphs when several related actions, facts, explanations, and judgments belong to one cognition movement. Keep paragraph lengths naturally uneven, and allow a one-sentence paragraph when a real break, failed assumption, result, or quiet ending earns it. Do not impose sentence or paragraph quotas.
@@ -87,6 +90,8 @@ Follow `references/editorial-fusion.md`. Consolidate unnecessary fragments, remo
 
 ### 10. Adapt English Without Changing Emotional Intensity
 
+After the English pass, run Pass C from `references/bilingual-writing.md`: L1-5 on both bodies and the per-pair structural-divergence check, repairing narrative sentences that mirror one-to-one.
+
 Keep the same facts, attention jumps, researched explanations, later synthesis, important reactions, humor targets, and confirmed emotional intensity, neither lowered nor amplified. Aim for roughly 60% of the same Khazix reference energy used to calibrate Chinese at 75%; this controls English surface rhythm, idiom, and emphasis, not the strength of the underlying reaction, and it is not 60% of the Chinese draft. Use natural English engineering-blog prose without shrinking it into a summary or translating slang literally.
 
 Apply the reader-prose hard gates to the English article body as well as the Chinese body. Preserve excluded technical syntax and verbatim evidence exactly.
@@ -101,7 +106,7 @@ End where the writer's current understanding reaches its last useful verificatio
 
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
-For model-authored project and note body, the reader-prose gate must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
+For model-authored project and note body, the reader-prose gate, including L1-5 syntax and collocation, must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
 
 Use `Li Zhiyi or compliance report?` as the operational release decision for first-person learning-note prose. A requested factual summary, caption, audit, or review may remain neutral when that matches the requested form.
 

@@ -4,7 +4,13 @@ Use this before producing English or bilingual MDX.
 
 ## Keep One Article, Two Natural Voices
 
-Draft Chinese first. Treat it as the factual and narrative source of truth. Rewrite the English around the same information moves rather than translating sentence by sentence.
+Compose in three passes, and the language order is fixed: the Chinese is the factual and narrative source of truth, and the English is derived from it.
+
+- Pass A, Chinese only. Compose the Chinese from the confirmed brief, the evidence, and the cognition route, with the English held out of the working context at every step. When rewriting approved prose, consciously re-derive each preserved passage from its content and claims; the old page surface is a claim source, not a skeleton to keep.
+- Pass B, English from Chinese. Write the English around the same information moves rather than translating sentence by sentence. Each language keeps its own idioms: a native Chinese frame (topic-comment structure, zero anaphora, a fossil idiom) is expressed by its English equivalent, not by a clause-for-clause mirror.
+- Pass C, calque and divergence check. Run L1-5 (syntax and collocation) on the Chinese body, and for each paired passage check structural divergence: semantic equality is required, and one-to-one clause mirroring of narrative sentences is a hit. A healthy pair may differ in skeleton while keeping the same facts, moves, and reactions.
+
+Draft Chinese first in this sense: the Chinese pass runs before the English pass, and each Chinese sentence must be one a Chinese reader would write from the content alone, not a translation of the English beside it.
 
 The user chose roughly 75% of the Khazix reference energy in Chinese and 60% of that same reference energy in English. These are qualitative surface-style anchors, not measurable quotas and not a rule that English should contain 60% of the Chinese draft. English may reduce Chinese-specific particles, literal slang, repeated emphasis, and exaggerated punctuation, but it must keep the confirmed emotional intensity, reaction, and humor target. A different English surface is not permission to weaken or exaggerate what the writer felt.
 

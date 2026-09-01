@@ -180,12 +180,74 @@ Rejected flattening: `The repeated error was mildly unexpected.`
 
 Rejected amplification: `The repeated error devastated me.`
 
+## Rejected Inanimate-Subject Experiential Frame
+
+Input: `带保护的小电池还给了我一个意外。`
+
+Expected repair: `使用这块带保护的小电池时出了一个意外。`
+
+An inanimate or abstract subject may not carry an experiential result noun
+such as 意外, 惊喜, 麻烦, 压力, 冲击, 尴尬, 恐慌, or 悬念 through 给, 送, 添, 造,
+下, 抛, or 丢, and may not take a perception verb such as 看到, 听到, 觉得,
+感到, or 意识到. Repair by restoring the human actor, switching to a
+situational subject with 出现, 发生, 出, 遇到, or 碰到, or moving an instrument
+into a 用… tool phrase.
+
+Reference case from the Claude Chime page published on main (commit
+6197e8e): the Chinese `带保护的小电池还给了我一个意外。` mirrored the English
+`The protected battery added one surprise.` The English frame is an
+established idiom and stays; the Chinese rendering fails P1 and is repaired
+while keeping the surprise, the cold-connection evidence, and the bounded
+hypothesis.
+
+Licensed exemptions remain available: native machine-personification fossils
+(脾气, 闹, 掉, 吃, 抢, 卡, 绑, 甩, 加戏, 脸色), functional 给 frames
+(供电, 留一条路径, 省地方, 交给, 分给), 带来 with a measurable result, and
+epistemic verbs with a test or measurement as subject (测试确认了, 测量支持).
+
+## Rejected Inanimate Perceiver
+
+Input: `万用表后来看到电池电压上升。`
+
+Expected repair: `我随后用万用表看到电池电压上升。`
+
+The perception verb stays with the human subject, and the instrument moves
+into a tool phrase. Same family as the frame case above: the bench instrument
+named as the perceiver of its own reading.
+
+## Rejected Concretized Polyseme
+
+Input: `我亲自确认的范围有一条很清楚的边。`
+
+Expected repair: `我亲手验证的这部分是有明确边界的。`
+
+`edge` in an abstract or evaluative register takes 边界, not the first
+concrete sense 边. The P2 map covers the same family: point→要点,
+figure→数值/读数, layer→层面, scope→范围, sense→含义/感觉, ground→根据/立足点.
+Reference case: the same published Claude Chime page, where the sentence also
+mirrored the English `My direct validation had a clear edge.` clause for
+clause, so P3 fires together with P2.
+
+## Rejected Clause-Mirror Pair
+
+English pair: `My direct validation had a clear edge.`
+
+Rejected mirror: `我直接的验证有一条很清楚的边。`
+
+Expected repair: `我亲手验证的这部分是有明确边界的。`
+
+The Chinese re-derives from the claim instead of following the English clause
+skeleton: the subject slot becomes a topic, and the concretized polyseme takes
+the abstract sense. Technical enumerations, pin lists, dimensions, and data
+parallels are exempt from the mirror check.
+
 ## Release Expectation
 
 - Main and section titles read as concise learning-note indexes rather than compressed body prose.
 - Related material may form substantial paragraphs, with natural length variation and a supported one-sentence break.
 - Li Zhiyi's identity, established voice, and the confirmed emotional intensity are preserved.
 - Model-authored em dashes reach zero scoped hits.
+- Inanimate or abstract subjects carry no experiential frame or perception verb, English abstract polysemes take the abstract Chinese sense, and paired narrative sentences keep semantic equality without one-to-one clause mirroring.
 - Semantic colons and real quotations remain; template-label colons, decorative quotation, and dense repetition are repaired.
 - Every current-article user prohibition reaches zero scoped hits.
 - A substantial rewrite may rebuild the cognition route.

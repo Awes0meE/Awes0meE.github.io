@@ -89,3 +89,18 @@ Apply the same conservation check after English adaptation. English may change
 sentence and paragraph boundaries, but it must keep the same factual and
 cognitive nodes, supported reactions, humor targets, and confirmed emotional
 intensity.
+
+## Preservation Locks Claims, Not Surface Grammar
+
+Conservation is a claim-level contract. A locked passage keeps its actors,
+actions, names, numbers, uncertainty, time boundaries, and publication state.
+It does not freeze the passage's surface grammar.
+
+When a preserved or previously approved sentence fails a reader-prose
+zero-hit gate such as L1-5, repair the grammar in place: restore the human
+actor, swap the frame, or re-derive the sentence from the claim it carries.
+Approval earlier in the project history is not a pass on today's gates; an old
+calque survives a rewrite only when preservation is read as a surface lock.
+
+Record each preserved-sentence repair in the release report with the gate that
+forced it.
