@@ -14,13 +14,13 @@ assetPaths:
 
 ## Solenoid Drive / 电磁铁驱动
 
-Claude Chime had one very physical job. When Claude finished a task on the computer, an ESP32 drove a 5 V push-pull solenoid and made Accele AI's 3D-printed Clawdy Family crab jump a few times. A person could be looking down at a phone, and the reminder still had to pull their eyes up.
+Claude Chime had one very physical job. When Claude finished a task on the computer, an ESP32 drove a 5 V push-pull solenoid and made Accele AI's 3D-printed Clawdy Family crab jump a few times. A person could be looking down at a phone, and the reminder still had to pull their gaze back.
 
 Claude Chime 干的是很实在的活。电脑里的 Claude 把一件事做完，ESP32 就驱动 5 V 推拉式电磁铁，让 Accele AI 的 Clawdy Family 3D 打印螃蟹连跳几下。人可能正低头看手机，这个提醒还是得把视线拉回来。
 
-Their early proposal drove the solenoid with a relay. After I took the paid independent hardware commission, I swapped that part of the design to a low-side MOSFET. The product was meant to stay compact, and a relay would have spent the budget on volume. `SOL_CTRL` reaches an AO3400A through a 33 Ω gate resistor, a 10 kΩ resistor holds the default state low, and an SS34 gives the inductive load a flyback path.
+Their first idea was a relay driving the solenoid. After I took the paid independent hardware commission, I swapped that part of the design to a low-side MOSFET. The product was meant to stay compact, and a relay would have spent the budget on volume. `SOL_CTRL` reaches an AO3400A through a 33 Ω gate resistor, a 10 kΩ resistor holds the default state low, and an SS34 gives the inductive load a flyback path.
 
-他们最初提的方案用继电器驱动电磁铁。我接下这次付费独立硬件委托后，先把这一段换成低边 MOSFET。产品本来就要做小，继电器在这里只会占体积。`SOL_CTRL` 经过 33 Ω 栅极电阻驱动 AO3400A，10 kΩ 下拉让它默认关断，SS34 给感性负载留一条续流路径。
+他们最早想的是用继电器驱动电磁铁。我接下这次付费独立硬件委托后，先把这一段换成低边 MOSFET。产品本来就要做小，继电器在这里只会占体积。`SOL_CTRL` 经过 33 Ω 栅极电阻驱动 AO3400A，10 kΩ 下拉让它默认关断，SS34 给感性负载留一条续流路径。
 
 If the requirement stopped there, the job would have stayed one switch. The device also had to run wirelessly from a single-cell battery, charge through Type-C, and keep the client's existing ESP32-S3 core board. Once those joined the list, the cable state mattered as much as the switch: insertion, removal, and actuation each changed where current came from and where it went. What began as one MOSFET became a power-system problem.
 
@@ -46,13 +46,13 @@ After `BAT+` the two rails stay separate, and a six-pin SH1.0 cable carries `ESP
 
 ## Supply Priority / 供电优先级
 
-The Type-C connector on the ESP32 core board could not move, so USB 5 V and the battery-derived source both reached `ESP_5V_BUS`. I briefly planned to set the backup converter to 5.5 V and let the extra voltage absorb the series Schottky drop. The number looked comfortable. The current path was the problem. Once the battery side sat above USB 5 V, the rail meant for backup could take supply priority while Type-C was still plugged in.
+The Type-C connector on the ESP32 core board was fixed in place, so the USB 5 V and the battery-derived source both ended up at `ESP_5V_BUS`. I briefly wanted to set the backup converter to 5.5 V so the extra voltage could absorb the series Schottky drop. It looked comfortable, until I traced the current path: once the battery side sat above USB 5 V, the rail meant for backup would take supply priority while Type-C was still plugged in.
 
-ESP32 核心板上的 Type-C 移不走，USB 5 V 和电池升压都会碰到 `ESP_5V_BUS`。我一度想把备用升压设成 5.5 V，用多出来的电压补偿串联肖特基的压降。这个数字看着挺安心，顺着电流路径走一遍就不对了。电池侧一旦高过 USB 5 V，原本负责备用的那路电源，会在 Type-C 还插着的时候抢回供电权。
+ESP32 核心板上的 Type-C 动不了，USB 5 V 和电池升压最后都汇到 `ESP_5V_BUS`。我一度想把备用升压设成 5.5 V，用多出来的电压补偿串联肖特基的压降，当时还挺安心，可顺着电流路径走一遍就不对了。电池侧一旦高过 USB 5 V，原本负责备用的那路电源，会在 Type-C 还插着的时候抢回供电权。
 
-The final feedback network targets a schematic-calculated output of about 4.984 V before an SS12 isolates the battery path. That value is a calculation, not a measured bus voltage, and it does not promise exactly 5.000 V after the diode. What it preserves is the order. Type-C supplies the system while connected, and the battery path takes over after removal.
+The final feedback network targets about 4.984 V before the SS12 isolates the battery path. The number is a calculation, not a bus measurement, and it cannot promise exactly 5.000 V after the diode. It preserves the order: Type-C supplies the system while connected, and the battery path takes over after removal.
 
-最终反馈网络把 SS12 前面的目标输出算在约 4.984 V。这个数是图纸算出来的，不是总线实测值，也不承诺过完二极管正好是 5.000 V。它守住的是顺序。Type-C 插着时由 USB 供电，拔掉以后再让电池路径接手。
+最终反馈网络把 SS12 前面的目标输出算在约 4.984 V。这个数是图纸算出来的，不是总线实测值，过完二极管后正好 5.000 V 保证不了。真正要守住的是顺序：Type-C 插着时由 USB 供电，拔掉以后再让电池路径接手。
 
 The same bus feeds the MCP73831 input, whose VBAT output returns to the cell. Following the diagram one loop around made the catch visible. If the charger stayed unconditionally enabled, battery energy could travel through the boost path and the diode into the charger and back toward the same battery. I used `CHARGE_CTRL` and a 2N7002 to connect the 3.3 kΩ PROG resistor only when charging was permitted. [Microchip documents](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf) that an open or floating PROG pin disables the MCP73831.
 
@@ -68,13 +68,13 @@ Battery sensing looked almost too simple. The 15 kΩ and 22 kΩ divider scaled t
 
 电池采样看起来简单得有点过头。15 kΩ 和 22 kΩ 负责把电池电压分给 ADC，可如果这两颗电阻一直跨在电池两端，就会给整块板留一条常开的漏电路径。我把分压器放到 `ADC_ENABLE` 后面，AO3401 和 2N7002 负责通断，要测的时候接通，空闲时断开。图纸上的换算关系是 `VBAT = VADC × 1.682`。
 
-My bench verification stopped at that analog boundary. With `ADC_ENABLE` driven high by hand, the divided node followed the calculated relation, and that was as far as I could check. I did not have the client's ESP32 core board, and I did not write the ADC firmware. The digital accuracy downstream of the sampling chain sat outside my bench.
+My bench verification stopped at that analog boundary. With `ADC_ENABLE` driven high by hand, the divided node followed the calculated relation, and that was as far as I could check. I did not have the client's ESP32 core board, I did not write the ADC firmware, and the digital accuracy downstream of the sampling chain sat outside my bench.
 
-桌上的测试到模拟接口这一层就停了。手动拉高 `ADC_ENABLE` 以后，分压节点符合图纸算出的关系，到这儿能确认的都确认了。可我没有客户的 ESP32 核心板，也没写 ADC 固件，采样链后段的数字精度不在我手里。
+桌上的测试到模拟接口这一层就停了：手动拉高 `ADC_ENABLE` 以后，分压节点符合图纸算出的关系，能确认的都确认了。客户的 ESP32 核心板不在我手上，ADC 固件我也没写，采样链后段的数字精度不归我这张桌子管。
 
-Reading the chain now adds one more layer. [Espressif's ESP32-S3 ADC documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html) describes chip-to-chip reference-voltage variation and offers calibration, so the ideal resistor ratio alone cannot establish final accuracy. That is present-day understanding, not a test result from project time.
+Reading the chain over again, I thought one layer deeper. [Espressif's ESP32-S3 ADC documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html) describes chip-to-chip reference-voltage variation and offers calibration, so final reading accuracy cannot rest on the ideal resistor ratio alone. That is present-day understanding, not a test result from project time.
 
-现在再想这条链，还要多一层。[Espressif 的 ESP32-S3 ADC 文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html)提到芯片之间存在参考电压差异，也提供了校准方法。最终读数精度不能只靠理想电阻比保证。这个判断来自现在的复盘，不是当时做出来的测试结果。
+现在再回看这条链，我又多想了一层。[Espressif 的 ESP32-S3 ADC 文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/index.html)提到芯片之间存在参考电压差异，也提供校准方法。最终读数精度不能只靠理想电阻比保证。这个判断来自现在的复盘，不是当时做出来的测试结果。
 
 ## First Spin / 第一版打板
 
@@ -84,13 +84,13 @@ V1.0 是第一次，也是唯一一次打板。需求拆解、电源架构、计
 
 ![Hand-assembled Claude Chime power board / 手工焊接完成的 Claude Chime 电源板](/uploads/projects/claude-chime-hardware/hardware-test/pcb-front-photo.jpg)
 
-My direct validation had a clear boundary. From a 3.8 V bench supply limited to 50 mA, the unloaded boost outputs measured about 5.12 V and 5.08 V, though I can no longer assign those readings to individual rails. I confirmed charging current through the MCP73831 with an ammeter and later watched the battery voltage rise with a multimeter. I enabled the ADC branch by hand and verified the divider, then drove `SOL_CTRL` repeatedly from a simulated 3.3 V logic level. The unloaded outputs switched continuously, and I did not observe a boost-rail drop.
+What I verified by hand has a clear boundary. From a 3.8 V bench supply limited to 50 mA, the unloaded boost outputs measured about 5.12 V and 5.08 V, though I can no longer assign those readings to individual rails. I confirmed charging current through the MCP73831 with an ammeter and later watched the battery voltage rise with a multimeter. I enabled the ADC branch by hand and the divider matched the calculation; I then drove `SOL_CTRL` repeatedly from a simulated 3.3 V logic level, and the unloaded outputs switched continuously without a boost-rail drop.
 
 我亲手验证的这部分是有明确边界的。3.8 V、限流 50 mA 的台式电源下，两路空载升压分别读到约 5.12 V 和 5.08 V，只是现在再回头看，我想不起哪个数属于哪一路。我用电流表确认了 MCP73831 的充电电流，随后用万用表看到电池电压上升。`ADC_ENABLE` 手动接通后分压符合计算，模拟 3.3 V 的高低电平反复驱动 `SOL_CTRL`，空载输出能连续切换，升压轨上也没有看到掉压。
 
-The protected cell added one surprise. On cold connection its terminal voltage fell from 4.03 V to the 1.49 to 1.57 V range, even though the same board had started from the 50 mA limited supply. The measurements support a bounded hypothesis, that startup demand at first power-up opened the protection path, the DW01A and 8205A on the pack. I did not measure the current peak, and the exact trigger was never directly proven. The full investigation lives in a separate [cold-start note](/notes/claude-chime-cold-start-battery-protection).
+The protected cell added one surprise. On a cold connection its terminal voltage fell from 4.03 V into the 1.49 to 1.57 V range, even though the same board had started from the 50 mA limited supply. The measurements support a bounded hypothesis: first-power-up demand opened the pack's protection path, the DW01A and 8205A. I did not measure the current peak, and I never proved the trigger directly. The full investigation lives in a separate [cold-start note](/notes/claude-chime-cold-start-battery-protection).
 
-使用这块带保护的小电池时出了一个意外。冷接入时端电压从 4.03 V 掉到 1.49 到 1.57 V，而同一块板此前就能从限流 50 mA 的电源启动。测量支持一个有限推断，上电瞬间的需求触发了电池包的保护路径，构成这条保护路径的是电池包上的 DW01A 和 8205A。电流峰值没有量到，确切触发也没有直接证明。完整排查放在单独的[冷启动笔记](/notes/claude-chime-cold-start-battery-protection)里。
+使用这块带保护的小电池时出了一个意外。冷接入时，端电压从 4.03 V 跌进 1.49 至 1.57 V 的区间，而同一块板此前就能从限流 50 mA 的电源启动。测量支持一个有限推断：上电瞬间的需求触发了电池包的保护路径，构成这条保护路径的是电池包上的 DW01A 和 8205A。电流峰值没有量到，确切触发也没有直接证明。完整排查放在单独的[冷启动笔记](/notes/claude-chime-cold-start-battery-protection)里。
 
 I did not connect the real solenoid, the crab never sat on my bench, and I did not write the ESP32 firmware. The client's firmware engineer later reported in project-time chat that ESP32 communication, ADC battery reading, charging control, repeated real-solenoid actuation, and complete-device operation were all normal. Those are client-side integration results, not an acceptance test I personally witnessed. The client also mentioned that the compact board and six-pin cable saved enclosure space.
 
@@ -100,6 +100,6 @@ Before the hardware left my hands, the software boundary needed to be exact. I p
 
 硬件交出去之前，软件边界也得说清楚。我另外整理了[软件交接文档](/uploads/projects/claude-chime-hardware/software-handoff.md)，覆盖六针接口、三路高有效控制、ADC 换算、充电控制，以及 Type-C 插入拔出后各状态该是什么样子。
 
-The project began with one jumping crab. By delivery, the harder part had moved to the power problem around it, who supplied the system in each state, which path had to step back, and which measurement still stopped short of a proof. The MOSFET switches the solenoid. The power architecture explains everything around it.
+The project began with one jumping crab. By delivery, the harder part had moved to the power problem around it: who supplied the system in each state, which path had to step back, and which measurement still stopped short of a proof. The MOSFET switches the solenoid. The power architecture explains everything around it.
 
-项目从一只跳起来的螃蟹开始。交付时，真正难的部分在它周围。每一种状态下谁来供电，哪条路径要退后，哪项测量离证明还差一步。MOSFET 负责让电磁铁动作，剩下的都归电源架构解释。
+项目从一只跳起来的螃蟹开始。交付的时候，真正难的部分在它周围的电源问题上：每一种状态下谁来供电，哪条路径要退后，哪项测量离证明还差一步。MOSFET 负责让电磁铁动作，剩下的都归电源架构解释。
