@@ -643,3 +643,39 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
 - Writing context: the fused repository-local `engineering-note-writer` was already on `main` through pull request #31 and commit `0ceb784`, so this publication did not create a duplicate skill change. The accepted MDX and before/after audit remain frozen under `docs/experiments/engineering-writer-fusion-claude-chime-2026-08-21/`; `/neat` synchronized the experiment index, agent-skill summary, active rewrite relay, durable memory, and this chronology.
 - Git state: pull request #32 used exact head `290daf5d5be3b0109a959f307c1243ad4e6568de` and merged into `main` at `1808aae2a7bc7b92c0eedc5876473d0a9d225119`. The explicitly reopened Claude Chime note scope is closed again; the 19 unrelated WPS/Finder-style files with ` 2` suffixes remain untracked and untouched.
 - Verification: the accepted snapshot and live note share SHA-256 `73fcbd880aa125893b65366b8eb6d665e7d0040918c572ddeb7acbce089ea811`; `git diff --check`, stale writer-rule scans, ESLint, content validation for 8 projects / 24 public notes / 84 media items, encoding validation for 370 UTF-8 text files, TypeScript, the 39-route Next.js 16.3 webpack production build, and `npm audit --omit=dev` with 0 vulnerabilities passed. The PR Vercel and Preview Comments checks plus the merge-commit production status succeeded, and the custom-domain note route returned the new bilingual titles and rewritten protected-pack text.
+
+## 2026-09-02 — Cross-device sync and Claude Chime project-page neat
+
+- Summary: synchronized the macOS checkout with the work pushed from the other
+  computer. Remote `main` and local `main` remain at `74f6a39`; the active
+  `docs/rewrite-claude-chime-project-page` branch was checked out at remote
+  checkpoint `c1155c5`, three linear commits ahead of `main`.
+- Active scope: the branch rewrites only
+  `content/projects/claude-chime-hardware-power-board.mdx` and extends the
+  repository-local `engineering-note-writer` with the L1-5 syntax/collocation
+  gate, fixed Chinese-first / English-from-Chinese / calque-divergence passes,
+  and current regression/rubric coverage. It is not merged, deployed, or
+  released.
+- Precision correction: reconciled the project page with the approved
+  cold-start note. The `4.03 V` to `1.49–1.57 V` collapse now remains at the
+  protected-pack output rather than the cell, and startup demand opening the
+  DW01A/8205A protection path remains a bounded hypothesis because the current
+  peak and exact state transition were not measured.
+- Documentation: updated `CODEX.md`, `MEMORY.md`, the active rewrite relay,
+  agent-skill summary, architecture, content workflow, and macOS environment
+  guide. The iCloud guidance now explains `dataless` tracked files, exact-file hydration,
+  ctime-only Git retries, and safe stale-lock handling.
+- Local environment: iCloud had evicted tracked assets and about 25,000 files
+  under `node_modules/`. Tracked files were hydrated; the generated dependency
+  directory was rebuilt from `package-lock.json` with `npm ci`. No package or
+  lockfile change was introduced.
+- Verification: scoped reader-prose scans and manual bilingual review passed;
+  `git diff --check`, lint, content validation for 8 projects / 24 public notes /
+  84 media items, encoding validation for 370 UTF-8 text files, TypeScript, and
+  the 39-page Next.js 16.3 webpack production build passed. Production-only
+  `npm audit --omit=dev` reports 0 vulnerabilities; `npm ci` reports 2 issues in
+  the full dependency tree, 1 low and 1 high.
+- Preserved local work: the 19 unrelated WPS/Finder-style files with ` 2`
+  suffixes remain untracked and untouched. The user approved publishing the
+  verified `/neat` reconciliation to the existing topic branch on 2026-09-02;
+  no merge, deployment, or release is claimed.

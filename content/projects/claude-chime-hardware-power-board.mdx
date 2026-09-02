@@ -88,9 +88,9 @@ What I verified by hand has a clear boundary. From a 3.8 V bench supply limited 
 
 我亲手验证的这部分是有明确边界的。3.8 V、限流 50 mA 的台式电源下，两路空载升压分别读到约 5.12 V 和 5.08 V，只是现在再回头看，我想不起哪个数属于哪一路。我用电流表确认了 MCP73831 的充电电流，随后用万用表看到电池电压上升。`ADC_ENABLE` 手动接通后分压符合计算，模拟 3.3 V 的高低电平反复驱动 `SOL_CTRL`，空载输出能连续切换，升压轨上也没有看到掉压。
 
-The protected cell added one surprise. On a cold connection its terminal voltage fell from 4.03 V into the 1.49 to 1.57 V range, even though the same board had started from the 50 mA limited supply. The measurements support a bounded hypothesis: first-power-up demand opened the pack's protection path, the DW01A and 8205A. I did not measure the current peak, and I never proved the trigger directly. The full investigation lives in a separate [cold-start note](/notes/claude-chime-cold-start-battery-protection).
+The protected battery pack added one surprise. On a cold connection, its output fell from 4.03 V into the 1.49 to 1.57 V range, even though the same board had started from the 50 mA-limited supply. The measurements support a bounded hypothesis: first-power-up demand may have opened the pack's DW01A-and-8205A protection path. I did not measure the current peak or the exact state transition, so the trigger was never proved directly. The full investigation lives in a separate [cold-start note](/notes/claude-chime-cold-start-battery-protection).
 
-使用这块带保护的小电池时出了一个意外。冷接入时，端电压从 4.03 V 跌进 1.49 至 1.57 V 的区间，而同一块板此前就能从限流 50 mA 的电源启动。测量支持一个有限推断：上电瞬间的需求触发了电池包的保护路径，构成这条保护路径的是电池包上的 DW01A 和 8205A。电流峰值没有量到，确切触发也没有直接证明。完整排查放在单独的[冷启动笔记](/notes/claude-chime-cold-start-battery-protection)里。
+使用这块带保护的小电池时出了一个意外。冷接入时，电池包输出端从 4.03 V 跌进 1.49 至 1.57 V 的区间，而同一块板此前能从限流 50 mA 的电源启动。测量支持一个有限推断：上电瞬间的需求可能使电池包上由 DW01A 和 8205A 构成的保护路径断开。电流峰值和确切的状态切换都没有量到，因此触发原因没有得到直接证明。完整排查放在单独的[冷启动笔记](/notes/claude-chime-cold-start-battery-protection)里。
 
 I did not connect the real solenoid, the crab never sat on my bench, and I did not write the ESP32 firmware. The client's firmware engineer later reported in project-time chat that ESP32 communication, ADC battery reading, charging control, repeated real-solenoid actuation, and complete-device operation were all normal. Those are client-side integration results, not an acceptance test I personally witnessed. The client also mentioned that the compact board and six-pin cable saved enclosure space.
 
