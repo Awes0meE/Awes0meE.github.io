@@ -15,6 +15,7 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Select concrete work, symptoms, decisions, and results that serve the requested article. Keep the selected facts accurate; the old draft is not a checklist of information that must survive.
 - Match the Chinese and English substance on public bilingual pages.
 - Give project homepages and learning notes distinct jobs under `references/project-note-division.md`: the homepage tells the user's project journey and actions; each note explores a bounded question from that work. Do not retell the same complete experience or reasoning across pages.
+- Let each article find its own ending. Compare nearby project and note endings for repeated retrospective or hypothetical-next-time frames, including synonymous variants. An occasional apt `下一次再看到……` is allowed; it is not a banned phrase or a default closing template.
 - Require the independent Chinese sentence gate in `references/chinese-sentence-gate.md` after Chinese editorial refinement and before English adaptation at Step 10, then recheck the final Chinese at Step 12. Its six error categories apply only to Chinese; English retains the existing adaptation and review rules.
 - Require model-authored reader-facing project and note body to pass the scoped reader-prose gates in `references/reader-prose-hard-gates.md`, including the L1-5 syntax and collocation layer. Prohibited patterns, note-specific bans, and L1-5 calque patterns must reach zero hits; semantically necessary colons and grounded quotations are not violations.
 - Compose Chinese as Chinese, not rendered English. Each bilingual pair keeps semantic equality; the Chinese is derived from the content, and one-to-one structural mirroring of the English is a release blocker.
@@ -115,7 +116,9 @@ English may change sentence and paragraph boundaries while expressing the select
 
 ### 11. Bring The Account To A Natural Close
 
-A closing paragraph is normal for project pages and learning notes. Give the reader a sense that this account has finished: return to the original task, say where the work led, or finish with a concrete understanding, reaction, or remaining question supported by the account. A project homepage should bring the whole experience to a close; a note should close its selected investigation.
+A closing paragraph is normal for project pages and learning notes. Continue from the last developed point and finish the particular account: its result, a concrete understanding, a supported reaction, or a real remaining question may be enough. A project homepage should bring the whole experience to a close; a note should close its selected investigation.
+
+Compare the endings of articles drafted together and the relevant recent pages. Do not repeatedly announce a look back or imagine doing the work again, whether phrased as `现在再看`, `回头看`, `下一次再看到`, `如果再做一次`, or an equivalent in either language. The user clarified that an individual sentence such as `下一次再看到……` can work well. Judge its fit and recurrence, not a keyword count. Keep an apt occasional use; repair a recurring frame from the article's content instead of rotating synonyms or enforcing a quota of ending types.
 
 After deleting audit commentary, check whether the page now stops abruptly at a number, file list, or isolated technical fact. If it does, write the missing connection and natural close. Do not confuse avoiding forced elevation with omitting the ending. When the existing last paragraph already closes the account, keep it; no extra heading, fixed ending formula, recap of every section, or new achievement is required.
 
@@ -124,6 +127,8 @@ After deleting audit commentary, check whether the page now stops abruptly at a 
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
 Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 5. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
+
+Recheck ending variety under Step 11 and Reader-Prose L1-3 across the current batch and relevant recent pages. Similar wording can hide the same repeated closing move. Do not turn this repetition check into a zero-occurrence ban on retrospective or future-looking sentences.
 
 For model-authored project and note body, the reader-prose gate, including L1-5 syntax and collocation, must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
 

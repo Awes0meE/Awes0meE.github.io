@@ -1,0 +1,18 @@
+{
+  "display": {
+    "paragraphPairs": 13,
+    "headings": 4,
+    "figures": 1,
+    "codeBlocks": 1,
+    "source": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+    "sourceSha256": "d21d6a85780b1ac22501c6bd16d4449d7d89e41aa5aa7ac2c1ec26fcdb53eff8"
+  },
+  "switch": {
+    "paragraphPairs": 15,
+    "headings": 4,
+    "figures": 1,
+    "codeBlocks": 0,
+    "source": "content/notes/arduino-counter-latching-switch-control.mdx",
+    "sourceSha256": "9a7287a0c375ce3ebc94b90851ab9d8805698b92a161817aa152bef33fb48a94"
+  }
+}

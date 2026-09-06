@@ -19,7 +19,7 @@ Replace every occurrence of these Chinese patterns in scoped prose:
 - `本质上` -> use `说到底`, `其实`, or the concrete claim;
 - `换句话说` -> use `你想想看`, `也就是说`, or continue directly;
 - `不可否认` -> delete it and make the positive claim;
-- `综上所述` or `总的来说` -> use a concrete callback to the active engineering question;
+- `综上所述` or `总的来说` -> continue directly from the active engineering question;
 - `值得注意的是` or `不难发现` -> delete the preface and state the observation;
 - `让我们来看看` or `接下来让我们` -> move directly to the event, artifact, or question;
 - `这是一篇`, `本文将`, `下面介绍`, or `这篇笔记整理了` when they narrate the document or writing act -> begin from the engineering subject;
@@ -38,6 +38,17 @@ Allow quotation marks when they identify traceable source wording, a real uttera
 Use natural quotation marks for the target language and preserve the punctuation of a verbatim source when accuracy requires it. Do not normalize a grounded quotation merely to satisfy another tool's style preference.
 
 ## L1-3 Scan Canned Structure
+
+Read the endings of the current batch and relevant recent project/note pages
+together. Repeated retrospective or hypothetical-next-time closures are a
+template problem even when the openings vary: `现在再看`, `回头看`, `下一次再看到`,
+`如果再做一次`, `Looking back`, `Returning to`, `Next time`, or `If I did this again`.
+Judge the role of the whole ending, not just its first words. The user explicitly
+allows an apt occasional `下一次再看到……`; none of these phrases is independently
+banned. Fix repeated use by closing from each article's own content, not by
+substituting a synonym. Do not set a numerical quota, delete useful endings, or
+flag genuine chronology, engineering conditions, and actual next tasks merely
+because they contain similar words. See `../tests/ending-variety-regression.md`.
 
 Reject textbook openings such as `在当今……的时代`, `在当今……背景下`, `随着……的发展`, and `随着技术的不断进步`, plus direct English equivalents such as `in today's rapidly changing era`, `in today's landscape`, and `with the continued development of`.
 

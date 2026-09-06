@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-07",
+  "stage": "Step 10 after Chinese refinement, before English adaptation",
+  "sha256": "9475d1b69e53cf8b428b994ce5477047485c265b79e18991ac106f80233c6c08",
+  "method": "Manual contextual sentence review by the current writer",
+  "reviewedCategories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "establishedViolationsRemaining": 0,
+  "technicalChecks": [
+    "Schematic output uses PWM, 12V+ and 12V−; each four-pin connector has one NC pin without assuming a standard fan pin order.",
+    "15 kHz gives 66.7 microseconds; ideal half-duty gives 33.3 microseconds; archived integer mapping yields 127, approximately half output.",
+    "Noctua frequency and two pulses per revolution are explicitly manufacturer examples, not identification of the project fan.",
+    "Open-collector output turns off to high impedance; the pull-up supplies the high level.",
+    "3.3V / 10k ohms gives approximately 0.33mA; 100Hz / 2 x 60 gives 3000 rpm."
+  ],
+  "editorialRepairs": [
+    {
+      "category": "表意不明 / 结构混乱",
+      "original": "每转两圈脉冲这里应理解为每转一圈产生两个脉冲",
+      "reason": "The draft mixed two incompatible pulse-count wordings in one clause.",
+      "repair": "其风扇使用开集电极测速输出，每转一圈产生两个脉冲。",
+      "meaningPreserved": true
+    }
+  ],
+  "allocation": "Homepage retains original build and connection experiences; this note studies its selected question. Sibling note owns the other question.",
+  "endingReview": "Different content-led closes; no repeated retrospective or imagined-next-project frame.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
+}

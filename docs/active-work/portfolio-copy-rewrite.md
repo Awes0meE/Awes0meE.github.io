@@ -1,60 +1,50 @@
-# Active Work: Homepage Release and Arduino Car Learning Note
+# Portfolio Writing Handoff
 
-**Updated:** 2026-09-06
+**Updated:** 2026-09-07
 
-**Branch:** `docs/refactor-project-homepages`
+The user approved all six bilingual learning notes for Arduino Smart Car, the two-digit counter and DIY cooling, and requested Neat, publication of the current Engineering Note Writer, deletion of their superseded notes, a pull request and merge to `main`.
 
-**State:** Seven homepages approved for release on 2026-09-06. Complete the PR and production verification, then work on the selected Arduino note. GitHub records the live merge and deployment status.
+## Current Source State
 
-**Pre-batch published checkpoint:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), the approved Claude Chime homepage. The named release tag remains `v0.9.0` and is older than that maintenance PR.
+- Eight project pages, 27 note sources, 15 public notes, 12 suspended notes and 84 media records. The Notes index has five project channels and two archive years.
+- Each of the three completed families has two public studies. Three existing slugs now contain replacement articles; three companion articles use new slugs. Their six bodies match approved checkpoint `2337f2d`.
+- The three old-note backups, twelve separate language drafts and four completed preview pages have been removed. Current prose lives only in `content/notes/`; earlier versions remain in Git. Review observations remain as dated history.
+- Smart Car now states seven IR tracking inputs in both homepage languages, matching the manual, schematic and decoded fields. Its six collision switches and six test groups are unchanged.
+- The DIY homepage ending and current writer ending-variety rules are included in this release. The other approved homepage narratives, including Claude Chime, retain their publication state.
 
-## Current Authorization and Work
-
-The user explicitly requested all seven other project homepages be rewritten using the latest writer and existing confirmed context. This is a one-time authorization for the batch, superseding the earlier freeze on those seven families. Claude Chime's approved narrative remains protected. The user also requested overlapping learning notes be suspended recoverably, and topic candidates be identified without writing new notes.
-
-- Seven homepages now have Chinese-first, English-derived body copy, concise subject headings, and updated summaries. Smart Car and Digital Clock keep their titles; the other titles are shortened to subject labels.
-- Fifteen notes have only `visibility` changed to `private`. All 24 note bodies are intact; nine independent topics or original-document notes remain public.
-- Claude Chime changes only by removing the two closing sentences linking to its suspended cold-start note. Its narrative, frontmatter, images, and evidence claims remain intact.
-- All 36 existing body images in the seven rewritten pages remain; cover paths, technical metadata, media records, public uploads, application code, and dependencies are unchanged.
-- [Review and restoration packet](../experiments/project-homepages-2026-09-06/README.md) includes the complete 24-note action list, original hashes, eight before-page copies, and bilingual comparison page.
-- [Future topics](project-note-topics-2026-09-06.md) gives a priority and alternative question for each project. These are proposals for later learning, not new claims about what Alvin already studied or measured.
+The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The release is tracked by [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37), from `docs/rewrite-diy-cooling-notes` to `main`. Follow-up work uses synchronized `main` after the PR is merged; the three merged note-writing branches can then be removed. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
 
 ## Writing Contract
 
-Use `skills/engineering-note-writer/SKILL.md` and its current references. The branch includes `ce015f2`, which adds project/note division, and the Chinese sentence gate originally added in `a1253dc`.
+Use [Engineering Note Writer](../../skills/engineering-note-writer/SKILL.md) and its current references. Project homepages tell what Alvin did and how the work progressed. Notes explore a specific question with new explanatory value, using only the context needed to understand it. Read the project family at Step 1, reuse confirmed briefs and selected topics, allocate material at Step 5 and recheck page division at Step 12.
 
-Homepages tell what Alvin did and how the work progressed. Notes investigate bounded questions with new explanatory value. Read the family at Step 1, reuse confirmed briefs/topics, choose candidates at Step 2 when delegated, allocate detailed material at Step 5, and recheck cross-page division at Step 12. Necessary context and original-document preservation are allowed; replaying a complete experience under new wording is not.
+Compose Chinese first. After editorial refinement, review all six Chinese sentence categories at Step 10 before deriving English; recheck Chinese at Step 12 alongside the existing Truth, voice, L1 and bilingual reviews. English keeps its established checks. Do not reintroduce the removed information-retention gate or add evidence inventories and repeated cannot-claim sentences to reader-facing prose.
 
-Compose Chinese from the confirmed brief and evidence. After editorial refinement, review all six Chinese sentence categories before English at Step 10. Derive natural English with equivalent substance and uncertainty, then repeat the full Chinese check at Step 12 alongside Truth, Li Zhiyi, L1-1 through L1-5, and bilingual review. English keeps its existing rules. A lexical scan is not a substitute for sentence-by-sentence judgment.
+Normal closing paragraphs are welcome. Avoid forced elevation and repeated look-back or next-time endings, including synonymous versions. An occasional apt retrospective or `下一次再看到……` is allowed; there is no phrase blacklist or quota. Keep confirmed emotion and humor, and distinguish present study from historical actions internally while writing natural, accurate prose.
 
-On 2026-09-06, after reviewing the seven pages, the user rejected excessive evidence-boundary commentary. The current writer removes mandatory explicit caveats: internal fact checks do not belong in the article. Remove missing-test lists, archive inventories and repeated cannot-claim statements. Use accurate retained claims with natural attribution and conditions; real failures and unfinished attempts can still drive the story. The independent editorial-conservation / information-retention gate is removed. English adaptation must not restore deleted material. The seven bilingual homepages now follow this correction, with their pre-feedback versions preserved in `pre-boundary-feedback/`.
+## Next Writing Work
 
-Retain confirmed emotion, humor, actors, and accurate results. Present-day reading must not turn into invented historical curiosity, experiments, failures, or causal explanations. Covers and demo media remain user-controlled. The user has approved the seven bilingual homepages for publication. New note prose still needs its own review.
+The six notes are approved; no draft review or topic decision remains pending for these three projects. Continue to another project only when the user asks. The [topic backlog](project-note-topics-2026-09-06.md) retains candidates for Tianjin STM32, Nanjing Turing, Juanyun phase-change cooling, sensorless FOC and Claude Chime. Reuse their confirmed briefs and ask only questions that change the claims or selected topic.
 
-The user then clarified that ordinary closing paragraphs are welcome: avoid forced elevation, but finish the account naturally. The seven endings were reviewed; DIY now closes beyond its temperature/FPS figures, and Turing finishes on the existing personal reaction rather than a file-submission sentence. The other five endings already close their accounts and remain unchanged.
+The 12 other suspended notes remain recoverable sources. Do not restore them wholesale or apply the old homepage-suspension manifest over the six rewritten notes. Completed review URLs on ports 8767–8770 are retired; use the actual website routes from the release record.
 
 ## Internal Fact Checks
 
 These are editorial working notes, not sentences to paste into the project pages.
 
-- Smart Car: kit assembly/testing/tuning, not Alvin's original PCB design. Reported 12 V battery voltage is not MCU or motor-terminal voltage. The suspended note's “13 digital pins” needs correction before republication; check Nano pinout and actual allocation. L293 is not a MOSFET H bridge.
-- Digital Clock: working classroom buttons and full marks are confirmed; 17 and 99 were separately flashed versions. The 17-second video lacks button operation, final source is missing, early `main.c` is incomplete, and final polarity/debounce cannot be reconstructed.
-- DIY: ESP32 completed the computer-to-fan machine; STM32 reached serial control without reconnecting the Windows/Bluetooth path; the printed enclosure remained a slicing preview. Temperature/FPS figures are memory, not controlled tests. Duty is not measured RPM.
+These are editorial working notes, not sentences to paste into the project pages.
+
+- Smart Car: kit assembly/testing/tuning, not Alvin's original PCB design. The new note follows schematic L7805CV regulation, separate L293D motor/logic rails, 3V3 ITR8307 sensors and D2/D3 rising-edge interrupts. Twelve counts/revolution yields `RPM = 5000 / interval_ms`. `motor_step()` contains a course-library feedback branch; this is not a claim that Alvin authored it or used it in the final race. The old “13 digital pins” assertion is omitted. Numerical voltage, loss and timing examples are calculations, not historical measurements.
+- Smart Car second note: the course comment groups black line and sensor lifted off the surface. ITR20001 reflection changes collector current and pulled-up OUT voltage; 74HC165 accepts logic levels. Two cascaded registers serve 7 IR + 6 collision + 2 key inputs. Shared PL loads before serial transmission; the code reads before clocking, first bit to bit 7, and maps reg0 bits 0–6 from leftmost through centre to rightmost. Double logical NOT normalizes IR truth, while switch/key single NOT inverts active-low inputs. The binary 0x08 example is a calculation, not a measurement.
+- Digital Clock: working classroom buttons and full marks are confirmed; 17 and 99 were separately flashed versions. Final firmware and button polarity/debounce cannot be reconstructed. New notes study present principles: decimal splitting and ABCD bit order, SN54LS47 open-collector sink paths, segment resistors, input bias, stable states, events and elapsed-time counting. The report's Uno/CD4511 simulation is not the final Nano/SN54LS47 wiring. Proposed reset-on-entry, initial-state handling, resume timing and reset priority are new design choices; resistor and debounce examples are calculations, not past measurements.
+- DIY: ESP32 completed the computer-to-fan machine; STM32 reached serial control without reconnecting the Windows/Bluetooth path; the printed enclosure remained a slicing preview. Temperature/FPS figures are memory, not controlled tests. The new sampling note accounts for independent read/send tasks and button-triggered peak resets. The button handler clears the peaks without changing lastUpdateTime and uses the previously saved maxValue; the timing example assumes an automatic mode. The fan note follows the actual PWM/12V+/12V− output connections. Noctua frequency and tach parameters are manufacturer examples, not the unidentified project fan's specifications. The source displays duty without reading tach. Proposed logging and response-curve work remains present study.
 - Tianjin: foundational internship demo, not railway-product development. Sixteen-point ADC/PWM mapping is feedforward; I²C errata is a later hypothesis. PID/ATP/ATO/ATS remained reading.
 - Turing: local accounts, not online authentication. Company acceptance used the development machine; the later clean Windows test was separate. Mac reached an unsigned DMG, with signing/notarization and clean-second-Mac tests incomplete; later adoption unknown.
 - Juanyun: independent BaseUnit and three-board ACUnit engineering, formal role intern. Personal staged bring-up is separate from later company refrigeration feedback and performance/endurance claims. No sensitive raw product packages are added.
 - FOC: personal custom hardware, adapted open-source algorithm baseline, Codex-assisted observer debugging. Open-loop compressor operation is confirmed; 30 to 80 Hz is electrical command range, not measured shaft speed. Exact video frequency is uncertain; no complete refrigerant loop or controlled six-step comparison; sensorless handoff unfinished.
 - Claude Chime: 4.03 V falling to 1.49 to 1.57 V is protected-pack output, not measured cell collapse. The 3.8 V / 50 mA supply check and unloaded outputs do not establish an exact protection state or inrush waveform. External-supply intervention preceded successful startup, but connection sequence and recovery mechanism are incompletely known. Real-solenoid operation remains client feedback. Alvin did not write the ESP32 firmware.
 
-## Next Action
 
-1. Publish the approved homepage/writer revision through a checked PR to `main`, and verify production. Preserve `gh-pages`, which supplies the GitHub Pages redirect.
-2. Start the Arduino Smart Car note on a new topic branch from updated `main`. The user chose both power delivery and speed sensing in one note. Follow battery input through regulation and the motor driver, then explain how the installed sensor and test code turn rotation into a measurable signal. Use the confirmed project brief; do not restart the full interview.
-3. Keep assembly, track tuning, the battery-change decision and competition results on the homepage. The note develops circuit operation, PWM, sensing and conversion to wheel speed. Do not replay the project journey or invent a historical closed-loop speed controller.
-4. Draft Chinese first, complete the sentence and voice review, then adapt English. Keep the note recoverable and show its draft before restoring public visibility. Do not begin another project until this one is reviewed.
+## History
 
-## Verification and History
-
-See `../experiments/project-homepages-2026-09-06/verification.json` for final checks. Expected counts are 8 projects and 24 note sources; the public subset is 9 notes and two note-index channels. A production build should prerender 24 pages. Older 39-page results describe the previous all-public note set.
-
-Historical interviews, release evidence, and cleanup remain in `docs/session-log.md`, project briefs, and dated experiments. The original overlap audit remains a diagnostic snapshot; this handoff and the execution packet define the current state.
+The seven-homepage release is [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged at `8e009ef`; its nine-public-note counts and 31 production checks describe that checkpoint. Claude Chime's approved homepage was published through PR #35. Earlier interviews and decisions are in project briefs and `docs/session-log.md`; dated experiment packets preserve review evidence rather than current publication instructions.

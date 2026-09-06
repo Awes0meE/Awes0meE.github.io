@@ -1,0 +1,283 @@
+{
+  "date": "2026-09-07",
+  "state": "both bilingual DIY cooling drafts complete; awaiting user review",
+  "preview": "http://127.0.0.1:8770/preview.html",
+  "method": "Manual editorial, Chinese sentence and bilingual review by the current writer; no independent review agent",
+  "notes": {
+    "sampling": {
+      "source": "content/notes/juanyun-diy-cooling.mdx",
+      "paragraphPairs": 14,
+      "headings": 4,
+      "figures": 0,
+      "codeBlocks": 1,
+      "sourceSha256": "6063a18c771ba6224842a1d99b61376f005a4721d0e91c6681342fbbbcf01c36",
+      "chineseFinalSha256": "80506952ccf7da799c6cea92d6891aff2249a391e676d621a372591cbffe5e97",
+      "englishFinalSha256": "e7a54eb81f5b6f5b6859f5900a8b9d8cb0aa004085a7542901a184bd63144971",
+      "chineseStep10Sha256": "832c605bc7b7e6eaecbcd0117cca82a0417d6a0717f6f61254b3e60ea0fc0376",
+      "truth": "pass; source paths, circuit connections, task/reset behavior, conditional examples and current proposed work checked",
+      "voice": "pass; sampling follows a message and an unexpected shared reset; fan follows an ambiguous display label into electrical connections and feedback",
+      "readerProseL1": "pass; scoped lexical scan and manual syntax/collocation review found zero applicable violations",
+      "chineseStep12": {
+        "categories": [
+          "语序不当",
+          "搭配不当",
+          "成分残缺或赘余",
+          "结构混乱",
+          "表意不明",
+          "不合逻辑"
+        ],
+        "method": "Manual contextual review of all final Chinese sentences, headings, title and caption",
+        "result": "pass",
+        "establishedViolationsRemaining": 0
+      },
+      "english": "pass under existing adaptation rules; Chinese six-category gate is not applied to English",
+      "bilingual": "pass; facts, conditions and sequence matched; narrative syntax reviewed independently",
+      "crossPageDivision": "pass; homepage retains construction and first-connection experience; the two notes separately own sampling timing and fan interface/feedback",
+      "naturalClose": "pass; closes on the particular investigation without recurring look-back or next-project framing"
+    },
+    "fan": {
+      "source": "content/notes/juanyun-diy-cooling-pwm-fan-control.mdx",
+      "paragraphPairs": 13,
+      "headings": 4,
+      "figures": 1,
+      "codeBlocks": 0,
+      "sourceSha256": "b4b6e03f58d2b4b6dab51c7f076b410b7c5cdb2bc6023650d647c16d902cf5d1",
+      "chineseFinalSha256": "9475d1b69e53cf8b428b994ce5477047485c265b79e18991ac106f80233c6c08",
+      "englishFinalSha256": "830c984c733afd1637760bfb270176abfc848e56126f32932b908dcef7969bad",
+      "chineseStep10Sha256": "9475d1b69e53cf8b428b994ce5477047485c265b79e18991ac106f80233c6c08",
+      "truth": "pass; source paths, circuit connections, task/reset behavior, conditional examples and current proposed work checked",
+      "voice": "pass; sampling follows a message and an unexpected shared reset; fan follows an ambiguous display label into electrical connections and feedback",
+      "readerProseL1": "pass; scoped lexical scan and manual syntax/collocation review found zero applicable violations",
+      "chineseStep12": {
+        "categories": [
+          "语序不当",
+          "搭配不当",
+          "成分残缺或赘余",
+          "结构混乱",
+          "表意不明",
+          "不合逻辑"
+        ],
+        "method": "Manual contextual review of all final Chinese sentences, headings, title and caption",
+        "result": "pass",
+        "establishedViolationsRemaining": 0
+      },
+      "english": "pass under existing adaptation rules; Chinese six-category gate is not applied to English",
+      "bilingual": "pass; facts, conditions and sequence matched; narrative syntax reviewed independently",
+      "crossPageDivision": "pass; homepage retains construction and first-connection experience; the two notes separately own sampling timing and fan interface/feedback",
+      "naturalClose": "pass; closes on the particular investigation without recurring look-back or next-project framing"
+    }
+  },
+  "lateEditorialRepairs": [
+    {
+      "note": "sampling",
+      "chinese": "Changed 它末尾的两行 to 清空峰值的两行 because logging follows the reset assignments in the original function.",
+      "english": "Aligned the excerpt introduction and changed sends to arrives in the hypothetical receiver timeline.",
+      "recheck": "Full final Chinese Step 12 and existing English/bilingual checks passed."
+    }
+  ],
+  "sourceChecks": {
+    "notes": {
+      "sampling": {
+        "lexicalHits": [],
+        "localLinksValid": 2,
+        "finalChineseMatchesStep10": false
+      },
+      "fan": {
+        "lexicalHits": [],
+        "localLinksValid": 4,
+        "finalChineseMatchesStep10": true
+      }
+    },
+    "workedExamples": "pass: 15 kHz gives 66.7 us; ideal half duty gives 33.3 us; integer map of 50 gives 127; 3.3V/10k ohms gives 0.33mA; 100Hz at two pulses/revolution gives 3000rpm",
+    "originalPreserved": "b2d6d37214e7da77eb2bc13c00aa50c5feffaf37f821186cbeb10e5bd67dabcb",
+    "originalCheckpoint": "2b21af8",
+    "protectedSources": {
+      "content/projects/juanyun-diy-cooling-prototype.mdx": "feb702a93bcc08ae70313c594cf207cb5e0e6930e77cec6e4d9a226efa25944a",
+      "content/notes/arduino-smart-car-line-tracking-learning-note.mdx": "308f9aa445ad5b6cea6f40f643ac7ff830ae9cc6d8367cba1b6ec4bb188ee051",
+      "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx": "7496b4f2a0ec6e55e24611c44e7c1afff1a50ae237eb9d66a202905211124302",
+      "content/notes/arduino-digital-clock-counter-course-note.mdx": "94c2a3803a92ec630508e0320d1bb8ff103f93b039c5eae99007883189f041b2",
+      "content/notes/arduino-counter-latching-switch-control.mdx": "d9a3026d35c8dbff3b412eb2c8247b6291c6ce9dd065ac72dec95cc6a26c3270",
+      "public/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs": "5a6cc8d04e97233c940e3ae59c1071589149c496cfb0224952dcd18a5afdaeb3",
+      "public/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp": "73a41990e1d10312589f146470b92602131a00e9b6827537e805db6a4f43a1c5",
+      "public/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf": "239538d7ec7deb50c29f54339c23ebcc88ed5750e7212bb7ecd5dc1de42477ac"
+    },
+    "publicNoteCount": 9,
+    "privateNoteCount": 18,
+    "totalNoteSources": 27,
+    "schematicRender": {
+      "source": "public/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf",
+      "output": "public/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+      "sha256": "5cc77f8a38c95ce2e45ae2cecfe70ab09b8f101b84cf60b483ad6c2eddbd709d",
+      "method": "Faithful pypdfium2 2x render of the existing single-page public PDF; visually inspected; no invented/cropped circuit",
+      "preview": "Same PNG embedded in preview HTML; clicking it opens the existing public PDF"
+    }
+  },
+  "browser": {
+    "views": [
+      {
+        "width": 1440,
+        "note": "sampling",
+        "language": "zh",
+        "title": "温度采样与风扇响应",
+        "lang": "zh-CN",
+        "paragraphs": 14,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [],
+        "overflow": false,
+        "last": "这样整理以后，温度降下来了、风扇输出却还没降，就有了可以逐段追查的过程。我能先确认读到了哪一项温度，再看这条消息何时发出、何时收到，以及哪个峰值被用于计算。几秒钟的等待究竟发生在任务之间、发送轮次里，还是峰值保留期间，应该能在记录里找到。把这段时间弄明白，再决定该加快哪一步，调整起来才有依据。",
+        "query": "?note=sampling&lang=zh"
+      },
+      {
+        "width": 1440,
+        "note": "sampling",
+        "language": "en",
+        "title": "Temperature Sampling and Fan Response",
+        "lang": "en",
+        "paragraphs": 14,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [],
+        "overflow": false,
+        "last": "A lower temperature with an unchanged fan output would then be something I could trace through the program. I could identify the sensor first, follow the message's departure and arrival, and check which peak entered the calculation. The records should locate those seconds of waiting between tasks, between sending turns, or within peak retention. Once I understand where that time is spent, I have a reason for choosing which part to speed up.",
+        "query": "?note=sampling&lang=en"
+      },
+      {
+        "width": 1440,
+        "note": "fan",
+        "language": "zh",
+        "title": "PWM 风扇控制与转速反馈",
+        "lang": "zh-CN",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "naturalWidth": 1697,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "这版程序目前把占空比显示在 Fan Speed 后面，没有读取测速输入。我更愿意让界面直接显示 PWM 百分数，接入测速后再单独显示 RPM。一项告诉我发出了什么设置，一项告诉我风扇怎样响应。调节时就能同时看到设置和响应，也能单独检查两只风扇的运行情况。",
+        "query": "?note=fan&lang=zh"
+      },
+      {
+        "width": 1440,
+        "note": "fan",
+        "language": "en",
+        "title": "PWM Fan Control and Speed Feedback",
+        "lang": "en",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "naturalWidth": 1697,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "The current program displays duty after Fan Speed and does not read a tachometer input. I would label that percentage PWM and add a separate RPM reading when speed sensing is connected. One shows the setting I sent; the other shows the fan's response. Both would be visible while adjusting the cooler, with each fan's operation available to check individually.",
+        "query": "?note=fan&lang=en"
+      },
+      {
+        "width": 390,
+        "note": "sampling",
+        "language": "zh",
+        "title": "温度采样与风扇响应",
+        "lang": "zh-CN",
+        "paragraphs": 14,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [],
+        "overflow": false,
+        "last": "这样整理以后，温度降下来了、风扇输出却还没降，就有了可以逐段追查的过程。我能先确认读到了哪一项温度，再看这条消息何时发出、何时收到，以及哪个峰值被用于计算。几秒钟的等待究竟发生在任务之间、发送轮次里，还是峰值保留期间，应该能在记录里找到。把这段时间弄明白，再决定该加快哪一步，调整起来才有依据。",
+        "query": "?note=sampling&lang=zh"
+      },
+      {
+        "width": 390,
+        "note": "sampling",
+        "language": "en",
+        "title": "Temperature Sampling and Fan Response",
+        "lang": "en",
+        "paragraphs": 14,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [],
+        "overflow": false,
+        "last": "A lower temperature with an unchanged fan output would then be something I could trace through the program. I could identify the sensor first, follow the message's departure and arrival, and check which peak entered the calculation. The records should locate those seconds of waiting between tasks, between sending turns, or within peak retention. Once I understand where that time is spent, I have a reason for choosing which part to speed up.",
+        "query": "?note=sampling&lang=en"
+      },
+      {
+        "width": 390,
+        "note": "fan",
+        "language": "zh",
+        "title": "PWM 风扇控制与转速反馈",
+        "lang": "zh-CN",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "naturalWidth": 1697,
+            "width": 318
+          }
+        ],
+        "overflow": false,
+        "last": "这版程序目前把占空比显示在 Fan Speed 后面，没有读取测速输入。我更愿意让界面直接显示 PWM 百分数，接入测速后再单独显示 RPM。一项告诉我发出了什么设置，一项告诉我风扇怎样响应。调节时就能同时看到设置和响应，也能单独检查两只风扇的运行情况。",
+        "query": "?note=fan&lang=zh"
+      },
+      {
+        "width": 390,
+        "note": "fan",
+        "language": "en",
+        "title": "PWM Fan Control and Speed Feedback",
+        "lang": "en",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "naturalWidth": 1697,
+            "width": 318
+          }
+        ],
+        "overflow": false,
+        "last": "The current program displays duty after Fan Speed and does not read a tachometer input. I would label that percentage PWM and add a separate RPM reading when speed sensing is connected. One shows the setting I sent; the other shows the fan's response. Both would be visible while adjusting the cooler, with each fan's operation available to check individually.",
+        "query": "?note=fan&lang=en"
+      }
+    ],
+    "anchor": {
+      "hash": "#section-4",
+      "top": 94.6875,
+      "atBottom": true
+    },
+    "notePicker": true,
+    "languageButtons": true,
+    "footerNoteSwitch": true,
+    "backToTop": true,
+    "consoleErrors": []
+  },
+  "visualReview": "Desktop and mobile screenshots inspected; heading, paragraph spacing and schematic render are readable, with no layout overflow",
+  "browserCheckAdjustment": "The first TOC assertion demanded 24px alignment at the final heading. The page had reached its natural bottom with the heading visible at 94.7px. Corrected the assertion to allow bottom-clamped scrolling; no page change was needed.",
+  "checks": {
+    "lint": "pass",
+    "content": "8 projects, 27 note sources, 84 media",
+    "encoding": "pass; 435 UTF-8 text files at final documentation check",
+    "typecheck": "pass",
+    "webpackBuild": "pass; 24 rendered pages",
+    "publicNoteCount": 9,
+    "privateNoteCount": 18,
+    "diffCheck": "pass"
+  },
+  "publication": "none; both notes remain private",
+  "releaseFollowUp": {
+    "date": "2026-09-07",
+    "record": "../../releases/engineering-notes-2026-09-07/README.md",
+    "status": "Approved for publication; superseded draft/preview files removed. Existing observations remain historical."
+  }
+}

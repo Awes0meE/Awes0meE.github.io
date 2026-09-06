@@ -1,0 +1,28 @@
+{
+  "stage": "Step 10, after Chinese editorial refinement and before English",
+  "date": "2026-09-06",
+  "sha256": "e7e78f029b7ef7bda116f0c5bd9c8d004eca001c5cffdd4ba5dfaeb4a6948f7e",
+  "reviewedCategories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "establishedViolationsRemaining": 0,
+  "editorialRepairs": [
+    "Replaced vague battery-label ending with explicit distinction between battery and chip supply voltage.",
+    "Grounded left/right explanation in verified drive polarity; removed an unnecessary claim about physical mounting."
+  ],
+  "technicalChecks": [
+    "Schematic VC bypasses L7805CV; regulated 5V supplies Nano and driver logic; speed sensor supply is marked 3V3.",
+    "EN pins pulled high; motor_set_PWM switches bridge inputs with opposite left/right drive polarity.",
+    "12 repeated wheel marks and RISING interrupts imply 12 counts/revolution; 5000/dt_ms yields rpm.",
+    "motor_step contains a course-library feedback branch; prose does not claim racing used it or Alvin authored it.",
+    "100mA dissipation and 0.6A driver-drop examples are calculations, not measurements."
+  ],
+  "crossPageAllocation": "Homepage owns assembly, battery replacement decision, track tuning and result; note investigates power, optical speed sensing, units and feedback.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
+}

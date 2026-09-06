@@ -181,9 +181,18 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 
 A dated audit of all 8 project pages and 24 public notes is available in
 [`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-The subsequent user request authorized seven bilingual homepage rewrites, excluding Claude Chime, and recoverable suspension of overlapping notes. The local candidate has 15 suspended and 9 public notes; no new notes have been written. See [`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md) for future topics and [`experiments/project-homepages-2026-09-06/README.md`](experiments/project-homepages-2026-09-06/README.md) for restoration. On 2026-09-06 the user
-adopted the trunk/branch writing rule, now implemented in the repository-local
-writer's [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
+The homepage batch was published through PR #36. The 2026-09-07 revision
+publishes six approved bilingual studies for Smart Car, the two-digit counter
+and DIY Cooling. Three replace old note bodies at existing paths and three are
+new sources. The collection has 27 notes, 15 public and 12 private. Superseded
+old-note backups and completed review copies were removed at the user's request;
+current MDX files are authoritative, with old versions retained in Git.
+See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md)
+for the current handoff and [`releases/engineering-notes-2026-09-07/README.md`](releases/engineering-notes-2026-09-07/README.md)
+for the release. Remaining candidates are in
+[`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md).
+The trunk/branch rule lives in the writer's
+[`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
 
 Project homepages tell what the user did and how the project progressed.
 Learning notes take bounded questions from that work and investigate them in
@@ -202,6 +211,12 @@ For substantial new project prose, rewrites, or humanization, use the repository
 Evidence checking stays internal. The user removed mandatory explicit boundary prose on 2026-09-06: write supported actions and outcomes, use natural attribution and conditions when useful, and remove commentary about what the available evidence cannot prove. Do not publish missing-test lists or restore them during English adaptation. The independent editorial-conservation / information-retention gate is removed, not renamed. Actual failures and unfinished attempts may still serve the story. Evidence bounds facts, not the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
 
 Step 11 gives the account a natural close. Ordinary closing paragraphs are welcome for project pages and learning notes; avoid forced elevation and full-section recaps. After removing audit commentary, check that the remaining page does not end abruptly at data or a file list. Keep an existing ending when it already closes the experience.
+
+Compare current and nearby article endings for repetitive closing moves. The
+user clarified that `下一次再看到……` is fine occasionally; the problem is using
+it or synonymous look-back/next-time frames in article after article. This
+applies to both project pages and notes, in both languages. Repair recurrence
+from the content, without a phrase blacklist, synonym rotation, or a quota.
 
 Every serious project should eventually include:
 

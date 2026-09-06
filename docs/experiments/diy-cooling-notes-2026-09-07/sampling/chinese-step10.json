@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-07",
+  "stage": "Step 10 after Chinese refinement, before English adaptation",
+  "sha256": "832c605bc7b7e6eaecbcd0117cca82a0417d6a0717f6f61254b3e60ea0fc0376",
+  "method": "Manual contextual sentence review by the current writer",
+  "reviewedCategories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "establishedViolationsRemaining": 0,
+  "technicalChecks": [
+    "The asynchronous example is hypothetical; task submission order does not ensure read completion before sending.",
+    "The peak-window example explicitly assumes automatic mode and no button events.",
+    "A button-triggered update uses saved maxValue, clears both retained peaks, and leaves lastUpdateTime unchanged.",
+    "Read-completion time is distinguished from the sensor update instant; clocks on separate devices are not directly subtracted."
+  ],
+  "editorialRepairs": [
+    {
+      "category": "不合逻辑",
+      "original": "先假设只有定时更新，中途没有按键操作。",
+      "reason": "The worked output calculation also requires an automatic mode; Manual retains the chosen duty.",
+      "repair": "先假设处于自动调速模式，只有定时更新，中途没有按键操作。",
+      "meaningPreserved": true
+    }
+  ],
+  "allocation": "Homepage retains original build and connection experiences; this note studies its selected question. Sibling note owns the other question.",
+  "endingReview": "Different content-led closes; no repeated retrospective or imagined-next-project frame.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
+}

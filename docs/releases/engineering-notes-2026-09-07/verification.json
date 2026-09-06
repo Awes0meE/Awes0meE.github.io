@@ -1,0 +1,582 @@
+{
+  "date": "2026-09-07",
+  "approval": "User approved all six bilingual notes and requested publication, old-note deletion, latest writer push, PR and merge to main.",
+  "approvedCheckpoint": "2337f2d",
+  "sourceBase": "8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d",
+  "notes": {
+    "arduino-smart-car-line-tracking-learning-note": {
+      "path": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+      "approvedBodySha256": "4092a7e601873aa6a48b6337ab8aa150827c3df4eab6932fb40c45e981760a70",
+      "publishedSourceSha256": "010a85583dffb0c463af3fb080e148207094faf40d0a01d1935881f7460c7962",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    },
+    "arduino-smart-car-line-sensing-input-acquisition": {
+      "path": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+      "approvedBodySha256": "7fa38e2e741275cc9844c79163435c888d43cb5c1d83e8e44898c9f4ffd5f131",
+      "publishedSourceSha256": "4ebba56939fbca0bce70facfe5e61764f5fe2b83bcf1648ee0b3b59d21d02875",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    },
+    "arduino-digital-clock-counter-course-note": {
+      "path": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "approvedBodySha256": "386938c20339ba3e5896b74e6de3b72153df2a4b485929a3674b8e38a50f7239",
+      "publishedSourceSha256": "b00cae74855847641dd19ecf2cf9290d8de15d99e32c7054f2f3deb9dea2d840",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    },
+    "arduino-counter-latching-switch-control": {
+      "path": "content/notes/arduino-counter-latching-switch-control.mdx",
+      "approvedBodySha256": "f248e57cc74a731f76182b03b8c7e0649fc0bd97806759e59424918d8cace7e9",
+      "publishedSourceSha256": "a0559785312ac5a1643cf06668ad8733f5e12a3a0800cb6b660ead6b4371ab3b",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    },
+    "juanyun-diy-cooling": {
+      "path": "content/notes/juanyun-diy-cooling.mdx",
+      "approvedBodySha256": "ed9eb28982ac4ae3188e7f9d6fcb8f233afd09dfb63406d826e33d552d4f77cd",
+      "publishedSourceSha256": "8d57f485894032a5c17ee777b770595e23a3195136945993da481ee85b8ae753",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    },
+    "juanyun-diy-cooling-pwm-fan-control": {
+      "path": "content/notes/juanyun-diy-cooling-pwm-fan-control.mdx",
+      "approvedBodySha256": "cda47128fa192fe00554244bd742437609c4af1ab04417c9a0fd3e5177fd84cf",
+      "publishedSourceSha256": "2236fb2a1318fa8afba2d804a022c3d5afd04a2f340a09e482e46419b008a859",
+      "visibility": "public",
+      "bodyUnchangedFromApproval": true
+    }
+  },
+  "removedFiles": [
+    {
+      "path": "docs/experiments/arduino-power-speed-note-2026-09-06/before.mdx",
+      "sha256": "500de2067f72c17dc26a93f82ea5d980560a1a5dccaae12923e174d81040512b",
+      "reason": "Superseded original note"
+    },
+    {
+      "path": "docs/experiments/arduino-power-speed-note-2026-09-06/chinese-draft.md",
+      "sha256": "a23e8e7a8198d7e0781d9bb2f715fa1d7e17b33a1760b987e0e9449f99b9b98e",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-power-speed-note-2026-09-06/english-draft.md",
+      "sha256": "55169fc2edb7c6724f60aa990cce41e8d791b053edaa78fd862aac320d82f6e7",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-power-speed-note-2026-09-06/preview.html",
+      "sha256": "1c972ab850dc4d9d6c2d3c5d0009f1c211238186ba7214b9cc3722638390b1e1",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-line-sensing-note-2026-09-06/chinese-draft.md",
+      "sha256": "c3f146b43d0bc9e71c5ffb713a9062ea56e2c85aef9c15b3ceea3f1eaef480d0",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-line-sensing-note-2026-09-06/english-draft.md",
+      "sha256": "de46d03afe8f2925e42c894bc2f94aa4d0d67d8211ab6ba5611f686bb576b898",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-line-sensing-note-2026-09-06/preview.html",
+      "sha256": "0ba0e9a7a281590e44d12303033db2f7027ca68345d5dd330385d38b637ad29e",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/before.mdx",
+      "sha256": "c167c5d9a43142522be50aac29127652a546f26aea74544f149a086cb51e5ce8",
+      "reason": "Superseded original note"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/display/chinese-draft.md",
+      "sha256": "99e48c9240e7fb4d31dc8b2a46835c72804a72b1418ce42f4b249da1638a8af8",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/display/english-draft.md",
+      "sha256": "4d241d1cab23a7d586d9350496b5a264ba6d6f5f95aafb284a7c5781759654a2",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/preview.html",
+      "sha256": "6532c385291d1b394afd45e57328630d456c9326d9e36e4f74163d727b1d512b",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/switch/chinese-draft.md",
+      "sha256": "b674bdc78d1d6acf6678efb1085ab89c68437d8ab7b030ae747c7d7d01e2249b",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/arduino-counter-notes-2026-09-06/switch/english-draft.md",
+      "sha256": "0b25b6845cef0e4690e2a1d510c8bf2c0509a34722527a667af10cf9e556021c",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/before.mdx",
+      "sha256": "b2d6d37214e7da77eb2bc13c00aa50c5feffaf37f821186cbeb10e5bd67dabcb",
+      "reason": "Superseded original note"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/fan/chinese-draft.md",
+      "sha256": "9475d1b69e53cf8b428b994ce5477047485c265b79e18991ac106f80233c6c08",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/fan/english-draft.md",
+      "sha256": "830c984c733afd1637760bfb270176abfc848e56126f32932b908dcef7969bad",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/preview.html",
+      "sha256": "bc0e6873454325adfa14479ef279e245df2f52be5ba0381b50e19b4a0d808cdd",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/sampling/chinese-draft.md",
+      "sha256": "80506952ccf7da799c6cea92d6891aff2249a391e676d621a372591cbffe5e97",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/experiments/diy-cooling-notes-2026-09-07/sampling/english-draft.md",
+      "sha256": "e7a54eb81f5b6f5b6859f5900a8b9d8cb0aa004085a7542901a184bd63144971",
+      "reason": "Completed review copy; canonical text is in content/notes"
+    },
+    {
+      "path": "docs/active-work/diy-cooling-note-plan-2026-09-07.md",
+      "sha256": "6182495c0e91d50f68a4d082a6bebc0f16f93c3fe1529643d6bc23eebaf65c38",
+      "reason": "Completed selection plan; approved articles, dated review evidence and current topic backlog supersede it"
+    }
+  ],
+  "checks": {
+    "noteBodyPreservation": "pass; six bodies unchanged from approved checkpoint",
+    "obsoleteCopiesRemoved": {
+      "oldNotes": 3,
+      "reviewCopies": 16,
+      "completedPlans": 1
+    },
+    "lint": "pass; ESLint, content and UTF-8 checks",
+    "typecheck": "pass",
+    "build": "pass; webpack production build, 30 prerendered pages",
+    "productionDependencies": "pass; npm audit --omit=dev, 0 vulnerabilities",
+    "skillValidation": "pass; quick_validate.py",
+    "writerReview": "pass; nine changed files and eight ending-variety regression cases checked manually; no new model trial claimed",
+    "homepageCorrection": "pass; Chinese sentence and English parity review of seven-IR-input count",
+    "localHttp": {
+      "passed": 53,
+      "total": 53,
+      "report": "local-http.json"
+    },
+    "browser": {
+      "noteViews": 24,
+      "indexViews": 4,
+      "relatedProjectViews": 6,
+      "viewports": [
+        1440,
+        390
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "pageErrors": 0,
+      "horizontalOverflow": false,
+      "brokenImages": false,
+      "visibleOppositeLanguageBlocks": 0,
+      "visualReview": "Chinese mobile introduction/ending and desktop schematic inspected",
+      "consoleWarnings": "Existing stylesheet preload warnings only; no page exceptions"
+    },
+    "documentation": "Current counts, active handoff and relative links reconciled; dated observations retain historical scope"
+  },
+  "smartCarCorrection": "Six to seven IR tracking inputs in both homepage languages, matching seven decoded fields and the approved sensor note; six collision switches and six test groups remain correct.",
+  "browserViews": [
+    {
+      "slug": "arduino-smart-car-line-tracking-learning-note",
+      "width": 1440,
+      "language": "zh",
+      "title": "Arduino 小车的供电与轮速测量",
+      "paragraphs": 20,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+          "loaded": true
+        },
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "7c85951897aedd3731adba991ed16b1524e07a3ed29433e9895ff7a8220da1d0"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracking-learning-note",
+      "width": 1440,
+      "language": "en",
+      "title": "Arduino Car Power and Wheel-Speed Measurement",
+      "paragraphs": 20,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+          "loaded": true
+        },
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "3c59223fc0e02a3b16562cff7657461df442a3fd676fd96dbd4023339bd7df2b"
+    },
+    {
+      "slug": "arduino-smart-car-line-sensing-input-acquisition",
+      "width": 1440,
+      "language": "zh",
+      "title": "Arduino 小车的循迹信号与输入采集",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "e6424babbf14b7d0a1ba14565d2f9f399a14282a60c388f92ea860808c6f1c8a"
+    },
+    {
+      "slug": "arduino-smart-car-line-sensing-input-acquisition",
+      "width": 1440,
+      "language": "en",
+      "title": "Arduino Car Line Sensing and Input Acquisition",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "f0d3bcb951e50d5929e7702db1ff5c21d43eb8de9310163eb56ec32a29ded2ee"
+    },
+    {
+      "slug": "arduino-digital-clock-counter-course-note",
+      "width": 1440,
+      "language": "zh",
+      "title": "共阳数码管与 BCD 译码",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "588b367916373539dc5bb6ba726c54db943071091e6e0dd3224a8308960b45f0"
+    },
+    {
+      "slug": "arduino-digital-clock-counter-course-note",
+      "width": 1440,
+      "language": "en",
+      "title": "Common-Anode Displays and BCD Decoding",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "550bd0a2673c6c5faf10d9e6312baed3b775a806e39089b9de6cd03626d4cfbc"
+    },
+    {
+      "slug": "arduino-counter-latching-switch-control",
+      "width": 1440,
+      "language": "zh",
+      "title": "自锁按键与计数控制",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "739bf33fe652fe8553b1bfe2165d648dbef061c88c452796e3928897d3f86e3f"
+    },
+    {
+      "slug": "arduino-counter-latching-switch-control",
+      "width": 1440,
+      "language": "en",
+      "title": "Latching Switches and Counter Control",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "8914ad2c6fe5f0f3d20a7c2c98f0a9d16e7242b56693420a56ea3cf9d8c05afe"
+    },
+    {
+      "slug": "juanyun-diy-cooling",
+      "width": 1440,
+      "language": "zh",
+      "title": "温度采样与风扇响应",
+      "paragraphs": 14,
+      "visibleOpposite": 0,
+      "images": [],
+      "overflow": false,
+      "endingSha256": "195216ec086702f27c94bc7ff7d996a8557c88dbd9374c7aea2b54ce115203b1"
+    },
+    {
+      "slug": "juanyun-diy-cooling",
+      "width": 1440,
+      "language": "en",
+      "title": "Temperature Sampling and Fan Response",
+      "paragraphs": 14,
+      "visibleOpposite": 0,
+      "images": [],
+      "overflow": false,
+      "endingSha256": "5b33736e3bc3f698b860a45a2718b24b5db5eb2c227e5626b3ccb29592b6aca7"
+    },
+    {
+      "slug": "juanyun-diy-cooling-pwm-fan-control",
+      "width": 1440,
+      "language": "zh",
+      "title": "PWM 风扇控制与转速反馈",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "bc102966d43af015bbe3d35bf623ce159d8eff1d17d76bf696ec49261ea2b6e7"
+    },
+    {
+      "slug": "juanyun-diy-cooling-pwm-fan-control",
+      "width": 1440,
+      "language": "en",
+      "title": "PWM Fan Control and Speed Feedback",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "f199eae9f0731243d2e2b5a61471dad27e72b22bdca13b485a118da5991176a8"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracking-learning-note",
+      "width": 390,
+      "language": "zh",
+      "title": "Arduino 小车的供电与轮速测量",
+      "paragraphs": 20,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+          "loaded": true
+        },
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "7c85951897aedd3731adba991ed16b1524e07a3ed29433e9895ff7a8220da1d0"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracking-learning-note",
+      "width": 390,
+      "language": "en",
+      "title": "Arduino Car Power and Wheel-Speed Measurement",
+      "paragraphs": 20,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+          "loaded": true
+        },
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "3c59223fc0e02a3b16562cff7657461df442a3fd676fd96dbd4023339bd7df2b"
+    },
+    {
+      "slug": "arduino-smart-car-line-sensing-input-acquisition",
+      "width": 390,
+      "language": "zh",
+      "title": "Arduino 小车的循迹信号与输入采集",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "e6424babbf14b7d0a1ba14565d2f9f399a14282a60c388f92ea860808c6f1c8a"
+    },
+    {
+      "slug": "arduino-smart-car-line-sensing-input-acquisition",
+      "width": 390,
+      "language": "en",
+      "title": "Arduino Car Line Sensing and Input Acquisition",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "f0d3bcb951e50d5929e7702db1ff5c21d43eb8de9310163eb56ec32a29ded2ee"
+    },
+    {
+      "slug": "arduino-digital-clock-counter-course-note",
+      "width": 390,
+      "language": "zh",
+      "title": "共阳数码管与 BCD 译码",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "588b367916373539dc5bb6ba726c54db943071091e6e0dd3224a8308960b45f0"
+    },
+    {
+      "slug": "arduino-digital-clock-counter-course-note",
+      "width": 390,
+      "language": "en",
+      "title": "Common-Anode Displays and BCD Decoding",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "550bd0a2673c6c5faf10d9e6312baed3b775a806e39089b9de6cd03626d4cfbc"
+    },
+    {
+      "slug": "arduino-counter-latching-switch-control",
+      "width": 390,
+      "language": "zh",
+      "title": "自锁按键与计数控制",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "739bf33fe652fe8553b1bfe2165d648dbef061c88c452796e3928897d3f86e3f"
+    },
+    {
+      "slug": "arduino-counter-latching-switch-control",
+      "width": 390,
+      "language": "en",
+      "title": "Latching Switches and Counter Control",
+      "paragraphs": 15,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "8914ad2c6fe5f0f3d20a7c2c98f0a9d16e7242b56693420a56ea3cf9d8c05afe"
+    },
+    {
+      "slug": "juanyun-diy-cooling",
+      "width": 390,
+      "language": "zh",
+      "title": "温度采样与风扇响应",
+      "paragraphs": 14,
+      "visibleOpposite": 0,
+      "images": [],
+      "overflow": false,
+      "endingSha256": "195216ec086702f27c94bc7ff7d996a8557c88dbd9374c7aea2b54ce115203b1"
+    },
+    {
+      "slug": "juanyun-diy-cooling",
+      "width": 390,
+      "language": "en",
+      "title": "Temperature Sampling and Fan Response",
+      "paragraphs": 14,
+      "visibleOpposite": 0,
+      "images": [],
+      "overflow": false,
+      "endingSha256": "5b33736e3bc3f698b860a45a2718b24b5db5eb2c227e5626b3ccb29592b6aca7"
+    },
+    {
+      "slug": "juanyun-diy-cooling-pwm-fan-control",
+      "width": 390,
+      "language": "zh",
+      "title": "PWM 风扇控制与转速反馈",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "bc102966d43af015bbe3d35bf623ce159d8eff1d17d76bf696ec49261ea2b6e7"
+    },
+    {
+      "slug": "juanyun-diy-cooling-pwm-fan-control",
+      "width": 390,
+      "language": "en",
+      "title": "PWM Fan Control and Speed Feedback",
+      "paragraphs": 13,
+      "visibleOpposite": 0,
+      "images": [
+        {
+          "src": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "endingSha256": "f199eae9f0731243d2e2b5a61471dad27e72b22bdca13b485a118da5991176a8"
+    }
+  ],
+  "publication": {
+    "pullRequest": "https://github.com/Awes0meE/Awes0meE.github.io/pull/37",
+    "baseBranch": "main",
+    "headBranch": "docs/rewrite-diy-cooling-notes",
+    "deploymentRecord": "GitHub checks and Vercel production status on the PR merge commit",
+    "contentCommit": "ebc152de1a2803e2216c8027f363a4dba8747ef0"
+  }
+}

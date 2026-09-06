@@ -1,0 +1,106 @@
+{
+  "date": "2026-09-06",
+  "baseCommit": "069bbbc",
+  "instruction": "Reduce repeated retrospective and next-time closing frames across pages. The user explicitly permits an apt occasional 下一次再看到 sentence; this is not a phrase ban.",
+  "changes": [
+    {
+      "path": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "after": {
+        "zh": "缺一段和整位显示成另一个数字，可以从不同的地方查起。前者沿对应的 LED 支路检查，后者先核对 BCD 位序和译码器的控制条件。显示错了什么、哪些引脚控制着它、电流应该从哪里流过，这几件事能对上，调试就有了具体的方向。",
+        "en": "An incorrect digit calls for checking BCD bit order and the decoder's control inputs; a missing segment can be investigated along its LED branch. Those are different starting points. Once I can connect the visible error to the relevant pins and expected current path, I have a concrete way to investigate it."
+      },
+      "reason": "Close with the diagnostic use of the explanation, removing the return-to-17 and next-time wrapper.",
+      "before": {
+        "en": "Returning to `17`, I now think about the BCD code for each digit, the selected segments, and the current through each LED. A segment that never lights leads me along its individual branch; a whole digit that consistently shows the wrong number sends me first to input order and decoding conditions. The small display now connects to specific pins and currents. I have a much clearer starting point the next time I work with one.",
+        "zh": "回到最初的 `17`，我现在会分别想到十位和个位的 BCD、被选中的段，以及经过每只 LED 的电流。若某一段始终不亮，可以沿那条支路找；若整位稳定显示成另一个数，就先对照输入位序和译码条件。一个小小的显示结果，终于能和具体引脚、具体电流对应起来了。以后再碰到数码管，我也更知道该从哪里开始看。"
+      },
+      "sourceBeforeSha256": "d21d6a85780b1ac22501c6bd16d4449d7d89e41aa5aa7ac2c1ec26fcdb53eff8",
+      "chineseEndingSha256": "588b367916373539dc5bb6ba726c54db943071091e6e0dd3224a8308960b45f0",
+      "draftFolder": "docs/experiments/arduino-counter-notes-2026-09-06/display",
+      "sourceAfterSha256": "94c2a3803a92ec630508e0320d1bb8ff103f93b039c5eae99007883189f041b2"
+    },
+    {
+      "path": "content/notes/arduino-counter-latching-switch-control.mdx",
+      "after": {
+        "zh": "暂停时保留原来的数字，复位时清零，拨动开关后及时响应，用这只计数器时期待的其实就是这些。让这些动作按预期发生，得把触点状态、输入判断和主循环顺序一起安排好。开关在手里只需要拨一下，程序却要认真处理这一下带来的变化。",
+        "en": "Pause should hold the displayed number, reset should clear it, and either action should take effect promptly. Getting that behaviour depends on how the contacts are wired, how inputs are interpreted, and when the loop acts on them. A single movement of the switch feels simple in the hand. The program still has to deal carefully with the changes it produces."
+      },
+      "reason": "Finish on the expected interaction and the execution details behind it, without a retrospective preface or claiming new tests.",
+      "before": {
+        "en": "I now approach pause and reset by separating the contact connections, the point at which a level becomes stable, and the transition that should trigger an action. The loop also needs time to handle them promptly. With those relationships worked out, I have a better basis for making the switches behave as intended. If they do not, I know to examine the wiring, input changes, or counter program in turn.",
+        "zh": "现在再看暂停和复位，我脑子里会先分清触点接到了哪里，电平什么时候稳定，以及哪一次变化该触发动作。最后还要给主循环留出及时处理它们的机会。把这些关系安排清楚以后，我才更有把握让开关按预期工作；遇到异常时，也知道该去检查接线、输入变化，还是计数程序。"
+      },
+      "sourceBeforeSha256": "9a7287a0c375ce3ebc94b90851ab9d8805698b92a161817aa152bef33fb48a94",
+      "chineseEndingSha256": "739bf33fe652fe8553b1bfe2165d648dbef061c88c452796e3928897d3f86e3f",
+      "draftFolder": "docs/experiments/arduino-counter-notes-2026-09-06/switch",
+      "sourceAfterSha256": "d9a3026d35c8dbff3b412eb2c8247b6291c6ce9dd065ac72dec95cc6a26c3270"
+    },
+    {
+      "path": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+      "after": {
+        "zh": "黑线和悬空都可能让 `sensor.ir_left_3` 为真。74HC165 把电平读得再准确，也不会替程序分辨这两种情况；判断还要依赖传感器实际放在哪里、收到了多少反射光。代码里的一个 `if`，因此也要连着车底的安装条件一起理解。",
+        "en": "The same `sensor.ir_left_3` field can be true over black tape or with the sensor lifted clear of the surface. Accurate capture by the 74HC165 cannot distinguish those situations on its own. Interpreting the bit still depends on the sensor's position and the reflected light reaching it. The mounting conditions beneath the car belong in the interpretation of that small `if`, too."
+      },
+      "reason": "Finish on why the digital field still needs physical context instead of announcing a return to the opening.",
+      "before": {
+        "en": "Returning to `if(sensor.ir_left_3)`, I can now follow the variable all the way back beneath the car. Reflected light changes phototransistor current, the circuit turns that into a voltage, and the 74HC165 accepts a logic level, loads it, and shifts it out. The program places the relevant bit in the outermost left sensor's field. The comment about black tape or being clear of the surface also brings the sensor's present position into the interpretation. With that path understood, a line-following condition in the code connects to both a physical location on the car and the light actually reaching it.",
+        "zh": "现在再回到开头的 `if(sensor.ir_left_3)`，我能把它一路接回车底。反射光先改变光敏三极管的电流，电路把变化转成电压，74HC165 接收电平、装载并移出，程序再把相应比特放进左侧最外一颗传感器的字段。那句“黑线或悬空”也提醒我，读懂这个字段还需要看传感器此刻放在哪里。把这条路径弄清楚以后，我再看循迹判断，就能同时想到代码中的位置和车底真实的受光条件了。"
+      },
+      "sourceBeforeSha256": "a33594f94a4efd6e2bcddc62831c0bda508bdc23dfb992cc5e86d20d8b66b4e1",
+      "chineseEndingSha256": "ce3e2e9136d5d1e6d7f8c9cbd57fce1e15d72998331bc3bc93623eb9e8287a78",
+      "draftFolder": "docs/experiments/arduino-line-sensing-note-2026-09-06",
+      "sourceAfterSha256": "7496b4f2a0ec6e55e24611c44e7c1afff1a50ae237eb9d66a202905211124302"
+    },
+    {
+      "path": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+      "after": {
+        "zh": "如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。",
+        "en": "For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update?"
+      },
+      "reason": "Keep one concrete, useful next-attempt ending as permitted by the clarification; remove the second retrospective wrap after it.",
+      "before": {
+        "en": "For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update? This is where the supply and sensing come together for me. When I read a motor-control function now, I follow it in both directions, toward the current through the motor and toward the wheel's actual motion returning to the program.",
+        "zh": "如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。供电和测速在这里接到了一起。我现在再看一个电机控制函数，会自然地沿着它往两边找，一边找电流怎样经过电机，另一边找车轮怎样把实际运动反馈给程序。"
+      },
+      "sourceBeforeSha256": "e877ed0f7d99206d3451d55ae3c36ea0396196bfe5f3a3d27622f315b0d7bc02",
+      "chineseEndingSha256": "7c85951897aedd3731adba991ed16b1524e07a3ed29433e9895ff7a8220da1d0",
+      "draftFolder": "docs/experiments/arduino-power-speed-note-2026-09-06",
+      "sourceAfterSha256": "308f9aa445ad5b6cea6f40f643ac7ff830ae9cc6d8367cba1b6ec4bb188ee051"
+    },
+    {
+      "path": "content/projects/juanyun-diy-cooling-prototype.mdx",
+      "after": {
+        "zh": "我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，我特别兴奋。",
+        "en": "The cooler I built could go under my own laptop and adjust its fan to the computer's temperature, just as I had first wanted. I was thrilled the first time I clicked Connect and watched the fan on my desk change speed with those readings."
+      },
+      "reason": "Keep the usable prototype and confirmed excitement; remove the look-back framing without dropping the closing paragraph.",
+      "before": {
+        "en": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings.",
+        "zh": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。"
+      },
+      "sourceBeforeSha256": "a331207cf28fd36df3dceb70f2d90efaf527f0fd46af43219fe17d9272c6042f",
+      "chineseEndingSha256": "e7a33aff326301b451be522b22f5a026d3b9e30f5a487ff6ec374c08b59abcc7",
+      "sourceAfterSha256": "feb702a93bcc08ae70313c594cf207cb5e0e6930e77cec6e4d9a226efa25944a"
+    }
+  ],
+  "chineseStep10": {
+    "time": "2026-09-06T15:58:26.691140+00:00",
+    "method": "Manual contextual review of the five Chinese ending replacements before English adaptation. Existing confirmed briefs and surrounding paragraphs were reused.",
+    "categories": {
+      "语序不当": "pass",
+      "搭配不当": "pass",
+      "成分残缺或赘余": "pass",
+      "结构混乱": "pass",
+      "表意不明": "pass",
+      "不合逻辑": "pass"
+    },
+    "notes": [
+      "Display checks remain suggested diagnostic routes, not a report of newly observed faults.",
+      "Switch behaviour is the expectation developed in the note, not a new bench result.",
+      "Sensor truth value still permits both black line and lifted-sensor conditions.",
+      "Car logging remains hypothetical; the concrete next-attempt ending is deliberately retained.",
+      "DIY retains the confirmed first-connection reaction and usable prototype, without adding an event."
+    ]
+  },
+  "englishAdaptation": "Completed from reviewed Chinese endings; English retains existing Truth, voice, L1 and bilingual checks."
+}

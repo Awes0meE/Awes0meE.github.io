@@ -1,0 +1,111 @@
+{
+  "state": "local draft awaiting user review; visibility private",
+  "date": "2026-09-06",
+  "source": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+  "sourceSha256": "e877ed0f7d99206d3451d55ae3c36ea0396196bfe5f3a3d27622f315b0d7bc02",
+  "previewSha256": "595054fd36a06a6b3c3ff90b9d840b782350dc440c770830d256bd605357adc0",
+  "chineseSha256": "e7e78f029b7ef7bda116f0c5bd9c8d004eca001c5cffdd4ba5dfaeb4a6948f7e",
+  "englishSha256": "d676a0ab4f0ef72e51a5b99da133b9837ab6e952d82b86f23e3fa200a70d9ccd",
+  "checks": {
+    "ChineseStep10": "pass before English; see chinese-step10.json",
+    "ChineseStep12": {
+      "result": "pass",
+      "categoriesReviewed": [
+        "语序不当",
+        "搭配不当",
+        "成分残缺或赘余",
+        "结构混乱",
+        "表意不明",
+        "不合逻辑"
+      ],
+      "establishedViolations": 0
+    },
+    "Truth": "pass; schematic/code/source claims and calculated units checked",
+    "LiZhiyi": "pass; present investigation follows voltage question to the unexplained 5 and feedback; no invented past scene",
+    "ReaderProseL1": "pass; lexical scan plus manual construction, collocation and metaphor review",
+    "Bilingual": "pass; 20 equivalent paragraph pairs, 5 headings, shared formula, 2 figures; English adapted after Chinese",
+    "CrossPage": "pass; homepage project journey unchanged; this is the only associated note",
+    "OriginalRecoverability": "before.mdx matches 8e009ef byte for byte",
+    "lint": "pass",
+    "typecheck": "pass",
+    "build": "webpack production build pass, 24 pages; sandbox Turbopack build stalled and was terminated before retry",
+    "scope": "one note body and editorial/release records; no homepage, app, asset or dependency changes"
+  },
+  "contentCounts": {
+    "projects": 8,
+    "noteSources": 24,
+    "publicNotes": 9
+  },
+  "browser": [
+    {
+      "width": 1440,
+      "lang": "zh",
+      "title": "Arduino 小车的供电与轮速测量",
+      "paragraphs": 20,
+      "headings": 5,
+      "images": 2,
+      "brokenImages": 0,
+      "overflow": false,
+      "lastParagraph": "如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。供电和测速在这里接到了一起。我现在再看一个电机控制函数，会自然地沿着它往两边找，一边找电流怎样经过电机，另一边找车轮怎样把实际运动反馈给程序。"
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "title": "Arduino Car Power and Wheel-Speed Measurement",
+      "paragraphs": 20,
+      "headings": 5,
+      "images": 2,
+      "brokenImages": 0,
+      "overflow": false,
+      "lastParagraph": "For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update? This is where the supply and sensing come together for me. When I read a motor-control function now, I follow it in both directions, toward the current through the motor and toward the wheel's actual motion returning to the program."
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "title": "Arduino 小车的供电与轮速测量",
+      "paragraphs": 20,
+      "headings": 5,
+      "images": 2,
+      "brokenImages": 0,
+      "overflow": false,
+      "lastParagraph": "如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。供电和测速在这里接到了一起。我现在再看一个电机控制函数，会自然地沿着它往两边找，一边找电流怎样经过电机，另一边找车轮怎样把实际运动反馈给程序。"
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "title": "Arduino Car Power and Wheel-Speed Measurement",
+      "paragraphs": 20,
+      "headings": 5,
+      "images": 2,
+      "brokenImages": 0,
+      "overflow": false,
+      "lastParagraph": "For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update? This is where the supply and sensing come together for me. When I read a motor-control function now, I follow it in both directions, toward the current through the motor and toward the wheel's actual motion returning to the program."
+    }
+  ],
+  "publication": "No note push, PR, merge or visibility restoration in this task",
+  "publicAssetChecks": [
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+      "status": 200
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+      "status": 200
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf",
+      "status": 200
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-6-speed/motor.cpp",
+      "status": 200
+    }
+  ],
+  "snapshotScope": "Historical pre-ending-feedback verification; original observations and hashes retained.",
+  "followUpVerification": "../natural-endings-2026-09-06/verification.json",
+  "releaseFollowUp": {
+    "date": "2026-09-07",
+    "record": "../../releases/engineering-notes-2026-09-07/README.md",
+    "status": "Approved for publication; superseded draft/preview files removed. Existing observations remain historical."
+  }
+}

@@ -1,0 +1,361 @@
+{
+  "base": "http://127.0.0.1:3000",
+  "checks": [
+    {
+      "path": "/notes/arduino-counter-latching-switch-control",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/arduino-digital-clock-counter-course-note",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/arduino-smart-car-line-sensing-input-acquisition",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/arduino-smart-car-line-tracking-learning-note",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/claude-chime-cold-start-battery-protection",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-acunit-automatic-control",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-acunit-board",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-acunit-firmware",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-acunit-hardware-revision-archive",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-baseunit-firmware",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-dht11-am2302-board",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-diy-cooling-pwm-fan-control",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-diy-cooling",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-hardware-sop",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-legacy-actuator-archive",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/juanyun-production-line-control-panel",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/sensorless-foc-handoff",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/tianjin-metro-environment-monitoring-stm32",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/tianjin-rail-control-pid-atc-reading",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/tianjin-stm32-environment-setup",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/tianjin-stm32-gpio-exti-timer",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/tianjin-stm32-pwm-uart-adc",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/turing-cmake-build-logic",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/turing-qt-seamly2d-first-run",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/turing-release-packaging-cross-platform",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/turing-sm2d-xml-data-format",
+      "expected": 200,
+      "status": 200,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes/turing-three-week-development-log",
+      "expected": 404,
+      "status": 404,
+      "bilingualTitles": true,
+      "pass": true
+    },
+    {
+      "path": "/notes",
+      "status": 200,
+      "publicLinks": 15,
+      "pass": true
+    },
+    {
+      "path": "/work/arduino-digital-clock-counter",
+      "status": 200,
+      "noteLinks": [
+        "/notes/arduino-counter-latching-switch-control",
+        "/notes/arduino-digital-clock-counter-course-note"
+      ],
+      "pass": true
+    },
+    {
+      "path": "/work/arduino-smart-car-line-tracker",
+      "status": 200,
+      "noteLinks": [
+        "/notes/arduino-smart-car-line-sensing-input-acquisition",
+        "/notes/arduino-smart-car-line-tracking-learning-note"
+      ],
+      "pass": true
+    },
+    {
+      "path": "/work/arduino-smart-car-line-tracker",
+      "sevenIrInputs": true,
+      "pass": true
+    },
+    {
+      "path": "/work/juanyun-diy-cooling-prototype",
+      "status": 200,
+      "noteLinks": [
+        "/notes/juanyun-diy-cooling",
+        "/notes/juanyun-diy-cooling-pwm-fan-control"
+      ],
+      "pass": true
+    },
+    {
+      "path": "/notes/arduino-smart-car-line-tracking-learning-note",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf#page=1",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf#page=2",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/manual-ir-sensor-schematic.png",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/manual-motor-driver-power-schematic.png",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf#page=45",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf#page=46",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf#page=9",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-4-ir/comm.cpp",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-4-ir/comm.h",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-4-ir/test-4-ir.ino",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-6-speed/motor.cpp",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf",
+      "method": "HEAD",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png",
+      "schematicSha256": "5cc77f8a38c95ce2e45ae2cecfe70ab09b8f101b84cf60b483ad6c2eddbd709d",
+      "pass": true
+    }
+  ],
+  "passed": 53,
+  "total": 53,
+  "publicNotes": 15,
+  "suspendedNotes": 12
+}

@@ -147,10 +147,23 @@ Template ending:
 现在回头看，这次学习为后续工作打下了坚实基础。
 ```
 
-Cognition-led ending:
+An occasional specific next-attempt ending:
 
 ```text
 下一次再看到开发机上能跑的结果，我大概不会那么快把它叫作 Release 了。
 ```
 
-Why it works: the ending resolves the current understanding by calling back to the note's actual packaging problem. It does not claim vague growth or add a mandatory retrospective heading.
+Why it can work: the next-attempt thought concerns the actual packaging problem.
+The user explicitly permits this sentence form. It stops working as a model
+for a batch when every page ends with `下一次`, `现在再看`, `回头看`, or the same move
+under different wording. Do not copy this ending's structure into each note.
+
+A direct ending for a note whose confirmed subject is deployment dependencies:
+
+```text
+安装包要带齐运行所需的依赖，接收它的人才能直接打开程序。这也是打包时需要解决的最后一件事。
+```
+
+This closes the stated investigation without inventing a successful installation
+test or announcing a retrospective. Choose from the actual account; neither
+example is a required ending type.

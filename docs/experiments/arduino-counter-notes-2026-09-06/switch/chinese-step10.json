@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-06",
+  "stage": "Step 10 after Chinese refinement, before English adaptation",
+  "sha256": "c7a623dc2e35a15bd4a404f4c2a53b7bd72cb461295e0bdba863f583cfbf84db",
+  "method": "Manual contextual sentence review in current session",
+  "reviewedCategories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "establishedViolationsRemaining": 0,
+  "technicalChecks": [
+    "Six terminals do not determine the actual internal topology; contact mapping is proposed from continuity measurements.",
+    "Latching mechanical position is distinct from releasing finger pressure.",
+    "INPUT uses external bias; INPUT_PULLUP enables internal pull-up.",
+    "20ms stability timing is a worked example, not a measured switch requirement.",
+    "Debouncing, state-change detection and periodic counting serve different functions.",
+    "Pause follows stable state; reset on entry, startup initialisation, timer restart and reset priority are proposed present-day choices, not reconstructed final firmware."
+  ],
+  "editorialRepairs": [
+    "Replaced the vague final 一层 diagnostic metaphor with concrete wiring, input changes and counter-program targets.",
+    "Separated the closing diagnostic statement from an unnecessary contrast with lengthening debounce."
+  ],
+  "allocation": "Present study of one selected question. Homepage retains project events, classroom result and personal work allocation; sibling note owns the other selected question.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
+}
