@@ -731,3 +731,95 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   `https://www.66ccff-labs.com/`; `.nojekyll` disables Jekyll, and
   `vercel.json` disables Vercel builds for this redirect-only branch.
   Retain this operational branch during topic-branch cleanup.
+
+## 2026-09-06 — Chinese sentence gate for the engineering writer
+
+- Authorization: the user approved a separate six-category Chinese sentence
+  gate after Chinese refinement and before English at Step 10, with a final
+  Chinese recheck at Step 12. Existing English adaptation and review rules
+  remain unchanged.
+- Scope: added a self-contained reference based on the supplied
+  `病句六大类型.doc`, routed it through the main workflow and final review, and
+  synchronized current project guidance. The supplied document remains an
+  external reference rather than a copied artifact or runtime dependency.
+- Regression: added 20 qualitative cases covering all six categories, the
+  reported PCB sentence, valid Chinese constructions, both gate locations,
+  preserved claims and emotion, and English-only exclusions. Primary-agent
+  manual semantic review found the cases consistent with the intended rule;
+  this was not a fresh independent-model trial or automatic grammar benchmark.
+- Verification: the skill validator, reference-path checks, new-file UTF-8
+  checks, and diff checks passed. Lint, content and encoding validation,
+  TypeScript, and the 39-page webpack baseline build passed. The skill-only
+  edits do not change application code or the built content.
+- Handoff: changes are on `feat/chinese-sentence-gate`, based on synchronized
+  `main` at `845c5ea`. This maintenance does not rewrite published articles,
+  alter frozen trial outputs, or claim a push, merge, or deployment. The 19
+  unrelated untracked duplicates remain untouched.
+
+## 2026-09-06 — Claude Chime bilingual project-page comparison
+
+- Authorization: the user reopened the Claude Chime project homepage to apply
+  the latest writer to known facts and requested complete before/after
+  comparisons in both languages. The existing confirmed brief was reused.
+- Scope: created a complete review candidate under
+  `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/`, with original
+  and rewritten MDX, full Markdown/HTML comparisons, and a factual/gate review.
+  The five-section candidate has 19 paragraphs per language. The formal
+  content file, cold-start note, images, and application code are unchanged.
+- Writing: finished Chinese refinement and the new six-category gate before
+  English, then reviewed final Chinese again. English follows the existing
+  English/L1/bilingual checks. The PCB sentence now names trace lengths,
+  copper area, input-capacitor placement, and the switching-current path using
+  TI's layout guidance as current interpretation. No new historical tests or
+  design actions were added; bench, client-report, and hypothesis boundaries
+  remain explicit in both languages.
+- Verification: source bytes, non-copy frontmatter, three image lines, local
+  resource links, 5 sections / 19 paragraphs per language/version, complete
+  comparison text, UTF-8, and comparison-script syntax checks passed. Browser
+  review covered language switching, comparison mode, and candidate-only mode.
+  Lint passed with 8 projects / 24 notes / 84 media and 377 UTF-8 files.
+  TypeScript and production build were not repeated for this experiment-only
+  change; their preceding skill-maintenance baseline is recorded above.
+- Handoff: local branch `docs/refine-claude-chime-copy` includes the latest
+  writer runtime from `a1253dc`. A loopback-only preview serves the comparison
+  at `http://127.0.0.1:8765/comparison.html`. The candidate awaits review and
+  has not been pushed, merged, or deployed. The 19 unrelated untracked
+  duplicates remain untouched.
+
+## 2026-09-06 — Approved Claude Chime publication and overlap audit
+
+- Authorization: the user approved the complete bilingual candidate and
+  requested application to the website, `/neat`, remote push, PR integration
+  into `main`, and a clean workspace. They also requested a scan of every
+  project page against its related learning notes before choosing how to
+  address overlap.
+- Content: copied the approved candidate byte-for-byte into the Claude Chime
+  project MDX (SHA-256 `a2698f058b8171ac1c5bcca35bec8cb9e5e8e81677dbc79bc0cb5f3188ea0ffa`).
+  Covers, public artifacts, media and the cold-start note are unchanged. The
+  release branch includes the Chinese sentence-gate runtime and regression
+  reference from `a1253dc`, plus the frozen full bilingual comparison.
+- Audit: `docs/active-work/project-note-overlap-audit-2026-09-06.md` covers
+  8 projects / 24 public notes. Four families have substantial repeated
+  narratives, two merit local reductions, and two already divide their
+  material well. These are editorial judgments, not similarity scores.
+  The report proposes exact page responsibilities and a focused Claude Chime
+  note revision; no additional article or writer policy was changed.
+- Knowledge cleanup: reconciled the experiment index, current relay, durable
+  project memory and content-workflow audit link. Removed obsolete environment
+  and branch checkpoints from the live relay; chronology stays in this log.
+  Other root/docs references were assessed as unaffected by this content-only
+  release. Global memory and configuration were not modified.
+- Local cleanup: compared all 19 untracked duplicate-named files against their
+  canonical files: 10 identical, 9 different. Copied and SHA-256 verified every
+  file under the sibling desktop directory
+  `Project_Final_Collation-local-backup-2026-09-06/`, with relative paths and a
+  `manifest.json`, before removing the checkout copies. No unique content was
+  discarded. The backup is local-only and outside the repository.
+- Verification: lint, content (8 projects / 24 notes / 84 media), encoding
+  (362 UTF-8 files), TypeScript and the 39-page webpack production build passed;
+  production dependency audit reported 0 vulnerabilities. Checked the local
+  production page in English and Chinese, including the replacement layout
+  sentence, original assets and cold-start note link. Audit links cover all
+  8 project files and 24 note files. [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35) is authoritative for
+  merge/deployment state; merged topic branches may be deleted, while
+  operational `gh-pages` remains required.

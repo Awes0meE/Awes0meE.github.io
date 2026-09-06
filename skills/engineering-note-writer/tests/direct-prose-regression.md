@@ -243,6 +243,7 @@ parallels are exempt from the mirror check.
 
 ## Release Expectation
 
+- The independent Chinese sentence gate in `chinese-sentence-regression.md` runs after Chinese refinement and before English at Step 10, then again on final Chinese at Step 12. Its six categories do not apply to English or replace existing L1 checks.
 - Main and section titles read as concise learning-note indexes rather than compressed body prose.
 - Related material may form substantial paragraphs, with natural length variation and a supported one-sentence break.
 - Li Zhiyi's identity, established voice, and the confirmed emotional intensity are preserved.
@@ -267,6 +268,7 @@ rg -n -S 'Reject these characters in scoped|Reader prose contains no `「」`|do
 
 The stale-rule scan must return no hits. Also run:
 
+- the Chinese-only sentence and workflow cases in `chinese-sentence-regression.md`, including false-positive controls and unchanged English-rule coverage;
 - the installed `skill-creator/scripts/quick_validate.py` against `skills/engineering-note-writer`;
 - `git diff --check`
 - a commit-local diff guard proving the frozen trial paths did not change.

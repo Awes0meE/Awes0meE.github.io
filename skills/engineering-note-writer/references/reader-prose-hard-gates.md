@@ -104,3 +104,5 @@ On a rewrite of approved prose, the check runs against the old surface as well: 
 ## Release Decision
 
 Run L1-1 through L1-5 after the Chinese draft, again after the English adaptation, and once more on the final reader-facing body. Repair every hit individually. Semantically necessary colons and grounded quotations remain allowed; zero applicable violations is the release threshold.
+
+The independent `chinese-sentence-gate.md` additionally reviews Chinese after editorial refinement and before English at Step 10, then again at Step 12. It covers six Chinese sentence-error categories and does not replace L1-5 or change any existing English rule.
