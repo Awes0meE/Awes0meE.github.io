@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-09-06
-**Current project:** No further prose work pending; Claude Chime project-page copy is approved
+**Current project:** Claude Chime project-page refinement; complete bilingual comparison pending user review
 **Last completed authoring scope:** `Claude Chime Power Board` / `Claude Chime 电源板`
 **Publication record:** [Pull request #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34), from `docs/rewrite-claude-chime-project-page` into `main`
-**State:** The user authorized PR integration and deletion of fully merged topic branches on 2026-09-06. PR #34 and its linked deployment checks are authoritative for the merge commit and publication status. After integration, continue from synchronized `main`; do not recreate the completed source branch.
+**State:** PR #34 records publication of the preceding approved copy. On 2026-09-06 the user explicitly reopened this project page to try the latest writing skill and requested complete Chinese and English before/after comparisons. The candidate is in `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/`; the published content file is unchanged. Local branch `docs/refine-claude-chime-copy` includes the Chinese sentence-gate runtime from `a1253dc`. This draft has not been pushed, merged, or deployed.
 
 ## Working Contract
 
@@ -85,7 +85,9 @@
 ## Protected Completed Families
 
 Do not reopen these approved families unless the user explicitly requests it.
-The Claude Chime project-page authoring scope is complete and covered by PR #34:
+The preceding Claude Chime project page was approved and published through
+PR #34; only that page has now been explicitly reopened for a review draft.
+Its cold-start note and the other families below remain protected:
 
 - Arduino Smart Car;
 - DIY pressure-flow cooling;
@@ -101,11 +103,15 @@ not standing permission to bulk-rewrite approved content.
 
 ## Next Action
 
-1. Use PR #34 and its linked checks to verify integration and deployment.
-   The user has already authorized this publication; no further copy approval
-   is pending for this scope.
-2. Start any user-selected new work from synchronized `main` on a semantic
-   topic branch. Keep `gh-pages`, the configured GitHub Pages redirect source.
+1. Review `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/comparison.html`
+   or `comparison.md`. Both contain the complete Chinese and English before/after
+   copy; `review.md` records evidence conservation and the gate review.
+2. Apply any user-requested revisions to the candidate. After explicit copy
+   approval, promote the approved MDX into the project content file and run
+   the publication checks. PR #34 approval applies to the earlier version;
+   it does not publish this new candidate automatically.
+3. Preserve `gh-pages`, the configured GitHub Pages redirect source, and the
+   unrelated untracked duplicates.
 
 ## 2026-08-22 Claude Chime Note Release Verification
 

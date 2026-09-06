@@ -755,3 +755,33 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   `main` at `845c5ea`. This maintenance does not rewrite published articles,
   alter frozen trial outputs, or claim a push, merge, or deployment. The 19
   unrelated untracked duplicates remain untouched.
+
+## 2026-09-06 — Claude Chime bilingual project-page comparison
+
+- Authorization: the user reopened the Claude Chime project homepage to apply
+  the latest writer to known facts and requested complete before/after
+  comparisons in both languages. The existing confirmed brief was reused.
+- Scope: created a complete review candidate under
+  `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/`, with original
+  and rewritten MDX, full Markdown/HTML comparisons, and a factual/gate review.
+  The five-section candidate has 19 paragraphs per language. The formal
+  content file, cold-start note, images, and application code are unchanged.
+- Writing: finished Chinese refinement and the new six-category gate before
+  English, then reviewed final Chinese again. English follows the existing
+  English/L1/bilingual checks. The PCB sentence now names trace lengths,
+  copper area, input-capacitor placement, and the switching-current path using
+  TI's layout guidance as current interpretation. No new historical tests or
+  design actions were added; bench, client-report, and hypothesis boundaries
+  remain explicit in both languages.
+- Verification: source bytes, non-copy frontmatter, three image lines, local
+  resource links, 5 sections / 19 paragraphs per language/version, complete
+  comparison text, UTF-8, and comparison-script syntax checks passed. Browser
+  review covered language switching, comparison mode, and candidate-only mode.
+  Lint passed with 8 projects / 24 notes / 84 media and 377 UTF-8 files.
+  TypeScript and production build were not repeated for this experiment-only
+  change; their preceding skill-maintenance baseline is recorded above.
+- Handoff: local branch `docs/refine-claude-chime-copy` includes the latest
+  writer runtime from `a1253dc`. A loopback-only preview serves the comparison
+  at `http://127.0.0.1:8765/comparison.html`. The candidate awaits review and
+  has not been pushed, merged, or deployed. The 19 unrelated untracked
+  duplicates remain untouched.

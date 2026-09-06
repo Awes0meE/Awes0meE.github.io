@@ -19,6 +19,10 @@ Current archives:
 - `engineering-writer-fusion-claude-chime-2026-08-21/`: user-approved full-note
   trial of the fused engineering writer, with the accepted MDX snapshot and
   before/after audit.
+- `chinese-gate-claude-chime-project-2026-09-06/`: complete bilingual Claude
+  Chime project-page rewrite using the Chinese sentence gate, with original
+  and candidate MDX, full Markdown/HTML comparisons, and a fact/gate review.
+  The candidate is pending review and has not replaced the published page.
 
 Keep future experiment directories date-stamped. Preserve their original inputs,
 candidate mapping, and final audits so later writing-rule changes can be traced

@@ -6,7 +6,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Current Baseline
 
-- The Claude Chime project-page authoring scope is complete and approved for publication on `2026-09-06`; [PR #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34) records integration and deployment. Its final copy preserves `可能` / `could` for shared-boost supply dips and the protected-pack-output cold-start boundary. Subsequent work starts from synchronized `main` after integration; use `docs/active-work/portfolio-copy-rewrite.md` for the handoff.
+- The preceding Claude Chime project-page copy was published through [PR #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34). On `2026-09-06` the user reopened that page for a complete bilingual refinement using the latest writer and its Chinese sentence gate. The review candidate and full before/after comparisons are under `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/`, on local branch `docs/refine-claude-chime-copy` with runtime `a1253dc`. The published content remains unchanged; this candidate is not pushed, merged, or deployed. It preserves `可能` / `could`, protected-pack-output measurements, and the separation between bench checks and client feedback. Use `docs/active-work/portfolio-copy-rewrite.md` for the handoff.
 
 - Production is release `v0.9.0` on `main`, served from `https://www.66ccff-labs.com/`; its annotated tag targets the reviewed pull-request merge commit.
 - The current repository content set is 8 projects, 24 public notes, and 84 media records (80 images and 4 videos). Project and note detail routes retain the paper system.
