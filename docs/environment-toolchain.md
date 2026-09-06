@@ -80,6 +80,20 @@ git pull --ff-only origin main
 Stop if `git status --short` reports local changes. Inspect and preserve them
 before pulling; do not reset or overwrite them.
 
+If the checkout lives in an iCloud-synced Desktop or Documents folder, macOS
+may evict tracked files while preserving their names, sizes, and modification
+times. `ls -lO <path>` marks these placeholders as `dataless`. A Git status or
+branch switch can then appear to hang while it waits for File Provider to
+restore a PDF, video, or source file. Use Finder's **Download Now** action or
+request the exact file with `brctl download <path>`, then retry. If only ctime
+changed, the tracked worktree was already verified clean, and full hydration is
+unnecessary, a one-command retry may use
+`git -c core.checkStat=minimal -c core.trustctime=false <command>`; do not make
+that weaker check a repository-wide default. Never remove `.git/index.lock`
+while a Git process owns it: confirm with `lsof .git/index.lock`, stop the
+specific stuck process, and move a released stale lock to a temporary path
+rather than deleting it blindly.
+
 Use Node.js 22 or newer and npm 10 or newer, then restore and verify the local
 environment:
 
@@ -149,6 +163,24 @@ If the synced folder contains local files that must be preserved, clone to a sep
 
 ## Install And Verify
 
+### Cloud-Sync Duplicate Recovery
+
+If TypeScript reports `TS2688` for names such as `node 2` or `react 2`, inspect
+the matching `node_modules/@types/` directories. Cloud-sync copies can leave
+empty directories that TypeScript interprets as extra type libraries. On
+macOS/Linux, use `rmdir` only on the exact confirmed-empty paths; it refuses
+to remove non-empty directories. If dependency files are missing or corrupted,
+stop the project's checks/server and restore dependencies with `npm ci`.
+Preserve `package-lock.json` and unrelated source files with ` 2` suffixes.
+
+Duplicate definitions under `.next/types/* 2.ts` are generated-cache artifacts.
+Stop the development server and rebuild before rerunning `npm run typecheck`.
+If rebuilding does not clear them, move `.next/` to a recoverable temporary
+location and rebuild. Do not change application types to accommodate duplicate
+cache files.
+
+### Verification Sequence
+
 Use this sequence after cloning or after a large dependency/content change:
 
 ```powershell
@@ -169,6 +201,13 @@ Development server:
 ```powershell
 npm.cmd run dev -- -H 127.0.0.1 -p 3000
 ```
+
+On macOS/Linux, use `npm run dev -- --hostname 127.0.0.1`. If a managed
+environment rejects the local listener with `listen EPERM`, launch through
+its approved local-network permission flow. If Turbopack's internal port
+binding is restricted during a production build, use
+`npm run build -- --webpack` and record that build mode in the verification
+result.
 
 Production smoke test after `npm.cmd run build`:
 

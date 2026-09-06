@@ -12,6 +12,12 @@ The user chose roughly 75% of `khazix-writer`'s narrative energy for Chinese. Tr
 
 Editorial fusion does not lower or amplify this emotional setting. A denser paragraph or a cleaner sentence may change where a reaction appears, but it must not mute, formalize, exaggerate, or remove a supported reaction merely to resemble another writer.
 
+## Grammar Sets Qualification, Energy Sets Intensity
+
+Grammar and collocation are a voice dimension with a pass/fail line, not a dial. A sentence at the approved emotional intensity that uses an ungrammatical collocation, a concretized polyseme, or an inanimate-agent experiential frame is not 75% of the target voice; it is a disqualified sentence and must be repaired under L1-5 before release. Energy rules how strong the sentence sounds; grammar rules whether the sentence is Chinese at all.
+
+The approved spoken palette licenses its frames only within their native selection range. Frames such as `给我一下子整不会了` require a human experiencer; they do not license an inanimate or abstract subject. `电池给了一个意外` is a violation, not a stronger voice. When a palette frame does not fit the sentence's subject, compose around the content instead of forcing the frame.
+
 ## Keep The Person In The Route
 
 First person is not a quota for `我`. The person becomes visible through selection and judgment: what detail they noticed, why it left a real question, which misunderstanding sent them to research later, and how one subsystem altered their reading of another.

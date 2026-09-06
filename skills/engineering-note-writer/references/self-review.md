@@ -28,7 +28,7 @@ On failure, return to the cognition trail and rebuild around attention and chang
 
 ## Gate 3: Reader-Prose L1
 
-For model-authored project and note article body, run every scoped check in `reader-prose-hard-gates.md`. L1-1 banned wording, prohibited L1-2 punctuation use, L1-3 canned structure, and L1-4 note-specific prohibitions must all reach zero applicable violations in both languages.
+For model-authored project and note article body, run every scoped check in `reader-prose-hard-gates.md`. L1-1 banned wording, prohibited L1-2 punctuation use, L1-3 canned structure, L1-4 note-specific prohibitions, and L1-5 syntax and collocation must all reach zero applicable violations in both languages.
 
 Scan reader-visible `title` and `titleZh` even when they are stored in frontmatter. Do not scan other frontmatter, metadata, Markdown syntax, URL or link destinations, code, commands, file paths, raw errors or logs, verbatim artifacts, or exact technical strings. Do not use these exclusions to shelter ordinary prose. Any applicable hit blocks release.
 
@@ -38,7 +38,10 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Do all user-specified prohibitions for this note reach zero hits at the scope the user set: exact forms and obvious variants for an expression ban, or direct functional equivalents for a construction or reader-effect ban?
 - Are bare negative-first binary reframes absent in both languages?
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
-- Are factual, evidence, authorship, and publication boundaries explicit and kept near the claims they limit? When a supported positive fact exists, it may lead; when the negative boundary is itself the fact, state it directly without inventing a positive lead.
+- Are factual, evidence, authorship, and publication boundaries explicit and kept near the claims they limit? When a supported positive fact exists, it may lead; when the negative boundary is itself the fact, state it directly without inventing a positive lead?
+- Does every inanimate or abstract subject carry only licensed native frames or functional verbs, with experiential results expressed through 出现, 发生, 出, 遇到, or a human or situational subject?
+- Do English abstract polysemes take the abstract Chinese sense (边界, 要点, 数值, 层面, 范围), with no concretized renderings?
+- Do paired Chinese and English passages keep semantic equality without one-to-one clause mirroring in narrative sentences, with the Chinese using native topic-comment and zero-anaphora structure?
 
 ## Gate 4: Editorial Conservation
 
@@ -77,6 +80,7 @@ If a joke could survive after replacing every technical noun with `某工具`, i
 ## Supporting Check: Bilingual And MDX
 
 - Do Chinese and English contain the same narrative nodes and ending?
+- Do paired passages keep semantic equality while each surface uses its own idiomatic frame, with narrative sentences re-derived rather than mirrored?
 - Does English sound natural without lowering or amplifying the confirmed emotional intensity or becoming shorter in substance?
 - Are technical terms stable?
 - Do paired titles and headings name the same concise subject and scope without forcing identical word order or paragraph boundaries?

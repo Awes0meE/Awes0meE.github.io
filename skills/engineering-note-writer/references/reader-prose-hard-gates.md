@@ -61,6 +61,46 @@ Match the scope of the user's instruction. If the user prohibits an exact word o
 
 Do not silently turn a one-note prohibition into a permanent global ban. Promote it into this repository-wide reference only when the user explicitly makes it a durable writing preference.
 
+## L1-5 Scan Syntax And Collocation
+
+L1-1 through L1-3 detect recurring patterns and template scaffolds. Calques and ungrammatical collocations are single-occurrence events: one wrong verb or one concretized polyseme is a complete violation with zero recurrence. This gate is a per-sentence qualification check, not a pattern-cluster check. One occurrence fails release.
+
+### P1 Inanimate-Subject Experiential Frames
+
+Reject an inanimate or abstract subject paired with an experiential result:
+
+- inanimate or abstract subject + `给`, `送`, `添`, `造`, `下`, `抛`, `丢` + experiential result nouns such as `意外`, `惊喜`, `麻烦`, `压力`, `冲击`, `教训`, `危机`, `尴尬`, `恐慌`, `悬念`;
+- inanimate or abstract subject + perception or cognition verbs such as `看到`, `听到`, `觉得`, `感到`, `意识到`.
+
+Repair by restoring the human actor (`我用万用表看到电池电压上升`), switching to an empty or situational subject with `出现`, `发生`, `出`, `遇到`, `碰到` (`使用这块带保护的小电池时出了一个意外`), or moving the instrument into a tool phrase. Apply the same principle to English with a looser threshold: inanimate-agent experiential frames are an established English idiom (`The protected cell added one surprise` reads as English, not as a translation); flag only frames that read as a rendered translation.
+
+Do not hit licensed native fossils and functional frames:
+
+- native machine personification fossils: `脾气`, `闹`, `掉`, `吃` (吃压降), `抢`, `卡`, `绑`, `甩` (甩锅), `加戏`, `脸色`;
+- functional `给` frames: 供电, 留一条路径/退路/余地, 省地方, 交给, 分给;
+- `带来` + measurable or functional result (提升, 损失, 变化, 静压, 额外损失);
+- epistemic verbs with a test or measurement as subject in technical register (测试确认了, 测量支持, 检查排除).
+
+### P2 Polyseme Sense Selection
+
+When an English abstract polyseme is rendered into Chinese, the Chinese must take the established abstract sense, never the first concrete sense:
+
+- `edge` → `边界` (not `边`);
+- `point` (an argument) → `要点` (not a bare `点` in an abstract register);
+- `figure` (a number) → `数值` or `读数` (not `图`);
+- `layer` (an abstract level) → `层面` (not a bare `层`);
+- `scope` → `范围`; `sense` → `含义` or `感觉`; `ground` → `根据` or `立足点`.
+
+General rule: if the English word operates in an abstract or evaluative register, the Chinese must take the abstract collocation a native writer would choose for that concept. A concrete-sense rendering in an abstract register is a hit.
+
+### P3 Structural Isomorphism Between Paired Languages
+
+For each paired Chinese and English passage, flag a Chinese sentence whose clause skeleton, subject slot, and metaphor carrier mirror the English pair one-to-one, provided the Chinese reads as a rendering of the English rather than as independently composed Chinese. Re-derive the flagged sentence from the content: keep the semantics, rebuild the surface in native Chinese topic-comment structure, zero anaphora, or a native idiom frame.
+
+The flag applies to narrative and metaphorical sentences. Content-forced parallels are exempt: technical enumerations (part numbers, pin names, dimensions, measurement lists), frequency-attribute mappings, and data parallels in which both surfaces use their own idiomatic parallel form. Operational test for a paired narrative sentence: does the Chinese carry a native topic-comment or zero-anaphora structure, or does it follow the English SVO skeleton clause for clause?
+
+On a rewrite of approved prose, the check runs against the old surface as well: a new Chinese sentence that mirrors the old approved English or old approved Chinese surface one-to-one is treated as inherited, not re-derived, and must be re-derived from the brief and evidence.
+
 ## Release Decision
 
-Run L1-1 through L1-4 after the Chinese draft, again after the English adaptation, and once more on the final reader-facing body. Repair every prohibited hit individually. Semantically necessary colons and grounded quotations remain allowed; zero applicable violations is the release threshold.
+Run L1-1 through L1-5 after the Chinese draft, again after the English adaptation, and once more on the final reader-facing body. Repair every hit individually. Semantically necessary colons and grounded quotations remain allowed; zero applicable violations is the release threshold.

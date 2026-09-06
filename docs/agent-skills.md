@@ -51,7 +51,11 @@ Purpose:
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.
 - Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.
-- Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1 gate; keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
+- Use the fixed bilingual sequence: compose Chinese from the confirmed brief,
+  evidence, and cognition route; derive English from the Chinese; then run the
+  L1-5 calque and pair-divergence check. A rewrite re-derives surface grammar
+  from locked claims instead of preserving an old sentence skeleton.
+- Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1-1 through L1-5 gates; L1-5 rejects even one unqualified syntax/collocation calque or one-to-one narrative clause mirror. Keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Use direct assertions and normal sentence syntax in scoped normal narration, with inline code for exact technical tokens. Keep model-authored em dashes off by default; allow semantic colons and grounded quotations, while rejecting template-label colons, decorative quotation, dense repetition, and correctly scoped article-local bans. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
