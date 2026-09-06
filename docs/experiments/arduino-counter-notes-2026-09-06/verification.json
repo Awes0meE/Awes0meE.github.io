@@ -268,5 +268,10 @@
     "publication": "none; both notes remain private",
     "previewSha256": "6532c385291d1b394afd45e57328630d456c9326d9e36e4f74163d727b1d512b",
     "previewChange": "Approval labels only; embedded bilingual article data is identical."
+  },
+  "releaseFollowUp": {
+    "date": "2026-09-07",
+    "record": "../../releases/engineering-notes-2026-09-07/README.md",
+    "status": "Approved for publication; superseded draft/preview files removed. Existing observations remain historical."
   }
 }

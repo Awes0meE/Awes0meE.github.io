@@ -30,9 +30,9 @@ The car was an Arduino line-tracking kit for MEC104. I began with assembly, circ
 
 ## Circuit Checks / 电路与测试
 
-With the board assembled, I used the [kit manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) to follow its signals. The LM7805 supply section provides the 5 V rail, with capacitors supporting filtering. Two 74HC165 devices bring six collision switches, six IR tracking inputs, and two keys back to the Nano-compatible controller. Calling `reload_shift_reg()` refreshes those states before the program chooses an action. Reflected light and physical contact begin as very different interactions; the software receives both as digital states.
+With the board assembled, I used the [kit manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) to follow its signals. The LM7805 supply section provides the 5 V rail, with capacitors supporting filtering. Two 74HC165 devices bring six collision switches, seven IR tracking inputs, and two keys back to the Nano-compatible controller. Calling `reload_shift_reg()` refreshes those states before the program chooses an action. Reflected light and physical contact begin as very different interactions; the software receives both as digital states.
 
-焊接完成后，我拿着 [套件 manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 顺着信号读板子。LM7805 所在的电源部分建立 5 V 供电，周围电容配合滤波；6 个碰撞开关、6 路红外循迹输入和 2 个按键，经两颗 74HC165 送回 Nano 兼容主控。程序先用 `reload_shift_reg()` 刷新状态，再决定下一步动作。红外传感器读的是地面反射差异，碰撞开关读的是真实接触，到了程序里才都变成数字状态。
+焊接完成后，我拿着 [套件 manual](/uploads/projects/arduino-smart-car-line-tracker/smart-car-manual-teas1-en.pdf) 顺着信号读板子。LM7805 所在的电源部分建立 5 V 供电，周围电容配合滤波；6 个碰撞开关、7 路红外循迹输入和 2 个按键，经两颗 74HC165 送回 Nano 兼容主控。程序先用 `reload_shift_reg()` 刷新状态，再决定下一步动作。红外传感器读的是地面反射差异，碰撞开关读的是真实接触，到了程序里才都变成数字状态。
 
 ![Teas smart-car system diagram / 小车系统框图](/uploads/projects/arduino-smart-car-line-tracker/manual-system-diagram.png)
 ![Power-supply slide with the school logo removed / 去掉校徽后的电源课件页](/uploads/projects/arduino-smart-car-line-tracker/course-power-supply.png)

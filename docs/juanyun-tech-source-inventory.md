@@ -14,7 +14,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-Juanyun project and note sources are stored in the following paths. Note visibility follows frontmatter: the 2026-09-06 revision suspends overlapping narratives while retaining source files and reviewed uploads. See `active-work/portfolio-copy-rewrite.md` for the current work.
+Juanyun project and note sources are stored in the following paths. Note visibility follows frontmatter. The two DIY cooling studies are public in the 2026-09-07 revision; Juanyun thermal retains five public and four suspended notes. Superseded DIY note backups were removed after approval. See `active-work/portfolio-copy-rewrite.md` for the current work.
 
 Source paths:
 
@@ -63,6 +63,8 @@ FOC is no longer classified as Juanyun material. The independent learning route 
 
 Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/`, and `scripts/validate-content.mjs` fails if non-allowlisted files reappear there. This matters because WPS-synced ignored ACUnit/BaseUnit raw files would still be static public files if they were left under `public/`, even when no page lists them.
 
+The DIY study uses `esp32-schematic.png`, a faithful render of the existing public `diy-cooling/pcb-schematic.pdf`; the original PDF remains unchanged.
+
 ## Portfolio Content Mapping
 
 The public-facing writing lives in:
@@ -75,7 +77,7 @@ content/media.json
 
 Current Juanyun project-page structure focuses on two larger public archives instead of many thin pages:
 
-- `juanyun-diy-cooling-prototype` and `juanyun-diy-cooling`;
+- `juanyun-diy-cooling-prototype`, `juanyun-diy-cooling` and `juanyun-diy-cooling-pwm-fan-control`;
 - `juanyun-thermal-hardware` as the main archive for ACUnit overview, BaseUnit firmware overview, DHT11 / AM2302 planning, actuator/fan evidence, and SOP material;
 - `juanyun-legacy-actuator-archive`, `juanyun-dht11-am2302-board`, ACUnit notes, and BaseUnit notes now point to `juanyun-thermal-hardware`;
 - `juanyun-hardware-sop`;

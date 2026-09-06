@@ -181,9 +181,18 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 
 A dated audit of all 8 project pages and 24 public notes is available in
 [`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-The subsequent user request authorized seven bilingual homepage rewrites, excluding Claude Chime, and recoverable suspension of overlapping notes. That homepage batch was published through PR #36. Local work has since produced four private Arduino notes, replacing two suspended bodies and adding two sources; the current count is 26 sources, nine public and seventeen private. See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md) for current draft state, [`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md) for future topics and [`experiments/project-homepages-2026-09-06/README.md`](experiments/project-homepages-2026-09-06/README.md) for restoration. On 2026-09-06 the user
-adopted the trunk/branch writing rule, now implemented in the repository-local
-writer's [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
+The homepage batch was published through PR #36. The 2026-09-07 revision
+publishes six approved bilingual studies for Smart Car, the two-digit counter
+and DIY Cooling. Three replace old note bodies at existing paths and three are
+new sources. The collection has 27 notes, 15 public and 12 private. Superseded
+old-note backups and completed review copies were removed at the user's request;
+current MDX files are authoritative, with old versions retained in Git.
+See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md)
+for the current handoff and [`releases/engineering-notes-2026-09-07/README.md`](releases/engineering-notes-2026-09-07/README.md)
+for the release. Remaining candidates are in
+[`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md).
+The trunk/branch rule lives in the writer's
+[`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
 
 Project homepages tell what the user did and how the project progressed.
 Learning notes take bounded questions from that work and investigate them in

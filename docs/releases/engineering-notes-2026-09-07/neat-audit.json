@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-07",
+  "scope": "Root Markdown files and docs/*.md, active writing handoff, completed review packets and current writer references. Dated historical observations remain historical.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Bootstrap and operating-guide pointer remain valid."
+    },
+    {
+      "path": "CODEX.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "DESIGN.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "MEMORY.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "PRODUCT.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "README.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "USER_GUIDE.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "docs/agent-skills.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "docs/architecture.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "docs/content-workflow.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "docs/environment-toolchain.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Node/npm requirements and webpack fallback remain valid; no dependency or runtime change."
+    },
+    {
+      "path": "docs/juanyun-tech-source-inventory.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    },
+    {
+      "path": "docs/memory-system.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Portable memory ownership and archival workflow remain valid."
+    },
+    {
+      "path": "docs/session-log.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled approved note publication, current counts, writer rules or release history."
+    }
+  ],
+  "globalGuidance": "Read current Codex AGENTS.md; no change needed. No global memory file modified.",
+  "archivalPolicy": "Historical counts and review URLs are labeled historical; current instructions point to source content and the release record."
+}

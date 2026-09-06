@@ -26,5 +26,6 @@
     "reg0 bits 0 through 6 map leftmost through centre to rightmost; !! preserves truth, switch ! inverts it.",
     "0b00001000 is a worked example, not a captured measurement."
   ],
-  "allocation": "This note follows line reflection, input thresholds, capture, serial read and field mapping. It does not repeat the homepage journey or the first note power and wheel-speed investigation."
+  "allocation": "This note follows line reflection, input thresholds, capture, serial read and field mapping. It does not repeat the homepage journey or the first note power and wheel-speed investigation.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
 }

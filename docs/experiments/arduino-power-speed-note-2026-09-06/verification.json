@@ -102,5 +102,10 @@
     }
   ],
   "snapshotScope": "Historical pre-ending-feedback verification; original observations and hashes retained.",
-  "followUpVerification": "../natural-endings-2026-09-06/verification.json"
+  "followUpVerification": "../natural-endings-2026-09-06/verification.json",
+  "releaseFollowUp": {
+    "date": "2026-09-07",
+    "record": "../../releases/engineering-notes-2026-09-07/README.md",
+    "status": "Approved for publication; superseded draft/preview files removed. Existing observations remain historical."
+  }
 }

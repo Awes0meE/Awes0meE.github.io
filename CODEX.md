@@ -182,55 +182,42 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-This user-approved revision contains seven rewritten bilingual project homepages, 8 projects in total, 9 public notes, 15 recoverably suspended note sources, and 84 unchanged media records. Claude Chime retains its approved narrative, with only the two links to the suspended cold-start note removed. See `docs/active-work/portfolio-copy-rewrite.md` for the selected next note and `docs/experiments/project-homepages-2026-09-06/README.md` for restoration and verification.
+The 2026-09-07 source revision contains 8 project pages, 27 note sources and 84
+media records. Fifteen notes are public across five project channels; twelve
+remain private pending their project-specific rewrites. The six newly approved
+bilingual notes cover Smart Car, the two-digit counter and DIY Cooling, two per
+project. Three old note paths now contain the replacement studies, and three
+additional note paths complete the set. Superseded old-note backups and completed
+review copies have been removed at the user's request; Git retains their history.
 
-The latest named release is `v0.9.0`; later maintenance is published through PRs including #35. The following describes the released frontend baseline before this local content batch. It retains the content and evidence boundaries from `v0.8.0` while promoting the Kinetic Signal Ledger frontend: the homepage uses the atom-orbit composition, and the shared `.signal-theme` marker opts approved surfaces into the Ember Black shell. `/work` is Project Aperture Sequence with eight evidence-first chapters and seven Ember-tick intervals. `/media` is Focus Aperture with eight named sources, validated `project` query initialization, and all 84 records server-rendered in project chapters. `/notes` is Routed Signal Map with 24 linked public notes across eight real-project channels plus metadata search and project/year filtering. `/about` is Tension Signal Column with CV-grounded bilingual copy, the unaltered portrait, four non-scoring route nodes, and one restrained non-status pulse. `/work/[slug]` and `/notes/[slug]` remain paper-themed; release `v0.9.0` does not redesign their content or evidence claims.
+Canonical prose lives in `content/projects/` and `content/notes/`. The writer is
+`skills/engineering-note-writer/SKILL.md`. Release scope and verification are in
+`docs/releases/engineering-notes-2026-09-07/README.md`; the active cross-device
+relay is `docs/active-work/portfolio-copy-rewrite.md`. The latest named tag
+remains `v0.9.0`; later maintenance uses PRs without inventing a new release tag.
 
-As of `2026-08-16`, this workspace builds on the `main` content set that removed placeholder projects and consolidated real internship / hardware material from:
+Family source counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal
+9, Tianjin 5, Nanjing Turing 5, FOC 1 and Claude Chime 1. The source-document
+notes and reviewed project assets keep their existing publication rules. The
+Smart Car homepage identifies seven IR tracking inputs, matching the manual and
+seven decoded sensor fields. The DIY schematic PNG is a faithful derivative of
+the existing public PDF, not new hardware evidence.
 
-```text
-D:\XJTLU\工作相关\卷云科技有限责任公司
-D:\XJTLU\工作相关\南京图灵人工智能研究院
-D:\XJTLU\工作相关\天津津铁通信有限公司
-D:\XJTLU\工作相关\Claude Chime 硬件
-```
+The homepage, `/work`, `/notes`, `/media` and `/about` use the approved Ember
+Black surfaces; project and note details retain the paper reading system.
+Design contracts live in `DESIGN.md`, product/asset constraints in `PRODUCT.md`
+and `docs/content-workflow.md`, and dated release history in `MEMORY.md` and
+`docs/session-log.md`.
 
-Current source inventory in this workspace (family note totals include suspended sources):
-
-- 8 project pages total;
-- 24 note sources total: 9 public and 15 temporarily suspended;
-- 2 Juanyun project pages and 10 Juanyun-prefixed notes remain;
-- 1 independent sensorless FOC learning-route project and 1 related note replace the former Juanyun-labelled FOC archive;
-- 1 Claude Chime commissioned hardware case study and 1 related note;
-- 1 Nanjing Turing Qt/CMake/packaging project and 5 related notes were added;
-- 1 Tianjin rail-transit STM32 foundation project and 5 related notes were added.
-- 1 Arduino Digital Clock course project and 1 related note were added from `C:\Users\123\Desktop\Digital Clock`; the original course PDF and source description TXT stay out of `public/uploads/`, while selected course screenshots without the top-right XJTLU logo, cropped homework-report excerpts, the original homework report PDF, Arduino sketches, demo video, and SN54LS47 datasheet are public.
-- 1 Arduino Smart Car line-tracking course project and 1 related note were added from `C:\Users\123\Desktop\Smart Car Project`; the original course tutorial PDF and project-description TXT stay reference-only, while selected course screenshots with the school logo area removed, the public kit manual PDF, the project report PDF, cleaned car photos, and Arduino testing code are public.
-- 84 project-bound media records comprise 80 images and 4 videos across 8 projects, including 12 independent FOC learning-route records for board renders, five schematic sheets, onsite SMT, the compressor bench, open-loop runtime, and the generated FOC/SVPWM signal-chain visual.
-- The DIY pressure-flow cooling project, note, and six media records completed the one-project-at-a-time `grill-me` rewrite on `2026-08-12`, then received the final cognition-led pass after the redesigned writer merged through pull request #8; pull request #9 merged that prose into `main` at `baa7c98`. Remembered temperature and frame-rate changes remain explicitly personal observations rather than controlled benchmark results.
-- The Arduino Digital Clock project, note, and 11 media records completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #10 merged that prose into `main` at `80c3743`. The account preserves individual ownership, treats the two rollover thresholds as separately flashed versions, and keeps the demo video, early `main.c`, final switch polarity/debounce, and later-found datasheet within their verified evidence boundaries.
-- The Tianjin Jintie Communications STM32 project and five notes completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #12 merged the project page, five notes, and three media-copy updates into `main` at `bb06ad8`. The account follows the self-directed path from Arduino abstractions to peripheral-level reasoning, keeps the 16-point ADC-to-PWM mapping feedforward, treats the hardware-I2C lockup as a present-day hypothesis, and leaves PID plus ATP/ATO/ATS in the reading layer. All four public C excerpts and public uploads were unchanged.
-- The Nanjing Turing Qt/Seamly2D project and three-week note completed the confirmed bilingual cognition-led rewrite on `2026-08-13`; pull request #14 merged the project page, note, and five media-copy updates into `main` at `f5e1082`. The account keeps the local `QSettings` account/role layer separate from online authentication, distinguishes formal development-machine acceptance from the later clean Windows PC test, stops macOS at a launched unsigned DMG with signing/notarization unfinished, and leaves post-handoff adoption unknown. The four source-document notes and all public uploads were unchanged.
-- The Claude Chime project completed the same workflow on `2026-08-13`; pull request #16 merged the approved bilingual commissioned-hardware case study, cold-start battery-protection note, one media-copy update, and 10 new public artifacts into `main` at `03f5ba5`. The account attributes the board architecture, calculations, schematic, PCB, manufacturing outputs, hand assembly, and scoped bring-up to Alvin while keeping ESP32 firmware and final real-load integration with the client. The two no-load 5 V readings, charge-current/battery-voltage check, gated divider check, and no-load control switching are direct tests; real-solenoid operation is client chat feedback; cold-start protection triggering remains a bounded inference rather than a directly proven trigger or measured inrush-current peak.
-- The Juanyun thermal project completed the confirmed bilingual cognition-led refactor on `2026-08-14`; pull request #22 merged the product-spine rewrite, three revised core notes, two new automatic-control/maintenance notes, five approved ACUnit V2.1 bring-up photographs, and updated media/inventory records into `main` at `e473b8c`. The project title at that checkpoint was `卷云相变散热器系统：两套控制器与一条完整制冷链`, and its canonical date range is `2025-11 to 2026-05`. Direct personal bring-up remains separate from company-reported later tests, and complete firmware plus reconstructable product source remain private.
-- Pull request #23 merged the approved pre-PR20 prose maintenance into `main` on `2026-08-15` at `c89b3b0`. Five older project families received an L1 surface cleanup; the direct-prose follow-up then covered the Digital Clock and Smart Car project/note pairs plus the Nanjing Turing project page after user review. This was not a new cognition-led rewrite. FOC, Claude Chime, Juanyun thermal, the four Nanjing source-document notes, covers, public uploads, and application code were unchanged.
-- Pull request #25 merged the user-approved sensorless FOC learning-route refactor into `main` on `2026-08-16` at `df5b913`. It replaces the legacy Juanyun-labelled project and note slugs, publishes 12 media records and 22 curated files under `public/uploads/projects/sensorless-foc-learning-route/`, keeps the full firmware repository external, and preserves the open-loop result plus unfinished sensorless-handoff boundary.
-- The old portfolio rebuild project, PID Starter Kit placeholder project, ACUnit/BaseUnit/DHT standalone project pages, and actuator/fan standalone project page were removed or merged into larger project archive pages.
-- The Nanjing Turing CMake/build-logic note renders the user's two Notion-exported Markdown originals directly, with a matching English reading section and page-internal anchor links.
-- Public project/note bodies have an English coverage pass; future content should keep Chinese and English article sections equivalent rather than relying only on frontmatter translation.
-- `ContentRenderer` renders consecutive standalone Markdown images as a clickable responsive gallery grid. Use plain consecutive image lines in MDX when several schematic sheets or board renders belong together. In-body evidence figures and project-file image previews are served through direct public URLs, so keep these assets compressed before adding them.
-
-Juanyun public boundary:
-
-- Sensitive: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project`. Do not publish raw Gerber archives, schematic PDFs, BOM/PnP files, EDA/CAD source, complete firmware source, internal product requirements, manufacturing packages, invoices, reimbursements, billing records, credentials, executable installers, vendor folders, or generated build outputs from those folders.
-- Public after pruning: legacy Juanyun DIY cooling, solenoid valve, BLDC quiet fan, DHT breakout planning, and the self-authored `卷云硬件开发SOP_Awes0meE.pdf`.
-- Static public assets for the expanded public Juanyun material live under `public/uploads/projects/juanyun-public/`; `main` may include selected legacy Gerber, EDA, BOM/PnP, STEP/3MF, source snippets, schematics, PDFs, and images from non-Current_Product folders after pruning installers, dependency folders, vendor folders, generated build outputs, financial/proof documents, and duplicate raw dumps.
-
-Independent FOC public boundary:
-
-- The FOC project is a personal learning route and must not be attributed to Juanyun or treated as a company archive.
-- Its reviewed public artifacts live under `public/uploads/projects/sensorless-foc-learning-route/` and include selected design, manufacturing, bench, and explanatory evidence from the user's 2026-08-16 handoff.
-- The complete firmware tree, vendor libraries, IDE caches, build output, and raw diagnostic logs stay out of `public/uploads/`; `https://github.com/Awes0meE/STM32_Sensorless_FOC` remains the external firmware evidence link.
+Publication constraints remain unchanged: Juanyun current-product raw design,
+manufacturing and complete firmware packages stay private; selected legacy
+material and individually approved derivatives follow
+`docs/juanyun-tech-source-inventory.md`. FOC is Alvin's independent learning
+route, with curated artifacts under `public/uploads/projects/sensorless-foc-learning-route/`
+and the complete firmware kept in its external repository. Do not add vendor
+libraries, IDE caches, build output or raw diagnostic dumps to public assets.
+The original Arduino course tutorial PDFs and project-description TXT files
+remain reference-only; use the already reviewed excerpts, reports and kit manual.
 
 ## Visual Direction
 
@@ -244,7 +231,7 @@ Maintain the current engineering-academic identity:
 - in release `v0.9.0`, keep those five presentation derivatives as a compact prototype nucleus in `components/technical-visual.tsx`; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
 - on `/work`, keep the sticky `01`–`08` rail, eight complete semantic project links, and exactly seven black signal intervals whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
-- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 2 channels and 9 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, keep `/notes/[slug]` on the paper system, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
+- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 5 channels and 15 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, keep `/notes/[slug]` on the paper system, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
 - on `/media`, keep the project-first Focus Aperture with eight source choices, one authentic lead record, and all 84 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the CV-grounded identity-and-method narrative distinct from the homepage capability list; preserve the complete original `public/uploads/projects/avatar.jpg` white field and black line art without crop, inversion, recoloring, filtering, blending, fading, tracing, or generated replacement. Treat the four stages as a route rather than a score, allow exactly one non-status pulse only while visible, and preserve the full static structure under `prefers-reduced-motion`;
 - treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
@@ -279,7 +266,7 @@ For `content/notes/*.mdx`:
 - use concise section labels for the following task, stage, component, experiment, or problem domain. `开发尝试` is valid when it accurately indexes that block; keep the anecdote, judgment, and cognition change in the body instead of compressing them into a heading;
 - prefer substantial paragraphs when related facts, explanations, and judgments belong to one cognition movement; keep paragraph lengths naturally uneven and allow a one-sentence paragraph when a real interruption, failed assumption, result, or ending earns it;
 - place supported reactions and light humor beside the real engineering friction rather than saving all personality for a conclusion;
-- give project pages and learning notes a natural close. A short closing paragraph can return to the original task, result or concrete understanding; avoid forced elevation, but do not leave an abrupt ending after data or file information merely to avoid a conclusion;
+- give project pages and learning notes a natural close without forced elevation or abrupt cuts after data. Compare nearby endings for repeated retrospective or hypothetical-next-time frames; an apt occasional `下一次再看到……` remains allowed. Judge recurring function, not a phrase blacklist;
 - preserve Li Zhiyi's established voice and keep the confirmed emotional intensity unchanged, neither flattened nor amplified; borrow editing mechanics without importing another writer's vocabulary, register, cadence, audience relationship, or persona;
 - use natural spoken transitions where they fit, avoid repetitive resume lists and repeated contrast/sequence scaffolds, and continue allowing ordinary `首先` / `其次` / `最后` phrasing when it is concrete rather than structural filler;
 - use direct assertions and normal sentence syntax in scoped normal narration. Model-authored em dashes remain off by default. Allow a colon when it performs a clear semantic job and quotation marks for traceable source wording, real utterances, UI labels, document claims, or terms genuinely being discussed; reject template-label colons, decorative quotation, and dense repeated use. Prefer inline code for code-like technical tokens. Avoid bare `不是 A，而是 B` / `not A but B` reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form when it genuinely prevents a false reading;

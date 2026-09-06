@@ -23,5 +23,6 @@
     "motor_step contains a course-library feedback branch; prose does not claim racing used it or Alvin authored it.",
     "100mA dissipation and 0.6A driver-drop examples are calculations, not measurements."
   ],
-  "crossPageAllocation": "Homepage owns assembly, battery replacement decision, track tuning and result; note investigates power, optical speed sensing, units and feedback."
+  "crossPageAllocation": "Homepage owns assembly, battery replacement decision, track tuning and result; note investigates power, optical speed sensing, units and feedback.",
+  "snapshotScope": "Historical Chinese review before English; the separate draft copy was removed on release. Retrieve the draft at Git checkpoint 2337f2d."
 }

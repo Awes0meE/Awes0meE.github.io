@@ -274,5 +274,10 @@
     "privateNoteCount": 18,
     "diffCheck": "pass"
   },
-  "publication": "none; both notes remain private"
+  "publication": "none; both notes remain private",
+  "releaseFollowUp": {
+    "date": "2026-09-07",
+    "record": "../../releases/engineering-notes-2026-09-07/README.md",
+    "status": "Approved for publication; superseded draft/preview files removed. Existing observations remain historical."
+  }
 }

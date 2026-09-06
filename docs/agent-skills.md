@@ -48,6 +48,7 @@ Source:
   - `skills/engineering-note-writer/tests/evidence-inventory-regression.md`
   - `skills/engineering-note-writer/tests/chinese-sentence-regression.md`
   - `skills/engineering-note-writer/tests/project-note-division-regression.md`
+  - `skills/engineering-note-writer/tests/ending-variety-regression.md`
 
 Purpose:
 
@@ -55,6 +56,7 @@ Purpose:
 - Keep the homepage's account of the user's work distinct from learning notes that investigate bounded questions. Inspect the family at Step 1, settle open topics at Step 2, allocate detail at Step 5, and check cross-page division at Step 12. Reuse confirmed topics, respect delegated selection, and never invent past curiosity from present research.
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
 - Keep factual checks internal and omit evidence-inventory prose. The independent editorial-conservation / information-retention gate has been removed; do not require every old fact, link, or caveat to survive a rewrite.
+- Let each account close naturally. Compare nearby endings for repeated look-back or hypothetical-next-time framing, including synonymous variants; an apt occasional use remains allowed.
 - Keep facts and authorship accurate while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.
 - Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.

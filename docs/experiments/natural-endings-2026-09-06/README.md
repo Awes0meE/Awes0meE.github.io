@@ -26,8 +26,8 @@ This is an ending-only revision, so the previous whole-article research and
 cross-page allocation remain applicable; no new experiment or source claim
 is introduced.
 
-The four note draft pairs and their existing previews at ports 8767, 8768 and
-8769 are updated. Earlier packet verification records remain historical
-snapshots and point here for this follow-up. The seven-homepage release
-comparison is also historical and is not rewritten. No visibility change,
-remote push, merge or publication is included.
+This records the ending-only change at `f631175`. The user subsequently approved
+publication on 2026-09-07; completed review copies and local previews were removed.
+The current six-note release is documented in
+`../../releases/engineering-notes-2026-09-07/README.md`. Earlier observations and
+the seven-homepage comparison remain historical snapshots.
