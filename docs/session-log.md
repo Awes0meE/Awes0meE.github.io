@@ -925,3 +925,11 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - Reviewed endings across eight homepages and 26 note sources. Changed only five bilingual ending pairs: the four recent Arduino notes and DIY homepage. The power/speed note retains its concrete proposed logging plan. The other 29 sources, all earlier content, metadata, assets, original documents and frozen trials remain intact. Current drafts and all three note previews are updated; older verification records are explicitly historical.
 - Chinese-first and final six-category review, English parity, ending variety, skill validation, lint/content/encoding, typecheck, 24-page webpack build and scope checks passed. All 16 browser views matched the new endings and language selection without horizontal overflow; desktop/mobile endings were visually checked. The packet is `docs/experiments/natural-endings-2026-09-06/`.
 - Local work stays on `docs/rewrite-counter-learning-notes`; no visibility change, remote push, merge or deployment.
+
+## 2026-09-07 — Counter approval and DIY topic selection
+
+- User approved both counter notes including the ending feedback, then requested the next project. The counter preview now marks both articles approved; its embedded bilingual article data is byte-equivalent after parsing. All four Arduino note bodies remain at `f631175`, private and unpublished.
+- Entered DIY cooling topic selection using the existing homepage, suspended note, WinForms sender and ESP32 source. Proposed one note on sensor identity/sampling/sending/peak timing and another on the PWM fan interface and tach feedback. The current source also calls `updatePWM()` from button handling, which clears both peaks; future timing prose must include this path.
+- Recorded selection scope, primary-source starting points and cross-page allocation in `docs/active-work/diy-cooling-note-plan-2026-09-07.md`. No new note draft or firmware change, and no remote action.
+
+- Same-turn selection: the user chose both DIY notes. Continue with Chinese-first bilingual drafts using the confirmed project brief; no repeated topic confirmation is needed.

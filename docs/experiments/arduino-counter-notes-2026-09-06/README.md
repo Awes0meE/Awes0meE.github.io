@@ -1,5 +1,7 @@
 # Arduino counter learning notes
 
+Both notes, including the revised endings, were approved by the user on 2026-09-07 at content checkpoint `f631175`. The preview now shows approved status. Both remain private while work moves to DIY cooling topic selection.
+
 Ending feedback applied on 2026-09-07. The working language drafts and preview include the revised closing paragraphs. Earlier verification and Step 10 files remain historical snapshots; see [the ending revision](../natural-endings-2026-09-06/README.md) for the current comparison, Chinese-first review and final checks.
 
 2026-09-06. The user selected both proposed topics and requested complete drafts for review. This packet contains Chinese-first bilingual versions of **共阳数码管与 BCD 译码 / Common-Anode Displays and BCD Decoding** and **自锁按键与计数控制 / Latching Switches and Counter Control**.

@@ -1,10 +1,10 @@
-# Active Work: Arduino Counter Learning Notes
+# Active Work: DIY Cooling Learning Notes
 
 **Updated:** 2026-09-07
 
 **Branch:** `docs/rewrite-counter-learning-notes`
 
-**State:** Homepage release completed through [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged as `8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d`. Vercel production succeeded and all 31 production copy/visibility checks passed. The user approved the first combined Arduino power/speed note, then selected black-line sensing and 74HC165 input acquisition together for a second note. The user has now approved the second note as well. Both car notes are final locally and remain private. The user then selected the two-digit counter and explicitly requested both proposed notes. The display and switch-control bilingual drafts are now ready for review, also private.
+**State:** Homepage release completed through [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged as `8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d`. Vercel production succeeded and all 31 production copy/visibility checks passed. The user approved the first combined Arduino power/speed note, then selected black-line sensing and 74HC165 input acquisition together for a second note. The user has now approved the second note as well. Both car notes are final locally and remain private. The user then selected the two-digit counter and explicitly requested both proposed notes. The user approved both counter notes and their revised endings on 2026-09-07, then requested the next project. All four Arduino notes are approved locally and remain private. The user selected both proposed DIY cooling notes for bilingual drafting.
 
 **Pre-batch published checkpoint:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), the approved Claude Chime homepage. The named release tag remains `v0.9.0` and is older than that maintenance PR.
 
@@ -17,7 +17,7 @@ The user explicitly requested all seven other project homepages be rewritten usi
 - Claude Chime changes only by removing the two closing sentences linking to its suspended cold-start note. Its narrative, frontmatter, images, and evidence claims remain intact.
 - All 36 existing body images in the seven rewritten pages remain; cover paths, technical metadata, media records, public uploads, application code, and dependencies are unchanged.
 - [Review and restoration packet](../experiments/project-homepages-2026-09-06/README.md) includes the complete 24-note action list, original hashes, eight before-page copies, and bilingual comparison page.
-- [Future topics](project-note-topics-2026-09-06.md) records the two approved car notes, the two selected counter drafts, and candidates for the remaining projects. Research is present study, not a claim about what Alvin already studied or measured during the original build.
+- [Future topics](project-note-topics-2026-09-06.md) records the four approved Arduino notes and candidates for the remaining projects. DIY sampling/response and fan-interface topics are now proposed for selection. Research is present study, not a claim about what Alvin already studied or measured during the original build.
 
 ## Writing Contract
 
@@ -29,7 +29,7 @@ Compose Chinese from the confirmed brief and evidence. After editorial refinemen
 
 On 2026-09-06, after reviewing the seven pages, the user rejected excessive evidence-boundary commentary. The current writer removes mandatory explicit caveats: internal fact checks do not belong in the article. Remove missing-test lists, archive inventories and repeated cannot-claim statements. Use accurate retained claims with natural attribution and conditions; real failures and unfinished attempts can still drive the story. The independent editorial-conservation / information-retention gate is removed. English adaptation must not restore deleted material. The seven bilingual homepages now follow this correction, with their pre-feedback versions preserved in `pre-boundary-feedback/`.
 
-Retain confirmed emotion, humor, actors, and accurate results. Present-day reading must not turn into invented historical curiosity, experiments, failures, or causal explanations. Covers and demo media remain user-controlled. The user has approved the seven bilingual homepages for publication. Both Arduino car notes have passed user review. The two counter notes await review. Publication remains a separate action.
+Retain confirmed emotion, humor, actors, and accurate results. Present-day reading must not turn into invented historical curiosity, experiments, failures, or causal explanations. Covers and demo media remain user-controlled. The user has approved the seven bilingual homepages for publication. All four Arduino car and counter notes have passed user review, including the later ending feedback. Publication remains a separate action.
 
 The user then clarified that ordinary closing paragraphs are welcome: avoid forced elevation, but finish the account naturally. The seven endings were reviewed; DIY closes beyond its temperature/FPS figures, and Turing finishes on the existing personal reaction rather than a file-submission sentence.
 
@@ -59,11 +59,11 @@ These are editorial working notes, not sentences to paste into the project pages
 
 ## Next Action
 
-1. Review the two counter notes through `http://127.0.0.1:8769/preview.html`: **共阳数码管与 BCD 译码 / Common-Anode Displays and BCD Decoding** and **自锁按键与计数控制 / Latching Switches and Counter Control**. The page switches both articles and languages. The packet is `docs/experiments/arduino-counter-notes-2026-09-06/`.
-2. The display note replaces the suspended `arduino-digital-clock-counter-course-note.mdx` body; its original is preserved as the packet's `before.mdx` from `6828f59`. `arduino-counter-latching-switch-control.mdx` is a new private source. Apply review feedback within these two notes; keep homepage project episodes separate. Reuse the confirmed brief and the user's explicit selection of both topics.
-3. The two car notes retain their approved content with the user's later ending feedback applied, and their previews at ports 8767 and 8768 are updated. This branch starts from their local approved checkpoint `6828f59`; `docs/rewrite-arduino-power-speed-note` preserves that checkpoint. No publication, next project or remote push is part of this revision request.
-4. Before the next relevant publication, reconcile the protected car homepage's old six-line-sensor count. The manual BOM, §5.4, IR1–IR7 schematic, and seven decoded IR fields agree on seven, including the centre sensor. This ending revision leaves the car homepage untouched.
-5. Homepage release branches `docs/refactor-project-homepages` and `feat/project-note-division` were removed after merging. The last verified `main` and `origin/main` are at `8e009ef`; preserve remote `gh-pages` for the GitHub Pages redirect.
+1. Continue with DIY cooling. The proposed topics are **温度采样与风扇响应** and **PWM 风扇控制与转速反馈**. The user selected both together; draft both for review. The source review and page allocation are in `diy-cooling-note-plan-2026-09-07.md`. Reuse the confirmed project context; the two-topic selection is already approved.
+2. Reuse the confirmed project context and study the current desktop/ESP32 sources. Account for independent sampling/sending tasks and button-triggered peak resets; check the board connections before assigning fan-interface details. Keep project events on the homepage.
+3. All four Arduino notes are approved locally. Counter preview at port 8769 now shows approved status; car previews remain at 8767/8768. Commit `f631175` preserves the approved article bodies and latest writer rules. These notes stay private until publication is requested. `docs/rewrite-arduino-power-speed-note` retains the earlier car checkpoint `6828f59`.
+4. Before the next relevant publication, reconcile the car homepage's old six-line-sensor count with the manual, schematic and seven decoded fields. This topic-selection work does not edit that homepage.
+5. The last verified `main` and `origin/main` remain at homepage release `8e009ef`. Preserve remote `gh-pages` for the redirect. No remote push, merge or publication is included in this project transition.
 
 ## Verification and History
 
