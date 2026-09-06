@@ -258,5 +258,7 @@
     "privateNoteCount": 17,
     "diffCheck": "pass"
   },
-  "publication": "none; both notes remain private"
+  "publication": "none; both notes remain private",
+  "snapshotScope": "Historical pre-ending-feedback verification; original observations and hashes retained.",
+  "followUpVerification": "../natural-endings-2026-09-06/verification.json"
 }

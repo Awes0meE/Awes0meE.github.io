@@ -100,5 +100,7 @@
       "path": "/uploads/projects/arduino-smart-car-line-tracker/testing-code/without-led/test-6-speed/motor.cpp",
       "status": 200
     }
-  ]
+  ],
+  "snapshotScope": "Historical pre-ending-feedback verification; original observations and hashes retained.",
+  "followUpVerification": "../natural-endings-2026-09-06/verification.json"
 }

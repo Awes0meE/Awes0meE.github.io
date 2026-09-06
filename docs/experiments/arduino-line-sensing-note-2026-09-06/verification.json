@@ -130,5 +130,7 @@
   },
   "publication": "none; private visibility retained for both Arduino drafts",
   "preview": "http://127.0.0.1:8768/preview.html",
-  "userReview": "User read the second note and confirmed it was good with no issues on 2026-09-06."
+  "userReview": "User read the second note and confirmed it was good with no issues on 2026-09-06.",
+  "snapshotScope": "Historical pre-ending-feedback verification; original observations and hashes retained.",
+  "followUpVerification": "../natural-endings-2026-09-06/verification.json"
 }

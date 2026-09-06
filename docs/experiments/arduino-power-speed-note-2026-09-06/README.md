@@ -1,5 +1,7 @@
 # Arduino power and wheel-speed note review
 
+Ending feedback applied on 2026-09-07. The working language drafts and preview include the revised closing paragraphs. Earlier verification and Step 10 files remain historical snapshots; see [the ending revision](../natural-endings-2026-09-06/README.md) for the current comparison, Chinese-first review and final checks.
+
 2026-09-06. User selected power delivery and wheel-speed sensing in **one note**. The new Chinese-first bilingual draft replaces the body of `content/notes/arduino-smart-car-line-tracking-learning-note.mdx` locally and remains `visibility: private`. The user has since approved the content; it is not published yet.
 
 Open `preview.html` through a local static server. The current session uses <http://127.0.0.1:8767/preview.html>. The full language drafts are `chinese-draft.md` and `english-draft.md`; the preview uses the same paragraphs. Figures and source links use the already public portfolio assets and original manufacturers' pages.

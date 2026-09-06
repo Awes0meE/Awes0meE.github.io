@@ -36,6 +36,11 @@ Apply `reader-prose-hard-gates.md` to both language bodies and to reader-visible
 
 Use direct English assertions instead of literal `not A but B` reframes. Keep retained claims accurate and express Chinese nuance naturally. Do not add English evidence disclaimers or restore audit passages removed from the Chinese.
 
+Adapt the chosen ending as well. If Chinese closes directly, do not add
+`Looking back`, `Returning to`, or a hypothetical next attempt in English.
+Occasional apt uses remain available in either language. Compare nearby endings
+by function so translation does not restore the repeated frame removed in editing.
+
 Keep source links close to the researched sentence in both languages when the target format permits it. Make the link placement natural; do not collect sources into a detached section that breaks the attention route.
 
 ## Translate The Comic Mechanism

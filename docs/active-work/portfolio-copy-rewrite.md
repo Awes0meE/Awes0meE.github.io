@@ -1,6 +1,6 @@
 # Active Work: Arduino Counter Learning Notes
 
-**Updated:** 2026-09-06
+**Updated:** 2026-09-07
 
 **Branch:** `docs/rewrite-counter-learning-notes`
 
@@ -31,7 +31,17 @@ On 2026-09-06, after reviewing the seven pages, the user rejected excessive evid
 
 Retain confirmed emotion, humor, actors, and accurate results. Present-day reading must not turn into invented historical curiosity, experiments, failures, or causal explanations. Covers and demo media remain user-controlled. The user has approved the seven bilingual homepages for publication. Both Arduino car notes have passed user review. The two counter notes await review. Publication remains a separate action.
 
-The user then clarified that ordinary closing paragraphs are welcome: avoid forced elevation, but finish the account naturally. The seven endings were reviewed; DIY now closes beyond its temperature/FPS figures, and Turing finishes on the existing personal reaction rather than a file-submission sentence. The other five endings already close their accounts and remain unchanged.
+The user then clarified that ordinary closing paragraphs are welcome: avoid forced elevation, but finish the account naturally. The seven endings were reviewed; DIY closes beyond its temperature/FPS figures, and Turing finishes on the existing personal reaction rather than a file-submission sentence.
+
+After reviewing the counter drafts, the user found their content sound but
+objected to repeated retrospective endings. Their explicit clarification allows
+an occasional `下一次再看到……`; do not ban that phrase or similar phrases.
+Compare nearby endings by function and avoid repeating the same look-back or
+next-time move under new wording. This applies to homepages and notes in both
+languages. The local follow-up changes only the ending pairs of the four recent
+Arduino notes and DIY homepage. The power/speed note deliberately retains its
+concrete proposed logging plan. Original documents and suspended notes awaiting
+their own rewrite stay intact. See `../experiments/natural-endings-2026-09-06/`.
 
 ## Internal Fact Checks
 
@@ -51,8 +61,8 @@ These are editorial working notes, not sentences to paste into the project pages
 
 1. Review the two counter notes through `http://127.0.0.1:8769/preview.html`: **共阳数码管与 BCD 译码 / Common-Anode Displays and BCD Decoding** and **自锁按键与计数控制 / Latching Switches and Counter Control**. The page switches both articles and languages. The packet is `docs/experiments/arduino-counter-notes-2026-09-06/`.
 2. The display note replaces the suspended `arduino-digital-clock-counter-course-note.mdx` body; its original is preserved as the packet's `before.mdx` from `6828f59`. `arduino-counter-latching-switch-control.mdx` is a new private source. Apply review feedback within these two notes; keep homepage project episodes separate. Reuse the confirmed brief and the user's explicit selection of both topics.
-3. The two car notes remain approved and unchanged, with previews at ports 8767 and 8768. This branch starts from their local approved checkpoint `6828f59`; `docs/rewrite-arduino-power-speed-note` preserves that checkpoint. No unreviewed publication, next project or remote push is part of this drafting request.
-4. Before the next relevant publication, reconcile the protected car homepage's old six-line-sensor count. The manual BOM, §5.4, IR1–IR7 schematic, and seven decoded IR fields agree on seven, including the centre sensor. This counter task leaves the car family untouched.
+3. The two car notes retain their approved content with the user's later ending feedback applied, and their previews at ports 8767 and 8768 are updated. This branch starts from their local approved checkpoint `6828f59`; `docs/rewrite-arduino-power-speed-note` preserves that checkpoint. No publication, next project or remote push is part of this revision request.
+4. Before the next relevant publication, reconcile the protected car homepage's old six-line-sensor count. The manual BOM, §5.4, IR1–IR7 schematic, and seven decoded IR fields agree on seven, including the centre sensor. This ending revision leaves the car homepage untouched.
 5. Homepage release branches `docs/refactor-project-homepages` and `feat/project-note-division` were removed after merging. The last verified `main` and `origin/main` are at `8e009ef`; preserve remote `gh-pages` for the GitHub Pages redirect.
 
 ## Verification and History

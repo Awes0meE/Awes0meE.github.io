@@ -1,5 +1,7 @@
 # Arduino counter learning notes
 
+Ending feedback applied on 2026-09-07. The working language drafts and preview include the revised closing paragraphs. Earlier verification and Step 10 files remain historical snapshots; see [the ending revision](../natural-endings-2026-09-06/README.md) for the current comparison, Chinese-first review and final checks.
+
 2026-09-06. The user selected both proposed topics and requested complete drafts for review. This packet contains Chinese-first bilingual versions of **共阳数码管与 BCD 译码 / Common-Anode Displays and BCD Decoding** and **自锁按键与计数控制 / Latching Switches and Counter Control**.
 
 Open `preview.html` through a local static server in this directory. The current session serves <http://127.0.0.1:8769/preview.html>. The two article buttons, language buttons, section links and footer navigation all work within the same page. Direct entries use `?note=display&lang=zh` and `?note=switch&lang=zh`; replace `zh` with `en` for English.

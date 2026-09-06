@@ -1,5 +1,7 @@
 # Arduino line-sensing and input-acquisition note
 
+Ending feedback applied on 2026-09-07. The working language drafts and preview include the revised closing paragraphs. Earlier verification and Step 10 files remain historical snapshots; see [the ending revision](../natural-endings-2026-09-06/README.md) for the current comparison, Chinese-first review and final checks.
+
 2026-09-06. The user explicitly combined black-line detection and 74HC165 input acquisition into one second Arduino learning note. The user has reviewed and approved the Chinese-first bilingual note at <http://127.0.0.1:8768/preview.html>. The first power/wheel-speed note has already received content approval. Both notes are now approved; neither has been published in this writing phase.
 
 The new source is `content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx`, with `visibility: private`. `chinese-draft.md` and `english-draft.md` contain the language drafts; `preview.html` renders their 15 paragraph pairs, four sections, one existing circuit image and one exact course-code excerpt. Start a local static server in this directory to reopen the packet on another device. The preview's figures and local-source links point to the existing public portfolio assets.

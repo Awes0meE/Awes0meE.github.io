@@ -104,6 +104,6 @@ Returning to the course library, I can now read the two motor interfaces more cl
 
 回到课程电机库，两个函数的区别现在更容易读懂了。`motor_set_PWM()` 直接设置驱动；`motor_step()` 在指定速度、不指定行进刻度的分支里，会比较目标值与刚算出的轮速，每次把 PWM 向上或向下调整一格。前面那个脉冲间隔的计算，到了这里才真正参与控制。它解释了反馈调速的基本动作，也提醒我先看清函数参数的单位，再决定该给它什么数值。
 
-For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update? This is where the supply and sensing come together for me. When I read a motor-control function now, I follow it in both directions, toward the current through the motor and toward the wheel's actual motion returning to the program.
+For further work on this car, I would view target rpm, measured rpm, and applied PWM together for both wheels, alongside battery voltage under load. A slow wheel would then lead to more specific questions: has the drive already reached its limit, or is the speed reading taking too long to update?
 
-如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。供电和测速在这里接到了一起。我现在再看一个电机控制函数，会自然地沿着它往两边找，一边找电流怎样经过电机，另一边找车轮怎样把实际运动反馈给程序。
+如果继续调这辆车，我会把左右轮的目标 rpm、测得的 rpm 和实际 PWM 放在一起看，再记录电池带载时的电压。这样一来，遇到轮子偏慢，就能继续追问，是驱动已经给满了，还是轮速读数更新得太慢。

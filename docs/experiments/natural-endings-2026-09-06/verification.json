@@ -1,0 +1,198 @@
+{
+  "date": "2026-09-07",
+  "baseCommit": "069bbbc",
+  "authorization": "User feedback on repetitive endings, with an explicit clarification that occasional apt next-time wording is allowed.",
+  "audit": {
+    "projects": 8,
+    "noteSources": 26,
+    "changedPages": 5,
+    "unchangedPages": 29,
+    "pages": [
+      {
+        "path": "content/projects/arduino-digital-clock-counter.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/arduino-smart-car-line-tracker.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/claude-chime-hardware-power-board.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/juanyun-diy-cooling-prototype.mdx",
+        "action": "closing paragraph pair revised; earlier content and metadata byte-identical"
+      },
+      {
+        "path": "content/projects/juanyun-thermal-hardware.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/nanjing-turing-qt-embedded-learning.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/sensorless-foc-learning-route.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/projects/tianjin-metro-stm32-foundation.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/arduino-counter-latching-switch-control.mdx",
+        "action": "closing paragraph pair revised; earlier content and metadata byte-identical"
+      },
+      {
+        "path": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+        "action": "closing paragraph pair revised; earlier content and metadata byte-identical"
+      },
+      {
+        "path": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+        "action": "closing paragraph pair revised; earlier content and metadata byte-identical"
+      },
+      {
+        "path": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+        "action": "closing paragraph pair revised; earlier content and metadata byte-identical"
+      },
+      {
+        "path": "content/notes/claude-chime-cold-start-battery-protection.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-acunit-automatic-control.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-acunit-board.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-acunit-firmware.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-acunit-hardware-revision-archive.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-baseunit-firmware.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-dht11-am2302-board.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-diy-cooling.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-hardware-sop.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-legacy-actuator-archive.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/juanyun-production-line-control-panel.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/sensorless-foc-handoff.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/tianjin-metro-environment-monitoring-stm32.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/tianjin-rail-control-pid-atc-reading.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/tianjin-stm32-environment-setup.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/tianjin-stm32-gpio-exti-timer.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/tianjin-stm32-pwm-uart-adc.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/turing-cmake-build-logic.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/turing-qt-seamly2d-first-run.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/turing-release-packaging-cross-platform.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/turing-sm2d-xml-data-format.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      },
+      {
+        "path": "content/notes/turing-three-week-development-log.mdx",
+        "action": "unchanged; reviewed for recurring ending frame, not a phrase ban"
+      }
+    ]
+  },
+  "manualReview": {
+    "method": "Current writer contextual review; no independent agent used.",
+    "chineseStep10": "Five revised Chinese endings reviewed before English adaptation; hashes and category results in endings.json.",
+    "chineseStep12": "Re-read all four final Chinese note drafts and the complete DIY homepage Chinese; all six categories considered; no established sentence fault found.",
+    "englishAndBilingual": "Five ending pairs retain supported meaning and voice, using natural English; no new test, event or result.",
+    "endingVariety": "Display fault tracing, expected switch interaction, sensing/mounting context, one specific next logging plan, and an actual prototype reaction. Occasional future framing retained intentionally.",
+    "regression": "All eight manual ending-variety calibration cases reviewed, including allowed next-time wording and false-positive controls.",
+    "crossPageDivision": "Ending-only scope; previous topic allocation retained, with no project episode added to a note."
+  },
+  "checks": {
+    "skillValidation": "pass",
+    "lint": "pass",
+    "contentValidation": "8 projects, 26 note sources, 84 media",
+    "typecheck": "pass",
+    "webpackBuild": "pass; 24 rendered pages",
+    "scope": "Only the five ending pairs changed in content; other 29 pages, all preceding content, metadata, frozen trials and public uploads remain unchanged.",
+    "diyBuildOutput": "Both revised language endings found in generated project HTML",
+    "diffCheck": "pass",
+    "encoding": "pass; 422 UTF-8 text files"
+  },
+  "browser": {
+    "method": "Playwright view assertions on live local previews, plus visual inspection of desktop Chinese display ending and mobile English switch ending.",
+    "viewCount": 16,
+    "widths": [
+      1440,
+      390
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "noteSources": [
+      "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "content/notes/arduino-counter-latching-switch-control.mdx",
+      "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+      "content/notes/arduino-smart-car-line-tracking-learning-note.mdx"
+    ],
+    "assertions": {
+      "renderedEndingMatchesSource": "pass in all 16 views",
+      "languageSelection": "pass in all 16 views",
+      "noHorizontalOverflow": "pass in all 16 views"
+    }
+  },
+  "currentHashes": {
+    "docs/experiments/arduino-counter-notes-2026-09-06/preview.html": "b14871158938f4093914603835765b408e34562200f6e8859b136568cd1feced",
+    "docs/experiments/arduino-power-speed-note-2026-09-06/preview.html": "1c972ab850dc4d9d6c2d3c5d0009f1c211238186ba7214b9cc3722638390b1e1",
+    "docs/experiments/arduino-line-sensing-note-2026-09-06/preview.html": "0ba0e9a7a281590e44d12303033db2f7027ca68345d5dd330385d38b637ad29e"
+  },
+  "publication": "none; four revised notes remain private; nine public and seventeen private note sources"
+}

@@ -99,18 +99,17 @@ Use bullets for a genuine set of files, measurements, checks, or alternatives. D
 
 ## Close The Account Naturally
 
-Let the reader finish the experience or investigation with the writer. A normal
-closing paragraph can connect the result back to the initial purpose and say
-what the writer now understands or feels about that particular work. Keep the
-scale personal and concrete. A failed or ongoing project can still have a
+Let the reader finish the experience or investigation with the writer. Continue
+from the last developed point without announcing the act of looking back. Keep
+the scale personal and concrete. A failed or ongoing project can still have a
 complete account of the work so far.
 
 Possible endings include:
 
 - the final verification that settled the active question;
 - a real remaining question the writer wants to investigate;
-- a callback to the error, file, or assumption that opened the note;
-- a concrete change in how the writer now reads similar systems;
+- a practical consequence of the explanation just developed;
+- a supported reaction to the work's actual result;
 - a new connection that combines earlier learning without pretending every question is closed.
 
 None of these forms is mandatory. Read the final section as an ending, especially
@@ -118,4 +117,11 @@ after cutting audit commentary. If only a measurement, filename, or isolated
 fact remains, connect it to the account rather than leaving the reader mid-step.
 If the existing paragraph already closes the experience, no extra paragraph is
 needed. Avoid grand lessons, a recap of every section, or a formula announcing
-that the article is ending; ordinary closure and a brief callback are welcome.
+that the article is ending. A callback or a specific next attempt may fit an
+individual article. It must not become the automatic ending for every page.
+
+Read nearby article endings together. `现在再看`, `回头看`, `下一次再看到`,
+`如果再做一次`, and their functional equivalents can repeat the same closing
+move despite different words. The user's clarification permits an apt
+occasional use. Repair recurrence, not isolated phrases; do not force every
+ending into a different category just to meet a quota.

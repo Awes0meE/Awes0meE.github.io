@@ -74,6 +74,11 @@ Read the selected account for clear meaning, natural flow, and the user's voice.
 Repair awkward sentences from their intended meaning instead of preserving an
 old clause shape. Keep useful detail where it serves the article.
 
+Read the ending beside those of the current batch and relevant recent pages.
+Repair repeated closing moves, including look-back and next-time frames under
+different wording. An apt occasional use is welcome; do not replace this habit
+with a phrase blacklist, a quota, or abrupt endings.
+
 The user removed the independent editorial-conservation / information-retention
 check on 2026-09-06. Do not compare old and new drafts against a mandatory list
 of surviving facts, links, caveats, or voice anchors. Do not classify an omitted

@@ -181,7 +181,7 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 
 A dated audit of all 8 project pages and 24 public notes is available in
 [`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-The subsequent user request authorized seven bilingual homepage rewrites, excluding Claude Chime, and recoverable suspension of overlapping notes. The local candidate has 15 suspended and 9 public notes; no new notes have been written. See [`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md) for future topics and [`experiments/project-homepages-2026-09-06/README.md`](experiments/project-homepages-2026-09-06/README.md) for restoration. On 2026-09-06 the user
+The subsequent user request authorized seven bilingual homepage rewrites, excluding Claude Chime, and recoverable suspension of overlapping notes. That homepage batch was published through PR #36. Local work has since produced four private Arduino notes, replacing two suspended bodies and adding two sources; the current count is 26 sources, nine public and seventeen private. See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md) for current draft state, [`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md) for future topics and [`experiments/project-homepages-2026-09-06/README.md`](experiments/project-homepages-2026-09-06/README.md) for restoration. On 2026-09-06 the user
 adopted the trunk/branch writing rule, now implemented in the repository-local
 writer's [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
 
@@ -202,6 +202,12 @@ For substantial new project prose, rewrites, or humanization, use the repository
 Evidence checking stays internal. The user removed mandatory explicit boundary prose on 2026-09-06: write supported actions and outcomes, use natural attribution and conditions when useful, and remove commentary about what the available evidence cannot prove. Do not publish missing-test lists or restore them during English adaptation. The independent editorial-conservation / information-retention gate is removed, not renamed. Actual failures and unfinished attempts may still serve the story. Evidence bounds facts, not the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
 
 Step 11 gives the account a natural close. Ordinary closing paragraphs are welcome for project pages and learning notes; avoid forced elevation and full-section recaps. After removing audit commentary, check that the remaining page does not end abruptly at data or a file list. Keep an existing ending when it already closes the experience.
+
+Compare current and nearby article endings for repetitive closing moves. The
+user clarified that `下一次再看到……` is fine occasionally; the problem is using
+it or synonymous look-back/next-time frames in article after article. This
+applies to both project pages and notes, in both languages. Repair recurrence
+from the content, without a phrase blacklist, synonym rotation, or a quota.
 
 Every serious project should eventually include:
 
