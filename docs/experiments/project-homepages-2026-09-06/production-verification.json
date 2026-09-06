@@ -1,0 +1,224 @@
+{
+  "base": "https://www.66ccff-labs.com",
+  "mergeCommit": "8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d",
+  "checks": [
+    {
+      "route": "/work/juanyun-diy-cooling-prototype",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/tianjin-metro-stm32-foundation",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/juanyun-thermal-hardware",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/nanjing-turing-qt-embedded-learning",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/arduino-smart-car-line-tracker",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/sensorless-foc-learning-route",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/work/arduino-digital-clock-counter",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-acunit-firmware",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-acunit-automatic-control",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/tianjin-stm32-pwm-uart-adc",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/tianjin-stm32-environment-setup",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-acunit-board",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/turing-cmake-build-logic",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-diy-cooling",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/claude-chime-cold-start-battery-protection",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/arduino-smart-car-line-tracking-learning-note",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-production-line-control-panel",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/tianjin-rail-control-pid-atc-reading",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-hardware-sop",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/tianjin-stm32-gpio-exti-timer",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/sensorless-foc-handoff",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-acunit-hardware-revision-archive",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/tianjin-metro-environment-monitoring-stm32",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/turing-release-packaging-cross-platform",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/arduino-digital-clock-counter-course-note",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-baseunit-firmware",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/turing-sm2d-xml-data-format",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-legacy-actuator-archive",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/turing-qt-seamly2d-first-run",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/turing-three-week-development-log",
+      "status": 404,
+      "expected": 404,
+      "copyMatches": true,
+      "passed": true
+    },
+    {
+      "route": "/notes/juanyun-dht11-am2302-board",
+      "status": 200,
+      "expected": 200,
+      "copyMatches": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

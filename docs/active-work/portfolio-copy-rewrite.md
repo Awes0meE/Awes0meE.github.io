@@ -2,9 +2,9 @@
 
 **Updated:** 2026-09-06
 
-**Branch:** `docs/refactor-project-homepages`
+**Branch:** `docs/rewrite-arduino-power-speed-note`
 
-**State:** Seven homepages approved for release on 2026-09-06. Complete the PR and production verification, then work on the selected Arduino note. GitHub records the live merge and deployment status.
+**State:** Homepage release completed through [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged as `8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d`. Vercel production succeeded and all 31 production copy/visibility checks passed. The first combined Arduino power/speed note is drafted in both languages and awaiting user review, with `visibility: private`.
 
 **Pre-batch published checkpoint:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), the approved Claude Chime homepage. The named release tag remains `v0.9.0` and is older than that maintenance PR.
 
@@ -13,7 +13,7 @@
 The user explicitly requested all seven other project homepages be rewritten using the latest writer and existing confirmed context. This is a one-time authorization for the batch, superseding the earlier freeze on those seven families. Claude Chime's approved narrative remains protected. The user also requested overlapping learning notes be suspended recoverably, and topic candidates be identified without writing new notes.
 
 - Seven homepages now have Chinese-first, English-derived body copy, concise subject headings, and updated summaries. Smart Car and Digital Clock keep their titles; the other titles are shortened to subject labels.
-- Fifteen notes have only `visibility` changed to `private`. All 24 note bodies are intact; nine independent topics or original-document notes remain public.
+- The published homepage batch changed only the visibility of fifteen notes; all 24 bodies were intact at its merge. Nine notes remain public. The subsequent local Arduino note rewrite is the first body revision; its original is preserved in `docs/experiments/arduino-power-speed-note-2026-09-06/before.mdx` and the release commit.
 - Claude Chime changes only by removing the two closing sentences linking to its suspended cold-start note. Its narrative, frontmatter, images, and evidence claims remain intact.
 - All 36 existing body images in the seven rewritten pages remain; cover paths, technical metadata, media records, public uploads, application code, and dependencies are unchanged.
 - [Review and restoration packet](../experiments/project-homepages-2026-09-06/README.md) includes the complete 24-note action list, original hashes, eight before-page copies, and bilingual comparison page.
@@ -37,7 +37,7 @@ The user then clarified that ordinary closing paragraphs are welcome: avoid forc
 
 These are editorial working notes, not sentences to paste into the project pages.
 
-- Smart Car: kit assembly/testing/tuning, not Alvin's original PCB design. Reported 12 V battery voltage is not MCU or motor-terminal voltage. The suspended note's “13 digital pins” needs correction before republication; check Nano pinout and actual allocation. L293 is not a MOSFET H bridge.
+- Smart Car: kit assembly/testing/tuning, not Alvin's original PCB design. The new note follows schematic L7805CV regulation, separate L293D motor/logic rails, 3V3 ITR8307 sensors and D2/D3 rising-edge interrupts. Twelve counts/revolution yields `RPM = 5000 / interval_ms`. `motor_step()` contains a course-library feedback branch; this is not a claim that Alvin authored it or used it in the final race. The old “13 digital pins” assertion is omitted. Numerical voltage, loss and timing examples are calculations, not historical measurements.
 - Digital Clock: working classroom buttons and full marks are confirmed; 17 and 99 were separately flashed versions. The 17-second video lacks button operation, final source is missing, early `main.c` is incomplete, and final polarity/debounce cannot be reconstructed.
 - DIY: ESP32 completed the computer-to-fan machine; STM32 reached serial control without reconnecting the Windows/Bluetooth path; the printed enclosure remained a slicing preview. Temperature/FPS figures are memory, not controlled tests. Duty is not measured RPM.
 - Tianjin: foundational internship demo, not railway-product development. Sixteen-point ADC/PWM mapping is feedforward; I²C errata is a later hypothesis. PID/ATP/ATO/ATS remained reading.
@@ -48,13 +48,13 @@ These are editorial working notes, not sentences to paste into the project pages
 
 ## Next Action
 
-1. Publish the approved homepage/writer revision through a checked PR to `main`, and verify production. Preserve `gh-pages`, which supplies the GitHub Pages redirect.
-2. Start the Arduino Smart Car note on a new topic branch from updated `main`. The user chose both power delivery and speed sensing in one note. Follow battery input through regulation and the motor driver, then explain how the installed sensor and test code turn rotation into a measurable signal. Use the confirmed project brief; do not restart the full interview.
-3. Keep assembly, track tuning, the battery-change decision and competition results on the homepage. The note develops circuit operation, PWM, sensing and conversion to wheel speed. Do not replay the project journey or invent a historical closed-loop speed controller.
-4. Draft Chinese first, complete the sentence and voice review, then adapt English. Keep the note recoverable and show its draft before restoring public visibility. Do not begin another project until this one is reviewed.
+1. Review the combined **Arduino 小车的供电与轮速测量 / Arduino Car Power and Wheel-Speed Measurement** draft with the user. Local review page: `http://127.0.0.1:8767/preview.html`; the self-contained HTML and language drafts are in `docs/experiments/arduino-power-speed-note-2026-09-06/`.
+2. Apply feedback to this note only. Chinese refinement and Step 10 sentence review preceded English; repeat Step 12 Chinese, Truth, voice and bilingual checks after any new edits. Assembly, battery replacement, track tuning and results stay on the protected homepage.
+3. Keep `visibility: private` until the user approves restoring the note. The draft branch is local; no unreviewed note release or second project has started. The old note remains recoverable from `before.mdx` or `8e009ef`.
+4. Homepage release branches `docs/refactor-project-homepages` and `feat/project-note-division` were removed after their commits were merged. `main` matches `origin/main` at `8e009ef`; preserve remote `gh-pages` for the GitHub Pages redirect.
 
 ## Verification and History
 
-See `../experiments/project-homepages-2026-09-06/verification.json` for final checks. Expected counts are 8 projects and 24 note sources; the public subset is 9 notes and two note-index channels. A production build should prerender 24 pages. Older 39-page results describe the previous all-public note set.
+See `../experiments/project-homepages-2026-09-06/verification.json` for homepage pre-release checks, `production-verification.json` for the 31 successful production checks, and the Arduino note packet for draft review. Expected counts are 8 projects and 24 note sources; the public subset is 9 notes and two note-index channels. A production build should prerender 24 pages. Older 39-page results describe the previous all-public note set.
 
 Historical interviews, release evidence, and cleanup remain in `docs/session-log.md`, project briefs, and dated experiments. The original overlap audit remains a diagnostic snapshot; this handoff and the execution packet define the current state.
