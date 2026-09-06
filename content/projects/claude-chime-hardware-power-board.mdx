@@ -34,9 +34,9 @@ I first looked at integrated power-bank devices such as the IP5306, and I also w
 
 我最早考虑过 IP5306 这类集成电源方案，也认真想过让一颗 Boost 同时带两个负载。这笔账一开始就不小。按项目期间围绕 5 V、1.5 A 电磁铁负载做的估算，输出功率已经到 7.5 W，从 3.7 V 电池取电、暂按 85% 效率算，输入约 2.38 A，电池电压和效率再往下走时电流还要加大。这些是设计估算，不是负载实测。
 
-The friction came from the two loads wanting different behavior. The ESP32 wanted continuous power, while the solenoid could pull a much sharper transient during actuation. One converter would save a branch, but every jump of the crab would become a supply dip for the ESP32. I split the problem across two [TLV61048](https://www.ti.com/product/TLV61048) converters instead. One supplies `SOL_5V`, and the other carries the battery-backed path for the ESP32.
+The friction came from the two loads wanting different behavior. The ESP32 wanted continuous power, while the solenoid could pull a much sharper transient during actuation. One converter would save a branch, but each jump of the crab could also cause a supply dip for the ESP32. I split the problem across two [TLV61048](https://www.ti.com/product/TLV61048) converters instead. One supplies `SOL_5V`, and the other carries the battery-backed path for the ESP32.
 
-真正的别扭是两个负载脾气不同。ESP32 要的是持续供电，电磁铁动作时却可能猛拉一段瞬态。塞进同一颗转换器能省一条支路，代价是螃蟹每跳一下，ESP32 都跟着吃一次压降。最后我把问题拆给两颗 [TLV61048](https://www.ti.com/product/TLV61048)。一路专门出 `SOL_5V`，另一路负责 ESP32 的电池备用供电。
+真正的别扭是两个负载脾气不同。ESP32 要的是持续供电，电磁铁动作时却可能猛拉一段瞬态。塞进同一颗转换器能省一条支路，可螃蟹每跳一下，ESP32 都可能跟着吃一次压降。最后我把问题拆给两颗 [TLV61048](https://www.ti.com/product/TLV61048)。一路专门出 `SOL_5V`，另一路负责 ESP32 的电池备用供电。
 
 After `BAT+` the two rails stay separate, and a six-pin SH1.0 cable carries `ESP_5V_BUS`, `SOL_CTRL`, `CHARGE_CTRL`, `ADC_ENABLE`, `ADC_BAT`, and GND to the core board. The schematic sets the solenoid branch at 600 kHz and the ESP32 branch at 1 MHz. [Texas Instruments associates 600 kHz with higher efficiency](https://www.ti.com/product/TLV61048) and 1 MHz with smaller magnetics and output capacitance. On this PCB, the practical consequence was keeping both switch nodes and their input, rectifier, and output-capacitor loops compact.
 

@@ -163,6 +163,24 @@ If the synced folder contains local files that must be preserved, clone to a sep
 
 ## Install And Verify
 
+### Cloud-Sync Duplicate Recovery
+
+If TypeScript reports `TS2688` for names such as `node 2` or `react 2`, inspect
+the matching `node_modules/@types/` directories. Cloud-sync copies can leave
+empty directories that TypeScript interprets as extra type libraries. On
+macOS/Linux, use `rmdir` only on the exact confirmed-empty paths; it refuses
+to remove non-empty directories. If dependency files are missing or corrupted,
+stop the project's checks/server and restore dependencies with `npm ci`.
+Preserve `package-lock.json` and unrelated source files with ` 2` suffixes.
+
+Duplicate definitions under `.next/types/* 2.ts` are generated-cache artifacts.
+Stop the development server and rebuild before rerunning `npm run typecheck`.
+If rebuilding does not clear them, move `.next/` to a recoverable temporary
+location and rebuild. Do not change application types to accommodate duplicate
+cache files.
+
+### Verification Sequence
+
 Use this sequence after cloning or after a large dependency/content change:
 
 ```powershell
@@ -183,6 +201,13 @@ Development server:
 ```powershell
 npm.cmd run dev -- -H 127.0.0.1 -p 3000
 ```
+
+On macOS/Linux, use `npm run dev -- --hostname 127.0.0.1`. If a managed
+environment rejects the local listener with `listen EPERM`, launch through
+its approved local-network permission flow. If Turbopack's internal port
+binding is restricted during a production build, use
+`npm run build -- --webpack` and record that build mode in the verification
+result.
 
 Production smoke test after `npm.cmd run build`:
 

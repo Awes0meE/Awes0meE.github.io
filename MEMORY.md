@@ -6,6 +6,8 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Current Baseline
 
+- As verified on `2026-09-06`, the active Claude Chime project-page branch is synchronized with its remote at `6e9757b`, four commits ahead of `main` (`74f6a39`). The 2026-09-02 reconciliation has been pushed; the branch remains unmerged. Use `docs/active-work/portfolio-copy-rewrite.md` for the current scope and next action.
+
 - Production is release `v0.9.0` on `main`, served from `https://www.66ccff-labs.com/`; its annotated tag targets the reviewed pull-request merge commit.
 - The current repository content set is 8 projects, 24 public notes, and 84 media records (80 images and 4 videos). Project and note detail routes retain the paper system.
 - Release `v0.9.0` promotes the integrated homepage, `/work`, `/notes`, `/media`, and `/about` Ember Black refresh. The implementation was consolidated at `28b0a8f`, followed by repository-wide documentation reconciliation and release preparation; detail routes remain outside the redesign.

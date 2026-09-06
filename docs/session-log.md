@@ -679,3 +679,30 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   suffixes remain untracked and untouched. The user approved publishing the
   verified `/neat` reconciliation to the existing topic branch on 2026-09-02;
   no merge, deployment, or release is claimed.
+
+## 2026-09-06 — macOS development environment preparation
+
+- Environment: Node `v22.23.1` and npm `10.9.8` resolve from
+  `/opt/homebrew/bin/`. All five required external skill files are present.
+  Existing fast-forward, prune, and push safeguards are configured.
+- Git: a fresh fetch confirmed the active topic branch and its upstream at
+  `6e9757b` with divergence `0 0`; local and remote `main` remain at
+  `74f6a39` with divergence `0 0`. No branch switch, commit, push, or merge
+  was performed in this session.
+- Recovery: removed six confirmed-empty ` 2` type directories under
+  `node_modules/@types/`. The webpack build regenerated `.next/`, clearing
+  duplicate generated declarations that had also blocked TypeScript. No
+  dependency reinstall or package/lockfile change was needed; the 19 unrelated
+  source/asset duplicates remain untouched.
+- Documentation: updated the environment guide with scoped duplicate/cache
+  recovery and managed local-listener guidance; refreshed the active relay
+  and durable memory with the verified pushed checkpoint. Starting Next.js
+  development mode also regenerated `next-env.d.ts` imports to reference
+  `.next/dev/types/`; this local generated change remains uncommitted.
+- Verification: lint, content (8 projects / 24 notes / 84 media records),
+  UTF-8 encoding (370 text files), TypeScript after cache regeneration, and
+  `npm run build -- --webpack` (39 pages) passed. Started the development
+  server with `npm run dev -- --hostname 127.0.0.1` through the approved
+  local-listener permission flow. The five index routes and both Claude Chime
+  detail routes returned HTTP 200. Dependency audit and full visual review
+  were not rerun for this environment-only task.

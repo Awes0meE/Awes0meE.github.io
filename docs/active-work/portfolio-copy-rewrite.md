@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
-**Updated:** 2026-09-02
+**Updated:** 2026-09-06
 **Copy-rewrite active branch:** `docs/rewrite-claude-chime-project-page`
 **Current project:** `Claude Chime Power Board` project page only
 **Last completed project:** `Claude Chime 电池冷启动排查`
-**State:** `c1155c5b8d2f2ccc904661f92d177961082db203` was the incoming remote checkpoint, three commits ahead of `main`; the user approved the verified `/neat` reconciliation for publication to this topic branch on 2026-09-02, but the branch has not been merged or released
+**State:** Local and remote topic branches match at `6e9757b`, four commits ahead of `main`, after the 2026-09-02 reconciliation was pushed. A fresh fetch on 2026-09-06 confirmed this checkpoint; the branch has not been merged or released.
 
 ## Working Contract
 
@@ -128,6 +128,21 @@ not standing permission to bulk-rewrite approved content.
   dependency maintenance remains separate from this content/docs branch.
 - Nineteen unrelated WPS/Finder-style files with ` 2` suffixes remain untracked
   and untouched.
+
+## 2026-09-06 Development Environment Verification
+
+- A fresh fetch confirmed topic-branch divergence `0 0` at `6e9757b` and
+  local/remote `main` divergence `0 0` at `74f6a39`.
+- Removed six confirmed-empty cloud-sync duplicate type directories under
+  `node_modules/@types/`. The webpack production build regenerated `.next/`
+  and cleared duplicate generated type declarations; TypeScript then passed.
+- Lint, content validation (8 projects / 24 notes / 84 media records),
+  encoding validation (370 text files), and the 39-page webpack build passed.
+- The development server started on `http://127.0.0.1:3000`; all five index
+  routes and both Claude Chime detail routes returned HTTP 200. This was an
+  HTTP smoke check, not a new full visual review or production release.
+- The 19 unrelated source/asset files with ` 2` suffixes remain untouched.
+  Machine-specific setup details are recorded in `docs/session-log.md`.
 
 ## Updating This File
 
