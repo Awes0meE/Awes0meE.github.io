@@ -181,7 +181,7 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 
 A dated audit of all 8 project pages and 24 public notes is available in
 [`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-Its article-specific rewrite suggestions remain pending. On 2026-09-06 the user
+The subsequent user request authorized seven bilingual homepage rewrites, excluding Claude Chime, and recoverable suspension of overlapping notes. The local candidate has 15 suspended and 9 public notes; no new notes have been written. See [`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md) for future topics and [`experiments/project-homepages-2026-09-06/README.md`](experiments/project-homepages-2026-09-06/README.md) for restoration. On 2026-09-06 the user
 adopted the trunk/branch writing rule, now implemented in the repository-local
 writer's [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
 
@@ -193,13 +193,15 @@ and associated notes at Step 1; when topics are open, ask a concise interest
 question with grounded candidates at Step 2, or choose when delegated; allocate
 the detailed accounts at Step 5; recheck the family in both languages at Step 12.
 Reuse confirmed topics and briefs. Preserve enough background for independent
-reading, relevant evidence limits, and original source documents. Later research
+reading, accuracy of retained claims, and original source documents. Later research
 must remain distinct from historical actions. These rules do not authorize
 bulk rewrites of approved pages.
 
-For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md`, `references/editorial-fusion.md`, `references/chinese-sentence-gate.md`, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; compose Chinese from the confirmed brief, evidence, and cognition route; run one voice-preserving editorial pass; pass the independent Chinese sentence gate at the entrance to Step 10; derive English from the Chinese with the same substance and confirmed emotional intensity; run the L1-5 calque and pair-divergence check; then pass the Truth, Li Zhiyi, editorial-conservation, and scoped reader-prose gates, with a full Chinese sentence recheck at Step 12. The six sentence-error categories apply only to Chinese; English retains its existing adaptation and review rules. On a rewrite, preserve claims rather than an old sentence skeleton.
+For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md`, `references/editorial-fusion.md`, `references/chinese-sentence-gate.md`, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; compose Chinese from the confirmed brief, evidence, and cognition route; run one voice-preserving editorial pass; pass the independent Chinese sentence gate at the entrance to Step 10; derive English from the Chinese with the same substance and confirmed emotional intensity; run the L1-5 calque and pair-divergence check; then pass the Truth, Li Zhiyi, and scoped reader-prose gates, with a full Chinese sentence recheck at Step 12. The six sentence-error categories apply only to Chinese; English retains its existing adaptation and review rules. On a rewrite, select useful supported content without treating the old draft as a mandatory information inventory.
 
-Evidence bounds project facts, authorship, actions, results, measurements, uncertainty, and publication claims, but it cannot choose the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
+Evidence checking stays internal. The user removed mandatory explicit boundary prose on 2026-09-06: write supported actions and outcomes, use natural attribution and conditions when useful, and remove commentary about what the available evidence cannot prove. Do not publish missing-test lists or restore them during English adaptation. The independent editorial-conservation / information-retention gate is removed, not renamed. Actual failures and unfinished attempts may still serve the story. Evidence bounds facts, not the reader-facing structure. External knowledge may add light nearby links and first-person present-learning insight; never turn it into invented project history, action, result, or measurement.
+
+Step 11 gives the account a natural close. Ordinary closing paragraphs are welcome for project pages and learning notes; avoid forced elevation and full-section recaps. After removing audit commentary, check that the remaining page does not end abruptly at data or a file list. Keep an existing ending when it already closes the experience.
 
 Every serious project should eventually include:
 

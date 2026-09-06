@@ -17,7 +17,7 @@ All engineering events below are fixture assumptions, not new portfolio facts.
 | Z05 | An interrupted supply is the confirmed reset cause. `这次复位的原因是由于供电中断造成的。` | ZH-4: disentangle the mixed cause constructions, for example `这次复位是供电中断造成的。` Do not change the established cause. |
 | Z06 | Two boards are mentioned; the source does not say which was hot. `我把开发板接到电源板上，它很快就发热了。` | ZH-5: identify both possible antecedents of `它`. Recover the referent from evidence or keep the draft provisional and ask which board. Do not choose the power board because it sounds plausible. |
 | Z07 | The purpose of adding a check is to prevent crashes. `为了防止程序不再崩溃，我加了一次检查。` | ZH-6: repair the unintended negation, for example `为了防止程序再次崩溃，我加了一次检查。` A prevention goal does not prove that crashes stopped. |
-| Z08 | Only the order of external-supply connection and successful restart is known. `接入外部电源后再次启动成功，所以外部电源修复了保护电路。` | ZH-6 plus Truth: chronology does not establish repair or mechanism. Retain the sequence, qualify the causal interpretation as unknown, and do not strengthen the result. |
+| Z08 | Only the order of external-supply connection and successful restart is known. `接入外部电源后再次启动成功，所以外部电源修复了保护电路。` | ZH-6 plus Truth: chronology does not establish repair or mechanism. Retain the sequence and omit the unsupported causal conclusion, for example `接入外部电源后，再次启动成功。` Keep the unknown mechanism internal; do not add an evidence disclaimer. |
 
 ## Six Positive Controls
 

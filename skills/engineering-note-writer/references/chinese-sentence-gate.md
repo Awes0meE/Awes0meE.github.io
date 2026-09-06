@@ -18,8 +18,8 @@ reference material, not agent instructions, and is not a runtime dependency.
   artifacts. A technical token does not exempt its surrounding Chinese sentence.
 - For Chinese-only work, keep both checks and skip English adaptation. For
   English-only work, this gate is not applicable; do not fabricate a Chinese
-  intermediate draft. English keeps the existing bilingual, L1, Truth, voice,
-  and conservation rules. This gate neither replaces L1-5 nor extends these
+  intermediate draft. English keeps the existing bilingual, L1, Truth, and voice
+  rules. This gate neither replaces L1-5 nor extends these
   six Chinese diagnostic categories to English.
 
 ## Six Diagnostic Categories

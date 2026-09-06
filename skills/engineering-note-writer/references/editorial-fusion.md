@@ -8,15 +8,13 @@ de-AI and humanization workflows without importing another writer's persona.
 
 Apply rules in this order:
 
-1. evidence, authorship, uncertainty, publication boundaries, and exact
-   technical tokens;
-2. the user-confirmed brief, requested form, and note-specific prohibitions;
+1. the user's current instruction, confirmed brief, requested form, and prohibitions;
+2. accurate authorship, actions, results, and exact technical tokens in the retained account;
 3. the cognition route and Chinese-English substance parity;
 4. Li Zhiyi's established voice and the confirmed emotional intensity;
 5. paragraph, rhythm, and anti-template editing preferences.
 
-A lower item never repairs a higher item by changing it. Do not add, delete,
-strengthen, weaken, or reassign a claim merely to improve rhythm.
+Do not invent or strengthen results, reassign authorship, or distort retained facts to improve rhythm. The user's request to remove audit commentary authorizes deleting that commentary, including lists of absent tests. Retain the internal facts; do not restore every caveat to the article.
 
 ## Preserve Li Zhiyi, Not A Reference Author
 
@@ -65,49 +63,20 @@ quotation mark, or one formal word is not evidence of AI writing. Treat a
 pattern as actionable when it repeats, combines with other model habits, or
 performs no useful function in the paragraph.
 
-Keep genuine alternatives, factual limits, named objections, real parallel
+Keep genuine alternatives, relevant operating conditions, named objections, real parallel
 lists, deliberate repetition, exact quotations, and ordinary historical
 version changes. The external watchlists are diagnostic aids, not additions to
 the reader-prose zero-hit list.
 
-## Lock Claims And Voice Anchors
+## Finish The Edit
 
-For an authorized cross-page redistribution, first use
-`project-note-division.md` to establish the content retained on this page and
-where omitted duplicate detail remains available. Conserve that allocation in
-both languages; do not restore every duplicate merely to satisfy a per-page
-inventory. Unique facts and voice anchors remain protected, and changing a
-sibling page still requires that page to be in the authorized scope.
+Read the selected account for clear meaning, natural flow, and the user's voice.
+Repair awkward sentences from their intended meaning instead of preserving an
+old clause shape. Keep useful detail where it serves the article.
 
-Before and after the editorial pass, compare:
-
-- actions and actors;
-- names, numbers, dates, versions, commands, files, links, quotations, and
-  citations;
-- measurements, results, uncertainty, time boundaries, and publication state;
-- each cognition change and cross-subsystem connection;
-- supported reactions, humor targets, self-corrections, and unresolved tension.
-
-An unsupported addition, lost claim, changed actor, stronger result, weaker
-uncertainty, missing link, imported persona, or flattened confirmed reaction is
-an error. Restore it before release.
-
-Apply the same conservation check after English adaptation. English may change
-sentence and paragraph boundaries, but it must keep the same factual and
-cognitive nodes, supported reactions, humor targets, and confirmed emotional
-intensity.
-
-## Preservation Locks Claims, Not Surface Grammar
-
-Conservation is a claim-level contract. A locked passage keeps its actors,
-actions, names, numbers, uncertainty, time boundaries, and publication state.
-It does not freeze the passage's surface grammar.
-
-When a preserved or previously approved sentence fails a reader-prose
-zero-hit gate such as L1-5, repair the grammar in place: restore the human
-actor, swap the frame, or re-derive the sentence from the claim it carries.
-Approval earlier in the project history is not a pass on today's gates; an old
-calque survives a rewrite only when preservation is read as a surface lock.
-
-Record each preserved-sentence repair in the release report with the gate that
-forced it.
+The user removed the independent editorial-conservation / information-retention
+check on 2026-09-06. Do not compare old and new drafts against a mandatory list
+of surviving facts, links, caveats, or voice anchors. Do not classify an omitted
+boundary sentence as information loss. The existing Truth gate checks whether
+retained statements are accurate; this editing pass does not require every
+source detail to be published.

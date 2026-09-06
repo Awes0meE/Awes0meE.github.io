@@ -1,0 +1,98 @@
+---
+title: "Custom Driver Board and Sensorless FOC"
+titleZh: "自制驱动板与无感 FOC 实践"
+summary: "I designed and assembled an STM32F446/DRV8301 driver, adapted open-source firmware, and ran a compressor on a 12 V bus with 30 to 80 Hz open-loop commands. Sensorless handoff remains unresolved."
+summaryZh: "我独立设计、装配 STM32F446/DRV8301 驱动板，适配开源固件，在 12 V 母线下用 30 到 80 Hz 开环指令带动压缩机；无感接管仍未完成。"
+date: "2025-11 to Present"
+status: "Ongoing Learning Route"
+tags: ["FOC", "Motor Control", "STM32F4", "DRV8301", "PCB", "SVPWM"]
+cover: "/uploads/projects/sensorless-foc-learning-route/cover.png"
+featured: false
+links:
+  repo: "https://github.com/Awes0meE/STM32_Sensorless_FOC"
+assetPaths:
+  - "/uploads/projects/sensorless-foc-learning-route"
+---
+
+## Building the Driver / 自制驱动板
+
+After a PMSM-FOC course, I wanted to make the equations drive a real motor. I had only brushed motors nearby, no suitable three-phase brushless load, and the companion teaching board cost RMB 888. I decided to build the driver myself, gaining an experimental platform while working through the course's circuit ideas again.
+
+学完一套 PMSM-FOC 课程后，我很想让那些公式真正带动电机。手边却只有有刷电机，没有合适的三相无刷负载，配套教学板又要 888 元。我决定先把驱动板自己做出来，一边补上实验条件，一边把课程里的电路重新弄明白。
+
+The PCB silkscreen marks 25 November 2025, the day I started drawing it. Using chip reference circuits, I independently completed the schematic, component selection, layout, and manufacturing files. The design went for fabrication in January 2026. This is a personal learning project, recorded separately from the Juanyun refrigeration controller.
+
+PCB 丝印上的 2025 年 11 月 25 日，就是我开始画板的日期。我参考芯片推荐电路，独立完成原理图、器件选型、PCB 布局与制造文件，到 2026 年 1 月完成设计并送去打板。这是个人学习项目，与卷云的制冷控制器工作分开记录。
+
+![Front render of the custom FOC board / 自制 FOC 板正面渲染](/uploads/projects/sensorless-foc-learning-route/board-render-front.png)
+![Back render of the custom FOC board / 自制 FOC 板背面渲染](/uploads/projects/sensorless-foc-learning-route/board-render-back.png)
+
+While I was working on another project, a small compressor arrived in the workshop. Reading its manual and following the three-phase connections showed me that its internal permanent-magnet motor could serve as the load. I had been looking for a brushless motor; the eventual experiment involved compressor startup, sustained operation, and disturbances, considerably more tangible than an ideal course model.
+
+刚好在做另一个项目时，工作室里出现了一台小型压缩机。我查手册、沿三相接线继续了解，才知道内部的永磁电机可以作为实验负载。原先只是想找一台无刷电机，后来要面对的变成了压缩机起转、持续运行与扰动，比课程里的理想模型具体得多。
+
+## From Schematic to Hardware / 从原理图到实物
+
+I chose an STM32F446RET6, DRV8301DCAR, and six HY3010D MOSFETs for the controller, gate driver, and three-phase power stage. Five schematic sheets organize control and timing, connectors, analog sensing, the power stage, and gate-drive interfaces. They allow the path to be followed from `Ia` and `Ib` sensing through six complementary PWM signals to the U/V/W output. Hall and encoder interfaces were retained for later experiments.
+
+我选了 STM32F446RET6、DRV8301DCAR 和六颗 HY3010D MOSFET，构成主控、栅极驱动与三相功率级。五张原理图分别整理控制时序、连接器、模拟采样、功率级与驱动接口，能顺着 `Ia`、`Ib` 采样一路检查到六路互补 PWM 和 U/V/W 输出。Hall 与编码器接口也预留了下来，方便后续实验。
+
+![STM32F446 control sheet / STM32F446 控制分页](/uploads/projects/sensorless-foc-learning-route/schematic-mcu.png)
+![Current and voltage sampling sheet / 电流与电压采样分页](/uploads/projects/sensorless-foc-learning-route/schematic-adc.png)
+![HY3010D power stage / HY3010D 三相功率级](/uploads/projects/sensorless-foc-learning-route/schematic-mos.png)
+![DRV8301 gate-driver sheet / DRV8301 栅极驱动分页](/uploads/projects/sensorless-foc-learning-route/schematic-driver.png)
+
+After completing the design, I exported Gerber and BOM files, placed the order, and operated the SMT equipment myself, loading feeders, setting placement coordinates, and running the machine. Rework, hand soldering, assembly, and power-on checks followed. The [onsite SMT video](/uploads/projects/sensorless-foc-learning-route/onsite-smt-pick-and-place.mp4) records this exact board. Component placement and connections that I had handled on the drawing now had to survive assembly and electrical checks.
+
+设计完成后，我继续做 Gerber、BOM 导出和下单，并亲自操作 SMT 设备，包括上料、设置贴片坐标、运行机器，再补焊、手焊、装配和上电。[现场 SMT 录像](/uploads/projects/sensorless-foc-learning-route/onsite-smt-pick-and-place.mp4)拍的就是这块板。以前在图纸上处理的是器件位置和连线，现在每一个决定都要经过装配和上电检查。
+
+![Feeder setup during onsite SMT work / 现场 SMT 上料与贴片设置](/uploads/projects/sensorless-foc-learning-route/onsite-smt-pick-and-place-poster.jpg)
+![Assembled board and compressor bench / 装配板与压缩机台架](/uploads/projects/sensorless-foc-learning-route/onsite-test.jpg)
+
+The [BOM](/uploads/projects/sensorless-foc-learning-route/bom.xlsx), [Gerber package](/uploads/projects/sensorless-foc-learning-route/gerber.zip), and [fabrication drawing](/uploads/projects/sensorless-foc-learning-route/pcb-fabrication-drawing.pdf) correspond to the hardware. The [compressor manual](/uploads/projects/sensorless-foc-learning-route/compressor-6md030z-datasheet.pdf) and [DRV8301](/uploads/projects/sensorless-foc-learning-route/drv8301-datasheet.pdf), [HY3010D](/uploads/projects/sensorless-foc-learning-route/hy3010d-datasheet.pdf), [STM32F446](/uploads/projects/sensorless-foc-learning-route/stm32f446re-datasheet.pdf), and [LM358A](/uploads/projects/sensorless-foc-learning-route/lm358a-datasheet.pdf) references remain available for checking the interfaces and analog front end.
+
+制造资料中的 [BOM](/uploads/projects/sensorless-foc-learning-route/bom.xlsx)、[Gerber](/uploads/projects/sensorless-foc-learning-route/gerber.zip)和 [PCB 制造图](/uploads/projects/sensorless-foc-learning-route/pcb-fabrication-drawing.pdf)与实物对应。[压缩机手册](/uploads/projects/sensorless-foc-learning-route/compressor-6md030z-datasheet.pdf)及 [DRV8301](/uploads/projects/sensorless-foc-learning-route/drv8301-datasheet.pdf)、[HY3010D](/uploads/projects/sensorless-foc-learning-route/hy3010d-datasheet.pdf)、[STM32F446](/uploads/projects/sensorless-foc-learning-route/stm32f446re-datasheet.pdf)、[LM358A](/uploads/projects/sensorless-foc-learning-route/lm358a-datasheet.pdf)资料也保留在项目文件中，便于对照接口和模拟前端。
+
+## Board Adaptation / 板级适配
+
+The work paused over the February holiday and after term resumed in March. I returned to concentrated hardware debugging in April and May. Firmware began with an open-source FOC example; I did not author its original Clarke, Park, current PI, inverse Park, SVPWM, or EKF baseline. My task was to adapt an example for an ordinary three-wire brushless motor to my board and this compressor.
+
+项目在 2 月寒假和 3 月开学后暂停过，4 月、5 月才重新集中做实物调试。固件从开源 FOC 示例开始，原始 Clarke、Park、电流 PI、反 Park、SVPWM 和 EKF 算法基线并非我编写。我的工作是把面向普通三线无刷电机的示例，适配到自己这块板和这台压缩机。
+
+I led pin, peripheral, and sensing-scale adaptation, connected the OLED, buttons, and EC11, then worked on compressor startup and the protection state machine. Voltage, current, driver faults, and restart conditions all needed physical checks. Matching pins was still some distance from reliable compressor operation. Startup load and fault behavior could not be explained solely by the example's defaults.
+
+我主导板级引脚、外设与采样换算的适配，接入 OLED、按键和 EC11，再处理压缩机启动与保护状态机。电压、电流、驱动器故障和重启条件都需要在实物上检查。引脚能对应上，离压缩机可靠运行还差不少工作，启动负载和故障反应不能只靠示例代码里的默认值解释。
+
+During the observer investigation, I reviewed code with Codex. It helped implement RAM tracing, correct EKF parameters, and identify overwritten Kalman-gain values. I selected experiment conditions, operated the hardware, assessed sound and vibration, checked startup behavior, and decided which changes to keep. The [firmware repository](https://github.com/Awes0meE/STM32_Sensorless_FOC) records the code; judging its behavior still required the bench.
+
+后续排查观测器时，我与 Codex 一起读代码，由它协助实现 RAM trace、修正 EKF 参数，并定位 Kalman 增益被覆盖的问题。我负责选择实验条件、操作硬件、判断声音与振动、检查启动状态，再决定保留哪些修改。[固件仓库](https://github.com/Awes0meE/STM32_Sensorless_FOC)记录了代码，实际运行的判断仍需要回到台架。
+
+## Running the Compressor / 压缩机运行
+
+Stable 45 Hz open-loop operation gave me the first repeatable condition for checking changes. I then retained 30, 45, and 60 Hz test points to compare mechanical response and electrical trends. The final low-speed EC11 version exposed a 30 to 80 Hz command range on a 12 V bus. These are electrical-frequency commands, without a direct measurement of mechanical speed.
+
+45 Hz 稳定开环运行，是第一个能反复用来检查修改的状态。我随后保留了 30、45、60 Hz 三个测试点，对照机械响应和电气趋势。最终低速 EC11 版本在 12 V 母线下开放了 30 到 80 Hz 的指令范围。这里的 Hz 是电频率指令，没有直接测量机械转速。
+
+The [runtime video](/uploads/projects/sensorless-foc-learning-route/runtime-open-loop.mp4) comes from that final version. I remember the setting possibly being near 80 Hz, but cannot assign an exact value to the recording. Both suction and discharge ports were open. Near the end I restricted the suction inlet by hand and observed continued operation. Strong suction and low perceived noise were direct bench impressions; the compressor was not connected to a complete refrigerant loop, and manual inlet restriction cannot substitute for a pressure-difference test under refrigeration load.
+
+[运行视频](/uploads/projects/sensorless-foc-learning-route/runtime-open-loop.mp4)来自这个最终版本。我记得拍摄时可能接近 80 Hz，但无法给录像确认一个精确设定值。当时吸气口、排气口都敞开，后段我用手限制吸气口，观察到驱动仍继续运行。吸力明显、听感噪声较低，这些都是我在工作台上的直接感受；没有接入完整冷媒回路，人工限制进气也不能代替制冷负载下的压差测试。
+
+![Final low-speed EC11 open-loop demo / 最终低速 EC11 开环演示](/uploads/projects/sensorless-foc-learning-route/runtime-open-loop-poster.jpg)
+
+Earlier, I had tried the same compressor with a low-cost sensorless board intended for small fan motors. It had a speed knob, and I confirmed ordinary six-step commutation with an oscilloscope. Under similar bench conditions, I remember louder sound, more heat, and weaker suction. The controllers were not configured as equivalent, controlled experiments, and I have no pressure, flow, acoustic, temperature-rise, or efficiency dataset. This remains a personal observation, without a general conclusion that FOC must outperform six-step control.
+
+此前我还用同一台压缩机试过一块带调速旋钮的低价无感驱动板，它原本面向小风扇电机，我用示波器确认过普通六步换相波形。在相近台架条件下，我记得它声音更大、发热更多、吸力更弱。两套驱动没有做成参数等价的受控实验，也没有压力、流量、声学、温升或效率数据，因此保留的是个人观察，不能推广成 FOC 必然优于六步驱动的结论。
+
+## Sensorless Handoff / 无感接管
+
+Once sustained open-loop operation worked, I continued correcting EKF signs, motor parameters, and code defects until estimated speed approached the imposed frequency. Switching to sensorless control still failed. I had to reconsider what I was using as evidence: agreement in speed did not establish a reliable instantaneous angle from the observer.
+
+开环阶段能够持续运行后，我继续修正 EKF 的符号、电机参数与代码问题，估计速度逐渐接近外加频率。但一切换到无感接管，运行仍会失败。这让我重新检查自己的判断，速度看着对了，还不足以说明观测器已经能够提供可靠的瞬时角度。
+
+Reading [ST's FOC overview](https://www.st.com/en/applications/industrial-motor-control/3-phase-field-oriented-control-foc.html) now reinforces the role of rotor angle in control. In my experiment, angle error, state convergence, and reference continuity at the transition still need to be distinguished. The available results do not establish adequate reliability for those conditions. Sensorless handoff remains incomplete, and determining why it fails requires further experiments.
+
+现在看 [ST 对 FOC 的说明](https://www.st.com/en/applications/industrial-motor-control/3-phase-field-oriented-control-foc.html)，转子角度本来就是控制所需的信息。对我的实验，还要继续区分角度偏差、状态收敛和切换瞬间的参考是否连续。现有结果没有证明其中哪一项已经足够可靠。无感接管还没完成，失败的原因仍要靠进一步实验判断。
+
+In May 2026, I froze the repeatable 30 to 80 Hz low-speed demonstration as a stage result I judged reasonably safe under its test conditions. I still want to complete sensorless control for brushless and servo motors, then investigate robot joints, force feedback, low-speed startup, and high-frequency injection. None is implemented here yet. The immediate question is how to move the observer from producing a plausible reading to supplying information I can actually use for control.
+
+我在 2026 年 5 月封存了可重复、当时判断相对安全的 30 到 80 Hz 低速演示，作为这一轮实验的阶段结果。后面仍想继续做通无刷与伺服电机的无感闭环，再研究机器人关节、力反馈、低速启动和高频注入。这些都还没有在本项目实现。眼前最明确的问题，仍是怎样让观测器从提供一个看似合理的读数，走到真正可以用于控制。

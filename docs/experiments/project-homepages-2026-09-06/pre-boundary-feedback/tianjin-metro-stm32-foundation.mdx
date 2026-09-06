@@ -1,0 +1,75 @@
+---
+title: "Tianjin Jintie STM32 Internship"
+titleZh: "天津津铁 STM32 嵌入式实习"
+summary: "During a month of foundational training at Tianjin Jintie, I planned my own STM32 learning sequence and combined external sensors, display, encoder, servo, and LED control in a working bare-metal demo."
+summaryZh: "在天津津铁一个月的基础实习中，我自行安排 STM32 学习顺序，从外设小实验做起，最后把传感器、显示、编码器、舵机与 LED 控制接进同一套裸机演示。"
+date: "2025.02"
+status: "Completed"
+tags: ["STM32", "Rail Transit", "Embedded", "Keil MDK", "Internship"]
+cover: "/uploads/projects/tianjin-metro/tianjin-rail-transit-cover.jpg"
+featured: true
+links:
+  download: "/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c"
+assetPaths:
+  - "/uploads/projects/tianjin-metro"
+---
+
+## From Arduino to STM32 / 从 Arduino 到 STM32
+
+In February 2025, I spent a month as an embedded intern at Tianjin Jintie Communications, working inside the Tianjin Rail Transit Group headquarters. The supervising engineer supplied introductory material, and my bench held an STM32F103C8T6 Blue Pill, an ST-Link, and external modules. The assignment was foundational training, with no development work on a production railway system.
+
+2025 年 2 月，我在天津津铁通信有限公司做了一个月嵌入式实习，日常办公地点在天津轨道交通集团总部。工程师给我一批入门资料，桌上是一块 STM32F103C8T6 Blue Pill、一只 ST-Link 和外接模块。这次任务是基础训练，没有参与生产轨道系统开发。
+
+My university Arduino Nano projects had mostly taught me to call functions and set pins high or low. There was no daily syllabus for this placement, so I combined the supplied material with online tutorials and arranged my own route: GPIO, EXTI and timers, then PWM, UART, ADC, and an integrated demo. I wanted to understand the configuration behind effects that Arduino had made available through a function call.
+
+此前我在学校用过 Arduino Nano，对单片机的理解大多停在调用函数、输出高低电平。工程师没有给逐日课表，我就结合资料和网上教程安排自己的顺序，先 GPIO，再 EXTI 与 Timer，接着学 PWM、UART、ADC，最后把它们接成一个综合 demo。我想弄明白，以前函数调用后直接出现的现象，在 STM32 上到底要经过哪些配置。
+
+## First Board Tests / 第一次上板
+
+Keil's Magic Wand settings occupied me before the peripherals did. Device packs, compiler selection, startup files, library paths, target addresses, and flash algorithms all needed configuration while I was still learning their separate purposes. I eventually split the checks into compilation on the computer, downloading through ST-Link, and an observable effect on the board. Toggling GPIOC13 every 300 ms became the first test across the toolchain and physical hardware.
+
+Keil 的魔术棒设置页先让我卡了一阵。器件包、编译器、启动文件、库路径、目标地址与下载算法都要配置，我却还不清楚它们分别影响哪一步。后来我把检查分开，电脑先能编译，ST-Link 再能下载，最后看板上有没有明确输出。GPIOC13 每隔 300 ms 翻转，成了第一项贯穿工具链与实物的验证。
+
+The [initial GPIO and OLED program](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c) preserves that setup. It enables GPIOB and GPIOC clocks, establishes OLED power levels through PB4 and PB5, initializes the display, and drives PC13. This was a low-power breadboard exercise; powering a module from GPIO remains constrained by the pin's current capability. I began looking below `GPIO_SetBits()` at clocks, modes, and registers instead of learning only the function names.
+
+[最初的 GPIO 与 OLED 程序](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)还保留着这些配置。先开 GPIOB、GPIOC 时钟，用 PB4、PB5 给 OLED 建立供电电平，再初始化显示并控制 PC13。当时是低功耗面包板练习，用 GPIO 给模块供电也受引脚电流能力约束。我开始主动往 `GPIO_SetBits()` 下面追，核对时钟、引脚模式和寄存器，而不只记函数名。
+
+![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
+
+At one point the OLED stayed blank even though compilation and download worked. Moving it to another pair of ordinary GPIO pins and using software I²C restored the display. I retained neither the exact pins nor BUSY-state or waveform records. Later, the [F103 errata](https://www.st.com/resource/en/errata_sheet/es096-stm32f101x8b-stm32f102x8b-and-stm32f103x8b-mediumdensity-device-limitations-stmicroelectronics.pdf) showed me a documented hardware-I²C BUSY-lock condition, but the missing contemporary evidence prevents assigning it as the cause of my failure.
+
+OLED 曾经编译、下载都正常却不显示。最后我换了一组普通 GPIO，用软件模拟 I²C，屏幕恢复了。当时只解决了能不能用的问题，没有保存具体引脚、BUSY 位或波形。后来查看 [F103 芯片勘误](https://www.st.com/resource/en/errata_sheet/es096-stm32f101x8b-stm32f102x8b-and-stm32f103x8b-mediumdensity-device-limitations-stmicroelectronics.pdf)，发现硬件 I²C 确实存在 BUSY 锁死相关问题，但缺少当年的记录，仍不能把它认定为这次故障的原因。
+
+## Peripheral Integration / 外设组合
+
+I ran GPIO, OLED, encoder, servo, DHT11, light sensing, PWM, and UART in separate projects before joining them into one bare-metal program. The hardware remained a Blue Pill, breadboard, and jumper wires, with no custom carrier board. A button selected what the encoder controlled: target light in one mode and servo speed in the other. The OLED showed measured light, target, LED output, temperature, and humidity; UART sent light readings and debug information to the computer, while PC13 served as a status indicator.
+
+GPIO、OLED、编码器、舵机、DHT11、光敏传感器、PWM 与 UART，我先在独立工程里逐个跑通，再加入同一套裸机程序。没有画定制扩展板，模块仍靠面包板与杜邦线连接。按键负责切换编码器的控制对象，一种模式调目标光照，另一种调舵机速度；OLED 显示实测光照、目标、LED 输出和温湿度，UART 向电脑发送光照与调试信息，PC13 留作状态灯。
+
+EXTI handled encoder events, TIM3 paced slower work, and TIM4 generated PWM. Light and temperature/humidity reads waited for a flag; encoder and target updates took place in the main loop. I wrote the application flow, encoder mapping, mode switching, and integrated superloop. The peripheral drivers were material I studied, modified, and connected from ST's Standard Peripheral Library and public examples.
+
+集成时，EXTI 处理编码器事件，TIM3 提供慢任务的触发节奏，TIM4 负责 PWM。温湿度与光敏读取等 flag 到来再执行，旋钮和目标值则在主循环中更新。我编写了应用流程、编码器映射、模式切换与综合主循环，外设驱动是在 ST 标准库和公开例程基础上理解、修改、接入的。
+
+All these functions ran together in the final demo, but blocking delays remained and I did not measure worst-case task execution times. The result was useful for a low-frequency demonstration, without establishing a strict real-time architecture. The [public main-loop excerpt](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c) keeps the light-control path; it omits parts of the complete servo, mode, and UART implementation. Exact timer settings cannot be reconstructed from its function names either.
+
+这套程序最终能同时运行这些功能，但仍包含阻塞式延时，也没有做各任务最坏执行时间的测量。它适合当时的低频演示，不能直接当作严格实时系统。公开的[主循环摘录](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c)保留了光照主线，完整工程中的舵机、模式与串口分支没有全部收进来，精确的定时器配置也无法从函数名还原。
+
+## Light Calibration / 光照标定
+
+To turn a target light value into an LED command, I adjusted PWM point by point and recorded 16 ADC readings on this breadboard, then wrote a [lookup and interpolation function](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c). The records span PWM 0 to 1000 and ADC 1600 down to 480. Linear interpolation provides the output for a target between adjacent records. This calibration belongs to the divider arrangement and ambient conditions used at the time; it includes no lux conversion, repeated measurements, error statistics, or temperature-drift testing.
+
+为了把目标光照数值转换成 LED 输出，我逐点调整 PWM、读取 ADC，在这套面包板上记下 16 组数据，再写了[查表插值函数](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。记录中 PWM 从 0 增到 1000，ADC 从 1600 降到 480；目标位于两个记录点之间，就用线性插值求对应输出。这是针对当时分压接法与环境的标定，没有换算成 lux，也没有重复测量、误差统计或温漂测试。
+
+I considered adding feedback correction but did not implement it. The target passes through the table to PWM; measured ADC values are displayed and printed without entering a target-minus-measurement calculation. Having sensing and actuation on the same board does not itself create feedback control. The implemented result is observable feedforward mapping.
+
+我当时想过继续做反馈修正，最终没有实现。保留下来的路径是目标值查表得到 PWM，实测 ADC 用来显示和打印，并不参与目标与实测的误差计算。把采样和输出接在同一块板上，还不足以构成反馈控制；这次完成的是可观察的前馈映射。
+
+## End of the Placement / 实习结束
+
+I completed this learning sequence independently in about 20 working days. The engineer watched the demo, heard my explanation of how the peripherals worked together, and said I had learned the material solidly. It was an informal review, with no acceptance or delivery of a railway product. The reading also introduced PID, ATP, ATO, and ATS, but I did not implement or tune PID and connected to no real train equipment.
+
+大约 20 个工作日后，我独立完成了这条学习路线。工程师看了 demo，听我解释外设之间怎样配合，评价我学得比较扎实。这是非正式检查，没有形成轨道产品的验收或交付。同期资料还让我接触了 PID、ATP、ATO、ATS，但这些停在阅读理解，没有做 PID 实现与整定，也没接入实际列车设备。
+
+Timer, ADC, and PWM returned when I later studied FOC, this time with questions about aligning sampling with switching and finishing calculations in time. Those motor-control tasks were not completed during the Tianjin placement. What the month gave me was a starting point for investigating them: behind a peripheral function, I had learned to look for the clocks, signals, and execution order it depended on.
+
+后来学 FOC 时，我又遇到了 Timer、ADC 和 PWM，只是要求变成了采样与开关时刻的配合，以及一次计算能否及时完成。天津这一个月没有直接完成那些电机控制工作，却让我有了继续往下查的起点。遇到一个外设函数，我已经会去找它依赖的时钟、信号和执行顺序。

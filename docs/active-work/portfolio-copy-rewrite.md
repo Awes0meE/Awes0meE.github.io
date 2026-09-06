@@ -1,140 +1,60 @@
-# Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
+# Active Work: Homepage Release and Arduino Car Learning Note
 
 **Updated:** 2026-09-06
-**Current work:** Project/note division added to the local writer on `feat/project-note-division`; article rewrites remain pending
-**Last completed authoring scope:** `Claude Chime Power Board` / `Claude Chime 电源板`
-**Publication record:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), from `docs/refine-claude-chime-copy` into `main`, records integration and deployment; PR #34 covers the preceding copy.
-**State:** On 2026-09-06 the user approved the full bilingual candidate, authorized publication and branch/workspace cleanup, and requested an all-project overlap audit. The approved `01-after.mdx` was applied byte-for-byte to the project page, with SHA-256 `a2698f058b8171ac1c5bcca35bec8cb9e5e8e81677dbc79bc0cb5f3188ea0ffa`. Runtime `a1253dc` adds the Chinese-only sentence gate. The overlap audit covers 8 projects and 24 public notes; its proposed rewrites have not been applied.
 
-**Latest decision:** The user adopted the trunk/branch model and requested a
-skill update. The repository-local writer now checks family context at Step 1,
-open topic selection at Step 2, content allocation at Step 5, and cross-page
-division at Step 12. The homepage tells the user's work and project progression;
-each note investigates a bounded question. The update is local, with no new
-publication request. The existing article bodies remain unchanged.
+**Branch:** `docs/refactor-project-homepages`
 
-## Working Contract
+**State:** Seven homepages approved for release on 2026-09-06. Complete the PR and production verification, then work on the selected Arduino note. GitHub records the live merge and deployment status.
 
-- Handle substantive portfolio rewrites one project family at a time.
-- Use `references/project-note-division.md` in the writer. Reuse confirmed note
-  topics or select when delegated; otherwise ask one concise interest question
-  with grounded candidates. Keep necessary short background, but do not replay
-  the same complete experience or reasoning. Separate present investigation
-  from historical curiosity, research, and measurements.
-- Start each new family from a clean, synchronized `main` on a semantic topic
-  branch.
-- Inspect the available evidence before drafting. Reuse a user-confirmed brief
-  for the same project and scope or run a `grill-me` interview.
-- Research current reliable knowledge only after shared understanding is
-  confirmed. Use external sources for present-day interpretation, never for
-  invented project history, actions, results, or measurements.
-- Draft Chinese through the user's cognition trail with the repository-local
-  `skills/engineering-note-writer/SKILL.md`, then adapt English with equivalent
-  facts and uncertainty.
-- Compose Chinese from the confirmed brief and evidence, finish Chinese
-  refinement, and pass the independent Chinese sentence gate before English
-  at Step 10. Derive English from the Chinese, then run the existing L1-5
-  calque and pair-divergence check. Recheck final Chinese at Step 12; the
-  six-category gate is Chinese-only and leaves existing English rules unchanged.
-- Require the Truth gate, Li Zhiyi gate, bilingual gate, editorial-conservation
-  gate, and scoped reader-prose L1-1 through L1-5 gates before review.
-- Preserve user-controlled covers and demonstration media unless the user
-  explicitly requests or approves a visual change.
-- Merge only after the user reviews the bilingual copy and explicitly approves
-  publication.
+**Pre-batch published checkpoint:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), the approved Claude Chime homepage. The named release tag remains `v0.9.0` and is older than that maintenance PR.
 
-## Completed Claude Chime Note Checkpoint
+## Current Authorization and Work
 
-- The public note is
-  `content/notes/claude-chime-cold-start-battery-protection.mdx`, titled
-  `Claude Chime Battery Cold-Start Debugging` / `Claude Chime 电池冷启动排查`.
-- The user explicitly reopened this one note and approved a complete bilingual
-  rewrite of its titles, summaries, section structure, cognition route,
-  paragraph boundaries, and body. The Claude Chime project page, cover, media,
-  public artifacts, and technical frontmatter were unchanged.
-- The fused repository-local writer used for the rewrite was already part of
-  `main` through pull request #31 and commit `0ceb784`; pull request #32 did not
-  manufacture another skill change.
-- Treat the observed `4.03 V` to `1.49–1.57 V` collapse as a measurement at the
-  protected-pack output, not a demonstrated cell-voltage collapse. The
-  `3.8 V / 50 mA` supply test and `5.12 V / 5.08 V` unloaded outputs make a
-  persistent hard short less likely, but the two output readings can no longer
-  be assigned to individual rails.
-- Applying an external supply and the next successful battery start are recorded
-  in that order. Whether the board remained connected during the external-supply
-  step and the mechanism that restored operation are unknown.
-- No connection-current waveform or exact protection-state transition was
-  measured. The dual TLV61048 rails do not imply startup ordering or a known
-  combined current. Real-solenoid and complete-device results remain
-  client-engineer chat feedback rather than Alvin's direct observation.
-- The accepted experiment snapshot and live note share SHA-256
-  `73fcbd880aa125893b65366b8eb6d665e7d0040918c572ddeb7acbce089ea811`.
+The user explicitly requested all seven other project homepages be rewritten using the latest writer and existing confirmed context. This is a one-time authorization for the batch, superseding the earlier freeze on those seven families. Claude Chime's approved narrative remains protected. The user also requested overlapping learning notes be suspended recoverably, and topic candidates be identified without writing new notes.
 
-## Approved Claude Chime Project-Page Scope
+- Seven homepages now have Chinese-first, English-derived body copy, concise subject headings, and updated summaries. Smart Car and Digital Clock keep their titles; the other titles are shortened to subject labels.
+- Fifteen notes have only `visibility` changed to `private`. All 24 note bodies are intact; nine independent topics or original-document notes remain public.
+- Claude Chime changes only by removing the two closing sentences linking to its suspended cold-start note. Its narrative, frontmatter, images, and evidence claims remain intact.
+- All 36 existing body images in the seven rewritten pages remain; cover paths, technical metadata, media records, public uploads, application code, and dependencies are unchanged.
+- [Review and restoration packet](../experiments/project-homepages-2026-09-06/README.md) includes the complete 24-note action list, original hashes, eight before-page copies, and bilingual comparison page.
+- [Future topics](project-note-topics-2026-09-06.md) gives a priority and alternative question for each project. These are proposals for later learning, not new claims about what Alvin already studied or measured.
 
-- The approved page is `content/projects/claude-chime-hardware-power-board.mdx`.
-  Its full before/after archive is under
-  `docs/experiments/chinese-gate-claude-chime-project-2026-09-06/`.
-- The approved Chinese and English keep the commissioned-hardware ownership,
-  dual-boost architecture, supply/charge decisions, gated analog sampling,
-  first-spin work, direct bench checks, client feedback, and software handoff.
-- The cold-start note, covers, images, public artifacts, and application code
-  are unchanged. The new layout explanation is present-day interpretation,
-  not an added historical PCB change or measured performance claim.
-- Both pages retain the protected-pack-output boundary, an unproven
-  DW01A/8205A startup-protection hypothesis, and unmeasured current peak / exact
-  state transition. Shared-boost supply dips remain a possibility.
-- The user also approved publishing the Chinese sentence-gate runtime. Chinese
-  is checked before English at Step 10 and again at Step 12; existing English
-  rules remain unchanged.
+## Writing Contract
 
-## Protected Completed Families
+Use `skills/engineering-note-writer/SKILL.md` and its current references. The branch includes `ce015f2`, which adds project/note division, and the Chinese sentence gate originally added in `a1253dc`.
 
-Do not reopen these approved families unless the user explicitly requests it.
-The new Claude Chime project page is approved for publication. The cross-project
-audit is diagnostic; it does not reopen every article for automatic rewriting.
-The cold-start note and the other families below remain protected:
+Homepages tell what Alvin did and how the work progressed. Notes investigate bounded questions with new explanatory value. Read the family at Step 1, reuse confirmed briefs/topics, choose candidates at Step 2 when delegated, allocate detailed material at Step 5, and recheck cross-page division at Step 12. Necessary context and original-document preservation are allowed; replaying a complete experience under new wording is not.
 
-- Arduino Smart Car;
-- DIY pressure-flow cooling;
-- Arduino Digital Clock;
-- Tianjin STM32;
-- Nanjing Turing;
-- Claude Chime;
-- Juanyun phase-change thermal management;
-- sensorless FOC learning route.
+Compose Chinese from the confirmed brief and evidence. After editorial refinement, review all six Chinese sentence categories before English at Step 10. Derive natural English with equivalent substance and uncertainty, then repeat the full Chinese check at Step 12 alongside Truth, Li Zhiyi, L1-1 through L1-5, and bilingual review. English keeps its existing rules. A lexical scan is not a substitute for sentence-by-sentence judgment.
 
-Pull request #23 was a one-time explicitly authorized surface-cleanup exception,
-not standing permission to bulk-rewrite approved content.
+On 2026-09-06, after reviewing the seven pages, the user rejected excessive evidence-boundary commentary. The current writer removes mandatory explicit caveats: internal fact checks do not belong in the article. Remove missing-test lists, archive inventories and repeated cannot-claim statements. Use accurate retained claims with natural attribution and conditions; real failures and unfinished attempts can still drive the story. The independent editorial-conservation / information-retention gate is removed. English adaptation must not restore deleted material. The seven bilingual homepages now follow this correction, with their pre-feedback versions preserved in `pre-boundary-feedback/`.
+
+Retain confirmed emotion, humor, actors, and accurate results. Present-day reading must not turn into invented historical curiosity, experiments, failures, or causal explanations. Covers and demo media remain user-controlled. The user has approved the seven bilingual homepages for publication. New note prose still needs its own review.
+
+The user then clarified that ordinary closing paragraphs are welcome: avoid forced elevation, but finish the account naturally. The seven endings were reviewed; DIY now closes beyond its temperature/FPS figures, and Turing finishes on the existing personal reaction rather than a file-submission sentence. The other five endings already close their accounts and remain unchanged.
+
+## Internal Fact Checks
+
+These are editorial working notes, not sentences to paste into the project pages.
+
+- Smart Car: kit assembly/testing/tuning, not Alvin's original PCB design. Reported 12 V battery voltage is not MCU or motor-terminal voltage. The suspended note's “13 digital pins” needs correction before republication; check Nano pinout and actual allocation. L293 is not a MOSFET H bridge.
+- Digital Clock: working classroom buttons and full marks are confirmed; 17 and 99 were separately flashed versions. The 17-second video lacks button operation, final source is missing, early `main.c` is incomplete, and final polarity/debounce cannot be reconstructed.
+- DIY: ESP32 completed the computer-to-fan machine; STM32 reached serial control without reconnecting the Windows/Bluetooth path; the printed enclosure remained a slicing preview. Temperature/FPS figures are memory, not controlled tests. Duty is not measured RPM.
+- Tianjin: foundational internship demo, not railway-product development. Sixteen-point ADC/PWM mapping is feedforward; I²C errata is a later hypothesis. PID/ATP/ATO/ATS remained reading.
+- Turing: local accounts, not online authentication. Company acceptance used the development machine; the later clean Windows test was separate. Mac reached an unsigned DMG, with signing/notarization and clean-second-Mac tests incomplete; later adoption unknown.
+- Juanyun: independent BaseUnit and three-board ACUnit engineering, formal role intern. Personal staged bring-up is separate from later company refrigeration feedback and performance/endurance claims. No sensitive raw product packages are added.
+- FOC: personal custom hardware, adapted open-source algorithm baseline, Codex-assisted observer debugging. Open-loop compressor operation is confirmed; 30 to 80 Hz is electrical command range, not measured shaft speed. Exact video frequency is uncertain; no complete refrigerant loop or controlled six-step comparison; sensorless handoff unfinished.
+- Claude Chime: 4.03 V falling to 1.49 to 1.57 V is protected-pack output, not measured cell collapse. The 3.8 V / 50 mA supply check and unloaded outputs do not establish an exact protection state or inrush waveform. External-supply intervention preceded successful startup, but connection sequence and recovery mechanism are incompletely known. Real-solenoid operation remains client feedback. Alvin did not write the ESP32 firmware.
 
 ## Next Action
 
-1. Use the release PR and its linked checks as the publication record for this
-   approved revision. Do not recreate a deleted, fully merged source branch.
-2. The local skill update implements the user's division rule. For a later
-   article request, read [the project/note overlap audit](project-note-overlap-audit-2026-09-06.md)
-   for all 8 projects and 24 notes. Its proposed first experiment narrows the
-   Claude Chime cold-start note while keeping this approved project page.
-3. Implement only the next user-selected project scope, with Chinese/English
-   review before publication. Page-division checks are now part of the local
-   writer; the audit's particular note topics and rewrites still require the
-   next selected scope. Arduino sensor/driver/supply examples are candidate
-   investigations, not confirmation of device topology or tested voltages.
-4. Preserve `gh-pages`, the GitHub Pages redirect source. The 19 previously
-   untracked duplicate-named files have been removed from the checkout only
-   after a verified recoverable backup; see the session log for the local path.
+1. Publish the approved homepage/writer revision through a checked PR to `main`, and verify production. Preserve `gh-pages`, which supplies the GitHub Pages redirect.
+2. Start the Arduino Smart Car note on a new topic branch from updated `main`. The user chose both power delivery and speed sensing in one note. Follow battery input through regulation and the motor driver, then explain how the installed sensor and test code turn rotation into a measurable signal. Use the confirmed project brief; do not restart the full interview.
+3. Keep assembly, track tuning, the battery-change decision and competition results on the homepage. The note develops circuit operation, PWM, sensing and conversion to wheel speed. Do not replay the project journey or invent a historical closed-loop speed controller.
+4. Draft Chinese first, complete the sentence and voice review, then adapt English. Keep the note recoverable and show its draft before restoring public visibility. Do not begin another project until this one is reviewed.
 
-## Verification And History
+## Verification and History
 
-The approved candidate matches its archived MDX byte-for-byte. The 39-page
-webpack production build and TypeScript passed; a local production preview
-rendered the new English and Chinese body, assets and note link. No other
-article was edited by the overlap audit. Earlier release and environment
-checkpoints are retained in `docs/session-log.md`, rather than repeated here
-as stale current-state instructions.
+See `../experiments/project-homepages-2026-09-06/verification.json` for final checks. Expected counts are 8 projects and 24 note sources; the public subset is 9 notes and two note-index channels. A production build should prerender 24 pages. Older 39-page results describe the previous all-public note set.
 
-## Updating This File
-
-Replace the current-state sections at each handoff. Keep durable writing rules
-and confirmed boundaries; do not append interview transcripts, secrets,
-credentials, or machine-specific checkout paths.
+Historical interviews, release evidence, and cleanup remain in `docs/session-log.md`, project briefs, and dated experiments. The original overlap audit remains a diagnostic snapshot; this handoff and the execution packet define the current state.

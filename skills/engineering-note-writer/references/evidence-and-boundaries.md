@@ -9,9 +9,9 @@ Use four evidence levels internally:
 | Level | Meaning | Safe writing move |
 |---|---|---|
 | Confirmed action | The user or a reliable first-hand record says who did what. | Use first person and active verbs. |
-| Artifact fact | A file, photo, log, code listing, board, or video directly shows something. | Describe what the artifact shows. |
-| Inference | Several clues support a reading but do not prove it. | Attribute the conclusion to the clues and qualify it. |
-| Unknown | The material does not answer the question. | Leave it open or ask one focused question. |
+| Artifact fact | A file, photo, log, code listing, board, or video directly shows something. | Use the supported detail when it helps the story; do not make a file inventory the story. |
+| Inference | Several clues support a reading but do not prove it. | If useful to the account, express the interpretation naturally; otherwise omit it. |
+| Unknown | The material does not answer the question. | Keep it in working notes, omit the unsupported claim, or ask if the answer is needed. |
 
 Never upgrade an artifact fact into personal authorship. A Gerber archive proves that fabrication files exist; it does not prove who drew the PCB, ordered it, assembled it, or brought it up.
 
@@ -19,7 +19,15 @@ Never upgrade an artifact fact into personal authorship. A Gerber archive proves
 
 Project evidence supports what Li or the device did. External sources support general principles and current technical facts. A source may help interpret an observation, but it cannot upgrade a recollection into a measurement or an artifact into authorship.
 
-Qualify a claim only nearby and only when the distinction changes its meaning. Do not narrate the whole evidence audit in reader-facing prose.
+## Keep The Audit Out Of The Article
+
+The user removed the requirement to state evidence boundaries explicitly in project and note prose on 2026-09-06. Checking support remains an internal responsibility; it does not earn a sentence in the article.
+
+Write what the user did, what happened, and what they learned. Remove passages whose job is to certify what the archive proves, announce what it cannot prove, or list measurements and implementations absent from it. This includes first-person versions such as `我能确认的只有……` when they still read as an audit. An explicit evidence-audit request is a different deliverable and may discuss these matters directly.
+
+Choose the supported claim itself instead of adding a disclaimer after a broad one. `我在 12 V 下让压缩机开环运行` states the result; it does not need a list of other tests. `老板反馈……` identifies who observed the later result; it does not need another sentence saying it is not my measurement. If an uncertain numerical recollection is worth retaining, `我记得大约……` is often enough. Omit optional claims that need a long defense.
+
+An actual unresolved problem can still drive the story: `一切换到无感接管，电机就停了。` Likewise, a concrete operating condition belongs with a result when it defines that result. These are engineering facts, not a mandatory boundary section. Do not erase a real failure, invent success, strip necessary attribution, or replace a removed disclaimer with another disclaimer in different words.
 
 ## Ground First Person And Emotion
 
@@ -27,17 +35,7 @@ Use `我` for an action only when the input or evidence supports it. Ground reac
 
 When the user confirms both a real event and the direction or intensity of the emotion, reconstruct the moment in natural first person without requiring the user's exact wording. Keep the reconstruction inside the confirmed anchor. Do not add a new time, place, action, dialogue, participant, technical result, or causal sequence. If only an emotion is confirmed, do not build an unconfirmed scene around it.
 
-When evidence is indirect, write from the evidence:
-
-```text
-从照片和这版原理图能对上的，是几个主要连接器的位置。
-```
-
-Do not turn that into:
-
-```text
-我完成了这版原理图和 PCB 设计。
-```
+Indirect evidence does not establish personal authorship. A photo showing connectors cannot justify `我完成了这版原理图和 PCB 设计`. If the connector observation serves no purpose in the user's story, omit it rather than writing an evidence-inventory sentence about the photo.
 
 ## Name Known Tools Exactly
 
@@ -50,7 +48,7 @@ Unknowns should sharpen the note rather than flood it with disclaimers.
 - If an unknown blocks public accuracy, keep the draft provisional and ask the smallest blocking question.
 - Group related unknowns into the smallest number of decision-bearing questions; do not turn every missing field into its own form item.
 - If the note can remain accurate without it, write around the gap naturally.
-- Mention an uncertainty near the claim it limits; do not collect every uncertainty into a mandatory final section.
+- Keep uncertainty in the internal fact sheet. Include a remaining question only when it is part of the user's actual inquiry; there is no requirement to publish a boundary sentence or missing-test list.
 - Do not guess sensor models, units, dates, performance, collaboration roles, or version relationships from plausible engineering context.
 
 ## Separate Prose Safety From File Publication

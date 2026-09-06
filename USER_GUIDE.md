@@ -160,7 +160,7 @@ Seven spacious black signal intervals separate adjacent projects. Their short or
 
 ## Using The Notes Routed Index
 
-On `/notes`, choose one of the eight project channels or use the project dropdown, then narrow the 24 linked public records by frontmatter year. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
+On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by frontmatter year. The 2026-09-06 content revision has 9 public notes across 2 channels; 15 suspended notes remain recoverable in the source. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` deliberately keeps the paper reading surface.
 
@@ -168,7 +168,7 @@ The selected orange path follows the existing graphite stem and zig-zag bus to t
 
 ## 使用笔记路由索引
 
-在 `/notes` 中，可以直接选择 8 个项目通道之一，也可以使用项目下拉框，再按 frontmatter 年份缩小当前 24 篇已关联公开笔记的范围。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
+在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按 frontmatter 年份筛选公开笔记。2026-09-06 这轮内容调整后为 9 篇公开笔记、2 个通道，另有 15 篇暂挂稿保留在源文件中，可逐篇恢复。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会继续使用适合阅读的 paper surface。
 

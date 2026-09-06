@@ -62,27 +62,21 @@ set of measurements will be developed. The homepage owns the project journey;
 each note owns its selected investigation. Compare notes with one another too.
 Use a compact internal map if useful, never a mandatory reader-facing table.
 
-Other pages may retain the short context, outcome, or evidence boundary needed
-to understand their own question and link to the detailed account. A note must
-remain readable on its own. Keep relevant test conditions and limitations near
-the conclusions they qualify, even when another page also states them. Shared
+Other pages may retain the short context or outcome needed to understand their
+own question and link to the detailed account. A note must remain readable on
+its own. State retained claims with accurate conditions and attribution; this
+does not require repeating evidence audits or missing-test lists. Shared
 technical terms, necessary diagrams, exact evidence, and Chinese-English
 counterparts are not redundant storytelling. Do not impose a word quota or
 string-similarity threshold.
 
-For a scoped rewrite, remove repeated background only when the detailed account
-remains available in the appropriate existing page and the reader can reach it.
-Track retained claims and their destinations in both languages. Do not delete a
-unique supported fact, uncertainty, or confirmed reaction merely because it
-does not fit the new focus. Preserve it in scope, or raise the specific scope
-decision if preserving it requires changing a protected sibling page. Inspecting
-the family does not authorize editing it. Do not silently move material into
-unapproved pages, delete notes, change slugs, or rewrite original documents.
-
-After this allocation, the editorial-conservation pass protects the agreed
-content and destinations. It should not restore every duplicate passage to
-every page. Preserve verbatim source-document notes as sources; apply the
-division check to authored framing and new commentary around them.
+For a scoped rewrite, select detail for the page's question and the user's
+requested account. Existing sources may remain available through a useful
+link, but each fact and link does not need a new home in reader-facing prose.
+There is no old-draft information-retention check. Inspecting a page family
+does not authorize changing protected siblings, deleting notes, changing slugs,
+or rewriting original documents. Preserve verbatim source-document notes as
+sources; apply the division check to authored framing and new commentary.
 
 ## Ground The Research In The Actual Project
 
@@ -115,7 +109,7 @@ Read the finished target alongside the homepage and sibling notes. Check that:
 - the same complete experience or reasoning is not replayed across pages,
   including in different words or a different section order;
 - context is sufficient for independent reading, links reach the detailed
-  account, and relevant boundaries remain beside claims;
+  account, and retained claims are accurate without evidence-inventory prose;
 - historical learning and present investigation remain distinct;
 - Chinese and English make the same allocation and retain equivalent meaning.
 

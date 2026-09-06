@@ -30,7 +30,7 @@ Project detail pages tell Alvin's work and project progression in his first
 person. Related learning notes branch into bounded questions raised by the work,
 developing principles, investigation, and changing understanding. They add
 technical depth without replaying the same complete experiences or reasoning.
-Brief shared context and relevant evidence boundaries keep each page readable
+Brief shared context and accurately stated claims keep each page readable
 on its own; original source-document notes retain their source-preserving role.
 
 The public site is deployed on Vercel and uses `https://www.66ccff-labs.com/` as its production domain. The source repository is also part of the public evidence surface, so material that is private cannot be protected merely by hiding it from site navigation.
@@ -39,7 +39,7 @@ Release `v0.9.0` promotes the Kinetic Signal Ledger through an opt-in, route-by-
 
 The `/work` index keeps all eight repository projects in one evidence-first sequence. A locating rail and complete linked chapters expose authentic project imagery, status, dates, focus, summary, and evidence availability; seven spacious orange-tick intervals separate adjacent chapters without representing progress, telemetry, or project completion.
 
-The separately approved `/notes` index uses a Routed Signal Map for all 24 public notes linked to eight real projects. Visitors can search bilingual metadata and filter by project or frontmatter year before opening a semantic note row; dates remain archive metadata, route motion never claims telemetry or progress, and every `/notes/[slug]` detail stays on the paper reading surface.
+The separately approved `/notes` index uses a Routed Signal Map for the currently public notes linked to real projects. The 2026-09-06 local content candidate retains 9 public notes across two channels and suspends 15 overlapping notes without deleting their sources; the site still has eight project homepages. Visitors can search bilingual metadata and filter by project or frontmatter year before opening a semantic note row; dates remain archive metadata, route motion never claims telemetry or progress, and every `/notes/[slug]` detail stays on the paper reading surface.
 
 The separately approved `/media` index uses a project-first Focus Aperture: visitors choose one of eight named project sources, inspect its lead record, and then enter the corresponding project chapter. The 84-record archive remains tied to repository evidence rather than becoming a loose gallery; project and note detail routes are outside this media-surface decision.
 
@@ -53,7 +53,7 @@ The separately approved `/about` surface gives a time-constrained reader a CV-gr
 - Preserve the existing project, note, media, and public-file relationships, including `projectSlug`, `assetPaths`, visibility controls, and server-side file-safety limits.
 - Treat `visibility: private` as a navigation control, not a repository privacy boundary. Files under `public/uploads/` are public after deployment.
 - Do not publish private financial, billing, proof, credential, installer, vendor, dependency, build-output, complete reconstructable product source, or other restricted material.
-- Do not fabricate outcomes, measurements, benchmarks, customers, testimonials, ownership, deployment, or validation. Keep incomplete work and evidentiary limits visible.
+- Do not fabricate outcomes, measurements, benchmarks, customers, testimonials, ownership, deployment, or validation. Keep claims accurate through selection, conditions, and attribution; do not require visible evidence audits or lists of unperformed tests.
 - Page structure, information architecture, hierarchy, and copy density may be refactored as long as the confirmed product truth and evidence boundaries remain intact.
 - Animated interface presentation must retain a useful static state under reduced-motion preferences and must not make evidence claims through motion alone.
 
@@ -84,4 +84,4 @@ The separately approved `/about` surface gives a time-constrained reader a CV-gr
 2. Make technical depth easy to enter quickly without flattening the underlying work.
 3. Keep claims proportional to what the surviving files, measurements, and first-person account can support.
 4. Preserve one coherent bilingual identity across projects, notes, media, and contact surfaces.
-5. Make limitations, failures, and unfinished validation part of the engineering record rather than hiding them.
+5. Tell actual failures and unfinished attempts when they matter to the project journey. Keep the supporting audit internal instead of adding defensive commentary to the article.

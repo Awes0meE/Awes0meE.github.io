@@ -1,0 +1,449 @@
+{
+  "date": "2026-09-06",
+  "state": "local-review-uncommitted-unpublished",
+  "branch": "docs/refactor-project-homepages",
+  "baselineCommit": "ce015f2a8ca035d3dc0582b2bc5e58e933370539",
+  "scope": {
+    "projects": 8,
+    "rewrittenBilingualHomepages": 7,
+    "chineseEnglishParagraphPairs": 88,
+    "claudeChime": "Only the two closing note-link sentences removed; approved narrative, metadata and images otherwise identical",
+    "noteSources": 24,
+    "suspendedNotes": 15,
+    "publicNotes": 9,
+    "publicNoteChannels": 2,
+    "unchangedBodyImagesAcrossSevenProjects": 36,
+    "unchangedMediaRecords": 84,
+    "allNoteBodiesUnchanged": true,
+    "publicUploadsApplicationAndDependenciesUnchanged": true
+  },
+  "writingReview": {
+    "method": "Author review against confirmed briefs, before copies, sibling notes and primary references. Lexical scans assist but do not replace context-sensitive judgment. No claim of independent external review.",
+    "step10": "Seven Chinese drafts refined and reviewed before English; original records in chinese-gate.json.",
+    "step12ChineseCategories": {
+      "语序不当": "Reviewed in full; no established fault remains after repairs.",
+      "搭配不当": "Reviewed in full; no established fault remains after repairs.",
+      "成分残缺或赘余": "Reviewed in full; no established fault remains after repairs.",
+      "结构混乱": "Reviewed in full; no established fault remains after repairs.",
+      "表意不明": "Reviewed in full; no established fault remains after repairs.",
+      "不合逻辑": "Reviewed in full; no established fault remains after repairs."
+    },
+    "english": "Existing English, Truth, L1 and bilingual-equivalence checks only. Chinese six-category gate not applied to English.",
+    "additionalGates": [
+      "Truth and attribution",
+      "Li Zhiyi cognition and confirmed voice",
+      "Reader prose L1-1 through L1-5",
+      "Editorial conservation and recorded redistribution",
+      "Bilingual equivalence",
+      "Project/note division against all 24 available sibling sources"
+    ],
+    "finalRepairs": [
+      {
+        "issue": "改变风扇 did not name a clear effect.",
+        "repair": "Clarified command reply and observed fan-speed change; did not add RPM measurement."
+      },
+      {
+        "issue": "ADC 采回来的温度 skipped the conversion between electrical reading and temperature.",
+        "repair": "Named temperature calculated from ADC readings, with matching English."
+      },
+      {
+        "issue": "English made the confirmed clean Windows test more explicit than Chinese.",
+        "repair": "Chinese now also names the absence of Qt and Visual Studio."
+      },
+      {
+        "issue": "Five paired passages sounded like editorial instructions about how to write the account.",
+        "repair": "Restated observed limits, checks and remaining questions in the user’s voice without inventing incidents or changing evidence strength."
+      }
+    ],
+    "lexicalReview": "Zero banned phrase or prose-dash hits. The English phrase “could not yet explain ... but ... tests” is ordinary factual contrast, not the prohibited bare not-A-but-B template.",
+    "crossPageLimits": "Fifteen overlapping narratives are suspended, not rewritten. Nine independent/original-document sources retained with necessary context. Original source documents were inspected for role and framing, not subjected to a fresh line-by-line technical audit."
+  },
+  "checks": {
+    "lint": "passed",
+    "contentValidation": {
+      "projects": 8,
+      "noteSources": 24,
+      "media": 84
+    },
+    "encoding": {
+      "passed": true,
+      "utf8Files": 378
+    },
+    "typecheck": "passed standalone and in final build",
+    "webpackBuild": {
+      "passed": true,
+      "prerenderedPages": 24
+    },
+    "diffWhitespace": "passed",
+    "scopeIntegrity": "Exact visibility-only comparison for all 15 notes; byte equality for remaining 9; expected-only Claude Chime diff; image order and non-writing metadata match all seven before copies."
+  },
+  "http": {
+    "requests": 105,
+    "mismatches": [],
+    "indexAndProjectPausedLinkIssues": [],
+    "expectedPaused404s": 15
+  },
+  "browser": {
+    "homepageChecks": [
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 1440,
+        "lang": "en",
+        "expected": 9,
+        "title": "Arduino Smart Car Line-Tracking Kit",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 9,
+        "title": "Arduino 循迹小车焊接与控制实训",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 390,
+        "lang": "en",
+        "expected": 9,
+        "title": "Arduino Smart Car Line-Tracking Kit",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 390,
+        "lang": "zh",
+        "expected": 9,
+        "title": "Arduino 循迹小车焊接与控制实训",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 1440,
+        "lang": "en",
+        "expected": 9,
+        "title": "Arduino Breadboard Two-Digit Seven-Segment Counter",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 9,
+        "title": "Arduino 面包板两位数码管计数器",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 390,
+        "lang": "en",
+        "expected": 9,
+        "title": "Arduino Breadboard Two-Digit Seven-Segment Counter",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 390,
+        "lang": "zh",
+        "expected": 9,
+        "title": "Arduino 面包板两位数码管计数器",
+        "overflow": false,
+        "paragraphs": 9,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 1440,
+        "lang": "en",
+        "expected": 13,
+        "title": "DIY Laptop Cooler",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 13,
+        "title": "DIY 压风式笔记本散热器",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 390,
+        "lang": "en",
+        "expected": 13,
+        "title": "DIY Laptop Cooler",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 390,
+        "lang": "zh",
+        "expected": 13,
+        "title": "DIY 压风式笔记本散热器",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 1440,
+        "lang": "en",
+        "expected": 12,
+        "title": "Tianjin Jintie STM32 Internship",
+        "overflow": false,
+        "paragraphs": 12,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 12,
+        "title": "天津津铁 STM32 嵌入式实习",
+        "overflow": false,
+        "paragraphs": 12,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 390,
+        "lang": "en",
+        "expected": 12,
+        "title": "Tianjin Jintie STM32 Internship",
+        "overflow": false,
+        "paragraphs": 12,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 390,
+        "lang": "zh",
+        "expected": 12,
+        "title": "天津津铁 STM32 嵌入式实习",
+        "overflow": false,
+        "paragraphs": 12,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 1440,
+        "lang": "en",
+        "expected": 15,
+        "title": "Seamly2D Qt Development Internship",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 15,
+        "title": "南京图灵 Seamly2D 开发实习",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 390,
+        "lang": "en",
+        "expected": 15,
+        "title": "Seamly2D Qt Development Internship",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 390,
+        "lang": "zh",
+        "expected": 15,
+        "title": "南京图灵 Seamly2D 开发实习",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 1440,
+        "lang": "en",
+        "expected": 15,
+        "title": "Cirro Phase-Change Cooling Controllers",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 15,
+        "title": "卷云相变散热器控制系统",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 390,
+        "lang": "en",
+        "expected": 15,
+        "title": "Cirro Phase-Change Cooling Controllers",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 390,
+        "lang": "zh",
+        "expected": 15,
+        "title": "卷云相变散热器控制系统",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 1440,
+        "lang": "en",
+        "expected": 15,
+        "title": "Custom Driver Board and Sensorless FOC",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 15,
+        "title": "自制驱动板与无感 FOC 实践",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 390,
+        "lang": "en",
+        "expected": 15,
+        "title": "Custom Driver Board and Sensorless FOC",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 390,
+        "lang": "zh",
+        "expected": 15,
+        "title": "自制驱动板与无感 FOC 实践",
+        "overflow": false,
+        "paragraphs": 15,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      }
+    ],
+    "noteIndexChecks": [
+      {
+        "width": 1440,
+        "language": "en",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "language": "zh",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "language": "en",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "language": "zh",
+        "rows": 9,
+        "overflow": false
+      }
+    ],
+    "pageErrors": [],
+    "comparisonChecks": {
+      "count": 28,
+      "projects": 7,
+      "languages": 2,
+      "widths": [
+        1440,
+        390
+      ],
+      "issues": []
+    },
+    "temporaryArtifacts": "/private/tmp/project-homepages-work/browser-cli-artifacts",
+    "representativeScreenshots": "/private/tmp/project-homepages-work/screenshots"
+  },
+  "artifacts": {
+    "manifest": "manifest.json",
+    "beforeCopies": "before/",
+    "comparison": "comparison.html",
+    "comparisonSha256": "f6cd48b63af08479a5fba0e8563117ee2b08f18d28969a240269f68171df9b0c",
+    "topics": "../../active-work/project-note-topics-2026-09-06.md",
+    "restoration": "README.md"
+  },
+  "preview": {
+    "site": "http://127.0.0.1:3000/work",
+    "comparison": "http://127.0.0.1:8766/comparison.html"
+  }
+}

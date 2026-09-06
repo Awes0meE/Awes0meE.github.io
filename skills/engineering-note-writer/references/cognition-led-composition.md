@@ -97,14 +97,25 @@ adding an explanation on only one side.
 
 Use bullets for a genuine set of files, measurements, checks, or alternatives. Do not convert a narrative into bullets because the evidence is messy. Explain why each listed item matters.
 
-## End Where The Cognition Resolves
+## Close The Account Naturally
+
+Let the reader finish the experience or investigation with the writer. A normal
+closing paragraph can connect the result back to the initial purpose and say
+what the writer now understands or feels about that particular work. Keep the
+scale personal and concrete. A failed or ongoing project can still have a
+complete account of the work so far.
 
 Possible endings include:
 
 - the final verification that settled the active question;
-- the exact unknown that still blocks a stronger claim;
+- a real remaining question the writer wants to investigate;
 - a callback to the error, file, or assumption that opened the note;
 - a concrete change in how the writer now reads similar systems;
 - a new connection that combines earlier learning without pretending every question is closed.
 
-None is mandatory. Stop when another paragraph would repeat the lesson or announce that the article is ending.
+None of these forms is mandatory. Read the final section as an ending, especially
+after cutting audit commentary. If only a measurement, filename, or isolated
+fact remains, connect it to the account rather than leaving the reader mid-step.
+If the existing paragraph already closes the experience, no extra paragraph is
+needed. Avoid grand lessons, a recap of every section, or a formula announcing
+that the article is ending; ordinary closure and a brief callback are welcome.

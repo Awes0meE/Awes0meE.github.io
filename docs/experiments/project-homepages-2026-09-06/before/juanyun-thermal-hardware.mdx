@@ -1,0 +1,107 @@
+---
+title: "Cirro Phase-Change Cooling System: Two Controllers and One Complete Refrigeration Chain"
+titleZh: "卷云相变散热器系统：两套控制器与一条完整制冷链"
+summary: "During my internship at Juanyun, I independently completed the BaseUnit and the three-board ACUnit hardware, firmware, bring-up, and integration for a phase-change laptop cooler, then continued the same project through its automatic-control and maintenance phase."
+summaryZh: "在卷云实习期间，我独立完成了相变制冷笔记本散热器的 BaseUnit 与三板 ACUnit 硬件、固件、bring-up 和整机联调，并继续参与同一项目的自动控制与交付维护阶段。"
+date: "2025-11 to 2026-05"
+status: "Completed Internship Project"
+tags: ["STM32", "PCB", "C/C++", "Thermal", "Firmware", "Control", "Bring-up"]
+cover: "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg"
+featured: true
+assetPaths:
+  - "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg"
+  - "/uploads/projects/juanyun-tech/acunit-v20-system-block.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-main-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-main-front.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-power-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-power-front.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-pressure-transmitter-params.jpg"
+  - "/uploads/projects/juanyun-tech/acunit-v21-pwm-fan-params.jpg"
+  - "/uploads/projects/juanyun-tech/acunit-v21-system-block.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-ui-back.png"
+  - "/uploads/projects/juanyun-tech/acunit-v21-ui-front.png"
+  - "/uploads/projects/juanyun-public/acunit-v21-bringup"
+  - "/uploads/projects/juanyun-public/actuator-fan"
+  - "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan-cover.png"
+  - "/uploads/projects/juanyun-public/dht11-am2302-breakout-plan.pdf"
+  - "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-pcb-3d.png"
+  - "/uploads/projects/juanyun-public/diy-cooling/diy-cooling-stm32-schematic.png"
+  - "/uploads/projects/juanyun-public/hardware-development-sop-awes0mee.pdf"
+  - "/uploads/projects/juanyun-public/hardware-sop-cover.jpeg"
+---
+
+## Two Controllers Had to Become One Machine / 两套控制器最后要接成一台机器
+
+The product is easiest to picture as a small air conditioner placed beneath a laptop. A compressor and refrigeration loop produce cold air, then a base pushes that air toward the laptop intake so it can carry heat away from the internal fins. The footprint eventually became one of the product's clearest weaknesses, but the engineering question was real. Cooling performance depended on a refrigeration system, an airflow path, two embedded controllers, and a PC tool agreeing on what the machine was doing.
+
+这套产品最容易理解的说法，是放在笔记本下面的一台小空调。压缩机和制冷回路持续制造冷风，底座再把冷风送进笔记本风道，让它带走内部鳍片上的热量。占地太大后来成了产品最明显的缺点之一，但它面对的工程问题并不小。制冷系统、送风结构、两套嵌入式控制器和电脑端工具，必须对同一台机器的状态达成一致。
+
+The BaseUnit sits under the laptop. It handles airflow delivery, screen and button interaction, local sensing, fan control, Bluetooth telemetry, and saved settings. The ACUnit is the external refrigeration controller. Its power, main-control, and interaction boards connect the compressor driver, electronic expansion valve, fans, pressure and temperature sensing, OLED, local controls, and network interface.
+
+BaseUnit 放在笔记本下面，负责送风、屏幕与按键交互、本地传感、风扇控制、蓝牙上报和设定保存。ACUnit 则是外机制冷控制器，分电板、主控板和交互板把压缩机驱动板、电子膨胀阀、风扇、压力与温度传感、OLED、本地交互和网络接口接到一起。
+
+![ACUnit V2.1 system map / ACUnit V2.1 系统图](/uploads/projects/juanyun-tech/acunit-v21-system-block.png)
+
+I independently completed the BaseUnit hardware, firmware, and real-machine bring-up. I then independently completed the three ACUnit PCBs, assembly and soldering, firmware, staged bring-up, full-chain integration, and the V2.1 development SOP. Looking back, the scope sometimes felt closer to the hardware-lead work of a small startup than to a narrowly bounded embedded internship. That is a comparison of responsibility, not a job title I held.
+
+BaseUnit 的硬件、固件和实机联调由我独立完成。随后三块 ACUnit PCB 的设计、装配与焊接、固件、分阶段 bring-up、整机联调和 V2.1 开发 SOP 也都由我独立完成。现在回头看，这个范围有时更像初创团队里硬件负责人要接住的事情，而不只是一个边界很窄的嵌入式实习任务。这是我对责任范围的回看，不是给自己补一个并不存在的职位。
+
+## BaseUnit Made the Larger Controller Feel Possible / BaseUnit 先让我相信更大的控制器能跑起来
+
+I built the simpler BaseUnit first. It still had enough moving parts to be a complete controller. Two temperature and humidity sensors, presence detection, a fan, an OLED, buttons, Bluetooth, and Flash persistence all had to share one state machine. When that system worked on hardware, the ACUnit stopped looking like one enormous leap and became the next, more complicated control problem.
+
+我先做了相对简单的 BaseUnit。它虽然职责少一些，却已经是一套完整控制器。两路温湿度、在位检测、风扇、OLED、按键、蓝牙和 Flash 参数保存要在同一个状态机里配合。等这套系统真的在硬件上跑起来，ACUnit 就不再像一次跨度过大的冒险，而是下一个更复杂的控制问题。
+
+The [BaseUnit note](/notes/juanyun-baseunit-firmware) follows that first state and data loop. Its success also shaped the order of the project. I did not begin with the compressor algorithm and hope the user-facing half would catch up later. I first made one complete control system behave coherently, then carried that confidence into the external unit.
+
+[BaseUnit 固件笔记](/notes/juanyun-baseunit-firmware)沿着第一套状态与数据循环展开。这次成功也决定了项目顺序。我没有先冲进压缩机算法，再期待用户交互那一半以后自己跟上来，而是先让一套完整控制系统稳定协作，再把这份把握带到外机。
+
+## Three Boards Put the Firmware Plan Under Pressure / 三块板把固件规划真正压到了实处
+
+The ACUnit had many more interfaces, but I did not want the firmware to become a long loop of whichever peripheral happened to be added next. Before coding, I planned the App, Service, and BSP boundaries and estimated the work that belonged at 1, 10, 100, 500, and 2000 ms. The details matured while functions were decomposed. The scheduling idea and layer responsibilities were there first.
+
+ACUnit 的接口一下多了很多，但我不想让固件变成一条按外设加入顺序不断续写的长循环。写代码之前，我已经规划好 App、Service、BSP 的边界，也预估了 1、10、100、500、2000 ms 各档任务该承担什么。功能往下拆时，细节当然还在继续完善，但调度思路和分层职责不是写乱以后才补的。
+
+That choice was partly practical and partly personal. The STM32F103 had limited resources. I understood RTOS concepts but had never used one and was not yet comfortable with it. The peripheral count was high, while the concurrency could still be expressed through a cooperative schedule and explicit state machines. I also wanted this project to test whether my bare-metal fundamentals were real. Timing, deadlines, and nonblocking progress were not chores around the project. They were the exam.
+
+这个选择一半来自项目约束，一半来自我自己的目的。STM32F103 性能有限，我理解 RTOS 的一些概念和原理，却没有真正用过，也谈不上熟练。外设很多，但并发复杂度仍能用协作式调度和明确状态机控制。我也想拿这个项目检验自己的裸机基本功到底扎不扎实。时序、deadline 和非阻塞推进不是项目旁边的杂活，它们就是这场考试。
+
+The [three-board bring-up note](/notes/juanyun-acunit-board) stays with the physical controller and measured rails. The [bare-metal firmware note](/notes/juanyun-acunit-firmware) explains how the multi-rate loop protected fast EEV work from slower sensing and communication. The later [automatic-control note](/notes/juanyun-acunit-automatic-control) follows the move from manual actuation to board-side EEV and compressor control.
+
+[三板 bring-up 笔记](/notes/juanyun-acunit-board)保留实体控制器和电源实测，[裸机固件笔记](/notes/juanyun-acunit-firmware)解释多速率循环怎样避免慢传感与通信拖住 EEV 快任务，后续的[自动控制笔记](/notes/juanyun-acunit-automatic-control)再沿着手动执行走到板端 EEV 与压缩机控制。
+
+![Populated V2.1 main board / 完成装配的 V2.1 主控板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-main-board-assembled.jpg)
+![Populated V2.1 power board / 完成装配的 V2.1 分电板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-power-board-assembled.jpg)
+![Populated V2.1 interaction board / 完成装配的 V2.1 交互板](/uploads/projects/juanyun-public/acunit-v21-bringup/acunit-v21-interaction-board-assembled.jpg)
+
+## The Company Test Team Went Beyond My Bench / 公司测试走得比我的工作台更远
+
+My direct validation covered the three boards' electrical behavior, each peripheral in isolation, and the complete connection among the boards, compressor driver, compressor, power supply, and PC. The later automatic modes and protection tests were performed by the company rather than by me.
+
+我亲自验证的范围包括三块板的电气行为、每一路外设的独立测试，以及三块板、压缩机驱动板、压缩机、电源与电脑全部连接后的完整链路。更后面的自动模式和保护测试由公司完成，不是我亲手跑的。
+
+According to results relayed by the boss and test team, the ControlPanel received real temperature, pressure, speed, and current telemetry. They reported operating the fans, EEV, and compressor manually, running QUIET, PERF, and ZERO on the refrigeration system, observing EEV superheat control and continuous compressor-speed changes, and triggering low or negative superheat and high condensing-pressure protection paths.
+
+按照老板和测试团队转述的结果，ControlPanel 收到过真实温度、压力、转速和电流遥测。他们反馈在制冷系统上手动控制过风扇、EEV 与压缩机，也运行过 QUIET、PERF、ZERO，观察到 EEV 过热度控制与压缩机连续调速产生变化，并触发过低过热度、负过热度和高冷凝压力保护。
+
+The company also described a small external trial involving more than ten campus students and faculty who used sustained workloads such as large renders and AAA games. The relayed estimate was roughly 25–40% more performance in some of those workloads, and the company reported one unit running continuously for more than 150 hours. I did not witness the full tests or receive the raw logs, unified benchmark records, or complete operating history, so I cannot independently verify those figures. They are company-reported trial results, not measurements I made.
+
+公司还提到一轮十余人的小规模外部试用，参与者主要是校园里会跑大型渲染、3A 游戏等持续重负载的师生。转述给我的说法是，部分负载下性能提升约为 25–40%，另有单台设备连续运行超过 150 小时。我没有亲眼看过完整测试，也没有拿到原始日志、统一 benchmark 记录和完整运行历史，因此无法独立验证这些数字。它们是公司反馈的试用结果，不是我的实测。
+
+The cooling effect was reported as strong, while the footprint and poor portability kept coming back as practical objections. The system did not reach mass production, and the later firmware still marked final long-term calibration as unfinished. The [ControlPanel and maintenance note](/notes/juanyun-production-line-control-panel) keeps those later engineering changes separate from the stronger claims that the available records cannot support.
+
+制冷效果得到的反馈很好，但占地和便携性不足也一直是很现实的问题。产品没有量产，后期固件同样明确保留了长期标定尚未完成的边界。[ControlPanel 与维护阶段笔记](/notes/juanyun-production-line-control-panel)只复盘后期工程变化，不把现有记录推不到的结论硬写上去。
+
+## The Board Came Alive on the PC / 电脑上出现数据时，板子活了
+
+The moment that settled the project for me was smaller than a performance figure. All three ACUnit boards, the compressor driver, compressor, power supply, and PC were connected. The ControlPanel began showing Modbus compressor state and data together with ADC temperatures. Every board and interface that had previously been checked alone was now part of one visible machine.
+
+真正把这个项目钉住的瞬间，反而不是某个性能数字。三块 ACUnit 板、压缩机驱动板、压缩机、电源和电脑全部接到一起，ControlPanel 上开始出现 Modbus 传来的压缩机状态与数据，旁边还有 ADC 采回来的温度。此前一块块板、一条条接口单独验证的东西，终于同时属于一台看得见的机器。
+
+That felt extremely good. The board was alive.
+
+这种感觉太爽了。板子活了。
+
+My boss later joked that before I joined, opening an EEV could involve moving a magnet around it by hand, while the system I delivered moved the team from that manual stage into electrical control. The joke was generous, but I understood why the team enjoyed it. A startup may not offer the most comfortable conditions, yet it can compress an unusual amount of growth into a short time. I am grateful that they trusted an undergraduate with a real zero-to-one embedded product, and grateful that the hardware, firmware, and people all met at the end of the same chain.
+
+老板后来开玩笑说，我来之前他们想打开 EEV，还要拿着磁铁围着阀一点点吸着转；我交付这套系统以后，团队像是从手动阶段直接跨进了电气控制。这个玩笑当然很照顾我，但我也明白大家为什么会觉得开心。初创公司的条件未必最舒服，却能把很密集的成长压进一段不算长的时间。我很感谢他们愿意把一套真实的从零到一嵌入式产品交给一个本科生，也很感谢硬件、固件和团队最后在同一条链上碰到了一起。

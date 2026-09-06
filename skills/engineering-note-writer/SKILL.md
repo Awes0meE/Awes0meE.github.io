@@ -10,8 +10,9 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 ## Non-Negotiables
 
 - Treat `references/evidence-and-boundaries.md` as the authority for factual, authorship, uncertainty, and publication claims; style never overrides it.
+- Keep that fact check internal. Project and note prose must not narrate an evidence audit, list missing verification, or repeatedly explain what cannot be claimed. Select accurate actions and outcomes, and use natural attribution when needed. Removing audit commentary is allowed; do not turn its omission into a stronger result. See `references/evidence-and-boundaries.md`.
 - Preserve Li Zhiyi's identity and keep the user-confirmed emotional intensity unchanged. Neither flatten nor amplify it. Borrow editing mechanics, never another writer's persona, vocabulary, audience relationship, or signature performance.
-- Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
+- Select concrete work, symptoms, decisions, and results that serve the requested article. Keep the selected facts accurate; the old draft is not a checklist of information that must survive.
 - Match the Chinese and English substance on public bilingual pages.
 - Give project homepages and learning notes distinct jobs under `references/project-note-division.md`: the homepage tells the user's project journey and actions; each note explores a bounded question from that work. Do not retell the same complete experience or reasoning across pages.
 - Require the independent Chinese sentence gate in `references/chinese-sentence-gate.md` after Chinese editorial refinement and before English adaptation at Step 10, then recheck the final Chinese at Step 12. Its six error categories apply only to Chinese; English retains the existing adaptation and review rules.
@@ -68,11 +69,13 @@ After confirmation and before composition, follow `references/research-expansion
 
 Separate supported action, artifact evidence, inference, unknowns, and public constraints. Resolve artifact and public facts yourself. If only personal knowledge can resolve a claim-changing gap, ask one focused question within the shared-understanding scope. Once the gate is passed, keep unresolved claims provisional rather than filling gaps.
 
+This is an internal working step, not a required passage in the article. Write the work itself. Omit an unsupported claim rather than following a broad claim with a defensive disclaimer. Do not export a checklist of unperformed tests into the homepage or note.
+
 ### 5. Sketch An Internal Cognition Trail
 
 Sketch how attention and understanding moved: a noticed detail, the real question it raised, an attention jump, new knowledge, a changed interpretation, or a later synthesis. This is an internal aid, not an outline. None of these move types is mandatory, and the trail may branch, revisit an earlier point, recombine ideas, or leave a question unresolved. Do not assign fixed slots, required transitions, or a named note archetype.
 
-First allocate the detailed accounts using `references/project-note-division.md`. The homepage owns the project progression; a note's cognition trail serves its chosen investigation. Other pages retain necessary short context and links. Preserve unique claims and respect protected sibling pages when narrowing a rewrite.
+First allocate the detailed accounts using `references/project-note-division.md`. The homepage owns the project progression; a note's cognition trail serves its chosen investigation. Other pages retain necessary short context and links. Select details for that page’s purpose and respect protected sibling pages when narrowing a rewrite.
 
 ### 6. Compose Through Attention
 
@@ -82,7 +85,7 @@ Prefer a short, natural spoken bridge when a transition needs help. Keep the lea
 
 ### 7. Draft Chinese With Controlled Energy
 
-Begin Pass A of the three-pass protocol in `references/bilingual-writing.md`: compose Chinese from the brief, evidence, and cognition route. Complete Steps 8 and 9 and pass the Chinese sentence gate at the entrance to Step 10 before deriving English; the existing L1-5 calque and pair-divergence check follows English. On a rewrite, re-derive each preserved passage from its locked claims; the old page surface is a claim source, not a skeleton.
+Begin Pass A of the three-pass protocol in `references/bilingual-writing.md`: compose Chinese from the brief, evidence, and cognition route. Complete Steps 8 and 9 and pass the Chinese sentence gate at the entrance to Step 10 before deriving English; the existing L1-5 calque and pair-divergence check follows English. On a rewrite, compose from the confirmed brief and selected facts; the old page is source material, not a required content inventory or sentence skeleton.
 
 Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Use the user-approved phrase palette in `references/voice-rules.md` naturally. Do not copy another writer's audience calls, public-account persona, or fixed performance patterns.
 
@@ -96,7 +99,7 @@ Add a section heading only when the reader benefits from a new work or study blo
 
 ### 9. Run One Voice-Preserving Editorial Pass
 
-Follow `references/editorial-fusion.md`. Consolidate unnecessary fragments, remove repeated model-visible organization, and check claims and voice anchors before and after editing. The cognition stage may rebuild the full route; this final pass must not run several competing full-style rewrites or replace Li Zhiyi with another persona.
+Follow `references/editorial-fusion.md`. Consolidate unnecessary fragments, remove repeated model-visible organization, and read for clear meaning and the user’s voice. The cognition stage may rebuild the full route; this final pass must not run several competing full-style rewrites or replace Li Zhiyi with another persona.
 
 ### 10. Adapt English Without Changing Emotional Intensity
 
@@ -108,23 +111,27 @@ Keep the same facts, attention jumps, researched explanations, later synthesis, 
 
 Apply the reader-prose hard gates to the English article body as well as the Chinese body. Preserve excluded technical syntax and verbatim evidence exactly.
 
-After English adaptation, repeat the claim and voice-anchor conservation check from `references/editorial-fusion.md`. English may change sentence and paragraph boundaries; do not let this check trigger a second cognition-route rewrite.
+English may change sentence and paragraph boundaries while expressing the selected Chinese account. Do not run an old-draft information-retention check or restore deleted material.
 
-### 11. Stop Where The Cognition Resolves
+### 11. Bring The Account To A Natural Close
 
-End where the writer's current understanding reaches its last useful verification, remaining question, new connection, concrete observation, or quiet callback. Do not add a retrospective, evidence list, future-work section, or philosophical elevation merely to complete a pattern.
+A closing paragraph is normal for project pages and learning notes. Give the reader a sense that this account has finished: return to the original task, say where the work led, or finish with a concrete understanding, reaction, or remaining question supported by the account. A project homepage should bring the whole experience to a close; a note should close its selected investigation.
+
+After deleting audit commentary, check whether the page now stops abruptly at a number, file list, or isolated technical fact. If it does, write the missing connection and natural close. Do not confuse avoiding forced elevation with omitting the ending. When the existing last paragraph already closes the account, keep it; no extra heading, fixed ending formula, recap of every section, or new achievement is required.
 
 ### 12. Run The Release Gates
 
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
-Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 6. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
+Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 5. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
 
 For model-authored project and note body, the reader-prose gate, including L1-5 syntax and collocation, must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
 
 Re-run the independent Chinese sentence gate on the final Chinese, including later changes to the ending or wording. The earlier pass is not a waiver. If a repair affects a bilingual pair, align the English meaning and rerun the existing English and bilingual checks; the six-category gate itself remains Chinese-only. Recheck any Chinese changed during release review before declaring it ready.
 
 Use `Li Zhiyi or compliance report?` as the operational release decision for first-person learning-note prose. A requested factual summary, caption, audit, or review may remain neutral when that matches the requested form.
+
+For both project homepages and learning notes, remove evidence-inventory commentary such as `现有证据只能说明……`, `不能据此声称……`, and `这还不能证明……`, including rephrased English equivalents. Check the function, not just those strings. The editorial-conservation / information-retention gate has been removed at the user’s request. Do not recreate it under another name or make English adaptation restore deleted material. Truth review checks the accuracy of the account that remains.
 
 ## Output
 
