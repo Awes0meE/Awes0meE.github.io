@@ -37,12 +37,14 @@ Source:
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
   - `skills/engineering-note-writer/references/editorial-fusion.md`
+  - `skills/engineering-note-writer/references/chinese-sentence-gate.md`
   - `skills/engineering-note-writer/references/reader-prose-hard-gates.md`
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
   - `skills/engineering-note-writer/references/style-examples.md`
 - direct-prose regression fixture:
   - `skills/engineering-note-writer/tests/direct-prose-regression.md`
+  - `skills/engineering-note-writer/tests/chinese-sentence-regression.md`
 
 Purpose:
 
@@ -52,8 +54,11 @@ Purpose:
 - Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.
 - Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.
 - Use the fixed bilingual sequence: compose Chinese from the confirmed brief,
-  evidence, and cognition route; derive English from the Chinese; then run the
-  L1-5 calque and pair-divergence check. A rewrite re-derives surface grammar
+  evidence, and cognition route; finish Chinese refinement and pass the independent
+  Chinese sentence gate at the entrance to Step 10; derive English from the Chinese;
+  then run the existing L1-5 calque and pair-divergence check. Recheck final Chinese
+  at Step 12. The six sentence-error categories apply only to Chinese; English
+  retains its existing adaptation and review rules. A rewrite re-derives surface grammar
   from locked claims instead of preserving an old sentence skeleton.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1-1 through L1-5 gates; L1-5 rejects even one unqualified syntax/collocation calque or one-to-one narrative clause mirror. Keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Use direct assertions and normal sentence syntax in scoped normal narration, with inline code for exact technical tokens. Keep model-authored em dashes off by default; allow semantic colons and grounded quotations, while rejecting template-label colons, decorative quotation, dense repetition, and correctly scoped article-local bans. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.

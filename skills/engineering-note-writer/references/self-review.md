@@ -1,6 +1,6 @@
 # Self Review
 
-Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose and editorial-conservation gates where they apply. Every applicable gate must pass before calling the draft ready.
+Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose, editorial-conservation, and Chinese sentence gates where they apply. Every applicable gate must pass before calling the draft ready.
 
 ## Gate 1: Truth
 
@@ -55,6 +55,12 @@ Use `editorial-fusion.md` to compare the approved source and finished draft.
 
 An unsupported addition, lost claim, changed actor, flattened voice anchor, or imported persona blocks release. Restore the protected material instead of adding a disclaimer.
 
+## Gate 5: Chinese Sentences
+
+Re-run `chinese-sentence-gate.md` on the complete final Chinese at Step 12, even if it passed before English adaptation at Step 10. Review all six categories: 语序不当, 搭配不当, 成分残缺或赘余, 结构混乱, 表意不明, and 不合逻辑. Its article-prose scope and exclusions follow Reader-Prose L1, restricted to Chinese.
+
+Every established fault must be repaired while preserving facts, uncertainty, and confirmed voice. A stylistic preference alone is not a fault. Recheck any Chinese changed during release review. If a repair affects a bilingual pair, align its English through the existing English and bilingual checks. The six-category gate is not applicable to English; the existing English rules are unchanged.
+
 ## Supporting Check: Cognition-Led Flow
 
 - Does the opening stand on a concrete artifact, action, symptom, or question?
@@ -95,6 +101,7 @@ Truth gate:
 Li Zhiyi gate:
 Reader-prose L1 gate:
 Editorial-conservation gate:
+Chinese sentence gate (Chinese only; not applicable for English-only work):
 Cognition-flow or humor issue:
 Bilingual mismatch:
 Recommended revision:

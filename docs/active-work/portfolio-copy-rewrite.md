@@ -19,8 +19,11 @@
 - Draft Chinese through the user's cognition trail with the repository-local
   `skills/engineering-note-writer/SKILL.md`, then adapt English with equivalent
   facts and uncertainty.
-- Compose Chinese from the confirmed brief and evidence, derive English from
-  the Chinese, then run the L1-5 calque and pair-divergence check.
+- Compose Chinese from the confirmed brief and evidence, finish Chinese
+  refinement, and pass the independent Chinese sentence gate before English
+  at Step 10. Derive English from the Chinese, then run the existing L1-5
+  calque and pair-divergence check. Recheck final Chinese at Step 12; the
+  six-category gate is Chinese-only and leaves existing English rules unchanged.
 - Require the Truth gate, Li Zhiyi gate, bilingual gate, editorial-conservation
   gate, and scoped reader-prose L1-1 through L1-5 gates before review.
 - Preserve user-controlled covers and demonstration media unless the user

@@ -13,6 +13,7 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Preserve Li Zhiyi's identity and keep the user-confirmed emotional intensity unchanged. Neither flatten nor amplify it. Borrow editing mechanics, never another writer's persona, vocabulary, audience relationship, or signature performance.
 - Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
 - Match the Chinese and English substance on public bilingual pages.
+- Require the independent Chinese sentence gate in `references/chinese-sentence-gate.md` after Chinese editorial refinement and before English adaptation at Step 10, then recheck the final Chinese at Step 12. Its six error categories apply only to Chinese; English retains the existing adaptation and review rules.
 - Require model-authored reader-facing project and note body to pass the scoped reader-prose gates in `references/reader-prose-hard-gates.md`, including the L1-5 syntax and collocation layer. Prohibited patterns, note-specific bans, and L1-5 calque patterns must reach zero hits; semantically necessary colons and grounded quotations are not violations.
 - Compose Chinese as Chinese, not rendered English. Each bilingual pair keeps semantic equality; the Chinese is derived from the content, and one-to-one structural mirroring of the English is a release blocker.
 - Prefer direct assertions over bare negative-first binary reframes; preserve ordinary factual negation and the confirmed `不是说……不行，而是说……` qualifier when it protects real nuance.
@@ -33,6 +34,7 @@ Use these bundled references:
 - Read `references/cognition-led-composition.md` before arranging a multi-section note or replacing a rigid draft.
 - Read `references/voice-rules.md` before drafting or humanizing Chinese prose.
 - Read `references/editorial-fusion.md` before the final Chinese editing pass for a substantial draft or rewrite.
+- Read `references/chinese-sentence-gate.md` after Chinese editorial refinement, before beginning English at Step 10, and again for the Step 12 Chinese recheck.
 - Read `references/reader-prose-hard-gates.md` before drafting project or note body and before final release review.
 - Read `references/bilingual-writing.md` before producing English or bilingual MDX.
 - Read `references/style-examples.md` when calibrating voice or repairing template-like prose.
@@ -72,7 +74,7 @@ Prefer a short, natural spoken bridge when a transition needs help. Keep the lea
 
 ### 7. Draft Chinese With Controlled Energy
 
-Run the three-pass bilingual protocol from `references/bilingual-writing.md` in this order: Chinese composed from the brief, evidence, and cognition route first; English derived from the Chinese second; the L1-5 calque and pair-divergence check third. On a rewrite, re-derive each preserved passage from its locked claims; the old page surface is a claim source, not a skeleton.
+Begin Pass A of the three-pass protocol in `references/bilingual-writing.md`: compose Chinese from the brief, evidence, and cognition route. Complete Steps 8 and 9 and pass the Chinese sentence gate at the entrance to Step 10 before deriving English; the existing L1-5 calque and pair-divergence check follows English. On a rewrite, re-derive each preserved passage from its locked claims; the old page surface is a claim source, not a skeleton.
 
 Treat the requested 75% Khazix influence as relative calibration, not a quota. Use concrete entry points, varied rhythm, supported emotion, light self-mockery, and humor found in real engineering friction. Use the user-approved phrase palette in `references/voice-rules.md` naturally. Do not copy another writer's audience calls, public-account persona, or fixed performance patterns.
 
@@ -89,6 +91,8 @@ Add a section heading only when the reader benefits from a new work or study blo
 Follow `references/editorial-fusion.md`. Consolidate unnecessary fragments, remove repeated model-visible organization, and check claims and voice anchors before and after editing. The cognition stage may rebuild the full route; this final pass must not run several competing full-style rewrites or replace Li Zhiyi with another persona.
 
 ### 10. Adapt English Without Changing Emotional Intensity
+
+Before starting English, run the independent Chinese sentence gate in `references/chinese-sentence-gate.md` on the refined Chinese. Check all six categories in context: 语序不当, 搭配不当, 成分残缺或赘余, 结构混乱, 表意不明, and 不合逻辑. Repair every established violation without inventing facts or changing the confirmed voice; unresolved meaning cannot be guessed by the translator. English adaptation starts only after the Chinese passes. For Chinese-only writing, run this gate after Step 9 and skip English adaptation; do not apply the six categories to English-only work.
 
 After the English pass, run Pass C from `references/bilingual-writing.md`: L1-5 on both bodies and the per-pair structural-divergence check, repairing narrative sentences that mirror one-to-one.
 
@@ -107,6 +111,8 @@ End where the writer's current understanding reaches its last useful verificatio
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
 For model-authored project and note body, the reader-prose gate, including L1-5 syntax and collocation, must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
+
+Re-run the independent Chinese sentence gate on the final Chinese, including later changes to the ending or wording. The earlier pass is not a waiver. If a repair affects a bilingual pair, align the English meaning and rerun the existing English and bilingual checks; the six-category gate itself remains Chinese-only. Recheck any Chinese changed during release review before declaring it ready.
 
 Use `Li Zhiyi or compliance report?` as the operational release decision for first-person learning-note prose. A requested factual summary, caption, audit, or review may remain neutral when that matches the requested form.
 

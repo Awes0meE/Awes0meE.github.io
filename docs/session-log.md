@@ -731,3 +731,27 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   `https://www.66ccff-labs.com/`; `.nojekyll` disables Jekyll, and
   `vercel.json` disables Vercel builds for this redirect-only branch.
   Retain this operational branch during topic-branch cleanup.
+
+## 2026-09-06 — Chinese sentence gate for the engineering writer
+
+- Authorization: the user approved a separate six-category Chinese sentence
+  gate after Chinese refinement and before English at Step 10, with a final
+  Chinese recheck at Step 12. Existing English adaptation and review rules
+  remain unchanged.
+- Scope: added a self-contained reference based on the supplied
+  `病句六大类型.doc`, routed it through the main workflow and final review, and
+  synchronized current project guidance. The supplied document remains an
+  external reference rather than a copied artifact or runtime dependency.
+- Regression: added 20 qualitative cases covering all six categories, the
+  reported PCB sentence, valid Chinese constructions, both gate locations,
+  preserved claims and emotion, and English-only exclusions. Primary-agent
+  manual semantic review found the cases consistent with the intended rule;
+  this was not a fresh independent-model trial or automatic grammar benchmark.
+- Verification: the skill validator, reference-path checks, new-file UTF-8
+  checks, and diff checks passed. Lint, content and encoding validation,
+  TypeScript, and the 39-page webpack baseline build passed. The skill-only
+  edits do not change application code or the built content.
+- Handoff: changes are on `feat/chinese-sentence-gate`, based on synchronized
+  `main` at `845c5ea`. This maintenance does not rewrite published articles,
+  alter frozen trial outputs, or claim a push, merge, or deployment. The 19
+  unrelated untracked duplicates remain untouched.
