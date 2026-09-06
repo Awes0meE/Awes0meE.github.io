@@ -820,6 +820,6 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   production dependency audit reported 0 vulnerabilities. Checked the local
   production page in English and Chinese, including the replacement layout
   sentence, original assets and cold-start note link. Audit links cover all
-  8 project files and 24 note files. The release PR is authoritative for
+  8 project files and 24 note files. [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35) is authoritative for
   merge/deployment state; merged topic branches may be deleted, while
   operational `gh-pages` remains required.

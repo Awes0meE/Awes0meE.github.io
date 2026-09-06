@@ -3,7 +3,7 @@
 **Updated:** 2026-09-06
 **Current project:** Claude Chime approved refinement applied; cross-project overlap audit complete
 **Last completed authoring scope:** `Claude Chime Power Board` / `Claude Chime 电源板`
-**Publication record:** The release pull request from `docs/refine-claude-chime-copy` records integration and deployment; PR #34 covers the preceding copy.
+**Publication record:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), from `docs/refine-claude-chime-copy` into `main`, records integration and deployment; PR #34 covers the preceding copy.
 **State:** On 2026-09-06 the user approved the full bilingual candidate, authorized publication and branch/workspace cleanup, and requested an all-project overlap audit. The approved `01-after.mdx` was applied byte-for-byte to the project page, with SHA-256 `a2698f058b8171ac1c5bcca35bec8cb9e5e8e81677dbc79bc0cb5f3188ea0ffa`. Runtime `a1253dc` adds the Chinese-only sentence gate. The overlap audit covers 8 projects and 24 public notes; its proposed rewrites have not been applied.
 
 ## Working Contract
