@@ -909,3 +909,12 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - Current local inventory: 8 projects, 25 note sources, 9 public notes, 16 private sources and 84 media. Both note contents are approved. Preview uses `http://127.0.0.1:8768/preview.html`, with the first preview retained at port 8767. Both remain local/private; no note push, PR or deployment occurred.
 
 - Same-session review: the user read the second note and explicitly confirmed no issues. Both local previews now show approved status; content approval is recorded for both, with private visibility retained pending publication work.
+
+## 2026-09-06 — Draft both counter learning notes
+
+- The user explicitly requested both proposed counter notes be written for review. Created `docs/rewrite-counter-learning-notes` from the approved local car checkpoint `6828f59`, retaining the previous branch.
+- Replaced the private counter note body with **共阳数码管与 BCD 译码 / Common-Anode Displays and BCD Decoding** and added private **自锁按键与计数控制 / Latching Switches and Counter Control**. The old body is preserved byte-for-byte in `docs/experiments/arduino-counter-notes-2026-09-06/before.mdx`.
+- The first note investigates decimal splitting, ABCD order, active-low sink outputs, per-segment current and display controls. The second studies contact mapping, input bias, debouncing, state changes, elapsed-time counting, resume timing and reset priority. Proposed control rules and numerical examples are present investigation, not claims about missing final firmware or unperformed measurements. Homepage episodes and both approved car notes remain unchanged.
+- Both Chinese drafts passed editorial refinement and six-category Step 10 review before English. Final Truth, voice, L1, Chinese Step 12, bilingual and cross-page reviews passed. Local links, source hashes and arithmetic checks passed. Lint/content/encoding, typecheck and a 24-page webpack build passed; the local source count is 26, with nine public and seventeen private notes.
+- The combined preview at `http://127.0.0.1:8769/preview.html` passed eight article/language/viewport checks, section navigation, footer article switching and a direct English entry. Desktop/mobile imagery loaded and neither viewport overflowed horizontally. The review packet contains the drafts, original recovery copy and verification results.
+- Status: both counter notes await user review. No public-visibility restoration, push, PR or deployment occurred. The two car notes remain approved at ports 8767/8768.

@@ -1,0 +1,262 @@
+{
+  "date": "2026-09-06",
+  "state": "both bilingual counter drafts complete; awaiting user review",
+  "preview": "http://127.0.0.1:8769/preview.html",
+  "method": "Manual editorial and bilingual review by the current writer; no independent semantic reviewer or agent",
+  "notes": {
+    "display": {
+      "paragraphPairs": 13,
+      "headings": 4,
+      "figures": 1,
+      "codeBlocks": 1,
+      "source": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "sourceSha256": "d21d6a85780b1ac22501c6bd16d4449d7d89e41aa5aa7ac2c1ec26fcdb53eff8",
+      "chineseFinalSha256": "485cdc161e64eef32cfd07cff34ad41cc5b7496c7d3350eb791b4b218d295b87",
+      "englishFinalSha256": "10b94470a1ec1919bd94778f5faa4e35c0ab10cb67a1b19cc6cec5cc0674cbd0",
+      "truth": "pass; actual project identifiers retained, researched knowledge and proposed choices described as present study",
+      "voice": "pass; follows a specific question through reading, interpretation and a concrete closing understanding",
+      "readerProseL1": "pass; zero applicable violations in titles and bodies",
+      "chineseStep12": {
+        "categories": [
+          "语序不当",
+          "搭配不当",
+          "成分残缺或赘余",
+          "结构混乱",
+          "表意不明",
+          "不合逻辑"
+        ],
+        "result": "pass",
+        "establishedViolationsRemaining": 0
+      },
+      "english": "pass under existing English adaptation rules; Chinese six-category gate is not applied to English",
+      "bilingual": "pass; narrative syntax reviewed independently, technical order preserved where required",
+      "crossPageDivision": "pass; homepage retains historical events, sibling note develops its separate selected question",
+      "naturalClose": "pass; display ends on locating faults along the mapping and current path; switch note ends on contact, state, event and scheduling distinctions"
+    },
+    "switch": {
+      "paragraphPairs": 15,
+      "headings": 4,
+      "figures": 1,
+      "codeBlocks": 0,
+      "source": "content/notes/arduino-counter-latching-switch-control.mdx",
+      "sourceSha256": "9a7287a0c375ce3ebc94b90851ab9d8805698b92a161817aa152bef33fb48a94",
+      "chineseFinalSha256": "c7a623dc2e35a15bd4a404f4c2a53b7bd72cb461295e0bdba863f583cfbf84db",
+      "englishFinalSha256": "b6592c2507c6f1fc744ee655460a12f6287bc531d6ddca36031e360fffbe49d5",
+      "truth": "pass; actual project identifiers retained, researched knowledge and proposed choices described as present study",
+      "voice": "pass; follows a specific question through reading, interpretation and a concrete closing understanding",
+      "readerProseL1": "pass; zero applicable violations in titles and bodies",
+      "chineseStep12": {
+        "categories": [
+          "语序不当",
+          "搭配不当",
+          "成分残缺或赘余",
+          "结构混乱",
+          "表意不明",
+          "不合逻辑"
+        ],
+        "result": "pass",
+        "establishedViolationsRemaining": 0
+      },
+      "english": "pass under existing English adaptation rules; Chinese six-category gate is not applied to English",
+      "bilingual": "pass; narrative syntax reviewed independently, technical order preserved where required",
+      "crossPageDivision": "pass; homepage retains historical events, sibling note develops its separate selected question",
+      "naturalClose": "pass; display ends on locating faults along the mapping and current path; switch note ends on contact, state, event and scheduling distinctions"
+    }
+  },
+  "sourceChecks": {
+    "notes": {
+      "display": {
+        "lexicalHits": [],
+        "localLinksValid": 7,
+        "finalChineseMatchesStep10": true
+      },
+      "switch": {
+        "lexicalHits": [],
+        "localLinksValid": 3,
+        "finalChineseMatchesStep10": true
+      }
+    },
+    "workedExamples": "pass: digit split and bit order, 540 ohms and 4.82mA, 0.5mA pull-up current, 7+20ms stability timing",
+    "originalPreserved": "c167c5d9a43142522be50aac29127652a546f26aea74544f149a086cb51e5ce8",
+    "protectedSources": {
+      "content/projects/arduino-digital-clock-counter.mdx": "3b208ad78464792aa480fbc6bd12bb240a694330972e1d5a8680209cfb729f4c",
+      "content/notes/arduino-smart-car-line-tracking-learning-note.mdx": "e877ed0f7d99206d3451d55ae3c36ea0396196bfe5f3a3d27622f315b0d7bc02",
+      "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx": "a33594f94a4efd6e2bcddc62831c0bda508bdc23dfb992cc5e86d20d8b66b4e1"
+    },
+    "publicNoteCount": 9,
+    "totalNoteSources": 26
+  },
+  "browser": {
+    "views": [
+      {
+        "width": 1440,
+        "note": "display",
+        "language": "zh",
+        "title": "共阳数码管与 BCD 译码",
+        "lang": "zh-CN",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "回到最初的 17，我现在会分别想到十位和个位的 BCD、被选中的段，以及经过每只 LED 的电流。若某一段始终不亮，可以沿那条支路找；若整位稳定显示成另一个数，就先对照输入位序和译码条件。一个小小的显示结果，终于能和具体引脚、具体电流对应起来了。以后再碰到数码管，我也更知道该从哪里开始看。",
+        "query": "?note=display&lang=zh"
+      },
+      {
+        "width": 1440,
+        "note": "display",
+        "language": "en",
+        "title": "Common-Anode Displays and BCD Decoding",
+        "lang": "en",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "Returning to 17, I now think about the BCD code for each digit, the selected segments, and the current through each LED. A segment that never lights leads me along its individual branch; a whole digit that consistently shows the wrong number sends me first to input order and decoding conditions. The small display now connects to specific pins and currents. I have a much clearer starting point the next time I work with one.",
+        "query": "?note=display&lang=en"
+      },
+      {
+        "width": 1440,
+        "note": "switch",
+        "language": "zh",
+        "title": "自锁按键与计数控制",
+        "lang": "zh-CN",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "现在再看暂停和复位，我脑子里会先分清触点接到了哪里，电平什么时候稳定，以及哪一次变化该触发动作。最后还要给主循环留出及时处理它们的机会。把这些关系安排清楚以后，我才更有把握让开关按预期工作；遇到异常时，也知道该去检查接线、输入变化，还是计数程序。",
+        "query": "?note=switch&lang=zh"
+      },
+      {
+        "width": 1440,
+        "note": "switch",
+        "language": "en",
+        "title": "Latching Switches and Counter Control",
+        "lang": "en",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "last": "I now approach pause and reset by separating the contact connections, the point at which a level becomes stable, and the transition that should trigger an action. The loop also needs time to handle them promptly. With those relationships worked out, I have a better basis for making the switches behave as intended. If they do not, I know to examine the wiring, input changes, or counter program in turn.",
+        "query": "?note=switch&lang=en"
+      },
+      {
+        "width": 390,
+        "note": "display",
+        "language": "zh",
+        "title": "共阳数码管与 BCD 译码",
+        "lang": "zh-CN",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "last": "回到最初的 17，我现在会分别想到十位和个位的 BCD、被选中的段，以及经过每只 LED 的电流。若某一段始终不亮，可以沿那条支路找；若整位稳定显示成另一个数，就先对照输入位序和译码条件。一个小小的显示结果，终于能和具体引脚、具体电流对应起来了。以后再碰到数码管，我也更知道该从哪里开始看。",
+        "query": "?note=display&lang=zh"
+      },
+      {
+        "width": 390,
+        "note": "display",
+        "language": "en",
+        "title": "Common-Anode Displays and BCD Decoding",
+        "lang": "en",
+        "paragraphs": 13,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "last": "Returning to 17, I now think about the BCD code for each digit, the selected segments, and the current through each LED. A segment that never lights leads me along its individual branch; a whole digit that consistently shows the wrong number sends me first to input order and decoding conditions. The small display now connects to specific pins and currents. I have a much clearer starting point the next time I work with one.",
+        "query": "?note=display&lang=en"
+      },
+      {
+        "width": 390,
+        "note": "switch",
+        "language": "zh",
+        "title": "自锁按键与计数控制",
+        "lang": "zh-CN",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "last": "现在再看暂停和复位，我脑子里会先分清触点接到了哪里，电平什么时候稳定，以及哪一次变化该触发动作。最后还要给主循环留出及时处理它们的机会。把这些关系安排清楚以后，我才更有把握让开关按预期工作；遇到异常时，也知道该去检查接线、输入变化，还是计数程序。",
+        "query": "?note=switch&lang=zh"
+      },
+      {
+        "width": 390,
+        "note": "switch",
+        "language": "en",
+        "title": "Latching Switches and Counter Control",
+        "lang": "en",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 0,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "last": "I now approach pause and reset by separating the contact connections, the point at which a level becomes stable, and the transition that should trigger an action. The loop also needs time to handle them promptly. With those relationships worked out, I have a better basis for making the switches behave as intended. If they do not, I know to examine the wiring, input changes, or counter program in turn.",
+        "query": "?note=switch&lang=en"
+      }
+    ],
+    "anchor": {
+      "hash": "#section-4",
+      "top": 24.2109375
+    },
+    "footerNoteSwitch": true,
+    "directEnglishEntry": true
+  },
+  "checks": {
+    "lint": "pass",
+    "content": "8 projects, 26 note sources, 84 media",
+    "encoding": "pass",
+    "typecheck": "pass",
+    "webpackBuild": "pass; 24 rendered pages",
+    "publicNoteCount": 9,
+    "privateNoteCount": 17,
+    "diffCheck": "pass"
+  },
+  "publication": "none; both notes remain private"
+}
