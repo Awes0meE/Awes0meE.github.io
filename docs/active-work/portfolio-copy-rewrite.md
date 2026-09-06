@@ -1,14 +1,26 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-09-06
-**Current project:** Claude Chime approved refinement applied; cross-project overlap audit complete
+**Current work:** Project/note division added to the local writer on `feat/project-note-division`; article rewrites remain pending
 **Last completed authoring scope:** `Claude Chime Power Board` / `Claude Chime 电源板`
 **Publication record:** [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35), from `docs/refine-claude-chime-copy` into `main`, records integration and deployment; PR #34 covers the preceding copy.
 **State:** On 2026-09-06 the user approved the full bilingual candidate, authorized publication and branch/workspace cleanup, and requested an all-project overlap audit. The approved `01-after.mdx` was applied byte-for-byte to the project page, with SHA-256 `a2698f058b8171ac1c5bcca35bec8cb9e5e8e81677dbc79bc0cb5f3188ea0ffa`. Runtime `a1253dc` adds the Chinese-only sentence gate. The overlap audit covers 8 projects and 24 public notes; its proposed rewrites have not been applied.
 
+**Latest decision:** The user adopted the trunk/branch model and requested a
+skill update. The repository-local writer now checks family context at Step 1,
+open topic selection at Step 2, content allocation at Step 5, and cross-page
+division at Step 12. The homepage tells the user's work and project progression;
+each note investigates a bounded question. The update is local, with no new
+publication request. The existing article bodies remain unchanged.
+
 ## Working Contract
 
 - Handle substantive portfolio rewrites one project family at a time.
+- Use `references/project-note-division.md` in the writer. Reuse confirmed note
+  topics or select when delegated; otherwise ask one concise interest question
+  with grounded candidates. Keep necessary short background, but do not replay
+  the same complete experience or reasoning. Separate present investigation
+  from historical curiosity, research, and measurements.
 - Start each new family from a clean, synchronized `main` on a semantic topic
   branch.
 - Inspect the available evidence before drafting. Reuse a user-confirmed brief
@@ -99,12 +111,15 @@ not standing permission to bulk-rewrite approved content.
 
 1. Use the release PR and its linked checks as the publication record for this
    approved revision. Do not recreate a deleted, fully merged source branch.
-2. Read [the project/note overlap audit](project-note-overlap-audit-2026-09-06.md)
-   for all 8 projects and 24 notes. The proposed first experiment narrows the
+2. The local skill update implements the user's division rule. For a later
+   article request, read [the project/note overlap audit](project-note-overlap-audit-2026-09-06.md)
+   for all 8 projects and 24 notes. Its proposed first experiment narrows the
    Claude Chime cold-start note while keeping this approved project page.
 3. Implement only the next user-selected project scope, with Chinese/English
-   review before publication. Page-division checks in the audit are proposals,
-   not new writer rules already installed.
+   review before publication. Page-division checks are now part of the local
+   writer; the audit's particular note topics and rewrites still require the
+   next selected scope. Arduino sensor/driver/supply examples are candidate
+   investigations, not confirmation of device topology or tested voltages.
 4. Preserve `gh-pages`, the GitHub Pages redirect source. The 19 previously
    untracked duplicate-named files have been removed from the checkout only
    after a verified recoverable backup; see the session log for the local path.

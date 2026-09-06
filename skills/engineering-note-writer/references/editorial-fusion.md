@@ -72,6 +72,13 @@ the reader-prose zero-hit list.
 
 ## Lock Claims And Voice Anchors
 
+For an authorized cross-page redistribution, first use
+`project-note-division.md` to establish the content retained on this page and
+where omitted duplicate detail remains available. Conserve that allocation in
+both languages; do not restore every duplicate merely to satisfy a per-page
+inventory. Unique facts and voice anchors remain protected, and changing a
+sibling page still requires that page to be in the authorized scope.
+
 Before and after the editorial pass, compare:
 
 - actions and actors;

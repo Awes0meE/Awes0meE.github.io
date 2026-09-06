@@ -33,6 +33,7 @@ Source:
 - focused references:
   - `skills/engineering-note-writer/references/evidence-and-boundaries.md`
   - `skills/engineering-note-writer/references/shared-understanding.md`
+  - `skills/engineering-note-writer/references/project-note-division.md`
   - `skills/engineering-note-writer/references/research-expansion.md`
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
@@ -42,13 +43,15 @@ Source:
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
   - `skills/engineering-note-writer/references/style-examples.md`
-- direct-prose regression fixture:
+- current qualitative regression fixtures:
   - `skills/engineering-note-writer/tests/direct-prose-regression.md`
   - `skills/engineering-note-writer/tests/chinese-sentence-regression.md`
+  - `skills/engineering-note-writer/tests/project-note-division-regression.md`
 
 Purpose:
 
 - Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and a user-confirmed brief into cognition-led Chinese-first engineering-note prose with accurate English counterparts.
+- Keep the homepage's account of the user's work distinct from learning notes that investigate bounded questions. Inspect the family at Step 1, settle open topics at Step 2, allocate detail at Step 5, and check cross-page division at Step 12. Reuse confirmed topics, respect delegated selection, and never invent past curiosity from present research.
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
 - Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.

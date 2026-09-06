@@ -823,3 +823,34 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   8 project files and 24 note files. [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35) is authoritative for
   merge/deployment state; merged topic branches may be deleted, while
   operational `gh-pages` remains required.
+
+## 2026-09-06 — Project homepage and learning-note division
+
+- Summary: Implemented the user's trunk/branch rule in the repository-local
+  Engineering Note Writer. Homepages tell the user's work and project progression;
+  notes investigate bounded questions arising from the work without replaying
+  complete experiences or reasoning.
+- Workflow: added `references/project-note-division.md`, routed family reading,
+  topic selection, content allocation, and bilingual review through Steps 1, 2,
+  5, and 12, and added Self Review Gate 6. Reuse confirmed topics or choose when
+  delegated; preserve necessary context and local evidence boundaries. New
+  research must not become invented historical curiosity, action, or testing.
+- Compatibility: clarified how authorized deduplication preserves claims at
+  accessible destinations without restoring every duplicate; unique facts and
+  voice anchors remain protected. Existing source documents and narrow edits
+  retain their scope. Chinese sentence checks remain at Steps 10 and 12, and
+  English language rules are unchanged.
+- Knowledge cleanup: reconciled product intent, agent guidance, content workflow,
+  skill index, overlap-audit status, project memory, and the active relay. Article
+  redistribution is still pending; no project, note, media, application, public
+  artifact, or frozen trial output was changed.
+- Verification: skill validation, 16 reference-path checks, lint, content
+  validation (8 projects / 24 notes / 84 media), UTF-8 validation (364 text files),
+  TypeScript, and diff whitespace checks passed. Added and manually reviewed
+  16 qualitative cases covering paraphrased repetition, distinct investigations,
+  premise checking, topic reuse, present versus historical learning, conservation,
+  bilingual parity, protected sources, and narrow-scope exceptions. These are
+  manual policy checks, not fresh independent-model trials. No production build
+  was rerun for this skill/documentation-only change.
+- Git state: work is on local `feat/project-note-division`, based on synchronized
+  `main` at `b43c83b`; no new push, PR, merge, or deployment was requested.

@@ -26,6 +26,13 @@ The portfolio is an evidence-calibrated engineering archive rather than a galler
 
 Visitors enter through the homepage or the project index, then move between project case studies, related learning notes, media, and public technical files. Project pages may expose a two-pane file browser for reviewing selected artifacts without leaving the case study. The global language control switches fixed interface copy and bilingual metadata between Simplified Chinese and English; long-form MDX content may contain explicit language sections.
 
+Project detail pages tell Alvin's work and project progression in his first
+person. Related learning notes branch into bounded questions raised by the work,
+developing principles, investigation, and changing understanding. They add
+technical depth without replaying the same complete experiences or reasoning.
+Brief shared context and relevant evidence boundaries keep each page readable
+on its own; original source-document notes retain their source-preserving role.
+
 The public site is deployed on Vercel and uses `https://www.66ccff-labs.com/` as its production domain. The source repository is also part of the public evidence surface, so material that is private cannot be protected merely by hiding it from site navigation.
 
 Release `v0.9.0` promotes the Kinetic Signal Ledger through an opt-in, route-by-route rollout rather than a site-wide theme switch. The homepage and only the separately approved surfaces recorded in `DESIGN.md` use the Ember Black system. In particular, the `/work` index uses Project Aperture Sequence, the `/notes` index uses Routed Signal Map, `/media` uses Focus Aperture, and `/about` uses Tension Signal Column, while every `/work/[slug]` and `/notes/[slug]` detail page remains on the paper system; unrecorded routes must not be described as redesigned.

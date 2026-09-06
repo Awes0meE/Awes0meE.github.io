@@ -181,8 +181,21 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 
 A dated audit of all 8 project pages and 24 public notes is available in
 [`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-It proposes page responsibilities and focused reductions; those proposals do
-not authorize bulk rewrites or change the current writer workflow.
+Its article-specific rewrite suggestions remain pending. On 2026-09-06 the user
+adopted the trunk/branch writing rule, now implemented in the repository-local
+writer's [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
+
+Project homepages tell what the user did and how the project progressed.
+Learning notes take bounded questions from that work and investigate them in
+the user's learning voice, adding principles, research, and understanding
+without repeating the same complete experience or reasoning. Read the homepage
+and associated notes at Step 1; when topics are open, ask a concise interest
+question with grounded candidates at Step 2, or choose when delegated; allocate
+the detailed accounts at Step 5; recheck the family in both languages at Step 12.
+Reuse confirmed topics and briefs. Preserve enough background for independent
+reading, relevant evidence limits, and original source documents. Later research
+must remain distinct from historical actions. These rules do not authorize
+bulk rewrites of approved pages.
 
 For substantial new project prose, rewrites, or humanization, use the repository-local `engineering-note-writer`, its `references/cognition-led-composition.md`, `references/editorial-fusion.md`, `references/chinese-sentence-gate.md`, and `references/reader-prose-hard-gates.md`. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; compose Chinese from the confirmed brief, evidence, and cognition route; run one voice-preserving editorial pass; pass the independent Chinese sentence gate at the entrance to Step 10; derive English from the Chinese with the same substance and confirmed emotional intensity; run the L1-5 calque and pair-divergence check; then pass the Truth, Li Zhiyi, editorial-conservation, and scoped reader-prose gates, with a full Chinese sentence recheck at Step 12. The six sentence-error categories apply only to Chinese; English retains its existing adaptation and review rules. On a rewrite, preserve claims rather than an old sentence skeleton.
 

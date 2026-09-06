@@ -1,6 +1,6 @@
 # Self Review
 
-Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose, editorial-conservation, and Chinese sentence gates where they apply. Every applicable gate must pass before calling the draft ready.
+Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose, editorial-conservation, Chinese sentence, and cross-page division gates where they apply. Every applicable gate must pass before calling the draft ready.
 
 ## Gate 1: Truth
 
@@ -47,6 +47,11 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 
 Use `editorial-fusion.md` to compare the approved source and finished draft.
 
+For an authorized redistribution, compare against the allocation established
+under `project-note-division.md`. A duplicated passage may be shortened when its
+detail remains available at the recorded destination; unique claims, voice
+anchors, and local evidence boundaries must not disappear.
+
 - Are every retained claim, actor, number, date, version, link, quotation, citation, exact technical token, uncertainty, and publication boundary unchanged in meaning?
 - Are the source-supported cognition changes and cross-subsystem connections still present after paragraph consolidation?
 - Are the confirmed emotional intensity, reaction, humor target, self-correction, and unresolved tension still present without being neutralized or amplified?
@@ -60,6 +65,21 @@ An unsupported addition, lost claim, changed actor, flattened voice anchor, or i
 Re-run `chinese-sentence-gate.md` on the complete final Chinese at Step 12, even if it passed before English adaptation at Step 10. Review all six categories: 语序不当, 搭配不当, 成分残缺或赘余, 结构混乱, 表意不明, and 不合逻辑. Its article-prose scope and exclusions follow Reader-Prose L1, restricted to Chinese.
 
 Every established fault must be repaired while preserving facts, uncertainty, and confirmed voice. A stylistic preference alone is not a fault. Recheck any Chinese changed during release review. If a repair affects a bilingual pair, align its English through the existing English and bilingual checks. The six-category gate is not applicable to English; the existing English rules are unchanged.
+
+## Gate 6: Project/Note Division
+
+For new or substantially rewritten project/note prose, run the Step 12 check
+in `project-note-division.md` against the homepage and all available sibling
+notes in both languages. The homepage must tell the user's work and project
+progression; each learning note must develop its selected question with new
+explanatory value. Rephrasing the same full experience or reasoning still fails.
+
+Keep enough context for standalone reading and preserve nearby evidence
+boundaries. Check note-to-note overlap, linked destinations, bilingual parity,
+and historical versus present learning. On failure, revisit topic and allocation
+within the authorized scope. Report unavailable pages or protected-sibling
+conflicts honestly; do not edit them or claim a complete family pass. Original
+documents and unrelated narrow edits keep the reference's scoped exceptions.
 
 ## Supporting Check: Cognition-Led Flow
 
@@ -102,6 +122,7 @@ Li Zhiyi gate:
 Reader-prose L1 gate:
 Editorial-conservation gate:
 Chinese sentence gate (Chinese only; not applicable for English-only work):
+Project/note division gate (scoped to the requested pages):
 Cognition-flow or humor issue:
 Bilingual mismatch:
 Recommended revision:

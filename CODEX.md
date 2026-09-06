@@ -253,6 +253,15 @@ Maintain the current engineering-academic identity:
 
 ## Writing Direction
 
+Project homepages tell the user's actions and project progression; learning
+notes investigate bounded questions arising from that work. Follow the writer's
+`references/project-note-division.md`: inspect the homepage and linked notes at
+Step 1, settle open note topics at Step 2, allocate detailed accounts at Step 5,
+and check cross-page division in both languages at Step 12. Reuse chosen topics
+or select them when delegated. Keep necessary context and evidence boundaries,
+preserve source documents, and do not reopen protected pages merely to remove
+overlap. Present research does not establish historical curiosity or actions.
+
 Portfolio notes should keep the user's practical learning-log texture: technically rigorous, close to the debugging scene, and comfortable carrying real frustration, amusement, uncertainty, and small human details beside the evidence. When uploaded public `.txt`, `.md`, or self-authored document text is itself the artifact, make it a real note page with the original wording rendered as readable article content instead of hiding it under a project asset frame or compressing it into a short summary.
 
 Use the repo-local `skills/engineering-note-writer/SKILL.md` when turning rough project bullet points, timelines, technical stacks, and evidence into portfolio prose. The canonical sequence is: inspect artifacts; reuse a user-confirmed `grill-me` brief or obtain one; after confirmation, research beyond uploaded material with current reliable web sources; compose Chinese through the user's cognition trail; run one voice-preserving editorial pass; pass the independent Chinese sentence gate at the entrance to Step 10; derive English from the Chinese with the same substance and confirmed emotional intensity; run the L1-5 syntax/collocation and pair-divergence check; then pass the Truth, Li Zhiyi, editorial-conservation, and scoped reader-prose gates, with a full Chinese sentence recheck at Step 12. The six sentence-error categories apply only to Chinese; English retains its existing adaptation and review rules. On a rewrite, preserve locked claims rather than an old sentence skeleton. Let `SKILL.md` own the staged reference order: evidence, cognition, and voice guide composition; editorial fusion follows the Chinese draft; the independent Chinese sentence gate precedes English and is rechecked at release; bilingual guidance governs English; hard gates and self-review control release.

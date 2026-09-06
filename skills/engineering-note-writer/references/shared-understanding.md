@@ -18,6 +18,12 @@ When no confirmed current brief exists:
 
 The brief is a source for the writer's point of view, not an outline. Do not turn its bullets into mandatory sections or preserve its order mechanically.
 
+For a learning-note request, also establish the bounded question under
+`project-note-division.md`. Reuse the confirmed project brief and any already
+chosen topics; topic selection does not require repeating the full interview.
+An agent-proposed research topic is a present investigation, not evidence that
+the user had that curiosity or performed that research during the project.
+
 ## Ask For Personal Knowledge Only
 
 Do not ask the user to inventory files or look up public technical facts. Ask about:

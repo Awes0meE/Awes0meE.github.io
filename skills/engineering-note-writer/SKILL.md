@@ -13,6 +13,7 @@ Write as Li Zhiyi: an engineering learner who can explain what he touched, what 
 - Preserve Li Zhiyi's identity and keep the user-confirmed emotional intensity unchanged. Neither flatten nor amplify it. Borrow editing mechanics, never another writer's persona, vocabulary, audience relationship, or signature performance.
 - Preserve concrete tools, files, symptoms, constraints, measurements, and unfinished parts.
 - Match the Chinese and English substance on public bilingual pages.
+- Give project homepages and learning notes distinct jobs under `references/project-note-division.md`: the homepage tells the user's project journey and actions; each note explores a bounded question from that work. Do not retell the same complete experience or reasoning across pages.
 - Require the independent Chinese sentence gate in `references/chinese-sentence-gate.md` after Chinese editorial refinement and before English adaptation at Step 10, then recheck the final Chinese at Step 12. Its six error categories apply only to Chinese; English retains the existing adaptation and review rules.
 - Require model-authored reader-facing project and note body to pass the scoped reader-prose gates in `references/reader-prose-hard-gates.md`, including the L1-5 syntax and collocation layer. Prohibited patterns, note-specific bans, and L1-5 calque patterns must reach zero hits; semantically necessary colons and grounded quotations are not violations.
 - Compose Chinese as Chinese, not rendered English. Each bilingual pair keeps semantic equality; the Chinese is derived from the content, and one-to-one structural mirroring of the English is a release blocker.
@@ -29,6 +30,7 @@ Before writing for this repository, read the task-relevant parts of `CODEX.md`, 
 Use these bundled references:
 
 - Read `references/shared-understanding.md` before substantive first-person writing for a new project, substantial rewrite, or humanization request.
+- Read `references/project-note-division.md` when inspecting a project/note family, selecting note topics, allocating its content, and running the Step 12 cross-page check.
 - Read `references/research-expansion.md` after the user confirms the brief and before composing the article.
 - Read `references/evidence-and-boundaries.md` before making first-person, result, or publication claims.
 - Read `references/cognition-led-composition.md` before arranging a multi-section note or replacing a rigid draft.
@@ -46,6 +48,8 @@ Use these bundled references:
 
 Read the task-relevant repository context, target material, available artifacts, and public facts. Find artifact and public information yourself; do not make the user perform an inventory.
 
+For new or substantial project/note writing, read the homepage and all available associated notes in both languages. Use `references/project-note-division.md` to identify their current questions and repeated experiences or explanations before choosing the target's scope.
+
 ### 2. Establish Shared Understanding
 
 For a new project, substantial rewrite, or humanization request, follow `references/shared-understanding.md`. If there is no confirmed current brief, run `grill-me` / `grilling`, ask only for the user's personal knowledge, summarize a compact brief, and explicitly obtain confirmation. The brief is a source, not an outline. Do not draft article prose before confirmation.
@@ -53,6 +57,8 @@ For a new project, substantial rewrite, or humanization request, follow `referen
 A review that asks for a humanized or first-person replacement still passes through this gate. You may diagnose the supplied prose, but the paragraph being reviewed is not a confirmed brief: without one, do not write the replacement in the same turn; return the next shared-understanding interview action.
 
 Reuse a confirmed current brief. Typo correction, formatting-only changes, and faithful translation of approved prose are the only narrow exceptions; a new interpretation reactivates the gate.
+
+When a note request leaves topics open, ask one concise question about what the user wants to investigate, with grounded candidates when useful. Reuse specified or confirmed topics; choose them yourself when delegated. Establish what each note adds beyond the homepage and other notes without inventing historical curiosity or research. See `references/project-note-division.md` for topic selection and scope handling.
 
 ### 3. Research Beyond Artifacts
 
@@ -65,6 +71,8 @@ Separate supported action, artifact evidence, inference, unknowns, and public co
 ### 5. Sketch An Internal Cognition Trail
 
 Sketch how attention and understanding moved: a noticed detail, the real question it raised, an attention jump, new knowledge, a changed interpretation, or a later synthesis. This is an internal aid, not an outline. None of these move types is mandatory, and the trail may branch, revisit an earlier point, recombine ideas, or leave a question unresolved. Do not assign fixed slots, required transitions, or a named note archetype.
+
+First allocate the detailed accounts using `references/project-note-division.md`. The homepage owns the project progression; a note's cognition trail serves its chosen investigation. Other pages retain necessary short context and links. Preserve unique claims and respect protected sibling pages when narrowing a rewrite.
 
 ### 6. Compose Through Attention
 
@@ -109,6 +117,8 @@ End where the writer's current understanding reaches its last useful verificatio
 ### 12. Run The Release Gates
 
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
+
+Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 6. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
 
 For model-authored project and note body, the reader-prose gate, including L1-5 syntax and collocation, must also pass with zero applicable violations. Allowed semantic punctuation is not a hit. Reader-visible `title` and `titleZh` remain in scope even when stored in frontmatter; other metadata, Markdown syntax, code, links, paths, logs, verbatim artifacts, and exact technical strings stay outside the scan.
 

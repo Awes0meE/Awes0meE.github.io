@@ -6,6 +6,12 @@ Research starts after the user confirms the shared-understanding brief and befor
 
 Identify one or more real technical questions that would deepen the writer's changing understanding. Browse beyond uploaded artifacts even when those artifacts already describe the build. Do not add research merely to pad the article or display diligence.
 
+For learning notes, research the selected branch question from
+`project-note-division.md`. Check its premise against the actual hardware,
+software, and operating conditions. Bring the explanation back to that question;
+do not expand it into another account of the full project or invent a past
+learning path from the sources consulted now.
+
 Prefer official documentation, datasheets, standards, vendor application notes, source repositories, and original papers. Use strong secondary sources when they make the subject materially more accessible. Verify current or consequential claims against multiple reliable sources when practical.
 
 ## Integrate Only What Changes Understanding

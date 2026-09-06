@@ -2,6 +2,11 @@
 
 Use this before arranging a multi-section note or repairing a rigid draft.
 
+First apply `project-note-division.md`: the homepage carries the user's project
+progression, while each learning note develops a bounded investigation. The
+flexibility below operates within that page's role. Crossing subsystems can
+help answer the note's question; it does not justify retelling the whole project.
+
 ## Follow Attention, Not The Timeline
 
 A learning note follows how the writer's understanding moved. Its order may skip time, cross systems, return to an earlier detail, or leave one branch unresolved. Do not force a strict build chronology or choose an article type before understanding what caught the writer's attention.
