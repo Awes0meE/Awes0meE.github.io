@@ -1,10 +1,10 @@
 # Active Work: One-Project-at-a-Time Portfolio Copy Rewrite
 
 **Updated:** 2026-09-06
-**Copy-rewrite active branch:** `docs/rewrite-claude-chime-project-page`
-**Current project:** `Claude Chime Power Board` project page only
-**Last completed project:** `Claude Chime 电池冷启动排查`
-**State:** Local and remote topic branches match at `6e9757b`, four commits ahead of `main`, after the 2026-09-02 reconciliation was pushed. A fresh fetch on 2026-09-06 confirmed this checkpoint; the branch has not been merged or released.
+**Current project:** No further prose work pending; Claude Chime project-page copy is approved
+**Last completed authoring scope:** `Claude Chime Power Board` / `Claude Chime 电源板`
+**Publication record:** [Pull request #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34), from `docs/rewrite-claude-chime-project-page` into `main`
+**State:** The user authorized PR integration and deletion of fully merged topic branches on 2026-09-06. PR #34 and its linked deployment checks are authoritative for the merge commit and publication status. After integration, continue from synchronized `main`; do not recreate the completed source branch.
 
 ## Working Contract
 
@@ -55,15 +55,15 @@
 - The accepted experiment snapshot and live note share SHA-256
   `73fcbd880aa125893b65366b8eb6d665e7d0040918c572ddeb7acbce089ea811`.
 
-## Active Claude Chime Project-Page Checkpoint
+## Approved Claude Chime Project-Page Scope
 
-- The active page is
+- The approved page is
   `content/projects/claude-chime-hardware-power-board.mdx`, titled
   `Claude Chime Power Board` / `Claude Chime 电源板` on this branch.
 - Remote commits `9bce881`, `f7e0ea8`, and `c1155c5` respectively rewrite the
   page, add the L1-5 syntax/collocation gate to the repository-local writer,
-  and run a second bilingual editorial pass. They are branch checkpoints, not
-  published `main` or production claims.
+  and run a second bilingual editorial pass. Their publication record is
+  PR #34; the earlier checkpoints alone do not establish production status.
 - The scope is the Claude Chime project page plus the writer runtime and its
   current regression/rubric files. The cold-start note, cover, media records,
   public artifacts, and application code remain unchanged.
@@ -75,11 +75,14 @@
 - Direct bench checks remain distinct from the client's firmware engineer's
   report of ESP32 communication, ADC battery reading, charging control,
   repeated real-solenoid actuation, and complete-device operation.
+- The final publication pass restores `可能` / `could` for the shared-boost
+  supply-dip risk. It remains a design concern, not a measured or inevitable
+  result.
 
 ## Protected Completed Families
 
 Do not reopen these approved families unless the user explicitly requests it.
-The active Claude Chime project-page branch is the current explicit exception:
+The Claude Chime project-page authoring scope is complete and covered by PR #34:
 
 - Arduino Smart Car;
 - DIY pressure-flow cooling;
@@ -95,9 +98,11 @@ not standing permission to bulk-rewrite approved content.
 
 ## Next Action
 
-1. Open or update the pull request and inspect its Vercel and mergeability
-   checks.
-2. Merge only after the user explicitly approves publication.
+1. Use PR #34 and its linked checks to verify integration and deployment.
+   The user has already authorized this publication; no further copy approval
+   is pending for this scope.
+2. Start any user-selected new work from synchronized `main` on a semantic
+   topic branch. Keep `gh-pages`, the configured GitHub Pages redirect source.
 
 ## 2026-08-22 Claude Chime Note Release Verification
 

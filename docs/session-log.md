@@ -706,3 +706,28 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   local-listener permission flow. The five index routes and both Claude Chime
   detail routes returned HTTP 200. Dependency audit and full visual review
   were not rerun for this environment-only task.
+
+## 2026-09-06 — Claude Chime project-page publication
+
+- Authorization: the user requested a PR into `main` and cleanup of unused
+  branches. [PR #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34)
+  is the authoritative record of the merge commit and Vercel publication.
+- Scope: approved bilingual project-page rewrite, L1-5 writing gates and
+  regression fixtures, plus reconciled environment and handoff docs. The
+  final precision pass restored `可能` / `could` for shared-boost supply
+  dips. No other article, public evidence, media, frontend, or dependency
+  version changed.
+- Verification before integration: lint, content (8 projects / 24 notes /
+  84 media records), UTF-8 (370 files), TypeScript, and the 39-page webpack
+  build passed. `npm audit --omit=dev` returned zero vulnerabilities. The
+  local production page rendered the approved Chinese copy and switched to
+  the English copy successfully. The production build restored the standard
+  generated `next-env.d.ts` imports, leaving no generated-file diff.
+- Cleanup boundary: `feat/homepage-brand-education-hero` is fully contained
+  in `main`; it and the Claude Chime source branch can be deleted after
+  integration. Preserve the 19 unrelated untracked source/asset duplicates.
+- GitHub Pages: the live Pages API reports source `gh-pages:/` and status
+  `built`. Its `index.html` and `404.html` redirect to
+  `https://www.66ccff-labs.com/`; `.nojekyll` disables Jekyll, and
+  `vercel.json` disables Vercel builds for this redirect-only branch.
+  Retain this operational branch during topic-branch cleanup.

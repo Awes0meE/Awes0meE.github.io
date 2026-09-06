@@ -6,7 +6,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Current Baseline
 
-- As verified on `2026-09-06`, the active Claude Chime project-page branch is synchronized with its remote at `6e9757b`, four commits ahead of `main` (`74f6a39`). The 2026-09-02 reconciliation has been pushed; the branch remains unmerged. Use `docs/active-work/portfolio-copy-rewrite.md` for the current scope and next action.
+- The Claude Chime project-page authoring scope is complete and approved for publication on `2026-09-06`; [PR #34](https://github.com/Awes0meE/Awes0meE.github.io/pull/34) records integration and deployment. Its final copy preserves `可能` / `could` for shared-boost supply dips and the protected-pack-output cold-start boundary. Subsequent work starts from synchronized `main` after integration; use `docs/active-work/portfolio-copy-rewrite.md` for the handoff.
 
 - Production is release `v0.9.0` on `main`, served from `https://www.66ccff-labs.com/`; its annotated tag targets the reviewed pull-request merge commit.
 - The current repository content set is 8 projects, 24 public notes, and 84 media records (80 images and 4 videos). Project and note detail routes retain the paper system.
