@@ -14,7 +14,9 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-The website keeps Juanyun public writing in:
+Juanyun project and note sources are stored in the following paths. Note visibility follows frontmatter: the 2026-09-06 revision suspends overlapping narratives while retaining source files and reviewed uploads. See `active-work/portfolio-copy-rewrite.md` for the current work.
+
+Source paths:
 
 ```text
 content/projects/juanyun-*.mdx

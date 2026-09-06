@@ -1,12 +1,12 @@
 # Self Review
 
-Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose, editorial-conservation, and Chinese sentence gates where they apply. Every applicable gate must pass before calling the draft ready.
+Run the independent Truth and Li Zhiyi gates on the finished draft, then run the reader-prose, Chinese sentence, and cross-page division gates where they apply. Every applicable gate must pass before calling the draft ready.
 
 ## Gate 1: Truth
 
 - Do all project actions and results have support?
 - Are researched claims accurate, with direct links near the claims they support?
-- Does each uncertainty have the right strength and stay near the claim it limits?
+- Is each retained claim accurate in certainty, attribution, and operating conditions? Can an unnecessary uncertain claim simply be omitted?
 - Are Chinese and English factually equivalent?
 - Are publication paths real or clearly provisional?
 - If a first-person scene was reconstructed, are its event and emotional direction confirmed, with no invented surrounding facts?
@@ -38,28 +38,31 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Do all user-specified prohibitions for this note reach zero hits at the scope the user set: exact forms and obvious variants for an expression ban, or direct functional equivalents for a construction or reader-effect ban?
 - Are bare negative-first binary reframes absent in both languages?
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
-- Are factual, evidence, authorship, and publication boundaries explicit and kept near the claims they limit? When a supported positive fact exists, it may lead; when the negative boundary is itself the fact, state it directly without inventing a positive lead?
+- Is evidence-inventory commentary absent in both languages? Keep fact checking internal; write the supported action, result, or actual engineering question. Do not append lists of what the material cannot prove.
 - Does every inanimate or abstract subject carry only licensed native frames or functional verbs, with experiential results expressed through 出现, 发生, 出, 遇到, or a human or situational subject?
 - Do English abstract polysemes take the abstract Chinese sense (边界, 要点, 数值, 层面, 范围), with no concretized renderings?
 - Do paired Chinese and English passages keep semantic equality without one-to-one clause mirroring in narrative sentences, with the Chinese using native topic-comment and zero-anaphora structure?
 
-## Gate 4: Editorial Conservation
-
-Use `editorial-fusion.md` to compare the approved source and finished draft.
-
-- Are every retained claim, actor, number, date, version, link, quotation, citation, exact technical token, uncertainty, and publication boundary unchanged in meaning?
-- Are the source-supported cognition changes and cross-subsystem connections still present after paragraph consolidation?
-- Are the confirmed emotional intensity, reaction, humor target, self-correction, and unresolved tension still present without being neutralized or amplified?
-- Is the voice still Li Zhiyi's, without imported vocabulary, register, cadence, cultural pose, audience relationship, or persona from another writer?
-- Were AI-pattern repairs made by function and recurrence instead of mechanical word replacement?
-
-An unsupported addition, lost claim, changed actor, flattened voice anchor, or imported persona blocks release. Restore the protected material instead of adding a disclaimer.
-
-## Gate 5: Chinese Sentences
+## Gate 4: Chinese Sentences
 
 Re-run `chinese-sentence-gate.md` on the complete final Chinese at Step 12, even if it passed before English adaptation at Step 10. Review all six categories: 语序不当, 搭配不当, 成分残缺或赘余, 结构混乱, 表意不明, and 不合逻辑. Its article-prose scope and exclusions follow Reader-Prose L1, restricted to Chinese.
 
 Every established fault must be repaired while preserving facts, uncertainty, and confirmed voice. A stylistic preference alone is not a fault. Recheck any Chinese changed during release review. If a repair affects a bilingual pair, align its English through the existing English and bilingual checks. The six-category gate is not applicable to English; the existing English rules are unchanged.
+
+## Gate 5: Project/Note Division
+
+For new or substantially rewritten project/note prose, run the Step 12 check
+in `project-note-division.md` against the homepage and all available sibling
+notes in both languages. The homepage must tell the user's work and project
+progression; each learning note must develop its selected question with new
+explanatory value. Rephrasing the same full experience or reasoning still fails.
+
+Keep enough context for standalone reading and state retained claims precisely.
+Check note-to-note overlap, linked destinations, bilingual parity,
+and historical versus present learning. On failure, revisit topic and allocation
+within the authorized scope. Report unavailable pages or protected-sibling
+conflicts honestly; do not edit them or claim a complete family pass. Original
+documents and unrelated narrow edits keep the reference's scoped exceptions.
 
 ## Supporting Check: Cognition-Led Flow
 
@@ -68,7 +71,7 @@ Every established fault must be repaired while preserving facts, uncertainty, an
 - Did a detour return to the active engineering problem?
 - Is the page title a short, accurate, precise learning-note index rather than a hook, metaphor, thesis sentence, or subtitle pair?
 - Are section headings concise labels for the following work or study block, with the body carrying the anecdote and cognition change?
-- Does the ending stop at the last useful beat instead of completing a template?
+- Does the ending bring the experience or investigation to a natural close? After cuts, does it stop abruptly at data or a file list that still needs a connecting thought? Keep a useful closing paragraph without forcing a grand lesson or a full recap.
 
 Delete repeated lessons and shorten headings without deleting the exact subject or scope needed to identify the material.
 
@@ -100,8 +103,8 @@ Return the finished prose by default. If the user requests a review, keep it sho
 Truth gate:
 Li Zhiyi gate:
 Reader-prose L1 gate:
-Editorial-conservation gate:
 Chinese sentence gate (Chinese only; not applicable for English-only work):
+Project/note division gate (scoped to the requested pages):
 Cognition-flow or humor issue:
 Bilingual mismatch:
 Recommended revision:

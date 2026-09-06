@@ -1,0 +1,49 @@
+{
+  "method": "Author review in paragraph context; lexical search is supplementary, not an automated grammar verdict.",
+  "stage": "Step 10 before English",
+  "categories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "pages": [
+    {
+      "slug": "arduino-digital-clock-counter",
+      "chineseSha256": "4767d7ae0c0b77f8e9b77bb3ca25f9918574b42360373a733e6124a4dab502ed",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracker",
+      "chineseSha256": "4f0cb32d24186a2a9ff6184438ce061f9dffa43ba64d52e7ec9e5ef3eb825431",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "juanyun-diy-cooling-prototype",
+      "chineseSha256": "87e7ca1466e2bce84f999722d601917759faa80ea53da0e37253881094a61ba8",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "juanyun-thermal-hardware",
+      "chineseSha256": "0d15dc71db41995584eaabcec721b241795e531e90cd13fb87805fc582106a5f",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "nanjing-turing-qt-embedded-learning",
+      "chineseSha256": "ff0f57b2bb69473fb53fc41f7da58be4acd6f2a0a6d81b10a14a105d521b7bbe",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "sensorless-foc-learning-route",
+      "chineseSha256": "dbbd2f967ac3ebcf3150dd39b6672bffcbddfe71437223c868a18efd43484edf",
+      "result": "reviewed, no established violation remaining"
+    },
+    {
+      "slug": "tianjin-metro-stm32-foundation",
+      "chineseSha256": "364f83fa8bef35797c979109d4a237b03740e5a825552c4fc34329a7e654a41e",
+      "result": "reviewed, no established violation remaining"
+    }
+  ]
+}

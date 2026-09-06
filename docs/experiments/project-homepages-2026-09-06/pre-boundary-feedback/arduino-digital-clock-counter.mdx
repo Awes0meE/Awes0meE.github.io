@@ -1,0 +1,84 @@
+---
+title: "Arduino Breadboard Two-Digit Seven-Segment Counter"
+titleZh: "Arduino 面包板两位数码管计数器"
+summary: "For MEC104 Group A17, I handled most of the two-digit counter’s wiring, firmware, and debugging. Testing the display segments and measuring switch contacts resolved faults that code changes had not."
+summaryZh: "我承担 MEC104 A17 组两位计数器的大部分搭建、编程与调试。数码管接法和六脚按键先后出问题，我通过逐段试灯、测量开关通断，把显示、暂停和复位调通。"
+date: "2024.04 to 2024.05"
+status: "Completed"
+tags: ["Arduino", "Embedded", "Seven-Segment Display", "BCD", "Breadboard", "Course Project"]
+cover: "/uploads/projects/arduino-digital-clock-counter/cover-wiring.jpg"
+featured: false
+links:
+  demo: "/uploads/projects/arduino-digital-clock-counter/demo.mp4"
+  download: "/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf"
+assetPaths:
+  - "/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg"
+  - "/uploads/projects/arduino-digital-clock-counter/demo.mp4"
+  - "/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf"
+  - "/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino"
+  - "/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino"
+  - "/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf"
+  - "/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png"
+  - "/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png"
+  - "/uploads/projects/arduino-digital-clock-counter/course-system-structure.png"
+  - "/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png"
+  - "/uploads/projects/arduino-digital-clock-counter/button-pullup-notes.png"
+  - "/uploads/projects/arduino-digital-clock-counter/milestone-breakdown.png"
+  - "/uploads/projects/arduino-digital-clock-counter/tinkercad-one-digit-demo.png"
+  - "/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png"
+  - "/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png"
+  - "/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png"
+---
+
+## Two-Digit Counter / 两位计数器
+
+Joining MEC104 Group A17 came just after my Arduino car project, making this my second encounter with embedded development. A counter sounded easier: increment a value at regular intervals and add pause and reset. I handled most of the technical implementation, including the breadboard, pin research, decoder wiring, Arduino program, button debugging, and integration. Other members took care of the report, video, and group administration.
+
+加入 MEC104 A17 组时，我刚做过 Arduino 小车，这是第二次接触嵌入式。我以为计数器会轻松一些，写个程序，每隔一段时间加一，再给它接上暂停和复位就行。组内的面包板搭建、引脚查找、译码接线、Arduino 程序、按键调试和最终联调主要由我完成，其他组员负责报告、视频与小组事务。
+
+![Breadboard digital-clock counter prototype / 面包板上的两位数码管计数器原型](/uploads/projects/arduino-digital-clock-counter/breadboard-counter-photo.jpg)
+![Course project requirement slide / 课程项目目标页](/uploads/projects/arduino-digital-clock-counter/course-project-requirement.png)
+![Basic two-digit and button requirements / 两位显示与按键要求](/uploads/projects/arduino-digital-clock-counter/course-basic-requirements.png)
+
+On the bench, an Arduino Nano sat beside two decoders, two displays, and a generous spread of jumper wires. The count had to be separated into tens and units, with each four-bit BCD value sent to an SN54LS47 driving its own digit. The report assigns the two BCD groups to D9 through D12 and D5 through D8. I wrote the digit-splitting and output code, then discovered how little a changing variable guaranteed about the physical display.
+
+实物摆开以后，Arduino Nano 旁边是两颗译码器、两位数码管和一大片杜邦线。一个计数值要拆成十位与个位，各自通过四位 BCD 控制一颗 SN54LS47，再由它驱动对应数码管。报告把两组 BCD 输出分别画在 D9 到 D12、D5 到 D8。我写了拆位与输出程序，却很快发现，数字在程序里变化，显示未必会跟着正常变化。
+
+![Two-digit wiring from the homework report / 作业报告里的两位数码管接线图](/uploads/projects/arduino-digital-clock-counter/report-two-digit-wiring.png)
+![Digit split code from the homework report / 作业报告里的个位和十位拆分代码](/uploads/projects/arduino-digital-clock-counter/report-digit-split-code.png)
+
+## Display Wiring / 数码管接线
+
+Connecting the common pin to GND as shown in the course slides produced either darkness or scrambled digits. I checked my program and wiring first, and the TA could not explain the behavior either. Only after moving wires and testing individual segments at different levels did I establish that our hardware needed a common-anode connection, with the common pin at VCC. The slides used a common-cathode CD4511 simulation, so their device assumptions did not match the parts on our breadboard.
+
+按课程 PPT 把公共端接到 GND，数码管有时全黑，有时乱码。我先查自己的程序和接线，TA 也没能解释清楚。后来在面包板上逐段换线、试高低电平，才发现手里的显示链路需要按共阳方式连接，公共端应接 VCC。PPT 用的是 CD4511 驱动共阴显示的仿真，实物器件的前提与它对不上。
+
+After we reported the finding, the professor announced it to the class over the microphone. Other groups had been stuck at the same point. I could not yet explain the decoder output structure fully, but the physical tests were enough to correct the wiring. It was while organizing this portfolio that I revisited [TI's LS47 documentation](https://www.ti.com/lit/ds/symlink/sn74ls47.pdf) and connected its active-low, open-collector outputs with common-anode LEDs. That fuller explanation came later; segment-by-segment testing produced the original breakthrough.
+
+我们把发现告诉教授后，他用麦克风向全班说明了这件事，其他组也正卡在这里。那时我的知识还不足以完整解释译码器的输出结构，但实物测试已经足以让我修正接法。整理作品集时再查 [TI 的 LS47 资料](https://www.ti.com/lit/ds/symlink/sn74ls47.pdf)，才把低有效、开集电极输出与共阳 LED 的关系补齐。这是后来理解得更清楚的原理，当时的突破来自逐段测试。
+
+## Button Checks / 按键排查
+
+The two six-pin latching switches took more work after the displays were running. We had no datasheet, and I did not know how to search for one by part number. Trying different connections produced missed presses, unstable readings, and sometimes two responses to one press. Editing the input conditions left the underlying hardware question open: which contacts actually connected in each switch position?
+
+显示调通后，两个六脚自锁按键又让我折腾了一阵。没有数据手册，也不知道怎样按型号找资料，我先靠换线试，遇到过按下没反应、读数乱跳，以及按一次触发两次。继续改按键判断，仍然绕不开一个硬件问题，按下前后究竟哪几只脚导通。
+
+I borrowed a multimeter from the instructor, checked continuity between pin pairs, and drew the internal connection map. I then connected pause and reset to D2 and D3, and both worked in the finished build. The surviving report gives conflicting `HIGH`, `LOW`, and pull-up descriptions, while the final source is missing. I can confirm the demonstrated functions, but cannot reconstruct their final polarity or debounce implementation. The double-trigger symptom alone does not identify the algorithm used.
+
+我向老师借了万用表，用通断档逐对测引脚，把开关的内部连接关系画出来，再把暂停与复位接到 D2、D3。最终两个功能都能正常使用。现在保存的报告对 `HIGH`、`LOW` 和上拉接法有冲突，最终源码也遗失了，因此我能确认按键通过演示，却无法还原最终极性与消抖实现。一次按压触发两次的现象，也不足以证明当时用了哪一种消抖算法。
+
+![Switch logic code from the homework report / 作业报告里的开关逻辑代码](/uploads/projects/arduino-digital-clock-counter/report-switch-logic-code.png)
+
+## Demonstration and Archive / 演示与归档
+
+Assessment required two separately flashed versions. One returned to `00` after our group number, `17`; the other rolled over after `99`. I changed the threshold, flashed each version, and had the instructor check it. There was no runtime mode switch between the programs. Both digits, pause, and reset worked during the classroom demonstration, and the TA awarded full marks.
+
+考核要分别演示两个版本，一个计到组号 `17` 后回到 `00`，另一个计到 `99` 后回到 `00`。我修改阈值，分别烧录，再让老师逐项检查。它们是两个独立程序版本，没有做成运行时切换的模式。课堂上，两位显示、暂停和复位都工作正常，TA 给了满分。
+
+The [bench video](/uploads/projects/arduino-digital-clock-counter/demo.mp4) preserves 17 seconds of changing digits without a button demonstration. A teammate wrote the [A17 report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf). The `main.c` remaining on my Mac is an early draft I wrote, flashed, and ran; it contains the `15 -> 16 -> 17 -> 00` trace, but its second button is unfinished and some comments and syntax are wrong. It cannot substitute for the final program. Xcode was simply the Mac's default application for opening `.c` files, not the project's embedded toolchain.
+
+[现场视频](/uploads/projects/arduino-digital-clock-counter/demo.mp4)留下了 17 秒数字变化，没有拍到按键操作；[A17 报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf)由组员撰写。Mac 上保留的 `main.c` 是我写过、烧录运行过的早期草稿，能看到 `15 -> 16 -> 17 -> 00` 的痕迹，但第二个按键还没完成，注释与语法也有问题。它不能代替最终程序。Xcode 当时只是 macOS 打开 `.c` 文件的默认应用，项目并没有用它作嵌入式开发工具。
+
+The firmware relied on polling and blocking `delay()` calls, and it looks distinctly like beginner work today. The debugging habit has lasted better. When a drawing disagrees with the hardware, I identify the actual parts and follow the current path; when a switch behaves strangely, I measure its contacts. Code still needs checking, but I stopped expecting code changes to repair every wiring problem.
+
+当年的代码依赖轮询和阻塞式 `delay()`，今天看确实稚嫩。但这次实践留下的习惯很具体，图纸与实物不一致时，我会先确认器件和电流路径；按键状态不对，就先量导通关系。程序当然要检查，只是从那以后，我不再指望改代码能修好所有接线问题。

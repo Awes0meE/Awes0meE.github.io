@@ -47,6 +47,12 @@ Keep the current heading and list rules. Do not add a fixed heading count below 
 
 Reject bare negative-first binary reframes such as `不是 A，而是 B`, `这不是 A，这是 B`, `问题不在 A，而在 B`, `难点不是 A，而是 B`, `not A but B`, and `was not A; it was B`. State the useful conclusion directly. Ordinary factual negation remains allowed. The confirmed qualifier `不是说 A 不行，而是说 B` remains allowed when it prevents a real misreading and is not repeated as scaffolding.
 
+## No Evidence-Inventory Voice
+
+The user's 2026-09-06 rule applies to project homepages and learning notes in both languages. Reject commentary whose function is to inventory evidence, announce the limits of the archive, or certify which achievements cannot be claimed. Typical forms include `现有证据只能说明……`, `不能据此声称……`, `这还不能证明……`, `只能算阶段结果，不能当作……`, `the available evidence only establishes ...`, and `this cannot be claimed as ...`. First-person phrasing and synonym substitution do not repair that function. Remove it or state the supported action, result, or actual engineering question directly.
+
+Do not convert this into a ban on words such as `没有`, `可能`, `边界`, `not`, or `unknown`. Real faults, unfinished attempts, operating conditions, tentative interpretations, and concise attribution remain available when they serve the story. An expressly requested evidence audit may use an audit voice. See `evidence-and-boundaries.md` for internal fact handling.
+
 ## Do Not Manufacture A Scene
 
 Do not write `比如有一次` or another scene lead-in unless the event is real and confirmed. A plausible example is still fabricated if the source does not place Li in that event.

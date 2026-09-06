@@ -1,0 +1,48 @@
+{
+  "method": "Exact source, metadata and image comparisons, not an article information-retention gate.",
+  "projects": {
+    "juanyun-diy-cooling-prototype": {
+      "sha256": "a331207cf28fd36df3dceb70f2d90efaf527f0fd46af43219fe17d9272c6042f",
+      "beforeBytes": 14152,
+      "afterBytes": 11834
+    },
+    "claude-chime-hardware-power-board": {
+      "sha256": "ea5faa92a6b103c7a222a15928f5e699fa130c2883ba1688106575d5570db96b",
+      "beforeBytes": 18252,
+      "afterBytes": 18252
+    },
+    "tianjin-metro-stm32-foundation": {
+      "sha256": "a4944d2de0eea432c64c915be9fd3c8a117a9360d714968ff914b0c2b051ad77",
+      "beforeBytes": 11605,
+      "afterBytes": 8659
+    },
+    "juanyun-thermal-hardware": {
+      "sha256": "473fdae577deea19f01d686bd67bb0b78aaa761c40167874d5c66d584e4725f6",
+      "beforeBytes": 15348,
+      "afterBytes": 12646
+    },
+    "nanjing-turing-qt-embedded-learning": {
+      "sha256": "c0a1e1817d71cac3c5d62dcea885c372d7b1807c9ccc204ee4843866aa4a2b08",
+      "beforeBytes": 17741,
+      "afterBytes": 14803
+    },
+    "arduino-smart-car-line-tracker": {
+      "sha256": "ee116c37797d20de4c269c97dd08bc3c51af7b167973f2e1c3784252b4f3da43",
+      "beforeBytes": 10095,
+      "afterBytes": 9067
+    },
+    "sensorless-foc-learning-route": {
+      "sha256": "d67038ce1180f537a3d95b8407d08bd74912710e1bff3e71bab78c902ce78455",
+      "beforeBytes": 15194,
+      "afterBytes": 11696
+    },
+    "arduino-digital-clock-counter": {
+      "sha256": "3b208ad78464792aa480fbc6bd12bb240a694330972e1d5a8680209cfb729f4c",
+      "beforeBytes": 11255,
+      "afterBytes": 9194
+    }
+  },
+  "all24NoteBodiesUnchanged": true,
+  "only15VisibilityChanges": true,
+  "claudeChimeUnchangedFromPreFeedback": true
+}

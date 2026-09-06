@@ -46,7 +46,7 @@ Accepted shape:
 
 > 我第一次按回车时，以为文件已经保存，窗口却直接回到了上一层。再试一次还是一样。顺着事件处理往下看，回车最终走到了取消分支，权限判断也只保留了最简单的实现；程序确实能启动，但这条操作链还没有跑通。
 >
-> “能跑”的范围又缩了一次。
+> 我先回到窗口的按键事件里查。
 
 Rejected shape:
 
@@ -137,7 +137,7 @@ the operation chain became visible.
 An accepted reconstruction may open with the Enter failure, return to what the
 first launch had actually proved, and then connect the permission path to the
 narrower definition of a working build. It may reorder sections, merge or split
-paragraphs, and replace every title. It must preserve all claims, uncertainty,
+paragraphs, and replace every title. Selected claims must remain accurate in certainty
 and real temporal relations, and each attention jump must remain locally
 intelligible.
 
@@ -155,7 +155,7 @@ Chinese:
 
 回车最终走到了取消分支。权限判断也只保留了最简单的实现。
 
-“能跑”的范围又缩了一次。
+我先回到窗口的按键事件里查。
 ```
 
 Accepted English:
@@ -165,7 +165,7 @@ Accepted English:
 
 ## Development Attempts
 
-Enter still reached the cancel branch, while permission handling remained minimal. That narrowed what I could honestly call a working build.
+Enter still reached the cancel branch, and permission handling remained minimal. I returned to the window’s key events to investigate.
 ```
 
 The English combines two Chinese paragraphs into one while preserving both
@@ -219,7 +219,7 @@ named as the perceiver of its own reading.
 
 Input: `我亲自确认的范围有一条很清楚的边。`
 
-Expected repair: `我亲手验证的这部分是有明确边界的。`
+The former expected repair, `我亲手验证的这部分是有明确边界的。`, fixes the polyseme but now fails the evidence-inventory gate. Omit the audit sentence. If the confirmed brief says the user ran a 12 V no-load test, a useful replacement is `我用 12 V 电源做了空载测试。`; without that support, do not invent a test.
 
 `edge` in an abstract or evaluative register takes 边界, not the first
 concrete sense 边. The P2 map covers the same family: point→要点,
@@ -234,11 +234,11 @@ English pair: `My direct validation had a clear edge.`
 
 Rejected mirror: `我直接的验证有一条很清楚的边。`
 
-Expected repair: `我亲手验证的这部分是有明确边界的。`
+Expected repair: omit this audit pair. With a confirmed 12 V no-load test in the brief, write `我用 12 V 电源做了空载测试。` / `I ran a no-load test with a 12 V supply.` instead.
 
-The Chinese re-derives from the claim instead of following the English clause
-skeleton: the subject slot becomes a topic, and the concretized polyseme takes
-the abstract sense. Technical enumerations, pin lists, dimensions, and data
+Re-derive both languages from the useful supported claim instead of preserving
+the English audit clause. In ordinary abstract prose, a retained polyseme still
+needs its abstract sense. Technical enumerations, pin lists, dimensions, and data
 parallels are exempt from the mirror check.
 
 ## Release Expectation
@@ -256,7 +256,7 @@ parallels are exempt from the mirror check.
 - English adapts rhythm and idiom without lowering or amplifying the confirmed emotional intensity.
 - Bare binary reframes are repaired in both languages.
 - The confirmed Chinese qualifier remains available when it carries real nuance.
-- Missing tests, implementations, evidence, authorship, and publication limits remain explicit.
+- Check missing tests, implementation, authorship, and publication status internally. Retained claims stay accurate; articles do not export the audit or list conclusions that cannot be claimed. Run `evidence-inventory-regression.md` in both languages.
 
 ## Verification
 

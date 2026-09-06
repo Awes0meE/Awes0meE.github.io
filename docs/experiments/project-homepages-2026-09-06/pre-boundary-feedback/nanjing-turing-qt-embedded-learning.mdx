@@ -1,0 +1,122 @@
+---
+title: "Seamly2D Qt Development Internship"
+titleZh: "南京图灵 Seamly2D 开发实习"
+summary: "In a three-week internship, I brought an unfamiliar Qt codebase into operation, added local accounts and role management, and prepared a Windows installer and an unsigned macOS package for review and handoff."
+summaryZh: "三周实习里，我从配置 Qt、编译陌生代码库开始，为 Seamly2D 加入本地账户和角色管理，再完成 Windows 安装包与 macOS 无签名包的演示和交接。"
+date: "2025-08"
+status: "Completed"
+tags: ["Qt", "C++", "CMake", "Packaging", "Internship"]
+cover: "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg"
+featured: true
+links:
+  repo: "https://github.com/FashionFreedom/Seamly2D"
+  download: "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf"
+assetPaths:
+  - "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg"
+  - "/uploads/projects/nanjing-turing/auth-role-snippet.cpp"
+  - "/uploads/projects/nanjing-turing/cmake-logo.jpeg"
+  - "/uploads/projects/nanjing-turing/cmake-make-flow.png"
+  - "/uploads/projects/nanjing-turing/compile-logic-sketch.jpg"
+  - "/uploads/projects/nanjing-turing/macos-build-package-sign.sh"
+  - "/uploads/projects/nanjing-turing/macos-build-package.sh"
+  - "/uploads/projects/nanjing-turing/qt-build-logic-notes.pdf"
+  - "/uploads/projects/nanjing-turing/qt-logo.png"
+  - "/uploads/projects/nanjing-turing/readme.txt"
+  - "/uploads/projects/nanjing-turing/sample-measurements.smis"
+  - "/uploads/projects/nanjing-turing/sample-pattern-example.sm2d"
+  - "/uploads/projects/nanjing-turing/seamly2d-banner.png"
+  - "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.md"
+  - "/uploads/projects/nanjing-turing/seamly2d-release-packaging-flow.pdf"
+  - "/uploads/projects/nanjing-turing/week-1-development-log.txt"
+  - "/uploads/projects/nanjing-turing/week-2-development-log.txt"
+  - "/uploads/projects/nanjing-turing/week-3-development-log.txt"
+  - "/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.docx"
+  - "/uploads/projects/nanjing-turing/windows11-qt6-seamly2d-onboarding.txt"
+  - "/uploads/projects/nanjing-turing/other-materials/CMake 入门学习记录 250669c3f4008099a6d6c614a4ca6937.md"
+  - "/uploads/projects/nanjing-turing/other-materials/关于编译的底层逻辑（Qt 学习导向） 24f669c3f4008089bc2df266992845de.md"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250814_72624b.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250814_8efe1c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_2541cb.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_5ff10c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_7db53e.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250815_a56fb3.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_161f13.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_1b8e6c.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_221410.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_3ce4ce.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_585daa.png"
+  - "/uploads/projects/nanjing-turing/other-materials/deepseek_mermaid_20250818_95d4a0.png"
+  - "/uploads/projects/nanjing-turing/other-materials/image-20230309130644912.png"
+---
+
+## Joining the Seamly2D Project / 进入 Seamly2D
+
+After the 2025 National Undergraduate Electronics Design Contest, I stayed in Nanjing for a three-week full-time internship. I had expected to encounter UI work for embedded devices. The actual assignment involved [Seamly2D](https://github.com/FashionFreedom/Seamly2D), a large C++ and Qt patternmaking application. My prior experience was an introductory university C++ course, mostly in the terminal; both Qt and a collaborative codebase were new territory.
+
+2025 年全国大学生电子设计竞赛结束后，我留在南京，开始了三周全职实习。我原先以为会接触嵌入式设备的 UI，真正要改的却是 [Seamly2D](https://github.com/FashionFreedom/Seamly2D)，一个 C++ 与 Qt 编写的大型服装纸样软件。此前我只上过学校的 C++ 入门课，程序基本还停在命令行，Qt 和多人协作仓库都要现学。
+
+![Upstream Seamly2D wordmark / Seamly2D 上游项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
+
+The company wanted to assess further development on the application. My task was to add local registration, login, and role management before the main interface, then build, package, and hand off the modified version. The supervising engineer assigned daily work, and I reported back after completing it. By the end of three weeks, someone else needed to be able to install, open, and inspect my changes.
+
+公司想验证继续二次开发的可行性。我接到的任务是在主界面前加入本地注册、登录和角色管理，再把修改版构建、打包并交接。带教工程师每天给任务，我完成后汇报。三周的终点很具体，要让别人能够安装、打开并检查我的改动。
+
+## Environment and Build / 环境与构建
+
+The first day disappeared into downloading. After three hours against the overseas server, the Qt Online Installer was about 10 percent complete. I assumed large software simply took that long and waited for much of the day. The next morning, the engineer mentioned the Tsinghua mirror; the remaining installation finished in a little over an hour. Reading the [TUNA Qt mirror guide](https://mirrors.tuna.tsinghua.edu.cn/help/qt/) later made that patient first day seem rather funny.
+
+第一天先耗在下载上。Qt 在线安装器连海外服务器，三个小时大约下了 10%，我还以为大软件本来就这么慢，老老实实等了大半天。第二天工程师告诉我可以换清华镜像，剩余安装一个多小时就结束了。后来看到 [TUNA 的 Qt 镜像说明](https://mirrors.tuna.tsinghua.edu.cn/help/qt/)，再想起那一天，多少有点好笑。
+
+Installation did not immediately produce a working build. I began with Qt 5.15.2 and made `core5compat` conditional, which let qmake pass, only for compilation to report more than thirty errors. The branch already used Qt 6 headers and APIs. Extending Qt 5 compatibility would have pulled me away from the assignment, so I installed Qt 6.5.3 MSVC2019 64-bit and Qt 5 Compatibility Module with the v142 compiler. Deleting the old build directory and `Seamly2D.pro.user`, then configuring the Kit again, finally produced a complete build.
+
+装好也没马上能用。最初我选 Qt 5.15.2，把 `core5compat` 改为条件加载后，qmake 通过，完整编译却继续报三十多个错误。当前分支已经用了 Qt 6 的头文件和 API，继续补 Qt 5 兼容会偏离这次任务。我改用 Qt 6.5.3 MSVC2019 64-bit、Qt 5 Compatibility Module 与 v142 编译器，删除旧 build 目录和 `Seamly2D.pro.user`，重新配置 Kit，才把完整构建跑通。
+
+That process taught me to check the branch, Qt package, compiler, and architecture together. GitHub had previously been somewhere to download code. During the internship I practiced clone, branch switching, commit, push, merge, pull requests, forks, and tags as ways to preserve and exchange actual work. The [original first-run record](/notes/turing-qt-seamly2d-first-run) retains the environment setup and specific error handling.
+
+这段排查让我开始把分支、Qt 包、编译器和架构放在一起核对。此前我把 GitHub 当成下载代码的地方，这次才实际练习 clone、切分支、commit、push、merge、pull request、fork 与 tag，用 Git 保存和交接自己的改动。[首跑原始记录](/notes/turing-qt-seamly2d-first-run)保留了环境配置与具体报错处理。
+
+## Accounts and Roles / 账户与角色
+
+With the application running, I added registration and login windows and organized the entry sequence around `main()`. `QSettings` persisted account information locally. I replaced early plaintext password comparison with hash storage and verification, masked the password input, and added distinct handling for existing users, missing users, and wrong passwords. This was a local desktop prototype without a database, server, or online authentication. [QSettings provides persistent application settings](https://doc.qt.io/qt-6.5/qsettings.html); adding a login window does not turn it into a network account service.
+
+程序启动后，我加入注册、登录窗口，并在 `main()` 附近整理进入主界面的顺序。账户信息由 `QSettings` 在本机保存，密码从早期明文比较改成哈希存储与校验，输入框增加遮蔽，再分别处理用户已存在、用户不存在和密码错误。它是本地桌面原型，没有数据库、服务器或在线认证；[QSettings 的职责](https://doc.qt.io/qt-6.5/qsettings.html)是持久化应用设置，也不能靠一个登录窗口把它变成网络账户系统。
+
+Using the windows exposed smaller problems that still blocked the feature. Enter activated Cancel, username fields offered suggestions, and the password field could crash with a Chinese input method active. I corrected those behaviors one by one. Role management then shifted my attention from the appearance of a window to which user could act on which account. The first account had to be `admin`; normal users could not access management; administrators could delete or promote only normal users, with confirmation before deletion; and only `admin` could demote another administrator.
+
+真正使用界面时，小问题一个也绕不开。回车默认触发取消，用户名框弹联想，密码框在中文输入法状态下发生过闪退，我逐项修正这些行为。到了角色管理，重点又从窗口长什么样，变成谁可以对谁执行什么操作。第一个账号必须是 `admin`；普通用户看不到管理入口；管理员只能删除或升级普通用户，删除还要二次确认；其他管理员的降级只能由 `admin` 执行。
+
+I implemented the operations by separating the current user, target user, and permitted state change, then demonstrated them individually. The [public role excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp) retains only role definitions and local lookup; the full added source remains unpublished. The completed work validates local functions and permission rules, without establishing an authentication system hardened against network attacks.
+
+我把每项操作按当前用户、目标用户和允许的状态变化拆开实现，再逐项演示。[公开角色摘录](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)只保留角色定义与本地查询，完整新增源码没有公开。这里完成的是本地功能与权限规则的验证，不能据此声称已经实现面向网络攻击的认证系统。
+
+## Installation and Another Machine / 安装与换机
+
+Release work in the third week stalled at `windeployqt` for about three days. The executable existed on disk but the build could not find it. Reinstallation and path checks were frustrating, and I no longer remember their precise sequence. The final solution is documented: expose Qt's `bin` directory to Qt Creator's Build Environment and let both `.pro` files locate the deployment tool through `QT_INSTALL_BINS`, running it only in Release configuration.
+
+第三周转做 Release，我在 `windeployqt` 上卡了约三天。工具明明在硬盘里，构建步骤却找不到，重装和查路径的过程确实很烦，准确顺序现在已经记不全。最终方案留在文档里，给 Qt Creator 的 Build Environment 补上 Qt `bin`，并让两个 `.pro` 文件通过 `QT_INSTALL_BINS` 定位部署工具，只在 Release 配置执行。
+
+Even with DLLs filling the deployment directory, the application still lacked `xerces-c_3_2.dll`. I added that XML library before completing Windows self-signing, Inno Setup packaging, installation, and launch. The [Qt deployment guide](https://doc.qt.io/qt-6.5/windows-deployment.html) explicitly excludes additional third-party libraries from `windeployqt`'s automatic work. The `.sm2d` and `.smis` samples I had read earlier now connected to a concrete runtime dependency on an XML parser.
+
+部署目录里已经堆满 DLL，程序还缺 `xerces-c_3_2.dll`。我补上这个 XML 库，才继续完成 Windows 自签名、Inno Setup 打包、安装与启动。[Qt 部署文档](https://doc.qt.io/qt-6.5/windows-deployment.html)也明确提醒，额外第三方库不在 `windeployqt` 的自动处理范围内。前面读过的 `.sm2d`、`.smis` 样例，这时与程序需要的 XML 解析依赖对上了。
+
+I also kept [CMake and build-logic study material](/notes/turing-cmake-build-logic) to distinguish generators, compilers, linkers, and runtime dependencies. Seamly2D itself continued to use qmake; I did not migrate it to CMake. The [original packaging record](/notes/turing-release-packaging-cross-platform) and [XML samples](/notes/turing-sm2d-xml-data-format) preserve the detailed procedures and data separately.
+
+我同期整理过 [CMake 与编译原理资料](/notes/turing-cmake-build-logic)，用来分清生成器、编译器、链接器和运行时依赖。Seamly2D 本身一直使用 qmake，没有被我迁移到 CMake。[打包原始记录](/notes/turing-release-packaging-cross-platform)与 [XML 样例](/notes/turing-sm2d-xml-data-format)仍可分别查到操作和数据细节。
+
+Formal Windows acceptance took place on the development machine. I had no separate computer without Qt and Visual Studio available then, so the README's claim about running on any computer exceeded what had been checked. About two weeks after the internship, I tested the installer on a newly installed Windows desktop at home with neither tool present. Registration, login, and role operations worked. I did not add this personal test to the old document or return to the company for re-acceptance, so it remains separate from the formal result.
+
+实习正式验收时，Windows 安装与功能检查都在开发机上进行。当时没有一台既无 Qt、也无 Visual Studio 的机器，README 写过的“任意电脑”超出了已有验证。结束约半个月后，我在家中一台新装的 Windows 台式机上补测，那台电脑没有 Qt 和 Visual Studio。运行安装程序后，注册、登录和角色功能都能实际操作。这个个人测试没有写回旧文档，也没拿回公司复验，不能并入正式验收。
+
+## Mac and Handoff / Mac 与交接
+
+I moved the same source to my Mac, reworked the Qt paths, architecture, and Kit, and brought up both Debug and Release. After collecting dependencies with `macdeployqt`, the application launched; I also generated and opened an unsigned DMG on that machine, with the supervising engineer watching the demonstration. I then created a self-signed certificate and tried the `codesign`, `spctl`, and packaging sequence. Application signing did not finish. I had no Developer ID, attempted no notarization, and did not test a second clean Mac.
+
+我也把同一份源码迁到自己的 Mac，重新处理 Qt 路径、架构与 Kit，跑通 Debug 和 Release，再用 `macdeployqt` 收集依赖。应用能够启动，无签名 DMG 也生成并在这台 Mac 上打开过，带教工程师现场看了演示。随后我创建自签名证书，尝试 `codesign`、`spctl` 与打包脚本，但应用签名没有完成，也没有 Developer ID，更没有做 notarization 或第二台干净 Mac 的测试。
+
+Both the [working unsigned script](/uploads/projects/nanjing-turing/macos-build-package.sh) and the [unfinished signing attempt](/uploads/projects/nanjing-turing/macos-build-package-sign.sh) remain in the archive. Reading [Apple's Developer ID guidance](https://developer.apple.com/help/account/certificates/create-developer-id-certificates) now, I check dependency packaging and distribution trust as separate responsibilities. The presence of a DMG cannot establish that both are complete.
+
+[可运行的无签名脚本](/uploads/projects/nanjing-turing/macos-build-package.sh)和[未完成的签名尝试](/uploads/projects/nanjing-turing/macos-build-package-sign.sh)都留了下来。现在再看 [Apple 的 Developer ID 说明](https://developer.apple.com/help/account/certificates/create-developer-id-certificates)，我会把依赖打包和分发信任分开检查。一个 DMG 存在，不能说明这些步骤已经完成。
+
+At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection. The source, weekly logs, environment notes, and scripts went into the company's intern `develop` branch. I was not involved after leaving and do not know whether the work was subsequently adopted or productized.
+
+最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。源码、周日志、环境文档和脚本提交到了公司的实习生 `develop` 分支。离开后是否继续采用或产品化，我没有再参与，也不清楚。

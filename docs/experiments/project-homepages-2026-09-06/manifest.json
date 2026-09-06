@@ -1,0 +1,262 @@
+{
+  "date": "2026-09-06",
+  "baselineCommit": "ce015f2a8ca035d3dc0582b2bc5e58e933370539",
+  "branch": "docs/refactor-project-homepages",
+  "state": "local review, not published",
+  "suspendedCount": 15,
+  "notes": [
+    {
+      "slug": "arduino-digital-clock-counter-course-note",
+      "path": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "beforeSha256": "d14159fe1c8d6e80ff9ee47ff230cd5e61009ad3ae4889059922712fe5a9d777",
+      "action": "suspend",
+      "reason": "公共端、BCD、六脚按键与调试习惯的经历重复。",
+      "afterSha256": "c167c5d9a43142522be50aac29127652a546f26aea74544f149a086cb51e5ce8"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracking-learning-note",
+      "path": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+      "beforeSha256": "3df233aced0ac69424091863a4b97af5ae9a0186d4e678e1aa3f07ea1bd016cc",
+      "action": "suspend",
+      "reason": "从焊接、电源、输入、驱动到比赛成绩重复完整项目路线。",
+      "afterSha256": "500de2067f72c17dc26a93f82ea5d980560a1a5dccaae12923e174d81040512b"
+    },
+    {
+      "slug": "claude-chime-cold-start-battery-protection",
+      "path": "content/notes/claude-chime-cold-start-battery-protection.mdx",
+      "beforeSha256": "73fcbd880aa125893b65366b8eb6d665e7d0040918c572ddeb7acbce089ea811",
+      "action": "suspend",
+      "reason": "重复展开双路升压、供电取舍、充电与交付过程；待集中冷启动诊断。",
+      "afterSha256": "355013cc0200d406f782d4ebe62b26b6175956126c74c1d25a43fb88da7c207f"
+    },
+    {
+      "slug": "juanyun-acunit-automatic-control",
+      "path": "content/notes/juanyun-acunit-automatic-control.mdx",
+      "beforeSha256": "a07b9ba3f209dad6b8c2008f29fc9b8d241f2097e8309710ed3d62c95ea11864",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "a07b9ba3f209dad6b8c2008f29fc9b8d241f2097e8309710ed3d62c95ea11864"
+    },
+    {
+      "slug": "juanyun-acunit-board",
+      "path": "content/notes/juanyun-acunit-board.mdx",
+      "beforeSha256": "db1347a389aad73f2576a8cb5c53946d3b49702414f2e484cd0de15c23a60fd9",
+      "action": "suspend",
+      "reason": "设计、装配、分阶段验证至整机联调的小项目叙事与主页重合。",
+      "afterSha256": "512783d2b094c64ba3c530fdd8c381aabeffed157affbab470259bc06d5843c9"
+    },
+    {
+      "slug": "juanyun-acunit-firmware",
+      "path": "content/notes/juanyun-acunit-firmware.mdx",
+      "beforeSha256": "68744d583f089b75d1bf7d0f1c44a731639caf3c51ca4ea3ef7d67a2eaf5ca61",
+      "action": "suspend",
+      "reason": "裸机选择、提前分层与后期扩展的过程与主页重合，待聚焦时序问题。",
+      "afterSha256": "55e755be08b23d11499c2f6dfd4b928ee39b87a6787df8d50d03858d0889c35f"
+    },
+    {
+      "slug": "juanyun-acunit-hardware-revision-archive",
+      "path": "content/notes/juanyun-acunit-hardware-revision-archive.mdx",
+      "beforeSha256": "75b904e37627d6b62c742e12136a3783c17182e2cbb0e717021a4795c1faee91",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "75b904e37627d6b62c742e12136a3783c17182e2cbb0e717021a4795c1faee91"
+    },
+    {
+      "slug": "juanyun-baseunit-firmware",
+      "path": "content/notes/juanyun-baseunit-firmware.mdx",
+      "beforeSha256": "87058a4039b90a42bae74c0629a29f6ade3f64478e8454278dc718a98742c484",
+      "action": "suspend",
+      "reason": "开头、结尾重复 BaseUnit 先行并带向 ACUnit 的项目经历。",
+      "afterSha256": "df467bb162626c3012f1f1dd850dcfe09ee3b7f04eececd7876c1f76c6682b35"
+    },
+    {
+      "slug": "juanyun-dht11-am2302-board",
+      "path": "content/notes/juanyun-dht11-am2302-board.mdx",
+      "beforeSha256": "a5c6f6f7720d82df2540a699975fa3b0d008b1f039d4d223d40c1c87d7f4f368",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "a5c6f6f7720d82df2540a699975fa3b0d008b1f039d4d223d40c1c87d7f4f368"
+    },
+    {
+      "slug": "juanyun-diy-cooling",
+      "path": "content/notes/juanyun-diy-cooling.mdx",
+      "beforeSha256": "13264381c9a005a8211fceb3a4cdab8392ca72ac804949a90de1a5c4518441a2",
+      "action": "suspend",
+      "reason": "首次 Connect、控制链和 PID 尝试重复；保留原代码分析待选题。",
+      "afterSha256": "b2d6d37214e7da77eb2bc13c00aa50c5feffaf37f821186cbeb10e5bd67dabcb"
+    },
+    {
+      "slug": "juanyun-hardware-sop",
+      "path": "content/notes/juanyun-hardware-sop.mdx",
+      "beforeSha256": "551a9551b58e041006f30c2c58ac755067a5f04bcb1f6cedffbbdb317066c7af",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "551a9551b58e041006f30c2c58ac755067a5f04bcb1f6cedffbbdb317066c7af"
+    },
+    {
+      "slug": "juanyun-legacy-actuator-archive",
+      "path": "content/notes/juanyun-legacy-actuator-archive.mdx",
+      "beforeSha256": "a678a0e6219252e8719ac51f629ba1ba25c962593b0e0b58d477216041cd955a",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "a678a0e6219252e8719ac51f629ba1ba25c962593b0e0b58d477216041cd955a"
+    },
+    {
+      "slug": "juanyun-production-line-control-panel",
+      "path": "content/notes/juanyun-production-line-control-panel.mdx",
+      "beforeSha256": "fec39142151d050476a37e73216e25ce046db2723a8270145b56ad1ed6b20164",
+      "action": "suspend",
+      "reason": "首尾重复首次整机连通，按提交演进也较宽，待聚焦控制权或观测问题。",
+      "afterSha256": "3a0f8fe9e2e834d4344b752030eb196141725e3b243d42e65bfdfb66f8f0515f"
+    },
+    {
+      "slug": "sensorless-foc-handoff",
+      "path": "content/notes/sensorless-foc-handoff.mdx",
+      "beforeSha256": "174c506b52975ee8c03b9c0e255802e3db3981a2e9a07dc0f3f3d21c7287448d",
+      "action": "suspend",
+      "reason": "六步对比、运行点、Codex 调试与长远目标在首尾重复项目经历。",
+      "afterSha256": "af6f96f4081ae5c68ae45fb0cf54f288be8ba5593a275eebb35084965c5fa6c4"
+    },
+    {
+      "slug": "tianjin-metro-environment-monitoring-stm32",
+      "path": "content/notes/tianjin-metro-environment-monitoring-stm32.mdx",
+      "beforeSha256": "633dc840c3aaffee7a02135154b1d12fdb5e63d7fe5d70df56db9c8b23aab561",
+      "action": "suspend",
+      "reason": "综合 demo 的集成过程、分工、功能结果与工程师反馈重复。",
+      "afterSha256": "15cb6b2c4505bc3fe9525cc1a25100237ad1baf98b1b022b6a285c3fe50d6a75"
+    },
+    {
+      "slug": "tianjin-rail-control-pid-atc-reading",
+      "path": "content/notes/tianjin-rail-control-pid-atc-reading.mdx",
+      "beforeSha256": "7e143852af9ea0f26eddcff7a945834efb70a4b52b96db7c7ba4833adf0e209c",
+      "action": "suspend",
+      "reason": "再次展开光照前馈判断与培训到轨道控制阅读的主线，兼有笔记间重复。",
+      "afterSha256": "fd4b2c49ebd5716e403da257b43d34b81180b9960fd3bdb8433d7f2efe5ee591"
+    },
+    {
+      "slug": "tianjin-stm32-environment-setup",
+      "path": "content/notes/tianjin-stm32-environment-setup.mdx",
+      "beforeSha256": "9adabe1fa567a39a8f1fbb6fd93639dc4a65ca60cd7550ed1bb82a34c84126da",
+      "action": "suspend",
+      "reason": "Keil 配置、300 ms 闪烁与首次上板经历重复。",
+      "afterSha256": "772b1881a4d10bd6cea1fd4b03d9ef34add1a4fb8776dfa5a7f7781d450b758a"
+    },
+    {
+      "slug": "tianjin-stm32-gpio-exti-timer",
+      "path": "content/notes/tianjin-stm32-gpio-exti-timer.mdx",
+      "beforeSha256": "4f4cb277bc9ad5ff943f61cf1cf71c92ee00590e22bef9f730a43f3d1bd94242",
+      "action": "suspend",
+      "reason": "从 Arduino 转向外设的经历、编码器应用和定时器角色重复。",
+      "afterSha256": "f8ec2cfb3397c0f1db9d7d4947bb8e49ae6b310fb0f945e5a7ef31c5c708755f"
+    },
+    {
+      "slug": "tianjin-stm32-pwm-uart-adc",
+      "path": "content/notes/tianjin-stm32-pwm-uart-adc.mdx",
+      "beforeSha256": "ae0bf62ebe65ba0d50b5e041b5bc5151e6b21167a550bb1cd01b847e005e9856",
+      "action": "suspend",
+      "reason": "16 点标定的操作过程与前馈判断在主页也完整展开。",
+      "afterSha256": "707985ff898fd516ee3fa756942c34926560ca2a6b1fa1eb00bee4569396c9ec"
+    },
+    {
+      "slug": "turing-cmake-build-logic",
+      "path": "content/notes/turing-cmake-build-logic.mdx",
+      "beforeSha256": "32fec4eda75879e1c1219cdb732efaf3b407b81134c90f25427d64336c817cfe",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "32fec4eda75879e1c1219cdb732efaf3b407b81134c90f25427d64336c817cfe"
+    },
+    {
+      "slug": "turing-qt-seamly2d-first-run",
+      "path": "content/notes/turing-qt-seamly2d-first-run.mdx",
+      "beforeSha256": "8771a575c4e16653674aaace3e30a12c9c32cb424f4a82d0987464f05f4af1b4",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "8771a575c4e16653674aaace3e30a12c9c32cb424f4a82d0987464f05f4af1b4"
+    },
+    {
+      "slug": "turing-release-packaging-cross-platform",
+      "path": "content/notes/turing-release-packaging-cross-platform.mdx",
+      "beforeSha256": "8a152be4ca0501e9f3fc3514e0088106be4203ccc04a0eaf07f477bd42eb72f7",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "8a152be4ca0501e9f3fc3514e0088106be4203ccc04a0eaf07f477bd42eb72f7"
+    },
+    {
+      "slug": "turing-sm2d-xml-data-format",
+      "path": "content/notes/turing-sm2d-xml-data-format.mdx",
+      "beforeSha256": "19a9fc98cf4c843af6fb4e7f082685d576cd1444129bd4a83a2c55bbc3930aed",
+      "action": "retain-public",
+      "reason": "独立技术问题或来源保真资料；必要背景不当作重复项目叙事。",
+      "afterSha256": "19a9fc98cf4c843af6fb4e7f082685d576cd1444129bd4a83a2c55bbc3930aed"
+    },
+    {
+      "slug": "turing-three-week-development-log",
+      "path": "content/notes/turing-three-week-development-log.mdx",
+      "beforeSha256": "81d8da307a2b0e32adcf6dc921c443da8d00ee89d864d9a8d8142bf52fd091fa",
+      "action": "suspend",
+      "reason": "三周从环境、账户、打包到交付的完整路线重复。",
+      "afterSha256": "3aae9060386cf91553aca0eae672ab71b63228fbb4ec0375a8d83b18b1b448fd"
+    }
+  ],
+  "projects": [
+    {
+      "slug": "arduino-digital-clock-counter",
+      "beforeSha256": "86cc72482c1a9c20739023409269e5a77012b0e978451dde383770c80b393eca",
+      "action": "rewrite",
+      "path": "content/projects/arduino-digital-clock-counter.mdx",
+      "afterSha256": "3b208ad78464792aa480fbc6bd12bb240a694330972e1d5a8680209cfb729f4c"
+    },
+    {
+      "slug": "arduino-smart-car-line-tracker",
+      "beforeSha256": "78c7c3d38e7daa07e3ee88afa9a9e7427cd4feccf356bd79ca08cfeb531c4b36",
+      "action": "rewrite",
+      "path": "content/projects/arduino-smart-car-line-tracker.mdx",
+      "afterSha256": "ee116c37797d20de4c269c97dd08bc3c51af7b167973f2e1c3784252b4f3da43"
+    },
+    {
+      "slug": "claude-chime-hardware-power-board",
+      "beforeSha256": "a2698f058b8171ac1c5bcca35bec8cb9e5e8e81677dbc79bc0cb5f3188ea0ffa",
+      "action": "link-maintenance-only",
+      "path": "content/projects/claude-chime-hardware-power-board.mdx",
+      "afterSha256": "ea5faa92a6b103c7a222a15928f5e699fa130c2883ba1688106575d5570db96b"
+    },
+    {
+      "slug": "juanyun-diy-cooling-prototype",
+      "beforeSha256": "f9fcdb6380e5b7a5725760591cae3c546a6e0426a0b244e5ea2f37190e705248",
+      "action": "rewrite",
+      "path": "content/projects/juanyun-diy-cooling-prototype.mdx",
+      "afterSha256": "a331207cf28fd36df3dceb70f2d90efaf527f0fd46af43219fe17d9272c6042f"
+    },
+    {
+      "slug": "juanyun-thermal-hardware",
+      "beforeSha256": "06bb0a546fd4fd95c68b3eb2dcdff38b13839f5d7b9a29dc50b196c544f40e61",
+      "action": "rewrite",
+      "path": "content/projects/juanyun-thermal-hardware.mdx",
+      "afterSha256": "473fdae577deea19f01d686bd67bb0b78aaa761c40167874d5c66d584e4725f6"
+    },
+    {
+      "slug": "nanjing-turing-qt-embedded-learning",
+      "beforeSha256": "32b953ba69d11cc67e0e191c35a86736e9571c1a69703939fdb6b3998e1d6b0a",
+      "action": "rewrite",
+      "path": "content/projects/nanjing-turing-qt-embedded-learning.mdx",
+      "afterSha256": "c0a1e1817d71cac3c5d62dcea885c372d7b1807c9ccc204ee4843866aa4a2b08"
+    },
+    {
+      "slug": "sensorless-foc-learning-route",
+      "beforeSha256": "2a188adb0e50de32e4930c74637fff497aa4c678f7117fdac666e6a61fcfe3a1",
+      "action": "rewrite",
+      "path": "content/projects/sensorless-foc-learning-route.mdx",
+      "afterSha256": "d67038ce1180f537a3d95b8407d08bd74912710e1bff3e71bab78c902ce78455"
+    },
+    {
+      "slug": "tianjin-metro-stm32-foundation",
+      "beforeSha256": "c844d2ce4d3381985c8ba67087a0253f82eff10d0962807398d08db41f225061",
+      "action": "rewrite",
+      "path": "content/projects/tianjin-metro-stm32-foundation.mdx",
+      "afterSha256": "a4944d2de0eea432c64c915be9fd3c8a117a9360d714968ff914b0c2b051ad77"
+    }
+  ],
+  "publicNoteCount": 9,
+  "rewrittenProjectCount": 7,
+  "noteBodiesUnchanged": true
+}

@@ -1,0 +1,629 @@
+{
+  "date": "2026-09-06",
+  "state": "user-approved-release",
+  "branch": "docs/refactor-project-homepages",
+  "baselineCommit": "ce015f2a8ca035d3dc0582b2bc5e58e933370539",
+  "scope": {
+    "projects": 8,
+    "rewrittenBilingualHomepages": 7,
+    "chineseEnglishParagraphPairs": 82,
+    "claudeChime": "Only the two closing note-link sentences removed; approved narrative, metadata and images otherwise identical",
+    "noteSources": 24,
+    "suspendedNotes": 15,
+    "publicNotes": 9,
+    "publicNoteChannels": 2,
+    "unchangedBodyImagesAcrossSevenProjects": 36,
+    "unchangedMediaRecords": 84,
+    "allNoteBodiesUnchanged": true,
+    "publicUploadsApplicationAndDependenciesUnchanged": true
+  },
+  "writingReview": {
+    "method": "Author manual review of the seven revised Chinese/English pages and changed rules, using confirmed briefs and source records. This is not a fresh independent-model evaluation; lexical scans are supplementary.",
+    "step10": "Revised Chinese reviewed before English adaptation; see boundary-chinese-gate.json. Original pre-feedback gate records remain historical.",
+    "step12ChineseCategories": {
+      "语序不当": "Final revised Chinese reviewed in context; no established fault remains.",
+      "搭配不当": "Final revised Chinese reviewed in context; no established fault remains.",
+      "成分残缺或赘余": "Final revised Chinese reviewed in context; no established fault remains.",
+      "结构混乱": "Final revised Chinese reviewed in context; no established fault remains.",
+      "表意不明": "Final revised Chinese reviewed in context; no established fault remains.",
+      "不合逻辑": "Final revised Chinese reviewed in context; no established fault remains."
+    },
+    "english": "Selected Chinese account adapted and checked under existing English, L1, Truth and bilingual rules; no six-category Chinese gate applied to English.",
+    "gates": [
+      "Truth",
+      "Li Zhiyi",
+      "Reader-Prose L1 including evidence-inventory rejection",
+      "Chinese Sentences",
+      "Project/Note Division"
+    ],
+    "removedGate": "Editorial Conservation / Information Retention: removed from Step 9/10 obligations, Step 12 self-review and rubric. No mandatory inventory of old claims, links or caveats.",
+    "manualRegressionReview": {
+      "E01": "FOC states the 12 V open-loop electrical-frequency result directly.",
+      "E02": "Juanyun later tests retain company attribution without repeated not-my-test prose.",
+      "E03": "DIY FPS and temperature retain approximate personal recollection without benchmark claims or missing-test lists.",
+      "E04": "FOC switching failure and the next angle investigation remain.",
+      "E05": "DIY unfinished PID attempt remains in Chinese and English without restored disclaimers.",
+      "E06": "Old-draft retention gate removed, not renamed; optional audit facts and links omitted.",
+      "E07": "FOC manufacturing-file paragraph, Clock artifact inventory and Turing signing-file inventory omitted from narrative; source files preserved.",
+      "E08": "Manual rule walk-through: explicit audit requests retain their neutral audit exception; not a newly executed audit-writing trial.",
+      "Z08": "Current fixture removes an unsupported repair-cause claim, retaining chronology without an audit sentence.",
+      "D03": "Measurement location remains part of an accurate retained claim, not a separate disclaimer.",
+      "D10-D11": "Current division cases no longer require every unique fact to survive a rewrite."
+    },
+    "finalSentenceRepair": "FOC final paragraph about estimated speed rephrased as a change of attention to instantaneous angle, reviewed in Chinese and aligned in English at Step 12.",
+    "scope": "Only seven homepages revised after feedback. Existing notes remain unchanged; previous family inspection and topic allocation retained."
+  },
+  "checks": {
+    "lint": "passed after natural-ending rule and document updates",
+    "contentValidation": {
+      "projects": 8,
+      "noteSources": 24,
+      "media": 84
+    },
+    "encoding": {
+      "passed": true,
+      "utf8Files": 390
+    },
+    "typecheck": "passed in current production build; standalone check passed in preceding revision",
+    "webpackBuild": {
+      "passed": true,
+      "prerenderedPages": 24
+    },
+    "diffWhitespace": "passed",
+    "scopeIntegrity": "24 note bodies intact, only 15 visibility changes versus HEAD; all 8 frontmatter and image sequences unchanged from pre-feedback snapshots; Claude Chime identical to pre-feedback copy. This is source protection, not a prose information-retention gate.",
+    "skillStructure": "passed",
+    "removedGateConsistency": "No active retention-gate heading, rubric row or mandatory repeat check; sequential gate numbering and referenced paths verified.",
+    "frozenTrials": "Inputs, outputs and historical trial comparisons unchanged.",
+    "dependencyAudit": "npm audit --omit=dev: 0 vulnerabilities"
+  },
+  "http": {
+    "requests": 91,
+    "mismatches": [],
+    "indexAndProjectPausedLinkIssues": [],
+    "expectedPaused404s": 15
+  },
+  "browser": {
+    "homepageChecks": [
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 1440,
+        "lang": "en",
+        "expected": 8,
+        "title": "Arduino Smart Car Line-Tracking Kit",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 8,
+        "title": "Arduino 循迹小车焊接与控制实训",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 390,
+        "lang": "en",
+        "expected": 8,
+        "title": "Arduino Smart Car Line-Tracking Kit",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-smart-car-line-tracker",
+        "width": 390,
+        "lang": "zh",
+        "expected": 8,
+        "title": "Arduino 循迹小车焊接与控制实训",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 1440,
+        "lang": "en",
+        "expected": 8,
+        "title": "Arduino Breadboard Two-Digit Seven-Segment Counter",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 8,
+        "title": "Arduino 面包板两位数码管计数器",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 390,
+        "lang": "en",
+        "expected": 8,
+        "title": "Arduino Breadboard Two-Digit Seven-Segment Counter",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "arduino-digital-clock-counter",
+        "width": 390,
+        "lang": "zh",
+        "expected": 8,
+        "title": "Arduino 面包板两位数码管计数器",
+        "overflow": false,
+        "paragraphs": 8,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 1440,
+        "lang": "en",
+        "expected": 13,
+        "title": "DIY Laptop Cooler",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 13,
+        "title": "DIY 压风式笔记本散热器",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 390,
+        "lang": "en",
+        "expected": 13,
+        "title": "DIY Laptop Cooler",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-diy-cooling-prototype",
+        "width": 390,
+        "lang": "zh",
+        "expected": 13,
+        "title": "DIY 压风式笔记本散热器",
+        "overflow": false,
+        "paragraphs": 13,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 1440,
+        "lang": "en",
+        "expected": 11,
+        "title": "Tianjin Jintie STM32 Internship",
+        "overflow": false,
+        "paragraphs": 11,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 11,
+        "title": "天津津铁 STM32 嵌入式实习",
+        "overflow": false,
+        "paragraphs": 11,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 390,
+        "lang": "en",
+        "expected": 11,
+        "title": "Tianjin Jintie STM32 Internship",
+        "overflow": false,
+        "paragraphs": 11,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "tianjin-metro-stm32-foundation",
+        "width": 390,
+        "lang": "zh",
+        "expected": 11,
+        "title": "天津津铁 STM32 嵌入式实习",
+        "overflow": false,
+        "paragraphs": 11,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 1440,
+        "lang": "en",
+        "expected": 14,
+        "title": "Seamly2D Qt Development Internship",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 14,
+        "title": "南京图灵 Seamly2D 开发实习",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 390,
+        "lang": "en",
+        "expected": 14,
+        "title": "Seamly2D Qt Development Internship",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "nanjing-turing-qt-embedded-learning",
+        "width": 390,
+        "lang": "zh",
+        "expected": 14,
+        "title": "南京图灵 Seamly2D 开发实习",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 1440,
+        "lang": "en",
+        "expected": 14,
+        "title": "Cirro Phase-Change Cooling Controllers",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 14,
+        "title": "卷云相变散热器控制系统",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 390,
+        "lang": "en",
+        "expected": 14,
+        "title": "Cirro Phase-Change Cooling Controllers",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "juanyun-thermal-hardware",
+        "width": 390,
+        "lang": "zh",
+        "expected": 14,
+        "title": "卷云相变散热器控制系统",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 1440,
+        "lang": "en",
+        "expected": 14,
+        "title": "Custom Driver Board and Sensorless FOC",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 1440,
+        "lang": "zh",
+        "expected": 14,
+        "title": "自制驱动板与无感 FOC 实践",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 390,
+        "lang": "en",
+        "expected": 14,
+        "title": "Custom Driver Board and Sensorless FOC",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      },
+      {
+        "slug": "sensorless-foc-learning-route",
+        "width": 390,
+        "lang": "zh",
+        "expected": 14,
+        "title": "自制驱动板与无感 FOC 实践",
+        "overflow": false,
+        "paragraphs": 14,
+        "wrongLanguage": 0,
+        "brokenImages": []
+      }
+    ],
+    "noteIndexChecks": [
+      {
+        "width": 1440,
+        "language": "en",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "language": "zh",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "language": "en",
+        "rows": 9,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "language": "zh",
+        "rows": 9,
+        "overflow": false
+      }
+    ],
+    "pageErrors": [],
+    "comparisonChecks": {
+      "count": 28,
+      "projects": 7,
+      "languages": 2,
+      "widths": [
+        1440,
+        390
+      ],
+      "issues": []
+    },
+    "representativeScreenshots": "/private/tmp/project-homepages-work/boundary-screenshots",
+    "temporaryArtifacts": "/private/tmp/project-homepages-work/boundary-browser-artifacts"
+  },
+  "artifacts": {
+    "manifest": "manifest.json",
+    "beforeCopies": "before/",
+    "comparison": "comparison.html",
+    "comparisonSha256": "4201020c5e40794c9ff42349880524b11261903345c88a5018cdc4f3ae67c32e",
+    "topics": "../../active-work/project-note-topics-2026-09-06.md",
+    "restoration": "README.md",
+    "preFeedbackCopies": "pre-boundary-feedback/",
+    "currentSourceProtection": "boundary-scope-check.json"
+  },
+  "preview": {
+    "site": "http://127.0.0.1:3000/work",
+    "comparison": "http://127.0.0.1:8766/comparison.html"
+  },
+  "revision": "Natural closing paragraphs after evidence-inventory cleanup; information-retention gate remains removed.",
+  "verifiedAt": "2026-09-06T13:54:20.200856+00:00",
+  "closureRevision": {
+    "scope": "Reviewed all seven endings; changed only DIY and Turing, in both languages.",
+    "rule": "Step 11 and the existing flow-review/rubric allow a natural closing paragraph and check for abrupt data/file endings. No new gate or old-draft information-retention check.",
+    "manualChineseReview": "The two revised Chinese endings were reviewed against the six sentence categories before English adaptation, then rechecked in final section context. No established fault remained. No new project actions, results or technical explanations were added.",
+    "englishReview": "Same selected closure, facts and reaction, reviewed with the existing English and bilingual rules.",
+    "endingReview": {
+      "arduino-smart-car-line-tracker": "Existing ending connects the race result with the first interest in embedded work; retained.",
+      "arduino-digital-clock-counter": "Existing ending closes on the learned debugging habit; retained.",
+      "juanyun-diy-cooling-prototype": "Added a closing paragraph after remembered FPS/temperature figures, returning to the original purpose and the confirmed first-connection excitement.",
+      "tianjin-metro-stm32-foundation": "Existing ending connects the training to later peripheral reasoning; retained.",
+      "nanjing-turing-qt-embedded-learning": "Moved the existing file-submission sentence ahead of the existing personal reaction, so the account closes with the experience.",
+      "juanyun-thermal-hardware": "Existing handoff and gratitude close the experience; retained.",
+      "sensorless-foc-learning-route": "Existing ending closes the current experiment on a specific next question; retained."
+    },
+    "productionBuild": "Passed, 24 pages; TypeScript passed in the build.",
+    "browser": {
+      "pages": [
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 1440,
+          "lang": "en",
+          "expected": 13,
+          "paragraphs": 13,
+          "ending": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings.",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 1440,
+          "lang": "zh",
+          "expected": 13,
+          "paragraphs": 13,
+          "ending": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 390,
+          "lang": "en",
+          "expected": 13,
+          "paragraphs": 13,
+          "ending": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings.",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 390,
+          "lang": "zh",
+          "expected": 13,
+          "paragraphs": 13,
+          "ending": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 1440,
+          "lang": "en",
+          "expected": 14,
+          "paragraphs": 14,
+          "ending": "At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern develop branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection.",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 1440,
+          "lang": "zh",
+          "expected": 14,
+          "paragraphs": 14,
+          "ending": "最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 develop 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 390,
+          "lang": "en",
+          "expected": 14,
+          "paragraphs": 14,
+          "ending": "At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern develop branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection.",
+          "overflow": false,
+          "wrongLanguage": 0
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 390,
+          "lang": "zh",
+          "expected": 14,
+          "paragraphs": 14,
+          "ending": "最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 develop 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。",
+          "overflow": false,
+          "wrongLanguage": 0
+        }
+      ],
+      "comparisons": [
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 1440,
+          "lang": "en",
+          "ending": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings.",
+          "overflow": false
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 1440,
+          "lang": "zh",
+          "ending": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。",
+          "overflow": false
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 390,
+          "lang": "en",
+          "ending": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings.",
+          "overflow": false
+        },
+        {
+          "slug": "juanyun-diy-cooling-prototype",
+          "width": 390,
+          "lang": "zh",
+          "ending": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。",
+          "overflow": false
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 1440,
+          "lang": "en",
+          "ending": "At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern develop branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection.",
+          "overflow": false
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 1440,
+          "lang": "zh",
+          "ending": "最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 develop 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。",
+          "overflow": false
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 390,
+          "lang": "en",
+          "ending": "At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern develop branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection.",
+          "overflow": false
+        },
+        {
+          "slug": "nanjing-turing-qt-embedded-learning",
+          "width": 390,
+          "lang": "zh",
+          "ending": "最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 develop 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。",
+          "overflow": false
+        }
+      ],
+      "errors": []
+    },
+    "sourceProtection": "Compared every current page/note hash with the prior verified manifest: only DIY and Turing changed. All metadata and image sequences remain unchanged.",
+    "currentEndings": {
+      "juanyun-diy-cooling-prototype": {
+        "zh": "回头看，我把最初那个让风扇跟着电脑温度调整的想法，做成了能放到自己电脑下面使用的散热器。第一次点下 Connect，看着桌上的风扇跟着电脑里的温度读数变速，那种兴奋我到现在还记得。",
+        "en": "Looking back, I had turned the idea of a fan responding to the computer's temperature into a cooler I could use under my own laptop. I still remember the excitement of clicking Connect for the first time and seeing the fan on my desk respond to those temperature readings."
+      },
+      "nanjing-turing-qt-embedded-learning": {
+        "zh": "最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 `develop` 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。",
+        "en": "At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern `develop` branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection."
+      }
+    },
+    "previewRepair": "The temporary comparison server returned empty responses; its identified process was restarted and all targeted checks then passed.",
+    "priorChecks": "Earlier whole-site HTTP, note-index, five unchanged homepage and original comparison checks remain historical checks of unchanged surfaces. The two changed pages and comparison selections were rechecked in this revision.",
+    "temporaryFiles": "Removed this revision’s temporary browser script, output, screenshots and CLI files after review."
+  },
+  "publication": {
+    "authorization": "2026-09-06 user approved homepage replacement on the remote site; PR and production status are verified through GitHub.",
+    "nextNote": "Arduino car power delivery and speed sensing combined into one note, selected by user."
+  }
+}

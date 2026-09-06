@@ -1,0 +1,25 @@
+{
+  "revision": "2026-09-06 remove evidence-inventory prose",
+  "stage": "Step 10 before English adaptation",
+  "review": "Author manual review, not an independent model evaluation or automated grammar diagnosis.",
+  "checkedAt": "2026-09-06T13:38:05.868364+00:00",
+  "categories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "scope": "Seven Chinese project bodies; existing confirmed brief reused, no new research or interview claims.",
+  "result": "No established sentence fault remains in reviewed drafts. Audit paragraphs omitted; actual failures, operating conditions, attribution and recollection retained where useful.",
+  "drafts": {
+    "arduino-digital-clock-counter": "954003701bb034a302af869580ea59e60f21e892658d639ae05f807e282a53e7",
+    "arduino-smart-car-line-tracker": "347607e0b16998fb8fdb691d57017b6452f63374f7f100d17a94c95e34f3519b",
+    "juanyun-diy-cooling-prototype": "b9a10de7837279baa925d33cc21dd166f9bce746a6421d6db37978361bd7562b",
+    "juanyun-thermal-hardware": "2e500cee080a3f3a5b7591f2a176cdb51ba14d7c134935fdb2b77c2b30aec748",
+    "nanjing-turing-qt-embedded-learning": "fdd86ed3d58ff523b54e5da6260f83b1bfd2ce45d8bcc75e5317abcdecc56b77",
+    "sensorless-foc-learning-route": "fa0f32f121ccdb5e9c9afe7e0b8137c39d67183dec434515733a041db9d6f193",
+    "tianjin-metro-stm32-foundation": "9ccaf9e8960f2ca982df9044f0f7147d1a73757e0c14143fea79a09e78519133"
+  }
+}

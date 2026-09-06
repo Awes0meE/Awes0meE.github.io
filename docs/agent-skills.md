@@ -33,6 +33,7 @@ Source:
 - focused references:
   - `skills/engineering-note-writer/references/evidence-and-boundaries.md`
   - `skills/engineering-note-writer/references/shared-understanding.md`
+  - `skills/engineering-note-writer/references/project-note-division.md`
   - `skills/engineering-note-writer/references/research-expansion.md`
   - `skills/engineering-note-writer/references/cognition-led-composition.md`
   - `skills/engineering-note-writer/references/voice-rules.md`
@@ -42,15 +43,19 @@ Source:
   - `skills/engineering-note-writer/references/bilingual-writing.md`
   - `skills/engineering-note-writer/references/self-review.md`
   - `skills/engineering-note-writer/references/style-examples.md`
-- direct-prose regression fixture:
+- current qualitative regression fixtures:
   - `skills/engineering-note-writer/tests/direct-prose-regression.md`
+  - `skills/engineering-note-writer/tests/evidence-inventory-regression.md`
   - `skills/engineering-note-writer/tests/chinese-sentence-regression.md`
+  - `skills/engineering-note-writer/tests/project-note-division-regression.md`
 
 Purpose:
 
 - Turn rough user bullet points, project details, timelines, technical stacks, evidence files, and a user-confirmed brief into cognition-led Chinese-first engineering-note prose with accurate English counterparts.
+- Keep the homepage's account of the user's work distinct from learning notes that investigate bounded questions. Inspect the family at Step 1, settle open topics at Step 2, allocate detail at Step 5, and check cross-page division at Step 12. Reuse confirmed topics, respect delegated selection, and never invent past curiosity from present research.
 - Research current reliable knowledge beyond the uploaded material after the brief, without converting external context into invented project history, actions, results, or measurements.
-- Keep facts and authorship evidence-gated while following the user's changing understanding across systems or chronology, without imposing a cognition template.
+- Keep factual checks internal and omit evidence-inventory prose. The independent editorial-conservation / information-retention gate has been removed; do not require every old fact, link, or caveat to survive a rewrite.
+- Keep facts and authorship accurate while following the user's changing understanding across systems or chronology, without imposing a cognition template.
 - Carry confirmed emotion, rhythm, and evidence-grounded humor without lowering or amplifying emotional intensity in either language; adapt English cadence naturally while keeping the same substantive force.
 - Run one repository-local voice-preserving editorial pass after the Chinese cognition draft, keeping Li Zhiyi's identity and confirmed emotional intensity unchanged in both languages.
 - Use the fixed bilingual sequence: compose Chinese from the confirmed brief,
@@ -59,7 +64,7 @@ Purpose:
   then run the existing L1-5 calque and pair-divergence check. Recheck final Chinese
   at Step 12. The six sentence-error categories apply only to Chinese; English
   retains its existing adaptation and review rules. A rewrite re-derives surface grammar
-  from locked claims instead of preserving an old sentence skeleton.
+  from selected supported facts instead of preserving an old sentence skeleton.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1-1 through L1-5 gates; L1-5 rejects even one unqualified syntax/collocation calque or one-to-one narrative clause mirror. Keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Use direct assertions and normal sentence syntax in scoped normal narration, with inline code for exact technical tokens. Keep model-authored em dashes off by default; allow semantic colons and grounded quotations, while rejecting template-label colons, decorative quotation, dense repetition, and correctly scoped article-local bans. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.

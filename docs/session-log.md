@@ -823,3 +823,70 @@ Append-only chronology for meaningful project milestones. Keep detailed current 
   8 project files and 24 note files. [PR #35](https://github.com/Awes0meE/Awes0meE.github.io/pull/35) is authoritative for
   merge/deployment state; merged topic branches may be deleted, while
   operational `gh-pages` remains required.
+
+## 2026-09-06 — Project homepage and learning-note division
+
+- Summary: Implemented the user's trunk/branch rule in the repository-local
+  Engineering Note Writer. Homepages tell the user's work and project progression;
+  notes investigate bounded questions arising from the work without replaying
+  complete experiences or reasoning.
+- Workflow: added `references/project-note-division.md`, routed family reading,
+  topic selection, content allocation, and bilingual review through Steps 1, 2,
+  5, and 12, and added Self Review Gate 6. Reuse confirmed topics or choose when
+  delegated; preserve necessary context and local evidence boundaries. New
+  research must not become invented historical curiosity, action, or testing.
+- Compatibility: clarified how authorized deduplication preserves claims at
+  accessible destinations without restoring every duplicate; unique facts and
+  voice anchors remain protected. Existing source documents and narrow edits
+  retain their scope. Chinese sentence checks remain at Steps 10 and 12, and
+  English language rules are unchanged.
+- Knowledge cleanup: reconciled product intent, agent guidance, content workflow,
+  skill index, overlap-audit status, project memory, and the active relay. Article
+  redistribution is still pending; no project, note, media, application, public
+  artifact, or frozen trial output was changed.
+- Verification: skill validation, 16 reference-path checks, lint, content
+  validation (8 projects / 24 notes / 84 media), UTF-8 validation (364 text files),
+  TypeScript, and diff whitespace checks passed. Added and manually reviewed
+  16 qualitative cases covering paraphrased repetition, distinct investigations,
+  premise checking, topic reuse, present versus historical learning, conservation,
+  bilingual parity, protected sources, and narrow-scope exceptions. These are
+  manual policy checks, not fresh independent-model trials. No production build
+  was rerun for this skill/documentation-only change.
+- Git state: work is on local `feat/project-note-division`, based on synchronized
+  `main` at `b43c83b`; no new push, PR, merge, or deployment was requested.
+
+## 2026-09-06: Seven homepages and recoverable note suspension
+
+The user explicitly authorized a one-time batch rewrite of the seven homepages other than Claude Chime, using the latest writer and already confirmed project briefs. They also requested temporary suspension of every note repeating a full project experience, with restoration preserved, and topic proposals without drafting new notes.
+
+Created `docs/refactor-project-homepages` from `ce015f2` (the local project/note-division skill commit). Seven Chinese-first and English-derived homepage candidates now replace the previous bodies. Fifteen notes change only `visibility: public` to `visibility: private`; nine independent technical/original-document notes remain public. All 24 note bodies are unchanged. Claude Chime retains its approved narrative and only loses the two closing sentences linking to its paused note. All 36 body images across the seven revised pages, covers, technical metadata, public uploads, and 84 media records are retained.
+
+The review packet is `docs/experiments/project-homepages-2026-09-06/`: eight before copies, a SHA-256 manifest, Step 10 Chinese review record, bilingual comparison HTML, recovery instructions, and final verification results. `docs/active-work/project-note-topics-2026-09-06.md` proposes one priority and one alternative per project, keeps existing automatic-control work distinct, and explicitly treats the proposals as future learning rather than historical experiments. No new notes were written.
+
+The writer's six-category Chinese review ran before English and again on the final Chinese. Final review clarified the DIY fan command wording and ADC-to-temperature conversion, aligned the separate clean-Windows test in both languages, and removed several sentences that sounded like instructions to an editor rather than Alvin's own account. English retained its existing adaptation and review gates. The prior Smart Car “13 digital IO” assertion was removed from the new homepage after checking the official Nano pinout; the untouched suspended note is flagged for correction before restoration.
+
+Content, encoding, typechecking, scope-integrity checks, and a 24-page webpack production build passed. Browser checks covered seven pages in English/Chinese at 1440 and 390 pixels, verified correct paragraph visibility without horizontal overflow or broken images, and checked the nine-row/two-channel note index. All 105 local route/attachment requests matched their expected results, including 404 for all 15 paused notes and no incoming paused-note links from the indexes or project pages. Later final wording changes were rebuilt and rechecked; the exact final scope and hashes are in `verification.json`.
+
+The local site runs at `http://127.0.0.1:3000/work`, and the bilingual comparison at `http://127.0.0.1:8766/comparison.html`. This batch is uncommitted, unpushed, and unpublished pending user review. Existing `main`, `feat/project-note-division`, and `gh-pages` were preserved; no branch cleanup or new release was requested in this turn.
+
+## 2026-09-06 — Remove the old-draft retention gate and evidence-inventory voice
+
+- User feedback: the seven reviewed homepages were mostly satisfactory, but repeated statements about evidence limits sounded like a robot inventorying the archive. The user then explicitly requested removal of the independent editorial-conservation / information-retention check.
+- Writer: removed that gate, its before/after content inventory and repeat-after-English requirement. Updated the primary workflow, editorial guidance, self-review numbering, bilingual guidance, current rubric and qualitative regressions. Existing Truth review checks retained claims; it does not require publishing every fact, caveat or link from the old draft.
+- Prose: seven bilingual pages now omit missing-test lists, archive inventories and repeated cannot-claim explanations. Real failures, unfinished attempts, natural attribution and useful conditions remain. Claude Chime is unchanged from the pre-feedback version. The 24 note bodies, 15 temporary visibility changes, all images and assets remain intact. No new notes were written.
+- Review: Chinese refinement and six-category review preceded English, with a final Chinese recheck and paired English repair. Rule and prose review was manual, not an independent model trial. Skill validation, retained-path checks, typecheck, 24-page webpack build, 91 local HTTP requests, 28 homepage language/viewport checks, 4 note-index checks and 28 comparison checks passed. Final lint, encoding and diff checks are recorded in the packet's verification.json.
+- State: local on `docs/refactor-project-homepages`; no commit, push, merge or deployment in this revision. Pre-feedback copies and verification remain in `docs/experiments/project-homepages-2026-09-06/pre-boundary-feedback/`. The comparison page shows the current candidate against the original pre-batch copy.
+
+## 2026-09-06 — Natural project endings
+
+- User feedback: project pages need a normal close; avoiding forced elevation must not produce an abrupt stop after data. The old Step 11 did not forbid endings, but its emphasis on stopping had been applied too aggressively after disclaimer removal.
+- Changes: Step 11, cognition guidance, the existing flow-review question and rubric now welcome a supported closing paragraph. Reviewed the seven endings; added a Chinese-first bilingual close to DIY after its remembered performance figures, and moved Turing's existing submission sentence before the final personal reaction. The other five endings already close their accounts. No new project events or results were added, and the removed information-retention gate remains removed.
+- Verification: skill validation, Chinese six-category review, English parity review and a 24-page production build with TypeScript checks passed. The packet's verification.json records the final targeted desktop/mobile browser review, lint and source hashes for this revision.
+- State: still a local, unpublished candidate on `docs/refactor-project-homepages`. The existing note suspension and protected Claude Chime narrative remain unchanged.
+
+## 2026-09-06 — Neat and approved homepage publication
+
+- User approved the revised seven bilingual homepages and requested Neat, remote replacement, then note work one project at a time. They selected Arduino car power delivery and speed sensing together in the first note.
+- Reconciled the 14 root/top-level documentation files, current handoff and review packet. Corrected stale Notes counts in DESIGN and USER_GUIDE to data-driven 9 notes / 2 project channels / 2 years; clarified the source inventory versus visible notes; consolidated repeated current-memory entries and removed obsolete pending-review instructions.
+- The release includes the latest writer rules, 15 visibility-only note suspensions and original snapshots. All source content/images/assets match the approved verification manifest; note rewriting starts after this release.
+- The homepage content was already checked with lint, TypeScript, a 24-page production build, bilingual desktop/mobile checks and local route/asset checks. Publication-specific PR checks and production validation are recorded on GitHub.
