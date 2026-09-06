@@ -1,0 +1,30 @@
+{
+  "stage": "Step 10, Chinese editorial refinement completed before English adaptation",
+  "date": "2026-09-06",
+  "sha256": "21000322d938ba3933c0f378a1882e7d3c7b81c41075a3fce116cce6ad76f61d",
+  "reviewedCategories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "establishedViolationsRemaining": 0,
+  "method": "Manual contextual reading, not an automated semantic classifier",
+  "editorialRepairs": [
+    "Changed 接受高或低 to 识别高或低 for the input circuit.",
+    "Replaced the abstract claim that a bit omits a voltage with a direct account of what the program can read.",
+    "Made setup/hold conditions specific to ending parallel load."
+  ],
+  "technicalChecks": [
+    "Seven ITR20001 line sensors, six collision inputs and two keys; 15 useful inputs across two registers.",
+    "Phototransistor collector OUT has a pull-up; weak reflection can make the input high. No extra comparator is assigned to the shown circuit.",
+    "PL low is asynchronous parallel load, not a falling-edge snapshot; both chips share load.",
+    "Read precedes clock; first serial bit reaches bit 7, last bit reaches bit 0.",
+    "reg0 bits 0 through 6 map leftmost through centre to rightmost; !! preserves truth, switch ! inverts it.",
+    "0b00001000 is a worked example, not a captured measurement."
+  ],
+  "allocation": "This note follows line reflection, input thresholds, capture, serial read and field mapping. It does not repeat the homepage journey or the first note power and wheel-speed investigation."
+}

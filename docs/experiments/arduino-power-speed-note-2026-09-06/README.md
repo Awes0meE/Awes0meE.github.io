@@ -1,12 +1,12 @@
 # Arduino power and wheel-speed note review
 
-2026-09-06. User selected power delivery and wheel-speed sensing in **one note**. The new Chinese-first bilingual draft replaces the body of `content/notes/arduino-smart-car-line-tracking-learning-note.mdx` locally and remains `visibility: private`. It is not published or approved yet.
+2026-09-06. User selected power delivery and wheel-speed sensing in **one note**. The new Chinese-first bilingual draft replaces the body of `content/notes/arduino-smart-car-line-tracking-learning-note.mdx` locally and remains `visibility: private`. The user has since approved the content; it is not published yet.
 
 Open `preview.html` through a local static server. The current session uses <http://127.0.0.1:8767/preview.html>. The full language drafts are `chinese-draft.md` and `english-draft.md`; the preview uses the same paragraphs. Figures and source links use the already public portfolio assets and original manufacturers' pages.
 
 ## Recovery
 
-`before.mdx` preserves the old private note exactly as it stood in main commit `8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d`. Restoring the body and restoring public visibility are separate actions. Keep the current source private until the user reviews the new note. No other project or note body is part of this draft.
+`before.mdx` preserves the old private note exactly as it stood in main commit `8e009efd2a00ef8fdbb2a47eaed9bf5b2251020d`. Restoring the body and restoring public visibility are separate actions. The user has approved the rewritten content. Keep visibility separate from that content approval until the notes are prepared for publication. No other project or note body is part of this draft.
 
 The date now identifies this present investigation, while the project homepage retains the original project period. Present research and calculated examples are not retroactive claims about the original race or measurements.
 

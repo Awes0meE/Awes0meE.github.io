@@ -1,0 +1,134 @@
+{
+  "date": "2026-09-06",
+  "state": "user approved both bilingual Arduino notes; local final copies",
+  "source": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+  "sourceSha256": "a33594f94a4efd6e2bcddc62831c0bda508bdc23dfb992cc5e86d20d8b66b4e1",
+  "chineseFinalSha256": "0479e31654143def7b1feee5ee7ebee38d83b613d2ab2e1114b9ce3dee8b83cd",
+  "englishFinalSha256": "828e7380edbacdd3738b018a433c3dd58cfe10f6e69474e448bae0ff598ae320",
+  "editorial": {
+    "method": "Manual sentence-by-sentence and paired-language review in the current session",
+    "truth": "pass for new note",
+    "voice": "pass; present investigation follows the actual black-line-or-air comment, threshold interpretation and read order",
+    "readerProseL1": "pass; zero applicable violations after final quotation repair",
+    "chineseStep12": {
+      "categories": [
+        "语序不当",
+        "搭配不当",
+        "成分残缺或赘余",
+        "结构混乱",
+        "表意不明",
+        "不合逻辑"
+      ],
+      "result": "pass",
+      "establishedViolationsRemaining": 0
+    },
+    "english": "pass under the existing English rules; Chinese six-category rules were not applied to English",
+    "bilingual": "15 equivalent paragraph pairs; narrative idiom reviewed separately from forced technical parallels",
+    "naturalClose": "returns to the opening if condition and physical illumination",
+    "crossPageDivision": "pass for the new note allocation; only necessary phototransistor context and the same circuit sheet overlap",
+    "protectedSiblingConflict": "Homepage six-IR count is stale; BOM, dedicated manual section, schematic and source code agree on seven. Reported and queued for later publication correction; no complete-family reconciliation claim."
+  },
+  "sourceChecks": {
+    "lexical_hits": [],
+    "local_links_valid": 9,
+    "serial_reconstruction_examples": 256,
+    "protected_files_unchanged": {
+      "content/notes/arduino-smart-car-line-tracking-learning-note.mdx": "e877ed0f7d99206d3451d55ae3c36ea0396196bfe5f3a3d27622f315b0d7bc02",
+      "content/projects/arduino-smart-car-line-tracker.mdx": "ee116c37797d20de4c269c97dd08bc3c51af7b167973f2e1c3784252b4f3da43"
+    }
+  },
+  "browser": {
+    "checks": [
+      {
+        "width": 1440,
+        "language": "zh",
+        "lang": "zh-CN",
+        "title": "Arduino 小车的循迹信号与输入采集",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "lastParagraph": "现在再回到开头的 if(sensor.ir_left_3)，我能把它一路接回车底。反射光先改变光敏三极管的电流，电路把变化转成电压，74HC165 接收电平、装载并移出，程序再把相应比特放进左侧最外一颗传感器的字段。那句“黑线或悬空”也提醒我，读懂这个字段还需要看传感器此刻放在哪里。把这条路径弄清楚以后，我再看循迹判断，就能同时想到代码中的位置和车底真实的受光条件了。",
+        "links": true
+      },
+      {
+        "width": 1440,
+        "language": "en",
+        "lang": "en",
+        "title": "Arduino Car Line Sensing and Input Acquisition",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 748
+          }
+        ],
+        "overflow": false,
+        "lastParagraph": "Returning to if(sensor.ir_left_3), I can now follow the variable all the way back beneath the car. Reflected light changes phototransistor current, the circuit turns that into a voltage, and the 74HC165 accepts a logic level, loads it, and shifts it out. The program places the relevant bit in the outermost left sensor's field. The comment about black tape or being clear of the surface also brings the sensor's present position into the interpretation. With that path understood, a line-following condition in the code connects to both a physical location on the car and the light actually reaching it.",
+        "links": true
+      },
+      {
+        "width": 390,
+        "language": "zh",
+        "lang": "zh-CN",
+        "title": "Arduino 小车的循迹信号与输入采集",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "lastParagraph": "现在再回到开头的 if(sensor.ir_left_3)，我能把它一路接回车底。反射光先改变光敏三极管的电流，电路把变化转成电压，74HC165 接收电平、装载并移出，程序再把相应比特放进左侧最外一颗传感器的字段。那句“黑线或悬空”也提醒我，读懂这个字段还需要看传感器此刻放在哪里。把这条路径弄清楚以后，我再看循迹判断，就能同时想到代码中的位置和车底真实的受光条件了。",
+        "links": true
+      },
+      {
+        "width": 390,
+        "language": "en",
+        "lang": "en",
+        "title": "Arduino Car Line Sensing and Input Acquisition",
+        "paragraphs": 15,
+        "headings": 4,
+        "codeBlocks": 1,
+        "images": [
+          {
+            "loaded": true,
+            "width": 303
+          }
+        ],
+        "overflow": false,
+        "lastParagraph": "Returning to if(sensor.ir_left_3), I can now follow the variable all the way back beneath the car. Reflected light changes phototransistor current, the circuit turns that into a voltage, and the 74HC165 accepts a logic level, loads it, and shifts it out. The program places the relevant bit in the outermost left sensor's field. The comment about black tape or being clear of the surface also brings the sensor's present position into the interpretation. With that path understood, a line-following condition in the code connects to both a physical location on the car and the light actually reaching it.",
+        "links": true
+      }
+    ],
+    "anchor": {
+      "hash": "#section-3",
+      "top": 24
+    },
+    "consoleNote": "The automation session logged one favicon.ico 404 on the existing production asset domain; all article imagery and content loaded. Local preview has a data favicon."
+  },
+  "checks": {
+    "lint": "pass",
+    "content": "8 projects, 25 notes, 84 media",
+    "encoding": "pass",
+    "typecheck": "pass",
+    "webpackBuild": "pass, 24 prerendered pages",
+    "publicNoteCount": 9,
+    "privateNoteCount": 16,
+    "diffCheck": "pass"
+  },
+  "publication": "none; private visibility retained for both Arduino drafts",
+  "preview": "http://127.0.0.1:8768/preview.html",
+  "userReview": "User read the second note and confirmed it was good with no issues on 2026-09-06."
+}
