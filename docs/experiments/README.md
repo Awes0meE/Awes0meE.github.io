@@ -22,7 +22,11 @@ Current archives:
 - `chinese-gate-claude-chime-project-2026-09-06/`: complete bilingual Claude
   Chime project-page rewrite using the Chinese sentence gate, with original
   and candidate MDX, full Markdown/HTML comparisons, and a fact/gate review.
-  The candidate is pending review and has not replaced the published page.
+  The user approved the candidate on 2026-09-06 and it was copied exactly into
+  the project content file for publication. The comparison and audit remain
+  frozen evidence of the earlier review stage; their original pending-review
+  labels describe that stage, not the current approval state. Current handoff:
+  `docs/active-work/portfolio-copy-rewrite.md`.
 
 Keep future experiment directories date-stamped. Preserve their original inputs,
 candidate mapping, and final audits so later writing-rule changes can be traced
