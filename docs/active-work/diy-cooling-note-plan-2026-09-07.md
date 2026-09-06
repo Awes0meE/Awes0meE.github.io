@@ -2,8 +2,10 @@
 
 2026-09-07. The user approved both counter notes, including the ending revision,
 and requested the next project. Following the topic list, the active family is
-DIY laptop cooling. The user selected both topics together. Draft both bilingual notes for review,
-reusing the confirmed project context.
+DIY laptop cooling. The user selected both topics together. Both bilingual drafts
+are complete, using the confirmed context, and await review at
+`http://127.0.0.1:8770/preview.html`. The review/restoration packet is
+`../experiments/diy-cooling-notes-2026-09-07/`.
 
 ## 温度采样与风扇响应
 
@@ -68,9 +70,10 @@ as project context rather than recasting them as new measurements.
 
 The homepage retains the actual build, desktop application, PCB revisions,
 first connection, enclosure and personal use. The old private
-`content/notes/juanyun-diy-cooling.mdx` supplies material for the two bounded
-investigations and remains intact until the topics are selected. Preserve a
-recovery copy when replacing its body. Proposed experiments remain present
+`content/notes/juanyun-diy-cooling.mdx` supplied material for the two investigations.
+Its original is preserved as `before.mdx` in the review packet; the same path now
+holds the private sampling note. The new private fan note is
+`content/notes/juanyun-diy-cooling-pwm-fan-control.mdx`. Proposed experiments remain present
 learning; no project event is invented from a code path or an external source.
 
 Research starting points verified during selection:
@@ -81,4 +84,4 @@ Research starting points verified during selection:
 
 Apply the current Engineering Note Writer, Chinese Step 10 and Step 12 checks,
 English adaptation rules and cross-page division. Compare nearby endings for
-recurrence; an apt occasional next-time sentence is allowed. The user selected both notes; do not ask for the same selection again.
+recurrence; an apt occasional next-time sentence is allowed. The user selected both notes and both drafts are ready; do not repeat topic selection.

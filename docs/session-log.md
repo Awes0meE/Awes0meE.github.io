@@ -933,3 +933,12 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - Recorded selection scope, primary-source starting points and cross-page allocation in `docs/active-work/diy-cooling-note-plan-2026-09-07.md`. No new note draft or firmware change, and no remote action.
 
 - Same-turn selection: the user chose both DIY notes. Continue with Chinese-first bilingual drafts using the confirmed project brief; no repeated topic confirmation is needed.
+
+## 2026-09-07 — Draft the two selected DIY cooling notes
+
+- User selected both topics. Created `docs/rewrite-diy-cooling-notes` from counter approval/selection checkpoint `2b21af8`; reused confirmed project context and current writer rules without another interview.
+- Replaced the old private DIY note with the sampling/response study, preserving an exact recovery copy. Added the separate private PWM fan/feedback study. The combined bilingual preview is `http://127.0.0.1:8770/preview.html`; both await user review.
+- Read desktop and ESP32 source, visually checked the schematic, and researched primary Microsoft, LibreHardwareMonitor, Espressif, Analog Devices and Noctua references. Sampling prose accounts for independent tasks and button-triggered peak resets. Fan prose separates actual board connections from manufacturer examples and proposed measurements. Homepage work/connection stories and the four approved Arduino notes are unchanged.
+- Chinese refinement and the six-category Step 10 review preceded English. Final Step 12 and bilingual review corrected the reset-excerpt introduction and kept receive times explicit in the hypothetical example. Both notes close their own investigations without recurring look-back/next-project frames. No evidence-inventory prose or old-draft retention gate was added.
+- Added a faithful PNG render of the existing public ESP32 schematic; the original PDF and source code are unchanged. Lint/content/encoding, typecheck and a 24-page webpack build passed. Eight desktop/mobile bilingual browser views, section navigation, article/language switching and footer controls passed. The initial TOC test was corrected to allow normal bottom-clamped scrolling; no page change was needed.
+- Current collection: 8 projects, 27 note sources, 9 public notes, 18 private sources and 84 media records. Recovery, final source hashes and review observations are in `docs/experiments/diy-cooling-notes-2026-09-07/`. No remote push, PR, merge or publication.

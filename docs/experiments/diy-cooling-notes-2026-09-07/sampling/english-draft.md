@@ -1,55 +1,28 @@
----
-title: "Temperature Sampling and Fan Response"
-titleZh: "温度采样与风扇响应"
-summary: "Following sensor selection, asynchronous reading and sending, and peak resets to understand when a temperature sample changes fan output."
-summaryZh: "沿传感器选择、异步读取与发送、温度峰值清空，研究一条温度样本何时影响风扇输出。"
-date: "2026.09.07"
-tags: ["ESP32", "C#", "Temperature Sampling", "Timing", "Cooling"]
-projectSlug: "juanyun-diy-cooling-prototype"
-visibility: "private"
----
+# Temperature Sampling and Fan Response
 
 To understand a change in this cooler's output, I want to follow the temperature reading that led to it. My desktop program sends the ESP32 short messages such as `CPU62.7`. The number travels easily enough, but explaining the response calls for more detail: where the reading came from, when it was obtained, and what happened to it along the way.
 
-我给这台散热器写的程序，会把电脑里的温度拼成 `CPU62.7` 这样的消息发给 ESP32。短短一行就能把数值送过去，但要解释风扇为什么在某个时刻改变输出，还得知道这个数从哪里来、什么时候读到，又经过了怎样的处理。我想顺着一条温度消息，把这几件事弄清楚。
-
-## Sensor Selection / 传感器的选择
+## Sensor Selection
 
 In the [desktop source](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs), LibreHardwareMonitor is used to walk through the hardware and its sensors. Each matching CPU temperature overwrites `cpuTemperature`, with the same approach used for GPU readings. When several temperature entries match during a pass, later assignments replace earlier ones. The name CPU temperature sounds specific, yet the value left in that field depends on which matching entry the traversal reaches last.
 
-[上位机代码](/uploads/projects/juanyun-public/diy-cooling/desktop-form1.cs)用 LibreHardwareMonitor 遍历硬件和传感器。每找到一个 CPU 温度项，就把它的值写进 `cpuTemperature`；GPU 也做同样的处理。如果一轮遍历遇到多个符合条件的温度项，后面的赋值就会覆盖前面的。变量名虽然叫 CPU 温度，具体留下哪一项，却取决于遍历时最后遇到了谁。
-
 That affects how I interpret a temperature change. To follow `CPU Package`, for example, I would select that entry explicitly and keep observing it. LibreHardwareMonitor exposes `Name` and `Identifier` through its [`ISensor` interface](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs), giving me a way to identify sensors and define a consistent selection rule. One decimal place makes the number convenient to display. A consistent source makes successive readings useful to compare.
 
-这个细节会影响我怎样理解温度变化。假如想跟踪 `CPU Package`，就应该明确选中这一项，持续观察同一个对象。[LibreHardwareMonitor 的 `ISensor` 接口](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/LibreHardwareMonitorLib/Hardware/ISensor.cs)提供了 `Name` 和 `Identifier`，可以用来辨认传感器，再建立固定的选择规则。保留一位小数方便显示，选定读数的来源才方便比较。
-
-## Reading and Sending / 读取和发送的顺序
+## Reading and Sending
 
 Even with a sensor selected, a new reading still has to be ready for transmission. The desktop timer is set to five seconds. Within one callback, however, it starts monitoring and sending through separate `Task.Run` calls. Monitoring appears first in the source, but there is no dependency making transmission wait for it to finish. [Microsoft's task programming guide](https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-based-asynchronous-programming) covers scheduling and the use of waits or continuations to establish dependencies. As written, the sender can pick up a temperature left in the field by a previous pass.
 
-来源确定以后，还要看新值能不能赶上这一次发送。上位机的定时器设为 5 秒，但它在一次回调中分别用两个 `Task.Run` 启动测温和发送。代码里先写测温任务，后写发送任务，两项任务之间却没有等待关系。[Microsoft 的任务编程说明](https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-based-asynchronous-programming)介绍了任务的调度，以及用等待或延续建立执行依赖的方法。按这段程序的写法，发送时完全可能读到上一轮留在字段里的温度。
-
 A hypothetical sequence makes the ordering easier to follow. Start with 60°C in the field. At 5.000 seconds, the program submits both tasks; at 5.002, the sender takes 60°C; only at 5.080 does monitoring write a new value of 72°C. The transmitted value is still 60°C. Those millisecond offsets are chosen for the example. What matters is the missing wait for the current read to complete. Shortening the timer interval would leave that dependency unresolved.
-
-用一组假设的时刻就能看清这个过程。字段里原来是 60°C；5.000 秒时，程序提交两个任务；发送任务在 5.002 秒取走 60°C；测温任务到 5.080 秒才写入新的 72°C。这次发出去的仍是 60°C。这里相差的几十毫秒只是推演用的数值，关键在于发送没有等本轮读取完成。把定时器改得更快，也不会自动补上这层依赖。
 
 CPU and GPU also take turns using the sending opportunity. At the intended cadence, one type is sent every five seconds, so each type gets a turn roughly every ten seconds. A timer tick, completion of a sensor read, and transmission of its value are therefore separate events. I would have a read return a definite sample and pass that sample to the sender. That avoids looking up a shared field again at send time while another task may be changing it.
 
-CPU 和 GPU 还轮流占用发送机会。按程序预定的节奏，每 5 秒发其中一种，每种温度大约 10 秒才轮到一次。因此，定时器触发、某个传感器读完，以及它的数值发出，本来就是三个不同的时刻。我会让一次读取返回一个确定的样本，再把这个样本交给发送任务，避免发送时重新去取一个随时可能被别的任务改写的共享字段。
-
-## The Peak Window / 峰值保留到什么时候
+## The Peak Window
 
 The [ESP32 program](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) handles an arriving message in two ways. It stores the most recently received readings in `cpuValue` and `gpuValue` for the OLED. It updates `maxCpuValue` and `maxGpuValue` only when a higher reading arrives. About every 30 seconds, the periodic control path saves the larger of those peaks in `maxValue` and calculates duty according to the current mode. A lower new reading can reach the screen immediately while an earlier high reading remains available for the next output calculation.
 
-到了 [ESP32 程序](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)，同一条消息又会进入两组变量。`cpuValue` 和 `gpuValue` 保存最近收到的值，供 OLED 显示；`maxCpuValue` 和 `maxGpuValue` 只在收到更高的温度时更新。定时控制部分每隔约 30 秒取两项峰值中较大的一项，存入 `maxValue`，再按当前模式计算占空比。较低的新读数可以马上出现在屏幕上，前面那个高读数却仍然可能参与下一次输出计算。
-
 Consider an automatic mode with periodic updates only and no button activity. A window begins at zero seconds. A CPU reading of 80°C arrives at five seconds, followed by 60°C at both 15 and 25 seconds, while the GPU stays below that CPU peak. At 30 seconds, the output calculation still uses 80°C. The retained peaks are then cleared, and the output setting stays in place until the next update. The screen could thus show 60°C from 15 seconds onwards, even as the program starts applying the earlier 80°C at 30 seconds. The software has arranged a wait between a falling reading and a falling output.
 
-先假设处于自动调速模式，只有定时更新，中途没有按键操作。一个窗口从 0 秒开始，CPU 温度在第 5 秒到达 80°C，第 15 秒和第 25 秒都到达 60°C，GPU 始终低于这次 CPU 峰值。第 30 秒计算输出时，采用的仍是 80°C；随后峰值变量被清零，输出设置则保留到下一次更新。这样，15 秒时屏幕就可能显示 60°C，30 秒时程序却刚开始采用之前的 80°C。读数变低和输出变低，中间隔着一段程序安排的等待。
-
 The two assignments clearing the peaks in `updatePWM()` caught my attention. This excerpt includes the output calculation and peak reset.
-
-我读到 `updatePWM()` 时，最想细看的是清空峰值的两行。下面摘出函数中计算输出和清空峰值的部分。
 
 ```cpp
 dutyCycle =processBluetoothValue(maxValue);
@@ -60,22 +33,12 @@ maxGpuValue = 0.0;
 
 Setting PWM and clearing the temperature peaks happen inside the same function. Following its callers, I found that the button handler calls it as well as the 30-second update path. Changing mode or adjusting frequency therefore clears the accumulated peaks too. The button path still uses the previously saved `maxValue`, without first selecting the new peaks being accumulated, and it leaves `lastUpdateTime` unchanged.
 
-这几行把设置 PWM 和清空温度峰值放在了同一个函数里。继续找调用位置，除了 30 秒定时更新，按键处理函数也会调用它。切换模式或调整频率时，累计的峰值因此也会被清掉。按键这条路径仍然使用此前保存的 `maxValue`，没有先取出正在累计的新峰值；它也没有重设 `lastUpdateTime`。
-
 That allows another variation on the timeline. Suppose a frequency-button event is handled at 25 seconds. The retained 80°C is cleared, but the periodic update still arrives at 30 seconds. Its calculation now draws on the short stretch of data received after the button reset. This makes the relationship between functions much more interesting to me. Reading `30000` alone suggests a fixed 30-second collection window. Following every reset explains how an operation can change what remains inside it.
 
-于是，上面的时间线还可以再推一步。假设第 25 秒处理了一次调频按键，刚才保留的 80°C 会被清除，而第 30 秒的定时更新仍照常到来。到时参与计算的，就是按键清空之后收到的那一小段数据。这让我更在意函数之间的关系了。单看 `30000`，很容易把它理解成固定的 30 秒统计窗口；把所有清空位置找出来，才能解释一次操作怎样改变了窗口里的内容。
-
-## Timing Each Sample / 给样本留下时间记录
+## Timing Each Sample
 
 To reorganize this code, I would separate writing PWM from closing out a temperature window. A button could change the output setting, with an explicit rule deciding whether temperature collection starts again. A fixed-period policy could retain the accumulated peaks through a button event. A policy that restarts collection on a mode change could clear the peaks and reset the timing origin together. Either is straightforward to describe; combining the operations in one function makes the choice easier to overlook.
 
-要继续整理这段程序，我会把写入 PWM 和结算温度窗口分成两个操作。按键可以修改输出设置，温度统计是否重新开始，则由明确的规则决定。比如选择固定周期，就让按键保留正在累计的峰值；如果希望切换模式时重新统计，就同时清空峰值并重设计时起点。两种安排都能说清，混在一个函数里时反而容易忽略。
-
 I would also keep a little more information with each desktop sample: its sensor identifier, value, read-completion time, and message sequence number. On the ESP32, I could record when the message arrived and when its sample was used. Read completion describes when the program obtained the value; the sensor may have an update cycle of its own. A computer timestamp and ESP32 `millis()` also cannot be subtracted directly. Matching a message by sequence number and examining the waits on each device separately would give me a clearer account than subtracting timestamps from different clocks.
 
-上位机的样本也可以多带一点信息。我想保留传感器标识、读数、读取完成时间和消息序号，再在 ESP32 一侧记录收到消息和采用样本的时刻。读取完成时间描述的是程序取到值的时刻，传感器自身可能还有更新周期；电脑时间和 ESP32 的 `millis()` 也不能直接相减。先用序号对上同一条消息，再分别检查两端各自的等待时间，会比直接减两个不同来源的时间戳清楚。
-
 A lower temperature with an unchanged fan output would then be something I could trace through the program. I could identify the sensor first, follow the message's departure and arrival, and check which peak entered the calculation. The records should locate those seconds of waiting between tasks, between sending turns, or within peak retention. Once I understand where that time is spent, I have a reason for choosing which part to speed up.
-
-这样整理以后，温度降下来了、风扇输出却还没降，就有了可以逐段追查的过程。我能先确认读到了哪一项温度，再看这条消息何时发出、何时收到，以及哪个峰值被用于计算。几秒钟的等待究竟发生在任务之间、发送轮次里，还是峰值保留期间，应该能在记录里找到。把这段时间弄明白，再决定该加快哪一步，调整起来才有依据。

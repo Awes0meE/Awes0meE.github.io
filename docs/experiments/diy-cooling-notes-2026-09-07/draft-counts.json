@@ -1,0 +1,16 @@
+{
+  "sampling": {
+    "source": "content/notes/juanyun-diy-cooling.mdx",
+    "paragraphPairs": 14,
+    "headings": 4,
+    "figures": 0,
+    "codeBlocks": 1
+  },
+  "fan": {
+    "source": "content/notes/juanyun-diy-cooling-pwm-fan-control.mdx",
+    "paragraphPairs": 13,
+    "headings": 4,
+    "figures": 1,
+    "codeBlocks": 0
+  }
+}
