@@ -571,5 +571,12 @@
       "overflow": false,
       "endingSha256": "f199eae9f0731243d2e2b5a61471dad27e72b22bdca13b485a118da5991176a8"
     }
-  ]
+  ],
+  "publication": {
+    "pullRequest": "https://github.com/Awes0meE/Awes0meE.github.io/pull/37",
+    "baseBranch": "main",
+    "headBranch": "docs/rewrite-diy-cooling-notes",
+    "deploymentRecord": "GitHub checks and Vercel production status on the PR merge commit",
+    "contentCommit": "ebc152de1a2803e2216c8027f363a4dba8747ef0"
+  }
 }

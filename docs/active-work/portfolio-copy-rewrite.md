@@ -12,7 +12,7 @@ The user approved all six bilingual learning notes for Arduino Smart Car, the tw
 - Smart Car now states seven IR tracking inputs in both homepage languages, matching the manual, schematic and decoded fields. Its six collision switches and six test groups are unchanged.
 - The DIY homepage ending and current writer ending-variety rules are included in this release. The other approved homepage narratives, including Claude Chime, retain their publication state.
 
-The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The delivery branch is `docs/rewrite-diy-cooling-notes`; after merge, continue from synchronized `main` and remove the three merged note-writing branches. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
+The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The release is tracked by [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37), from `docs/rewrite-diy-cooling-notes` to `main`. Follow-up work uses synchronized `main` after the PR is merged; the three merged note-writing branches can then be removed. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
 
 ## Writing Contract
 

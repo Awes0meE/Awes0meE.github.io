@@ -31,4 +31,4 @@ Lint, content/UTF-8 validation, TypeScript, skill validation and the webpack pro
 
 Browser checks passed for all six articles in both languages at 1440 and 390 pixels (24 views), the Notes index (4 views) and all three related-project link sets (6 views). No page exceptions, horizontal overflow, wrong-language body blocks or broken images were found. The mobile introduction/ending and desktop schematic were visually inspected. Existing stylesheet preload warnings did not affect rendering. All [53 local route/attachment checks](local-http.json) passed, including 404 for the 12 suspended notes.
 
-The pull request and its GitHub/Vercel checks track the final publication result.
+Publication is tracked by [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37). Its GitHub/Vercel checks record preview validation, merge and the production deployment. Continue subsequent writing from synchronized `main` after this PR is merged.
