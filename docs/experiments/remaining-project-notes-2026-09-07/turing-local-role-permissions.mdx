@@ -1,0 +1,82 @@
+---
+title: "Local Account Permission Rules"
+titleZh: "本地账户的权限判断"
+summary: "Separating actor, target and action in Seamly2D role management, then checking state changes and persistence."
+summaryZh: "从 Seamly2D 的本地角色管理出发，拆开操作者、目标账户与操作，再检查状态变化和保存结果。"
+date: "2026-09-07"
+tags: ["Qt", "State Machine", "Authorization", "Testing"]
+projectSlug: "nanjing-turing-qt-embedded-learning"
+visibility: private
+---
+
+One Seamly2D account rule made role management more interesting than a login window. An administrator could promote a normal user, but only the specific `admin` account could demote an existing administrator. Changing the target's role could immediately change which operations were allowed on it. A single administrator label on the current user could not express the whole rule.
+
+Seamly2D 的本地账户功能做到角色管理时，我需要处理一条很具体的规则：管理员可以把普通用户升级成管理员，但已有管理员的降级只能由 `admin` 执行。同样一个目标账户，角色一变，原先允许的操作就可能不再允许。只给当前用户贴一个管理员标签，显然解释不完这件事。
+
+## Actor and Target / 操作者与目标
+
+I laid out the rules by actor, target account and requested action. Here, `admin` names the initial special account; an ordinary administrator is another account subsequently assigned the Admin role.
+
+我把这组规则重新列成表，先固定操作者，再看目标账户和请求的动作。`admin` 在这里指初始的特定账户，普通管理员指后来获得 Admin 角色的其他账户。
+
+| Actor | Target | Action | Decision |
+| --- | --- | --- | --- |
+| Normal user | Other accounts | Management operation | Reject |
+| Ordinary administrator | Normal user | Promote to administrator | Allow |
+| Ordinary administrator | Normal user | Delete | Allow after confirmation |
+| Ordinary administrator | Existing administrator | Delete or demote | Reject |
+| `admin` | Another administrator | Demote | Allow |
+
+| 操作者 | 目标 | 操作 | 判断 |
+| --- | --- | --- | --- |
+| 普通用户 | 其他账户 | 管理操作 | 拒绝 |
+| 普通管理员 | 普通用户 | 升级为管理员 | 允许 |
+| 普通管理员 | 普通用户 | 删除 | 确认后允许 |
+| 普通管理员 | 已有管理员 | 删除或降级 | 拒绝 |
+| `admin` | 其他管理员 | 降级 | 允许 |
+
+Reading across the table brings out conditions beyond role: whether the actor is targeting themselves, whether the target exists, and what state the operation will leave behind. [OWASP's authorization guidance](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) similarly examines the relationship between subjects, resources and actions. Identifying a user at login still leaves permission for each operation to be decided.
+
+这张表让我更容易发现，角色只是判断条件之一。还要知道是不是本人、目标是否存在、操作以后剩下什么状态。[OWASP 的授权说明](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)也把权限判断放在主体、资源与操作的关系中讨论。登录解决身份识别，执行一项具体操作还要再判断权限。
+
+## A Special Username / 一个名字的特殊含义
+
+In the project's [public role-query excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp), `roleOf()` first compares the username with `admin`, ignoring case, and returns Admin on a match. For other accounts it reads the stored role from QSettings. That function answers a role query, but the operation table contains additional rules. Two accounts with the same Admin enum value can have different demotion permissions.
+
+项目的[公开角色查询节选](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)里，`roleOf()` 会先忽略大小写比较用户名是否为 `admin`，命中便返回 Admin；其他用户则从 QSettings 读取保存的角色。这个函数能回答账户属于哪种角色，却没有表达整张操作表。具有相同 Admin 枚举值的两个账户，仍然可能拥有不同的降级权限。
+
+I would keep those responsibilities explicit. A role query reads account attributes; an operation check receives an authenticated actor, the freshly retrieved target and an action. Username normalization also needs one consistent definition. Treating `Admin` and `admin` as separate names during creation, then as the same special identity during role lookup, would make the rules disagree.
+
+我会把这个差别继续拆开。角色查询负责读取账户属性；某项操作的判断函数再接收已确认身份的操作者、刚读取的目标账户和动作。名称规范化也要统一，否则创建账户时把 `Admin` 和 `admin` 当成两个名字，查询角色时却把它们视为同一个特殊身份，就会出现前后规则不一致。
+
+The special account also raises a startup-state question. The project required the first account in an empty store to be `admin`; subsequent registrations should follow the normal path. Initialization, registration and account management need to agree on how account identities are recognized.
+
+这个特殊账户还让我想到初始状态。空账户库中的第一位用户按项目要求应当建立为 `admin`；账户已经存在以后，注册就应走普通流程。初始化、注册和管理操作需要使用同一套账户识别规则，不能各自解释一次用户名。
+
+## At Execution Time / 操作发生的那一刻
+
+Hiding management controls from a normal user makes the interface clearer. I would still enforce permissions inside the operation that changes the account. Menus, shortcuts and other windows may become new callers later, and a check attached only to button visibility is easy to miss when adding an entry point.
+
+普通用户看不到管理入口，界面会清楚很多。不过真正修改账户时，我仍希望执行函数自己完成权限判断。菜单、快捷键和其他窗口将来都可能成为调用入口，把判断只放在按钮是否可见上，后续维护很容易漏掉新入口。
+
+A deletion confirmation introduces a time gap as well. The target may be a normal user when the dialog opens, yet have changed role or disappeared by the time confirmation arrives. A useful implementation exercise is to reload account state immediately before execution, check permission, then persist the change. Cancellation, a missing target or a failed permission check should end the operation without changing account data.
+
+删除确认还多了一段时间。弹出对话框前，目标是普通用户；等操作者点下确认，它的角色或者存在状态可能已经变化。一个适合继续练习的实现顺序，是在执行前重新读取账户状态，判断权限，再保存修改。取消、目标消失或权限不满足，都直接结束这次操作，不改变账户数据。
+
+Deletion and demotion also deserve a check on the resulting account set. If the product must always retain management access, it should refuse to remove the last usable administrator. Looking only at the target's present role misses that condition. Studying it alongside the current special-`admin` rule would also help if the design later replaced a special username with explicit permission attributes.
+
+对于管理员的删除和降级，我还会单独检查操作后的状态。如果产品要求始终保留管理能力，那么删除最后一个可用管理员就应该被拒绝。这个条件关心的是整组账户的结果，仅检查目标的当前角色会漏掉它。以当前特殊 `admin` 的规则为基础，研究这一点也有助于以后把特殊用户名改成明确的权限属性。
+
+## After Restart / 重启之后
+
+QSettings makes persistence convenient, but the save result still matters. [Qt documents deferred writes, `sync()` and `status()`](https://doc.qt.io/qt-6.5/qsettings.html), including access and format errors. A role that changes on screen and reverts after restart is a failed operation from the user's perspective. The interface should therefore consider persistence before reporting success.
+
+QSettings 让设置保存起来很方便，但保存动作也有返回结果。[Qt 文档](https://doc.qt.io/qt-6.5/qsettings.html)说明，修改可能延迟写入，`sync()` 用来同步，`status()` 可检查访问或格式错误。角色已经在界面里改了，重启后却恢复原样，用户感受到的仍然是一次失败的操作。因此，界面提示成功之前，应当把持久化结果也纳入处理。
+
+These accounts live on the local machine, so the trust model includes the operating-system account and storage location. Restricting someone who can edit the settings directly would require a different storage and access-control design as well as application roles. That requirement needs deciding before extending the local-account feature in that direction.
+
+这里的账户保存在本机，信任关系也延伸到操作系统账户和存储位置。如果需要约束能够直接修改本地设置文件的人，应用内部的一张角色表就不够了，还要改变数据存储和访问控制的设计。这是继续扩展本地账户功能时需要先定下来的需求。
+
+The exercise I would most like to complete is to run both the allowed and rejected table entries, then add cancellation, a disappearing target, restart after an edit and preservation of the last administrator. Good role management makes the entire operation understandable: who requests it, which account it affects and what state remains. The window is how a person uses those rules.
+
+我觉得最值得做的一组练习，是把表里的允许和拒绝情况都跑一遍，再加入取消确认、目标消失、修改后重启和保留最后一个管理员这些情况。角色管理真正完整的地方，在于一次操作从谁发起、对谁执行，到最终留下什么状态，都能说得清楚。窗口只是让人使用这套规则的入口。

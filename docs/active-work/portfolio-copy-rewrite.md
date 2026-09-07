@@ -2,7 +2,9 @@
 
 **Updated:** 2026-09-07
 
-The user paused the unapproved About rewrite and requested the next project’s learning notes. The current branch is `docs/rewrite-tianjin-notes`, based on synchronized `main` at `007decf`. Two bilingual Tianjin Jintie STM32 candidate drafts are ready for review: light calibration/lookup control and I2C/OLED debugging. They remain outside the public content collection in [the review packet](../experiments/tianjin-notes-2026-09-07/README.md). Preview: `http://127.0.0.1:8771/preview.html?note=calibration&lang=zh`. The user has not approved either draft yet.
+The user requested all remaining projects' notes for batch review. On `docs/rewrite-tianjin-notes`, based on synchronized `main` at `007decf`, eight new bilingual candidates cover Nanjing Turing, Juanyun cooling, sensorless FOC and Claude Chime, two per project. Together with the two Tianjin drafts, all ten are available in [the combined review packet](../experiments/remaining-project-notes-2026-09-07/README.md). Preview: `http://127.0.0.1:8772/preview.html?note=tianjin-stm32-i2c-oled-debugging&lang=zh`. They remain outside the public collection and await user review; no publication is authorized by draft completion.
+
+During review, the user rejected “做 STM32 练习” because the object of practice should be a specific activity or skill. The Tianjin I2C opening now uses “我在折腾 STM32 的时候” and identifies firmware as the object of compilation/flashing. English and the old 8771 preview are aligned. The current writer's ZH-2 reference contains this durable collocation rule without inventing more specific project activities.
 
 Preserve the separate About branch `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). Its wording was not approved; do not publish it or carry it into the note branch.
 
@@ -26,7 +28,7 @@ Normal closing paragraphs are welcome. Avoid forced elevation and repeated look-
 
 ## Next Writing Work
 
-The six published notes remain approved. Review the two Tianjin candidate drafts next; the other four project families remain in the backlog. The [topic backlog](project-note-topics-2026-09-06.md) retains candidates for Tianjin STM32, Nanjing Turing, Juanyun phase-change cooling, sensorless FOC and Claude Chime. Reuse their confirmed briefs and ask only questions that change the claims or selected topic.
+The six published notes remain approved. Review the ten candidates in the combined packet next. The user delegated remaining topic selection, so do not repeat the topic interview. The [topic record](project-note-topics-2026-09-06.md) retains the grounds for the five families' studies. Reuse confirmed briefs and ask only questions that change claims. Original Turing procedure pages and existing independent public studies remain intact; none of the suspended sources has been deleted or restored in this draft batch.
 
 The 12 other suspended notes remain recoverable sources. Do not restore them wholesale or apply the old homepage-suspension manifest over the six rewritten notes. Completed review URLs on ports 8767–8770 are retired; use the actual website routes from the release record.
 

@@ -3,7 +3,7 @@
   "status": "two local candidate drafts awaiting user review; unpublished",
   "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
   "draftSha256": {
-    "tianjin-stm32-i2c-oled-debugging.mdx": "9aab577646efbe4f94e5e2dda47c562e2f16efee8e3d402fef245d861b4ee39d",
+    "tianjin-stm32-i2c-oled-debugging.mdx": "b012541d0fb4d68c2ee30f26dffebc5c49ad5971ecb5a4b841a43d57c56f580d",
     "tianjin-stm32-light-calibration-control.mdx": "6a57b27c8789b1b0473221ba93ac30c233d34d13b6662a0e965fbdc45de7f87e"
   },
   "step12Chinese": {
@@ -27,7 +27,7 @@
   ],
   "voiceAndBilingual": "pass; Chinese composed first, with direct calculations and circuit questions. English retains the same explanations, proposed checks and endings using natural independent sentence forms. No old-draft information-retention gate or evidence-inventory narration was added.",
   "crossPage": "New notes develop interpolation coverage and I2C signaling; the homepage retains the internship progression. Both drafts keep short opening context and avoid reproducing whole build/bring-up scenes. The five older notes remain suspended as sources.",
-  "scope": "Only local review drafts and handoff documentation change. Website content, application source, current writer and public assets equal origin/main. About remains parked separately at docs/rewrite-about-copy, checkpoint af3ace5.",
+  "scope": "Local candidate drafts, preview packets, the Chinese sentence-gate reference and handoff records change. Production content, application source and public assets remain unchanged; About is parked separately.",
   "researchSources": {
     "AN2834": "https://www.st.com/resource/en/application_note/an2834-how-to-get-the-best-adc-accuracy-in-stm32-microcontrollers-stmicroelectronics.pdf",
     "UM10204": "https://www.nxp.com/docs/en/user-guide/UM10204.pdf",
@@ -215,5 +215,13 @@
       }
     ],
     "errors": []
+  },
+  "postReviewCorrection": {
+    "date": "2026-09-07",
+    "userFeedback": "Use a verb that fits STM32 as a device, or name the concrete skill being practised.",
+    "change": "I2C opening corrected to 我在折腾 STM32 的时候; firmware is compiled and flashed. English and preview aligned.",
+    "chineseSentenceGate": "pass after correction",
+    "latestBrowserReview": "../remaining-project-notes-2026-09-07/review.json",
+    "historicalBrowserNote": "The original browser record below is retained. Its ending selector included hidden Chinese paragraphs in English views; the combined preview review uses visible paragraphs."
   }
 }

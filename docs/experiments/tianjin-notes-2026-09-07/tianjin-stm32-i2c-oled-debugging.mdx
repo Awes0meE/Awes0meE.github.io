@@ -9,9 +9,9 @@ projectSlug: "tianjin-metro-stm32-foundation"
 visibility: "private"
 ---
 
-During my STM32 practice in Tianjin, an OLED stayed blank even though compilation and downloading both worked. Moving to another pair of ordinary GPIO pins and using software I²C restored the display. I want to understand that result more closely. Both implementations ultimately communicate through SDA and SCL, so where do their differences arise? I would begin with the voltages on those pins.
+I ran into a blank OLED while working with an STM32, even though the firmware compiled and flashed successfully. Moving to another pair of ordinary GPIO pins and using software I²C restored the display. I want to understand that result more closely. Both implementations ultimately communicate through SDA and SCL, so where do their differences arise? I would begin with the voltages on those pins.
 
-我在天津做 STM32 练习时，遇到过 OLED 编译、下载都正常，屏幕却不显示的情况。后来换了一组普通 GPIO，用软件模拟 I²C，显示恢复了。这个结果让我想继续弄清楚，两种实现最终都通过 SDA 和 SCL 通信，它们究竟在哪些地方不同？要把这个问题看明白，我会先从引脚上的电压开始。
+我在折腾 STM32 的时候，遇到过程序编译、烧录都正常，OLED 却不显示的情况。后来换了一组普通 GPIO，用软件模拟 I²C，显示恢复了。这个结果让我想继续弄清楚，两种实现最终都通过 SDA 和 SCL 通信，它们究竟在哪些地方不同？要把这个问题看明白，我会先从引脚上的电压开始。
 
 ## Where the High Level Comes From / 高电平从哪里来
 

@@ -1,0 +1,82 @@
+---
+title: "Qt Windows Runtime Dependencies"
+titleZh: "Qt 程序的 Windows 运行依赖"
+summary: "Tracing a packaged Qt application through DLL loading, platform plugins and a clean-machine check."
+summaryZh: "从缺少 DLL 的报错出发，研究 Qt 程序的动态依赖、平台插件与换机验证。"
+date: "2026-09-07"
+tags: ["Qt", "Windows", "Deployment", "Debugging"]
+projectSlug: "nanjing-turing-qt-embedded-learning"
+visibility: private
+---
+
+During the Seamly2D internship in Nanjing, I collected dependencies with `windeployqt` and still got an error about `xerces-c_3_2.dll`. With a directory already full of DLLs, another missing file made the deployment step feel rather pointless. Following the application from startup to opening a pattern helps explain how a successful deployment-tool run and a missing dependency can coexist.
+
+在南京图灵做 Seamly2D 时，我用 `windeployqt` 收集过依赖，程序仍然提示缺少 `xerces-c_3_2.dll`。目录里已经有一大堆 DLL，再冒出来一个缺失文件，很容易让人怀疑刚才的打包是不是白做了。把程序从启动到打开纸样的过程拆开，才能理解这两件事为什么会同时发生。
+
+## After Compilation / 编译之后
+
+Headers describe types and functions to the compiler. Import libraries then help the linker resolve external symbols. With dynamic linking, the implementations still have to be loaded from DLLs at runtime. A development PC already has Qt, a compiler and assorted libraries installed, so its environment may supply files that the application package lacks. Moving the program elsewhere exposes that hidden assistance.
+
+编译时，头文件告诉编译器有哪些类型和函数；链接时，导入库帮助链接器处理外部符号。采用动态链接以后，相应实现仍要在运行时从 DLL 加载。开发电脑已经装好 Qt、编译器和各种库，程序可能恰好能从这些环境里找到依赖。换到另一台电脑，之前由环境补上的部分才会暴露出来。
+
+I find it useful to start at the executable and follow its dependency chain. A library it imports may need further libraries, while other components are loaded only when a particular feature runs. A matching filename in the folder is therefore just the beginning. Architecture, version and the actual load location also matter.
+
+我现在会把可执行文件看作一条依赖链的起点。它直接依赖一个库，这个库又可能依赖其他库；有些组件则要等到运行中的某个功能被调用才加载。只看文件夹里有没有同名 DLL 还不够，需要继续检查架构、版本以及它实际从哪里被加载。
+
+The internship build used MSVC x64, which cannot load an x86 DLL directly into its process. MSVC version compatibility takes a closer reading. [Microsoft documents compatibility across certain toolset versions](https://learn.microsoft.com/en-us/cpp/porting/binary-compat-2015-2017?view=msvc-170), with conditions on the linker, runtime version and some compilation options. Different toolset names prompt me to check the combination, rather than immediately reject it.
+
+以这次使用的 MSVC x64 构建为例，x86 DLL 不能直接装进 x64 进程。至于 MSVC 的版本，情况比目录名复杂。[微软的二进制兼容说明](https://learn.microsoft.com/en-us/cpp/porting/binary-compat-2015-2017?view=msvc-170)允许特定版本之间兼容，同时约束链接工具、运行库版本及部分编译选项。因此，遇到两个工具集名称不同，我会先核对具体组合，不再直接判定它们无法配合。
+
+## Qt Plugins / Qt 插件
+
+On Windows, Qt normally needs `platforms/qwindows.dll` to interact with the window system. Although it is a DLL, the platform plugin has its own discovery and loading process; dropping it beside the executable may put it in the wrong place. [Qt's plugin deployment guide](https://doc.qt.io/qt-6.5/deployment-plugins.html) also explains version and build-mode compatibility, and provides the `QT_DEBUG_PLUGINS` diagnostic switch.
+
+Qt 的平台插件负责与窗口系统交互。在 Windows 上，部署目录通常需要 `platforms/qwindows.dll`。它是 DLL，却有自己的发现和加载过程，随手把它扔到可执行文件旁边，未必放对了位置。[Qt 插件部署说明](https://doc.qt.io/qt-6.5/deployment-plugins.html)还列出了插件和 Qt 库之间的版本、构建模式要求，并提供 `QT_DEBUG_PLUGINS` 诊断开关。
+
+A platform-plugin error can describe two different stages of failure: discovery never found the file, or loading failed after finding it. The latter may involve another missing library required by the plugin, or an incompatible version or build mode. Both errors can name the same plugin. The search paths and failure reason in the diagnostic output are more useful than adding yet more DLLs to the folder.
+
+因此，看到平台插件报错，我会先区分插件没有被找到，还是已经找到但加载失败。后一种情况可能是插件依赖的另一个库缺失，也可能是版本或构建模式不合适。两种问题的报错都可能提到同一个插件名称，修法却不一样。调试输出中的搜索路径和加载失败原因，比继续往目录里堆 DLL 更有用。
+
+There is a familiar hardware habit here. Finding the connector tells me where it is; establishing communication requires following the rest of the interface. For deployment, the connections I am tracing are between loaded files.
+
+这个排查和嵌入式里读接口状态有点像。找到连接器，只回答了连接器在哪里；通信是否真的建立，还要继续沿链路检查。这里要追的是文件加载关系。
+
+## Third-Party Libraries / 第三方依赖
+
+Xerces supplies XML parsing through `xerces-c_3_2.dll`. The [Qt Windows deployment guide](https://doc.qt.io/qt-6.5/windows-deployment.html) explicitly leaves additional third-party libraries outside `windeployqt`'s collection of Qt dependencies. My folder could contain the required Qt libraries and still be missing Xerces.
+
+`xerces-c_3_2.dll` 属于 XML 解析库。[Qt 的 Windows 部署文档](https://doc.qt.io/qt-6.5/windows-deployment.html)明确说明，`windeployqt` 负责收集 Qt 相关依赖，额外的第三方库仍需另外处理。我的部署目录里有 Qt 库，同时还缺 Xerces，这两种状态完全可以共存。
+
+[Microsoft's DUMPBIN](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) provides a starting point for inspecting the binaries. `/DEPENDENTS` lists imports, and `/HEADERS` exposes architecture information. These help follow static import relationships. Files introduced through plugins or explicit runtime loading still need investigation while the application starts and its features run.
+
+排查时，可以先用微软的 [DUMPBIN](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) 检查二进制文件。`/DEPENDENTS` 查看导入依赖，`/HEADERS` 查看架构信息。它们适合顺着静态导入关系往下找；运行中通过插件或显式加载函数引入的文件，还需要结合实际启动和功能操作来查。
+
+For a corrected package, I would use a fresh deployment directory and add dependencies from the Qt installation used for that build and other known sources. Testing without Qt or Visual Studio then removes the development tools' search paths from the equation. The [original packaging record](/notes/turing-release-packaging-cross-platform) retains the build and installation procedure; the question here is which external files the application actually uses.
+
+我会把修复后的程序放进一个新部署目录，只从这次构建对应的 Qt 安装和已知来源补齐依赖。随后在没有 Qt 和 Visual Studio 的环境里测试，避免开发工具的搜索路径继续掩盖问题。具体构建与安装步骤仍放在[原始打包记录](/notes/turing-release-packaging-cross-platform)，这一步更关心程序究竟借用了哪些外部文件。
+
+## Checking Another Machine / 换机检查
+
+After the internship, I ran the installer on a newly installed Windows desktop at home and used registration, login and role management successfully. To extend that check around dependencies, I would add opening an `.sm2d` pattern with its associated `.smis` measurements, saving it and reopening it. Those actions exercise XML parsing and file access after the initial window has appeared.
+
+实习结束后，我在家里新装的 Windows 台式机上运行过安装包，注册、登录和角色操作都能使用。沿着依赖问题继续设计检查，我还会加入打开 `.sm2d` 纸样及关联 `.smis` 量体文件、保存后重新打开等动作。窗口能出现以后，XML 解析与文件访问才真正有机会被用到。
+
+| Action | What to observe |
+| --- | --- |
+| Launch from the installation directory | Loading of Qt libraries, the platform plugin and runtime |
+| Register, exit and log in again | Account-state recovery in a new process |
+| Open a pattern and measurement file | XML parsing and associated file paths |
+| Save and reopen | The connection between writing and reading data |
+| Use the same installer on another machine | Dependence on the development environment |
+
+| 操作 | 重点观察 |
+| --- | --- |
+| 从安装目录启动 | Qt 库、平台插件与运行库是否能被加载 |
+| 注册后退出，再重新登录 | 账户状态能否在新的进程中恢复 |
+| 打开纸样和量体文件 | XML 解析、关联文件路径是否正常 |
+| 保存并重新打开 | 写入路径和数据读取能否衔接 |
+| 用同一安装包换机 | 结果是否依赖开发电脑上的环境 |
+
+That gives me a concrete completion criterion for packaging: someone else can run a program that finds its own dependencies, opens real files and saves the result. Each actual use case checked before handoff removes one more gap that a user would otherwise discover for me.
+
+这样检查下来，打包的完成标准也更具体了。交给别人的是一套能够独立找到依赖、打开实际文件并保存结果的程序。每多验证一个真实使用动作，就少留一个等用户碰到才发现的缺口。

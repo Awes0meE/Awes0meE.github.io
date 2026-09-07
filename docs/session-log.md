@@ -956,3 +956,12 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - The user paused the unapproved About wording and requested the next project. Preserved it on `docs/rewrite-about-copy` at `af3ace5`, then started `docs/rewrite-tianjin-notes` from synchronized main `007decf`.
 - Read the confirmed Tianjin homepage, all five sibling notes and the public lookup, main-loop and GPIO excerpts. Prepared two candidate studies on calibration/lookup control and I2C/OLED debugging using current Engineering Note Writer rules and official ST, NXP and TI references.
 - Completed Chinese drafting and Step 10 before English adaptation, then rechecked the final Chinese, bilingual meaning, calculations and page division. Drafts and local review page are in `docs/experiments/tianjin-notes-2026-09-07/`; the website content, all old notes and About source on main remain unchanged. User review is pending.
+
+
+## 2026-09-07 Remaining project study drafts
+
+- User delegated the remaining four families for batch review. Wrote eight bilingual study drafts and combined them with Tianjin's two in `docs/experiments/remaining-project-notes-2026-09-07/`. All ten await review; current public counts remain unchanged.
+- Chinese passed the six-category check before English; final review includes technical calculations, first-person attribution, cross-page division and varied endings. Only reviewed public facts and derived explanations are used for Juanyun; no private product files are copied.
+- User rejected “做 STM32 练习”. Revised the Tianjin I2C opening to “我在折腾 STM32 的时候” and corrected firmware/OLED verb objects in both languages. Added the activity-specific object guidance to the canonical writer reference, then updated both local previews.
+- Combined review uses port 8772, with project, article and language selection; old Tianjin review on 8771 remains usable. Lint/content/encoding and 40 browser combinations passed. See the packet review record for exact checks.
+- About remains parked on its separate unapproved branch. No push, PR, merge, release, or old-note deletion was performed.

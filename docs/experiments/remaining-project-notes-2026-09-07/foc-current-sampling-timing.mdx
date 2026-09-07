@@ -1,0 +1,76 @@
+---
+title: "Current Sampling Within a PWM Cycle"
+titleZh: "PWM 周期内的电流采样"
+summary: "Following the actual shunts, analog filtering and four-rank injected ADC sequence on the STM32F446 FOC board."
+summaryZh: "沿实际分流电阻、模拟滤波与四通道注入序列，研究 FOC 电流采样是否处在合适的时刻。"
+date: "2026-09-07"
+tags: ["FOC", "ADC", "PWM", "Current Sensing"]
+projectSlug: "sensorless-foc-learning-route"
+visibility: private
+---
+
+Every FOC iteration uses `Ia` and `Ib`. In the algorithm they look like two values available whenever needed. Following my board's schematic and ADC configuration adds the missing time conditions: PWM is switching, current paths are changing, amplifiers need to settle and the ADC reads channels in a particular order.
+
+FOC 里每轮都要用到 `Ia` 和 `Ib`。刚看算法时，很容易把它们当成随时可取的两个数；顺着自己这块板的原理图和 ADC 配置往下读，才会发现读数还有时间条件。PWM 正在切换，电流经过哪条路径、放大器是否稳定、ADC 先读哪一路，都会影响这两个数。
+
+## Where the Shunts Sit / 采样电阻的位置
+
+The power-stage schematic places a 20 mΩ resistor below each of the three low-side bridge legs. Two connect through `SN1/SP1` and `SN2/SP2` to the DRV8301's current amplifiers. A separate 4 mΩ resistor sits after the three return paths join and feeds an independent bus-current amplifier. For `Ia/Ib` timing, it is the first two phase-current paths that matter.
+
+功率级原理图里，三个低侧桥臂下面各有一颗 20 mΩ 电阻。其中两路通过 `SN1/SP1`、`SN2/SP2` 接入 DRV8301 的两组电流放大器。三相回流汇合以后，还串着一颗 4 mΩ 电阻，经独立运放电路测量母线电流。研究 `Ia/Ib` 的时序时，要沿前面两路相电流通道继续走。
+
+A low-side shunt provides usable phase-current information when that current actually passes through it. During a leg's high-side conduction interval, the resistor below the leg cannot be assumed to represent its phase current continuously. Current direction, recirculation paths, dead time and switching disturbances must be interpreted with the actual PWM state.
+
+低侧电阻只在相应电流实际经过这条路径时提供可用的相电流信息。某个桥臂处于高侧导通阶段，不能期待它下面的分流电阻始终代表该相电流。电流方向、续流路径、死区和开关后的扰动，都需要结合实际 PWM 状态判断。
+
+The [DRV8301 datasheet](https://www.ti.com/lit/ds/symlink/drv8301.pdf) specifies amplifier settling for different gains. For example, at gain 20 and the specified temperature and 2 V step conditions, the typical time to settle within 1% is 600 ns. That calls for an analog response allowance. The board's input network, output filter and actual switching disturbance still need to be observed together.
+
+[DRV8301 手册](https://www.ti.com/lit/ds/symlink/drv8301.pdf)给出了电流放大器不同增益下的建立时间。例如，在手册规定的温度与 2 V 阶跃条件下，增益 20 的 1% 建立时间为典型 600 ns。这个数提醒我留出模拟响应时间；板上的输入网络、输出滤波与实际开关扰动，还要一起观察。
+
+## Analog Filtering / 模拟滤波
+
+Each phase-current signal passes through 51 Ω and 4.7 nF before reaching the ADC. An ideal first-order calculation gives a time constant of `51 × 4.7 nF = 0.240 μs`. Five time constants are about 1.20 μs, at which point a step response still differs from its final value by roughly 0.67%.
+
+原理图中的两路相电流信号，在 ADC 前各经过 51 Ω 与 4.7 nF。只按理想一阶 RC 计算，时间常数约为 `51 × 4.7 nF = 0.240 μs`。若输入发生阶跃，五个时间常数约为 1.20 μs，此时距最终值仍有约 0.67% 的差距。
+
+I find that calculation a useful check on intuition. The capacitor suppresses fast disturbances while slowing the response to a change. Moving the ADC sample beyond a switching edge does not immediately guarantee a settled signal. After just one RC time constant, approximately 37% of an ideal step remains unsettled. The required delay depends on acceptable error, amplifier response and ADC loading.
+
+这个计算很适合检查直觉。电容可以抑制快速扰动，同时也会让读数跟随变化得慢一些。把 ADC 移到开关边沿以后，并不等于立刻读到稳定信号；只等一个 RC 时间常数，理想阶跃还剩约 37% 没建立完。真正需要等待多久，应当结合允许误差、放大器响应和 ADC 采样负载来确定。
+
+## Four Channels per Trigger / 一次触发的四个通道
+
+In the project's [firmware snapshot](https://github.com/Awes0meE/STM32_Sensorless_FOC/blob/d539c4a4f2f8c66ed6dfe3ce02c2dbd31a681847/user/board_config.c), TIM1 runs center-aligned PWM. Channel 4's compare value is set to the period minus one, and `TIM1_CC4` triggers injected conversion. The sequence converts bus voltage, A-phase current, B-phase current and total current, with 15 sampling cycles configured for each channel.
+
+项目[固件快照的 ADC 配置](https://github.com/Awes0meE/STM32_Sensorless_FOC/blob/d539c4a4f2f8c66ed6dfe3ce02c2dbd31a681847/user/board_config.c)使用 TIM1 中心对齐 PWM，将通道 4 的比较值设为周期值减一，并选择 `TIM1_CC4` 作为注入转换触发源。注入序列依次转换母线电压、A 相电流、B 相电流和总电流，各通道设置为 15 个采样周期。
+
+The order is easy to miss. A common trigger starts the group, but one ADC converts its four ranks sequentially. A is second and B is third, so their sampling instants differ. Subsequent control calculation begins from the interrupt after group conversion finishes. The trigger, each acquisition interval and the interrupt belong at separate positions on the timeline.
+
+这里最容易漏掉的是顺序。四个通道由同一事件触发，但在一只 ADC 上按序转换。A 相排第二，B 相排第三，两路采样时刻并不相同。组转换完成后，中断才进入后续控制计算。触发时刻、各通道的采样时刻和中断时刻，需要分开画在时间轴上。
+
+[ST's ADC driver documentation](https://github.com/STMicroelectronics/stm32f4xx-hal-driver/blob/master/Inc/stm32f4xx_hal_adc_ex.h) specifies 12-bit conversion time as acquisition plus 12 ADC clock cycles. Using a 30 MHz ADC clock as an example, 15 acquisition cycles take 0.5 μs, each rank takes about 0.9 μs and four ranks take about 3.6 μs, with trigger latency and the actual operating conditions to consider separately. The illustrative clock value shows how sequential conversion creates time offsets.
+
+[ST 的 ADC 驱动说明](https://github.com/STMicroelectronics/stm32f4xx-hal-driver/blob/master/Inc/stm32f4xx_hal_adc_ex.h)给出 12 位转换时间为采样时间加 12 个 ADC 时钟周期。取 30 MHz ADC 时钟作计算示例，15 个采样周期对应 0.5 μs，一个通道约需 0.9 μs，四路共约 3.6 μs，另需考虑触发延迟及具体运行条件。这里采用 30 MHz 只是为了展示顺序造成的时间差。
+
+Even with the channel 4 event near the intended window, the later B-phase acquisition must still fit inside it. Duty changes alter the stable low-side conduction intervals. A fixed trigger position therefore needs checking across the modulation range actually used.
+
+所以，即使通道 4 的比较事件安排在预期窗口附近，也要检查排在后面的 B 相是否仍在有效窗口内。占空比变化以后，低侧稳定导通区间会跟着改变；固定触发位置是否合适，需要覆盖实际使用的调制范围。
+
+## Reconstructing the Third Phase / 第三相的重建
+
+The firmware reconstructs the third phase using `Ic = -Ia - Ib`. The zero-sum relationship in a three-wire system applies at one instant, while these two ADC samples are taken in sequence. Adding `Ia` and `Ib` from different times introduces an error when current changes appreciably between them. Larger acquisition separation and steeper current slopes make that effect more significant.
+
+固件用 `Ic = -Ia - Ib` 重建第三相电流。三线制电流和为零的关系针对同一时刻，而两路 ADC 采样存在先后。当电流变化较快时，把不同时刻的 `Ia` 和 `Ib` 相加，会引入额外误差。采样间隔越大、电流斜率越大，这个影响越值得检查。
+
+There is a useful trap here. After computing `Ic` this way, checking whether `Ia + Ib + Ic` is near zero will almost inevitably look good. The third value was constructed from the first two, so the sum is no independent validation of measurement quality. Raw ADC codes, offsets and acquisition times need inspection, with independent current measurement where necessary.
+
+一个细节是，用这个公式算出 `Ic` 以后，再检查 `Ia + Ib + Ic` 是否接近零，几乎必然能得到好看的结果。第三个数本来就是由前两个数构造出来的，这个和不能独立检验采样是否正确。需要对照原始 ADC、偏置、各通道采样时刻，必要时再使用独立的电流测量。
+
+## Comparing Waveforms / 对照波形
+
+I would record PWM, amplifier output and a GPIO marking conversion completion together, starting at a stable, lightly loaded operating point before exploring different duties. An interrupt marker occurs after acquisition. Locating the earlier sample requires accounting for the sequence timing; the GPIO edge cannot simply be treated as the ADC sampling edge.
+
+继续验证时，我会把 PWM、放大器输出和用于标记转换完成的 GPIO 同时记录，先从稳定的低负载运行点开始，再观察不同占空比。GPIO 标记发生在中断中，比真正的采样晚，应结合序列耗时向前定位，不能直接把它当成 ADC 采样沿。
+
+An anomaly that moves with the switching edge suggests checking the sampling window and observing whether a timing adjustment moves the error. An offset throughout the waveform calls for zero, gain or wiring-polarity checks. Separating timing from conversion errors gives the later Clarke, Park and observer work a more stable input. Understanding a current value on this board requires knowing both its electrical origin and the instant it represents.
+
+如果某一路异常总跟着开关边沿移动，可以先调整采样窗口，再观察误差是否随之变化。如果整段波形都偏移，就更应该查零点、增益或接线极性。这样把时序问题与换算问题分开，后面的 Clarke、Park 和观测器调试才有稳定的输入。对这块板来说，理解一个电流值，需要同时知道它从哪里来，以及它对应哪一刻。
