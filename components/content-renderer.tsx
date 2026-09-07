@@ -132,7 +132,7 @@ function parseInline(text: string, baseHref?: string) {
 
     if (match[1]) {
       parts.push(
-        <code key={`code-${match.index}`} className="rounded border border-line bg-paper px-1 py-0.5 text-[0.9em] text-ink">
+        <code key={`code-${match.index}`} className="text-wrap-safe rounded border border-line bg-paper px-1 py-0.5 text-[0.9em] text-ink">
           {match[1]}
         </code>
       );
@@ -480,7 +480,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
           <p
             key={index}
             className={cn(
-              "mt-4 leading-7 text-graphite",
+              "text-wrap-safe mt-4 leading-7 text-graphite",
               getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage)
             )}
           >

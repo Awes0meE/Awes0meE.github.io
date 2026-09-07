@@ -6,7 +6,7 @@ summaryZh: "把速度接近、角度偏差和控制器状态连续性分开，�
 date: "2026-09-07"
 tags: ["FOC", "Observer", "EKF", "Control"]
 projectSlug: "sensorless-foc-learning-route"
-visibility: private
+visibility: public
 ---
 
 Late in debugging my custom FOC board, the EKF speed estimate approached the imposed open-loop frequency, yet the compressor still failed at sensorless takeover. That led me to angle. I now want to make the question more precise: when two speed traces nearly coincide, how far apart can the reference frames used for current control still be?

@@ -6,7 +6,7 @@ summaryZh: "从 BaseUnit 的风扇设定值出发，研究延迟写入、记录�
 date: "2026-09-07"
 tags: ["STM32", "Flash", "Persistence", "Recovery"]
 projectSlug: "juanyun-thermal-hardware"
-visibility: private
+visibility: public
 ---
 
 The BaseUnit needed to remember one fan percentage. My implementation reserved two Flash pages and included a sequence number, CRC32 and commit marker in its records, saving four seconds after the last adjustment. That is a surprising amount of machinery for one value. The useful question is what startup should trust if power disappears halfway through saving it.

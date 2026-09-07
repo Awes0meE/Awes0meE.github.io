@@ -6,7 +6,7 @@ summaryZh: "从上拉、电平、地址与应答，研究软件和硬件 I²C �
 date: "2026.09.07"
 tags: ["STM32", "I2C", "OLED", "GPIO", "Debugging"]
 projectSlug: "tianjin-metro-stm32-foundation"
-visibility: "private"
+visibility: public
 ---
 
 I ran into a blank OLED while working with an STM32, even though the firmware compiled and flashed successfully. Moving to another pair of ordinary GPIO pins and using software I²C restored the display. I want to understand that result more closely. Both implementations ultimately communicate through SDA and SCL, so where do their differences arise? I would begin with the voltages on those pins.

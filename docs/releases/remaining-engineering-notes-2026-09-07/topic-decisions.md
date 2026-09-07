@@ -1,6 +1,6 @@
-# 项目之外，可以继续研究什么
+# Completed learning-note topic decisions
 
-更新：2026-09-07。Arduino 小车、两位计数器和 DIY 散热器的六篇中英文笔记均已获用户批准发布。其余五个项目各有两篇候选稿，现已放进[集中审阅页](../experiments/remaining-project-notes-2026-09-07/README.md)，等待用户统一审阅。下面保留选题依据；研究中的计算与实验设计不代表 Alvin 当年已经执行。
+2026-09-07: all sixteen studies were approved. This is the historical topic rationale, not pending work. Current routes and completion checks are in [the release record](README.md). Past proposals and missing measurements describe topic selection, not instructions to resume drafting.
 
 主页记录自己做过的工作、决定、调试和结果。笔记从一个具体疑问出发，查原理、对照代码或设计实验。开头只交代理解问题所需的背景，完整项目经历链接回主页。
 
@@ -15,13 +15,13 @@
 | DIY 散热器 | [温度采样与风扇响应](/notes/juanyun-diy-cooling) | 传感器身份、读取与发送调度、CPU/GPU 轮流发送、自动与按键触发的峰值清空 |
 | DIY 散热器 | [PWM 风扇控制与转速反馈](/notes/juanyun-diy-cooling-pwm-fan-control) | 实际供电与 PWM 网络、占空比、测速输出、两只风扇的独立反馈 |
 
-正文以 `content/notes/` 为准，发布与检查见 [本轮记录](../releases/engineering-notes-2026-09-07/README.md)。三个旧稿及完成的审稿副本已删除，Git 保留历史。小车主页的循迹输入已同步为七路。无需重问这三个项目的选题或访谈。
+正文以 `content/notes/` 为准，发布与检查见 [本轮记录](../engineering-notes-2026-09-07/README.md)。三个旧稿及完成的审稿副本已删除，Git 保留历史。小车主页的循迹输入已同步为七路。无需重问这三个项目的选题或访谈。
 
 DIY 后续还可研究风道与实际散热效果；如另做固定负载对照，应同步记录温度、转速、环境和负载。现有温度与 FPS 变化保留为项目回忆。
 
 ## 天津津铁 STM32
 
-两篇候选稿已写好，见[本地审阅记录](../experiments/tianjin-notes-2026-09-07/README.md)。目前等待用户审阅，旧五篇继续暂挂；以下保留选题依据。
+两篇已获批并移入正式内容，旧五篇已弃用；以下保留选题依据。
 
 **优先：16 个标定点能做什么，为什么还不算反馈控制？**
 
@@ -72,7 +72,3 @@ DIY 后续还可研究风道与实际散热效果；如另做固定负载对照�
 - 写作限制：不要再复述主页已经完整叙述的排查过程，也不重复双路升压选型、充电架构和交付。以后若不能提供新的测量方法、原理分析或区分性实验，就继续暂挂旧笔记；不能把电池包输出写成电芯电压，不能宣称已有浪涌波形或确定的保护触发状态。
 
 **备选：带开关的 ADC 分压器何时才能读数？** 从已确认的分压与控制接口研究静态功耗、建立时间、ADC 采样要求和误差来源，先核对 ESP32 的实际采样设置。Alvin 没有编写客户固件，未来推导或实验不能变成客户软件已采用的方案。
-
-## 下一次写笔记时
-
-当前先审阅天津的两篇候选稿，再继续其他项目。先复用已确认背景，再选择一个感兴趣的问题；若用户委托选择，优先挑资料充分、能完整展开的一项。把旧笔记作为材料库，不复述主页经历。先写中文、精修并过六类病句检查，再适配英文；最后复查事实、中英一致性和跨页面分工，交给用户审阅。

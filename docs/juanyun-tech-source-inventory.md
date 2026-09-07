@@ -14,7 +14,7 @@ This document records how the raw Juanyun source folder is represented in the po
 
 ## Current Public Boundary
 
-Juanyun project and note sources are stored in the following paths. Note visibility follows frontmatter. The two DIY cooling studies are public in the 2026-09-07 revision; Juanyun thermal retains five public and four suspended notes. Superseded DIY note backups were removed after approval. See `active-work/portfolio-copy-rewrite.md` for the current work.
+Juanyun project and note sources are stored in the following paths. Note visibility follows frontmatter. The two DIY cooling studies are public in the 2026-09-07 revision; Juanyun thermal has seven public notes, including the new task-timing and Flash-recovery studies. Its four suspended old notes and superseded DIY backups were removed after approval, with history retained in Git. See `active-work/portfolio-copy-rewrite.md` for the current work.
 
 Source paths:
 
@@ -59,7 +59,7 @@ public/uploads/projects/juanyun-public/actuator-fan/
 
 The remaining legacy `juanyun-public/` subfolders contain selected evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, datasheets, PDFs, images, and demo media. The separate `acunit-v21-bringup/` folder is a tightly scoped exception for five assembled-board and bench-measurement photographs that the user explicitly confirmed were cleared for publication on 2026-08-14. Raw current-product packages remain excluded.
 
-FOC is no longer classified as Juanyun material. The independent learning route uses `content/projects/sensorless-foc-learning-route.mdx`, `content/notes/sensorless-foc-handoff.mdx`, and `public/uploads/projects/sensorless-foc-learning-route/`. Its 2026-08-16 user-curated handoff is authoritative for portfolio publication, and its full firmware repository remains external.
+FOC is no longer classified as Juanyun material. The independent learning route uses `content/projects/sensorless-foc-learning-route.mdx`, `content/notes/foc-angle-handoff.mdx`, `content/notes/foc-current-sampling-timing.mdx`, and `public/uploads/projects/sensorless-foc-learning-route/`. Its 2026-08-16 user-curated handoff is authoritative for portfolio publication, and its full firmware repository remains external.
 
 Project pages render these files through `components/project-assets.tsx`. The renderer has an explicit allowlist for `public/uploads/projects/juanyun-tech/`, and `scripts/validate-content.mjs` fails if non-allowlisted files reappear there. This matters because WPS-synced ignored ACUnit/BaseUnit raw files would still be static public files if they were left under `public/`, even when no page lists them.
 

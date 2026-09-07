@@ -6,7 +6,7 @@ summaryZh: "沿 ACUnit 的阀步进与慢速传感器读取，研究执行耗时
 date: "2026-09-07"
 tags: ["STM32", "Scheduling", "EEV", "State Machine"]
 projectSlug: "juanyun-thermal-hardware"
-visibility: private
+visibility: public
 ---
 
 The ACUnit checks its EEV stepping service on a 1 ms cadence. DHT environmental reads are scheduled every 2000 ms and deferred while the valve is busy. A temperature reading every two seconds sounds leisurely, so why explicitly make it wait for the valve? Following one pass through the main loop makes the conflict easier to understand.

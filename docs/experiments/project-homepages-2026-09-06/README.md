@@ -6,7 +6,7 @@
 - 分支：`docs/refactor-project-homepages`，从包含最新分工规则的 `ce015f2a8ca035d3dc0582b2bc5e58e933370539` 建立。此前的 `feat/project-note-division` 分支保留。重构开始时远端 `main` 的基准为 `b43c83b`。
 - 当时数量：8 个主页，24 个笔记源文件，其中 9 篇公开、15 篇暂挂；84 条媒体及所有 public/uploads 文件不变。
 - [七个主页中英前后对照](comparison.html)可用本地 HTTP 服务打开；实际主页位于 `/work`。对照中的旧文本是历史版本，不代表最新事实判断。
-- [后续选题](../../active-work/project-note-topics-2026-09-06.md)给每个项目一个优先题和一个备选题，另说明卷云现有自动控制笔记继续承担的主题。
+- [后续选题](../../releases/remaining-engineering-notes-2026-09-07/topic-decisions.md)给每个项目一个优先题和一个备选题，另说明卷云现有自动控制笔记继续承担的主题。
 
 ## 用户审阅后的文案精简
 

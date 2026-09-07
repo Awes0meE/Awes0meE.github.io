@@ -33,7 +33,7 @@ const nextConfig = {
       },
       {
         source: "/notes/juanyun-foc-driver",
-        destination: "/notes/sensorless-foc-handoff",
+        destination: "/notes/foc-angle-handoff",
         permanent: true
       }
     ];

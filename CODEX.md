@@ -182,26 +182,24 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The 2026-09-07 source revision contains 8 project pages, 27 note sources and 84
-media records. Fifteen notes are public across five project channels; twelve
-remain private pending their project-specific rewrites. The six newly approved
-bilingual notes cover Smart Car, the two-digit counter and DIY Cooling, two per
-project. Three old note paths now contain the replacement studies, and three
-additional note paths complete the set. Superseded old-note backups and completed
-review copies have been removed at the user's request; Git retains their history.
+The 2026-09-07 source revision contains 8 project pages, 25 public notes and 84
+media records. All eight projects have note channels. Sixteen approved bilingual
+studies cover two topics per project; nine technical/source-document notes remain.
+The twelve suspended old notes have been retired from current source. Git retains
+their history; do not restore a former suspension manifest over the new articles.
 
 Canonical prose lives in `content/projects/` and `content/notes/`. The writer is
 `skills/engineering-note-writer/SKILL.md`. Release scope and verification are in
-`docs/releases/engineering-notes-2026-09-07/README.md`; the active cross-device
-relay is `docs/active-work/portfolio-copy-rewrite.md`. The latest named tag
-remains `v0.9.0`; later maintenance uses PRs without inventing a new release tag.
+`docs/releases/remaining-engineering-notes-2026-09-07/README.md`; the current handoff is
+`docs/active-work/portfolio-copy-rewrite.md`. The latest named tag remains `v0.9.0`.
+Maintenance releases use PRs without inventing a new tag.
 
-Family source counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal
-9, Tianjin 5, Nanjing Turing 5, FOC 1 and Claude Chime 1. The source-document
-notes and reviewed project assets keep their existing publication rules. The
-Smart Car homepage identifies seven IR tracking inputs, matching the manual and
-seven decoded sensor fields. The DIY schematic PNG is a faithful derivative of
-the existing public PDF, not new hardware evidence.
+Family note counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal 7,
+Tianjin 2, Nanjing Turing 6, FOC 2 and Claude Chime 2. Source-document notes and
+reviewed assets keep their existing publication rules. The Smart Car homepage
+identifies seven IR tracking inputs. The DIY schematic PNG is a faithful
+derivative of the existing public PDF. The legacy FOC note redirect now leads
+to `/notes/foc-angle-handoff`.
 
 The homepage, `/work`, `/notes`, `/media` and `/about` use the approved Ember
 Black surfaces; project and note details retain the paper reading system.

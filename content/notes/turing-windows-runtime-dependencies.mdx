@@ -6,7 +6,7 @@ summaryZh: "从缺少 DLL 的报错出发，研究 Qt 程序的动态依赖、�
 date: "2026-09-07"
 tags: ["Qt", "Windows", "Deployment", "Debugging"]
 projectSlug: "nanjing-turing-qt-embedded-learning"
-visibility: private
+visibility: public
 ---
 
 During the Seamly2D internship in Nanjing, I collected dependencies with `windeployqt` and still got an error about `xerces-c_3_2.dll`. With a directory already full of DLLs, another missing file made the deployment step feel rather pointless. Following the application from startup to opening a pattern helps explain how a successful deployment-tool run and a missing dependency can coexist.

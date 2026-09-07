@@ -6,7 +6,7 @@ summaryZh: "从目标 ADC 到 PWM 的一次插值计算，研究采样点分布�
 date: "2026.09.07"
 tags: ["STM32", "ADC", "PWM", "Calibration", "Control"]
 projectSlug: "tianjin-metro-stm32-foundation"
-visibility: "private"
+visibility: public
 ---
 
 In my Tianjin lighting exercise, an encoder set the target and the STM32 adjusted an LED. A target of 1000 leaves a very specific question: what value should go into TIM4's compare register? During the placement, I measured 16 PWM and ADC pairs and put them into a [lookup function](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c). Working through that question connects the resulting command, 209, to two further concerns: where extra calibration measurements would help, and how the output could respond to a change in ambient light.

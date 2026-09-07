@@ -23,7 +23,7 @@ The release also includes the approved DIY homepage ending, the Smart Car homepa
 
 Deleted three superseded `before.mdx` files, twelve completed language drafts, four review preview pages and the finished DIY selection plan. Git retains the earlier copies. Current prose lives in `content/notes/`; dated review observations and Step 10 checks remain historical evidence. The other 12 suspended notes await their own project-by-project rewrite.
 
-[Verification](verification.json) records approved-body hashes and removed-file hashes. [Neat audit](neat-audit.json) records documentation assessment. The [writing handoff](../../active-work/portfolio-copy-rewrite.md) and [topic backlog](../../active-work/project-note-topics-2026-09-06.md) replace obsolete pending-review instructions.
+[Verification](verification.json) records approved-body hashes and removed-file hashes. [Neat audit](neat-audit.json) records documentation assessment. The [writing handoff](../../active-work/portfolio-copy-rewrite.md) and [topic backlog](../../releases/remaining-engineering-notes-2026-09-07/topic-decisions.md) replace obsolete pending-review instructions.
 
 ## Validation and Publication
 

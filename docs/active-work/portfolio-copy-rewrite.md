@@ -2,25 +2,11 @@
 
 **Updated:** 2026-09-07
 
-The user requested all remaining projects' notes for batch review. On `docs/rewrite-tianjin-notes`, based on synchronized `main` at `007decf`, eight new bilingual candidates cover Nanjing Turing, Juanyun cooling, sensorless FOC and Claude Chime, two per project. Together with the two Tianjin drafts, all ten are available in [the combined review packet](../experiments/remaining-project-notes-2026-09-07/README.md). Preview: `http://127.0.0.1:8772/preview.html?note=tianjin-stm32-i2c-oled-debugging&lang=zh`. They remain outside the public collection and await user review; no publication is authorized by draft completion.
+All sixteen new bilingual study notes across the eight projects are approved. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
 
-During review, the user rejected “做 STM32 练习” because the object of practice should be a specific activity or skill. The Tianjin I2C opening now uses “我在折腾 STM32 的时候” and identifies firmware as the object of compilation/flashing. English and the old 8771 preview are aligned. The current writer's ZH-2 reference contains this durable collocation rule without inventing more specific project activities.
+The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
-The preceding review requested concrete section headings derived from the full section after writing it. That heading-only pass reviewed all 16 current rewrites/candidates plus four other public authored notes (20 notes, 83 headings) and changed 56 bilingual headings in 19 notes. Clear headings such as `软件与硬件 I²C` and `BUSY 与芯片勘误` remain. That pass preserved paragraphs, page titles, metadata, code and figures. See [heading review](../experiments/note-heading-review-2026-09-07/review.json).
-
-The latest review limits each Chinese note to at most one paragraph beginning with `我`, including the introduction. Across the same 20 active/candidate notes, 15 Chinese and 13 paired English paragraph openings were revised in 12 files; every note now has zero or one Chinese `我` opening. Concrete subjects, conditions, questions and actions replace repeated setup phrases. Confirmed personal work and proposed test status remain intact. The ten candidates and 8771/8772 previews are updated. Public-source heading and paragraph edits await a later authorized release; original source-document pages and 12 suspended superseded notes remain unchanged. See [paragraph-opening review](../experiments/note-paragraph-openings-2026-09-07/review.json).
-
-Preserve the separate About branch `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). Its wording was not approved; do not publish it or carry it into the note branch.
-
-## Current Source State
-
-- Eight project pages, 27 note sources, 15 public notes, 12 suspended notes and 84 media records. The Notes index has five project channels and two archive years.
-- Each of the three completed families has two public studies. Three existing slugs now contain replacement articles; three companion articles use new slugs. Their approved baseline is checkpoint `2337f2d`; local heading and paragraph-opening corrections follow the user's latest review and remain unpublished.
-- The three old-note backups, twelve separate language drafts and four completed preview pages have been removed. Current prose lives only in `content/notes/`; earlier versions remain in Git. Review observations remain as dated history.
-- Smart Car now states seven IR tracking inputs in both homepage languages, matching the manual, schematic and decoded fields. Its six collision switches and six test groups are unchanged.
-- The DIY homepage ending and current writer ending-variety rules are included in this release. The other approved homepage narratives, including Claude Chime, retain their publication state.
-
-The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The release was merged through [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37) at `007decf`. The three completed note-writing branches were removed before the About and Tianjin draft branches began. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
+Preserve `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). The user paused its unapproved wording. Main's About page is excluded from this note release. Preserve remote `gh-pages`, which redirects old GitHub Pages visits. The latest named tag remains `v0.9.0`; this maintenance release does not create a tag.
 
 ## Writing Contract
 
@@ -34,11 +20,9 @@ Write each section first, then derive a short heading that identifies its actual
 
 Each Chinese learning note may contain at most one prose paragraph beginning with `我`, counting the introduction and every paragraph under headings. Zero is allowed. Recompose other openings around their concrete content; do not merely prefix filler, remove confirmed ownership, or turn suggested tests into historical results. First-person phrasing inside paragraphs remains available. English keeps natural semantic alignment without this numerical Chinese-only quota.
 
-## Next Writing Work
+## Next Work
 
-The six published notes remain approved. Review the ten candidates in the combined packet next. The user delegated remaining topic selection, so do not repeat the topic interview. The [topic record](project-note-topics-2026-09-06.md) retains the grounds for the five families' studies. Reuse confirmed briefs and ask only questions that change claims. Original Turing procedure pages and existing independent public studies remain intact; none of the suspended sources has been deleted or restored in this draft batch.
-
-The 12 other suspended notes remain recoverable sources. Do not restore them wholesale or apply the old homepage-suspension manifest over the six rewritten notes. Completed review URLs on ports 8767–8770 are retired; use the actual website routes from the release record.
+No note rewrite or approval is pending. Future topics should add a specific independent investigation, reusing confirmed briefs and asking only claim-changing questions. The completed [topic decisions](../releases/remaining-engineering-notes-2026-09-07/topic-decisions.md) and original overlap audit are historical rationale, not a queue to execute. Do not restore the retired sources or reapply the former suspension manifest.
 
 ## Internal Fact Checks
 

@@ -91,7 +91,7 @@ The local Barlow Condensed SemiBold face is the English display voice. Chinese d
 - English hero and section headings use the display token; Chinese headings use `display-cjk` with independent line-height and width tuning.
 - On Ember Black desktop surfaces, English navigation reuses the same display token as `Project evidence index`; Chinese navigation keeps the CJK display stack. The `01`–`04` prefixes remain compact monospace metadata rather than part of the label voice.
 - The hero keeps one concise personal introduction in ember orange beneath the primary direction statement.
-- Long paragraphs remain in the body face. Mono is for compact technical metadata, not novelty body copy.
+- Long paragraphs remain in the body face. Mono is for compact technical metadata, not novelty body copy. Paragraphs and inline code use `text-wrap-safe` so long identifiers can wrap on narrow screens; fenced code retains its own horizontal scrolling.
 - English and Chinese may wrap differently, but factual meaning and visual hierarchy must remain equivalent.
 
 ## Homepage Structure
@@ -289,7 +289,7 @@ This section governs the Ember Black treatment for the `/notes` index in release
 
 ### Routed index topology
 
-- The compact opening band states the archive scope without becoming a second hero. The three values are derived from public notes, their linked projects, and available frontmatter years. With the 2026-09-07 note release they are `15 / 5 / 2` (public notes / linked projects / years); they must follow the content data.
+- The compact opening band states the archive scope without becoming a second hero. The three values are derived from public notes, their linked projects, and available frontmatter years. With the 2026-09-07 note release they are `25 / 8 / 2` (public notes / linked projects / years); they must follow the content data.
 - On wide screens, one stepped route stem per available project channel leaves the project-channel column, join one graphite bus, pass the search, project, and year junctions, and converge at the note ledger. The visible geometry explains how to navigate the index; native controls and semantic list links remain the operative interface.
 - Selecting a project creates one continuous, unmasked orange navigation path by lighting the selected stepped graphite stem, the corresponding prefix of the existing zig-zag bus, and that project's graphite branch into the ledger. The orange route never invents a perimeter shortcut. Its endpoint advances down the ledger edge for each successive project, so lower channel selections visibly extend the route instead of leaving a fixed full-height line. Only junctions the selected route has reached illuminate; the ledger edge and only the records linked to that project receive the matching orange continuation. Search and year filters update the real result set and their control states without inventing additional signal paths.
 - Each ledger row is one full semantic link carrying the real sequence number, linked project, frontmatter date, bilingual title and summary, and up to three visible tags. The row's node, underline, title shift, and arrow act as one hover/focus cue; they do not split the destination into competing actions.
