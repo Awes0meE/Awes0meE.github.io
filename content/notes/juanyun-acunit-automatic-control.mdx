@@ -9,7 +9,7 @@ projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## A Command Could Move the Valve Without Controlling the System / 一条命令能让阀动，却还不能叫系统控制
+## Manual Commands and Automatic Control / 手动指令与自动控制
 
 The first ACUnit firmware could Home the electronic expansion valve, move it to a target pulse, adjust the fans, and send a compressor speed command. Those abilities were necessary for bring-up, but they still left the operator in the loop. A target opening did not explain whether refrigerant flow was appropriate, and a compressor RPM did not explain whether the outlet temperature was approaching a safe operating point.
 
@@ -19,7 +19,7 @@ The later `production-line` branch changed the question. Manual control stayed a
 
 后来的 `production-line` 分支改变了问题。手动控制继续保留给测试使用，板端核心则开始根据传感状态和运行模式决定 EEV 动作与压缩机转速。控制逻辑被抽成一套可移植核心，旁边还有参考模型和回归资产。这样一来，算法可以暂时离开 UART、OLED 和板级驱动细节，单独接受推演。
 
-## Two Control Rates Watched Different Kinds of Change / 两个控制周期盯着两种不同变化
+## Control Periods and Operating Modes / 控制周期与运行模式
 
 The compressor path ran every 200 ms. It adjusted speed continuously around the outlet-control temperature and the limit assigned to the current mode. The EEV and safety path made decisions every second. Valve movement and refrigeration state respond on a different time scale from a UART command, so separating the two loops kept a fast compressor update from turning every EEV observation into another immediate step.
 
@@ -29,7 +29,7 @@ The operating modes gave those loops bounded targets. `STOP` held the machine in
 
 运行模式给两个循环套上不同边界。`STOP` 把机器保持在安全停机状态，`QUIET` 限制压缩机转速以优先照顾噪声，`PERF` 允许更高制冷能力，`ZERO` 则追求更低的出风温区，并带有自己的低温停机行为。每次上电，固件先进入 `AUTO + STOP`，不会恢复上次保存的非零风扇或压缩机输出。EEV 仍然必须先 Home，保存开度才有物理意义。
 
-## Superheat Turned Two Sensors into One Control Question / 过热度把两类传感器变成了一个控制问题
+## Superheat Calculation and EEV Control / 过热度计算与 EEV 控制
 
 The branch calculated superheat from suction temperature and the evaporating saturation temperature inferred from suction pressure. In compact form, the relationship was `SH = Ts - Tevap_sat(Ps)`. The pressure-to-temperature table in this firmware was an R134a approximation, so a different refrigerant or a changed sensor range would require another table and another validation pass.
 
@@ -43,7 +43,7 @@ That source explains a general refrigeration principle. It does not validate thi
 
 这份资料解释的是通用制冷原理，不会替这套产品验证阈值。对卷云分支，我能确认代码加入了低开度阻尼、趋势与预测约束、低过热度与负过热度处理，以及压缩机协同限制，却不能把这些实现直接写成最终参数已经完整标定。
 
-## Safety Had to Be Able to Overrule the Temperature Target / 安全层必须有权推翻温度目标
+## Protection Logic and Startup Sequence / 保护逻辑与启动顺序
 
 A controller that only chases temperature can make a bad sensor look like a reason to push harder. The later core placed validity and protection decisions above the ordinary target. Invalid sensing could prevent automatic operation. Low or negative superheat could restrict valve and compressor behavior. High condensing pressure could reduce the permitted compressor speed. A persistently low compressor-control temperature could stop the run.
 
@@ -53,7 +53,7 @@ Startup needed different treatment from steady operation. EEV first moved throug
 
 启动阶段也不能直接照搬稳态逻辑。EEV 先完成 Home 与预开，压缩机等待有效状态和重启约束，严重条件仍可以越过宽限阶段直接接管。这不是一条漂亮公式统治所有事情，而是一组仲裁关系。机器状态不可信时，普通温控必须让路。
 
-## Real-Hardware Results Came Back Through the Test Team / 实机结果由测试团队反馈回来
+## Test-Team Feedback and Parameter Calibration / 测试团队反馈与参数标定
 
 The company test team later reported running `QUIET`, `PERF`, and `ZERO` on the real refrigeration system. They also reported observable changes from EEV superheat control and continuous compressor-speed adjustment, plus real triggers of low superheat, negative superheat, and high condensing-pressure protection. I did not personally run or witness those complete later tests, and I did not receive the raw logs needed to verify each event independently.
 

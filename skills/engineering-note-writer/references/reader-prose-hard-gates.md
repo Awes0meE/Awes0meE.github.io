@@ -39,6 +39,8 @@ Use natural quotation marks for the target language and preserve the punctuation
 
 ## L1-3 Scan Canned Structure
 
+For each Chinese learning note, count prose paragraphs whose first visible character is `我`, including `我会`, `我想`, `我在` and other continuations. Count the introduction and every prose paragraph beneath every heading; at most one is allowed by the user's 2026-09-07 instruction. Zero passes. Strip leading whitespace and Markdown emphasis when checking. Exclude metadata, headings, tables, lists, code, captions and verbatim source documents. Do not apply the numerical limit to English or to first-person phrases occurring later in a paragraph. Recompose repeated openings around their concrete content, then check that filler has not simply been prefixed and that ownership, uncertainty and proposed versus completed work are unchanged.
+
 Read the endings of the current batch and relevant recent project/note pages
 together. Repeated retrospective or hypothetical-next-time closures are a
 template problem even when the openings vary: `现在再看`, `回头看`, `下一次再看到`,
@@ -55,6 +57,8 @@ Reject textbook openings such as `在当今……的时代`, `在当今……背
 Do not use bold as paragraph-level structure. More than two consecutive source lines of bold prose, or a full prose paragraph whose main structure depends on bold, fails this check. Short emphasis remains available when it genuinely helps.
 
 Keep the current heading and list rules. Do not add a fixed heading count below the existing ceiling, and do not reject a genuine parallel bullet list merely because it has more than three items.
+
+Section headings must directly summarize the subject of their following paragraphs, as required by Step 8. Reject question hooks (`高电平从哪里来` / `Where the High Level Comes From`), abstract labels (`一个名字的特殊含义` / `A Special Username`) and isolated moments (`操作发生的那一刻` / `At Execution Time`, `重启之后` / `After Restart`) when used instead of that subject. Use the content to name the electrical principle, procedure, rule, measurement or other actual topic. `I²C 传输流程`, `软件与硬件 I²C` and `BUSY 与芯片勘误` are direct labels. This heading rule does not prohibit questions in the body or require every heading to list every detail.
 
 Reject bare negative-first binary reframes such as `不是 A，而是 B`, `这不是 A，这是 B`, `问题不在 A，而在 B`, `难点不是 A，而是 B`, `not A but B`, and `was not A; it was B`. State the useful conclusion directly. Ordinary factual negation remains allowed. The confirmed qualifier `不是说 A 不行，而是说 B` remains allowed when it prevents a real misreading and is not repeated as scaffolding.
 

@@ -1,0 +1,70 @@
+---
+title: "Cooperative Task Timing on the ACUnit"
+titleZh: "ACUnit 的协作式任务时序"
+summary: "Examining execution time, deferred sensor reads and missed deadlines in a bare-metal EEV controller."
+summaryZh: "沿 ACUnit 的阀步进与慢速传感器读取，研究执行耗时、任务推迟与错过节拍后的处理。"
+date: "2026-09-07"
+tags: ["STM32", "Scheduling", "EEV", "State Machine"]
+projectSlug: "juanyun-thermal-hardware"
+visibility: public
+---
+
+The ACUnit checks its EEV stepping service on a 1 ms cadence. DHT environmental reads are scheduled every 2000 ms and deferred while the valve is busy. A temperature reading every two seconds sounds leisurely, so why explicitly make it wait for the valve? Following one pass through the main loop makes the conflict easier to understand.
+
+ACUnit 的调度里，EEV 步进服务按 1 ms 检查，DHT 环境读取按 2000 ms 安排，而且要等 EEV 不忙时才进入。两秒读一次温湿度听起来很慢，为什么还要专门给阀让路？我想沿着一次主循环，把这个等待的实际含义弄清楚。
+
+## Period and Execution Time / 周期与耗时
+
+Call frequency and time spent inside a call are independent quantities. A DHT read performed only once every two seconds can still occupy the CPU continuously for several milliseconds. Checking the 1 ms task first helps only before the slow call begins. Once the loop enters a busy wait, the next valve-service call has to wait for its return.
+
+任务多久调用一次，和一次调用占用多久，是两件独立的事。DHT 两秒才读一次，仍可能在读的那几毫秒里持续占用 CPU。它被调用之前，1 ms 服务确实先检查过；一旦主循环进入忙等，下一次阀服务就得等它返回。
+
+Consider a slow task occupying the loop for 4 ms just after valve service. Running once every two seconds gives it only 0.2% average utilization, yet that single uninterrupted interval can block several 1 ms dispatch opportunities. A light average workload can coexist with a late response at a particular instant. This is a timing example, not a measured 4 ms execution time for the board.
+
+为方便推算，假设一个慢任务在阀服务执行后占用主循环 4 ms。即使它每两秒只执行一次，占用率也只有 0.2%，那一次连续占用仍足以挡住几个 1 ms 的检查机会。平均负载很轻，和某个具体时刻能及时响应，可以同时出现不同结果。这是一个时序例子，4 ms 并非这块板的测量值。
+
+The [AM2302 manual](https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf) specifies the reading interval separately from the pulse timing of an individual transaction. The former concerns sensor updates; the latter requires the host to decode a pulse sequence. Waiting two seconds between reads does not let the driver pause arbitrarily during decoding. Reducing how often it runs also leaves the duration of each busy wait unchanged.
+
+[AM2302 手册](https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf)把读取间隔与单次通信时序分开规定。前者涉及传感器数据更新，后者要求主机识别一串脉冲。应用愿意等两秒，不代表驱动就能在解码期间随意停下来处理别的事；反过来，把读取频率降得更低，也不会自动缩短单次忙等。
+
+## Task Delays and Event Handling / 任务延迟与事件处理
+
+The original scheduler uses unsigned differences from `HAL_GetTick()` to identify due work, updating a task's timestamp to the current time before dispatch. If its previous timestamp was 100 ms and the loop next checks at 104 ms, the branch runs once and starts timing again from 104 ms. The missing calls are not automatically replayed.
+
+原有调度使用 `HAL_GetTick()`，通过无符号时间差判断任务是否到期，执行前把该任务的时间戳更新为当前时间。假设上次时间戳是 100 ms，主循环直到 104 ms 才再次检查，那么到期分支只执行一次，随后从 104 ms 继续计时。程序并不会自动补出中间缺少的几次调用。
+
+That behavior suits many refresh tasks. A late display update can usually show the latest state. Stepping needs a closer look at what a call represents: a state check, or an actual physical step. A tight loop that catches up on missed pulses may restore the pulse count while failing to restore the time the mechanism needed between them.
+
+这种写法适合不少刷新任务。屏幕晚了一点，显示最新状态通常就够了。但对于步进输出，需要继续问一次调用究竟代表一次状态检查，还是一定产生一个步进动作。如果试图用循环瞬间补齐错过的脉冲，电气脉冲数量可能补上了，机械运动所需的时间间隔却没有补上。
+
+Different tasks need different responses to a delay. A display can skip old frames, counted events need their counts preserved, and communication needs a timeout decision about retry or failure. The EEV must retain its physical step interval rather than compress several steps because software arrived late. A Boolean pending flag remembers that work exists; setting it repeatedly still stores only one state. Events that must accumulate need a counter or queue.
+
+任务延迟以后，处理方式要根据任务本身来选。显示可以跳过旧帧，计数事件需要保存次数，通信则要结合超时决定重试还是报错。EEV 要遵守实际步进间隔，不能因为软件迟到就把几步挤在一起。一个布尔型到期标志只能记住有事待办，多次置位也仍然只有一个状态；需要累计的事件，应当另用计数或队列保存。
+
+## Nonblocking State Machines / 非阻塞状态机
+
+I divided ACUnit homing into stages. During a mechanical wait, the firmware retains the stage and the next action time. A later visit returns immediately if that time has not arrived, or advances the operation when it has. Communication waits and retries can follow the same pattern. Other tasks can use the waiting interval, while each visit performs only the work needed at that point.
+
+我在 ACUnit 中把回零拆成多个阶段。等待机械过程时保存阶段和下一次动作的时间，主循环再次访问时，时间未到就返回；到了才推进一步。通信等待与重试也可以用同样的方式组织。这样，等待时间能够用于其他任务，真正连续占用 CPU 的部分只剩下本次必须执行的操作。
+
+The contents of each state still need inspection. A state named as a wait for a serial response can block the loop if it calls a long blocking receive function internally. A short success path is insufficient as well: no response, an invalid length and exhausted retries all need bounded returns.
+
+但拆成状态机以后，还得检查每个状态内部有没有一段新的阻塞调用。等待串口应答的状态如果最终又调用了长时间阻塞接收，主循环照样停在那里。成功路径短也不够，设备不应答、数据长度不对和重试耗尽时，函数同样要能按时返回。
+
+Deferring DHT reads while the EEV is busy moves slow sensing into a gap in valve motion. To extend that arrangement, I would also retain the environmental reading's update time. Continuous valve activity could keep postponing the read, leaving control logic with an old temperature or humidity value. That logic should know its age even if the display continues to show the last reading. Deferred work needs an observable outcome too.
+
+原有的 EEV 忙碌判断把慢速 DHT 读取推迟到运动空隙，适合当时的协作方式。继续扩展时，我会同时记录环境数据的更新时间。如果阀长期忙碌，温湿度可能一直沿用旧值；此时显示最后读到的值，还应让使用它的控制逻辑知道数据已经多久没有更新。允许任务等待，也需要给这份等待一个可检查的结果。
+
+## Task Execution Time and Interval Measurements / 任务耗时与执行间隔测量
+
+To check the timing, I would bracket the slow task with a debug GPIO and mark valve-service activity on another signal. A logic analyzer could then show continuous occupancy and the intervals between service calls. Before interpreting those traces, I would distinguish a marker for entering the function from a marker for an actual output change, so an idle visit is not counted as a step.
+
+要核对这些推算，我会在慢任务入口和出口翻转一个调试 GPIO，再给阀步进服务加另一组标记。逻辑分析仪可以直接显示连续占用时间，以及阀服务两次进入之间的间隔。开始测量前，还要区分标记的是函数被调用，还是实际输出发生变化，避免把空调用也算成步进脉冲。
+
+Normal reads, an unresponsive sensor, communication retries, OLED refresh and parameter saving should be observed individually, then when their deadlines coincide. Printing every event over serial changes execution time, so I prefer brief RAM records that can be exported later at a suitable moment.
+
+正常读取、传感器不应答、通信重试、OLED 刷新和参数保存都应分别观察，然后再看它们同时到期的情况。串口逐行打印会改变执行耗时，我更倾向于先在 RAM 里保存简短事件，再在合适的时机导出。
+
+The discipline I want from cooperative scheduling is quite practical: each function has a clear amount of work for this visit, a return point and a state that someone will resume. Once those details are settled, the simple time comparisons in the main loop can correspond to a pace the valve and sensors can actually follow.
+
+对我来说，协作式调度最需要掌握的就是这里：每个函数应当清楚自己这次做多少事，什么时候返回，留下的状态由谁继续处理。把这些细节安排好，主循环里那些看似简单的时间判断，才会对应到阀和传感器真正能够接受的节奏。

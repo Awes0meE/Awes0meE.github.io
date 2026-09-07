@@ -950,3 +950,40 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - Deleted three superseded note backups, twelve separate language drafts, four finished previews and the completed DIY selection plan. Earlier copies remain in Git; dated review observations remain in experiment packets. Closed the four obsolete note-preview servers.
 - Reconciled the 14 root/top-level documentation files, active handoff, topic backlog and review packet pointers. The current writer includes the contextual ending-variety rule across nine files. Corrected the Smart Car homepage to seven IR tracking inputs in both languages; six collision switches and six test groups are unchanged.
 - Publication validation, canonical routes and cleanup hashes are recorded in `docs/releases/engineering-notes-2026-09-07/`; PR #37 tracks the merge and deployment. No new project topic or note drafting is started by this release.
+
+## 2026-09-07 — Resume Tianjin learning notes
+
+- The user paused the unapproved About wording and requested the next project. Preserved it on `docs/rewrite-about-copy` at `af3ace5`, then started `docs/rewrite-tianjin-notes` from synchronized main `007decf`.
+- Read the confirmed Tianjin homepage, all five sibling notes and the public lookup, main-loop and GPIO excerpts. Prepared two candidate studies on calibration/lookup control and I2C/OLED debugging using current Engineering Note Writer rules and official ST, NXP and TI references.
+- Completed Chinese drafting and Step 10 before English adaptation, then rechecked the final Chinese, bilingual meaning, calculations and page division. Drafts and local review page are in `docs/experiments/tianjin-notes-2026-09-07/`; the website content, all old notes and About source on main remain unchanged. User review is pending.
+
+
+## 2026-09-07 Remaining project study drafts
+
+- User delegated the remaining four families for batch review. Wrote eight bilingual study drafts and combined them with Tianjin's two in `docs/experiments/remaining-project-notes-2026-09-07/`. All ten await review; current public counts remain unchanged.
+- Chinese passed the six-category check before English; final review includes technical calculations, first-person attribution, cross-page division and varied endings. Only reviewed public facts and derived explanations are used for Juanyun; no private product files are copied.
+- User rejected “做 STM32 练习”. Revised the Tianjin I2C opening to “我在折腾 STM32 的时候” and corrected firmware/OLED verb objects in both languages. Added the activity-specific object guidance to the canonical writer reference, then updated both local previews.
+- Combined review uses port 8772, with project, article and language selection; old Tianjin review on 8771 remains usable. Lint/content/encoding and 40 browser combinations passed. See the packet review record for exact checks.
+- About remains parked on its separate unapproved branch. No push, PR, merge, release, or old-note deletion was performed.
+
+## 2026-09-07 — Section headings from section content
+
+The user rejected question hooks, abstract headings and isolated narrative moments, requesting heading-only edits. Reviewed 20 active/candidate authored notes (83 headings), changing 56 bilingual headings in 19 files. The six earlier rewrites, ten candidates and four other public authored studies were included; original source-document pages and 12 suspended superseded notes were retained. Non-heading content, page titles, metadata, code and figures were verified unchanged against the local pre-edit commit. Both candidate preview pages were synchronized. Engineering Note Writer Step 8/12, composition guidance, examples and review criteria now require direct subject labels derived after reading the entire section. Public-source edits remain local pending publication. Review details: `docs/experiments/note-heading-review-2026-09-07/review.json`.
+
+Validation passed: lint, content/UTF-8 checks, typecheck and webpack production build (30 routes). All 20 notes retain identical non-heading content; all 10 candidate previews and 10 public rendered pages match their canonical headings. Eight focused desktop/mobile language views of Tianjin I2C and Turing permissions passed overflow checks; the old 8771 preview also reflects the new headings. No push or publication.
+
+## 2026-09-07 — Natural paragraph openings
+
+The user limited Chinese learning notes to at most one paragraph beginning with 我 and asked for direct, natural openings. The same 20 active/candidate notes were scanned, including introductions and all paragraphs beneath headings. Fifteen Chinese openings and thirteen English counterparts changed in twelve files; the other eight notes required no changes. Every note now has zero or one Chinese 我 opening. Confirmed personal work, proposed checks, technical statements, headings, code and links retain their meaning. Engineering Note Writer Step 7/12, voice guidance and L1 review now encode the Chinese limit without an English quota or a ban on first-person phrases inside paragraphs. Both candidate previews were synchronized; no push or publication. Details: `docs/experiments/note-paragraph-openings-2026-09-07/review.json`.
+
+Validation passed: lint, content/UTF-8 checks, typecheck and webpack production build (30 routes). Exact replacement replay confirms no unrelated prose or metadata edits; headings, code, links and paragraph breaks are unchanged. All ten public rendered pages and ten candidate pages match the per-article Chinese opening counts. Turing permissions passed four desktop/mobile language views; the old Tianjin preview is synchronized.
+
+## 2026-09-07 — Final note approval and publication
+
+The user approved all notes and authorized neat, remote push, PR merge, production publication and workspace cleanup. Ten bilingual drafts across Tianjin, Turing, Juanyun, FOC and Claude Chime are promoted unchanged except for public visibility; twelve suspended old notes are retired with recovery in Git. The existing fifteen note sources retain their approved ce2411e bytes, including the prior heading and paragraph corrections. The final set is 8 projects, 25 public notes across 8 channels, and 84 media records. About remains parked separately and excluded.
+
+Reconciled root and top-level documentation, current writing handoff, source inventory and review pointers. Completed topic and overlap plans moved to the release record, with retired-source links pinned to history. Removed completed previews and their builder; dated review JSON remains historical. The legacy FOC note redirect now leads to the new angle-handoff study. Current writer changes ship with the notes.
+
+Lint/content/UTF-8, typecheck, 40-route webpack build and zero-vulnerability production audit passed. Exact body/retirement hashes, browser checks, PR tracking and cleanup scope are recorded in `docs/releases/remaining-engineering-notes-2026-09-07/`. The named tag remains v0.9.0 and gh-pages remains the compatibility redirect.
+
+Release browser review found long inline identifiers overflowing three original Turing documents on mobile. Applied the existing safe-wrap class to paragraphs and inline code in ContentRenderer; original article bytes and scrollable fenced code remain unchanged.

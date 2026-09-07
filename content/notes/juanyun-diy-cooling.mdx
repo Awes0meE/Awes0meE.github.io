@@ -37,7 +37,7 @@ CPU and GPU also take turns using the sending opportunity. At the intended caden
 
 CPU 和 GPU 还轮流占用发送机会。按程序预定的节奏，每 5 秒发其中一种，每种温度大约 10 秒才轮到一次。因此，定时器触发、某个传感器读完，以及它的数值发出，本来就是三个不同的时刻。我会让一次读取返回一个确定的样本，再把这个样本交给发送任务，避免发送时重新去取一个随时可能被别的任务改写的共享字段。
 
-## The Peak Window / 峰值保留到什么时候
+## Peak-Temperature Window / 温度峰值的统计窗口
 
 The [ESP32 program](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) handles an arriving message in two ways. It stores the most recently received readings in `cpuValue` and `gpuValue` for the OLED. It updates `maxCpuValue` and `maxGpuValue` only when a higher reading arrives. About every 30 seconds, the periodic control path saves the larger of those peaks in `maxValue` and calculates duty according to the current mode. A lower new reading can reach the screen immediately while an earlier high reading remains available for the next output calculation.
 
@@ -47,9 +47,9 @@ Consider an automatic mode with periodic updates only and no button activity. A 
 
 先假设处于自动调速模式，只有定时更新，中途没有按键操作。一个窗口从 0 秒开始，CPU 温度在第 5 秒到达 80°C，第 15 秒和第 25 秒都到达 60°C，GPU 始终低于这次 CPU 峰值。第 30 秒计算输出时，采用的仍是 80°C；随后峰值变量被清零，输出设置则保留到下一次更新。这样，15 秒时屏幕就可能显示 60°C，30 秒时程序却刚开始采用之前的 80°C。读数变低和输出变低，中间隔着一段程序安排的等待。
 
-The two assignments clearing the peaks in `updatePWM()` caught my attention. This excerpt includes the output calculation and peak reset.
+Alongside the output calculation, `updatePWM()` contains two assignments that clear the peaks. The excerpt below includes both operations.
 
-我读到 `updatePWM()` 时，最想细看的是清空峰值的两行。下面摘出函数中计算输出和清空峰值的部分。
+`updatePWM()` 在计算输出之外，还会清空峰值。下面摘出函数中计算输出和清空峰值的部分。
 
 ```cpp
 dutyCycle =processBluetoothValue(maxValue);
@@ -66,7 +66,7 @@ That allows another variation on the timeline. Suppose a frequency-button event 
 
 于是，上面的时间线还可以再推一步。假设第 25 秒处理了一次调频按键，刚才保留的 80°C 会被清除，而第 30 秒的定时更新仍照常到来。到时参与计算的，就是按键清空之后收到的那一小段数据。这让我更在意函数之间的关系了。单看 `30000`，很容易把它理解成固定的 30 秒统计窗口；把所有清空位置找出来，才能解释一次操作怎样改变了窗口里的内容。
 
-## Timing Each Sample / 给样本留下时间记录
+## Sample Timestamps and Control Timing / 样本时间记录与控制时序
 
 To reorganize this code, I would separate writing PWM from closing out a temperature window. A button could change the output setting, with an explicit rule deciding whether temperature collection starts again. A fixed-period policy could retain the accumulated peaks through a button event. A policy that restarts collection on a mode change could clear the peaks and reset the timing origin together. Either is straightforward to describe; combining the operations in one function makes the choice easier to overlook.
 

@@ -1,0 +1,27 @@
+{
+  "date": "2026-09-07",
+  "stage": "Step 10 Chinese review complete before English adaptation",
+  "brief": "Reused confirmed Tianjin project account and all five sibling notes; topics prepared as two separate investigations following the next-project request and the offered default. No new historical curiosity, test or fault diagnosis is claimed.",
+  "sha256": {
+    "calibration": "f53b425e7073757144e8aef18ba51f0a889d69d996517e3974cf8712d8962ff1",
+    "i2c": "aa567c6acb7b6363cd2e1ac377e531c2d903a0ed9f259087534e29ad0065bb87"
+  },
+  "review": {
+    "语序不当": "pass; historical context separated from present calculations and proposed measurements",
+    "搭配不当": "pass; ADC code increments, timer compare counts, voltage levels and output current remain distinct",
+    "成分残缺或赘余": "pass; subjects recoverable throughout and lists have explicit governing predicates",
+    "结构混乱": "pass; conditional examples retain their own subjects and results",
+    "表意不明": "pass; 1000 denotes target ADC where stated, 209 denotes compare count, 0x3C is explicitly hypothetical",
+    "不合逻辑": "pass; negative plant slope and feedback sign checked; interpolation output not treated as measured brightness; ACK separated from correct image"
+  },
+  "repairs": [
+    {
+      "before": "每改变一个目标 ADC 码",
+      "after": "目标 ADC 码每改变 1",
+      "category": "表意不明",
+      "reason": "Specify the numerical increment rather than sounding like a change to one variable object."
+    }
+  ],
+  "editorial": "Concrete calculations and line-level I2C behavior lead the notes. No evidence inventory, repeated full internship narrative, or retrospective ending. The five old notes stay suspended while the new studies await review.",
+  "postAdaptationChineseRepair": "Localized the shared calibration table header so both language views show the same five records. Chinese sentence review remains passed; no narrative claim changed."
+}

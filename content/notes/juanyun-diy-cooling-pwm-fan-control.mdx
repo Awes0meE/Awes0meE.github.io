@@ -43,7 +43,7 @@ For the frequency itself, I would start with the particular fan's interface requ
 
 频率该选多少，我会先查具体风扇的接口要求。以 [Noctua 的微控制器接线说明](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring)为例，它给出的目标值是 25 kHz，接受范围为 21 至 28 kHz。这是厂商对其风扇的要求，可以拿来学习怎样核对接口。原程序里按键每次把频率加减 200 Hz，只是在改变波形的重复频率；把频率数值调高，并不等于给风扇增加了同样比例的转速。
 
-## Receiving a Speed Signal / 测速信号怎样回到主控
+## Tachometer Interface and RPM Calculation / 测速接口与转速换算
 
 An actual speed reading has to travel back from the fan. [Noctua's PWM white paper](https://cdn.noctua.at/media/Noctua_PWM_specifications_white_paper.pdf) describes an open-collector tachometer output producing two pulses per revolution on its fans. The internal output transistor pulls the signal low when it conducts. When it switches off, an external pull-up resistor brings the line high. A controller connected to that node can count the pulses produced as the fan rotates.
 
@@ -61,7 +61,7 @@ Two fans introduce another wiring question. Both fan outputs in the schematic sh
 
 两个风扇还会多出一个接线问题。原理图上的两路风扇输出共用 `PWM`，所以会收到同一个控制波形。若希望知道两只风扇各自的转速，就需要分别接收测速信号。按开集电极的工作方式推下去，把两个测速输出并在一起，任意一边拉低都会让公共节点变低，重叠的脉冲便无法分清来自哪一只。共享控制指令很方便，分别观察每只风扇还需要各自的反馈。
 
-## Duty and Actual Response / 占空比与实际响应
+## Duty Cycle and Fan Speed / 占空比与风扇转速
 
 With a speed reading available, I could compare duty and rotation directly. I would hold supply voltage and PWM frequency constant, step through duty settings, and record speed after it settles to build a response curve for that fan. Low duty deserves a closer check. Starting from rest and reducing duty on a fan that is already turning can be recorded separately, so the curve also captures the starting and low-speed behaviour that matter in use.
 

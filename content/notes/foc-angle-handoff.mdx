@@ -1,0 +1,70 @@
+---
+title: "Angle Continuity in Sensorless FOC Handoff"
+titleZh: "无感 FOC 接管时的角度连续性"
+summary: "Separating speed agreement, angle offset and controller-state continuity when moving from open-loop operation to an observer."
+summaryZh: "把速度接近、角度偏差和控制器状态连续性分开，研究开环切换到观测器时应检查什么。"
+date: "2026-09-07"
+tags: ["FOC", "Observer", "EKF", "Control"]
+projectSlug: "sensorless-foc-learning-route"
+visibility: public
+---
+
+Late in debugging my custom FOC board, the EKF speed estimate approached the imposed open-loop frequency, yet the compressor still failed at sensorless takeover. That led me to angle. I now want to make the question more precise: when two speed traces nearly coincide, how far apart can the reference frames used for current control still be?
+
+自制 FOC 板调到后期，EKF 估计速度已经接近外加的开环频率，切换到无感控制时，压缩机仍然接不住。我当时继续查角度，现在想把这个问题拆得更细：两条速度曲线贴得很近时，电流控制实际使用的坐标系可能相差多少？
+
+## Speed and Phase / 速度与相位
+
+Imagine two hands rotating once per second, with one always a quarter-turn ahead. Their speeds match perfectly and their positions remain 90° apart. Electrical angle has the same relationship. Agreement in estimated speed constrains the rate of change, leaving initial offset and accumulated error to consider.
+
+假设两根指针都以每秒一圈旋转，其中一根始终领先另一根四分之一圈。它们的转速完全相同，位置却一直差 90°。电角度也有同样的关系。估计速度接近，只约束角度变化的速率，初始偏差和随时间积累的误差还在。
+
+The accumulation is easy to calculate. An electrical-frequency estimate 0.5 Hz above the reference produces `360° × 0.5 × 0.1 = 18°` of phase drift in 100 ms. A small speed error can become a substantial angle error over time. Conversely, a fixed angular offset can persist while the speed traces coincide. These are explanatory calculations, not angle measurements from the experiment.
+
+这个关系可以直接算。若估计电频率比参考高 0.5 Hz，持续 100 ms，累计相位差就是 `360° × 0.5 × 0.1 = 18°`。速度差看起来很小，时间一长，角度就会越走越远。反过来，固定的角度偏差也可以在两条速度曲线完全一致时保留下来。这些计算用来解释误差，并非当时的角度测量。
+
+The open-loop command angle needs its own interpretation. It defines the rotating reference imposed by the inverter; producing load torque can require an offset between that reference and the rotor flux. Logging estimated angle minus commanded angle therefore helps inspect continuity between two references, but does not directly measure error against the actual rotor. That requires a reliable position reference with its electrical zero aligned.
+
+开环指令角也需要单独看待。它规定逆变器施加的旋转参考，转子要产生负载转矩时，实际磁链方向可能与这个参考存在夹角。因此，记录估计角减去开环指令角，可以检查两套参考是否连续，却不能直接把差值命名为真实转子角误差。若要测量后者，还需要可靠的位置参考和电角零点对应关系。
+
+## Angle Error and dq Currents / 角度偏差与 dq 电流
+
+I use the common Park convention `id = iα cosθ + iβ sinθ`, `iq = -iα sinθ + iβ cosθ` to examine the effect. Define `δ = θest - θtrue` and take `id = 0`, `iq = I` in the true frame. Substitution gives `id_est = I sinδ` and `iq_est = I cosδ`.
+
+为了看清角度偏差怎样影响电流，我采用常见的 Park 变换约定：`id = iα cosθ + iβ sinθ`，`iq = -iα sinθ + iβ cosθ`。定义 `δ = θ估计 - θ真实`，在真实坐标系中取 `id = 0`、`iq = I`，代入后得到 `id估计 = I sinδ`，`iq估计 = I cosδ`。
+
+For an example with `I = 1 A` and `δ = 30°`, the controller obtains approximately `0.5 A` on d and `0.866 A` on q. The physical phase currents have not suddenly changed. Changing only the transformation angle has changed the error presented to the PI controllers. Their subsequent voltage correction is what then affects the physical current.
+
+取 `I = 1 A`、`δ = 30°` 作示例，控制器会得到约 `0.5 A` 的 d 轴分量和 `0.866 A` 的 q 轴分量。同一组相电流没有突然换掉，仅仅改变用于变换的角度，PI 看到的误差就变了。接下来它会调整电压，物理电流才进一步受影响。
+
+[Imperix analyzes position-estimation error](https://imperix.com/doc/implementation/sensorless-motor-control) through the same reference-frame coupling. What makes it intuitive for me is that angle error changes the interpretation of current feedback. A tight tolerance on the speed estimate alone cannot make that feedback behave smoothly at takeover.
+
+[Imperix 对位置估计误差的分析](https://imperix.com/doc/implementation/sensorless-motor-control)也从坐标旋转讨论了这种耦合。我更容易理解的地方是，角度错误会改变电流反馈的含义。因此，不能只给速度估计设一个很窄的允许误差，就期待电流环自然平稳接管。
+
+## Angle Transition and PI State / 角度过渡与 PI 状态衔接
+
+Circular quantities need careful subtraction. Angles of 359° and 1° are only 2° apart, although direct subtraction can yield -358°. The difference used for transition should first be wrapped to a shortest-angle interval, for example with `atan2(sinδ, cosδ)`. Only then is it useful to decide how gradually to remove the offset.
+
+切换角度时，还要处理圆周上的数值。359° 与 1° 只隔 2°，直接相减却会得到 -358°。用于切换的差值应当先折回最短角区间，例如用 `atan2(sinδ, cosδ)`。随后才适合讨论如何逐渐修正这段偏差。
+
+One transition method worth studying records the shortest difference at takeover, starts the control angle from the existing reference and gradually removes the offset. That avoids an immediate phase jump. Smoothly following a wrong angle still produces wrong control, however, so the transition rate needs consideration alongside observer convergence. [Imperix's I-f startup explanation](https://imperix.com/doc/implementation/i-f-startup-method) offers another startup and transition design for comparing reference-frame and current-command continuity. My project's open-loop voltage-frequency operation needs analysis according to its own control structure.
+
+一个可以研究的过渡方法，是在切换时记录两套角度的最短差值，让控制角从当前参考开始，再逐步减小偏移。这样能避免一上来就跳相。不过，平滑地跟上一个错误角度，仍然会得到错误控制，所以过渡速度需要和观测器收敛情况一起检查。[Imperix 的 I-f 启动说明](https://imperix.com/doc/implementation/i-f-startup-method)提供了另一种启动与切换设计，可用于对照参考系和电流指令怎样衔接；项目原有的开环电压频率运行方式需要按自己的控制结构分析。
+
+The PI states deserve equal attention. During direct open-loop voltage control, the current-loop integrators may not have tracked the applied output. Enabling them can produce a voltage change even if angle is continuous. I would therefore put angle, d/q targets, integral states, saturation flags and final voltage commands on the same timeline. A smooth handoff involves the complete control calculation.
+
+PI 的内部状态也不能遗漏。开环阶段直接给定电压时，电流 PI 积分器可能没有跟踪当前输出。切换后，即便角度连续，突然启用的 PI 仍可能给出不同的电压。由此我会把角度、d/q 目标、积分状态、限幅状态和最终电压指令放在同一段时间记录里。连续接管涉及的是整条控制计算。
+
+## Handoff Traces and Fault Diagnosis / 接管数据记录与故障判断
+
+I have already used RAM traces to inspect internal states. For this investigation, I would retain a short interval before and after the transition event, with common timestamps for open-loop angle, estimated angle, actual control angle, frequency, `Id/Iq`, current targets, `Vd/Vq` and saturation flags. The sample interval and angle units belong in the record too. Otherwise degrees, radians or mismatched update times can masquerade as control errors.
+
+我已经用过 RAM trace 来读取内部状态。继续查这个问题时，可以以切换事件为中心保留一小段前后数据，统一时间戳，记录开环角、估计角、实际控制角、频率、`Id/Iq`、目标电流、`Vd/Vq` 与限幅标志。采样周期和角度单位必须一起保存，否则度、弧度或不同更新时刻之间的差异，会混进判断里。
+
+The traces can separate several cases. Drift already present before switching points toward estimator bias or parameters. A jump appearing exactly at the event directs attention to angle selection and wrapping. Continuous angle with a voltage jump instead suggests PI state or command continuity. Keeping open-loop drive active while the observer only computes and records would first show its behavior at stable operating points, before short takeover trials with current limits and fault exit handling.
+
+这组数据至少能区分几种现象。切换以前差值就在持续漂移，可以先查估计偏差和参数；切换点才出现跳变，优先查角度选择与折回处理；角度连续而电压突变，就继续查 PI 状态和指令衔接。还可以保持开环驱动，让观测器只计算和记录，先观察它在几个稳定运行点上的表现，再安排带电流限制与故障退出的短时接管试验。
+
+The most useful clue would be the first quantity to become abnormal around the transition. That short sequence can decide whether to work next on the observer, coordinate transform or controller state. Speed agreement remains useful progress; completing takeover requires following the angle all the way to the voltage actually applied.
+
+这组记录里，最值得追查的是切换前后第一个发生异常的量。把这一小段过程看清，就能决定下一次该改观测器、坐标变换还是控制器状态。速度曲线接近仍然是有用的进展，只是接管这件事，需要从角度一直追到最终施加的电压。

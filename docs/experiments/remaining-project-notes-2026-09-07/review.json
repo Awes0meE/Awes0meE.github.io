@@ -1,0 +1,522 @@
+{
+  "date": "2026-09-07",
+  "status": "eight new bilingual local candidate drafts plus two Tianjin drafts; awaiting user review; unpublished",
+  "branch": "docs/rewrite-tianjin-notes",
+  "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
+  "draftSha256": {
+    "claude-chime-startup-current.mdx": "f499cd32930ced6b87f86c33370c294e85b123f4d8ff74e78271174bd43f516b",
+    "claude-chime-switched-adc-divider.mdx": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+    "foc-angle-handoff.mdx": "a8c92f5b6b1d03cba82b1356994e289373ccbba3f8126a6f1120f75b9aa57aff",
+    "foc-current-sampling-timing.mdx": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+    "juanyun-cooperative-task-timing.mdx": "476a1fce695b2c6781298d4287604e3cf6dcfbd7b40ae52b5705603e4b110257",
+    "juanyun-flash-parameter-recovery.mdx": "9a89809128c0a98f195eda967f70124a6a935e622bae96897cbfa259cffeff09",
+    "turing-local-role-permissions.mdx": "208639c523874520f448015811cb8c1a74b90783eb570cbf93715f16d11090b5",
+    "turing-windows-runtime-dependencies.mdx": "de53d996b6894b453b5b85debab07f76290a36f1045b4fe57ebd85543d2bfe78"
+  },
+  "step10": "See chinese-step10.json for the Chinese-only checkpoint before English adaptation.",
+  "step12Chinese": {
+    "语序不当": "pass; final Chinese reviewed in paragraph context",
+    "搭配不当": "pass; final Chinese reviewed in paragraph context",
+    "成分残缺或赘余": "pass; final Chinese reviewed in paragraph context",
+    "结构混乱": "pass; final Chinese reviewed in paragraph context",
+    "表意不明": "pass; final Chinese reviewed in paragraph context",
+    "不合逻辑": "pass; final Chinese reviewed in paragraph context"
+  },
+  "finalEditorialRepairs": [
+    "The Tianjin I2C opening now uses 折腾 STM32. Firmware, rather than the OLED, is the object of compile/flash. English and both preview pages match.",
+    "The Chinese sentence gate now distinguishes a device from an activity or skill when selecting a verb and object.",
+    "The Chime ADC note states that the battery supplies the divider through AO3401; it does not describe a battery passing through a transistor. The Thevenin derivation explicitly sets the ideal source to zero in the circuit model.",
+    "Endings were compared across the batch; the Flash conclusion describes recovery of a defined saved setting, without promising preservation of an unsaved live value."
+  ],
+  "truthReview": [
+    "Project-specific claims were checked against current homepages, relevant family notes, approved briefs and selected source excerpts. Protected long-form Turing procedures remain unchanged.",
+    "Qt runtime and compiler compatibility explanations follow the official Qt and Microsoft documentation. Local QSettings role checks are not presented as remote authentication.",
+    "Juanyun existing notes confirm two Flash pages, sequence, CRC32, commit and a four-second delay. The expanded format, migration and power-cut matrix are a proposed study, not a claim of historical tests.",
+    "FOC source was inspected locally at d539c4a4f2f8c66ed6dfe3ce02c2dbd31a681847, including board_config.c and adc.c. Actual schematic images distinguish two phase-current amplifier channels from the separate bus-current path.",
+    "FOC worked angle examples use an explicit Park convention. The injected ADC timing example is labeled hypothetical. Reconstructing Ic as -Ia-Ib cannot independently validate the current sum.",
+    "Chime startup measurements refer to protected-pack output, not cell voltage. Startup-current and ADC-settling numbers are calculations from stated assumptions, not measured test results.",
+    "Chime ADC calculations include 15 kohm, 22 kohm, 1 kohm and 100 nF: Rth 9.918919 kohm, tau 0.991892 ms, 0.1 percent settling about 6.85175 ms. Gate pull-up consumption and capacitor recharge are distinguished from divider current."
+  ],
+  "researchSources": {
+    "Qt deployment": "https://doc.qt.io/qt-6.5/windows-deployment.html",
+    "Qt plugins": "https://doc.qt.io/qt-6.5/deployment-plugins.html",
+    "QSettings": "https://doc.qt.io/qt-6.5/qsettings.html",
+    "MSVC compatibility": "https://learn.microsoft.com/en-us/cpp/porting/binary-compat-2015-2017?view=msvc-170",
+    "DUMPBIN": "https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170",
+    "Authorization": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+    "DHT": "https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf",
+    "AN2594": "https://www.st.com/resource/en/application_note/an2594-eeprom-emulation-in-stm32f10x-microcontrollers-stmicroelectronics.pdf",
+    "FOC source": "https://github.com/Awes0meE/STM32_Sensorless_FOC/blob/d539c4a4f2f8c66ed6dfe3ce02c2dbd31a681847/user/board_config.c",
+    "ST injected ADC definitions": "https://github.com/STMicroelectronics/stm32f4xx-hal-driver/blob/master/Inc/stm32f4xx_hal_adc_ex.h",
+    "DRV8301": "https://www.ti.com/lit/ds/symlink/drv8301.pdf",
+    "Sensorless control": "https://imperix.com/doc/implementation/sensorless-motor-control",
+    "I-f startup": "https://imperix.com/doc/implementation/i-f-startup-method",
+    "Inrush current": "https://www.ti.com/lit/an/slva670a/slva670a.pdf",
+    "TLV61048": "https://www.ti.com/lit/ds/symlink/tlv61048.pdf",
+    "DW01A": "https://www.ic-fortune.com/upload/Download/DW01A-DS-12_EN.pdf",
+    "ESP32-S3 ADC calibration": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/adc/adc_calibration.html"
+  },
+  "sourceAccessLimit": "The DW01A PDF did not open in the web reader; official indexed text supported only the general sense-voltage and delay explanation. No exact protection threshold was inferred or quoted.",
+  "voiceAndBilingual": "pass for local review; Chinese was composed first and English adapted with equivalent reasoning and factual status. No inventory-style claim disclaimers or repeated retrospective closing template were introduced. Reader-prose patterns and verb-object matching were reviewed in both languages.",
+  "crossPage": "Homepages retain project progression. Each new note investigates one bounded technical question. Necessary opening context is short. Old suspended notes and original Turing procedures remain intact pending user review; publication must reconcile replacements separately.",
+  "scope": "Only local review packets, writing guidance and handoff records change. Production content, application source and public assets are unchanged. About remains on its separate parked branch.",
+  "checks": {
+    "lint": "pass after final wording and documentation updates; eslint, content validation and encoding validation (438 UTF-8 text files)",
+    "contentValidation": "8 projects, 27 note sources and 84 media records unchanged",
+    "publicState": "15 public and 12 suspended notes unchanged; ten drafts remain outside content/",
+    "productionBuild": "not repeated for this packet; application and public content unchanged",
+    "visualInspection": "Desktop Chime ADC and mobile Turing permissions screenshots inspected; paragraphs and tables fit.",
+    "browser": {
+      "views": [
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "光照标定与查表控制",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Light Calibration and Lookup Control",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "I²C 通信与 OLED 调试",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "I²C Communication and OLED Debugging",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "Qt 程序的 Windows 运行依赖",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Qt Windows Runtime Dependencies",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "本地账户的权限判断",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Local Account Permission Rules",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "ACUnit 的协作式任务时序",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Cooperative Task Timing on the ACUnit",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "Flash 参数保存与恢复",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            5
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Flash Parameter Saving and Recovery",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            5
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "无感 FOC 接管时的角度连续性",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Angle Continuity in Sensorless FOC Handoff",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "PWM 周期内的电流采样",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Current Sampling Within a PWM Cycle",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "带保护电池的启动测量",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "Protected Battery Startup Measurements",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 1440,
+          "lang": "zh",
+          "title": "电池采样开关与 ADC 建立时间",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            4
+          ]
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "title": "A Switched Battery Divider and ADC Settling",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            4
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "光照标定与查表控制",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Light Calibration and Lookup Control",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "I²C 通信与 OLED 调试",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "I²C Communication and OLED Debugging",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "Qt 程序的 Windows 运行依赖",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Qt Windows Runtime Dependencies",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "本地账户的权限判断",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Local Account Permission Rules",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            6
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "ACUnit 的协作式任务时序",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Cooperative Task Timing on the ACUnit",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "Flash 参数保存与恢复",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            5
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Flash Parameter Saving and Recovery",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            5
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "无感 FOC 接管时的角度连续性",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Angle Continuity in Sensorless FOC Handoff",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "PWM 周期内的电流采样",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Current Sampling Within a PWM Cycle",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "带保护电池的启动测量",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "Protected Battery Startup Measurements",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": []
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "title": "电池采样开关与 ADC 建立时间",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            4
+          ]
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "title": "A Switched Battery Divider and ADC Settling",
+          "languageLeaks": 0,
+          "chineseInEnglish": false,
+          "overflow": false,
+          "tables": [
+            4
+          ]
+        }
+      ],
+      "errors": [],
+      "navigation": {
+        "url": "http://127.0.0.1:8772/preview.html?note=claude-chime-switched-adc-divider&lang=en",
+        "title": "A Switched Battery Divider and ADC Settling · Review",
+        "previous": "http://127.0.0.1:8772/preview.html?note=claude-chime-startup-current&lang=en"
+      },
+      "tianjinOldPreviewUpdated": true,
+      "finalChimeAdcRecheck": [
+        {
+          "width": 1440,
+          "lang": "zh",
+          "overflow": false,
+          "updatedWording": true,
+          "visibleTables": 1
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "overflow": false,
+          "updatedWording": true,
+          "visibleTables": 1
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "overflow": false,
+          "updatedWording": true,
+          "visibleTables": 1
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "overflow": false,
+          "updatedWording": true,
+          "visibleTables": 1
+        }
+      ]
+    },
+    "gitDiffCheck": "pass"
+  },
+  "headingRevision": {
+    "date": "2026-09-07",
+    "review": "../note-heading-review-2026-09-07/review.json",
+    "change": "Concrete section headings derived from the complete section; paragraphs and metadata unchanged. Earlier browser records describe their original checkpoints."
+  },
+  "paragraphOpeningRevision": {
+    "date": "2026-09-07",
+    "review": "../note-paragraph-openings-2026-09-07/review.json",
+    "change": "Repetitive Chinese 我 paragraph openings revised; every note has at most one, including the introduction. Paired English aligned as needed. Earlier checks describe their dated checkpoints."
+  }
+}

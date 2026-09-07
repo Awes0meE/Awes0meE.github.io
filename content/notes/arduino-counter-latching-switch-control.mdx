@@ -37,9 +37,9 @@ The resistor has another role that is easy to miss. With the contact closed, cur
 
 The [course test sketch](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino) uses `INPUT` and repeatedly prints the readings. [Arduino's `pinMode()` reference](https://github.com/arduino/reference-en/blob/master/Language/Functions/Digital%20IO/pinMode.adoc) distinguishes that mode from `INPUT_PULLUP`, which enables the internal pull-up. Following this sketch therefore also means providing the external pull-up or pull-down shown in the circuit. Configuring an input alone does not supply the missing default level.
 
-我再读[课程测试代码](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino)，它把输入设为 `INPUT`，然后不断打印读数。[Arduino 的 `pinMode()` 说明](https://github.com/arduino/reference-en/blob/master/Language/Functions/Digital%20IO/pinMode.adoc)区分了 `INPUT` 和 `INPUT_PULLUP`，后者才会启用内部上拉。所以照着这段程序接线时，课件中的外部上拉或下拉也要接上。仅把引脚设为输入，并不会自动替电路补好默认电平。
+[课程测试代码](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino)把输入设为 `INPUT`，然后不断打印读数。[Arduino 的 `pinMode()` 说明](https://github.com/arduino/reference-en/blob/master/Language/Functions/Digital%20IO/pinMode.adoc)区分了 `INPUT` 和 `INPUT_PULLUP`，后者才会启用内部上拉。所以照着这段程序接线时，课件中的外部上拉或下拉也要接上。仅把引脚设为输入，并不会自动替电路补好默认电平。
 
-## Stable States and Single Actions / 稳定状态与一次动作
+## Switch Debouncing and State-Change Detection / 按键消抖与状态变化检测
 
 Debouncing comes next. Mechanical contacts can briefly make and break several times during a transition, producing multiple changes from one operation. [Arduino's Debounce example](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/Debounce/Debounce.ino) restarts a timer whenever the raw reading changes and accepts a new button state only after the reading has remained steady for an interval. That gives me two distinct values to follow. The raw input can change first; the state accepted by the program changes later.
 
@@ -57,15 +57,15 @@ For this counter, I would define the two controls explicitly. Pause follows the 
 
 对这份计数器，我会先给两个功能写下明确约定。暂停跟随消抖后的开关状态，锁在暂停位置就持续停止加数，切回来再继续。复位则选择一个确定的状态变化，例如进入有效位置时清零一次，保持在这个位置不再反复清零。启动程序时，也要先读取并确认初始状态，避免把开机时已经按下的开关误当成刚发生的一次操作。不同交互要求可以采用不同约定，但代码和实际使用方式要一致。
 
-## Timing and Response / 计时与响应
+## Loop Timing and Button Response / 主循环计时与按键响应
 
 The counter's `delay(1000)` introduces another timing question. While the main loop waits for a second, the button polling that follows has to wait too. A brief press and return can fit entirely between two reads. A latching switch that remains in its new position will usually still be read on the next pass, although the response comes later. [Arduino's `delay()` documentation](https://github.com/arduino/reference-en/blob/master/Language/Functions/Time/delay.adoc) also distinguishes suspension of the main program from mechanisms such as interrupts that can continue. What matters for these buttons is how often the loop returns to read them.
 
 再看计数程序里的 `delay(1000)`，前面的问题又多了一层时间关系。程序在主循环里等待一秒时，后面的按键轮询也得等它返回。一次很短的按下和恢复，可能完全落在两次读取之间；自锁开关若保持在新位置，下一次通常还能读到，不过响应会晚。[Arduino 的 `delay()` 说明](https://github.com/arduino/reference-en/blob/master/Language/Functions/Time/delay.adoc)也区分了暂停主程序与中断等仍可继续工作的机制。这里影响按键的是主循环多久回来读一次。
 
-I would treat one second as a condition between increments and let the loop keep checking the switches. On each pass, read `millis()`, process the inputs and state changes, and update the count only when a second has elapsed since the last counting reference. [Blink Without Delay](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/BlinkWithoutDelay/BlinkWithoutDelay.ino) demonstrates this elapsed-time approach. Display updates and other work also need to stay brief so that debouncing and change detection receive input samples frequently enough.
+A one-second interval between increments can be checked without stopping the loop from reading the switches. On each pass, read `millis()`, process the inputs and state changes, and update the count only when a second has elapsed since the last counting reference. [Blink Without Delay](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/BlinkWithoutDelay/BlinkWithoutDelay.ino) demonstrates this elapsed-time approach. Display updates and other work also need to stay brief so that debouncing and change detection receive input samples frequently enough.
 
-我会把一秒理解成两次加数之间的时间条件，让循环继续检查开关。每轮读一次 `millis()`，处理输入和状态变化，再比较距上次计数是否已满一秒，到时才更新数字。[Blink Without Delay 示例](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/BlinkWithoutDelay/BlinkWithoutDelay.ino)用的就是这种经过时间的判断。显示更新和其他处理也要尽量短，循环能及时回来，前面的消抖与变化检测才有足够频繁的输入。
+一秒可以作为两次加数之间的时间条件，等待期间让主循环继续检查开关。每轮读一次 `millis()`，处理输入和状态变化，再比较距上次计数是否已满一秒，到时才更新数字。[Blink Without Delay 示例](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/BlinkWithoutDelay/BlinkWithoutDelay.ino)用的就是这种经过时间的判断。显示更新和其他处理也要尽量短，循环能及时回来，前面的消抖与变化检测才有足够频繁的输入。
 
 Resuming from pause raises a small question worth answering before writing the code. If 700 ms of the second has elapsed when I pause, should resuming leave 300 ms or begin a fresh second? Both behaviours are possible, but they feel different to use. For a new version of this exercise, I would start a full second on resume and reset the timing reference when clearing the count. Preserving the elapsed 700 ms would instead require storing that partial interval. Defining the choice avoids an immediate extra increment caused by an old timing reference after resuming.
 

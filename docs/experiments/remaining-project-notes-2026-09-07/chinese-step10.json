@@ -1,0 +1,70 @@
+{
+  "stage": "Step 10, refined Chinese reviewed before English body adaptation",
+  "time": "2026-09-07T12:36:52.274937+08:00",
+  "categories": [
+    "语序不当",
+    "搭配不当",
+    "成分残缺或赘余",
+    "结构混乱",
+    "表意不明",
+    "不合逻辑"
+  ],
+  "result": "pass",
+  "established_violations_remaining": 0,
+  "repairs": [
+    {
+      "file": "juanyun-flash-parameter-recovery.mdx",
+      "category": "不合逻辑",
+      "before": "掉电前后才是同一个设定",
+      "reason": "Delayed saving permits recovery of an earlier committed value. The ending must not promise preservation of an unsaved live setting.",
+      "after": "明确重启后应该使用哪个设定"
+    },
+    {
+      "file": "claude-chime-startup-current.mdx",
+      "category": "editorial, not grammar",
+      "reason": "Removed a repeated desired-next-measurement ending shared with FOC handoff."
+    }
+  ],
+  "drafts": [
+    {
+      "file": "claude-chime-startup-current.mdx",
+      "sha256": "84a1919e28066df815ea874d60175843fe19f389a857b8840615a39ff586a67e",
+      "chinese_body_only": true
+    },
+    {
+      "file": "claude-chime-switched-adc-divider.mdx",
+      "sha256": "1d720c7a97c49019b9c4d8d7cafd30f3878906fc71c7b14f4911dd47206f0d90",
+      "chinese_body_only": true
+    },
+    {
+      "file": "foc-angle-handoff.mdx",
+      "sha256": "db0adc44db5b4089da210d1d53be0132aeabff99074c4bd3596523dfd9a965c9",
+      "chinese_body_only": true
+    },
+    {
+      "file": "foc-current-sampling-timing.mdx",
+      "sha256": "972f55d89d7af62a257d5e1d8a9f60c40903b08e9aae40313722db1f8c613ff5",
+      "chinese_body_only": true
+    },
+    {
+      "file": "juanyun-cooperative-task-timing.mdx",
+      "sha256": "226551bbc6c31808848c9b643e781e484c0fa0be5d9b9e301778607f92146e87",
+      "chinese_body_only": true
+    },
+    {
+      "file": "juanyun-flash-parameter-recovery.mdx",
+      "sha256": "0f4a0dfad7b5e80ce7b087eb514399de2d92da622870724beab9c1c1da598d86",
+      "chinese_body_only": true
+    },
+    {
+      "file": "turing-local-role-permissions.mdx",
+      "sha256": "d7ccf24569a6dc57f49dabc3922531409ab576be0ee27e38299c948e42585bd9",
+      "chinese_body_only": true
+    },
+    {
+      "file": "turing-windows-runtime-dependencies.mdx",
+      "sha256": "df34268f8f4f873906df31fa12c32b9b83cf0073e0454688717bdfed64f8f605",
+      "chinese_body_only": true
+    }
+  ]
+}

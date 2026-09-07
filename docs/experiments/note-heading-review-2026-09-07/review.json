@@ -1,0 +1,800 @@
+{
+  "date": "2026-09-07",
+  "baseCommit": "a6a63219e8905c4d9b3bc74afd670b23683d6540",
+  "scope": "All 16 current rewritten or candidate notes plus four other public model-authored notes. Original source-document pages and 12 suspended superseded notes are retained unchanged.",
+  "request": "Read each section first, then name its concrete subject and aspect. Replace abstract, rhetorical and narrative fragment headings in Chinese and English; preserve body content.",
+  "files": [
+    {
+      "file": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+      "headingsReviewed": 5,
+      "changes": [
+        {
+          "before": "Feeding Speed Back / 把轮速送回控制",
+          "after": "Wheel-Speed Feedback Control / 轮速反馈控制"
+        }
+      ],
+      "beforeSha256": "010a85583dffb0c463af3fb080e148207094faf40d0a01d1935881f7460c7962",
+      "afterSha256": "aaa881c932788b2c6e5c59fc81c24fe1d271d8aadcfbdb6a47d59f72ebd4a514",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+      "headingsReviewed": 4,
+      "changes": [],
+      "beforeSha256": "4ebba56939fbca0bce70facfe5e61764f5fe2b83bcf1648ee0b3b59d21d02875",
+      "afterSha256": "4ebba56939fbca0bce70facfe5e61764f5fe2b83bcf1648ee0b3b59d21d02875",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Current in Each Segment / 每一段的电流",
+          "after": "Segment Current and Resistor Selection / 段电流与限流电阻"
+        },
+        {
+          "before": "Matching the Decoder and Display / 译码器的配合",
+          "after": "Decoder and Display Compatibility / 译码器与数码管的匹配"
+        }
+      ],
+      "beforeSha256": "b00cae74855847641dd19ecf2cf9290d8de15d99e32c7054f2f3deb9dea2d840",
+      "afterSha256": "58a753fad42dfc3610c089a18df69cd68d3e9b3adc35d51cabfd1cb964465c51",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/arduino-counter-latching-switch-control.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Stable States and Single Actions / 稳定状态与一次动作",
+          "after": "Switch Debouncing and State-Change Detection / 按键消抖与状态变化检测"
+        },
+        {
+          "before": "Timing and Response / 计时与响应",
+          "after": "Loop Timing and Button Response / 主循环计时与按键响应"
+        }
+      ],
+      "beforeSha256": "a0559785312ac5a1643cf06668ad8733f5e12a3a0800cb6b660ead6b4371ab3b",
+      "afterSha256": "6095ec78ffba8e3ac3339021a606a6017f4a78657e84caae4793b2ba0e63f140",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-diy-cooling.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "The Peak Window / 峰值保留到什么时候",
+          "after": "Peak-Temperature Window / 温度峰值的统计窗口"
+        },
+        {
+          "before": "Timing Each Sample / 给样本留下时间记录",
+          "after": "Sample Timestamps and Control Timing / 样本时间记录与控制时序"
+        }
+      ],
+      "beforeSha256": "8d57f485894032a5c17ee777b770595e23a3195136945993da481ee85b8ae753",
+      "afterSha256": "5cfbeaaf7493a6463aad38116d8cec846af3618db44d5807fcf91a445c0d03a9",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-diy-cooling-pwm-fan-control.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Receiving a Speed Signal / 测速信号怎样回到主控",
+          "after": "Tachometer Interface and RPM Calculation / 测速接口与转速换算"
+        },
+        {
+          "before": "Duty and Actual Response / 占空比与实际响应",
+          "after": "Duty Cycle and Fan Speed / 占空比与风扇转速"
+        }
+      ],
+      "beforeSha256": "2236fb2a1318fa8afba2d804a022c3d5afd04a2f340a09e482e46419b008a859",
+      "afterSha256": "79d7ff584234f925cdcd8035cee04b4420cecd95c57de7de4a830fc46f9c36fa",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-i2c-oled-debugging.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Where the High Level Comes From / 高电平从哪里来",
+          "after": "I²C Open-Drain Outputs and Pull-Ups / I²C 开漏输出与上拉电阻"
+        },
+        {
+          "before": "Following a Transfer / 一次传输怎样完成",
+          "after": "I²C Transfer Sequence / I²C 传输流程"
+        }
+      ],
+      "beforeSha256": "b012541d0fb4d68c2ee30f26dffebc5c49ad5971ecb5a4b841a43d57c56f580d",
+      "afterSha256": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-light-calibration-control.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Reading the Calibration Table / 标定表里的数",
+          "after": "PWM and ADC Calibration Data / PWM 与 ADC 标定数据"
+        },
+        {
+          "before": "Interpolating a Target / 目标与插值",
+          "after": "Linear Interpolation and Output Limits / 线性插值与输出限幅"
+        }
+      ],
+      "beforeSha256": "6a57b27c8789b1b0473221ba93ac30c233d34d13b6662a0e965fbdc45de7f87e",
+      "afterSha256": "8c9c70b685a03d5ee5ef190f38855967263baa86d63d909ffea5faba54a8d47f",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/turing-local-role-permissions.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Actor and Target / 操作者与目标",
+          "after": "Account Operation Permissions / 账户操作权限"
+        },
+        {
+          "before": "A Special Username / 一个名字的特殊含义",
+          "after": "Username Rules and Account Initialization / 用户名规则与账户初始化"
+        },
+        {
+          "before": "At Execution Time / 操作发生的那一刻",
+          "after": "Permission Checks Before Execution / 执行前的权限检查"
+        },
+        {
+          "before": "After Restart / 重启之后",
+          "after": "Saving Account Data with QSettings / QSettings 账户数据保存"
+        }
+      ],
+      "beforeSha256": "627fb0b14825412dc71bd71e429a7b6ef35b2e9efd36f888a4f20418ce3b27c6",
+      "afterSha256": "a8f29256be6520b05c9655278a167f000d278e79cf33196c874f594cec60ab2b",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/turing-windows-runtime-dependencies.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "After Compilation / 编译之后",
+          "after": "Dynamic Linking and Runtime Dependencies / 动态链接与运行依赖"
+        },
+        {
+          "before": "Checking Another Machine / 换机检查",
+          "after": "Deployment Testing on Another Computer / 换机部署测试"
+        }
+      ],
+      "beforeSha256": "d622fba7fedcd2c7856aa3ebdb2c82208b079ddcb2ad133bccf73ad68abf3348",
+      "afterSha256": "4255da952baad91aea42a7e3ce7144d68fb0a4d55f80006d3077d3ba2730c4ea",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-cooperative-task-timing.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "After a Missed Deadline / 到期以后",
+          "after": "Task Delays and Event Handling / 任务延迟与事件处理"
+        },
+        {
+          "before": "Splitting the Wait / 把等待拆开",
+          "after": "Nonblocking State Machines / 非阻塞状态机"
+        },
+        {
+          "before": "Measuring the Loop / 测量主循环",
+          "after": "Task Execution Time and Interval Measurements / 任务耗时与执行间隔测量"
+        }
+      ],
+      "beforeSha256": "b7ba6126910cbb93c42185ceac527758051a4698654c1d0579fd3390049a16d8",
+      "afterSha256": "a76dcc77e907fa396a34b306ccebe2982455721abdff207d720c4ccbea757808",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-flash-parameter-recovery.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Waiting Before Writing / 暂时不写",
+          "after": "Deferred Parameter Saving / 参数的延迟保存"
+        },
+        {
+          "before": "A Complete Record / 一条完整记录",
+          "after": "Record Format and Validation / 记录格式与校验"
+        },
+        {
+          "before": "Moving Between Pages / 两页之间",
+          "after": "Flash Page Transfer and Power-Loss Recovery / Flash 换页与掉电恢复"
+        },
+        {
+          "before": "Checking Recovery / 继续验证",
+          "after": "Power-Loss Tests and Flash Endurance / 掉电测试与 Flash 寿命"
+        }
+      ],
+      "beforeSha256": "cc9cd143a0e568075e7c8f108e326a16805dbfade9c1fee3a4cfd33e479ebb36",
+      "afterSha256": "e7b257fe2738b3a54913ea62f37989e22c75da86ea20082d47bccd82139c05f7",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/foc-angle-handoff.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Current Components / 电流分量",
+          "after": "Angle Error and dq Currents / 角度偏差与 dq 电流"
+        },
+        {
+          "before": "The Transition / 切换瞬间",
+          "after": "Angle Transition and PI State / 角度过渡与 PI 状态衔接"
+        },
+        {
+          "before": "Around the Handoff / 先看接管前后",
+          "after": "Handoff Traces and Fault Diagnosis / 接管数据记录与故障判断"
+        }
+      ],
+      "beforeSha256": "49b1f68fbef303b308116e92a47f578b1c2d1962f0188ffe5f91e043e76d7ac4",
+      "afterSha256": "ac058e8c9015f91c1db48b780c911e9a41074bdd578ad6323deb9cf98384fabb",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/foc-current-sampling-timing.mdx",
+      "headingsReviewed": 5,
+      "changes": [
+        {
+          "before": "Where the Shunts Sit / 采样电阻的位置",
+          "after": "Shunt Placement and Sampling Conditions / 采样电阻的位置与采样条件"
+        },
+        {
+          "before": "Four Channels per Trigger / 一次触发的四个通道",
+          "after": "ADC Triggering and Conversion Sequence / ADC 触发与转换顺序"
+        },
+        {
+          "before": "Reconstructing the Third Phase / 第三相的重建",
+          "after": "Third-Phase Current Reconstruction / 第三相电流重建"
+        },
+        {
+          "before": "Comparing Waveforms / 对照波形",
+          "after": "Sampling Waveforms and Error Diagnosis / 采样波形与误差判断"
+        }
+      ],
+      "beforeSha256": "878f41b7d300342af0906521f2bd40b64849c78bd6022216be8fbd06ddeaf39e",
+      "afterSha256": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-startup-current.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Cell and Pack Output / 电芯与输出端",
+          "after": "Cell and Pack-Output Voltage Measurements / 电芯与电池包输出电压测量"
+        },
+        {
+          "before": "Charging the Capacitors / 电容先充电",
+          "after": "Capacitor Charging and Startup Current / 电容充电与启动电流"
+        },
+        {
+          "before": "The Current-Limited Supply / 限流电源的差别",
+          "after": "Supply Current Limiting and Battery Protection / 电源限流与电池保护"
+        },
+        {
+          "before": "Trigger and Recovery / 触发与恢复",
+          "after": "Startup Waveform Measurements / 启动波形测量"
+        }
+      ],
+      "beforeSha256": "694cf5f5d22457e3f76e7a8da79231d83ce95a296d9fd549913db64b0a31f923",
+      "afterSha256": "0bab6aefdfe7c13dbe4c9efeff0404013c732e3e19e2f016eee5c55b2c46dd83",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-switched-adc-divider.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Settling Time / 等多久",
+          "after": "RC Settling Time / RC 电路的建立时间"
+        },
+        {
+          "before": "Current Consumption / 省下的电流",
+          "after": "Sampling-Circuit Current Consumption / 采样电路的电流消耗"
+        }
+      ],
+      "beforeSha256": "8d666a8bd1779c0f40bc4b779cada89fb3e3eef40191bcde7e9547346bac4dbd",
+      "afterSha256": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-acunit-automatic-control.mdx",
+      "headingsReviewed": 5,
+      "changes": [
+        {
+          "before": "A Command Could Move the Valve Without Controlling the System / 一条命令能让阀动，却还不能叫系统控制",
+          "after": "Manual Commands and Automatic Control / 手动指令与自动控制"
+        },
+        {
+          "before": "Two Control Rates Watched Different Kinds of Change / 两个控制周期盯着两种不同变化",
+          "after": "Control Periods and Operating Modes / 控制周期与运行模式"
+        },
+        {
+          "before": "Superheat Turned Two Sensors into One Control Question / 过热度把两类传感器变成了一个控制问题",
+          "after": "Superheat Calculation and EEV Control / 过热度计算与 EEV 控制"
+        },
+        {
+          "before": "Safety Had to Be Able to Overrule the Temperature Target / 安全层必须有权推翻温度目标",
+          "after": "Protection Logic and Startup Sequence / 保护逻辑与启动顺序"
+        },
+        {
+          "before": "Real-Hardware Results Came Back Through the Test Team / 实机结果由测试团队反馈回来",
+          "after": "Test-Team Feedback and Parameter Calibration / 测试团队反馈与参数标定"
+        }
+      ],
+      "beforeSha256": "a07b9ba3f209dad6b8c2008f29fc9b8d241f2097e8309710ed3d62c95ea11864",
+      "afterSha256": "51f35fdc5201a7ac51ed3c58b4a9f773649476774edb205c26af87c01741a18a",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-acunit-hardware-revision-archive.mdx",
+      "headingsReviewed": 3,
+      "changes": [
+        {
+          "before": "V2.0 Uses Routes to Explain the System / V2.0 用连线解释系统",
+          "after": "V2.0 Power and Signal Connections / V2.0 电源与信号连接"
+        },
+        {
+          "before": "V2.1 Uses Branches to Inventory Interfaces / V2.1 用分支清点接口",
+          "after": "V2.1 Interface Diagram / V2.1 接口框图"
+        },
+        {
+          "before": "The Revision Reason Is Not in Either Image / 改图原因不在任何一张图里",
+          "after": "Diagram Comparison and Revision Records / 框图对比与改版记录"
+        }
+      ],
+      "beforeSha256": "75b904e37627d6b62c742e12136a3783c17182e2cbb0e717021a4795c1faee91",
+      "afterSha256": "4d5149f52899edb1adb74dce961fef7d88b56428d83f77b1864ce31a81e910ab",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-legacy-actuator-archive.mdx",
+      "headingsReviewed": 4,
+      "changes": [
+        {
+          "before": "Four Inputs Enter, Four Driven Nodes Leave / 四路输入进来，四路驱动节点出去",
+          "after": "ULN2003A Valve-Driver Circuit / ULN2003A 阀驱动电路"
+        },
+        {
+          "before": "PB12-PB15 Carry an Eight-Step Sequence / PB12-PB15 承担八拍序列",
+          "after": "GPIO Mapping and Eight-Step Sequence / GPIO 映射与八拍驱动序列"
+        },
+        {
+          "before": "The Control Path Is Deliberately Blocking / 控制路径明确采用阻塞式调用",
+          "after": "Blocking Valve Control / 阀的阻塞式控制"
+        },
+        {
+          "before": "The BLDC Branch Is Two Files Wide / BLDC 支线目前只有两类文件",
+          "after": "BLDC Design Files / BLDC 设计文件"
+        }
+      ],
+      "beforeSha256": "a678a0e6219252e8719ac51f629ba1ba25c962593b0e0b58d477216041cd955a",
+      "afterSha256": "54d464b9d5f3d69f5164527d1f7b18e1d59676692bc467f9abd27496c1a52634",
+      "nonHeadingContentUnchanged": true
+    },
+    {
+      "file": "content/notes/juanyun-dht11-am2302-board.mdx",
+      "headingsReviewed": 5,
+      "changes": [
+        {
+          "before": "The Cover Describes an Assigned Plan / 封面写的是一份分配任务",
+          "after": "Sensor-Board Development Plan / 传感器小板开发计划"
+        },
+        {
+          "before": "GND and NC Change Places Between Two Documents / 两份文档里的 GND 与 NC 对不上",
+          "after": "AM2302 Pin Definitions / AM2302 引脚定义"
+        },
+        {
+          "before": "Pull-Up, Supply, and Timing Also Need a Datasheet Pass / 上拉、供电与节拍也要再过一遍手册",
+          "after": "Pull-Ups, Supply, and Read Timing / 上拉电阻、供电与读取时序"
+        },
+        {
+          "before": "A 15.4 mm Sensor Meets a 14 mm Board / 15.4 mm 本体遇上 14 mm 板宽",
+          "after": "Board Dimensions and Mounting Clearance / 板框尺寸与安装间隙"
+        },
+        {
+          "before": "The Five-Minute Run Is Still an Acceptance Item / 连续五分钟仍是一条验收项",
+          "after": "MCU Tests and Acceptance Requirements / MCU 测试与验收要求"
+        }
+      ],
+      "beforeSha256": "a5c6f6f7720d82df2540a699975fa3b0d008b1f039d4d223d40c1c87d7f4f368",
+      "afterSha256": "3073c2cfdc4e355947cda7b3ca19d8eb20485c21d9f583edee583a8d004443e2",
+      "nonHeadingContentUnchanged": true
+    }
+  ],
+  "counts": {
+    "notesReviewed": 20,
+    "notesChanged": 19,
+    "headingsReviewed": 83,
+    "bilingualHeadingsChanged": 56
+  },
+  "editorialReview": "Chinese heading accuracy and six-category sentence checks passed before English adaptation; final paired headings name equivalent subjects. Retained Software and Peripheral Implementations / 软件与硬件 I²C and BUSY and Device Errata / BUSY 与芯片勘误.",
+  "publication": "Local review only; no push, PR or deployment.",
+  "checks": {
+    "nonHeadingContent": "pass across all 20 notes against the pre-edit commit; paragraphs, metadata, code, figures and page titles unchanged",
+    "candidatePreview": "all 10 notes match canonical MDX headings in both languages",
+    "productionRender": [
+      {
+        "note": "arduino-smart-car-line-tracking-learning-note",
+        "headings": 5,
+        "pass": true
+      },
+      {
+        "note": "arduino-smart-car-line-sensing-input-acquisition",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "arduino-digital-clock-counter-course-note",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "arduino-counter-latching-switch-control",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "juanyun-diy-cooling",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "juanyun-diy-cooling-pwm-fan-control",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "juanyun-acunit-automatic-control",
+        "headings": 5,
+        "pass": true
+      },
+      {
+        "note": "juanyun-acunit-hardware-revision-archive",
+        "headings": 3,
+        "pass": true
+      },
+      {
+        "note": "juanyun-legacy-actuator-archive",
+        "headings": 4,
+        "pass": true
+      },
+      {
+        "note": "juanyun-dht11-am2302-board",
+        "headings": 5,
+        "pass": true
+      }
+    ],
+    "browser": {
+      "allHeadings": [
+        {
+          "note": "tianjin-stm32-light-calibration-control",
+          "headings": [
+            {
+              "en": "PWM and ADC Calibration Data",
+              "zh": "PWM 与 ADC 标定数据"
+            },
+            {
+              "en": "Linear Interpolation and Output Limits",
+              "zh": "线性插值与输出限幅"
+            },
+            {
+              "en": "Calibration Coverage",
+              "zh": "标定点与补测"
+            },
+            {
+              "en": "Ambient Light and Feedback",
+              "zh": "环境光与反馈修正"
+            }
+          ]
+        },
+        {
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "headings": [
+            {
+              "en": "I²C Open-Drain Outputs and Pull-Ups",
+              "zh": "I²C 开漏输出与上拉电阻"
+            },
+            {
+              "en": "I²C Transfer Sequence",
+              "zh": "I²C 传输流程"
+            },
+            {
+              "en": "Software and Peripheral Implementations",
+              "zh": "软件与硬件 I²C"
+            },
+            {
+              "en": "BUSY and Device Errata",
+              "zh": "BUSY 与芯片勘误"
+            }
+          ]
+        },
+        {
+          "note": "turing-windows-runtime-dependencies",
+          "headings": [
+            {
+              "en": "Dynamic Linking and Runtime Dependencies",
+              "zh": "动态链接与运行依赖"
+            },
+            {
+              "en": "Qt Plugins",
+              "zh": "Qt 插件"
+            },
+            {
+              "en": "Third-Party Libraries",
+              "zh": "第三方依赖"
+            },
+            {
+              "en": "Deployment Testing on Another Computer",
+              "zh": "换机部署测试"
+            }
+          ]
+        },
+        {
+          "note": "turing-local-role-permissions",
+          "headings": [
+            {
+              "en": "Account Operation Permissions",
+              "zh": "账户操作权限"
+            },
+            {
+              "en": "Username Rules and Account Initialization",
+              "zh": "用户名规则与账户初始化"
+            },
+            {
+              "en": "Permission Checks Before Execution",
+              "zh": "执行前的权限检查"
+            },
+            {
+              "en": "Saving Account Data with QSettings",
+              "zh": "QSettings 账户数据保存"
+            }
+          ]
+        },
+        {
+          "note": "juanyun-cooperative-task-timing",
+          "headings": [
+            {
+              "en": "Period and Execution Time",
+              "zh": "周期与耗时"
+            },
+            {
+              "en": "Task Delays and Event Handling",
+              "zh": "任务延迟与事件处理"
+            },
+            {
+              "en": "Nonblocking State Machines",
+              "zh": "非阻塞状态机"
+            },
+            {
+              "en": "Task Execution Time and Interval Measurements",
+              "zh": "任务耗时与执行间隔测量"
+            }
+          ]
+        },
+        {
+          "note": "juanyun-flash-parameter-recovery",
+          "headings": [
+            {
+              "en": "Deferred Parameter Saving",
+              "zh": "参数的延迟保存"
+            },
+            {
+              "en": "Record Format and Validation",
+              "zh": "记录格式与校验"
+            },
+            {
+              "en": "Flash Page Transfer and Power-Loss Recovery",
+              "zh": "Flash 换页与掉电恢复"
+            },
+            {
+              "en": "Power-Loss Tests and Flash Endurance",
+              "zh": "掉电测试与 Flash 寿命"
+            }
+          ]
+        },
+        {
+          "note": "foc-angle-handoff",
+          "headings": [
+            {
+              "en": "Speed and Phase",
+              "zh": "速度与相位"
+            },
+            {
+              "en": "Angle Error and dq Currents",
+              "zh": "角度偏差与 dq 电流"
+            },
+            {
+              "en": "Angle Transition and PI State",
+              "zh": "角度过渡与 PI 状态衔接"
+            },
+            {
+              "en": "Handoff Traces and Fault Diagnosis",
+              "zh": "接管数据记录与故障判断"
+            }
+          ]
+        },
+        {
+          "note": "foc-current-sampling-timing",
+          "headings": [
+            {
+              "en": "Shunt Placement and Sampling Conditions",
+              "zh": "采样电阻的位置与采样条件"
+            },
+            {
+              "en": "Analog Filtering",
+              "zh": "模拟滤波"
+            },
+            {
+              "en": "ADC Triggering and Conversion Sequence",
+              "zh": "ADC 触发与转换顺序"
+            },
+            {
+              "en": "Third-Phase Current Reconstruction",
+              "zh": "第三相电流重建"
+            },
+            {
+              "en": "Sampling Waveforms and Error Diagnosis",
+              "zh": "采样波形与误差判断"
+            }
+          ]
+        },
+        {
+          "note": "claude-chime-startup-current",
+          "headings": [
+            {
+              "en": "Cell and Pack-Output Voltage Measurements",
+              "zh": "电芯与电池包输出电压测量"
+            },
+            {
+              "en": "Capacitor Charging and Startup Current",
+              "zh": "电容充电与启动电流"
+            },
+            {
+              "en": "Supply Current Limiting and Battery Protection",
+              "zh": "电源限流与电池保护"
+            },
+            {
+              "en": "Startup Waveform Measurements",
+              "zh": "启动波形测量"
+            }
+          ]
+        },
+        {
+          "note": "claude-chime-switched-adc-divider",
+          "headings": [
+            {
+              "en": "Divider and Switch",
+              "zh": "分压与开关"
+            },
+            {
+              "en": "RC Settling Time",
+              "zh": "RC 电路的建立时间"
+            },
+            {
+              "en": "Sampling-Circuit Current Consumption",
+              "zh": "采样电路的电流消耗"
+            },
+            {
+              "en": "ADC Conversion",
+              "zh": "ADC 换算"
+            }
+          ]
+        }
+      ],
+      "views": [
+        {
+          "width": 1440,
+          "note": "turing-local-role-permissions",
+          "lang": "zh",
+          "headings": [
+            "账户操作权限",
+            "用户名规则与账户初始化",
+            "执行前的权限检查",
+            "QSettings 账户数据保存"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "note": "turing-local-role-permissions",
+          "lang": "en",
+          "headings": [
+            "Account Operation Permissions",
+            "Username Rules and Account Initialization",
+            "Permission Checks Before Execution",
+            "Saving Account Data with QSettings"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "lang": "zh",
+          "headings": [
+            "I²C 开漏输出与上拉电阻",
+            "I²C 传输流程",
+            "软件与硬件 I²C",
+            "BUSY 与芯片勘误"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "lang": "en",
+          "headings": [
+            "I²C Open-Drain Outputs and Pull-Ups",
+            "I²C Transfer Sequence",
+            "Software and Peripheral Implementations",
+            "BUSY and Device Errata"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "note": "turing-local-role-permissions",
+          "lang": "zh",
+          "headings": [
+            "账户操作权限",
+            "用户名规则与账户初始化",
+            "执行前的权限检查",
+            "QSettings 账户数据保存"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "note": "turing-local-role-permissions",
+          "lang": "en",
+          "headings": [
+            "Account Operation Permissions",
+            "Username Rules and Account Initialization",
+            "Permission Checks Before Execution",
+            "Saving Account Data with QSettings"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "lang": "zh",
+          "headings": [
+            "I²C 开漏输出与上拉电阻",
+            "I²C 传输流程",
+            "软件与硬件 I²C",
+            "BUSY 与芯片勘误"
+          ],
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "lang": "en",
+          "headings": [
+            "I²C Open-Drain Outputs and Pull-Ups",
+            "I²C Transfer Sequence",
+            "Software and Peripheral Implementations",
+            "BUSY and Device Errata"
+          ],
+          "overflow": false
+        }
+      ],
+      "oldTianjinHeadings": [
+        "I²C 开漏输出与上拉电阻",
+        "I²C 传输流程",
+        "软件与硬件 I²C",
+        "BUSY 与芯片勘误"
+      ]
+    },
+    "lint": "pass; content validation 8 projects / 27 notes / 84 media items; encoding 438 UTF-8 text files",
+    "build": "webpack production build passed; 30 routes prerendered",
+    "typecheck": "pass"
+  }
+}

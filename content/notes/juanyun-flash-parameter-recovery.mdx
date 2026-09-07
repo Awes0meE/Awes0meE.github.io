@@ -1,0 +1,80 @@
+---
+title: "Flash Parameter Saving and Recovery"
+titleZh: "Flash 参数保存与恢复"
+summary: "Studying delayed writes, committed records and page turnover using the BaseUnit fan setting."
+summaryZh: "从 BaseUnit 的风扇设定值出发，研究延迟写入、记录提交与双页切换时的恢复顺序。"
+date: "2026-09-07"
+tags: ["STM32", "Flash", "Persistence", "Recovery"]
+projectSlug: "juanyun-thermal-hardware"
+visibility: public
+---
+
+The BaseUnit needed to remember one fan percentage. My implementation reserved two Flash pages and included a sequence number, CRC32 and commit marker in its records, saving four seconds after the last adjustment. That is a surprising amount of machinery for one value. The useful question is what startup should trust if power disappears halfway through saving it.
+
+BaseUnit 要记住一个风扇百分比。我实现时用了两页 Flash，记录带序号、CRC32 和 commit 标记，用户停止调整四秒后才保存。只记一个数，为什么要做这么多安排？真正需要研究的是，电源在保存过程中的任意一步断掉，重新开机该相信哪一个数。
+
+## Deferred Parameter Saving / 参数的延迟保存
+
+An encoder adjustment might pass through 41, 42 and 43 before settling at 44. The fan should respond promptly, but Flash does not need every intermediate setting. The existing four-second delay combines a series of adjustments into one save, reducing writes and avoiding Flash activity on every manual change.
+
+转动编码器时，设定值可能连续经过 41、42、43，最后停在 44。风扇响应应当及时，Flash 却没有必要把每一个中间值都存进去。原有的四秒延迟把连续调整合并成一次保存，减少写入次数，也避免每次手动操作都触发 Flash 工作。
+
+There is a practical trade-off. The controller may already be using 44 when power fails within those four seconds, then restore the previously saved value on restart. Whether that is acceptable depends on how the product is used. A fan preference can tolerate deferred saving; a configuration requiring immediate confirmation could have an explicit save action. The active RAM value and the persistent value need not always match.
+
+这里有一个实际取舍。44 已经用于运行，四秒还没过去就断电，重启后可能恢复之前保存的设定。要不要接受这个行为，应当由产品使用方式决定。普通风扇偏好可以延迟保存，需要立即确认的配置则可以设置明确的保存动作。RAM 中正在使用的值与已经持久保存的值，不一定时时相同。
+
+## Record Format and Validation / 记录格式与校验
+
+[ST's AN2594](https://www.st.com/resource/en/application_note/an2594-eeprom-emulation-in-stm32f10x-microcontrollers-stmicroelectronics.pdf) discusses erasing, programming and recovery when internal Flash emulates EEPROM. Erase granularity is much larger than one percentage, and programming rules limit repeated changes at the same address. Appending new records within reserved space, then migrating when a page fills, works with those constraints.
+
+[ST 的 AN2594](https://www.st.com/resource/en/application_note/an2594-eeprom-emulation-in-stm32f10x-microcontrollers-stmicroelectronics.pdf)说明了用内部 Flash 模拟 EEPROM 时需要处理的擦除、写入和掉电恢复问题。Flash 的擦除粒度比一个百分比大，重复修改同一个地址也受编程规则限制。因此，可以在预留空间里追加新记录，等页面满了再迁移。
+
+I prefer to design the record backward from the reader. At startup, it must decide whether a record is complete, whether its value makes sense and which valid record is newest. A CRC checks consistency between content and checksum; the sequence orders records; the commit marker identifies a completed submission. Each has a separate job. A fan setting of 255% still needs rejection by range checking even if its CRC passes.
+
+我更愿意从读取端倒着设计一条记录。上电扫描时，需要知道内容是否完整、数值是否合理，以及有效记录中哪条更新。CRC 检查内容是否与校验值一致，序号帮助比较新旧，commit 标记表示记录已经完成提交。三者负责不同问题，不能互相替代。一个通过 CRC 的 255% 风扇设定，仍然应该被数值范围检查拒绝。
+
+For reasoning about interruptions, a simplified format can include version, length, sequence, parameters, CRC and a commit marker. Version and length support later format changes. The CRC covers the agreed header and parameter bytes, with the commit marker handled separately. One inspectable write order is content and CRC first, readback verification next, then programming the commit marker last. Field alignment must still follow the device's programming granularity.
+
+为了推演中断情况，可以使用一个简化的记录格式，包含版本、长度、序号、参数、CRC 和提交标记。版本和长度用于后续格式演进，CRC 覆盖约定的头部与参数字节，提交标记另行处理。写入时先写记录内容和 CRC，读回核对，再最后编程提交标记。这里讨论的是便于检查的设计顺序，具体字段对齐还要服从芯片的编程粒度。
+
+## Flash Page Transfer and Power-Loss Recovery / Flash 换页与掉电恢复
+
+A single full page eventually needs erasing, which removes the old setting with it. The second page provides somewhere to migrate. In the simplified recovery scheme I use for this analysis, the old page retains its valid record while a newer record is written to the prepared destination. Erasing the old page becomes permissible only after the new record is committed and readable.
+
+只有一页时，页面写满以后必须擦除，旧设定会随之消失。第二页提供了迁移空间。在我用来分析恢复过程的简化方案里，旧页保留有效记录，新页准备好以后写入更新记录；等新记录完成提交并可被读取，旧页才允许擦除。
+
+| Interruption point | Usable content after restart | Recovery approach |
+| --- | --- | --- |
+| New record only partly written | Complete record on the old page | Ignore the uncommitted record |
+| New record committed, old page not erased | Valid records on both pages | Select the newer valid sequence |
+| Old-page erase interrupted | Complete record on the new page | Restore it, then handle the old page |
+| Neither page contains a valid record | Default configuration | Load defaults and report initialization state |
+
+| 断电位置 | 重启时可用的内容 | 恢复思路 |
+| --- | --- | --- |
+| 新记录只写了一部分 | 旧页中的完整记录 | 忽略未提交记录 |
+| 新记录完成提交，旧页尚未擦除 | 两页都有有效记录 | 按有效序号选择较新的记录 |
+| 旧页擦除中断 | 新页中的完整记录 | 恢复新记录，再处理旧页 |
+| 两页都没有有效记录 | 默认配置 | 装载默认值并报告初始化状态 |
+
+The second row is easy to overlook. Two valid pages can be an ordinary intermediate state after a successful new write but before cleanup. Startup code that clears both pages on seeing that combination would undo the care taken by the save routine. Writing and recovery have to interpret the same intermediate states consistently.
+
+第二行特别容易被忽略。两页都有效，可能恰好是成功写完新页、尚未来得及清理旧页的正常中间状态。如果启动代码一看到这种组合就清空两页，前面的写入顺序再谨慎也没有用了。保存函数和恢复函数必须对同一组中间状态作出一致解释。
+
+Sequence numbers also run out. A fixed-width integer wraps, so choosing the numerically largest record eventually fails. Wrap-aware comparison with an explicit bound on the sequence span, or separate generation information, can address this. Whichever approach is chosen must be shared by the writer and startup scanner. Defining newest as highest address fails at page turnover as well.
+
+序号也有自己的尽头。固定宽度整数会回绕，直接选择数值最大的记录迟早会选错。可以使用带明确跨度限制的回绕比较，或者设计独立的代际信息；采用哪种方式，都要让写入端与启动扫描使用同一规则。把最新定义成最高地址，同样会在换页时失效。
+
+## Power-Loss Tests and Flash Endurance / 掉电测试与 Flash 寿命
+
+To test specific recovery paths, execution could be interrupted between header, parameter, CRC and commit writes, and during old-page erasure, followed by a check of the restored value after restart. Cases with two valid pages, a bad CRC, an out-of-range parameter and a sequence near wraparound would further test the scanner. Resetting the program can first examine software flow; removing power also introduces supply decay and interrupted Flash operations, so that electrical behavior needs a separate observation.
+
+验证具体恢复路径时，可以把中断点放在写头部、写参数、写 CRC、写提交标记和擦除旧页之间，并在重启后读取实际恢复值。单独测试两页同时有效、CRC 错误、参数越界及序号接近回绕，也能检查启动扫描的判断。程序复位适合先检查软件流程，真实掉电则还涉及供电下降和 Flash 操作被打断时的电气行为，需要分别观察。
+
+Waiting four seconds only delays the start of saving. It does not shorten the erase itself. A save task in a cooperative loop still needs scheduling alongside valve motion and communication. For lifetime estimates, the number of records appended before each erase and the number of actual saves per day are also more useful than assuming an erase on every adjustment.
+
+另外，延迟四秒保存只是推迟了开始写入的时间，不会缩短擦除本身的耗时。保存任务放进协作式主循环以后，还要和阀动作、通信等任务一起安排。长期使用中，追加多少条才擦一页、一天真正保存多少次，也比每次改值都擦页更适合用来估算寿命。
+
+Remembering this percentage involves a connected sequence of decisions. The user changes a value, the system chooses when to save, a complete record is written, and startup selects valid content. Coordinating writing with recovery is what makes the setting to use after restart unambiguous.
+
+为了保存这个百分比，我需要考虑一组连续动作。用户改了值，系统选择保存时机，写出可识别的完整记录，再在下一次启动时选择有效记录。写入和恢复配合起来，才能明确重启后应该使用哪个设定。

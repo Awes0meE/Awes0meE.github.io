@@ -1,0 +1,103 @@
+{
+  "date": "2026-09-07",
+  "scope": "Root Markdown, direct docs/*.md, current writer and completed review/planning artifacts; dated chronology stays historical.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Bootstrap and canonical guide remain valid."
+    },
+    {
+      "path": "CODEX.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "DESIGN.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "MEMORY.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "PRODUCT.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "README.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "USER_GUIDE.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "docs/agent-skills.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "docs/architecture.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "docs/content-workflow.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "docs/environment-toolchain.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "No toolchain, deployment mechanism or dependency change."
+    },
+    {
+      "path": "docs/juanyun-tech-source-inventory.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    },
+    {
+      "path": "docs/memory-system.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Existing project-local retrieval and update mechanism remains valid."
+    },
+    {
+      "path": "docs/session-log.md",
+      "assessment": "evaluated; updated",
+      "reason": "Reconciled current approved content counts, publication state, release pointers or writer contract."
+    }
+  ],
+  "additionalAssessments": [
+    {
+      "path": "/Users/alvinli/.codex/AGENTS.md",
+      "assessment": "evaluated; unchanged",
+      "reason": "Project-specific release belongs in repository docs."
+    },
+    {
+      "path": "skills/engineering-note-writer/",
+      "assessment": "evaluated; ship approved branch edits",
+      "reason": "Current rules match latest user feedback."
+    },
+    {
+      "path": "docs/active-work/",
+      "assessment": "reconciled; completed plans archived",
+      "reason": "No notes awaiting review; About remains paused."
+    },
+    {
+      "path": "docs/experiments/tianjin-notes-2026-09-07/ and remaining-project-notes-2026-09-07/",
+      "assessment": "canonical articles promoted; finished previews removed",
+      "reason": "Keep dated review JSON, remove duplicate prose and completed preview utilities."
+    },
+    {
+      "path": "AddProject.skill",
+      "assessment": "evaluated; unchanged",
+      "reason": "Existing import workflow remains valid; no raw material imported."
+    }
+  ]
+}

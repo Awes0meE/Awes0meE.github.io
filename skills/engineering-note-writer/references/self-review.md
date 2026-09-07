@@ -38,6 +38,7 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Do all user-specified prohibitions for this note reach zero hits at the scope the user set: exact forms and obvious variants for an expression ban, or direct functional equivalents for a construction or reader-effect ban?
 - Are bare negative-first binary reframes absent in both languages?
 - Do current and nearby article endings avoid repeatedly using the same look-back or next-time frame, including differently worded equivalents? Keep an occasional apt use; this is a repetition check, not a banned-phrase scan.
+- Does each Chinese learning note have at most one prose paragraph starting with `我`, counting its introduction and all paragraphs under headings? Have the replacements been read for natural variety, complete meaning and unchanged factual status, rather than only passing a prefix count? English has no corresponding numerical limit.
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
 - Is evidence-inventory commentary absent in both languages? Keep fact checking internal; write the supported action, result, or actual engineering question. Do not append lists of what the material cannot prove.
 - Does every inanimate or abstract subject carry only licensed native frames or functional verbs, with experiential results expressed through 出现, 发生, 出, 遇到, or a human or situational subject?
@@ -71,7 +72,7 @@ documents and unrelated narrow edits keep the reference's scoped exceptions.
 - Does every section add information or change the reader's understanding?
 - Did a detour return to the active engineering problem?
 - Is the page title a short, accurate, precise learning-note index rather than a hook, metaphor, thesis sentence, or subtitle pair?
-- Are section headings concise labels for the following work or study block, with the body carrying the anecdote and cognition change?
+- Was each section written first and its heading then derived from all the following paragraphs? Does the heading directly identify the subject and relevant aspect, without a question hook, abstract label or isolated moment? Keep the anecdote and cognition change in the body. For a heading-only request, confirm that non-heading content is unchanged.
 - Does the ending bring the experience or investigation to a natural close? After cuts, does it stop abruptly at data or a file list that still needs a connecting thought? Keep a useful closing paragraph without forcing a grand lesson or a full recap.
 
 Delete repeated lessons and shorten headings without deleting the exact subject or scope needed to identify the material.

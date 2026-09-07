@@ -49,7 +49,7 @@ I also want to look more closely at open-collector operation. When the output tr
 
 ![Course diagram of decoder pins and individual segment resistors / 课程中的译码器引脚与逐段限流说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
 
-## Current in Each Segment / 每一段的电流
+## Segment Current and Resistor Selection / 段电流与限流电阻
 
 The course slide calls for one series resistor per segment output. I want to understand why a single resistor at the display's common pin would not do the same job. With a shared resistor, two LED branches divide the current when displaying `1`, and seven do so when displaying `8`. Changing the number of lit segments changes the current available to each, making brightness depend on the displayed digit. Individual branch resistors let each segment's current be limited separately.
 
@@ -63,15 +63,15 @@ That gives me a useful way to examine the slide's 330 Ω value. Supply voltage, 
 
 这样看，课件里的 330 Ω 就有了可以继续追问的地方。电阻值要和供电、电流、LED 压降放在一起看；同样用 330 Ω，换一种 LED 后电流未必相同。显示 `8` 时七段都亮，还要把七路电流加起来，检查公共端、电源和译码器的负担。选电阻既要让每一段合适，也要看整位显示一起亮时怎样工作。
 
-## Matching the Decoder and Display / 译码器的配合
+## Decoder and Display Compatibility / 译码器与数码管的匹配
 
 The [CD4511B](https://www.ti.com/product/CD4511B) used in the course simulation makes the difference concrete. It supplies segment current for common-cathode LEDs. An active segment output goes high, sending current through the LED and its limiting resistor to the common cathode and ground. The two chips therefore require different common connections and active output levels for the same input digit. Both turn BCD into a seven-segment pattern, but the LED connections have to match the output structure.
 
 再对照课件仿真里的 [CD4511B](https://www.ti.com/product/CD4511B)，差别就很具体了。它为共阴 LED 提供段驱动电流，选中的段输出高电平，电流从输出端经过 LED 和限流电阻流向公共阴极，再回到地。同样送入一个数字，两种芯片要求的公共端接法和段输出有效电平不同。它们都能把 BCD 变成七段图形，连接 LED 的方式却要随输出结构一起选。
 
-I would also look beyond the four data inputs to the test and blanking pins. [The LS47 controls](https://www.ti.com/product/SN74LS47) include lamp test, blanking, and zero suppression, all of which affect what appears on the display. A correct value on A through D can still be hidden by those controls. For a single-digit check, I would first establish normal decoding conditions from the truth table, then hold the inputs at `1`, `7`, and `8` in turn. That sequence checks the two right-hand segments, adds the top segment, then exercises all seven.
+The test and blanking pins need checking alongside the four data inputs. [The LS47 controls](https://www.ti.com/product/SN74LS47) include lamp test, blanking, and zero suppression, all of which affect what appears on the display. A correct value on A through D can still be hidden by those controls. For a single-digit check, I would first establish normal decoding conditions from the truth table, then hold the inputs at `1`, `7`, and `8` in turn. That sequence checks the two right-hand segments, adds the top segment, then exercises all seven.
 
-我还会把视线从四位输入移到测试和消隐脚上。[LS47 的控制说明](https://www.ti.com/product/SN74LS47)列有灯测试、消隐和零消隐功能，这些控制会参与决定显示状态。如果只查 A 到 D，忽略了这些脚的状态，就可能遇到输入数字正确、显示仍然被关闭的情况。调试单个位时，我会先按真值表设好正常译码条件，再固定送入 `1`、`7` 和 `8`，逐步检查右侧两段、顶部一段和全部七段。
+四位输入确认以后，还要检查测试和消隐脚。[LS47 的控制说明](https://www.ti.com/product/SN74LS47)列有灯测试、消隐和零消隐功能，这些控制会参与决定显示状态。如果只查 A 到 D，忽略了这些脚的状态，就可能遇到输入数字正确、显示仍然被关闭的情况。调试单个位时，我会先按真值表设好正常译码条件，再固定送入 `1`、`7` 和 `8`，逐步检查右侧两段、顶部一段和全部七段。
 
 An incorrect digit calls for checking BCD bit order and the decoder's control inputs; a missing segment can be investigated along its LED branch. Those are different starting points. Once I can connect the visible error to the relevant pins and expected current path, I have a concrete way to investigate it.
 

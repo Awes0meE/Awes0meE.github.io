@@ -9,7 +9,7 @@ projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## V2.0 Uses Routes to Explain the System / V2.0 用连线解释系统
+## V2.0 Power and Signal Connections / V2.0 电源与信号连接
 
 The earlier public image carries its own title: `Cirro V2.0 AC Unit Control System`. It already contains three board blocks. The power board accepts the 24 V input and branches power toward the compressor, pressure transmitter, and main board. The main board collects sensing, fan, compressor, EEV, OLED, and interaction functions, while colored lines mark what crosses toward external loads and the interaction board.
 
@@ -21,7 +21,7 @@ This drawing is route-oriented. Its legend separates power, sensor, control/comm
 
 这张图偏向“沿线追踪”。图例把电源、传感、控制 / 通信、UI / 显示分色，箭头方向与线名承担了大部分说明。即使不看 PCB，也能顺着 `Analog Pressure`、`Shared PWM`、`EEV_A/B/C/D`、`OLED_SCL/SDA` 和七针 UI 连接一路读下去。
 
-## V2.1 Uses Branches to Inventory Interfaces / V2.1 用分支清点接口
+## V2.1 Interface Diagram / V2.1 接口框图
 
 The other image is a Chinese mind map. It starts with the power board and main board, then fans outward into labeled interfaces: two power buses, STM32F103C8T6, two PWM fans, a five-pin EEV connector, five NTC channels, a linear pressure-sensor input, DHT11, compressor UART, Wi-Fi, Bluetooth, SWD, interaction inputs, and an OLED branch.
 
@@ -33,7 +33,7 @@ This version is inventory-oriented. It gives each interface its own branch, but 
 
 这张图偏向“逐项清点”。每个接口都有自己的分支，但多数连接不再保留 V2.0 那样的方向细节与颜色分类。因此，三板拆分并不是 V2.1 才突然出现的东西；两张图里都能看到它，只是用了两套不同的图形语法。
 
-## The Revision Reason Is Not in Either Image / 改图原因不在任何一张图里
+## Diagram Comparison and Revision Records / 框图对比与改版记录
 
 What changed visibly is the emphasis: routes and signal categories in V2.0, interface breadth and Chinese labels in V2.1. Neither image records a change request, review comment, electrical failure, mechanical constraint, fabrication result, or bring-up outcome. It would be tempting to turn the cleaner inventory into a story of design maturity, but that story is not inside these artifacts.
 

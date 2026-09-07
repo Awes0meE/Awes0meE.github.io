@@ -1,0 +1,501 @@
+{
+  "date": "2026-09-07",
+  "baseCommit": "6ac5fc1faba06560608f678a8cb334abbf960dc8",
+  "scope": "20 active or candidate model-authored notes, as in the preceding heading review. Original source documents, superseded suspended notes and historical review copies remain unchanged.",
+  "rule": "At most one Chinese prose paragraph beginning with 我 in each note, counted across the full article including the introduction. Zero is allowed. This is not a ban on first-person phrasing within paragraphs or a numeric quota for English.",
+  "files": [
+    {
+      "file": "content/notes/arduino-smart-car-line-tracking-learning-note.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我还想知道，这种算法在轮子转得很慢时会怎样。",
+          "after": "轮子转得很慢时，这种算法会怎样？"
+        }
+      ],
+      "beforeSha256": "aaa881c932788b2c6e5c59fc81c24fe1d271d8aadcfbdb6a47d59f72ebd4a514",
+      "chineseStageSha256": "2cc421d31b3491b493259e0915a8f8d5e8a5687ab9040d856987c6a131ed725c",
+      "englishChanges": [
+        {
+          "before": "I also want to know how this behaves when the wheel turns slowly.",
+          "after": "How does this approach behave when the wheel turns slowly?"
+        }
+      ],
+      "afterSha256": "cabbef2280e1b34a62e3e48f724c7c5ec11b3d0a3439a282da893213fec5d679"
+    },
+    {
+      "file": "content/notes/arduino-smart-car-line-sensing-input-acquisition.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我先看图中上半部分的 ITR20001 电路。R1 为发光管限流，",
+          "after": "图中上半部分是 ITR20001 电路，R1 为发光管限流，"
+        }
+      ],
+      "beforeSha256": "4ebba56939fbca0bce70facfe5e61764f5fe2b83bcf1648ee0b3b59d21d02875",
+      "chineseStageSha256": "21772e5ab6ceb9f21b05468e6a94fc9699aa31a9faa40d0dd5b1c2fc5fec4570",
+      "englishChanges": [],
+      "afterSha256": "21772e5ab6ceb9f21b05468e6a94fc9699aa31a9faa40d0dd5b1c2fc5fec4570"
+    },
+    {
+      "file": "content/notes/arduino-digital-clock-counter-course-note.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我还会把视线从四位输入移到测试和消隐脚上。",
+          "after": "四位输入确认以后，还要检查测试和消隐脚。"
+        }
+      ],
+      "beforeSha256": "58a753fad42dfc3610c089a18df69cd68d3e9b3adc35d51cabfd1cb964465c51",
+      "chineseStageSha256": "b45aee6978149f32be39428e8057efa187e93693c3e52ede27d5376ccff41664",
+      "englishChanges": [
+        {
+          "before": "I would also look beyond the four data inputs to the test and blanking pins.",
+          "after": "The test and blanking pins need checking alongside the four data inputs."
+        }
+      ],
+      "afterSha256": "76ae3a41b258af2158c74def97854101fb4b98f174f01affa5a1fcb25d698489"
+    },
+    {
+      "file": "content/notes/arduino-counter-latching-switch-control.mdx",
+      "beforeCount": 3,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我再读[课程测试代码](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino)，它把输入设为 `INPUT`，然后不断打印读数。",
+          "after": "[课程测试代码](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino)把输入设为 `INPUT`，然后不断打印读数。"
+        },
+        {
+          "before": "我会把一秒理解成两次加数之间的时间条件，让循环继续检查开关。",
+          "after": "一秒可以作为两次加数之间的时间条件，等待期间让主循环继续检查开关。"
+        }
+      ],
+      "beforeSha256": "6095ec78ffba8e3ac3339021a606a6017f4a78657e84caae4793b2ba0e63f140",
+      "chineseStageSha256": "aea74862ad2d99adb54750d9c18ded30aa8d5b8728eb6ca53bebe5ed574f9416",
+      "englishChanges": [
+        {
+          "before": "I would treat one second as a condition between increments and let the loop keep checking the switches.",
+          "after": "A one-second interval between increments can be checked without stopping the loop from reading the switches."
+        }
+      ],
+      "afterSha256": "201b82930e6fbeb41fa02075f1aab4d9e2312f148d93ce56c27c08c1bdd57fc7"
+    },
+    {
+      "file": "content/notes/juanyun-diy-cooling.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我读到 `updatePWM()` 时，最想细看的是清空峰值的两行。",
+          "after": "`updatePWM()` 在计算输出之外，还会清空峰值。"
+        }
+      ],
+      "beforeSha256": "5cfbeaaf7493a6463aad38116d8cec846af3618db44d5807fcf91a445c0d03a9",
+      "chineseStageSha256": "0c082cd7b468afdb10d03d853f70bdfaf4a2a95f9e5e4c08cfebbbb4b4cff919",
+      "englishChanges": [
+        {
+          "before": "The two assignments clearing the peaks in `updatePWM()` caught my attention. This excerpt includes the output calculation and peak reset.",
+          "after": "Alongside the output calculation, `updatePWM()` contains two assignments that clear the peaks. The excerpt below includes both operations."
+        }
+      ],
+      "afterSha256": "23ea618853a5db85e991509e618aab157040bbea58ba952240581d2e259f71a4"
+    },
+    {
+      "file": "content/notes/juanyun-diy-cooling-pwm-fan-control.mdx",
+      "beforeCount": 1,
+      "afterCount": 1,
+      "chineseChanges": [],
+      "beforeSha256": "79d7ff584234f925cdcd8035cee04b4420cecd95c57de7de4a830fc46f9c36fa",
+      "chineseStageSha256": "79d7ff584234f925cdcd8035cee04b4420cecd95c57de7de4a830fc46f9c36fa",
+      "englishChanges": [],
+      "afterSha256": "79d7ff584234f925cdcd8035cee04b4420cecd95c57de7de4a830fc46f9c36fa"
+    },
+    {
+      "file": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-i2c-oled-debugging.mdx",
+      "beforeCount": 1,
+      "afterCount": 1,
+      "chineseChanges": [],
+      "beforeSha256": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88",
+      "chineseStageSha256": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88",
+      "englishChanges": [],
+      "afterSha256": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88"
+    },
+    {
+      "file": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-light-calibration-control.mdx",
+      "beforeCount": 1,
+      "afterCount": 0,
+      "chineseChanges": [
+        {
+          "before": "我更关心这张表包含了哪些影响。",
+          "after": "标定表里的读数还会受到测量环境的影响。"
+        }
+      ],
+      "beforeSha256": "8c9c70b685a03d5ee5ef190f38855967263baa86d63d909ffea5faba54a8d47f",
+      "chineseStageSha256": "9e9b47373e9608470ab34ffcda5c80592f24258aeab6bfd96ce04829e460071f",
+      "englishChanges": [
+        {
+          "before": "I also want to account for what went into those readings.",
+          "after": "Those readings also depend on the measurement conditions."
+        }
+      ],
+      "afterSha256": "24bd84b2d1c32333e7f659a5e272d21fef9e6fd9829f7f8c514001699467253d"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/turing-local-role-permissions.mdx",
+      "beforeCount": 3,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我把这组规则重新列成表，先固定操作者，再看目标账户和请求的动作。",
+          "after": "判断账户操作权限时，先确定操作者，再看目标账户和请求的动作。下表按这个顺序列出规则。"
+        },
+        {
+          "before": "我会把这个差别继续拆开。角色查询负责读取账户属性；某项操作的判断函数再接收已确认身份的操作者、刚读取的目标账户和动作。",
+          "after": "角色查询和操作判断可以分开处理。前者负责读取账户属性；后者接收已确认身份的操作者、刚读取的目标账户和动作。"
+        }
+      ],
+      "beforeSha256": "a8f29256be6520b05c9655278a167f000d278e79cf33196c874f594cec60ab2b",
+      "chineseStageSha256": "9ccd0f11609185870b8b1efec861a81f8af84a0c00decf386db72d915f6a37ff",
+      "englishChanges": [
+        {
+          "before": "I laid out the rules by actor, target account and requested action.",
+          "after": "The table groups permissions by actor, target account and requested action."
+        },
+        {
+          "before": "I would keep those responsibilities explicit. A role query reads account attributes; an operation check receives an authenticated actor, the freshly retrieved target and an action.",
+          "after": "A role query can read account attributes, while a separate operation check receives an authenticated actor, the freshly retrieved target and an action."
+        }
+      ],
+      "afterSha256": "208639c523874520f448015811cb8c1a74b90783eb570cbf93715f16d11090b5"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/turing-windows-runtime-dependencies.mdx",
+      "beforeCount": 2,
+      "afterCount": 0,
+      "chineseChanges": [
+        {
+          "before": "我现在会把可执行文件看作一条依赖链的起点。",
+          "after": "沿着可执行文件往下查，就能逐步找到它的运行依赖。"
+        },
+        {
+          "before": "我会把修复后的程序放进一个新部署目录，只从这次构建对应的 Qt 安装和已知来源补齐依赖。",
+          "after": "重新整理部署包时，可以把修复后的程序放进一个新目录，再从这次构建对应的 Qt 安装和已知来源补齐依赖。"
+        }
+      ],
+      "beforeSha256": "4255da952baad91aea42a7e3ce7144d68fb0a4d55f80006d3077d3ba2730c4ea",
+      "chineseStageSha256": "dc32794468e658e92b913151898e043f784e5822124d420a908ca308b7322608",
+      "englishChanges": [
+        {
+          "before": "I find it useful to start at the executable and follow its dependency chain.",
+          "after": "The executable provides a starting point for tracing runtime dependencies."
+        },
+        {
+          "before": "For a corrected package, I would use a fresh deployment directory and add dependencies from the Qt installation used for that build and other known sources.",
+          "after": "A corrected package can be assembled in a fresh deployment directory, with dependencies drawn from the Qt installation used for that build and other known sources."
+        }
+      ],
+      "afterSha256": "de53d996b6894b453b5b85debab07f76290a36f1045b4fe57ebd85543d2bfe78"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-cooperative-task-timing.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我会按任务含义选择处理方式。",
+          "after": "任务延迟以后，处理方式要根据任务本身来选。"
+        }
+      ],
+      "beforeSha256": "a76dcc77e907fa396a34b306ccebe2982455721abdff207d720c4ccbea757808",
+      "chineseStageSha256": "8600ced9cf2b71e759352e04b04d3a22ac5dc31d4430d21e6955758eabdba813",
+      "englishChanges": [
+        {
+          "before": "I would choose recovery behavior according to the work.",
+          "after": "Different tasks need different responses to a delay."
+        }
+      ],
+      "afterSha256": "476a1fce695b2c6781298d4287604e3cf6dcfbd7b40ae52b5705603e4b110257"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-flash-parameter-recovery.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我想验证的是具体恢复路径，因此会把中断点放在写头部、写参数、写 CRC、写提交标记和擦除旧页之间，并在重启后读取实际恢复值。",
+          "after": "验证具体恢复路径时，可以把中断点放在写头部、写参数、写 CRC、写提交标记和擦除旧页之间，并在重启后读取实际恢复值。"
+        }
+      ],
+      "beforeSha256": "e7b257fe2738b3a54913ea62f37989e22c75da86ea20082d47bccd82139c05f7",
+      "chineseStageSha256": "31db8df54f9cd6fffe4897113d332545c4dda6a003068930228f58711f3126ba",
+      "englishChanges": [
+        {
+          "before": "I would exercise specific recovery paths by interrupting between header, parameter, CRC and commit writes, and during old-page erasure, then reading the restored value after restart.",
+          "after": "To test specific recovery paths, execution could be interrupted between header, parameter, CRC and commit writes, and during old-page erasure, followed by a check of the restored value after restart."
+        }
+      ],
+      "afterSha256": "9a89809128c0a98f195eda967f70124a6a935e622bae96897cbfa259cffeff09"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/foc-angle-handoff.mdx",
+      "beforeCount": 2,
+      "afterCount": 1,
+      "chineseChanges": [
+        {
+          "before": "我现在最想找到的是切换前后第一个发生异常的量。",
+          "after": "这组记录里，最值得追查的是切换前后第一个发生异常的量。"
+        }
+      ],
+      "beforeSha256": "ac058e8c9015f91c1db48b780c911e9a41074bdd578ad6323deb9cf98384fabb",
+      "chineseStageSha256": "929a1ff6ceb3256f8311f2e46cec34e49882c4c0dada00c255eb02a6111cea21",
+      "englishChanges": [
+        {
+          "before": "I want to identify the first quantity that becomes abnormal around the transition.",
+          "after": "The most useful clue would be the first quantity to become abnormal around the transition."
+        }
+      ],
+      "afterSha256": "a8c92f5b6b1d03cba82b1356994e289373ccbba3f8126a6f1120f75b9aa57aff"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/foc-current-sampling-timing.mdx",
+      "beforeCount": 0,
+      "afterCount": 0,
+      "chineseChanges": [],
+      "beforeSha256": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+      "chineseStageSha256": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+      "englishChanges": [],
+      "afterSha256": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-startup-current.mdx",
+      "beforeCount": 1,
+      "afterCount": 0,
+      "chineseChanges": [
+        {
+          "before": "我会以接入事件触发示波器，同时记录包输出和电流。",
+          "after": "以电池接入事件触发示波器，可以同时记录电池包的输出电压和电流。"
+        }
+      ],
+      "beforeSha256": "0bab6aefdfe7c13dbe4c9efeff0404013c732e3e19e2f016eee5c55b2c46dd83",
+      "chineseStageSha256": "89b2976c83e72b8584b8a426ac43767d748e91ec0d2474f69dcc79b473119151",
+      "englishChanges": [
+        {
+          "before": "I would trigger on connection and capture pack output and current together.",
+          "after": "Triggering on battery connection would capture pack-output voltage and current together."
+        }
+      ],
+      "afterSha256": "f499cd32930ced6b87f86c33370c294e85b123f4d8ff74e78271174bd43f516b"
+    },
+    {
+      "file": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-switched-adc-divider.mdx",
+      "beforeCount": 1,
+      "afterCount": 1,
+      "chineseChanges": [],
+      "beforeSha256": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+      "chineseStageSha256": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+      "englishChanges": [],
+      "afterSha256": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1"
+    },
+    {
+      "file": "content/notes/juanyun-acunit-automatic-control.mdx",
+      "beforeCount": 0,
+      "afterCount": 0,
+      "chineseChanges": [],
+      "beforeSha256": "51f35fdc5201a7ac51ed3c58b4a9f773649476774edb205c26af87c01741a18a",
+      "chineseStageSha256": "51f35fdc5201a7ac51ed3c58b4a9f773649476774edb205c26af87c01741a18a",
+      "englishChanges": [],
+      "afterSha256": "51f35fdc5201a7ac51ed3c58b4a9f773649476774edb205c26af87c01741a18a"
+    },
+    {
+      "file": "content/notes/juanyun-acunit-hardware-revision-archive.mdx",
+      "beforeCount": 0,
+      "afterCount": 0,
+      "chineseChanges": [],
+      "beforeSha256": "4d5149f52899edb1adb74dce961fef7d88b56428d83f77b1864ce31a81e910ab",
+      "chineseStageSha256": "4d5149f52899edb1adb74dce961fef7d88b56428d83f77b1864ce31a81e910ab",
+      "englishChanges": [],
+      "afterSha256": "4d5149f52899edb1adb74dce961fef7d88b56428d83f77b1864ce31a81e910ab"
+    },
+    {
+      "file": "content/notes/juanyun-legacy-actuator-archive.mdx",
+      "beforeCount": 0,
+      "afterCount": 0,
+      "chineseChanges": [],
+      "beforeSha256": "54d464b9d5f3d69f5164527d1f7b18e1d59676692bc467f9abd27496c1a52634",
+      "chineseStageSha256": "54d464b9d5f3d69f5164527d1f7b18e1d59676692bc467f9abd27496c1a52634",
+      "englishChanges": [],
+      "afterSha256": "54d464b9d5f3d69f5164527d1f7b18e1d59676692bc467f9abd27496c1a52634"
+    },
+    {
+      "file": "content/notes/juanyun-dht11-am2302-board.mdx",
+      "beforeCount": 0,
+      "afterCount": 0,
+      "chineseChanges": [],
+      "beforeSha256": "3073c2cfdc4e355947cda7b3ca19d8eb20485c21d9f583edee583a8d004443e2",
+      "chineseStageSha256": "3073c2cfdc4e355947cda7b3ca19d8eb20485c21d9f583edee583a8d004443e2",
+      "englishChanges": [],
+      "afterSha256": "3073c2cfdc4e355947cda7b3ca19d8eb20485c21d9f583edee583a8d004443e2"
+    }
+  ],
+  "step10Chinese": {
+    "result": "pass before English adaptation",
+    "categories": {
+      "语序不当": "pass; changed openings reviewed with their following paragraphs",
+      "搭配不当": "pass; changed openings reviewed with their following paragraphs",
+      "成分残缺或赘余": "pass; changed openings reviewed with their following paragraphs",
+      "结构混乱": "pass; changed openings reviewed with their following paragraphs",
+      "表意不明": "pass; changed openings reviewed with their following paragraphs",
+      "不合逻辑": "pass; changed openings reviewed with their following paragraphs"
+    },
+    "factualStatus": "Future checks remain proposed with 可以 or equivalent context; confirmed ACUnit homing and RAM trace use remain explicitly personal. Numbers, links, code, headings and chronology preserved."
+  },
+  "counts": {
+    "notesReviewed": 20,
+    "notesChanged": 12,
+    "chineseParagraphsChanged": 15,
+    "beforeOpenings": 27,
+    "afterOpenings": 12,
+    "englishParagraphsChanged": 13
+  },
+  "step12": {
+    "Chinese": "pass; all six categories rechecked for changed openings in context",
+    "bilingual": "pass; factual status and explanation preserved, without imposing the Chinese opening quota on English",
+    "voice": "pass; objects, conditions, questions and direct actions replace repeated pronoun-led setup; no uniform substitute preface added",
+    "scope": "Headings, frontmatter, figures, tables, code and unaffected paragraphs retained. No publication."
+  },
+  "checks": {
+    "exactScope": "pass; the files equal the pre-edit versions with only recorded Chinese/English replacements applied",
+    "structure": "pass; frontmatter, headings, fenced/inline code, links and paragraph breaks unchanged",
+    "chineseOpeningCounts": "pass; all 20 articles have zero or one; introductions included",
+    "renderedPublicNotes": [
+      {
+        "note": "arduino-smart-car-line-tracking-learning-note",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "arduino-smart-car-line-sensing-input-acquisition",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "arduino-digital-clock-counter-course-note",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "arduino-counter-latching-switch-control",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-diy-cooling",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-diy-cooling-pwm-fan-control",
+        "count": 1,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-acunit-automatic-control",
+        "count": 0,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-acunit-hardware-revision-archive",
+        "count": 0,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-legacy-actuator-archive",
+        "count": 0,
+        "updatedText": true
+      },
+      {
+        "note": "juanyun-dht11-am2302-board",
+        "count": 0,
+        "updatedText": true
+      }
+    ],
+    "browser": {
+      "notes": [
+        {
+          "note": "tianjin-stm32-light-calibration-control",
+          "count": 0
+        },
+        {
+          "note": "tianjin-stm32-i2c-oled-debugging",
+          "count": 1
+        },
+        {
+          "note": "turing-windows-runtime-dependencies",
+          "count": 0
+        },
+        {
+          "note": "turing-local-role-permissions",
+          "count": 1
+        },
+        {
+          "note": "juanyun-cooperative-task-timing",
+          "count": 1
+        },
+        {
+          "note": "juanyun-flash-parameter-recovery",
+          "count": 1
+        },
+        {
+          "note": "foc-angle-handoff",
+          "count": 1
+        },
+        {
+          "note": "foc-current-sampling-timing",
+          "count": 0
+        },
+        {
+          "note": "claude-chime-startup-current",
+          "count": 0
+        },
+        {
+          "note": "claude-chime-switched-adc-divider",
+          "count": 1
+        }
+      ],
+      "views": [
+        {
+          "width": 1440,
+          "lang": "zh",
+          "updated": true,
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "lang": "en",
+          "updated": true,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "lang": "zh",
+          "updated": true,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "lang": "en",
+          "updated": true,
+          "overflow": false
+        }
+      ],
+      "oldPreviewUpdated": true
+    },
+    "lint": "pass; eslint, 8 projects / 27 notes / 84 media items, 439 UTF-8 files",
+    "typecheck": "pass",
+    "build": "webpack production build passed; 30 routes prerendered",
+    "gitDiffCheck": "pass"
+  }
+}

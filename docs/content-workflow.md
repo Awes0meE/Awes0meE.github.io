@@ -180,17 +180,16 @@ The website has a top-right English / Simplified Chinese language switch. A firs
 ## Writing Standard
 
 A dated audit of all 8 project pages and 24 public notes is available in
-[`active-work/project-note-overlap-audit-2026-09-06.md`](active-work/project-note-overlap-audit-2026-09-06.md).
-The homepage batch was published through PR #36. The 2026-09-07 revision
-publishes six approved bilingual studies for Smart Car, the two-digit counter
-and DIY Cooling. Three replace old note bodies at existing paths and three are
-new sources. The collection has 27 notes, 15 public and 12 private. Superseded
-old-note backups and completed review copies were removed at the user's request;
-current MDX files are authoritative, with old versions retained in Git.
+[`releases/remaining-engineering-notes-2026-09-07/overlap-audit-2026-09-06.md`](releases/remaining-engineering-notes-2026-09-07/overlap-audit-2026-09-06.md).
+The homepage batch was published through PR #36, followed by six approved studies
+through PR #37. The final 2026-09-07 note batch adds ten approved studies across
+five projects. The collection now has 25 public notes across eight projects, with
+no suspended sources. Twelve old notes and completed preview copies are retired;
+current MDX is authoritative and Git retains previous versions.
 See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md)
-for the current handoff and [`releases/engineering-notes-2026-09-07/README.md`](releases/engineering-notes-2026-09-07/README.md)
-for the release. Remaining candidates are in
-[`active-work/project-note-topics-2026-09-06.md`](active-work/project-note-topics-2026-09-06.md).
+for the handoff and [`releases/remaining-engineering-notes-2026-09-07/README.md`](releases/remaining-engineering-notes-2026-09-07/README.md)
+for the release. Completed topic decisions are preserved in the release packet.
+
 The trunk/branch rule lives in the writer's
 [`project-note-division.md`](../skills/engineering-note-writer/references/project-note-division.md).
 

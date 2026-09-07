@@ -148,31 +148,23 @@ Important privacy rule: `visibility: private` hides a note from the website, but
 
 Current repository content state, 2026-09-07:
 
-The source collection contains 8 project pages, 27 learning notes and 84 media
-records. Fifteen notes are public across five project channels; twelve older
-notes remain suspended while their projects await a focused note rewrite.
+The source collection contains 8 project pages, 25 public notes across all eight
+project channels, and 84 media records. Each project has two approved bilingual
+studies; nine existing technical/source-document pages remain available.
 
-- Arduino Smart Car has two bilingual notes on power and wheel-speed measurement,
-  and on line sensing with input acquisition.
-- The two-digit counter has two bilingual notes on common-anode displays and BCD,
-  and on latching switches with counter control.
-- DIY Cooling has two bilingual notes on temperature sampling and fan response,
-  and on PWM fan control with speed feedback.
-- The nine previously public Juanyun technical/source notes and Nanjing Turing
-  source-document notes remain available. Project pages, note links and the
-  index use the same `visibility` and `projectSlug` data.
+The final batch adds two studies each for Tianjin STM32, Nanjing Turing, Juanyun
+thermal hardware, sensorless FOC and Claude Chime. The twelve suspended old notes
+and completed preview copies are retired. Canonical MDX lives in `content/notes/`;
+Git retains earlier versions. The original source-document articles remain intact.
 
-The six approved notes replace the three former project narratives. Their old
-backup copies and completed review pages have been removed; the current MDX
-files are the editing source of truth. Git retains the previous versions.
-The Smart Car homepage now consistently identifies seven IR tracking inputs.
+The [release record](docs/releases/remaining-engineering-notes-2026-09-07/README.md) lists routes and checks.
+The [handoff](docs/active-work/portfolio-copy-rewrite.md) records the completed
+note work and the separately parked, unapproved About draft.
+[Engineering Note Writer](skills/engineering-note-writer/SKILL.md) includes the
+Chinese sentence gates, cross-page division, natural endings, concrete headings
+and the limit of one Chinese paragraph beginning with 我 per learning note.
 
-The [release record](docs/releases/engineering-notes-2026-09-07/README.md) lists
-all six routes and checks. The [active handoff](docs/active-work/portfolio-copy-rewrite.md)
-tracks the remaining projects. The repository-local
-[Engineering Note Writer](skills/engineering-note-writer/SKILL.md) contains the
-Chinese sentence gates, cross-page division, internal fact checking and
-contextual ending-variety review. Full design and asset constraints live in
+Full design and asset constraints live in
 `PRODUCT.md`, `DESIGN.md` and `docs/content-workflow.md`.
 
 ## Deployment
@@ -344,16 +336,11 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 当前工作区内容状态：
 
-2026-09-07 内容状态：8 个项目主页、27 个笔记源文件、84 条媒体记录。其中 15 篇笔记公开，分布在 5 个项目通道；另有 12 篇旧笔记暂挂，随各项目后续重写逐篇处理。
+2026-09-07 内容状态：8 个项目主页、25 篇公开笔记、8 个项目通道、84 条媒体记录。每个项目各有两篇获批的双语专题，另保留 9 篇既有技术或来源文档。
 
-- Arduino 小车有两篇双语笔记，分别研究供电与轮速测量、循迹信号与输入采集。
-- 两位计数器有两篇双语笔记，分别研究共阳数码管与 BCD、自锁按键与计数控制。
-- DIY 散热器有两篇双语笔记，分别研究温度采样与响应、PWM 风扇控制与转速反馈。
-- 原先公开的 9 篇卷云技术或来源资料、南京图灵原始文档笔记继续可读。主页关联列表、笔记索引与详情页共同使用 `visibility` 和 `projectSlug`。
+本批加入天津 STM32、南京图灵、卷云相变散热器、无感 FOC 和 Claude Chime 各两篇笔记。原先暂挂的 12 篇旧稿及完成的预览副本已弃用，正文以 `content/notes/` 为准，历史版本仍保留在 Git 中。原始来源文档保持不变。
 
-六篇获批新稿已替换三个项目的旧叙事笔记。对应旧稿备份与已完成的审稿副本已删除，后续编辑以 `content/notes/` 中的正式文件为准；历史版本仍在 Git 中。小车主页已统一为七路红外循迹输入。
-
-[发布记录](docs/releases/engineering-notes-2026-09-07/README.md)列出六篇入口和检查结果，[接力文档](docs/active-work/portfolio-copy-rewrite.md)记录剩余项目。最新 [Engineering Note Writer](skills/engineering-note-writer/SKILL.md)包含中文病句门禁、跨页面分工、内部事实检查与结尾重复检查。完整设计和公开资料规则见 `PRODUCT.md`、`DESIGN.md` 和 `docs/content-workflow.md`。
+[发布记录](docs/releases/remaining-engineering-notes-2026-09-07/README.md)列出入口和检查结果，[接力文档](docs/active-work/portfolio-copy-rewrite.md)记录笔记工作完成及单独保留的未获批 About 草稿。最新 [Engineering Note Writer](skills/engineering-note-writer/SKILL.md)包含中文病句门禁、跨页面分工、自然结尾、具体小标题，以及每篇中文笔记最多一个以“我”开头的段落。完整设计和公开资料规则见 `PRODUCT.md`、`DESIGN.md` 和 `docs/content-workflow.md`。
 
 ## 部署
 

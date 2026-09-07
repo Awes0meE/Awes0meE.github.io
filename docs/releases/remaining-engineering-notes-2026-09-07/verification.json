@@ -1,0 +1,525 @@
+{
+  "approvedCheckpoint": "ce2411e",
+  "promoted": [
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-startup-current.mdx",
+      "path": "content/notes/claude-chime-startup-current.mdx",
+      "route": "/notes/claude-chime-startup-current",
+      "titleZh": "带保护电池的启动测量",
+      "approvedSha256": "f499cd32930ced6b87f86c33370c294e85b123f4d8ff74e78271174bd43f516b",
+      "publishedSha256": "a36e458398b50169b629e0d18f10860796987bac5f36cd83bd36daf5e2f66dbf",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/claude-chime-switched-adc-divider.mdx",
+      "path": "content/notes/claude-chime-switched-adc-divider.mdx",
+      "route": "/notes/claude-chime-switched-adc-divider",
+      "titleZh": "电池采样开关与 ADC 建立时间",
+      "approvedSha256": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+      "publishedSha256": "eeb812f5b513539866fc6501808c78ddad11bc066df83db68c79f74a3f72aaa2",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/foc-angle-handoff.mdx",
+      "path": "content/notes/foc-angle-handoff.mdx",
+      "route": "/notes/foc-angle-handoff",
+      "titleZh": "无感 FOC 接管时的角度连续性",
+      "approvedSha256": "a8c92f5b6b1d03cba82b1356994e289373ccbba3f8126a6f1120f75b9aa57aff",
+      "publishedSha256": "0a1c03b15861b6c596268b4f9308fc201f84d0771ffd06167080d5ca8a3212f5",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/foc-current-sampling-timing.mdx",
+      "path": "content/notes/foc-current-sampling-timing.mdx",
+      "route": "/notes/foc-current-sampling-timing",
+      "titleZh": "PWM 周期内的电流采样",
+      "approvedSha256": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+      "publishedSha256": "d62b061d00763e87d997259232bbec77fccad64db49531efa8223e9819c6096b",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-cooperative-task-timing.mdx",
+      "path": "content/notes/juanyun-cooperative-task-timing.mdx",
+      "route": "/notes/juanyun-cooperative-task-timing",
+      "titleZh": "ACUnit 的协作式任务时序",
+      "approvedSha256": "476a1fce695b2c6781298d4287604e3cf6dcfbd7b40ae52b5705603e4b110257",
+      "publishedSha256": "8887a6f0fe9dd74a138664ecc8b8c19f30756c127326b85db18a7f9f52a229e3",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/juanyun-flash-parameter-recovery.mdx",
+      "path": "content/notes/juanyun-flash-parameter-recovery.mdx",
+      "route": "/notes/juanyun-flash-parameter-recovery",
+      "titleZh": "Flash 参数保存与恢复",
+      "approvedSha256": "9a89809128c0a98f195eda967f70124a6a935e622bae96897cbfa259cffeff09",
+      "publishedSha256": "b57c4a109a4d3b84a79f434b62e2bc13c0cc62d65e491e0edb4ba966491c76da",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/turing-local-role-permissions.mdx",
+      "path": "content/notes/turing-local-role-permissions.mdx",
+      "route": "/notes/turing-local-role-permissions",
+      "titleZh": "本地账户的权限判断",
+      "approvedSha256": "208639c523874520f448015811cb8c1a74b90783eb570cbf93715f16d11090b5",
+      "publishedSha256": "70e07ac350d8246b81a67ad4af06d53813101a4ce2ae300814ef978f9b227b8d",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/remaining-project-notes-2026-09-07/turing-windows-runtime-dependencies.mdx",
+      "path": "content/notes/turing-windows-runtime-dependencies.mdx",
+      "route": "/notes/turing-windows-runtime-dependencies",
+      "titleZh": "Qt 程序的 Windows 运行依赖",
+      "approvedSha256": "de53d996b6894b453b5b85debab07f76290a36f1045b4fe57ebd85543d2bfe78",
+      "publishedSha256": "47206b967cd0e8f4e3bcb3485c758b741af46f68bb431cdd4f5f6ec6d4356cda",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-i2c-oled-debugging.mdx",
+      "path": "content/notes/tianjin-stm32-i2c-oled-debugging.mdx",
+      "route": "/notes/tianjin-stm32-i2c-oled-debugging",
+      "titleZh": "I²C 通信与 OLED 调试",
+      "approvedSha256": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88",
+      "publishedSha256": "9f7fc69efc7509eec2d291a98d00bddf3aa53b37bf90aa74c283089275061cb0",
+      "bodyUnchanged": true
+    },
+    {
+      "draft": "docs/experiments/tianjin-notes-2026-09-07/tianjin-stm32-light-calibration-control.mdx",
+      "path": "content/notes/tianjin-stm32-light-calibration-control.mdx",
+      "route": "/notes/tianjin-stm32-light-calibration-control",
+      "titleZh": "光照标定与查表控制",
+      "approvedSha256": "24bd84b2d1c32333e7f659a5e272d21fef9e6fd9829f7f8c514001699467253d",
+      "publishedSha256": "5d6a87924105f09c15d1e0cc618c02491104bf438f9470b28e48839a0d0bf563",
+      "bodyUnchanged": true
+    }
+  ],
+  "retired": [
+    {
+      "path": "content/notes/juanyun-acunit-firmware.mdx",
+      "sha256": "55e755be08b23d11499c2f6dfd4b928ee39b87a6787df8d50d03858d0889c35f",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/tianjin-stm32-pwm-uart-adc.mdx",
+      "sha256": "707985ff898fd516ee3fa756942c34926560ca2a6b1fa1eb00bee4569396c9ec",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/tianjin-stm32-environment-setup.mdx",
+      "sha256": "772b1881a4d10bd6cea1fd4b03d9ef34add1a4fb8776dfa5a7f7781d450b758a",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/juanyun-acunit-board.mdx",
+      "sha256": "512783d2b094c64ba3c530fdd8c381aabeffed157affbab470259bc06d5843c9",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/claude-chime-cold-start-battery-protection.mdx",
+      "sha256": "355013cc0200d406f782d4ebe62b26b6175956126c74c1d25a43fb88da7c207f",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/juanyun-production-line-control-panel.mdx",
+      "sha256": "3a0f8fe9e2e834d4344b752030eb196141725e3b243d42e65bfdfb66f8f0515f",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/tianjin-rail-control-pid-atc-reading.mdx",
+      "sha256": "fd4b2c49ebd5716e403da257b43d34b81180b9960fd3bdb8433d7f2efe5ee591",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/tianjin-stm32-gpio-exti-timer.mdx",
+      "sha256": "f8ec2cfb3397c0f1db9d7d4947bb8e49ae6b310fb0f945e5a7ef31c5c708755f",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/sensorless-foc-handoff.mdx",
+      "sha256": "af6f96f4081ae5c68ae45fb0cf54f288be8ba5593a275eebb35084965c5fa6c4",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/tianjin-metro-environment-monitoring-stm32.mdx",
+      "sha256": "15cb6b2c4505bc3fe9525cc1a25100237ad1baf98b1b022b6a285c3fe50d6a75",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/juanyun-baseunit-firmware.mdx",
+      "sha256": "df467bb162626c3012f1f1dd850dcfe09ee3b7f04eececd7876c1f76c6682b35",
+      "recoverAt": "ce2411e"
+    },
+    {
+      "path": "content/notes/turing-three-week-development-log.mdx",
+      "sha256": "3aae9060386cf91553aca0eae672ab71b63228fbb4ec0375a8d83b18b1b448fd",
+      "recoverAt": "ce2411e"
+    }
+  ],
+  "counts": {
+    "projects": 8,
+    "publicNotes": 25,
+    "suspendedNotes": 0,
+    "media": 84
+  },
+  "checks": {
+    "lint": "passed; content and UTF-8 validation included",
+    "typecheck": "passed",
+    "productionBuild": "passed; webpack, 40 routes",
+    "productionDependencyAudit": "0 vulnerabilities, 2026-09-07",
+    "existingPublicNotes": "all 15 byte-identical to approved ce2411e",
+    "homepagesAboutAssetsDependencies": "unchanged against origin/main 007decf; paragraph and inline-code renderer separately gains existing safe-wrap class",
+    "writerSkillValidation": "passed"
+  },
+  "browserInitial": {
+    "views": 100,
+    "passed": 95,
+    "failed": 5,
+    "cause": "Pre-existing mobile overflow in inline code on three source-document notes; fixed using existing text-wrap-safe class."
+  },
+  "browserFinal": {
+    "views": 100,
+    "failures": [],
+    "pageErrors": [],
+    "indexTotals": [
+      "25",
+      "8",
+      "2"
+    ],
+    "uniqueIndexNoteLinks": 25,
+    "widths": [
+      1440,
+      390
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "checks": [
+      "HTTP 200",
+      "localized title",
+      "language isolation",
+      "no horizontal overflow",
+      "no broken completed images"
+    ],
+    "consoleWarnings": "Browser emitted stylesheet preload-not-used warnings; no page errors."
+  },
+  "httpLocal": {
+    "base": "http://127.0.0.1:3000",
+    "routes": [
+      {
+        "route": "/",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/work",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNotes": []
+      },
+      {
+        "route": "/media",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/about",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/work/juanyun-diy-cooling-prototype",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/claude-chime-hardware-power-board",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/tianjin-metro-stm32-foundation",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/juanyun-thermal-hardware",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/nanjing-turing-qt-embedded-learning",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/arduino-smart-car-line-tracker",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/sensorless-foc-learning-route",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/work/arduino-digital-clock-counter",
+        "status": 200,
+        "expected": 200,
+        "pass": true,
+        "missingNoteLinks": []
+      },
+      {
+        "route": "/notes/arduino-counter-latching-switch-control",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/arduino-digital-clock-counter-course-note",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/arduino-smart-car-line-sensing-input-acquisition",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/arduino-smart-car-line-tracking-learning-note",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/claude-chime-startup-current",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/claude-chime-switched-adc-divider",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/foc-angle-handoff",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/foc-current-sampling-timing",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-acunit-automatic-control",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-acunit-hardware-revision-archive",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-cooperative-task-timing",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-dht11-am2302-board",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-diy-cooling-pwm-fan-control",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-diy-cooling",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-flash-parameter-recovery",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-hardware-sop",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-legacy-actuator-archive",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-stm32-i2c-oled-debugging",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-stm32-light-calibration-control",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-cmake-build-logic",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-local-role-permissions",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-qt-seamly2d-first-run",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-release-packaging-cross-platform",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-sm2d-xml-data-format",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-windows-runtime-dependencies",
+        "status": 200,
+        "expected": 200,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-acunit-firmware",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-stm32-pwm-uart-adc",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-stm32-environment-setup",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-acunit-board",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/claude-chime-cold-start-battery-protection",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-production-line-control-panel",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-rail-control-pid-atc-reading",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-stm32-gpio-exti-timer",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/sensorless-foc-handoff",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/tianjin-metro-environment-monitoring-stm32",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/juanyun-baseunit-firmware",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      },
+      {
+        "route": "/notes/turing-three-week-development-log",
+        "status": 404,
+        "expected": 404,
+        "pass": true
+      }
+    ],
+    "redirect": {
+      "status": 308,
+      "location": "/notes/foc-angle-handoff?lang=zh",
+      "pass": true
+    },
+    "failures": []
+  }
+}

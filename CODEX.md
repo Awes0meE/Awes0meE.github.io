@@ -182,26 +182,24 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The 2026-09-07 source revision contains 8 project pages, 27 note sources and 84
-media records. Fifteen notes are public across five project channels; twelve
-remain private pending their project-specific rewrites. The six newly approved
-bilingual notes cover Smart Car, the two-digit counter and DIY Cooling, two per
-project. Three old note paths now contain the replacement studies, and three
-additional note paths complete the set. Superseded old-note backups and completed
-review copies have been removed at the user's request; Git retains their history.
+The 2026-09-07 source revision contains 8 project pages, 25 public notes and 84
+media records. All eight projects have note channels. Sixteen approved bilingual
+studies cover two topics per project; nine technical/source-document notes remain.
+The twelve suspended old notes have been retired from current source. Git retains
+their history; do not restore a former suspension manifest over the new articles.
 
 Canonical prose lives in `content/projects/` and `content/notes/`. The writer is
 `skills/engineering-note-writer/SKILL.md`. Release scope and verification are in
-`docs/releases/engineering-notes-2026-09-07/README.md`; the active cross-device
-relay is `docs/active-work/portfolio-copy-rewrite.md`. The latest named tag
-remains `v0.9.0`; later maintenance uses PRs without inventing a new release tag.
+`docs/releases/remaining-engineering-notes-2026-09-07/README.md`; the current handoff is
+`docs/active-work/portfolio-copy-rewrite.md`. The latest named tag remains `v0.9.0`.
+Maintenance releases use PRs without inventing a new tag.
 
-Family source counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal
-9, Tianjin 5, Nanjing Turing 5, FOC 1 and Claude Chime 1. The source-document
-notes and reviewed project assets keep their existing publication rules. The
-Smart Car homepage identifies seven IR tracking inputs, matching the manual and
-seven decoded sensor fields. The DIY schematic PNG is a faithful derivative of
-the existing public PDF, not new hardware evidence.
+Family note counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal 7,
+Tianjin 2, Nanjing Turing 6, FOC 2 and Claude Chime 2. Source-document notes and
+reviewed assets keep their existing publication rules. The Smart Car homepage
+identifies seven IR tracking inputs. The DIY schematic PNG is a faithful
+derivative of the existing public PDF. The legacy FOC note redirect now leads
+to `/notes/foc-angle-handoff`.
 
 The homepage, `/work`, `/notes`, `/media` and `/about` use the approved Ember
 Black surfaces; project and note details retain the paper reading system.
@@ -263,8 +261,9 @@ For `content/notes/*.mdx`:
 - begin from a concrete course detail, file, symptom, command, or engineering question instead of describing the page as a reorganized document;
 - let the writer's changing understanding determine the paragraph and section order instead of selecting a note archetype; attention may jump across subsystems or chronology and synthesize later when that reflects genuine understanding, with no mandatory cognition template;
 - derive the title and headings after drafting; keep the page title short, accurate, and precise, naming the engineering subject plus only the scope needed to identify the learning note;
-- use concise section labels for the following task, stage, component, experiment, or problem domain. `开发尝试` is valid when it accurately indexes that block; keep the anecdote, judgment, and cognition change in the body instead of compressing them into a heading;
+- derive each section heading from all its paragraphs after writing them. Use a concise label for their actual subject and aspect, such as `I²C 传输流程` or `执行前的权限检查`; reject question hooks, abstract labels and isolated moments such as `高电平从哪里来` or `重启之后`. `开发尝试` remains valid when it accurately indexes the block; keep the anecdote, judgment and cognition change in the body. Apply this rule to both languages, and preserve non-heading content during a heading-only revision;
 - prefer substantial paragraphs when related facts, explanations, and judgments belong to one cognition movement; keep paragraph lengths naturally uneven and allow a one-sentence paragraph when a real interruption, failed assumption, result, or ending earns it;
+- in each Chinese learning note, allow at most one prose paragraph beginning with `我`, counting the introduction and every paragraph beneath headings. Start other paragraphs naturally from their concrete subject, condition, question or action; do not simply prefix filler. Preserve personal ownership and proposed-versus-completed work. This does not ban first person within paragraphs or impose an English numerical quota;
 - place supported reactions and light humor beside the real engineering friction rather than saving all personality for a conclusion;
 - give project pages and learning notes a natural close without forced elevation or abrupt cuts after data. Compare nearby endings for repeated retrospective or hypothetical-next-time frames; an apt occasional `下一次再看到……` remains allowed. Judge recurring function, not a phrase blacklist;
 - preserve Li Zhiyi's established voice and keep the confirmed emotional intensity unchanged, neither flattened nor amplified; borrow editing mechanics without importing another writer's vocabulary, register, cadence, audience relationship, or persona;

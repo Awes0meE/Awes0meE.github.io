@@ -160,7 +160,7 @@ Seven spacious black signal intervals separate adjacent projects. Their short or
 
 ## Using The Notes Routed Index
 
-On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by frontmatter year. The 2026-09-07 content revision has 15 public notes across 5 channels, including two new studies each for Smart Car, the counter and DIY Cooling. Twelve other notes remain suspended. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
+On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by frontmatter year. The 2026-09-07 content revision has 25 public notes across 8 channels, including two approved studies per project and nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` deliberately keeps the paper reading surface.
 
@@ -168,7 +168,7 @@ The selected orange path follows the existing graphite stem and zig-zag bus to t
 
 ## 使用笔记路由索引
 
-在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按 frontmatter 年份筛选公开笔记。2026-09-07 这轮发布后为 15 篇公开笔记、5 个通道，小车、计数器和 DIY 散热器各有两篇新专题；另有 12 篇笔记继续暂挂。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
+在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按 frontmatter 年份筛选公开笔记。2026-09-07 这轮发布后为 25 篇公开笔记、8 个通道，每个项目有两篇获批专题，另保留 9 篇技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会继续使用适合阅读的 paper surface。
 
