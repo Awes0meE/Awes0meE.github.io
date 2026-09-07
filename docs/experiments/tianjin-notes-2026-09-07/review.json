@@ -1,0 +1,219 @@
+{
+  "date": "2026-09-07",
+  "status": "two local candidate drafts awaiting user review; unpublished",
+  "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
+  "draftSha256": {
+    "tianjin-stm32-i2c-oled-debugging.mdx": "9aab577646efbe4f94e5e2dda47c562e2f16efee8e3d402fef245d861b4ee39d",
+    "tianjin-stm32-light-calibration-control.mdx": "6a57b27c8789b1b0473221ba93ac30c233d34d13b6662a0e965fbdc45de7f87e"
+  },
+  "step12Chinese": {
+    "语序不当": "pass; reviewed in paragraph context",
+    "搭配不当": "pass; reviewed in paragraph context",
+    "成分残缺或赘余": "pass; reviewed in paragraph context",
+    "结构混乱": "pass; reviewed in paragraph context",
+    "表意不明": "pass; reviewed in paragraph context",
+    "不合逻辑": "pass; reviewed in paragraph context"
+  },
+  "postStep10Changes": [
+    "Calibration table headers were localized for correct display in both languages.",
+    "Two calibration headings were shortened to subject labels; final Chinese headings and corresponding English were rechecked."
+  ],
+  "truth": [
+    "The confirmed Tianjin homepage and all five sibling notes were read in both languages.",
+    "Original lookup and main-loop C excerpts support the 16 values, decreasing ADC relation, interpolation, round-to-integer step, 999 clamp and separation of measurement from lookup input.",
+    "Worked values: target 1000 -> 209.090909 -> 209; PWM 550 -> predicted ADC 700.5; inverse slopes 0.142857 and 1.672241; 100 pF and 4.7 kohm -> 398.231 ns; hypothetical address 0x3C -> write byte 0x78.",
+    "Additional calibration measurements, ambient-light change to ADC 900, proportional correction and same-pin I2C comparison are present calculations or proposed work, not historical tests.",
+    "OLED model, historical SCL/SDA pin pair, bus rate, waveforms and exact original fault are not invented. ST F1 HAL source is current reading, not a claim that the internship used HAL."
+  ],
+  "voiceAndBilingual": "pass; Chinese composed first, with direct calculations and circuit questions. English retains the same explanations, proposed checks and endings using natural independent sentence forms. No old-draft information-retention gate or evidence-inventory narration was added.",
+  "crossPage": "New notes develop interpolation coverage and I2C signaling; the homepage retains the internship progression. Both drafts keep short opening context and avoid reproducing whole build/bring-up scenes. The five older notes remain suspended as sources.",
+  "scope": "Only local review drafts and handoff documentation change. Website content, application source, current writer and public assets equal origin/main. About remains parked separately at docs/rewrite-about-copy, checkpoint af3ace5.",
+  "researchSources": {
+    "AN2834": "https://www.st.com/resource/en/application_note/an2834-how-to-get-the-best-adc-accuracy-in-stm32-microcontrollers-stmicroelectronics.pdf",
+    "UM10204": "https://www.nxp.com/docs/en/user-guide/UM10204.pdf",
+    "SLVA689": "https://www.ti.com/lit/an/slva689/slva689.pdf",
+    "SLVA704": "https://www.ti.com/lit/an/slva704/slva704.pdf",
+    "ES096": "https://www.st.com/resource/en/errata_sheet/es096-stm32f101x8b-stm32f102x8b-and-stm32f103x8b-mediumdensity-device-limitations-stmicroelectronics.pdf",
+    "ST F1 I2C driver": "https://github.com/STMicroelectronics/stm32f1xx-hal-driver/blob/master/Src/stm32f1xx_hal_i2c.c"
+  },
+  "checks": {
+    "lint": "pass",
+    "contentValidation": "8 projects, 27 note sources, 84 media records unchanged",
+    "publicState": "15 public notes and 12 suspended notes unchanged; the two new drafts are outside content/",
+    "productionBuild": "not repeated; application and public content unchanged",
+    "visualInspection": "Desktop calibration and mobile I2C full-page screenshots reviewed; text, headings and table fit. All eight note/language/width combinations pass overflow and language checks."
+  },
+  "browser": {
+    "views": [
+      {
+        "width": 1440,
+        "note": "calibration",
+        "lang": "zh",
+        "title": "光照标定与查表控制",
+        "headings": [
+          "标定表里的数",
+          "目标与插值",
+          "标定点与补测",
+          "环境光与反馈修正"
+        ],
+        "paragraphs": 15,
+        "tables": [
+          5
+        ],
+        "codeBlocks": 1,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "这个修正还要等新的采样结果到来再计算，并结合采样间隔和 LED、传感器的响应选择系数，最后把输出限制在允许范围内。环境光足够强时，即使 LED 已经关闭，读数也可能达不到目标，继续减小指令便没有作用。查表能帮我快速给出一个起始值，反馈负责根据当前读数调整；而灯能调多亮、能暗到什么程度，最终还是由这套实物决定。",
+        "linkCount": 7
+      },
+      {
+        "width": 1440,
+        "note": "calibration",
+        "lang": "en",
+        "title": "Light Calibration and Lookup Control",
+        "headings": [
+          "Reading the Calibration Table",
+          "Interpolating a Target",
+          "Calibration Coverage",
+          "Ambient Light and Feedback"
+        ],
+        "paragraphs": 15,
+        "tables": [
+          5
+        ],
+        "codeBlocks": 1,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "这个修正还要等新的采样结果到来再计算，并结合采样间隔和 LED、传感器的响应选择系数，最后把输出限制在允许范围内。环境光足够强时，即使 LED 已经关闭，读数也可能达不到目标，继续减小指令便没有作用。查表能帮我快速给出一个起始值，反馈负责根据当前读数调整；而灯能调多亮、能暗到什么程度，最终还是由这套实物决定。",
+        "linkCount": 7
+      },
+      {
+        "width": 1440,
+        "note": "i2c",
+        "lang": "zh",
+        "title": "I²C 通信与 OLED 调试",
+        "headings": [
+          "高电平从哪里来",
+          "一次传输怎样完成",
+          "软件与硬件 I²C",
+          "BUSY 与芯片勘误"
+        ],
+        "paragraphs": 16,
+        "tables": [],
+        "codeBlocks": 0,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "屏幕不亮时，可以沿着供电、总线电平、地址应答和显示数据逐段检查。每多看清一步，下一次测量就能更有针对性。对我来说，软件 I²C 的学习价值也在这里：把释放引脚、等待时钟和读取应答写清楚以后，再去读硬件外设的状态位，就更容易理解程序正在等什么。",
+        "linkCount": 11
+      },
+      {
+        "width": 1440,
+        "note": "i2c",
+        "lang": "en",
+        "title": "I²C Communication and OLED Debugging",
+        "headings": [
+          "Where the High Level Comes From",
+          "Following a Transfer",
+          "Software and Peripheral Implementations",
+          "BUSY and Device Errata"
+        ],
+        "paragraphs": 16,
+        "tables": [],
+        "codeBlocks": 0,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "屏幕不亮时，可以沿着供电、总线电平、地址应答和显示数据逐段检查。每多看清一步，下一次测量就能更有针对性。对我来说，软件 I²C 的学习价值也在这里：把释放引脚、等待时钟和读取应答写清楚以后，再去读硬件外设的状态位，就更容易理解程序正在等什么。",
+        "linkCount": 11
+      },
+      {
+        "width": 390,
+        "note": "calibration",
+        "lang": "zh",
+        "title": "光照标定与查表控制",
+        "headings": [
+          "标定表里的数",
+          "目标与插值",
+          "标定点与补测",
+          "环境光与反馈修正"
+        ],
+        "paragraphs": 15,
+        "tables": [
+          5
+        ],
+        "codeBlocks": 1,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "这个修正还要等新的采样结果到来再计算，并结合采样间隔和 LED、传感器的响应选择系数，最后把输出限制在允许范围内。环境光足够强时，即使 LED 已经关闭，读数也可能达不到目标，继续减小指令便没有作用。查表能帮我快速给出一个起始值，反馈负责根据当前读数调整；而灯能调多亮、能暗到什么程度，最终还是由这套实物决定。",
+        "linkCount": 7
+      },
+      {
+        "width": 390,
+        "note": "calibration",
+        "lang": "en",
+        "title": "Light Calibration and Lookup Control",
+        "headings": [
+          "Reading the Calibration Table",
+          "Interpolating a Target",
+          "Calibration Coverage",
+          "Ambient Light and Feedback"
+        ],
+        "paragraphs": 15,
+        "tables": [
+          5
+        ],
+        "codeBlocks": 1,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "这个修正还要等新的采样结果到来再计算，并结合采样间隔和 LED、传感器的响应选择系数，最后把输出限制在允许范围内。环境光足够强时，即使 LED 已经关闭，读数也可能达不到目标，继续减小指令便没有作用。查表能帮我快速给出一个起始值，反馈负责根据当前读数调整；而灯能调多亮、能暗到什么程度，最终还是由这套实物决定。",
+        "linkCount": 7
+      },
+      {
+        "width": 390,
+        "note": "i2c",
+        "lang": "zh",
+        "title": "I²C 通信与 OLED 调试",
+        "headings": [
+          "高电平从哪里来",
+          "一次传输怎样完成",
+          "软件与硬件 I²C",
+          "BUSY 与芯片勘误"
+        ],
+        "paragraphs": 16,
+        "tables": [],
+        "codeBlocks": 0,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "屏幕不亮时，可以沿着供电、总线电平、地址应答和显示数据逐段检查。每多看清一步，下一次测量就能更有针对性。对我来说，软件 I²C 的学习价值也在这里：把释放引脚、等待时钟和读取应答写清楚以后，再去读硬件外设的状态位，就更容易理解程序正在等什么。",
+        "linkCount": 11
+      },
+      {
+        "width": 390,
+        "note": "i2c",
+        "lang": "en",
+        "title": "I²C Communication and OLED Debugging",
+        "headings": [
+          "Where the High Level Comes From",
+          "Following a Transfer",
+          "Software and Peripheral Implementations",
+          "BUSY and Device Errata"
+        ],
+        "paragraphs": 16,
+        "tables": [],
+        "codeBlocks": 0,
+        "languageLeaks": 0,
+        "chineseInEnglish": false,
+        "overflow": false,
+        "ending": "屏幕不亮时，可以沿着供电、总线电平、地址应答和显示数据逐段检查。每多看清一步，下一次测量就能更有针对性。对我来说，软件 I²C 的学习价值也在这里：把释放引脚、等待时钟和读取应答写清楚以后，再去读硬件外设的状态位，就更容易理解程序正在等什么。",
+        "linkCount": 11
+      }
+    ],
+    "errors": []
+  }
+}

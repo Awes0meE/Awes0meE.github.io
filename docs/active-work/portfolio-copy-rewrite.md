@@ -2,7 +2,9 @@
 
 **Updated:** 2026-09-07
 
-The user approved all six bilingual learning notes for Arduino Smart Car, the two-digit counter and DIY cooling, and requested Neat, publication of the current Engineering Note Writer, deletion of their superseded notes, a pull request and merge to `main`.
+The user paused the unapproved About rewrite and requested the next project’s learning notes. The current branch is `docs/rewrite-tianjin-notes`, based on synchronized `main` at `007decf`. Two bilingual Tianjin Jintie STM32 candidate drafts are ready for review: light calibration/lookup control and I2C/OLED debugging. They remain outside the public content collection in [the review packet](../experiments/tianjin-notes-2026-09-07/README.md). Preview: `http://127.0.0.1:8771/preview.html?note=calibration&lang=zh`. The user has not approved either draft yet.
+
+Preserve the separate About branch `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). Its wording was not approved; do not publish it or carry it into the note branch.
 
 ## Current Source State
 
@@ -12,7 +14,7 @@ The user approved all six bilingual learning notes for Arduino Smart Car, the tw
 - Smart Car now states seven IR tracking inputs in both homepage languages, matching the manual, schematic and decoded fields. Its six collision switches and six test groups are unchanged.
 - The DIY homepage ending and current writer ending-variety rules are included in this release. The other approved homepage narratives, including Claude Chime, retain their publication state.
 
-The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The release is tracked by [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37), from `docs/rewrite-diy-cooling-notes` to `main`. Follow-up work uses synchronized `main` after the PR is merged; the three merged note-writing branches can then be removed. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
+The [2026-09-07 release record](../releases/engineering-notes-2026-09-07/README.md) lists routes, verification and publication tracking. The release was merged through [PR #37](https://github.com/Awes0meE/Awes0meE.github.io/pull/37) at `007decf`. The three completed note-writing branches were removed before the About and Tianjin draft branches began. Preserve remote `gh-pages`, which serves the old GitHub Pages redirect. The named tag remains `v0.9.0`; this maintenance release does not create a new tag.
 
 ## Writing Contract
 
@@ -24,13 +26,11 @@ Normal closing paragraphs are welcome. Avoid forced elevation and repeated look-
 
 ## Next Writing Work
 
-The six notes are approved; no draft review or topic decision remains pending for these three projects. Continue to another project only when the user asks. The [topic backlog](project-note-topics-2026-09-06.md) retains candidates for Tianjin STM32, Nanjing Turing, Juanyun phase-change cooling, sensorless FOC and Claude Chime. Reuse their confirmed briefs and ask only questions that change the claims or selected topic.
+The six published notes remain approved. Review the two Tianjin candidate drafts next; the other four project families remain in the backlog. The [topic backlog](project-note-topics-2026-09-06.md) retains candidates for Tianjin STM32, Nanjing Turing, Juanyun phase-change cooling, sensorless FOC and Claude Chime. Reuse their confirmed briefs and ask only questions that change the claims or selected topic.
 
 The 12 other suspended notes remain recoverable sources. Do not restore them wholesale or apply the old homepage-suspension manifest over the six rewritten notes. Completed review URLs on ports 8767–8770 are retired; use the actual website routes from the release record.
 
 ## Internal Fact Checks
-
-These are editorial working notes, not sentences to paste into the project pages.
 
 These are editorial working notes, not sentences to paste into the project pages.
 

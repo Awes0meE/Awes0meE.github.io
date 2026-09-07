@@ -1,0 +1,74 @@
+---
+title: "I²C Communication and OLED Debugging"
+titleZh: "I²C 通信与 OLED 调试"
+summary: "Studying pull-ups, transfer timing and acknowledgment, then comparing software and peripheral I²C when troubleshooting an OLED."
+summaryZh: "从上拉、电平、地址与应答，研究软件和硬件 I²C 的区别，以及 OLED 不显示时怎样定位问题。"
+date: "2026.09.07"
+tags: ["STM32", "I2C", "OLED", "GPIO", "Debugging"]
+projectSlug: "tianjin-metro-stm32-foundation"
+visibility: "private"
+---
+
+During my STM32 practice in Tianjin, an OLED stayed blank even though compilation and downloading both worked. Moving to another pair of ordinary GPIO pins and using software I²C restored the display. I want to understand that result more closely. Both implementations ultimately communicate through SDA and SCL, so where do their differences arise? I would begin with the voltages on those pins.
+
+我在天津做 STM32 练习时，遇到过 OLED 编译、下载都正常，屏幕却不显示的情况。后来换了一组普通 GPIO，用软件模拟 I²C，显示恢复了。这个结果让我想继续弄清楚，两种实现最终都通过 SDA 和 SCL 通信，它们究竟在哪些地方不同？要把这个问题看明白，我会先从引脚上的电压开始。
+
+## Where the High Level Comes From / 高电平从哪里来
+
+I²C normally uses open-drain outputs. A conducting output transistor pulls the line low; switching it off releases the line, allowing a pull-up resistor to bring it high. Both controller and peripheral can pull SDA low, and releasing it gives the receiver room to acknowledge. The [NXP I²C specification](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) explains the electrical relationship through this shared connection. In software I²C, I would treat a high output as a request to release the pin, then read the input to check that the line has actually risen.
+
+I²C 通常采用开漏输出。输出管导通时，器件把信号线拉低；关断时，则释放这根线，由上拉电阻把它拉回高电平。主控和外设都可以拉低 SDA，发送方释放后，接收方才有机会应答。[NXP 的 I²C 规范](https://www.nxp.com/docs/en/user-guide/UM10204.pdf)用这种连接解释了总线上的电平关系。写软件 I²C 时，我会把输出高电平理解成释放引脚，同时还要读取引脚，确认线上已经变高。
+
+That interpretation connects a software assignment to the circuit. Driving SDA high with a push-pull output while the peripheral pulls it low makes the two outputs contend. With open-drain operation, the next question becomes how quickly the released line rises. Modules, wiring and input pins all add capacitance, which takes time to charge through the pull-up resistor.
+
+这样理解以后，程序里的一个赋值就和电路接上了。如果我用推挽输出强行把 SDA 拉高，而外设此时正在拉低它，两边就会争着驱动同一根线。换成开漏以后，高电平的建立速度又取决于上拉电阻和总线电容。模块、连线和输入引脚都会增加电容，释放信号线之后，电压需要一段时间才能升上来。
+
+Choosing a familiar resistor value without checking the bus can miss that timing requirement. [TI's SLVA689](https://www.ti.com/lit/an/slva689/slva689.pdf) gives `tr = 0.8473 × Rp × Cb` for the approximate rise from 30% to 70% of the pull-up voltage. As a worked example, 100 pF with 4.7 kΩ gives about 398 ns. That fits the 1000 ns Standard-mode limit but exceeds the 300 ns Fast-mode limit. Shortening a software delay cannot make the line charge faster.
+
+上拉电阻因此不能只凭常用值挑一个。[TI 的 SLVA689](https://www.ti.com/lit/an/slva689/slva689.pdf)给出从上拉电压的 30% 升到 70% 所需时间的近似式 `tr = 0.8473 × Rp × Cb`。假设总线电容为 100 pF，上拉为 4.7 kΩ，算出的上升时间约 398 ns。它低于标准模式的 1000 ns 上限，却超过快速模式的 300 ns 上限。把软件中的延时缩短，并不能让这根线充电更快。
+
+A smaller resistance speeds up the rise while increasing current when the line is low. I would calculate that current from the pull-up voltage, low-level voltage and resistance, then compare it with the device's sink capability. Pull-ups fitted to two modules also appear in parallel when the modules are connected. Checking the module circuit and measuring the assembled bus levels gives a clearer basis for troubleshooting than repeatedly changing delays.
+
+减小电阻可以加快上升，但拉低时的电流也会增大。这个电流要按上拉电压、低电平电压和电阻计算，再对照器件允许的灌电流。如果两块模块各带一组上拉，接在一起后电阻还会并联。接线前看模块电路、接线后测实际电平，比在程序里反复改延时更容易判断问题出在哪里。
+
+## Following a Transfer / 一次传输怎样完成
+
+The first landmarks I would look for in a trace are START, the address and its acknowledgment. [TI's bus guide](https://www.ti.com/lit/an/slva704/slva704.pdf) illustrates the sequence. SDA falling while SCL is high generates START; the controller then sends the address and direction bit. An acknowledgment clock follows every byte. During ordinary data bits, SDA must remain stable throughout SCL's high period.
+
+在时序图里，我最先会找 START、地址和紧接着的应答。[TI 的总线说明](https://www.ti.com/lit/an/slva704/slva704.pdf)画出了这些动作：SCL 为高时，SDA 由高变低表示 START；随后发送地址和读写位，每个字节后再安排一个时钟，让接收方应答。普通数据位传输时，SDA 要在 SCL 为高的期间保持稳定。
+
+For a hypothetical 7-bit address of `0x3C`, the first byte of a write is `(0x3C << 1) | 0 = 0x78`. The software interface may expect the 7-bit address or a value that already incorporates the direction-bit position. I need to check its convention. Otherwise, familiar-looking numbers can hide an address that was shifted twice. It is a small calculation worth doing while reading a driver interface.
+
+拿一个假设的 7 位地址 `0x3C` 来算，写操作发出的第一个字节是 `(0x3C << 1) | 0 = 0x78`。代码传的是 7 位地址，还是已经拼好读写位的字节，要看所调用接口的约定。否则程序里数字看起来都熟悉，线上发出的地址却可能移位两次。这是读驱动接口时值得顺手算一遍的地方。
+
+After sending the address, the transmitter releases SDA. The receiver acknowledges by holding it low during the ninth clock; leaving it high gives NACK. Eight visible data pulses are only part of the transaction, so I would inspect the ninth clock and which device controls SDA there. Once ACK is present, the next checks are the initialization commands and display data. Accepting a byte still leaves the display controller's own processing between the transfer and the intended image.
+
+地址发完以后，发送方释放 SDA。若接收方在第九个时钟把它拉低，就是 ACK；保持高电平则是 NACK。只看见八个数据脉冲，还需要继续看第九个时钟和 SDA 上是谁在驱动。收到 ACK 后，我会继续核对后续初始化命令和显示数据。字节被接收与屏幕出现预期内容，中间还有显示控制器自己的处理过程。
+
+## Software and Peripheral Implementations / 软件与硬件 I²C
+
+Software I²C schedules pin writes, reads and waits directly. The sequence is easy to follow and can move to other suitable GPIO pins, at the cost of CPU involvement in the timing. Interrupt handling or other work can stretch the gap between operations. An implementation that supports clock stretching must also read SCL after releasing it, waiting for the line to become high rather than assuming a fixed delay is enough.
+
+软件 I²C 由程序安排引脚翻转、读取和等待，步骤比较直观，也容易换到其他可用 GPIO。代价是 CPU 要参与这些时序；处理中断或执行别的任务时，两次操作之间的间隔可能被拉长。要支持时钟拉伸，还得在释放 SCL 后检查它是否真的变高，不能只等待一个固定延时就当作时钟已经到位。
+
+With hardware I²C, a dedicated peripheral handles the bit transfers. Software still configures pins, peripheral clocks, rate and transaction handling, then deals with status and errors. ST's [F1 I²C driver instructions](https://github.com/STMicroelectronics/stm32f1xx-hal-driver/blob/master/Src/stm32f1xx_hal_i2c.c) list those setup tasks and provide a useful way to understand the peripheral's dependencies. The same bus rules apply, including pull-ups and signal quality. For a comparison, I would hold wiring, pull-ups, bus rate and transmitted content constant, changing one condition at a time where possible.
+
+硬件 I²C 把位传输交给片上的专用外设，软件负责配置引脚、外设时钟、速率和事务流程，并处理状态与错误。ST 的 [F1 系列 I²C 驱动说明](https://github.com/STMicroelectronics/stm32f1xx-hal-driver/blob/master/Src/stm32f1xx_hal_i2c.c)列出了这些配置环节，也方便对照理解外设需要哪些准备。通信仍然使用相同的总线规则，上拉和信号质量照样要满足要求。排查时我会先固定接线、上拉、总线速率和要发送的内容，再比较两种实现，尽量一次只改变一个条件。
+
+My original change involved both GPIO selection and the communication implementation. To investigate further, I would first run a software version on the same pins used by the I²C peripheral, then switch those pins back to peripheral operation. Comparing START, address and ACK in the two cases would help separate pin configuration, electrical connections and driver handling.
+
+当时我同时换了 GPIO 和通信实现，这里面已经有两个变化。如果要继续研究，我会在硬件 I²C 对应的同一组引脚上先运行软件版本，再切回外设版本，分别观察 START、地址和 ACK。这样比较，才能逐步分清差异来自引脚配置、电气连接，还是驱动处理过程。
+
+## BUSY and Device Errata / BUSY 与芯片勘误
+
+The STM32F103 does have I²C issues worth checking. [Section 2.8.7 of ST's ES096 errata](https://www.st.com/resource/en/errata_sheet/es096-stm32f101x8b-stm32f102x8b-and-stm32f103x8b-mediumdensity-device-limitations-stmicroelectronics.pdf) describes SDA and SCL being physically high while the internal analogue filters can retain a low state. BUSY becomes set and the controller cannot generate START. The documented recovery includes prescribed GPIO transitions, input reads to confirm the levels and peripheral reconfiguration.
+
+STM32F103 的 I²C 确实有值得查的芯片问题。[ST 的 ES096 勘误 2.8.7](https://www.st.com/resource/en/errata_sheet/es096-stm32f101x8b-stm32f102x8b-and-stm32f103x8b-mediumdensity-device-limitations-stmicroelectronics.pdf)描述了一种情况：SDA、SCL 实际已经为高，内部模拟滤波器却可能保持低电平状态，导致 BUSY 置位，主机无法发出 START。它给出的恢复步骤包含用 GPIO 产生指定电平变化、读取引脚确认，以及重新设置外设。
+
+What interests me here is the possible disagreement between physical pins and internal state. I would examine SDA and SCL alongside BUSY to distinguish a line actually held low from released lines with an internal busy indication. Silicon revision and the erratum's conditions would then guide the response, instead of assigning every blank display to the same cause.
+
+这个现象值得研究的地方，是引脚电平和内部状态可能对不上。检查 BUSY 时，我会同时观察 SDA、SCL，区分信号线真的被拉低，还是两根线已经释放而内部仍显示忙。然后再结合芯片版本和勘误条件选择处理办法，避免把任何一次黑屏都归到同一个原因上。
+
+A blank screen can be investigated through power, bus levels, address acknowledgment and display data. Resolving one stage makes the next measurement more focused. This is also what I value in studying software I²C: spelling out pin release, clock waits and acknowledgment reads makes it easier to understand what a hardware driver's status checks are waiting for.
+
+屏幕不亮时，可以沿着供电、总线电平、地址应答和显示数据逐段检查。每多看清一步，下一次测量就能更有针对性。对我来说，软件 I²C 的学习价值也在这里：把释放引脚、等待时钟和读取应答写清楚以后，再去读硬件外设的状态位，就更容易理解程序正在等什么。

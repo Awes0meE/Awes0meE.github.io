@@ -1,0 +1,93 @@
+---
+title: "Light Calibration and Lookup Control"
+titleZh: "光照标定与查表控制"
+summary: "Working through an ADC-to-PWM interpolation example, uneven calibration intervals and a possible correction for changing ambient light."
+summaryZh: "从目标 ADC 到 PWM 的一次插值计算，研究采样点分布、标定条件和环境光变化后的修正思路。"
+date: "2026.09.07"
+tags: ["STM32", "ADC", "PWM", "Calibration", "Control"]
+projectSlug: "tianjin-metro-stm32-foundation"
+visibility: "private"
+---
+
+In my Tianjin lighting exercise, an encoder set the target and the STM32 adjusted an LED. A target of 1000 leaves a very specific question: what value should go into TIM4's compare register? During the placement, I measured 16 PWM and ADC pairs and put them into a [lookup function](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c). Working through that question connects the resulting command, 209, to two further concerns: where extra calibration measurements would help, and how the output could respond to a change in ambient light.
+
+天津实习的光照小实验里，我用编码器设定目标，再让 STM32 调节 LED。程序中有个很具体的问题：目标填 1000，TIM4 的比较值应该填多少？我当时测了 16 组 PWM 与 ADC 数据，写进[查表函数](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。顺着这个问题算下去，209 从哪来、哪些区间值得补测，以及环境光变化后怎样修正输出，就能放在一起理解了。
+
+## Reading the Calibration Table / 标定表里的数
+
+The table starts at `PWM = 0, ADC = 1600` and ends at `PWM = 1000, ADC = 480`. Increasing the LED output produces a lower ADC reading in this setup. A smaller target code therefore requests more light: changing the target from 1200 to 1000 asks for a brighter LED. The display calls it light, but the program works in ADC codes. Expressing the result in lux would require a relationship between the sensor reading and illuminance.
+
+这张表从 `PWM = 0, ADC = 1600` 开始，到 `PWM = 1000, ADC = 480` 结束。LED 输出增大时，ADC 读数反而减小。对这套接法来说，较小的 ADC 码对应较强的光照，因此目标从 1200 调到 1000，要求的是把灯调亮。屏幕上虽然写着光照，程序真正处理的是 ADC 采样码；要换成 lux，还需要传感器与照度之间的换算关系。
+
+I also want to account for what went into those readings. Distance and orientation between the LED and sensor matter, as does the light already in the room. Holding those conditions steady during calibration makes it easier to relate a PWM change to the resulting ADC change. These selected adjacent records are enough for the calculations below.
+
+我更关心这张表包含了哪些影响。LED 离传感器多远、朝向怎样、房间原本有多亮，都会参与最后的读数。标定时保持这些条件不变，才方便把 PWM 的变化和 ADC 的变化对应起来。这里挑出几组相邻记录，后面的计算就用它们。
+
+| PWM setting | ADC code |
+| --- | --- |
+| 100 | 1180 |
+| 200 | 1015 |
+| 300 | 850 |
+| 800 | 551 |
+| 900 | 515 |
+
+| PWM 设置 | ADC 采样码 |
+| --- | --- |
+| 100 | 1180 |
+| 200 | 1015 |
+| 300 | 850 |
+| 800 | 551 |
+| 900 | 515 |
+
+## Interpolating a Target / 目标与插值
+
+ADC codes 1015 and 850 bracket the target of 1000; their PWM settings are 200 and 300. I can locate the target within that ADC interval, then apply the same fraction to the PWM interval. Subtracting both ADC differences in table order gives two negative numbers, so their ratio is positive.
+
+目标 1000 处在 ADC 1015 和 850 之间，对应的 PWM 分别是 200 和 300。我先求目标在这段区间里走了多少，再把相同比例用到 PWM 上。两边的 ADC 都按表中顺序相减，分子、分母同时为负，比例仍然为正。
+
+```text
+fraction = (1000 - 1015) / (850 - 1015)
+         = 15 / 165
+PWM      = 200 + fraction * (300 - 200)
+         = 209.0909...
+```
+
+Adding `0.5f` before the integer conversion makes the function return 209. Rounding changes this particular calculation by about 0.09 compare counts. To find the actual lighting error, I would still need to apply the command and take another ADC reading. The decimal places in the calculation and the accuracy of the physical response answer different questions.
+
+函数最后加 `0.5f` 再转成整数，于是返回 209。这是按表算出的指令值。四舍五入对这次计算只改动了约 0.09 个比较计数，真实光照离目标多远，还要把灯调到这个输出以后再读取 ADC。算式的小数位和实物的控制精度，需要分别看。
+
+There is another small detail further down the call path. The table can return 1000, but `Set_LED_Brightness()` clips anything above 999 before writing TIM4. For a new calibration, I would record the compare value actually written, keeping calibration, display and actuation in the same numerical range. Converting that value into duty cycle also requires the timer period and output mode.
+
+沿着调用再往下看，还有一处很容易漏掉。表格末端会返回 1000，但 `Set_LED_Brightness()` 把大于 999 的输入截成 999，最后写入 TIM4。若重新采集这张表，我会记录实际写入的比较值，让标定、显示和执行用同一套数值范围。比较值怎样对应占空比，则要结合定时器的周期和输出模式一起换算。
+
+## Calibration Coverage / 标定点与补测
+
+The 16 points are unevenly spaced. Between PWM 0 and 100 there is a record every 10 counts, followed later by a jump from 300 straight to 800. Linear interpolation connects the two records with a straight line and can readily return intermediate values. Measurements inside that large interval would establish how closely the real curve follows the line.
+
+16 个点分布得很不均匀。前面 PWM 从 0 到 100，每隔 10 就有一个点；后面从 300 直接跳到 800。线性插值等于用一条直线连接这两个记录，函数照样能返回中间值，但这一大段的真实曲线到底弯不弯，得在中间选点测一下。
+
+At PWM 550, the line predicts an ADC value of `(850 + 551) / 2 = 700.5`. That is a prediction to check. With LED and sensor positions fixed, I would let the reading settle, collect several samples and compare their mean with 700.5. Additional points would be most useful where the discrepancy is large or the curve changes quickly; expanding the table from 16 to 32 entries merely to reach a round number would not guide the work.
+
+例如把 PWM 设成 550，按两端的直线计算，ADC 应为 `(850 + 551) / 2 = 700.5`。这里的 700.5 是预测值。固定 LED 和传感器的位置，等读数稳定后多读几次，再把平均值与预测值比较，就能检查这段直线是否合适。我会优先在偏差较大或曲线变化较快的位置补点，而不会仅仅为了凑整，把 16 个点扩成 32 个。
+
+The inverse mapping also has different sensitivities across the table. PWM 0 to 10 changes ADC by 70 codes, whereas PWM 300 to 800 changes it by 299. A one-code change in the target therefore corresponds to about `10 / 70 = 0.143` PWM compare counts in the first interval and `500 / 299 = 1.672` in the second. Equal target increments from the knob can produce quite different output steps. That ratio helps explain the adjustment sensitivity, although it cannot by itself identify the interval with the largest calibration error.
+
+不同区间的换算灵敏度也不同。从 PWM 0 到 10，ADC 变化了 70；从 PWM 300 到 800，ADC 只变化了 299。反过来算，目标 ADC 码每改变 1，前一段约需改变 `10 / 70 = 0.143` 个 PWM 比较计数，后一段约需 `500 / 299 = 1.672` 个。用同样的目标步长转动旋钮，各区间的输出步长会相差不少。这个比值能解释调节手感，却不能单独告诉我哪一段的标定误差最大。
+
+Before adding points, I would check how the samples are acquired. [ST's ADC application note AN2834](https://www.st.com/resource/en/application_note/an2834-how-to-get-the-best-adc-accuracy-in-stm32-microcontrollers-stmicroelectronics.pdf) relates source impedance to the time needed to charge the sampling capacitor. A high-impedance light-sensing circuit needs sufficient ADC sampling time, along with a stable reference voltage. Repeated readings help reveal variation. A persistent error caused by the sampling conditions can survive averaging, however many times I measure it.
+
+补点之前，我还会先检查采样本身。[ST 的 ADC 应用说明 AN2834](https://www.st.com/resource/en/application_note/an2834-how-to-get-the-best-adc-accuracy-in-stm32-microcontrollers-stmicroelectronics.pdf)讨论了信号源阻抗与采样电容的充电时间。光敏电路输出阻抗较高时，要给 ADC 留够采样时间，参考电压也要稳定。重复取样有助于观察波动；如果采样条件一直不对，把同一个偏差测很多遍，平均之后它仍然在。
+
+## Ambient Light and Feedback / 环境光与反馈修正
+
+In the [main loop](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c), `set_light_value` enters the lookup function while the measured `light_value` goes to the display. Holding the target at 1000 keeps the calculated command at 209. Suppose the room becomes brighter and the sensor reading falls to 900. The displayed value changes, but the LED command stays where it was. The conditions have changed while the calibrated mapping remains fixed.
+
+这套程序的[主循环](/uploads/projects/tianjin-metro/metro-environment-main-excerpt.c)把目标 `set_light_value` 交给查表函数，实测 `light_value` 则送去显示。目标保持 1000 时，查表就一直得到 209。假设此时房间变亮，传感器读数降到了 900，屏幕上的数字会变，LED 指令仍然保持原值。这就是固定标定关系遇到环境变化时的表现。
+
+For a feedback correction, I would first work out which direction the error should move the output. More light gives a smaller ADC code here, so a reading of 900 against a target of 1000 calls for dimming the LED. One possible extension would keep the table's initial command and add a positive coefficient times `measured ADC - target ADC`. A negative error would then reduce PWM. The actual sensor arrangement determines this sign; copying a familiar error formula without checking it could drive the adjustment further away from the target.
+
+要让输出跟着修正，我会从误差的方向开始推。这里光照越强，ADC 码越小；实测 900、目标 1000，灯应当调暗。沿用原表提供起始输出，可以设想增加一个比例修正项，让 `实测 ADC − 目标 ADC` 乘以正的系数后加到查表结果上。这样误差为负时，PWM 随之减小。这个符号必须根据实际接法确定，直接套一个惯用的误差公式，很容易越调越偏。
+
+That correction should run when a new sample arrives, with its coefficient chosen in relation to the sampling interval and the LED and sensor response. The final command also needs output limits. If ambient light is strong enough, even switching the LED off may leave the reading short of the requested target, so further reductions have no effect. The table can supply an initial setting and feedback can adjust it using the current reading. The range of light the hardware can actually produce sets the final limit on both.
+
+这个修正还要等新的采样结果到来再计算，并结合采样间隔和 LED、传感器的响应选择系数，最后把输出限制在允许范围内。环境光足够强时，即使 LED 已经关闭，读数也可能达不到目标，继续减小指令便没有作用。查表能帮我快速给出一个起始值，反馈负责根据当前读数调整；而灯能调多亮、能暗到什么程度，最终还是由这套实物决定。

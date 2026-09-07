@@ -950,3 +950,9 @@ The local site runs at `http://127.0.0.1:3000/work`, and the bilingual compariso
 - Deleted three superseded note backups, twelve separate language drafts, four finished previews and the completed DIY selection plan. Earlier copies remain in Git; dated review observations remain in experiment packets. Closed the four obsolete note-preview servers.
 - Reconciled the 14 root/top-level documentation files, active handoff, topic backlog and review packet pointers. The current writer includes the contextual ending-variety rule across nine files. Corrected the Smart Car homepage to seven IR tracking inputs in both languages; six collision switches and six test groups are unchanged.
 - Publication validation, canonical routes and cleanup hashes are recorded in `docs/releases/engineering-notes-2026-09-07/`; PR #37 tracks the merge and deployment. No new project topic or note drafting is started by this release.
+
+## 2026-09-07 — Resume Tianjin learning notes
+
+- The user paused the unapproved About wording and requested the next project. Preserved it on `docs/rewrite-about-copy` at `af3ace5`, then started `docs/rewrite-tianjin-notes` from synchronized main `007decf`.
+- Read the confirmed Tianjin homepage, all five sibling notes and the public lookup, main-loop and GPIO excerpts. Prepared two candidate studies on calibration/lookup control and I2C/OLED debugging using current Engineering Note Writer rules and official ST, NXP and TI references.
+- Completed Chinese drafting and Step 10 before English adaptation, then rechecked the final Chinese, bilingual meaning, calculations and page division. Drafts and local review page are in `docs/experiments/tianjin-notes-2026-09-07/`; the website content, all old notes and About source on main remain unchanged. User review is pending.
