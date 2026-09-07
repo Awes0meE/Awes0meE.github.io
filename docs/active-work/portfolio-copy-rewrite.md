@@ -2,7 +2,7 @@
 
 **Updated:** 2026-09-07
 
-All sixteen new bilingual study notes across the eight projects are approved. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
+All sixteen new bilingual study notes across the eight projects are approved. Publication is tracked by [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38); use its live merge/deployment state when resuming. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
 
 The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
