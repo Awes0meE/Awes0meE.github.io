@@ -49,7 +49,7 @@ I also want to look more closely at open-collector operation. When the output tr
 
 ![Course diagram of decoder pins and individual segment resistors / 课程中的译码器引脚与逐段限流说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
 
-## Current in Each Segment / 每一段的电流
+## Segment Current and Resistor Selection / 段电流与限流电阻
 
 The course slide calls for one series resistor per segment output. I want to understand why a single resistor at the display's common pin would not do the same job. With a shared resistor, two LED branches divide the current when displaying `1`, and seven do so when displaying `8`. Changing the number of lit segments changes the current available to each, making brightness depend on the displayed digit. Individual branch resistors let each segment's current be limited separately.
 
@@ -63,7 +63,7 @@ That gives me a useful way to examine the slide's 330 Ω value. Supply voltage, 
 
 这样看，课件里的 330 Ω 就有了可以继续追问的地方。电阻值要和供电、电流、LED 压降放在一起看；同样用 330 Ω，换一种 LED 后电流未必相同。显示 `8` 时七段都亮，还要把七路电流加起来，检查公共端、电源和译码器的负担。选电阻既要让每一段合适，也要看整位显示一起亮时怎样工作。
 
-## Matching the Decoder and Display / 译码器的配合
+## Decoder and Display Compatibility / 译码器与数码管的匹配
 
 The [CD4511B](https://www.ti.com/product/CD4511B) used in the course simulation makes the difference concrete. It supplies segment current for common-cathode LEDs. An active segment output goes high, sending current through the LED and its limiting resistor to the common cathode and ground. The two chips therefore require different common connections and active output levels for the same input digit. Both turn BCD into a seven-segment pattern, but the LED connections have to match the output structure.
 

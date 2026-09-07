@@ -13,7 +13,7 @@ In my Tianjin lighting exercise, an encoder set the target and the STM32 adjuste
 
 天津实习的光照小实验里，我用编码器设定目标，再让 STM32 调节 LED。程序中有个很具体的问题：目标填 1000，TIM4 的比较值应该填多少？我当时测了 16 组 PWM 与 ADC 数据，写进[查表函数](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。顺着这个问题算下去，209 从哪来、哪些区间值得补测，以及环境光变化后怎样修正输出，就能放在一起理解了。
 
-## Reading the Calibration Table / 标定表里的数
+## PWM and ADC Calibration Data / PWM 与 ADC 标定数据
 
 The table starts at `PWM = 0, ADC = 1600` and ends at `PWM = 1000, ADC = 480`. Increasing the LED output produces a lower ADC reading in this setup. A smaller target code therefore requests more light: changing the target from 1200 to 1000 asks for a brighter LED. The display calls it light, but the program works in ADC codes. Expressing the result in lux would require a relationship between the sensor reading and illuminance.
 
@@ -39,7 +39,7 @@ I also want to account for what went into those readings. Distance and orientati
 | 800 | 551 |
 | 900 | 515 |
 
-## Interpolating a Target / 目标与插值
+## Linear Interpolation and Output Limits / 线性插值与输出限幅
 
 ADC codes 1015 and 850 bracket the target of 1000; their PWM settings are 200 and 300. I can locate the target within that ADC interval, then apply the same fraction to the PWM interval. Subtracting both ADC differences in table order gives two negative numbers, so their ratio is positive.
 

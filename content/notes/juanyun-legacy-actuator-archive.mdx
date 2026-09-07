@@ -9,7 +9,7 @@ projectSlug: "juanyun-thermal-hardware"
 visibility: public
 ---
 
-## Four Inputs Enter, Four Driven Nodes Leave / 四路输入进来，四路驱动节点出去
+## ULN2003A Valve-Driver Circuit / ULN2003A 阀驱动电路
 
 The EEV board render is small enough to read almost at a glance. A pin header marked `H2` sits on one side, an SOP16 package marked `U2` in the centre, a five-position connector opposite, and four LED positions along the output edge. The paired schematic supplies U2's identity as ULN2003A; the render shows placement, not an assembled board.
 
@@ -27,7 +27,7 @@ What is not drawn matters too. The sheet does not identify a valve model, supply
 
 没画出来的部分同样重要：图里没有阀型号、供电数值、线圈电流、连接器额定值、特定负载下的钳位表现或实测波形。四个 LED 表达的是预期节点指示；板子是否带动过阀，只能由硬件记录回答。
 
-## PB12-PB15 Carry an Eight-Step Sequence / PB12-PB15 承担八拍序列
+## GPIO Mapping and Eight-Step Sequence / GPIO 映射与八拍驱动序列
 
 The public CubeMX configuration names an STM32F103C8T6 and labels PB12-PB15 as valve phases A-D. The linked [`solenoid-valve.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-valve.c) maps those four pins to an eight-entry mask sequence: A, A+B, B, B+C, C, C+D, D, D+A. `_apply_mask()` writes set and reset bits through GPIOB `BSRR`, matching a four-phase low-side drive model.
 
@@ -37,7 +37,7 @@ The filenames still say “solenoid”, while the code expresses stepped positio
 
 文件名仍写着 “solenoid”，代码里却出现步进位置、全开步数、归零、百分比换算与四相序列。这个命名错位很值得保留：实现读起来更像步进阀归档，而不是简单的通断电磁阀案例。
 
-## The Control Path Is Deliberately Blocking / 控制路径明确采用阻塞式调用
+## Blocking Valve Control / 阀的阻塞式控制
 
 The source defines `Valve_StepNBlocking()`, `Valve_HomeBlocking()`, `Valve_MoveToStepsBlocking()`, and `Valve_MoveToUnit500Blocking()`. In the linked [`main.c`](/uploads/projects/juanyun-public/actuator-fan/solenoid-main.c), startup calls `Valve_Init(70)`, sets 530 full-open steps, and invokes blocking home. Encoder input changes a 0-500 set value; the `ENC_BTN_EVT_SHORT` branch commands a blocking move, while `ENC_BTN_EVT_LONG` calls soft home. K1/K2 store or recall two setpoints. OLED refresh is rate-limited to 30 ms when the UI is dirty, followed by a 2 ms loop delay.
 
@@ -47,7 +47,7 @@ Those constants and calls are source facts, not calibration results. The archive
 
 这些常量与调用是源码事实，不是校准结果。归档没有配套阀规格、机械零点传感器、电流曲线、丢步统计、动作视频或时序抓取；尤其是一个叫 `HomeBlocking` 的函数，并不能证明机械零点可以重复找到。
 
-## The BLDC Branch Is Two Files Wide / BLDC 支线目前只有两类文件
+## BLDC Design Files / BLDC 设计文件
 
 The same public folder also contains a quiet-fan BOM and an EasyEDA project. Their presence records a neighboring BLDC board direction, but no accompanying public render, schematic excerpt, topology description, voltage target, noise measurement, or bring-up log is present.
 

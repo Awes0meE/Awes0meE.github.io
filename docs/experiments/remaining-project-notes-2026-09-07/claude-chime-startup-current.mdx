@@ -13,7 +13,7 @@ Connecting the Claude Chime power board to its protected battery pack dropped th
 
 Claude Chime 电源板接入带保护电池时，我在电池包输出端量到的电压从 4.03 V 降到了 1.49 至 1.57 V。同一块板却能用 3.8 V、限流 50 mA 的台式电源启动两路空载升压。这两个结果放在一起，最值得继续研究的是电源怎样进入工作状态，以及仪器量到的究竟是哪一段电路。
 
-## Cell and Pack Output / 电芯与输出端
+## Cell and Pack-Output Voltage Measurements / 电芯与电池包输出电压测量
 
 A protected pack contains a cell, protection circuitry and a series switching path. A meter across its output terminals measures the voltage available to the load. If the protection switch opens, the load, leakage and internal paths can leave a low output reading while the cell still holds charge. Before interpreting a reading near 1.5 V as a cell condition, I need to identify the measurement nodes.
 
@@ -27,7 +27,7 @@ An ideal capture for separating cell droop from an opened protection path would 
 
 要区分电芯自身下跌与保护路径断开，理想记录应当同时包含电芯端电压、包输出电压和接入电流。测电池不同参考点时，要使用合适的差分测量方式，避免示波器共地探头把保护路径意外短接。测量连接本身会改变电路，这一点在低侧保护结构里尤其需要留心。
 
-## Charging the Capacitors / 电容先充电
+## Capacitor Charging and Startup Current / 电容充电与启动电流
 
 At connection, capacitors need charge. [TI's inrush-current application note](https://www.ti.com/lit/an/slva670a/slva670a.pdf) expresses that current as `I = C × dV/dt`: for the same capacitance, a faster voltage rise demands more current. Added capacitance that helps with operating load transients also increases the charge needed at startup.
 
@@ -41,7 +41,7 @@ Output capacitors need examination along their own paths. The [TLV61048 datashee
 
 输出电容还要沿各自路径继续计算。[TLV61048 手册](https://www.ti.com/lit/ds/symlink/tlv61048.pdf)描述了内部软启动，但这颗芯片使用外部电感和整流二极管，接电时可以先沿电感与二极管向输出充电。芯片开始调节内部参考之前，已经可能有电流流过。因此，检查启动电流时，需要把直接输入充电、输出预充及进入升压调节后的过程分开。
 
-## The Current-Limited Supply / 限流电源的差别
+## Supply Current Limiting and Battery Protection / 电源限流与电池保护
 
 Successful startup at a 50 mA limit is useful, but the bench supply has a different response from the protected pack. In current limit, its voltage may rise more slowly. Output capacitance, control response and connection details also affect the initial current. A protected battery may instead interrupt discharge once its detection conditions are met. The same board can consequently follow different startup trajectories with the two sources.
 
@@ -55,7 +55,7 @@ At the time, disconnecting the board restored pack output; applying an external 
 
 当时断开主板后，包输出电压会恢复；给包输出端接过外部电源后，下一次启动也成功过。这让我更关心每次试验开始前的状态。电容有没有放完电、保护是否已经恢复、主板有没有持续连接，都会影响可重复性。继续试验时，应先固定这些条件，再比较结果。
 
-## Trigger and Recovery / 触发与恢复
+## Startup Waveform Measurements / 启动波形测量
 
 I would trigger on connection and capture pack output and current together. A current probe is preferable; a shunt requires accounting for its additional voltage drop and reading it differentially. A peak alone is insufficient. Its duration, the beginning of output collapse and whether current is then interrupted belong in the same capture.
 

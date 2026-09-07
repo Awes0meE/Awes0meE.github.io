@@ -98,6 +98,20 @@ reaction, and changed understanding instead of compressing them into a heading.
 Short does not mean vague: `Release 打包`, `角色管理`, and `触点抖动` are useful
 only when each one accurately bounds what follows.
 
+The user's 2026-09-07 heading correction makes this distinction concrete:
+
+| Section content | Rejected heading | Content-based heading |
+| --- | --- | --- |
+| Open-drain signaling, pull-up resistance, rise time and interface checks | `高电平从哪里来` / `Where the High Level Comes From` | `I²C 开漏输出与上拉电阻` / `I²C Open-Drain Outputs and Pull-Ups` |
+| START, address and read/write bit, followed by ACK or NACK | `一次传输怎样完成` / `Following a Transfer` | `I²C 传输流程` / `I²C Transfer Sequence` |
+| Special admin identity, case normalization and initial account creation | `一个名字的特殊含义` / `A Special Username` | `用户名规则与账户初始化` / `Username Rules and Account Initialization` |
+| Rechecking the actor, target and allowed action before a data change | `操作发生的那一刻` / `At Execution Time` | `执行前的权限检查` / `Permission Checks Before Execution` |
+| QSettings synchronization, errors and persistent account state | `重启之后` / `After Restart` | `QSettings 账户数据保存` / `Saving Account Data with QSettings` |
+
+Read the whole section before choosing the label. Keep already direct headings,
+including `软件与硬件 I²C` and `BUSY 与芯片勘误`. A heading summarizes the
+section's subject; it does not need to turn the section into a miniature essay.
+
 ## Let A Paragraph Carry Related Layers
 
 Fragmented:

@@ -13,7 +13,7 @@ The BaseUnit needed to remember one fan percentage. My implementation reserved t
 
 BaseUnit 要记住一个风扇百分比。我实现时用了两页 Flash，记录带序号、CRC32 和 commit 标记，用户停止调整四秒后才保存。只记一个数，为什么要做这么多安排？真正需要研究的是，电源在保存过程中的任意一步断掉，重新开机该相信哪一个数。
 
-## Waiting Before Writing / 暂时不写
+## Deferred Parameter Saving / 参数的延迟保存
 
 An encoder adjustment might pass through 41, 42 and 43 before settling at 44. The fan should respond promptly, but Flash does not need every intermediate setting. The existing four-second delay combines a series of adjustments into one save, reducing writes and avoiding Flash activity on every manual change.
 
@@ -23,7 +23,7 @@ There is a practical trade-off. The controller may already be using 44 when powe
 
 这里有一个实际取舍。44 已经用于运行，四秒还没过去就断电，重启后可能恢复之前保存的设定。要不要接受这个行为，应当由产品使用方式决定。普通风扇偏好可以延迟保存，需要立即确认的配置则可以设置明确的保存动作。RAM 中正在使用的值与已经持久保存的值，不一定时时相同。
 
-## A Complete Record / 一条完整记录
+## Record Format and Validation / 记录格式与校验
 
 [ST's AN2594](https://www.st.com/resource/en/application_note/an2594-eeprom-emulation-in-stm32f10x-microcontrollers-stmicroelectronics.pdf) discusses erasing, programming and recovery when internal Flash emulates EEPROM. Erase granularity is much larger than one percentage, and programming rules limit repeated changes at the same address. Appending new records within reserved space, then migrating when a page fills, works with those constraints.
 
@@ -37,7 +37,7 @@ For reasoning about interruptions, a simplified format can include version, leng
 
 为了推演中断情况，可以使用一个简化的记录格式，包含版本、长度、序号、参数、CRC 和提交标记。版本和长度用于后续格式演进，CRC 覆盖约定的头部与参数字节，提交标记另行处理。写入时先写记录内容和 CRC，读回核对，再最后编程提交标记。这里讨论的是便于检查的设计顺序，具体字段对齐还要服从芯片的编程粒度。
 
-## Moving Between Pages / 两页之间
+## Flash Page Transfer and Power-Loss Recovery / Flash 换页与掉电恢复
 
 A single full page eventually needs erasing, which removes the old setting with it. The second page provides somewhere to migrate. In the simplified recovery scheme I use for this analysis, the old page retains its valid record while a newer record is written to the prepared destination. Erasing the old page becomes permissible only after the new record is committed and readable.
 
@@ -65,7 +65,7 @@ Sequence numbers also run out. A fixed-width integer wraps, so choosing the nume
 
 序号也有自己的尽头。固定宽度整数会回绕，直接选择数值最大的记录迟早会选错。可以使用带明确跨度限制的回绕比较，或者设计独立的代际信息；采用哪种方式，都要让写入端与启动扫描使用同一规则。把最新定义成最高地址，同样会在换页时失效。
 
-## Checking Recovery / 继续验证
+## Power-Loss Tests and Flash Endurance / 掉电测试与 Flash 寿命
 
 I would exercise specific recovery paths by interrupting between header, parameter, CRC and commit writes, and during old-page erasure, then reading the restored value after restart. Cases with two valid pages, a bad CRC, an out-of-range parameter and a sequence near wraparound would further test the scanner. Resetting the program can first examine software flow; removing power also introduces supply decay and interrupted Flash operations, so that electrical behavior needs a separate observation.
 

@@ -27,7 +27,7 @@ The [AM2302 manual](https://www.aosong.com/uploadfiles/2025/04/20250417105409216
 
 [AM2302 手册](https://www.aosong.com/uploadfiles/2025/04/20250417105409216.pdf)把读取间隔与单次通信时序分开规定。前者涉及传感器数据更新，后者要求主机识别一串脉冲。应用愿意等两秒，不代表驱动就能在解码期间随意停下来处理别的事；反过来，把读取频率降得更低，也不会自动缩短单次忙等。
 
-## After a Missed Deadline / 到期以后
+## Task Delays and Event Handling / 任务延迟与事件处理
 
 The original scheduler uses unsigned differences from `HAL_GetTick()` to identify due work, updating a task's timestamp to the current time before dispatch. If its previous timestamp was 100 ms and the loop next checks at 104 ms, the branch runs once and starts timing again from 104 ms. The missing calls are not automatically replayed.
 
@@ -41,7 +41,7 @@ I would choose recovery behavior according to the work. A display can skip old f
 
 我会按任务含义选择处理方式。显示可以跳过旧帧，计数事件需要保存次数，通信则要结合超时决定重试还是报错。EEV 要遵守实际步进间隔，不能因为软件迟到就把几步挤在一起。一个布尔型到期标志只能记住有事待办，多次置位也仍然只有一个状态；需要累计的事件，应当另用计数或队列保存。
 
-## Splitting the Wait / 把等待拆开
+## Nonblocking State Machines / 非阻塞状态机
 
 I divided ACUnit homing into stages. During a mechanical wait, the firmware retains the stage and the next action time. A later visit returns immediately if that time has not arrived, or advances the operation when it has. Communication waits and retries can follow the same pattern. Other tasks can use the waiting interval, while each visit performs only the work needed at that point.
 
@@ -55,7 +55,7 @@ Deferring DHT reads while the EEV is busy moves slow sensing into a gap in valve
 
 原有的 EEV 忙碌判断把慢速 DHT 读取推迟到运动空隙，适合当时的协作方式。继续扩展时，我会同时记录环境数据的更新时间。如果阀长期忙碌，温湿度可能一直沿用旧值；此时显示最后读到的值，还应让使用它的控制逻辑知道数据已经多久没有更新。允许任务等待，也需要给这份等待一个可检查的结果。
 
-## Measuring the Loop / 测量主循环
+## Task Execution Time and Interval Measurements / 任务耗时与执行间隔测量
 
 To check the timing, I would bracket the slow task with a debug GPIO and mark valve-service activity on another signal. A logic analyzer could then show continuous occupancy and the intervals between service calls. Before interpreting those traces, I would distinguish a marker for entering the function from a marker for an actual output change, so an idle visit is not counted as a step.
 

@@ -13,7 +13,7 @@ During the Seamly2D internship in Nanjing, I collected dependencies with `windep
 
 在南京图灵做 Seamly2D 时，我用 `windeployqt` 收集过依赖，程序仍然提示缺少 `xerces-c_3_2.dll`。目录里已经有一大堆 DLL，再冒出来一个缺失文件，很容易让人怀疑刚才的打包是不是白做了。把程序从启动到打开纸样的过程拆开，才能理解这两件事为什么会同时发生。
 
-## After Compilation / 编译之后
+## Dynamic Linking and Runtime Dependencies / 动态链接与运行依赖
 
 Headers describe types and functions to the compiler. Import libraries then help the linker resolve external symbols. With dynamic linking, the implementations still have to be loaded from DLLs at runtime. A development PC already has Qt, a compiler and assorted libraries installed, so its environment may supply files that the application package lacks. Moving the program elsewhere exposes that hidden assistance.
 
@@ -55,7 +55,7 @@ For a corrected package, I would use a fresh deployment directory and add depend
 
 我会把修复后的程序放进一个新部署目录，只从这次构建对应的 Qt 安装和已知来源补齐依赖。随后在没有 Qt 和 Visual Studio 的环境里测试，避免开发工具的搜索路径继续掩盖问题。具体构建与安装步骤仍放在[原始打包记录](/notes/turing-release-packaging-cross-platform)，这一步更关心程序究竟借用了哪些外部文件。
 
-## Checking Another Machine / 换机检查
+## Deployment Testing on Another Computer / 换机部署测试
 
 After the internship, I ran the installer on a newly installed Windows desktop at home and used registration, login and role management successfully. To extend that check around dependencies, I would add opening an `.sm2d` pattern with its associated `.smis` measurements, saving it and reopening it. Those actions exercise XML parsing and file access after the initial window has appeared.
 

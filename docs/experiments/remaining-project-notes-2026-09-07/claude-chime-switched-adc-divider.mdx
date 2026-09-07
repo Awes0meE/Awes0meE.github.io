@@ -23,7 +23,7 @@ Ignoring switch resistance and ADC input current, the settled output is `VADC = 
 
 在稳定状态下，先忽略开关导通电阻和 ADC 输入电流，分压输出为 `VADC = VBAT × 22 / 37`，反算系数为 `37 / 22 ≈ 1.682`。电池电压取 4.2 V 时，ADC 节点的目标电压约为 2.497 V。但刚接通的瞬间，100 nF 电容需要充电，电压要经过一段时间才接近这个目标。
 
-## Settling Time / 等多久
+## RC Settling Time / RC 电路的建立时间
 
 To calculate the resistance seen by the capacitor, I set the ideal voltage source to zero in the circuit model. The 15 kΩ and 22 kΩ resistors are then in parallel, followed by 1 kΩ in series. The resulting Thevenin resistance is about 9.919 kΩ. With 100 nF, the time constant is approximately 0.992 ms. For a capacitor starting at 0 V, the first-order remaining-error fraction is `exp(-t/τ)`.
 
@@ -49,7 +49,7 @@ Setting an isolated RC settling target of 0.1% requires approximately `6.91τ`, 
 
 如果单独把 RC 建立误差目标设为 0.1%，则需要约 `6.91τ`，也就是 6.85 ms。实际等待还要考虑电阻电容容差、MOS 开通过程、ADC 采样负载和测量要求。交接时给出的 5 到 10 ms 因而可以继续用示波器与实际 ADC 读数核对，再选择合适的时长。
 
-## Current Consumption / 省下的电流
+## Sampling-Circuit Current Consumption / 采样电路的电流消耗
 
 At 4.2 V, the 37 kΩ divider draws about 113.5 μA, or 2.72 mAh over a full day if continuously connected. Switching it on for an illustrative 10 ms each second reduces the average current in the divider resistors alone to about 1.14 μA.
 

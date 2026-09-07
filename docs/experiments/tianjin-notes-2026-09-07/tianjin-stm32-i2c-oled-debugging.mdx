@@ -13,7 +13,7 @@ I ran into a blank OLED while working with an STM32, even though the firmware co
 
 我在折腾 STM32 的时候，遇到过程序编译、烧录都正常，OLED 却不显示的情况。后来换了一组普通 GPIO，用软件模拟 I²C，显示恢复了。这个结果让我想继续弄清楚，两种实现最终都通过 SDA 和 SCL 通信，它们究竟在哪些地方不同？要把这个问题看明白，我会先从引脚上的电压开始。
 
-## Where the High Level Comes From / 高电平从哪里来
+## I²C Open-Drain Outputs and Pull-Ups / I²C 开漏输出与上拉电阻
 
 I²C normally uses open-drain outputs. A conducting output transistor pulls the line low; switching it off releases the line, allowing a pull-up resistor to bring it high. Both controller and peripheral can pull SDA low, and releasing it gives the receiver room to acknowledge. The [NXP I²C specification](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) explains the electrical relationship through this shared connection. In software I²C, I would treat a high output as a request to release the pin, then read the input to check that the line has actually risen.
 
@@ -31,7 +31,7 @@ A smaller resistance speeds up the rise while increasing current when the line i
 
 减小电阻可以加快上升，但拉低时的电流也会增大。这个电流要按上拉电压、低电平电压和电阻计算，再对照器件允许的灌电流。如果两块模块各带一组上拉，接在一起后电阻还会并联。接线前看模块电路、接线后测实际电平，比在程序里反复改延时更容易判断问题出在哪里。
 
-## Following a Transfer / 一次传输怎样完成
+## I²C Transfer Sequence / I²C 传输流程
 
 The first landmarks I would look for in a trace are START, the address and its acknowledgment. [TI's bus guide](https://www.ti.com/lit/an/slva704/slva704.pdf) illustrates the sequence. SDA falling while SCL is high generates START; the controller then sends the address and direction bit. An acknowledgment clock follows every byte. During ordinary data bits, SDA must remain stable throughout SCL's high period.
 

@@ -13,7 +13,7 @@ Every FOC iteration uses `Ia` and `Ib`. In the algorithm they look like two valu
 
 FOC 里每轮都要用到 `Ia` 和 `Ib`。刚看算法时，很容易把它们当成随时可取的两个数；顺着自己这块板的原理图和 ADC 配置往下读，才会发现读数还有时间条件。PWM 正在切换，电流经过哪条路径、放大器是否稳定、ADC 先读哪一路，都会影响这两个数。
 
-## Where the Shunts Sit / 采样电阻的位置
+## Shunt Placement and Sampling Conditions / 采样电阻的位置与采样条件
 
 The power-stage schematic places a 20 mΩ resistor below each of the three low-side bridge legs. Two connect through `SN1/SP1` and `SN2/SP2` to the DRV8301's current amplifiers. A separate 4 mΩ resistor sits after the three return paths join and feeds an independent bus-current amplifier. For `Ia/Ib` timing, it is the first two phase-current paths that matter.
 
@@ -37,7 +37,7 @@ I find that calculation a useful check on intuition. The capacitor suppresses fa
 
 这个计算很适合检查直觉。电容可以抑制快速扰动，同时也会让读数跟随变化得慢一些。把 ADC 移到开关边沿以后，并不等于立刻读到稳定信号；只等一个 RC 时间常数，理想阶跃还剩约 37% 没建立完。真正需要等待多久，应当结合允许误差、放大器响应和 ADC 采样负载来确定。
 
-## Four Channels per Trigger / 一次触发的四个通道
+## ADC Triggering and Conversion Sequence / ADC 触发与转换顺序
 
 In the project's [firmware snapshot](https://github.com/Awes0meE/STM32_Sensorless_FOC/blob/d539c4a4f2f8c66ed6dfe3ce02c2dbd31a681847/user/board_config.c), TIM1 runs center-aligned PWM. Channel 4's compare value is set to the period minus one, and `TIM1_CC4` triggers injected conversion. The sequence converts bus voltage, A-phase current, B-phase current and total current, with 15 sampling cycles configured for each channel.
 
@@ -55,7 +55,7 @@ Even with the channel 4 event near the intended window, the later B-phase acquis
 
 所以，即使通道 4 的比较事件安排在预期窗口附近，也要检查排在后面的 B 相是否仍在有效窗口内。占空比变化以后，低侧稳定导通区间会跟着改变；固定触发位置是否合适，需要覆盖实际使用的调制范围。
 
-## Reconstructing the Third Phase / 第三相的重建
+## Third-Phase Current Reconstruction / 第三相电流重建
 
 The firmware reconstructs the third phase using `Ic = -Ia - Ib`. The zero-sum relationship in a three-wire system applies at one instant, while these two ADC samples are taken in sequence. Adding `Ia` and `Ib` from different times introduces an error when current changes appreciably between them. Larger acquisition separation and steeper current slopes make that effect more significant.
 
@@ -65,7 +65,7 @@ There is a useful trap here. After computing `Ic` this way, checking whether `Ia
 
 一个细节是，用这个公式算出 `Ic` 以后，再检查 `Ia + Ib + Ic` 是否接近零，几乎必然能得到好看的结果。第三个数本来就是由前两个数构造出来的，这个和不能独立检验采样是否正确。需要对照原始 ADC、偏置、各通道采样时刻，必要时再使用独立的电流测量。
 
-## Comparing Waveforms / 对照波形
+## Sampling Waveforms and Error Diagnosis / 采样波形与误差判断
 
 I would record PWM, amplifier output and a GPIO marking conversion completion together, starting at a stable, lightly loaded operating point before exploring different duties. An interrupt marker occurs after acquisition. Locating the earlier sample requires accounting for the sequence timing; the GPIO edge cannot simply be treated as the ADC sampling edge.
 

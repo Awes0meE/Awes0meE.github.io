@@ -96,7 +96,9 @@ Prefer substantial paragraphs when several related actions, facts, explanations,
 
 Treat titles as navigation labels, not miniature prose. Keep the page title short, accurate, and precise, naming the engineering subject plus only the scope needed to identify the note. Prefer `Seamly2D 三周开发记录` over an abstract thesis, metaphor, quotation-led hook, or colon-separated explanatory title.
 
-Add a section heading only when the reader benefits from a new work or study block. Prefer short subject, component, stage, or activity labels such as `环境配置`, `开发尝试`, `角色管理`, or `Release 打包`. The body carries the friction, judgment, and cognition change. A short note may need no headings. Use no more than 15 headings; the ceiling is never a target.
+After the section is written, read all of its paragraphs and name the concrete subject and aspect they actually cover. The heading should let a reader scanning the contents identify that section. Use direct labels such as `I²C 开漏输出与上拉电阻`, `I²C 传输流程`, `用户名规则与账户初始化`, or `执行前的权限检查`. Retain clear labels such as `软件与硬件 I²C` and `BUSY 与芯片勘误`. Do not derive a heading from only the first sentence or turn it into a question, abstract hook, suspense phrase, or narrative fragment such as `高电平从哪里来`, `一个名字的特殊含义`, `操作发生的那一刻`, or `重启之后`. Apply the same content-based naming to English. A brief overview does not require listing every detail or adding a new conclusion.
+
+Add a section heading only when the reader benefits from a new work or study block. Short subject, component, stage, or activity labels such as `环境配置`, `开发尝试`, `角色管理`, or `Release 打包` remain suitable when they accurately cover the following paragraphs. The body carries the friction, judgment, and cognition change. A short note may need no headings. Use no more than 15 headings; the ceiling is never a target.
 
 ### 9. Run One Voice-Preserving Editorial Pass
 
@@ -127,6 +129,8 @@ After deleting audit commentary, check whether the page now stops abruptly at a 
 Follow `references/self-review.md` for the final release decision. For first-person learning-note prose, both applicable Truth and Li Zhiyi gates must pass before release, and Truth alone is insufficient. If the Li Zhiyi gate fails, return to the cognition trail and rebuild from it rather than making cosmetic voice edits.
 
 Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 5. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
+
+Recheck every section heading against the entire section under Step 8. A concise heading still fails if it hides the subject behind a question, abstract phrase or isolated moment. For a heading-only revision, preserve paragraphs, code, figures, page titles and metadata; do not rewrite accepted content to justify a new label.
 
 Recheck ending variety under Step 11 and Reader-Prose L1-3 across the current batch and relevant recent pages. Similar wording can hide the same repeated closing move. Do not turn this repetition check into a zero-occurrence ban on retrospective or future-looking sentences.
 

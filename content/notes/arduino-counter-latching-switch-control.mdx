@@ -39,7 +39,7 @@ The [course test sketch](/uploads/projects/arduino-digital-clock-counter/digital
 
 我再读[课程测试代码](/uploads/projects/arduino-digital-clock-counter/digital-read-key.ino)，它把输入设为 `INPUT`，然后不断打印读数。[Arduino 的 `pinMode()` 说明](https://github.com/arduino/reference-en/blob/master/Language/Functions/Digital%20IO/pinMode.adoc)区分了 `INPUT` 和 `INPUT_PULLUP`，后者才会启用内部上拉。所以照着这段程序接线时，课件中的外部上拉或下拉也要接上。仅把引脚设为输入，并不会自动替电路补好默认电平。
 
-## Stable States and Single Actions / 稳定状态与一次动作
+## Switch Debouncing and State-Change Detection / 按键消抖与状态变化检测
 
 Debouncing comes next. Mechanical contacts can briefly make and break several times during a transition, producing multiple changes from one operation. [Arduino's Debounce example](https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/Debounce/Debounce.ino) restarts a timer whenever the raw reading changes and accepts a new button state only after the reading has remained steady for an interval. That gives me two distinct values to follow. The raw input can change first; the state accepted by the program changes later.
 
@@ -57,7 +57,7 @@ For this counter, I would define the two controls explicitly. Pause follows the 
 
 对这份计数器，我会先给两个功能写下明确约定。暂停跟随消抖后的开关状态，锁在暂停位置就持续停止加数，切回来再继续。复位则选择一个确定的状态变化，例如进入有效位置时清零一次，保持在这个位置不再反复清零。启动程序时，也要先读取并确认初始状态，避免把开机时已经按下的开关误当成刚发生的一次操作。不同交互要求可以采用不同约定，但代码和实际使用方式要一致。
 
-## Timing and Response / 计时与响应
+## Loop Timing and Button Response / 主循环计时与按键响应
 
 The counter's `delay(1000)` introduces another timing question. While the main loop waits for a second, the button polling that follows has to wait too. A brief press and return can fit entirely between two reads. A latching switch that remains in its new position will usually still be read on the next pass, although the response comes later. [Arduino's `delay()` documentation](https://github.com/arduino/reference-en/blob/master/Language/Functions/Time/delay.adoc) also distinguishes suspension of the main program from mechanisms such as interrupts that can continue. What matters for these buttons is how often the loop returns to read them.
 

@@ -98,7 +98,7 @@ I also want to know how this behaves when the wheel turns slowly. Counting pulse
 
 我还想知道，这种算法在轮子转得很慢时会怎样。固定时间内数脉冲是另一种常见做法，但每圈只有 12 个脉冲，若计数窗口取 100 ms，多一个或少一个脉冲，就会相差 50 rpm；窗口延长到 500 ms，每个计数对应 10 rpm，代价是等得更久。测相邻脉冲间隔能绕开短窗口里计数太少的问题，不过转得越慢，两次更新之间也越久。轮子停住后没有新边沿，程序还需要根据等待时间把旧速度清零。第一次边沿也应先建立计时基准，再由后续边沿计算速度。
 
-## Feeding Speed Back / 把轮速送回控制
+## Wheel-Speed Feedback Control / 轮速反馈控制
 
 Returning to the course library, I can now read the two motor interfaces more clearly. `motor_set_PWM()` sets the drive directly. In the branch of `motor_step()` that requests speed without a travel count, the library compares the target with the calculated wheel speed and adjusts PWM up or down by one count per update. This is where pulse timing enters the control action. It gives a concrete example of feedback adjustment and a reason to check parameter units before choosing values for a function call.
 

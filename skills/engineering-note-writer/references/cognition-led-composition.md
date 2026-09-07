@@ -69,8 +69,11 @@ For example, use `Seamly2D 三周开发记录` when that identifies the note. Do
 expand it into a sentence that also explains how the writer's definition of
 success changed. That change belongs in the body.
 
-For section headings, use a short noun phrase or exact technical label for the
-current work or study block. Suitable forms include:
+Write the section before naming it. Read all the following paragraphs and use
+a short noun phrase or exact technical label that summarizes their subject
+and relevant aspect. A reader should be able to identify the content from the
+heading alone. Do not lift a fragment from the opening sentence or use a
+question to postpone naming the subject. Suitable forms include:
 
 - `环境配置`
 - `开发尝试`
@@ -78,9 +81,16 @@ current work or study block. Suitable forms include:
 - `Release 打包`
 - `macOS 部署`
 - `触点抖动`
+- `I²C 开漏输出与上拉电阻`
+- `I²C 传输流程`
+- `用户名规则与账户初始化`
+- `执行前的权限检查`
 
 Do not turn a heading into a compressed anecdote, punchline, abstract judgment,
-or miniature conclusion. `回车键连着取消，权限还没来得及复杂` belongs in
+question, temporal fragment or miniature conclusion. `高电平从哪里来`,
+`一个名字的特殊含义`, `操作发生的那一刻` and `重启之后` conceal the
+section's actual subject. Replace them from the full section's content, not
+with another vague synonym. `回车键连着取消，权限还没来得及复杂` belongs in
 the paragraph; `开发尝试` is enough for the heading when that is the actual
 block.
 

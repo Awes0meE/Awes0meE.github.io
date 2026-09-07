@@ -71,7 +71,7 @@ documents and unrelated narrow edits keep the reference's scoped exceptions.
 - Does every section add information or change the reader's understanding?
 - Did a detour return to the active engineering problem?
 - Is the page title a short, accurate, precise learning-note index rather than a hook, metaphor, thesis sentence, or subtitle pair?
-- Are section headings concise labels for the following work or study block, with the body carrying the anecdote and cognition change?
+- Was each section written first and its heading then derived from all the following paragraphs? Does the heading directly identify the subject and relevant aspect, without a question hook, abstract label or isolated moment? Keep the anecdote and cognition change in the body. For a heading-only request, confirm that non-heading content is unchanged.
 - Does the ending bring the experience or investigation to a natural close? After cuts, does it stop abruptly at data or a file list that still needs a connecting thought? Keep a useful closing paragraph without forcing a grand lesson or a full recap.
 
 Delete repeated lessons and shorten headings without deleting the exact subject or scope needed to identify the material.

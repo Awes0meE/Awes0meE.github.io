@@ -27,7 +27,7 @@ The open-loop command angle needs its own interpretation. It defines the rotatin
 
 开环指令角也需要单独看待。它规定逆变器施加的旋转参考，转子要产生负载转矩时，实际磁链方向可能与这个参考存在夹角。因此，记录估计角减去开环指令角，可以检查两套参考是否连续，却不能直接把差值命名为真实转子角误差。若要测量后者，还需要可靠的位置参考和电角零点对应关系。
 
-## Current Components / 电流分量
+## Angle Error and dq Currents / 角度偏差与 dq 电流
 
 I use the common Park convention `id = iα cosθ + iβ sinθ`, `iq = -iα sinθ + iβ cosθ` to examine the effect. Define `δ = θest - θtrue` and take `id = 0`, `iq = I` in the true frame. Substitution gives `id_est = I sinδ` and `iq_est = I cosδ`.
 
@@ -41,7 +41,7 @@ For an example with `I = 1 A` and `δ = 30°`, the controller obtains approximat
 
 [Imperix 对位置估计误差的分析](https://imperix.com/doc/implementation/sensorless-motor-control)也从坐标旋转讨论了这种耦合。我更容易理解的地方是，角度错误会改变电流反馈的含义。因此，不能只给速度估计设一个很窄的允许误差，就期待电流环自然平稳接管。
 
-## The Transition / 切换瞬间
+## Angle Transition and PI State / 角度过渡与 PI 状态衔接
 
 Circular quantities need careful subtraction. Angles of 359° and 1° are only 2° apart, although direct subtraction can yield -358°. The difference used for transition should first be wrapped to a shortest-angle interval, for example with `atan2(sinδ, cosδ)`. Only then is it useful to decide how gradually to remove the offset.
 
@@ -55,7 +55,7 @@ The PI states deserve equal attention. During direct open-loop voltage control, 
 
 PI 的内部状态也不能遗漏。开环阶段直接给定电压时，电流 PI 积分器可能没有跟踪当前输出。切换后，即便角度连续，突然启用的 PI 仍可能给出不同的电压。由此我会把角度、d/q 目标、积分状态、限幅状态和最终电压指令放在同一段时间记录里。连续接管涉及的是整条控制计算。
 
-## Around the Handoff / 先看接管前后
+## Handoff Traces and Fault Diagnosis / 接管数据记录与故障判断
 
 I have already used RAM traces to inspect internal states. For this investigation, I would retain a short interval before and after the transition event, with common timestamps for open-loop angle, estimated angle, actual control angle, frequency, `Id/Iq`, current targets, `Vd/Vq` and saturation flags. The sample interval and angle units belong in the record too. Otherwise degrees, radians or mismatched update times can masquerade as control errors.
 

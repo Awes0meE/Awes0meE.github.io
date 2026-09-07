@@ -13,7 +13,7 @@ One Seamly2D account rule made role management more interesting than a login win
 
 Seamly2D 的本地账户功能做到角色管理时，我需要处理一条很具体的规则：管理员可以把普通用户升级成管理员，但已有管理员的降级只能由 `admin` 执行。同样一个目标账户，角色一变，原先允许的操作就可能不再允许。只给当前用户贴一个管理员标签，显然解释不完这件事。
 
-## Actor and Target / 操作者与目标
+## Account Operation Permissions / 账户操作权限
 
 I laid out the rules by actor, target account and requested action. Here, `admin` names the initial special account; an ordinary administrator is another account subsequently assigned the Admin role.
 
@@ -39,7 +39,7 @@ Reading across the table brings out conditions beyond role: whether the actor is
 
 这张表让我更容易发现，角色只是判断条件之一。还要知道是不是本人、目标是否存在、操作以后剩下什么状态。[OWASP 的授权说明](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)也把权限判断放在主体、资源与操作的关系中讨论。登录解决身份识别，执行一项具体操作还要再判断权限。
 
-## A Special Username / 一个名字的特殊含义
+## Username Rules and Account Initialization / 用户名规则与账户初始化
 
 In the project's [public role-query excerpt](/uploads/projects/nanjing-turing/auth-role-snippet.cpp), `roleOf()` first compares the username with `admin`, ignoring case, and returns Admin on a match. For other accounts it reads the stored role from QSettings. That function answers a role query, but the operation table contains additional rules. Two accounts with the same Admin enum value can have different demotion permissions.
 
@@ -53,7 +53,7 @@ The special account also raises a startup-state question. The project required t
 
 这个特殊账户还让我想到初始状态。空账户库中的第一位用户按项目要求应当建立为 `admin`；账户已经存在以后，注册就应走普通流程。初始化、注册和管理操作需要使用同一套账户识别规则，不能各自解释一次用户名。
 
-## At Execution Time / 操作发生的那一刻
+## Permission Checks Before Execution / 执行前的权限检查
 
 Hiding management controls from a normal user makes the interface clearer. I would still enforce permissions inside the operation that changes the account. Menus, shortcuts and other windows may become new callers later, and a check attached only to button visibility is easy to miss when adding an entry point.
 
@@ -67,7 +67,7 @@ Deletion and demotion also deserve a check on the resulting account set. If the 
 
 对于管理员的删除和降级，我还会单独检查操作后的状态。如果产品要求始终保留管理能力，那么删除最后一个可用管理员就应该被拒绝。这个条件关心的是整组账户的结果，仅检查目标的当前角色会漏掉它。以当前特殊 `admin` 的规则为基础，研究这一点也有助于以后把特殊用户名改成明确的权限属性。
 
-## After Restart / 重启之后
+## Saving Account Data with QSettings / QSettings 账户数据保存
 
 QSettings makes persistence convenient, but the save result still matters. [Qt documents deferred writes, `sync()` and `status()`](https://doc.qt.io/qt-6.5/qsettings.html), including access and format errors. A role that changes on screen and reverts after restart is a failed operation from the user's perspective. The interface should therefore consider persistence before reporting success.
 

@@ -4,14 +4,14 @@
   "branch": "docs/rewrite-tianjin-notes",
   "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
   "draftSha256": {
-    "claude-chime-startup-current.mdx": "694cf5f5d22457e3f76e7a8da79231d83ce95a296d9fd549913db64b0a31f923",
-    "claude-chime-switched-adc-divider.mdx": "8d666a8bd1779c0f40bc4b779cada89fb3e3eef40191bcde7e9547346bac4dbd",
-    "foc-angle-handoff.mdx": "49b1f68fbef303b308116e92a47f578b1c2d1962f0188ffe5f91e043e76d7ac4",
-    "foc-current-sampling-timing.mdx": "878f41b7d300342af0906521f2bd40b64849c78bd6022216be8fbd06ddeaf39e",
-    "juanyun-cooperative-task-timing.mdx": "b7ba6126910cbb93c42185ceac527758051a4698654c1d0579fd3390049a16d8",
-    "juanyun-flash-parameter-recovery.mdx": "cc9cd143a0e568075e7c8f108e326a16805dbfade9c1fee3a4cfd33e479ebb36",
-    "turing-local-role-permissions.mdx": "627fb0b14825412dc71bd71e429a7b6ef35b2e9efd36f888a4f20418ce3b27c6",
-    "turing-windows-runtime-dependencies.mdx": "d622fba7fedcd2c7856aa3ebdb2c82208b079ddcb2ad133bccf73ad68abf3348"
+    "claude-chime-startup-current.mdx": "0bab6aefdfe7c13dbe4c9efeff0404013c732e3e19e2f016eee5c55b2c46dd83",
+    "claude-chime-switched-adc-divider.mdx": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
+    "foc-angle-handoff.mdx": "ac058e8c9015f91c1db48b780c911e9a41074bdd578ad6323deb9cf98384fabb",
+    "foc-current-sampling-timing.mdx": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
+    "juanyun-cooperative-task-timing.mdx": "a76dcc77e907fa396a34b306ccebe2982455721abdff207d720c4ccbea757808",
+    "juanyun-flash-parameter-recovery.mdx": "e7b257fe2738b3a54913ea62f37989e22c75da86ea20082d47bccd82139c05f7",
+    "turing-local-role-permissions.mdx": "a8f29256be6520b05c9655278a167f000d278e79cf33196c874f594cec60ab2b",
+    "turing-windows-runtime-dependencies.mdx": "4255da952baad91aea42a7e3ce7144d68fb0a4d55f80006d3077d3ba2730c4ea"
   },
   "step10": "See chinese-step10.json for the Chinese-only checkpoint before English adaptation.",
   "step12Chinese": {
@@ -508,5 +508,10 @@
       ]
     },
     "gitDiffCheck": "pass"
+  },
+  "headingRevision": {
+    "date": "2026-09-07",
+    "review": "../note-heading-review-2026-09-07/review.json",
+    "change": "Concrete section headings derived from the complete section; paragraphs and metadata unchanged. Earlier browser records describe their original checkpoints."
   }
 }
