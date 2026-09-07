@@ -39,6 +39,8 @@ Use natural quotation marks for the target language and preserve the punctuation
 
 ## L1-3 Scan Canned Structure
 
+For each Chinese learning note, count prose paragraphs whose first visible character is `我`, including `我会`, `我想`, `我在` and other continuations. Count the introduction and every prose paragraph beneath every heading; at most one is allowed by the user's 2026-09-07 instruction. Zero passes. Strip leading whitespace and Markdown emphasis when checking. Exclude metadata, headings, tables, lists, code, captions and verbatim source documents. Do not apply the numerical limit to English or to first-person phrases occurring later in a paragraph. Recompose repeated openings around their concrete content, then check that filler has not simply been prefixed and that ownership, uncertainty and proposed versus completed work are unchanged.
+
 Read the endings of the current batch and relevant recent project/note pages
 together. Repeated retrospective or hypothetical-next-time closures are a
 template problem even when the openings vary: `现在再看`, `回头看`, `下一次再看到`,

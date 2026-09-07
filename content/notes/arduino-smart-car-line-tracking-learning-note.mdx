@@ -94,9 +94,9 @@ So the 5 comes from `60 ÷ 12`. A 20 ms interval between rising edges gives 250 
 
 原来 `5` 就是 `60 ÷ 12`。例如相邻上升沿相隔 20 ms，按这个模型算出的轮速是 250 rpm。这也解释了为什么不能随手改中断触发方式。若改成双边沿计数，却仍用原来的系数，换算出的速度就会多一倍。硬件上一圈有多少组标记，到了代码里，最后藏在这么一个小常数中。
 
-I also want to know how this behaves when the wheel turns slowly. Counting pulses over a fixed window is another option, but twelve pulses per revolution is fairly coarse. In a 100 ms window, one count represents 50 rpm; extending the window to 500 ms brings that increment down to 10 rpm, at the cost of a longer wait. Measuring the interval avoids having too few counts in a short window, though updates arrive farther apart as the wheel slows. Once it stops, no new edge arrives, so the program needs elapsed time to clear an old speed value. The first edge should also establish the time reference, leaving subsequent edges to produce a speed estimate.
+How does this approach behave when the wheel turns slowly? Counting pulses over a fixed window is another option, but twelve pulses per revolution is fairly coarse. In a 100 ms window, one count represents 50 rpm; extending the window to 500 ms brings that increment down to 10 rpm, at the cost of a longer wait. Measuring the interval avoids having too few counts in a short window, though updates arrive farther apart as the wheel slows. Once it stops, no new edge arrives, so the program needs elapsed time to clear an old speed value. The first edge should also establish the time reference, leaving subsequent edges to produce a speed estimate.
 
-我还想知道，这种算法在轮子转得很慢时会怎样。固定时间内数脉冲是另一种常见做法，但每圈只有 12 个脉冲，若计数窗口取 100 ms，多一个或少一个脉冲，就会相差 50 rpm；窗口延长到 500 ms，每个计数对应 10 rpm，代价是等得更久。测相邻脉冲间隔能绕开短窗口里计数太少的问题，不过转得越慢，两次更新之间也越久。轮子停住后没有新边沿，程序还需要根据等待时间把旧速度清零。第一次边沿也应先建立计时基准，再由后续边沿计算速度。
+轮子转得很慢时，这种算法会怎样？固定时间内数脉冲是另一种常见做法，但每圈只有 12 个脉冲，若计数窗口取 100 ms，多一个或少一个脉冲，就会相差 50 rpm；窗口延长到 500 ms，每个计数对应 10 rpm，代价是等得更久。测相邻脉冲间隔能绕开短窗口里计数太少的问题，不过转得越慢，两次更新之间也越久。轮子停住后没有新边沿，程序还需要根据等待时间把旧速度清零。第一次边沿也应先建立计时基准，再由后续边沿计算速度。
 
 ## Wheel-Speed Feedback Control / 轮速反馈控制
 

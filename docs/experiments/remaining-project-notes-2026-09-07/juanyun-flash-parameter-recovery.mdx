@@ -67,9 +67,9 @@ Sequence numbers also run out. A fixed-width integer wraps, so choosing the nume
 
 ## Power-Loss Tests and Flash Endurance / 掉电测试与 Flash 寿命
 
-I would exercise specific recovery paths by interrupting between header, parameter, CRC and commit writes, and during old-page erasure, then reading the restored value after restart. Cases with two valid pages, a bad CRC, an out-of-range parameter and a sequence near wraparound would further test the scanner. Resetting the program can first examine software flow; removing power also introduces supply decay and interrupted Flash operations, so that electrical behavior needs a separate observation.
+To test specific recovery paths, execution could be interrupted between header, parameter, CRC and commit writes, and during old-page erasure, followed by a check of the restored value after restart. Cases with two valid pages, a bad CRC, an out-of-range parameter and a sequence near wraparound would further test the scanner. Resetting the program can first examine software flow; removing power also introduces supply decay and interrupted Flash operations, so that electrical behavior needs a separate observation.
 
-我想验证的是具体恢复路径，因此会把中断点放在写头部、写参数、写 CRC、写提交标记和擦除旧页之间，并在重启后读取实际恢复值。单独测试两页同时有效、CRC 错误、参数越界及序号接近回绕，也能检查启动扫描的判断。程序复位适合先检查软件流程，真实掉电则还涉及供电下降和 Flash 操作被打断时的电气行为，需要分别观察。
+验证具体恢复路径时，可以把中断点放在写头部、写参数、写 CRC、写提交标记和擦除旧页之间，并在重启后读取实际恢复值。单独测试两页同时有效、CRC 错误、参数越界及序号接近回绕，也能检查启动扫描的判断。程序复位适合先检查软件流程，真实掉电则还涉及供电下降和 Flash 操作被打断时的电气行为，需要分别观察。
 
 Waiting four seconds only delays the start of saving. It does not shorten the erase itself. A save task in a cooperative loop still needs scheduling alongside valve motion and communication. For lifetime estimates, the number of records appended before each erase and the number of actual saves per day are also more useful than assuming an erase on every adjustment.
 

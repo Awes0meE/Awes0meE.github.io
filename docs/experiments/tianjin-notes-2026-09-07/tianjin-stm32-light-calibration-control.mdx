@@ -19,9 +19,9 @@ The table starts at `PWM = 0, ADC = 1600` and ends at `PWM = 1000, ADC = 480`. I
 
 这张表从 `PWM = 0, ADC = 1600` 开始，到 `PWM = 1000, ADC = 480` 结束。LED 输出增大时，ADC 读数反而减小。对这套接法来说，较小的 ADC 码对应较强的光照，因此目标从 1200 调到 1000，要求的是把灯调亮。屏幕上虽然写着光照，程序真正处理的是 ADC 采样码；要换成 lux，还需要传感器与照度之间的换算关系。
 
-I also want to account for what went into those readings. Distance and orientation between the LED and sensor matter, as does the light already in the room. Holding those conditions steady during calibration makes it easier to relate a PWM change to the resulting ADC change. These selected adjacent records are enough for the calculations below.
+Those readings also depend on the measurement conditions. Distance and orientation between the LED and sensor matter, as does the light already in the room. Holding those conditions steady during calibration makes it easier to relate a PWM change to the resulting ADC change. These selected adjacent records are enough for the calculations below.
 
-我更关心这张表包含了哪些影响。LED 离传感器多远、朝向怎样、房间原本有多亮，都会参与最后的读数。标定时保持这些条件不变，才方便把 PWM 的变化和 ADC 的变化对应起来。这里挑出几组相邻记录，后面的计算就用它们。
+标定表里的读数还会受到测量环境的影响。LED 离传感器多远、朝向怎样、房间原本有多亮，都会参与最后的读数。标定时保持这些条件不变，才方便把 PWM 的变化和 ADC 的变化对应起来。这里挑出几组相邻记录，后面的计算就用它们。
 
 | PWM setting | ADC code |
 | --- | --- |

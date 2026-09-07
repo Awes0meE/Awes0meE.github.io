@@ -20,9 +20,15 @@ The approved spoken palette licenses its frames only within their native selecti
 
 ## Keep The Person In The Route
 
-First person is not a quota for `我`. The person becomes visible through selection and judgment: what detail they noticed, why it left a real question, which misunderstanding sent them to research later, and how one subsystem altered their reading of another.
+First-person perspective does not require repeated `我` openings. The person becomes visible through selection and judgment: what detail they noticed, why it left a real question, which misunderstanding sent them to research later, and how one subsystem altered their reading of another.
 
 Keep those choices close to the technical facts. A sentence can feel personal without a pronoun when its attention, uncertainty, or changed interpretation clearly belongs to the writer.
+
+The user's 2026-09-07 rule permits at most one Chinese prose paragraph beginning with `我` in each learning note, including its introduction. Zero is fine; do not insert a pronoun to meet a target. Apply the check to every paragraph, including later paragraphs beneath the same heading. Frontmatter, headings, lists, tables, code, captions and verbatim source documents are outside this paragraph count.
+
+Start from the actual subject, condition, question or action instead. For example, `我把这组规则重新列成表，先固定操作者，再看目标账户和请求的动作` can become `判断账户操作权限时，先确定操作者，再看目标账户和请求的动作。下表按这个顺序列出规则。` A vague `我会把这个差别继续拆开` can be replaced with the specific distinction: `角色查询和操作判断可以分开处理。` Read the rest of the paragraph before making that change.
+
+Keep useful first-person phrasing within paragraphs and preserve authorship, reactions and confirmed actions. Future tests must remain suggestions or plans. Do not merely prepend `其实`, `对于我来说` or a repeated temporal phrase, and do not replace every opening with the same conditional template. English follows semantic alignment and natural style without inheriting this numerical Chinese-only limit.
 
 ## Put Reaction Next To Its Cause
 
@@ -47,7 +53,7 @@ The joke works because the directory and failure are real. Without evidence, omi
 - Use a short local bridge when a jump needs orientation; do not rebuild the note into a forced chronology.
 - Keep a paragraph inside one intelligible movement, but do not reduce every movement to one point, force equal length, or make every paragraph thick.
 
-Do not require a fixed number or length of paragraphs, sentences, fragments, questions, jokes, colloquial phrases, or emotional punctuation. Quotas produce another template.
+Do not require a fixed number or length of paragraphs, sentences, fragments, questions, jokes, colloquial phrases, or emotional punctuation. The explicit user limit on Chinese `我` paragraph openings above is a narrow exception, not a target or a reason to force identical paragraph structures.
 
 ## Find Humor In Engineering Friction
 

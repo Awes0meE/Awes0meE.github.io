@@ -15,9 +15,9 @@ Seamly2D 的本地账户功能做到角色管理时，我需要处理一条很�
 
 ## Account Operation Permissions / 账户操作权限
 
-I laid out the rules by actor, target account and requested action. Here, `admin` names the initial special account; an ordinary administrator is another account subsequently assigned the Admin role.
+The table groups permissions by actor, target account and requested action. Here, `admin` names the initial special account; an ordinary administrator is another account subsequently assigned the Admin role.
 
-我把这组规则重新列成表，先固定操作者，再看目标账户和请求的动作。`admin` 在这里指初始的特定账户，普通管理员指后来获得 Admin 角色的其他账户。
+判断账户操作权限时，先确定操作者，再看目标账户和请求的动作。下表按这个顺序列出规则。`admin` 在这里指初始的特定账户，普通管理员指后来获得 Admin 角色的其他账户。
 
 | Actor | Target | Action | Decision |
 | --- | --- | --- | --- |
@@ -45,9 +45,9 @@ In the project's [public role-query excerpt](/uploads/projects/nanjing-turing/au
 
 项目的[公开角色查询节选](/uploads/projects/nanjing-turing/auth-role-snippet.cpp)里，`roleOf()` 会先忽略大小写比较用户名是否为 `admin`，命中便返回 Admin；其他用户则从 QSettings 读取保存的角色。这个函数能回答账户属于哪种角色，却没有表达整张操作表。具有相同 Admin 枚举值的两个账户，仍然可能拥有不同的降级权限。
 
-I would keep those responsibilities explicit. A role query reads account attributes; an operation check receives an authenticated actor, the freshly retrieved target and an action. Username normalization also needs one consistent definition. Treating `Admin` and `admin` as separate names during creation, then as the same special identity during role lookup, would make the rules disagree.
+A role query can read account attributes, while a separate operation check receives an authenticated actor, the freshly retrieved target and an action. Username normalization also needs one consistent definition. Treating `Admin` and `admin` as separate names during creation, then as the same special identity during role lookup, would make the rules disagree.
 
-我会把这个差别继续拆开。角色查询负责读取账户属性；某项操作的判断函数再接收已确认身份的操作者、刚读取的目标账户和动作。名称规范化也要统一，否则创建账户时把 `Admin` 和 `admin` 当成两个名字，查询角色时却把它们视为同一个特殊身份，就会出现前后规则不一致。
+角色查询和操作判断可以分开处理。前者负责读取账户属性；后者接收已确认身份的操作者、刚读取的目标账户和动作。名称规范化也要统一，否则创建账户时把 `Admin` 和 `admin` 当成两个名字，查询角色时却把它们视为同一个特殊身份，就会出现前后规则不一致。
 
 The special account also raises a startup-state question. The project required the first account in an empty store to be `admin`; subsequent registrations should follow the normal path. Initialization, registration and account management need to agree on how account identities are recognized.
 

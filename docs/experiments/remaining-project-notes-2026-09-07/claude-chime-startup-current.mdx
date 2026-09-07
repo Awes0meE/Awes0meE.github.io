@@ -57,9 +57,9 @@ At the time, disconnecting the board restored pack output; applying an external 
 
 ## Startup Waveform Measurements / 启动波形测量
 
-I would trigger on connection and capture pack output and current together. A current probe is preferable; a shunt requires accounting for its additional voltage drop and reading it differentially. A peak alone is insufficient. Its duration, the beginning of output collapse and whether current is then interrupted belong in the same capture.
+Triggering on battery connection would capture pack-output voltage and current together. A current probe is preferable; a shunt requires accounting for its additional voltage drop and reading it differentially. A peak alone is insufficient. Its duration, the beginning of output collapse and whether current is then interrupted belong in the same capture.
 
-我会以接入事件触发示波器，同时记录包输出和电流。电流测量优先考虑电流探头；若使用分流电阻，则需计算它额外引入的压降，并用差分方式读取。只量到一个尖峰还不够，还要看它持续多久、输出何时开始下降，以及下降之后电流是否被切断。
+以电池接入事件触发示波器，可以同时记录电池包的输出电压和电流。电流测量优先考虑电流探头；若使用分流电阻，则需计算它额外引入的压降，并用差分方式读取。只量到一个尖峰还不够，还要看它持续多久、输出何时开始下降，以及下降之后电流是否被切断。
 
 If current rises first, pack output suddenly falls and cell voltage remains relatively high, the protection path deserves priority. If the cell voltage also falls substantially, cell resistance and connection drops need investigation. The waveform can then guide a choice of precharge, controlled rise time or a revised startup sequence. Both converters share the connection event, so their combined demand needs observing at the common input.
 

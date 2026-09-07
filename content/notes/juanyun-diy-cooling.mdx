@@ -47,9 +47,9 @@ Consider an automatic mode with periodic updates only and no button activity. A 
 
 先假设处于自动调速模式，只有定时更新，中途没有按键操作。一个窗口从 0 秒开始，CPU 温度在第 5 秒到达 80°C，第 15 秒和第 25 秒都到达 60°C，GPU 始终低于这次 CPU 峰值。第 30 秒计算输出时，采用的仍是 80°C；随后峰值变量被清零，输出设置则保留到下一次更新。这样，15 秒时屏幕就可能显示 60°C，30 秒时程序却刚开始采用之前的 80°C。读数变低和输出变低，中间隔着一段程序安排的等待。
 
-The two assignments clearing the peaks in `updatePWM()` caught my attention. This excerpt includes the output calculation and peak reset.
+Alongside the output calculation, `updatePWM()` contains two assignments that clear the peaks. The excerpt below includes both operations.
 
-我读到 `updatePWM()` 时，最想细看的是清空峰值的两行。下面摘出函数中计算输出和清空峰值的部分。
+`updatePWM()` 在计算输出之外，还会清空峰值。下面摘出函数中计算输出和清空峰值的部分。
 
 ```cpp
 dutyCycle =processBluetoothValue(maxValue);

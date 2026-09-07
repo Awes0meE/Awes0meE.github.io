@@ -65,6 +65,6 @@ The traces can separate several cases. Drift already present before switching po
 
 这组数据至少能区分几种现象。切换以前差值就在持续漂移，可以先查估计偏差和参数；切换点才出现跳变，优先查角度选择与折回处理；角度连续而电压突变，就继续查 PI 状态和指令衔接。还可以保持开环驱动，让观测器只计算和记录，先观察它在几个稳定运行点上的表现，再安排带电流限制与故障退出的短时接管试验。
 
-I want to identify the first quantity that becomes abnormal around the transition. That short sequence can decide whether to work next on the observer, coordinate transform or controller state. Speed agreement remains useful progress; completing takeover requires following the angle all the way to the voltage actually applied.
+The most useful clue would be the first quantity to become abnormal around the transition. That short sequence can decide whether to work next on the observer, coordinate transform or controller state. Speed agreement remains useful progress; completing takeover requires following the angle all the way to the voltage actually applied.
 
-我现在最想找到的是切换前后第一个发生异常的量。把这一小段过程看清，就能决定下一次该改观测器、坐标变换还是控制器状态。速度曲线接近仍然是有用的进展，只是接管这件事，需要从角度一直追到最终施加的电压。
+这组记录里，最值得追查的是切换前后第一个发生异常的量。把这一小段过程看清，就能决定下一次该改观测器、坐标变换还是控制器状态。速度曲线接近仍然是有用的进展，只是接管这件事，需要从角度一直追到最终施加的电压。

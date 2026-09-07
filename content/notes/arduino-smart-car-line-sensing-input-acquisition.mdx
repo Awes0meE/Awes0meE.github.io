@@ -23,7 +23,7 @@ The line sensors are ITR20001 devices. An infrared emitter and a phototransistor
 
 In the upper circuit, R1 limits current through the emitter. The phototransistor has its emitter connected to ground and its collector connected to `OUT`, with R2 pulling that node up toward the supply. Stronger reflected light increases collector current and lowers the output voltage. As reflection weakens, the pull-up brings the voltage back up. Black tape and an unobstructed view into the distance can both reduce the light returning to the receiver, which explains why the comment groups them together.
 
-我先看图中上半部分的 ITR20001 电路。R1 为发光管限流，光敏三极管的发射极接地，集电极接在 `OUT` 上，R2 则从电源把这个节点上拉。接收到的反射光较强时，集电极电流增大，`OUT` 电压降低；反射光较弱时，R2 会把输出拉向电源电压。黑胶带和传感器悬空都可能使返回的光变少，开头那句注释由此就有了电路上的解释。
+图中上半部分是 ITR20001 电路，R1 为发光管限流，光敏三极管的发射极接地，集电极接在 `OUT` 上，R2 则从电源把这个节点上拉。接收到的反射光较强时，集电极电流增大，`OUT` 电压降低；反射光较弱时，R2 会把输出拉向电源电压。黑胶带和传感器悬空都可能使返回的光变少，开头那句注释由此就有了电路上的解释。
 
 I would therefore read a high input first as weak reflected light reaching the receiver. Interpreting it as a black line also depends on the sensor's position relative to the track. Raising the chassis, tilting the sensor, or mounting it too far above the floor can change the received light. In [Pololu's reflectance-sensor experiment](https://www.pololu.com/docs/0J13/3), increasing the distance reduced the voltage difference between the black and white regions. That gives me something specific to watch when following the car manual's test of moving a sensor over black tape: whether my hand changes its height at the same time.
 

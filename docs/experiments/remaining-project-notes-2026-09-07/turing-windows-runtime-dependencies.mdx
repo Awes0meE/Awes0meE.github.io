@@ -19,9 +19,9 @@ Headers describe types and functions to the compiler. Import libraries then help
 
 编译时，头文件告诉编译器有哪些类型和函数；链接时，导入库帮助链接器处理外部符号。采用动态链接以后，相应实现仍要在运行时从 DLL 加载。开发电脑已经装好 Qt、编译器和各种库，程序可能恰好能从这些环境里找到依赖。换到另一台电脑，之前由环境补上的部分才会暴露出来。
 
-I find it useful to start at the executable and follow its dependency chain. A library it imports may need further libraries, while other components are loaded only when a particular feature runs. A matching filename in the folder is therefore just the beginning. Architecture, version and the actual load location also matter.
+The executable provides a starting point for tracing runtime dependencies. A library it imports may need further libraries, while other components are loaded only when a particular feature runs. A matching filename in the folder is therefore just the beginning. Architecture, version and the actual load location also matter.
 
-我现在会把可执行文件看作一条依赖链的起点。它直接依赖一个库，这个库又可能依赖其他库；有些组件则要等到运行中的某个功能被调用才加载。只看文件夹里有没有同名 DLL 还不够，需要继续检查架构、版本以及它实际从哪里被加载。
+沿着可执行文件往下查，就能逐步找到它的运行依赖。它直接依赖一个库，这个库又可能依赖其他库；有些组件则要等到运行中的某个功能被调用才加载。只看文件夹里有没有同名 DLL 还不够，需要继续检查架构、版本以及它实际从哪里被加载。
 
 The internship build used MSVC x64, which cannot load an x86 DLL directly into its process. MSVC version compatibility takes a closer reading. [Microsoft documents compatibility across certain toolset versions](https://learn.microsoft.com/en-us/cpp/porting/binary-compat-2015-2017?view=msvc-170), with conditions on the linker, runtime version and some compilation options. Different toolset names prompt me to check the combination, rather than immediately reject it.
 
@@ -51,9 +51,9 @@ Xerces supplies XML parsing through `xerces-c_3_2.dll`. The [Qt Windows deployme
 
 排查时，可以先用微软的 [DUMPBIN](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference?view=msvc-170) 检查二进制文件。`/DEPENDENTS` 查看导入依赖，`/HEADERS` 查看架构信息。它们适合顺着静态导入关系往下找；运行中通过插件或显式加载函数引入的文件，还需要结合实际启动和功能操作来查。
 
-For a corrected package, I would use a fresh deployment directory and add dependencies from the Qt installation used for that build and other known sources. Testing without Qt or Visual Studio then removes the development tools' search paths from the equation. The [original packaging record](/notes/turing-release-packaging-cross-platform) retains the build and installation procedure; the question here is which external files the application actually uses.
+A corrected package can be assembled in a fresh deployment directory, with dependencies drawn from the Qt installation used for that build and other known sources. Testing without Qt or Visual Studio then removes the development tools' search paths from the equation. The [original packaging record](/notes/turing-release-packaging-cross-platform) retains the build and installation procedure; the question here is which external files the application actually uses.
 
-我会把修复后的程序放进一个新部署目录，只从这次构建对应的 Qt 安装和已知来源补齐依赖。随后在没有 Qt 和 Visual Studio 的环境里测试，避免开发工具的搜索路径继续掩盖问题。具体构建与安装步骤仍放在[原始打包记录](/notes/turing-release-packaging-cross-platform)，这一步更关心程序究竟借用了哪些外部文件。
+重新整理部署包时，可以把修复后的程序放进一个新目录，再从这次构建对应的 Qt 安装和已知来源补齐依赖。随后在没有 Qt 和 Visual Studio 的环境里测试，避免开发工具的搜索路径继续掩盖问题。具体构建与安装步骤仍放在[原始打包记录](/notes/turing-release-packaging-cross-platform)，这一步更关心程序究竟借用了哪些外部文件。
 
 ## Deployment Testing on Another Computer / 换机部署测试
 

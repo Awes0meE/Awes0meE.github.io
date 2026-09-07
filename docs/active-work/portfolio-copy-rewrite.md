@@ -6,14 +6,16 @@ The user requested all remaining projects' notes for batch review. On `docs/rewr
 
 During review, the user rejected “做 STM32 练习” because the object of practice should be a specific activity or skill. The Tianjin I2C opening now uses “我在折腾 STM32 的时候” and identifies firmware as the object of compilation/flashing. English and the old 8771 preview are aligned. The current writer's ZH-2 reference contains this durable collocation rule without inventing more specific project activities.
 
-The user's next review requested concrete section headings derived from the full section after writing it. The heading-only pass reviewed all 16 current rewrites/candidates plus four other public authored notes (20 notes, 83 headings) and changed 56 bilingual headings in 19 notes. Clear headings such as `软件与硬件 I²C` and `BUSY 与芯片勘误` remain. Paragraphs, page titles, metadata, code and figures are unchanged. The ten candidates and 8771/8772 previews are updated; the nine changed public-source notes await a later authorized release. Original source-document pages and 12 suspended superseded notes remain unchanged. See [heading review](../experiments/note-heading-review-2026-09-07/review.json).
+The preceding review requested concrete section headings derived from the full section after writing it. That heading-only pass reviewed all 16 current rewrites/candidates plus four other public authored notes (20 notes, 83 headings) and changed 56 bilingual headings in 19 notes. Clear headings such as `软件与硬件 I²C` and `BUSY 与芯片勘误` remain. That pass preserved paragraphs, page titles, metadata, code and figures. See [heading review](../experiments/note-heading-review-2026-09-07/review.json).
+
+The latest review limits each Chinese note to at most one paragraph beginning with `我`, including the introduction. Across the same 20 active/candidate notes, 15 Chinese and 13 paired English paragraph openings were revised in 12 files; every note now has zero or one Chinese `我` opening. Concrete subjects, conditions, questions and actions replace repeated setup phrases. Confirmed personal work and proposed test status remain intact. The ten candidates and 8771/8772 previews are updated. Public-source heading and paragraph edits await a later authorized release; original source-document pages and 12 suspended superseded notes remain unchanged. See [paragraph-opening review](../experiments/note-paragraph-openings-2026-09-07/review.json).
 
 Preserve the separate About branch `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). Its wording was not approved; do not publish it or carry it into the note branch.
 
 ## Current Source State
 
 - Eight project pages, 27 note sources, 15 public notes, 12 suspended notes and 84 media records. The Notes index has five project channels and two archive years.
-- Each of the three completed families has two public studies. Three existing slugs now contain replacement articles; three companion articles use new slugs. Their non-heading content matches approved checkpoint `2337f2d`; local heading corrections follow the user's latest review.
+- Each of the three completed families has two public studies. Three existing slugs now contain replacement articles; three companion articles use new slugs. Their approved baseline is checkpoint `2337f2d`; local heading and paragraph-opening corrections follow the user's latest review and remain unpublished.
 - The three old-note backups, twelve separate language drafts and four completed preview pages have been removed. Current prose lives only in `content/notes/`; earlier versions remain in Git. Review observations remain as dated history.
 - Smart Car now states seven IR tracking inputs in both homepage languages, matching the manual, schematic and decoded fields. Its six collision switches and six test groups are unchanged.
 - The DIY homepage ending and current writer ending-variety rules are included in this release. The other approved homepage narratives, including Claude Chime, retain their publication state.
@@ -29,6 +31,8 @@ Compose Chinese first. After editorial refinement, review all six Chinese senten
 Normal closing paragraphs are welcome. Avoid forced elevation and repeated look-back or next-time endings, including synonymous versions. An occasional apt retrospective or `下一次再看到……` is allowed; there is no phrase blacklist or quota. Keep confirmed emotion and humor, and distinguish present study from historical actions internally while writing natural, accurate prose.
 
 Write each section first, then derive a short heading that identifies its actual subject and aspect. Questions, abstract hooks and isolated moments such as `高电平从哪里来`, `一个名字的特殊含义` and `重启之后` fail this heading check. Name the actual principle, procedure, rule or measurement in both languages; preserve accepted paragraphs during a heading-only request.
+
+Each Chinese learning note may contain at most one prose paragraph beginning with `我`, counting the introduction and every paragraph under headings. Zero is allowed. Recompose other openings around their concrete content; do not merely prefix filler, remove confirmed ownership, or turn suggested tests into historical results. First-person phrasing inside paragraphs remains available. English keeps natural semantic alignment without this numerical Chinese-only quota.
 
 ## Next Writing Work
 

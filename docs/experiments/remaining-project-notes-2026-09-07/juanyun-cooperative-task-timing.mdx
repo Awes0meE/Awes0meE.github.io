@@ -37,9 +37,9 @@ That behavior suits many refresh tasks. A late display update can usually show t
 
 这种写法适合不少刷新任务。屏幕晚了一点，显示最新状态通常就够了。但对于步进输出，需要继续问一次调用究竟代表一次状态检查，还是一定产生一个步进动作。如果试图用循环瞬间补齐错过的脉冲，电气脉冲数量可能补上了，机械运动所需的时间间隔却没有补上。
 
-I would choose recovery behavior according to the work. A display can skip old frames, counted events need their counts preserved, and communication needs a timeout decision about retry or failure. The EEV must retain its physical step interval rather than compress several steps because software arrived late. A Boolean pending flag remembers that work exists; setting it repeatedly still stores only one state. Events that must accumulate need a counter or queue.
+Different tasks need different responses to a delay. A display can skip old frames, counted events need their counts preserved, and communication needs a timeout decision about retry or failure. The EEV must retain its physical step interval rather than compress several steps because software arrived late. A Boolean pending flag remembers that work exists; setting it repeatedly still stores only one state. Events that must accumulate need a counter or queue.
 
-我会按任务含义选择处理方式。显示可以跳过旧帧，计数事件需要保存次数，通信则要结合超时决定重试还是报错。EEV 要遵守实际步进间隔，不能因为软件迟到就把几步挤在一起。一个布尔型到期标志只能记住有事待办，多次置位也仍然只有一个状态；需要累计的事件，应当另用计数或队列保存。
+任务延迟以后，处理方式要根据任务本身来选。显示可以跳过旧帧，计数事件需要保存次数，通信则要结合超时决定重试还是报错。EEV 要遵守实际步进间隔，不能因为软件迟到就把几步挤在一起。一个布尔型到期标志只能记住有事待办，多次置位也仍然只有一个状态；需要累计的事件，应当另用计数或队列保存。
 
 ## Nonblocking State Machines / 非阻塞状态机
 

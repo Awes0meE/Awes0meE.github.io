@@ -92,6 +92,8 @@ Treat the requested 75% Khazix influence as relative calibration, not a quota. U
 
 Prefer substantial paragraphs when several related actions, facts, explanations, and judgments belong to one cognition movement. Keep paragraph lengths naturally uneven, and allow a one-sentence paragraph when a real break, failed assumption, result, or quiet ending earns it. Do not impose sentence or paragraph quotas.
 
+For Chinese learning notes, the user requires at most one prose paragraph beginning with `我` per article, including the introduction. Zero is acceptable. Check every paragraph under a heading, not just the first one. Rebuild repeated `我会……`, `我还想……` and `我更关心……` openings from the concrete object, condition, question or action being discussed. Do not evade the rule by routinely adding `对于`, `其实` or another filler before `我`, and do not erase confirmed personal work or turn proposed tests into completed actions. First-person wording inside a paragraph remains available. This specific Chinese opening limit does not impose a matching numerical quota on English; align meaning and preserve natural English phrasing.
+
 ### 8. Add Learning-Note Titles And Headings After Drafting
 
 Treat titles as navigation labels, not miniature prose. Keep the page title short, accurate, and precise, naming the engineering subject plus only the scope needed to identify the note. Prefer `Seamly2D 三周开发记录` over an abstract thesis, metaphor, quotation-led hook, or colon-separated explanatory title.
@@ -131,6 +133,8 @@ Follow `references/self-review.md` for the final release decision. For first-per
 Run the cross-page division check in `references/project-note-division.md` and Self Review Gate 5. Compare the finished target with its homepage and sibling notes in both languages: each page must do its own job without replaying the same full experience or reasoning. Repair the authorized target's allocation; report out-of-scope conflicts without reopening protected pages.
 
 Recheck every section heading against the entire section under Step 8. A concise heading still fails if it hides the subject behind a question, abstract phrase or isolated moment. For a heading-only revision, preserve paragraphs, code, figures, page titles and metadata; do not rewrite accepted content to justify a new label.
+
+Count `我`-initial Chinese prose paragraphs across each complete learning note under Step 7. A count above one fails. Then read the revised openings together to catch repetitive substitute prefaces, missing subjects, changed ownership or altered test status. This check concerns paragraph openings, not all uses of first person.
 
 Recheck ending variety under Step 11 and Reader-Prose L1-3 across the current batch and relevant recent pages. Similar wording can hide the same repeated closing move. Do not turn this repetition check into a zero-occurrence ban on retrospective or future-looking sentences.
 

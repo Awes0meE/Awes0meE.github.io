@@ -41,6 +41,8 @@ Adapt the chosen ending as well. If Chinese closes directly, do not add
 Occasional apt uses remain available in either language. Compare nearby endings
 by function so translation does not restore the repeated frame removed in editing.
 
+When revising Chinese paragraph openings under the user's one-`我`-initial-paragraph limit, preserve the same explanation and factual status in English. A direct subject or conditional opening may suit the English too, but do not impose an unrequested numerical quota on English `I` or `My`. English that already expresses the same meaning naturally can remain unchanged. Neither version may turn a proposed check into a claimed past test or erase confirmed ownership merely to vary an opening.
+
 Keep source links close to the researched sentence in both languages when the target format permits it. Make the link placement natural; do not collect sources into a detached section that breaks the attention route.
 
 ## Translate The Comic Mechanism

@@ -4,14 +4,14 @@
   "branch": "docs/rewrite-tianjin-notes",
   "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
   "draftSha256": {
-    "claude-chime-startup-current.mdx": "0bab6aefdfe7c13dbe4c9efeff0404013c732e3e19e2f016eee5c55b2c46dd83",
+    "claude-chime-startup-current.mdx": "f499cd32930ced6b87f86c33370c294e85b123f4d8ff74e78271174bd43f516b",
     "claude-chime-switched-adc-divider.mdx": "f30c2087c0754fd0b442c6a31222175b05fe9516c09c231461dfdcf321c1aec1",
-    "foc-angle-handoff.mdx": "ac058e8c9015f91c1db48b780c911e9a41074bdd578ad6323deb9cf98384fabb",
+    "foc-angle-handoff.mdx": "a8c92f5b6b1d03cba82b1356994e289373ccbba3f8126a6f1120f75b9aa57aff",
     "foc-current-sampling-timing.mdx": "a1160ccc1fa6494cbc42d4fb619ab7281806c12665230de59a685e1a319ee2c2",
-    "juanyun-cooperative-task-timing.mdx": "a76dcc77e907fa396a34b306ccebe2982455721abdff207d720c4ccbea757808",
-    "juanyun-flash-parameter-recovery.mdx": "e7b257fe2738b3a54913ea62f37989e22c75da86ea20082d47bccd82139c05f7",
-    "turing-local-role-permissions.mdx": "a8f29256be6520b05c9655278a167f000d278e79cf33196c874f594cec60ab2b",
-    "turing-windows-runtime-dependencies.mdx": "4255da952baad91aea42a7e3ce7144d68fb0a4d55f80006d3077d3ba2730c4ea"
+    "juanyun-cooperative-task-timing.mdx": "476a1fce695b2c6781298d4287604e3cf6dcfbd7b40ae52b5705603e4b110257",
+    "juanyun-flash-parameter-recovery.mdx": "9a89809128c0a98f195eda967f70124a6a935e622bae96897cbfa259cffeff09",
+    "turing-local-role-permissions.mdx": "208639c523874520f448015811cb8c1a74b90783eb570cbf93715f16d11090b5",
+    "turing-windows-runtime-dependencies.mdx": "de53d996b6894b453b5b85debab07f76290a36f1045b4fe57ebd85543d2bfe78"
   },
   "step10": "See chinese-step10.json for the Chinese-only checkpoint before English adaptation.",
   "step12Chinese": {
@@ -513,5 +513,10 @@
     "date": "2026-09-07",
     "review": "../note-heading-review-2026-09-07/review.json",
     "change": "Concrete section headings derived from the complete section; paragraphs and metadata unchanged. Earlier browser records describe their original checkpoints."
+  },
+  "paragraphOpeningRevision": {
+    "date": "2026-09-07",
+    "review": "../note-paragraph-openings-2026-09-07/review.json",
+    "change": "Repetitive Chinese 我 paragraph openings revised; every note has at most one, including the introduction. Paired English aligned as needed. Earlier checks describe their dated checkpoints."
   }
 }

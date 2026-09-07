@@ -4,7 +4,7 @@
   "baseCommit": "007decf091ce6c21496358fecf6443a13ed092e7",
   "draftSha256": {
     "tianjin-stm32-i2c-oled-debugging.mdx": "91a5477744a37d5e34ddaeef73148b406375e50dcb68366a1c8837446140cf88",
-    "tianjin-stm32-light-calibration-control.mdx": "8c9c70b685a03d5ee5ef190f38855967263baa86d63d909ffea5faba54a8d47f"
+    "tianjin-stm32-light-calibration-control.mdx": "24bd84b2d1c32333e7f659a5e272d21fef9e6fd9829f7f8c514001699467253d"
   },
   "step12Chinese": {
     "语序不当": "pass; reviewed in paragraph context",
@@ -228,5 +228,10 @@
     "date": "2026-09-07",
     "review": "../note-heading-review-2026-09-07/review.json",
     "change": "Concrete section headings derived from the complete section; paragraphs and metadata unchanged. Earlier browser records describe their original checkpoints."
+  },
+  "paragraphOpeningRevision": {
+    "date": "2026-09-07",
+    "review": "../note-paragraph-openings-2026-09-07/review.json",
+    "change": "Repetitive Chinese 我 paragraph openings revised; every note has at most one, including the introduction. Paired English aligned as needed. Earlier checks describe their dated checkpoints."
   }
 }

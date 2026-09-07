@@ -38,6 +38,7 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Do all user-specified prohibitions for this note reach zero hits at the scope the user set: exact forms and obvious variants for an expression ban, or direct functional equivalents for a construction or reader-effect ban?
 - Are bare negative-first binary reframes absent in both languages?
 - Do current and nearby article endings avoid repeatedly using the same look-back or next-time frame, including differently worded equivalents? Keep an occasional apt use; this is a repetition check, not a banned-phrase scan.
+- Does each Chinese learning note have at most one prose paragraph starting with `我`, counting its introduction and all paragraphs under headings? Have the replacements been read for natural variety, complete meaning and unchanged factual status, rather than only passing a prefix count? English has no corresponding numerical limit.
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
 - Is evidence-inventory commentary absent in both languages? Keep fact checking internal; write the supported action, result, or actual engineering question. Do not append lists of what the material cannot prove.
 - Does every inanimate or abstract subject carry only licensed native frames or functional verbs, with experiential results expressed through 出现, 发生, 出, 遇到, or a human or situational subject?
