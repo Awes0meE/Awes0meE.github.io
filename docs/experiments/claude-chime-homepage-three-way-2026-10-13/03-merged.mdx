@@ -1,0 +1,89 @@
+---
+title: "Claude Chime Power Board"
+titleZh: "Claude Chime 电源板"
+summary: "For an independent hardware commission from Accele AI, I designed and hand-assembled the ESP32 peripheral power board for Claude Chime. The roughly 28 × 27 mm PCB combines single-cell charging, two separate boost rails, on-demand battery-voltage sensing and a 5 V push-pull solenoid driver. I completed basic bring-up and the software handoff on the only V1.0 spin, and the client's firmware engineer later reported normal complete-device operation."
+summaryZh: "受 Accele AI 委托，我独立设计并手工焊接了 Claude Chime 的 ESP32 外围电源板。约 28 × 27 mm 的 PCB 上有单节锂电池充电、两路独立升压、按需接通的电池电压采样和 5 V 推拉式电磁铁驱动。V1.0 一次打板，我完成了基础上电和软件交接，客户固件工程师随后反馈整机运行正常。"
+date: "2026-04 to 2026-05"
+status: "Commissioned Hardware"
+tags: ["PCB", "Power Electronics", "ESP32-S3", "Battery", "Boost Converter", "Hardware Bring-up"]
+cover: "/uploads/projects/claude-chime-hardware/claude-chime-logo.png"
+featured: true
+assetPaths:
+  - "/uploads/projects/claude-chime-hardware"
+---
+
+## Solenoid Drive / 电磁铁驱动
+
+When Claude finishes a task on the computer, a crab on the desk jumps a few times. Accele AI built Claude Chime on a simple idea, a reminder you can see even while looking down at a phone. The crab is a 3D-printed Clawdy Family model sitting on a 5 V push-pull solenoid, which an ESP32-S3 core board pulses.
+
+Claude 在电脑上干完活，桌上的螃蟹就跳几下。Accele AI 做 Claude Chime 的想法很直接，提醒得有动静，低头看手机的人也不会错过。螃蟹是 Clawdy Family 的 3D 打印模型，底下一颗 5 V 推拉式电磁铁，由 ESP32-S3 核心板控制吸合。
+
+When this paid hardware commission reached me, the client had planned to switch the solenoid with a relay. There is very little room inside the crab, and for a 5 V DC coil a low-side MOSFET does the job in far less space. `SOL_CTRL` drives an AO3400A through a 33 Ω gate resistor, a 10 kΩ pull-down keeps it off at power-up, and an SS34 gives the coil current somewhere to go when it switches off.
+
+这单付费硬件委托交到我手上时，客户原本打算用继电器开关电磁铁。螃蟹肚子里就那么点地方，继电器塞进去太占位置，对一颗 5 V 的直流线圈来说，低边 MOSFET 已经够用。于是 `SOL_CTRL` 经 33 Ω 栅极电阻驱动 AO3400A，10 kΩ 下拉保证上电默认关断，SS34 给线圈断电时的感应电流留一条续流路径。
+
+Had the requirements stopped there, the board would have been one MOSFET and a few passives. Three further conditions changed its scale. The device had to run from a single lithium-ion cell without a cable, charge over Type-C, and keep the client's existing ESP32-S3 core board, whose Type-C connector could not move. A switch became a power system with four questions to answer: who supplies power while the cable is in, who takes over once it is pulled, what must stay steady when the crab jumps, and when the battery should charge or must stop.
+
+需求要是停在这里，这块板也就是一颗 MOS 加几个外围器件。后面陆续补上来的三个条件把事情撑大了。设备要能脱离电源线、靠单节锂电池工作，要能经 Type-C 充电，主控还必须沿用客户现成的 ESP32-S3 核心板，Type-C 口长在那块板上，位置改不了。手里的活儿一下从一个开关，变成了一个得回答四个问题的电源系统：插着线时谁供电，拔掉线后谁接手，螃蟹跳的那一下谁不能跟着晃，电池什么时候该充、什么时候必须停。
+
+![Claude Chime power-board 3D render / Claude Chime 电源板 3D 渲染](/uploads/projects/claude-chime-hardware/board-3d-render.png)
+
+## Two Boost Rails / 两路升压
+
+During selection I looked at integrated parts such as the IP5306 and considered one boost converter for both the ESP32 and the solenoid. With the 5 V, 1.5 A solenoid load used during the project, output power comes to 7.5 W; from a 3.7 V cell at an assumed 85 percent efficiency, that is about 2.38 A of input current, rising further as the battery discharges. Current was only part of it. What bothered me more was how differently the two loads behave. The ESP32 wants a quiet, steady rail, while the solenoid yanks current in bursts, so on a shared output every jump of the crab could drag the controller's supply down with it.
+
+选型时我看过 IP5306 这类集成方案，也想过一颗 Boost 同时带 ESP32 和电磁铁。按项目期间采用的 5 V、1.5 A 电磁铁负载估算，输出功率是 7.5 W；电池取 3.7 V、效率按 85% 算，输入电流约 2.38 A，电池电压一降，这个数还要往上走。电流大只是一方面，说实话我更在意两个负载的脾气差得太多。ESP32 要一条稳稳当当的电源，电磁铁却是一下一下地拽电流，两者共用一路输出，螃蟹跳一下，主控的供电就可能跟着往下掉。
+
+I ended up with two [TLV61048](https://www.ti.com/product/TLV61048) converters branching from `BAT+`. One produces `SOL_5V` for the solenoid alone and switches at 600 kHz; the other supplies the ESP32 core board during battery operation at 1 MHz. TI frames the choice as efficiency at 600 kHz against smaller inductors and output capacitors at 1 MHz. Both branches follow the same [TLV61048 layout practice](https://www.ti.com/lit/ds/symlink/tlv61048.pdf#page=15): short SW traces with little copper, input capacitors tight against VIN and GND, and a short loop from the switch through the rectifier and output capacitor back to ground. With the outputs separated, solenoid pulses no longer land directly on the controller's rail. The one thing the branches still share is the battery, and that comes back later.
+
+最后用了两颗 [TLV61048](https://www.ti.com/product/TLV61048)，从 `BAT+` 分成两条升压支路。一路输出 `SOL_5V`，专供电磁铁，开关频率设在 600 kHz；另一路在电池供电时给 ESP32 核心板，设在 1 MHz。TI 对这两档的取舍是 600 kHz 偏效率，1 MHz 换来更小的电感和输出电容。两条支路都要照着 [TLV61048 的布局要求](https://www.ti.com/lit/ds/symlink/tlv61048.pdf#page=15)来摆：SW 走线短、铜皮小，输入电容紧贴 VIN 和 GND，开关管、整流管和输出电容回到地的那圈电流路径也要尽量短。输出分开以后，电磁铁的动作不会直接压在主控那一路上，两条支路剩下的共同点只有电池本身，这一点后面还会再碰到。
+
+![Claude Chime power-board schematic / Claude Chime 电源板原理图](/uploads/projects/claude-chime-hardware/power-board-schematic.png)
+
+## Supply Priority and Charge Control / 供电优先级与充电控制
+
+Separate rails still left one meeting point on the ESP32 side. USB 5 V and the battery-derived 5 V both reach `ESP_5V_BUS`, and the backup branch feeds it through a Schottky diode. My first idea was to set the backup boost to 5.5 V and make up for the diode drop, and for a moment that margin felt comfortably safe. Following the current path again exposed a flaw. With the battery side above USB, the system would draw from the battery even while Type-C was plugged in. The feedback resistors instead target about 4.984 V, calculated before the SS12, so USB carries the system while connected and the battery takes over once it is unplugged. That answered the first two questions by deciding which source gets to supply first.
+
+两路升压分开以后，ESP32 这侧还剩一个交汇点。USB 的 5 V 和电池升出来的 5 V 都要接到 `ESP_5V_BUS`，备用那路后面串着肖特基二极管。我一开始想把备用升压调到 5.5 V，把二极管的压降补回来，刚想到这儿还觉得这份余量留得挺稳妥。顺着电流路径再走一遍才觉出不对劲，电池这侧一旦比 USB 高，插着 Type-C 时系统也会优先用电池的电。反馈电阻最后选在约 4.984 V，这是 SS12 之前的计算值，插线时让 USB 供电，拔线后再由电池接手。前两个问题到这里有了答案，定下来的是谁有资格先供电。
+
+The same bus feeds the MCP73831, whose output returns to the battery. If charging stayed enabled after Type-C was removed, battery energy could travel through the boost converter and diode into the charger and back into the same cell. The fix sits on the PROG pin: `CHARGE_CTRL` drives a 2N7002 that connects the 3.3 kΩ PROG resistor to ground or releases it. According to the [MCP73831 datasheet](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf), that resistor sets roughly 300 mA of charge current, and a floating PROG pin stops charging. By this point charging, boosting and driving could no longer be considered separately. Whether USB is present decides which source powers the system and whether software should allow charging.
+
+同一条总线还接着 MCP73831 的输入，充电芯片的输出又回到电池。Type-C 拔掉以后，充电要是还开着，电池的电就会经升压和二极管绕一圈，回到充电芯片，再充回同一块电池。这件事在 PROG 脚上解决：`CHARGE_CTRL` 驱动 2N7002，决定 3.3 kΩ 的 PROG 电阻接不接地。按 [MCP73831 数据手册](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP73831-Family-Data-Sheet-DS20001984H.pdf)，这颗电阻对应约 300 mA 的充电电流，PROG 悬空则停止充电。到这一步，充电、升压和驱动已经没法分开看了，USB 在不在场，既决定系统由谁供电，也决定软件该不该放开充电。
+
+## Battery-Voltage Sensing / 电池电压采样
+
+The battery divider uses 15 kΩ and 22 kΩ, giving `VBAT = VADC × 1.682`. Left across the battery, those two resistors would drain it continuously, so an AO3401 and a 2N7002 let `ADC_ENABLE` switch the branch on for a reading and off again afterwards. On the bench I drove `ADC_ENABLE` high by hand and the divided voltage matched the calculation; the digital reading itself is handled by the client's core board and firmware. How long to wait after switching on, and what the whole sensing circuit costs on average, are worked out in [A Switched Battery Divider and ADC Settling](/notes/claude-chime-switched-adc-divider).
+
+电池电压用 15 kΩ 和 22 kΩ 分压，换算关系是 `VBAT = VADC × 1.682`。两颗电阻一直跨在电池两端就会一直耗电，所以我加了 AO3401 和 2N7002，让 `ADC_ENABLE` 控制这条支路，读数时接通，读完断开。测试台上，我手动拉高 `ADC_ENABLE`，分压节点的电压和计算对得上，后面的数字读数交给客户的核心板和固件。支路接通后要等多久、整套采样电路平均耗多少电，在[电池采样开关与 ADC 建立时间](/notes/claude-chime-switched-adc-divider)里有完整计算。
+
+## Board Bring-Up / 打板与上电测试
+
+From requirements and power architecture through calculations, selection, schematic, PCB, BOM, Gerber, ordering and hand assembly to bring-up, debugging and the software handoff, I did the work on this board myself. The drawing puts it at about 28 × 27 mm with a maximum height of about 4.75 mm. V1.0 was the only spin, and it needed no cuts, flywires, value changes or added capacitors.
+
+从需求拆解、电源架构、计算选型，到原理图、PCB、BOM、Gerber、下单和手工焊接，再到上电排查和软件交接，这块板都是我一个人做的。图纸标注约 28 × 27 mm，最高点约 4.75 mm。V1.0 只打了一次，焊完没有割线、飞线、换阻值或补电容。
+
+![Hand-assembled Claude Chime power board / 手工焊接完成的 Claude Chime 电源板](/uploads/projects/claude-chime-hardware/hardware-test/pcb-front-photo.jpg)
+
+First power-up used a 3.8 V bench supply limited to 50 mA. The two unloaded boost outputs read about 5.12 V and 5.08 V, though I can no longer say which reading belongs to which rail. The ammeter showed MCP73831 charge current, and the multimeter later showed the battery voltage creeping up. Repeatedly driving `SOL_CTRL` with simulated 3.3 V logic levels switched the unloaded output every time, with no boost-output droop.
+
+第一次上电用 3.8 V、限流 50 mA 的台式电源，两路升压空载量到约 5.12 V 和 5.08 V，哪个数对应哪一路，现在已经记不清了。电流表上看到了 MCP73831 的充电电流，之后万用表上的电池电压也慢慢往上走。我又用模拟的 3.3 V 高低电平反复驱动 `SOL_CTRL`，空载输出跟着连续切换，升压没有出现掉压。
+
+## Battery Cold-Start Voltage Drop / 电池冷启动掉压
+
+Connected cold, a protected battery pack failed to start the board. The pack output read 4.03 V beforehand and fell to between 1.49 and 1.57 V once the board was attached. My first suspicion was a PCB short, yet the same board had just started from a 50 mA-limited bench supply, and a hard short would never have got past that. Disconnecting the board let the pack voltage recover, and after an external supply had been applied at the pack output, the next battery connection started normally.
+
+换成带保护的电池包冷接入，板子却起不来。接入前电池包输出端 4.03 V，一接上就掉到 1.49 至 1.57 V。第一反应是 PCB 哪里短路了，可同一块板刚刚还能从限流 50 mA 的台式电源启动，真有一条硬短路，那一关就过不去。断开板子，电池包的电压会恢复；在电池包输出端接过外部电源以后，下一次接电池又能正常启动。
+
+Both boost converters are enabled by default, so at connection the input capacitors and both converters demand current together. The branches I had separated share only the battery, and that is exactly where this problem appeared. I suspect the startup current tripped the DW01A and 8205A protection inside the pack and cut its output. I never captured the current peak or the protection-state change, so the cause remains a hypothesis. The handoff turned it into advice: use a pack rated for at least 3 A continuous and 5 A peak discharge, and if the voltage falls to around 1.4 V on connection, check the protection board before blaming the PCB. Capturing the startup waveform and separating the cell from the protection path are covered in [Protected Battery Startup Measurements](/notes/claude-chime-startup-current).
+
+两路升压默认常开，电池一接上，输入端的电容和两颗 Boost 同时要电。前面拆开的两条支路，唯一的共同点就是电池，这次出问题的正好也是电池这一端。我怀疑这一下的启动电流触发了电池包里 DW01A 和 8205A 的保护，把输出切断了。电流峰值和保护状态的切换都没测到，这个原因至今还停在推断。交接时我把它写成了建议：电池选持续放电 3 A、峰值 5 A 以上的型号，接上后电压掉到 1.4 V 左右，先查保护板，别急着认定 PCB 短路。启动波形该怎么测、怎样区分电芯和保护路径，放在了[带保护电池的启动测量](/notes/claude-chime-startup-current)里。
+
+## Software Handoff / 软件交接
+
+Neither the real solenoid nor the crab ever reached my bench, and the client wrote the ESP32 firmware. The two boards share a single six-pin SH1.0 cable carrying `ESP_5V_BUS`, `GND`, `SOL_CTRL`, `CHARGE_CTRL`, `ADC_ENABLE` and `ADC_BAT`. Before delivery I wrote a [software handoff](/uploads/projects/claude-chime-hardware/software-handoff.md) covering each line's direction and meaning, the three active-high controls held low at power-up, charging only once USB is confirmed, and no solenoid action below a battery threshold. The four questions from the start ended up as a handful of firmware rules.
+
+真实的电磁铁和螃蟹都没到过我的测试台，ESP32 固件也由客户负责。两块板之间只有一根六针 SH1.0 排线，走的是 `ESP_5V_BUS`、`GND`、`SOL_CTRL`、`CHARGE_CTRL`、`ADC_ENABLE` 和 `ADC_BAT`。交付前，我把每根线的方向和含义、三路高有效控制上电先全部拉低、确认 USB 在场才放开充电、电量低于阈值时不让电磁铁动作，都写进了[软件交接文档](/uploads/projects/claude-chime-hardware/software-handoff.md)。开头那四个问题，最后都落成了固件里的几条规则。
+
+The client's firmware engineer later reported in chat that ESP32 communication, ADC battery reading, charge control, repeated real-solenoid actuation and complete-device operation all worked, and noted that the small power board and six-pin cable saved space in the enclosure. Space was the reason the relay went at the very start, and at delivery the client raised it as an advantage.
+
+后来客户的固件工程师在聊天里反馈，ESP32 通信、ADC 电量读取、充电控制、实际电磁铁反复动作和整机运行都正常，还提到这块小电源板配上六针排线，给外壳省了空间。最开始为了螃蟹肚子里那点地方换掉继电器，到交付时，省空间又成了对方主动提起的优点。

@@ -1,6 +1,6 @@
 # Portfolio Writing Handoff
 
-**Updated:** 2026-09-07
+**Updated:** 2026-10-14
 
 All sixteen new bilingual study notes across the eight projects are approved. Publication is tracked by [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38); use its live merge/deployment state when resuming. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
 
@@ -19,6 +19,8 @@ Normal closing paragraphs are welcome. Avoid forced elevation and repeated look-
 Write each section first, then derive a short heading that identifies its actual subject and aspect. Questions, abstract hooks and isolated moments such as `高电平从哪里来`, `一个名字的特殊含义` and `重启之后` fail this heading check. Name the actual principle, procedure, rule or measurement in both languages; preserve accepted paragraphs during a heading-only request.
 
 Each Chinese learning note may contain at most one prose paragraph beginning with `我`, counting the introduction and every paragraph under headings. Zero is allowed. Recompose other openings around their concrete content; do not merely prefix filler, remove confirmed ownership, or turn suggested tests into historical results. First-person phrasing inside paragraphs remains available. English keeps natural semantic alignment without this numerical Chinese-only quota.
+
+Do not announce or count an article's spine: counted scaffold labels and forward road signs such as `四个问题`, `前两个问题到这里有了答案`, `这一点后面还会再碰到`, `four questions` or `that comes back later` fail; list the concrete items once and return to them in ordinary words. In Chinese change sentences such as `从 A 变成 B`, the subject must actually undergo the change and A and B must be the same kind of thing.
 
 ## Next Work
 
@@ -41,4 +43,4 @@ These are editorial working notes, not sentences to paste into the project pages
 
 ## History
 
-The seven-homepage release is [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged at `8e009ef`; its nine-public-note counts and 31 production checks describe that checkpoint. Claude Chime's approved homepage was published through PR #35. Earlier interviews and decisions are in project briefs and `docs/session-log.md`; dated experiment packets preserve review evidence rather than current publication instructions.
+The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](https://github.com/Awes0meE/Awes0meE.github.io/pull/40), with the comparison drafts in `docs/experiments/claude-chime-homepage-three-way-2026-10-13/`; the matching writer rules are [PR #39](https://github.com/Awes0meE/Awes0meE.github.io/pull/39). The seven-homepage release is [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged at `8e009ef`; its nine-public-note counts and 31 production checks describe that checkpoint. Claude Chime's approved homepage was published through PR #35. Earlier interviews and decisions are in project briefs and `docs/session-log.md`; dated experiment packets preserve review evidence rather than current publication instructions.
