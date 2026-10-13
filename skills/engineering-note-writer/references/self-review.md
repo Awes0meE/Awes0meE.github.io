@@ -37,6 +37,7 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Does each quotation mark identify traceable wording, a real utterance, a UI label, a document claim, or a term genuinely being discussed? Are decorative and densely repeated scare quotes absent?
 - Do all user-specified prohibitions for this note reach zero hits at the scope the user set: exact forms and obvious variants for an expression ban, or direct functional equivalents for a construction or reader-effect ban?
 - Are bare negative-first binary reframes absent in both languages?
+- Are counted scaffold labels (`四个问题`, `four questions`) and forward road signs (`这一点后面还会再碰到`, `that comes back later`) absent, with any spine carried by the concrete items themselves?
 - Do current and nearby article endings avoid repeatedly using the same look-back or next-time frame, including differently worded equivalents? Keep an occasional apt use; this is a repetition check, not a banned-phrase scan.
 - Does each Chinese learning note have at most one prose paragraph starting with `我`, counting its introduction and all paragraphs under headings? Have the replacements been read for natural variety, complete meaning and unchanged factual status, rather than only passing a prefix count? English has no corresponding numerical limit.
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?

@@ -258,6 +258,18 @@ parallels are exempt from the mirror check.
 - The confirmed Chinese qualifier remains available when it carries real nuance.
 - Check missing tests, implementation, authorship, and publication status internally. Retained claims stay accurate; articles do not export the audit or list conclusions that cannot be claimed. Run `evidence-inventory-regression.md` in both languages.
 
+## Rejected Counted Scaffold Labels
+
+Context: a project homepage organises its sections around the supply states of a battery-powered board. The user wants that spine kept but not announced.
+
+Rejected Chinese: `手里的活儿一下从一个开关，变成了一个得回答四个问题的电源系统……前两个问题到这里有了答案……开头那四个问题，最后都落成了固件里的几条规则。`
+
+Expected Chinese: list the states once (`插着 Type-C 时谁给系统供电，拔掉以后谁来接手，电磁铁动作时主控会不会跟着掉压，电池什么时候可以充、什么时候必须停`), return to them in ordinary words (`插着线和拔了线这两种状态，到这里都有了着落`), and close on the concrete outcome (`落到固件里就是这几条规则`).
+
+Rejected English: `A switch became a power system with four questions to answer ... That answered the first two questions ... The one thing the branches still share is the battery, and that comes back later.`
+
+Accepted: `Two TLV61048 converters branch from BAT+.` A count that states a fact is not a scaffold label.
+
 ## Verification
 
 Run the stale-rule scan and report its hits:
