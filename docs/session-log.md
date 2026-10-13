@@ -995,3 +995,7 @@ The user asked for the Claude Chime homepage to be rewritten twice, once freely 
 The two failures became writer rules in [PR #39](https://github.com/Awes0meE/Awes0meE.github.io/pull/39): a Chinese change-sentence check (ZH-2/ZH-6) and a reader-prose ban on counted scaffold labels and forward road signs, with regression cases Z10, P07 and a direct-prose case. The Claude account copy of `engineering-note-writer` was replaced with the repository version at `60421fd`, and `neat-freak` v3.0.0 from `KKKKhazix/khazix-skills` at `322346d` was installed in the Claude account. The Codex copy of `neat-freak` on the Windows machine was not updated.
 
 Validation: Chinese sentence gate and reader-prose scans with zero hits in both languages, lint with content and UTF-8 validation (8 projects, 25 notes, 84 media), typecheck, production build, `git diff --check`, and the skill-creator validator. The user reviewed the Vercel preview before merge.
+
+## 2026-10-14 — Unapproved About draft discarded
+
+The About draft from 2026-09-07 had been kept only on the MacBook as `docs/rewrite-about-copy` (`af3ace5`, prose `bd6cdc9`). After it was pushed for review, the user asked to discard it if outdated. It was: the wording was never approved, it removed the education list the site presents, and it predates the current NTU dissertation work. About code on `main` had not changed since its base `007decf`, so nothing else depended on it. The remote branch was deleted; the MacBook keeps a local copy until the user removes it. The live About page is unchanged.

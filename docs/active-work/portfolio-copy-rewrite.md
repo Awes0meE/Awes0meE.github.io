@@ -6,7 +6,7 @@ All sixteen new bilingual study notes across the eight projects are approved. Pu
 
 The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
-Preserve `docs/rewrite-about-copy` at `af3ace5` (prose checkpoint `bd6cdc9`). The user paused its unapproved wording. Main's About page is excluded from this note release. Preserve remote `gh-pages`, which redirects old GitHub Pages visits. The latest named tag remains `v0.9.0`; this maintenance release does not create a tag.
+The unapproved 2026-09-07 About draft (`docs/rewrite-about-copy`, `af3ace5`) was discarded on 2026-10-14 as outdated. A future About rewrite starts from current `main` with a new confirmed brief. Preserve remote `gh-pages`, which redirects old GitHub Pages visits. The latest named tag remains `v0.9.0`; this maintenance release does not create a tag.
 
 ## Writing Contract
 
