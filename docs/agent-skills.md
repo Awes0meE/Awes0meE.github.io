@@ -70,9 +70,12 @@ Purpose:
   from selected supported facts instead of preserving an old sentence skeleton.
 - Require first-person learning-note prose to pass the Truth gate and Li Zhiyi gate, and require model-authored project/note article body to pass the scoped zero-hit reader-prose L1-1 through L1-5 gates; L1-5 rejects even one unqualified syntax/collocation calque or one-to-one narrative clause mirror. Keep requested neutral audits, summaries, and captions scoped to their neutral purpose.
 - Use direct assertions and normal sentence syntax in scoped normal narration, with inline code for exact technical tokens. Keep model-authored em dashes off by default; allow semantic colons and grounded quotations, while rejecting template-label colons, decorative quotation, dense repetition, and correctly scoped article-local bans. Reject bare negative-first binary reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form.
+- Do not announce or count an article's spine: counted scaffold labels and forward road signs such as `四个问题`, `前两个问题到这里有了答案`, `这一点后面还会再碰到`, `four questions` or `that comes back later` fail; list the concrete items once and return to them in ordinary words. In Chinese change sentences such as `从 A 变成 B`, the subject must actually undergo the change and A and B must be the same kind of thing.
 - Support `AddProject.skill` during project imports by drafting project body copy, related notes, summaries, tags, and media captions.
 
 Use it when the user asks to write, rewrite, polish, humanize, or structure project/note/media copy in the user's engineering-note style.
+
+The Claude account also carries a copy of this skill. On 2026-10-14 it was replaced with the repository version at `60421fd`; the copy does not update itself, so re-upload the folder after later skill changes.
 
 Dated five-way comparisons and direct fusion trials live under `docs/experiments/`. They are maintenance evidence for the repository-local writer, are not imported into the website, and may enter public content only after explicit user approval.
 
@@ -149,6 +152,11 @@ Source:
 Expected user-level Codex skill:
 
 - `neat-freak`
+
+Installed copies:
+
+- Claude account: v3.0.0 from `KKKKhazix/khazix-skills` at `322346d`, installed 2026-10-14 (`SKILL.md`, references, inventory script and MIT licence; the upstream evals are omitted).
+- Codex on the Windows machine: an older installation that was not updated on 2026-10-14.
 
 Rules incorporated into `CODEX.md` and `docs/memory-system.md`:
 

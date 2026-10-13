@@ -27,6 +27,12 @@ Current archives:
   frozen evidence of the earlier review stage; their original pending-review
   labels describe that stage, not the current approval state. Current handoff:
   `docs/active-work/portfolio-copy-rewrite.md`.
+- `claude-chime-homepage-three-way-2026-10-13/`: Chinese-first comparison of
+  the live Claude Chime homepage (`00-current.mdx`), a free-form rewrite
+  (`01-free.mdx`), a writer-skill rewrite (`02-skill.mdx`), the first merge the
+  user rejected for its counted-question framing (`03-merged.mdx`) and the
+  published bilingual candidate (`04-final.mdx`). PR #40 published the final
+  version; PR #39 turned the two rejected patterns into writer rules.
 
 Keep future experiment directories date-stamped. Preserve their original inputs,
 candidate mapping, and final audits so later writing-rule changes can be traced
