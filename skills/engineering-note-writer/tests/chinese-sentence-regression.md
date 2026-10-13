@@ -49,6 +49,13 @@ Reject `我已经把……缩小了` or a claimed EMI improvement. These add imp
 or results to a requirement. Never apply this fixture assumption to the actual
 Claude Chime page without its own supporting evidence.
 
+## Change-Sentence Regression
+
+| ID | Input and context | Expected behavior |
+|---|---|---|
+| Z10 | A commission's scope grew from a solenoid switch to battery charging, two boost rails and supply handover. `手里的活儿一下从一个开关，变成了一个得回答四个问题的电源系统。` | ZH-2 and ZH-6: the work itself did not turn into a switch or a system, and a switch (a component) and questions (things to answer) are not the same kind of item. Repair by stating the concrete change, for example listing the states that needed working out: `这几种状态我得挨个想清楚：插着 Type-C 时谁给系统供电，拔掉以后谁来接手……` Do not swap in another vivid noun that keeps the mismatched frame. |
+| P07 | The same context. `需求要是停在这里，这块板也就是一颗 MOS 加几个外围器件。` | Pass: the board, not the work, is described, and both sides name hardware of the same kind. |
+
 ## Five Workflow Cases
 
 | ID | Situation | Expected behavior |
@@ -61,7 +68,7 @@ Claude Chime page without its own supporting evidence.
 
 ## Review Procedure
 
-For these 20 cases, record the relationship that passes or fails, any sufficient
+For these 22 cases, record the relationship that passes or fails, any sufficient
 repair, and any meaning or language-scope change introduced by that repair.
 Re-read the repaired Chinese in context. Check that English is still evaluated
 by the pre-existing rules. A search for labels or a successful build alone does
