@@ -9,64 +9,64 @@ projectSlug: "juanyun-diy-cooling-prototype"
 visibility: "public"
 ---
 
-The cooler's OLED labels a percentage as `Fan Speed`. Following the [display function](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp), I find that it reads `dutyCycle`, the PWM duty sent to the fan. That label gives me a useful question to pursue. How does a duty setting act on a fan, and where would I get a reading of how fast the fan actually turns?
+The cooler's OLED has a line reading `Fan Speed` followed by a percentage, which looks a lot like a speed. Following the [display function](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp) down, what it prints is `dutyCycle`, the PWM duty sent to the fan. The mismatch between label and content leads straight to a question worth settling: how a duty setting actually acts on a fan, and where a reading of how fast the fan really turns would have to come from.
 
-这台散热器的 OLED 上有一项 `Fan Speed`，后面显示百分数。我顺着[程序里的显示函数](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)往下找，它取的是 `dutyCycle`，也就是发给风扇的 PWM 占空比。这个名字把我想研究的问题引了出来：一个占空比设置怎样作用于风扇，又要从哪里得到风扇实际转了多快的消息？
+散热器的 OLED 上有一行 `Fan Speed`，后面跟着一个百分数，看着挺像转速。顺着[显示函数](/uploads/projects/juanyun-public/diy-cooling/esp32-platformio-main.cpp)往下找，它印出来的是 `dutyCycle`，也就是发给风扇的 PWM 占空比。名字和内容对不上，正好引出一个值得弄清楚的问题：占空比设置到底怎样作用到风扇上，风扇实际转多快，又该从哪里读回来。
 
 ## Fan Interface Wiring / 风扇接口的连线
 
-On this version of the [ESP32 controller schematic](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf), D5 connects to the `PWM` net. The fan outputs use three signals, `12V+`, `12V−`, and `PWM`. The two four-pin connectors also carry only those three signals, leaving one pin unconnected on each. Following the nets tells me more directly where power and control go than counting the connector pins does.
+On the [ESP32 controller schematic](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf), D5 connects to the `PWM` net, and the fan outputs use three signals, `12V+`, `12V−` and `PWM`. The two four-pin connectors carry only those three as well, each leaving one pin unconnected. Following the nets makes it clearer than counting pins which wire carries power and which carries control.
 
-在这版 [ESP32 控制板原理图](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)上，D5 接到 `PWM` 网络，风扇输出接口使用 `12V+`、`12V−` 和 `PWM` 三种信号。两个四针接口也只接了这三种信号，各留一针未连接。顺着连线看，比数接口有几只脚更直接，电源与控制各自走哪根线，一眼就能对上。
+[ESP32 控制板原理图](/uploads/projects/juanyun-public/diy-cooling/pcb-schematic.pdf)上，D5 接到 `PWM` 网络，风扇输出用到 `12V+`、`12V−` 和 `PWM` 三种信号。两个四针接口也只接了这三种，各空着一针。顺着网络看，比数接口有几只脚直观，电源和控制各走哪根线，一下就能对上。
 
 ![Fan power and PWM connections on the ESP32 controller schematic / ESP32 控制板原理图中的风扇电源与 PWM 接口](/uploads/projects/juanyun-public/diy-cooling/esp32-schematic.png)
 
-Studying four-wire PWM fans brought their internal drive electronics into the picture for me. The four connections provide power, ground, a PWM input, and a tachometer output. The supply wires deliver the motor's energy, the controller sends a command through the PWM input, and circuitry inside the fan drives the motor. [Analog Devices' explanation of fan control](https://www.analog.com/en/resources/analog-dialogue/articles/how-to-control-fan-speed.html) also describes why a dedicated PWM input matters. It lets the fan electronics remain powered; repeatedly switching the entire fan supply can interrupt the tachometer output along with it.
+Looking into how four-wire PWM fans work made me count the drive circuit inside the fan as part of the system. The four connections are power, ground, PWM input and tachometer output. The motor's energy comes through the supply wires, the controller gives its command on the PWM line, and the fan's own electronics drive the motor. [Analog Devices' explanation of fan control](https://www.analog.com/en/resources/analog-dialogue/articles/how-to-control-fan-speed.html) adds that a dedicated PWM line lets those electronics stay powered, whereas repeatedly switching the whole fan supply can cut the tachometer output along with it.
 
-查四线 PWM 风扇的原理时，我才把风扇内部的驱动电路也放进考虑。它有供电、地、PWM 输入和测速输出这四条连接。电机所需的能量由电源线提供，控制器从 PWM 输入给出指令，风扇内部电路负责驱动电机。[Analog Devices 的风扇控制说明](https://www.analog.com/en/resources/analog-dialogue/articles/how-to-control-fan-speed.html)还讲到，把 PWM 放在专用控制线上，可以让风扇电子电路持续供电；若用开关反复切断整只风扇的电源，测速输出也可能随供电中断。
+查四线 PWM 风扇的工作方式，我才把风扇肚子里的驱动电路也算进来。四根线分别是供电、地、PWM 输入和测速输出。电机要的能量从电源线来，控制器从 PWM 线下指令，真正驱动电机的是风扇内部的电路。[Analog Devices 的风扇控制说明](https://www.analog.com/en/resources/analog-dialogue/articles/how-to-control-fan-speed.html)还提到，PWM 单独走一根控制线，风扇里的电子电路就能一直有电；要是拿开关反复切整只风扇的供电，测速输出也可能跟着断掉。
 
-I can now consider the two wiring jobs separately. The 12 V supply provides energy for the motor, while the GPIO provides a logic signal. That signal needs a compatible voltage level and ground reference at the fan interface. The motor supply voltage does not define the PWM pin's logic level. I would map each connector pin against the schematic and the fan's pin definitions; a four-pin housing alone leaves those connections unspecified.
+Power and control therefore need separate thought when wiring. The 12 V supply delivers the motor's running energy, while the GPIO provides a logic signal whose level and ground reference have to suit the fan interface; the motor's supply voltage says nothing about the PWM pin's logic level. The actual pin order still has to be matched wire by wire against the schematic and the fan's definition, because a four-pin housing on its own settles none of it.
 
-这也解释了我在接线时应该分别考虑的两件事。12 V 供电负责提供电机运行所需的能量，GPIO 提供的是逻辑信号。控制信号的电平和参考地要与风扇接口相容，不能按电机的供电电压去理解 PWM 引脚。具体接插件的脚序仍要按图纸和风扇定义逐根对应，四针的外形本身并没有把这些关系说明白。
+这样一来，供电和控制在接线时就得分开想。12 V 送的是电机运转的能量，GPIO 给的是逻辑信号，控制信号的电平和参考地要跟风扇接口对得上，不能拿电机的供电电压去理解 PWM 引脚。具体的脚序还得按图纸和风扇定义一根根对，光看四针的外形，什么也定不下来。
 
-## Frequency, Duty, and Speed / 频率、占空比和转速
+## Frequency, Duty and Speed / 频率、占空比和转速
 
-The program initially configures PWM at 15 kHz with 8-bit resolution. A cycle at that frequency lasts about 66.7 μs. An ideal 50% duty keeps the signal high for about 33.3 μs of each cycle. The code maps percentages to integers from 0 to 255, so 50 becomes 127, producing approximately half duty. All of these quantities describe the pin waveform. None yet tells me how many revolutions the blades make per minute.
+The program starts PWM at 15 kHz with 8-bit resolution. One cycle lasts about 66.7 μs, so an ideal 50% duty keeps the signal high for roughly 33.3 μs each cycle. The code maps percentages from 0 to 100 onto 0 to 255, and 50 becomes 127, just under half. All of these numbers describe the waveform on the pin; none of them yet says how many times the blades turn in a minute.
 
-程序最初把 PWM 设为 15 kHz，使用 8 位分辨率。按这个频率计算，一个周期约为 66.7 μs；理想的 50% 占空比，就是每个周期约有 33.3 μs 为高电平。代码把百分数映射到 0 至 255，50 会得到整数 127，对应接近一半的输出比例。这里算的都是引脚上的波形，还没有涉及叶片每分钟转多少圈。
+程序一开始把 PWM 设在 15 kHz、8 位分辨率。一个周期约 66.7 μs，理想的 50% 占空比，就是每个周期里大约 33.3 μs 是高电平。代码把 0 到 100 的百分数映射到 0 到 255，50 得到 127，略低于一半。这些数说的都是引脚上的波形，跟叶片一分钟转几圈还没扯上关系。
 
-The main loop also does not have to toggle the pin for every 15 kHz pulse. As the [ESP32 LEDC documentation](https://docs.espressif.com/projects/esp-idf/en/v4.4.8/esp32/api-reference/peripherals/ledc.html) explains, a configured channel generates PWM at the selected frequency and duty. The program can wait before writing a new duty while the peripheral continues producing the previous waveform. How often temperature processing changes a setting and how long one PWM cycle lasts are two different time scales.
+The main loop does not have to toggle the pin for every 15 kHz pulse either. According to the [ESP32 LEDC documentation](https://docs.espressif.com/projects/esp-idf/en/v4.4.8/esp32/api-reference/peripherals/ledc.html), once a channel is configured the peripheral generates PWM at the set frequency and duty by itself. The program writes a new duty only now and then, and between writes the peripheral keeps producing the old waveform. How often temperature processing changes the setting and how long one PWM cycle lasts sit on entirely different time scales.
 
-15 kHz 的脉冲也不需要主循环逐个翻转引脚。[ESP32 的 LEDC 文档](https://docs.espressif.com/projects/esp-idf/en/v4.4.8/esp32/api-reference/peripherals/ledc.html)说明，通道配置好以后，就按设定的频率和占空比产生 PWM。程序可以隔一段时间才写入新的占空比，期间外设继续输出原来的波形。温度处理多久改变一次设置，与 PWM 一个周期有多长，分属两种时间尺度。
+15 kHz 的脉冲也用不着主循环一个个去翻。[ESP32 的 LEDC 文档](https://docs.espressif.com/projects/esp-idf/en/v4.4.8/esp32/api-reference/peripherals/ledc.html)说明，通道配好以后，外设会按设定的频率和占空比自己产生 PWM。程序隔一阵才写一次新的占空比，中间外设照旧输出原来的波形。温度处理多久改一次设置，和 PWM 一个周期多长，完全是两个时间尺度上的事。
 
-For the frequency itself, I would start with the particular fan's interface requirements. [Noctua's microcontroller guide](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring), for example, specifies a 25 kHz target and an accepted range of 21 to 28 kHz for its fans. It is a useful manufacturer example of what to check. The original program lets buttons change frequency in 200 Hz steps. Those steps change how often the waveform repeats; a proportional increase in fan speed does not follow from increasing that number.
+Choosing the frequency starts with the particular fan's interface requirements. [Noctua's microcontroller guide](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring), for example, targets 25 kHz for its fans and accepts 21 to 28 kHz. That is one manufacturer's requirement for its own fans, and a handy example of what to check. In the original program each button press moves the frequency up or down by 200 Hz, which only changes how fast the waveform repeats; raising that number does not make the fan spin proportionally faster.
 
-频率该选多少，我会先查具体风扇的接口要求。以 [Noctua 的微控制器接线说明](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring)为例，它给出的目标值是 25 kHz，接受范围为 21 至 28 kHz。这是厂商对其风扇的要求，可以拿来学习怎样核对接口。原程序里按键每次把频率加减 200 Hz，只是在改变波形的重复频率；把频率数值调高，并不等于给风扇增加了同样比例的转速。
+频率选多少，先得查具体风扇的接口要求。以 [Noctua 的微控制器接线说明](https://www.noctua.at/en/support/faqs/microcontroller-guide-pwm-setup-and-rpm-monitoring)为例，他们家风扇的目标值是 25 kHz，可接受范围 21 到 28 kHz。这是厂商对自家风扇的要求，正好拿来练习怎么核对接口。原程序里按一次键，频率加减 200 Hz，改的只是波形重复得多快；频率数字调高了，风扇并不会按同样的比例转得更快。
 
 ## Tachometer Interface and RPM Calculation / 测速接口与转速换算
 
-An actual speed reading has to travel back from the fan. [Noctua's PWM white paper](https://cdn.noctua.at/media/Noctua_PWM_specifications_white_paper.pdf) describes an open-collector tachometer output producing two pulses per revolution on its fans. The internal output transistor pulls the signal low when it conducts. When it switches off, an external pull-up resistor brings the line high. A controller connected to that node can count the pulses produced as the fan rotates.
+A real speed reading has to travel back from the fan. [Noctua's PWM white paper](https://cdn.noctua.at/media/Noctua_PWM_specifications_white_paper.pdf) describes an open-collector tachometer output on its fans that produces two pulses per revolution. When the fan's internal output transistor conducts it pulls the line low; when it switches off, an external pull-up resistor brings the line back high. A controller attached to that node can count the pulses as the fan turns.
 
-实际转速需要从另一个方向传回来。[Noctua 的 PWM 技术白皮书](https://cdn.noctua.at/media/Noctua_PWM_specifications_white_paper.pdf)说明，其风扇使用开集电极测速输出，每转一圈产生两个脉冲。风扇内部的输出晶体管导通时，把信号线拉低；关断时，信号线靠外部上拉电阻回到高电平。控制器接在这个节点上，就能数到随转动产生的脉冲。
+真正的转速得从风扇那头传回来。[Noctua 的 PWM 技术白皮书](https://cdn.noctua.at/media/Noctua_PWM_specifications_white_paper.pdf)说明，他们的风扇用开集电极测速输出，每转一圈出两个脉冲。风扇里的输出晶体管导通时把信号线拉低，关断时靠外部上拉电阻把线拉回高电平。控制器接在这个节点上，就能数到随转动产生的脉冲。
 
-I would choose the pull-up supply for the controller's logic voltage and give the tachometer output and controller a common ground reference. For a worked example, a 10 kΩ resistor to 3.3 V gives approximately 0.33 mA while the output is low. That calculation helps check the current, but resistor selection also depends on the allowed sink current and the signal's rise time. A larger resistance charges the line capacitance more slowly. Inspecting the levels and edges at the controller input would establish whether the signal can be read reliably.
+The pull-up should go to the controller's logic voltage, and the tachometer output and controller need a common ground. With a 10 kΩ pull-up to 3.3 V, about 0.33 mA flows while the output is low. That figure checks the current, but the actual value also has to respect the output's allowed sink current and the signal's rise time, since a larger resistor charges the line capacitance more slowly. Whether the controller pin sees clean enough levels and edges to count reliably is something to confirm on an oscilloscope.
 
-我会按主控的逻辑电压选择上拉电源，并让测速输出与主控共用参考地。假设上拉到 3.3 V，电阻取 10 kΩ，输出拉低时的电流约为 0.33 mA。这个计算方便检查电流大小，实际选值还要兼顾输出允许的灌电流和信号上升速度。电阻太大，信号线上的电容充电会更慢；到主控引脚处观察高低电平和边沿，才能知道它能否被可靠识别。
+上拉电源要按主控的逻辑电压来选，测速输出和主控还得共地。假设上拉到 3.3 V、电阻取 10 kΩ，输出拉低时电流约 0.33 mA。这个算式能核对电流大小，实际取值还要顾及输出允许的灌电流和信号上升速度，电阻越大，线上的电容充得越慢。主控引脚上的高低电平和边沿能不能被可靠识别，得拿示波器看过才算数。
 
-Once the pulse count per revolution is known, the conversion is short. At two pulses per revolution, a 100 Hz tachometer signal represents 50 revolutions per second, or 3000 rpm. I explored pulse timing in the [car power and speed-feedback note](/notes/arduino-smart-car-line-tracking-learning-note); the same counting idea applies here. I need the fan's own pulses-per-revolution value and must keep the tachometer frequency separate from the 15 kHz control waveform.
+Once pulses per revolution are known, the conversion is short. At two pulses per revolution, a 100 Hz tachometer signal means 50 revolutions per second, or 3000 rpm. The car's [power and wheel-speed note](/notes/arduino-smart-car-line-tracking-learning-note) worked through pulse timing, and the same counting idea carries over here, as long as the fan's own pulses-per-revolution value is used and the tachometer frequency is kept apart from the 15 kHz control waveform.
 
-每圈脉冲数确定以后，计算就很短。按两脉冲一圈举例，100 Hz 的测速信号对应每秒 50 圈，也就是 3000 rpm。我之前在[小车电源与速度反馈笔记](/notes/arduino-smart-car-line-tracking-learning-note)里研究过脉冲计时，这里沿用同一个计数思路。要换成风扇自己的每圈脉冲数，并把测速频率与前面控制端的 15 kHz 分开。
+每圈脉冲数确定以后，换算就很短了。按两脉冲一圈算，100 Hz 的测速信号对应每秒 50 圈，也就是 3000 rpm。小车那篇[供电与轮速测量](/notes/arduino-smart-car-line-tracking-learning-note)研究过脉冲计时，这里沿用同一个计数思路，只是要换成风扇自己的每圈脉冲数，也别把测速频率和控制端的 15 kHz 搅在一起。
 
-Two fans introduce another wiring question. Both fan outputs in the schematic share `PWM`, so they receive the same control waveform. Reading each fan's speed would require separate tachometer inputs. Reasoning from the open-collector circuit, joining both outputs would let either one pull the shared node low. Overlapping pulses would no longer identify which fan produced them. Sharing a command is convenient, while observing each fan individually requires its own feedback.
+Two fans bring one more wiring question. Both fan outputs on the schematic share `PWM`, so they receive the same control waveform. Knowing each fan's speed separately would need separate tachometer inputs. Following the open-collector behaviour through, tying both outputs together would let either fan pull the shared node low, and with the pulses overlapping there would be no telling which fan produced them. A shared command is convenient; watching each fan on its own needs a feedback line for each.
 
-两个风扇还会多出一个接线问题。原理图上的两路风扇输出共用 `PWM`，所以会收到同一个控制波形。若希望知道两只风扇各自的转速，就需要分别接收测速信号。按开集电极的工作方式推下去，把两个测速输出并在一起，任意一边拉低都会让公共节点变低，重叠的脉冲便无法分清来自哪一只。共享控制指令很方便，分别观察每只风扇还需要各自的反馈。
+两只风扇又带出一个接线问题。原理图上两路风扇输出共用 `PWM`，收到的是同一个控制波形。想分别知道两只风扇的转速，测速信号就得分开接。按开集电极的工作方式推下去，两个测速输出要是并在一起，任何一边拉低都会把公共节点拉低，脉冲叠在一起，就分不清是哪一只的了。控制指令共用很省事，想单独看清每只风扇，还得各给一路反馈。
 
-## Duty Cycle and Fan Speed / 占空比与风扇转速
+## Duty Cycle and Fan Speed / 占空比与转速的对应关系
 
-With a speed reading available, I could compare duty and rotation directly. I would hold supply voltage and PWM frequency constant, step through duty settings, and record speed after it settles to build a response curve for that fan. Low duty deserves a closer check. Starting from rest and reducing duty on a fan that is already turning can be recorded separately, so the curve also captures the starting and low-speed behaviour that matter in use.
+With a speed reading available, duty and rotation can finally be compared side by side. I would hold the supply voltage and PWM frequency fixed, step the duty one notch at a time, record the speed once it settles, and plot this fan's response curve. The low-duty end deserves its own test: whether the fan can start from rest, and how low the duty can go once it is already spinning before it stops, recorded separately. A curve built that way includes the starting and low-speed behaviour that matters most in actual use.
 
-有了测速读数，占空比与转速的关系才方便放到一起比较。我想固定供电电压和 PWM 频率，逐档改变占空比，等转速稳定后记录下来，画出这只风扇的响应曲线。低占空比处尤其值得单独试，从静止开始能否启动，以及已经转起来后能否继续降低占空比，可以分别记录。这样得到的曲线，也就包含了实际使用时关心的启动和低速运行情况。
+有了测速读数，占空比和转速才能放在一起比。我想固定供电电压和 PWM 频率，一档一档改占空比，等转速稳定后记下来，画出这只风扇的响应曲线。低占空比那一段尤其值得单独试，从静止能不能起转，已经转起来以后能降到多低还不停，分开记。这样画出来的曲线，才包含实际使用时最在意的启动和低速表现。
 
-The current program displays duty after `Fan Speed` and does not read a tachometer input. I would label that percentage `PWM` and add a separate `RPM` reading when speed sensing is connected. One shows the setting I sent; the other shows the fan's response. Both would be visible while adjusting the cooler, with each fan's operation available to check individually.
+This version of the program hangs duty cycle after `Fan Speed` and never reads a tachometer input. To change that, the screen line would simply say `PWM`, with a separate `RPM` line added once speed sensing is wired in. One line shows the setting I sent, the other shows how the fan answered, and with the two side by side it would be obvious at a glance which fan was slacking off.
 
-这版程序目前把占空比显示在 `Fan Speed` 后面，没有读取测速输入。我更愿意让界面直接显示 `PWM` 百分数，接入测速后再单独显示 `RPM`。一项告诉我发出了什么设置，一项告诉我风扇怎样响应。调节时就能同时看到设置和响应，也能单独检查两只风扇的运行情况。
+这版程序把占空比挂在 `Fan Speed` 后面，又没读测速输入。要改的话，屏幕上那行干脆写成 `PWM`，接上测速以后再单独加一行 `RPM`。一行是我发出去的设置，一行是风扇给出的回应，两行并排摆着，调风扇的时候哪只在偷懒，一眼就看得出来。
