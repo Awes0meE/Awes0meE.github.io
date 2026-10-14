@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { BilingualText } from "@/components/bilingual-text";
-import { PaperRouteTransitionProvider } from "@/components/paper-route-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { openGraphBase, site } from "@/lib/site";
 
-const languageBootstrapScript = `try{var l=localStorage.getItem("portfolio-language");if(l!=="zh"&&l!=="en"){l="en";}document.documentElement.dataset.lang=l;document.documentElement.lang=l==="zh"?"zh-CN":"en";}catch(e){document.documentElement.dataset.lang="en";document.documentElement.lang="en";}`;
+const preferenceBootstrapScript = `(function(){var d=document.documentElement;try{var l=localStorage.getItem("portfolio-language");if(l!=="zh"&&l!=="en"){l="en";}d.dataset.lang=l;d.lang=l==="zh"?"zh-CN":"en";}catch(e){d.dataset.lang="en";d.lang="en";}var t;try{t=localStorage.getItem("portfolio-theme");}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}d.dataset.theme=t;d.style.colorScheme=t;var c=t==="light"?"#eeede9":"#080808";var m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++){m[i].content=c;}})();`;
 
 const signalDisplay = localFont({
   src: "./fonts/BarlowCondensed-SemiBold.ttf",
@@ -38,6 +37,14 @@ export const metadata: Metadata = {
   }
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#eeede9" },
+    { media: "(prefers-color-scheme: dark)", color: "#080808" }
+  ],
+  colorScheme: "dark light"
+};
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -53,21 +60,19 @@ export default function RootLayout({
     >
       <body>
         <script
-          id="portfolio-language-bootstrap"
+          id="portfolio-preference-bootstrap"
           dangerouslySetInnerHTML={{
-            __html: languageBootstrapScript
+            __html: preferenceBootstrapScript
           }}
         />
-        <PaperRouteTransitionProvider>
-          <a className="skip-link" href="#main-content">
-            <BilingualText en="Skip to content" zh="跳到主要内容" />
-          </a>
-          <SiteHeader />
-          <div id="main-content" className="site-main-target" tabIndex={-1}>
-            {children}
-          </div>
-          <SiteFooter />
-        </PaperRouteTransitionProvider>
+        <a className="skip-link" href="#main-content">
+          <BilingualText en="Skip to content" zh="跳到主要内容" />
+        </a>
+        <SiteHeader />
+        <div id="main-content" className="site-main-target" tabIndex={-1}>
+          {children}
+        </div>
+        <SiteFooter />
       </body>
     </html>
   );

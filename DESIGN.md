@@ -1,27 +1,70 @@
 ---
 name: Kinetic Signal Ledger
-description: Ember Black opt-in visual system for Alvin Li's bilingual, evidence-calibrated iRidium engineering portfolio.
+description: One sitewide instrument grammar in two luminance themes (Ember Black, Bench Paper) for Alvin Li's bilingual, evidence-calibrated iRidium engineering portfolio.
 scope:
-  release: v0.9.0
-  appliesTo: "routes rooted by .signal-theme: homepage, work, notes, media, and about"
-  excludes: project and note detail routes retain the existing paper system
+  release: v0.9.0 unified-theme update (2026-10)
+  appliesTo: "every route: homepage, work, notes, media, about, project detail, and note detail"
+  themes: "Ember Black (dark, default) and Bench Paper (light), selected by html[data-theme]"
+  retired: the light pine/graphite paper system and its black-to-paper route handoff
 colors:
+  # Ember Black (dark, default). Runtime source: RGB triplets on :root in app/globals.css.
   canvas: "#080808"
-  surface-deep: "#0D0D0C"
+  surface-deep: "#0B0B0A"
+  surface-panel: "#11110F"
   surface-raised: "#171614"
-  elevated-graphite: "#2F2F2F"
   text: "#FAFAFA"
   warm-white: "#F7F0E8"
-  muted: "#AAA39A"
-  dim: "#77716B"
+  t1: "#E1D9D0"
+  t2: "#C4BDB5"
+  t3: "#AAA39A"
+  t4: "#928B84"
+  t5: "#7D7771"
+  t6: "#5F5B56"
+  rule: "#3B3936"
   line: "rgba(250, 250, 250, 0.20)"
   line-soft: "rgba(250, 250, 250, 0.11)"
   ember: "#FF7400"
   ember-soft: "#FF9A4A"
+  ember-text: "#FF9A4A"
+  ember-hover: "#FF8A2B"
   focus: "#FFB36B"
+  on-ember: "#080808"
+  code: "#0D0D0C"
+  image-well: "#10100E"
+  glow-warm: "#FFD8AD"
+  tint: "#0F0A07"
+  shadow: "#000000"
   orbit-embedded: "#B9914B"
   orbit-firmware: "#5FA78F"
   orbit-tools: "#9B90B5"
+  # Bench Paper (light). Ember marks, ember-soft, and on-ember are shared with Ember Black.
+  light-canvas: "#EEEDE9"
+  light-surface-deep: "#E8E7E2"
+  light-surface-panel: "#F4F3EF"
+  light-surface-raised: "#FAF9F6"
+  light-text: "#121212"
+  light-warm-ink: "#141311"
+  light-t1: "#22201D"
+  light-t2: "#34312D"
+  light-t3: "#4A4641"
+  light-t4: "#5C5751"
+  light-t5: "#6A655E"
+  light-t6: "#928D86"
+  light-rule: "#CCC9C2"
+  light-line: "rgba(18, 18, 18, 0.20)"
+  light-line-soft: "rgba(18, 18, 18, 0.11)"
+  light-ember-text: "#B04E00"
+  light-ember-hover: "#943E00"
+  light-focus: "#B04E00"
+  light-code: "#E2E0DA"
+  light-image-well: "#E2E0DA"
+  light-glow: "#FFFFFF"
+  light-glow-warm: "#FFC48C"
+  light-tint: "#FCF6EE"
+  light-shadow: "#2E261E"
+  light-orbit-embedded: "#966E26"
+  light-orbit-firmware: "#2E7D63"
+  light-orbit-tools: "#6C6096"
 typography:
   display:
     fontFamily: '"Barlow Condensed", "Arial Narrow", sans-serif'
@@ -33,6 +76,19 @@ typography:
     fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
   mono:
     fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+components:
+  bench-plate:
+    backgroundColor: "{colors.ember}"
+    textColor: "{colors.on-ember}"
+    typography: "{typography.display}"
+  bench-rail:
+    width: "248px"
+  bench-reading-column:
+    textColor: "{colors.t1}"
+    typography: "{typography.body}"
+    width: "58ch"
+  image-well:
+    backgroundColor: "{colors.image-well}"
 geometry:
   interface: sharp
   atom: circular
@@ -42,19 +98,23 @@ motion:
   electrons: evenly phased orbital travel with tapered comet tails
   nucleus: slower clockwise rotation
   separator: repeating iRidium marks scrolling upward
+  theme-switch: 260ms root crossfade through document.startViewTransition
+  route-entry: vertical leave-and-arrive on nav-forward and nav-back, shared project-figure morph
 ---
 
 # Design System: Kinetic Signal Ledger
 
 ## Scope
 
-This document is the design authority for the Kinetic Signal Ledger implementation released in `v0.9.0`. Ember Black is not sitewide: the homepage, `/work`, `/notes`, `/media`, and `/about` opt into the shared system. Project and note detail routes retain the existing light paper system unless a future, separately approved redesign changes their scope.
+This document is the design authority for the Kinetic Signal Ledger. Since the 2026-10 unified-theme update on top of `v0.9.0`, the system is sitewide: the homepage, `/work`, `/notes`, `/media`, `/about`, every `/work/[slug]` project page, and every `/notes/[slug]` note page share one grammar of sharp fields, 1px rules, mono coordinates, Barlow display, and one ember signal. The former light paper system (pine and graphite accents, rounded cards, cool grid-paper ground) is retired and must not be revived on any route.
 
-The opt-in boundary is the shared `.signal-theme` shell marker on a route's root content. `body:has(.signal-theme)` adapts the shared body, header, navigation, language control, focus treatment, selection, and footer without forking those components. A route that remains in the paper system must not receive the marker, and surface-specific composition still belongs to that route's approved brief rather than becoming a global template.
+The grammar renders in two luminance themes, **Ember Black** (dark, the default) and **Bench Paper** (light). Both themes carry the same layouts, type, geometry, motion, and evidence rules; only token values change. The theme is the `data-theme` attribute on `html`, set before first paint (see *Theme control*). A surface never forks its markup or composition per theme.
+
+The shell rules apply globally on `body`: the shared body, header, navigation, preference pill, focus treatment, selection, and footer read the theme tokens directly, with no route-level opt-in. Every route's root content still carries the `.signal-theme` marker, which exposes the `--signal-*` aliases that surface styles use. Surface-specific composition belongs to that route's approved section below rather than becoming a global template.
 
 ## Creative North Star
 
-**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. The near-black canvas recalls a hardware bench at low light; fine rules, indices, and compact labels create an instrument grammar; warm white carries information; ember orange identifies the principal signal.
+**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. In Ember Black the near-black canvas recalls a hardware bench at low light; in Bench Paper the drafting-grey ground recalls the same bench under daylight. In both, fine rules, indices, and compact labels create an instrument grammar; warm white or warm ink carries information; ember orange identifies the principal signal.
 
 The homepage may be visually kinetic, but every motion must reinforce structure: the separator establishes flow, the nucleus gathers prototype work, the orbits group the technical stack, and project rows lead to inspectable evidence. The animation is an illustrative systems map, not telemetry or proof of project completion.
 
@@ -65,12 +125,28 @@ Key characteristics:
 - Hardware and firmware practice remain the subject; decorative effects stay subordinate.
 - Continuous motion is permitted only where it communicates orbit, flow, grouping, or signal direction.
 - Bilingual clarity, contrast, reduced-motion behavior, and evidence limits take priority over spectacle.
+- One grammar in two luminance themes; a page reads as the same instrument in either.
 
 ## Color System
 
-Canvas, text, elevated graphite, and ember are the global Ember Black anchors. Deeper surfaces, warm neutrals, and translucent rules create depth without turning the page into neon cyberpunk.
+Every color is a theme token declared once on `:root` in `app/globals.css` as an RGB triplet (`--c-canvas: 8 8 8`), so any surface can apply its own alpha with `rgb(var(--c-fg) / 0.14)`. Ember Black is the `:root` / `:root[data-theme="dark"]` block; Bench Paper overrides it under `:root[data-theme="light"]`, and the same light values repeat under `@media (prefers-color-scheme: light)` for `:root:not([data-theme])`, so a page without the attribute still follows the system. The frontmatter mirrors these triplets in hex: unprefixed keys are Ember Black, `light-*` keys are Bench Paper. Tailwind color names map to the same tokens in `tailwind.config.ts` (`ink` → warm, `graphite` → t3, `dim` → t5, `line` → rule, `paper` → canvas, `chalk` → panel, `raised`, `code`, `well`, `pine` and `moss` → ember text, `copper` → ember hover, `ember`, `on-ember`); the legacy names survive only as aliases and no longer mean pine or graphite colors.
 
-**The primary-signal rule.** Ember is the only saturated color used broadly across Ember Black interface state: primary actions, focus, directional marks, key rules, and selected controls. It must not become routine paragraph color or a blanket surface fill.
+### Ember Black (dark, default)
+
+Canvas, deep, panel, and raised surfaces step up from near-black in small warm increments. Text is near-white for headings and warm white for display and reading anchors; the `t1`–`t6` warm-grey ramp steps down from body copy (`t1`) through metadata (`t3`–`t4`) to quiet annotation (`t5`–`t6`). Ember text uses the softer ember so links and status read comfortably on black. Shadows use pure black at full strength.
+
+### Bench Paper (light)
+
+A drafting-grey canvas, a slightly darker deep surface, and paler panel and raised surfaces. Headings and display use near-black ink with a warm cast; the same `t1`–`t6` ramp inverts into warm darks. Ember marks stay at the shared ember value, but every ember that carries text, link, status, or focus meaning switches to the darker ember text so it holds AA contrast on paper, with an even darker ember hover. Shadows use a warm brown-black base and `--shadow-k` scales every shadow alpha (1 in Ember Black, 0.4 in Bench Paper) so elevation stays quiet on a light ground. The orbit category colors are darkened for paper.
+
+### Shared roles
+
+- **The on-ember rule.** Content set on a solid ember fill (the bench plate, selected language and theme options, selection, filled actions) uses the near-black on-ember token in both themes, never white.
+- **The image-well rule.** Image frames sit on the neutral image-well token, so evidence reads on paper-deep in Bench Paper and near-black in Ember Black. The two transparent `-system-block` diagrams carry white labels and keep the Ember Black image-well value as a dark plate in both themes.
+- **The logo-filter rule.** The iRidium header assets use the `--logo-filter` token: inverted to white in Ember Black, rendered black in Bench Paper. Geometry is never altered.
+- **Lines.** Rules and borders are the foreground at low alpha (about 0.11–0.20), so the same declaration produces a light hairline on black and a dark hairline on paper.
+
+**The primary-signal rule.** Ember is the only saturated color used broadly across interface state in either theme: primary actions, focus, directional marks, key rules, and selected controls. It must not become routine paragraph color or a blanket surface fill.
 
 **The orbital exception.** The technical atom uses three tightly scoped semantic colors:
 
@@ -80,18 +156,18 @@ Canvas, text, elevated graphite, and ember are the global Ember Black anchors. D
 
 These colors identify orbit membership only. They may tint the corresponding orbit, dash flow, electron edge, comet tail, and category label. They must not spread into unrelated navigation, project rows, education, or ordinary copy.
 
-**The mark exception.** Technology and institution marks may retain their recognizable brand colors. Every technology mark sits on the same black electron-badge surface. If a mark is too dark to remain legible, use an approved lightened derivative, white inlay, or restrained contrast treatment documented with that asset; do not add inconsistent white badge backgrounds.
+**The mark exception.** Technology and institution marks may retain their recognizable brand colors. Every technology mark sits on the same canvas-toned electron-badge surface. If a mark is too dark to remain legible, use an approved lightened derivative, white inlay, or restrained contrast treatment documented with that asset; do not add inconsistent white badge backgrounds.
 
-**The contrast rule.** Essential reading copy uses text or warm white on the canvas. Muted and dim tokens are reserved for metadata and nonessential annotation.
+**The contrast rule.** Essential reading copy uses text, warm white or warm ink, or `t1` on the canvas. The `t3`–`t6` steps are reserved for metadata and nonessential annotation.
 
 ## Typography
 
 The local Barlow Condensed SemiBold face is the English display voice. Chinese display copy uses PingFang SC, then Microsoft YaHei and the system sans stack. Body copy uses the native UI sans stack; indices, dates, tags, and instrument labels use the native monospace stack.
 
 - English hero and section headings use the display token; Chinese headings use `display-cjk` with independent line-height and width tuning.
-- On Ember Black desktop surfaces, English navigation reuses the same display token as `Project evidence index`; Chinese navigation keeps the CJK display stack. The `01`–`04` prefixes remain compact monospace metadata rather than part of the label voice.
+- On desktop, in both themes, English navigation reuses the same display token as `Project evidence index`; Chinese navigation keeps the CJK display stack. The `01`–`04` prefixes remain compact monospace metadata rather than part of the label voice.
 - The hero keeps one concise personal introduction in ember orange beneath the primary direction statement.
-- Long paragraphs remain in the body face. Mono is for compact technical metadata, not novelty body copy. Paragraphs and inline code use `text-wrap-safe` so long identifiers can wrap on narrow screens; fenced code retains its own horizontal scrolling.
+- Long paragraphs remain in the body face; detail-page reading copy is set at 17px (see *Detail pages — Bench Log*). Mono is for compact technical metadata, not novelty body copy. Paragraphs and inline code use `text-wrap-safe` so long identifiers can wrap on narrow screens; fenced code retains its own horizontal scrolling.
 - English and Chinese may wrap differently, but factual meaning and visual hierarchy must remain equivalent.
 
 ## Homepage Structure
@@ -130,7 +206,7 @@ The atom has exactly three equal-size elliptical orbit paths centered on the sam
 
 Each orbit contains exactly five electrons placed at equal path-phase intervals. All three orbits initialize from deterministic, interleaved phases so the first frame is balanced. Adding or removing a technology requires re-establishing equal spacing rather than clustering spare electrons together.
 
-Each electron contains one recognizable technology mark on a uniform black circular badge. Marks use a consistent optical scale rather than identical raw image bounds. Transparent negative space must reveal the shared black badge. Short labels associated with an orbit remain upright relative to the viewport even while the orbit assembly rotates; labels must never turn upside down with their parent path.
+Each electron contains one recognizable technology mark on a uniform circular badge filled with the canvas token (near-black in Ember Black, drafting grey in Bench Paper). Marks use a consistent optical scale rather than identical raw image bounds. Transparent negative space must reveal the shared badge. Short labels associated with an orbit remain upright relative to the viewport even while the orbit assembly rotates; labels must never turn upside down with their parent path.
 
 The three categories describe the portfolio's technical stack:
 
@@ -159,13 +235,22 @@ Animation pauses whenever the technical visual is outside the viewport or the do
 
 ### Shared header and footer
 
-`SiteHeader` and `SiteFooter` remain shared components. Ember Black styling is scoped through the route-level `.signal-theme` marker and the shared `body:has(.signal-theme)` shell rules; do not fork the components or apply the dark treatment to paper-system routes.
+`SiteHeader` and `SiteFooter` remain shared components. Their styling comes from the global `body` shell rules and the theme tokens, identically on every route; do not fork the components per route or per theme. The header is the one anchored element during route transitions (view-transition name `site-header`).
 
-Desktop navigation places a low-opacity `01`–`04` index before each label in both paper and Ember Black surfaces. Size, spacing, typography, lift, press feedback, and line growth are shared so changing surface does not change the control system; only the paper pine/graphite and Ember orange/warm-white colors differ. Exact routes expose `aria-current="page"`, nested routes expose `aria-current="location"`, and the homepage itself does not invent a current item. The compact mobile row omits the indices.
+Desktop navigation places a low-opacity `01`–`04` index before each label on every route. Size, spacing, typography, lift, press feedback, and line growth are one control system; the theme changes only token values (warm label, `t3` index, ember-text active state, ember line). Exact routes expose `aria-current="page"`, nested routes expose `aria-current="location"`, and the homepage itself does not invent a current item. The compact mobile row omits the indices.
 
 Under `prefers-reduced-motion: reduce`, navigation state remains visible but lift, press, and line-growth transitions become immediate. Semantic current-route state remains available on the shared navigation across every route.
 
-Preserve `public/brand/iridium-mark.png` and `public/brand/iridium-wordmark-script.png` with their intrinsic proportions. The wordmark always reads exactly `iRidium` in both languages. The middle separator repeats the mark glyph, not a replacement text logo. Filtering may adapt an existing transparent asset to the homepage theme, but must not alter its geometry.
+Preserve `public/brand/iridium-mark.png` and `public/brand/iridium-wordmark-script.png` with their intrinsic proportions. The wordmark always reads exactly `iRidium` in both languages. The middle separator repeats the mark glyph, not a replacement text logo. Filtering through the `--logo-filter` token adapts the transparent assets to each theme (white in Ember Black, black in Bench Paper) but must not alter their geometry.
+
+### Theme control
+
+The theme control is a sun/moon two-state segment inside the existing language pill (`SitePreferences`), after a hairline divider; the pill keeps its rounded language-control geometry and the 44px targets. Each option is a native button with `aria-pressed` and a bilingual screen-reader label; the selected option fills with ember and on-ember content, the same treatment as the selected language.
+
+- On a first visit the theme follows `prefers-color-scheme`, and keeps following live system changes.
+- A click stores `portfolio-theme` (`light` or `dark`) in `localStorage`; from then on the stored choice wins and the system setting is ignored.
+- A bootstrap script in `app/layout.tsx` runs before paint, restoring both `portfolio-language` and `portfolio-theme`, setting `html[data-theme]`, `color-scheme`, and the `theme-color` meta (canvas value of the chosen theme), so neither theme flashes.
+- Switching crossfades the whole root through `document.startViewTransition` (260ms). Under `prefers-reduced-motion: reduce`, or where view transitions are unsupported, the switch is instant.
 
 ### Hero actions
 
@@ -197,15 +282,15 @@ Do not place unreviewed third-party marks into the homepage, infer permission fr
 
 The technical atom is announced as one meaningful visual with a concise bilingual description. Its internal orbit paths, repeated marks, comet tails, and decorative traces remain hidden from assistive technology. Technology names conveyed only through logos must also exist in accessible text.
 
-Keyboard focus is always visible. A bilingual skip link is the first keyboard stop and moves focus directly to the current route content without adding a second main landmark. Shared header navigation, logo, language controls, homepage archive actions, and other standalone controls expose at least 44px touch targets in both paper and Ember themes. Interactions do not depend on hover, color, or motion alone. Verify both languages at desktop, tablet, and mobile widths, including keyboard navigation, contrast, overflow, document visibility changes, offscreen pausing, and reduced motion.
+Keyboard focus is always visible. A bilingual skip link is the first keyboard stop and moves focus directly to the current route content without adding a second main landmark. Shared header navigation, logo, language controls, homepage archive actions, and other standalone controls expose at least 44px touch targets in both Ember Black and Bench Paper. Interactions do not depend on hover, color, or motion alone. Verify both languages in both themes at desktop, tablet, and mobile widths, including keyboard navigation, contrast, overflow, document visibility changes, offscreen pausing, and reduced motion.
 
 ## Do's and Don'ts
 
 ### Do
 
-- Use ember sparingly as the main interface signal.
+- Use ember sparingly as the main interface signal, and use the ember-text token, not the ember mark, wherever ember carries readable text.
 - Keep gold, green, and violet confined to their three orbital categories.
-- Keep all electron badges black and adjust dark marks with documented, recognizable contrast treatments.
+- Keep all electron badges on the same canvas-toned surface and adjust dark marks with documented, recognizable contrast treatments.
 - Preserve the atom's equal orbit geometry, equal electron spacing, upright labels, and symmetric starting composition.
 - Let project metadata and public-file presence drive evidence rows.
 - Keep prototype, technology-mark, and institution-mark provenance explicit.
@@ -221,11 +306,12 @@ Keyboard focus is always visible. A bilingual skip link is the first keyboard st
 - Do not treat hero derivatives, orbit motion, or technology marks as engineering evidence.
 - Do not distort the iRidium wordmark or institution marks.
 - Do not introduce random or motion-only meaning, hover-only controls, scroll hijacking, or undersized targets.
-- Do not apply `.signal-theme` to routes that remain in the paper design.
+- Do not revive the retired paper system: no pine or graphite accents, rounded cards, cool grid-paper ground, or thick left borders, on any route or in either theme.
+- Do not hard-code a color that differs between themes; read it from the theme tokens.
 
 ## `/work` — Project Aperture Sequence
 
-This section governs the `/work` project index in release `v0.9.0`. Project detail routes remain outside this surface decision. The route uses **Experience mode**: authentic project evidence leads, while the archive interface recedes into a precise locating and inspection system.
+This section governs the `/work` project index in release `v0.9.0`, now rendered in both themes. Project detail routes are governed by *Detail pages — Bench Log*. The route uses **Experience mode**: authentic project evidence leads, while the archive interface recedes into a precise locating and inspection system.
 
 **Direction record.** The approved direction is **Project Aperture Sequence / 检视窗序列**, selected from three visualized structures with surface seed `c576f6e6`. Machine-local Impeccable comps may preserve the review process, but they are excluded from Git and are not portable design authority. This section and the shipping implementation are the durable record; generated review rasters never ship as project imagery.
 
@@ -238,21 +324,21 @@ This section governs the `/work` project index in release `v0.9.0`. Project deta
 
 ### Inter-project signal interval
 
-Every adjacent pair of project chapters is separated by a generous black interval containing one low-contrast band of short, thin, upright ember-orange ticks. With eight current projects, the page has exactly seven intervals; in general, the invariant is one interval per adjacent pair. The band belongs only to the right project stage and never crosses or animates beneath the left rail.
+Every adjacent pair of project chapters is separated by a generous canvas-colored interval containing one low-contrast band of short, thin, upright ember-orange ticks. With eight current projects, the page has exactly seven intervals; in general, the invariant is one interval per adjacent pair. The band belongs only to the right project stage and never crosses or animates beneath the left rail.
 
 The repeating tick phase travels continuously from right to left at approximately `12px/s`. Motion runs only while its own interval is near the viewport and the document is visible; it pauses offscreen and while the page is hidden. Under `prefers-reduced-motion: reduce`, the short ticks remain present as a static separator. The interval means only “next archive record.” It is decorative and must not imply progress, telemetry, completion, chronology, or a measured signal.
 
-Keep this separator quiet: broad black breathing room above and below, low orange contrast, no solid bar, arrows, waveform, grid, glow halo, blur, or horizontal-dash substitution.
+Keep this separator quiet: broad canvas breathing room above and below, low orange contrast, no solid bar, arrows, waveform, grid, glow halo, blur, or horizontal-dash substitution.
 
 ### Evidence and asset boundary
 
 Titles, statuses, dates, tags, summaries, evidence availability, project order, and destinations come from the repository content model. All production chapter and rail imagery comes from reviewed project assets under `public/uploads/projects/`; preserve each source image's aspect ratio and never substitute the approved mock, a generated placeholder, or a homepage presentation derivative. The final `/work` surface must remain inspectable evidence, not an invented metric or outcome wrapped in an archive aesthetic.
 
-Opening a paper detail from the `/work` or `/notes` Ember archive uses one bounded staged handoff rather than browser page snapshots. The live Ember page fades to a fully painted black field in 220ms; an opaque black mask then interpolates to paper white over the same 220ms before navigation commits. The destination mounts below that paper mask, and the mask fades away only after the target DOM, fonts, and first-viewport images are ready, revealing the paper page as one complete surface. The same handoff also applies to homepage note-detail rows because they cross the same dark-to-paper boundary. It remains interruptible, becomes immediate under `prefers-reduced-motion`, and never adds a black prelude to a direct detail-page visit, refresh, browser return, or paper-to-paper link.
+Opening a project or note from the `/work` or `/notes` archive, or from a homepage row, stays inside one surface: there is no theme change and no mask. React `<ViewTransition>` (`components/route-stage.tsx`) runs the route change. Links into detail pages carry the `nav-forward` transition type and Bench Log back links carry `nav-back`. On `nav-forward` the old page content fades up and away (150ms) and the new content rises into place (380ms, after a 110ms overlap); `nav-back` runs the same pair downward. The `/work` chapter image and the project page's lead figure share the view-transition name `project-figure-<slug>` and morph between their positions (440ms), so the visitor recognises the project they clicked. The header stays anchored under its own `site-header` name and never moves. Untyped navigations (direct visits, refresh, browser history) swap without directional motion, and under `prefers-reduced-motion: reduce` every view-transition duration is 0.
 
 ## `/media` — Focus Aperture
 
-The `/media` route uses **Experience mode** inside the shared Ember Black shell. Its approved direction is **Focus Aperture / 深焦检视窗**, selected from three visualized structures with surface seed `568122f0`. Machine-local Impeccable comps are non-portable review aids; this section and the shipping implementation are the durable record, and generated rasters never ship as evidence. The page's governing idea is project-bound media: a visitor chooses a named project source, inspects one lead record, and then enters that project's complete grouped library or case study. It must never collapse back into a loose, site-wide image wall.
+The `/media` route uses **Experience mode** inside the shared Kinetic Signal Ledger shell, in both themes. Its approved direction is **Focus Aperture / 深焦检视窗**, selected from three visualized structures with surface seed `568122f0`. Machine-local Impeccable comps are non-portable review aids; this section and the shipping implementation are the durable record, and generated rasters never ship as evidence. The page's governing idea is project-bound media: a visitor chooses a named project source, inspects one lead record, and then enters that project's complete grouped library or case study. It must never collapse back into a loose, site-wide image wall.
 
 ### Project-first archive structure
 
@@ -273,17 +359,17 @@ Project-source choices are native buttons with `aria-pressed`; the selected focu
 
 ### Motion and reduced motion
 
-Motion is bounded to the focus-aperture model: a 460ms aperture reveal, an eight-second ambient Ember scan rule, short source-selection transitions, and precise image or metadata hover wipes. These effects indicate selection and inspection only; they never imply telemetry, measurement, validation, completion, progress, or chronology. Under `prefers-reduced-motion: reduce`, the reveal, scan, transforms, and transitions stop completely while selection state, focus visibility, record identity, and every action remain available.
+Motion is bounded to the focus-aperture model: a 460ms aperture reveal, an eight-second ambient ember scan rule, short source-selection transitions, and precise image or metadata hover wipes. These effects indicate selection and inspection only; they never imply telemetry, measurement, validation, completion, progress, or chronology. Under `prefers-reduced-motion: reduce`, the reveal, scan, transforms, and transitions stop completely while selection state, focus visibility, record identity, and every action remain available.
 
 ## `/notes` — Routed Signal Map
 
-This section governs the Ember Black treatment for the `/notes` index in release `v0.9.0`. Individual `/notes/[slug]` pages remain outside this decision and retain their existing design until the page-by-page rollout reaches them. The index uses **Read mode**: its routing form helps visitors locate an engineering question or project thread, while the note record remains the destination.
+This section governs the `/notes` index in release `v0.9.0`, now rendered in both themes. Individual `/notes/[slug]` pages are governed by *Detail pages — Bench Log*. The index uses **Read mode**: its routing form helps visitors locate an engineering question or project thread, while the note record remains the destination.
 
 **Direction record.** The approved direction is **Routed Signal Map**, candidate `7 / 7` from surface seed `be3086ea`. Machine-local Impeccable comps and screenshots may record the review process, but `.impeccable/` is excluded from Git and cannot serve as cross-device evidence. This section, the bundled font provenance, and the shipping implementation are the durable record; generated review images never ship as interface or note evidence.
 
 ### Tonal field and typography
 
-- The index keeps the established Ember anchors while adding a local graphite ramp: net ground `#090B0A`, deep routing panels `#0B0D0C`, control fill `#10110F`, raised hover graphite `#171614`, and fine warm-white rules at several low opacities. Neutral text steps from warm white through restrained warm greys so headings, summaries, labels, and tertiary metadata remain distinct without introducing another accent.
+- The index uses the shared tonal steps: surface-deep for the net ground and opening band, surface-panel for routing panels and control fills, surface-raised for hover, and fine foreground rules at several low opacities. Neutral text steps from warm white (warm ink in Bench Paper) through the `t1`–`t6` ramp so headings, summaries, labels, and tertiary metadata remain distinct without introducing another accent.
 - Ember orange remains the only selected navigation signal. It may illuminate a chosen channel, its routed line, control state, ledger edge, matching record stems, focus treatment, and row interaction; it must not become routine body copy or a broad panel fill.
 - English headings and note titles use the self-hosted Barlow Condensed display face. Chinese headings and note titles use the same explicit PingFang SC, Microsoft YaHei, and system sans stack as the Media title surfaces, at a semibold weight for legibility. The former ZCOOL QingKe HuangYou subset and SIL OFL record remain archived in `app/fonts/` as provenance for the earlier `v0.9.0` treatment, but the current runtime does not load them. Body copy remains the native UI sans stack, while indices, counts, dates, tags, and control labels use the mono stack.
 
@@ -304,7 +390,7 @@ This section governs the Ember Black treatment for the `/notes` index in release
 
 ## `/about` — Tension Signal Column
 
-The `/about` route uses **Read mode** inside the shared Ember Black shell. Its approved direction is **Tension Signal Column / 张力信号柱**, selected from three visualized structures with surface seed `b1f777a9`. Machine-local Impeccable comps, approval sidecars, and screenshots are non-portable review aids because `.impeccable/` is excluded from Git. This section and the shipping implementation are the durable record; generated rasters never ship as portrait or interface artwork.
+The `/about` route uses **Read mode** inside the shared Kinetic Signal Ledger shell, in both themes. Its approved direction is **Tension Signal Column / 张力信号柱**, selected from three visualized structures with surface seed `b1f777a9`. Machine-local Impeccable comps, approval sidecars, and screenshots are non-portable review aids because `.impeccable/` is excluded from Git. This section and the shipping implementation are the durable record; generated rasters never ship as portrait or interface artwork.
 
 ### Identity narrative and first viewport
 
@@ -321,10 +407,45 @@ The `/about` route uses **Read mode** inside the shared Ember Black shell. Its a
 
 **The single-pulse rule.** Exactly one restrained ember pulse may travel along the hairline tension graph to communicate connection and flow. It carries no status or progress meaning, runs only while the column is in view and the document is visible, and stops completely under `prefers-reduced-motion: reduce` while every label and relationship remains legible.
 
-The About surface keeps the shared compressed display, warm-white reading hierarchy, mono coordinates, one-pixel rules, and Ember signal. Its planar regions and actions remain sharp and zero-radius; circles are reserved for the graph nodes and moving pulse. The portrait's source white and page-local supporting warm greys do not become new global palette roles.
+The About surface keeps the shared compressed display, warm-white (warm-ink in Bench Paper) reading hierarchy, mono coordinates, one-pixel rules, and Ember signal. Its planar regions and actions remain sharp and zero-radius; circles are reserved for the graph nodes and moving pulse. The portrait plate stays white in both themes. The portrait's source white and page-local supporting warm greys do not become new global palette roles.
 
 ### Responsive and evidence boundaries
 
 At mobile widths, the desktop split becomes one document-order sequence: identity and method, actions and contact, the untouched portrait plate, the four-node load path, then the practice ledger and current coordinates. No essential relationship depends on the desktop graph geometry, hover, motion, or horizontal scrolling.
 
 Every biographical, educational, employment, project, and current-study statement stays proportional to the supplied CV and repository evidence. Keep direct contribution, direct measurement, client report, inference, recollection, and unfinished validation distinct; the route geometry, portrait treatment, comp, review capture, and pulse establish presentation only and never strengthen a factual claim.
+
+## Detail pages — Bench Log
+
+Every `/work/[slug]` project page and `/notes/[slug]` note page uses the **Bench Log** layout in **Read mode**, in both themes. The page reads as one entry in Alvin's bench log: a numbered masthead and a margin index of entries in the order the work happened, around a calm reading column. It refuses the generic blog article (rounded cards, system-sans title, colored links, grid-paper ground). The direction contract is the surface brief for `app/work/[slug]/page.tsx`; this section and the shipping implementation (`app/globals.css` Bench Log block, `components/bench-log-rail.tsx`, `components/bench-log.module.css`, `components/content-renderer.tsx`) are the durable record.
+
+### Margin rail and contents strip
+
+- On desktop, a 248px sticky margin rail sits left of the article, below the header, with a 1px rule on its right edge. It lists one `§NN` entry per `h2` of the active language (language-scoped headings are counted per language), each with a mono number and the heading text, on a 1px vertical spine.
+- Each entry has a small square marker: unread is an outlined square on the canvas, read is filled `t4`, and the current entry is filled ember, with the current number in ember text, a warm 600-weight title, and `aria-current="location"`, so the state never depends on the square alone. A mono uppercase back link in ember text closes the rail.
+- At 1023px and below the rail becomes a sticky strip under the header: the current `§NN`, the current title, one progress square per entry (or an `NN/NN` counter when there are more than 12 entries), and a `Contents` disclosure that opens the full entry list and closes when an entry is chosen.
+
+### Masthead
+
+- One solid ember plate per page, set beside the Barlow title, with on-ember display numerals. On a project page the plate is the project's number; on a note page it is the linked project's number. There is no eyebrow kicker above the title.
+- The title row spans the whole article width so long titles stay on one or two lines. The English title is uppercase Barlow at a 0.96 line-height; Chinese uses `display-cjk` at 700 with an independent size and 1.2 line-height. Below 640px both titles step down (English about 2–2.5rem at line-height 1) so long titles wrap in three lines or fewer.
+- Under the title, the page splits into a reading column and a sticky side ledger (280–340px) that runs the full length of the body, so the right side of a wide screen always carries the project record. The lede opens the reading column at about 64ch in `t1`.
+- The side ledger opens with a 2px warm rule and separates rows with 1px rules: uppercase `t4` mono labels, `t1` values with tabular figures, status in ember text, tags as 1px-outlined chips, and ember-text links for public files. On project pages a compact development-notes list follows it; on note pages the ledger holds the project link, date, and tags, followed by the project's other notes.
+- At 1180px and below the side ledger stops being sticky and sits between the lead figure and the body (lede, figure, ledger, body); its notes list is dropped because the related-records ledger follows the body. At 640px and below the spec becomes a two-column ledger, short rows pair up, and the Project row is hidden because the plate and title already carry it.
+
+### Lead figure
+
+The lead figure (`FIG. 01`) comes from the optional project frontmatter `lead`, framed by `leadFit` (`cover` or `contain`); `coverFit` frames the cover on `/work` when there is no lead. `scripts/validate-content.mjs` validates all three fields. Only evidence images become lead figures, never logos: a project without `lead` has no lead figure. The figure is a 16:9 image well with a 1px rule at the head of the reading column, after the lede; below 1180px it sits between the lede and the ledger. It shares the `project-figure-<slug>` transition name with the `/work` chapter image.
+
+### Reading column
+
+- Running text keeps a 58ch measure in English and 40rem in Chinese, at 17px with a 1.75 line-height (1.9 in Chinese), in `t1`. Figures, code blocks, and tables extend to the full reading-column width.
+- Each `h2` opens with a 1px rule and is set inline with an ember-text mono `§NN` counter that matches the rail. `h3` and `h4` use the body face at a heavier weight.
+- Figures are numbered `FIG. NN` in ember-text mono, continuing from the lead figure, and sit in the image well.
+- Code blocks use the code token with a 1px border and a mono label bar; inline code uses a faint foreground tint. Tables open with a 2px warm rule and use tabular figures. Quotes are a faint ember-tinted field with a 1px ember border. Bullet lists use square markers and numbered lists use leading-zero numerals, both in ember-text mono.
+- **The no-left-bar rule.** No element in the reading column uses a thick colored left border. Rules are 1px and horizontal, or a full 1px frame.
+- **The zero-radius rule.** Every Bench Log surface, figure, chip, and control is square.
+
+### Related records
+
+The related-notes ledger, public files, and related media use the same grammar: Barlow section titles with 1px-outlined mono counts, 1px row rules, one full-row link per note with its index, copy, and arrow, image-well media tiles in an auto-fill grid of 220px minimum, and sharp ember-outline actions that fill with ember and on-ember text on hover. The ledger, its counts, and its links come from repository content; the layout adds no claims.

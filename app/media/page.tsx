@@ -1,9 +1,10 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowRight, ExternalLink, Play } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { RouteStage } from "@/components/route-stage";
 import {
   formatDateRange,
   formatDateRangeZh,
@@ -39,11 +40,6 @@ export const metadata: Metadata = {
     title: socialTitle,
     description: pageDescription
   }
-};
-
-export const viewport: Viewport = {
-  themeColor: "#080808",
-  colorScheme: "dark"
 };
 
 const mediaProjectConfig = [
@@ -213,171 +209,173 @@ export default function MediaPage() {
   });
 
   return (
-    <main className={`signal-theme ${styles.page}`}>
-      <Suspense
-        fallback={(
-          <MediaFocusAperture
+    <RouteStage>
+      <main className={`signal-theme ${styles.page}`}>
+        <Suspense
+          fallback={(
+            <MediaFocusAperture
+              groups={focusGroups}
+              totals={totals}
+              initialSlug={focusGroups[0]?.slug ?? ""}
+            />
+          )}
+        >
+          <MediaFocusApertureFromQuery
             groups={focusGroups}
             totals={totals}
             initialSlug={focusGroups[0]?.slug ?? ""}
           />
-        )}
-      >
-        <MediaFocusApertureFromQuery
-          groups={focusGroups}
-          totals={totals}
-          initialSlug={focusGroups[0]?.slug ?? ""}
-        />
-      </Suspense>
+        </Suspense>
 
-      <section className={styles.library} aria-labelledby="project-library-title">
-        <header className={styles.libraryHeader}>
-          <div>
-            <h2 id="project-library-title">
-              <BilingualText en="Media, grouped by project" zh="按项目分类的媒体库" />
-            </h2>
-            <p>
-              <BilingualText
-                en="Each chapter keeps its source project, engineering context, and records together."
-                zh="每一个分区都把项目来源、工程背景和对应媒体放在一起，不再混成一张总图墙。"
-              />
-            </p>
-          </div>
-          <div className={styles.libraryScope} aria-label="Archive scope / 档案范围">
-            <span>{count(totals.projects)} <BilingualText en="projects" zh="个项目" /></span>
-            <span>{count(totals.records)} <BilingualText en="records" zh="条记录" /></span>
-          </div>
-        </header>
+        <section className={styles.library} aria-labelledby="project-library-title">
+          <header className={styles.libraryHeader}>
+            <div>
+              <h2 id="project-library-title">
+                <BilingualText en="Media, grouped by project" zh="按项目分类的媒体库" />
+              </h2>
+              <p>
+                <BilingualText
+                  en="Each chapter keeps its source project, engineering context, and records together."
+                  zh="每一个分区都把项目来源、工程背景和对应媒体放在一起，不再混成一张总图墙。"
+                />
+              </p>
+            </div>
+            <div className={styles.libraryScope} aria-label="Archive scope / 档案范围">
+              <span>{count(totals.projects)} <BilingualText en="projects" zh="个项目" /></span>
+              <span>{count(totals.records)} <BilingualText en="records" zh="条记录" /></span>
+            </div>
+          </header>
 
-        <div className={styles.projectGroups}>
-          {groups.map((group, groupIndex) => {
-            const title = groupTitle(group);
-            const imageCount = group.items.filter((item) => item.type === "image").length;
-            const videoCount = group.items.length - imageCount;
+          <div className={styles.projectGroups}>
+            {groups.map((group, groupIndex) => {
+              const title = groupTitle(group);
+              const imageCount = group.items.filter((item) => item.type === "image").length;
+              const videoCount = group.items.length - imageCount;
 
-            return (
-              <section
-                key={group.slug}
-                id={`media-project-${group.slug}`}
-                className={styles.projectGroup}
-                aria-labelledby={`media-project-title-${group.slug}`}
-              >
-                <header className={styles.projectHeader}>
-                  <div className={styles.projectSequence} aria-hidden="true">
-                    <span>{String(groupIndex + 1).padStart(2, "0")}</span>
-                    <span>/</span>
-                    <span>{String(groups.length).padStart(2, "0")}</span>
-                  </div>
-                  <div className={styles.projectIdentity}>
-                    <h3 id={`media-project-title-${group.slug}`}>
-                      <BilingualText en={title.en} zh={title.zh} />
-                    </h3>
-                    {group.project ? (
-                      <p>
-                        <BilingualText en={group.project.summary} zh={group.project.summaryZh} />
-                      </p>
-                    ) : (
-                      <p>
-                        <BilingualText
-                          en="Records awaiting a confirmed project relationship."
-                          zh="这些记录仍在等待确认对应的项目关系。"
-                        />
-                      </p>
-                    )}
-                  </div>
-                  <dl className={styles.projectFacts}>
-                    <div>
-                      <dt><BilingualText en="Records" zh="记录" /></dt>
-                      <dd>{count(group.items.length)}</dd>
+              return (
+                <section
+                  key={group.slug}
+                  id={`media-project-${group.slug}`}
+                  className={styles.projectGroup}
+                  aria-labelledby={`media-project-title-${group.slug}`}
+                >
+                  <header className={styles.projectHeader}>
+                    <div className={styles.projectSequence} aria-hidden="true">
+                      <span>{String(groupIndex + 1).padStart(2, "0")}</span>
+                      <span>/</span>
+                      <span>{String(groups.length).padStart(2, "0")}</span>
                     </div>
-                    <div>
-                      <dt><BilingualText en="Images" zh="图像" /></dt>
-                      <dd>{count(imageCount)}</dd>
-                    </div>
-                    <div>
-                      <dt><BilingualText en="Videos" zh="视频" /></dt>
-                      <dd>{count(videoCount)}</dd>
-                    </div>
-                  </dl>
-                  <div className={styles.projectContext}>
-                    {group.project ? (
-                      <>
-                        <span>
-                          <BilingualText en={group.project.status} zh={formatStatusZh(group.project.status)} />
-                        </span>
-                        <span>
+                    <div className={styles.projectIdentity}>
+                      <h3 id={`media-project-title-${group.slug}`}>
+                        <BilingualText en={title.en} zh={title.zh} />
+                      </h3>
+                      {group.project ? (
+                        <p>
+                          <BilingualText en={group.project.summary} zh={group.project.summaryZh} />
+                        </p>
+                      ) : (
+                        <p>
                           <BilingualText
-                            en={formatDateRange(group.project.date)}
-                            zh={formatDateRangeZh(group.project.date)}
+                            en="Records awaiting a confirmed project relationship."
+                            zh="这些记录仍在等待确认对应的项目关系。"
                           />
-                        </span>
-                        <Link href={`/work/${group.slug}`}>
-                          <BilingualText en="Open project" zh="打开项目" />
-                          <ArrowRight size={16} aria-hidden="true" />
-                        </Link>
-                      </>
-                    ) : null}
-                  </div>
-                </header>
-
-                <ol className={styles.mediaGrid}>
-                  {group.items.map((item, itemIndex) => {
-                    const type = mediaType(item.type);
-
-                    return (
-                      <li key={item.id}>
-                        <a
-                          href={item.src}
-                          className={styles.mediaCell}
-                          aria-label={`${item.titleZh ?? item.title} / ${item.title}`}
-                        >
-                          <div className={styles.mediaVisual}>
-                            <Image
-                              src={item.thumbnail}
-                              alt=""
-                              fill
-                              sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                              className={styles.mediaImage}
-                            />
-                            {item.type === "video" ? (
-                              <span className={styles.videoMarker}>
-                                <Play size={14} aria-hidden="true" />
-                                <BilingualText en="Video" zh="视频" />
-                              </span>
-                            ) : null}
-                            <span className={styles.mediaOpenIcon} aria-hidden="true">
-                              <ExternalLink size={15} />
-                            </span>
-                          </div>
-                          <div className={styles.mediaMetadata}>
-                            <span>{String(groupIndex + 1).padStart(2, "0")}.{String(itemIndex + 1).padStart(2, "0")}</span>
-                            <span><BilingualText en={type.en} zh={type.zh} /></span>
-                            <time dateTime={htmlDatePattern.test(item.date) ? item.date : undefined}>
-                              <BilingualText en={formatDateRange(item.date)} zh={formatDateRangeZh(item.date)} />
-                            </time>
-                          </div>
-                          <h4>
-                            <BilingualText en={item.title} zh={item.titleZh ?? item.title} />
-                          </h4>
-                          <p>
-                            <BilingualText en={item.caption} zh={item.captionZh ?? item.caption} />
-                          </p>
-                          <span className={styles.mediaSource}>
+                        </p>
+                      )}
+                    </div>
+                    <dl className={styles.projectFacts}>
+                      <div>
+                        <dt><BilingualText en="Records" zh="记录" /></dt>
+                        <dd>{count(group.items.length)}</dd>
+                      </div>
+                      <div>
+                        <dt><BilingualText en="Images" zh="图像" /></dt>
+                        <dd>{count(imageCount)}</dd>
+                      </div>
+                      <div>
+                        <dt><BilingualText en="Videos" zh="视频" /></dt>
+                        <dd>{count(videoCount)}</dd>
+                      </div>
+                    </dl>
+                    <div className={styles.projectContext}>
+                      {group.project ? (
+                        <>
+                          <span>
+                            <BilingualText en={group.project.status} zh={formatStatusZh(group.project.status)} />
+                          </span>
+                          <span>
                             <BilingualText
-                              en={`Project source · ${group.shortTitle}`}
-                              zh={`项目来源 · ${group.shortTitleZh}`}
+                              en={formatDateRange(group.project.date)}
+                              zh={formatDateRangeZh(group.project.date)}
                             />
                           </span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </section>
-            );
-          })}
-        </div>
-      </section>
-    </main>
+                          <Link href={`/work/${group.slug}`}>
+                            <BilingualText en="Open project" zh="打开项目" />
+                            <ArrowRight size={16} aria-hidden="true" />
+                          </Link>
+                        </>
+                      ) : null}
+                    </div>
+                  </header>
+
+                  <ol className={styles.mediaGrid}>
+                    {group.items.map((item, itemIndex) => {
+                      const type = mediaType(item.type);
+
+                      return (
+                        <li key={item.id}>
+                          <a
+                            href={item.src}
+                            className={styles.mediaCell}
+                            aria-label={`${item.titleZh ?? item.title} / ${item.title}`}
+                          >
+                            <div className={styles.mediaVisual}>
+                              <Image
+                                src={item.thumbnail}
+                                alt=""
+                                fill
+                                sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                                className={styles.mediaImage}
+                              />
+                              {item.type === "video" ? (
+                                <span className={styles.videoMarker}>
+                                  <Play size={14} aria-hidden="true" />
+                                  <BilingualText en="Video" zh="视频" />
+                                </span>
+                              ) : null}
+                              <span className={styles.mediaOpenIcon} aria-hidden="true">
+                                <ExternalLink size={15} />
+                              </span>
+                            </div>
+                            <div className={styles.mediaMetadata}>
+                              <span>{String(groupIndex + 1).padStart(2, "0")}.{String(itemIndex + 1).padStart(2, "0")}</span>
+                              <span><BilingualText en={type.en} zh={type.zh} /></span>
+                              <time dateTime={htmlDatePattern.test(item.date) ? item.date : undefined}>
+                                <BilingualText en={formatDateRange(item.date)} zh={formatDateRangeZh(item.date)} />
+                              </time>
+                            </div>
+                            <h4>
+                              <BilingualText en={item.title} zh={item.titleZh ?? item.title} />
+                            </h4>
+                            <p>
+                              <BilingualText en={item.caption} zh={item.captionZh ?? item.caption} />
+                            </p>
+                            <span className={styles.mediaSource}>
+                              <BilingualText
+                                en={`Project source · ${group.shortTitle}`}
+                                zh={`项目来源 · ${group.shortTitleZh}`}
+                              />
+                            </span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </section>
+              );
+            })}
+          </div>
+        </section>
+      </main>
+    </RouteStage>
   );
 }

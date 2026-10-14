@@ -3,10 +3,10 @@
   min-width: 0;
   min-height: calc(100vh - 78px);
   overflow: clip;
-  background: #090b0a;
+  background: rgb(var(--c-deep));
   color: var(--signal-text);
   isolation: isolate;
-  scrollbar-color: var(--signal-orange) var(--signal-surface);
+  scrollbar-color: var(--signal-ember-ink) var(--signal-surface);
 }
 
 .root::before {
@@ -14,8 +14,8 @@
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, transparent 0 10%, rgba(247, 240, 232, 0.025) 10% calc(10% + 1px), transparent calc(10% + 1px) 100%),
-    linear-gradient(90deg, transparent 0 72%, rgba(247, 240, 232, 0.018) 72% calc(72% + 1px), transparent calc(72% + 1px) 100%);
+    linear-gradient(90deg, transparent 0 10%, rgb(var(--c-glow) / 0.025) 10% calc(10% + 1px), transparent calc(10% + 1px) 100%),
+    linear-gradient(90deg, transparent 0 72%, rgb(var(--c-glow) / 0.018) 72% calc(72% + 1px), transparent calc(72% + 1px) 100%);
   content: "";
   pointer-events: none;
 }
@@ -34,7 +34,7 @@
   min-height: 132px;
   padding: 1.35rem clamp(1.5rem, 3.3vw, 3.5rem) 1.2rem;
   border-bottom: 1px solid var(--signal-line);
-  background: #090b0a;
+  background: rgb(var(--c-deep));
 }
 
 .introCopy {
@@ -64,7 +64,7 @@ html[data-lang="zh"] .intro h1 {
 .intro p {
   max-width: 72ch;
   margin: 0.62rem 0 0;
-  color: #b8b1a8;
+  color: rgb(var(--c-t2));
   font-size: clamp(0.98rem, 1.15vw, 1.08rem);
   line-height: 1.5;
 }
@@ -102,7 +102,7 @@ html[data-lang="zh"] .intro h1 {
 .coverage dt {
   order: 2;
   margin-top: 0.35rem;
-  color: #a69f97;
+  color: rgb(var(--c-t3));
   font-size: 0.67rem;
   font-weight: 650;
   letter-spacing: 0.075em;
@@ -158,24 +158,24 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .routeStems path {
-  stroke: rgba(247, 240, 232, 0.12);
+  stroke: rgb(var(--c-warm) / 0.12);
   stroke-width: 1;
 }
 
 .routeBranches path {
-  stroke: rgba(247, 240, 232, 0.14);
+  stroke: rgb(var(--c-warm) / 0.14);
   stroke-width: 1;
 }
 
 .routeBus {
-  stroke: rgba(247, 240, 232, 0.2);
+  stroke: rgb(var(--c-warm) / 0.2);
   stroke-width: 1;
 }
 
 .routeJunctions circle,
 .routeJunctions rect {
-  fill: #0b0d0c;
-  stroke: #6f6a64;
+  fill: rgb(var(--c-deep));
+  stroke: rgb(var(--c-t5));
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
@@ -184,7 +184,7 @@ html[data-lang="zh"] .intro h1 {
   stroke: var(--signal-orange);
   stroke-width: 1.5;
   stroke-dasharray: 9 7;
-  filter: drop-shadow(0 0 5px rgba(255, 116, 0, 0.38));
+  filter: drop-shadow(0 0 5px rgb(var(--c-ember) / 0.38));
   animation: route-flow 1.7s linear infinite;
 }
 
@@ -197,7 +197,7 @@ html[data-lang="zh"] .intro h1 {
   fill: var(--signal-orange);
   stroke: var(--signal-orange);
   stroke-width: 1;
-  filter: drop-shadow(0 0 5px rgba(255, 116, 0, 0.38));
+  filter: drop-shadow(0 0 5px rgb(var(--c-ember) / 0.38));
   vector-effect: non-scaling-stroke;
 }
 
@@ -212,13 +212,13 @@ html[data-lang="zh"] .intro h1 {
   gap: 1rem;
   padding: 0.78rem 1.2rem;
   border-bottom: 1px solid var(--signal-line);
-  background: #0a0c0b;
+  background: rgb(var(--c-deep));
 }
 
 .regionHeader h2,
 .ledgerHeader h2 {
   margin: 0;
-  color: #bdb6ae;
+  color: rgb(var(--c-t2));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.7rem;
   font-weight: 650;
@@ -233,7 +233,7 @@ html[data-lang="zh"] .intro h1 {
   border: 1px solid var(--signal-line);
   border-radius: 2px;
   background: transparent;
-  color: #a69f97;
+  color: rgb(var(--c-t3));
   font-size: 0.69rem;
   font-weight: 650;
   cursor: pointer;
@@ -241,9 +241,9 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .allChannels[aria-pressed="true"] {
-  border-color: var(--signal-orange);
-  background: rgba(255, 116, 0, 0.09);
-  color: var(--signal-orange-soft);
+  border-color: var(--signal-ember-ink);
+  background: rgb(var(--c-ember) / 0.09);
+  color: var(--signal-ember-text);
 }
 
 .channels {
@@ -264,7 +264,7 @@ html[data-lang="zh"] .intro h1 {
   border: 0;
   border-bottom: 1px solid var(--signal-line-soft);
   background: transparent;
-  color: #c8c1b9;
+  color: rgb(var(--c-t2));
   text-align: left;
   cursor: pointer;
   opacity: 0;
@@ -287,7 +287,7 @@ html[data-lang="zh"] .intro h1 {
 
 .channelIndex,
 .channelCount {
-  color: #88827b;
+  color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.66rem;
   font-variant-numeric: tabular-nums;
@@ -311,7 +311,7 @@ html[data-lang="zh"] .intro h1 {
   align-self: start;
   min-width: 1.5rem;
   padding: 0.15rem 0.2rem;
-  background: #090b0a;
+  background: rgb(var(--c-deep));
   text-align: right;
 }
 
@@ -322,45 +322,45 @@ html[data-lang="zh"] .intro h1 {
   z-index: 2;
   width: 8px;
   height: 8px;
-  border: 1px solid #77716b;
+  border: 1px solid rgb(var(--c-t5));
   border-radius: 50%;
-  background: #090b0a;
+  background: rgb(var(--c-deep));
   transition: border-color 180ms ease-out, background 180ms ease-out, box-shadow 180ms ease-out;
 }
 
 .channel[data-active="true"] {
-  background: rgba(255, 116, 0, 0.045);
+  background: rgb(var(--c-ember) / 0.045);
   color: var(--signal-warm-white);
 }
 
 .channel[data-active="true"]::after {
   background: var(--signal-orange);
-  box-shadow: 0 0 16px rgba(255, 116, 0, 0.22);
+  box-shadow: 0 0 16px rgb(var(--c-ember) / 0.22);
   transform: scaleX(1);
 }
 
 .channel[data-active="true"] .channelIndex,
 .channel[data-active="true"] .channelCount {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
 }
 
 .channel[data-active="true"] .channelNode {
-  border-color: var(--signal-orange);
+  border-color: var(--signal-ember-ink);
   background: var(--signal-orange);
-  box-shadow: 0 0 0 5px rgba(255, 116, 0, 0.09), 0 0 18px rgba(255, 116, 0, 0.28);
+  box-shadow: 0 0 0 5px rgb(var(--c-ember) / 0.09), 0 0 18px rgb(var(--c-ember) / 0.28);
   animation: node-pulse 1.8s ease-in-out infinite;
 }
 
 .routingPanel {
   overflow: hidden;
-  background: #0b0d0c;
+  background: rgb(var(--c-deep));
 }
 
 .routeState {
   display: -webkit-box;
   max-width: 13ch;
   overflow: hidden;
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-size: 0.68rem;
   font-weight: 650;
   line-height: 1.25;
@@ -390,7 +390,7 @@ html[data-lang="zh"] .intro h1 {
 .yearGroup legend {
   display: block;
   margin: 0 0 0.42rem;
-  color: #a69f97;
+  color: rgb(var(--c-t3));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.64rem;
   font-weight: 650;
@@ -405,17 +405,17 @@ html[data-lang="zh"] .intro h1 {
   display: flex;
   min-height: 44px;
   align-items: center;
-  border: 1px solid #3b3936;
+  border: 1px solid rgb(var(--c-rule));
   border-radius: 2px;
-  background: #10110f;
-  color: #918b84;
+  background: rgb(var(--c-panel));
+  color: rgb(var(--c-t4));
   transition: border-color 170ms ease-out, box-shadow 170ms ease-out;
 }
 
 .searchField:focus-within,
 .selectField:focus-within {
-  border-color: var(--signal-orange);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(255, 116, 0, 0.12);
+  border-color: var(--signal-ember-ink);
+  box-shadow: 0 10px 30px rgb(var(--c-shadow) / calc(0.22 * var(--shadow-k))), 0 0 0 1px rgb(var(--c-ember) / 0.12);
 }
 
 .searchField > svg {
@@ -434,7 +434,7 @@ html[data-lang="zh"] .intro h1 {
   color: var(--signal-warm-white);
   font: inherit;
   font-size: 0.78rem;
-  caret-color: var(--signal-orange);
+  caret-color: var(--signal-ember-ink);
 }
 
 .searchField input {
@@ -442,7 +442,7 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .searchField input::placeholder {
-  color: #8f8982;
+  color: rgb(var(--c-t4));
   opacity: 1;
 }
 
@@ -452,14 +452,14 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .selectField option {
-  background: #10110f;
+  background: rgb(var(--c-panel));
   color: var(--signal-warm-white);
 }
 
 .yearOptions {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid #3b3936;
+  border: 1px solid rgb(var(--c-rule));
   border-radius: 2px;
 }
 
@@ -468,9 +468,9 @@ html[data-lang="zh"] .intro h1 {
   min-height: 44px;
   padding: 0.45rem 0.32rem;
   border: 0;
-  border-right: 1px solid #3b3936;
-  background: #10110f;
-  color: #aaa39a;
+  border-right: 1px solid rgb(var(--c-rule));
+  background: rgb(var(--c-panel));
+  color: rgb(var(--c-t3));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.68rem;
   font-variant-numeric: tabular-nums;
@@ -484,7 +484,7 @@ html[data-lang="zh"] .intro h1 {
 
 .yearOptions button[aria-pressed="true"] {
   background: var(--signal-orange);
-  color: #080808;
+  color: rgb(var(--c-on-ember));
   font-weight: 750;
 }
 
@@ -496,7 +496,7 @@ html[data-lang="zh"] .intro h1 {
   min-height: 46px;
   padding-top: 0.9rem;
   border-top: 1px solid var(--signal-line-soft);
-  color: #aaa39a;
+  color: rgb(var(--c-t3));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.66rem;
   font-variant-numeric: tabular-nums;
@@ -506,15 +506,15 @@ html[data-lang="zh"] .intro h1 {
 .routePulse {
   width: 7px;
   height: 7px;
-  border: 1px solid #827c75;
+  border: 1px solid rgb(var(--c-t5));
   border-radius: 50%;
-  background: #0b0d0c;
+  background: rgb(var(--c-deep));
 }
 
 .workspace[data-route-active="true"] .routePulse {
-  border-color: var(--signal-orange);
+  border-color: var(--signal-ember-ink);
   background: var(--signal-orange);
-  box-shadow: 0 0 15px rgba(255, 116, 0, 0.32);
+  box-shadow: 0 0 15px rgb(var(--c-ember) / 0.32);
 }
 
 .routeSummary button {
@@ -526,13 +526,13 @@ html[data-lang="zh"] .intro h1 {
   border: 1px solid var(--signal-line);
   border-radius: 2px;
   background: transparent;
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font: inherit;
   cursor: pointer;
 }
 
 .ledger {
-  background: #090b0a;
+  background: rgb(var(--c-deep));
 }
 
 .ledger::before {
@@ -549,7 +549,7 @@ html[data-lang="zh"] .intro h1 {
 
 .workspace[data-project-route="true"] .ledger::before {
   background: var(--signal-orange);
-  box-shadow: 0 0 12px rgba(255, 116, 0, 0.24);
+  box-shadow: 0 0 12px rgb(var(--c-ember) / 0.24);
 }
 
 .ledgerHeader {
@@ -559,20 +559,20 @@ html[data-lang="zh"] .intro h1 {
 
 .ledgerHeader p {
   margin: 0.32rem 0 0;
-  color: #918b84;
+  color: rgb(var(--c-t4));
   font-size: 0.67rem;
   line-height: 1.35;
 }
 
 .ledgerHeader output {
-  color: #8f8982;
+  color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
 }
 
 .ledgerHeader output strong {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-size: 0.9rem;
 }
 
@@ -630,7 +630,7 @@ html[data-lang="zh"] .intro h1 {
 
 .noteList > li[data-route-match="true"] .noteRow::before {
   background: var(--signal-orange);
-  box-shadow: 0 0 8px rgba(255, 116, 0, 0.24);
+  box-shadow: 0 0 8px rgb(var(--c-ember) / 0.24);
 }
 
 .noteSequence {
@@ -640,7 +640,7 @@ html[data-lang="zh"] .intro h1 {
   position: relative;
   padding-top: 0.1rem;
   border-right: 1px solid var(--signal-line-soft);
-  color: #817b74;
+  color: rgb(var(--c-t5));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.63rem;
   font-variant-numeric: tabular-nums;
@@ -655,12 +655,12 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .noteList > li[data-route-match="true"] .noteSequence {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
 }
 
 .noteList > li[data-route-match="true"] .noteSequence > span {
   background: var(--signal-orange);
-  box-shadow: 0 0 10px rgba(255, 116, 0, 0.26);
+  box-shadow: 0 0 10px rgb(var(--c-ember) / 0.26);
 }
 
 .noteBody {
@@ -673,7 +673,7 @@ html[data-lang="zh"] .intro h1 {
   flex-wrap: wrap;
   gap: 0.45rem 0.85rem;
   align-items: baseline;
-  color: #918b84;
+  color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.63rem;
   font-variant-numeric: tabular-nums;
@@ -682,7 +682,7 @@ html[data-lang="zh"] .intro h1 {
 }
 
 .noteProject {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-weight: 650;
 }
 
@@ -719,7 +719,7 @@ html[data-lang="zh"] .noteTitle {
   max-width: 72ch;
   overflow: hidden;
   margin-top: 0.35rem;
-  color: #b4ada5;
+  color: rgb(var(--c-t2));
   font-size: 0.78rem;
   line-height: 1.45;
   -webkit-box-orient: vertical;
@@ -731,7 +731,7 @@ html[data-lang="zh"] .noteTitle {
   flex-wrap: wrap;
   gap: 0.35rem 0.7rem;
   margin-top: 0.42rem;
-  color: #938d86;
+  color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.59rem;
   letter-spacing: 0.035em;
@@ -740,7 +740,7 @@ html[data-lang="zh"] .noteTitle {
 
 .noteTags > span::before {
   margin-right: 0.24rem;
-  color: #5f5b56;
+  color: rgb(var(--c-t6));
   content: "#";
 }
 
@@ -752,14 +752,14 @@ html[data-lang="zh"] .noteTitle {
   place-items: center;
   border: 1px solid var(--signal-line);
   border-radius: 2px;
-  color: #908a83;
+  color: rgb(var(--c-t4));
   transition: border-color 180ms ease-out, color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .noteRow:focus-visible {
-  outline: 2px solid #ffb36b;
+  outline: 2px solid rgb(var(--c-focus));
   outline-offset: -4px;
-  background: rgba(255, 116, 0, 0.045);
+  background: rgb(var(--c-ember) / 0.045);
 }
 
 .noteRow:focus-visible::after {
@@ -767,18 +767,18 @@ html[data-lang="zh"] .noteTitle {
 }
 
 .noteRow:focus-visible .noteTitle {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   transform: translateX(0.18rem);
 }
 
 .noteRow:focus-visible .noteSequence > span {
   background: var(--signal-orange);
-  box-shadow: 0 0 12px rgba(255, 116, 0, 0.28);
+  box-shadow: 0 0 12px rgb(var(--c-ember) / 0.28);
 }
 
 .noteRow:focus-visible .noteArrow {
-  border-color: var(--signal-orange);
-  color: var(--signal-orange-soft);
+  border-color: var(--signal-ember-ink);
+  color: var(--signal-ember-text);
   transform: translateX(0.2rem);
 }
 
@@ -789,11 +789,11 @@ html[data-lang="zh"] .noteTitle {
   align-items: center;
   min-height: 220px;
   padding: 2rem;
-  color: #a69f97;
+  color: rgb(var(--c-t3));
 }
 
 .emptyState > svg {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
 }
 
 .emptyState h3,
@@ -819,7 +819,7 @@ html[data-lang="zh"] .noteTitle {
   border: 1px solid var(--signal-orange);
   border-radius: 2px;
   background: transparent;
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font: inherit;
   font-size: 0.75rem;
   font-weight: 700;
@@ -840,12 +840,12 @@ html[data-lang="zh"] .noteTitle {
   .allChannels:hover,
   .routeSummary button:hover,
   .emptyState button:hover {
-    border-color: var(--signal-orange);
-    color: var(--signal-orange-soft);
+    border-color: var(--signal-ember-ink);
+    color: var(--signal-ember-text);
   }
 
   .channel:hover {
-    background: rgba(247, 240, 232, 0.025);
+    background: rgb(var(--c-warm) / 0.025);
     color: var(--signal-warm-white);
   }
 
@@ -855,17 +855,17 @@ html[data-lang="zh"] .noteTitle {
   }
 
   .yearOptions button:hover {
-    background: #171614;
+    background: rgb(var(--c-raised));
     color: var(--signal-warm-white);
   }
 
   .yearOptions button[aria-pressed="true"]:hover {
     background: var(--signal-orange);
-    color: #080808;
+    color: rgb(var(--c-on-ember));
   }
 
   .noteRow:hover {
-    background: rgba(247, 240, 232, 0.025);
+    background: rgb(var(--c-warm) / 0.025);
   }
 
   .noteRow:hover::after {
@@ -873,18 +873,18 @@ html[data-lang="zh"] .noteTitle {
   }
 
   .noteRow:hover .noteTitle {
-    color: var(--signal-orange-soft);
+    color: var(--signal-ember-text);
     transform: translateX(0.18rem);
   }
 
   .noteRow:hover .noteSequence > span {
     background: var(--signal-orange);
-    box-shadow: 0 0 12px rgba(255, 116, 0, 0.28);
+    box-shadow: 0 0 12px rgb(var(--c-ember) / 0.28);
   }
 
   .noteRow:hover .noteArrow {
-    border-color: var(--signal-orange);
-    color: var(--signal-orange-soft);
+    border-color: var(--signal-ember-ink);
+    color: var(--signal-ember-text);
     transform: translateX(0.2rem);
   }
 }
@@ -1168,10 +1168,10 @@ html[data-lang="zh"] .noteTitle {
 @keyframes node-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 4px rgba(255, 116, 0, 0.07), 0 0 14px rgba(255, 116, 0, 0.2);
+    box-shadow: 0 0 0 4px rgb(var(--c-ember) / 0.07), 0 0 14px rgb(var(--c-ember) / 0.2);
   }
   50% {
-    box-shadow: 0 0 0 7px rgba(255, 116, 0, 0.02), 0 0 22px rgba(255, 116, 0, 0.38);
+    box-shadow: 0 0 0 7px rgb(var(--c-ember) / 0.02), 0 0 22px rgb(var(--c-ember) / 0.38);
   }
 }
 

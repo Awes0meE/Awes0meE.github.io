@@ -74,20 +74,20 @@ export function ProjectAssets({ paths }: { paths?: string[] }) {
   }
 
   return (
-    <section className="mt-12 border-t border-line pt-10">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <section id="project-files" className="bench-section bench-section-wide">
+      <div className="bench-section-head">
         <div>
-          <h2 className="text-2xl font-semibold text-ink">
+          <h2 className="bench-section-title">
             <BilingualText en="Public Project Files" zh="公开项目资料" />
           </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-graphite">
+          <p className="bench-section-note">
             <BilingualText
               en="Uploaded evidence served from the public asset folder. Use the file index to preview documents, source code, media, PDFs, and downloadable artifacts without leaving the page."
               zh="这里列出已经上传到公开目录的项目证据。可以在左侧索引里选择文件，在右侧直接预览文档、源码、媒体、PDF 和可下载附件。"
             />
           </p>
         </div>
-        <span className="rounded border border-line bg-paper px-3 py-1 text-xs font-semibold text-graphite">
+        <span className="bench-count">
           <BilingualText en={`${assets.length} files`} zh={`${assets.length} 个文件`} />
         </span>
       </div>

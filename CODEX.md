@@ -169,7 +169,7 @@ Media items live in `content/media.json` and require:
 
 The site has a top-right language toggle for English and Simplified Chinese.
 
-- `components/language-toggle.tsx` stores the selected language in `localStorage` under `portfolio-language`.
+- `components/site-preferences.tsx` renders the language and theme controls in one pill; it stores the language in `localStorage` under `portfolio-language` and the theme under `portfolio-theme`.
 - `app/layout.tsx` uses an inline bootstrap script at the start of `<body>` to set `html[data-lang]` before the main UI renders.
 - A visitor without a valid saved preference starts in English. A valid saved English or Simplified Chinese choice remains authoritative on later visits.
 - `components/bilingual-text.tsx` renders paired English/Chinese text and CSS in `app/globals.css` hides the inactive language.
@@ -201,8 +201,10 @@ identifies seven IR tracking inputs. The DIY schematic PNG is a faithful
 derivative of the existing public PDF. The legacy FOC note redirect now leads
 to `/notes/foc-angle-handoff`.
 
-The homepage, `/work`, `/notes`, `/media` and `/about` use the approved Ember
-Black surfaces; project and note details retain the paper reading system.
+Every route shares the Kinetic Signal Ledger grammar in dark (Ember Black) and
+light (Bench Paper) themes. The homepage, `/work`, `/notes`, `/media` and
+`/about` keep their approved compositions; project and note details use the
+Bench Log reading layout.
 Design contracts live in `DESIGN.md`, product/asset constraints in `PRODUCT.md`
 and `docs/content-workflow.md`, and dated release history in `MEMORY.md` and
 `docs/session-log.md`.
@@ -229,12 +231,12 @@ Maintain the current engineering-academic identity:
 - in release `v0.9.0`, keep those five presentation derivatives as a compact prototype nucleus in `components/technical-visual.tsx`; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
 - on `/work`, keep the sticky `01`–`08` rail, eight complete semantic project links, and exactly seven black signal intervals whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
-- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 5 channels and 15 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, keep `/notes/[slug]` on the paper system, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
+- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 5 channels and 15 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
 - on `/media`, keep the project-first Focus Aperture with eight source choices, one authentic lead record, and all 84 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the CV-grounded identity-and-method narrative distinct from the homepage capability list; preserve the complete original `public/uploads/projects/avatar.jpg` white field and black line art without crop, inversion, recoloring, filtering, blending, fading, tracing, or generated replacement. Treat the four stages as a route rather than a score, allow exactly one non-status pulse only while visible, and preserve the full static structure under `prefers-reduced-motion`;
 - treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
-- the `.signal-theme` shell uses a near-black engineering field, warm white information, fine rules, and ember-orange signal accents only on explicitly opted-in routes; do not infer that every route shares the same surface composition;
+- every route uses the shared theme tokens at the top of `app/globals.css` (dark near-black field or light drafting-grey field, fine rules, ember-orange signal accents); add colours as tokens with both theme values, never as literals, and do not infer that every route shares the same surface composition;
 - project evidence over decoration;
 - no generic template blog styling, no Hexo identity, no stock marketing hero.
 

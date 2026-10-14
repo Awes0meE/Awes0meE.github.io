@@ -136,7 +136,7 @@ Media items are stored in `content/media.json`, with assets under `public/upload
 
 All source, content, docs, and public-upload text files must be UTF-8. Convert legacy GBK, UTF-16, EDA, Notion, and manufacturing text exports before placing them under `content/` or `public/uploads/`; `npm run lint` includes the encoding gate.
 
-The site has a top-right English / Simplified Chinese toggle. A first visit starts in English; a valid saved choice in browser `localStorage` wins on later visits. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
+The site has a top-right preference pill with an English / Simplified Chinese toggle and a light / dark theme toggle. A first visit starts in English and follows the operating-system light or dark setting; saved choices in browser `localStorage` (`portfolio-language`, `portfolio-theme`) win on later visits. Fixed UI labels use paired text through `components/bilingual-text.tsx`; projects and notes use `title/titleZh` and `summary/summaryZh`. Long MDX body text is still edited manually, so add bilingual body sections only where the article itself needs both languages.
 
 Normal fenced code blocks are rendered as shared technical evidence. If a whole listing belongs only to one language view, prefix the fence language with `en-` or `zh-`, such as `en-text` or `zh-powershell`; the visible code label drops the prefix while the language toggle hides the inactive block.
 

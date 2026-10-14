@@ -1,9 +1,10 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import {
   NotesSignalIndex,
   type NotesIndexItem,
   type NotesIndexProject
 } from "@/components/notes-signal-index";
+import { RouteStage } from "@/components/route-stage";
 import { getNotes, getProjects } from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
 
@@ -25,11 +26,6 @@ export const metadata: Metadata = {
     title: socialTitle,
     description: pageDescription
   }
-};
-
-export const viewport: Viewport = {
-  themeColor: "#090b0a",
-  colorScheme: "dark"
 };
 
 function getNoteDateSortTime(value: string) {
@@ -95,5 +91,9 @@ export default function NotesPage() {
     ];
   });
 
-  return <NotesSignalIndex notes={notes} projects={projects} />;
+  return (
+    <RouteStage>
+      <NotesSignalIndex notes={notes} projects={projects} />
+    </RouteStage>
+  );
 }

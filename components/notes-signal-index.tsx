@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties, FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { ArrowRight, RotateCcw, Search, SearchX } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { PaperTransitionLink } from "@/components/paper-route-transition";
 import styles from "@/app/notes/notes.module.css";
 
 export type NotesIndexItem = {
@@ -456,8 +456,9 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                         "--row-delay": `${Math.min(index, 7) * 28}ms`
                       } as CSSProperties}
                     >
-                      <PaperTransitionLink
+                      <Link
                         href={`/notes/${note.slug}`}
+                        transitionTypes={["nav-forward"]}
                         className={styles.noteRow}
                       >
                         <span className={styles.noteSequence} aria-hidden="true">
@@ -487,7 +488,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                         <span className={styles.noteArrow} aria-hidden="true">
                           <ArrowRight size={18} strokeWidth={1.7} />
                         </span>
-                      </PaperTransitionLink>
+                      </Link>
                     </li>
                   );
                 })}

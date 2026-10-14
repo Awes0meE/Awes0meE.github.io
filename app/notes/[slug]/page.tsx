@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { BenchLogRail } from "@/components/bench-log-rail";
 import { BilingualText } from "@/components/bilingual-text";
-import { ContentRenderer } from "@/components/content-renderer";
-import { getNote, getNotes, getProject } from "@/lib/content";
+import { ContentRenderer, getContentOutline } from "@/components/content-renderer";
+import { RouteStage } from "@/components/route-stage";
+import { getNote, getNotes, getProjects } from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
 
 type NotePageProps = {
@@ -46,53 +48,118 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
 export default async function NotePage({ params }: NotePageProps) {
   const { slug } = await params;
   const note = getNote(slug);
-  const relatedProject = note?.projectSlug ? getProject(note.projectSlug) : undefined;
 
   if (!note) {
     notFound();
   }
 
+  const projects = getProjects();
+  const projectIndex = note.projectSlug ? projects.findIndex((project) => project.slug === note.projectSlug) : -1;
+  const relatedProject = projectIndex >= 0 ? projects[projectIndex] : undefined;
+  const projectNumber = projectIndex >= 0 ? String(projectIndex + 1).padStart(2, "0") : null;
+  const outline = getContentOutline(note.body);
+  const siblingNotes = note.projectSlug
+    ? getNotes().filter((item) => item.projectSlug === note.projectSlug && item.slug !== note.slug)
+    : [];
+
   return (
-    <main className="mx-auto max-w-3xl px-5 py-12 lg:px-8">
-      <Link href="/notes" className="inline-flex items-center gap-2 text-sm font-semibold text-pine hover:text-copper">
-        <ArrowLeft size={16} />
-        <BilingualText en="Back to notes" zh="返回笔记" />
-      </Link>
-      <article className="mt-8">
-        <p className="text-sm font-medium text-graphite">{note.date}</p>
-        <h1 className="mt-3 text-5xl font-semibold text-ink">
-          <BilingualText en={note.title} zh={note.titleZh} />
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-graphite">
-          <BilingualText en={note.summary} zh={note.summaryZh} />
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {note.tags.map((tag) => (
-            <span key={tag} className="rounded border border-line bg-paper px-2 py-1 text-xs text-graphite">
-              {tag}
-            </span>
-          ))}
+    <RouteStage>
+      <main className="signal-theme bench-page bench-page-note">
+        <div className="bench-layout">
+          <BenchLogRail
+            entries={outline}
+            backHref="/notes"
+            backLabel={{ en: "All notes", zh: "全部笔记" }}
+          />
+          <article className="bench-article">
+            <header className="bench-mast">
+              <h1 className="bench-title">
+                {projectNumber ? (
+                  <span className="bench-plate" aria-hidden="true">{projectNumber}</span>
+                ) : null}
+                <span className="bench-title-text">
+                  <BilingualText en={note.title} zh={note.titleZh} />
+                </span>
+              </h1>
+            </header>
+
+            <div className="bench-reading">
+              <div className="bench-main">
+                <p className="bench-lede">
+                  <BilingualText en={note.summary} zh={note.summaryZh} />
+                </p>
+                <div className="bench-body">
+                  <ContentRenderer source={note.body} />
+                </div>
+              </div>
+              <aside className="bench-side" aria-label="Note details / 笔记信息">
+                <div className="bench-side-inner">
+                  <dl className="bench-spec">
+                    {relatedProject ? (
+                      <div>
+                        <dt><BilingualText en="Project" zh="所属项目" /></dt>
+                        <dd className="bench-spec-links">
+                          <Link href={`/work/${relatedProject.slug}`} transitionTypes={["nav-back"]}>
+                            <span>{projectNumber} · </span>
+                            <BilingualText en={relatedProject.title} zh={relatedProject.titleZh} />
+                            <ArrowRight size={14} aria-hidden="true" />
+                          </Link>
+                        </dd>
+                      </div>
+                    ) : null}
+                    <div className="bench-spec-half">
+                      <dt><BilingualText en="Date" zh="日期" /></dt>
+                      <dd><time>{note.date}</time></dd>
+                    </div>
+                    <div>
+                      <dt><BilingualText en="Tags" zh="标签" /></dt>
+                      <dd className="bench-tags">
+                        {note.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </dd>
+                    </div>
+                  </dl>
+                  {siblingNotes.length ? (
+                    <nav className="bench-side-notes" aria-label="More from this project / 同项目的其他笔记">
+                      <p className="bench-side-label">
+                        <BilingualText en="More from this project" zh="同项目的其他笔记" />
+                      </p>
+                      <ol>
+                        {siblingNotes.map((sibling) => (
+                          <li key={sibling.slug}>
+                            <Link href={`/notes/${sibling.slug}`} transitionTypes={["nav-forward"]}>
+                              <ArrowRight size={13} aria-hidden="true" />
+                              <BilingualText en={sibling.title} zh={sibling.titleZh} />
+                            </Link>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  ) : null}
+                </div>
+              </aside>
+            </div>
+
+            {relatedProject ? (
+              <section className="bench-section" aria-label="Related project / 相关项目">
+                <Link
+                  href={`/work/${relatedProject.slug}`}
+                  transitionTypes={["nav-back"]}
+                  className="bench-note-row bench-return-row"
+                >
+                  <span className="bench-note-index">{projectNumber}</span>
+                  <span className="bench-note-copy">
+                    <strong><BilingualText en="Back to the project" zh="回到项目" /></strong>
+                    <span><BilingualText en={relatedProject.title} zh={relatedProject.titleZh} /></span>
+                  </span>
+                  <ArrowRight size={18} aria-hidden="true" className="bench-note-arrow" />
+                </Link>
+              </section>
+            ) : null}
+          </article>
         </div>
-        {relatedProject ? (
-          <Link
-            href={`/work/${relatedProject.slug}`}
-            className="mt-6 flex items-center justify-between gap-4 rounded-lg border border-line bg-white p-4 text-sm transition hover:-translate-y-0.5 hover:shadow-fine"
-          >
-            <span>
-              <span className="block font-semibold text-ink">
-                <BilingualText en="Related Project" zh="相关项目" />
-              </span>
-              <span className="mt-1 block text-graphite">
-                <BilingualText en={relatedProject.title} zh={relatedProject.titleZh} />
-              </span>
-            </span>
-            <ArrowRight className="shrink-0 text-pine" size={18} />
-          </Link>
-        ) : null}
-        <div className="mt-10 border-t border-line pt-2">
-          <ContentRenderer source={note.body} />
-        </div>
-      </article>
-    </main>
+      </main>
+    </RouteStage>
   );
 }

@@ -132,7 +132,7 @@ function parseInline(text: string, baseHref?: string) {
 
     if (match[1]) {
       parts.push(
-        <code key={`code-${match.index}`} className="text-wrap-safe rounded border border-line bg-paper px-1 py-0.5 text-[0.9em] text-ink">
+        <code key={`code-${match.index}`} className="prose-code text-wrap-safe">
           {match[1]}
         </code>
       );
@@ -142,14 +142,14 @@ function parseInline(text: string, baseHref?: string) {
           <a
             key={`${match[2]}-${match.index}`}
             href={resolveContentHref(match[3], baseHref)}
-            className="font-medium text-pine underline-offset-4 hover:underline"
+            className="prose-link"
           >
             {match[2]}
           </a>
         );
       } else {
         parts.push(
-          <strong key={`strong-${match.index}`} className="font-semibold text-ink">
+          <strong key={`strong-${match.index}`} className="prose-strong">
             {parseInline(match[4], baseHref)}
           </strong>
         );
@@ -260,8 +260,7 @@ function splitTableRow(line: string) {
     .map((cell) => cell.trim());
 }
 
-export function ContentRenderer({ source, baseHref }: { source: string; baseHref?: string }) {
-  const blocks = splitBlocks(source);
+function hasBilingualBody(blocks: string[]) {
   const textBlocks = blocks
     .map((block) => block.trim())
     .filter(
@@ -276,10 +275,13 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
     );
   const hasEnglishBody = textBlocks.some((block) => getBlockLanguage(block) === "en");
   const hasChineseBody = textBlocks.some((block) => getBlockLanguage(block) === "zh");
-  const shouldScopeLanguage = hasEnglishBody && hasChineseBody;
+  return hasEnglishBody && hasChineseBody;
+}
+
+function createHeadingIdFactory() {
   const headingCounts = new Map<string, number>();
 
-  function getHeadingId(text: string) {
+  return function getHeadingId(text: string) {
     const baseId = slugifyHeading(text);
 
     if (!baseId) {
@@ -289,7 +291,63 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
     const count = headingCounts.get(baseId) ?? 0;
     headingCounts.set(baseId, count + 1);
     return count ? `${baseId}-${count + 1}` : baseId;
+  };
+}
+
+export type ContentOutlineEntry = {
+  id: string;
+  en: string;
+  zh: string;
+  /** "both" when the heading carries both languages; otherwise the only language it shows in. */
+  language: "both" | "en" | "zh";
+};
+
+/** Top-level sections, with the same ids ContentRenderer gives their headings. */
+export function getContentOutline(source: string): ContentOutlineEntry[] {
+  const blocks = splitBlocks(source);
+  const shouldScopeLanguage = hasBilingualBody(blocks);
+  const getHeadingId = createHeadingIdFactory();
+  const outline: ContentOutlineEntry[] = [];
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    const heading = trimmed.match(/^(#{1,4})\s+([\s\S]+)$/);
+
+    if (!heading || isHtmlCommentBlock(trimmed)) {
+      continue;
+    }
+
+    const text = heading[2];
+    const id = getHeadingId(text);
+
+    if (!id || heading[1].length > 2) {
+      continue;
+    }
+
+    const split = splitBilingualSlash(text);
+    const plain = plainInlineText(text);
+
+    if (split) {
+      outline.push({ id, en: plainInlineText(split.en), zh: plainInlineText(split.zh), language: "both" });
+      continue;
+    }
+
+    const language = getBlockLanguage(text);
+    outline.push({
+      id,
+      en: plain,
+      zh: plain,
+      language: shouldScopeLanguage && language !== "neutral" ? language : "both"
+    });
   }
+
+  return outline;
+}
+
+export function ContentRenderer({ source, baseHref }: { source: string; baseHref?: string }) {
+  const blocks = splitBlocks(source);
+  const shouldScopeLanguage = hasBilingualBody(blocks);
+  const getHeadingId = createHeadingIdFactory();
 
   function renderHeading(index: number, level: 2 | 3 | 4, text: string, className: string) {
     const Heading = `h${level}` as const;
@@ -297,7 +355,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
     const languageClass = split ? undefined : getScopedLanguageClass(getBlockLanguage(text), shouldScopeLanguage);
 
     return (
-      <Heading id={getHeadingId(text)} key={index} className={cn(className, "scroll-mt-24", languageClass)}>
+      <Heading id={getHeadingId(text)} key={index} className={cn(className, languageClass)}>
         {split ? (
           <>
             <span className="lang-en">{parseInline(split.en, baseHref)}</span>
@@ -312,7 +370,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
 
   function renderImageFigure(image: ParsedImage, key: string | number, sizes: string, className?: string) {
     return (
-      <figure key={key} className={cn("overflow-hidden rounded-lg border border-line bg-chalk", className)}>
+      <figure key={key} className={cn("prose-figure", className)}>
         <a href={image.src} className="block">
           <div className="relative aspect-[16/9]">
             <Image
@@ -322,12 +380,12 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
               sizes={sizes}
               loading="eager"
               unoptimized
-              className="object-contain p-2 transition duration-500 hover:scale-[1.01]"
+              className="prose-figure-image"
             />
           </div>
         </a>
         {image.alt ? (
-          <figcaption className="border-t border-line bg-white px-4 py-3 text-sm text-graphite">
+          <figcaption className="prose-figcaption">
             {parseLocalizedInline(image.alt, baseHref)}
           </figcaption>
         ) : null}
@@ -336,7 +394,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
   }
 
   return (
-    <div>
+    <div className="bench-prose">
       {blocks.map((block, index) => {
         const trimmed = block.trim();
         const imageLines = trimmed.split("\n").map((line) => parseImageLine(line, baseHref));
@@ -350,13 +408,13 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
           const images = imageLines as ParsedImage[];
 
           if (images.length === 1) {
-            return renderImageFigure(images[0], index, "(min-width: 1024px) 896px, calc(100vw - 40px)", "mt-8");
+            return renderImageFigure(images[0], index, "(min-width: 1024px) 760px, calc(100vw - 32px)");
           }
 
           return (
-            <div key={index} className="mt-8 grid gap-4 md:grid-cols-2">
+            <div key={index} className="prose-figure-pair">
               {images.map((image, imageIndex) =>
-                renderImageFigure(image, `${index}-${image.src}-${imageIndex}`, "(min-width: 1024px) 432px, calc(100vw - 40px)")
+                renderImageFigure(image, `${index}-${image.src}-${imageIndex}`, "(min-width: 1024px) 380px, calc(100vw - 32px)")
               )}
             </div>
           );
@@ -367,13 +425,13 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
           const { displayLanguage, languageClass } = getCodeLanguageMeta(language);
 
           return (
-            <figure key={index} className={cn("mt-6 overflow-hidden rounded-lg border border-line bg-[#10231e]", languageClass)}>
+            <figure key={index} className={cn("prose-codeblock", languageClass)}>
               {displayLanguage ? (
-                <figcaption className="border-b border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-normal text-[#b9d2ca]">
+                <figcaption className="prose-codeblock-label">
                   {displayLanguage}
                 </figcaption>
               ) : null}
-              <pre tabIndex={0} className="overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
+              <pre tabIndex={0} className="prose-pre">
                 <code>{code}</code>
               </pre>
             </figure>
@@ -387,12 +445,12 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
           const languageClass = getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage);
 
           return (
-            <div key={index} className={cn("mt-6 overflow-x-auto rounded-lg border border-line", languageClass)}>
-              <table className="min-w-full border-collapse bg-white text-sm text-graphite">
-                <thead className="bg-paper text-left text-ink">
+            <div key={index} className={cn("prose-table-wrap", languageClass)}>
+              <table className="prose-table">
+                <thead>
                   <tr>
                     {headers.map((header) => (
-                      <th key={header} className="border-b border-line px-4 py-3 font-semibold">
+                      <th key={header}>
                         {parseInline(header, baseHref)}
                       </th>
                     ))}
@@ -400,9 +458,9 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
                 </thead>
                 <tbody>
                   {rows.map((row, rowIndex) => (
-                    <tr key={`${row.join("-")}-${rowIndex}`} className="border-b border-line last:border-b-0">
+                    <tr key={`${row.join("-")}-${rowIndex}`}>
                       {headers.map((_, cellIndex) => (
-                        <td key={cellIndex} className="px-4 py-3 align-top leading-6">
+                        <td key={cellIndex}>
                           {parseInline(row[cellIndex] ?? "", baseHref)}
                         </td>
                       ))}
@@ -415,28 +473,28 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
         }
 
         if (trimmed.startsWith("# ")) {
-          return renderHeading(index, 2, trimmed.replace(/^#\s+/, ""), "mt-10 text-2xl font-semibold text-ink");
+          return renderHeading(index, 2, trimmed.replace(/^#\s+/, ""), "prose-h2");
         }
 
         if (trimmed.startsWith("## ")) {
-          return renderHeading(index, 2, trimmed.replace(/^##\s+/, ""), "mt-10 text-2xl font-semibold text-ink");
+          return renderHeading(index, 2, trimmed.replace(/^##\s+/, ""), "prose-h2");
         }
 
         if (trimmed.startsWith("### ")) {
-          return renderHeading(index, 3, trimmed.replace(/^###\s+/, ""), "mt-8 text-xl font-semibold text-ink");
+          return renderHeading(index, 3, trimmed.replace(/^###\s+/, ""), "prose-h3");
         }
 
         if (trimmed.startsWith("#### ")) {
-          return renderHeading(index, 4, trimmed.replace(/^####\s+/, ""), "mt-6 text-lg font-semibold text-ink");
+          return renderHeading(index, 4, trimmed.replace(/^####\s+/, ""), "prose-h4");
         }
 
         if (/^[-*]\s+/.test(trimmed)) {
           const languageClass = getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage);
 
           return (
-            <ul key={index} className={cn("mt-4 list-disc space-y-2 pl-5 text-graphite", languageClass)}>
+            <ul key={index} className={cn("prose-list prose-list-bullet", languageClass)}>
               {trimmed.split("\n").map((item) => (
-                <li key={item} className="leading-7">
+                <li key={item}>
                   {parseInline(item.replace(/^[-*]\s+/, ""), baseHref)}
                 </li>
               ))}
@@ -448,9 +506,9 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
           const languageClass = getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage);
 
           return (
-            <ol key={index} className={cn("mt-4 list-decimal space-y-2 pl-5 text-graphite", languageClass)}>
+            <ol key={index} className={cn("prose-list prose-list-number", languageClass)}>
               {trimmed.split("\n").map((item) => (
-                <li key={item} className="leading-7">
+                <li key={item}>
                   {parseInline(item.replace(/^\d+[.)]\s+/, ""), baseHref)}
                 </li>
               ))}
@@ -463,7 +521,7 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
             <blockquote
               key={index}
               className={cn(
-                "mt-5 border-l-4 border-pine bg-paper px-4 py-3 text-sm leading-7 text-graphite",
+                "prose-quote",
                 getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage)
               )}
             >
@@ -473,14 +531,14 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
         }
 
         if (/^-{3,}$/.test(trimmed)) {
-          return <hr key={index} className="mt-8 border-line" />;
+          return <hr key={index} className="prose-rule" />;
         }
 
         return (
           <p
             key={index}
             className={cn(
-              "text-wrap-safe mt-4 leading-7 text-graphite",
+              "prose-p text-wrap-safe",
               getScopedLanguageClass(getBlockLanguage(trimmed), shouldScopeLanguage)
             )}
           >

@@ -37,6 +37,8 @@ date: "2026.05"
 status: "In Progress"
 tags: ["Control", "Embedded", "Next.js"]
 cover: "/uploads/projects/my-project/cover.jpg"
+lead: "/uploads/projects/my-project/board-photo.jpg"
+leadFit: "contain"
 featured: false
 links:
   repo: "https://github.com/Awes0meE/example"
@@ -48,6 +50,8 @@ assetPaths:
 ```
 
 Set `featured: true` only for projects that should appear on the homepage.
+
+`lead` is optional: an evidence image (board photo, render, scope capture) that leads the project page as FIG. 01 and also fills the project's `/work` chapter, so the image morphs between the two. Never point `lead` at a logo; projects whose only cover is a logo omit it and show no lead figure. `leadFit` (`cover` or `contain`, default `cover`) frames the lead image; use `contain` for photos or renders whose edges must stay visible. `coverFit` sets the same framing for the cover on `/work` when no `lead` exists.
 
 Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages show these files in a two-pane browser: the left side is a project-file index, and the right side previews the currently selected file. Images and videos preview inline, Markdown / text documents render as readable article content with relative image/link paths resolved from the source file, small UTF-8 source/code files render in code frames, PDFs embed from page one where the browser supports it, and spreadsheets, EDA/CAD files, fabrication archives, and other binary files keep a direct open action. HTML and SVG uploads are treated as download-only artifacts rather than inline previews. Prefer explicit file lists over broad directories when a folder contains Notion stubs, unfinished exports, or other files that should not appear as project evidence; the resolver also has directory-depth, file-count, and aggregate text-preview caps as a safety backstop.
 

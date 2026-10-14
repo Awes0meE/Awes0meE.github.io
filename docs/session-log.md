@@ -1005,3 +1005,20 @@ The About draft from 2026-09-07 had been kept only on the MacBook as `docs/rewri
 The user asked for every project interviewed on the MacBook to be rewritten with the repository-local writer, after judging that a Claude-written Claude Chime homepage read less like AI than the earlier Codex drafts. The raw interviews survive in `~/.codex/archived_sessions/` on the MacBook: DIY Cooling (2026-08-11), Digital Clock (2026-08-12), Tianjin and Nanjing Turing (2026-08-12/13) and Claude Chime (2026-08-13). Each rewrite reused the confirmed brief from the original rewrite commit (`6986295`, `a27cf44`, `d243176`, `d27463b`, `6b2c0c9`) and drew wording and confirmed reactions from the raw answers. Scope: four homepages with two study notes each, plus both Claude Chime notes; the Claude Chime homepage and the four Turing source-document notes were not touched. Note topics, frontmatter, assets and media captions are unchanged. The startup-measurement note gained three details confirmed in the raw interview: the battery-terminal voltage notch seen on the oscilloscope, the intent behind the large MLCCs, and the bench-supply sequence that restored the protected pack.
 
 Validation: reader-prose scans with zero applicable hits and at most one `我`-initial paragraph per Chinese note (all are zero), Chinese sentence gate repairs, lint with content and UTF-8 validation (8 projects, 25 notes, 84 media), typecheck and production build. The user reviewed `docs/experiments/mac-interview-rewrite-2026-10-15/comparison.html` before publication.
+
+## 2026-10-15 — Unified light/dark theme and Bench Log detail pages
+
+An Impeccable critique (dual-agent, 17/28) found that the dark index pages and the paper detail pages read as two brands, so entering a project felt like leaving the site, and that the homepage below the hero repeats one block anatomy. The user chose a five-phase plan: unify the two worlds with a light/dark switch, redesign the atom, relayout the homepage, then typography and polish. Phase 1 confirmed the Bench Log layout (dealt structure 4 of 7) from three code-led sketches; the brief is in `.impeccable/surfaces/app-work-slug-page-tsx.md`, which is machine-local.
+
+Phase 2 on `feat/unified-theme`:
+- Theme tokens: about 400 colour literals became `--c-*` RGB-triplet tokens with dark and light values; Tailwind colour names map onto them.
+- Theme control: a sun/moon segment in the language pill, set before first paint.
+- Detail pages: `/work/[slug]` and `/notes/[slug]` rebuilt in the Bench Log layout.
+- Transitions: the black→paper handoff was replaced by React view transitions (forward/back vertical motion, `/work`→project image morph, anchored header).
+- Content: projects gained optional `lead`/`leadFit`/`coverFit` fields.
+
+A fresh finish reviewer returned `fix` twice. Ten items were applied: §-label kicker, mobile figure position, phone progress squares, measure, light image well, figure numbering, storage guard, bilingual alt, rail read state, and note masthead gap. The last two were verified by measurement rather than a third review.
+
+After review the user found the right half of wide screens empty below the masthead and long titles cramped beside the spec ledger. The title row now spans the article width, and the spec ledger moved into a sticky side column that runs the length of the body with the project's development-notes links. Figures, code and tables use the full reading column while running text keeps its measure, and phone titles step down to three lines or fewer.
+
+Validation: lint with content and UTF-8 validation, typecheck, and production build. CDP probes confirmed the typed transitions and the shared-figure morph. Screenshots covered 390/1280/1440 in both themes and both languages, with no horizontal overflow. `impeccable detect` findings fell from 61 to 3 before DESIGN.md was updated.
