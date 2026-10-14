@@ -122,7 +122,7 @@ Long note or project body text is not automatically machine-translated. If a lon
 
 The header brand is always the English wordmark `iRidium`; switching the site to Chinese does not replace it with `铱`. Its approved mark and transparent B-style script wordmark live under `public/brand/`. Keep the upper-left and lower-right blocks of the mark equal in size and preserve the compact 26px wordmark height.
 
-Every desktop header uses the same subdued `01`–`04` prefixes, control size, typography, lift, press feedback, and line-growth motion. Paper pages keep pine/graphite colors and Ember pages keep orange/warm-white colors. The mobile navigation remains unnumbered. The first keyboard stop is a bilingual `Skip to content` link, and shared controls keep at least a 44px touch target in both themes. Reduced-motion mode keeps the current/focus signal but removes movement and transition effects.
+Every desktop header uses the same subdued `01`–`04` prefixes, control size, typography, lift, press feedback, and line-growth motion. Both themes use the same orange signal; only the ground and text colors change. The mobile navigation remains unnumbered. The first keyboard stop is a bilingual `Skip to content` link, and shared controls keep at least a 44px touch target in both themes. Reduced-motion mode keeps the current/focus signal but removes movement and transition effects.
 
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
@@ -130,13 +130,13 @@ The homepage technical visual is maintained in `components/technical-visual.tsx`
 
 The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
 
-The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. Release `v0.9.0` enables Ember Black per route through `.signal-theme`; Work, Notes, Media, and About use their own Project Aperture Sequence, Routed Signal Map, project-first Focus Aperture, and Tension Signal Column, while project and note detail pages keep the paper system. See `DESIGN.md` for the current route scope.
+The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. Every page now has a dark and a light theme; Work, Notes, Media, and About keep their own Project Aperture Sequence, Routed Signal Map, project-first Focus Aperture, and Tension Signal Column, and project and note detail pages use the Bench Log reading layout. See `DESIGN.md` for the current route scope.
 
 ## 页头品牌、共享导航、首页学校信息与原子可视化
 
 页头品牌名始终使用英文 `iRidium`，切换到中文界面也不会变成“铱”。已确认的图形标记和 B 款透明花体字标保存在 `public/brand/`；维护时要保持图形左上角与右下角方块等大，并保留字标 26px 的紧凑显示高度。
 
-所有桌面页头现在共用低透明度的 `01`–`04` 编号、控件尺寸、字体、抬升、按压反馈和信号线生长动画；纸白页保留松绿/石墨配色，Ember 页保留橙色/暖白配色。移动端导航不显示编号。键盘第一个焦点是双语“跳到主要内容”链接，共享控件在两种主题里都保持至少 44px 的触控区域；“减少动态效果”模式仍保留当前项和焦点提示，但取消位移与过渡动画。
+所有桌面页头现在共用低透明度的 `01`–`04` 编号、控件尺寸、字体、抬升、按压反馈和信号线生长动画；深浅两种主题使用同一个橙色信号，只有底色和文字颜色不同。移动端导航不显示编号。键盘第一个焦点是双语“跳到主要内容”链接，共享控件在两种主题里都保持至少 44px 的触控区域；“减少动态效果”模式仍保留当前项和焦点提示，但取消位移与过渡动画。
 
 首页教育区第一行显示南洋理工大学及硕士在读信息，第二行以双栏明确展示西交利物浦大学与英国利物浦大学授予的本科双学位；“一等荣誉学位”归在英国利物浦大学学位下。
 
@@ -144,7 +144,7 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 
 prototype 图片和技术标识只用于展示。它们不能证明某块板卡已经制造或完成验证，标识也不表示关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
 
-当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。`v0.9.0` 通过 `.signal-theme` 按路由启用 Ember Black；Work、Notes、Media 与 About 分别采用项目检视窗序列、路由信号图、项目优先的深焦检视窗和张力信号柱，项目与笔记详情页继续使用 paper system。当前路由范围以 `DESIGN.md` 为准。
+当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。现在每个页面都有深色和浅色两种主题；Work、Notes、Media 与 About 保留各自的项目检视窗序列、路由信号图、项目优先的深焦检视窗和张力信号柱，项目与笔记详情页使用“工作台日志”阅读版式。当前路由范围以 `DESIGN.md` 为准。
 
 ## Using The Work Project Aperture
 
@@ -162,7 +162,7 @@ Seven spacious black signal intervals separate adjacent projects. Their short or
 
 On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by frontmatter year. The 2026-09-07 content revision has 25 public notes across 8 channels, including two approved studies per project and nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
 
-Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` deliberately keeps the paper reading surface.
+Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` opens in the Bench Log reading layout.
 
 The selected orange path follows the existing graphite stem and zig-zag bus to the chosen project's ledger endpoint. On wide screens, Project channels and Route controls stay the same height while only the note ledger follows the filtered result count. Long titles use the available desktop width, then wrap safely on narrower screens.
 
@@ -170,17 +170,17 @@ The selected orange path follows the existing graphite stem and zig-zag bus to t
 
 在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按 frontmatter 年份筛选公开笔记。2026-09-07 这轮发布后为 25 篇公开笔记、8 个通道，每个项目有两篇获批专题，另保留 9 篇技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
 
-每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会继续使用适合阅读的 paper surface。
+每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会以“工作台日志”阅读版式打开。
 
 选中的橙色路径会沿既有灰色 stem 和折线 bus 走到对应项目的台账端点。宽屏下“项目通道”和“路由控制”保持同一固定高度，只让右侧笔记台账跟随筛选结果变化；较长标题会利用桌面可用宽度，并在窄屏安全换行。
 
-## Dark-To-Paper Detail Transition
+## Themes And Detail Transitions
 
-Opening a Work project, a Notes ledger row, or a homepage note first fades the live dark page to black. Black then changes to paper white over the same duration. The destination loads under an opaque paper mask, and the complete detail page appears together after its first-viewport assets are ready. Direct detail links, refresh, browser Back/Forward, links between paper pages, and reduced-motion navigation remain immediate.
+The sun/moon buttons beside EN/ZH switch between the light and dark themes. A first visit follows the operating-system setting; after a click the choice is remembered in this browser. Because every page shares the chosen theme, opening a project or note never changes brightness. Opening a project from Work moves its image into the project page's lead figure while the page content rises into place; the back link reverses the motion. Direct links, refresh, browser Back/Forward, and reduced-motion settings change pages without movement.
 
-## 暗色到纸白详情页过渡
+## 主题与详情页过渡
 
-从 Work 打开项目、从 Notes 台账打开笔记，或从首页打开笔记时，当前暗色页面会先渐隐到黑场，再用相同时长从黑场变成纸白。目标详情页会在不透明纸白遮罩下加载，首屏资源就绪后整页一次显示。直接打开详情网址、刷新、浏览器前进后退、纸白页面之间的链接，以及“减少动态效果”模式都保持即时跳转。
+EN/ZH 旁边的太阳/月亮按钮用于切换浅色和深色主题。第一次访问时跟随操作系统设置，点过之后会在当前浏览器里记住选择。所有页面共用同一主题，所以打开项目或笔记时不会再出现明暗跳变。从 Work 打开项目时，项目图片会移动成项目页的首图，页面内容同时上浮进入；点“全部项目”返回时动作反向。直接打开网址、刷新、浏览器前进后退以及“减少动态效果”模式下，页面会直接切换、不做位移。
 
 ## Using The Media Focus Aperture
 
