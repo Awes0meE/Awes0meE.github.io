@@ -1,8 +1,9 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { PaperTransitionLink } from "@/components/paper-route-transition";
+import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
 import {
   WorkProjectRail,
   type WorkRailProject
@@ -11,6 +12,7 @@ import {
   formatDateRange,
   formatDateRangeZh,
   formatStatusZh,
+  getProjectChapterMedia,
   getProjects,
   type Project
 } from "@/lib/content";
@@ -20,30 +22,6 @@ const pageTitle = "Work";
 const pageDescription =
   "Evidence-first project archives covering embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, and robotic systems hardware.";
 const socialTitle = `${pageTitle} | Alvin Li`;
-
-const workMediaBySlug: Record<string, { src: string; fit: "contain" | "cover" }> = {
-  "claude-chime-hardware-power-board": {
-    src: "/uploads/projects/claude-chime-hardware/board-3d-render.png",
-    fit: "cover"
-  },
-  "juanyun-thermal-hardware": {
-    src: "/uploads/projects/juanyun-public/covers/cirro-tech-cover.jpg",
-    fit: "contain"
-  },
-  "sensorless-foc-learning-route": {
-    src: "/uploads/projects/sensorless-foc-learning-route/cover.png",
-    fit: "contain"
-  },
-  "nanjing-turing-qt-embedded-learning": {
-    src: "/uploads/projects/nanjing-turing/turing-ai-institute-cover.jpg",
-    fit: "contain"
-  }
-};
-
-export const viewport: Viewport = {
-  themeColor: "#080808",
-  colorScheme: "dark"
-};
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -88,7 +66,7 @@ function WorkProjectChapter({
   const focus = project.tags.slice(0, 3);
   const evidenceEn = project.assetPaths?.length ? "Case study + public files" : "Case study";
   const evidenceZh = project.assetPaths?.length ? "项目记录 + 公开文件" : "项目记录";
-  const media = workMediaBySlug[project.slug] ?? { src: project.cover, fit: "cover" as const };
+  const media = getProjectChapterMedia(project);
   const chapterNumber = String(index + 1).padStart(2, "0");
   const total = String(projectCount).padStart(2, "0");
   const titleId = `work-project-${project.slug}-title`;
@@ -101,8 +79,9 @@ function WorkProjectChapter({
       data-work-chapter={project.slug}
       aria-labelledby={titleId}
     >
-      <PaperTransitionLink
+      <Link
         href={`/work/${project.slug}`}
+        transitionTypes={["nav-forward"]}
         className="signal-work-chapter-link"
         aria-labelledby={titleId}
         aria-describedby={detailsId}
@@ -143,14 +122,16 @@ function WorkProjectChapter({
           </span>
         </div>
         <div className="signal-work-media" aria-hidden="true">
-          <Image
-            src={media.src}
-            alt=""
-            fill
-            preload={index === 0}
-            sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 148px), (max-width: 1199px) 54vw, 56vw"
-            className={`signal-work-image signal-work-image-${media.fit}`}
-          />
+          <ProjectFigureTransition slug={project.slug}>
+            <Image
+              src={media.src}
+              alt=""
+              fill
+              preload={index === 0}
+              sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 148px), (max-width: 1199px) 54vw, 56vw"
+              className={`signal-work-image signal-work-image-${media.fit}`}
+            />
+          </ProjectFigureTransition>
           <span className="signal-work-media-index">{chapterNumber} / APERTURE</span>
         </div>
         <span id={detailsId} className="sr-only">
@@ -159,7 +140,7 @@ function WorkProjectChapter({
             zh={`状态：${statusZh}。时间：${timelineZh}。方向：${focus.join("、")}。证据：${evidenceZh}。`}
           />
         </span>
-      </PaperTransitionLink>
+      </Link>
     </article>
   );
 }
@@ -172,35 +153,37 @@ export default function WorkPage() {
     titleZh: project.titleZh,
     status: project.status,
     statusZh: formatStatusZh(project.status),
-    cover: workMediaBySlug[project.slug]?.src ?? project.cover
+    cover: getProjectChapterMedia(project).src
   }));
 
   return (
-    <main className="signal-theme signal-work">
-      <div className="signal-work-shell">
-        <WorkProjectRail projects={railProjects} />
-        <div className="signal-work-stage">
-          <header className="signal-work-mobile-header">
-            <h1><BilingualText en="Project archive" zh="项目档案" /></h1>
-            <p>
-              <BilingualText
-                en="Eight engineering records, with status and validation limits left visible."
-                zh="八份工程项目记录，状态与验证边界保持可见。"
-              />
-            </p>
-          </header>
-          {projects.map((project, index) => (
-            <div key={project.slug} className="signal-work-sequence-item">
-              <WorkProjectChapter
-                index={index}
-                project={project}
-                projectCount={projects.length}
-              />
-              {index < projects.length - 1 ? <ProjectSignalBand /> : null}
-            </div>
-          ))}
+    <RouteStage>
+      <main className="signal-theme signal-work">
+        <div className="signal-work-shell">
+          <WorkProjectRail projects={railProjects} />
+          <div className="signal-work-stage">
+            <header className="signal-work-mobile-header">
+              <h1><BilingualText en="Project archive" zh="项目档案" /></h1>
+              <p>
+                <BilingualText
+                  en="Eight engineering records, with status and validation limits left visible."
+                  zh="八份工程项目记录，状态与验证边界保持可见。"
+                />
+              </p>
+            </header>
+            {projects.map((project, index) => (
+              <div key={project.slug} className="signal-work-sequence-item">
+                <WorkProjectChapter
+                  index={index}
+                  project={project}
+                  projectCount={projects.length}
+                />
+                {index < projects.length - 1 ? <ProjectSignalBand /> : null}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </RouteStage>
   );
 }

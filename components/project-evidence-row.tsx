@@ -28,6 +28,7 @@ export function ProjectEvidenceRow({ index, project }: ProjectEvidenceRowProps) 
     <article className="signal-project-row">
       <Link
         href={`/work/${project.slug}`}
+        transitionTypes={["nav-forward"]}
         className="signal-project-row-link"
         aria-labelledby={titleId}
         aria-describedby={detailsId}

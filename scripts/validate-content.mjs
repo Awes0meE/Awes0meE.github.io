@@ -175,6 +175,18 @@ for (const project of projects) {
 
   validatePublicHref(project.filePath, "cover", project.data.cover);
 
+  if (project.data.lead !== undefined) {
+    validatePublicHref(project.filePath, "lead", project.data.lead);
+  }
+
+  for (const fitField of ["leadFit", "coverFit"]) {
+    const fit = project.data[fitField];
+
+    if (fit !== undefined && fit !== "cover" && fit !== "contain") {
+      addError(project.filePath, `${fitField} must be "cover" or "contain"`);
+    }
+  }
+
   if (project.data.assetPaths !== undefined) {
     if (!isStringArray(project.data.assetPaths)) {
       addError(project.filePath, "assetPaths must be an array of public upload paths");

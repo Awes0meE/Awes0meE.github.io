@@ -27,7 +27,7 @@
   background: repeating-linear-gradient(
     to bottom,
     transparent 0 14px,
-    rgba(255, 116, 0, 0.68) 14px 15px,
+    rgb(var(--c-ember) / 0.68) 14px 15px,
     transparent 15px 28px
   );
   content: "";
@@ -54,7 +54,7 @@
   width: 1px;
   height: 22%;
   background: var(--signal-orange);
-  box-shadow: 0 14px 28px rgba(255, 116, 0, 0.22);
+  box-shadow: 0 14px 28px rgb(var(--c-ember) / 0.22);
   content: "";
 }
 
@@ -96,13 +96,13 @@
   max-width: 72ch;
   margin-top: clamp(1.7rem, 3vw, 2.7rem);
   gap: 1rem;
-  color: #c7c0b7;
+  color: rgb(var(--c-t2));
   font-size: clamp(0.94rem, 1.15vw, 1.08rem);
   line-height: 1.72;
 }
 
 .narrative p:first-child {
-  color: #e1d9d0;
+  color: rgb(var(--c-t1));
 }
 
 .heroActions {
@@ -131,7 +131,7 @@
 
 .primaryAction {
   border: 1px solid var(--signal-orange);
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-size: 0.82rem;
   font-weight: 750;
   letter-spacing: 0.02em;
@@ -183,8 +183,8 @@
   align-content: center;
   padding: clamp(4.7rem, 6vw, 6.5rem) clamp(2rem, 4vw, 4.75rem) clamp(4rem, 6vw, 5.5rem);
   background:
-    linear-gradient(90deg, transparent 0 49.9%, rgba(250, 250, 250, 0.035) 50%, transparent 50.1%),
-    #0a0a09;
+    linear-gradient(90deg, transparent 0 49.9%, rgb(var(--c-fg) / 0.035) 50%, transparent 50.1%),
+    rgb(var(--c-deep));
   animation: aboutFieldReveal 880ms 90ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -249,7 +249,7 @@
   align-self: center;
   margin: 0;
   background: #ffffff;
-  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 28px 72px rgb(var(--c-shadow) / calc(0.42 * var(--shadow-k)));
 }
 
 .portraitPlate::before,
@@ -297,14 +297,14 @@
   gap: 0.5rem;
   padding: 0.6rem 0.72rem;
   background: #ffffff;
-  color: #080808;
+  color: rgb(var(--c-on-ember));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.58rem;
   letter-spacing: 0.08em;
 }
 
 .portraitPlate figcaption span {
-  color: #5d5d5d;
+  color: rgb(var(--c-t6));
 }
 
 .tensionTrack {
@@ -327,7 +327,7 @@
   bottom: 27px;
   left: 22px;
   width: 1px;
-  background: linear-gradient(to bottom, var(--signal-line), #8e877f 48%, var(--signal-line));
+  background: linear-gradient(to bottom, var(--signal-line), rgb(var(--c-t4)) 48%, var(--signal-line));
   content: "";
 }
 
@@ -358,17 +358,17 @@
   width: 45px;
   height: 45px;
   place-items: center;
-  border: 1px solid #69635d;
+  border: 1px solid rgb(var(--c-t5));
   border-radius: 50%;
-  background: #0a0a09;
-  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.3);
+  background: rgb(var(--c-deep));
+  box-shadow: 0 9px 24px rgb(var(--c-shadow) / calc(0.3 * var(--shadow-k)));
   transition: border-color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tensionNode::before {
   width: 17px;
   height: 17px;
-  border: 1px solid #625d57;
+  border: 1px solid rgb(var(--c-t6));
   border-radius: 50%;
   content: "";
 }
@@ -379,7 +379,7 @@
   height: 5px;
   border-radius: 50%;
   background: var(--signal-orange);
-  box-shadow: 0 0 12px rgba(255, 116, 0, 0.38);
+  box-shadow: 0 0 12px rgb(var(--c-ember) / 0.38);
 }
 
 .tensionStage > div {
@@ -388,12 +388,12 @@
   display: grid;
   gap: 0.28rem;
   padding: 0.8rem 0.9rem 0.8rem 0;
-  background: #0a0a09;
+  background: rgb(var(--c-deep));
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stageIndex {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.68rem;
   font-weight: 700;
@@ -437,8 +437,8 @@
   border-radius: 50%;
   background: var(--signal-orange);
   box-shadow:
-    0 0 0 5px rgba(255, 116, 0, 0.09),
-    0 8px 24px rgba(255, 116, 0, 0.42);
+    0 0 0 5px rgb(var(--c-ember) / 0.09),
+    0 8px 24px rgb(var(--c-ember) / 0.42);
   opacity: 0.42;
   pointer-events: none;
 }
@@ -462,7 +462,7 @@
   gap: 1rem;
   padding-inline: clamp(2rem, 4vw, 4rem);
   border-top: 1px solid var(--signal-line-soft);
-  background: rgba(8, 8, 8, 0.86);
+  background: rgb(var(--c-canvas) / 0.86);
   color: var(--signal-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.66rem;
@@ -474,7 +474,7 @@
 }
 
 .nextLedgerCue svg {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -557,7 +557,7 @@
 }
 
 .practiceIndex {
-  color: var(--signal-orange-soft);
+  color: var(--signal-ember-text);
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
   font-size: 2.1rem;
   font-weight: 600;
@@ -595,7 +595,7 @@
 
 .practiceRow > p {
   max-width: 68ch;
-  color: #beb7ae;
+  color: rgb(var(--c-t2));
   font-size: clamp(0.9rem, 1.1vw, 1.02rem);
   line-height: 1.72;
 }
@@ -619,7 +619,7 @@
 
 .currentLead p {
   max-width: 60ch;
-  color: #c7c0b7;
+  color: rgb(var(--c-t2));
   font-size: clamp(1rem, 1.5vw, 1.28rem);
   line-height: 1.72;
 }
@@ -690,18 +690,18 @@
   .secondaryAction:hover,
   .secondaryAction:focus-visible {
     border-color: var(--signal-muted);
-    color: var(--signal-orange-soft);
+    color: var(--signal-ember-text);
     transform: translateY(-2px);
   }
 
   .mailRoute:hover,
   .mailRoute:focus-visible {
-    border-color: var(--signal-orange);
-    color: var(--signal-orange-soft);
+    border-color: var(--signal-ember-ink);
+    color: var(--signal-ember-text);
   }
 
   .tensionStage:hover .tensionNode {
-    border-color: var(--signal-orange-soft);
+    border-color: var(--signal-ember-text);
     transform: scale(1.08);
   }
 
@@ -715,7 +715,7 @@
   }
 
   .practiceRow:hover {
-    background: rgba(255, 255, 255, 0.018);
+    background: rgb(var(--c-glow) / 0.018);
   }
 
   .practiceRow:hover::after {
@@ -724,7 +724,7 @@
 
   .contactRoutes a:hover,
   .contactRoutes a:focus-visible {
-    color: var(--signal-orange-soft);
+    color: var(--signal-ember-text);
     transform: translateX(5px);
   }
 

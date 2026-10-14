@@ -23,6 +23,11 @@ export type Project = {
   status: string;
   tags: string[];
   cover: string;
+  /** Evidence image that leads the project page and its /work chapter. */
+  lead?: string;
+  leadFit?: "cover" | "contain";
+  /** How /work frames the cover when no lead image exists. */
+  coverFit?: "cover" | "contain";
   links?: LinkSet;
   assetPaths?: string[];
   featured: boolean;
@@ -150,4 +155,42 @@ export function formatStatusZh(value: string) {
   };
 
   return statusMap[value] ?? value;
+}
+
+export type ProjectMedia = {
+  src: string;
+  fit: "cover" | "contain";
+};
+
+/** Image for a project's /work chapter: the lead evidence image, else the cover. */
+export function getProjectChapterMedia(project: Project): ProjectMedia {
+  if (project.lead) {
+    return { src: project.lead, fit: project.leadFit ?? "cover" };
+  }
+
+  return { src: project.cover, fit: project.coverFit ?? "cover" };
+}
+
+/** The project page's lead figure, or null when only a logo-style cover exists. */
+export function getProjectLeadMedia(project: Project): ProjectMedia | null {
+  return project.lead ? { src: project.lead, fit: project.leadFit ?? "cover" } : null;
+}
+
+/** Bilingual caption for a public image, from the media index or the image's alt text in the body. */
+export function getImageCaption(src: string, body: string) {
+  const media = getMediaItems().find((item) => item.src === src || item.thumbnail === src);
+
+  if (media) {
+    return { en: media.title, zh: media.titleZh ?? media.title };
+  }
+
+  const escaped = src.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const alt = body.match(new RegExp(`!\\[([^\\]]+)\\]\\(${escaped}\\)`))?.[1];
+
+  if (!alt) {
+    return null;
+  }
+
+  const [en, zh] = alt.split(/\s+\/\s+/);
+  return { en: en.trim(), zh: (zh ?? en).trim() };
 }

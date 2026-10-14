@@ -11,19 +11,19 @@
 }
 
 .atomVisual {
-  --atom-ink: #f7f0e8;
-  --atom-muted: #aaa39a;
-  --atom-orange: #ff7400;
-  --atom-orange-soft: #ff9a4a;
-  --atom-line: rgba(247, 240, 232, 0.22);
+  --atom-ink: rgb(var(--c-warm));
+  --atom-muted: rgb(var(--c-t3));
+  --atom-orange: rgb(var(--c-ember));
+  --atom-orange-soft: rgb(var(--c-ember-text));
+  --atom-line: rgb(var(--c-warm) / 0.22);
   position: relative;
   z-index: 1;
   min-width: 0;
   min-height: 712px;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 48% 50%, rgba(255, 116, 0, 0.075), transparent 30%),
-    linear-gradient(112deg, rgba(8, 8, 8, 0.18), rgba(13, 10, 8, 0.46));
+    radial-gradient(ellipse at 48% 50%, rgb(var(--c-ember) / 0.075), transparent 30%),
+    linear-gradient(112deg, rgb(var(--c-canvas) / 0.18), rgb(var(--c-tint) / 0.46));
   color: var(--atom-ink);
   isolation: isolate;
 }
@@ -38,7 +38,7 @@
 
 .atomVisual::before {
   inset: 18px;
-  border: 1px solid rgba(247, 240, 232, 0.045);
+  border: 1px solid rgb(var(--c-warm) / 0.045);
 }
 
 .atomVisual::after {
@@ -46,8 +46,8 @@
   bottom: 18px;
   width: 54px;
   height: 54px;
-  border-right: 1px solid rgba(255, 116, 0, 0.46);
-  border-bottom: 1px solid rgba(255, 116, 0, 0.46);
+  border-right: 1px solid rgb(var(--c-ember) / 0.46);
+  border-bottom: 1px solid rgb(var(--c-ember) / 0.46);
 }
 
 .cornerTopRight {
@@ -57,8 +57,8 @@
   z-index: 9;
   width: 54px;
   height: 54px;
-  border-top: 1px solid rgba(255, 116, 0, 0.46);
-  border-right: 1px solid rgba(255, 116, 0, 0.46);
+  border-top: 1px solid rgb(var(--c-ember) / 0.46);
+  border-right: 1px solid rgb(var(--c-ember) / 0.46);
   pointer-events: none;
 }
 
@@ -80,7 +80,7 @@
 
 .visualLabel > span:first-child {
   padding: 0.34rem 0.5rem;
-  border: 1px solid rgba(255, 116, 0, 0.48);
+  border: 1px solid rgb(var(--c-ember) / 0.48);
   color: var(--atom-orange-soft);
 }
 
@@ -107,8 +107,8 @@
 .orbit {
   --orbit-tilt: 0deg;
   --counter-tilt: 0deg;
-  --orbit-color: #b9914b;
-  --orbit-rgb: 185, 145, 75;
+  --orbit-color: rgb(var(--c-orbit-embedded));
+  --orbit-rgb: var(--c-orbit-embedded);
   --orbit-direction: normal;
   position: absolute;
   top: 51%;
@@ -123,8 +123,8 @@
 .embeddedOrbit {
   --orbit-tilt: 0deg;
   --counter-tilt: 0deg;
-  --orbit-color: #b9914b;
-  --orbit-rgb: 185, 145, 75;
+  --orbit-color: rgb(var(--c-orbit-embedded));
+  --orbit-rgb: var(--c-orbit-embedded);
 }
 
 .embeddedOrbit .orbitLabel {
@@ -136,15 +136,15 @@
 .firmwareOrbit {
   --orbit-tilt: 60deg;
   --counter-tilt: -60deg;
-  --orbit-color: #5fa78f;
-  --orbit-rgb: 95, 167, 143;
+  --orbit-color: rgb(var(--c-orbit-firmware));
+  --orbit-rgb: var(--c-orbit-firmware);
 }
 
 .toolsOrbit {
   --orbit-tilt: 120deg;
   --counter-tilt: -120deg;
-  --orbit-color: #9b90b5;
-  --orbit-rgb: 155, 144, 181;
+  --orbit-color: rgb(var(--c-orbit-tools));
+  --orbit-rgb: var(--c-orbit-tools);
 }
 
 .orbitLine {
@@ -158,7 +158,7 @@
 
 .orbitLine ellipse {
   fill: none;
-  stroke: rgba(var(--orbit-rgb), 0.58);
+  stroke: rgb(var(--orbit-rgb) / 0.58);
   stroke-dasharray: 3.6 2.2;
   stroke-dashoffset: 0;
   stroke-linecap: round;
@@ -171,7 +171,7 @@
   position: absolute;
   top: 50%;
   left: calc(100% + 17px);
-  color: rgba(var(--orbit-rgb), 0.92);
+  color: rgb(var(--orbit-rgb) / 0.92);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.58rem;
   font-weight: 600;
@@ -217,13 +217,13 @@
   height: 18px;
   background: linear-gradient(
     90deg,
-    rgba(var(--orbit-rgb), 0) 0%,
-    rgba(var(--orbit-rgb), 0.08) 30%,
-    rgba(var(--orbit-rgb), 0.36) 72%,
-    rgba(var(--orbit-rgb), 0.88) 100%
+    rgb(var(--orbit-rgb) / 0) 0%,
+    rgb(var(--orbit-rgb) / 0.08) 30%,
+    rgb(var(--orbit-rgb) / 0.36) 72%,
+    rgb(var(--orbit-rgb) / 0.88) 100%
   );
   clip-path: polygon(0 47%, 100% 8%, 100% 92%, 0 53%);
-  filter: drop-shadow(0 0 5px rgba(var(--orbit-rgb), 0.46));
+  filter: drop-shadow(0 0 5px rgb(var(--orbit-rgb) / 0.46));
   transform: translateY(-50%);
 }
 
@@ -235,7 +235,7 @@
 
 .cometTail::before {
   inset: 3px 0;
-  background: linear-gradient(90deg, transparent, rgba(var(--orbit-rgb), 0.54));
+  background: linear-gradient(90deg, transparent, rgb(var(--orbit-rgb) / 0.54));
   filter: blur(3px);
 }
 
@@ -244,7 +244,7 @@
   right: 0;
   width: 66%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(247, 240, 232, 0.9));
+  background: linear-gradient(90deg, transparent, rgb(var(--c-glow) / 0.9));
 }
 
 .electronBadge {
@@ -254,10 +254,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid rgba(var(--orbit-rgb), 0.9);
+  border: 1px solid rgb(var(--orbit-rgb) / 0.9);
   border-radius: 50%;
-  background: #080808;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.48), 0 4px 18px rgba(var(--orbit-rgb), 0.14);
+  background: rgb(var(--c-canvas));
+  box-shadow: 0 10px 24px rgb(var(--c-shadow) / calc(0.48 * var(--shadow-k))), 0 4px 18px rgb(var(--orbit-rgb) / 0.14);
   color: var(--orbit-color);
   transform: rotate(calc(var(--counter-tilt) + var(--assembly-angle)));
 }
@@ -277,7 +277,7 @@
 }
 
 .electronBadge[data-icon-tone="outline"] img {
-  filter: brightness(1.18) saturate(0.92) drop-shadow(0 0 0.7px rgba(247, 240, 232, 0.95));
+  filter: brightness(1.18) saturate(0.92) drop-shadow(0 0 0.7px rgb(var(--c-warm) / 0.95));
 }
 
 .nucleus {
@@ -293,16 +293,16 @@
 .nucleusField {
   position: absolute;
   inset: 18px 27px;
-  border: 1px solid rgba(255, 116, 0, 0.3);
+  border: 1px solid rgb(var(--c-ember) / 0.3);
   border-radius: 50%;
-  box-shadow: 0 30px 64px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 30px 64px rgb(var(--c-shadow) / calc(0.52 * var(--shadow-k)));
   animation: nucleus-field 9s ease-in-out infinite;
 }
 
 .nucleusField::after {
   position: absolute;
   inset: 25px;
-  border: 1px dashed rgba(247, 240, 232, 0.16);
+  border: 1px dashed rgb(var(--c-warm) / 0.16);
   border-radius: 50%;
   content: "";
 }
@@ -332,10 +332,10 @@
   width: 92px;
   height: 92px;
   overflow: hidden;
-  border: 1px solid rgba(247, 240, 232, 0.3);
+  border: 1px solid rgb(var(--c-warm) / 0.3);
   border-radius: 50%;
-  background: #e7e1d8;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
+  background: rgb(var(--c-t1));
+  box-shadow: 0 14px 28px rgb(var(--c-shadow) / calc(0.5 * var(--shadow-k)));
   transform: rotate(calc(0deg - var(--nucleus-angle)));
 }
 
@@ -343,7 +343,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 0 18px rgba(8, 8, 8, 0.3);
+  box-shadow: inset 0 0 18px rgb(var(--c-canvas) / 0.3);
   content: "";
   pointer-events: none;
 }

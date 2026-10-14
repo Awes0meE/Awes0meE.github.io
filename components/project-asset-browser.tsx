@@ -79,7 +79,7 @@ function getRelatedNoteHref(href: string) {
 function PreviewBody({ asset }: { asset: ProjectAsset }) {
   if (asset.kind === "image") {
     return (
-      <a href={asset.href} className="block bg-chalk">
+      <a href={asset.href} className="block bg-well">
         <div className="relative min-h-[420px]">
           <Image
             src={asset.href}
@@ -150,7 +150,7 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
             ) : null}
           </div>
         ) : null}
-        <div className={cn("max-h-[680px] overflow-auto bg-white px-5 pb-6 pt-2", isChineseSourceDocument && "lang-zh")}>
+        <div className={cn("max-h-[680px] overflow-auto bg-chalk px-5 pb-6 pt-2", isChineseSourceDocument && "lang-zh")}>
           <ContentRenderer source={asset.content} baseHref={asset.href} />
         </div>
       </>
@@ -159,11 +159,11 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
 
   if (asset.kind === "text" && asset.content) {
     return (
-      <figure className="overflow-hidden bg-[#10231e]">
-        <figcaption className="border-b border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-normal text-[#b9d2ca]">
+      <figure className="overflow-hidden bg-code">
+        <figcaption className="border-b border-line px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-graphite">
           {asset.language}
         </figcaption>
-        <pre tabIndex={0} className="max-h-[680px] overflow-auto p-4 text-xs leading-5 text-[#e8f3ef]">
+        <pre tabIndex={0} className="max-h-[680px] overflow-auto p-4 font-mono text-[0.8rem] leading-6 text-ink">
           <code>{asset.content}</code>
         </pre>
       </figure>
@@ -216,14 +216,11 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
   }
 
   return (
-    <div className="mt-6 overflow-hidden rounded-lg border border-line bg-white">
+    <div className="mt-6 overflow-hidden border border-line bg-chalk">
       <div className="grid lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="border-b border-line bg-paper lg:border-b-0 lg:border-r">
           <div className="border-b border-line px-4 py-3">
-            <p className="text-xs font-semibold uppercase tracking-normal text-[#914315]">
-              <BilingualText en="Project Index" zh="项目索引" />
-            </p>
-            <p className="mt-1 text-xs text-graphite">
+            <p className="text-xs text-graphite">
               <BilingualText en="Select a file to preview" zh="选择文件查看预览" />
             </p>
           </div>
@@ -239,10 +236,10 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
                   aria-controls="project-asset-preview"
                   onClick={() => handleSelect(asset.href)}
                   className={cn(
-                    "mb-1 grid w-full grid-cols-[28px_minmax(0,1fr)] gap-2 rounded-md border px-2.5 py-2 text-left transition",
+                    "mb-1 grid w-full grid-cols-[28px_minmax(0,1fr)] gap-2 border px-2.5 py-2 text-left transition",
                     isSelected
-                      ? "border-pine bg-white text-ink shadow-sm"
-                      : "border-transparent text-graphite hover:border-line hover:bg-white"
+                      ? "border-pine bg-chalk text-ink shadow-sm"
+                      : "border-transparent text-graphite hover:border-line hover:bg-chalk"
                   )}
                 >
                   <span className={cn("mt-0.5 text-pine", isSelected && "text-copper")}>
@@ -263,7 +260,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
         <article id="project-asset-preview" ref={previewRef} className="min-w-0 scroll-mt-4">
           <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-line text-pine">
+              <span className="grid h-10 w-10 shrink-0 place-items-center border border-line text-pine">
                 <AssetIcon asset={selectedAsset} size={18} />
               </span>
               <div className="min-w-0">
@@ -278,7 +275,7 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
               target={opensAsDownload ? undefined : "_blank"}
               rel={opensAsDownload ? undefined : "noopener noreferrer"}
               download={opensAsDownload ? selectedAsset.name : undefined}
-              className="inline-flex items-center gap-2 rounded-md border border-pine px-3 py-2 text-sm font-semibold text-pine transition hover:bg-pine hover:text-white"
+              className="inline-flex items-center gap-2 border border-pine px-3 py-2 text-sm font-semibold text-pine transition hover:bg-ember hover:text-on-ember hover:border-ember"
             >
               <BilingualText en={opensAsDownload ? "Download file" : "Open file"} zh={opensAsDownload ? "下载文件" : "打开文件"} />
               <ExternalLink size={15} />
