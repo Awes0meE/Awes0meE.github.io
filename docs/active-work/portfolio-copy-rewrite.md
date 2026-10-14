@@ -1,6 +1,6 @@
 # Portfolio Writing Handoff
 
-**Updated:** 2026-10-14
+**Updated:** 2026-10-15
 
 All sixteen new bilingual study notes across the eight projects are approved. Publication is tracked by [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38); use its live merge/deployment state when resuming. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
 
@@ -42,5 +42,7 @@ These are editorial working notes, not sentences to paste into the project pages
 
 
 ## History
+
+On 2026-10-15 the DIY Cooling, Digital Clock, Tianjin and Nanjing Turing homepages and their two study notes each, plus both Claude Chime notes, were rewritten with the writer from the raw Codex interviews kept on the MacBook (`~/.codex/archived_sessions/`, 2026-08-11 to 2026-08-13) and the confirmed briefs. The Claude Chime homepage and the four original Turing source-document notes were left unchanged; Smart Car, Juanyun thermal and FOC were interviewed on the Windows machine and were not in scope. The before/after reader is `docs/experiments/mac-interview-rewrite-2026-10-15/comparison.html`.
 
 The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](https://github.com/Awes0meE/Awes0meE.github.io/pull/40), with the comparison drafts in `docs/experiments/claude-chime-homepage-three-way-2026-10-13/`; the matching writer rules are [PR #39](https://github.com/Awes0meE/Awes0meE.github.io/pull/39). The seven-homepage release is [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged at `8e009ef`; its nine-public-note counts and 31 production checks describe that checkpoint. Claude Chime's approved homepage was published through PR #35. Earlier interviews and decisions are in project briefs and `docs/session-log.md`; dated experiment packets preserve review evidence rather than current publication instructions.

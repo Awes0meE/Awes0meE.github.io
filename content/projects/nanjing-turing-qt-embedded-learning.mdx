@@ -51,68 +51,68 @@ assetPaths:
 
 ## Joining the Seamly2D Project / 进入 Seamly2D
 
-After the 2025 National Undergraduate Electronics Design Contest, I stayed in Nanjing for a three-week full-time internship. I had expected to encounter UI work for embedded devices. The actual assignment involved [Seamly2D](https://github.com/FashionFreedom/Seamly2D), a large C++ and Qt patternmaking application. My prior experience was an introductory university C++ course, mostly in the terminal; both Qt and a collaborative codebase were new territory.
+In early August 2025 I finished the National Undergraduate Electronics Design Contest in Nanjing and went straight into a three-week, full-time internship in the same city, in the office from eight to five every day. I had expected to work on UI for embedded devices. What I actually had to change was [Seamly2D](https://github.com/FashionFreedom/Seamly2D), a large open-source C++ and Qt application for cutting and designing garment patterns. My C++ stopped at the level of the university's introductory course: functions and object-oriented basics, with inheritance only skimmed. Everything I had written lived in a terminal, one command in and one result out. I had never touched Qt or run an open-source desktop project of this size.
 
-2025 年全国大学生电子设计竞赛结束后，我留在南京，开始了三周全职实习。我原先以为会接触嵌入式设备的 UI，真正要改的却是 [Seamly2D](https://github.com/FashionFreedom/Seamly2D)，一个 C++ 与 Qt 编写的大型服装纸样软件。此前我只上过学校的 C++ 入门课，程序基本还停在命令行，Qt 和多人协作仓库都要现学。
+2025 年 8 月初，我在南京打完全国大学生电子设计竞赛，接着就在南京开始了三周的全职实习，早八点到晚五点坐办公室。我原本以为会去做嵌入式设备上的交互界面，结果要改的是 [Seamly2D](https://github.com/FashionFreedom/Seamly2D)，一个用 C++ 和 Qt 写的大型开源服装纸样软件，能在上面裁剪、设计衣服的版型。那时我的 C++ 停在学校入门课的水平，函数和面向对象学过，继承只稍微了解了一下；写过的程序全在命令行里，敲一行命令，出一行结果。Qt 没碰过，这种体量的开源桌面项目也从来没跑过。
 
 ![Upstream Seamly2D wordmark / Seamly2D 上游项目标识](/uploads/projects/nanjing-turing/seamly2d-banner.png)
 
-The company wanted to assess further development on the application. My task was to add local registration, login, and role management before the main interface, then build, package, and hand off the modified version. The supervising engineer assigned daily work, and I reported back after completing it. By the end of three weeks, someone else needed to be able to install, open, and inspect my changes.
+The company wanted to build on Seamly2D and first check whether a layer of account access could sit in front of the existing program. My supervising engineer's brief was clear: add local registration, login and role management before the main interface, then build, package and hand off the modified version. Each day he told me the day's task, and I reported back once it was done. Three weeks later, someone else had to be able to install my changes, open them and check them.
 
-公司想验证继续二次开发的可行性。我接到的任务是在主界面前加入本地注册、登录和角色管理，再把修改版构建、打包并交接。带教工程师每天给任务，我完成后汇报。三周的终点很具体，要让别人能够安装、打开并检查我的改动。
+公司想在 Seamly2D 的基础上做二次开发，先验证能不能在原有程序前面加一层账户入口。带教工程师给我的任务很明确：在主界面之前加上本地注册、登录和角色管理，再把改好的版本构建、打包、交接。他每天跟我讲当天的任务，我做完去找他汇报。三周以后，要让别人能把我的改动装上、打开、检查一遍。
 
 ## Environment and Build / 环境与构建
 
-The first day disappeared into downloading. After three hours against the overseas server, the Qt Online Installer was about 10 percent complete. I assumed large software simply took that long and waited for much of the day. The next morning, the engineer mentioned the Tsinghua mirror; the remaining installation finished in a little over an hour. Reading the [TUNA Qt mirror guide](https://mirrors.tuna.tsinghua.edu.cn/help/qt/) later made that patient first day seem rather funny.
+The first day went almost entirely on downloading. The Qt Online Installer was pulling from an overseas server, and after three hours the progress bar had reached about 10 percent. Assuming big software was just slow, I plodded along and waited most of the day. When I mentioned it to the engineer, he told me there was a Tsinghua mirror inside China. The next day I switched to the [Tsinghua Qt mirror](https://mirrors.tuna.tsinghua.edu.cn/help/qt/) and the rest finished in a little over an hour. The me who had sat watching that progress bar the day before looked a bit like a clown, though it was the learn-from-it kind of foolishness, nothing like the real frustration still to come.
 
-第一天先耗在下载上。Qt 在线安装器连海外服务器，三个小时大约下了 10%，我还以为大软件本来就这么慢，老老实实等了大半天。第二天工程师告诉我可以换清华镜像，剩余安装一个多小时就结束了。后来看到 [TUNA 的 Qt 镜像说明](https://mirrors.tuna.tsinghua.edu.cn/help/qt/)，再想起那一天，多少有点好笑。
+第一天几乎全耗在下载上。Qt 在线安装器连的是国外的服务器，下了三个小时，进度条才走到 10%。我以为大软件就是这么慢，坑吃坑吃等了大半天。跟带教工程师一提，他告诉我可以换国内的清华源。第二天换到[清华的 Qt 镜像](https://mirrors.tuna.tsinghua.edu.cn/help/qt/)上，剩下的一个多钟头就下完了。前一天守着进度条的我，真跟个小丑一样，不过这种事属于吃一堑长一智，跟后面那种真烦躁不是一回事。
 
-Installation did not immediately produce a working build. I began with Qt 5.15.2 and made `core5compat` conditional, which let qmake pass, only for compilation to report more than thirty errors. The branch already used Qt 6 headers and APIs. Extending Qt 5 compatibility would have pulled me away from the assignment, so I installed Qt 6.5.3 MSVC2019 64-bit and Qt 5 Compatibility Module with the v142 compiler. Deleting the old build directory and `Seamly2D.pro.user`, then configuring the Kit again, finally produced a complete build.
+Installing Qt did not make it usable. I started with Qt 5.15.2 and made `core5compat` load conditionally, which got qmake through, only for the full build to report more than thirty errors. The branch had long since moved to Qt 6 headers and APIs, and patching in more Qt 5 compatibility would have taken me further and further from the task. I switched to Qt 6.5.3 MSVC2019 64-bit with the Qt 5 Compatibility Module and the v142 compiler, deleted the old build directory and `Seamly2D.pro.user`, configured the Kit again, and the full build finally went through. Once the versions matched, those thirty-odd errors went away with them.
 
-装好也没马上能用。最初我选 Qt 5.15.2，把 `core5compat` 改为条件加载后，qmake 通过，完整编译却继续报三十多个错误。当前分支已经用了 Qt 6 的头文件和 API，继续补 Qt 5 兼容会偏离这次任务。我改用 Qt 6.5.3 MSVC2019 64-bit、Qt 5 Compatibility Module 与 v142 编译器，删除旧 build 目录和 `Seamly2D.pro.user`，重新配置 Kit，才把完整构建跑通。
+装好也没法直接用。我先选了 Qt 5.15.2，把 `core5compat` 改成条件加载，qmake 是过了，完整编译却又报出三十多个错误。当前分支早就用上了 Qt 6 的头文件和 API，再去补 Qt 5 的兼容，只会离这次的任务越来越远。我改装 Qt 6.5.3 MSVC2019 64-bit 和 Qt 5 Compatibility Module，配 v142 编译器，删掉旧的 build 目录和 `Seamly2D.pro.user`，重新配 Kit，完整构建才终于跑通。版本一对上，那三十多个错误也跟着没了。
 
-That process taught me to check the branch, Qt package, compiler, and architecture together. GitHub had previously been somewhere to download code. During the internship I practiced clone, branch switching, commit, push, merge, pull requests, forks, and tags as ways to preserve and exchange actual work. The [original first-run record](/notes/turing-qt-seamly2d-first-run) retains the environment setup and specific error handling.
+After that episode I got into the habit of checking branch, Qt package, compiler and architecture together. It was also my first real contact with a large project. GitHub had been a place to download code, and I had no picture at all of how several people develop together. Over these three weeks I learned clone, inspecting and switching upstream branches, creating my own development branch, commit, push, merge, pull requests, forks and tags from scratch, and used every one of them for real; Git turned out to be genuinely useful. How the environment was set up and each error handled is in the [original first-run record](/notes/turing-qt-seamly2d-first-run) I wrote at the time.
 
-这段排查让我开始把分支、Qt 包、编译器和架构放在一起核对。此前我把 GitHub 当成下载代码的地方，这次才实际练习 clone、切分支、commit、push、merge、pull request、fork 与 tag，用 Git 保存和交接自己的改动。[首跑原始记录](/notes/turing-qt-seamly2d-first-run)保留了环境配置与具体报错处理。
+这么一折腾，我养成了把分支、Qt 包、编译器和架构放在一起对的习惯。这也是我第一次系统地碰大型项目。以前 GitHub 对我来说就是个下代码的地方，多人协作开发是怎么回事，脑子里完全没概念。这三周里，clone、查看并切换上游分支、建自己的开发分支、commit、push、merge、pull request、fork、tag，全是现学的，而且实打实用了一遍，我是真觉得 Git 好用。环境怎么配、每个报错怎么处理，记在我当时写的[首跑原始记录](/notes/turing-qt-seamly2d-first-run)里。
 
 ## Accounts and Roles / 账户与角色
 
-With the application running, I added registration and login windows and organized the entry sequence around `main()`. [QSettings](https://doc.qt.io/qt-6.5/qsettings.html) persisted account information locally. I replaced early plaintext password comparison with hash storage and verification, masked the password input, and added distinct handling for existing users, missing users, and wrong passwords.
+With the application running, I added registration and login windows and sorted out the sequence leading to the main interface around `main()`. Account information is stored locally with [QSettings](https://doc.qt.io/qt-6.5/qsettings.html). Passwords started out as a plaintext comparison and became one-way hashed storage and verification; the input field got masking, and existing users, missing users and wrong passwords each got their own handling. Online access and a database were not part of this round, partly because I did not know how and partly because there was no hurry. The point was only to check whether Seamly2D could take one more layer of entry in front.
 
-程序启动后，我加入注册、登录窗口，并在 `main()` 附近整理进入主界面的顺序。账户信息由 [QSettings](https://doc.qt.io/qt-6.5/qsettings.html) 在本机保存，密码从早期明文比较改成哈希存储与校验，输入框增加遮蔽，再分别处理用户已存在、用户不存在和密码错误。
+程序能跑以后，我加了注册和登录窗口，在 `main()` 附近理顺进入主界面的顺序。账户信息用 [QSettings](https://doc.qt.io/qt-6.5/qsettings.html) 存在本机。密码一开始是明文比对，后来改成不可逆的哈希存储和校验，输入框也加了遮挡，再把用户已存在、用户不存在、密码错误分开处理。线上联网和数据库这次没做，一来我不会，二来当时也不急，这一步本来就只是验证 Seamly2D 前面能不能再加一层入口。
 
-Using the windows exposed smaller problems that still blocked the feature. Enter activated Cancel, username fields offered suggestions, and the password field could crash with a Chinese input method active. I corrected those behaviors one by one. Role management then shifted my attention from the appearance of a window to which user could act on which account. The first account had to be `admin`; normal users could not access management; administrators could delete or promote only normal users, with confirmation before deletion; and only `admin` could demote another administrator.
+Actually using the windows, no small problem could be dodged. Enter triggered Cancel by default, the username field popped up suggestions, and the password field once crashed with a Chinese input method active; I fixed them one by one. With role management, my attention moved from how a window looked to who could do what to whom. The first account had to be `admin`; normal users could not see the management entry; administrators could delete or promote only normal users, with a second confirmation before deletion; and only `admin` could demote another administrator. I implemented each operation by separating the current user, the target user and the allowed state change, then demonstrated them one at a time. Those rules get a second, closer look in [Local Account Permission Rules](/notes/turing-local-role-permissions).
 
-真正使用界面时，小问题一个也绕不开。回车默认触发取消，用户名框弹联想，密码框在中文输入法状态下发生过闪退，我逐项修正这些行为。到了角色管理，重点又从窗口长什么样，变成谁可以对谁执行什么操作。第一个账号必须是 `admin`；普通用户看不到管理入口；管理员只能删除或升级普通用户，删除还要二次确认；其他管理员的降级只能由 `admin` 执行。
+界面真拿来用，小毛病一个都躲不掉。回车默认触发的是取消，用户名框会弹联想，开着中文输入法时密码框还闪退过，我一项项改掉。到了角色管理，心思就从窗口长什么样，转到了谁能对谁做什么。第一个账号必须是 `admin`；普通用户看不到管理入口；管理员只能删除或升级普通用户，删除前还要二次确认；其他管理员只能由 `admin` 来降级。我把每项操作按当前用户、目标用户和允许的状态变化拆开实现，再一项项演示。这几条规则后来又拆开细想了一遍，写在[本地账户的权限判断](/notes/turing-local-role-permissions)里。
 
-I implemented the operations by separating the current user, target user, and permitted state change, then demonstrated them individually.
+## Windows Packaging and Another Machine / Windows 打包与换机
 
-我把每项操作按当前用户、目标用户和允许的状态变化拆开实现，再逐项演示。
+In the third week I moved on to Release, and `windeployqt` held me up for at least three days. The tool was sitting right there on the disk, and the build step simply could not find it. Reinstalling, checking paths, round and round: those days were genuinely irritating. Which change finally did it I can no longer say for sure; at some point it just worked. According to the notes I kept, the final setup added Qt's `bin` directory to Qt Creator's Build Environment and had both `.pro` files locate the deployment tool through `QT_INSTALL_BINS`, running it only in the Release configuration.
 
-## Installation and Another Machine / 安装与换机
+第三周转去做 Release，`windeployqt` 卡了我至少三天。工具明明就在硬盘里，构建步骤就是找不到它。重装、查路径，来来回回，那几天是真烦。到底是哪一步起的作用，我自己都记不太清，反正某一刻它突然就找到了。按当时留下的记录，最后的做法是给 Qt Creator 的 Build Environment 补上 Qt 的 `bin` 目录，再让两个 `.pro` 文件通过 `QT_INSTALL_BINS` 去定位部署工具，只在 Release 配置下执行。
 
-Release work in the third week stalled at `windeployqt` for about three days. The executable existed on disk but the build could not find it. Reinstallation and path checks were frustrating. I finally exposed Qt's `bin` directory to Qt Creator's Build Environment and let both `.pro` files locate the deployment tool through `QT_INSTALL_BINS`, running it only in Release configuration.
+With the deployment folder already crammed with DLLs, the application still started up missing `xerces-c_3_2.dll`. Only after adding that XML parsing library could I finish Windows self-signing, the Inno Setup installer, installation and launch. According to [Qt's deployment guide](https://doc.qt.io/qt-6.5/windows-deployment.html), additional third-party libraries were never `windeployqt`'s job. The `.sm2d` and `.smis` samples I had read earlier now matched up with the XML parser the program needed. Why one DLL can still be missing among dozens is traced through the loading process in [Qt Windows Runtime Dependencies](/notes/turing-windows-runtime-dependencies).
 
-第三周转做 Release，我在 `windeployqt` 上卡了约三天。工具明明在硬盘里，构建步骤却找不到，重装和查路径的过程确实很烦。最后，我给 Qt Creator 的 Build Environment 补上 Qt `bin`，并让两个 `.pro` 文件通过 `QT_INSTALL_BINS` 定位部署工具，只在 Release 配置执行。
+部署目录里的 DLL 已经堆得满满当当，程序一启动还是缺 `xerces-c_3_2.dll`。补上这个 XML 解析库，才接着做完 Windows 自签名、Inno Setup 打包、安装和启动。按 [Qt 的部署文档](https://doc.qt.io/qt-6.5/windows-deployment.html)，额外的第三方库本来就不归 `windeployqt` 管。前面读过的 `.sm2d`、`.smis` 样例，到这里和程序要的 XML 解析依赖对上了。为什么一大堆 DLL 里还能缺一个，在[Qt 程序的 Windows 运行依赖](/notes/turing-windows-runtime-dependencies)里顺着加载过程拆了一遍。
 
-Even with DLLs filling the deployment directory, the application still lacked `xerces-c_3_2.dll`. I added that XML library before completing Windows self-signing, Inno Setup packaging, installation, and launch. The [Qt deployment guide](https://doc.qt.io/qt-6.5/windows-deployment.html) explicitly excludes additional third-party libraries from `windeployqt`'s automatic work. The `.sm2d` and `.smis` samples I had read earlier now connected to a concrete runtime dependency on an XML parser.
+Alongside this I put together [CMake and build-logic study material](/notes/turing-cmake-build-logic) to tell generators, compilers, linkers and runtime dependencies apart, while the Seamly2D project in front of me stayed on qmake. The [original packaging record](/notes/turing-release-packaging-cross-platform) and the [XML samples](/notes/turing-sm2d-xml-data-format) hold the step-by-step procedures and data.
 
-部署目录里已经堆满 DLL，程序还缺 `xerces-c_3_2.dll`。我补上这个 XML 库，才继续完成 Windows 自签名、Inno Setup 打包、安装与启动。[Qt 部署文档](https://doc.qt.io/qt-6.5/windows-deployment.html)也明确提醒，额外第三方库不在 `windeployqt` 的自动处理范围内。前面读过的 `.sm2d`、`.smis` 样例，这时与程序需要的 XML 解析依赖对上了。
+同期我还整理过 [CMake 与编译原理的资料](/notes/turing-cmake-build-logic)，用来分清生成器、编译器、链接器和运行时依赖，手上的 Seamly2D 则一直用的是 qmake。[打包原始记录](/notes/turing-release-packaging-cross-platform)和 [XML 样例](/notes/turing-sm2d-xml-data-format)里有具体操作和数据。
 
-I also kept [CMake and build-logic study material](/notes/turing-cmake-build-logic) to distinguish generators, compilers, linkers, and runtime dependencies, while the Seamly2D project on my desk continued to use qmake. The [original packaging record](/notes/turing-release-packaging-cross-platform) and [XML samples](/notes/turing-sm2d-xml-data-format) contain the detailed procedures and data.
+The formal Windows installation and feature checks took place on the development machine. About two weeks after the internship, back home, I tried again on a Windows desktop with a fresh system install and neither Qt nor Visual Studio on it. I ran the installer, double-clicked the result, and up came my modified version, with registration, login and roles all working.
 
-我同期整理过 [CMake 与编译原理资料](/notes/turing-cmake-build-logic)，用来分清生成器、编译器、链接器和运行时依赖，手上的 Seamly2D 则一直使用 qmake。[打包原始记录](/notes/turing-release-packaging-cross-platform)与 [XML 样例](/notes/turing-sm2d-xml-data-format)里有操作和数据细节。
-
-Formal Windows installation and feature checks took place on the development machine. About two weeks after the internship, I also tested the installer on a newly installed Windows desktop at home with neither Qt nor Visual Studio present. Registration, login, and role operations worked.
-
-实习正式验收时，Windows 安装与功能检查都在开发机上进行。结束约半个月后，我又在家中一台新装的 Windows 台式机上补测，那台电脑没有 Qt 和 Visual Studio。运行安装程序后，注册、登录和角色功能都能实际操作。
+正式验收时，Windows 的安装和功能检查都是在开发机上做的。实习结束大概半个月，我回到家，在一台刚装好系统的 Windows 台式机上又试了一次，那台电脑上没有 Qt，也没有 Visual Studio。直接运行安装程序，装完双击打开，就是我改过的那一版，注册、登录和角色功能都能用。
 
 ## Mac and Handoff / Mac 与交接
 
-I moved the same source to my Mac, reworked the Qt paths, architecture, and Kit, and brought up both Debug and Release. After collecting dependencies with `macdeployqt`, the application launched; I also generated and opened an unsigned DMG on that machine, with the supervising engineer watching the demonstration. I then created a self-signed certificate and tried the `codesign`, `spctl`, and packaging sequence. Application signing did not finish.
+I moved the same source onto my own Mac, reworked the Qt paths, architecture and Kit, and got both Debug and Release running. After `macdeployqt` collected the dependencies the application launched, and an unsigned DMG was generated and opened on that Mac while the supervising engineer watched the demonstration. I then created a self-signed certificate and tried the `codesign`, `spctl` and packaging-script sequence. Application signing never got finished, and exactly which step it stuck on I still cannot quite say. The engineer did not work on macOS; knowing the route was viable was enough for him, and he did not press further.
 
-我也把同一份源码迁到自己的 Mac，重新处理 Qt 路径、架构与 Kit，跑通 Debug 和 Release，再用 `macdeployqt` 收集依赖。应用能够启动，无签名 DMG 也生成并在这台 Mac 上打开过，带教工程师现场看了演示。随后我创建自签名证书，尝试 `codesign`、`spctl` 与打包脚本，应用签名没有做完。
+同一份源码我也搬到了自己的 Mac 上，重新处理 Qt 路径、架构和 Kit，Debug 和 Release 都跑通了。用 `macdeployqt` 收集完依赖，应用能启动，无签名的 DMG 也生成出来，在这台 Mac 上打开过，带教工程师现场看了演示。之后我建了自签名证书，试着走 `codesign`、`spctl` 和打包脚本那一套，应用签名到底没做完，具体卡在哪一步，我到现在也说不太清。工程师自己不用 macOS，知道这条路走得通，也就没再多问。
 
-At the final review, the engineer checked registration, login, roles, Windows installation, and the Mac demonstration, and made a point of praising my progress over the three weeks. The source, weekly logs, environment notes, and scripts went into the company's intern `develop` branch. I was very excited. For the first time, I had entered an unfamiliar large codebase, completed real changes, and handed them to someone else for inspection.
+At the final review the engineer went through registration and login, role management, the Windows installation and the Mac demonstration item by item, and then gave me a proper round of praise: for someone who three weeks earlier had not known what Qt was, getting this far was seriously impressive. The source, weekly logs, environment notes and scripts were committed to the `develop` branch the company had opened for interns. How it was used afterwards, or whether it became part of a product, I do not know.
 
-最后，工程师检查了注册登录、角色管理、Windows 安装和 Mac 演示，还认真肯定了我三周里的进步。源码、周日志、环境文档和脚本提交到了公司的实习生 `develop` 分支。我当时非常兴奋，第一次确认自己能进入陌生的大型代码库，完成一组实际修改，再交给别人检查。
+最后验收，工程师逐项看了注册登录、角色管理、Windows 安装和 Mac 演示，结结实实把我夸了一顿，说一个三周前连 Qt 是什么都不知道的人，能做到这一步相当厉害。源码、每周日志、环境文档和脚本都提交到了公司专门给实习生开的 `develop` 分支，后面怎么用、有没有做进产品，我就不清楚了。
+
+That praise genuinely thrilled me. Three weeks earlier I had been going round in circles in a terminal; three weeks later I had walked into an unfamiliar large codebase, made a set of real changes, and handed them to someone else to check.
+
+被这么一夸，我是真的兴奋。三周前我还在命令行里打转，三周后，我进了一个陌生的大型代码库，做完一组实打实的修改，又把它交到了别人手里检查。

@@ -33,6 +33,12 @@ Current archives:
   user rejected for its counted-question framing (`03-merged.mdx`) and the
   published bilingual candidate (`04-final.mdx`). PR #40 published the final
   version; PR #39 turned the two rejected patterns into writer rules.
+- `mac-interview-rewrite-2026-10-15/`: before/after reader (`comparison.html`)
+  for the 2026-10-15 rewrite of the DIY Cooling, Digital Clock, Tianjin and
+  Nanjing Turing homepages with their study notes, plus both Claude Chime
+  notes, recomposed from the raw Mac interviews and confirmed briefs. The left
+  column is the pre-rewrite `main`; the user approved the right column for
+  publication.
 
 Keep future experiment directories date-stamped. Preserve their original inputs,
 candidate mapping, and final audits so later writing-rule changes can be traced

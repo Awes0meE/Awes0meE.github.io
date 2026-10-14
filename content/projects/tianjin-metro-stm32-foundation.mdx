@@ -16,56 +16,68 @@ assetPaths:
 
 ## From Arduino to STM32 / 从 Arduino 到 STM32
 
-In February 2025, I spent a month as an embedded intern at Tianjin Jintie Communications, working inside the Tianjin Rail Transit Group headquarters. The supervising engineer supplied introductory material, and my bench held an STM32F103C8T6 Blue Pill, an ST-Link, and external modules. I started with those fundamentals.
+In February 2025 I saw an embedded-intern opening at Tianjin Jintie Communications online, applied, and went. Jintie is a wholly owned subsidiary of Tianjin Rail Transit Group, so every morning I walked into the Group's headquarters building, which still strikes me as a slightly surreal way to spend an internship. The title was embedded intern; in practice it was a month of foundational training. The engineer tossed me a batch of introductory material, and on my desk sat an STM32F103C8T6 Blue Pill, an ST-Link and a pile of external modules. An intern was hardly worth him stopping his own work to teach step by step, so the rest of the route was mine to find.
 
-2025 年 2 月，我在天津津铁通信有限公司做了一个月嵌入式实习，日常办公地点在天津轨道交通集团总部。工程师给我一批入门资料，桌上是一块 STM32F103C8T6 Blue Pill、一只 ST-Link 和外接模块，我就从这些基础练起。
+2025 年 2 月，我在网上看到天津津铁通信招嵌入式实习生，投了就去了。津铁通信是天津轨道交通集团旗下的全资子公司，我每天上班进的是轨道交通集团的总部大楼，这段实习说起来还挺神奇。岗位叫嵌入式实习生，实际是一个月的基础培训。工程师甩给我一批入门资料，桌上一块 STM32F103C8T6 Blue Pill、一只 ST-Link，外加一堆外接模块。我一个实习生，也犯不着让他停下手里的活来手把手教，剩下的路得自己摸。
 
-My university Arduino Nano projects had mostly taught me to call functions and set pins high or low. There was no daily syllabus for this placement, so I combined the supplied material with online tutorials and arranged my own route: GPIO, EXTI and timers, then PWM, UART, ADC, and an integrated demo. I wanted to understand the configuration behind effects that Arduino had made available through a function call.
+Before this, the only microcontroller I had used was the Arduino Nano the university handed out, for the car and the seven-segment counter. Keil, ST-Link, the Standard Peripheral Library, interrupts, timers, PWM, ADC: I knew none of them, a complete beginner. To me a microcontroller meant calling one function to set a pin high and another to set it low.
 
-此前我在学校用过 Arduino Nano，对单片机的理解大多停在调用函数、输出高低电平。工程师没有给逐日课表，我就结合资料和网上教程安排自己的顺序，先 GPIO，再 EXTI 与 Timer，接着学 PWM、UART、ADC，最后把它们接成一个综合 demo。我想弄明白，以前函数调用后直接出现的现象，在 STM32 上到底要经过哪些配置。
+来之前，我只用过学校发的 Arduino Nano，做过小车和数码管计数器。Keil、ST-Link、标准外设库、中断、定时器、PWM、ADC，一样都不懂，纯小白。在我眼里，单片机就是调一个函数让引脚变高，再调一个函数让它变低。
+
+There was no syllabus, so I set the order myself. Later topics make no sense until the earlier ones do, so I combined the engineer's material with online tutorials and laid out a route: GPIO first, then EXTI and timers, then PWM, UART and ADC, and finally one integrated demo. I wanted to know why things worked, and in particular what an effect Arduino produced with a single function call actually took on an STM32.
+
+没有课表，学习顺序是我自己排的。前面的没弄懂，后面的就看不明白，所以我结合工程师给的资料和网上的教程，定了一条路：先 GPIO，再 EXTI 和定时器，然后 PWM、UART、ADC，最后把它们接成一个综合 demo。我是奔着知其所以然去学的，想弄清楚以前 Arduino 一个函数就出来的效果，换到 STM32 上到底要经过哪些步骤。
 
 ## First Board Tests / 第一次上板
 
-Keil's Magic Wand settings occupied me before the peripherals did. Device packs, compiler selection, startup files, library paths, target addresses, and flash algorithms all needed configuration while I was still learning their separate purposes. I eventually split the checks into compilation on the computer, downloading through ST-Link, and an observable effect on the board. Toggling GPIOC13 every 300 ms became the first test across the toolchain and physical hardware.
+Before I touched a single peripheral, the Keil environment held me up for quite a while. Keil is an old piece of software and anything but beginner-friendly. I had to download the device pack from ST's website, then work through the Magic Wand settings one by one: library paths, compiler, whether the ST-Link was detected, the program's start address. I had no idea what a start address or a bootloader was, so I searched and fumbled my way through until the environment built and the ST-Link could download.
 
-Keil 的魔术棒设置页先让我卡了一阵。器件包、编译器、启动文件、库路径、目标地址与下载算法都要配置，我却还不清楚它们分别影响哪一步。后来我把检查分开，电脑先能编译，ST-Link 再能下载，最后看板上有没有明确输出。GPIOC13 每隔 300 ms 翻转，成了第一项贯穿工具链与实物的验证。
+外设还没碰，Keil 的环境先折腾了我好一阵。Keil 是个很老的软件，对小白一点都不友好。要去 ST 官网下器件支持包，再在魔术棒里一项项设置库路径、编译器、ST-Link 能不能识别、程序的起始地址。什么叫起始地址、什么叫 bootloader，我那时完全不知道，只能边查边摸索，最后环境总算配通，ST-Link 也能下载了。
 
-The [initial GPIO and OLED program](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c) preserves that setup. It enables GPIOB and GPIOC clocks, establishes OLED power levels through PB4 and PB5, initializes the display, and drives PC13. This was a low-power breadboard exercise; powering a module from GPIO remains constrained by the pin's current capability. I began looking below `GPIO_SetBits()` at clocks, modes, and registers instead of learning only the function names.
+I split the checks apart: first the computer had to compile, then the ST-Link had to download, and finally the board had to do something visible. PC13 toggling every 300 ms was that first visible thing, and the moment the little LED blinked, the toolchain and the hardware had finally met.
 
-[最初的 GPIO 与 OLED 程序](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)还保留着这些配置。先开 GPIOB、GPIOC 时钟，用 PB4、PB5 给 OLED 建立供电电平，再初始化显示并控制 PC13。当时是低功耗面包板练习，用 GPIO 给模块供电也受引脚电流能力约束。我开始主动往 `GPIO_SetBits()` 下面追，核对时钟、引脚模式和寄存器，而不只记函数名。
+我把检查拆开来做：电脑上先能编译，ST-Link 再能下载，最后看板子上有没有看得见的动作。PC13 每 300 ms 翻转一次，那盏小灯一闪，工具链和实物算是第一次接上了。
+
+The [initial GPIO and OLED program](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c) still holds that setup. It enables the GPIOB and GPIOC clocks, uses PB4 and PB5 to supply the OLED (only acceptable for a low-current breadboard exercise), initializes the display and drives PC13. This was also where remembering the name `GPIO_SetBits()` stopped being enough. I started following it down into clocks, pin modes and registers, and spent a lot of time chewing through ST's manuals and forum threads. Behind a single set-bit call, the peripheral clock has to be on and the mode configured before the pin will do as it is told.
+
+[最初的 GPIO 与 OLED 程序](/uploads/projects/tianjin-metro/stm32-basic-gpio-oled-loop.c)还留着当时的配置：先开 GPIOB、GPIOC 的时钟，用 PB4、PB5 两个引脚给 OLED 供电（小电流的面包板练习才敢这么接），再初始化屏幕、控制 PC13。也是从这里开始，光记住 `GPIO_SetBits()` 这个函数名已经不够了。我顺着它往下追时钟、引脚模式和寄存器，花了大把时间啃 ST 的手册和论坛帖子。一句置位背后，得先给外设开时钟、配好模式，引脚才会听话。
 
 ![STM32F103C8T6 pinout reference / STM32F103C8T6 引脚定义参考](/uploads/projects/tianjin-metro/stm32f103c8t6-pinout.png)
 
-At one point the OLED stayed blank even though compilation and download worked. Moving it to another pair of ordinary GPIO pins and using software I²C restored the display.
+The OLED had one strange episode. The code was right, it compiled, it flashed, the wiring checked out, and the screen would not light no matter what. In the end I moved to another pair of ordinary GPIO pins with software-emulated I²C, and the screen came on. At the time I did not even know what separated hardware I²C from software I²C; I was just baffled that it stayed dark. Thinking about it now, I most likely ran into the STM32F103's well-known hardware I²C lockup; the analysis is in [I²C Communication and OLED Debugging](/notes/tianjin-stm32-i2c-oled-debugging).
 
-OLED 曾经编译、下载都正常却不显示。最后我换了一组普通 GPIO，用软件模拟 I²C，屏幕恢复了。
+OLED 也出过一次怪事。代码是对的，编译能过，烧录没问题，接线查了也没错，屏幕就是死活不亮。最后换了一对普通 GPIO，改用软件模拟 I²C，屏幕亮了。那时我连硬件 I²C 和软件 I²C 有什么区别都不知道，只是纳闷它为什么不亮。现在想想，很可能是撞上了 STM32F103 硬件 I²C 卡死的老问题，展开的分析在 [I²C 通信与 OLED 调试](/notes/tianjin-stm32-i2c-oled-debugging)里。
 
 ## Peripheral Integration / 外设组合
 
-I ran GPIO, OLED, encoder, servo, DHT11, light sensing, PWM, and UART in separate projects before joining them into one bare-metal program. The hardware remained a Blue Pill, breadboard, and jumper wires. A button selected what the encoder controlled: target light in one mode and servo speed in the other. The OLED showed measured light, target, LED output, temperature, and humidity; UART sent light readings and debug information to the computer, while PC13 served as a status indicator.
+Apart from that, things went fairly smoothly. Most of the work built on example projects, so compile errors were rare, and the bugs were mostly logic that came straight once I traced it through. GPIO, OLED, encoder, servo, DHT11, light sensor, PWM and UART each ran first in a project of its own, and then I merged them one at a time into a single bare-metal program. The hardware stayed a Blue Pill with every module on breadboard and jumper wires.
 
-GPIO、OLED、编码器、舵机、DHT11、光敏传感器、PWM 与 UART，我先在独立工程里逐个跑通，再加入同一套裸机程序，模块靠面包板与杜邦线连接。按键负责切换编码器的控制对象，一种模式调目标光照，另一种调舵机速度；OLED 显示实测光照、目标、LED 输出和温湿度，UART 向电脑发送光照与调试信息，PC13 留作状态灯。
+除了 OLED 这一下，整个过程总体挺顺。大部分是在例程基础上开发，编译错误不多，顶多是逻辑没捋顺，捋清楚改改代码就好了。GPIO、OLED、编码器、舵机、DHT11、光敏传感器、PWM 和 UART，我先在各自的独立工程里跑通，再一个个并进同一套裸机程序。硬件还是那块 Blue Pill，模块全靠面包板和杜邦线连着。
 
-EXTI handled encoder events, TIM3 paced slower work, and TIM4 generated PWM. Light and temperature/humidity reads waited for a flag; encoder and target updates took place in the main loop. I wrote the application flow, encoder mapping, mode switching, and integrated superloop. The peripheral drivers were material I studied, modified, and connected from ST's Standard Peripheral Library and public examples.
+In the final demo every peripheral worked at once. A button switched what the encoder controlled, target light in one mode and servo speed in the other. The OLED showed measured light, the target, LED output, temperature and humidity; UART sent light readings and debug output to the computer; PC13 stayed on as a status light. EXTI handled the encoder, TIM3 set the pace for slower tasks, TIM4 produced PWM, and the temperature, humidity and light reads waited for a timer flag before running.
 
-集成时，EXTI 处理编码器事件，TIM3 提供慢任务的触发节奏，TIM4 负责 PWM。温湿度与光敏读取等 flag 到来再执行，旋钮和目标值则在主循环中更新。我编写了应用流程、编码器映射、模式切换与综合主循环，外设驱动是在 ST 标准库和公开例程基础上理解、修改、接入的。
+最后的 demo 里，所有外设同时工作。按键切换编码器的控制对象，一种模式调目标光照，另一种调舵机速度；OLED 显示实测光照、目标值、LED 输出和温湿度；UART 把光照数据和调试信息发到电脑上；PC13 那盏灯留下来当状态灯。EXTI 处理编码器，TIM3 给慢任务打节拍，TIM4 输出 PWM，温湿度和光照的读取等定时器的 flag 到了再做。
+
+I wrote the application flow, encoder mapping, mode switching and the integrated main loop; the OLED, DHT11, encoder and servo drivers were standard drivers from online and ST examples that I reworked heavily. I had not met an RTOS yet, so it was all bare metal, interrupts plus timer-driven polling, and every delay a blocking `delay()`. The logic was nothing elegant. All these tasks ran at very low rates, though, and it worked fine.
+
+应用流程、编码器映射、模式切换和综合主循环是我写的；OLED、DHT11、编码器和舵机的驱动，是拿网上的标准驱动和 ST 例程魔改来的。那时还不知道 RTOS，全是裸机，中断加定时器轮询，延时一律是阻塞式 `delay()`，逻辑谈不上漂亮。好在这些任务的频率都很低，跑起来没毛病。
 
 ## Light Calibration / 光照标定
 
-To turn a target light value into an LED command, I adjusted PWM point by point and recorded 16 ADC readings on this breadboard, then wrote a [lookup and interpolation function](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c). The records span PWM 0 to 1000 and ADC 1600 down to 480. Linear interpolation provides the output for a target between adjacent records.
+To turn a target light value into an LED output, I stepped the PWM point by point, read the ADC, recorded 16 pairs on this breadboard, and wrote a [lookup and interpolation function](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c). PWM runs from 0 to 1000 while ADC falls from 1600 to 480, and a target between two records gets its output by linear interpolation. The program looks up PWM from the target; measured ADC is only displayed and printed. I definitely thought about feedback correction at the time, but it never went in, and the demo kept this feedforward version. The interpolation, where to add calibration points and which way feedback should correct are worked through in [Light Calibration and Lookup Control](/notes/tianjin-stm32-light-calibration-control).
 
-为了把目标光照数值转换成 LED 输出，我逐点调整 PWM、读取 ADC，在这套面包板上记下 16 组数据，再写了[查表插值函数](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。记录中 PWM 从 0 增到 1000，ADC 从 1600 降到 480；目标位于两个记录点之间，就用线性插值求对应输出。
-
-The program converts the target through the lookup table into PWM, while measured ADC values are displayed and printed. I considered adding feedback correction, but kept this feedforward implementation for the demo.
-
-这套程序根据目标值查表得到 PWM，实测 ADC 用来显示和打印。我当时也想过再加反馈修正，最后先保留了这套前馈实现。
+想把目标光照换算成 LED 的输出，我一点一点调 PWM、读 ADC，在这套面包板上记了 16 组数据，再写了[查表插值函数](/uploads/projects/tianjin-metro/metro-pwm-lookup-excerpt.c)。PWM 从 0 加到 1000，ADC 从 1600 降到 480，目标落在两个记录点之间，就用线性插值算输出。程序按目标查表得到 PWM，实测的 ADC 只拿来显示和打印。反馈修正我当时肯定想过，最后没做进去，demo 里留下的是这套前馈。插值怎么算、哪里该补测、加反馈该往哪个方向修，在[光照标定与查表控制](/notes/tianjin-stm32-light-calibration-control)里推了一遍。
 
 ## End of the Placement / 实习结束
 
-I completed this learning sequence independently in about 20 working days. The engineer watched the demo, heard my explanation of how the peripherals worked together, and said I had learned the material solidly. Alongside the practical work, I read introductory material on PID, ATP, ATO, and ATS.
+In about 20 working days I covered the whole route on my own. The engineer ran things hands-off and never set a target for me. At the end I showed him the demo and talked through how I understood the peripherals working together and what I had found along the way, and he said I had learned it solidly.
 
-大约 20 个工作日后，我独立完成了这条学习路线。工程师看了 demo，听我解释外设之间怎样配合，评价我学得比较扎实。同期我还阅读了 PID、ATP、ATO、ATS 的入门资料。
+大约 20 个工作日，这条路线我一个人走完了。工程师那边是散养，没要求我做到什么程度。最后我给他演示了 demo，讲了讲我对这些外设怎么配合的理解，还有自己的一些发现，他说我学得挺扎实。
 
-Timer, ADC, and PWM returned when I later studied FOC, this time with questions about aligning sampling with switching and finishing calculations in time. The month in Tianjin gave me a starting point for investigating them. Behind a peripheral function, I had learned to look for the clocks, signals, and execution order it depended on.
+The training material also covered PID and the ATP, ATO and ATS systems common in rail transit. I read them closely, though I never wrote or tuned a PID loop. The first time I read about PID it seemed almost magical that one formula could bring something to the position you want, quickly and stably. I also found myself mapping the bench exercises onto a train: carriage lighting and ventilation fans, station-entry signals, all of it needs microcontrollers, just with sturdier, more reliable hardware and designs. The breadboard on my desk felt like a miniature of those systems.
 
-后来学 FOC 时，我又遇到了 Timer、ADC 和 PWM，只是要求变成了采样与开关时刻的配合，以及一次计算能否及时完成。天津这一个月让我有了继续往下查的起点。遇到一个外设函数，我已经会去找它依赖的时钟、信号和执行顺序。
+培训资料里还有 PID 和 ATP、ATO、ATS 这些轨道交通里常用的东西，我读得很仔细，只是 PID 没有真写过，也没调过。第一次读到 PID，我觉得它很神奇，一个公式就能让东西又快又稳地逼近想要的位置。那时我也会把桌上这些小练习往车上想：车厢里的照明和通风扇、进站的信号控制，背后都离不开单片机，只是会换成更稳、更可靠的方案。面包板上的这一套，算是那些系统的一个小缩影。
+
+When I later took on [FOC](/work/sensorless-foc-learning-route), Timer, ADC, PWM and interrupts all came up again at once. This time sampling had to line up exactly with switching, and each calculation had to finish before the next cycle began. The peripherals I had learned one by one in Tianjin were now bound together in motor control, and bound far more tightly.
+
+后来做 [FOC](/work/sensorless-foc-learning-route)，Timer、ADC、PWM 和中断我又全碰了一遍。这回采样要和开关时刻严丝合缝地对上，每一次计算都得赶在下一个周期之前算完。天津那一个月里一个个分开学的外设，到了电机控制里被绑到了一起，而且绑得更紧。

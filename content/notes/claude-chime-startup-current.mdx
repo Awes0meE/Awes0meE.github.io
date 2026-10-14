@@ -9,62 +9,66 @@ projectSlug: "claude-chime-hardware-power-board"
 visibility: public
 ---
 
-Connecting the Claude Chime power board to its protected battery pack dropped the measured pack output from 4.03 V to 1.49 through 1.57 V. Yet a 3.8 V bench supply with a 50 mA limit could start both unloaded boost rails on the same board. Together, those observations raise questions about how each source enters operation and which part of the circuit an instrument is measuring.
+The first time the Claude Chime power board met its protected battery pack, it would not start. Before connection I measured 4.03 V at the pack output; once connected it fell to between 1.49 and 1.57 V. Yet the very same board started both unloaded boost rails from a 3.8 V bench supply limited to 50 mA. Same board, different source, opposite outcomes. What deserves following up is how each source actually brings the board into operation, and which part of the circuit an instrument is really measuring.
 
-Claude Chime 电源板接入带保护电池时，我在电池包输出端量到的电压从 4.03 V 降到了 1.49 至 1.57 V。同一块板却能用 3.8 V、限流 50 mA 的台式电源启动两路空载升压。这两个结果放在一起，最值得继续研究的是电源怎样进入工作状态，以及仪器量到的究竟是哪一段电路。
+Claude Chime 电源板第一次接上带保护的电池，板子没起来。接入前我在电池包输出端量到 4.03 V，一接上就掉到 1.49 至 1.57 V。可同一块板，用 3.8 V、限流 50 mA 的台式电源，两路升压都能空载启动。同一块板，换个电源就是两种结局。值得接着追的是，电源到底怎样把板子带进工作状态，仪表量到的又究竟是哪一段电路。
+
+At the time my first suspect was the PCB. I went over the voltages at each test point and the chip configuration pins with a multimeter, and everything sat in its normal operating state. Then I used the oscilloscope to catch the battery-terminal voltage at the moment the cell was soldered on. It dropped sharply, with a small notch in the middle where it looked as if it were trying to climb back, before being held down low. Following the battery further, it turned out to be a Taobao lithium cell with a protection board: a narrow little strip spot-welded straight onto the cell's two tabs.
+
+当时我先怀疑 PCB，拿万用表把各个点位的电压和芯片的配置引脚挨个量了一遍，都在正常的工作状态。接着用示波器去抓电池焊上那一瞬间电池端的电压，看到它一下子掉下去，中间还有个小凹槽，像是想往回升，最后还是被压在了低位。顺着电池往下查，这是一块淘宝买来的带保护板的锂电池，一块细长的小保护板直接点焊在电芯的两片极耳上。
 
 ## Cell and Pack-Output Voltage Measurements / 电芯与电池包输出电压测量
 
-A protected pack contains a cell, protection circuitry and a series switching path. A meter across its output terminals measures the voltage available to the load. If the protection switch opens, the load, leakage and internal paths can leave a low output reading while the cell still holds charge. Before interpreting a reading near 1.5 V as a cell condition, I need to identify the measurement nodes.
+A protected pack contains a cell, protection circuitry and a series switching path. A meter across its output terminals reads the terminal voltage the load can actually use. Once the protection switch opens, the output can read very low through load, leakage and internal paths even while the cell still holds charge. Seeing something around 1.5 V, the first job is to pin down which two points were measured, and only then talk about the state of the cell.
 
-带保护的电池包包含电芯、保护芯片和串联开关路径。万用表接在包的输出正负端，读到的是负载能够使用的端电压。保护开关断开时，即使电芯仍有电，输出端也可能因负载、漏电及内部路径呈现很低的读数。看到 1.5 V 左右，必须先确认测量节点，再讨论电芯状态。
+带保护的电池包里有电芯、保护芯片和一段串联的开关路径。万用表接在包的输出正负端，读到的是负载实际能用的端电压。保护开关一断，就算电芯里还有电，输出端也可能因为负载、漏电和内部路径读出一个很低的数。所以看到 1.5 V 上下，先得弄清量的是哪两个点，再谈电芯怎么样。
 
-The behavior made me suspect startup activity in the pack's DW01A and 8205A protection path. [Fortune's DW01A documentation](https://www.ic-fortune.com/upload/Download/DW01A-DS-12_EN.pdf) describes overcurrent detection using the CS-pin voltage and a corresponding delay. Converting that voltage threshold into a current requires the impedance of the monitored path. The threshold alone is no universal current rating for every protection board.
+That combination of symptoms made me suspect that the pack's DW01A and 8205A protection path acted at the moment of connection. [Fortune's DW01A documentation](https://www.ic-fortune.com/upload/Download/DW01A-DS-12_EN.pdf) describes overcurrent detection from the CS-pin voltage combined with a delay. The threshold is a detection voltage; turning it into a current requires the impedance of the monitored path, so no single voltage threshold can stand in for a current rating shared by every protection board.
 
-这组现象让我怀疑电池包上的 DW01A 与 8205A 保护路径在启动时发生了动作。[DW01A 原厂资料](https://www.ic-fortune.com/upload/Download/DW01A-DS-12_EN.pdf)说明，电流检测使用 CS 引脚的电压，并结合相应延时判断过流。门限是检测电压，换算为电流还要知道受监测路径的阻抗。不能把一个电压门限直接当成所有保护板通用的电流额定值。
+这组现象让我怀疑，接电那一下，电池包里 DW01A 和 8205A 组成的保护路径动作了。[DW01A 的原厂资料](https://www.ic-fortune.com/upload/Download/DW01A-DS-12_EN.pdf)说明，它靠 CS 引脚上的电压，再加一段延时来判断过流。门限是一个检测电压，要换成电流，还得知道被监测那段路径的阻抗，所以没法拿一个电压门限，当成所有保护板通用的电流额定值。
 
-An ideal capture for separating cell droop from an opened protection path would include cell voltage, pack output and connection current together. Measurements across different battery references require an appropriate differential arrangement, so common-ground oscilloscope probes do not accidentally bypass the protection path. The measuring connection itself can change the circuit, especially with low-side protection.
+Telling a sagging cell apart from an opened protection path ideally means recording cell voltage, pack output voltage and connection current together. Measuring between different reference points inside a battery needs a suitable differential setup, so that a common-ground oscilloscope probe does not end up shorting the protection path. The measurement connection itself changes the circuit, and with low-side protection that deserves particular care.
 
-要区分电芯自身下跌与保护路径断开，理想记录应当同时包含电芯端电压、包输出电压和接入电流。测电池不同参考点时，要使用合适的差分测量方式，避免示波器共地探头把保护路径意外短接。测量连接本身会改变电路，这一点在低侧保护结构里尤其需要留心。
+要分清是电芯自己掉下去，还是保护路径断开了，最理想的是同时记下电芯端电压、包输出电压和接入电流。测电池里不同的参考点，得用合适的差分方式，免得示波器共地的探头一夹，反倒把保护路径给短接了。测量的接法本身就会改变电路，低侧保护的结构里尤其要当心。
 
 ## Capacitor Charging and Startup Current / 电容充电与启动电流
 
-At connection, capacitors need charge. [TI's inrush-current application note](https://www.ti.com/lit/an/slva670a/slva670a.pdf) expresses that current as `I = C × dV/dt`: for the same capacitance, a faster voltage rise demands more current. Added capacitance that helps with operating load transients also increases the charge needed at startup.
+The board carries a fair amount of high-value MLCC capacitance, put there so that the solenoid's kick could draw plenty of current from the capacitors. At the moment power arrives, though, those capacitors need charge of their own. [TI's inrush-current application note](https://www.ti.com/lit/an/slva670a/slva670a.pdf) describes that current as `I = C × dV/dt`: for the same capacitance, the faster the voltage rises, the more current it takes. The more capacitance added for load transients during operation, the more charge has to be supplied first at connection.
 
-电源刚接入时，电容需要获得电荷。[TI 的浪涌电流说明](https://www.ti.com/lit/an/slva670a/slva670a.pdf)用 `I = C × dV/dt` 描述这部分电流。相同电容量，电压建立得越快，所需电流就越大。为了帮助运行中的负载瞬态而增加电容，也会增加接电时需要补充的电荷。
+板上放了不少大容量的 MLCC，本意是电磁铁起跳那一下，能从这些电容里拿到足够的电流。可电源刚接入时，这些电容自己也得先充上电。[TI 的浪涌电流说明](https://www.ti.com/lit/an/slva670a/slva670a.pdf)用 `I = C × dV/dt` 描述这部分电流：同样的电容量，电压建立得越快，要的电流越大。为运行中的负载瞬态加的电容越多，接电那一刻要先补上的电荷也越多。
 
-The schematic shows three 22 μF capacitors across the boost inputs, 4.7 μF at the charger's battery terminal and two 100 nF capacitors, all directly connected to `BAT+`. Their nominal sum is about 70.9 μF. For an illustrative linear 4 V rise in 100 μs, those capacitors alone require about 2.84 A; extending the rise to 1 ms reduces that to about 0.284 A. This is an ideal estimate. Effective capacitance, wiring impedance and source response alter the actual waveform.
+On the schematic, the capacitors tied directly to `BAT+` include three 22 μF parts at the two boost inputs, 4.7 μF at the charger's battery pin and two 100 nF parts, about 70.9 μF by nominal value alone. Taking a 4 V change with a linear 100 μs rise as an example, those capacitors by themselves need roughly 2.84 A of charging current; stretching the rise to 1 ms brings it down to about 0.284 A. This is an idealized estimate, and effective capacitance, wiring impedance and source response all reshape the real waveform.
 
-原理图里直接接在 `BAT+` 上的电容，包括两路升压输入的 22 μF、22 μF、22 μF，充电芯片电池端的 4.7 μF，以及两颗 100 nF。只按标称值相加，已经约有 70.9 μF。取 4 V 电压变化、100 μs 线性上升作示例，仅这部分电容就对应约 2.84 A 的充电电流；把上升时间延长到 1 ms，则约为 0.284 A。这是理想估算，实际电容量、连线阻抗和电源响应都会改变波形。
+原理图上直接挂在 `BAT+` 上的电容，有两路升压输入端的三颗 22 μF、充电芯片电池端的 4.7 μF，还有两颗 100 nF，光按标称值加起来就约 70.9 μF。拿 4 V 的电压变化、100 μs 线性上升来举例，光这些电容就要约 2.84 A 的充电电流；上升时间拉长到 1 ms，就降到约 0.284 A。这是理想估算，实际的有效电容、连线阻抗和电源响应都会改变波形。
 
-Output capacitors need examination along their own paths. The [TLV61048 datasheet](https://www.ti.com/lit/ds/symlink/tlv61048.pdf) describes internal soft start, but the external inductor and rectifier also provide a path that can charge the output when power is first connected. Current can flow before the internal reference begins its controlled ramp. Direct input charging, output precharge and regulated boost startup should therefore be distinguished when examining the input current.
+Output capacitors need following along their own paths too. The [TLV61048 datasheet](https://www.ti.com/lit/ds/symlink/tlv61048.pdf) describes internal soft start, but this part uses an external inductor and rectifier diode, so as soon as power arrives, current can flow through the inductor and diode into the output capacitors. Current may already be flowing before the chip begins regulating its internal reference. Examining startup current therefore means separating direct input charging, output precharge and the period after boost regulation takes over.
 
-输出电容还要沿各自路径继续计算。[TLV61048 手册](https://www.ti.com/lit/ds/symlink/tlv61048.pdf)描述了内部软启动，但这颗芯片使用外部电感和整流二极管，接电时可以先沿电感与二极管向输出充电。芯片开始调节内部参考之前，已经可能有电流流过。因此，检查启动电流时，需要把直接输入充电、输出预充及进入升压调节后的过程分开。
+输出电容也得顺着各自的路径算。[TLV61048 手册](https://www.ti.com/lit/ds/symlink/tlv61048.pdf)写了内部软启动，可这颗芯片用的是外部电感和整流二极管，一接电，电流就能先顺着电感和二极管往输出电容里充。芯片还没开始调节内部参考，电流可能已经流过去了。所以看启动电流时，要把输入端直接充电、输出预充和进入升压调节以后的过程分开看。
 
 ## Supply Current Limiting and Battery Protection / 电源限流与电池保护
 
-Successful startup at a 50 mA limit is useful, but the bench supply has a different response from the protected pack. In current limit, its voltage may rise more slowly. Output capacitance, control response and connection details also affect the initial current. A protected battery may instead interrupt discharge once its detection conditions are met. The same board can consequently follow different startup trajectories with the two sources.
+Starting successfully at a 50 mA limit is a useful result, but it reflects a different kind of source response. A bench supply in current limit may let its output rise more slowly, and output capacitance, control response and wiring also shape that first sliver of current. A protected battery may instead cut its discharge path outright once its detection conditions are met. Faced with these two sources, the same board can follow completely different startup paths.
 
-50 mA 限流启动成功很有价值，但它对应的是另一种电源响应。台式电源进入限流时，输出电压可能上升得更慢；输出电容、控制响应和连接方式也会影响最初那一小段电流。带保护电池则可能在检测条件满足后切断放电路径。两者面对同一块板，可以走出不同的启动过程。
+限流 50 mA 能启动，这个结果很有用，但它对应的是另一种电源响应。台式电源进了限流，输出电压可能升得更慢；输出电容、控制响应和接法也会影响最开始那一小段电流。带保护的电池则可能在检测条件满足以后，直接把放电路径切断。同一块板，碰上这两种电源，可以走出完全不同的启动过程。
 
-Resistance mode helps look for a persistent low-resistance path, but does not reproduce power-on charging. Its test current and voltage differ from the battery connection, potentially putting semiconductor devices in different states. I would use resistance checks to narrow the persistent-short possibility, then voltage and current captures to investigate connection behavior. Each measurement has a different job.
+A multimeter's resistance range is good for a first look at persistent low resistance, but it cannot replay the charging that happens at power-on. Its test voltage and current differ from a real battery connection, and semiconductors may sit in different states. Resistance checks narrow down the possibility of a persistent short; the moment of connection is a job for voltage and current waveforms. Each measurement answers its own question.
 
-万用表电阻挡适合先查持续低阻，却无法重放上电时的充电过程。它的测试电压和电流与真正接入电池不同，半导体的状态也可能不同。我会把电阻检查用于缩小持续短路的可能范围，再用电压、电流波形研究接入瞬间，各种测量回答各自的问题。
+万用表电阻挡适合先查有没有持续的低阻，却重放不了上电时的充电过程。它的测试电压和电流跟真接电池不一样，半导体的状态也可能不一样。电阻挡用来缩小持续短路的可能，接入瞬间的事交给电压、电流波形，每种测量各管各的问题。
 
-At the time, disconnecting the board restored pack output; applying an external supply at the pack output was also followed by a successful battery start. That makes the initial state of each trial worth controlling. Residual capacitor charge, protection recovery and whether the board remained connected can all affect repeatability. I would fix those conditions before comparing further trials.
+At the time, disconnecting the board brought the pack output back. With the battery soldered to the board, briefly applying 3.7 V from the bench supply across the pack terminals made the output normal again, as if the protection board's lockout had been released, and it stayed fine as long as the battery was not removed. Every fresh connection brought the voltage drop back once more. That makes the starting state of each trial worth controlling: whether the capacitors have fully discharged, whether the protection has recovered, and whether the board stayed connected all affect repeatability. Further trials should fix those conditions before comparing results.
 
-当时断开主板后，包输出电压会恢复；给包输出端接过外部电源后，下一次启动也成功过。这让我更关心每次试验开始前的状态。电容有没有放完电、保护是否已经恢复、主板有没有持续连接，都会影响可重复性。继续试验时，应先固定这些条件，再比较结果。
+当时断开板子，电池包的输出电压就会恢复。电池焊在板子上以后，用台式电源在电池包两端打一下 3.7 V，输出就恢复正常了，像是把保护板的锁定解开了，只要不再拆下来就一直没事；可每重新接一次，就会再掉一次压。这也说明每次试验开始前的状态值得控制：电容放没放完电、保护有没有恢复、板子是不是一直接着，都会影响能不能复现。接着试的话，先把这些条件固定住，再比结果。
 
 ## Startup Waveform Measurements / 启动波形测量
 
-Triggering on battery connection would capture pack-output voltage and current together. A current probe is preferable; a shunt requires accounting for its additional voltage drop and reading it differentially. A peak alone is insufficient. Its duration, the beginning of output collapse and whether current is then interrupted belong in the same capture.
+Triggering on the battery connection, pack output voltage and current can be recorded together. A current probe is the first choice; with a shunt resistor, its extra voltage drop has to be accounted for and it has to be read differentially. Catching a single spike is not enough. How long it lasts, when the output starts to fall, and whether current is cut off after the fall all belong in the same capture.
 
-以电池接入事件触发示波器，可以同时记录电池包的输出电压和电流。电流测量优先考虑电流探头；若使用分流电阻，则需计算它额外引入的压降，并用差分方式读取。只量到一个尖峰还不够，还要看它持续多久、输出何时开始下降，以及下降之后电流是否被切断。
+以电池接入为触发，可以同时记下电池包的输出电压和电流。电流优先用电流探头；用分流电阻的话，得把它多出来的压降算进去，并用差分方式读。只抓到一个尖峰不够，还要看它持续多久、输出从什么时候开始往下掉、掉下去以后电流是不是被切断了。
 
-If current rises first, pack output suddenly falls and cell voltage remains relatively high, the protection path deserves priority. If the cell voltage also falls substantially, cell resistance and connection drops need investigation. The waveform can then guide a choice of precharge, controlled rise time or a revised startup sequence. Both converters share the connection event, so their combined demand needs observing at the common input.
+If current surges first, pack output then drops abruptly and the cell stays relatively high, the protection path should be checked first. If the cell also falls noticeably, cell resistance and connection drops need investigating. Deciding between precharge, a controlled rise rate or a revised startup sequence after seeing the waveform makes the change well aimed. Both boost converters share the same connection event, so their combined current should be watched at the common input.
 
-如果电流先增大，随后包输出突然降低，而电芯端仍保持较高电压，保护路径就值得优先检查。如果电芯端也明显下跌，则要继续查电芯内阻和连接压降。根据波形，再选择预充、受控上升斜率或调整启动安排，改动会更有针对性。两颗 Boost 共用同一次接电事件，合计电流也应在共同输入端观察。
+如果是电流先冲上去，包输出随后突然掉下，电芯端却还保持在较高电压，保护路径就该优先查。如果电芯端也明显跌了，那就得接着查电芯内阻和连接压降。看清波形以后再决定是加预充、控制上升斜率，还是调整启动顺序，改起来才有的放矢。两颗 Boost 共用同一次接电，合计电流要在共同的输入端看。
 
-Those synchronized measurements provide a concrete continuation for the fault investigation. Whether current rises before voltage falls, and which nodes begin to separate, can progressively narrow the cause. Once startup is visible at that level, circuit changes have a much clearer basis.
+Put a current trace beside that small notch on the oscilloscope, and it would show what was holding the voltage up as it tried to recover, and what pressed it back down. Whether current rises before voltage falls, and which two nodes separate first, are the details that narrow the cause step by step. Once startup is measured that clearly, where to change the circuit has a solid basis.
 
-启动掉压的后续排查，可以从这组同步测量继续。电流先增大还是电压先下降、哪两个节点开始分离，这些细节能够逐渐缩小原因范围。把启动过程测清楚以后，电路该改哪里，也就有了具体依据。
+示波器上那个小凹槽，要是旁边再配一条电流波形，就能看出往回升的那一下是谁在撑，又是谁把它按了下去。电流先涨还是电压先掉、哪两个节点先分开，这些细节能把原因一点点收窄。启动过程测清楚了，电路该改哪儿，也就有了实实在在的依据。

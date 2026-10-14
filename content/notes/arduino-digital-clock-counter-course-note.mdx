@@ -9,19 +9,19 @@ visibility: "public"
 projectSlug: "arduino-digital-clock-counter"
 ---
 
-When the two-digit display reads `17`, it looks as though the program has simply moved a number onto the breadboard. Reading the counter program again, I want to follow what happens in between. The Arduino holds a number, the decoders receive two groups of four inputs, and a set of LED segments lights up. Numbers, pin levels, and illuminated segments each have a mapping that needs to make sense.
+When the two digits read `17`, it looks as if the program simply carried a number onto the breadboard. There are several layers in between: the Arduino holds an integer, the decoders receive two groups of four voltage levels, and what finally lights up is a handful of LED segments. Back when I wired the common pin to ground as the course slides showed, the display stayed dark, and the wiring that worked was found by trial and error. The reasoning behind it was never filled in.
 
-两位数码管显示 `17` 时，看上去只是把程序里的数搬到了面包板上。我现在再看这份计数器程序，想把中间的过程拆开弄明白。Arduino 保存的是一个数，送到译码器的是两组四位输入，最后亮起来的却是几段 LED。数字、引脚电平和发光的灯段之间，每一步都有各自的对应关系。
+两位数码管亮出 `17`，看上去就像程序把一个数搬到了面包板上。中间其实隔着好几层，Arduino 手里是一个整数，译码器收到的是两组四位电平，最后亮起来的是几段 LED。当年按课件把公共端接到地，数码管一片黑，能用的接法是靠瞎试找到的，背后的道理一直没补上。
 
 ## Decimal Digits and BCD / 十进制数与 BCD
 
-The [project report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf#page=1) separates the digits with `Num % 10` for units and `(Num / 10) % 10` for tens. Applying those expressions to `17` gives `7` and `1`, which go to separate decoders. BCD represents each decimal digit with four binary bits, so there are two independent digit codes here. The binary representation of the integer 17 is `10001`; the two display digits require the BCD groups `0001 0111`. Those representations serve different purposes.
+The [project report](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf#page=1) splits the digits plainly, `Num % 10` for units and `(Num / 10) % 10` for tens. Feeding in `17` gives `7` and `1`, which go to separate decoders. BCD spends four binary bits on each decimal digit, so the display needs two independent codes, `0001` and `0111`. Written straight out in binary, the integer 17 is `10001`, which is a different thing altogether from what the two digits need.
 
-[作业报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf#page=1)里的拆位方法很直接，`Num % 10` 取个位，`(Num / 10) % 10` 取十位。把 `17` 代进去，得到个位 `7`、十位 `1`，再分别送给两颗译码器。BCD 用四个二进制位表示一个十进制数字，所以这里是两个独立的数字编码。若把整数 17 直接按二进制展开，得到的是 `10001`，和两位显示所需的 `0001 0111` 不是同一种表示。
+[作业报告](/uploads/projects/arduino-digital-clock-counter/digital-clock-homework-report.pdf#page=1)里拆位很直接，`Num % 10` 取个位，`(Num / 10) % 10` 取十位。`17` 代进去，个位 `7`、十位 `1`，分别送给两颗译码器。BCD 用四个二进制位表示一个十进制数字，所以这里要的是两组独立的编码，`0001` 和 `0111`。整数 17 直接按二进制写是 `10001`，跟两位显示要的东西压根不是一回事。
 
-The number `1` made me pause when I read the [single-digit example](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino). Its array entry is `{1, 0, 0, 0}`, while I normally expect to see `0001` written down. The pin definitions explain the order. The array follows A, B, C, D, with weights of 1, 2, 4, and 8. Written binary usually puts the most significant bit on the left. Here the first array element goes to A, exactly where it belongs.
+In the [single-digit example](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino), the simplest digit of all is the one that made me stop. The array stores `1` as `{1, 0, 0, 0}`, while written binary usually reads `0001`. The pin definitions settle it. The program stores bits in A, B, C, D order with weights 1, 2, 4 and 8, whereas written binary puts the most significant bit on the left. The first array element goes to A, so the order is exactly right; it just looks reversed.
 
-我读[单个位显示示例](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino)时，反而在最简单的数字 `1` 上停了一下。数组把它写成 `{1, 0, 0, 0}`，而平时写二进制时习惯看到 `0001`。对照引脚定义就明白了，程序按 A、B、C、D 的顺序存储，权重依次为 1、2、4、8；通常书写的二进制数则把最高位放在左边。数组里的第一个元素先发给 A，顺序完全对得上。
+读[单个位显示示例](/uploads/projects/arduino-digital-clock-counter/single-digit-bcd-counter.ino)时，最简单的 `1` 反倒让我愣了一下。数组里写的是 `{1, 0, 0, 0}`，平时写二进制，习惯看到的却是 `0001`。对一下引脚定义就明白了，程序按 A、B、C、D 的顺序存，权重依次是 1、2、4、8；平时书写则把最高位放在左边。数组第一个元素发给 A，顺序完全对得上，只是看着反过来了。
 
 ```text
 Decimal digit    D C B A    Array order A, B, C, D
@@ -29,50 +29,50 @@ Decimal digit    D C B A    Array order A, B, C, D
       7          0 1 1 1          1, 1, 1, 0
 ```
 
-The example contains sixteen array rows, but `% 10` limits the index to 0 through 9 in the loop. Four wires can represent sixteen combinations; one decimal digit uses ten of them. The other six are not automatically hexadecimal characters. [TI defines particular patterns for the LS47](https://www.ti.com/product/SN74LS47), whereas the [CD4511B blanks inputs above 9](https://www.ti.com/product/CD4511B). When comparing decoders, I would now check what happens outside the normal digit range as well.
+The example has sixteen rows of codes, yet the main loop uses `% 10` to keep the index between 0 and 9. Four wires can express sixteen combinations and one decimal digit uses ten, and the remaining six cannot be assumed to show hexadecimal letters. [TI's LS47 description](https://www.ti.com/product/SN74LS47) assigns those six inputs particular patterns, while the [CD4511B](https://www.ti.com/product/CD4511B) simply blanks any input above 9. Swapping in another decoder means checking what it shows outside 0 to 9 as well.
 
-这个示例还有十六行编码，但主循环用 `% 10` 把索引限制在 0 到 9。四根线能表示十六种组合，十进制的一位只需要其中十种。剩下六种也不能随意当成十六进制字母来显示。[TI 的 LS47 说明](https://www.ti.com/product/SN74LS47)给它们定义了特定图形，[CD4511B](https://www.ti.com/product/CD4511B) 则会将大于 9 的输入消隐。以后换译码器时，除了看 0 到 9，我也会看看越界输入会让输出变成什么。
+示例里一共写了十六行编码，主循环却用 `% 10` 把索引限制在 0 到 9。四根线能表示十六种组合，十进制的一位只用其中十种，剩下六种也不能想当然地当成十六进制字母。[TI 的 LS47 说明](https://www.ti.com/product/SN74LS47)给这六种输入定义了特定图形，[CD4511B](https://www.ti.com/product/CD4511B) 遇到大于 9 的输入则直接消隐。换一颗译码器，0 到 9 之外的输入会显示成什么，也得一起查。
 
 ## Active-Low Outputs / 低有效输出
 
-Inputs A through D select the number; outputs a through g correspond to the seven LED segments. With the usual segment labels, `7` lights the top segment a, upper-right b, and lower-right c. The project's SN54LS47 turns those segments on by taking their outputs low. Its [datasheet](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf#page=2) identifies active-low, open-collector outputs for common-anode displays. Following current through the circuit makes that low level easier to interpret.
+A through D only choose the digit; the decoder's a through g outputs are what map onto the seven LED segments. With the usual segment labels, `7` lights the top segment a, upper-right b and lower-right c. On the SN54LS47, those segments light when their outputs go low. The [LS47 datasheet](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf#page=2) marks its outputs active-low and open-collector, for driving common-anode displays. Why a low level should turn a segment on only makes sense along the current path.
 
-再往后看，A 到 D 只负责选择数字，译码器的 a 到 g 才对应七段 LED。按常用段位标记，显示 `7` 要点亮顶部的 a、右上的 b 和右下的 c。对项目里的 SN54LS47 来说，这几个输出变低时，相应的灯段才亮。[LS47 数据手册](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf#page=2)把它的输出标为低有效、开集电极，驱动共阳数码管。这里的低电平要放到电流路径里理解。
+A 到 D 只负责选数字，真正对应七段 LED 的是译码器的 a 到 g。按常用的段位标记，显示 `7` 要点亮顶上的 a、右上的 b 和右下的 c。对 SN54LS47 来说，这几路输出变低，对应的段才亮。[LS47 数据手册](/uploads/projects/arduino-digital-clock-counter/sn54ls47-datasheet.pdf#page=2)把它的输出标成低有效、开集电极，用来驱动共阳数码管。低电平为什么反而点亮，得放进电流路径里看。
 
-In a common-anode display, the segment anodes share a connection to the positive supply. Selecting a segment turns on the corresponding output transistor inside the LS47. Current travels from the supply through that LED and its series resistor, into the driver, and back to ground. Lowering the output voltage forward-biases the LED, causing it to emit light. The relationship between a low output and a lit segment becomes straightforward once I follow that path.
+A common-anode display ties the anodes of all its segments together and connects that common pin to the positive supply. When a segment is selected, the matching output transistor inside the LS47 turns on, and current runs from the supply through that LED and its series resistor, into the decoder and down to ground. Pulling the output low gives the LED its forward voltage, and it lights. Walk that path once and a low level lighting a segment stops feeling backwards. Wiring the common pin to GND, as we first did, cuts the supply off at the very start of the path, so a dark display is no surprise.
 
-共阳数码管把各段 LED 的阳极连在一起，公共端接到正电源。选中某一段后，LS47 内部的输出晶体管导通，电流从正电源经过该段 LED 和串联限流电阻，流入译码器，再回到地。输出端电压降低，LED 两端反而得到正向电压，于是发光。沿着这条路径看，输出电平与亮灭的关系就顺了。
+共阳数码管把各段 LED 的阳极连在一起，公共端接正电源。选中某一段时，LS47 里对应的输出晶体管导通，电流从正电源出发，经过这段 LED 和串联的限流电阻，流进译码器，再回到地。输出一拉低，LED 两端就有了正向电压，于是发光。顺着这条路走一遍，低电平点亮这件事就不别扭了。当年把公共端接到 GND，这条路从起点就没了电，数码管黑着也就不奇怪了。
 
-I also want to look more closely at open-collector operation. When the output transistor turns off, the chip releases the path to ground. The output is then high impedance, with its voltage determined by the external circuit. It does not actively drive the pin up to the supply as a push-pull output would. A segment-off entry in the truth table, the voltage measured at the pin, and the ability to supply current are consequently different things to examine. This makes me pay more attention to why the datasheet calls the part both a decoder and a driver.
+Open-collector operation deserves a word of its own. When the output transistor turns off, the chip merely lets go of that path to ground. The output goes high-impedance and its voltage is set by the external circuit; it does not push the pin up to the supply the way a push-pull output would. The segment-off state in the truth table, the voltage a meter reads at the pin, and whether the pin can source current are therefore three separate questions. Reading this far explained why the datasheet gives the part two identities at once, decoder and driver.
 
-开集电极也值得单独看一下。输出晶体管关闭时，芯片松开了这条下拉路径，输出端呈高阻，节点电压由外部电路决定。它不会像普通推挽输出那样主动把引脚推到电源电压。因而，真值表里的不点亮状态、输出引脚上测到的电压，以及能否向外提供电流，要分别理解。我读到这里才更留意数据手册为什么同时写了译码器和驱动器两个身份。
+开集电极也值得单独说两句。输出晶体管关断时，芯片只是松开了这条到地的路径，输出端处于高阻，电压由外部电路决定，不会像推挽输出那样主动把引脚推到电源。所以真值表里写的熄灭、万用表在引脚上量到的电压、这个引脚能不能往外送电流，要分开理解。读到这儿，我才明白数据手册为什么给它同时安了译码器和驱动器两个身份。
 
 ![Course diagram of decoder pins and individual segment resistors / 课程中的译码器引脚与逐段限流说明](/uploads/projects/arduino-digital-clock-counter/bcd-decoder-notes.png)
 
 ## Segment Current and Resistor Selection / 段电流与限流电阻
 
-The course slide calls for one series resistor per segment output. I want to understand why a single resistor at the display's common pin would not do the same job. With a shared resistor, two LED branches divide the current when displaying `1`, and seven do so when displaying `8`. Changing the number of lit segments changes the current available to each, making brightness depend on the displayed digit. Individual branch resistors let each segment's current be limited separately.
+The course slide asks for one series resistor on every segment output. Why not a single resistor at the common pin? If all seven segments shared one, showing `1` would split the current between two branches and showing `8` between seven. As the number of lit segments changes, so does the current each one gets, and brightness starts to depend on the digit. With a resistor in each segment branch, every segment's current is limited on its own.
 
-课件要求每个段输出各串一个限流电阻。我想进一步弄清楚，为什么不在数码管公共端只放一只。假如所有段共用一只电阻，显示 `1` 时只有两条 LED 支路分电流，显示 `8` 时变成七条。亮起的段数改变后，每段分到的电流也会改变，亮度就容易随数字变化。电阻分别放在各段支路，才能分别限制各段电流。
+课件要求每个段输出各串一只限流电阻。为什么不在公共端放一只就完事？假如七段共用一只电阻，显示 `1` 时只有两条支路分电流，显示 `8` 时变成七条。亮的段数一变，每段分到的电流跟着变，数字不同，亮度也不同。电阻放到各段支路上，每段的电流才各管各的。
 
-For one segment, I would subtract both the LED's forward drop and the driver's on-state low voltage from the supply. Suppose the supply is 5 V, the LED forward drop near the intended current is 2.0 V, and the driver drop is taken as 0.3 V. A target of roughly 5 mA gives `(5 − 2.0 − 0.3) / 0.005 = 540 Ω`. Using a standard 560 Ω resistor gives about 4.8 mA under the same assumptions. This is an example of choosing a value; the calculation for particular parts needs their electrical parameters.
+Estimating one segment means subtracting both the LED's forward drop and the driver's on-state low voltage from the supply. Assume a 5 V supply, an LED forward drop of 2.0 V near the target current, and 0.3 V across the driver output. Aiming for about 5 mA gives `(5 − 2.0 − 0.3) / 0.005 = 540 Ω`, and the common 560 Ω value gives roughly 4.8 mA under the same assumptions. These numbers only show how a value is chosen; real displays and chips need their own parameters.
 
-估算某一段时，我会把 LED 的正向压降和驱动器导通后的低电平电压一起扣掉。假设电源为 5 V，某段 LED 在目标电流附近的正向压降为 2.0 V，驱动输出压降按 0.3 V 计算，希望段电流约为 5 mA，那么电阻约为 `(5 − 2.0 − 0.3) / 0.005 = 540 Ω`。换成常见的 560 Ω，按同样假设算出约 4.8 mA。这组数值是一个选值例子，具体数码管和芯片还要按各自的电气参数计算。
+估算一段时，要把 LED 的正向压降和驱动器导通后的低电平一起扣掉。假设电源 5 V，LED 在目标电流附近的正向压降 2.0 V，驱动输出压降按 0.3 V 算，想让段电流在 5 mA 左右，电阻约为 `(5 − 2.0 − 0.3) / 0.005 = 540 Ω`。换成常见的 560 Ω，同样假设下大约 4.8 mA。这组数只是演示怎么选值，具体的数码管和芯片还得按各自的参数算。
 
-That gives me a useful way to examine the slide's 330 Ω value. Supply voltage, current, and LED forward voltage belong in the same calculation. Changing the LED while keeping 330 Ω need not preserve the current. When `8` lights all seven segments, their currents also add at the common connection and place a combined load on the supply and driver. I need to consider both each segment and the full digit operating together.
+Worked that way, the slide's 330 Ω becomes something to question. A resistor value belongs with the supply, the current and the LED drop; keep 330 Ω and change the LED, and the current need not stay the same. When `8` lights all seven segments, the seven currents also add up at the common pin, so the load on the supply and the decoder needs checking too.
 
-这样看，课件里的 330 Ω 就有了可以继续追问的地方。电阻值要和供电、电流、LED 压降放在一起看；同样用 330 Ω，换一种 LED 后电流未必相同。显示 `8` 时七段都亮，还要把七路电流加起来，检查公共端、电源和译码器的负担。选电阻既要让每一段合适，也要看整位显示一起亮时怎样工作。
+这么一算，课件里的 330 Ω 就有了可以追问的地方。电阻值要和供电、电流、LED 压降放在一起看，同样是 330 Ω，换一种 LED，电流未必一样。显示 `8` 时七段全亮，七路电流还要在公共端加起来，电源和译码器的负担也得一起检查。
 
 ## Decoder and Display Compatibility / 译码器与数码管的匹配
 
-The [CD4511B](https://www.ti.com/product/CD4511B) used in the course simulation makes the difference concrete. It supplies segment current for common-cathode LEDs. An active segment output goes high, sending current through the LED and its limiting resistor to the common cathode and ground. The two chips therefore require different common connections and active output levels for the same input digit. Both turn BCD into a seven-segment pattern, but the LED connections have to match the output structure.
+Set the course simulation's [CD4511B](https://www.ti.com/product/CD4511B) beside it and the difference becomes concrete. That chip supplies segment current for common-cathode LEDs: a selected output goes high, and current flows from the output through the LED and its resistor to the common cathode and ground. Feed the same digit into both chips and they want opposite common connections and opposite active levels. Both turn BCD into a seven-segment pattern, yet the LED wiring has to follow the output structure. Pairing the CD4511's wiring with LS47 hardware is exactly where the course slides went wrong.
 
-再对照课件仿真里的 [CD4511B](https://www.ti.com/product/CD4511B)，差别就很具体了。它为共阴 LED 提供段驱动电流，选中的段输出高电平，电流从输出端经过 LED 和限流电阻流向公共阴极，再回到地。同样送入一个数字，两种芯片要求的公共端接法和段输出有效电平不同。它们都能把 BCD 变成七段图形，连接 LED 的方式却要随输出结构一起选。
+再拿课件仿真里的 [CD4511B](https://www.ti.com/product/CD4511B) 对照，差别就落到了实处。它给共阴 LED 提供段电流，选中的段输出高电平，电流从输出端经过 LED 和限流电阻流到公共阴极，再回到地。同一个数字送进去，两颗芯片要求的公共端接法和有效电平正好相反。它们都能把 BCD 变成七段图形，LED 怎么接，却得跟着输出结构走。课件拿 CD4511 的接法去配 LS47 的实物，问题就出在这里。
 
-The test and blanking pins need checking alongside the four data inputs. [The LS47 controls](https://www.ti.com/product/SN74LS47) include lamp test, blanking, and zero suppression, all of which affect what appears on the display. A correct value on A through D can still be hidden by those controls. For a single-digit check, I would first establish normal decoding conditions from the truth table, then hold the inputs at `1`, `7`, and `8` in turn. That sequence checks the two right-hand segments, adds the top segment, then exercises all seven.
+Correct data inputs are not the end of it; the test and blanking pins matter too. [The LS47 controls](https://www.ti.com/product/SN74LS47) include lamp test, blanking and ripple blanking, and they also decide what appears. Check only A through D and ignore them, and the input digit can be right while the whole display stays off. To check a single digit I would first set those pins for normal decoding from the truth table, then feed `1`, `7` and `8` in turn: the two right-hand segments, then the top one added, then all seven.
 
-四位输入确认以后，还要检查测试和消隐脚。[LS47 的控制说明](https://www.ti.com/product/SN74LS47)列有灯测试、消隐和零消隐功能，这些控制会参与决定显示状态。如果只查 A 到 D，忽略了这些脚的状态，就可能遇到输入数字正确、显示仍然被关闭的情况。调试单个位时，我会先按真值表设好正常译码条件，再固定送入 `1`、`7` 和 `8`，逐步检查右侧两段、顶部一段和全部七段。
+四位输入对了还不算完，测试和消隐脚也得看。[LS47 的控制说明](https://www.ti.com/product/SN74LS47)里有灯测试、消隐和零消隐，这几个脚同样在决定显示什么。只查 A 到 D、忽略了它们，就可能碰上输入数字没错、整位却被关掉的情况。调单个位时，我会先按真值表把这几个脚设到正常译码的状态，再依次送 `1`、`7`、`8`，先看右边两段，再加上顶上一段，最后七段全亮。
 
-An incorrect digit calls for checking BCD bit order and the decoder's control inputs; a missing segment can be investigated along its LED branch. Those are different starting points. Once I can connect the visible error to the relevant pins and expected current path, I have a concrete way to investigate it.
+A missing segment and a whole digit showing the wrong number start from different places. The first is traced along that segment's LED branch; the second begins with the BCD bit order and the decoder's control pins. Once the visible error, the pins that govern it and the path the current should take line up, finding the fault no longer depends on poking jumper wires and hoping.
 
-缺一段和整位显示成另一个数字，可以从不同的地方查起。前者沿对应的 LED 支路检查，后者先核对 BCD 位序和译码器的控制条件。显示错了什么、哪些引脚控制着它、电流应该从哪里流过，这几件事能对上，调试就有了具体的方向。
+缺了一段，和整位显示成了另一个数字，排查的起点不一样。前者顺着那一段的 LED 支路去查，后者先核对 BCD 位序和译码器的控制脚。看到的错误、管着它的引脚、电流该走的路，这几样能对上，就不用再靠瞎插杜邦线碰运气了。
