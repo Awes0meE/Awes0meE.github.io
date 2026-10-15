@@ -7,6 +7,7 @@ import { BenchLogRail } from "@/components/bench-log-rail";
 import { BilingualText } from "@/components/bilingual-text";
 import { ContentRenderer, getContentOutline } from "@/components/content-renderer";
 import { ProjectAssets } from "@/components/project-assets";
+import { ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
 import {
   formatDateRange,
@@ -16,7 +17,7 @@ import {
   getMediaItems,
   getNotes,
   getProject,
-  getProjectLeadMedia,
+  getProjectCover,
   getProjects
 } from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
@@ -70,8 +71,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const relatedNotes = getNotes().filter((note) => note.projectSlug === slug);
   const relatedMedia = getMediaItems().filter((item) => item.projectSlug === slug);
   const outline = getContentOutline(project.body);
-  const lead = getProjectLeadMedia(project);
-  const leadCaption = lead ? getImageCaption(lead.src, project.body) : null;
+  const lead = getProjectCover(project);
+  const leadCaption =
+    project.coverKind === "company"
+      ? { en: `Company mark · ${project.title}`, zh: `实习单位标识 · ${project.titleZh}` }
+      : getImageCaption(lead.src, project.body);
   const number = String(projectIndex + 1).padStart(2, "0");
   const total = String(projects.length).padStart(2, "0");
   const hasFiles = Boolean(project.assetPaths?.length);
@@ -110,15 +114,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <figure className="bench-lead">
                     <div className="bench-lead-frame">
                       <ProjectFigureTransition slug={project.slug}>
-                        <Image
-                          src={lead.src}
+                      <span className="project-cover-frame">
+                        <ProjectCover
+                          media={lead}
                           alt={leadAlt}
-                          fill
-                          priority
+                          preload
                           sizes="(min-width: 1280px) 900px, (min-width: 1024px) 70vw, 100vw"
-                          className={`bench-lead-image bench-lead-image-${lead.fit}`}
+                          className="bench-lead-image"
                         />
-                      </ProjectFigureTransition>
+                      </span>
+                    </ProjectFigureTransition>
                     </div>
                     <figcaption>
                       <span className="bench-fig-label">FIG. 01</span>

@@ -1,16 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ProjectCover } from "@/components/project-cover";
+import type { ProjectMedia } from "@/lib/content";
 
 export type WorkRailProject = {
   slug: string;
   title: string;
   titleZh: string;
-  status: string;
-  statusZh: string;
-  cover: string;
+  phase: "completed" | "ongoing" | "archived";
+  phaseEn: string;
+  phaseZh: string;
+  cover: ProjectMedia;
 };
 
 export function WorkProjectRail({ projects }: { projects: WorkRailProject[] }) {
@@ -101,16 +103,10 @@ export function WorkProjectRail({ projects }: { projects: WorkRailProject[] }) {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="signal-work-rail-cover" aria-hidden="true">
-                <Image
-                  src={project.cover}
-                  alt=""
-                  fill
-                  sizes="72px"
-                  className="object-contain"
-                />
+                <ProjectCover media={project.cover} alt="" sizes="72px" />
               </span>
-              <span className="signal-work-rail-status" aria-hidden="true">
-                <BilingualText en={project.status} zh={project.statusZh} />
+              <span className="signal-work-rail-status" data-phase={project.phase} aria-hidden="true">
+                <BilingualText en={project.phaseEn} zh={project.phaseZh} />
               </span>
             </a>
           );
