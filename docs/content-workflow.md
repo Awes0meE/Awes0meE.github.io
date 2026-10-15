@@ -36,9 +36,9 @@ summaryZh: "中文摘要"
 date: "2026.05"
 status: "In Progress"
 tags: ["Control", "Embedded", "Next.js"]
-cover: "/uploads/projects/my-project/cover.jpg"
-lead: "/uploads/projects/my-project/board-photo.jpg"
-leadFit: "contain"
+cover: "/uploads/projects/my-project/cover-card.webp"
+coverDark: "/uploads/projects/my-project/cover-card-dark.webp"
+coverKind: "render"
 featured: false
 links:
   repo: "https://github.com/Awes0meE/example"
@@ -51,7 +51,7 @@ assetPaths:
 
 Set `featured: true` only for projects that should appear on the homepage.
 
-`lead` is optional: an evidence image (board photo, render, scope capture) that leads the project page as FIG. 01 and also fills the project's `/work` chapter, so the image morphs between the two. Never point `lead` at a logo; projects whose only cover is a logo omit it and show no lead figure. `leadFit` (`cover` or `contain`, default `cover`) frames the lead image; use `contain` for photos or renders whose edges must stay visible. `coverFit` sets the same framing for the cover on `/work` when no `lead` exists.
+**Cover rule (`cover`, `coverDark`, `coverKind`).** Every project has exactly one cover card, shown on `/work`, in the `/work` rail, in the homepage project index, and as the project page's `FIG. 01` (the `/work` image morphs into it). Company or internship experience (`coverKind: "company"`) uses the company's logo; personal work (`coverKind: "render"`) uses the board's EDA 3D render, or the closest equivalent when no render exists (the course-kit photo and the Tinkercad wiring view of the two Arduino projects). Cards are normalized transparent WebP files: the subject is separated from its background, cropped, and centred on a 1600×1200 canvas at roughly 42% of the area (never wider than 84% or taller than 78%), so logos and boards carry the same visual weight. The mat is CSS, not pixels: the image-well token (light `#EEF4FD`, dark `#10100E`). A logo that does not read on one of the mats ships a second `coverDark` card in a reversed colourway (white type for dark, navy type for light); `ProjectCover` renders both and the theme shows one. Name the card `cover-card.webp` (and `cover-card-dark.webp`) inside the project's upload folder; keep the original image for evidence and media use.
 
 Use `assetPaths` when a project should show uploaded public evidence. Entries can be individual files or directories under `public/uploads/`. Project pages show these files in a two-pane browser: the left side is a project-file index, and the right side previews the currently selected file. Images and videos preview inline, Markdown / text documents render as readable article content with relative image/link paths resolved from the source file, small UTF-8 source/code files render in code frames, PDFs embed from page one where the browser supports it, and spreadsheets, EDA/CAD files, fabrication archives, and other binary files keep a direct open action. HTML and SVG uploads are treated as download-only artifacts rather than inline previews. Prefer explicit file lists over broad directories when a folder contains Notion stubs, unfinished exports, or other files that should not appear as project evidence; the resolver also has directory-depth, file-count, and aggregate text-preview caps as a safety backstop.
 
