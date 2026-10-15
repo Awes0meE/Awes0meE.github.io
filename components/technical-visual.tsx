@@ -17,26 +17,39 @@ type StackMark = {
 
 const prototypes = [
   {
+    id: "power",
+    src: "/uploads/hero/power-supply-board-cutout-v4.webp",
+    width: 590,
+    height: 511
+  },
+  {
     id: "oled",
-    src: "/uploads/hero/embedded-controller-isolated-tight-v3.webp"
+    src: "/uploads/hero/embedded-controller-cutout-v4.webp",
+    width: 727,
+    height: 528
   },
   {
     id: "tft",
-    src: "/uploads/hero/hardware-prototype-isolated-tight-v3.webp"
+    src: "/uploads/hero/hardware-prototype-cutout-v4.webp",
+    width: 615,
+    height: 536
   },
   {
     id: "battery",
-    src: "/uploads/hero/battery-power-isolated-tight-v3.webp"
-  },
-  {
-    id: "power",
-    src: "/uploads/hero/power-supply-board-isolated-tight-v1.webp"
+    src: "/uploads/hero/battery-power-cutout-v4.webp",
+    width: 865,
+    height: 600
   },
   {
     id: "mixer",
-    src: "/uploads/hero/ad831-mixer-cutout-v1.png"
+    src: "/uploads/hero/ad831-mixer-cutout-v1.png",
+    width: 292,
+    height: 227
   }
 ] as const;
+
+/** Seconds each prototype holds the nucleus before the next one fades in. */
+const nucleusSlot = 5;
 
 const stackGroups = {
   embedded: [
@@ -66,22 +79,46 @@ const stackGroups = {
 } satisfies Record<string, readonly StackMark[]>;
 
 function PrototypeNucleus() {
+  const cycle = `${prototypes.length * nucleusSlot}s`;
+
   return (
-    <div className={styles.nucleus} aria-hidden="true">
-      <span className={styles.nucleusField} />
-      <div className={styles.nucleusRotor}>
+    <div
+      className={styles.nucleus}
+      style={{ "--nucleus-cycle": cycle } as CSSProperties}
+      aria-hidden="true"
+    >
+      <svg className={styles.nucleusRing} viewBox="0 0 100 100" focusable="false">
         {prototypes.map((prototype, index) => (
-          <span className={styles.nucleon} data-index={index} key={prototype.id}>
-            <Image
-              src={prototype.src}
-              alt=""
-              fill
-              sizes="92px"
-              className={`${styles.nucleonImage}${index === prototypes.length - 1 ? ` ${styles.nucleonCutout}` : ""}`}
-            />
-          </span>
+          <circle
+            key={prototype.id}
+            cx="50"
+            cy="50"
+            r="48"
+            pathLength="100"
+            className={styles.nucleusArc}
+            style={{
+              "--arc-offset": `${-index * 20 - 1}`,
+              "--slot-delay": `${index * nucleusSlot}s`
+            } as CSSProperties}
+          />
         ))}
-      </div>
+      </svg>
+      {prototypes.map((prototype, index) => (
+        <span
+          className={styles.nucleusSlide}
+          key={prototype.id}
+          style={{ "--slot-delay": `${index * nucleusSlot}s` } as CSSProperties}
+        >
+          <Image
+            src={prototype.src}
+            alt=""
+            width={prototype.width}
+            height={prototype.height}
+            sizes="180px"
+            className={styles.nucleusImage}
+          />
+        </span>
+      ))}
     </div>
   );
 }
@@ -216,12 +253,11 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
     >
       <span id={visualDescriptionId} className="sr-only">
         <BilingualText
-          en="Five prototype images form a nucleus. Three slow rotating orbits with evenly spaced electrons group representative embedded systems, firmware, and engineering tool skills."
-          zh="五张原型图片组成原子核；三条缓慢旋转且电子等距分布的轨道，分别代表嵌入式系统、固件开发和工程工具。"
+          en="The nucleus shows five prototype boards in turn. Three slow rotating orbits with evenly spaced electrons group representative embedded systems, firmware, and engineering tool skills."
+          zh="原子核轮流展示五块原型板；三条缓慢旋转且电子等距分布的轨道，分别代表嵌入式系统、固件开发和工程工具。"
         />
       </span>
       <div className={styles.visualLabel} aria-hidden="true">
-        <span>GYROSCOPIC CORE</span>
         <BilingualText en="Prototype nucleus · representative stack" zh="原型核心 · 代表性技术栈" />
       </div>
       <span className={styles.cornerTopRight} aria-hidden="true" />

@@ -539,9 +539,7 @@ body:has(.signal-home) .site-footer-visual-note {
   line-height: 1.55;
 }
 
-.signal-hero[data-motion="paused"] .variantFluid,
-.signal-hero[data-motion="paused"] .iridium-divider-marks,
-.signal-hero[data-motion="paused"] .signal-hero-copy::before {
+.signal-hero[data-motion="paused"] .iridium-divider-marks {
   animation-play-state: paused;
 }
 
@@ -581,26 +579,6 @@ body:has(.signal-home) .site-footer-visual-note {
   pointer-events: none;
 }
 
-@keyframes divider-fluid-a {
-  from { transform: translate3d(-2%, 1%, 0) scale(1); }
-  to { transform: translate3d(4%, -3%, 0) scale(1.05); }
-}
-
-@keyframes divider-fluid-b {
-  from { transform: translate3d(3%, -2%, 0) scale(1.04); }
-  to { transform: translate3d(-4%, 3%, 0) scale(0.99); }
-}
-
-@keyframes divider-fluid-c {
-  from { transform: translate3d(-1%, -3%, 0) scale(0.99); }
-  to { transform: translate3d(4%, 3%, 0) scale(1.04); }
-}
-
-@keyframes divider-fluid-d {
-  from { transform: translate3d(2%, 2%, 0) scale(1.02); }
-  to { transform: translate3d(-4%, -2%, 0) scale(1.07); }
-}
-
 @keyframes iridium-mark-rise {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, calc(0px - var(--mark-pitch)), 0); }
@@ -609,11 +587,6 @@ body:has(.signal-home) .site-footer-visual-note {
 @keyframes iridium-mark-cross {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(calc(0px - var(--mark-pitch)), 0, 0); }
-}
-
-@keyframes copy-ticks-fall {
-  from { background-position: 0 0; }
-  to { background-position: 0 169px; }
 }
 
 .atmosphereConveyor {
@@ -628,7 +601,6 @@ body:has(.signal-home) .site-footer-visual-note {
   position: absolute;
   display: block;
   pointer-events: none;
-  will-change: transform;
 }
 
 .atmosphereConveyor .fluidA {
@@ -637,7 +609,6 @@ body:has(.signal-home) .site-footer-visual-note {
   width: 64%;
   height: 94%;
   background: radial-gradient(ellipse at 36% 60%, rgb(var(--c-glow) / calc(0.075 * var(--light-strength))), rgb(var(--c-ember) / calc(0.035 * var(--light-strength))) 36%, transparent 72%);
-  animation: divider-fluid-a 39s ease-in-out infinite alternate;
 }
 
 .atmosphereConveyor .fluidB {
@@ -646,7 +617,6 @@ body:has(.signal-home) .site-footer-visual-note {
   width: 58%;
   height: 76%;
   background: radial-gradient(ellipse at 52% 47%, rgb(var(--c-ember-soft) / calc(0.078 * var(--light-strength))), transparent 69%);
-  animation: divider-fluid-b 51s ease-in-out infinite alternate;
 }
 
 .atmosphereConveyor .fluidC {
@@ -655,7 +625,6 @@ body:has(.signal-home) .site-footer-visual-note {
   width: 72%;
   height: 82%;
   background: radial-gradient(ellipse at 44% 45%, rgb(var(--c-ember) / calc(0.06 * var(--light-strength))), rgb(var(--c-glow) / calc(0.025 * var(--light-strength))) 40%, transparent 73%);
-  animation: divider-fluid-c 63s ease-in-out infinite alternate;
 }
 
 .atmosphereConveyor .fluidD {
@@ -665,7 +634,6 @@ body:has(.signal-home) .site-footer-visual-note {
   width: 49%;
   height: 76%;
   background: radial-gradient(ellipse at 44% 58%, rgb(var(--c-glow) / calc(0.052 * var(--light-strength))), rgb(var(--c-ember) / calc(0.038 * var(--light-strength))) 38%, transparent 72%);
-  animation: divider-fluid-d 47s ease-in-out infinite alternate;
 }
 
 .iridium-divider {
@@ -742,8 +710,6 @@ html[data-lang="en"] .signal-hero-grid {
   content: "";
   opacity: 0.62;
   background: repeating-linear-gradient(to bottom, rgb(var(--c-ember)) 0 1px, transparent 1px 13px);
-  animation: copy-ticks-fall 18s linear infinite;
-  will-change: background-position;
 }
 
 .signal-hero-title {
