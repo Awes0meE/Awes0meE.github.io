@@ -22,12 +22,15 @@ export type Project = {
   date: string;
   status: string;
   tags: string[];
+  /**
+   * Normalized transparent cover card (subject centred on a 16:10 canvas).
+   * Company experience uses the company logo; personal work uses an EDA 3D
+   * render of the board (or the closest equivalent when none exists).
+   */
   cover: string;
-  /** Evidence image that leads the project page and its /work chapter. */
-  lead?: string;
-  leadFit?: "cover" | "contain";
-  /** How /work frames the cover when no lead image exists. */
-  coverFit?: "cover" | "contain";
+  /** Optional dark-theme variant when the light card does not read on dark. */
+  coverDark?: string;
+  coverKind: "company" | "render";
   links?: LinkSet;
   assetPaths?: string[];
   featured: boolean;
@@ -157,23 +160,38 @@ export function formatStatusZh(value: string) {
   return statusMap[value] ?? value;
 }
 
-export type ProjectMedia = {
-  src: string;
-  fit: "cover" | "contain";
+export type ProjectPhase = "completed" | "ongoing" | "archived";
+
+const phaseLabels: Record<ProjectPhase, { en: string; zh: string }> = {
+  completed: { en: "Completed", zh: "已完成" },
+  ongoing: { en: "In progress", zh: "进行中" },
+  archived: { en: "Archived", zh: "已归档" }
 };
 
-/** Image for a project's /work chapter: the lead evidence image, else the cover. */
-export function getProjectChapterMedia(project: Project): ProjectMedia {
-  if (project.lead) {
-    return { src: project.lead, fit: project.leadFit ?? "cover" };
-  }
+/**
+ * One short, uniform lifecycle label per project for compact indexes. The full
+ * status (which also carries the project type, e.g. commissioned or internship)
+ * stays on the project page and chapter metadata.
+ */
+export function getProjectPhase(status: string) {
+  const normalized = status.toLowerCase();
+  const phase: ProjectPhase = /ongoing|in progress|draft|planning/.test(normalized)
+    ? "ongoing"
+    : /archiv/.test(normalized)
+      ? "archived"
+      : "completed";
 
-  return { src: project.cover, fit: project.coverFit ?? "cover" };
+  return { phase, ...phaseLabels[phase] };
 }
 
-/** The project page's lead figure, or null when only a logo-style cover exists. */
-export function getProjectLeadMedia(project: Project): ProjectMedia | null {
-  return project.lead ? { src: project.lead, fit: project.leadFit ?? "cover" } : null;
+export type ProjectMedia = {
+  src: string;
+  srcDark?: string;
+};
+
+/** The one cover image a project shows everywhere: /work, rails, homepage rows and its page. */
+export function getProjectCover(project: Project): ProjectMedia {
+  return { src: project.cover, srcDark: project.coverDark };
 }
 
 /** Bilingual caption for a public image, from the media index or the image's alt text in the body. */

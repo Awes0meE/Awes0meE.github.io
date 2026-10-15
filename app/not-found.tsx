@@ -15,7 +15,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="bench-action"
+        className="bench-action signal-fill"
       >
         <BilingualText en="Back home" zh="返回首页" />
       </Link>

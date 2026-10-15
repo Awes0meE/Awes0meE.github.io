@@ -37,31 +37,50 @@ colors:
   orbit-embedded: "#B9914B"
   orbit-firmware: "#5FA78F"
   orbit-tools: "#9B90B5"
-  # Bench Paper (light). Ember marks, ember-soft, and on-ember are shared with Ember Black.
-  light-canvas: "#EEEDE9"
-  light-surface-deep: "#E8E7E2"
-  light-surface-panel: "#F4F3EF"
-  light-surface-raised: "#FAF9F6"
-  light-text: "#121212"
-  light-warm-ink: "#141311"
-  light-t1: "#22201D"
-  light-t2: "#34312D"
-  light-t3: "#4A4641"
-  light-t4: "#5C5751"
-  light-t5: "#6A655E"
-  light-t6: "#928D86"
-  light-rule: "#CCC9C2"
-  light-line: "rgba(18, 18, 18, 0.20)"
-  light-line-soft: "rgba(18, 18, 18, 0.11)"
-  light-ember-text: "#B04E00"
-  light-ember-hover: "#943E00"
-  light-focus: "#B04E00"
-  light-code: "#E2E0DA"
-  light-image-well: "#E2E0DA"
+  # Bench Paper (light). Cobalt: Tailwind slate neutrals, cobalt accent, white sheets alternating with faint cobalt bands; no pure black.
+  light-canvas: "#FFFFFF"
+  light-band: "#F5F9FF"
+  light-surface-deep: "#FFFFFF"
+  light-surface-panel: "#FFFFFF"
+  light-surface-raised: "#F8FAFC"
+  light-text: "#0F172A"
+  light-warm-ink: "#0F172A"
+  light-t1: "#1E293B"
+  light-t2: "#334155"
+  light-t3: "#526073"
+  light-t4: "#5A687C"
+  light-t5: "#586476"
+  light-t6: "#94A3B8"
+  light-rule: "#E2E8F0"
+  light-line: "rgba(30, 41, 59, 0.20)"
+  light-line-soft: "rgba(30, 41, 59, 0.11)"
+  light-accent-mark: "#2563EB"
+  light-accent-soft: "#60A5FA"
+  light-accent-text: "#00334D"
+  light-accent-hover: "#2465FF"
+  light-focus: "#1D4ED8"
+  light-heading: "#2465FF"
+  light-on-accent: "#FFFFFF"
+  light-logo-mark: "#2563EB"
+  light-logo-word: "#1E3A8A"
+  light-code: "#F8FAFC"
+  light-image-well: "#EEF4FD"
   light-glow: "#FFFFFF"
-  light-glow-warm: "#FFC48C"
-  light-tint: "#FCF6EE"
-  light-shadow: "#2E261E"
+  light-glow-warm: "#FFFFFF"
+  light-tint: "#FFFFFF"
+  light-halo: "#FFFFFF"
+  light-shadow: "#0F172A"
+  light-daylight-cobalt: "#60A5FA"
+  light-daylight-ice: "#93C5FD"
+  light-daylight-sky: "#7DD3FC"
+  light-daylight-cyan: "#38BDF8"
+  light-daylight-frost: "#BAE6FD"
+  light-daylight-periwinkle: "#81A0FA"
+  light-chrome: "#1E3A8A"
+  light-aurora-violet: "#8B5CF6"
+  light-aurora-sky: "#0EA5E9"
+  light-chrome-deep: "#1B347D"
+  light-chrome-panel: "#25449C"
   light-orbit-embedded: "#966E26"
   light-orbit-firmware: "#2E7D63"
   light-orbit-tools: "#6C6096"
@@ -86,7 +105,7 @@ components:
   bench-reading-column:
     textColor: "{colors.t1}"
     typography: "{typography.body}"
-    width: "58ch"
+    width: "full reading column"
   image-well:
     backgroundColor: "{colors.image-well}"
 geometry:
@@ -96,9 +115,9 @@ geometry:
 motion:
   orbit-assembly: slow counterclockwise rotation
   electrons: evenly phased orbital travel with tapered comet tails
-  nucleus: one prototype at a time, 5s per board with a cross-fade and a five-segment ring
+  nucleus: one prototype at a time, 5s per board with a cross-fade
   separator: repeating iRidium marks scrolling upward
-  theme-switch: 260ms root crossfade through document.startViewTransition
+  theme-switch: 620ms circular reveal from the pressed control (view transition type `theme`)
   route-entry: vertical leave-and-arrive on nav-forward and nav-back, shared project-figure morph
 ---
 
@@ -114,7 +133,7 @@ The shell rules apply globally on `body`: the shared body, header, navigation, p
 
 ## Creative North Star
 
-**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. In Ember Black the near-black canvas recalls a hardware bench at low light; in Bench Paper the drafting-grey ground recalls the same bench under daylight. In both, fine rules, indices, and compact labels create an instrument grammar; warm white or warm ink carries information; ember orange identifies the principal signal.
+**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. In Ember Black the near-black canvas recalls a hardware bench at low light; in Bench Paper a clean drafting-sheet white recalls the same bench under daylight. In both, fine rules, indices, and compact labels create an instrument grammar; warm white or warm ink carries information; ember orange identifies the principal signal.
 
 The homepage may be visually kinetic, but every motion must reinforce structure: the separator establishes flow, the nucleus gathers prototype work, the orbits group the technical stack, and project rows lead to inspectable evidence. The animation is an illustrative systems map, not telemetry or proof of project completion.
 
@@ -137,13 +156,13 @@ Canvas, deep, panel, and raised surfaces step up from near-black in small warm i
 
 ### Bench Paper (light)
 
-A drafting-grey canvas, a slightly darker deep surface, and paler panel and raised surfaces. Headings and display use near-black ink with a warm cast; the same `t1`–`t6` ramp inverts into warm darks. Ember marks stay at the shared ember value, but every ember that carries text, link, status, or focus meaning switches to the darker ember text so it holds AA contrast on paper, with an even darker ember hover. Shadows use a warm brown-black base and `--shadow-k` scales every shadow alpha (1 in Ember Black, 0.4 in Bench Paper) so elevation stays quiet on a light ground. The orbit category colors are darkened for paper.
+Bench Paper uses the **Cobalt** palette (the owner's final choice after Slate Sky read too pale for the logo and emphasis): white sheets with Tailwind-slate neutrals, alternating with faint cobalt bands (`#F5F9FF`) behind the homepage hero, education, contact and the detail masthead, so the page has a white–band–white rhythm instead of one empty field. Bench Paper is designed, not inverted: it trades ember for **cobalt** as its signal. **The cobalt-signal rule**: marks, fills, the number plate, dimension lines, crop marks, rail markers, the selected-language fill and the drafting grid use cobalt `#2563EB`; all coloured text (small labels, links, status, eyebrows, chapter numbers) on every page uses owner-picked deep sea `#00334D` (13.3:1 on white, 12.6:1 on the band), lighting to `#2465FF` on hover. Homepage section titles use owner-picked bright blue `#2465FF` (`--c-heading`, 4.8:1 on white, 4.5:1 on the band), so the titles carry the colour and the small text stays quiet; the focus ring stays cobalt `#1D4ED8`; text on a cobalt fill is white (5.2:1). The header logo pairs a cobalt mark with a deep-cobalt `#1E3A8A` wordmark. **The no-pure-black rule** sets headings, body, rules, and logos in near-black slate ink (`#0F172A` for headings, `#1E293B` body, `#334155` secondary, then `#526073` → `#586476` meta at 4.5:1 or better, including on the band, `#94A3B8` only for non-text), never `#000`. The owner asked for the ink to lean toward black. **The no-glow rule**: every atmospheric ember glow, radiance, tint, and halo in Ember Black reads through the `--c-halo`, `--c-glow-warm`, and `--c-tint` tokens, which Bench Paper sets to its canvas so they vanish; depth comes from hairlines and quiet slate shadows (`--shadow-k` 0.28). **The full-colour rule**: Ember Black dims and desaturates covers and media thumbnails at rest; Bench Paper shows them in full colour, because the same filter reads as a grey film on white. **Daylight** gives Bench Paper its own living field, the counterpart of the Ember glow: the homepage hero drops the drafting grid for four broad, low-alpha blue lights (cobalt, sky, periwinkle and a white highlight) over a white-to-pale-cobalt wash. They roam on long multi-point paths (64–86s loops), so the light travels across the field rather than sitting as fixed patches; they pause offscreen or when hidden and stop under reduced motion. The detail masthead keeps a static two-light wash. **Aurora chrome** frames the light page the way near-black chrome frames the Ember hero: the header (including the mobile nav row) and the footer are a deep cobalt `#1E3A8A` base carrying three soft lights (cyan `#38BDF8`, violet `#8B5CF6`, sky `#0EA5E9`) that drift on a 24s loop under a fine overlay grain, with their own scoped on-blue tokens. Logo, nav labels, indices and footer text are white for contrast over every part of the aurora; the active nav adds a soft ice glow and the sky underline; the selected language is a white thumb with cobalt text; the pill sits on a translucent navy field. The drift stops under reduced motion. Other Bench Paper details remain: ember-equivalent cobalt dimension lines under homepage section titles, crop marks on figures, and dashed heading rules. These appear only in Bench Paper. The orbit category colors are darkened for paper.
 
 ### Shared roles
 
 - **The on-ember rule.** Content set on a solid ember fill (the bench plate, selected language and theme options, selection, filled actions) uses the near-black on-ember token in both themes, never white.
 - **The image-well rule.** Image frames sit on the neutral image-well token, so evidence reads on paper-deep in Bench Paper and near-black in Ember Black. The two transparent `-system-block` diagrams carry white labels and keep the Ember Black image-well value as a dark plate in both themes.
-- **The logo-filter rule.** The iRidium header assets use the `--logo-filter` token: inverted to white in Ember Black, rendered black in Bench Paper. Geometry is never altered.
+- **The logo-ink rule.** The header mark and script wordmark are CSS masks of the approved PNGs filled with `--logo-mark-color` and `--logo-word-color`: warm white in Ember Black; in Bench Paper a cobalt mark (`#2563EB`) beside a deep-cobalt wordmark (`#1E3A8A`). Geometry is never altered.
 - **Lines.** Rules and borders are the foreground at low alpha (about 0.11–0.20), so the same declaration produces a light hairline on black and a dark hairline on paper.
 
 **The primary-signal rule.** Ember is the only saturated color used broadly across interface state in either theme: primary actions, focus, directional marks, key rules, and selected controls. It must not become routine paragraph color or a blanket surface fill.
@@ -182,9 +201,9 @@ The homepage is one continuous instrument field divided by restrained rules. Its
 6. engineering stack and contact;
 7. shared footer.
 
-The wide hero has three explicit visual zones:
+The headline is the heaviest element in the hero: the copy column takes about 46% (ZH) / 44% (EN) of the width and is a size container. The title runs up to 5.8rem (ZH) / 6rem (EN). The Chinese title sets two explicit lines, 嵌入式、控制、 / 电源与电驱, never relying on automatic CJK wrapping (Safari would not break at the commas). Its size is capped at `13.5cqi`, so the seven-glyph first line always fits between the ruler and the separator. The atom stage renders at 0.86 scale. The wide hero has three explicit visual zones:
 
-1. **Left — text field.** The direction statement, one orange identity paragraph, and actions form the reading anchor. A narrow static tick texture may reinforce the outer edge without competing with the copy.
+1. **Left — text field.** The direction statement, one orange identity paragraph, and actions form the reading anchor. An outer-edge ruler (20px wide, a 1.5px major tick every 38px with three 1px minor ticks between; the copy always keeps clear of it) falls along the left edge at exactly the separator's pitch and speed, so the two edges of the copy move as one counter-flowing pair without competing with the copy.
 2. **Middle — iRidium separator.** Repeated instances of the existing iRidium mark form a vertical, ember-colored band that scrolls upward. The band is translucent, has no extra centerline, and separates rather than fences off the two sides.
 3. **Right — orbital technical visual.** A tilted atom combines a rotating prototype nucleus with three technical-category orbits. It fills the available visual field without colliding with the separator or header.
 
@@ -196,9 +215,9 @@ The hero background may use several low-contrast, irregular warm radiances acros
 
 ### Nucleus
 
-The nucleus shows one prototype at a time. Five transparent presentation cutouts from `public/uploads/hero/` take turns at the center, each held for 5 seconds and cross-fading into the next, at about 160px wide on desktop so the board reads clearly without crowding the orbits. A thin ring of five equal segments surrounds the core; the segment for the current board is lit in ember. The boards keep their own color and a soft contact shadow on a faint ember glow, with no circular crop, white photo field, or card frame, so they sit on either theme's canvas. The nucleus never expands into a grid or shows several boards at once.
+The nucleus shows one prototype at a time. Five transparent presentation cutouts from `public/uploads/hero/` take turns at the center, each held for 5 seconds and cross-fading into the next, at about 180px wide on desktop so the board reads clearly without crowding the orbits. The boards keep their own color and a soft contact shadow on a faint ember glow, with no circular crop, white photo field, or card frame, so they sit on either theme's canvas. The nucleus never expands into a grid or shows several boards at once.
 
-The nucleus represents a portfolio core, not five completed case-study claims. The rotation order and the ring are presentational: they mark which image is showing, not sequence, progress, scale, or technical relationship.
+The nucleus represents a portfolio core, not five completed case-study claims. The rotation order is presentational: it does not imply sequence, progress, scale, or technical relationship.
 
 ### Orbits and electrons
 
@@ -206,7 +225,7 @@ The atom has exactly three equal-size elliptical orbit paths centered on the sam
 
 Each orbit contains exactly five electrons placed at equal path-phase intervals. All three orbits initialize from deterministic, interleaved phases so the first frame is balanced. Adding or removing a technology requires re-establishing equal spacing rather than clustering spare electrons together.
 
-Each electron contains one recognizable technology mark on a uniform circular badge filled with the canvas token (near-black in Ember Black, drafting grey in Bench Paper). Marks use a consistent optical scale rather than identical raw image bounds. Transparent negative space must reveal the shared badge. Short labels associated with an orbit remain upright relative to the viewport even while the orbit assembly rotates; labels must never turn upside down with their parent path.
+Each electron contains one recognizable technology mark on a uniform circular badge filled with the canvas token (near-black in Ember Black, white in Bench Paper). Marks use a consistent optical scale rather than identical raw image bounds. Transparent negative space must reveal the shared badge. Short labels associated with an orbit remain upright relative to the viewport even while the orbit assembly rotates; labels must never turn upside down with their parent path.
 
 The three categories describe the portfolio's technical stack:
 
@@ -224,12 +243,12 @@ Motion establishes two complementary systems:
 - electrons continue to travel around their own orbit paths while preserving equal spacing;
 - long orbit dashes flow along each ellipse and remain visibly faster than the overall assembly rotation;
 - every electron carries a tapered comet tail, widest and brightest near the badge and narrowing toward the trailing end;
-- the nucleus cross-fades to the next prototype every 5 seconds while its ring segment advances;
-- the central iRidium separator scrolls upward; the outer-left tick texture and the background radiances stay still.
+- the nucleus cross-fades to the next prototype every 5 seconds;
+- the central iRidium separator (38px marks in a 48px band, never larger than the 44px header mark) scrolls upward while the outer-left ruler falls at the same pitch and speed in counterflow; the Ember radiances stay still, and the Bench Paper daylight roams slowly.
 
 Do not attach fabricated waveform meaning, sensor values, stage completion, or live-system status to these motions. Avoid arbitrary bouncing, hover-chasing, or independent random movement that breaks the orbital model.
 
-Animation pauses whenever the technical visual is outside the viewport or the document is hidden. Under `prefers-reduced-motion: reduce`, the atom renders as a balanced static composition: orbit assembly, electrons, dash flow, nucleus rotation, and separator stop; the nucleus holds its first prototype with the first ring segment lit, and comet tails may be removed. No information or navigation may depend on motion.
+Animation pauses whenever the technical visual is outside the viewport or the document is hidden. Under `prefers-reduced-motion: reduce`, the atom renders as a balanced static composition: orbit assembly, electrons, dash flow, nucleus rotation, and separator stop; the nucleus holds its first prototype, and comet tails may be removed. No information or navigation may depend on motion.
 
 ## Components
 
@@ -241,7 +260,7 @@ Desktop navigation places a low-opacity `01`–`04` index before each label on e
 
 Under `prefers-reduced-motion: reduce`, navigation state remains visible but lift, press, and line-growth transitions become immediate. Semantic current-route state remains available on the shared navigation across every route.
 
-Preserve `public/brand/iridium-mark.png` and `public/brand/iridium-wordmark-script.png` with their intrinsic proportions. The wordmark always reads exactly `iRidium` in both languages. The middle separator repeats the mark glyph, not a replacement text logo. Filtering through the `--logo-filter` token adapts the transparent assets to each theme (white in Ember Black, black in Bench Paper) but must not alter their geometry.
+Preserve `public/brand/iridium-mark.png` and `public/brand/iridium-wordmark-script.png` with their intrinsic proportions. The wordmark always reads exactly `iRidium` in both languages. The middle separator repeats the mark glyph, not a replacement text logo. The header renders them as CSS masks filled per theme (`--logo-mark-color`, `--logo-word-color`), which recolors them without altering their geometry.
 
 ### Theme control
 
@@ -250,7 +269,7 @@ The theme control is a sun/moon two-state segment inside the existing language p
 - On a first visit the theme follows `prefers-color-scheme`, and keeps following live system changes.
 - A click stores `portfolio-theme` (`light` or `dark`) in `localStorage`; from then on the stored choice wins and the system setting is ignored.
 - A bootstrap script in `app/layout.tsx` runs before paint, restoring both `portfolio-language` and `portfolio-theme`, setting `html[data-theme]`, `color-scheme`, and the `theme-color` meta (canvas value of the chosen theme), so neither theme flashes.
-- Switching crossfades the whole root through `document.startViewTransition` (260ms). Under `prefers-reduced-motion: reduce`, or where view transitions are unsupported, the switch is instant.
+- Switching reveals the new theme as a circle that grows from the pressed sun or moon button over 620ms (`document.startViewTransition` with the `theme` transition type; the old page stays still underneath). Browsers without transition types fall back to a crossfade. Under `prefers-reduced-motion: reduce`, or where view transitions are unsupported, the switch is instant.
 
 ### Hero actions
 
@@ -268,6 +287,20 @@ Keep the full-width NTU master's entry above the two undergraduate awards on lay
 
 Dark-background derivatives may add white only inside intended shield or crest cutouts while preserving transparent space outside the mark and preserving the original geometry. Source, ownership, and derivative treatment belong in `public/education/README.md`.
 
+### Interaction motion
+
+Every control shares one quiet motion vocabulary (`app/globals.css`, *Interaction motion*). Exits run faster than entrances, and the shared ease is `cubic-bezier(0.16, 1, 0.3, 1)`.
+
+- **Signal fill.** Outlined actions (`.signal-fill`: hero primary, header CTA, About primary, Media "Open media", file "Open file", 404 action) fill with the signal colour as a left-to-right wipe: 420ms in, 240ms out. The label turns to on-signal text a beat later.
+- **Drawn underline.** Section-header links and detail section links draw a 1px underline from the left. The hero secondary link and prose links tighten their existing underline offset.
+- **Directional arrow.** Arrows lean 3px toward their destination on hover and focus. Download arrows drop 2px.
+- **Press.** Pill options, the logo, and filled actions settle 1px on press (60ms).
+- **Sliding thumb.** The language and theme pill each have one thumb that slides between options (340ms). Its position comes from `html[data-lang]` / `html[data-theme]`, so it is correct before hydration. The sun icon turns 45° and the moon 18° on hover.
+- **Settling focus ring.** The focus outline settles from 7px to 3px offset.
+- **Panels and swaps.** The mobile contents strip unfolds by grid rows (0fr → 1fr) with a fading list and stays `inert` while closed. A newly selected file preview eases in over 260ms. Rows move their title and arrow together 4px. Media tiles keep their slow image ease.
+
+Under `prefers-reduced-motion: reduce`, all spatial movement (wipes, thumbs, arrows, icon turns, press offsets, unfold, preview rise) is removed. Colour and state changes stay immediate and legible.
+
 ## Evidence and Asset Boundaries
 
 The five files under `public/uploads/hero/` are homepage presentation derivatives: four `*-cutout-v4.webp` background-removed cutouts made from the earlier studio-photo derivatives (shadows kept as translucent black, no board content added or altered) plus the original AD831 cutout. Their inclusion in the nucleus does not establish exact components, silkscreen, fabrication, bring-up, integration, measurement, validation, ownership, or completion. Use original photographs, drawings, Gerbers, logs, traces, and other direct artifacts on project evidence surfaces.
@@ -282,7 +315,7 @@ Do not place unreviewed third-party marks into the homepage, infer permission fr
 
 The technical atom is announced as one meaningful visual with a concise bilingual description. Its internal orbit paths, repeated marks, comet tails, and decorative traces remain hidden from assistive technology. Technology names conveyed only through logos must also exist in accessible text.
 
-Keyboard focus is always visible. A bilingual skip link is the first keyboard stop and moves focus directly to the current route content without adding a second main landmark. Shared header navigation, logo, language controls, homepage archive actions, and other standalone controls expose at least 44px touch targets in both Ember Black and Bench Paper. Interactions do not depend on hover, color, or motion alone. Verify both languages in both themes at desktop, tablet, and mobile widths, including keyboard navigation, contrast, overflow, document visibility changes, offscreen pausing, and reduced motion.
+Keyboard focus is always visible. A bilingual skip link is the first keyboard stop and moves focus directly to the current route content without adding a second main landmark. Shared header navigation, logo, language controls, homepage archive actions, and other standalone controls expose at least 44px touch targets in both Ember Black and Bench Paper. Interactions do not depend on hover, color, or motion alone. Text, including mono metadata and controls, never renders below 14px (`0.875rem`); only the decorative, `aria-hidden` orbit labels may sit at 13px. At the owner's request, every small size sits two 1px steps above its original value, in both themes; sizes reaching 1rem stopped there. Tailwind `text-xs`/`text-sm` resolve to 14px/16px. The compact header runs up to 599px. Verify both languages in both themes at desktop, tablet, and mobile widths, including keyboard navigation, contrast, overflow, document visibility changes, offscreen pausing, and reduced motion.
 
 ## Do's and Don'ts
 
@@ -317,7 +350,7 @@ This section governs the `/work` project index in release `v0.9.0`, now rendered
 
 ### Spatial model and project chapters
 
-- On wide screens, a sticky left rail keeps the current eight-project sequence visible as `01`–`08`. The right stage carries vertically stacked, evidence-first apertures with one real project image beside the localized title, status, timeline, focus tags, evidence availability, and case-study action.
+- On wide screens, a sticky left rail keeps the current eight-project sequence visible as `01`–`08`. Each rail entry shows one uniform lifecycle label from `getProjectPhase` (Completed / In progress / Archived, with a filled, outlined, or dimmed square); the full status, which also names the project type, stays in the chapter and on the project page. The right stage carries vertically stacked, evidence-first apertures with one real project image beside the localized title, status, timeline, focus tags, evidence availability, and case-study action.
 - Each project chapter is one complete semantic link to its case study. Do not split its image, copy, metadata, or action into nested or competing links.
 - The active rail item follows the chapter in view and exposes location state. On tablet, compress the rail without losing the sequence. On mobile, keep a sticky horizontal `01`–`08` rail and repeat the project number inside each chapter so orientation does not depend on the desktop composition.
 - English and Simplified Chinese use the same information hierarchy. Long titles may wrap differently, but neither language may be clipped, abbreviated into a different claim, or allowed to create horizontal overflow.
@@ -427,7 +460,7 @@ Every `/work/[slug]` project page and `/notes/[slug]` note page uses the **Bench
 
 ### Masthead
 
-- One solid ember plate per page, set beside the Barlow title, with on-ember display numerals. On a project page the plate is the project's number; on a note page it is the linked project's number. There is no eyebrow kicker above the title.
+- One solid ember plate per page, set beside the Barlow title, with on-ember display numerals. On a project page the plate is the project's number; on a note page it is the note's number within its project (in the project page's development-note order), with a `Note 01 / 02` ledger row. The numerals sit optically centred: a fixed-height grid plate, `text-box: trim-both cap alphabetic`, and proportional numerals. There is no eyebrow kicker above the title.
 - The title row spans the whole article width so long titles stay on one or two lines. The English title is uppercase Barlow at a 0.96 line-height; Chinese uses `display-cjk` at 700 with an independent size and 1.2 line-height. Below 640px both titles step down (English about 2–2.5rem at line-height 1) so long titles wrap in three lines or fewer.
 - Under the title, the page splits into a reading column and a sticky side ledger (280–340px) that runs the full length of the body, so the right side of a wide screen always carries the project record. The lede opens the reading column at about 64ch in `t1`.
 - The side ledger opens with a 2px warm rule and separates rows with 1px rules: uppercase `t4` mono labels, `t1` values with tabular figures, status in ember text, tags as 1px-outlined chips, and ember-text links for public files. On project pages a compact development-notes list follows it; on note pages the ledger holds the project link, date, and tags, followed by the project's other notes.
@@ -435,11 +468,12 @@ Every `/work/[slug]` project page and `/notes/[slug]` note page uses the **Bench
 
 ### Lead figure
 
-The lead figure (`FIG. 01`) comes from the optional project frontmatter `lead`, framed by `leadFit` (`cover` or `contain`); `coverFit` frames the cover on `/work` when there is no lead. `scripts/validate-content.mjs` validates all three fields. Only evidence images become lead figures, never logos: a project without `lead` has no lead figure. The figure is a 16:9 image well with a 1px rule at the head of the reading column, after the lede; below 1180px it sits between the lede and the ledger. It shares the `project-figure-<slug>` transition name with the `/work` chapter image.
+**Cover rule.** Every project has exactly one cover card, shown on `/work`, in the `/work` rail, in the homepage project index, and as the project page's `FIG. 01` (the `/work` image morphs into it). Company or internship experience (`coverKind: "company"`) uses the company's logo; personal work (`coverKind: "render"`) uses the board's EDA 3D render, or the closest equivalent when no render exists (the course-kit photo and the Tinkercad wiring view of the two Arduino projects). Cards are normalized transparent WebP files: the subject is separated from its background, cropped, and centred on a 1600×1200 canvas at roughly 42% of the area (never wider than 84% or taller than 78%), so logos and boards carry the same visual weight. The mat is CSS, not pixels: the image-well token (light `#EEF4FD`, dark `#10100E`). A logo that does not read on one of the mats ships a second `coverDark` card in a reversed colourway (white type for dark, navy type for light); `ProjectCover` renders both and the theme shows one. `scripts/validate-content.mjs` checks `cover`, `coverDark` and `coverKind`. The lead figure is a 16:9 image well with a 1px rule at the head of the reading column, after the lede; below 1180px it sits between the lede and the ledger. It shares the `project-figure-<slug>` transition name with the `/work` chapter image.
 
 ### Reading column
 
-- Running text keeps a 58ch measure in English and 40rem in Chinese, at 17px with a 1.75 line-height (1.9 in Chinese), in `t1`. Figures, code blocks, and tables extend to the full reading-column width.
+- Project and note reading text (lede, paragraphs, list items) is justified: Chinese spreads by character on a slightly tightened `-0.02em` base tracking so it still reads close-set, and English hyphenates (`hyphens: auto`, `text-justify: inter-word`) so word gaps stay even.
+- Running text, the lede, figures, code blocks, and tables all share the full reading-column width (about 666px at 1440), so justified text and figures line up at both edges. Text sets at 17px with a 1.75 line-height (1.9 in Chinese), in `t1`. The owner asked for the edges to match once the text was justified.
 - Each `h2` opens with a 1px rule and is set inline with an ember-text mono `§NN` counter that matches the rail. `h3` and `h4` use the body face at a heavier weight.
 - Figures are numbered `FIG. NN` in ember-text mono, continuing from the lead figure, and sit in the image well.
 - Code blocks use the code token with a 1px border and a mono label bar; inline code uses a faint foreground tint. Tables open with a 2px warm rule and use tabular figures. Quotes are a faint ember-tinted field with a 1px ember border. Bullet lists use square markers and numbered lists use leading-zero numerals, both in ember-text mono.

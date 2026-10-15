@@ -200,7 +200,7 @@ export function MediaFocusAperture({ groups, totals, initialSlug }: MediaFocusAp
               />
             </p>
           </div>
-          <a href={activeGroup.featured.src} className={styles.openMedia}>
+          <a href={activeGroup.featured.src} className={`${styles.openMedia} signal-fill`}>
             <BilingualText en="Open media" zh="打开媒体" />
             <ExternalLink size={16} aria-hidden="true" />
           </a>

@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { openGraphBase, site } from "@/lib/site";
 
-const preferenceBootstrapScript = `(function(){var d=document.documentElement;try{var l=localStorage.getItem("portfolio-language");if(l!=="zh"&&l!=="en"){l="en";}d.dataset.lang=l;d.lang=l==="zh"?"zh-CN":"en";}catch(e){d.dataset.lang="en";d.lang="en";}var t;try{t=localStorage.getItem("portfolio-theme");}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}d.dataset.theme=t;d.style.colorScheme=t;var c=t==="light"?"#eeede9":"#080808";var m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++){m[i].content=c;}})();`;
+const preferenceBootstrapScript = `(function(){var d=document.documentElement;try{var l=localStorage.getItem("portfolio-language");if(l!=="zh"&&l!=="en"){l="en";}d.dataset.lang=l;d.lang=l==="zh"?"zh-CN":"en";}catch(e){d.dataset.lang="en";d.lang="en";}var t;try{t=localStorage.getItem("portfolio-theme");}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}d.dataset.theme=t;d.style.colorScheme=t;var c=t==="light"?"#1e3a8a":"#080808";var m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++){m[i].content=c;}})();`;
 
 const signalDisplay = localFont({
   src: "./fonts/BarlowCondensed-SemiBold.ttf",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eeede9" },
+    { media: "(prefers-color-scheme: light)", color: "#1e3a8a" },
     { media: "(prefers-color-scheme: dark)", color: "#080808" }
   ],
   colorScheme: "dark light"

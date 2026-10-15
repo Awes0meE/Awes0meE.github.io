@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Small text runs two steps above Tailwind's defaults (14px / 16px).
+      fontSize: {
+        xs: ["0.875rem", { lineHeight: "1.25rem" }],
+        sm: ["1rem", { lineHeight: "1.5rem" }]
+      },
       colors: {
         ink: "rgb(var(--c-warm) / <alpha-value>)",
         graphite: "rgb(var(--c-t3) / <alpha-value>)",

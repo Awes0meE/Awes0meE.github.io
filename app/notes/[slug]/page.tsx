@@ -58,9 +58,13 @@ export default async function NotePage({ params }: NotePageProps) {
   const relatedProject = projectIndex >= 0 ? projects[projectIndex] : undefined;
   const projectNumber = projectIndex >= 0 ? String(projectIndex + 1).padStart(2, "0") : null;
   const outline = getContentOutline(note.body);
-  const siblingNotes = note.projectSlug
-    ? getNotes().filter((item) => item.projectSlug === note.projectSlug && item.slug !== note.slug)
-    : [];
+  // Number each note within its project, in the same order the project
+  // page lists its development notes.
+  const projectNotes = note.projectSlug ? getNotes().filter((item) => item.projectSlug === note.projectSlug) : [];
+  const noteIndex = projectNotes.findIndex((item) => item.slug === note.slug);
+  const noteNumber = noteIndex >= 0 ? String(noteIndex + 1).padStart(2, "0") : null;
+  const noteTotal = String(projectNotes.length).padStart(2, "0");
+  const siblingNotes = projectNotes.filter((item) => item.slug !== note.slug);
 
   return (
     <RouteStage>
@@ -74,8 +78,13 @@ export default async function NotePage({ params }: NotePageProps) {
           <article className="bench-article">
             <header className="bench-mast">
               <h1 className="bench-title">
-                {projectNumber ? (
-                  <span className="bench-plate" aria-hidden="true">{projectNumber}</span>
+                {noteNumber ? (
+                  <>
+                    <span className="bench-plate" aria-hidden="true">{noteNumber}</span>
+                    <span className="sr-only">
+                      <BilingualText en={`Note ${noteNumber} of ${noteTotal}: `} zh={`笔记 ${noteNumber} / ${noteTotal}：`} />
+                    </span>
+                  </>
                 ) : null}
                 <span className="bench-title-text">
                   <BilingualText en={note.title} zh={note.titleZh} />
@@ -105,6 +114,12 @@ export default async function NotePage({ params }: NotePageProps) {
                             <ArrowRight size={14} aria-hidden="true" />
                           </Link>
                         </dd>
+                      </div>
+                    ) : null}
+                    {noteNumber ? (
+                      <div className="bench-spec-half">
+                        <dt><BilingualText en="Note" zh="笔记" /></dt>
+                        <dd>{noteNumber} / {noteTotal}</dd>
                       </div>
                     ) : null}
                     <div className="bench-spec-half">

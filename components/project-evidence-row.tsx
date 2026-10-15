@@ -1,11 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ProjectCover } from "@/components/project-cover";
 import {
   formatDateRange,
   formatDateRangeZh,
   formatStatusZh,
+  getProjectCover,
   type Project
 } from "@/lib/content";
 
@@ -36,13 +37,7 @@ export function ProjectEvidenceRow({ index, project }: ProjectEvidenceRowProps) 
         <span className="signal-project-number">{String(index + 1).padStart(2, "0")}</span>
         <span className="signal-project-identity">
           <span className="signal-project-cover">
-            <Image
-              src={project.cover}
-              alt=""
-              fill
-              sizes="(min-width: 900px) 96px, 76px"
-              className="object-cover"
-            />
+            <ProjectCover media={getProjectCover(project)} alt="" sizes="96px" />
           </span>
           <span className="min-w-0">
             <strong id={titleId}><BilingualText en={project.title} zh={project.titleZh} /></strong>

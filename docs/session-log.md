@@ -1035,3 +1035,127 @@ Shipped together:
 - the four unused white-field derivatives were removed.
 
 Validation: lint, typecheck, and production build pass. A CDP sample confirmed one board per 5 s in order. Screenshots at 1440 in both themes and at 390 show no overflow.
+
+## 2026-10-15 — Bench Paper redesign
+
+After phase 3 the user found the light theme dirty and inverted, and asked for design elements without pure black. The `#EEEDE9` beige-grey ground and the dark theme's ember glows, radiances and tints had become peach smudges on paper.
+
+- Light palette: a near-white canvas (`#FAFAF9`), white panels, and a warm dark-grey ink ramp (`#2E2D2A` family) for headings, text, logos, the iRidium mark and on-ember text.
+- Glows: a new `--c-halo` token carries every atmospheric ember glow; Bench Paper sets it, `--c-glow-warm` and `--c-tint` to the canvas.
+- Light-style options: three were built in the live page and compared — redline drafting, a white chassis with dark screens, and datasheet ink bars. The user's later "no pure black" constraint ruled out the two heavy-black options, so the redline drafting details shipped as light-only design: a faint two-level grid behind the hero and detail masthead, ember dimension lines under homepage section titles, crop marks on figures, and dashed heading rules.
+- Theme switch: it now reveals the new theme as a circle from the pressed control (view transition type `theme`, verified over CDP); the user confirmed keeping it.
+- Nucleus: the five-segment ring was removed at the user's request.
+
+Validation: lint, typecheck, and production build pass. Screenshots of home, /work, /notes and the detail pages in light at 1440 and of home at 390 show no overflow, and dark mode is unchanged.
+
+The same day the user found the ember-orange text still muddy on paper and asked for blues instead. Three accents were built behind a temporary switch: navy + 66CCFF, cobalt, and 66CCFF teal. The user chose navy + 66CCFF, then preferred a brighter sky to navy. The shipped light accent therefore uses `#66CCFF` for marks, grid and fills, `#0A75AD` for text and links (4.8:1, the brightest sky that passes AA on the canvas), and `#12364A` text on sky fills (7:1). The canvas and ink also moved to cool sky-tinted neutrals (`#F5F9FC` / `#1E2B3C`) so the white stops reading grey.
+
+Other changes:
+- The header mark and wordmark became CSS masks so each theme recolours them without touching the PNG geometry.
+- 59 font sizes below 12px were raised to 12px.
+- The /work rail status switched to the sans face with a narrower thumbnail so it no longer breaks words.
+
+The user still disliked the result. Five blue-family palettes were built behind a temporary switch and shown on real pages with contrast checks (all text at least 4.5:1): Blueprint, Nordic, Slate Sky, Lab Cyan, and Periwinkle. The user chose **Slate Sky**: Tailwind slate neutrals, sky `#38BDF8` marks, `#0369A1` text, `#082F49` on sky fills, and a sky logo mark beside a slate wordmark.
+
+The user then reported a grey film under /notes, /media and /about. A CDP probe traced it to two causes:
+- Those surfaces paint `--c-deep`, which was `#F1F5F9`.
+- The dark theme's rest-state `grayscale`/`brightness` filters stayed on media thumbnails and covers.
+
+Bench Paper now uses a white ground (canvas, deep and panel all `#FFFFFF`) and shows images in full colour; the dark theme is unchanged. The homepage table's first header label no longer wraps.
+
+The /work rail had mixed status strings that blended lifecycle and project type (Commissioned Hardware, Completed Internship Project, Ongoing Learning Route, Archived Prototype, Completed). At the user's request the rail now shows one uniform lifecycle label per project through `getProjectPhase`: 已完成 / 进行中 / 已归档 (Completed / In progress / Archived). Each label carries a filled, outlined or dimmed square. The full status is unchanged in the chapter metadata, the homepage index and the project spec ledger.
+
+Interaction motion pass: a CDP inventory of every clickable element on the seven main routes found many controls with no transition, including the skip link, prose links, section links, media tiles, inputs, the rail back link and the related-media tile. It also found abrupt background flips on outlined actions and the preference pill, and an instant `hidden` contents panel. One vocabulary now covers them: signal-fill wipes, drawn underlines, 3px arrow leans, 1px presses, a sliding pill thumb, a settling focus ring, an unfolding mobile contents panel, and a preview ease-in. A CDP hover/click test confirmed each one mid-transition in both themes. Reduced motion keeps colour and state changes and drops the movement.
+
+After the motion pass the user found the sky-blue logo and emphasis too low in contrast and the white page empty. Three stronger palettes were compared on real pages: Cobalt, Navy and Ocean. Each had tinted bands alternating with white sections. The user chose **Cobalt** with a lighter band:
+- Marks are `#2563EB`; text and section titles are `#1D4ED8` (6.7:1).
+- On-fill text is white.
+- The logo is a cobalt mark with a `#1E3A8A` wordmark.
+- `#F5F9FF` bands sit behind the hero, education, contact and detail masthead.
+- The drafting grid is lighter.
+- The slate `t5` step was deepened to `#586476` so small text keeps 4.5:1 on the band.
+
+The user then singled out the static blue grid as the ugliest part of the light hero. In dark mode, drifting ember glows make the hero feel alive. Three light backgrounds were compared: Daylight Glass, Cyanotype and Board Traces. The user chose **Daylight Glass** with fainter light that travels rather than sitting in place.
+- The hero now uses four low-alpha blue lights on long multi-point roaming paths; a CDP check confirmed they move. The detail masthead uses a static wash.
+- Because a white header looked wrong against the glowing hero, the light theme's header, mobile nav row and footer became deep cobalt `#1E3A8A` chrome. They use their own scoped tokens: white text, `#BAE6FD` active nav, a sky logo mark with a white wordmark, and a white language thumb.
+- `theme-color` for the light theme is `#1E3A8A`.
+
+The user chose **Aurora** chrome from three navbar studies (Aurora, Ribbon, Signal). It is now permanent for the light header and footer, with white logo, labels and indices for contrast across the moving light. The same round also changed the hero:
+- The iRidium separator is larger: 54px marks in a 68px band, with slightly stronger opacity.
+- The outer-left tick strip moves again. Phase 3 had frozen it; it now falls in counterflow to the rising separator, as originally designed.
+- The nucleus board grew to about 180px.
+- Light-theme orbits are heavier: 0.85 alpha, 1.5px stroke, full-strength labels and thicker badge rims. The left tick strip then became a heavier ruler: 26px wide, with 2px major ticks on the separator's 54px pitch and 1px minor quarter ticks. It falls at exactly the separator's speed (54px per 5.75s), so the two bands read as a pair.
+
+At the user's request the ruler was slimmed to 20px with a 1.5px major tick and lighter opacity. A width sweep from 320 to 1440px in both languages turned up two layout faults, both now fixed:
+- The hero copy touched the ruler at mobile widths. The copy now always clears it via `--ruler-left`, `--ruler-w` and `--ruler-gap`.
+- The header logo overflowed into the preference pill at 430–460px and into the inline nav at 780–860px and around 1040px. The logo no longer shrinks; the compact header applies up to 480px; the inline nav starts at 900px (the compact nav row covers 768–899px, `--site-header-h` 132px); and the logo subtitle is hidden between 900 and 1199px.
+
+Cover rule, set by the user: company or internship experience uses the company logo, and personal work uses the EDA 3D render. All eight covers became normalized transparent cards (1600×1200, subject about 42% of the area) on a CSS image-well mat:
+- Company logos: Cirro, Turing and Tianjin, with reversed dark/light colourways where needed.
+- EDA renders: Claude Chime, FOC and DIY.
+- Closest equivalents for the two Arduino projects, which have no render: the course-kit photo and the Tinkercad wiring view.
+
+The same card now drives /work, the rail, the homepage index and the project page `FIG. 01`, replacing `lead`/`leadFit`/`coverFit`. Original images stay in the uploads for evidence and media.
+
+Hero rebalance at the user's request:
+- The iRidium separator shrank to 38px marks in a 48px band, below the 44px header mark. The left ruler moved to the same 38px pitch and speed.
+- The copy column widened to 38% (ZH) / 44% (EN).
+- The title grew to a maximum of 5.8rem (ZH) / 6rem (EN), and Chinese now breaks only at its enumeration commas, which also fixes the old 电/源 split.
+- The atom stage scales to 0.86, with proportionally smaller scales at narrower widths.
+
+Safari title fix: the user reported the Chinese hero title "flying out" in Safari. There, `word-break: keep-all` kept 嵌入式、控制、电源与电驱 on one line, running across the separator and into the atom. Chrome sweeps had missed it.
+- The ZH title now sets explicit lines, 嵌入式、控制、 / 电源与电驱, as two lines at the user's request.
+- The ZH copy column widened to 46%. `.signal-hero-copy` became a size container, and the ZH title size is capped at `13.5cqi`.
+- A 320–2560px sweep found at least a 21px gap before the separator or column edge at every width.
+
+The same sweep exposed header clipping that `body { overflow-x: hidden }` had been hiding:
+- The preference pill at 320–360px: the logo and pill now slim down at ≤380px.
+- English at 490–540px: the compact header now applies up to 559px.
+- English at 1024–1040px: the work CTA is hidden at 1024–1079px.
+- English at 1200–1240px: the logo subtitle is now hidden up to 1299px.
+
+A header sweep from 320 to 1600px in both languages reports no overflow.
+
+The owner found the cobalt `#1D4ED8` homepage section titles too much like 天青 in Bench Paper and asked for a sky or glacier blue that stays legible. Section titles now use the new light-only `--c-heading` token: `#0277BD`, hue 202°, 4.8:1 on white and 4.5:1 on the band. Cobalt stays the accent for text, links and marks. The owner then asked for the small accent text on every page to move off the cobalt as well. In light, `--c-ember-text` and `--c-ember-ink` are now sky `#0272B6`, which passes AA at small sizes on white, band and well, and `--c-ember-hover` is `#075985`. Cobalt `#2563EB` remains for fills, strokes and the focus ring. A computed-colour scan of 8 routes in both languages finds no cobalt text left.
+
+The owner found all small text too small, so it went up one step:
+- Every CSS `font-size` below 1rem (122 declarations across the global and module stylesheets) gained 1px (0.0625rem).
+- The two small media clamps rose by the same amount.
+- Tailwind `text-xs`/`text-sm` now resolve to 13px/15px.
+- The text floor is now 13px, with the decorative orbit labels at 12px.
+
+Sweeps after the change:
+- The header sweep (320–1600px, both languages) is clean.
+- The overflow sweep (8 routes × 9 widths × 2 languages) found only the /media sequence column. Its 80px track had been almost entirely padding, a pre-existing fault, so its inline padding is now narrower.
+
+The owner then picked final colours with a colour-wheel preview:
+- Light accent text, `--c-ember-text`/`--c-ember-ink`: `#00334D`.
+- Homepage section titles, `--c-heading`: `#2465FF`. Link hover, `--c-ember-hover`, uses the same `#2465FF`.
+
+The owner asked for the dark-grey text to lean further toward black. The light ink ramp moved one step darker:
+- `fg`/`warm` (headings and primary ink): `#1E293B` → `#0F172A`.
+- `t1` (body): `#334155` → `#1E293B`.
+- `t2` (secondary): `#475569` → `#334155`.
+- The meta steps `t3`–`t6` are unchanged, which keeps the hierarchy.
+
+The owner found the non-heading text still small, so it went up a second step in both themes:
+- Every CSS `font-size` still below 1rem (115 declarations) gained another 1px. Sizes that had reached 1rem stayed there.
+- The media clamps rose by the same amount.
+- Tailwind `text-xs`/`text-sm` are now 14px/16px, and the text floor is 14px.
+
+Sweeps after the change:
+- The page overflow sweep (8 routes × 9 widths × 2 languages) is clean.
+- The header sweep flagged English at 560–570px, so the compact header now runs up to 599px. A rerun of the header sweep is clean.
+
+Notes ledger and reading alignment at the owner's request:
+- With the larger text, each /notes ledger row read as four cramped lines. Rows now have more padding, and the meta line (project · date) is smaller with a dot separator.
+- Each row now has a looser title line-height and a two-line summary at 1.65 line-height in place of the one-line ellipsis.
+- The `#` tags drop to 12px in `t5` behind a clear gap. The owner allowed them to sit smaller.
+- Project and note body text (`.bench-lede`, `.prose-p`, `.prose-list li`) is now justified. English uses automatic hyphenation. The owner found the justified Chinese a little loose, so Chinese reading text now sets at `letter-spacing: -0.02em`.
+
+With the text justified, the owner noticed that paragraph edges did not match the figures, and that a note's lede was a different width from its body. The separate measures (`.bench-lede` at 64ch, prose at 58ch EN / 40rem ZH) are gone, so the lede, paragraphs, headings, figures and tables now share the reading column. Measurements on project and note pages, at 390/820/1440px in both languages, show one shared edge. The only exception is the deliberately full-bleed mobile project cover.
+
+Note plate fixes:
+- Note detail pages showed the project's number in the plate, so both Claude Chime notes read `01`. The plate now numbers each note within its project, in the same order as the project page's development-note list. The spec ledger gained a `Note 01 / 02` row, and an sr-only label reads "Note 01 of 02".
+- The plate digits sat low and "01" sat left of centre. The plate is now a fixed-height grid with `text-box: trim-both cap alphabetic`, proportional numerals and a 0.07em optical lift.
+- Pixel measurement of the digit ink against the plate edges is within 1px horizontally and vertically on desktop, and exact on mobile.

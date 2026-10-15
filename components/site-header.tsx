@@ -18,7 +18,7 @@ export function SiteHeader() {
           <SitePreferences />
           <Link
             href="/work"
-            className="site-header-cta hidden items-center gap-2 rounded-md border border-pine px-4 py-2 text-sm font-semibold text-pine transition hover:bg-ember hover:text-on-ember lg:flex"
+            className="site-header-cta signal-fill hidden items-center gap-2 border border-pine px-4 py-2 text-sm font-semibold text-pine lg:flex"
           >
             <BilingualText en="View Projects" zh="查看项目" />
             <ArrowRight size={16} />

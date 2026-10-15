@@ -175,16 +175,12 @@ for (const project of projects) {
 
   validatePublicHref(project.filePath, "cover", project.data.cover);
 
-  if (project.data.lead !== undefined) {
-    validatePublicHref(project.filePath, "lead", project.data.lead);
+  if (project.data.coverDark !== undefined) {
+    validatePublicHref(project.filePath, "coverDark", project.data.coverDark);
   }
 
-  for (const fitField of ["leadFit", "coverFit"]) {
-    const fit = project.data[fitField];
-
-    if (fit !== undefined && fit !== "cover" && fit !== "contain") {
-      addError(project.filePath, `${fitField} must be "cover" or "contain"`);
-    }
+  if (project.data.coverKind !== "company" && project.data.coverKind !== "render") {
+    addError(project.filePath, 'coverKind must be "company" (company logo) or "render" (EDA 3D render)');
   }
 
   if (project.data.assetPaths !== undefined) {

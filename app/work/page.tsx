@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
 import {
   WorkProjectRail,
@@ -12,7 +12,8 @@ import {
   formatDateRange,
   formatDateRangeZh,
   formatStatusZh,
-  getProjectChapterMedia,
+  getProjectCover,
+  getProjectPhase,
   getProjects,
   type Project
 } from "@/lib/content";
@@ -66,7 +67,7 @@ function WorkProjectChapter({
   const focus = project.tags.slice(0, 3);
   const evidenceEn = project.assetPaths?.length ? "Case study + public files" : "Case study";
   const evidenceZh = project.assetPaths?.length ? "项目记录 + 公开文件" : "项目记录";
-  const media = getProjectChapterMedia(project);
+  const media = getProjectCover(project);
   const chapterNumber = String(index + 1).padStart(2, "0");
   const total = String(projectCount).padStart(2, "0");
   const titleId = `work-project-${project.slug}-title`;
@@ -123,14 +124,15 @@ function WorkProjectChapter({
         </div>
         <div className="signal-work-media" aria-hidden="true">
           <ProjectFigureTransition slug={project.slug}>
-            <Image
-              src={media.src}
-              alt=""
-              fill
-              preload={index === 0}
-              sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 148px), (max-width: 1199px) 54vw, 56vw"
-              className={`signal-work-image signal-work-image-${media.fit}`}
-            />
+            <span className="project-cover-frame">
+              <ProjectCover
+                media={media}
+                alt=""
+                preload={index === 0}
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 148px), (max-width: 1199px) 54vw, 56vw"
+                className="signal-work-image"
+              />
+            </span>
           </ProjectFigureTransition>
           <span className="signal-work-media-index">{chapterNumber} / APERTURE</span>
         </div>
@@ -151,9 +153,8 @@ export default function WorkPage() {
     slug: project.slug,
     title: project.title,
     titleZh: project.titleZh,
-    status: project.status,
-    statusZh: formatStatusZh(project.status),
-    cover: getProjectChapterMedia(project).src
+    ...(({ phase, en, zh }) => ({ phase, phaseEn: en, phaseZh: zh }))(getProjectPhase(project.status)),
+    cover: getProjectCover(project)
   }));
 
   return (

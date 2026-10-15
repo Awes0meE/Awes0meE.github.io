@@ -107,7 +107,7 @@ export default function AboutPage() {
             </div>
 
             <div className={styles.heroActions}>
-              <Link href="/work" className={styles.primaryAction}>
+              <Link href="/work" className={`${styles.primaryAction} signal-fill`}>
                 <BilingualText en="Open the engineering record" zh="打开工程记录" />
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>

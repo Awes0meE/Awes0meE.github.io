@@ -16,7 +16,7 @@
   min-height: 712px;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 48% 50%, rgb(var(--c-ember) / 0.075), transparent 30%),
+    radial-gradient(ellipse at 48% 50%, rgb(var(--c-halo) / 0.075), transparent 30%),
     linear-gradient(112deg, rgb(var(--c-canvas) / 0.18), rgb(var(--c-tint) / 0.46));
   color: var(--atom-ink);
   isolation: isolate;
@@ -66,7 +66,7 @@
   gap: 12px;
   color: var(--atom-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -76,6 +76,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
+  transform: scale(0.86);
   transform-origin: 49% 51%;
 }
 
@@ -161,7 +162,7 @@
   left: calc(100% + 17px);
   color: rgb(var(--orbit-rgb) / 0.92);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.8125rem; /* decorative, aria-hidden orbit label */
   font-weight: 600;
   letter-spacing: 0.075em;
   line-height: 1.25;
@@ -268,9 +269,10 @@
   filter: brightness(1.18) saturate(0.92) drop-shadow(0 0 0.7px rgb(var(--c-warm) / 0.95));
 }
 
-/* Bench Paper: marks sit on a light badge, so undo the dark-ground lifts. */
+/* Bench Paper: marks sit on a light badge, so undo the dark-ground lifts
+   and set single-colour marks in the dark-grey ink instead of black. */
 :global(html[data-theme="light"]) .electronBadge[data-icon-tone="light-ink"] img {
-  filter: brightness(0);
+  filter: brightness(0) invert(0.18);
 }
 
 :global(html[data-theme="light"]) .electronBadge[data-icon-tone="lift"] img,
@@ -283,8 +285,8 @@
   top: 51%;
   left: 50.5%;
   z-index: 8;
-  width: 300px;
-  height: 300px;
+  width: 340px;
+  height: 340px;
   transform: translate(-50%, -50%);
 }
 
@@ -292,7 +294,7 @@
   position: absolute;
   inset: 7%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(var(--c-ember) / 0.12), transparent 80%);
+  background: radial-gradient(closest-side, rgb(var(--c-halo) / 0.12), transparent 80%);
   content: "";
 }
 
@@ -305,27 +307,9 @@
   will-change: offset-distance;
 }
 
-/* Five-segment ring: the lit segment marks which prototype holds the nucleus. */
-.nucleusRing {
-  position: absolute;
-  inset: 0;
-  overflow: visible;
-  transform: rotate(-90deg);
-}
-
-.nucleusArc {
-  fill: none;
-  stroke: rgb(var(--c-fg) / 0.2);
-  stroke-dasharray: 18 82;
-  stroke-dashoffset: var(--arc-offset);
-  stroke-width: 1.4;
-  animation: nucleus-arc var(--nucleus-cycle) linear infinite;
-  animation-delay: var(--slot-delay);
-}
-
 .nucleusSlide {
   position: absolute;
-  inset: 23%;
+  inset: 17%;
   display: grid;
   place-items: center;
   opacity: 0;
@@ -345,7 +329,6 @@
 .atomVisual[data-paused="true"] .orbitLine ellipse,
 .atomVisual[data-paused="true"] .electron,
 .atomVisual[data-paused="true"] .cometRunner,
-.atomVisual[data-paused="true"] .nucleusArc,
 .atomVisual[data-paused="true"] .nucleusSlide {
   animation-play-state: paused;
 }
@@ -374,16 +357,11 @@
   100% { opacity: 0; transform: translateY(-8px) scale(1.01); }
 }
 
-@keyframes nucleus-arc {
-  0%, 19.5% { stroke: rgb(var(--c-ember)); stroke-width: 2.4; }
-  20%, 100% { stroke: rgb(var(--c-fg) / 0.2); stroke-width: 1.4; }
-}
-
 @media (max-width: 1120px) {
   .atomVisual { min-height: 650px; }
 
   .atomStage {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
 
   .orbitLabel {
@@ -405,7 +383,7 @@
   }
 
   .atomStage {
-    transform: scale(0.82);
+    transform: scale(0.76);
     transform-origin: 50% 51%;
   }
 
@@ -440,7 +418,7 @@
   }
 
   .atomStage {
-    transform: scale(0.66);
+    transform: scale(0.62);
   }
 
   .orbit {
@@ -468,18 +446,12 @@
   .orbitAssembly,
   .orbitLine ellipse,
   .electron,
-  .nucleusArc,
   .nucleusSlide {
     animation: none;
   }
 
   .nucleusSlide:first-of-type {
     opacity: 1;
-  }
-
-  .nucleusArc:first-child {
-    stroke: rgb(var(--c-ember));
-    stroke-width: 2.4;
   }
 
   .electron {
@@ -493,4 +465,18 @@
   .cometRunner {
     display: none;
   }
+}
+
+/* Bench Paper: orbits need more ink on a light field. */
+:global(html[data-theme="light"]) .orbitLine ellipse {
+  stroke: rgb(var(--orbit-rgb) / 0.85);
+  stroke-width: 1.5;
+}
+
+:global(html[data-theme="light"]) .orbitLabel {
+  color: rgb(var(--orbit-rgb));
+}
+
+:global(html[data-theme="light"]) .electronBadge {
+  border-width: 1.5px;
 }

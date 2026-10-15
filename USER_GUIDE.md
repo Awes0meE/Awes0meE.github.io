@@ -126,7 +126,7 @@ Every desktop header uses the same subdued `01`–`04` prefixes, control size, t
 
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
-The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. The nucleus shows the five prototype cutouts from `public/uploads/hero/` one at a time, switching every 5 seconds, with a five-segment ring marking the current board. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
+The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. The nucleus shows the five prototype cutouts from `public/uploads/hero/` one at a time, switching every 5 seconds. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
 
 The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
 
