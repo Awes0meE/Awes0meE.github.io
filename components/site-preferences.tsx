@@ -8,7 +8,7 @@ type Theme = "light" | "dark";
 
 const themeColors: Record<Theme, string> = {
   dark: "#080808",
-  light: "#eeede9"
+  light: "#1e3a8a"
 };
 
 function readDocumentLanguage(): Language {
@@ -38,11 +38,31 @@ function setDocumentTheme(theme: Theme) {
   });
 }
 
-function applyTheme(theme: Theme) {
+/**
+ * Switch themes by revealing the new one as a circle that grows from the
+ * pressed control. Falls back to a plain swap without View Transition types
+ * or under reduced motion.
+ */
+function applyTheme(theme: Theme, origin?: HTMLElement | null) {
+  const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  if (origin) {
+    const rect = origin.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    root.style.setProperty("--theme-reveal-x", `${x}px`);
+    root.style.setProperty("--theme-reveal-y", `${y}px`);
+    root.style.setProperty("--theme-reveal-r", `${radius}px`);
+  }
+
   if (!reduceMotion && typeof document.startViewTransition === "function") {
-    document.startViewTransition(() => setDocumentTheme(theme));
+    try {
+      document.startViewTransition({ update: () => setDocumentTheme(theme), types: ["theme"] });
+    } catch {
+      document.startViewTransition(() => setDocumentTheme(theme));
+    }
   } else {
     setDocumentTheme(theme);
   }
@@ -93,12 +113,12 @@ export function SitePreferences() {
     applyLanguage(nextLanguage);
   }
 
-  function handleThemeChange(nextTheme: Theme) {
+  function handleThemeChange(nextTheme: Theme, origin: HTMLElement) {
     if (nextTheme === theme) {
       return;
     }
     setTheme(nextTheme);
-    applyTheme(nextTheme);
+    applyTheme(nextTheme, origin);
   }
 
   return (
@@ -106,12 +126,13 @@ export function SitePreferences() {
       <span className="language-toggle-icon grid h-8 w-8 place-items-center rounded-full" aria-hidden="true">
         <Languages size={16} />
       </span>
-      <div className="site-preference-group" role="group" aria-label="Language / 语言">
+      <div className="site-preference-group site-preference-language" role="group" aria-label="Language / 语言">
+        <span className="site-preference-thumb" aria-hidden="true" />
         <button
           type="button"
           aria-pressed={language === "en"}
           onClick={() => handleLanguageChange("en")}
-          className="language-option-en rounded-full px-3 py-1.5 text-xs font-semibold transition"
+          className="language-option-en rounded-full text-xs font-semibold"
         >
           EN
         </button>
@@ -119,18 +140,19 @@ export function SitePreferences() {
           type="button"
           aria-pressed={language === "zh"}
           onClick={() => handleLanguageChange("zh")}
-          className="language-option-zh rounded-full px-3 py-1.5 text-xs font-semibold transition"
+          className="language-option-zh rounded-full text-xs font-semibold"
         >
           <span className="lang-en">ZH</span>
           <span className="lang-zh">简中</span>
         </button>
       </div>
       <span className="site-preference-divider" aria-hidden="true" />
-      <div className="site-preference-group" role="group" aria-label="Color theme / 显示主题">
+      <div className="site-preference-group site-preference-theme" role="group" aria-label="Color theme / 显示主题">
+        <span className="site-preference-thumb" aria-hidden="true" />
         <button
           type="button"
           aria-pressed={theme === "light"}
-          onClick={() => handleThemeChange("light")}
+          onClick={(event) => handleThemeChange("light", event.currentTarget)}
           className="theme-option theme-option-light rounded-full"
         >
           <Sun size={16} aria-hidden="true" />
@@ -142,7 +164,7 @@ export function SitePreferences() {
         <button
           type="button"
           aria-pressed={theme === "dark"}
-          onClick={() => handleThemeChange("dark")}
+          onClick={(event) => handleThemeChange("dark", event.currentTarget)}
           className="theme-option theme-option-dark rounded-full"
         >
           <Moon size={16} aria-hidden="true" />

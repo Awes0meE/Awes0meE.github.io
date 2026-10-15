@@ -26,6 +26,7 @@
   --c-rule: 59 57 54;
   --c-ember: 255 116 0;
   --c-ember-soft: 255 154 74;
+  --c-halo: 255 116 0;
   --c-ember-ink: 255 116 0;
   --c-ember-text: 255 154 74;
   --c-ember-hover: 255 138 43;
@@ -41,73 +42,88 @@
   --c-orbit-embedded: 185 145 75;
   --c-orbit-firmware: 95 167 143;
   --c-orbit-tools: 155 144 181;
-  --logo-filter: grayscale(1) brightness(0) invert(1);
+  --logo-mark-color: rgb(var(--c-warm));
+  --logo-word-color: rgb(var(--c-warm));
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --c-canvas: 238 237 233;
-  --c-deep: 232 231 226;
-  --c-panel: 244 243 239;
-  --c-raised: 250 249 246;
-  --c-fg: 18 18 18;
-  --c-warm: 20 19 17;
-  --c-t1: 34 32 29;
-  --c-t2: 52 49 45;
-  --c-t3: 74 70 65;
-  --c-t4: 92 87 81;
-  --c-t5: 106 101 94;
-  --c-t6: 146 141 134;
-  --c-rule: 204 201 194;
-  --c-ember-ink: 176 78 0;
-  --c-ember-text: 176 78 0;
-  --c-ember-hover: 148 62 0;
-  --c-focus: 176 78 0;
+  --c-canvas: 255 255 255;
+  --c-deep: 255 255 255;
+  --c-panel: 255 255 255;
+  --c-raised: 248 250 252;
+  --c-fg: 15 23 42;
+  --c-warm: 15 23 42;
+  --c-t1: 30 41 59;
+  --c-t2: 51 65 85;
+  --c-t3: 82 96 115;
+  --c-t4: 90 104 124;
+  --c-t5: 88 100 118;
+  --c-t6: 148 163 184;
+  --c-rule: 226 232 240;
+  --c-ember: 37 99 235;
+  --c-ember-soft: 96 165 250;
+  --c-ember-ink: 0 51 77;
+  --c-ember-text: 0 51 77;
+  --c-ember-hover: 36 101 255;
+  --c-heading: 36 101 255;
+  --c-focus: 29 78 216;
+  --c-on-ember: 255 255 255;
+  --logo-mark-color: rgb(37 99 235);
+  --logo-word-color: rgb(30 58 138);
   --c-glow: 255 255 255;
-  --c-glow-warm: 255 196 140;
-  --c-tint: 252 246 238;
-  --c-shadow: 46 38 30;
-  --shadow-k: 0.4;
-  --c-code: 226 224 218;
-  --c-well: 226 224 218;
+  --c-glow-warm: 255 255 255;
+  --c-tint: 255 255 255;
+  --c-halo: 255 255 255;
+  --c-shadow: 15 23 42;
+  --shadow-k: 0.28;
+  --c-code: 248 250 252;
+  --c-well: 238 244 253;
   --c-orbit-embedded: 150 110 38;
   --c-orbit-firmware: 46 125 99;
   --c-orbit-tools: 108 96 150;
-  --logo-filter: grayscale(1) brightness(0);
+  --c-band: 245 249 255;
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
-    --c-canvas: 238 237 233;
-    --c-deep: 232 231 226;
-    --c-panel: 244 243 239;
-    --c-raised: 250 249 246;
-    --c-fg: 18 18 18;
-    --c-warm: 20 19 17;
-    --c-t1: 34 32 29;
-    --c-t2: 52 49 45;
-    --c-t3: 74 70 65;
-    --c-t4: 92 87 81;
-    --c-t5: 106 101 94;
-    --c-t6: 146 141 134;
-    --c-rule: 204 201 194;
-    --c-ember-ink: 176 78 0;
-    --c-ember-text: 176 78 0;
-    --c-ember-hover: 148 62 0;
-    --c-focus: 176 78 0;
+    --c-canvas: 255 255 255;
+    --c-deep: 255 255 255;
+    --c-panel: 255 255 255;
+    --c-raised: 248 250 252;
+    --c-fg: 15 23 42;
+    --c-warm: 15 23 42;
+    --c-t1: 30 41 59;
+    --c-t2: 51 65 85;
+    --c-t3: 82 96 115;
+    --c-t4: 90 104 124;
+    --c-t5: 88 100 118;
+    --c-t6: 148 163 184;
+    --c-rule: 226 232 240;
+    --c-ember: 37 99 235;
+    --c-ember-soft: 96 165 250;
+    --c-ember-ink: 0 51 77;
+    --c-ember-text: 0 51 77;
+    --c-ember-hover: 36 101 255;
+    --c-heading: 36 101 255;
+    --c-focus: 29 78 216;
+    --c-on-ember: 255 255 255;
+    --logo-mark-color: rgb(37 99 235);
+    --logo-word-color: rgb(30 58 138);
     --c-glow: 255 255 255;
-    --c-glow-warm: 255 196 140;
-    --c-tint: 252 246 238;
-    --c-shadow: 46 38 30;
-    --shadow-k: 0.4;
-    --c-code: 226 224 218;
-    --c-well: 226 224 218;
+    --c-glow-warm: 255 255 255;
+    --c-tint: 255 255 255;
+    --c-halo: 255 255 255;
+    --c-shadow: 15 23 42;
+    --shadow-k: 0.28;
+    --c-code: 248 250 252;
+    --c-well: 238 244 253;
     --c-orbit-embedded: 150 110 38;
     --c-orbit-firmware: 46 125 99;
     --c-orbit-tools: 108 96 150;
-    --logo-filter: grayscale(1) brightness(0);
-  }
+    --c-band: 245 249 255;
+}
 }
 
 :root {
@@ -122,11 +138,35 @@
   --font-display-zh: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
 }
 
-/* Theme switch: crossfade the whole document when supported. */
+/* Default root cross-fade (route changes without a typed transition). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 260ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Theme switch: the new theme opens as a circle from the pressed control. */
+html:active-view-transition-type(theme)::view-transition-old(root),
+html:active-view-transition-type(theme)::view-transition-old(site-header) {
+  animation: none;
+}
+
+html:active-view-transition-type(theme)::view-transition-new(root),
+html:active-view-transition-type(theme)::view-transition-new(site-header) {
+  animation: theme-reveal 620ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+html:active-view-transition-type(theme)::view-transition-group(site-header) {
+  z-index: 100;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-reveal-x, 90%) var(--theme-reveal-y, 40px));
+  }
+  to {
+    clip-path: circle(var(--theme-reveal-r, 150vmax) at var(--theme-reveal-x, 90%) var(--theme-reveal-y, 40px));
+  }
 }
 
 * {
@@ -140,12 +180,6 @@ html {
 html[data-lang="en"] .lang-zh,
 html[data-lang="zh"] .lang-en {
   display: none !important;
-}
-
-html[data-lang="en"] .language-option-en,
-html[data-lang="zh"] .language-option-zh {
-  background: rgb(var(--c-ember));
-  color: rgb(var(--c-on-ember));
 }
 
 .language-option-en,
@@ -258,7 +292,7 @@ button {
   min-width: 1.12rem;
   color: var(--site-nav-index);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: 1;
@@ -339,6 +373,7 @@ html[data-lang="zh"] body .site-mobile-nav-link .site-nav-label {
 
 .site-logo {
   min-height: 44px;
+  flex: 0 0 auto;
 }
 
 .site-mobile-nav-link {
@@ -393,9 +428,28 @@ body .site-mobile-nav {
   background: rgb(var(--c-deep));
 }
 
-body .site-logo-mark,
-body .site-logo-wordmark {
-  filter: var(--logo-filter);
+.site-logo-mark {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  background: var(--logo-mark-color);
+  -webkit-mask: url("/brand/iridium-mark.png") center / contain no-repeat;
+  mask: url("/brand/iridium-mark.png") center / contain no-repeat;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-logo:hover .site-logo-mark {
+  transform: scale(1.05);
+}
+
+.site-logo-wordmark {
+  display: block;
+  height: 26px;
+  aspect-ratio: 1417 / 363;
+  background: var(--logo-word-color);
+  -webkit-mask: url("/brand/iridium-wordmark-script.png") left center / contain no-repeat;
+  mask: url("/brand/iridium-wordmark-script.png") left center / contain no-repeat;
 }
 
 body .site-logo-subtitle {
@@ -443,7 +497,6 @@ body .language-option-zh {
 }
 
 .theme-option[aria-pressed="true"] {
-  background: rgb(var(--c-fg) / 0.1);
   color: rgb(var(--c-ember-text));
 }
 
@@ -485,18 +538,12 @@ body .site-mobile-nav-link:focus-visible::after {
 
 html[data-lang="en"] body .language-option-en,
 html[data-lang="zh"] body .language-option-zh {
-  background: rgb(var(--c-ember));
   color: rgb(var(--c-on-ember));
 }
 
 body .site-header-cta {
   border-color: rgb(var(--c-ember));
   color: rgb(var(--c-ember-hover));
-}
-
-body .site-header-cta:hover {
-  background: rgb(var(--c-ember));
-  color: rgb(var(--c-on-ember));
 }
 
 body .site-footer {
@@ -534,12 +581,13 @@ body:has(.signal-home) .site-footer-visual-note {
   max-width: 82ch;
   color: rgb(var(--c-t5));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   letter-spacing: 0.035em;
   line-height: 1.55;
 }
 
-.signal-hero[data-motion="paused"] .iridium-divider-marks {
+.signal-hero[data-motion="paused"] .iridium-divider-marks,
+.signal-hero[data-motion="paused"] .signal-hero-copy::before {
   animation-play-state: paused;
 }
 
@@ -558,16 +606,16 @@ body:has(.signal-home) .site-footer-visual-note {
   pointer-events: none;
   background:
     radial-gradient(circle at 7% 48%, rgb(var(--c-glow-warm) / 0.14), transparent 24%),
-    radial-gradient(circle at 15% 48%, rgb(var(--c-ember) / 0.1), transparent 44%);
+    radial-gradient(circle at 15% 48%, rgb(var(--c-halo) / 0.1), transparent 44%);
 }
 
 .signal-hero-grid {
-  --copy-share: 30.8%;
+  --copy-share: 46%;
   position: relative;
   display: grid;
   width: 100%;
   min-height: 700px;
-  grid-template-columns: minmax(390px, var(--copy-share)) minmax(0, 1fr);
+  grid-template-columns: minmax(480px, var(--copy-share)) minmax(0, 1fr);
   margin: 0 auto;
 }
 
@@ -582,6 +630,11 @@ body:has(.signal-home) .site-footer-visual-note {
 @keyframes iridium-mark-rise {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, calc(0px - var(--mark-pitch)), 0); }
+}
+
+@keyframes copy-ticks-fall {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 38px, 0 38px; }
 }
 
 @keyframes iridium-mark-cross {
@@ -608,7 +661,7 @@ body:has(.signal-home) .site-footer-visual-note {
   left: -8%;
   width: 64%;
   height: 94%;
-  background: radial-gradient(ellipse at 36% 60%, rgb(var(--c-glow) / calc(0.075 * var(--light-strength))), rgb(var(--c-ember) / calc(0.035 * var(--light-strength))) 36%, transparent 72%);
+  background: radial-gradient(ellipse at 36% 60%, rgb(var(--c-glow) / calc(0.075 * var(--light-strength))), rgb(var(--c-halo) / calc(0.035 * var(--light-strength))) 36%, transparent 72%);
 }
 
 .atmosphereConveyor .fluidB {
@@ -616,7 +669,7 @@ body:has(.signal-home) .site-footer-visual-note {
   left: 29%;
   width: 58%;
   height: 76%;
-  background: radial-gradient(ellipse at 52% 47%, rgb(var(--c-ember-soft) / calc(0.078 * var(--light-strength))), transparent 69%);
+  background: radial-gradient(ellipse at 52% 47%, rgb(var(--c-halo) / calc(0.078 * var(--light-strength))), transparent 69%);
 }
 
 .atmosphereConveyor .fluidC {
@@ -624,7 +677,7 @@ body:has(.signal-home) .site-footer-visual-note {
   bottom: -31%;
   width: 72%;
   height: 82%;
-  background: radial-gradient(ellipse at 44% 45%, rgb(var(--c-ember) / calc(0.06 * var(--light-strength))), rgb(var(--c-glow) / calc(0.025 * var(--light-strength))) 40%, transparent 73%);
+  background: radial-gradient(ellipse at 44% 45%, rgb(var(--c-halo) / calc(0.06 * var(--light-strength))), rgb(var(--c-glow) / calc(0.025 * var(--light-strength))) 40%, transparent 73%);
 }
 
 .atmosphereConveyor .fluidD {
@@ -633,11 +686,11 @@ body:has(.signal-home) .site-footer-visual-note {
   right: -3%;
   width: 49%;
   height: 76%;
-  background: radial-gradient(ellipse at 44% 58%, rgb(var(--c-glow) / calc(0.052 * var(--light-strength))), rgb(var(--c-ember) / calc(0.038 * var(--light-strength))) 38%, transparent 72%);
+  background: radial-gradient(ellipse at 44% 58%, rgb(var(--c-glow) / calc(0.052 * var(--light-strength))), rgb(var(--c-halo) / calc(0.038 * var(--light-strength))) 38%, transparent 72%);
 }
 
 .iridium-divider {
-  --mark-pitch: 40px;
+  --mark-pitch: 38px;
   position: absolute;
   z-index: 2;
   display: block;
@@ -649,7 +702,7 @@ body:has(.signal-home) .site-footer-visual-note {
   top: 3%;
   bottom: 3%;
   left: var(--copy-share);
-  width: 52px;
+  width: 48px;
   transform: translateX(-50%);
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
@@ -663,8 +716,8 @@ body:has(.signal-home) .site-footer-visual-note {
   position: absolute;
   display: block;
   background: rgb(var(--c-ember));
-  opacity: 0.38;
-  filter: drop-shadow(0 0 3px rgb(var(--c-ember) / 0.22));
+  opacity: 0.46;
+  filter: drop-shadow(0 0 3px rgb(var(--c-halo) / 0.22));
   will-change: transform;
   -webkit-mask-image: url("/brand/iridium-mark.png");
   mask-image: url("/brand/iridium-mark.png");
@@ -677,7 +730,7 @@ body:has(.signal-home) .site-footer-visual-note {
   left: 0;
   width: 100%;
   height: calc(100% + var(--mark-pitch));
-  animation: iridium-mark-rise 4.26s linear infinite;
+  animation: iridium-mark-rise 4.05s linear infinite;
   -webkit-mask-position: center top;
   mask-position: center top;
   -webkit-mask-repeat: repeat-y;
@@ -687,12 +740,13 @@ body:has(.signal-home) .site-footer-visual-note {
 }
 
 html[data-lang="en"] .signal-hero-grid {
-  --copy-share: 38%;
-  grid-template-columns: minmax(520px, var(--copy-share)) minmax(0, 1fr);
+  --copy-share: 44%;
+  grid-template-columns: minmax(540px, var(--copy-share)) minmax(0, 1fr);
 }
 
 .signal-hero-copy {
   position: relative;
+  container-type: inline-size;
   z-index: 3;
   display: flex;
   min-width: 0;
@@ -701,15 +755,27 @@ html[data-lang="en"] .signal-hero-grid {
   padding: 3.3rem clamp(2.2rem, 3.1vw, 3.7rem) 3.4rem clamp(2.8rem, 4vw, 4.8rem);
 }
 
+/* Outer-edge ruler: the counterpart of the central mark band. It shares the
+   band's 54px pitch (a long major tick per mark, three minor ticks between)
+   and falls at the same speed as the band rises, so the two edges of the copy
+   move as one counter-rotating pair. */
 .signal-hero-copy::before {
+  --tick-pitch: 38px;
   position: absolute;
   top: 1.6rem;
   bottom: 1.6rem;
-  left: 0.5rem;
-  width: 14px;
+  left: var(--ruler-left);
+  width: var(--ruler-w);
   content: "";
-  opacity: 0.62;
-  background: repeating-linear-gradient(to bottom, rgb(var(--c-ember)) 0 1px, transparent 1px 13px);
+  opacity: 0.6;
+  background:
+    repeating-linear-gradient(to bottom, rgb(var(--c-ember)) 0 1.5px, transparent 1.5px var(--tick-pitch)) 0 0 / 100% var(--tick-pitch),
+    repeating-linear-gradient(to bottom, rgb(var(--c-ember)) 0 1px, transparent 1px calc(var(--tick-pitch) / 4)) 0 0 / 55% calc(var(--tick-pitch) / 4) no-repeat;
+  background-repeat: repeat-y, repeat-y;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  animation: copy-ticks-fall 4.05s linear infinite;
+  will-change: background-position;
 }
 
 .signal-hero-title {
@@ -717,7 +783,7 @@ html[data-lang="en"] .signal-hero-grid {
   margin: 0;
   color: var(--signal-warm-white);
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-size: clamp(3.4rem, 5.1vw, 5.75rem);
+  font-size: clamp(3.6rem, 5.6vw, 6.4rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 0.88;
@@ -726,28 +792,34 @@ html[data-lang="en"] .signal-hero-grid {
 
 html[data-lang="en"] .signal-hero-title {
   max-width: none;
-  font-size: clamp(3.3rem, 4.45vw, 5.05rem);
+  font-size: clamp(3.6rem, 5.2vw, 6rem);
 }
 
 html[data-lang="zh"] .signal-hero-title {
-  max-width: 7.5ch;
+  max-width: none;
   font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
-  font-size: clamp(3rem, 4.5vw, 5rem);
+  /* The seven-glyph first line must always fit the copy column. */
+  font-size: min(clamp(3.2rem, 5vw, 5.8rem), 13.5cqi);
   font-weight: 700;
   line-height: 1.02;
+}
+
+.signal-hero-title-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .signal-hero-identity {
   max-width: 42rem;
   margin: 2rem 0 0;
   color: var(--signal-ember-text);
-  font-size: 0.92rem;
+  font-size: 1.045rem;
   line-height: 1.65;
 }
 
 html[data-lang="en"] .signal-hero-identity {
   margin-top: 1.45rem;
-  font-size: 0.88rem;
+  font-size: 1.005rem;
   line-height: 1.58;
 }
 
@@ -771,11 +843,10 @@ html[data-lang="en"] .signal-hero-actions {
   justify-content: center;
   gap: 0.7rem;
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-size: 0.88rem;
+  font-size: 1.005rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: color 240ms ease-out, background-color 240ms ease-out, border-color 240ms ease-out;
 }
 
 .signal-primary-action {
@@ -784,9 +855,9 @@ html[data-lang="en"] .signal-hero-actions {
   color: var(--signal-ember-text);
 }
 
-.signal-primary-action:hover {
-  background: var(--signal-orange);
-  color: var(--signal-canvas);
+.signal-primary-action:hover,
+.signal-primary-action:focus-visible {
+  color: rgb(var(--c-on-ember));
 }
 
 .signal-secondary-action {
@@ -845,7 +916,7 @@ html[data-lang="zh"] .signal-stack h2 {
   justify-content: center;
   gap: 0.55rem;
   color: var(--signal-ember-text);
-  font-size: 0.78rem;
+  font-size: 0.905rem;
   font-weight: 650;
   text-underline-offset: 6px;
 }
@@ -861,7 +932,7 @@ html[data-lang="zh"] .signal-stack h2 {
 .signal-project-table-head,
 .signal-project-row-link {
   display: grid;
-  grid-template-columns: 58px minmax(250px, 1.25fr) minmax(170px, 0.74fr) minmax(180px, 0.78fr) minmax(132px, 0.52fr) 40px;
+  grid-template-columns: 64px minmax(250px, 1.25fr) minmax(170px, 0.74fr) minmax(180px, 0.78fr) minmax(132px, 0.52fr) 40px;
 }
 
 .signal-project-table-head {
@@ -869,9 +940,13 @@ html[data-lang="zh"] .signal-stack h2 {
   align-items: center;
   color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.signal-project-table-head > span {
+  white-space: nowrap;
 }
 
 .signal-project-table-head > span,
@@ -894,7 +969,7 @@ html[data-lang="zh"] .signal-stack h2 {
 
 .signal-project-row-link:hover,
 .signal-project-row-link:focus-visible {
-  background: linear-gradient(90deg, rgb(var(--c-ember) / 0.105), rgb(var(--c-ember) / 0.02) 70%, transparent);
+  background: linear-gradient(90deg, rgb(var(--c-halo) / 0.105), rgb(var(--c-halo) / 0.02) 70%, transparent);
 }
 
 .signal-project-number,
@@ -903,7 +978,7 @@ html[data-lang="zh"] .signal-stack h2 {
   align-items: center;
   color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
 }
 
@@ -941,7 +1016,7 @@ html[data-lang="zh"] .signal-stack h2 {
   display: block;
   overflow: hidden;
   color: var(--signal-warm-white);
-  font-size: 0.9rem;
+  font-size: 1.025rem;
   font-weight: 650;
   line-height: 1.35;
   text-overflow: ellipsis;
@@ -952,7 +1027,7 @@ html[data-lang="zh"] .signal-stack h2 {
   margin-top: 0.45rem;
   color: var(--signal-ember-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.62rem;
+  font-size: 0.875rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -966,14 +1041,14 @@ html[data-lang="zh"] .signal-stack h2 {
   flex-wrap: wrap;
   gap: 0.4rem 0.7rem;
   color: rgb(var(--c-t3));
-  font-size: 0.74rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
 .signal-project-focus span {
   color: rgb(var(--c-t2));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.63rem;
+  font-size: 0.875rem;
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
@@ -1042,7 +1117,7 @@ html[data-lang="zh"] .signal-stack h2 {
 .signal-credential h3 {
   margin: 0;
   color: var(--signal-warm-white);
-  font-size: 0.93rem;
+  font-size: 1.055rem;
   font-weight: 650;
   line-height: 1.35;
 }
@@ -1050,7 +1125,7 @@ html[data-lang="zh"] .signal-stack h2 {
 .signal-credential p {
   margin: 0.55rem 0 0;
   color: var(--signal-muted);
-  font-size: 0.76rem;
+  font-size: 0.885rem;
   line-height: 1.55;
 }
 
@@ -1093,14 +1168,14 @@ html[data-lang="zh"] .signal-stack h2 {
 .signal-note-row time {
   color: rgb(var(--c-t5));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
 }
 
 .signal-note-row strong {
   display: block;
   color: var(--signal-warm-white);
-  font-size: 0.83rem;
+  font-size: 0.955rem;
   font-weight: 600;
   line-height: 1.45;
 }
@@ -1109,7 +1184,7 @@ html[data-lang="zh"] .signal-stack h2 {
   display: block;
   margin-top: 0.38rem;
   color: rgb(var(--c-t4));
-  font-size: 0.66rem;
+  font-size: 0.875rem;
 }
 
 .signal-note-row > svg {
@@ -1158,7 +1233,7 @@ html[data-lang="zh"] .signal-stack h2 {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
   background:
-    radial-gradient(circle at 86% 54%, rgb(var(--c-ember) / 0.12), transparent 28%),
+    radial-gradient(circle at 86% 54%, rgb(var(--c-halo) / 0.12), transparent 28%),
     rgb(var(--c-deep));
 }
 
@@ -1180,7 +1255,7 @@ html[data-lang="zh"] .signal-stack h2 {
   gap: 0.9rem;
   margin: 0;
   color: var(--signal-muted);
-  font-size: 0.86rem;
+  font-size: 0.985rem;
   line-height: 1.7;
 }
 
@@ -1204,7 +1279,7 @@ html[data-lang="zh"] .signal-stack h2 {
   padding: 1rem clamp(1.25rem, 3vw, 3.2rem);
   border-bottom: 1px solid var(--signal-line);
   color: var(--signal-warm-white);
-  font-size: 0.83rem;
+  font-size: 0.955rem;
   overflow-wrap: anywhere;
   transition: background-color 240ms ease-out, color 240ms ease-out;
 }
@@ -1221,13 +1296,13 @@ html[data-lang="zh"] .signal-stack h2 {
 
 @media (max-width: 1180px) {
   .signal-hero-grid {
-    --copy-share: 35%;
-    grid-template-columns: minmax(350px, var(--copy-share)) minmax(0, 1fr);
+    --copy-share: 46%;
+    grid-template-columns: minmax(380px, var(--copy-share)) minmax(0, 1fr);
   }
 
   html[data-lang="en"] .signal-hero-grid {
-    --copy-share: 37%;
-    grid-template-columns: minmax(360px, var(--copy-share)) minmax(0, 1fr);
+    --copy-share: 45%;
+    grid-template-columns: minmax(380px, var(--copy-share)) minmax(0, 1fr);
   }
 
   .signal-hero-copy {
@@ -1241,12 +1316,12 @@ html[data-lang="zh"] .signal-stack h2 {
   }
 
   html[data-lang="en"] .signal-hero-title {
-    font-size: clamp(3.05rem, 4.65vw, 3.7rem);
+    font-size: clamp(3.3rem, 5.2vw, 4.4rem);
   }
 
   html[data-lang="en"] .signal-hero-identity {
     margin-top: 1.2rem;
-    font-size: 0.82rem;
+    font-size: 0.945rem;
     line-height: 1.5;
   }
 
@@ -1318,8 +1393,7 @@ html[data-lang="zh"] .signal-stack h2 {
   }
 
   html[data-lang="zh"] .signal-hero-title {
-    max-width: 9ch;
-    font-size: clamp(3.6rem, 9vw, 5.6rem);
+    font-size: min(clamp(3.6rem, 9vw, 5.6rem), 13.5cqi);
   }
 
   .signal-credentials-grid {
@@ -1367,7 +1441,7 @@ html[data-lang="zh"] .signal-stack h2 {
   }
 
   .signal-hero-copy::before {
-    left: 0.35rem;
+    --ruler-left: 0.35rem;
   }
 
   .signal-hero-title {
@@ -1376,8 +1450,8 @@ html[data-lang="zh"] .signal-stack h2 {
   }
 
   html[data-lang="zh"] .signal-hero-title {
-    max-width: 7.4ch;
-    font-size: clamp(2.8rem, 13.5vw, 4rem);
+    max-width: none;
+    font-size: min(clamp(2.8rem, 13.5vw, 4rem), 13.5cqi);
   }
 
   .signal-hero-actions {
@@ -1421,8 +1495,8 @@ html[data-lang="zh"] .signal-stack h2 {
   .signal-project-identity { grid-area: identity; grid-template-columns: 76px minmax(0, 1fr); }
   .signal-project-cover { width: 76px; height: 58px; }
   .signal-project-focus { grid-area: focus; padding-top: 0.9rem; }
-  .signal-project-evidence { grid-area: evidence; padding-top: 0.9rem; font-size: 0.68rem; }
-  .signal-project-timeline { grid-area: timeline; justify-content: flex-start; padding-top: 0.55rem; font-size: 0.66rem; }
+  .signal-project-evidence { grid-area: evidence; padding-top: 0.9rem; font-size: 0.875rem; }
+  .signal-project-timeline { grid-area: timeline; justify-content: flex-start; padding-top: 0.55rem; font-size: 0.875rem; }
   .signal-project-arrow { grid-area: arrow; }
 
   .signal-credentials-grid {
@@ -1460,7 +1534,7 @@ html[data-lang="zh"] .signal-stack h2 {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 599px) {
   body .site-header-inner {
     padding-inline: 0.85rem;
   }
@@ -1490,9 +1564,33 @@ html[data-lang="zh"] .signal-stack h2 {
     gap: 0;
   }
 
-  body .language-option-en,
-  body .language-option-zh {
-    padding-inline: 0.65rem;
+  body .site-preference-language {
+    --pill-w: 2.75rem;
+  }
+}
+
+/* The narrowest phones: slim the pill options so logo + pill stay in view. */
+@media (max-width: 380px) {
+  body .site-logo {
+    flex-basis: 108px;
+    min-width: 108px;
+  }
+
+  body .site-logo-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  body .site-logo-wordmark {
+    width: 66px;
+  }
+
+  body .site-preference-language {
+    --pill-w: 2.3rem;
+  }
+
+  body .site-preference-theme {
+    --pill-w: 36px;
   }
 }
 
@@ -1606,7 +1704,7 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
   margin: 0;
   color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   letter-spacing: 0.055em;
   line-height: 1.45;
   text-transform: uppercase;
@@ -1624,9 +1722,9 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
   display: grid;
   min-width: 0;
   align-items: center;
-  grid-template-columns: 36px 72px minmax(0, 1fr);
-  gap: 0.7rem;
-  padding: 0.55rem 0.75rem;
+  grid-template-columns: 30px 56px minmax(0, 1fr);
+  gap: 0.6rem;
+  padding: 0.55rem 0.7rem;
   border-bottom: 1px solid var(--signal-line-soft);
   color: rgb(var(--c-t4));
   transition: color 180ms ease-out, background-color 220ms ease-out;
@@ -1668,8 +1766,8 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
 .signal-work-rail-cover {
   position: relative;
   display: block;
-  width: 72px;
-  height: 48px;
+  width: 56px;
+  height: 40px;
   overflow: hidden;
   background: rgb(var(--c-well));
   filter: grayscale(0.85) brightness(0.62);
@@ -1677,15 +1775,38 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
 }
 
 .signal-work-rail-status {
+  display: inline-flex;
   min-width: 0;
-  overflow: hidden;
-  color: rgb(var(--c-t4));
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.52rem;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgb(var(--c-t3));
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
   letter-spacing: 0.04em;
-  line-height: 1.35;
-  text-overflow: ellipsis;
+  line-height: 1.3;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.signal-work-rail-status::before {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border: 1px solid currentColor;
+  content: "";
+}
+
+.signal-work-rail-status[data-phase="completed"]::before {
+  border-color: rgb(var(--c-ember));
+  background: rgb(var(--c-ember));
+}
+
+.signal-work-rail-status[data-phase="ongoing"]::before {
+  border-color: rgb(var(--c-ember));
+}
+
+.signal-work-rail-status[data-phase="archived"] {
+  color: rgb(var(--c-t5));
 }
 
 .signal-work-rail-link[data-active="true"] .signal-work-rail-cover,
@@ -1809,7 +1930,7 @@ html[data-lang="zh"] .signal-work-title {
 .signal-work-meta dt {
   color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.875rem;
   letter-spacing: 0.075em;
   text-transform: uppercase;
 }
@@ -1818,7 +1939,7 @@ html[data-lang="zh"] .signal-work-title {
   margin: 0.35rem 0 0;
   color: var(--signal-ember-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.035em;
   line-height: 1.45;
@@ -1829,7 +1950,7 @@ html[data-lang="zh"] .signal-work-title {
   max-width: 66ch;
   margin: 1.35rem 0 0;
   color: var(--signal-muted);
-  font-size: 0.82rem;
+  font-size: 0.945rem;
   line-height: 1.65;
 }
 
@@ -1845,7 +1966,7 @@ html[data-lang="zh"] .signal-work-title {
   border: 1px solid var(--signal-line);
   color: rgb(var(--c-t2));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.875rem;
   letter-spacing: 0.045em;
   line-height: 1;
   text-transform: uppercase;
@@ -1858,7 +1979,7 @@ html[data-lang="zh"] .signal-work-title {
   gap: 0.55rem;
   color: rgb(var(--c-t3));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.64rem;
+  font-size: 0.875rem;
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
@@ -1882,7 +2003,7 @@ html[data-lang="zh"] .signal-work-title {
 
 html[data-lang="zh"] .signal-work-case-action {
   font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
-  font-size: 0.92rem;
+  font-size: 1.045rem;
   font-weight: 700;
   letter-spacing: 0.025em;
 }
@@ -1898,7 +2019,7 @@ html[data-lang="zh"] .signal-work-case-action {
   overflow: hidden;
   border-left: 1px solid var(--signal-line);
   background:
-    linear-gradient(145deg, rgb(var(--c-ember) / 0.035), transparent 42%),
+    linear-gradient(145deg, rgb(var(--c-halo) / 0.035), transparent 42%),
     rgb(var(--c-well));
 }
 
@@ -1915,15 +2036,6 @@ html[data-lang="zh"] .signal-work-case-action {
   transition: filter 320ms ease-out, transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.signal-work-image-contain {
-  padding: clamp(2rem, 5vw, 5.5rem);
-  object-fit: contain;
-}
-
-.signal-work-image-cover {
-  object-fit: cover;
-}
-
 .signal-work-media-index {
   position: absolute;
   right: 1.2rem;
@@ -1931,7 +2043,7 @@ html[data-lang="zh"] .signal-work-case-action {
   z-index: 1;
   color: rgb(var(--c-warm) / 0.52);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.55rem;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
 }
@@ -2187,17 +2299,13 @@ html[data-lang="zh"] .signal-work-case-action {
   }
 
   .signal-work-summary {
-    font-size: 0.88rem;
+    font-size: 1.005rem;
     line-height: 1.7;
   }
 
   .signal-work-media {
     min-height: 0;
     aspect-ratio: 4 / 3;
-  }
-
-  .signal-work-image-contain {
-    padding: 1.65rem;
   }
 
   .signal-work-signal-band {
@@ -2266,7 +2374,7 @@ html[data-lang="zh"] .signal-work-case-action {
   --site-header-h: 79px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   :root {
     --site-header-h: 132px;
   }
@@ -2412,7 +2520,7 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   margin: 0 0 0.6rem;
   color: rgb(var(--c-t4));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2433,7 +2541,7 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   padding: 0.6rem 0;
   border-bottom: 1px solid rgb(var(--c-fg) / 0.14);
   color: rgb(var(--c-t2));
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.45;
   text-decoration: none;
   transition: color 160ms ease-out;
@@ -2443,7 +2551,7 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
 .bench-side-notes a > svg {
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -2458,17 +2566,25 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   margin: 0;
 }
 
+/* The plate centres its digits optically: a fixed-height box, with the
+   glyph box trimmed to cap height where supported. */
 .bench-plate {
+  display: inline-grid;
   flex: none;
-  margin-top: 0.08em;
-  padding: 0.12em 0.22em 0.02em;
+  place-items: center;
+  height: 1.12em;
+  min-width: 1.4em;
+  margin-top: 0.06em;
+  padding: 0 0.2em 0.07em;
   background: rgb(var(--c-ember));
   color: rgb(var(--c-on-ember));
   font-family: var(--font-display-en);
   font-size: clamp(2.3rem, 3.4vw, 3.3rem);
+  font-variant-numeric: proportional-nums;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   line-height: 1;
+  text-box: trim-both cap alphabetic;
 }
 
 .bench-title-text {
@@ -2501,7 +2617,7 @@ html[data-lang="zh"] .bench-page-note .bench-title-text {
 }
 
 .bench-lede {
-  max-width: 64ch;
+  max-width: none;
   margin: 1.5rem 0 0;
   color: rgb(var(--c-t1));
   font-size: 1.0625rem;
@@ -2530,7 +2646,7 @@ html[data-lang="zh"] .bench-lede {
 .bench-spec dt {
   padding-top: 0.12rem;
   color: rgb(var(--c-t4));
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2540,7 +2656,7 @@ html[data-lang="zh"] .bench-lede {
   min-width: 0;
   margin: 0;
   color: rgb(var(--c-t1));
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
   font-variant-numeric: tabular-nums;
 }
@@ -2559,7 +2675,7 @@ html[data-lang="zh"] .bench-lede {
 .bench-tags span {
   padding: 0.15rem 0.45rem;
   border: 1px solid rgb(var(--c-fg) / 0.18);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .bench-spec-links {
@@ -2603,15 +2719,6 @@ html[data-lang="zh"] .bench-lede {
   background: rgb(var(--c-well));
 }
 
-.bench-lead-image-cover {
-  object-fit: cover;
-}
-
-.bench-lead-image-contain {
-  padding: clamp(0.75rem, 2vw, 1.5rem);
-  object-fit: contain;
-}
-
 .bench-lead figcaption,
 .prose-figcaption {
   display: flex;
@@ -2620,14 +2727,14 @@ html[data-lang="zh"] .bench-lede {
   gap: 0.35rem 0.75rem;
   padding-top: 0.7rem;
   color: rgb(var(--c-t3));
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
 .bench-fig-label {
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
@@ -2642,22 +2749,9 @@ html[data-lang="zh"] .bench-lede {
 }
 
 /* Text keeps a reading measure; figures, code and tables use the full column. */
+/* Justified text, the lede and figures share one column edge: no separate
+   text measure, so every block lines up left and right. */
 .bench-prose > * {
-  max-width: 58ch;
-}
-
-html[data-lang="zh"] .bench-prose > * {
-  max-width: 40rem;
-}
-
-.bench-prose > .prose-figure,
-.bench-prose > .prose-figure-pair,
-.bench-prose > .prose-codeblock,
-.bench-prose > .prose-table-wrap,
-html[data-lang="zh"] .bench-prose > .prose-figure,
-html[data-lang="zh"] .bench-prose > .prose-figure-pair,
-html[data-lang="zh"] .bench-prose > .prose-codeblock,
-html[data-lang="zh"] .bench-prose > .prose-table-wrap {
   max-width: none;
 }
 
@@ -2669,7 +2763,7 @@ html[data-lang="zh"] .bench-prose > .prose-table-wrap {
   counter-increment: bench-fig;
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   content: "FIG. " counter(bench-fig, decimal-leading-zero);
@@ -2677,7 +2771,7 @@ html[data-lang="zh"] .bench-prose > .prose-table-wrap {
 
 /* The two transparent system diagrams carry white labels; keep them on a dark plate in either theme. */
 img[src*="-system-block"] {
-  background-color: rgb(16 16 14);
+  background-color: rgb(44 43 40);
 }
 
 /* Reading column */
@@ -2700,6 +2794,26 @@ html[data-lang="zh"] .bench-prose {
 .prose-p {
   margin: 1.1rem 0 0;
   text-wrap: pretty;
+}
+
+/* Project and note reading text sets justified, so both edges of the
+   column line up. Chinese spreads by character; English hyphenates so
+   justification does not open wide word gaps. */
+:is(.bench-lede, .prose-p, .prose-list li) {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+html[data-lang="en"] :is(.bench-lede, .prose-p, .prose-list li) {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  text-justify: inter-word;
+}
+
+/* Justification already spreads Chinese lines; tighten the base tracking so
+   the characters still read as close-set text. */
+html[data-lang="zh"] :is(.bench-lede, .prose-p, .prose-list li) {
+  letter-spacing: -0.02em;
 }
 
 .prose-h2 {
@@ -2725,7 +2839,7 @@ html[data-lang="zh"] .bench-prose {
   color: rgb(var(--c-ember-text));
   vertical-align: 0.42em;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   content: "§" counter(bench-entry, decimal-leading-zero);
@@ -2832,7 +2946,7 @@ html[data-lang="zh"] .prose-h2 {
   border-bottom: 1px solid rgb(var(--c-fg) / 0.12);
   color: rgb(var(--c-t4));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2844,7 +2958,7 @@ html[data-lang="zh"] .prose-h2 {
   padding: 1rem;
   color: rgb(var(--c-warm));
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.65;
   tab-size: 2;
 }
@@ -2858,7 +2972,7 @@ html[data-lang="zh"] .prose-h2 {
 .prose-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.55;
   font-variant-numeric: tabular-nums;
 }
@@ -2868,7 +2982,7 @@ html[data-lang="zh"] .prose-h2 {
   border-bottom: 1px solid rgb(var(--c-fg) / 0.2);
   color: rgb(var(--c-t4));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-align: left;
@@ -2911,7 +3025,7 @@ html[data-lang="zh"] .prose-h2 {
   border: 1px solid rgb(var(--c-ember) / 0.32);
   background: rgb(var(--c-ember) / 0.06);
   color: rgb(var(--c-t1));
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
@@ -2965,7 +3079,7 @@ html[data-lang="zh"] .bench-section-title {
   max-width: 62ch;
   margin: 0.6rem 0 0;
   color: rgb(var(--c-t3));
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -2974,7 +3088,7 @@ html[data-lang="zh"] .bench-section-title {
   border: 1px solid rgb(var(--c-fg) / 0.18);
   color: rgb(var(--c-t3));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
@@ -2986,7 +3100,7 @@ html[data-lang="zh"] .bench-section-title {
   gap: 0.4rem;
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3017,7 +3131,7 @@ html[data-lang="zh"] .bench-section-title {
   padding-top: 0.2rem;
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.925rem;
   font-weight: 600;
 }
 
@@ -3038,7 +3152,7 @@ html[data-lang="zh"] .bench-section-title {
   display: -webkit-box;
   overflow: hidden;
   color: rgb(var(--c-t3));
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.55;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -3107,7 +3221,7 @@ html[data-lang="zh"] .bench-section-title {
   background: rgb(var(--c-canvas) / 0.88);
   color: rgb(var(--c-warm));
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -3119,7 +3233,7 @@ html[data-lang="zh"] .bench-section-title {
 
 .bench-media-caption strong {
   color: rgb(var(--c-t1));
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 550;
   line-height: 1.45;
 }
@@ -3142,14 +3256,14 @@ html[data-lang="zh"] .bench-section-title {
   border: 1px solid rgb(var(--c-ember));
   color: rgb(var(--c-ember-text));
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.925rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.bench-action:hover {
-  background: rgb(var(--c-ember));
+.bench-action:hover,
+.bench-action:focus-visible {
   color: rgb(var(--c-on-ember));
 }
 
@@ -3289,4 +3403,702 @@ html[data-lang="zh"] .bench-section-title {
   .bench-media-image {
     transition: none !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Bench Paper drafting details (light theme only)                     */
+/* A faint drafting grid behind the hero and detail mastheads, orange  */
+/* dimension lines under section titles, and crop marks on figures.    */
+
+html[data-theme="light"] .bench-mast {
+  background-image:
+    radial-gradient(ellipse 55% 120% at 12% 30%, rgb(147 197 253 / 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 110% at 88% 70%, rgb(125 211 252 / 0.13), transparent 72%);
+}
+
+html[data-theme="light"] .bench-mast {
+  max-width: none;
+  margin: -3.5rem calc(clamp(1.5rem, 4.5vw, 4.5rem) * -1) 0;
+  padding: 3.5rem clamp(1.5rem, 4.5vw, 4.5rem) 2.25rem;
+  border-bottom: 1px solid rgb(var(--c-fg) / 0.12);
+}
+
+html[data-theme="light"] .signal-hero [class*="atomVisual"] {
+  background: transparent;
+}
+
+html[data-theme="light"] .signal-section-header {
+  position: relative;
+}
+
+html[data-theme="light"] .signal-section-header::after {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 4.75rem);
+  bottom: -1px;
+  left: clamp(1.25rem, 4vw, 4.75rem);
+  height: 9px;
+  border-right: 1px solid rgb(var(--c-ember));
+  border-left: 1px solid rgb(var(--c-ember));
+  background: linear-gradient(rgb(var(--c-ember)), rgb(var(--c-ember))) center / 100% 1px no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+html[data-theme="light"] :is(.bench-lead-frame, .prose-figure > a) {
+  position: relative;
+}
+
+html[data-theme="light"] :is(.bench-lead-frame, .prose-figure > a)::after {
+  position: absolute;
+  inset: 6px;
+  z-index: 1;
+  --crop: rgb(var(--c-ember));
+  background:
+    linear-gradient(var(--crop), var(--crop)) 0 0 / 14px 1.5px,
+    linear-gradient(var(--crop), var(--crop)) 0 0 / 1.5px 14px,
+    linear-gradient(var(--crop), var(--crop)) 100% 0 / 14px 1.5px,
+    linear-gradient(var(--crop), var(--crop)) 100% 0 / 1.5px 14px,
+    linear-gradient(var(--crop), var(--crop)) 0 100% / 14px 1.5px,
+    linear-gradient(var(--crop), var(--crop)) 0 100% / 1.5px 14px,
+    linear-gradient(var(--crop), var(--crop)) 100% 100% / 14px 1.5px,
+    linear-gradient(var(--crop), var(--crop)) 100% 100% / 1.5px 14px;
+  background-repeat: no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+html[data-theme="light"] .prose-h2 {
+  border-top-style: dashed;
+  border-top-color: rgb(var(--c-fg) / 0.3);
+}
+
+/* Selected and pressed states in Bench Paper: a 66CCFF fill with deep
+   slate-blue text (7:1), never white text on the light sky fill. */
+html[data-theme="light"] .site-preference-theme .site-preference-thumb {
+  background: rgb(var(--c-ember) / 0.22);
+}
+
+html[data-theme="light"] body .theme-option[aria-pressed="true"] {
+  color: rgb(var(--c-ember-ink));
+}
+
+/* Bench Paper shows evidence in full colour: the dark theme's dimmed,
+   desaturated rest state reads as a grey film on a white page. */
+html[data-theme="light"] :is(
+  .signal-project-cover,
+  .signal-media-item img,
+  .signal-work-rail-cover,
+  .signal-work-image
+) {
+  filter: none;
+}
+
+/* ================================================================== */
+/* Interaction motion                                                  */
+/* One quiet vocabulary for every control: a signal fill that wipes in */
+/* from the left on outlined actions, underlines that draw from the    */
+/* left on text links, arrows that lean 3px toward their destination,  */
+/* a 1px press, a sliding thumb in the preference pill, and a focus    */
+/* ring that settles inward. Exits are faster than entrances.          */
+
+:root {
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-press: 110ms;
+  --motion-quick: 180ms;
+  --motion-base: 260ms;
+  --motion-fill: 420ms;
+}
+
+/* Focus ring settles from 7px to 3px. */
+a,
+button,
+select,
+input,
+summary,
+[tabindex] {
+  outline-offset: 7px;
+  transition-property: outline-offset;
+  transition-duration: var(--motion-quick);
+  transition-timing-function: var(--ease-out-soft);
+}
+
+:focus-visible {
+  outline-offset: 3px;
+}
+
+/* Signal fill: outlined actions fill from the left. */
+body .signal-fill {
+  background-color: transparent;
+  background-image: linear-gradient(rgb(var(--c-ember)), rgb(var(--c-ember)));
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition:
+    background-size 240ms var(--ease-exit),
+    color var(--motion-quick) ease-out,
+    border-color var(--motion-quick) ease-out,
+    outline-offset var(--motion-quick) var(--ease-out-soft),
+    translate var(--motion-press) ease-out;
+}
+
+body .signal-fill:hover,
+body .signal-fill:focus-visible {
+  border-color: rgb(var(--c-ember));
+  background-size: 100% 100%;
+  color: rgb(var(--c-on-ember));
+  transition:
+    background-size var(--motion-fill) var(--ease-out-soft),
+    color var(--motion-quick) ease-out 60ms,
+    border-color var(--motion-quick) ease-out,
+    outline-offset var(--motion-quick) var(--ease-out-soft),
+    translate var(--motion-press) ease-out;
+}
+
+/* Arrows lean toward their destination. */
+:is(
+  .signal-fill,
+  .signal-secondary-action,
+  .signal-section-header > a,
+  .bench-section-link,
+  .bench-spec-links a,
+  .signal-note-row,
+  .signal-project-row-link
+) svg {
+  transition: transform var(--motion-base) var(--ease-out-soft);
+}
+
+:is(
+  .signal-fill,
+  .signal-secondary-action,
+  .signal-section-header > a,
+  .bench-section-link,
+  .signal-note-row
+):is(:hover, :focus-visible) svg {
+  transform: translateX(3px);
+}
+
+.bench-spec-links a:is(:hover, :focus-visible) svg[class*="arrow-down"] {
+  transform: translateY(2px);
+}
+
+/* Press: everything clickable that is not a large row settles 1px. */
+:is(
+  .signal-fill,
+  .signal-secondary-action,
+  .theme-option,
+  .language-option-en,
+  .language-option-zh,
+  .bench-action,
+  .site-logo
+):active {
+  translate: 0 1px;
+  transition-duration: 60ms;
+}
+
+/* Text links: underline draws from the left. */
+:is(.signal-section-header > a, .bench-section-link, .site-footer-links a) {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  text-decoration: none;
+  transition:
+    background-size 220ms var(--ease-exit),
+    color var(--motion-quick) ease-out,
+    outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+:is(.signal-section-header > a, .bench-section-link):is(:hover, :focus-visible) {
+  background-size: 100% 1px;
+  text-decoration: none;
+  transition:
+    background-size 360ms var(--ease-out-soft),
+    color var(--motion-quick) ease-out,
+    outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+.signal-secondary-action {
+  text-decoration-thickness: 1px;
+  transition:
+    color var(--motion-quick) ease-out,
+    text-decoration-color var(--motion-quick) ease-out,
+    text-underline-offset var(--motion-base) var(--ease-out-soft),
+    outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+.signal-secondary-action:is(:hover, :focus-visible) {
+  text-decoration-color: currentColor;
+  text-underline-offset: 4px;
+}
+
+:is(.prose-link, .bench-spec-links a) {
+  transition:
+    color var(--motion-quick) ease-out,
+    text-decoration-color var(--motion-quick) ease-out,
+    text-underline-offset var(--motion-base) var(--ease-out-soft),
+    outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+:is(.prose-link, .bench-spec-links a):is(:hover, :focus-visible) {
+  text-underline-offset: 0.14em;
+}
+
+/* Preference pill: one thumb slides between the two options. */
+.site-preference-group {
+  position: relative;
+  isolation: isolate;
+}
+
+.site-preference-language {
+  --pill-w: 3.25rem;
+}
+
+.site-preference-theme {
+  --pill-w: 44px;
+}
+
+.site-preference-group > button {
+  position: relative;
+  z-index: 1;
+  width: var(--pill-w);
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  transition:
+    color 200ms ease-out 40ms,
+    outline-offset var(--motion-quick) var(--ease-out-soft),
+    translate var(--motion-press) ease-out;
+}
+
+.site-preference-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 0;
+  width: var(--pill-w);
+  height: 44px;
+  border-radius: 999px;
+  background: rgb(var(--c-ember));
+  pointer-events: none;
+  transform: translate(0, -50%);
+  transition: transform 340ms var(--ease-out-soft);
+}
+
+html[data-lang="zh"] .site-preference-language .site-preference-thumb {
+  transform: translate(calc(var(--pill-w) + 0.25rem), -50%);
+}
+
+.site-preference-theme .site-preference-thumb {
+  background: rgb(var(--c-fg) / 0.1);
+  transform: translate(calc(var(--pill-w) + 0.25rem), -50%);
+}
+
+html[data-theme="light"] .site-preference-theme .site-preference-thumb {
+  transform: translate(0, -50%);
+}
+
+.theme-option svg {
+  transition: transform 420ms var(--ease-out-soft);
+}
+
+.theme-option-light:is(:hover, :focus-visible) svg {
+  transform: rotate(45deg);
+}
+
+.theme-option-dark:is(:hover, :focus-visible) svg {
+  transform: rotate(-18deg);
+}
+
+/* Logo: the mark lifts a touch; the wordmark follows a beat later. */
+.site-logo-wordmark {
+  transition: transform 360ms var(--ease-out-soft) 30ms;
+}
+
+.site-logo:is(:hover, :focus-visible) .site-logo-wordmark {
+  transform: translateX(2px);
+}
+
+/* Header CTA keeps its outline colour from the theme. */
+body .site-header-cta.signal-fill:is(:hover, :focus-visible) {
+  color: rgb(var(--c-on-ember));
+}
+
+/* Homepage rows: title and arrow travel together. */
+.signal-note-row > span:nth-child(2),
+.signal-project-identity {
+  transition: transform var(--motion-base) var(--ease-out-soft);
+}
+
+.signal-note-row:is(:hover, :focus-visible) > span:nth-child(2),
+.signal-project-row-link:is(:hover, :focus-visible) .signal-project-identity {
+  transform: translateX(4px);
+}
+
+/* Media tiles on the homepage: caption lifts as the image eases in. */
+.signal-media-item {
+  transition: outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+/* Project file browser: a new preview eases in. */
+.asset-preview-swap {
+  animation: preview-in 260ms var(--ease-out-soft) both;
+}
+
+@keyframes preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Skip link slides down instead of snapping. */
+.skip-link {
+  transition: transform var(--motion-base) var(--ease-out-soft), outline-offset var(--motion-quick) var(--ease-out-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body .signal-fill,
+  body .signal-fill:hover,
+  body .signal-fill:focus-visible {
+    transition: color var(--motion-quick) ease-out, background-size 0s, border-color var(--motion-quick) ease-out;
+  }
+
+  :is(.signal-section-header > a, .bench-section-link, .site-footer-links a),
+  :is(.signal-section-header > a, .bench-section-link):is(:hover, :focus-visible) {
+    transition: color var(--motion-quick) ease-out;
+  }
+
+  .site-preference-thumb,
+  .theme-option svg,
+  .site-logo-wordmark,
+  .signal-note-row > span:nth-child(2),
+  .signal-project-identity,
+  :is(.signal-fill, .signal-secondary-action, .signal-section-header > a, .bench-section-link, .bench-spec-links a, .signal-note-row, .signal-project-row-link) svg {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .site-preference-thumb {
+    transform: translate(0, -50%) !important;
+  }
+
+  html[data-lang="zh"] .site-preference-language .site-preference-thumb,
+  .site-preference-theme .site-preference-thumb {
+    transform: translate(calc(var(--pill-w) + 0.25rem), -50%) !important;
+  }
+
+  html[data-theme="light"] .site-preference-theme .site-preference-thumb {
+    transform: translate(0, -50%) !important;
+  }
+
+  .asset-preview-swap {
+    animation: none;
+  }
+
+  :is(.signal-fill, .signal-secondary-action, .theme-option, .language-option-en, .language-option-zh, .bench-action, .site-logo):active {
+    translate: none;
+  }
+}
+
+/* Bench Paper colour mass: faint cobalt bands alternate with white so the
+   page reads as a rhythm of sheets rather than one empty white field. */
+html[data-theme="light"] :is(.signal-hero, .atmosphereConveyor, .bench-mast, .signal-credentials-section, .signal-contact-section) {
+  background-color: rgb(var(--c-band));
+}
+
+/* Section headings in owner-picked bright blue #2465FF; accent text below
+   them is deep sea #00334D, so the titles carry the colour. */
+html[data-theme="light"] .signal-section-header h2 {
+  color: rgb(var(--c-heading));
+}
+
+/* ------------------------------------------------------------------ */
+/* Bench Paper daylight: the light-theme counterpart of the Ember glow. */
+/* Four broad, low-alpha blue lights roam slowly across the hero on    */
+/* long multi-point paths, so the field shifts like daylight through   */
+/* glass instead of sitting as fixed patches.                          */
+
+html[data-theme="light"] .signal-hero .atmosphereConveyor {
+  background: linear-gradient(118deg, rgb(255 255 255) 0%, rgb(247 250 255) 55%, rgb(240 246 255) 100%);
+}
+
+html[data-theme="light"] .signal-hero::before {
+  background: radial-gradient(circle at 12% 48%, rgb(255 255 255 / 0.8), transparent 46%);
+}
+
+html[data-theme="light"] .atmosphereConveyor .variantFluid {
+  will-change: transform;
+}
+
+html[data-theme="light"] .atmosphereConveyor .fluidA {
+  background: radial-gradient(ellipse at 50% 50%, rgb(96 165 250 / 0.2), rgb(147 197 253 / 0.08) 42%, transparent 70%);
+  animation: daylight-roam-a 70s ease-in-out infinite;
+}
+
+html[data-theme="light"] .atmosphereConveyor .fluidB {
+  background: radial-gradient(ellipse at 50% 50%, rgb(129 160 250 / 0.14), transparent 66%);
+  animation: daylight-roam-b 86s ease-in-out infinite;
+}
+
+html[data-theme="light"] .atmosphereConveyor .fluidC {
+  background: radial-gradient(ellipse at 50% 50%, rgb(56 189 248 / 0.16), rgb(186 230 253 / 0.07) 42%, transparent 72%);
+  animation: daylight-roam-c 78s ease-in-out infinite;
+}
+
+html[data-theme="light"] .atmosphereConveyor .fluidD {
+  background: radial-gradient(ellipse at 50% 50%, rgb(255 255 255 / 0.85), rgb(239 246 255 / 0.3) 40%, transparent 72%);
+  animation: daylight-roam-d 64s ease-in-out infinite;
+}
+
+html[data-theme="light"] .signal-hero[data-motion="paused"] .variantFluid {
+  animation-play-state: paused;
+}
+
+@keyframes daylight-roam-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(38%, 18%, 0) scale(1.12); }
+  50% { transform: translate3d(70%, -6%, 0) scale(0.94); }
+  75% { transform: translate3d(28%, -22%, 0) scale(1.06); }
+}
+
+@keyframes daylight-roam-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.04); }
+  30% { transform: translate3d(-42%, 28%, 0) scale(0.95); }
+  60% { transform: translate3d(-12%, 46%, 0) scale(1.1); }
+  80% { transform: translate3d(24%, 14%, 0) scale(1); }
+}
+
+@keyframes daylight-roam-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(-48%, -30%, 0) scale(1.08); }
+  66% { transform: translate3d(-80%, 6%, 0) scale(0.96); }
+}
+
+@keyframes daylight-roam-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(-36%, 34%, 0) scale(1.1); }
+  50% { transform: translate3d(-90%, 20%, 0) scale(0.92); }
+  75% { transform: translate3d(-50%, -12%, 0) scale(1.04); }
+}
+
+/* Bench Paper chrome: a deep cobalt header and footer frame the light
+   page the way near-black chrome frames the Ember hero. */
+html[data-theme="light"] :is(.site-header, .site-footer) {
+  color-scheme: dark;
+  --c-canvas: 30 58 138;
+  --c-deep: 27 52 125;
+  --c-panel: 37 68 156;
+  --c-raised: 45 80 172;
+  --c-fg: 255 255 255;
+  --c-warm: 255 255 255;
+  --c-t1: 239 246 255;
+  --c-t2: 219 234 254;
+  --c-t3: 199 219 250;
+  --c-t4: 191 212 247;
+  --c-t5: 165 191 238;
+  --c-t6: 120 150 210;
+  --c-rule: 59 88 168;
+  --c-ember: 255 255 255;
+  --c-ember-soft: 191 219 254;
+  --c-ember-ink: 255 255 255;
+  --c-ember-text: 186 230 253;
+  --c-ember-hover: 255 255 255;
+  --c-focus: 186 230 253;
+  --c-on-ember: 30 58 138;
+  --c-shadow: 15 23 42;
+  --shadow-k: 0.6;
+  --logo-mark-color: rgb(125 211 252);
+  --logo-word-color: rgb(255 255 255);
+  --site-nav-active: rgb(186 230 253);
+  --site-nav-color: rgb(255 255 255);
+  --site-nav-focus: rgb(186 230 253);
+  --site-nav-index: rgb(191 212 247);
+  --site-nav-line: rgb(125 211 252);
+  --site-nav-line-shadow: rgb(125 211 252 / 0.3);
+}
+
+html[data-theme="light"] body .site-header {
+  border-color: rgb(30 58 138);
+  background: rgb(30 58 138 / 0.96);
+}
+
+html[data-theme="light"] .site-header .site-preference-theme .site-preference-thumb {
+  background: rgb(255 255 255 / 0.18);
+}
+
+html[data-theme="light"] .site-header .theme-option[aria-pressed="true"] {
+  color: rgb(255 255 255);
+}
+
+html[data-theme="light"] .site-header .site-nav-index {
+  opacity: 0.7;
+}
+
+html[data-theme="light"] body .site-footer {
+  border-color: rgb(30 58 138);
+  background: rgb(30 58 138);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] .atmosphereConveyor .variantFluid {
+    animation: none;
+  }
+}
+
+/* Bench Paper aurora chrome: the cobalt header and footer carry slowly
+   drifting cyan, sky and violet light under a fine grain. */
+html[data-theme="light"] body :is(.site-header, .site-footer) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(40% 140% at 20% 50%, rgb(56 189 248 / 0.4), transparent 70%),
+    radial-gradient(35% 160% at 75% 40%, rgb(139 92 246 / 0.4), transparent 70%),
+    radial-gradient(30% 120% at 50% 100%, rgb(14 165 233 / 0.32), transparent 70%),
+    linear-gradient(100deg, rgb(30 58 138), rgb(37 64 175) 50%, rgb(30 50 130));
+  background-size: 140% 140%, 140% 140%, 140% 140%, 100% 100%;
+  animation: chrome-aurora 24s ease-in-out infinite;
+}
+
+html[data-theme="light"] body .site-header {
+  position: sticky;
+}
+
+html[data-theme="light"] body :is(.site-header, .site-footer)::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.85%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%20.5%200%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22%2F%3E%3C%2Fsvg%3E");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@keyframes chrome-aurora {
+  0% { background-position: 0% 50%, 100% 50%, 40% 0%, 0 0; }
+  50% { background-position: 60% 30%, 30% 70%, 90% 100%, 0 0; }
+  100% { background-position: 0% 50%, 100% 50%, 40% 0%, 0 0; }
+}
+
+/* Contrast on the aurora: white labels, white logo, brighter indices. */
+html[data-theme="light"] :is(.site-header, .site-footer) {
+  --logo-mark-color: rgb(255 255 255);
+  --logo-word-color: rgb(255 255 255);
+  --site-nav-active: rgb(255 255 255);
+  --site-nav-index: rgb(255 255 255);
+  --c-t3: 232 240 255;
+  --c-t4: 224 236 255;
+}
+
+html[data-theme="light"] .site-header .site-nav-index {
+  opacity: 0.78;
+}
+
+html[data-theme="light"] .site-header .site-nav-link[data-active="true"] .site-nav-label {
+  text-shadow: 0 0 18px rgb(186 230 253 / 0.55);
+}
+
+html[data-theme="light"] .site-header .language-toggle {
+  border-color: rgb(255 255 255 / 0.35);
+  background: rgb(30 58 138 / 0.45);
+}
+
+html[data-theme="light"] body .site-footer {
+  color: rgb(240 246 255);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] body :is(.site-header, .site-footer) {
+    animation: none;
+  }
+}
+
+html[data-theme="light"] .iridium-divider-marks {
+  opacity: 0.55;
+}
+
+html[data-theme="light"] .signal-hero-copy::before {
+  opacity: 0.72;
+}
+
+/* Hero ruler geometry and the copy's clearance from it at every width. */
+.signal-hero-copy {
+  --ruler-left: 0.6rem;
+  --ruler-w: 20px;
+  --ruler-gap: clamp(1.4rem, 2.6vw, 2.4rem);
+  padding-left: max(clamp(2.8rem, 4vw, 4.8rem), calc(var(--ruler-left) + var(--ruler-w) + var(--ruler-gap)));
+}
+
+@media (max-width: 767px) {
+  .signal-hero-copy {
+    --ruler-left: 0.35rem;
+    padding-left: calc(var(--ruler-left) + var(--ruler-w) + var(--ruler-gap));
+  }
+}
+
+/* Header: the inline nav needs ~900px beside the logo and preference pill;
+   below that the compact nav row is used, and the subtitle steps aside
+   while the inline nav is tight. */
+@media (min-width: 768px) and (max-width: 899px) {
+  .site-primary-nav {
+    display: none !important;
+  }
+
+  .site-mobile-nav {
+    display: block !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1299px) {
+  body .site-logo-subtitle {
+    display: none;
+  }
+}
+
+/* The work CTA repeats the first nav item; drop it until the row has room. */
+@media (min-width: 1024px) and (max-width: 1079px) {
+  body .site-header-cta {
+    display: none;
+  }
+}
+
+/* Project cover cards: transparent subjects centred on a 16:10 canvas,
+   always fully visible on the theme's image-well mat. */
+.project-cover-frame,
+.project-cover-pair {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.project-cover-image {
+  object-fit: contain;
+}
+
+.theme-image-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-image-light {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-image-dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) .theme-image-light {
+    display: none;
+  }
+
+  html:not([data-theme]) .theme-image-dark {
+    display: block;
+  }
+}
+
+.signal-work-media .project-cover-image {
+  padding: clamp(0.5rem, 1.5vw, 1.25rem);
 }

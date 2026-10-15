@@ -61,10 +61,14 @@ export default function Home() {
             <IridiumMarkDivider orientation="vertical" />
             <div className="signal-hero-copy">
               <h1 id="signal-hero-title" className="signal-hero-title">
-                <BilingualText
-                  en="Embedded systems, control, power, and motor drives"
-                  zh="嵌入式、控制、电源与电驱"
-                />
+                <span className="bilingual-text">
+                  <span className="lang-en">Embedded systems, control, power, and motor drives</span>
+                  <span className="lang-zh">
+                    {/* Explicit lines: Safari will not break CJK after "、" under keep-all. */}
+                    <span className="signal-hero-title-line">嵌入式、控制、</span>
+                    <span className="signal-hero-title-line">电源与电驱</span>
+                  </span>
+                </span>
               </h1>
               <p className="signal-hero-identity">
                 <BilingualText
@@ -73,7 +77,7 @@ export default function Home() {
                 />
               </p>
               <div className="signal-hero-actions">
-                <Link href="#project-evidence" className="signal-primary-action">
+                <Link href="#project-evidence" className="signal-primary-action signal-fill">
                   <BilingualText en="View project evidence" zh="查看项目证据" />
                   <ArrowRight size={18} aria-hidden="true" />
                 </Link>

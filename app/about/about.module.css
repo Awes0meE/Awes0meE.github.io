@@ -54,7 +54,7 @@
   width: 1px;
   height: 22%;
   background: var(--signal-orange);
-  box-shadow: 0 14px 28px rgb(var(--c-ember) / 0.22);
+  box-shadow: 0 14px 28px rgb(var(--c-halo) / 0.22);
   content: "";
 }
 
@@ -132,7 +132,7 @@
 .primaryAction {
   border: 1px solid var(--signal-orange);
   color: var(--signal-ember-text);
-  font-size: 0.82rem;
+  font-size: 0.945rem;
   font-weight: 750;
   letter-spacing: 0.02em;
 }
@@ -141,7 +141,7 @@
   border: 1px solid var(--signal-line);
   color: var(--signal-warm-white);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.76rem;
+  font-size: 0.885rem;
   letter-spacing: 0.04em;
 }
 
@@ -169,7 +169,7 @@
 .mailRoute small {
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   letter-spacing: 0.025em;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -232,7 +232,7 @@
 
 .tensionHeader p {
   color: var(--signal-muted);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   line-height: 1.55;
 }
 
@@ -299,7 +299,7 @@
   background: #ffffff;
   color: rgb(var(--c-on-ember));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
 }
 
@@ -379,7 +379,7 @@
   height: 5px;
   border-radius: 50%;
   background: var(--signal-orange);
-  box-shadow: 0 0 12px rgb(var(--c-ember) / 0.38);
+  box-shadow: 0 0 12px rgb(var(--c-halo) / 0.38);
 }
 
 .tensionStage > div {
@@ -395,7 +395,7 @@
 .stageIndex {
   color: var(--signal-ember-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -421,7 +421,7 @@
 .tensionStage small {
   color: var(--signal-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.6rem;
+  font-size: 0.875rem;
   letter-spacing: 0.025em;
   line-height: 1.45;
 }
@@ -465,7 +465,7 @@
   background: rgb(var(--c-canvas) / 0.86);
   color: var(--signal-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: none;
@@ -522,7 +522,7 @@
 .sectionHeader p {
   max-width: 58ch;
   color: var(--signal-muted);
-  font-size: 0.94rem;
+  font-size: 1.0025rem;
   line-height: 1.7;
 }
 
@@ -588,7 +588,7 @@
 .practiceTitle > span {
   color: var(--signal-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.64rem;
+  font-size: 0.875rem;
   letter-spacing: 0.04em;
   line-height: 1.5;
 }
@@ -655,7 +655,7 @@
 
 .educationList dd {
   color: var(--signal-muted);
-  font-size: 0.8rem;
+  font-size: 0.925rem;
   line-height: 1.55;
 }
 
@@ -673,25 +673,17 @@
   padding-inline: 0.2rem;
   border-bottom: 1px solid var(--signal-line-soft);
   color: var(--signal-warm-white);
-  font-size: 0.88rem;
+  font-size: 1.005rem;
   font-weight: 700;
   text-decoration: none;
   transition: color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .primaryAction:hover,
-  .primaryAction:focus-visible {
-    background: var(--signal-orange);
-    color: var(--signal-canvas);
-    transform: translateY(-2px);
-  }
-
   .secondaryAction:hover,
   .secondaryAction:focus-visible {
     border-color: var(--signal-muted);
     color: var(--signal-ember-text);
-    transform: translateY(-2px);
   }
 
   .mailRoute:hover,
@@ -856,7 +848,7 @@
   }
 
   .narrative {
-    font-size: 0.94rem;
+    font-size: 1.0025rem;
     line-height: 1.7;
   }
 
@@ -986,7 +978,7 @@
   }
 
   .tensionStage small {
-    font-size: 0.56rem;
+    font-size: 0.875rem;
   }
 
   .sectionHeader h2,

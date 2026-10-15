@@ -87,22 +87,6 @@ function PrototypeNucleus() {
       style={{ "--nucleus-cycle": cycle } as CSSProperties}
       aria-hidden="true"
     >
-      <svg className={styles.nucleusRing} viewBox="0 0 100 100" focusable="false">
-        {prototypes.map((prototype, index) => (
-          <circle
-            key={prototype.id}
-            cx="50"
-            cy="50"
-            r="48"
-            pathLength="100"
-            className={styles.nucleusArc}
-            style={{
-              "--arc-offset": `${-index * 20 - 1}`,
-              "--slot-delay": `${index * nucleusSlot}s`
-            } as CSSProperties}
-          />
-        ))}
-      </svg>
       {prototypes.map((prototype, index) => (
         <span
           className={styles.nucleusSlide}

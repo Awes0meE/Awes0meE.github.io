@@ -163,7 +163,7 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
         <figcaption className="border-b border-line px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-graphite">
           {asset.language}
         </figcaption>
-        <pre tabIndex={0} className="max-h-[680px] overflow-auto p-4 font-mono text-[0.8rem] leading-6 text-ink">
+        <pre tabIndex={0} className="max-h-[680px] overflow-auto p-4 font-mono text-[0.9375rem] leading-6 text-ink">
           <code>{asset.content}</code>
         </pre>
       </figure>
@@ -275,13 +275,13 @@ export function ProjectAssetBrowser({ assets }: { assets: ProjectAsset[] }) {
               target={opensAsDownload ? undefined : "_blank"}
               rel={opensAsDownload ? undefined : "noopener noreferrer"}
               download={opensAsDownload ? selectedAsset.name : undefined}
-              className="inline-flex items-center gap-2 border border-pine px-3 py-2 text-sm font-semibold text-pine transition hover:bg-ember hover:text-on-ember hover:border-ember"
+              className="signal-fill inline-flex items-center gap-2 border border-pine px-3 py-2 text-sm font-semibold text-pine"
             >
               <BilingualText en={opensAsDownload ? "Download file" : "Open file"} zh={opensAsDownload ? "下载文件" : "打开文件"} />
               <ExternalLink size={15} />
             </a>
           </header>
-          <div key={selectedAsset.href}>
+          <div key={selectedAsset.href} className="asset-preview-swap">
             <PreviewBody asset={selectedAsset} />
           </div>
         </article>

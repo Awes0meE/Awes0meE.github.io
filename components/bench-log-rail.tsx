@@ -230,14 +230,16 @@ export function BenchLogRail({ entries, backHref, backLabel }: BenchLogRailProps
               <ChevronDown size={15} aria-hidden="true" />
             </button>
           </div>
-          <nav
-            id="bench-log-contents"
-            className={styles.stripPanel}
-            aria-label="Sections / 章节"
-            hidden={!contentsOpen}
-          >
-            {list(() => setContentsOpen(false))}
-          </nav>
+          <div className={styles.stripPanelFrame} data-open={contentsOpen ? "true" : "false"}>
+            <nav
+              id="bench-log-contents"
+              className={styles.stripPanel}
+              aria-label="Sections / 章节"
+              inert={!contentsOpen}
+            >
+              {list(() => setContentsOpen(false))}
+            </nav>
+          </div>
         </div>
       ) : null}
     </>
