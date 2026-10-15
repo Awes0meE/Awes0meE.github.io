@@ -96,7 +96,7 @@ geometry:
 motion:
   orbit-assembly: slow counterclockwise rotation
   electrons: evenly phased orbital travel with tapered comet tails
-  nucleus: slower clockwise rotation
+  nucleus: one prototype at a time, 5s per board with a cross-fade and a five-segment ring
   separator: repeating iRidium marks scrolling upward
   theme-switch: 260ms root crossfade through document.startViewTransition
   route-entry: vertical leave-and-arrive on nav-forward and nav-back, shared project-figure morph
@@ -184,21 +184,21 @@ The homepage is one continuous instrument field divided by restrained rules. Its
 
 The wide hero has three explicit visual zones:
 
-1. **Left — text field.** The direction statement, one orange identity paragraph, and actions form the reading anchor. A narrow moving signal texture may reinforce the outer edge without competing with the copy.
+1. **Left — text field.** The direction statement, one orange identity paragraph, and actions form the reading anchor. A narrow static tick texture may reinforce the outer edge without competing with the copy.
 2. **Middle — iRidium separator.** Repeated instances of the existing iRidium mark form a vertical, ember-colored band that scrolls upward. The band is translucent, has no extra centerline, and separates rather than fences off the two sides.
-3. **Right — orbital technical visual.** A tilted atom combines the five prototype images with three technical-category orbits. It fills the available visual field without colliding with the separator or header.
+3. **Right — orbital technical visual.** A tilted atom combines a rotating prototype nucleus with three technical-category orbits. It fills the available visual field without colliding with the separator or header.
 
 At narrower widths, preserve the same reading order while allowing the hero zones to stack or simplify. The separator may become horizontal or recede when a vertical band would consume useful reading width. The atom must remain complete and legible rather than being cropped into a decorative fragment.
 
-The hero background may use several low-contrast, irregular warm radiances that drift subtly across the full text-and-atom field. They should feel like light moving behind a dark material, not detached gradient blobs. Right-side corner brackets may frame the atom without adding a full card border.
+The hero background may use several low-contrast, irregular warm radiances across the full text-and-atom field. They stay static so the separator and the atom are the only moving systems, and they should feel like light behind a material, not detached gradient blobs. Right-side corner brackets may frame the atom without adding a full card border.
 
 ## Orbital Technical Visual
 
 ### Nucleus
 
-The nucleus is a compact cluster of five circular prototype presentation images from `public/uploads/hero/`. The circles overlap enough to read as one bound core while leaving each prototype distinguishable. Images remain in color and use consistent framing; the cluster must not expand into a five-card grid.
+The nucleus shows one prototype at a time. Five transparent presentation cutouts from `public/uploads/hero/` take turns at the center, each held for 5 seconds and cross-fading into the next, at about 160px wide on desktop so the board reads clearly without crowding the orbits. A thin ring of five equal segments surrounds the core; the segment for the current board is lit in ember. The boards keep their own color and a soft contact shadow on a faint ember glow, with no circular crop, white photo field, or card frame, so they sit on either theme's canvas. The nucleus never expands into a grid or shows several boards at once.
 
-The nucleus represents a portfolio core, not five completed case-study claims. Its arrangement is presentational and may be adjusted for balance without implying sequence, scale, or technical relationship.
+The nucleus represents a portfolio core, not five completed case-study claims. The rotation order and the ring are presentational: they mark which image is showing, not sequence, progress, scale, or technical relationship.
 
 ### Orbits and electrons
 
@@ -224,12 +224,12 @@ Motion establishes two complementary systems:
 - electrons continue to travel around their own orbit paths while preserving equal spacing;
 - long orbit dashes flow along each ellipse and remain visibly faster than the overall assembly rotation;
 - every electron carries a tapered comet tail, widest and brightest near the badge and narrowing toward the trailing end;
-- the five-image nucleus rotates slowly clockwise as a compact group;
-- the central iRidium separator scrolls upward, while any outer-left signal texture may move in the opposite direction to create controlled counterflow.
+- the nucleus cross-fades to the next prototype every 5 seconds while its ring segment advances;
+- the central iRidium separator scrolls upward; the outer-left tick texture and the background radiances stay still.
 
 Do not attach fabricated waveform meaning, sensor values, stage completion, or live-system status to these motions. Avoid arbitrary bouncing, hover-chasing, or independent random movement that breaks the orbital model.
 
-Animation pauses whenever the technical visual is outside the viewport or the document is hidden. Under `prefers-reduced-motion: reduce`, the atom renders as a balanced static composition: orbit assembly, electrons, dash flow, nucleus, separator, tails, and background drift stop; comet tails may be removed. No information or navigation may depend on motion.
+Animation pauses whenever the technical visual is outside the viewport or the document is hidden. Under `prefers-reduced-motion: reduce`, the atom renders as a balanced static composition: orbit assembly, electrons, dash flow, nucleus rotation, and separator stop; the nucleus holds its first prototype with the first ring segment lit, and comet tails may be removed. No information or navigation may depend on motion.
 
 ## Components
 
@@ -270,7 +270,7 @@ Dark-background derivatives may add white only inside intended shield or crest c
 
 ## Evidence and Asset Boundaries
 
-The five files under `public/uploads/hero/` are homepage presentation derivatives. Their inclusion in the nucleus does not establish exact components, silkscreen, fabrication, bring-up, integration, measurement, validation, ownership, or completion. Use original photographs, drawings, Gerbers, logs, traces, and other direct artifacts on project evidence surfaces.
+The five files under `public/uploads/hero/` are homepage presentation derivatives: four `*-cutout-v4.webp` background-removed cutouts made from the earlier studio-photo derivatives (shadows kept as translucent black, no board content added or altered) plus the original AD831 cutout. Their inclusion in the nucleus does not establish exact components, silkscreen, fabrication, bring-up, integration, measurement, validation, ownership, or completion. Use original photographs, drawings, Gerbers, logs, traces, and other direct artifacts on project evidence surfaces.
 
 Technology marks under `public/skills/icons/` identify tools and platforms only. Their source, license where applicable, trademark ownership, derivative treatment, and non-endorsement boundary are maintained in `public/skills/icons/README.md`. Institution-mark provenance and dark-background adaptations are maintained separately in `public/education/README.md`.
 

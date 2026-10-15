@@ -1022,3 +1022,16 @@ A fresh finish reviewer returned `fix` twice. Ten items were applied: §-label k
 After review the user found the right half of wide screens empty below the masthead and long titles cramped beside the spec ledger. The title row now spans the article width, and the spec ledger moved into a sticky side column that runs the length of the body with the project's development-notes links. Figures, code and tables use the full reading column while running text keeps its measure, and phone titles step down to three lines or fewer.
 
 Validation: lint with content and UTF-8 validation, typecheck, and production build. CDP probes confirmed the typed transitions and the shared-figure morph. Screenshots covered 390/1280/1440 in both themes and both languages, with no horizontal overflow. `impeccable detect` findings fell from 61 to 3 before DESIGN.md was updated.
+
+## 2026-10-15 — Hero atom refresh (phase 3)
+
+The user disliked the nucleus's white-background circular photos. Four studio-photo derivatives were cut out with a border flood fill plus enclosed-pocket and lower-edge fringe removal, which keeps the studio shadow as translucent black. White connectors and the flat cable were checked to survive. Three nucleus variants were built in the live page and compared in both themes: a loose pile, specimen discs, and a featured rotation. The user chose the featured rotation, switching every 5 seconds with a smaller board (about 160px). All 15 orbit logos stayed.
+
+Shipped together:
+- the orbit dash flow is slower (7 s) and the comet glow is softer;
+- the `GYROSCOPIC CORE` label box is gone;
+- the hero's left tick texture and background radiances are static;
+- light-theme badges no longer invert or lift logos;
+- the four unused white-field derivatives were removed.
+
+Validation: lint, typecheck, and production build pass. A CDP sample confirmed one board per 5 s in order. Screenshots at 1440 in both themes and at 390 show no overflow.
