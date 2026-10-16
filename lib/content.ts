@@ -2,8 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import matter from "gray-matter";
+import yaml from "js-yaml";
 
 const contentRoot = path.join(process.cwd(), "content");
+
+// gray-matter resolves js-yaml 4 through a package.json override (the old js-yaml 3
+// chain pulled in vulnerable argparse/sprintf-js); js-yaml 4 removed safeLoad, so
+// frontmatter is parsed with its safe `load` explicitly.
+const matterOptions = { engines: { yaml: (source: string) => yaml.load(source) as object } };
 
 export type LinkSet = {
   demo?: string;
@@ -78,7 +84,7 @@ function readCollection<T extends { slug: string; date: string }>(
     .map((file) => {
       const filePath = path.join(directory, file);
       const raw = fs.readFileSync(filePath, "utf8");
-      const { data, content } = matter(raw);
+      const { data, content } = matter(raw, matterOptions);
 
       return {
         slug: file.replace(/\.mdx$/, ""),
