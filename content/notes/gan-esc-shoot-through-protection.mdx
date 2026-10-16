@@ -19,9 +19,9 @@ In a shoot-through, current leaves the battery, passes through the high-side and
 
 直通的时候，电流从电池正极出来，穿过上管、下管，直接回到负极，一路上只有电池内阻、连线和两颗管子的导通电阻。INN100EA035A 的导通电阻最大才 3.5 mΩ，两颗串起来不到 10 mΩ，4S 航模电池本来就是为了瞬间放出大电流设计的，这一路上百安轻轻松松。这颗管子手册里写的脉冲电流额定是 230 A、脉宽 300 µs，管子炸飞一米高，这么一看一点也不奇怪。
 
-On the firmware side, dead time is what keeps the two transistors apart. AM32 sets `DEAD_TIME` to 60 for this target and writes it into the dead-time field of TMR1. The AT32F421's advanced timer is closely modelled on STM32's, and reading the field with the STM32 dead-time encoding (below 128, the value times the timer clock period) gives about 500 ns at 120 MHz with no clock division. That is a generous gap for GaN, so the shoot-through more likely came from something outside the dead time, such as counterfeit parts, false turn-on caused by the layout, or the MCU briefly running away. I never pinned down which.
+On the firmware side, dead time is what keeps the two transistors apart. AM32 sets `DEAD_TIME` to 60 for this target and writes it into the dead-time field of TMR1. The AT32F421's advanced timer is closely modelled on STM32's, and reading the field with the STM32 dead-time encoding (below 128, the value times the timer clock period) gives about 500 ns at 120 MHz with no clock division. That is a generous gap for GaN, so the shoot-through more likely came from something outside the dead time, such as counterfeit parts, false turn-on caused by the layout, or the MCU briefly running away.
 
-软件这一侧，挡直通靠的是死区。AM32 给这个目标设的 `DEAD_TIME` 是 60，写进 TMR1 的死区字段。AT32F421 的高级定时器和 STM32 的结构很像，按 STM32 那套死区编码来算，数值小于 128 时死区等于这个数乘以定时器时钟周期，120 MHz、不分频下约 500 ns。对 GaN 来说这个死区一点也不短，所以直通更可能出在死区之外：假芯片、layout 引起的误导通，或者单片机短暂跑飞，到最后也没定论。
+软件这一侧，挡直通靠的是死区。AM32 给这个目标设的 `DEAD_TIME` 是 60，写进 TMR1 的死区字段。AT32F421 的高级定时器和 STM32 的结构很像，按 STM32 那套死区编码来算，数值小于 128 时死区等于这个数乘以定时器时钟周期，120 MHz、不分频下约 500 ns。对 GaN 来说这个死区一点也不短，所以直通更可能出在死区之外：假芯片、layout 引起的误导通，或者单片机短暂跑飞。
 
 ## Backfeed Paths After Shoot-Through / 直通后的反灌路径
 
@@ -29,9 +29,9 @@ My explanation at the time was that voltage forced its way backwards into everyt
 
 主控为什么会坏，我当时的理解是电压逆着灌了进去。现在顺着电路看，有两条比较可能的路。第一条是母线过压。直通时几百安的电流流过电池线，线是有电感的，等管子烧开路或者保险丝熔断，电流被突然切断，这段电感就会在母线上顶出一个尖峰。板上的 DC-DC 是 SY8303，IN 引脚的绝对最大值是 40 V。入口那颗 SMDJ40CA 双向 TVS 的关断电压是 40 V，要超过它才开始击穿，所以它钳住的位置，本来就已经在 SY8303 扛不住的范围里了。
 
-The second route is the ground. Hundreds of amps crossing the power ground pull different parts of the ground plane to different potentials, so for that instant the drivers and the controller no longer share one zero. Pins referenced to one ground can end up below another, which is roughly what I meant when I said a negative voltage got pushed in through the ground plane. Tantalum capacitors are polarised and tend to break down and overheat under reverse voltage, which fits the one that glowed. Either route could explain the dead controllers and LDOs, and which one dominated is something I still cannot say.
+The second route is the ground. Hundreds of amps crossing the power ground pull different parts of the ground plane to different potentials, so for that instant the drivers and the controller no longer share one zero. Pins referenced to one ground can end up below another, which is roughly what I meant when I said a negative voltage got pushed in through the ground plane. Tantalum capacitors are polarised and tend to break down and overheat under reverse voltage, which fits the one that glowed.
 
-第二条是地。几百安的电流从功率地上流过，地平面上各处的电位会被拉开，那一瞬间驱动芯片和主控不再共用同一个零点，以某处地为参考的引脚，相对另一处地就可能出现负压。我当时说的"从地层灌一个负电压进去"，大概就是这个意思。钽电容有极性，反向电压一上来就容易击穿发热，跟那颗亮起来的对得上。两条路都能解释主控和 LDO 为什么跟着坏，哪条占主导，我现在也说不准。
+第二条是地。几百安的电流从功率地上流过，地平面上各处的电位会被拉开，那一瞬间驱动芯片和主控不再共用同一个零点，以某处地为参考的引脚，相对另一处地就可能出现负压。我当时说的"从地层灌一个负电压进去"，大概就是这个意思。钽电容有极性，反向电压一上来就容易击穿发热，跟那颗亮起来的对得上。
 
 ## Gate TVS and Input Fuses / 栅极 TVS 与入口保险丝
 

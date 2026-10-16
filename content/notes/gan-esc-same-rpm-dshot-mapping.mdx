@@ -45,6 +45,6 @@ The selected commands were 551, 786 and 1124 for the Si board and 540, 762 and 1
 
 ## Command Gap Between the Boards / 两块板的指令差
 
-Back to those hundred-odd counts. Measured from the start of the throttle range at 48, reaching 10000 rpm took about ten percent more throttle on the Si board than on the GaN board. Following the reading above, the Si board had to apply a larger duty cycle to put the same effective voltage on the motor, with the difference lost in the transistors' conduction drop, in switching and in driver delays. That points the same way as E1, where the Si board drew more input power. The command gap itself only came out of choosing operating points, though, and with two different driver designs, splitting that loss into its pieces is a separate question I have not answered yet.
+Back to those hundred-odd counts. Measured from the start of the throttle range at 48, reaching 10000 rpm took about ten percent more throttle on the Si board than on the GaN board. Following the reading above, the Si board had to apply a larger duty cycle to put the same effective voltage on the motor, with the difference lost in the transistors' conduction drop, in switching and in driver delays. That points the same way as E1, where the Si board drew more input power.
 
-再说回那一百出头的差距。从油门起点 48 开始算，同样转到 10000 rpm，Si 板要的油门比 GaN 板多大约 10%。按上面的理解，Si 板得用更大的占空比，才能把同样的有效电压送到电机上，中间多出来的那部分电压，损失在开关管的导通压降、开关过程和驱动延时这些地方。这和 E1 里 Si 板输入功率更高的方向是一致的。不过指令差本身只是定工作点时顺带得到的，两块板的驱动方案又不一样，这部分损耗具体怎么拆开，是我还没回答的问题。
+再说回那一百出头的差距。从油门起点 48 开始算，同样转到 10000 rpm，Si 板要的油门比 GaN 板多大约 10%。按上面的理解，Si 板得用更大的占空比，才能把同样的有效电压送到电机上，中间多出来的那部分电压，损失在开关管的导通压降、开关过程和驱动延时这些地方。这和 E1 里 Si 板输入功率更高的方向是一致的。
