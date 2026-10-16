@@ -2,11 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import matter from "gray-matter";
+import yaml from "js-yaml";
 
 const root = process.cwd();
 const contentRoot = path.join(root, "content");
 const publicRoot = path.join(root, "public");
 const errors = [];
+// Same frontmatter engine as lib/content.ts: js-yaml 4 `load`, since js-yaml 4 removed safeLoad.
+const matterOptions = { engines: { yaml: (source) => yaml.load(source) } };
 
 const juanyunTechAllowlist = new Set([
   "/uploads/projects/juanyun-tech/acunit-v20-system-block.png",
@@ -34,7 +37,7 @@ function readMdxCollection(folder) {
     .map((file) => {
       const filePath = path.join(directory, file);
       const raw = fs.readFileSync(filePath, "utf8");
-      const parsed = matter(raw);
+      const parsed = matter(raw, matterOptions);
 
       return {
         filePath,

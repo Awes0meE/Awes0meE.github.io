@@ -288,7 +288,7 @@ Use this recovery path:
 3. Run `npm.cmd run dev` again.
 4. Revisit the affected note route.
 
-That error usually means the local `.next` cache is corrupt around `gray-matter -> js-yaml -> esprima`. It does not automatically mean the MDX note body needs to be rewritten.
+That error usually means the local `.next` cache is corrupt. It does not automatically mean the MDX note body needs to be rewritten. (Older reports named `esprima.js` through gray-matter's js-yaml 3; that chain was removed on 2026-10-17.)
 
 ## Pre-Publish Checklist
 
