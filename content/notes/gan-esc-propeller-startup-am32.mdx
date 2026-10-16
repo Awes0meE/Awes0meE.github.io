@@ -1,0 +1,56 @@
+---
+title: "Propeller-Loaded Startup and AM32 Startup Parameters"
+titleZh: "带桨起转与 AM32 启动参数"
+summary: "Most blown transistors on the GaN ESC died the moment a propeller-loaded motor started from standstill. Why that moment draws so much current in a sensorless six-step drive, and what AM32's startup power, sine startup and stall protection settings each control."
+summaryZh: "GaN 电调的炸管大多出在带桨电机从静止起转的那一下。无感六步驱动里，这一下为什么电流最大，以及 AM32 的启动功率、正弦启动和堵转补偿这几项参数各自管什么。"
+date: "2026-10-17"
+tags: ["AM32", "BLDC", "Sensorless", "Startup", "ESC", "GaN"]
+projectSlug: "gan-quadrotor-esc-fyp"
+visibility: public
+---
+
+Roughly nine in ten of the transistors I lost on the GaN ESC went at the same instant: the throttle went up on the test controller and the propeller-loaded motor had to start from standstill. Once the motor was spinning, failures were rare. That raises two separate questions: what makes the first moment of startup so much more dangerous than steady running, and how AM32's startup settings soften it.
+
+GaN 电调炸掉的管子，大约九成出在同一个时刻：上位机把油门往上推，带着螺旋桨的电机从零开始起转。电机一旦转起来，反而很少出事。起转那一下凭什么比稳态危险得多，AM32 的启动参数又是怎么把它压下去的，这两件事可以拆开看。
+
+## Startup Current Without Back-EMF / 静止时的起转电流
+
+A spinning motor generates back-EMF in its windings, opposing the supply and pushing current back. Going by KV, this 1960 KV 2207.5 motor at 10000 rpm generates roughly 10000 ÷ 1960 ≈ 5.1 V, so on a 14.8 V bus about five volts are cancelled by the motor itself. At standstill that figure is zero, and whatever voltage reaches the windings is opposed only by winding and wiring resistance.
+
+电机转起来以后，绕组里会感应出反电动势，方向跟电源相反，正好把电流往回顶。按 KV 估算，这台 1960 KV 的 2207.5 电机转到 10000 rpm，反电动势大约是 10000 ÷ 1960 ≈ 5.1 V，14.8 V 的母线里有 5 V 左右被电机自己抵掉了。静止的时候这一项是零，加到绕组上的电压，只剩绕组电阻和线路电阻去挡。
+
+AM32's own startup limits make the scale concrete. In the [AM32 source](https://github.com/am32-firmware/AM32/blob/main/Src/main.c), the duty cycle runs on a 0 to 2000 scale, and until the motor has collected 30 zero crossings it is clamped no higher than the minimum duty plus 400, about 20 percent. Twenty percent of 14.8 V is roughly 3 V. If the phase-to-phase resistance were 0.1 Ω, an assumed round number for illustration, that would be on the order of 30 A with nothing pushing back. At startup, current is set almost entirely by duty and resistance, so a more aggressive duty translates directly into more current.
+
+AM32 自己的起转限制，可以让这个量级更具体。[AM32 源码](https://github.com/am32-firmware/AM32/blob/main/Src/main.c)里占空比的满量程是 2000，电机攒够 30 次过零之前，占空比最高只到最低占空比再加 400，也就是 20% 上下。14.8 V 的 20% 是 3 V 左右，相间电阻要是按 0.1 Ω 这个假设的整数来算，就是 30 A 量级的电流，而且没有任何东西往回顶。起转那一下，电流几乎只由占空比和电阻决定，占空比给得猛一点，电流就跟着猛。
+
+## Open-Loop Stage of Sensorless Startup / 无感起转的开环阶段
+
+Missing back-EMF causes a second problem. AM32 drives the motor with sensorless six-step commutation, judging rotor position from the zero crossing of back-EMF on the floating phase, and a motor at rest has no zero crossing to catch. When I worked through the AM32 code during the project, the startup chain I wrote down was open-loop first. Without sine startup, `startMotor()` forces one commutation step and a 20 kHz polling routine then hunts for zero crossings. With sine startup, a sine table advances the three phase voltages a little at a time, and six-step commutation takes over once the rotor is following. Only after that does the firmware switch from polling to comparator interrupts.
+
+没有反电动势，还带来第二个麻烦。AM32 是无感六步换相，靠悬空相反电动势的过零点判断转子转到了哪，可电机静止时根本没有过零点可抓。我当时整理 AM32 代码时记下的启动链路，前面都是开环：不开正弦启动，`startMotor()` 先硬换一步，再靠 20 kHz 的轮询去找过零点；开了正弦启动，就用正弦表一点点推三相电压，等转子跟上来，再切回六步换相。转稳以后，固件才从轮询换成比较器中断。
+
+A propeller makes that open-loop stretch hard. The propeller adds inertia and drag, and if the open-loop sequence steps faster than the rotor can follow, the motor desyncs. After a desync the commutation sequence no longer matches where the rotor actually is, so the energised pair of phases may not be producing torque while current keeps pouring in. My explanation at the time was that current was sloshing between the phases. That remains a guess, though it is consistent with how desync works. AM32 checks for this itself: after each full set of six steps it compares adjacent commutation intervals, and a jump that is too large counts as a desync and sends the motor back to the startup state.
+
+带着螺旋桨，这段开环就难走了。桨有惯量，还有风阻，开环推出去的步子要是比转子快，转子跟不上，就失步了。失步以后，换相顺序和转子的实际位置对不上，正在通电的那两相未必在出力，电流却照样往里灌。我当时给炸管的解释是相跟相之间电流乱窜，这是一个推测，方向上跟失步的机理一致。AM32 自己也会查失步：每走完一整圈六步，就比一比相邻的换相周期，跳得太大就判定失步，退回启动状态。
+
+## AM32 Startup Parameters / AM32 的启动参数
+
+I started on AM32's default parameters, without sine startup, and the motor wrenched itself into motion. Following a seasoned hobbyist's blog, I retuned the startup set, and my v0.3.0 change log records it: sine startup enabled, `startup_power` at 60, `sine_mode_changeover_thottle_level` at 20, `sine_mode_power` at 4, and `stall_protection` left off. The final release later raised `sine_mode_power` to 6. Read against the code, each of these covers its own part of startup:
+
+AM32 一开始用的是默认参数，没开正弦启动，起转拉扭矩特别暴力。后来参考大佬的博客重新调了一组，v0.3.0 的改动记录里写着：打开正弦启动，`startup_power` 设成 60，`sine_mode_changeover_thottle_level` 设成 20，`sine_mode_power` 设成 4，`stall_protection` 保持关闭；到了最终版，`sine_mode_power` 又调到了 6。对照代码看，这几项各管起转的一段：
+
+- `startup_power` accepts 50 to 150 and sets the startup duty floor, the minimum duty plus this value; until 30 zero crossings, duty is held between that floor and the minimum duty plus 400. A value of 60 sits near the bottom of the range, giving startup just enough push to get moving.
+- `use_sine_start` replaces six-step forcing at low throttle with a sine table that moves the three phase voltages smoothly, so the current changes smoothly too.
+- `sine_mode_changeover_thottle_level` sets how far the sine stage extends, and the code clamps it to 5 to 25 percent of throttle. At 20, sine startup carries the motor until the throttle reaches about 20 percent, giving the rotor time to follow before six-step commutation takes over.
+- `sine_mode_power` scales the sine-stage output from 1 to 10, and the code falls back to 5 when the value is invalid. The 4 and 6 used here sit either side of that default.
+- `stall_protection` adds throttle as speed falls, which suits rock-crawling cars. On a propeller-loaded ESC it would push harder exactly at the most dangerous moment, so it stayed off.
+
+- `startup_power`：允许 50 到 150，决定起转阶段的最低占空比，等于最低占空比再加上这个数；攒够 30 次过零之前，占空比被夹在这个下限和"最低占空比加 400"之间。取 60，是贴着下限给，起转只用够转起来的那点力。
+- `use_sine_start`：打开以后，低油门这一段改用正弦表平滑地推三相电压，取代六步硬拖，电流也跟着平滑。
+- `sine_mode_changeover_thottle_level`：正弦启动管到多大油门，代码里限制在 5% 到 25%。设成 20，油门推到 20% 左右之前都由正弦启动带着走，转子有足够的时间跟上，再交给六步换相。
+- `sine_mode_power`：正弦阶段的输出幅度，范围 1 到 10，值无效时代码会退回 5。这里用过的 4 和 6，正好在默认值两边。
+- `stall_protection`：开了以后，转速越低越自动补油门，适合爬坡的车模。放在带桨的电调上，就是在最危险的那一刻再推一把，所以一直关着。
+
+Together these settings do one thing: during the stretch when there is no back-EMF to help, they apply less voltage and step more gently, so a rotor carrying a propeller can keep up. After the retune, blown transistors became much rarer, and the shoot-throughs that still happened were left to the fuses and the other protection.
+
+这几项合起来，做的是同一件事：在没有反电动势帮忙的那一段，少给一点电压，推得慢一点，让带着桨的转子跟得上。调完以后炸管少了很多，剩下偶尔的直通，就交给保险丝和后来加上的那些保护去兜。
