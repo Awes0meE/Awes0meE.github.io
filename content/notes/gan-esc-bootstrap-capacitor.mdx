@@ -1,0 +1,52 @@
+---
+title: "LMG1210 Bootstrap Capacitor Sizing"
+titleZh: "LMG1210 自举电容选型"
+summary: "A 220 nF bootstrap capacitor that matched the datasheet formula still distorted the GaN ESC's high-side waveform. Working the formula through a six-step ESC's floating phase shows where the missing charge went."
+summaryZh: "按手册公式算出来够用的 220 nF 自举电容，装上 GaN 电调后高边波形还是失真。把公式放进六步换相里一相悬空的那段时间再算一遍，缺的电荷就找到了。"
+date: "2026-10-17"
+tags: ["GaN", "LMG1210", "Bootstrap", "Gate Driver", "MLCC", "ESC"]
+projectSlug: "gan-quadrotor-esc-fyp"
+visibility: public
+---
+
+On the first GaN ESC board, the high-side bootstrap supply of the LMG1210 never looked right on the oscilloscope. The capacitor charged in a flash and emptied almost as fast, and the waveform I was measuring stayed distorted. I had sized that capacitor myself: the calculation came out at one or two hundred nanofarads, so I fitted a 220 nF 0603 part and assumed a little above the answer was enough. Replacing it with 1 µF cured the waveform without touching the layout. The calculation said enough and the board said otherwise, which leaves a gap worth finding.
+
+GaN 电调第一版上，LMG1210 高边的自举电压在示波器上怎么看都不对劲。电容充得飞快，放得也几乎一样快，测出来的波形一直是失真的。那颗电容是我自己算的，算出来一两百纳法，就挑了一颗 220 nF 的 0603，想当然觉得比算出来的大一点就够了。换成 1 µF 以后波形就正常了，没改版。算出来够，装上去却不够，这中间差了点什么，值得找出来。
+
+## Bootstrap Formula in the Datasheet / 手册里的自举电容公式
+
+The [LMG1210 datasheet](https://www.ti.com/lit/ds/symlink/lmg1210.pdf) sizes the bootstrap capacitor as `C_BST,min = (0.5 nC + Qrr + QgH + IHB × tON) / ΔV`. The numerator is the charge one high-side on-period pulls out of the capacitor: the gate charge of the high-side FET, the bootstrap diode's reverse recovery, the high-side driver's own quiescent current integrated over the on-time, plus 0.5 nC of dynamic loss. `ΔV` is how far the capacitor is allowed to sag.
+
+[LMG1210 手册](https://www.ti.com/lit/ds/symlink/lmg1210.pdf)给的自举电容下限是 `C_BST,min = (0.5 nC + Qrr + QgH + IHB × tON) / ΔV`。分子是高边开一次要从电容里拿走的电荷：给高边功率管栅极充电的 `QgH`，自举二极管的反向恢复 `Qrr`，高边驱动自己的静态电流 `IHB` 乘上导通时间 `tON`，再加 0.5 nC 的动态损耗。`ΔV` 是允许电容掉多少压。
+
+Filling it in for this board: the INN100EA035A datasheet gives a typical total gate charge of 7.6 nC; the bootstrap diode is an SS34F Schottky, so `Qrr` is negligible; and the LMG1210 lists `IHB` at 520 µA typical and 850 µA maximum. Taking `tON` as one PWM period at AM32's final 48 kHz, about 20.8 µs, the quiescent term is about 17.7 nC at the maximum current. The numerator lands near 26 nC, which needs about 130 nF for a 0.2 V sag and about 260 nF for 0.1 V. A result of one or two hundred nanofarads is exactly what this route produces.
+
+代进这块板的数：INN100EA035A 手册里栅极总电荷典型值 7.6 nC；自举二极管用的是 SS34F 肖特基，`Qrr` 可以忽略；LMG1210 的 `IHB` 典型 520 µA、最大 850 µA。`tON` 按一个 PWM 周期取，AM32 最终跑 48 kHz，周期约 20.8 µs，按最大电流算，静态电流这一项约 17.7 nC。分子加起来 26 nC 左右，允许掉 0.2 V 就要约 130 nF，只许掉 0.1 V 就要 260 nF 上下。按这条路算，结果正好落在一两百纳法。
+
+## Hold Time in Six-Step Commutation / 六步换相下的保持时间
+
+The weak spot is the choice of `tON`. In six-step commutation each electrical step gives the three phases three different jobs: one phase is PWM'd with complementary switching, one has its low side held on, and the third floats with both transistors off. The LMG1210's internal bootstrap switch only conducts while the low-side FET is on, so the PWM phase gets topped up every cycle and the low-side phase constantly, while the floating phase gets nothing. Its high-side driver keeps drawing quiescent current from the capacitor regardless, and the floating interval lasts a full step, sixty electrical degrees.
+
+毛病出在 `tON` 该取多长。六步换相里，每一步三相各干各的：一相做互补 PWM，高低边轮流开；一相下管常开；还有一相悬空，上下两个管子都关着。LMG1210 内部的自举开关只在低边导通时才接通，所以做 PWM 的那一相每个周期都能补一次电，下管常开的那一相一直在补，悬空的那一相什么也补不上，高边驱动的静态电流却照样从电容里往外拿。一相悬空要持续整整一步，也就是六十度电角度。
+
+The motor has 14 poles, seven pole pairs. At 3000 rpm the electrical frequency is 350 Hz, one electrical cycle lasts about 2.86 ms, and one step about 476 µs, all of which the capacitor must bridge on its own. With a 5 V VDD, the capacitor charges to roughly 4.5 V after the diode and switch drops (assuming about half a volt across them), while the HB undervoltage threshold falls at 3.45 V typical, leaving a little over one volt of headroom. Dropping one volt, 220 nF gives up 0.22 µC, enough for about 420 µs at the typical 520 µA and about 260 µs at the 850 µA maximum. Neither covers 476 µs. With 1 µF, the same volt buys 1.2 to 1.9 ms, comfortably enough at 3000 rpm.
+
+电机是 14 极，7 对极。3000 rpm 时电频率 350 Hz，一个电周期约 2.86 ms，一步约 476 µs，这段时间电容得自己撑着。VDD 是 5 V，经过二极管和内部开关，HB 到 HS 之间大约能充到 4.5 V（这里按两者共压降半伏估），手册里 HB 欠压门限的下降沿典型 3.45 V，中间只有一伏多一点的余量。220 nF 掉一伏能放出 0.22 µC，按 520 µA 的典型电流只能撑约 420 µs，按 850 µA 最大值约 260 µs，都撑不到 476 µs。换成 1 µF，同样掉一伏能撑 1.2 到 1.9 ms，3000 rpm 下绰绰有余。
+
+My current reading of that distorted waveform follows from this. At low speed the floating step outlasts the capacitor, the bootstrap voltage falls below the undervoltage threshold, the driver shuts the high side off, and it recovers only when that phase reaches its low-side interval and the capacitor recharges. The slower the motor turns, the longer each step and the worse this gets, and startup is the slowest stretch of all. This explanation comes from working through the datasheet afterwards.
+
+照这个算法，我现在更愿意把当时的失真理解成这样：低速时悬空那一步比电容撑得久，自举电压掉到欠压门限以下，驱动把高边关掉，要等这一相轮到下管导通、电容重新充上，高边才能恢复。转速越低，一步越长，越容易出事，起转阶段又是最慢的一段。这个解释是后来对着手册一步步算出来的。
+
+## DC Bias and the VDD Capacitor / 直流偏压与 VDD 电容
+
+At the time I put the shortfall down to DC bias: an MLCC loses effective capacitance under DC voltage, and small packages with low voltage ratings lose the most. That effect is real. Even so, by the arithmetic above, a 220 nF part with no bias loss at all still could not hold through a floating step at 3000 rpm. Hold time was the larger hole, and DC bias belongs in the margin on top of it.
+
+当时我把问题归到直流偏压上。MLCC 加了直流电压，有效容值会比标称值小，小封装、低耐压的尤其明显。这个现象是真的。可按上面的算法，就算 220 nF 一点不缩水，3000 rpm 时悬空那一步也撑不过去。保持时间是更大的那个缺口，偏压该算进它上面的余量里。
+
+Bigger is not automatically better either. The same datasheet asks that the VDD-to-VSS capacitance stay at least five times the bootstrap capacitance once the bootstrap capacitor grows, otherwise recharging it can pull VDD down into undervoltage lockout. On this board each LMG1210 has 10 µF plus 100 nF on VDD, about ten times the 1 µF bootstrap capacitor on paper. Those 10 µF parts are 0603, 25 V MLCCs that shrink under a 5 V bias themselves, so that factor of ten is not wasted.
+
+自举电容也不是越大越好。同一本手册还要求，自举电容加大以后，VDD 到 VSS 的电容至少保持在它的五倍，不然给自举电容补电时会把 VDD 拉下去，触发 VDD 的欠压锁定。板上每颗 LMG1210 的 VDD 旁边是 10 µF 加 100 nF，标称值是 1 µF 自举电容的十倍左右。那几颗 10 µF 是 0603、25 V 的 MLCC，在 5 V 偏压下自己也会缩水，十倍的余量留着不算浪费。
+
+So `tON` cannot come from the PWM period alone. It has to come from the slowest step the motor will see, the sixty electrical degrees a phase spends floating at the lowest working speed, with DC bias and temperature added as margin on top. The 220 nF answer was right for the PWM period and wrong for the motor.
+
+所以自举电容公式里的 `tON` 不能只看 PWM 周期，要按电机最慢的那一步来取：最低工作转速下，一相悬空的那六十度电角度，再在上面给偏压和温度留余量。220 nF 按 PWM 周期算是对的，按电机算就不够了。
