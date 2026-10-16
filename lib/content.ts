@@ -112,10 +112,6 @@ export const getNotes = cache(() =>
   getAllNotes().filter((note) => note.visibility === "public")
 );
 
-export const getFeaturedProjects = cache(() =>
-  getProjects().filter((project) => project.featured)
-);
-
 export const getProject = cache((slug: string) =>
   getProjects().find((project) => project.slug === slug)
 );

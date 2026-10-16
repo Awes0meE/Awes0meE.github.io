@@ -11,9 +11,17 @@ import {
 } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { RouteStage } from "@/components/route-stage";
-import { ProjectEvidenceRow } from "@/components/project-evidence-row";
+import { ProjectCoverFlow, type CoverFlowItem } from "@/components/project-cover-flow";
 import { TechnicalVisual } from "@/components/technical-visual";
-import { getFeaturedProjects, getMediaItems, getNotes } from "@/lib/content";
+import {
+  formatDateRange,
+  formatDateRangeZh,
+  formatStatusZh,
+  getMediaItems,
+  getNotes,
+  getProjectCover,
+  getProjects
+} from "@/lib/content";
 import { site } from "@/lib/site";
 
 function EducationMark({ school }: { school: "ntu" | "xjtlu" | "liverpool" }) {
@@ -43,7 +51,17 @@ function IridiumMarkDivider({ orientation }: { orientation: "vertical" | "horizo
 }
 
 export default function Home() {
-  const featuredProjects = getFeaturedProjects();
+  const coverFlowItems: CoverFlowItem[] = getProjects().map((project) => ({
+    slug: project.slug,
+    title: project.title,
+    titleZh: project.titleZh,
+    status: project.status,
+    statusZh: formatStatusZh(project.status),
+    timeline: formatDateRange(project.date),
+    timelineZh: formatDateRangeZh(project.date),
+    tags: project.tags,
+    cover: getProjectCover(project)
+  }));
   const notes = getNotes().slice(0, 5);
   const media = getMediaItems().slice(0, 6);
 
@@ -92,30 +110,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="project-evidence" className="signal-section signal-project-index" aria-labelledby="project-index-title">
-          <header className="signal-section-header">
-            <h2 id="project-index-title">
-              <BilingualText en="Project evidence index" zh="项目证据索引" />
-            </h2>
-            <Link href="/work">
-              <BilingualText en="Open complete archive" zh="打开完整归档" />
-              <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </header>
-          <div className="signal-project-table">
-            <div className="signal-project-table-head" aria-hidden="true">
-              <span><BilingualText en="No." zh="编号" /></span>
-              <span><BilingualText en="Project" zh="项目" /></span>
-              <span><BilingualText en="Focus" zh="方向" /></span>
-              <span><BilingualText en="Evidence" zh="证据" /></span>
-              <span><BilingualText en="Timeline" zh="时间" /></span>
-              <span />
-            </div>
-            {featuredProjects.map((project, index) => (
-              <ProjectEvidenceRow key={project.slug} index={index} project={project} />
-            ))}
-          </div>
-        </section>
+        <ProjectCoverFlow items={coverFlowItems} />
 
         <section className="signal-section signal-credentials-section" aria-labelledby="credentials-title">
           <header className="signal-section-header">
