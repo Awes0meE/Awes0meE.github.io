@@ -4102,3 +4102,121 @@ html[data-theme="dark"] .theme-image-dark {
 .signal-work-media .project-cover-image {
   padding: clamp(0.5rem, 1.5vw, 1.25rem);
 }
+
+/* Site-wide image lightbox (components/image-lightbox.tsx). Clicking the stage
+   outside the image, pressing Escape or the close button dismisses it. */
+html.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--c-fg));
+  overflow: hidden;
+}
+
+.lightbox[open] {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  animation: lightbox-in var(--motion-base) var(--ease-out-soft);
+}
+
+.lightbox::backdrop {
+  background: rgb(var(--c-canvas) / 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.lightbox-stage {
+  display: grid;
+  min-height: 0;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem) 0.75rem;
+  cursor: zoom-out;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: rgb(var(--c-well));
+  box-shadow: 0 24px 64px rgb(var(--c-shadow) / calc(0.45 * var(--shadow-k)));
+  cursor: default;
+}
+
+.lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem clamp(1rem, 4vw, 3rem) max(1rem, env(safe-area-inset-bottom));
+}
+
+.lightbox-caption {
+  max-width: 72ch;
+  color: rgb(var(--c-t2));
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lightbox-actions {
+  display: flex;
+  flex: none;
+  gap: 0.5rem;
+}
+
+.lightbox-action {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0 0.85rem;
+  border: 1px solid rgb(var(--c-fg) / 0.2);
+  background: rgb(var(--c-panel));
+  color: rgb(var(--c-warm));
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: border-color var(--motion-quick) ease-out, color var(--motion-quick) ease-out;
+}
+
+.lightbox-action:hover,
+.lightbox-action:focus-visible {
+  border-color: rgb(var(--c-ember));
+  color: rgb(var(--c-ember-text));
+}
+
+[data-lightbox] {
+  cursor: zoom-in;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 640px) {
+  .lightbox-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lightbox-actions {
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open] {
+    animation: none;
+  }
+}

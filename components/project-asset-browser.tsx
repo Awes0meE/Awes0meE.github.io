@@ -79,7 +79,7 @@ function getRelatedNoteHref(href: string) {
 function PreviewBody({ asset }: { asset: ProjectAsset }) {
   if (asset.kind === "image") {
     return (
-      <a href={asset.href} className="block bg-well">
+      <a href={asset.href} className="block bg-well" data-lightbox="" data-caption-en={asset.name}>
         <div className="relative min-h-[420px]">
           <Image
             src={asset.href}
