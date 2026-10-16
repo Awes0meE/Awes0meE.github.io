@@ -1,20 +1,58 @@
+/*
+ * /about — online CV. One shared grammar with the rest of the site: sharp
+ * fields, 1px rules, mono coordinates, Barlow display and one signal colour
+ * (ember in Ember Black, cobalt in Bench Paper). Motion is driven by
+ * components/about-motion.tsx through data attributes and stops completely
+ * under prefers-reduced-motion.
+ */
+
 .about {
+  --about-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --about-gutter: clamp(1.5rem, 5vw, 5.5rem);
   min-height: 100dvh;
   overflow: clip;
   background: var(--signal-canvas);
   color: var(--signal-text);
 }
 
-.hero {
+.hero,
+.roadSection,
+.nowSection,
+.offSection,
+.contactSection {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(500px, 0.94fr);
-  min-height: calc(100svh - 78px);
   max-width: 1536px;
   margin-inline: auto;
   border-right: 1px solid var(--signal-line-soft);
   border-bottom: 1px solid var(--signal-line);
   border-left: 1px solid var(--signal-line-soft);
+}
+
+/* Reveal: hidden only once the motion island is ready, so no-JS and
+   reduced-motion readers always see the full page. */
+.about[data-motion-ready="true"] [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 760ms var(--about-ease),
+    transform 760ms var(--about-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.about[data-motion-ready="true"] [data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  min-height: calc(88svh - 78px);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  padding: clamp(5rem, 9vw, 8.5rem) var(--about-gutter) clamp(4rem, 7vw, 6.5rem);
   isolation: isolate;
 }
 
@@ -35,246 +73,155 @@
   pointer-events: none;
 }
 
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: 4%;
+  width: min(54vw, 760px);
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgb(var(--c-halo) / 0.13), transparent 72%);
+  content: "";
+  pointer-events: none;
+}
+
 .heroCopy {
-  position: relative;
-  z-index: 1;
   display: flex;
   min-width: 0;
   flex-direction: column;
-  justify-content: center;
-  padding: clamp(5.5rem, 8vw, 8.5rem) clamp(2.4rem, 6vw, 6.5rem) clamp(4.5rem, 7vw, 7rem);
-  border-right: 1px solid var(--signal-line);
-  animation: aboutFieldReveal 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.heroCopy::after {
-  position: absolute;
-  right: -1px;
-  bottom: 12%;
-  width: 1px;
-  height: 22%;
+/* The hero animates in with CSS alone, so it never waits on hydration. */
+.heroCopy > *,
+.portraitPlate {
+  animation: aboutRise 900ms var(--about-ease) both;
+}
+
+.heroCopy > :nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.heroCopy > :nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.heroCopy > :nth-child(4) {
+  animation-delay: 270ms;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--signal-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow > span:first-child {
+  color: var(--signal-ember-text);
+}
+
+.eyebrow::after {
+  width: 56px;
+  height: 1px;
   background: var(--signal-orange);
-  box-shadow: 0 14px 28px rgb(var(--c-halo) / 0.22);
   content: "";
 }
 
 .name {
-  max-width: 8ch;
+  margin-top: 1.4rem;
   color: var(--signal-warm-white);
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-size: clamp(5.5rem, 8.6vw, 8.2rem);
+  font-size: clamp(5rem, 10vw, 9.5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 0.78;
-  text-wrap: balance;
+  line-height: 0.82;
 }
 
 .heroStatement {
-  max-width: 18ch;
-  margin-top: clamp(1.75rem, 3vw, 2.6rem);
-  color: var(--signal-warm-white);
-  font-size: clamp(2rem, 3.4vw, 3.55rem);
-  font-weight: 750;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  max-width: 22ch;
+  margin-top: clamp(1.5rem, 2.6vw, 2.2rem);
+  color: var(--signal-ember-text);
+  font-size: clamp(1.55rem, 2.5vw, 2.45rem);
+  font-weight: 720;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
   text-wrap: balance;
+}
+
+.statementLine {
+  display: block;
+  white-space: nowrap;
 }
 
 :global(html[data-lang="en"]) .heroStatement {
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
   font-weight: 600;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
-:global(html[data-lang="zh"]) .heroStatement {
-  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
-}
-
-.narrative {
-  display: grid;
-  max-width: 72ch;
-  margin-top: clamp(1.7rem, 3vw, 2.7rem);
-  gap: 1rem;
-  color: rgb(var(--c-t2));
-  font-size: clamp(0.94rem, 1.15vw, 1.08rem);
-  line-height: 1.72;
-}
-
-.narrative p:first-child {
+.heroIntro {
+  max-width: 60ch;
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
   color: rgb(var(--c-t1));
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.8;
 }
 
-.heroActions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  margin-top: clamp(2rem, 3vw, 2.8rem);
-  gap: 0.75rem;
+:global(html[data-lang="zh"]) .heroIntro {
+  line-height: 1.95;
 }
 
-.primaryAction,
-.secondaryAction {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.68rem;
-  padding: 0.8rem 1.05rem;
-  text-decoration: none;
-  transition:
-    background-color 180ms ease-out,
-    color 180ms ease-out,
-    border-color 180ms ease-out,
-    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.primaryAction {
-  border: 1px solid var(--signal-orange);
-  color: var(--signal-ember-text);
-  font-size: 0.945rem;
-  font-weight: 750;
-  letter-spacing: 0.02em;
-}
-
-.secondaryAction {
-  border: 1px solid var(--signal-line);
-  color: var(--signal-warm-white);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.885rem;
-  letter-spacing: 0.04em;
-}
-
-.mailRoute {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  max-width: 31rem;
-  min-height: 58px;
-  align-items: center;
-  margin-top: 1.25rem;
-  gap: 0.8rem;
-  padding-block: 0.8rem;
-  border-top: 1px solid var(--signal-line);
-  border-bottom: 1px solid var(--signal-line-soft);
-  color: var(--signal-muted);
-  text-decoration: none;
-  transition: color 180ms ease-out, border-color 180ms ease-out;
-}
-
-.mailRoute span {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.mailRoute small {
-  overflow: hidden;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  letter-spacing: 0.025em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.tensionColumn {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  min-width: 0;
-  align-content: center;
-  padding: clamp(4.7rem, 6vw, 6.5rem) clamp(2rem, 4vw, 4.75rem) clamp(4rem, 6vw, 5.5rem);
-  background:
-    linear-gradient(90deg, transparent 0 49.9%, rgb(var(--c-fg) / 0.035) 50%, transparent 50.1%),
-    rgb(var(--c-deep));
-  animation: aboutFieldReveal 880ms 90ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.tensionColumn::before,
-.tensionColumn::after {
-  position: absolute;
-  right: 8%;
-  left: 8%;
-  height: 1px;
-  background: var(--signal-line-soft);
-  content: "";
-}
-
-.tensionColumn::before {
-  top: 3.4rem;
-}
-
-.tensionColumn::after {
-  bottom: 3.4rem;
-}
-
-.tensionHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.85fr);
-  align-items: end;
-  gap: 1.5rem;
-  padding-bottom: 1.15rem;
-  border-bottom: 1px solid var(--signal-line);
-}
-
-.tensionHeader h2 {
-  color: var(--signal-warm-white);
-  font-size: clamp(1.45rem, 2vw, 2.1rem);
-  font-weight: 750;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-}
-
-:global(html[data-lang="en"]) .tensionHeader h2 {
-  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.035em;
-  text-transform: uppercase;
-}
-
-.tensionHeader p {
-  color: var(--signal-muted);
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-
-.tensionGraph {
-  display: grid;
-  grid-template-columns: minmax(185px, 0.88fr) minmax(235px, 1.12fr);
-  min-height: 500px;
-  align-items: center;
-  gap: clamp(1.4rem, 2.2vw, 2.4rem);
-}
-
+/* Portrait: the original image is never filtered, cropped or recoloured.
+   Motion lives only in the orbit drawn around the plate. */
 .portraitPlate {
   position: relative;
-  align-self: center;
+  animation-delay: 220ms;
+  justify-self: center;
+  width: min(100%, 380px);
   margin: 0;
   background: #ffffff;
   box-shadow: 0 28px 72px rgb(var(--c-shadow) / calc(0.42 * var(--shadow-k)));
 }
 
-.portraitPlate::before,
-.portraitPlate::after {
+.portraitOrbit {
   position: absolute;
-  z-index: 2;
-  width: 18px;
-  height: 18px;
-  border-color: var(--signal-muted);
-  content: "";
+  z-index: -1;
+  inset: -16%;
+  border: 1px dashed rgb(var(--c-fg) / 0.16);
+  border-radius: 50%;
+  animation: aboutOrbit 28s linear infinite;
+  animation-play-state: paused;
   pointer-events: none;
 }
 
-.portraitPlate::before {
-  top: -8px;
-  left: -8px;
-  border-top: 1px solid;
-  border-left: 1px solid;
+.portraitOrbit::before,
+.portraitOrbit::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
 }
 
-.portraitPlate::after {
-  right: -8px;
-  bottom: -8px;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
+.portraitOrbit::before {
+  top: 50%;
+  left: -6px;
+  width: 11px;
+  height: 11px;
+  background: var(--signal-orange);
+  box-shadow: 0 0 18px rgb(var(--c-halo) / 0.7);
+}
+
+.portraitOrbit::after {
+  inset: 9%;
+  border: 1px solid rgb(var(--c-fg) / 0.08);
+}
+
+.portraitPlate[data-motion="running"] .portraitOrbit {
+  animation-play-state: running;
 }
 
 .portraitImage {
@@ -283,10 +230,7 @@
   height: auto;
   aspect-ratio: 1;
   background: #ffffff;
-  filter: none;
-  mix-blend-mode: normal;
   object-fit: contain;
-  opacity: 1;
 }
 
 .portraitPlate figcaption {
@@ -295,532 +239,549 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.6rem 0.72rem;
+  padding: 0.6rem 0.8rem;
+  border-top: 1px solid #e5e5e5;
   background: #ffffff;
-  color: rgb(var(--c-on-ember));
+  color: #1e293b;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
 }
 
-.portraitPlate figcaption span {
-  color: rgb(var(--c-t6));
+.portraitPlate figcaption span:last-child {
+  color: #64748b;
 }
 
-.tensionTrack {
-  --pulse-travel: 410px;
+/* ---------- Embedded-world ticker ---------- */
+
+.ticker {
   position: relative;
-}
-
-.tensionStages {
-  position: relative;
-  display: grid;
-  min-height: 470px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tensionStages::before {
-  position: absolute;
-  top: 27px;
-  bottom: 27px;
-  left: 22px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--signal-line), rgb(var(--c-t4)) 48%, var(--signal-line));
-  content: "";
-}
-
-.tensionStage {
-  position: relative;
-  display: grid;
-  grid-template-columns: 45px minmax(0, 1fr);
-  align-items: center;
-  gap: 1.15rem;
-}
-
-.tensionStage::after {
-  position: absolute;
-  right: 0;
-  left: 44px;
-  z-index: -1;
-  height: 1px;
-  background: var(--signal-line-soft);
-  content: "";
-  transition: background-color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: left;
-}
-
-.tensionNode {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  width: 45px;
-  height: 45px;
-  place-items: center;
-  border: 1px solid rgb(var(--c-t5));
-  border-radius: 50%;
-  background: rgb(var(--c-deep));
-  box-shadow: 0 9px 24px rgb(var(--c-shadow) / calc(0.3 * var(--shadow-k)));
-  transition: border-color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tensionNode::before {
-  width: 17px;
-  height: 17px;
-  border: 1px solid rgb(var(--c-t6));
-  border-radius: 50%;
-  content: "";
-}
-
-.tensionNode span {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--signal-orange);
-  box-shadow: 0 0 12px rgb(var(--c-halo) / 0.38);
-}
-
-.tensionStage > div {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 0.28rem;
-  padding: 0.8rem 0.9rem 0.8rem 0;
-  background: rgb(var(--c-deep));
-  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.stageIndex {
-  color: var(--signal-ember-text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.tensionStage strong {
-  color: var(--signal-warm-white);
-  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-size: clamp(1.18rem, 1.65vw, 1.58rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-:global(html[data-lang="zh"]) .tensionStage strong {
-  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
-  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
-  font-weight: 750;
-  letter-spacing: 0.03em;
-  text-transform: none;
-}
-
-.tensionStage small {
-  color: var(--signal-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  letter-spacing: 0.025em;
-  line-height: 1.45;
-}
-
-.tensionPulse {
-  position: absolute;
-  top: 22px;
-  left: 17px;
-  z-index: 3;
-  width: 11px;
-  height: 11px;
-  border: 1px solid var(--signal-orange-soft);
-  border-radius: 50%;
-  background: var(--signal-orange);
-  box-shadow:
-    0 0 0 5px rgb(var(--c-ember) / 0.09),
-    0 8px 24px rgb(var(--c-ember) / 0.42);
-  opacity: 0.42;
-  pointer-events: none;
-}
-
-.tensionColumn[data-motion="running"] .tensionPulse {
-  animation: tensionTravel 5.8s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
-  opacity: 1;
-  will-change: transform;
-}
-
-.nextLedgerCue {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 4;
-  display: flex;
-  width: 47%;
-  min-height: 58px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-inline: clamp(2rem, 4vw, 4rem);
-  border-top: 1px solid var(--signal-line-soft);
-  background: rgb(var(--c-canvas) / 0.86);
-  color: var(--signal-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 180ms ease-out;
-}
-
-.nextLedgerCue svg {
-  color: var(--signal-ember-text);
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.routeSection,
-.currentSection {
   max-width: 1536px;
   margin-inline: auto;
+  overflow: hidden;
   border-right: 1px solid var(--signal-line-soft);
   border-bottom: 1px solid var(--signal-line);
   border-left: 1px solid var(--signal-line-soft);
+  background: rgb(var(--c-deep));
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-.routeSection {
-  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5.5rem);
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: aboutTicker 52s linear infinite;
+  animation-play-state: paused;
 }
 
-.sectionHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(18rem, 0.68fr);
-  align-items: end;
-  gap: clamp(2rem, 6vw, 7rem);
-  padding-bottom: clamp(2rem, 4vw, 3.5rem);
-  border-bottom: 1px solid var(--signal-line);
+.ticker[data-motion="running"] .tickerTrack {
+  animation-play-state: running;
 }
 
-.sectionHeader h2,
-.currentLead h2 {
-  max-width: 15ch;
-  color: var(--signal-warm-white);
-  font-size: clamp(2.8rem, 5.2vw, 5.2rem);
-  font-weight: 750;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  text-wrap: balance;
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+  padding: 1.15rem 0 1.15rem 2.2rem;
+  color: var(--signal-muted);
+  font-size: 1.05rem;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
-:global(html[data-lang="en"]) .sectionHeader h2,
-:global(html[data-lang="en"]) .currentLead h2 {
+:global(html[data-lang="en"]) .tickerItem {
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.sectionHeader p {
-  max-width: 58ch;
-  color: var(--signal-muted);
-  font-size: 1.0025rem;
-  line-height: 1.7;
+.tickerItem::after {
+  width: 7px;
+  height: 7px;
+  background: var(--signal-orange);
+  content: "";
+  transform: rotate(45deg);
 }
 
-.practiceList {
+.tickerItem:nth-child(9n) {
+  color: var(--signal-warm-white);
+}
+
+/* ---------- Section frame ---------- */
+
+.roadSection,
+.nowSection,
+.offSection {
+  padding: clamp(4.5rem, 8vw, 8rem) var(--about-gutter);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  padding-bottom: clamp(1.6rem, 3vw, 2.6rem);
+  border-bottom: 1px solid var(--signal-line);
+}
+
+.sectionIndex {
+  color: var(--signal-ember-text);
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sectionHeader h2,
+.contactSection h2 {
+  color: var(--signal-warm-white);
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+:global(html[data-lang="en"]) .sectionHeader h2,
+:global(html[data-lang="en"]) .contactSection h2 {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.roadStory p,
+.nowCopy p,
+.offCopy p {
+  max-width: 64ch;
+  color: rgb(var(--c-t2));
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.82;
+}
+
+:global(html[data-lang="zh"]) :is(.roadStory, .nowCopy, .offCopy) p {
+  line-height: 1.95;
+}
+
+/* ---------- The road so far ---------- */
+
+.roadLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  align-items: start;
+  gap: clamp(2.5rem, 6vw, 6.5rem);
+  margin-top: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.roadStory {
+  position: sticky;
+  top: 112px;
+  display: grid;
+  gap: 1.15rem;
+}
+
+.roadStory p:first-child {
+  color: rgb(var(--c-t1));
+  font-size: clamp(1.08rem, 1.35vw, 1.22rem);
+}
+
+.studioNote {
+  padding: 1rem 0 0 1rem;
+  border-top: 1px solid var(--signal-line-soft);
+  border-left: 1px solid var(--signal-orange);
+}
+
+.roadTrack {
+  --road-progress: 1;
+  position: relative;
+  padding-left: 44px;
+}
+
+.roadRail {
+  position: absolute;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  left: 14px;
+  width: 1px;
+  background: var(--signal-line);
+}
+
+.roadRailFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--signal-orange);
+  box-shadow: 0 0 14px rgb(var(--c-halo) / 0.55);
+  transform: scaleY(var(--road-progress));
+  transform-origin: top;
+}
+
+.roadList {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.practiceRow {
+.roadStop {
   position: relative;
   display: grid;
-  grid-template-columns: 70px minmax(220px, 0.8fr) minmax(0, 1.2fr);
-  align-items: start;
-  gap: clamp(1.25rem, 3vw, 3rem);
-  padding-block: clamp(2rem, 4vw, 3.3rem);
+  gap: 0.55rem;
+  padding-block: clamp(1.3rem, 2.4vw, 1.9rem);
   border-bottom: 1px solid var(--signal-line-soft);
-  transition: background-color 180ms ease-out;
 }
 
-.practiceRow::after {
+.roadStop:first-child {
+  padding-top: 0;
+}
+
+.roadNode {
   position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 1px;
+  top: calc(clamp(1.3rem, 2.4vw, 1.9rem) + 0.32rem);
+  left: -35px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--signal-orange);
+  background: var(--signal-canvas);
+  transform: rotate(45deg);
+  transition:
+    background-color 320ms ease-out,
+    box-shadow 320ms ease-out;
+}
+
+.roadStop:first-child .roadNode {
+  top: 0.32rem;
+}
+
+.roadStop[data-lit="true"] .roadNode {
   background: var(--signal-orange);
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 16px rgb(var(--c-halo) / 0.65);
 }
 
-.practiceIndex {
-  color: var(--signal-ember-text);
-  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-size: 2.1rem;
-  font-weight: 600;
-  line-height: 0.9;
-}
-
-.practiceTitle {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.practiceTitle h3 {
-  max-width: 18ch;
-  color: var(--signal-warm-white);
-  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
-  font-weight: 720;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-}
-
-:global(html[data-lang="en"]) .practiceTitle h3 {
-  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
-}
-
-.practiceTitle > span {
+.roadWhen {
   color: var(--signal-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  line-height: 1.5;
+  letter-spacing: 0.08em;
 }
 
-.practiceRow > p {
-  max-width: 68ch;
-  color: rgb(var(--c-t2));
-  font-size: clamp(0.9rem, 1.1vw, 1.02rem);
-  line-height: 1.72;
+.roadStop[data-lit="true"] .roadWhen {
+  color: var(--signal-ember-text);
 }
 
-.currentSection {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-}
-
-.currentLead,
-.coordinateLedger {
-  padding: clamp(4rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5.5rem);
-}
-
-.currentLead {
-  display: grid;
-  min-height: 520px;
-  align-content: space-between;
-  border-right: 1px solid var(--signal-line);
-}
-
-.currentLead p {
-  max-width: 60ch;
-  color: rgb(var(--c-t2));
-  font-size: clamp(1rem, 1.5vw, 1.28rem);
-  line-height: 1.72;
-}
-
-.coordinateLedger {
-  display: grid;
-  align-content: space-between;
-  gap: clamp(3rem, 6vw, 6rem);
-  background: var(--signal-surface);
-}
-
-.educationList {
-  display: grid;
-}
-
-.educationList > div {
-  display: grid;
-  gap: 0.65rem;
-  padding-block: 1.6rem;
-  border-bottom: 1px solid var(--signal-line-soft);
-}
-
-.educationList > div:first-child {
-  border-top: 1px solid var(--signal-line);
-}
-
-.educationList dt {
-  color: var(--signal-warm-white);
-  font-size: clamp(1.08rem, 1.6vw, 1.4rem);
-  font-weight: 720;
-  line-height: 1.35;
-}
-
-.educationList dd {
-  color: var(--signal-muted);
-  font-size: 0.925rem;
-  line-height: 1.55;
-}
-
-.contactRoutes {
-  display: grid;
-  border-top: 1px solid var(--signal-line);
-}
-
-.contactRoutes a {
-  display: flex;
-  min-height: 62px;
+.roadLink {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 44px;
   align-items: center;
+  gap: 0.6rem;
+  color: var(--signal-warm-white);
+  text-decoration: none;
+  transition: color 180ms ease-out;
+}
+
+.roadLink h3 {
+  font-size: clamp(1.25rem, 1.9vw, 1.65rem);
+  font-weight: 720;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+:global(html[data-lang="en"]) .roadLink h3 {
+  font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.roadLink svg {
+  flex: none;
+  color: var(--signal-muted);
+  transition:
+    transform 260ms var(--about-ease),
+    color 180ms ease-out;
+}
+
+.roadStop > p {
+  max-width: 62ch;
+  color: rgb(var(--c-t3));
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* ---------- Work in progress ---------- */
+
+.nowLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: start;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  margin-top: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.nowCopy {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.nowCopy p:first-child {
+  color: rgb(var(--c-t1));
+}
+
+.availability {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--signal-line);
+  border-left: 2px solid var(--signal-orange);
+  background: rgb(var(--c-panel));
+}
+
+.signalScope {
+  --reveal-delay: 120ms;
+  position: sticky;
+  top: 112px;
+  margin: 0;
+  border: 1px solid var(--signal-line);
+  background: rgb(var(--c-deep));
+}
+
+.scopeHeader,
+.scopeFooter {
+  display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding-inline: 0.2rem;
-  border-bottom: 1px solid var(--signal-line-soft);
-  color: var(--signal-warm-white);
-  font-size: 1.005rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 180ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem 1rem;
+  color: var(--signal-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
 }
+
+.scopeHeader {
+  border-bottom: 1px solid var(--signal-line-soft);
+}
+
+.scopeHeader span:last-child,
+.scopeFooter span:last-child {
+  color: var(--signal-ember-text);
+}
+
+.scopeFooter {
+  border-top: 1px solid var(--signal-line-soft);
+}
+
+.scopeSvg {
+  display: block;
+  width: 100%;
+  height: clamp(200px, 22vw, 280px);
+  overflow: hidden;
+}
+
+.scopeGrid line {
+  stroke: rgb(var(--c-fg) / 0.07);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.scopeScroll {
+  animation: aboutScope 7s linear infinite;
+  animation-play-state: paused;
+}
+
+.signalScope[data-motion="running"] .scopeScroll {
+  animation-play-state: running;
+}
+
+.scopeRaw,
+.scopeClean {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.scopeRaw {
+  stroke: rgb(var(--c-t4));
+  stroke-linejoin: round;
+  stroke-width: 1.25;
+}
+
+.scopeClean {
+  stroke: var(--signal-orange);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgb(var(--c-halo) / 0.6));
+}
+
+/* ---------- Off the clock ---------- */
+
+.offLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  margin-top: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.hobbyList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hobby {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--signal-line-soft);
+  background: rgb(var(--c-panel));
+  color: rgb(var(--c-t1));
+  font-size: 1rem;
+  transition:
+    border-color 200ms ease-out,
+    transform 260ms var(--about-ease),
+    opacity 760ms var(--about-ease);
+}
+
+.hobby svg {
+  flex: none;
+  color: var(--signal-ember-text);
+  transition: transform 320ms var(--about-ease);
+}
+
+.offCopy {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.offCopy p:first-child {
+  color: rgb(var(--c-t1));
+}
+
+/* ---------- Contact ---------- */
+
+.contactSection {
+  display: grid;
+  gap: clamp(1.8rem, 3vw, 2.6rem);
+  padding: clamp(4rem, 7vw, 6.5rem) var(--about-gutter) clamp(4.5rem, 8vw, 7rem);
+}
+
+.contactList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contactList li:nth-child(2) {
+  --reveal-delay: 80ms;
+}
+
+.contactList li:nth-child(3) {
+  --reveal-delay: 160ms;
+}
+
+.contactLink {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-height: 84px;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--signal-line);
+  color: var(--signal-warm-white);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.contactLink span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Hover ---------- */
 
 @media (hover: hover) and (pointer: fine) {
-  .secondaryAction:hover,
-  .secondaryAction:focus-visible {
-    border-color: var(--signal-muted);
+  .roadLink:hover,
+  .roadLink:focus-visible {
     color: var(--signal-ember-text);
   }
 
-  .mailRoute:hover,
-  .mailRoute:focus-visible {
-    border-color: var(--signal-ember-ink);
+  .roadLink:hover svg,
+  .roadLink:focus-visible svg {
     color: var(--signal-ember-text);
+    transform: translate(3px, -3px);
   }
 
-  .tensionStage:hover .tensionNode {
-    border-color: var(--signal-ember-text);
-    transform: scale(1.08);
+  .hobby:hover {
+    border-color: var(--signal-orange);
+    transform: translateY(-3px);
   }
 
-  .tensionStage:hover::after {
-    background: var(--signal-orange);
-    transform: scaleX(1.02);
-  }
-
-  .tensionStage:hover > div {
-    transform: translateX(5px);
-  }
-
-  .practiceRow:hover {
-    background: rgb(var(--c-glow) / 0.018);
-  }
-
-  .practiceRow:hover::after {
-    transform: scaleX(1);
-  }
-
-  .contactRoutes a:hover,
-  .contactRoutes a:focus-visible {
-    color: var(--signal-ember-text);
-    transform: translateX(5px);
-  }
-
-  .nextLedgerCue:hover,
-  .nextLedgerCue:focus-visible {
-    color: var(--signal-warm-white);
-  }
-
-  .nextLedgerCue:hover svg,
-  .nextLedgerCue:focus-visible svg {
-    transform: translateY(4px);
+  .hobby:hover svg {
+    transform: rotate(-12deg) scale(1.12);
   }
 }
 
-@keyframes aboutFieldReveal {
+/* ---------- Keyframes ---------- */
+
+@keyframes aboutRise {
   from {
-    opacity: 0.78;
-    filter: blur(2px);
-    clip-path: inset(0 0 8% 0);
-    transform: translateY(18px);
+    opacity: 0;
+    transform: translateY(24px);
   }
+}
+
+@keyframes aboutOrbit {
   to {
-    opacity: 1;
-    filter: blur(0);
-    clip-path: inset(0);
-    transform: translateY(0);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes tensionTravel {
-  0%,
-  8% {
-    transform: translateY(0);
-  }
-  92%,
-  100% {
-    transform: translateY(var(--pulse-travel));
+@keyframes aboutTicker {
+  to {
+    transform: translateX(-50%);
   }
 }
 
-@media (max-width: 1180px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(440px, 0.88fr);
-  }
-
-  .heroCopy {
-    padding-inline: clamp(2.4rem, 4vw, 4rem);
-  }
-
-  .tensionColumn {
-    padding-inline: 2rem;
-  }
-
-  .tensionGraph {
-    grid-template-columns: minmax(125px, 0.65fr) minmax(230px, 1.35fr);
-    gap: 1.7rem;
-  }
-
-  .tensionStage strong {
-    font-size: 1.22rem;
+@keyframes aboutScope {
+  to {
+    transform: translateX(-480px);
   }
 }
+
+/* ---------- Responsive ---------- */
 
 @media (max-width: 980px) {
   .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
 
-  .heroCopy {
-    min-height: calc(100svh - 142px);
-    border-right: 0;
-    border-bottom: 1px solid var(--signal-line);
+  .portraitPlate {
+    justify-self: start;
+    width: min(72vw, 320px);
+    margin-left: 12%;
   }
 
-  .heroCopy::after {
-    right: 12%;
-    bottom: -1px;
-    width: 24%;
-    height: 1px;
+  .roadLayout,
+  .nowLayout,
+  .offLayout {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .name {
-    max-width: none;
-  }
-
-  .tensionColumn {
-    min-height: 680px;
-  }
-
-  .tensionGraph {
-    grid-template-columns: minmax(180px, 0.72fr) minmax(300px, 1.28fr);
-  }
-
-  .nextLedgerCue {
+  .roadStory,
+  .signalScope {
     position: static;
-    grid-column: 1;
-    width: auto;
-    min-height: 64px;
-    padding-inline: 2rem;
   }
 
-  .currentLead {
-    min-height: 460px;
+  .contactList {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -829,209 +790,71 @@
     width: 10px;
   }
 
-  .heroCopy {
-    min-height: auto;
-    padding: 5.6rem 1.5rem 4rem;
+  .hero {
+    padding-top: 3.5rem;
   }
 
   .name {
-    font-size: clamp(4.25rem, 21vw, 6rem);
+    font-size: clamp(4rem, 19vw, 5.5rem);
   }
 
-  .heroStatement {
-    max-width: 14ch;
-    font-size: clamp(2.3rem, 10.5vw, 3.8rem);
+  .roadTrack {
+    padding-left: 34px;
   }
 
-  :global(html[data-lang="zh"]) .heroStatement {
-    max-width: 9ch;
+  .roadRail {
+    left: 9px;
   }
 
-  .narrative {
-    font-size: 1.0025rem;
-    line-height: 1.7;
+  .roadNode {
+    left: -30px;
   }
 
-  .heroActions {
-    display: grid;
-    grid-template-columns: 1fr;
+  .hobbyList {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .primaryAction,
-  .secondaryAction {
-    justify-content: space-between;
-  }
-
-  .tensionColumn {
-    min-height: auto;
-    padding: 4.6rem 1.5rem;
-  }
-
-  .nextLedgerCue {
-    padding-inline: 1.5rem;
-  }
-
-  .tensionColumn::before,
-  .tensionColumn::after {
-    right: 1.5rem;
-    left: 1.5rem;
-  }
-
-  .tensionHeader {
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: 0.8rem;
-  }
-
-  .tensionHeader p {
-    max-width: 42ch;
-  }
-
-  .tensionGraph {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    gap: 3.5rem;
-    padding-top: 3rem;
-  }
-
-  .portraitPlate {
-    width: min(68vw, 300px);
-    justify-self: center;
-  }
-
-  .tensionTrack {
-    --pulse-travel: 335px;
-  }
-
-  .tensionStages {
-    min-height: 395px;
-  }
-
-  .sectionHeader,
-  .currentSection {
-    grid-template-columns: 1fr;
-  }
-
-  .sectionHeader {
-    align-items: start;
-  }
-
-  .practiceRow {
-    grid-template-columns: 48px minmax(0, 1fr);
-    gap: 1rem;
-  }
-
-  .practiceRow > p {
-    grid-column: 2;
-  }
-
-  .practiceIndex {
-    font-size: 1.65rem;
-  }
-
-  .currentLead {
-    min-height: 440px;
-    border-right: 0;
-    border-bottom: 1px solid var(--signal-line);
-  }
-
-  .currentLead p {
-    margin-top: 3rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .heroCopy,
-  .tensionColumn,
-  .routeSection,
-  .currentLead,
-  .coordinateLedger {
-    padding-inline: 1.1rem;
-  }
-
-  .name {
-    font-size: clamp(3.85rem, 20vw, 5rem);
-  }
-
-  .heroStatement {
-    font-size: clamp(2.15rem, 10.5vw, 3.1rem);
-  }
-
-  .mailRoute small {
-    max-width: 14rem;
-  }
-
-  .portraitPlate {
-    width: min(76vw, 280px);
-  }
-
-  .tensionStage {
-    gap: 0.85rem;
-  }
-
-  .tensionStage > div {
-    padding-right: 0;
-  }
-
-  .tensionStage strong {
-    font-size: 1.12rem;
-  }
-
-  .tensionStage small {
+  .scopeHeader,
+  .scopeFooter {
     font-size: 0.875rem;
-  }
-
-  .sectionHeader h2,
-  .currentLead h2 {
-    font-size: clamp(2.55rem, 13vw, 3.8rem);
-  }
-
-  .practiceRow {
-    grid-template-columns: 38px minmax(0, 1fr);
-  }
-
-  .practiceTitle h3 {
-    font-size: 1.35rem;
+    letter-spacing: 0.02em;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroCopy,
-  .tensionColumn,
-  .tensionPulse {
+  .heroCopy > *,
+  .portraitPlate,
+  .portraitOrbit,
+  .tickerTrack,
+  .scopeScroll {
     animation: none !important;
   }
 
-  .heroCopy,
-  .tensionColumn {
-    filter: none;
-    clip-path: none;
-    transform: none;
+  .tickerTrack {
+    width: auto;
+    flex-wrap: wrap;
+    padding-right: 2.2rem;
   }
 
-  .primaryAction,
-  .secondaryAction,
-  .mailRoute,
-  .tensionNode,
-  .tensionStage::after,
-  .tensionStage > div,
-  .practiceRow,
-  .practiceRow::after,
-  .contactRoutes a,
-  .nextLedgerCue,
-  .nextLedgerCue svg {
+  .tickerItem:nth-child(n + 10) {
+    display: none;
+  }
+
+  .ticker {
+    mask-image: none;
+  }
+
+  .roadNode,
+  .roadLink,
+  .roadLink svg,
+  .hobby,
+  .hobby svg {
     transition: none !important;
   }
 
-  .tensionStage:hover .tensionNode,
-  .tensionStage:hover::after,
-  .tensionStage:hover > div,
-  .primaryAction:hover,
-  .primaryAction:focus-visible,
-  .secondaryAction:hover,
-  .secondaryAction:focus-visible,
-  .nextLedgerCue:hover svg,
-  .nextLedgerCue:focus-visible svg {
+  .roadLink:hover svg,
+  .hobby:hover,
+  .hobby:hover svg {
     transform: none !important;
   }
 }

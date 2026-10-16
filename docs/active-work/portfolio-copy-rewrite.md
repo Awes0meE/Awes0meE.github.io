@@ -46,3 +46,17 @@ These are editorial working notes, not sentences to paste into the project pages
 On 2026-10-15 the DIY Cooling, Digital Clock, Tianjin and Nanjing Turing homepages and their two study notes each, plus both Claude Chime notes, were rewritten with the writer from the raw Codex interviews kept on the MacBook (`~/.codex/archived_sessions/`, 2026-08-11 to 2026-08-13) and the confirmed briefs. The Claude Chime homepage and the four original Turing source-document notes were left unchanged; Smart Car, Juanyun thermal and FOC were interviewed on the Windows machine and were not in scope. The before/after reader is `docs/experiments/mac-interview-rewrite-2026-10-15/comparison.html`.
 
 The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](https://github.com/Awes0meE/Awes0meE.github.io/pull/40), with the comparison drafts in `docs/experiments/claude-chime-homepage-three-way-2026-10-13/`; the matching writer rules are [PR #39](https://github.com/Awes0meE/Awes0meE.github.io/pull/39). The seven-homepage release is [PR #36](https://github.com/Awes0meE/Awes0meE.github.io/pull/36), merged at `8e009ef`; its nine-public-note counts and 31 production checks describe that checkpoint. Claude Chime's approved homepage was published through PR #35. Earlier interviews and decisions are in project briefs and `docs/session-log.md`; dated experiment packets preserve review evidence rather than current publication instructions.
+
+## About Page Brief (confirmed 2026-10-16)
+
+`/about` is the owner's online CV for recruiters, supervisors and collaborators. Project detail stays on the project pages.
+
+- The turn from telecommunications was gradual. Foundation courses on microcontrollers, circuits and motor control hooked him. He wanted to know how the world runs and came to see it as one huge embedded system, from traffic lights to lithography machines. He taught himself from online roadmaps, then started building projects.
+- He co-founded the XJTLU Hardware Studio and led its electronic hardware. Modelling and mechanics were handled by others.
+- At NTU (MSc RIS, Aug 2026–Feb 2028) he works in Assoc. Prof. Wang Yifan's Robotic Materials Group on wearable bioimpedance and EMG sensing hardware for human–robot interaction. His dissertation is a miniaturised wearable acquisition platform.
+- He uses PID, LQR, NMPC, EMA, lock-in amplification, SINC3, and Kalman filtering/EKF, and finds the control and signal-processing sides complementary.
+- His direction is embodied AI and world models: solid hardware first, then reinforcement learning and model training on the collected data.
+- The student pass caps work at 16 h/week, so he is looking for RA or part-time roles.
+- Off the clock: cutting weight, gym, badminton, road cycling, piano, chess, talking with AI, occasional writing. On AI: it raises everyone's floor and the world's ceiling, but thinking stays his own ("teach me to fish"). The Chinese page may carry the meme; English keeps only the idea.
+- Section headings: 我走的路 / The Road So Far, 在做的事 / Work in Progress, 认真之余 / Off the Clock. English is adapted, not translated literally.
+- The GaN-versus-silicon ESC dissertation is not on the page until its project page exists.
