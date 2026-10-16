@@ -117,10 +117,14 @@ complete account of the work so far.
 Possible endings include:
 
 - the final verification that settled the active question;
-- a real remaining question the writer wants to investigate;
 - a practical consequence of the explanation just developed;
 - a supported reaction to the work's actual result;
-- a new connection that combines earlier learning without pretending every question is closed.
+- a new connection that combines earlier learning.
+
+Do not close on what stayed unknown, unanswered or unresolved, and do not add a
+sentence announcing it anywhere else (the user's 2026-10-17 rule in
+`reader-prose-hard-gates.md`). An internal cognition trail may still leave a
+branch open; the published account ends on what was actually found or done.
 
 None of these forms is mandatory. Read the final section as an ending, especially
 after cutting audit commentary. If only a measurement, filename, or isolated

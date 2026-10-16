@@ -154,4 +154,3 @@ Primary flashing artefact:
 - SHA256: `FF165CFFB8CC8AF5548FBBB984E36A83FB7576C29A182955697DF3352D440BD6`
 
 The `.hex` and `.elf` outputs are preserved alongside the `.bin` for reproducibility and debugging.
-

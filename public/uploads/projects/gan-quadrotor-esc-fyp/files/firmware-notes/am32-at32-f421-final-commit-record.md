@@ -13,4 +13,3 @@ Date: 2026-05-17
 - Primary firmware SHA256: `FF165CFFB8CC8AF5548FBBB984E36A83FB7576C29A182955697DF3352D440BD6`
 
 This record marks the code state used as the final AM32/AT32F421 firmware for the FYP thesis experiments.
-

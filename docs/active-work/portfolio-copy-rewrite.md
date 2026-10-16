@@ -63,7 +63,7 @@ The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](htt
 
 ## GaN Quadrotor ESC FYP Brief (confirmed 2026-10-17)
 
-This brief is for `gan-quadrotor-esc-fyp` and its four notes. It was confirmed after two `grilling` rounds.
+This brief is for `gan-quadrotor-esc-fyp` and its five notes. They were published through PR #48 (merged at `da94d8f`). It was confirmed after two `grilling` rounds.
 
 - Motive: motor drives and drone videos drew Alvin in, and he wanted to work at DJI. No flight-controller topic was on the XJTLU list, so he took Prof. Tianru Zhang's quadrotor ESC topic. GaN was the 2025 talking point, from chargers to EV drives. The project ran from 2025-09 to 2026-05.
 - Routes: the GaN board uses INN100EA035A and LMG1210, and the Si reference uses NTTFS010N10MCL and FD6288Q. Both use an AT32F421 with AM32, and an STM32F103 serves as test controller. They were pitched as parallel routes, then the thesis narrowed to GaN at the supervisor's suggestion.

@@ -68,6 +68,8 @@ Reject counted scaffold labels and forward road signs that expose the article's 
 
 The user's 2026-09-06 rule applies to project homepages and learning notes in both languages. Reject commentary whose function is to inventory evidence, announce the limits of the archive, or certify which achievements cannot be claimed. Typical forms include `现有证据只能说明……`, `不能据此声称……`, `这还不能证明……`, `只能算阶段结果，不能当作……`, `the available evidence only establishes ...`, and `this cannot be claimed as ...`. First-person phrasing and synonym substitution do not repair that function. Remove it or state the supported action, result, or actual engineering question directly.
 
+The user's 2026-10-17 rule extends this to open-question and suspense lines: reject sentences whose function is to announce that a cause, mechanism, choice or question stayed unknown, unanswered or unsettled, anywhere in the article and especially as an ending. Typical forms include `哪条占主导，我现在也说不准`, `这部分具体怎么拆开，是我还没回答的问题`, `最后也没定论`, `至今没有定论`, `I never pinned down which`, and `a question I have not answered yet`. If something was not investigated, leave it out; do not replace the line with a softer synonym. A tentative interpretation that the user confirmed (`这是一个推测`) and the plain current status of unfinished work (`无感闭环还在台架上`) remain allowed, because they state what is, not what is missing.
+
 Do not convert this into a ban on words such as `没有`, `可能`, `边界`, `not`, or `unknown`. Real faults, unfinished attempts, operating conditions, tentative interpretations, and concise attribution remain available when they serve the story. An expressly requested evidence audit may use an audit voice. See `evidence-and-boundaries.md` for internal fact handling.
 
 ## Do Not Manufacture A Scene

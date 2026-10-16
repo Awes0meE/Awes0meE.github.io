@@ -1182,3 +1182,9 @@ Owner follow-up the same day: open-question lines were removed and logged as a d
 ## 2026-10-17 — Image lightbox
 
 While reviewing the GaN preview, the owner found that clicking any evidence image navigated to the bare file, with no easy way back on macOS. Branch `feat/image-lightbox` adds a site-wide modal viewer (`components/image-lightbox.tsx`) for article figures, project media tiles, `/media` image records and asset-browser image previews. Clicking outside, Escape or the close button dismisses it and returns focus to the opener. Every close path runs one cleanup function, because the native dialog `close` event proved unreliable in the hidden preview pane. Verified on a 3100 dev server: opening, keeping it open on image click, closing three ways, scroll lock and release, focus return, captions, and video exclusion.
+
+## 2026-10-17 — Neat closeout after the GaN import and lightbox merges
+
+PRs #48 (GaN FYP import, `da94d8f`) and #49 (image lightbox, `bd9ee25`) were merged. The lightbox branch first took `main`, with a session-log conflict resolved by keeping both entries. Local `main` was fast-forwarded. The production deploy of `bd9ee25` was verified live: the GaN project page carries 58 lightbox-enabled links and the viewer dialog. The neat pass updated MEMORY (merged PR states and the verification baseline), the active-work brief (five notes) and USER_GUIDE (how to use the image viewer), and stripped two trailing blank lines from uploaded firmware notes that `git diff --check` flagged.
+
+Same day: at the owner's request, the no-suspense preference was promoted from agent memory into the repository writer (SKILL.md Step 11, cognition-led-composition, evidence-and-boundaries, reader-prose-hard-gates, self-review, regression E04/E09), CODEX and MEMORY, so Codex sessions follow it too.
