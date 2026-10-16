@@ -1,0 +1,13 @@
+board,rpm_point,target_rpm,sweep_level,lower_dshot,lower_mean_rpm,upper_dshot,upper_mean_rpm,linear_interpolated_dshot,final_selected_dshot,final_selected_mean_rpm,selected_minus_interpolated_dshot,notes
+Si,R1,3000,coarse,500,1985.667,600,3810.667,555.58,551,3010.333,-4.58,coarse bracket from DShot 500-600
+Si,R1,3000,fine,550,2960.667,551,3010.333,550.792,551,3010.333,0.208,nearest fine bracket around target
+Si,R2,6500,coarse,700,5303.333,800,6608,791.722,786,6500.667,-5.722,coarse bracket from DShot 700-800
+Si,R2,6500,fine,784,6474.333,786,6500.667,785.949,786,6500.667,0.051,nearest fine bracket around target
+Si,R3,10000,coarse,1100,9792,1200,10848.333,1119.691,1124,10001.333,4.309,coarse bracket from DShot 1100-1200
+Si,R3,10000,fine,1122,9987,1124,10001.333,1123.814,1124,10001.333,0.186,nearest fine bracket around target
+GaN,R1,3000,coarse,500,2308.667,600,4010.667,540.619,540,3001.333,-0.619,coarse bracket from DShot 500-600
+GaN,R1,3000,fine,530,2854,540,3001.333,539.91,540,3001.333,0.09,nearest fine bracket around target
+GaN,R2,6500,coarse,700,5569.667,800,7033.333,763.562,762,6499.333,-1.562,coarse bracket from DShot 700-800
+GaN,R2,6500,fine,762,6499.333,770,6616.333,762.046,762,6499.333,-0.046,nearest fine bracket after selected 762; target is only +0.667 rpm above 762 mean
+GaN,R3,10000,coarse,1000,9654.333,1100,10794,1030.331,1022,10002,-8.331,coarse bracket from DShot 1000-1100
+GaN,R3,10000,fine,1020,9971.667,1022,10002,1021.868,1022,10002,0.132,nearest fine bracket around target

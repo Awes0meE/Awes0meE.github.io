@@ -1,0 +1,24 @@
+E1 measurement limitations
+Date: 2026-05-18
+
+This folder records final propeller-loaded same-RPM E1 steady-state electrical evidence. The processed tables report input-side electrical behaviour derived from the STM32 E1 controller logs: VBAT, input current, and input electrical power.
+
+Allowed interpretation:
+- The E1 data can support statements about measured/processed input voltage, input current, input power, voltage sag, and repeatability at the selected P0 same-RPM operating points.
+- The E1 data can be compared at the recorded R1/R2/R3 target-speed conditions because the DShot commands were selected from the P0 tachometer mapping.
+- The repeated run cycles can be used as repeatability evidence for the input electrical telemetry under the same logged setup.
+
+Important limitations:
+- Input electrical power is not strict ESC efficiency.
+- The E1 logs do not include torque, thrust, shaft power, aerodynamic output, or mechanical output power.
+- Same-RPM input electrical comparison does not prove equal thrust, equal torque, or equal useful propulsive output.
+- The data were collected on the local propeller-loaded bench setup, not on a calibrated dynamometer.
+- Current and voltage values are firmware-processed telemetry values from the ADC/INA199/VBAT-divider measurement chain; final thesis wording should mention calibration and uncertainty limitations unless separate calibration evidence is added.
+- DShot command differences between Si and GaN boards are operating-point selection evidence only, not performance evidence by themselves.
+- Any conclusion about lower loss, higher efficiency, thermal superiority, flight performance, or commercial reliability requires additional evidence beyond this E1 folder.
+
+Recommended thesis wording:
+- Safe: "The E1 experiment reports input electrical behaviour at P0-selected propeller-loaded same-RPM operating points."
+- Safe: "The processed input power is treated as an input-side electrical quantity, not as complete ESC efficiency."
+- Unsafe: "The GaN route is more efficient" unless supported by torque/thrust/shaft-power or other matched-output evidence.
+- Unsafe: "The same-RPM points prove equal mechanical output" because RPM alone does not establish torque or thrust.

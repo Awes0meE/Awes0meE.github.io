@@ -1,0 +1,1 @@
+RIGOL DHO814示波器 ；普通勾针探头 ；鳄鱼夹底线接ESC W相焊盘旁的GND测试点 ；探头和示波器设置10X ；测上升沿time scale是200ns ；下降沿是50ns ；长波形总览是500us ；voltage scale所有测试都一样 为5V

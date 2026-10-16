@@ -1,0 +1,131 @@
+用途
+- 本文件用于每次最终带桨实验前后记录安全、夹具、供电、接线、仪器和异常情况。
+- 本文件不证明实验结果有效。
+
+1. 已知 setup baseline
+
+- Motor model: KonKer Cler Sky 2207.5 brushless DC motor
+- GaN-side motor ID: 1
+- Si-side motor ID: 2
+- Propeller: Gemfan FURY 5128.0
+- Propeller orientation: clockwise motor rotation
+- Power supply: lab adjustable DC supply, 14.8 V, 10 A current limit
+- Supply lead: 100 cm banana-to-alligator lead + 15 cm XT30 female lead
+- Fixture baseline: electrical tape along diagonal and centre axis; tested arm reinforced with extra tape
+
+
+2. Before power-on
+
+Personal and area safety:
+- Eye protection worn.
+- Loose objects removed from bench.
+- No hand, cable, probe, phone, notebook or tool is inside propeller arc.
+- Bystanders warned before spin-up.
+- Emergency stop / supply output switch is reachable.
+- Fire/smoke response route is clear.
+
+Mechanical:
+- Correct motor ID for selected route confirmed.
+- Propeller model confirmed as Gemfan FURY 5128.0.
+- Propeller orientation and clockwise rotation checked.
+- Propeller has no visible crack, chip or deformation.
+- Propeller nut/fastener tightness checked.
+- Motor mount and frame/arm are fixed.
+- Tape fixture along diagonal and centre axis checked.
+- Tested arm extra tape reinforcement checked.
+- Reflective tachometer tape is attached securely.
+
+Electrical power:
+- Bench supply output is OFF before connection.
+- Voltage setting confirmed: 14.8 V.
+- Current limit confirmed: 10 A.
+- Supply polarity checked at ESC connector.
+- XT30 connection fully seated.
+- Banana/alligator clips secured; no exposed short risk.
+- Same supply lead condition as the other route confirmed.
+- ESC bulk capacitor / power input area visually checked.
+
+Controller and signals:
+- STM32 controller powered correctly.
+- DShot signal connection checked.
+- ESC signal ground and STM32 ground reference checked.
+- Current-sense channel connected.
+- Voltage-sense channel connected.
+- OLED status display connected.
+- Bluetooth/HC-05 start control connected.
+- Local button state checked.
+
+Instruments:
+- Tachometer model recorded.
+- Tachometer distance/angle checked.
+- Oscilloscope probe type and ground method checked if used.
+- Oscilloscope trigger source checked if used.
+- Thermal camera emissivity/distance/ambient setting recorded if used.
+- Camera/scope storage path checked.
+
+
+3. During run
+
+Start confirmation:
+- Announced "power on" / "spin-up" before output enable.
+- Supply output enabled.
+- Motor starts without abnormal vibration.
+- Direction visually consistent with setup note.
+- First RPM reading plausible.
+
+Monitoring:
+- Current stayed below abort threshold.
+- Voltage sag stayed within expected range.
+- No abnormal sound, oscillation or desync.
+- Fixture and tape did not move.
+- Instrument probes/cables remained clear of propeller.
+- Thermal hotspot did not exceed threshold.
+- Data/image capture started and file names noted.
+
+Abort thresholds for this run:
+- Current threshold: >10A
+- Voltage sag threshold: -3V
+- Thermal threshold: >80℃
+- Abnormal vibration / sound
+
+Abort immediately if any item occurs:
+- Smoke, spark, burning smell or visible damage.
+- Propeller crack, strike, loosening or severe vibration.
+- Fixture movement or tape lifting.
+- Unexpected current rise or supply current limiting.
+- Motor desync, stall, repeated restart or severe noise.
+- Probe, cable or object moves near propeller arc.
+- Operator cannot safely continue observation.
+
+4. After run
+
+Shutdown:
+- DShot command returned to stop/disarm.
+- Motor fully stopped before approaching.
+- Bench supply output OFF.
+- Board and motor temperature checked before touch.
+
+Data record:
+- Tachometer readings recorded.
+- Current/voltage log saved if applicable.
+- Scope screenshot/CSV saved if applicable.
+- Thermal images saved if applicable.
+- Run sheet updated.
+- Master log updated.
+- File names and paths written below.
+
+Post-run condition:
+- No visible damage to ESC.
+- No visible damage to motor/propeller.
+- Fixture condition still acceptable.
+- Supply lead/connectors still secure.
+- Cooldown time recorded:
+
+
+6. Claim boundary
+
+Allowed use:
+- Support traceability of safety checks, setup condition, abort criteria and run-level notes for a propeller-loaded bench experiment.
+
+Forbidden overclaim:
+- Do not use this checklist alone to claim formal safety certification, calibrated measurement accuracy, thermal reliability, commercial readiness or flight validation.
