@@ -1,0 +1,40 @@
+E3 combined thermal camera settings and extraction notes
+
+Scope:
+- This file consolidates the duplicated Si and GaN camera-setting notes for E3 same-RPM thermal images.
+- Raw image folders:
+  - Si board images: Si板实测热像/
+  - GaN board images: GaN板实测热像/
+- Per-board source notes are preserved in E3_split_source_notes/Si_E3_camera_settings.txt and E3_split_source_notes/GaN_E3_camera_settings.txt.
+
+Thermal camera model:
+- HIKMICRO P20Max/W phone thermal imager, WiFi version.
+- Ordering model from the referenced datasheet: HM-TJ52-3AQF-P20Max/W.
+- Datasheet notes: TJ52 portable phone-module thermal product, 256 x 192 IR detector, HIKMICRO ISR super-resolution support.
+
+Emissivity:
+- Not recorded in the provided JPG overlays, E3 firmware evidence, or the referenced P20Max/W datasheet.
+- Treat the extracted temperatures as the on-image app readout under the camera/app settings used during capture.
+
+Distance:
+- Camera-to-board distance: 0.20 m.
+- Geometry: thermal camera placed vertically above the switching MOSFET area.
+- 2026-05-21 clarification: although the extraction table uses the thermal app "Cen" readout, the camera centre was aimed at the V-phase MOSFET area on both ESCs.
+- Source: user-provided experiment condition.
+- Datasheet reference: minimum imaging distance 0.05 m.
+
+Ambient:
+- 25.0 deg C constant ambient.
+
+Image interval / checkpoints:
+- Thermal images are captured at heat-soak checkpoints rather than a fixed uniform interval.
+- Checkpoints per board route: 0 s, 30 s, 60 s, 120 s, 300 s, 600 s.
+- Consecutive intervals: 30 s, 30 s, 60 s, 180 s, 300 s.
+
+Extraction basis:
+- E3_thermal_extraction_table.csv combines the Si and GaN extraction tables into one table.
+- The CSV hotspot_temperature_C column records the top-left on-image Cen readout for each JPG.
+- With the 2026-05-21 V-phase aiming clarification, treat the values as V-phase MOSFET-centred surface readouts, not full-image maximum hotspots or junction temperatures.
+- File names provide board_route and time_point_s, for example "Si R2 300s.jpg" -> board_route "Si R2", time_point_s 300.
+- The on-image Max readout was not used for the CSV.
+- No raw JPG file was edited during extraction or consolidation.

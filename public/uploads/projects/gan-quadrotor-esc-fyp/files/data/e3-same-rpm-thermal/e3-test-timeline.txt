@@ -1,0 +1,39 @@
+E3 combined same-RPM thermal test timeline
+
+Scope:
+- This file consolidates the duplicated Si and GaN timeline notes for E3 same-RPM thermal images.
+- Per-board source notes are preserved in E3_split_source_notes/Si_E3_test_timeline.txt and E3_split_source_notes/GaN_E3_test_timeline.txt.
+
+Source firmware evidence:
+- Final E3 sequence: ARMING -> READY -> PREPARE -> RAMP -> STABILIZE -> HEAT_SOAK -> STOP -> DONE.
+- DShot output path: PB8 / TIM4_CH3 / DMA1_Channel5, DShot300.
+- Marker output: PB0, active HIGH, 50 ms pulse at each thermal checkpoint.
+
+Compiled same-RPM routes:
+| Board route | Target RPM | DShot command |
+|---|---:|---:|
+| Si R1 | 3000 | 551 |
+| Si R2 | 6500 | 786 |
+| Si R3 | 10000 | 1124 |
+| GaN R1 | 3000 | 540 |
+| GaN R2 | 6500 | 762 |
+| GaN R3 | 10000 | 1022 |
+
+Startup:
+1. Power on: firmware enters ARMING and continuously sends DShot stop (0) for 6000 ms so the ESC can finish power-on and arming tones.
+2. READY: DShot remains stop (0). Short PB13 presses select the profile; long PB13 press starts the selected test session.
+3. The selected route command is fixed during the thermal evidence window.
+
+Stabilization before photos:
+1. PREPARE: 10000 ms safety countdown with DShot held at 0; operator confirms bench and thermal camera readiness.
+2. RAMP: 5000 ms total. Start at DShot 500, hold 250 ms, then ramp to the selected route command.
+3. STABILIZE: 10000 ms at the selected same-RPM command before the thermal evidence window starts.
+
+Photo checkpoints:
+- The HEAT_SOAK window starts after STABILIZE; this point is time 0 s for the thermal images.
+- Capture checkpoints are 0 s, 30 s, 60 s, 120 s, 300 s, and 600 s.
+- At each checkpoint, PB0 emits a 50 ms HIGH marker pulse and the OLED shows the matching IMG xxxS reminder.
+
+Stop conditions:
+- Normal completion: after the 600 s final checkpoint / heat-soak boundary, firmware transitions to STOP, sends DShot stop (0) for 10000 ms, then enters DONE and remains stopped.
+- Emergency stop: during PREPARE, RAMP, STABILIZE, HEAT_SOAK, or STOP, a debounced PB13 press enters ABORTED, requests DShot stop immediately, stops active DShot DMA output, pulls PB0 LOW, and holds the controller in a stopped state until a new session is started.

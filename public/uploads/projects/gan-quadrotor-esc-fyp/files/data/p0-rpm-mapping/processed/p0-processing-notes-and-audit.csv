@@ -1,0 +1,9 @@
+category,board,item,recorded_value,treatment
+student_correction,Si,DShot 520 RPM reading 1,2360,Used in final raw table and statistics
+student_correction,Si,DShot 790 RPM reading 2,6560,Used in final raw table and statistics
+student_correction,GaN,Raw numeric data,no correction,GaN table retained as previously transcribed
+sweep_note,GaN,coarse/fine tachometer note,"coarse x1, fine x5",Recorded as scan_repeat_note
+sweep_note,Si,coarse/fine tachometer note,"coarse x1, fine x6",Recorded as scan_repeat_note
+crossed_out_logic,GaN,DShot 763 / 764 near R2,crossed out/no valid readings entered,Not included in raw statistics; interpreted as measurement stopped after target/useful interval found
+crossed_out_logic,GaN,DShot 1040 / 1050 / 1024 / 1026 near R3,crossed out/no valid readings entered,Not included in raw statistics; interpreted as measurement stopped after target/useful interval found
+claim_boundary,Si/GaN,DShot command difference,board-specific commands are allowed for same-RPM comparison,"Not interpreted as efficiency, thrust, or performance result by itself"
