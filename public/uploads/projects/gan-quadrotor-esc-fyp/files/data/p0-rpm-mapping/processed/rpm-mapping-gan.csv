@@ -1,0 +1,21 @@
+board,sweep_type,target_rpm,dshot_command,rpm_reading_1,rpm_reading_2,rpm_reading_3,visible_readings_n,actual_rpm_mean,actual_rpm_median,rpm_min,rpm_max,rpm_range,rpm_error_pct,selected_mapping_point,scan_repeat_note,source_image
+GaN,coarse,,500,2308,2306,2312,3,2308.667,2308,2306,2312,6,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,600,4013,4007,4012,3,4010.667,4012,4007,4013,6,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,700,5570,5573,5566,3,5569.667,5570,5566,5573,7,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,800,7036,7034,7030,3,7033.333,7034,7030,7036,6,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,900,8396,8398,8392,3,8395.333,8396,8392,8398,6,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,1000,9653,9650,9660,3,9654.333,9653,9650,9660,10,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,coarse,,1100,10794,10799,10789,3,10794,10794,10789,10799,10,,,coarse sweep tachometer x1; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R1_3000,3000,510,2481,2483,2480,3,2481.333,2481,2480,2483,3,-17.288889,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R1_3000,3000,520,2645,2649,2644,3,2646,2645,2644,2649,5,-11.8,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R1_3000,3000,530,2852,2853,2857,3,2854,2853,2852,2857,5,-4.866667,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R1_3000,3000,540,2998,3004,3002,3,3001.333,3002,2998,3004,6,0.044444,R1,fine sweep tachometer x5; selected R1 point,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R2_6500,6500,750,6284,6282,6286,3,6284,6284,6282,6286,4,-3.323077,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R2_6500,6500,760,6488,6480,6483,3,6483.667,6483,6480,6488,8,-0.251282,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R2_6500,6500,761,6489,6485,6488,3,6487.333,6488,6485,6489,4,-0.194872,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R2_6500,6500,762,6499,6498,6501,3,6499.333,6499,6498,6501,3,-0.010256,R2,fine sweep tachometer x5; selected R2 point,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R2_6500,6500,770,6614,6615,6620,3,6616.333,6615,6614,6620,6,1.789744,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R3_10000,10000,1010,9830,9832,9828,3,9830,9830,9828,9832,4,-1.7,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R3_10000,10000,1020,9970,9974,9971,3,9971.667,9971,9970,9974,4,-0.283333,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R3_10000,10000,1022,10002,10001,10003,3,10002,10002,10001,10003,2,0.02,R3,fine sweep tachometer x5; selected R3 point,GaN 板手动记录 tachometer RPM原始证据.jpg
+GaN,fine_R3_10000,10000,1030,10065,10070,10073,3,10069.333,10070,10065,10073,8,0.693333,,fine sweep tachometer x5; visible triplet retained,GaN 板手动记录 tachometer RPM原始证据.jpg

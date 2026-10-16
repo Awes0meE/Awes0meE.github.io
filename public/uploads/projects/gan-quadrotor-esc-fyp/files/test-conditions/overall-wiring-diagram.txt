@@ -1,0 +1,155 @@
+用途
+- 本文件用于记录最终带桨同 RPM 实验平台的总体接线关系。
+- 重点覆盖 DShot 输出、VBAT 供电、电流/电压采样、OLED/Bluetooth、示波器/热像仪触发或同步关系。
+- 本文件本身不证明实验结果、校准或安全认证。
+
+1. 已登记的共同硬件条件
+
+ESC routes:
+- GaN ESC route:
+  - ESC board ID: 1
+  - Motor ID: 1
+  - Motor model: KonKer Cler Sky 2207.5 brushless DC motor
+  - Motor batch note: same production batch as Si-side motor
+- Si reference route:
+  - ESC board ID: 2
+  - Motor ID: 2
+  - Motor model: KonKer Cler Sky 2207.5 brushless DC motor
+  - Motor batch note: same production batch as GaN-side motor
+
+Propeller:
+- Model: Gemfan FURY 5128.0
+- Orientation / rotation: clockwise motor rotation，push air to ground
+- Propeller photo / label evidence: see testbench_overview.jpg
+
+Fixture:
+- Base fixture method: electrical tape along diagonal and centre axis on experiment mat
+- Tested arm reinforcement: extra multi-layer tape on the active test arm
+- Fixture photo evidence: see testbench_overview.jpg
+
+Power supply:
+- Supply type: laboratory adjustable DC power supply
+- Voltage setting: 14.8 V
+- Current limit: 10 A
+- Supply lead section 1: 100 cm banana-to-alligator lead
+- Supply lead section 2: 15 cm single-end-tinned lead to XT30 female connector
+- Same supply condition used for both routes: yes
+- Supply display photo / reading: see testbench_overview.jpg
+
+Tachometer method reference:
+- Detailed P0 tachometer method source: ../08_Experiments/P0_RPM_mapping/P0_processed_mapping_table_evidence_packet/
+- Approximate note already registered: handheld laser tachometer about 10 cm above propeller with reflective tape; three readings per throttle point.
+- Final tachometer model / accuracy: ‪check FYP_Evidence\04_Datasheets\手持转速计说明书.png
+
+2. Overall block diagram
+
+Replace or complete the ASCII diagram below with the exact physical wiring used in the final setup.
+
+        STM32F103 test controller / Blue Pill
+        ---------------------------------------------------------
+        DShot output: PB8 / TIM4_CH3
+        Current ADC: PA0 / ADC1_IN0 from INA199 output
+        VBAT ADC: PA1
+        OLED I2C: PB6/PB7
+        HC-05 Bluetooth UART: PA9/PA10, STATE PB12
+        Local button: PB13
+        Trigger/marker output: PB0
+        ---------------------------------------------------------
+                   | DShot signal
+                   | signal ground reference
+                   v
+        ESC under test: GaN route / Si route
+        ---------------------------------------------------------
+        ESC DShot input pin on AT32/AM32 route: PB4 / TMR3_CH1
+        Phase outputs to motor: U / V / W order
+        ---------------------------------------------------------
+                   | three-phase motor wires
+                   v
+        Motor + propeller load
+        ---------------------------------------------------------
+        Motor ID: 1 for GaN / 2 for Si
+        Propeller: Gemfan FURY 5128.0
+        Rotation: clockwise
+        ---------------------------------------------------------
+
+        VBAT power path
+        ---------------------------------------------------------
+        DC supply +  -> 100 cm banana/alligator lead -> 15 cm XT30 female lead -> ESC VBAT +
+        DC supply -  -> 100 cm banana/alligator lead -> 15 cm XT30 female lead -> ESC GND
+        Common signal ground between STM32 controller and ESC: yes
+        Measurement ground / probe ground connection point: W相输出低边MOS管旁边的GND测试点
+        ---------------------------------------------------------
+
+        Instruments and sync
+        ---------------------------------------------------------
+        Oscilloscope channels:
+        - CH1: 仅用了一个通道 测试两块板子的W相输出焊盘
+        Oscilloscope trigger source:
+        - manual 因为示波器不支持外部触发测量
+        Thermal camera sync:
+        - manual timestamp 因为热成像仪不支持外部触发测量，故采取在OLED屏上提示测量时间，到对应的时间点手动记录热成像图片数据
+        Bluetooth/OLED role:
+        - Start command / status display / checkpoint reminder
+        ---------------------------------------------------------
+
+3. Connection table
+
+| Link ID | Source | Destination | Signal / power | Pin / connector | Cable length | Ground reference | Verified before power-on | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| W01 | STM32 controller | ESC | DShot command | PB8/TIM4_CH3 to ESC signal input | | common signal ground | yes | |
+| W02 | STM32 controller GND | ESC GND | signal ground | | | ESC/bus ground | yes | |
+| W03 | DC supply + | ESC VBAT + | power | banana/alligator + XT30 | 100 cm + 15 cm | bus ground | yes | 14.8 V, 10 A limit |
+| W04 | DC supply - | ESC GND | power return | banana/alligator + XT30 | 100 cm + 15 cm | bus ground | yes | |
+| W05 | Current sense output | STM32 ADC / logger | current sample | PA0/ADC1_IN0 if used | | analog ground | yes | INA199 path if used |
+| W06 | VBAT divider output | STM32 ADC / logger | voltage sample | PA1 if used | | analog ground | yes | divider ratio/calibration note |
+| W07 | STM32 I2C | OLED | status display | PB6/PB7 if used | | controller ground | yes | |
+| W08 | STM32 UART | HC-05 Bluetooth | start/control/logging | PA9/PA10, PB12 STATE if used | | controller ground | yes | |
+| W09 | STM32 PB0 | Oscilloscope / thermal timeline | trigger or marker | PB0 if used | | instrument ground policy | yes | pulse width/profile |
+| W10 | ESC phase U/V/W | Motor | three-phase drive | U/V/W pads | | power ground | yes | phase order checked |
+
+4. Instrument setup
+
+Oscilloscope:
+- Model: Rigol DHO814
+- Probe type: 详见E3实验说明
+- Probe attenuation: 详见E3实验说明
+- Ground method: 详见E3实验说明
+- Channel meaning: 详见E3实验说明
+- Trigger condition: 详见E3实验说明
+- Time scale / voltage scale: 详见E3实验说明
+
+Thermal camera:
+- Model: HIKMICRO P20Max
+- Distance: 详见E2实验说明
+- Ambient temperature: 详见E2实验说明
+- Checkpoint schedule: 详见E2实验说明
+
+Tachometer:
+- Model: DELIXI DLY-2301
+- Reflective tape location: 反光胶条裁剪成约8mm宽3cm长的长平行四边形，顺着其中一个桨贴在其中心部位
+- Distance / angle: "FYP_Evidence\08_Experiments\P0_RPM_mapping\P0 mapping notes.txt"
+- Number of readings per point: "FYP_Evidence\08_Experiments\P0_RPM_mapping\P0 mapping notes.txt"
+- Mean / median rule: "FYP_Evidence\08_Experiments\P0_RPM_mapping\P0_processed_mapping_table_evidence_packet"
+
+5. Evidence links to attach after filling
+
+Photos:
+- Overall setup:
+- GaN route setup:
+- Si route setup:
+
+Associated evidence folders:
+- Setup photos: ../07_Testbench/
+- P0 mapping source: ../08_Experiments/P0_RPM_mapping/
+- Final E1 data: ../08_Experiments/E1_sameRPM_electrical/
+- Final E2 data: ../08_Experiments/E2_sameRPM_waveform/
+- Final E3 data: ../08_Experiments/E3_sameRPM_thermal/
+- Run/data inventory: use the raw/processed/audit files inside each ../08_Experiments/ subfolder plus the root index spreadsheets; the separate ../10_Experiment_Logs/ TODO-only folder was removed on 2026-05-18.
+
+6. Claim boundary
+
+Allowed use:
+- Support that the final bench setup, wiring routes, supply condition, motor/propeller identity and instrument sync method were recorded.
+
+Forbidden overclaim:
+- Do not use this file alone to claim calibrated measurement accuracy, efficiency, thermal superiority, formal EMI performance, long-term reliability or flight validation.
