@@ -194,6 +194,14 @@ Technical evidence is shown with contain fitting so schematics, PCB renders, and
 
 原理图、PCB 渲染和板卡照片使用 contain 适配，避免为了版式裁掉技术证据。操作系统启用“减少动态效果”时，检视窗显现和扫描线会停止，但项目身份、选择状态和所有链接仍然可用。
 
+## Viewing Images
+
+Clicking an evidence image, whether in an article, among a project's media tiles, on `/media` or in the project file browser, opens it enlarged on the same page. Click anywhere outside the image, press Escape or use the close button to return; **Original** opens the full file in a new tab. Holding ⌘ or Ctrl while clicking still opens the image in a new tab as before.
+
+## 查看图片
+
+点击正文、项目媒体缩略图、`/media` 或项目文件浏览器里的图片，会在当前页面放大显示。点图片外面的空白处、按 Esc 或点关闭按钮就能回到原处；**原图** 会在新标签页打开完整文件。按住 ⌘ 或 Ctrl 点击，仍然照常在新标签页打开。
+
 ## Reading The About Page
 
 `/about` is Alvin's online CV in his own words: a short introduction, how he moved from telecommunications into embedded hardware, a dated route whose stops open the matching project pages, what he works on at NTU now, and life outside the lab. Email, GitHub and LinkedIn sit together at the end.
