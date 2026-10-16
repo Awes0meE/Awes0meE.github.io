@@ -48,7 +48,7 @@ Unknowns should sharpen the note rather than flood it with disclaimers.
 - If an unknown blocks public accuracy, keep the draft provisional and ask the smallest blocking question.
 - Group related unknowns into the smallest number of decision-bearing questions; do not turn every missing field into its own form item.
 - If the note can remain accurate without it, write around the gap naturally.
-- Keep uncertainty in the internal fact sheet. Include a remaining question only when it is part of the user's actual inquiry; there is no requirement to publish a boundary sentence or missing-test list.
+- Keep uncertainty in the internal fact sheet. Do not publish remaining-question or still-unknown sentences (`哪条占主导，我现在也说不准`, `是我还没回答的问题`, `最后也没定论`, `I never pinned down which`); per the user's 2026-10-17 rule, what was not investigated is simply left out. There is no requirement to publish a boundary sentence or missing-test list.
 - Do not guess sensor models, units, dates, performance, collaboration roles, or version relationships from plausible engineering context.
 
 ## Separate Prose Safety From File Publication

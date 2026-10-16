@@ -42,6 +42,7 @@ Scan reader-visible `title` and `titleZh` even when they are stored in frontmatt
 - Does each Chinese learning note have at most one prose paragraph starting with `我`, counting its introduction and all paragraphs under headings? Have the replacements been read for natural variety, complete meaning and unchanged factual status, rather than only passing a prefix count? English has no corresponding numerical limit.
 - If `不是说……不行，而是说……` appears, does it prevent a real misreading rather than repeat as scaffolding?
 - Is evidence-inventory commentary absent in both languages? Keep fact checking internal; write the supported action, result, or actual engineering question. Do not append lists of what the material cannot prove.
+- Are open-question and suspense lines absent in both languages (user rule 2026-10-17)? No sentence may announce that something stayed unknown, unanswered or unsettled, and no section or article may end on one; omit what was not investigated.
 - Does every inanimate or abstract subject carry only licensed native frames or functional verbs, with experiential results expressed through 出现, 发生, 出, 遇到, or a human or situational subject?
 - Do English abstract polysemes take the abstract Chinese sense (边界, 要点, 数值, 层面, 范围), with no concretized renderings?
 - Do paired Chinese and English passages keep semantic equality without one-to-one clause mirroring in narrative sentences, with the Chinese using native topic-comment and zero-anaphora structure?
