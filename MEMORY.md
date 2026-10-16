@@ -14,7 +14,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - The earlier homepage release is PR #36 (`8e009ef`); the first six-note release is PR #37 (`007decf`). Their dated release packets describe those historical checkpoints.
 
 - The latest named release tag is `v0.9.0`; subsequent approved maintenance is integrated through PRs on `main`, served from `https://www.66ccff-labs.com/`. Do not equate the older tag with the latest deployed commit.
-- The current local repository content set is 9 projects, 29 public notes (none suspended), and 101 media records (97 images and 4 videos). The DIY notes add a faithful PNG render of the existing public ESP32 schematic without adding a media record. Project and note detail routes use the Bench Log layout in both themes.
+- The current local repository content set is 9 projects, 30 public notes (none suspended), and 101 media records (97 images and 4 videos). The DIY notes add a faithful PNG render of the existing public ESP32 schematic without adding a media record. Project and note detail routes use the Bench Log layout in both themes.
 - Release `v0.9.0` promotes the integrated homepage, `/work`, `/notes`, `/media`, and `/about` Ember Black refresh. The implementation was consolidated at `28b0a8f`, followed by repository-wide documentation reconciliation and release preparation; detail routes stayed outside that release and joined the system in the 2026-10 unified theme (PR #43).
 - The post-`v0.9.0` accessibility and Notes refinement defaults first visits to English, adds a bilingual skip link, and normalizes 44px touch targets and desktop navigation behavior; its painted black-to-paper handoff was later replaced by the 2026-10 unified-theme view transitions. The Notes route now follows its existing graphite topology to project-specific endpoints, keeps the two left desktop panels at a stable depth, lets only the ledger follow result height, removes trailing control rules, and uses the shared CJK system stack.
 - Public identity is Alvin Li, the archive brand is `iRidium / 铱`, and reader-facing contact routes are GitHub, LinkedIn and the NTU email.
@@ -100,7 +100,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Justified reading text that shares one column edge with figures.
 - Note plates numbered within their project.
 - `2026-10-16`: Branch `feat/about-online-cv` rebuilt `/about` as an owner-voiced online CV from a confirmed brief and his LinkedIn profile. It has an introduction, an embedded-world ticker, a dated route linking to project pages, current NTU work and availability, an off-the-clock section, and one contact block. The Tension Signal Column was retired, and LinkedIn was added to `lib/site.ts` and the footer.
-- `2026-10-17`: Branch `content/add-gan-quadrotor-esc-fyp` imported the XJTLU final-year project as `gan-quadrotor-esc-fyp` through the full AddProject and engineering-note-writer SOP (two `grilling` rounds, Chinese-first drafting, gate records). It adds 1 project, 4 notes (AM32 bootloader-free port, LMG1210 bootstrap sizing, same-speed DShot mapping, shoot-through protection), 17 media records and 189 curated uploads, with datasheets linked rather than uploaded and local paths and the student ID removed. The owner chose to feature it on the homepage project index.
+- `2026-10-17`: Branch `content/add-gan-quadrotor-esc-fyp` imported the XJTLU final-year project as `gan-quadrotor-esc-fyp` through the full AddProject and engineering-note-writer SOP (two `grilling` rounds, Chinese-first drafting, gate records). It adds 1 project, 5 notes (AM32 bootloader-free port, LMG1210 bootstrap sizing, same-speed DShot mapping, shoot-through protection, propeller-loaded startup and AM32 startup parameters), 17 media records and 189 curated uploads, with datasheets linked rather than uploaded and local paths and the student ID removed. The owner chose to feature it on the homepage project index.
 
 ## Stable Decisions
 
@@ -242,9 +242,9 @@ npm audit --omit=dev
 Expected result:
 
 - lint passes;
-- content validation passes for 9 projects, 29 public notes (none suspended), 101 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
+- content validation passes for 9 projects, 30 public notes (none suspended), 101 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
 - encoding validation passes; use the current command output for the UTF-8 file count;
-- the production build passes and prerenders 45 pages for the current 9-project, 29-note set (40 before the GaN import); earlier 39-page results below describe an older set;
+- the production build passes and prerenders 46 pages for the current 9-project, 30-note set (40 before the GaN import); earlier 39-page results below describe an older set;
 - the integrated homepage, `/work`, `/notes`, `/media`, and `/about` indexes passed English/Chinese review at 1440 × 900 and 390 × 844 with no horizontal overflow, broken images, or console errors; representative work and note details were then still on the retired paper system (they use Bench Log since PR #43);
 - the `/work` Project Aperture Sequence passed desktop, mobile, reduced-motion, semantic-link, keyboard, project-count, interval-count, and horizontal-overflow review before its local closeout; the closeout revalidated diff whitespace, lint, content, encoding, and TypeScript without rebuilding the shared `.next` directory used by neighboring page threads;
 - the `/notes` Routed Signal Map passed English/Chinese browser review at 320, 390, 768, 1024, and 1440 pixel widths with no horizontal overflow, plus search/filter/reset, semantic-link, reduced-motion, console, and HTTP-error checks. Its isolated 39-page webpack build passed, and the terminal Impeccable review returned `disposition: ship` with remaining issues `clear`;

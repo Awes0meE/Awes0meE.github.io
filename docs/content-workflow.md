@@ -188,7 +188,7 @@ A dated audit of all 8 project pages and 24 public notes is available in
 The homepage batch was published through PR #36, followed by six approved studies
 through PR #37. The final 2026-09-07 note batch adds ten approved studies across
 five projects. The collection then had 25 public notes across eight projects; the 2026-10-17 GaN
-quadrotor ESC import brought it to 29 public notes across nine projects, with
+quadrotor ESC import brought it to 30 public notes across nine projects, with
 no suspended sources. Twelve old notes and completed preview copies are retired;
 current MDX is authoritative and Git retains previous versions.
 See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md)

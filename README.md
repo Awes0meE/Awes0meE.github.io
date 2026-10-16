@@ -148,9 +148,9 @@ Important privacy rule: `visibility: private` hides a note from the website, but
 
 Current repository content state, 2026-09-07:
 
-The source collection contains 9 project pages, 29 public notes across all nine
+The source collection contains 9 project pages, 30 public notes across all nine
 project channels, and 101 media records. The first eight projects have two approved
-bilingual studies each and the GaN quadrotor ESC final-year project has four; nine
+bilingual studies each and the GaN quadrotor ESC final-year project has five; nine
 existing technical/source-document pages remain available.
 
 The final batch adds two studies each for Tianjin STM32, Nanjing Turing, Juanyun
