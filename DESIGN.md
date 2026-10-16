@@ -421,32 +421,31 @@ This section governs the `/notes` index in release `v0.9.0`, now rendered in bot
 - On wide screens, Project channels and Route controls form a stable control deck with a shared `37.625rem` minimum depth; changing the result set may grow or shrink only the note ledger, not those two columns. The search, linked-project, and year boxes terminate at their own borders without decorative trailing rules. Below the three-column breakpoint, both control regions return to the existing responsive flow rather than reserving desktop-height empty space.
 - The counters, channel quantities, filters, and ledger records are derived from repository content. Frontmatter dates provide archive sorting and filtering metadata only; neither date order nor line travel implies an engineering timeline, live telemetry, progress, completion, status, throughput, or measurement. Motion and orange state must never manufacture evidence.
 
-## `/about` — Tension Signal Column
+## `/about` — Online CV
 
-The `/about` route uses **Read mode** inside the shared Kinetic Signal Ledger shell, in both themes. Its approved direction is **Tension Signal Column / 张力信号柱**, selected from three visualized structures with surface seed `b1f777a9`. Machine-local Impeccable comps, approval sidecars, and screenshots are non-portable review aids because `.impeccable/` is excluded from Git. This section and the shipping implementation are the durable record; generated rasters never ship as portrait or interface artwork.
+The `/about` route uses **Read mode** inside the shared Kinetic Signal Ledger shell, in both themes. Since 2026-10-16 it is Alvin's online CV in his own voice: who he is, how he came to embedded hardware, what he works on now, and who he is away from the bench. It replaced the earlier Tension Signal Column (four-node load path and single pulse), which repeated the same hardware-to-handoff chain four times and read as model-written.
 
-### Identity narrative and first viewport
+### Content and order
 
-- About traces Alvin's route from telecommunications study into connected systems work, then explains the working method across hardware, firmware, bring-up, measurement, handoff, and iteration. It is an identity-and-method narrative, not another homepage capability inventory.
-- On wide screens, the opening field is an asymmetrical split: the left side carries `Alvin Li`, the statement “After the schematic leaves the page,” two CV-grounded paragraphs, the project, GitHub, and email routes; the right side carries the identity plate and four-node load path. A clear next-ledger cue touches the fold so the route continues into practice evidence and current coordinates.
-- The lower ledger uses selected CV-grounded contexts to show where the method took shape, then separates current study and contact from project evidence. The sequence describes a route through practice; it does not rank projects or turn experience into a score.
-- English and Simplified Chinese preserve equivalent claims and hierarchy even when their headings, paragraphs, and controls wrap differently.
+- **Hero.** Mono `01 · About` eyebrow, `Alvin Li`, the tongue-in-cheek statement "The whole world is just one giant embedded system / 这个世界就是一台巨大的嵌入式", one first-person introduction, and the portrait plate.
+- **Embedded-world ticker.** One band of everyday-to-extreme embedded systems (traffic lights through lithography machines), echoing the hero statement. It is illustration, not a claim about Alvin's work.
+- **02 我走的路 / The Road So Far.** A sticky story column (how the turn from telecommunications happened, plus the XJTLU Hardware Studio role) beside a dated timeline whose stops link to the matching `/work/[slug]` pages. Each stop gets one or two sentences; project detail stays on the project pages.
+- **03 在做的事 / Work in Progress.** Current NTU study and lab work, the control and signal-processing algorithms he uses, the embodied-AI direction, and an availability note (student-pass hours; RA or part-time roles). A decorative scope figure beside it shows a raw trace and a clean lock-in trace.
+- **04 认真之余 / Off the Clock.** Hobby chips and two paragraphs on working with AI. The Chinese text may carry the internet meme the owner asked for; English keeps only the floor-and-ceiling idea.
+- **Say Hello / 保持联系.** Email, GitHub and LinkedIn, each exactly once. Education stays on the homepage and is not repeated here.
+- English headings are idiomatic adaptations of the Chinese ones, never literal translations. Section headings name their content plainly; no metaphor headings.
 
-### Portrait plate and load path
+### Portrait and motion
 
-**The original-portrait rule.** `public/uploads/projects/avatar.jpg` is the shipping identity asset, with SHA-256 `19fc1f897595b113d413f34f1b3b99689c91213ae8fdcfad0f3bf81736939fc2`. Preserve its complete square white field and black line art with contain fitting; never crop, invert, recolor, filter, blend, fade, trace, or replace it with generated artwork.
+**The original-portrait rule.** `public/uploads/projects/avatar.jpg` is the shipping identity asset, with SHA-256 `19fc1f897595b113d413f34f1b3b99689c91213ae8fdcfad0f3bf81736939fc2`. Preserve its complete square white field and black line art with contain fitting; never crop, invert, recolor, filter, blend, fade, trace, or replace it with generated artwork. The plate stays white in both themes. Motion lives only in the dashed orbit drawn behind the plate.
 
-**The route-not-score rule.** The four visible stages are system framing, firmware and protocols, bring-up and measurement, and handoff and iteration. They form one semantic ordered route and must not imply proficiency, rank, completion, validation, or telemetry.
-
-**The single-pulse rule.** Exactly one restrained ember pulse may travel along the hairline tension graph to communicate connection and flow. It carries no status or progress meaning, runs only while the column is in view and the document is visible, and stops completely under `prefers-reduced-motion: reduce` while every label and relationship remains legible.
-
-The About surface keeps the shared compressed display, warm-white (warm-ink in Bench Paper) reading hierarchy, mono coordinates, one-pixel rules, and Ember signal. Its planar regions and actions remain sharp and zero-radius; circles are reserved for the graph nodes and moving pulse. The portrait plate stays white in both themes. The portrait's source white and page-local supporting warm greys do not become new global palette roles.
+**Motion.** The hero rises in with CSS alone. `components/about-motion.tsx` reveals later blocks as they enter the viewport, fills the timeline rail and lights each stop as the reader passes it, and runs the portrait orbit, ticker and scope only while each is visible and the document is shown. Under `prefers-reduced-motion: reduce` nothing is hidden or moves: the ticker becomes a static wrapped list and every block is visible. Hover adds small lifts and arrow nudges only on fine pointers. All colour comes from theme tokens, so the signal is ember in Ember Black and cobalt in Bench Paper.
 
 ### Responsive and evidence boundaries
 
-At mobile widths, the desktop split becomes one document-order sequence: identity and method, actions and contact, the untouched portrait plate, the four-node load path, then the practice ledger and current coordinates. No essential relationship depends on the desktop graph geometry, hover, motion, or horizontal scrolling.
+Below 980px every two-column block stacks in document order and the sticky columns become static. Timeline stops, hobbies and contacts reflow to one column on phones. No content depends on hover, motion or horizontal scrolling.
 
-Every biographical, educational, employment, project, and current-study statement stays proportional to the supplied CV and repository evidence. Keep direct contribution, direct measurement, client report, inference, recollection, and unfinished validation distinct; the route geometry, portrait treatment, comp, review capture, and pulse establish presentation only and never strengthen a factual claim.
+Biographical, employment, project and current-study statements follow the owner-confirmed brief (summarised in `docs/active-work/portfolio-copy-rewrite.md`), the project pages and his public LinkedIn profile. The ticker and scope figure are presentation only and never strengthen a factual claim.
 
 ## Detail pages — Bench Log
 

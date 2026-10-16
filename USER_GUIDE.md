@@ -130,7 +130,7 @@ The homepage technical visual is maintained in `components/technical-visual.tsx`
 
 The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
 
-The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. Every page now has a dark and a light theme; Work, Notes, Media, and About keep their own Project Aperture Sequence, Routed Signal Map, project-first Focus Aperture, and Tension Signal Column, and project and note detail pages use the Bench Log reading layout. See `DESIGN.md` for the current route scope.
+The orbit and nucleus motion pauses when the visual is offscreen or the browser document is hidden. If the operating system requests reduced motion, the visual becomes a static composition. Every page now has a dark and a light theme; Work, Notes, and Media keep their own Project Aperture Sequence, Routed Signal Map, and project-first Focus Aperture, About is an online CV, and project and note detail pages use the Bench Log reading layout. See `DESIGN.md` for the current route scope.
 
 ## 页头品牌、共享导航、首页学校信息与原子可视化
 
@@ -144,7 +144,7 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 
 prototype 图片和技术标识只用于展示。它们不能证明某块板卡已经制造或完成验证，标识也不表示关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
 
-当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。现在每个页面都有深色和浅色两种主题；Work、Notes、Media 与 About 保留各自的项目检视窗序列、路由信号图、项目优先的深焦检视窗和张力信号柱，项目与笔记详情页使用“工作台日志”阅读版式。当前路由范围以 `DESIGN.md` 为准。
+当可视化离开视口或浏览器页面被隐藏时，轨道和核团动效会暂停；如果操作系统启用了“减少动态效果”，可视化会降级为静态构图。现在每个页面都有深色和浅色两种主题；Work、Notes 与 Media 保留各自的项目检视窗序列、路由信号图、项目优先的深焦检视窗，关于页是一份线上简历，项目与笔记详情页使用“工作台日志”阅读版式。当前路由范围以 `DESIGN.md` 为准。
 
 ## Using The Work Project Aperture
 
@@ -194,17 +194,17 @@ Technical evidence is shown with contain fitting so schematics, PCB renders, and
 
 原理图、PCB 渲染和板卡照片使用 contain 适配，避免为了版式裁掉技术证据。操作系统启用“减少动态效果”时，检视窗显现和扫描线会停止，但项目身份、选择状态和所有链接仍然可用。
 
-## Reading The About Tension Column
+## Reading The About Page
 
-On `/about`, the opening field introduces Alvin's route from telecommunications study into connected embedded work, then the lower ledger anchors that method in selected CV-grounded contexts and current study. Project, GitHub, and email actions remain direct links; the page is an identity-and-method narrative rather than a second homepage capability list.
+`/about` is Alvin's online CV in his own words: a short introduction, how he moved from telecommunications into embedded hardware, a dated route whose stops open the matching project pages, what he works on at NTU now, and life outside the lab. Email, GitHub and LinkedIn sit together at the end.
 
-The portrait is intentionally shown as its complete original white field with black line art. The four route nodes describe system framing, firmware and protocols, bring-up and measurement, and handoff and iteration; they are not a skill score or progress indicator. One restrained pulse stops when the column is offscreen or the document is hidden, and reduced-motion mode keeps the full route visible without animation.
+The portrait is shown as its complete original white field with black line art. Blocks rise in as they scroll into view, the route line fills as you read, and the ticker, portrait orbit and scope figure pause when offscreen or when the tab is hidden. With reduced motion enabled everything is visible and still.
 
-## 阅读关于页张力信号柱
+## 阅读关于页
 
-`/about` 首屏介绍 Alvin 从通信工程学习走向相互连接的嵌入式工作的路径，下方台账再用经过简历事实约束的经历与当前学习状态说明这套工作方法。项目、GitHub 与邮箱入口都是直接链接；这个页面讲个人路径与方法，不再重复首页的能力清单。
+`/about` 是 Alvin 用自己的话写的线上简历：一段自我介绍、从通信工程走到嵌入式硬件的经过、按时间排列并可直接打开对应项目页的经历、现在在 NTU 做的事，以及工作之外的生活。邮箱、GitHub 和领英集中放在页面末尾。
 
-头像刻意保留原图完整白底与黑色线稿。四个节点分别表示系统界定、固件与协议、bring-up 与测量、交接与迭代，不是技能评分或进度条。一次克制的脉冲会在信号柱离开视口或页面被隐藏时停止；“减少动态效果”模式会保留完整静态路径，不依赖动画传达信息。
+头像保持原图完整的白底黑线。内容会在滚动进入视口时浮现，经历时间线随阅读进度点亮；滚动字带、头像轨道和示波器图在离开视口或标签页隐藏时暂停。开启“减少动态效果”后，所有内容静止且完整可见。
 
 ## How To Modify Text
 

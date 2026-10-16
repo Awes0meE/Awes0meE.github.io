@@ -17,7 +17,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - The current local repository content set is 8 projects, 25 public notes (none suspended), and 84 media records (80 images and 4 videos). The DIY notes add a faithful PNG render of the existing public ESP32 schematic without adding a media record. Project and note detail routes use the Bench Log layout in both themes.
 - Release `v0.9.0` promotes the integrated homepage, `/work`, `/notes`, `/media`, and `/about` Ember Black refresh. The implementation was consolidated at `28b0a8f`, followed by repository-wide documentation reconciliation and release preparation; detail routes stayed outside that release and joined the system in the 2026-10 unified theme (PR #43).
 - The post-`v0.9.0` accessibility and Notes refinement defaults first visits to English, adds a bilingual skip link, and normalizes 44px touch targets and desktop navigation behavior; its painted black-to-paper handoff was later replaced by the 2026-10 unified-theme view transitions. The Notes route now follows its existing graphite topology to project-specific endpoints, keeps the two left desktop panels at a stable depth, lets only the ledger follow result height, removes trailing control rules, and uses the shared CJK system stack.
-- Public identity is Alvin Li, the archive brand is `iRidium / 铱`, and reader-facing contact routes are the reviewed GitHub and NTU email links already present in the site.
+- Public identity is Alvin Li, the archive brand is `iRidium / 铱`, and reader-facing contact routes are GitHub, LinkedIn and the NTU email.
 - The Claude Chime homepage was rewritten on 2026-10-14 (PR #40) after a free-form versus writer-skill comparison; the writer rules from that review are PR #39. The Claude account copies of `engineering-note-writer` (repository `60421fd`) and `neat-freak` v3.0.0 were installed the same day.
 
 ## Milestone History
@@ -99,6 +99,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - A roomier /notes ledger.
 - Justified reading text that shares one column edge with figures.
 - Note plates numbered within their project.
+- `2026-10-16`: Branch `feat/about-online-cv` rebuilt `/about` as an owner-voiced online CV from a confirmed brief and his LinkedIn profile. It has an introduction, an embedded-world ticker, a dated route linking to project pages, current NTU work and availability, an off-the-clock section, and one contact block. The Tension Signal Column was retired, and LinkedIn was added to `lib/site.ts` and the footer.
 
 ## Stable Decisions
 
@@ -116,7 +117,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Keep `/work` as Project Aperture Sequence: one desktop sticky or mobile horizontal `01`–`08` rail, eight complete semantic project links, and seven spacious signal intervals. The orange ticks mean “next record,” move right to left only while visible, and stay static under reduced motion; use repository project truth and reviewed `public/uploads/projects/` imagery only.
 - Keep `/notes` as Routed Signal Map: project eight real channels into one continuous Ember ledger for the 25 currently linked public notes; keep client behavior limited to lightweight bilingual metadata search plus project/year filtering and reset. A selected route must reuse the corresponding graphite stem, the existing zig-zag bus prefix, and that project's ledger branch rather than inventing a shortcut. On wide screens, Project channels and Route controls keep a stable shared depth while only the ledger follows result height. Treat frontmatter dates as archive coverage rather than a strict engineering timeline, keep every row as a semantic detail link, retain a fully visible static reduced-motion state, and open `/notes/[slug]` in the Bench Log layout.
 - Keep `/media` project-first: `projectSlug` is the provenance join, the source chooser precedes the focus record in mobile DOM order, and every server-rendered record repeats its source project. The unassigned group is a defensive fallback only; generated decision comps never ship as media evidence.
-- Keep `/about` as Tension Signal Column: the server-owned bilingual narrative must remain CV-grounded and distinct from the homepage capability inventory; preserve the complete original white-background, black-line portrait; keep the four stages semantic and non-scoring; and limit motion to one visibility-aware, non-status pulse with a complete reduced-motion fallback.
+- Keep `/about` as the owner-voiced online CV (since 2026-10-16): introduction, embedded-world ticker, `02 我走的路 / The Road So Far` timeline linking to project pages, `03 在做的事 / Work in Progress`, `04 认真之余 / Off the Clock`, and one contact block with email, GitHub and LinkedIn. Do not reintroduce the retired Tension Signal Column, metaphor headings, repeated method chains, or an education list duplicated from the homepage. Preserve the original portrait untouched.
 - Keep technology-mark source and trademark notes in `public/skills/icons/README.md`. The marks identify representative technologies only and do not establish skill level, project use, endorsement, affiliation, or engineering evidence.
 - Use optional `projectSlug` on notes and media to connect project pages, related notes, related media, and note back-links. For notes, the field remains optional in the schema, but the current `/notes` Routed Signal Map includes only public notes whose join resolves to a real project; do not fabricate an unassigned channel.
 - Use optional project `assetPaths` to render public project evidence from `public/uploads/` on project detail pages. Keep filesystem resolution, path normalization, strict UTF-8 reads, Juanyun allowlist filtering, directory recursion caps, file-count caps, and aggregate preview-size caps server-side in `components/project-assets.tsx`; pass only serializable asset metadata/content into the client-side browser. The browser previews images/videos, Markdown/text, source code, and PDFs, while binary documents / CAD / EDA / fabrication archives keep direct open links.
@@ -148,7 +149,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 - Primary public identity and metadata: `Alvin Li`. `iRidium / 铱` is the engineering archive brand. The capitalization `iRidium` is immutable: lowercase `i`, uppercase `R`, lowercase `idium`. Previous aliases and the old lab name should not appear as reader-facing identity labels.
 - Approved visual mark: five rectilinear outlined blocks constrained to a square boundary, with one uninterrupted full-height centre rectangle and equal upper-left/lower-right square bounds. Use `public/brand/iridium-mark.png` in the site header, pair it with the selected B-style script asset at `public/brand/iridium-wordmark-script.png` at the approved 26px display height, and keep `public/brand/iridium-logo-lockup.png` as the matching transparent full lockup.
-- Public contact routes: GitHub and `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
+- Public contact routes: GitHub, LinkedIn (`lib/site.ts`) and `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
 - Visual tone: engineering academic, precise, bilingual, clean, evidence-driven.
 - Avoid returning to generic template-blog styling.
 
@@ -170,11 +171,12 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `app/media/page.tsx`: server-side media/project grouping, archive totals, and the eight complete project chapters.
 - `app/media/media-focus-aperture.tsx`: the small client island for project-source selection and the active lead record.
 - `app/media/media.module.css`: Focus Aperture geometry, project contact sheets, responsive order, contrast, and reduced-motion behavior.
-- `app/about/page.tsx`: server-owned bilingual identity, working-method, practice-ledger, current-study, and contact content.
-- `app/about/about.module.css`: route-local Tension Signal Column composition, portrait plate, ledger, responsive reflow, and reduced-motion presentation.
-- `components/about-tension-column.tsx`: small client island for the original portrait, four-stage route, intersection/document visibility, and single-pulse state.
+- `app/about/page.tsx`: server-owned bilingual online-CV content: introduction, dated route, current work, off-the-clock, and contact.
+- `app/about/about.module.css`: About layout, portrait plate and orbit, ticker, timeline rail, scope figure, responsive reflow, and reduced-motion presentation.
+- `components/about-motion.tsx`: small client island for scroll reveals, timeline progress and lit stops, and visibility-gated loops on `/about`.
 - `components/site-header.tsx`: shared header, brand, language control, and project CTA shell.
 - `components/site-navigation.tsx`: pathname-aware desktop/mobile navigation, semantic exact/nested current state, and the numbered `.signal-theme` desktop label structure.
+- `components/site-footer.tsx`: shared footer with GitHub, LinkedIn and Notes links.
 - `components/site-preferences.tsx`: client-side EN/简中 language switch and light/dark theme switch in one header pill.
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: server-side resolver for project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
@@ -245,7 +247,7 @@ Expected result:
 - the `/work` Project Aperture Sequence passed desktop, mobile, reduced-motion, semantic-link, keyboard, project-count, interval-count, and horizontal-overflow review before its local closeout; the closeout revalidated diff whitespace, lint, content, encoding, and TypeScript without rebuilding the shared `.next` directory used by neighboring page threads;
 - the `/notes` Routed Signal Map passed English/Chinese browser review at 320, 390, 768, 1024, and 1440 pixel widths with no horizontal overflow, plus search/filter/reset, semantic-link, reduced-motion, console, and HTTP-error checks. Its isolated 39-page webpack build passed, and the terminal Impeccable review returned `disposition: ship` with remaining issues `clear`;
 - the `/media` Focus Aperture passed eight-source and 84-record checks, query-initialized project selection, concise live-status output, valid machine-readable date handling, English/Chinese desktop/mobile review, and reduced-motion review;
-- the `/about` Tension Signal Column passed route-specific English/Chinese desktop and mobile structural review, original-portrait source/computed-style checks, reduced-motion and visibility-source review, lint, TypeScript, and the 39-page Next.js webpack build. Its terminal Impeccable review returned `disposition: pass`;
+- the former `/about` Tension Signal Column (retired 2026-10-16) passed route-specific English/Chinese desktop and mobile structural review, original-portrait source/computed-style checks, reduced-motion and visibility-source review, lint, TypeScript, and the 39-page Next.js webpack build. Its terminal Impeccable review returned `disposition: pass`;
 - `npm audit --omit=dev` reported `0 vulnerabilities` on `2026-09-07`; neither dependency manifest changed in this release;
 - the current `engineering-note-writer` skill validator and direct-prose regression pass; the retained Trials 06-11 and 34-file SHA-256 manifest remain historical evidence for runtime commit `9eab429`, not a claim that the later reader-prose runtime is byte-identical to that snapshot.
 

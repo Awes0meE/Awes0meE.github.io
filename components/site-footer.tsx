@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Rss } from "lucide-react";
+import { Github, Linkedin, Rss } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { site } from "@/lib/site";
 
@@ -24,6 +24,9 @@ export function SiteFooter() {
         <div className="site-footer-links flex items-center gap-5 text-ink">
           <a href={site.github} aria-label="GitHub" className="transition hover:text-pine">
             <Github size={18} />
+          </a>
+          <a href={site.linkedin} aria-label="LinkedIn" className="transition hover:text-pine">
+            <Linkedin size={18} />
           </a>
           <Link href="/notes" aria-label="Notes" className="transition hover:text-pine">
             <Rss size={18} />
