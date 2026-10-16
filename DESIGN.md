@@ -133,7 +133,7 @@ The shell rules apply globally on `body`: the shared body, header, navigation, p
 
 ## Creative North Star
 
-**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. In Ember Black the near-black canvas recalls a hardware bench at low light; in Bench Paper a clean drafting-sheet white recalls the same bench under daylight. In both, fine rules, indices, and compact labels create an instrument grammar; warm white or warm ink carries information; ember orange identifies the principal signal.
+**Kinetic Signal Ledger** presents engineering as a field of connected evidence rather than a marketing gallery. In Ember Black the near-black canvas recalls a hardware bench at low light; in Bench Paper a clean drafting-sheet white recalls the same bench under daylight. In both, fine rules, indices, and compact labels create an instrument grammar; warm white or warm ink carries information; one signal colour identifies the principal signal, ember orange in Ember Black and cobalt in Bench Paper.
 
 The homepage may be visually kinetic, but every motion must reinforce structure: the separator establishes flow, the nucleus gathers prototype work, the orbits group the technical stack, and project rows lead to inspectable evidence. The animation is an illustrative systems map, not telemetry or proof of project completion.
 
