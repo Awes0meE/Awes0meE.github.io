@@ -1159,3 +1159,7 @@ Note plate fixes:
 - Note detail pages showed the project's number in the plate, so both Claude Chime notes read `01`. The plate now numbers each note within its project, in the same order as the project page's development-note list. The spec ledger gained a `Note 01 / 02` row, and an sr-only label reads "Note 01 of 02".
 - The plate digits sat low and "01" sat left of centre. The plate is now a fixed-height grid with `text-box: trim-both cap alphabetic`, proportional numerals and a 0.07em optical lift.
 - Pixel measurement of the digit ink against the plate edges is within 1px horizontally and vertically on desktop, and exact on mobile.
+
+## 2026-10-16 — Neat closeout after the 2026-10 theme merges
+
+The Windows checkout at `main` was fast-forwarded 17 commits to `27f9712` (PR #45). The production domain served the PR #44 cutouts and the theme switch. Docs were reconciled against the code. `/notes` has 8 channels and 25 rows, and every public note joins a real project. The CODEX token summary now names the Cobalt Bench Paper signal. MEMORY records PRs #42–#45 as merged, marks the 2026-09-02 Claude Chime branch as merged through PR #34, and dates the verification baseline. Lint, content (8/25/84), encoding (437 files), typecheck and the 40-page build passed. Open items: the 2026-07-05 `stash@{0}` (an old `engineering-note-writer` edit) and the older `F:\XJTLU\XJTLU_Portfolio` checkout with uncommitted changes were left untouched pending the owner's decision.
