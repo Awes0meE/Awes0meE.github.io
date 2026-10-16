@@ -96,8 +96,8 @@ $env:Path='C:\Program Files\nodejs;' + $env:Path
 Local Next.js cache rule:
 
 - Do not run `npm.cmd run build` while `npm.cmd run dev` is still running. Both commands write to `.next/`.
-- If local dynamic routes fail with `Cannot find module './vendor-chunks/esprima.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm.cmd run dev`.
-- This error comes from a corrupted local build cache around `gray-matter -> js-yaml -> esprima`; it does not automatically mean the MDX note content is broken.
+- If local dynamic routes fail with `Cannot find module './vendor-chunks/<name>.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm.cmd run dev`.
+- That error comes from a corrupted local build cache; it does not automatically mean the MDX note content is broken. (It used to name `esprima.js` through `gray-matter -> js-yaml 3`; since 2026-10-17 gray-matter resolves js-yaml 4 through a `package.json` override and esprima is no longer installed.)
 
 ## Encoding Policy
 

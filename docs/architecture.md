@@ -12,7 +12,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 - React 19.2
 - TypeScript
 - Tailwind CSS
-- local file content via `gray-matter`
+- local file content via `gray-matter`, parsing YAML frontmatter with js-yaml 4 (`package.json` overrides gray-matter's js-yaml, and `lib/content.ts` / `scripts/validate-content.mjs` pass `yaml.load` as the engine)
 - Node.js 22 LTS or newer with npm 10 or newer
 - Vercel hosting
 - Cloudflare DNS
