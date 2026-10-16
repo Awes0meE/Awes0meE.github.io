@@ -21,7 +21,7 @@ The implementation is deliberately file-based. Projects, notes, and media are ve
 
 | Route | Purpose | Source |
 | --- | --- | --- |
-| `/` | Concise homepage with hero, education, featured projects, notes, media, and contact | `app/page.tsx` |
+| `/` | Homepage with hero, pinned project wheel (all projects, `components/project-cover-flow.tsx`), education, notes, media, and contact | `app/page.tsx` |
 | `/work` | Evidence-first Project Aperture Sequence index | `app/work/page.tsx` |
 | `/work/[slug]` | Project detail | `app/work/[slug]/page.tsx` |
 | `/notes` | Project-routed engineering note index with metadata search and project/year filters | `app/notes/page.tsx` |
