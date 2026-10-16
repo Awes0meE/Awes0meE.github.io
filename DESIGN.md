@@ -291,6 +291,7 @@ Dark-background derivatives may add white only inside intended shield or crest c
 
 Every control shares one quiet motion vocabulary (`app/globals.css`, *Interaction motion*). Exits run faster than entrances, and the shared ease is `cubic-bezier(0.16, 1, 0.3, 1)`.
 
+- **Image lightbox.** Clicking an evidence image opens it in a modal viewer on the same page instead of navigating to the bare file: article figures, project media tiles, `/media` image records and file-browser image previews. The image sits uncropped over a canvas-tinted, blurred backdrop with a bilingual caption, an "Original" link and a close button. Clicking outside the image, pressing Escape or the close button dismisses it, and focus returns to the opener. Modified clicks keep the browser default, videos are untouched, and the open animation stops under reduced motion.
 - **Signal fill.** Outlined actions (`.signal-fill`: hero primary, header CTA, About primary, Media "Open media", file "Open file", 404 action) fill with the signal colour as a left-to-right wipe: 420ms in, 240ms out. The label turns to on-signal text a beat later.
 - **Drawn underline.** Section-header links and detail section links draw a 1px underline from the left. The hero secondary link and prose links tighten their existing underline offset.
 - **Directional arrow.** Arrows lean 3px toward their destination on hover and focus. Download arrows drop 2px.

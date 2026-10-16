@@ -182,6 +182,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/bilingual-text.tsx`: paired English/Chinese text rendering.
 - `components/project-assets.tsx`: server-side resolver for project `assetPaths` from `public/uploads/`, with an explicit allowlist for reviewed `juanyun-tech` files.
 - `components/project-asset-browser.tsx`: client-side two-pane file index and preview UI for public project files.
+- `components/image-lightbox.tsx`: site-wide modal image viewer mounted in `app/layout.tsx`; any `a[data-lightbox]` (article figures, project media tiles, `/media` images, asset-browser image previews) opens it, and clicking outside, Escape or the close button dismisses it.
 - `components/content-renderer.tsx`: renders safe markdown-like body content, including readable Markdown/text document previews, normal and language-scoped fenced code blocks, basic Markdown tables, heading anchors, ignored standalone HTML comments, and language-scoped body/headings/tables.
 - `lib/content.ts`: content loaders and typed content models.
 - `lib/site.ts`: site constants and navigation labels.

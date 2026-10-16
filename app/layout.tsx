@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { BilingualText } from "@/components/bilingual-text";
+import { ImageLightbox } from "@/components/image-lightbox";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { openGraphBase, site } from "@/lib/site";
@@ -73,6 +74,7 @@ export default function RootLayout({
           {children}
         </div>
         <SiteFooter />
+        <ImageLightbox />
       </body>
     </html>
   );
