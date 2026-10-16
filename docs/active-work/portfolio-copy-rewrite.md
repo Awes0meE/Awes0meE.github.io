@@ -74,4 +74,4 @@ This brief is for `gan-quadrotor-esc-fyp` and its four notes. It was confirmed a
 - Results: at 10000 rpm, input power was about 27.0 W for GaN against 45.0 W for Si, and surface temperature after 600 s was 34.0 °C against 38.9 °C. Alvin's reaction was relief, with the clear understanding that this is input power at matched speed.
 - Defense: other students in the group did Simulink. Alvin brought hardware with only P0 done. The session ran 55 minutes, with a 40-minute English Q&A, and the next student finished in 6 minutes and thanked him. The grade was 72, in the first-class band, recorded as A. The page closes by recommending Prof. Zhang.
 - Notes: the AM32 bootloader-free port, bootstrap sizing, same-speed DShot mapping, and shoot-through paths and protection.
-- Publication: datasheets are linked, not uploaded. The XJTLU crest on the silkscreen stays. Local paths and the student ID stay out. Whether the project is homepage-featured is still the owner's call.
+- Publication: datasheets are linked, not uploaded. The XJTLU crest on the silkscreen stays. Local paths and the student ID stay out. The owner chose to feature it on the homepage.

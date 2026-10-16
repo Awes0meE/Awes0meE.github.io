@@ -100,7 +100,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Justified reading text that shares one column edge with figures.
 - Note plates numbered within their project.
 - `2026-10-16`: Branch `feat/about-online-cv` rebuilt `/about` as an owner-voiced online CV from a confirmed brief and his LinkedIn profile. It has an introduction, an embedded-world ticker, a dated route linking to project pages, current NTU work and availability, an off-the-clock section, and one contact block. The Tension Signal Column was retired, and LinkedIn was added to `lib/site.ts` and the footer.
-- `2026-10-17`: Branch `content/add-gan-quadrotor-esc-fyp` imported the XJTLU final-year project as `gan-quadrotor-esc-fyp` through the full AddProject and engineering-note-writer SOP (two `grilling` rounds, Chinese-first drafting, gate records). It adds 1 project, 4 notes (AM32 bootloader-free port, LMG1210 bootstrap sizing, same-speed DShot mapping, shoot-through protection), 17 media records and 189 curated uploads, with datasheets linked rather than uploaded and local paths and the student ID removed. `featured` stays `false` until the owner decides.
+- `2026-10-17`: Branch `content/add-gan-quadrotor-esc-fyp` imported the XJTLU final-year project as `gan-quadrotor-esc-fyp` through the full AddProject and engineering-note-writer SOP (two `grilling` rounds, Chinese-first drafting, gate records). It adds 1 project, 4 notes (AM32 bootloader-free port, LMG1210 bootstrap sizing, same-speed DShot mapping, shoot-through protection), 17 media records and 189 curated uploads, with datasheets linked rather than uploaded and local paths and the student ID removed. The owner chose to feature it on the homepage project index.
 
 ## Stable Decisions
 
