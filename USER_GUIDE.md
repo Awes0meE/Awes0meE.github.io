@@ -8,7 +8,7 @@ This is Alvin Li's personal engineering portfolio, with iRidium / 铱 as the eng
 
 The site contains:
 
-- Homepage: personal introduction, a scroll-driven wheel of every project, education, notes and media
+- Homepage: personal introduction, a scroll-driven wheel of every project, education, a moving film of bench media and a ticket tape of engineering notes
 - Work: project case studies
 - Notes: learning notes and technical writing
 - Media: images, videos, board renders, and experiment materials
@@ -20,7 +20,7 @@ The site contains:
 
 网站包含：
 
-- 首页：个人介绍、可以滚动翻看全部项目的封面流、教育经历、笔记与影像
+- 首页：个人介绍、可以滚动翻看全部项目的封面流、教育经历、持续滚动的影像胶片与工程笔记票根
 - Work / 项目：项目案例
 - Notes / 笔记：学习笔记和技术记录
 - Media / 媒体：图片、视频、板卡渲染图和实验材料
@@ -184,13 +184,13 @@ EN/ZH 旁边的太阳/月亮按钮用于切换浅色和深色主题。第一次�
 
 ## Using The Media Focus Aperture
 
-On `/media`, choose one of nine project sources to load that project's authentic lead record in the Focus Aperture. Homepage media thumbnails carry their project source into this chooser. The complete 101-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
+On `/media`, choose one of nine project sources to load that project's authentic lead record in the Focus Aperture. Frames on the homepage film carry their project source into this chooser. The complete 101-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
 
 Technical evidence is shown with contain fitting so schematics, PCB renders, and board photographs remain complete. The aperture reveal and scan stop when the operating system requests reduced motion; project identity, selection state, and all links remain available.
 
 ## 使用媒体深焦检视窗
 
-在 `/media` 中，选择 9 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页媒体缩略图会把项目来源带入这个选择器。完整的 101 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
+在 `/media` 中，选择 9 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页胶片上的画格会把项目来源带入这个选择器。完整的 101 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
 
 原理图、PCB 渲染和板卡照片使用 contain 适配，避免为了版式裁掉技术证据。操作系统启用“减少动态效果”时，检视窗显现和扫描线会停止，但项目身份、选择状态和所有链接仍然可用。
 

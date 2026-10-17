@@ -197,7 +197,7 @@ The homepage is one continuous instrument field divided by restrained rules. Its
 2. hero direction, identity, actions, and technical atom;
 3. project wheel (every project, see *Project wheel*);
 4. education and current direction;
-5. notes and bench media;
+5. bench media and engineering notes (see *Media and notes strips*);
 6. engineering stack and contact;
 7. shared footer.
 
@@ -286,6 +286,15 @@ The primary action is a sharp ember-outline control that fills on hover or focus
 - **Reduced motion.** Under `prefers-reduced-motion: reduce` the section is not pinned: the same links form a flat grid of covers with visible titles and status lines; field, legend, caption and controls are absent.
 
 Titles, statuses, timelines, tags and covers come from project metadata. Never add achievements or evidence claims for visual density.
+
+### Media and notes strips
+
+Bench media and engineering notes (`components/home-feed.tsx`, `components/home-feed.module.css`) replaced the half-and-half notes list and cropped media grid on 2026-10-17. Each has its own section header and one full-width strip that loops endlessly: media runs left at 14px/s and notes run right at 24px/s. Both strips come up in a random order on every visit (`components/home-feed-strips.tsx`): the film draws 24 records at random from the whole media archive and the tape shuffles every public note, then neighbours from the same project are swapped apart. The server renders a fixed first order, dealt project by project, for the first paint and for readers without script. Neither strip stops for the pointer (a click opens the record); keyboard focus stops a strip; the loop copy is `aria-hidden` and out of the tab order but stays clickable, since it is half of what is on screen; the strips fade out at both ends; under reduced motion they stand still and scroll sideways with snap points, without the copy.
+
+- **Film.** Media is a strip of film on a gradient base: a deep ember gradient in Ember Black (faint ember glows over `#1E0C02` to `#2A1103`) and a light blue gradient in Bench Paper with a strong sweep (white, sky and indigo light over `#2B64D6` → `#60A0F5` → `#4480E8` → `#2558CC`). The base belongs to the strip and stays put while the frames travel across it. Two equal sprocket edges of rectangular holes (14 × 10px on a 24px pitch, so the 10px between holes equals the 10px between images, and the holes line up with the image edges) are punched through to the page; frames are a whole number of holes wide (240px, or 216px on phones), so the holes never break. The strip is about 235px tall: 31px sprocket edges and 10px of base between frames hold a 230 × 172 image. Each record is one frame with the image alone, on the image-well mat (contain fit, never cropped); no text is printed on the film, and the project and media title stay in the link's accessible name. Dark images dim at rest and show full colour on hover, when the frame edge lights with a 2px rim (pale ember on Ember Black, deep cobalt `#1D4ED8` on Bench Paper), per *The full-colour rule*. Frames link to `/media?project=…`.
+- **Tape.** Notes are stubs on one ruled paper tape (warm `#12100E` in Ember Black, just above the canvas; the pale cobalt band in Bench Paper, matching the stack-and-contact section) with a 16px grid at 9%, parted by dashed tear lines. Each stub is masked to shape with a 15px quarter-circle notch cut at every corner, so the notches are real cut-outs. A stub carries only what a ticket would, centred in one box clear of the arrow and the notches (long lines truncate or clamp, never spill): its project in ember-text mono, the note title in the display face (uppercase Barlow in English, bold CJK in Chinese, two lines at most) and up to three tags, with an arrow at the top right and a flat 64 × 14px barcode at the lower right whose bars are derived from the note's slug, so every stub's code differs. The stub under the pointer (or keyboard focus) lights its whole outline, notch arcs included, as an even 2px rim (the paper's notch circles share the rim's centres) in the signal colour on Ember Black and the soft blue `#60A5FA` on Bench Paper with a soft inner glow, changing colour only so it never flashes, and returns to plain paper when the pointer leaves. Stubs are 320px (270px on phones), 9.5rem (152px) tall, a whole number of pixels so the top and bottom rim land on the same pixel grid, and link to the note with `nav-forward`.
+
+The owner asked for a film strip with a real frame (equal edges, images only) on a gradient base, and for notes as plain ticket stubs without number plates.
 
 ### Education and current direction
 

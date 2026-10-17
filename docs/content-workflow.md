@@ -92,7 +92,7 @@ On project detail pages, related development notes appear above the public proje
 
 `visibility` controls whether the note is served publicly:
 
-- `visibility: public` makes the detail route available and lets the note participate in public homepage selection. It appears on `/notes` and in a project detail related-note section only when `projectSlug` resolves to a real project.
+- `visibility: public` makes the detail route available. The note appears on the homepage notes tape, on `/notes` and in a project detail related-note section only when `projectSlug` resolves to a real project.
 - `visibility: private` hides the note from those public surfaces and makes the public detail route return 404.
 - missing `visibility` is treated as private. Use this for drafts.
 
