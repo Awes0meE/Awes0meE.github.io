@@ -6,10 +6,10 @@ import {
   Github,
   Mail,
   Microchip,
-  PlayCircle,
   SquareActivity
 } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { HomeFeed } from "@/components/home-feed";
 import { RouteStage } from "@/components/route-stage";
 import { ProjectCoverFlow, type CoverFlowItem } from "@/components/project-cover-flow";
 import { TechnicalVisual } from "@/components/technical-visual";
@@ -17,8 +17,6 @@ import {
   formatDateRange,
   formatDateRangeZh,
   formatStatusZh,
-  getMediaItems,
-  getNotes,
   getProjectCover,
   getProjects
 } from "@/lib/content";
@@ -62,8 +60,6 @@ export default function Home() {
     tags: project.tags,
     cover: getProjectCover(project)
   }));
-  const notes = getNotes().slice(0, 5);
-  const media = getMediaItems().slice(0, 6);
 
   return (
     <RouteStage>
@@ -143,62 +139,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="signal-section signal-reading-section">
-          <div className="signal-reading-column" aria-labelledby="notes-title">
-            <header className="signal-section-header">
-              <h2 id="notes-title"><BilingualText en="Engineering notes" zh="工程笔记" /></h2>
-              <Link href="/notes"><BilingualText en="All notes" zh="全部笔记" /><ArrowRight size={16} aria-hidden="true" /></Link>
-            </header>
-            <div className="signal-notes-list">
-              {notes.map((note, index) => (
-                <Link
-                  key={note.slug}
-                  href={`/notes/${note.slug}`}
-                  transitionTypes={["nav-forward"]}
-                  className="signal-note-row"
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <span>
-                    <strong><BilingualText en={note.title} zh={note.titleZh} /></strong>
-                    <small>{note.tags.slice(0, 3).join(" · ")}</small>
-                  </span>
-                  <time>{note.date}</time>
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="signal-reading-column signal-media-column" aria-labelledby="media-title">
-            <header className="signal-section-header">
-              <h2 id="media-title"><BilingualText en="Bench and build media" zh="台架与制作影像" /></h2>
-              <Link href="/media"><BilingualText en="All media" zh="全部媒体" /><ArrowRight size={16} aria-hidden="true" /></Link>
-            </header>
-            <div className="signal-media-grid">
-              {media.map((item) => (
-                <Link
-                  key={item.id}
-                  href={item.projectSlug ? `/media?project=${encodeURIComponent(item.projectSlug)}` : "/media"}
-                  className="signal-media-item"
-                >
-                  <Image
-                    src={item.thumbnail}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 18vw, (min-width: 640px) 30vw, 48vw"
-                    className="object-cover"
-                  />
-                  {item.type === "video" ? (
-                    <span className="signal-media-play"><PlayCircle size={21} aria-hidden="true" /></span>
-                  ) : null}
-                  <span className="sr-only">
-                    <BilingualText en={item.title} zh={item.titleZh ?? item.title} />
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <HomeFeed />
 
         <section className="signal-section signal-contact-section" aria-labelledby="stack-contact-title">
           <div className="signal-stack">
