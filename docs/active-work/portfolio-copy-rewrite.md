@@ -78,7 +78,7 @@ This brief is for `gan-quadrotor-esc-fyp` and its five notes. They were publishe
 
 ## AD831 Active Mixer Brief (confirmed 2026-10-17)
 
-This brief is for `ad831-active-mixer` and its four notes. It was confirmed after three `grilling` rounds.
+This brief is for `ad831-active-mixer` and its four notes. They were published through PR #53 (merged at `22b0916`). It was confirmed after three `grilling` rounds.
 
 - Context: EEE307 Electronics for Communications circuit-construction coursework, semester 1 of 2025/26, 20% of the module, in a pair with roommate Zichen (first name only on the page). The lecturer is not named. Most classmates built breadboard filters from through-hole resistors and electrolytics; very few built mixers.
 - Motive: something weightier than a filter with assured performance. Alvin was also doing the FYP and the Juanyun part-time job, so he admits taking the shortcut of ADI's ready-made AD831 and used the project to learn RF routing and the SMA-to-pin path. Fresh from the 2025 NUEDC, he had the LCEDA contest guide, and V1 copied its chapter 8 reference circuit.
