@@ -146,11 +146,12 @@ Use optional project `assetPaths` to list uploaded evidence from `public/uploads
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current repository content state, 2026-09-07:
+Current repository content state, 2026-10-18:
 
-The source collection contains 9 project pages, 30 public notes across all nine
-project channels, and 101 media records. The first eight projects have two approved
-bilingual studies each and the GaN quadrotor ESC final-year project has five; nine
+The source collection contains 10 project pages, 34 public notes across all ten
+project channels, and 119 media records. The first eight projects have two approved
+bilingual studies each and the GaN quadrotor ESC final-year project has five, and the AD831 active mixer
+coursework has four; nine
 existing technical/source-document pages remain available.
 
 The final batch adds two studies each for Tianjin STM32, Nanjing Turing, Juanyun

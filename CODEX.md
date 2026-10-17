@@ -182,11 +182,12 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The source now contains 9 project pages, 30 public notes and 101 media records
-(97 images, 4 videos). All nine projects have note channels. The 2026-09-07 revision
+The source now contains 10 project pages, 34 public notes and 119 media records
+(114 images, 5 videos). All ten projects have note channels. The 2026-09-07 revision
 gave the first eight projects two approved bilingual studies each, with nine
 technical/source-document notes remaining; the GaN quadrotor ESC final-year project
-(added 2026-10-17) has five notes.
+(added 2026-10-17) has five notes, and the AD831 active mixer coursework (added
+2026-10-18) has four.
 The twelve suspended old notes have been retired from current source. Git retains
 their history; do not restore a former suspension manifest over the new articles.
 
@@ -232,9 +233,9 @@ Maintain the current engineering-academic identity:
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
 - in release `v0.9.0`, keep those five presentation derivatives (now transparent cutouts) as a prototype nucleus in `components/technical-visual.tsx` that shows one board at a time, 5 seconds each, without any ring or segment indicator; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
-- on `/work`, keep the sticky `01`–`09` rail, nine complete semantic project links, and exactly eight black signal intervals (one between each adjacent pair) whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
-- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 9 channels and 30 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
-- on `/media`, keep the project-first Focus Aperture with nine source choices, one authentic lead record, and all 101 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
+- on `/work`, keep the sticky `01`–`10` rail, ten complete semantic project links, and exactly nine black signal intervals (one between each adjacent pair) whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
+- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 10 channels and 34 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
+- on `/media`, keep the project-first Focus Aperture with ten source choices, one authentic lead record, and all 119 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the owner-voiced online CV described in `DESIGN.md`: no repeated method chains, education blocks or duplicate contact links, idiomatic (not literal) English headings, the complete original `public/uploads/projects/avatar.jpg` without crop, filter or replacement, and motion that pauses offscreen and disappears under `prefers-reduced-motion`;
 - treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
