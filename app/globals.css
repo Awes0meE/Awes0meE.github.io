@@ -614,7 +614,8 @@ body:has(.signal-home) .site-footer-visual-note {
   position: relative;
   display: grid;
   width: 100%;
-  min-height: 700px;
+  /* The hero fills the first screen, so the project wheel starts below the fold. */
+  min-height: max(700px, calc(100svh - var(--site-header-h)));
   grid-template-columns: minmax(480px, var(--copy-share)) minmax(0, 1fr);
   margin: 0 auto;
 }
@@ -877,10 +878,6 @@ html[data-lang="en"] .signal-hero-actions {
   background: var(--signal-canvas);
 }
 
-#project-evidence {
-  scroll-margin-top: 7.75rem;
-}
-
 .signal-section-header {
   display: flex;
   min-height: 66px;
@@ -923,157 +920,6 @@ html[data-lang="zh"] .signal-stack h2 {
 
 .signal-section-header > a:hover {
   text-decoration: underline;
-}
-
-.signal-project-table {
-  width: 100%;
-}
-
-.signal-project-table-head,
-.signal-project-row-link {
-  display: grid;
-  grid-template-columns: 64px minmax(250px, 1.25fr) minmax(170px, 0.74fr) minmax(180px, 0.78fr) minmax(132px, 0.52fr) 40px;
-}
-
-.signal-project-table-head {
-  min-height: 42px;
-  align-items: center;
-  color: rgb(var(--c-t4));
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.signal-project-table-head > span {
-  white-space: nowrap;
-}
-
-.signal-project-table-head > span,
-.signal-project-row-link > * {
-  min-width: 0;
-  padding-inline: 1rem;
-  border-right: 1px solid var(--signal-line-soft);
-}
-
-.signal-project-row {
-  border-top: 1px solid var(--signal-line);
-}
-
-.signal-project-row-link {
-  min-height: 116px;
-  align-items: stretch;
-  color: inherit;
-  transition: background-color 260ms ease-out;
-}
-
-.signal-project-row-link:hover,
-.signal-project-row-link:focus-visible {
-  background: linear-gradient(90deg, rgb(var(--c-halo) / 0.105), rgb(var(--c-halo) / 0.02) 70%, transparent);
-}
-
-.signal-project-number,
-.signal-project-timeline {
-  display: flex;
-  align-items: center;
-  color: rgb(var(--c-t4));
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.signal-project-number {
-  justify-content: center;
-  padding-inline: 0 !important;
-}
-
-.signal-project-identity {
-  display: grid;
-  min-width: 0;
-  grid-template-columns: 96px minmax(0, 1fr);
-  align-items: center;
-  gap: 1rem;
-}
-
-.signal-project-cover {
-  position: relative;
-  background: rgb(var(--c-well));
-  display: block;
-  width: 96px;
-  height: 72px;
-  overflow: hidden;
-  filter: grayscale(1) contrast(1.05) brightness(0.8);
-  transition: filter 320ms ease-out, transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.signal-project-row-link:hover .signal-project-cover,
-.signal-project-row-link:focus-visible .signal-project-cover {
-  filter: grayscale(0.18) contrast(1.05) brightness(0.95);
-  transform: scale(1.035);
-}
-
-.signal-project-identity strong {
-  display: block;
-  overflow: hidden;
-  color: var(--signal-warm-white);
-  font-size: 1.025rem;
-  font-weight: 650;
-  line-height: 1.35;
-  text-overflow: ellipsis;
-}
-
-.signal-project-identity small {
-  display: block;
-  margin-top: 0.45rem;
-  color: var(--signal-ember-text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.signal-project-focus,
-.signal-project-evidence {
-  display: flex;
-  min-width: 0;
-  align-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.7rem;
-  color: rgb(var(--c-t3));
-  font-size: 0.875rem;
-  line-height: 1.45;
-}
-
-.signal-project-focus span {
-  color: rgb(var(--c-t2));
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  letter-spacing: 0.035em;
-  text-transform: uppercase;
-}
-
-.signal-project-focus span:not(:last-child)::after {
-  margin-left: 0.7rem;
-  color: rgb(var(--c-ember) / 0.7);
-  content: "/";
-}
-
-.signal-project-timeline {
-  justify-content: flex-start;
-  white-space: nowrap;
-}
-
-.signal-project-arrow {
-  align-self: center;
-  justify-self: center;
-  color: var(--signal-ember-text);
-  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.signal-project-row-link:hover .signal-project-arrow,
-.signal-project-row-link:focus-visible .signal-project-arrow {
-  transform: translate(3px, -3px);
 }
 
 .signal-credentials-section {
@@ -1330,19 +1176,6 @@ html[data-lang="zh"] .signal-stack h2 {
     margin-top: 1.2rem;
   }
 
-  .signal-project-table-head,
-  .signal-project-row-link {
-    grid-template-columns: 52px minmax(230px, 1.15fr) minmax(145px, 0.7fr) minmax(150px, 0.72fr) 124px 36px;
-  }
-
-  .signal-project-table-head > span,
-  .signal-project-row-link > * {
-    padding-inline: 0.75rem;
-  }
-
-  .signal-project-timeline {
-    white-space: normal;
-  }
 }
 
 @media (max-width: 1023px) {
@@ -1472,33 +1305,6 @@ html[data-lang="zh"] .signal-stack h2 {
     padding: 1rem 1.25rem;
   }
 
-  .signal-project-table-head {
-    display: none;
-  }
-
-  .signal-project-row-link {
-    grid-template-columns: 34px minmax(0, 1fr) 28px;
-    grid-template-areas:
-      "number identity arrow"
-      "number focus focus"
-      "number evidence evidence"
-      "number timeline timeline";
-    padding: 1rem 0;
-  }
-
-  .signal-project-row-link > * {
-    padding-inline: 0.75rem;
-    border-right: 0;
-  }
-
-  .signal-project-number { grid-area: number; align-self: stretch; border-right: 1px solid var(--signal-line-soft); }
-  .signal-project-identity { grid-area: identity; grid-template-columns: 76px minmax(0, 1fr); }
-  .signal-project-cover { width: 76px; height: 58px; }
-  .signal-project-focus { grid-area: focus; padding-top: 0.9rem; }
-  .signal-project-evidence { grid-area: evidence; padding-top: 0.9rem; font-size: 0.875rem; }
-  .signal-project-timeline { grid-area: timeline; justify-content: flex-start; padding-top: 0.55rem; font-size: 0.875rem; }
-  .signal-project-arrow { grid-area: arrow; }
-
   .signal-credentials-grid {
     grid-template-columns: 1fr;
   }
@@ -1527,10 +1333,6 @@ html[data-lang="zh"] .signal-stack h2 {
   .signal-stack,
   .signal-contact-links a {
     padding-inline: 1.25rem;
-  }
-
-  .signal-project-timeline {
-    white-space: nowrap;
   }
 }
 
@@ -1622,20 +1424,13 @@ html[data-lang="zh"] .signal-stack h2 {
   .site-nav-link::after,
   body .site-mobile-nav-link::after,
   .site-nav-index,
-  .signal-project-row-link,
-  .signal-project-cover,
-  .signal-project-arrow,
   .signal-primary-action,
   .signal-secondary-action {
     transition: none !important;
   }
 
   .site-nav-link:hover,
-  .site-nav-link:active,
-  .signal-project-row-link:hover .signal-project-cover,
-  .signal-project-row-link:focus-visible .signal-project-cover,
-  .signal-project-row-link:hover .signal-project-arrow,
-  .signal-project-row-link:focus-visible .signal-project-arrow {
+  .site-nav-link:active {
     transform: none;
   }
 }
@@ -2371,7 +2166,7 @@ html[data-lang="zh"] .signal-work-case-action {
 /* Route transitions (React <ViewTransition>, see components/route-stage) */
 
 :root {
-  --site-header-h: 79px;
+  --site-header-h: 87px;
 }
 
 @media (max-width: 899px) {
@@ -3485,7 +3280,6 @@ html[data-theme="light"] body .theme-option[aria-pressed="true"] {
 /* Bench Paper shows evidence in full colour: the dark theme's dimmed,
    desaturated rest state reads as a grey film on a white page. */
 html[data-theme="light"] :is(
-  .signal-project-cover,
   .signal-media-item img,
   .signal-work-rail-cover,
   .signal-work-image
@@ -3562,8 +3356,7 @@ body .signal-fill:focus-visible {
   .signal-section-header > a,
   .bench-section-link,
   .bench-spec-links a,
-  .signal-note-row,
-  .signal-project-row-link
+  .signal-note-row
 ) svg {
   transition: transform var(--motion-base) var(--ease-out-soft);
 }
@@ -3725,13 +3518,11 @@ body .site-header-cta.signal-fill:is(:hover, :focus-visible) {
 }
 
 /* Homepage rows: title and arrow travel together. */
-.signal-note-row > span:nth-child(2),
-.signal-project-identity {
+.signal-note-row > span:nth-child(2) {
   transition: transform var(--motion-base) var(--ease-out-soft);
 }
 
-.signal-note-row:is(:hover, :focus-visible) > span:nth-child(2),
-.signal-project-row-link:is(:hover, :focus-visible) .signal-project-identity {
+.signal-note-row:is(:hover, :focus-visible) > span:nth-child(2) {
   transform: translateX(4px);
 }
 
@@ -3773,8 +3564,7 @@ body .site-header-cta.signal-fill:is(:hover, :focus-visible) {
   .theme-option svg,
   .site-logo-wordmark,
   .signal-note-row > span:nth-child(2),
-  .signal-project-identity,
-  :is(.signal-fill, .signal-secondary-action, .signal-section-header > a, .bench-section-link, .bench-spec-links a, .signal-note-row, .signal-project-row-link) svg {
+  :is(.signal-fill, .signal-secondary-action, .signal-section-header > a, .bench-section-link, .bench-spec-links a, .signal-note-row) svg {
     transition: none !important;
     transform: none !important;
   }

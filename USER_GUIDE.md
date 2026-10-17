@@ -8,7 +8,7 @@ This is Alvin Li's personal engineering portfolio, with iRidium / 铱 as the eng
 
 The site contains:
 
-- Homepage: personal introduction and featured work
+- Homepage: personal introduction, a scroll-driven wheel of every project, education, notes and media
 - Work: project case studies
 - Notes: learning notes and technical writing
 - Media: images, videos, board renders, and experiment materials
@@ -20,7 +20,7 @@ The site contains:
 
 网站包含：
 
-- 首页：个人介绍和精选项目
+- 首页：个人介绍、可以滚动翻看全部项目的封面流、教育经历、笔记与影像
 - Work / 项目：项目案例
 - Notes / 笔记：学习笔记和技术记录
 - Media / 媒体：图片、视频、板卡渲染图和实验材料
@@ -313,7 +313,7 @@ assetPaths:
 4. Write the project story below the metadata.
 5. Save the file and check the website locally.
 
-If `featured: true`, the project appears on the homepage featured section.
+The homepage project wheel shows every project in `/work` order. `featured` is still required by the content check but no longer selects homepage projects.
 
 If `assetPaths` is set, the project page shows uploaded public files in a file browser. The left side is a project-file index, and the right side previews the selected file. Images and videos show inline previews, Markdown / text documents render as readable page content, source/code files render in code frames, PDFs embed from page one where the browser supports it, and binary files keep direct open links. Relative images and links inside uploaded Markdown are resolved from the source file path. HTML and SVG files are kept as download-only artifacts.
 
@@ -325,7 +325,7 @@ If `assetPaths` is set, the project page shows uploaded public files in a file b
 4. 在元数据下面写项目介绍。
 5. 保存文件，并在本地网站里检查效果。
 
-如果把 `featured` 设置为 `true`，这个项目会显示在首页精选项目区域。
+首页项目封面流按 `/work` 的顺序展示全部项目。`featured` 仍是内容检查要求的字段，但已经不再决定哪些项目出现在首页。
 
 如果设置 `assetPaths`，项目页会用文件浏览器展示这些公开路径下的上传资料。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，二进制文件保留直接打开链接。上传 Markdown 里的相对图片和链接会按源文件位置解析；HTML 和 SVG 文件只作为下载附件保留。
 

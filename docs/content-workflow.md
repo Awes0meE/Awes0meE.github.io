@@ -49,7 +49,7 @@ assetPaths:
 ---
 ```
 
-Set `featured: true` only for projects that should appear on the homepage.
+The homepage project wheel shows every project in `/work` order, so `featured` no longer selects homepage projects; the validator still requires the boolean and no route currently reads it.
 
 **Cover rule (`cover`, `coverDark`, `coverKind`).** Every project has exactly one cover card, shown on `/work`, in the `/work` rail, in the homepage project index, and as the project page's `FIG. 01` (the `/work` image morphs into it). Company or internship experience (`coverKind: "company"`) uses the company's logo; personal work (`coverKind: "render"`) uses the board's EDA 3D render, or the closest equivalent when no render exists (the course-kit photo and the Tinkercad wiring view of the two Arduino projects). Cards are normalized transparent WebP files: the subject is separated from its background, cropped, and centred on a 1600×1200 canvas at roughly 42% of the area (never wider than 84% or taller than 78%), so logos and boards carry the same visual weight. The mat is CSS, not pixels: the image-well token (light `#EEF4FD`, dark `#10100E`). A logo that does not read on one of the mats ships a second `coverDark` card in a reversed colourway (white type for dark, navy type for light); `ProjectCover` renders both and the theme shows one. Name the card `cover-card.webp` (and `cover-card-dark.webp`) inside the project's upload folder; keep the original image for evidence and media use.
 
