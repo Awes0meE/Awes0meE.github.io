@@ -1,0 +1,402 @@
+/* Homepage bench media and engineering notes (components/home-feed.tsx): two endless
+   strips moving in opposite directions at the hero band's pace (38px per 4.05s). Each
+   card has a fixed pitch, so one run is --n × --pitch px wide and the loop duration
+   follows from the speed. */
+
+.feed {
+  --speed: 9.383;
+}
+
+.feed > section + section {
+  border-top: 1px solid var(--signal-line);
+}
+
+.strip {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+
+/* The film runs faster than the hero band but slower than the notes. */
+.film {
+  --pitch: 240;
+  --speed: 14;
+}
+
+/* Notes travel faster than the film. */
+.tape {
+  --pitch: 320;
+  --speed: 24;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation-duration: calc(var(--n) * var(--pitch) / var(--speed) * 1s);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  will-change: transform;
+}
+
+.film .track {
+  animation-name: feed-left;
+}
+
+.tape .track {
+  animation-name: feed-right;
+}
+
+/* Neither strip stops for the pointer; keyboard focus stops a strip so the focused
+   record stays in view. */
+.strip:focus-within .track {
+  animation-play-state: paused;
+}
+
+.run {
+  display: flex;
+  flex: none;
+}
+
+@keyframes feed-left {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes feed-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+/* ---- Film: each media record is one frame, image only, on a strip whose base is the
+   header's deep cobalt aurora, with equal sprocket edges punched through to the page above
+   and below. The base belongs to the strip and stays put while the frames travel across
+   it. Frame pitch is a whole number of hole pitches (25px), so the holes run on without a
+   seam. ---- */
+
+/* Ember Black: an ember gradient film. */
+.film {
+  --film-ink: rgb(255 179 107);
+  margin: 1.25rem 0 1.5rem;
+  background:
+    radial-gradient(40% 140% at 20% 50%, rgb(255 154 74 / 0.09), transparent 70%),
+    radial-gradient(35% 160% at 75% 40%, rgb(255 116 0 / 0.08), transparent 70%),
+    radial-gradient(30% 120% at 50% 100%, rgb(255 205 150 / 0.03), transparent 70%),
+    linear-gradient(100deg, rgb(30 12 2), rgb(42 17 3) 50%, rgb(28 11 2));
+}
+
+/* Bench Paper: a light blue gradient film with a strong sweep from deep to bright. */
+:global(html[data-theme="light"]) .film {
+  --film-ink: rgb(29 78 216);
+  background:
+    radial-gradient(38% 150% at 22% 50%, rgb(255 255 255 / 0.3), transparent 70%),
+    radial-gradient(34% 160% at 74% 40%, rgb(56 189 248 / 0.45), transparent 70%),
+    radial-gradient(30% 120% at 50% 100%, rgb(79 70 229 / 0.28), transparent 70%),
+    linear-gradient(100deg, rgb(43 100 214), rgb(96 160 245) 38%, rgb(68 128 232) 68%, rgb(37 88 204));
+}
+
+.frame {
+  position: relative;
+  display: block;
+  flex: none;
+  width: calc(var(--pitch) * 1px);
+  padding: 31px 5px;
+  color: inherit;
+}
+
+.frame::before,
+.frame::after {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 11px;
+  background: rgb(var(--c-canvas));
+  content: "";
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='11'%3E%3Crect x='5' y='0.5' width='14' height='10' rx='1.2'/%3E%3C/svg%3E") 0 0 / 24px 11px repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='11'%3E%3Crect x='5' y='0.5' width='14' height='10' rx='1.2'/%3E%3C/svg%3E") 0 0 / 24px 11px repeat-x;
+}
+
+.frame::before {
+  top: 10px;
+}
+
+.frame::after {
+  bottom: 10px;
+}
+
+.well {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgb(0 0 0 / 0.35);
+  background: rgb(var(--c-well));
+  transition: border-color 260ms ease-out, box-shadow 260ms ease-out;
+}
+
+.mediaImage {
+  object-fit: contain;
+  padding: 5%;
+  filter: saturate(0.82) brightness(0.88);
+  transition: filter 320ms ease-out, transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:global(html[data-theme="light"]) .mediaImage {
+  filter: none;
+}
+
+.frame:hover .mediaImage,
+.frame:focus-visible .mediaImage {
+  filter: none;
+  transform: scale(1.04);
+}
+
+.frame:hover .well,
+.frame:focus-visible .well {
+  border-color: var(--film-ink);
+  box-shadow: 0 0 0 1px var(--film-ink);
+}
+
+.play {
+  position: absolute;
+  bottom: 0.55rem;
+  left: 0.55rem;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid rgb(var(--c-ember) / 0.7);
+  background: rgb(var(--c-canvas));
+  color: var(--signal-ember-text);
+}
+
+/* ---- Tape: the notes are stubs on one ruled paper tape in the ground of the stack and
+   contact section, parted by dashed tear lines with a notch cut at both ends of each line.
+   A stub carries what a ticket would: its project, the note title, its tags, and an arrow. ---- */
+
+.tape {
+  --tape: rgb(18 16 14);
+  margin: 1.1rem 0 1.4rem;
+}
+
+:global(html[data-theme="light"]) .tape {
+  --tape: rgb(var(--c-band));
+}
+
+/* Each stub is cut to shape: a mask removes a 15px quarter circle at every corner, so the
+   notches are real cut-outs. Two layers share the shape and never change geometry: the
+   rim (::after, the full stub) and, --rim inside it, the paper (::before) with the grid and
+   the dashed tear line. The paper's notch circles share the rim's centres (radius
+   15px + --rim, centred --rim outside the paper box), so the rim is equally thick along
+   the edges and round the arcs. At rest the rim is paper-coloured and invisible; under the
+   pointer only its colour changes to the signal, with no repaint flash. */
+.ticket {
+  --rim: 2px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: none;
+  width: calc(var(--pitch) * 1px);
+  height: 9.5rem;
+  place-items: center;
+  padding: 1.15rem 2.7rem 1.95rem;
+  text-align: center;
+  color: inherit;
+}
+
+.ticket::before,
+.ticket::after {
+  --scallop:
+    radial-gradient(circle at calc(0% - var(--off)) calc(0% - var(--off)), transparent var(--notch), #000 calc(var(--notch) + 0.5px)),
+    radial-gradient(circle at calc(100% + var(--off)) calc(0% - var(--off)), transparent var(--notch), #000 calc(var(--notch) + 0.5px)),
+    radial-gradient(circle at calc(0% - var(--off)) calc(100% + var(--off)), transparent var(--notch), #000 calc(var(--notch) + 0.5px)),
+    radial-gradient(circle at calc(100% + var(--off)) calc(100% + var(--off)), transparent var(--notch), #000 calc(var(--notch) + 0.5px));
+  position: absolute;
+  content: "";
+  /* Four full-size masks, one per notch, intersected: no tiles to snap to the pixel grid,
+     so the bottom edge keeps its last row of pixels like the top. */
+  -webkit-mask: var(--scallop);
+  -webkit-mask-composite: source-in;
+  mask: var(--scallop);
+  mask-composite: intersect;
+}
+
+.ticket::before {
+  --off: var(--rim);
+  --notch: calc(15px + var(--rim));
+  inset: var(--rim);
+  z-index: -1;
+  border-right: 1px dashed rgb(var(--c-fg) / 0.28);
+  background:
+    linear-gradient(rgb(var(--c-fg) / 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(90deg, rgb(var(--c-fg) / 0.09) 1px, transparent 1px) 0 0 / 16px 16px,
+    var(--tape);
+  transition: box-shadow 240ms ease-out, border-color 240ms ease-out;
+}
+
+.ticket::after {
+  --off: 0px;
+  --notch: 15px;
+  inset: 0;
+  z-index: -2;
+  background: var(--tape);
+  transition: background-color 240ms ease-out;
+}
+
+.ticket:hover,
+.ticket:focus-visible {
+  outline: none;
+}
+
+.ticket:hover::after,
+.ticket:focus-visible::after {
+  background: rgb(var(--c-ember));
+}
+
+.ticket:hover::before,
+.ticket:focus-visible::before {
+  border-right-color: transparent;
+  box-shadow:
+    inset 0 0 12px rgb(var(--c-ember) / 0.45),
+    inset 0 0 28px rgb(var(--c-ember) / 0.16);
+}
+
+/* On the light paper the full cobalt reads heavy; the rim and glow take the soft blue. */
+:global(html[data-theme="light"]) .ticket:hover::after,
+:global(html[data-theme="light"]) .ticket:focus-visible::after {
+  background: rgb(var(--c-ember-soft));
+}
+
+:global(html[data-theme="light"]) .ticket:hover::before,
+:global(html[data-theme="light"]) .ticket:focus-visible::before {
+  box-shadow:
+    inset 0 0 12px rgb(var(--c-ember-soft) / 0.4),
+    inset 0 0 28px rgb(var(--c-ember-soft) / 0.14);
+}
+
+/* The stub's text stays inside one centred box, clear of the arrow and the notches;
+   lines that do not fit are truncated or clamped rather than spilling over the edges. */
+.ticketBody {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  justify-items: center;
+  gap: 0.45rem;
+}
+
+.ticketBody > * {
+  max-width: 100%;
+}
+
+/* A flat barcode at the stub's lower right, unique to each note. */
+.barcode {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 0.85rem;
+  fill: rgb(var(--c-fg) / 0.5);
+}
+
+.ticketProject {
+  overflow: hidden;
+  color: var(--signal-ember-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticketTitle {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--signal-warm-white);
+  font-family: var(--font-display-en);
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-width: 100%;
+}
+
+:global(html[data-lang="zh"]) .ticketTitle {
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  text-transform: none;
+}
+
+.ticketTags {
+  overflow: hidden;
+  color: rgb(var(--c-t4));
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticketArrow {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.1rem;
+  color: var(--signal-ember-text);
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ticket:hover .ticketArrow,
+.ticket:focus-visible .ticketArrow {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 599px) {
+  .film {
+    --pitch: 216;
+  }
+
+  .frame {
+    padding: 29px 5px;
+  }
+
+  .frame::before {
+    top: 9px;
+  }
+
+  .frame::after {
+    bottom: 9px;
+  }
+
+  .tape {
+    --pitch: 270;
+  }
+}
+
+/* Reduced motion: the strips stand still and scroll sideways; the loop copy is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  .strip {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .copy {
+    display: none;
+  }
+
+  .frame,
+  .ticket {
+    scroll-snap-align: start;
+  }
+
+  .mediaImage,
+  .ticketArrow {
+    transition: none;
+  }
+}

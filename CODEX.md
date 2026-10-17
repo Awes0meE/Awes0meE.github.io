@@ -148,7 +148,7 @@ Notes require:
 
 Notes without `visibility: public` are treated as private. Private notes are not listed on the homepage, `/notes`, or project detail pages, and `/notes/[slug]` returns 404 for them through the public route helpers.
 
-An unlinked public note can still have a public `/notes/[slug]` route and remain eligible for homepage selection, but it is omitted from the current `/notes` project-channel index and from project-detail related-note lists. Do not invent an “unassigned” Notes channel to hide a missing or invalid join.
+An unlinked public note can still have a public `/notes/[slug]` route, but it is omitted from the homepage notes tape, the current `/notes` project-channel index and project-detail related-note lists. Do not invent an “unassigned” Notes channel to hide a missing or invalid join.
 
 Media items live in `content/media.json` and require:
 
