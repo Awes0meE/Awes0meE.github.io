@@ -1,0 +1,48 @@
+---
+title: "Shoot-Through Current Paths and Protection"
+titleZh: "上下管直通的电流路径与保护"
+summary: "Shoot-throughs on the GaN ESC killed far more than the power transistors. Following the fault current through the bus, the ground and the gates shows what the dead time, gate TVS, input fuses and input TVS each protect, and where a gap remains."
+summaryZh: "GaN 电调的几次直通，坏掉的远不止功率管。顺着故障电流走一遍母线、地和栅极，看清死区、栅极 TVS、入口保险丝和入口 TVS 各自护住的是哪一段，又在哪里留了空档。"
+date: "2026-10-17"
+tags: ["GaN", "Shoot-Through", "Protection", "TVS", "Fuse", "ESC"]
+projectSlug: "gan-quadrotor-esc-fyp"
+visibility: public
+---
+
+Across the shoot-throughs on my GaN ESC boards, the dead parts were not limited to the power transistors. As I swapped chips one by one, DC-DC converters, LDOs and even AT32 controllers several stages away from the bridge turned out to be dead too, and a tantalum capacitor beside an LDO had lit up like an LED. A blown power transistor I could understand. A controller that never touches the bridge was harder to explain.
+
+我的 GaN 电调前后几次直通，坏掉的都不只是功率管。一颗颗换芯片的时候才发现，DC-DC、LDO，甚至隔着好几级的 AT32 主控都跟着坏了，LDO 旁边那颗钽电容还亮成了一颗 LED。功率管坏我能理解，压根不碰桥臂的主控怎么也会坏？
+
+## Shoot-Through Current / 直通电流的大小
+
+In a shoot-through, current leaves the battery, passes through the high-side and low-side transistors and returns straight to the negative terminal. Nothing stands in its way except the battery's internal resistance, the wiring and two on-resistances. An INN100EA035A is specified at 3.5 mΩ maximum, so the pair adds under 10 mΩ, and a 4S drone pack is built to deliver very large currents instantly. Hundreds of amps are easy. The transistor's datasheet rates its pulsed current at 230 A for a 300 µs pulse, which makes the one that flew a metre into the air look entirely unsurprising.
+
+直通的时候，电流从电池正极出来，穿过上管、下管，直接回到负极，一路上只有电池内阻、连线和两颗管子的导通电阻。INN100EA035A 的导通电阻最大才 3.5 mΩ，两颗串起来不到 10 mΩ，4S 航模电池本来就是为了瞬间放出大电流设计的，这一路上百安轻轻松松。这颗管子手册里写的脉冲电流额定是 230 A、脉宽 300 µs，管子炸飞一米高，这么一看一点也不奇怪。
+
+On the firmware side, dead time is what keeps the two transistors apart. AM32 sets `DEAD_TIME` to 60 for this target and writes it into the dead-time field of TMR1. The AT32F421's advanced timer is closely modelled on STM32's, and reading the field with the STM32 dead-time encoding (below 128, the value times the timer clock period) gives about 500 ns at 120 MHz with no clock division. That is a generous gap for GaN, so the shoot-through more likely came from something outside the dead time, such as counterfeit parts, false turn-on caused by the layout, or the MCU briefly running away.
+
+软件这一侧，挡直通靠的是死区。AM32 给这个目标设的 `DEAD_TIME` 是 60，写进 TMR1 的死区字段。AT32F421 的高级定时器和 STM32 的结构很像，按 STM32 那套死区编码来算，数值小于 128 时死区等于这个数乘以定时器时钟周期，120 MHz、不分频下约 500 ns。对 GaN 来说这个死区一点也不短，所以直通更可能出在死区之外：假芯片、layout 引起的误导通，或者单片机短暂跑飞。
+
+## Backfeed Paths After Shoot-Through / 直通后的反灌路径
+
+My explanation at the time was that voltage forced its way backwards into everything downstream. Following the circuit now, I see two likely routes. The first is overvoltage on the bus. Hundreds of amps flow through the battery leads during a shoot-through, and the leads have inductance; when the current is suddenly interrupted, by a transistor failing open or a fuse blowing, that inductance kicks a spike onto the bus. The board's DC-DC converter is an SY8303 with an absolute maximum of 40 V on its IN pin. The bidirectional SMDJ40CA at the input has a 40 V stand-off voltage and only begins to break down above that, so wherever it clamps is already beyond what the SY8303 can survive.
+
+主控为什么会坏，我当时的理解是电压逆着灌了进去。现在顺着电路看，有两条比较可能的路。第一条是母线过压。直通时几百安的电流流过电池线，线是有电感的，等管子烧开路或者保险丝熔断，电流被突然切断，这段电感就会在母线上顶出一个尖峰。板上的 DC-DC 是 SY8303，IN 引脚的绝对最大值是 40 V。入口那颗 SMDJ40CA 双向 TVS 的关断电压是 40 V，要超过它才开始击穿，所以它钳住的位置，本来就已经在 SY8303 扛不住的范围里了。
+
+The second route is the ground. Hundreds of amps crossing the power ground pull different parts of the ground plane to different potentials, so for that instant the drivers and the controller no longer share one zero. Pins referenced to one ground can end up below another, which is roughly what I meant when I said a negative voltage got pushed in through the ground plane. Tantalum capacitors are polarised and tend to break down and overheat under reverse voltage, which fits the one that glowed.
+
+第二条是地。几百安的电流从功率地上流过，地平面上各处的电位会被拉开，那一瞬间驱动芯片和主控不再共用同一个零点，以某处地为参考的引脚，相对另一处地就可能出现负压。我当时说的"从地层灌一个负电压进去"，大概就是这个意思。钽电容有极性，反向电压一上来就容易击穿发热，跟那颗亮起来的对得上。
+
+## Gate TVS and Input Fuses / 栅极 TVS 与入口保险丝
+
+The ESD9B5.0 on each GaN gate is a 5 V bidirectional TVS that starts breaking down around 6 V and clamps at 8 V at 8 A. The INN100EA035A only tolerates 6 V forward and -4 V reverse on its gate, so there was little margin to begin with. When a transistor fails, drain voltage can reach the gate through the damaged die and push on into the LMG1210's output; the TVS sits right in that path and holds the voltage at a level the driver can live with. In the shoot-through that launched a transistor off the board, only that phase's transistors died while the gates and the other two phases came through, and I give the TVS much of the credit.
+
+每个 GaN 栅极上那颗 ESD9B5.0 是 5 V 双向 TVS，6 V 左右开始击穿，8 A 时钳在 8 V。INN100EA035A 的栅源电压正向只允许 6 V、反向 -4 V，余量本来就小。管子一坏，漏极的高压可能顺着坏掉的芯片窜到栅极，再往 LMG1210 的输出脚里灌，这颗 TVS 正好横在这条路上，把电压钳在驱动芯片还扛得住的范围里。管子炸飞的那次，只坏了那一相的管子，栅极和另外两相都没事，我觉得它功不可没。
+
+The 10 A and 15 A automotive fuses on the input work on a different timescale. A fuse opens by heating its element until it melts; more current makes that faster, but it remains a thermal process, much slower than the fault current inside the bridge. Where the fuse earns its keep is afterwards. A shorted bridge keeps conducting, and without a fuse the copper, the DC-DC and the LDOs fail in turn; cutting off that sustained current stops the chain reaction. That is how those fuses kept my boards alive more than ten times.
+
+入口那两颗 10 A 和 15 A 的汽车保险丝，管的是另一段时间。保险丝靠熔丝发热熔断，电流越大断得越快，但终归是一个发热的过程，比桥臂里的故障电流慢得多。它真正派上用场是在后面：桥臂短路以后电流会一直流下去，没有保险丝，铜皮、DC-DC、LDO 就一个接一个遭殃，把这段持续的大电流切断，后面那串连锁反应也就停住了。那几颗保险丝能救我的板子十次以上，靠的就是这一点。
+
+Put together, each protection covers its own stretch. Dead time and the driver keep shoot-through from happening, the gate TVS shields the driver when a transistor dies anyway, and the fuses stop a short from turning into a slow fire. The input TVS is meant for surges arriving from outside, and it leaves a band uncovered: spikes generated on the board's own bus that sit above the SY8303's 40 V limit but below the point where the TVS begins to clamp. Covering it would take either a clamp that acts below 40 V or a separate protection stage in front of the DC-DC converter.
+
+这样算下来，这几样保护各管一段：死区和驱动管着不让直通发生，栅极 TVS 在管子真坏了的时候护住驱动，保险丝不让一次短路变成一场慢慢烧的火。入口那颗 TVS 本来对付的是外面进来的浪涌，它留下了一段空档：板子自己的母线上冒出来的尖峰，高过 SY8303 的 40 V 极限，又还没到 TVS 开始钳位的电压。要把它补上，得换一个 40 V 以下就开始钳位的器件，或者在 DC-DC 前面单独再加一级保护。

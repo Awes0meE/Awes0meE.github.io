@@ -369,9 +369,17 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
   }
 
   function renderImageFigure(image: ParsedImage, key: string | number, sizes: string, className?: string) {
+    const caption = splitBilingualSlash(image.alt);
+
     return (
       <figure key={key} className={cn("prose-figure", className)}>
-        <a href={image.src} className="block">
+        <a
+          href={image.src}
+          className="block"
+          data-lightbox=""
+          data-caption-en={caption?.en ?? image.alt}
+          data-caption-zh={caption?.zh ?? image.alt}
+        >
           <div className="relative aspect-[16/9]">
             <Image
               src={image.src}

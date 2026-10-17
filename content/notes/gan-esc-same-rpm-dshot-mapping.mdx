@@ -1,0 +1,50 @@
+---
+title: "Same-Speed Comparison and DShot Mapping"
+titleZh: "同转速对比与 DShot 转速映射"
+summary: "With a propeller fitted, one DShot throttle value spun the GaN and Si ESCs at different speeds. Why that breaks a direct comparison, and how the P0 tachometer mapping matched both boards at 3000, 6500 and 10000 rpm."
+summaryZh: "装上螺旋桨以后，同一个 DShot 油门值让 GaN 和 Si 两块电调转出了不同的转速。为什么这样没法直接比，以及 P0 怎样用转速计把两块板对齐到 3000、6500 和 10000 rpm。"
+date: "2026-10-17"
+tags: ["DShot", "ESC", "Propeller", "Tachometer", "Test Method", "GaN"]
+projectSlug: "gan-quadrotor-esc-fyp"
+visibility: public
+---
+
+Once the propellers went on, the STM32 test controller could send both ESCs exactly the same DShot value and the tachometer would still disagree. Near 10000 rpm the gap was obvious: the Si board needed a command of 1124, while 1022 was enough for the GaN board. Those hundred-odd counts decided how every later comparison had to be run.
+
+螺旋桨装上以后，STM32 测试控制器给两块电调发一模一样的 DShot 值，转速计读出来的数还是对不上。到 10000 rpm 附近差得最明显：Si 板要 1124，GaN 板 1022 就够了。就是这一百出头的差距，决定了后面所有对比该怎么做。
+
+## DShot Commands and Motor Speed / DShot 指令与转速
+
+[DShot](https://brushlesswhoop.com/dshot-and-bidirectional-dshot/) is a digital throttle protocol. Each 16-bit frame carries an 11-bit value from 0 to 2047, where 1 to 47 are reserved for special commands and 48 to 2047 are throttle. Inside the ESC that throttle becomes a PWM duty cycle, and the motor sees the bus voltage scaled by that duty minus whatever drops along the way. The two boards use different transistors and different drivers, so I now read the speed mismatch as the same duty arriving at the windings as two different effective voltages.
+
+[DShot](https://brushlesswhoop.com/dshot-and-bidirectional-dshot/) 是一种数字油门协议，一帧 16 位，里面有 11 位是数值，范围 0 到 2047，其中 1 到 47 留给特殊命令，48 到 2047 才是油门。油门值进了电调，会被换成 PWM 占空比，电机拿到的是母线电压乘上占空比，再扣掉一路上的压降。两块板的开关管和驱动都不一样，我现在的理解是，同一个占空比落到绕组上，变成了两个不同的有效电压，转速自然对不上。
+
+## Propeller Load and Speed / 螺旋桨负载与转速
+
+A small speed difference matters because of how a propeller loads its motor. Propeller data such as the [UIUC propeller database](https://m-selig.ae.illinois.edu/props/propDB.html) is expressed through a power coefficient, `P = C_P ρ n³ D⁵`. For one propeller in still air, power rises roughly with the cube of speed and torque with its square. A ten percent speed difference therefore means about a third more power demanded by the propeller. Compare the boards at equal throttle, and each one is quietly working against a different load.
+
+转速差一点为什么不能放过，要看螺旋桨怎么给电机加负载。像 [UIUC 螺旋桨数据库](https://m-selig.ae.illinois.edu/props/propDB.html)这类资料，用功率系数来描述桨，`P = C_P ρ n³ D⁵`。同一副桨在静止空气里，功率大致跟转速的三次方走，转矩跟平方走。转速差 10%，桨要的功率就会差三成多。按同一个油门值去比，两块板背后其实挂着两份不一样的负载。
+
+Turned around, the same relation is what makes a fair comparison possible. A propeller of the same model at the same speed asks for practically the same torque and power, so once the speeds match, a difference in input power belongs to the ESC and motor side of the system. Each board drove its own 2207.5 motor of the same model, and that difference sits on the same side.
+
+反过来，也正是这条关系让对比能比得起来。同一型号的桨转到同一个转速，桨这一侧要的转矩和功率基本一样，转速一对齐，输入功率的差别就落在电调和电机这一侧。两块板各配一台同型号的 2207.5 电机，这部分差异也算在电机这一侧里。
+
+## P0 Mapping Procedure / P0 映射的做法
+
+The procedure was plain. A coarse sweep stepped the DShot value in wide increments to see roughly where each target speed fell. Fine sweeps around each target followed, with three readings from a handheld tachometer per command and the mean, median and error against the target noted down. The GaN board needed one coarse and five fine sweeps, the Si board one coarse and six, and every raw reading went on paper by hand.
+
+做法很朴素。先粗扫，DShot 值隔一大段取一个，看每个目标转速大概落在哪；再在目标附近细扫，每个指令用手持转速计读三次，记下平均值、中位数和跟目标的偏差。GaN 板粗扫一轮、细扫五轮，Si 板粗扫一轮、细扫六轮，原始读数都是手写在纸上的。
+
+![Handwritten tachometer readings for the GaN board / GaN 板的手写转速记录](/uploads/projects/gan-quadrotor-esc-fyp/files/data/p0-rpm-mapping/gan-tachometer-handwritten-log.webp)
+
+The selected commands were 551, 786 and 1124 for the Si board and 540, 762 and 1022 for the GaN board, for 3000, 6500 and 10000 rpm. The largest error between mean speed and target was on the Si board at 3000 rpm, about 0.34 percent; every other point stayed within 0.05 percent. That table is what fixed the operating points for everything after it: E1's input power, E2's waveforms and E3's temperatures were all taken at those three matched speeds.
+
+最后选出来的指令，Si 板是 551、786、1124，GaN 板是 540、762、1022，分别对应 3000、6500、10000 rpm。平均转速和目标偏差最大的是 Si 板 3000 rpm 那一点，约 0.34%，其余都在 0.05% 以内。这张表定下了后面所有实验的工作点，E1 的输入功率、E2 的波形、E3 的温度，都是在这三个对齐的转速下测的。
+
+![DShot commands for matched speed / 对齐转速所需的 DShot 指令](/uploads/projects/gan-quadrotor-esc-fyp/results/p0-selected-dshot-commands.png)
+
+## Command Gap Between the Boards / 两块板的指令差
+
+Back to those hundred-odd counts. Measured from the start of the throttle range at 48, reaching 10000 rpm took about ten percent more throttle on the Si board than on the GaN board. Following the reading above, the Si board had to apply a larger duty cycle to put the same effective voltage on the motor, with the difference lost in the transistors' conduction drop, in switching and in driver delays. That points the same way as E1, where the Si board drew more input power.
+
+再说回那一百出头的差距。从油门起点 48 开始算，同样转到 10000 rpm，Si 板要的油门比 GaN 板多大约 10%。按上面的理解，Si 板得用更大的占空比，才能把同样的有效电压送到电机上，中间多出来的那部分电压，损失在开关管的导通压降、开关过程和驱动延时这些地方。这和 E1 里 Si 板输入功率更高的方向是一致的。

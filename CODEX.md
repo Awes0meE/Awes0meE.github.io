@@ -96,8 +96,8 @@ $env:Path='C:\Program Files\nodejs;' + $env:Path
 Local Next.js cache rule:
 
 - Do not run `npm.cmd run build` while `npm.cmd run dev` is still running. Both commands write to `.next/`.
-- If local dynamic routes fail with `Cannot find module './vendor-chunks/esprima.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm.cmd run dev`.
-- This error comes from a corrupted local build cache around `gray-matter -> js-yaml -> esprima`; it does not automatically mean the MDX note content is broken.
+- If local dynamic routes fail with `Cannot find module './vendor-chunks/<name>.js'`, stop the project Node/Next.js processes, delete `.next/`, and restart `npm.cmd run dev`.
+- That error comes from a corrupted local build cache; it does not automatically mean the MDX note content is broken. (It used to name `esprima.js` through `gray-matter -> js-yaml 3`; since 2026-10-17 gray-matter resolves js-yaml 4 through a `package.json` override and esprima is no longer installed.)
 
 ## Encoding Policy
 
@@ -182,9 +182,11 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The 2026-09-07 source revision contains 8 project pages, 25 public notes and 84
-media records. All eight projects have note channels. Sixteen approved bilingual
-studies cover two topics per project; nine technical/source-document notes remain.
+The source now contains 9 project pages, 30 public notes and 101 media records
+(97 images, 4 videos). All nine projects have note channels. The 2026-09-07 revision
+gave the first eight projects two approved bilingual studies each, with nine
+technical/source-document notes remaining; the GaN quadrotor ESC final-year project
+(added 2026-10-17) has five notes.
 The twelve suspended old notes have been retired from current source. Git retains
 their history; do not restore a former suspension manifest over the new articles.
 
@@ -230,9 +232,9 @@ Maintain the current engineering-academic identity:
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
 - in release `v0.9.0`, keep those five presentation derivatives (now transparent cutouts) as a prototype nucleus in `components/technical-visual.tsx` that shows one board at a time, 5 seconds each, without any ring or segment indicator; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
-- on `/work`, keep the sticky `01`–`08` rail, eight complete semantic project links, and exactly seven black signal intervals whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
-- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 8 channels and 25 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
-- on `/media`, keep the project-first Focus Aperture with eight source choices, one authentic lead record, and all 84 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
+- on `/work`, keep the sticky `01`–`09` rail, nine complete semantic project links, and exactly eight black signal intervals (one between each adjacent pair) whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
+- on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 9 channels and 30 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
+- on `/media`, keep the project-first Focus Aperture with nine source choices, one authentic lead record, and all 101 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the owner-voiced online CV described in `DESIGN.md`: no repeated method chains, education blocks or duplicate contact links, idiomatic (not literal) English headings, the complete original `public/uploads/projects/avatar.jpg` without crop, filter or replacement, and motion that pauses offscreen and disappears under `prefers-reduced-motion`;
 - treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
@@ -267,7 +269,7 @@ For `content/notes/*.mdx`:
 - prefer substantial paragraphs when related facts, explanations, and judgments belong to one cognition movement; keep paragraph lengths naturally uneven and allow a one-sentence paragraph when a real interruption, failed assumption, result, or ending earns it;
 - in each Chinese learning note, allow at most one prose paragraph beginning with `我`, counting the introduction and every paragraph beneath headings. Start other paragraphs naturally from their concrete subject, condition, question or action; do not simply prefix filler. Preserve personal ownership and proposed-versus-completed work. This does not ban first person within paragraphs or impose an English numerical quota;
 - place supported reactions and light humor beside the real engineering friction rather than saving all personality for a conclusion;
-- give project pages and learning notes a natural close without forced elevation or abrupt cuts after data. Compare nearby endings for repeated retrospective or hypothetical-next-time frames; an apt occasional `下一次再看到……` remains allowed. Judge recurring function, not a phrase blacklist;
+- give project pages and learning notes a natural close without forced elevation or abrupt cuts after data. Never write open-question or suspense lines announcing that something stayed unknown or unanswered (user rule 2026-10-17); leave out what was not investigated. Compare nearby endings for repeated retrospective or hypothetical-next-time frames; an apt occasional `下一次再看到……` remains allowed. Judge recurring function, not a phrase blacklist;
 - preserve Li Zhiyi's established voice and keep the confirmed emotional intensity unchanged, neither flattened nor amplified; borrow editing mechanics without importing another writer's vocabulary, register, cadence, audience relationship, or persona;
 - use natural spoken transitions where they fit, avoid repetitive resume lists and repeated contrast/sequence scaffolds, and continue allowing ordinary `首先` / `其次` / `最后` phrasing when it is concrete rather than structural filler;
 - use direct assertions and normal sentence syntax in scoped normal narration. Model-authored em dashes remain off by default. Allow a colon when it performs a clear semantic job and quotation marks for traceable source wording, real utterances, UI labels, document claims, or terms genuinely being discussed; reject template-label colons, decorative quotation, and dense repeated use. Prefer inline code for code-like technical tokens. Avoid bare `不是 A，而是 B` / `not A but B` reframes; preserve ordinary factual negation and the exact user-confirmed `不是说 A 不行，而是说 B` form when it genuinely prevents a false reading;

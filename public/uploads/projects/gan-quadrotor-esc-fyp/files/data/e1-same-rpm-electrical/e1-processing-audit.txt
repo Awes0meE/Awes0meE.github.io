@@ -1,0 +1,10 @@
+E1 processing audit
+Date: 2026-05-18
+
+Raw log files parsed: 6
+Processed run-cycle rows: 18
+Repeatability summary rows: 6
+Stable window: 0.15-0.85 of each STATE_RUN cycle
+Malformed h1 frames skipped: 0
+
+No malformed h1 frames skipped.

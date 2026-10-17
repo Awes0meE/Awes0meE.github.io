@@ -120,7 +120,7 @@ English may change sentence and paragraph boundaries while expressing the select
 
 ### 11. Bring The Account To A Natural Close
 
-A closing paragraph is normal for project pages and learning notes. Continue from the last developed point and finish the particular account: its result, a concrete understanding, a supported reaction, or a real remaining question may be enough. A project homepage should bring the whole experience to a close; a note should close its selected investigation.
+A closing paragraph is normal for project pages and learning notes. Continue from the last developed point and finish the particular account: its result, a concrete understanding, a practical consequence, or a supported reaction may be enough. Under the user's 2026-10-17 rule, never end on, or insert, a sentence that announces what stayed unknown, unanswered or unresolved; if something was not investigated, leave it out (see `references/reader-prose-hard-gates.md`). A project homepage should bring the whole experience to a close; a note should close its selected investigation.
 
 Compare the endings of articles drafted together and the relevant recent pages. Do not repeatedly announce a look back or imagine doing the work again, whether phrased as `现在再看`, `回头看`, `下一次再看到`, `如果再做一次`, or an equivalent in either language. The user clarified that an individual sentence such as `下一次再看到……` can work well. Judge its fit and recurrence, not a keyword count. Keep an apt occasional use; repair a recurring frame from the article's content instead of rotating synonyms or enforcing a quota of ending types.
 

@@ -148,13 +148,13 @@ prototype 图片和技术标识只用于展示。它们不能证明某块板卡�
 
 ## Using The Work Project Aperture
 
-On `/work`, the desktop `01`–`08` rail stays visible while eight large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
+On `/work`, the desktop `01`–`09` rail stays visible while nine large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
 
 Seven spacious black signal intervals separate adjacent projects. Their short orange ticks move from right to left, pause when the interval is offscreen or the browser document is hidden, and become static when the operating system requests reduced motion. The moving ticks mean “next record”; they do not report progress, telemetry, or completion.
 
 ## 使用项目检视窗
 
-`/work` 的桌面版会固定显示 `01`–`08` 定位 rail，右侧依次展示 8 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把 rail 改成位于纵向章节上方的横向定位条。
+`/work` 的桌面版会固定显示 `01`–`09` 定位 rail，右侧依次展示 9 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把 rail 改成位于纵向章节上方的横向定位条。
 
 相邻项目之间共有 7 段留白更大的黑色信号间隔。橙色短竖线由右向左移动；间隔离开视口或浏览器页面被隐藏时暂停，操作系统启用“减少动态效果”时保持静态。这些短竖线只表示“下一条档案”，不表示进度、遥测或项目完成度。
 
@@ -184,15 +184,23 @@ EN/ZH 旁边的太阳/月亮按钮用于切换浅色和深色主题。第一次�
 
 ## Using The Media Focus Aperture
 
-On `/media`, choose one of eight project sources to load that project's authentic lead record in the Focus Aperture. Homepage media thumbnails carry their project source into this chooser. The complete 84-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
+On `/media`, choose one of nine project sources to load that project's authentic lead record in the Focus Aperture. Homepage media thumbnails carry their project source into this chooser. The complete 101-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
 
 Technical evidence is shown with contain fitting so schematics, PCB renders, and board photographs remain complete. The aperture reveal and scan stop when the operating system requests reduced motion; project identity, selection state, and all links remain available.
 
 ## 使用媒体深焦检视窗
 
-在 `/media` 中，选择 8 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页媒体缩略图会把项目来源带入这个选择器。完整的 84 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
+在 `/media` 中，选择 9 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页媒体缩略图会把项目来源带入这个选择器。完整的 101 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
 
 原理图、PCB 渲染和板卡照片使用 contain 适配，避免为了版式裁掉技术证据。操作系统启用“减少动态效果”时，检视窗显现和扫描线会停止，但项目身份、选择状态和所有链接仍然可用。
+
+## Viewing Images
+
+Clicking an evidence image, whether in an article, among a project's media tiles, on `/media` or in the project file browser, opens it enlarged on the same page. Click anywhere outside the image, press Escape or use the close button to return; **Original** opens the full file in a new tab. Holding ⌘ or Ctrl while clicking still opens the image in a new tab as before.
+
+## 查看图片
+
+点击正文、项目媒体缩略图、`/media` 或项目文件浏览器里的图片，会在当前页面放大显示。点图片外面的空白处、按 Esc 或点关闭按钮就能回到原处；**原图** 会在新标签页打开完整文件。按住 ⌘ 或 Ctrl 点击，仍然照常在新标签页打开。
 
 ## Reading The About Page
 

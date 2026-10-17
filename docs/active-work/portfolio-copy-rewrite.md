@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-15
 
-All sixteen new bilingual study notes across the eight projects are approved. They were published through [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38), merged at `f77c1fc`. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content: 8 projects, 25 public notes, 8 note channels and 84 media records. There are no remaining note drafts awaiting review.
+All sixteen new bilingual study notes across the eight projects are approved. They were published through [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38), merged at `f77c1fc`. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content after the 2026-10-17 GaN import: 9 projects, 30 public notes, 9 note channels and 101 media records. There are no remaining note drafts awaiting review.
 
 The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
@@ -60,3 +60,18 @@ The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](htt
 - Off the clock: cutting weight, gym, badminton, road cycling, piano, chess, talking with AI, occasional writing. On AI: it raises everyone's floor and the world's ceiling, but thinking stays his own ("teach me to fish"). The Chinese page may carry the meme; English keeps only the idea.
 - Section headings: 我走的路 / The Road So Far, 在做的事 / Work in Progress, 认真之余 / Off the Clock. English is adapted, not translated literally.
 - The GaN-versus-silicon ESC dissertation is not on the page until its project page exists.
+
+## GaN Quadrotor ESC FYP Brief (confirmed 2026-10-17)
+
+This brief is for `gan-quadrotor-esc-fyp` and its five notes. They were published through PR #48 (merged at `da94d8f`). It was confirmed after two `grilling` rounds.
+
+- Motive: motor drives and drone videos drew Alvin in, and he wanted to work at DJI. No flight-controller topic was on the XJTLU list, so he took Prof. Tianru Zhang's quadrotor ESC topic. GaN was the 2025 talking point, from chargers to EV drives. The project ran from 2025-09 to 2026-05.
+- Routes: the GaN board uses INN100EA035A and LMG1210, and the Si reference uses NTTFS010N10MCL and FD6288Q. Both use an AT32F421 with AM32, and an STM32F103 serves as test controller. They were pitched as parallel routes, then the thesis narrowed to GaN at the supervisor's suggestion.
+- Boards: there were five spins, GaN v1 to v3 and Si v1 to v2. v1 boards were 1.6 mm and v2 boards 1.0 mm. GaN v2 blew up on a 4S LiPo, and v3 was a 48-hour JLCPCB rush order about a week before the defense; it ran every later test. Each spin took at least ten days. QFN parts went on through a stencil, hand placement and hot-plate reflow. The bulk capacitor was changed to 470 µF 35 V.
+- Bootstrap: the calculation gave roughly 100 to 200 nF, so 220 nF was fitted. The waveform distorted, and swapping to 1 µF fixed it with no layout change. The note's six-step hold-time explanation is present-day analysis.
+- Blow-up: the FET glowed for about 100 ms, flew about a metre, and tore copper off down to FR-4. Suspected causes were counterfeit parts, layout or an MCU glitch, never settled. The only protection was an input TVS plus 5 V gate TVS diodes, and that event killed only one phase. Over the whole project, 3 to 4 AT32s, several FETs, 2 DC-DC chips and 2 to 3 LDOs burned, and a tantalum capacitor glowed. Afterwards, 10 A and 15 A automotive fuses saved boards more than ten times.
+- Method: no-prop differences were unresolvable, and drones always fly with props. Equal DShot commands gave unequal speeds, so P0 matched 3000, 6500 and 10000 rpm before E1 to E3.
+- Results: at 10000 rpm, input power was about 27.0 W for GaN against 45.0 W for Si, and surface temperature after 600 s was 34.0 °C against 38.9 °C. Alvin's reaction was relief, with the clear understanding that this is input power at matched speed.
+- Defense: other students in the group did Simulink. Alvin brought hardware with only P0 done. The session ran 55 minutes, with a 40-minute English Q&A, and the next student finished in 6 minutes and thanked him. The grade was 72, in the first-class band, recorded as A. The page closes by recommending Prof. Zhang.
+- Notes: the AM32 bootloader-free port, bootstrap sizing, same-speed DShot mapping, shoot-through paths and protection, and propeller-loaded startup with AM32 startup parameters. About nine in ten blow-ups came at propeller-loaded startup on AM32 defaults (a recollection), and 'current sloshing between phases' was a guess. The retune followed a hobbyist blog, and the v0.3.0 change log records sine start, `startup_power` 60, changeover 20, sine power 4 (6 in the final release) and stall protection off. The test controller moved from USB to HC-05 Bluetooth, VOFA+ handled plotting, and flashing used DAPLink with OpenOCD over SWD per the archive.
+- Publication: datasheets are linked, not uploaded. The XJTLU crest on the silkscreen stays. Local paths and the student ID stay out. The owner chose to feature it on the homepage.

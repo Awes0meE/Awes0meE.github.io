@@ -49,9 +49,9 @@ A controller that only chases temperature can make a bad sensor look like a reas
 
 只追温度的控制器，很容易把坏传感器误读成继续加力的理由。后期核心把有效性与保护判断放在普通目标之上。传感无效时可以阻止自动运行，低过热度或负过热度会限制阀与压缩机，高冷凝压力会压低允许转速，压缩机调控温度持续过低时则可以停机。
 
-Startup needed different treatment from steady operation. EEV first moved through Home and a pre-open stage, the compressor waited for valid status and restart constraints, and severe conditions could still override the grace period. This was not one elegant formula governing everything. It was an arbitration problem where ordinary temperature control had to yield whenever the machine lacked a trustworthy state.
+Startup needed different treatment from steady operation. EEV first moved through Home and a pre-open stage, the compressor waited for valid status and restart constraints, and severe conditions could still override the grace period. What held all of this together was a set of arbitration rules, more than any single elegant formula could have managed: whenever the machine lacked a trustworthy state, ordinary temperature control had to yield.
 
-启动阶段也不能直接照搬稳态逻辑。EEV 先完成 Home 与预开，压缩机等待有效状态和重启约束，严重条件仍可以越过宽限阶段直接接管。这不是一条漂亮公式统治所有事情，而是一组仲裁关系。机器状态不可信时，普通温控必须让路。
+启动阶段也不能直接照搬稳态逻辑。EEV 先完成 Home 与预开，压缩机等待有效状态和重启约束，严重条件仍可以越过宽限阶段直接接管。管住这一切的是一组仲裁关系，一条漂亮公式管不过来。机器状态不可信时，普通温控必须让路。
 
 ## Test-Team Feedback and Parameter Calibration / 测试团队反馈与参数标定
 

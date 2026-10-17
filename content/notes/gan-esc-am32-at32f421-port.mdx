@@ -1,0 +1,40 @@
+---
+title: "AM32 on AT32F421 Without a Bootloader"
+titleZh: "去掉 bootloader 的 AT32F421 版 AM32"
+summary: "Why the official AM32 layout starts the application at 0x08001000, and what had to change in the linker script, scatter file and vector table offset to flash it directly over SWD."
+summaryZh: "官方 AM32 为什么把程序放在 0x08001000，以及要通过 SWD 直接烧录时，链接脚本、scatter 文件和向量表偏移各要改什么。"
+date: "2026-10-17"
+tags: ["AM32", "AT32F421", "Bootloader", "Linker Script", "SWD", "Firmware"]
+projectSlug: "gan-quadrotor-esc-fyp"
+visibility: public
+---
+
+Both ESC boards in my final-year project carry an AT32F421K8U7 and nothing for programming except a four-pin SWD header. The firmware is [AM32](https://github.com/am32-firmware/AM32), and its official AT32F421 target assumes something my board never had: a bootloader already sitting at the start of flash, through which the application arrives over the ESC's own signal wire. In the AM32 world that usually means a USB-to-serial adapter wired up as a one-wire serial link, driven from a graphical configurator. My board had no such path, so the question became what exactly the bootloader occupies, and what the application assumes about it.
+
+毕设里两块电调都用 AT32F421K8U7，板子上能拿来烧程序的只有一个 4 线的 SWD 接口。固件是 [AM32](https://github.com/am32-firmware/AM32)，它官方的 AT32F421 目标默认有个前提，我的板子从来没满足过：Flash 开头已经躺着一个 bootloader，程序是通过电调自己的信号线、经这个 bootloader 写进去的。在 AM32 这套生态里，通常是拿一个 USB 转串口，接成单线串口的样子，再用图形化的配置工具来烧。我的板子上没有这条路，所以要先弄清楚 bootloader 到底占了哪块地方，程序又对它做了哪些假设。
+
+## Upstream AM32 Flash Layout / 官方 AM32 的 Flash 布局
+
+The upstream linker script for this target, [`AT32F421x6_FLASH.ld`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/AT32F421x6_FLASH.ld), starts the application at `0x08001000` with 27 KB of room, places a 1 KB EEPROM emulation block at `0x08007C00`, and keeps a 32-byte file-name record just below it. The Keil scatter file, [`Am32.sct`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/Am32.sct), uses the same `0x08001000` load region. The first 4 KB from `0x08000000` belong to the bootloader. To make interrupts land in the right place, [`system_at32f421.c`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/Src/system_at32f421.c) defines `VECT_TAB_OFFSET` as `0x1000` and writes `FLASH_BASE | VECT_TAB_OFFSET` into `SCB->VTOR` during startup.
+
+官方这个目标的链接脚本 [`AT32F421x6_FLASH.ld`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/AT32F421x6_FLASH.ld) 把程序起点放在 `0x08001000`，给了 27 KB；`0x08007C00` 开始是 1 KB 的 EEPROM 模拟区，紧挨着它下面留了 32 字节放固件文件名。Keil 用的 scatter 文件 [`Am32.sct`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/Am32.sct) 也是从 `0x08001000` 开始装载。`0x08000000` 起的前 4 KB 归 bootloader。为了让中断跳到对的地方，[`system_at32f421.c`](https://github.com/am32-firmware/AM32/blob/main/Mcu/f421/Src/system_at32f421.c) 里把 `VECT_TAB_OFFSET` 定成 `0x1000`，启动时把 `FLASH_BASE | VECT_TAB_OFFSET` 写进 `SCB->VTOR`。
+
+That offset matters because of how a Cortex-M4 starts. Out of reset it reads its initial stack pointer from the first word of the boot area and the address of the reset handler from the next word, and on the AT32F421 that area maps to the start of main flash. With the official layout, those first words belong to the bootloader, which later hands control to the application and its vector table at `0x08001000`. Flash the upstream application alone at `0x08001000` and the core wakes up reading erased flash. Flash it at `0x08000000` without relinking, and every absolute address inside it is off by 4 KB.
+
+这个偏移之所以要紧，跟 Cortex-M4 的启动方式有关。复位以后，内核先从启动区的第一个字读初始栈指针，再从下一个字读复位处理函数的地址，AT32F421 的启动区默认映射到主 Flash 开头。按官方布局，开头这几个字是 bootloader 的，由它再把控制权交给 `0x08001000` 上的程序和它的向量表。要是只把官方程序烧到 `0x08001000`，内核一醒来读到的是一片擦除过的 Flash；不重新链接就直接烧到 `0x08000000`，程序里所有的绝对地址都会差 4 KB。
+
+## Changes for Direct Flashing / 直接烧录要改的地方
+
+The FYP branch therefore moves everything down to the start of flash. In the GCC linker script, `FLASH` now begins at `0x08000000` with a length of `0x7BE0`, which runs right up to the file-name record at `0x08007BE0`. The Keil scatter file's load and execution regions start at `0x08000000` as well, and `VECT_TAB_OFFSET` goes to `0x0`, so `SCB->VTOR` points at the vector table the linker now places at the very beginning of flash. The EEPROM block stays at `0x08007C00`, untouched, so the settings storage code keeps working without any change. Those are the [linker script](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/AT32F421x6_FLASH.ld), [scatter file](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/Am32.sct) and [system file](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/Src/system_at32f421.c) in the project repository.
+
+所以毕设这个分支把整个程序往下挪到 Flash 起点。GCC 链接脚本里，`FLASH` 从 `0x08000000` 开始，长度 `0x7BE0`，刚好顶到 `0x08007BE0` 那块文件名记录；Keil 的 scatter 文件装载区和执行区也都改成 `0x08000000` 起；`VECT_TAB_OFFSET` 改成 `0x0`，让 `SCB->VTOR` 指向链接器现在放在 Flash 最开头的向量表。EEPROM 区还在 `0x08007C00`，一动没动，存参数的那部分代码一行都不用改。改过的[链接脚本](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/AT32F421x6_FLASH.ld)、[scatter 文件](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/Am32.sct)和[系统文件](https://github.com/Awes0meE/STM32-BLDC-ESC-Experiments/blob/main/AM32-firmware-FYP-modified/Mcu/f421/Src/system_at32f421.c)都在项目仓库里。
+
+The three changes only work together. Relink without touching the vector table offset, and the program still boots, because reset always fetches from the start of flash. The first interrupt is where it falls apart: the core looks up its handler 4 KB into the image, in the middle of ordinary code, and jumps to whatever address it finds there. On an ESC the commutation timer, DShot input capture and comparator all depend on interrupts, so nothing works. Change the offset but keep the old load address, and the reset vector itself is missing. Once all three agreed, a DAPLink probe running under OpenOCD wrote the image to `0x08000000` and the board started like any ordinary microcontroller project.
+
+这三处改动必须一起改。只重新链接、不改向量表偏移，程序照样能启动，因为复位总是从 Flash 开头取向量。麻烦出在第一个中断：内核会跑到镜像 4 KB 之后去找处理函数的地址，那里是普通代码，读出什么就跳到哪。电调的换相定时器、DShot 输入捕获和比较器全靠中断，一个都跑不起来。只改偏移、不改装载地址，复位向量干脆就不在了。三处都对上以后，DAPLink 通过 OpenOCD 把镜像写到 `0x08000000`，板子就跟普通单片机工程一样启动了。
+
+## What Changes Without a Bootloader / 没有 bootloader 以后
+
+Dropping the bootloader also drops what it was there for. AM32 normally lets you reflash and change settings over the signal wire with the configurator, without opening anything. On my boards every firmware update went through the SWD probe, and settings that would usually be adjusted in the configurator were set in code instead: the final experiment values sit in `Inc/ESC_Settings.h` and are applied from `main()` through `ApplyCustomEscSettings(...)`, including 48 kHz complementary PWM, 22.5 degrees of fixed timing advance and sine startup. For a bench experiment that is arguably an advantage, because both boards provably ran the same settings from the same source file. For an ESC that has to live inside a drone, losing signal-wire updates would be a real cost, and the four-pin header would deserve a second thought.
+
+去掉 bootloader，它原本负责的那些功能也就没了。正常的 AM32 不用拆机，用配置工具通过信号线就能重新烧固件、改参数。我的板子每次更新固件都得接 SWD 调试器，平时在配置工具里调的参数改成写在代码里：最终实验用的数值放在 `Inc/ESC_Settings.h`，由 `main()` 调 `ApplyCustomEscSettings(...)` 写进去，包括 48 kHz 互补 PWM、固定 22.5 度超前角和正弦启动。放在台架实验里，这反而有点好处，两块板跑的是同一个源文件里的同一组参数，清清楚楚。可如果电调要装进飞机里用，没法通过信号线更新就是实打实的代价，那个 4 线接口就值得再想一想了。

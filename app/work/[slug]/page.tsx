@@ -261,7 +261,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
                 <div className="bench-media-grid">
                   {relatedMedia.map((item) => (
-                    <a key={item.id} href={item.src} className="bench-media-tile">
+                    <a
+                      key={item.id}
+                      href={item.src}
+                      className="bench-media-tile"
+                      {...(item.type === "image"
+                        ? { "data-lightbox": "", "data-caption-en": item.title, "data-caption-zh": item.titleZh ?? item.title }
+                        : {})}
+                    >
                       <span className="bench-media-frame">
                         <Image
                           src={item.thumbnail}
