@@ -184,7 +184,7 @@ EN/ZH 旁边的太阳/月亮按钮用于切换浅色和深色主题。第一次�
 
 ## Using The Media Focus Aperture
 
-On `/media`, choose one of nine project sources to load that project's authentic lead record in the Focus Aperture. Homepage media thumbnails carry their project source into this chooser. The complete 101-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
+On `/media`, choose one of ten project sources to load that project's authentic lead record in the Focus Aperture. Homepage media thumbnails carry their project source into this chooser. The complete 101-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
 
 Technical evidence is shown with contain fitting so schematics, PCB renders, and board photographs remain complete. The aperture reveal and scan stop when the operating system requests reduced motion; project identity, selection state, and all links remain available.
 

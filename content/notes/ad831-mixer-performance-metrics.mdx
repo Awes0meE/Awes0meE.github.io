@@ -1,0 +1,58 @@
+---
+title: "Mixer Performance Metrics"
+titleZh: "混频器的性能指标"
+summary: "Starting from the defense question about a mixer's two most important specifications: what conversion gain, noise figure, third-order intercept, 1 dB compression and port isolation each measure, how they are tested, and how the AD831 board's own LO leakage compares with the datasheet."
+summaryZh: "从答辩时那道“混频器最重要的两个指标”出发，把转换增益、噪声系数、三阶交调截点、1 dB 压缩点和端口隔离各自衡量什么、怎么测拆开讲，再拿 AD831 混频器板自己的本振泄漏和手册对一对。"
+date: "2026-10-18"
+tags: ["RF", "Mixer", "Noise Figure", "IP3", "AD831"]
+projectSlug: "ad831-active-mixer"
+visibility: public
+---
+
+At the defense, the lecturer asked: for a mixer, which two specifications matter most? The specification table in the AD831 datasheet runs to a page and a half, bandwidth, gain, isolation, intercept points, compression point and noise figure one after another, and every line looks important. I answered a few from the noise side and a few from the linearity side, noise figure and the third-order intercept among them, and the lecturer smiled and let it go. Sorting the datasheet's specifications by what each one actually governs shows why those two come first.
+
+答辩时老师问：对一个混频器来说，最重要的两个指标是什么？AD831 手册的参数表有一页半，带宽、增益、隔离度、截点、压缩点、噪声系数挨个列下来，每一项都像是重要的。当时从噪声和线性度两个方向各答了几个，噪声系数和三阶交调截点都在里面，老师笑着放过了。这两个指标为什么排在前面，把手册上的几类指标按各自管的事情拆开，就看得出来。
+
+## Conversion Gain / 转换增益
+
+Conversion gain is the gain from the RF input to the IF output. With its on-chip load resistors, the AD831's mixer core is nominally 0 dB: as much voltage comes out at IF as goes in at RF, and the [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/AD831.pdf) lists 0 dB conversion gain with the output amplifier at unity. The mixer board sets the output amplifier to 10 dB with R1 and R2, so the board's conversion gain is about 10 dB. Passive diode mixers usually lose several dB in conversion, while active mixers can break even or add gain ([ADI's MT-080 mixer tutorial](https://www.analog.com/media/en/training-seminars/tutorials/MT-080.pdf)). Gain is welcome, but when it falls short, another amplifier stage afterwards makes it up.
+
+转换增益是 RF 输入到中频输出的增益。AD831 的混频核心配上片内负载电阻，名义上是 0 dB，RF 进来多少电压、中频出去多少电压，[数据手册](https://www.analog.com/media/en/technical-documentation/data-sheets/AD831.pdf)在输出放大器接成单位增益时写的转换增益也是 0 dB。混频器板用 R1、R2 把输出放大器设成 10 dB，整板的转换增益就是 10 dB 左右。无源二极管混频器通常有几 dB 的变频损耗，有源混频器能做到不亏甚至有增益（[ADI 的 MT-080 混频器教程](https://www.analog.com/media/en/training-seminars/tutorials/MT-080.pdf)）。增益固然好，可它不够时，在后面再加一级放大就能补回来。
+
+## Noise Figure / 噪声系数
+
+Noise figure measures how much a device degrades the signal-to-noise ratio, in dB. With a matched input, the AD831's single-sideband noise figure is 10.3 dB at 70 MHz and 14 dB at 150 MHz. The noise the mixer adds sits on top of the signal; the amplifiers after it can't tell signal from noise and amplify both, so SNR lost at this stage never comes back. It sets how small a signal the receive chain can hear.
+
+噪声系数衡量一个器件让信噪比变差了多少，单位 dB。AD831 在输入匹配时的单边带噪声系数，70 MHz 下是 10.3 dB，150 MHz 下是 14 dB。混频器自己贡献的噪声叠在信号上，后面的放大器分不清哪部分是信号、哪部分是噪声，只能一起放大，信噪比一旦在这一级变差，就再也拿不回来。它决定了这个接收链路能听见多小的信号。
+
+## Third-Order Intercept and 1 dB Compression / 三阶交调截点与 1 dB 压缩点
+
+Linearity measures whether the mixer still behaves when signals get large. When two strong signals close in frequency arrive together, nonlinearity creates third-order intermodulation products at 2f₁ − f₂ and 2f₂ − f₁. They land right next to the wanted signal, where no filter can remove them. Third-order products grow three times as fast as the input power while the wanted signal grows at the same rate as the input; extend both lines and they cross at the third-order intercept. A two-tone test measures it as OIP3 = P_out + ΔP / 2, where ΔP is the gap between the wanted signal and the third-order product. The AD831's output-referred third-order intercept is +24 dBm and its 1 dB compression point is +10 dBm; the Low Distortion in the datasheet title refers to exactly this. Linearity sets how large a signal the chain can withstand.
+
+线性度衡量信号大了以后混频器还老不老实。两个频率靠得很近的强信号同时进来，非线性会在 2f₁ − f₂、2f₂ − f₁ 这样的位置上产生三阶交调产物，它们紧挨着有用信号，滤波器滤不掉。三阶产物随输入功率以三倍斜率增长，有用信号以一倍斜率增长，两条直线延长后相交的那一点就是三阶交调截点，用两音测试量出来，OIP3 = P_out + ΔP / 2，ΔP 是有用信号和三阶产物之间的差。AD831 的输出三阶截点是 +24 dBm，1 dB 压缩点是 +10 dBm，手册标题里的 Low Distortion 说的就是这一项。它决定了这个链路能扛住多大的信号。
+
+At one end is the smallest usable signal, set by noise; at the other, the largest usable signal, set by distortion; the dynamic range lies between them ([Mini-Circuits AN00-009](https://www.minicircuits.com/app/AN00-009.pdf) puts these two limits very directly). A mixer in a receive chain is squeezed between both. A low-noise amplifier sits in front of it, so part of the mixer's own noise is diluted by the gain ahead. But by the time the signal reaches the mixer it has already been amplified, so most of the linearity burden falls on the mixer. That is why noise figure and linearity head the list.
+
+一头是噪声定下的最小可用信号，另一头是失真定下的最大可用信号，两者之间就是动态范围（[Mini-Circuits 的 AN00-009](https://www.minicircuits.com/app/AN00-009.pdf) 把这两个边界讲得很直接）。混频器在接收链路里正好卡在这两头之间：前面有低噪声放大器，混频器自己的噪声会被前级增益分摊掉一部分；可信号经过前级放大后已经变大，线性度的压力大半落在混频器身上。噪声系数和线性度被排在最前面，原因就在这里。
+
+## Isolation and Spurious Products / 隔离度与杂散
+
+The remaining group is how much leaks between ports. With a 100 MHz LO and a 10.7 MHz IF, the AD831 gives 70 dB of LO-to-RF isolation, 30 dB LO-to-IF and 45 dB RF-to-IF. The LO is usually the strongest signal in the whole mixer, so LO leakage into the other ports gets the most attention.
+
+剩下的一类是端口之间漏了多少。AD831 在本振 100 MHz、中频 10.7 MHz 时，本振到 RF 的隔离是 70 dB，本振到中频是 30 dB，RF 到中频是 45 dB。本振的功率通常是整个混频器里最大的，所以本振漏到别的端口最受关注。
+
+![IF spectrum from the RIGOL capture / RIGOL 存图的中频频谱](/uploads/projects/ad831-active-mixer/results/if-fft.png)
+
+The mixer board's own data gives a rough check. An FFT of the IF waveform saved on the RIGOL puts the 130.7 MHz LO leakage about 34 dB below the 10.7 MHz peak. Seen from the LO side, the LO goes in at −10 dBm, about 200 mVpp, and only about 3.8 mVpp of it reaches OUT, about 34 dB down. The datasheet's LO-to-IF isolation is 30 dB; on this board the IF amplifier adds 10 dB back, and the 470 pF low-pass takes off roughly another 15 dB at 130.7 MHz. Those three add up to about 35 dB, close to the measured 34 dB.
+
+拿混频器板自己的数据粗略对一下。RIGOL 存下的中频波形做 FFT，130.7 MHz 的本振泄漏比 10.7 MHz 主峰低约 34 dB。换个角度看，本振以 −10 dBm、也就是约 200 mVpp 送进来，漏到 OUT 脚上只剩约 3.8 mVpp，相对本振低了 34 dB 左右。手册的本振到中频隔离是 30 dB，这块板上中频放大器又加回 10 dB，470 pF 的低通在 130.7 MHz 处大约还能压掉 15 dB，三项加起来约 35 dB，和实测的 34 dB 很接近。
+
+## Measuring the Metrics / 指标的测量方法
+
+Each metric has its own test. Conversion gain is the simplest: put a spectrum analyzer on the IF port, read the IF power and subtract the RF input power. Raise the RF power step by step, and the point where the IF falls 1 dB short of the linear expectation is the 1 dB compression point. The third-order intercept needs two signal sources combined into two closely spaced tones, with the gap between the main tone and the third-order product read off the analyzer. Noise figure needs a noise source for a Y-factor measurement, or, with a known gain, a direct measurement of the output noise power. All of these are best read in dBm in a 50 Ω system with a spectrum analyzer; a Vpp reading on a scope won't do.
+
+这几类指标各有各的测法。转换增益最简单，频谱仪接在中频端，读出中频功率，减去 RF 输入功率就是；把 RF 功率一点点调大，看中频功率什么时候比线性预期少了 1 dB，就是 1 dB 压缩点；三阶截点要两台信号源合成两个靠得很近的音，在频谱仪上读出主音和三阶产物的差；噪声系数要用噪声源做 Y 因子测量，或者在已知增益的前提下直接测输出噪声功率。这几种测法最好都在 50 Ω 系统里用频谱仪读 dBm，示波器上的 Vpp 帮不上忙。
+
+Short on conversion gain, add an amplifier stage afterwards; short on isolation, add a filter. The lower limit set by noise figure and the upper limit set by linearity, once lost at the mixer, can't be recovered anywhere later in the chain. That, more or less, is the pair the lecturer was after.
+
+转换增益不够，后面补一级放大；隔离不够，加一级滤波。噪声系数定下的下限和线性度定下的上限，一旦在混频器这一级丢了，后面就再也找不回来。老师要的大概就是这两个。
