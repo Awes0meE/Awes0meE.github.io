@@ -14,7 +14,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - The earlier homepage release is PR #36 (`8e009ef`); the first six-note release is PR #37 (`007decf`). Their dated release packets describe those historical checkpoints.
 
 - The latest named release tag is `v0.9.0`; subsequent approved maintenance is integrated through PRs on `main`, served from `https://www.66ccff-labs.com/`. Do not equate the older tag with the latest deployed commit.
-- The current local repository content set is 9 projects, 30 public notes (none suspended), and 101 media records (97 images and 4 videos). The DIY notes add a faithful PNG render of the existing public ESP32 schematic without adding a media record. Project and note detail routes use the Bench Log layout in both themes.
+- The current local repository content set is 10 projects, 34 public notes (none suspended), and 119 media records (114 images and 5 videos). The DIY notes add a faithful PNG render of the existing public ESP32 schematic without adding a media record. Project and note detail routes use the Bench Log layout in both themes.
 - Release `v0.9.0` promotes the integrated homepage, `/work`, `/notes`, `/media`, and `/about` Ember Black refresh. The implementation was consolidated at `28b0a8f`, followed by repository-wide documentation reconciliation and release preparation; detail routes stayed outside that release and joined the system in the 2026-10 unified theme (PR #43).
 - The post-`v0.9.0` accessibility and Notes refinement defaults first visits to English, adds a bilingual skip link, and normalizes 44px touch targets and desktop navigation behavior; its painted black-to-paper handoff was later replaced by the 2026-10 unified-theme view transitions. The Notes route now follows its existing graphite topology to project-specific endpoints, keeps the two left desktop panels at a stable depth, lets only the ledger follow result height, removes trailing control rules, and uses the shared CJK system stack.
 - Public identity is Alvin Li, the archive brand is `iRidium / 铱`, and reader-facing contact routes are GitHub, LinkedIn and the NTU email.
@@ -104,6 +104,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `2026-10-17`: Pull request #48 (`content/add-gan-quadrotor-esc-fyp`, merged at `da94d8f` and live the same day) imported the XJTLU final-year project as `gan-quadrotor-esc-fyp` through the full AddProject and engineering-note-writer SOP (two `grilling` rounds, Chinese-first drafting, gate records). It adds 1 project, 5 notes (AM32 bootloader-free port, LMG1210 bootstrap sizing, same-speed DShot mapping, shoot-through protection, propeller-loaded startup and AM32 startup parameters), 17 media records and 189 curated uploads, with datasheets linked rather than uploaded and local paths and the student ID removed. The owner chose to feature it on the homepage project index.
 - `2026-10-17`: Branch `build/upgrade-next-security` upgraded `next` and `eslint-config-next` from 16.3.0 to 16.3.8. This patches the critical and high Next.js advisories (RCE, cache poisoning and SSRF ranges up to 16.3.7) without moving to 16.4. `npm audit fix` refreshed the transitive packages. A `package.json` override moves gray-matter onto js-yaml 4, which removes the vulnerable argparse 1 and sprintf-js chain; `lib/content.ts` and `scripts/validate-content.mjs` pass `yaml.load` as the frontmatter engine because js-yaml 4 dropped `safeLoad`. All 39 MDX files keep their frontmatter types, and the production audit is at 0.
 - `2026-10-17`: Pull request #49 (`feat/image-lightbox`, merged at `bd9ee25` and live the same day) added the site-wide image lightbox: evidence images open in an in-page viewer instead of navigating to the bare file.
+- `2026-10-18`: Branch `content/add-ad831-mixer` imported the EEE307 circuit-construction coursework as `ad831-active-mixer` through the full add-project SOP and writer workflow (three grilling rounds, Chinese-first drafts, Chinese sentence gate, English adaptation, release gates). It adds the project page, four notes (lumped matching versus trace impedance, dBm/Vpp and the IF output level, capacitor parasitics and self-resonance, mixer performance metrics), 18 media records and curated uploads under `public/uploads/projects/ad831-active-mixer/`: V1 to V4 board photos, renders, schematics, Gerber, BOM, slides, design report, scope captures with the IF CSV and `FFT.m`, and the demo video trimmed from 9.9 s to drop the self-introduction. Student IDs are allowed for this project. Totals: 10 projects, 34 notes, 119 media.
 
 ## Stable Decisions
 
@@ -166,7 +167,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `components/logo.tsx`: approved iRidium header mark and the user-selected B-style script wordmark from `public/brand/iridium-wordmark-script.png`; the wordmark is a portable transparent asset and does not switch to `铱` in Chinese mode.
 - `components/technical-visual.tsx`: homepage atom composition, the rotating five-prototype nucleus, the three five-item technology groups, deterministic phase placement, visibility pausing, and bilingual accessible description.
 - `components/technical-visual.module.css`: same-size `0deg` / `60deg` / `120deg` orbit geometry, nucleus and orbit motion, counter-rotation, comet trails, responsive scaling, and reduced-motion behavior.
-- `app/work/page.tsx`: server-rendered project sequence (nine projects), chapter links, authentic project imagery, and one signal interval between each adjacent pair.
+- `app/work/page.tsx`: server-rendered project sequence (ten projects), chapter links, authentic project imagery, and one signal interval between each adjacent pair.
 - `components/work-project-rail.tsx`: small client island for active chapter state and visibility-aware interval motion.
 - `app/notes/page.tsx`: server-side stable note ordering, real-project joins, and lightweight Routed Signal Map index projection.
 - `components/notes-signal-index.tsx`: metadata-only client search, project/year filters, reset, result state, channel controls, and semantic note rows.
@@ -231,7 +232,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Lint, content, encoding, typecheck and build were last rerun on `2026-10-17`
+Lint, content, encoding, typecheck and build were last rerun on `2026-10-18`
 for the merged GaN import and lightbox (`main` at `bd9ee25`) on Windows (Node 24.19.0); the browser-review bullets
 below are dated route checkpoints from 2026-08/09. Use the `npm.cmd` form on
 Windows PowerShell:
@@ -248,7 +249,7 @@ npm audit --omit=dev
 Expected result:
 
 - lint passes;
-- content validation passes for 9 projects, 30 public notes (none suspended), 101 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
+- content validation passes for 10 projects, 34 public notes (none suspended), 119 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
 - encoding validation passes; use the current command output for the UTF-8 file count;
 - the production build passes and prerenders 46 pages for the current 9-project, 30-note set (40 before the GaN import); earlier 39-page results below describe an older set;
 - the integrated homepage, `/work`, `/notes`, `/media`, and `/about` indexes passed English/Chinese review at 1440 × 900 and 390 × 844 with no horizontal overflow, broken images, or console errors; representative work and note details were then still on the retired paper system (they use Bench Log since PR #43);
