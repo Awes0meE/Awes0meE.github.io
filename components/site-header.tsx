@@ -20,7 +20,7 @@ export function SiteHeader() {
             href="/work"
             className="site-header-cta signal-fill hidden items-center gap-2 border border-pine px-4 py-2 text-sm font-semibold text-pine lg:flex"
           >
-            <BilingualText en="View Projects" zh="查看项目" />
+            <BilingualText en="View projects" zh="查看项目" />
             <ArrowRight size={16} />
           </Link>
         </div>

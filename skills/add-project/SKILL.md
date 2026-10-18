@@ -184,7 +184,7 @@ content/media.json
 
 For writing, first use `skills/engineering-note-writer/SKILL.md` to turn rough user bullet points and evidence into Chinese-first engineering notes with accurate English counterparts.
 
-Project pages must include accurate `title/titleZh`, `summary/summaryZh`, date, status, tags (add a Chinese label to `content/tag-labels.json` for each new word tag), cover, `featured`, links when real, `assetPaths` when useful, and bilingual body coverage for substantial content.
+Project pages must include accurate `title/titleZh`, a short `shortTitle/shortTitleZh` that maps plainly to the title (optionally `mediaLead`, one of the project's own media ids), `summary/summaryZh`, date, status, tags (add a Chinese label to `content/tag-labels.json` for each new word tag), cover, `featured`, links when real, `assetPaths` when useful, and bilingual body coverage for substantial content.
 
 Notes should preserve the user's practical learning-log tone: concrete files, symptoms, decisions, evidence, and reflection. Use `visibility: public` only for publishable notes and set `projectSlug` so related notes appear on project pages.
 

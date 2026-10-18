@@ -13,6 +13,8 @@
   --ink-rule: #c2560a;
   --paper-shadow: 0 0 0;
   container-type: inline-size;
+  /* The lamp glow is wider than the sheet; keep it from widening the page on phones. */
+  overflow-x: clip;
   display: grid;
   grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr);
   align-items: center;

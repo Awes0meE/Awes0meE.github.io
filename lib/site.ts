@@ -18,7 +18,7 @@ export const openGraphBase = {
 };
 
 export const navItems = [
-  { href: "/work", labelEn: "Work", labelZh: "项目" },
+  { href: "/work", labelEn: "Projects", labelZh: "项目" },
   { href: "/notes", labelEn: "Notes", labelZh: "笔记" },
   { href: "/media", labelEn: "Media", labelZh: "媒体" },
   { href: "/about", labelEn: "About", labelZh: "关于" }

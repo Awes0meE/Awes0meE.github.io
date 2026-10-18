@@ -23,11 +23,16 @@ export type Project = {
   slug: string;
   title: string;
   titleZh: string;
+  /** Short name for tight surfaces: media sources, note stubs. */
+  shortTitle: string;
+  shortTitleZh: string;
   summary: string;
   summaryZh: string;
   date: string;
   status: string;
   tags: string[];
+  /** Media record that leads the project on /media; the first record when unset. */
+  mediaLead?: string;
   /**
    * Normalized transparent cover card (subject centred on a 16:10 canvas).
    * Company experience uses the company logo; personal work uses an EDA 3D

@@ -21,7 +21,7 @@ function interleave<T>(groups: T[][]): T[] {
  */
 export function HomeFeed() {
   const projects = getProjects();
-  const byProject = new Map(projects.map((project) => [project.slug, { en: project.title, zh: project.titleZh }]));
+  const byProject = new Map(projects.map((project) => [project.slug, { en: project.shortTitle, zh: project.shortTitleZh }]));
 
   const film: FilmRecord[] = interleave(
     projects.map((project) =>

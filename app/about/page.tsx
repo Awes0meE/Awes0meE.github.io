@@ -370,7 +370,7 @@ export default function AboutPage() {
 
         <section className={styles.contactSection} aria-labelledby="contact-title">
           <h2 id="contact-title" data-reveal>
-            <BilingualText en="Say Hello" zh="保持联系" />
+            <BilingualText en="Get in touch" zh="保持联系" />
           </h2>
           <ul className={styles.contactList}>
             {contacts.map(({ href, icon: Icon, label, external }) => (
