@@ -31,6 +31,9 @@ Use this frontmatter shape:
 ---
 title: "English title"
 titleZh: "中文标题"
+shortTitle: "Short name"
+shortTitleZh: "短名"
+mediaLead: "my-project-board-photo"
 summary: "English summary"
 summaryZh: "中文摘要"
 date: "2026.05"
@@ -167,6 +170,8 @@ Example:
 ```
 
 Use `titleZh` and `captionZh` when a media card should switch cleanly between English and Simplified Chinese.
+
+**Short name (`shortTitle`, `shortTitleZh`, `mediaLead`).** Every project also has a short name of a few words, used where the full title would be cut off: the `/media` source list, the homepage note stubs and the project wheel's number tooltips. It must still map plainly to the full title (no nicknames). `/media` lists projects in `/work` order and opens each one on `mediaLead`, which must be one of that project's own media records; without it, the project's first record leads. `validate-content` enforces all of this.
 
 Every project/note image or video that should be discoverable from the media page needs a matching `content/media.json` entry. Set `projectSlug` for every project-owned record; `/media` uses it to build the source chooser and the server-rendered project chapters, and repeats the source project on each record. The unassigned group is a defensive fallback, not a substitute for confirming provenance.
 
