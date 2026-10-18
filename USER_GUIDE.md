@@ -140,7 +140,7 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 
 首页教育区第一行显示南洋理工大学及硕士在读信息，第二行以双栏明确展示西交利物浦大学与英国利物浦大学授予的本科双学位；“一等荣誉学位”归在英国利物浦大学学位下。
 
-首页技术可视化由 `components/technical-visual.tsx` 和 `components/technical-visual.module.css` 维护。`public/uploads/hero/` 中的五张 prototype 图片组成缓慢旋转的核团；三条尺寸一致的轨道互成 60 度，每条轨道上有五个等距技术标识，分别代表嵌入式系统、固件开发或工程工具。
+首页技术可视化由 `components/technical-visual.tsx` 和 `components/technical-visual.module.css` 维护。核团轮流展示 `public/uploads/hero/` 中的九张原型抠图，每张停留 5 秒；三条尺寸一致的轨道互成 60 度，每条轨道上有五个等距技术标识，分别代表嵌入式系统、固件开发或工程工具。
 
 prototype 图片和技术标识只用于展示。它们不能证明某块板卡已经制造或完成验证，标识也不表示关联、背书或熟练度。技术标识来源记录在 `public/skills/icons/README.md`，学校标识来源记录在 `public/education/README.md`。
 
@@ -148,19 +148,19 @@ prototype 图片和技术标识只用于展示。它们不能证明某块板卡�
 
 ## Using The Work Project Aperture
 
-On `/work`, the desktop `01`–`09` rail stays visible while nine large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
+On `/work`, the desktop `01`–`10` rail stays visible while ten large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
 
-Seven spacious black signal intervals separate adjacent projects. Their short orange ticks move from right to left, pause when the interval is offscreen or the browser document is hidden, and become static when the operating system requests reduced motion. The moving ticks mean “next record”; they do not report progress, telemetry, or completion.
+Nine spacious signal intervals separate adjacent projects. Their short accent-coloured ticks move from right to left, pause when the interval is offscreen or the browser document is hidden, and become static when the operating system requests reduced motion. The moving ticks mean “next record”; they do not report progress, telemetry, or completion.
 
 ## 使用项目检视窗
 
-`/work` 的桌面版会固定显示 `01`–`09` 定位 rail，右侧依次展示 9 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把 rail 改成位于纵向章节上方的横向定位条。
+`/work` 的桌面版会固定显示 `01`–`10` 定位条，右侧依次展示 10 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把定位条改成位于纵向章节上方的横向条。
 
-相邻项目之间共有 7 段留白更大的黑色信号间隔。橙色短竖线由右向左移动；间隔离开视口或浏览器页面被隐藏时暂停，操作系统启用“减少动态效果”时保持静态。这些短竖线只表示“下一条档案”，不表示进度、遥测或项目完成度。
+相邻项目之间共有 9 段留白更大的信号间隔。短竖线采用当前主题的强调色，由右向左移动；间隔离开视口或浏览器页面被隐藏时暂停，操作系统启用“减少动态效果”时保持静态。这些短竖线只表示“下一条档案”，不表示进度、遥测或项目完成度。
 
 ## Using The Notes Routed Index
 
-On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by year. The 2026-09-07 content revision has 25 public notes across 8 channels, including two approved studies per project and nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
+On `/notes`, choose a project from the list or dropdown, then narrow the public records by year. The current collection has 34 public notes across 10 projects, including nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete list.
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` opens in the Bench Log reading layout.
 
@@ -168,7 +168,7 @@ The selected orange path follows the existing graphite stem and zig-zag bus to t
 
 ## 使用笔记路由索引
 
-在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按年份筛选公开笔记。2026-09-07 这轮发布后为 25 篇公开笔记、8 个通道，每个项目有两篇获批专题，另保留 9 篇技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
+在 `/notes` 中，可以直接从列表或下拉框选择项目，再按年份筛选公开笔记。当前共有 34 篇公开笔记，关联 10 个项目，其中包括 9 篇保留的技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整列表。
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会以“工作台日志”阅读版式打开。
 

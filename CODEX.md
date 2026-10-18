@@ -125,12 +125,15 @@ Projects require frontmatter matching `lib/content.ts`:
 
 - `title`
 - `titleZh`
+- `shortTitle` and `shortTitleZh` (required short names for compact surfaces)
 - `summary`
 - `summaryZh`
 - `date`
 - `status`
 - `tags` (every word tag needs a Chinese label in `content/tag-labels.json`; see `docs/content-workflow.md`)
 - `cover`
+- `coverKind`: `company` or `render`; optional `coverDark`
+- optional `mediaLead`: the ID of one of the project's own media records
 - `featured` (still validated; no route reads it since the homepage wheel shows every project)
 - `links`
 - optional `assetPaths`
@@ -147,6 +150,8 @@ Notes require:
 - optional `projectSlug` at schema level; the current `/notes` Routed Signal Map requires it to resolve to a real project before the note can enter an index channel
 
 Notes without `visibility: public` are treated as private. Private notes are not listed on the homepage, `/notes`, or project detail pages, and `/notes/[slug]` returns 404 for them through the public route helpers.
+
+Note dates use `YYYY.MM.DD`; the content validator rejects other formats. Rendered `<time dateTime>` values use ISO dates.
 
 An unlinked public note can still have a public `/notes/[slug]` route, but it is omitted from the homepage notes tape, the current `/notes` project-channel index and project-detail related-note lists. Do not invent an “unassigned” Notes channel to hide a missing or invalid join.
 
@@ -231,13 +236,13 @@ Maintain the current engineering-academic identity:
 - keep the approved five-rectangle mark from `public/brand/iridium-mark.png` in the header, preserve equal square bounds for its upper-left and lower-right blocks, pair it with the user-selected B-style `public/brand/iridium-wordmark-script.png`, render that wordmark at the user-approved compact 26px height, and preserve the exact `iRidium` capitalization in both language modes;
 - keep the shared navigation's exact-route `aria-current="page"` and nested-route `aria-current="location"` semantics. On `.signal-theme` desktop headers, retain the `01`–`04` prefixes, English Barlow Condensed display face, Ember line spanning number and label, visible focus/current state, and short press response; omit indices on mobile and remove movement under reduced motion;
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
-- in release `v0.9.0`, keep those five presentation derivatives (now transparent cutouts) as a prototype nucleus in `components/technical-visual.tsx` that shows one board at a time, 5 seconds each, without any ring or segment indicator; surround it with three same-size orbital ellipses whose long axes begin at `0deg`, `60deg`, and `120deg`, with five evenly spaced technology marks on each orbit for embedded systems, firmware development, and engineering tools;
+- keep the current nine-cutout nucleus in `components/technical-visual.tsx`, showing one board at a time for 5 seconds each; the earlier five-image nucleus belongs to release `v0.9.0`. Preserve the three equal-sized orbits, five marks per orbit, fixed category legend and category-coloured curved comets specified in `DESIGN.md`;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
 - on `/work`, keep the sticky `01`–`10` rail, ten complete semantic project links, and exactly nine black signal intervals (one between each adjacent pair) whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
 - on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 10 channels and 34 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
 - on `/media`, keep the project-first Focus Aperture with ten source choices, one authentic lead record, and all 119 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the owner-voiced online CV described in `DESIGN.md`: no repeated method chains, education blocks or duplicate contact links, idiomatic (not literal) English headings, the complete original `public/uploads/projects/avatar.jpg` without crop, filter or replacement, and motion that pauses offscreen and disappears under `prefers-reduced-motion`;
-- treat both the five hero derivatives and the sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
+- treat the hero derivatives and sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;
 - every route uses the shared theme tokens at the top of `app/globals.css` (Ember Black: near-black field with ember-orange signal; Bench Paper: white Cobalt sheets with cobalt signal and deep-sea text, see `DESIGN.md`; fine rules in both); add colours as tokens with both theme values, never as literals, and do not infer that every route shares the same surface composition;
 - project evidence over decoration;

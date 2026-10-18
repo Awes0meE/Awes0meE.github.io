@@ -119,7 +119,7 @@ substitute a similarly named global writing skill.
 Before resuming, read `AGENTS.md`, `CODEX.md`, and
 `docs/active-work/portfolio-copy-rewrite.md`. Confirm the branch is clean. If
 the handoff names an active topic branch, fetch and fast-forward that branch;
-otherwise continue from its `Next Action` section on synchronized `main`.
+otherwise continue from its `Next Work` section on synchronized `main`.
 
 ## GitHub Sync Workflow
 

@@ -94,4 +94,6 @@ Use absolute dates and concise language.
 - `grill-me` and `grilling`: interview the user one project at a time and turn voice answers into shared understanding before the repository-local writer is used.
 - `impeccable`: external web-design workflow from `https://github.com/pbakaus/impeccable`, installed machine-locally at `.agents/skills/impeccable`. Its `.agents/` tooling and `.impeccable/` session state do not travel with Git; durable product and design decisions belong in `PRODUCT.md` and `DESIGN.md`.
 
-Restart Codex after installing external skills so they appear in the tool's native skill list.
+After installing external skills, check the next turn's native skill list before restarting. Installation paths and device-specific versions are recorded in `docs/agent-skills.md`.
+
+This repository's hand-maintained `MEMORY.md` follows the milestone workflow above. Host-generated Codex memory is a separate, read-only surface unless the user explicitly requests an update through the host's permitted correction mechanism. Project closeout does not authorize editing global generated memory or Claude account files.
