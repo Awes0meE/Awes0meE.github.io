@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { ArrowUpRight, PlayCircle } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { tagZh } from "@/lib/tags";
 import styles from "./home-feed.module.css";
 
 type ProjectName = { en: string; zh: string } | null;
@@ -142,7 +143,9 @@ export function TicketTape({ records }: { records: TicketRecord[] }) {
           <strong className={styles.ticketTitle}>
             <BilingualText en={note.title} zh={note.titleZh} />
           </strong>
-          <span className={styles.ticketTags}>{note.tags.slice(0, 3).join(" · ")}</span>
+          <span className={styles.ticketTags}>
+            <BilingualText en={note.tags.slice(0, 3).join(" · ")} zh={note.tags.slice(0, 3).map(tagZh).join(" · ")} />
+          </span>
         </span>
         <ArrowUpRight className={styles.ticketArrow} size={18} aria-hidden="true" />
         <Barcode seed={note.slug} />

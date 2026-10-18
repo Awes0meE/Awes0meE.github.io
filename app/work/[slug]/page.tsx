@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { ArrowDown, ArrowRight, ExternalLink, PlayCircle } from "lucide-react";
 import { BenchLogRail } from "@/components/bench-log-rail";
 import { BilingualText } from "@/components/bilingual-text";
+import { tagZh } from "@/lib/tags";
 import { ContentRenderer, getContentOutline } from "@/components/content-renderer";
 import { ProjectAssets } from "@/components/project-assets";
-import { ProjectCover } from "@/components/project-cover";
+import { PROJECT_FIGURE_SIZES, ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
 import {
   formatDateRange,
@@ -119,14 +120,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                           media={lead}
                           alt={leadAlt}
                           preload
-                          sizes="(min-width: 1280px) 900px, (min-width: 1024px) 70vw, 100vw"
+                          sizes={PROJECT_FIGURE_SIZES}
                           className="bench-lead-image"
                         />
                       </span>
                     </ProjectFigureTransition>
                     </div>
                     <figcaption>
-                      <span className="bench-fig-label">FIG. 01</span>
+                      <span className="bench-fig-label"><BilingualText en="FIG. 01" zh="图 01" /></span>
                       <BilingualText
                         en={leadCaption?.en ?? project.title}
                         zh={leadCaption?.zh ?? project.titleZh}
@@ -161,7 +162,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       <dt><BilingualText en="Stack" zh="技术栈" /></dt>
                       <dd className="bench-tags">
                         {project.tags.map((tag) => (
-                          <span key={tag}>{tag}</span>
+                          <span key={tag}><BilingualText en={tag} zh={tagZh(tag)} /></span>
                         ))}
                       </dd>
                     </div>

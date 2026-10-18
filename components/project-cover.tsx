@@ -1,6 +1,14 @@
 import Image from "next/image";
 import type { ProjectMedia } from "@/lib/content";
 
+/**
+ * One `sizes` for every place a cover morphs into the project page's lead figure (the
+ * homepage wheel, the /work chapter and the lead itself). The browser then picks the same
+ * file on both sides, so the project page reuses the image already decoded instead of
+ * fetching and decoding a larger one while the entry transition runs.
+ */
+export const PROJECT_FIGURE_SIZES = "(min-width: 1280px) 900px, (min-width: 1024px) 70vw, 100vw";
+
 type ProjectCoverProps = {
   media: ProjectMedia;
   alt: string;

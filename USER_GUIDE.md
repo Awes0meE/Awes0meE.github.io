@@ -315,6 +315,8 @@ assetPaths:
 
 The homepage project wheel shows every project in `/work` order. `featured` is still required by the content check but no longer selects homepage projects.
 
+Write tags in English. When you add a new word tag (one with lowercase letters, such as `Motor Control`), also add its Chinese label to `content/tag-labels.json`; tool and product names map to themselves (`"Qt": "Qt"`). Acronyms such as `STM32` need no entry. `npm run validate-content` stops on a word tag without a label, and Chinese mode shows the label wherever tags appear.
+
 If `assetPaths` is set, the project page shows uploaded public files in a file browser. The left side is a project-file index, and the right side previews the selected file. Images and videos show inline previews, Markdown / text documents render as readable page content, source/code files render in code frames, PDFs embed from page one where the browser supports it, and binary files keep direct open links. Relative images and links inside uploaded Markdown are resolved from the source file path. HTML and SVG files are kept as download-only artifacts.
 
 ## 如何添加新项目
@@ -326,6 +328,8 @@ If `assetPaths` is set, the project page shows uploaded public files in a file b
 5. 保存文件，并在本地网站里检查效果。
 
 首页项目封面流按 `/work` 的顺序展示全部项目。`featured` 仍是内容检查要求的字段，但已经不再决定哪些项目出现在首页。
+
+标签用英文写。新增含小写字母的单词标签（例如 `Motor Control`）时，要同时在 `content/tag-labels.json` 里写上它的中文；工具和产品名照抄原文（`"Qt": "Qt"`），`STM32` 这类缩写不用写。缺中文时 `npm run validate-content` 会报错；中文模式下，所有显示标签的地方都会换成中文。
 
 如果设置 `assetPaths`，项目页会用文件浏览器展示这些公开路径下的上传资料。左侧是项目文件索引，右侧是当前文件预览。图片和视频会内嵌预览，Markdown 和文本文件会以正文形式显示，源码/代码文件会放进代码框，PDF 会尽量从第一页内嵌预览，二进制文件保留直接打开链接。上传 Markdown 里的相对图片和链接会按源文件位置解析；HTML 和 SVG 文件只作为下载附件保留。
 

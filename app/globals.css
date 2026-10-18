@@ -182,6 +182,12 @@ html[data-lang="zh"] .lang-en {
   display: none !important;
 }
 
+/* Uppercase labels are an English device. Chinese text has no case, and the Latin names it
+   carries (Qt, GaN, Arduino) keep their own spelling instead of turning into QT or GAN. */
+.lang-zh {
+  text-transform: none;
+}
+
 .language-option-en,
 .language-option-zh {
   min-width: 44px;
@@ -1412,11 +1418,13 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
   transition: color 180ms ease-out, background-color 220ms ease-out;
 }
 
+/* The active marker stays short of the number column (which starts about 16px in), so the
+   line never runs into the digits. */
 .signal-work-rail-link::before {
   position: absolute;
   top: 50%;
   left: 0;
-  width: 24px;
+  width: 11px;
   height: 1px;
   background: var(--signal-orange);
   content: "";
@@ -1464,10 +1472,9 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
   color: rgb(var(--c-t3));
   font-family: var(--font-mono);
   font-size: 0.875rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   line-height: 1.3;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .signal-work-rail-status::before {
@@ -1640,18 +1647,48 @@ html[data-lang="zh"] .signal-work-title {
   display: flex;
   margin-top: 1.2rem;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.55rem 0.7rem;
 }
 
-.signal-work-focus span {
-  padding: 0.42rem 0.68rem;
-  border: 1px solid var(--signal-line);
-  color: rgb(var(--c-t2));
+/* Each focus area is a hang tag: a signal-tinted card with rounded corners, a punched hole
+   near its left end and a metal eyelet ring round the hole. */
+.signal-work-focus > span {
+  position: relative;
+  isolation: isolate;
+  padding: 0.46rem 0.75rem 0.46rem 1.65rem;
+  color: var(--signal-ember-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.875rem;
   letter-spacing: 0.045em;
   line-height: 1;
   text-transform: uppercase;
+}
+
+.signal-work-focus > span::before,
+.signal-work-focus > span::after {
+  position: absolute;
+  content: "";
+}
+
+.signal-work-focus > span::before {
+  inset: 0;
+  z-index: -1;
+  border-radius: 3px 7px 7px 3px;
+  background: rgb(var(--c-ember) / 0.16);
+  -webkit-mask: radial-gradient(circle at 12.5px 50%, transparent 2.6px, #000 3.1px);
+  mask: radial-gradient(circle at 12.5px 50%, transparent 2.6px, #000 3.1px);
+}
+
+.signal-work-focus > span::after {
+  top: 50%;
+  left: 7px;
+  box-sizing: border-box;
+  width: 11px;
+  height: 11px;
+  margin-top: -5.5px;
+  border: 1.6px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.7;
 }
 
 .signal-work-evidence {
@@ -1805,6 +1842,11 @@ html[data-lang="zh"] .signal-work-case-action {
   .signal-work-rail-cover {
     width: 62px;
     height: 44px;
+  }
+
+  /* The status column is too narrow for words here; the square alone carries the phase. */
+  .signal-work-rail-status > .bilingual-text {
+    display: none;
   }
 
   .signal-work-chapter-link {
@@ -2079,29 +2121,34 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   animation: none;
 }
 
-::view-transition-old(.entry-forward) {
+/* The page content moves as part of the root snapshot, which is one viewport tall. React's
+   <ViewTransition> around <main> still starts the transition and carries the type, but main
+   gets no snapshot of its own: Safari captures a named element at its full height (a project
+   page is about 7,600px, 15,000 device pixels), and redrawing that every frame dropped the
+   entry to five frames a second in a 1512px window. */
+main {
+  view-transition-name: none !important;
+}
+
+html:active-view-transition-type(nav-forward)::view-transition-old(root) {
   animation: 150ms cubic-bezier(0.4, 0, 1, 1) both entry-leave-up;
 }
 
-::view-transition-new(.entry-forward) {
+html:active-view-transition-type(nav-forward)::view-transition-new(root) {
   animation: 380ms cubic-bezier(0.16, 1, 0.3, 1) 110ms both entry-arrive-up;
 }
 
-::view-transition-old(.entry-back) {
+html:active-view-transition-type(nav-back)::view-transition-old(root) {
   animation: 150ms cubic-bezier(0.4, 0, 1, 1) both entry-leave-down;
 }
 
-::view-transition-new(.entry-back) {
+html:active-view-transition-type(nav-back)::view-transition-new(root) {
   animation: 360ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both entry-arrive-down;
 }
 
 ::view-transition-group(.project-figure) {
   animation-duration: 440ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-::view-transition-image-pair(.project-figure) {
-  animation-name: figure-focus-pull;
 }
 
 @keyframes entry-leave-up {
@@ -2132,11 +2179,6 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   }
 }
 
-@keyframes figure-focus-pull {
-  35% {
-    filter: blur(2px);
-  }
-}
 
 /* ------------------------------------------------------------------ */
 /* Bench Log: project and note detail pages                            */
@@ -2158,8 +2200,13 @@ html:active-view-transition-type(nav-forward, nav-back)::view-transition-new(sit
   padding: 3.5rem clamp(1.5rem, 4.5vw, 4.5rem) 6rem;
 }
 
+/* The masthead is its own full-bleed zone in both themes: a band (the panel tone in Ember
+   Black, the cobalt band in Bench Paper) closed by a hairline, with the reading grid below. */
 .bench-mast {
-  max-width: 76rem;
+  margin: -3.5rem calc(clamp(1.5rem, 4.5vw, 4.5rem) * -1) 0;
+  padding: 3.5rem clamp(1.5rem, 4.5vw, 4.5rem) 2.25rem;
+  border-bottom: 1px solid rgb(var(--c-fg) / 0.12);
+  background-color: rgb(var(--c-panel));
 }
 
 /* Reading grid: lead figure and body on the left, a sticky ledger on the right. */
@@ -2354,9 +2401,11 @@ html[data-lang="zh"] .bench-lede {
   gap: 0.35rem;
 }
 
-.bench-tags span {
+/* A faint neutral fill lifts each chip off the page in both themes. */
+.bench-tags > span {
   padding: 0.15rem 0.45rem;
   border: 1px solid rgb(var(--c-fg) / 0.18);
+  background: rgb(var(--c-fg) / 0.065);
   font-size: 0.875rem;
 }
 
@@ -2449,6 +2498,10 @@ html[data-lang="zh"] .bench-lede {
   font-weight: 600;
   letter-spacing: 0.1em;
   content: "FIG. " counter(bench-fig, decimal-leading-zero);
+}
+
+html[data-lang="zh"] .prose-figcaption::before {
+  content: "图 " counter(bench-fig, decimal-leading-zero);
 }
 
 /* The two transparent system diagrams carry white labels; keep them on a dark plate in either theme. */
@@ -3004,6 +3057,11 @@ html[data-lang="zh"] .bench-section-title {
     padding: 2.25rem clamp(1rem, 4vw, 2.5rem) 4.5rem;
   }
 
+  .bench-mast {
+    margin: -2.25rem calc(clamp(1rem, 4vw, 2.5rem) * -1) 0;
+    padding: 2.25rem clamp(1rem, 4vw, 2.5rem) 1.75rem;
+  }
+
   .prose-h2 {
     scroll-margin-top: calc(var(--site-header-h) + 4.5rem);
   }
@@ -3096,13 +3154,6 @@ html[data-theme="light"] .bench-mast {
   background-image:
     radial-gradient(ellipse 55% 120% at 12% 30%, rgb(147 197 253 / 0.16), transparent 70%),
     radial-gradient(ellipse 45% 110% at 88% 70%, rgb(125 211 252 / 0.13), transparent 72%);
-}
-
-html[data-theme="light"] .bench-mast {
-  max-width: none;
-  margin: -3.5rem calc(clamp(1.5rem, 4.5vw, 4.5rem) * -1) 0;
-  padding: 3.5rem clamp(1.5rem, 4.5vw, 4.5rem) 2.25rem;
-  border-bottom: 1px solid rgb(var(--c-fg) / 0.12);
 }
 
 html[data-theme="light"] .signal-hero [class*="atomVisual"] {
@@ -3665,6 +3716,16 @@ html[data-theme="light"] .site-header .language-toggle {
 }
 
 html[data-theme="light"] body .site-footer {
+  color: rgb(240 246 255);
+}
+
+/* The aurora drifts its sky-blue light under the footer text, so both lines are measured
+   against its brightest frame: white copy (5.0:1) and a near-white visual note (4.6:1). */
+html[data-theme="light"] body .site-footer-copy {
+  color: rgb(255 255 255);
+}
+
+html[data-theme="light"] body:has(.signal-home) .site-footer-visual-note {
   color: rgb(240 246 255);
 }
 

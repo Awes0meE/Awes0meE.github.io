@@ -219,6 +219,19 @@ for (const note of notes) {
   validateBodyUploadRefs(note);
 }
 
+// Every word tag needs a Chinese label (tool and product names map to themselves);
+// acronyms and part numbers without lowercase letters read the same in both languages.
+const tagLabelsPath = path.join(contentRoot, "tag-labels.json");
+const tagLabels = JSON.parse(fs.readFileSync(tagLabelsPath, "utf8"));
+
+for (const item of [...projects, ...notes]) {
+  for (const tag of isStringArray(item.data.tags) ? item.data.tags : []) {
+    if (/[a-z]/.test(tag) && !isString(tagLabels[tag])) {
+      addError(item.filePath, `tag "${tag}" has no Chinese label in content/tag-labels.json`);
+    }
+  }
+}
+
 const mediaPath = path.join(contentRoot, "media.json");
 const media = JSON.parse(fs.readFileSync(mediaPath, "utf8"));
 const mediaIds = new Set();

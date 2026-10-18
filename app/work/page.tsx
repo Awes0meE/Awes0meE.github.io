@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { ProjectCover } from "@/components/project-cover";
+import { tagZh } from "@/lib/tags";
+import { PROJECT_FIGURE_SIZES, ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
 import {
   WorkProjectRail,
@@ -110,7 +111,7 @@ function WorkProjectChapter({
           </p>
           <div className="signal-work-focus" aria-label="Project focus / 项目方向">
             {focus.map((tag) => (
-              <span key={tag}>{tag}</span>
+              <span key={tag}><BilingualText en={tag} zh={tagZh(tag)} /></span>
             ))}
           </div>
           <span className="signal-work-evidence">
@@ -129,7 +130,7 @@ function WorkProjectChapter({
                 media={media}
                 alt=""
                 preload={index === 0}
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 148px), (max-width: 1199px) 54vw, 56vw"
+                sizes={PROJECT_FIGURE_SIZES}
                 className="signal-work-image"
               />
             </span>
@@ -139,7 +140,7 @@ function WorkProjectChapter({
         <span id={detailsId} className="sr-only">
           <BilingualText
             en={`Status: ${project.status}. Timeline: ${timelineEn}. Focus: ${focus.join(", ")}. Evidence: ${evidenceEn}.`}
-            zh={`状态：${statusZh}。时间：${timelineZh}。方向：${focus.join("、")}。证据：${evidenceZh}。`}
+            zh={`状态：${statusZh}。时间：${timelineZh}。方向：${focus.map(tagZh).join("、")}。证据：${evidenceZh}。`}
           />
         </span>
       </Link>

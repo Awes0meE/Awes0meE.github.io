@@ -5,6 +5,7 @@ import type { CSSProperties, FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { ArrowRight, RotateCcw, Search, SearchX } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { tagZh } from "@/lib/tags";
 import styles from "@/app/notes/notes.module.css";
 
 export type NotesIndexItem = {
@@ -147,7 +148,8 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
         note.summaryZh,
         note.projectTitle,
         note.projectTitleZh,
-        ...note.tags
+        ...note.tags,
+        ...note.tags.map(tagZh)
       ]
         .join(" ")
         .toLocaleLowerCase();
@@ -480,7 +482,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                           </span>
                           <span className={styles.noteTags} aria-label="Tags / 标签">
                             {note.tags.slice(0, 3).map((tag, tagIndex) => (
-                              <span key={`${tag}-${tagIndex}`}>{tag}</span>
+                              <span key={`${tag}-${tagIndex}`}><BilingualText en={tag} zh={tagZh(tag)} /></span>
                             ))}
                             {hiddenTagCount > 0 ? <span>+{hiddenTagCount}</span> : null}
                           </span>
