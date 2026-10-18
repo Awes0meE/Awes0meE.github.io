@@ -80,10 +80,10 @@ export function WorkProjectRail({ projects }: { projects: WorkRailProject[] }) {
     <aside className="signal-work-rail" aria-label="Project index / 项目索引">
       <header className="signal-work-rail-header">
         <h1>
-          <BilingualText en="Project archive" zh="项目档案" />
+          <BilingualText en="Projects" zh="项目" />
         </h1>
         <p>
-          <BilingualText en={`${projects.length} evidence records`} zh={`${projects.length} 份项目记录`} />
+          <BilingualText en={`${projects.length} projects`} zh={`${projects.length} 个项目`} />
         </p>
       </header>
       <nav className="signal-work-rail-nav" aria-label="Project chapters / 项目章节">

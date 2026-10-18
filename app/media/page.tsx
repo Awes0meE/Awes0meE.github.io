@@ -42,57 +42,6 @@ export const metadata: Metadata = {
   }
 };
 
-const mediaProjectConfig = [
-  {
-    slug: "juanyun-thermal-hardware",
-    shortTitle: "Cirro thermal hardware",
-    shortTitleZh: "卷云相变散热系统",
-    featuredId: "juanyun-acunit-v20-block"
-  },
-  {
-    slug: "sensorless-foc-learning-route",
-    shortTitle: "Sensorless FOC",
-    shortTitleZh: "无感 FOC 学习路线",
-    featuredId: "sensorless-foc-cover"
-  },
-  {
-    slug: "juanyun-diy-cooling-prototype",
-    shortTitle: "DIY cooling",
-    shortTitleZh: "DIY 压风式散热器",
-    featuredId: "juanyun-diy-cooling-stm32-pcb-render"
-  },
-  {
-    slug: "nanjing-turing-qt-embedded-learning",
-    shortTitle: "Nanjing Qt log",
-    shortTitleZh: "南京图灵 Qt 实习",
-    featuredId: "turing-ai-institute-cover"
-  },
-  {
-    slug: "tianjin-metro-stm32-foundation",
-    shortTitle: "Tianjin STM32",
-    shortTitleZh: "天津津铁 STM32 实习",
-    featuredId: "tianjin-rail-transit-cover"
-  },
-  {
-    slug: "arduino-digital-clock-counter",
-    shortTitle: "Digital counter",
-    shortTitleZh: "Arduino 数码管计数器",
-    featuredId: "arduino-digital-clock-cover"
-  },
-  {
-    slug: "arduino-smart-car-line-tracker",
-    shortTitle: "Line-tracking car",
-    shortTitleZh: "Arduino 循迹小车",
-    featuredId: "arduino-smart-car-cover"
-  },
-  {
-    slug: "claude-chime-hardware-power-board",
-    shortTitle: "Claude Chime power",
-    shortTitleZh: "Claude Chime 电源板",
-    featuredId: "claude-chime-logo"
-  }
-] as const;
-
 type MediaProjectGroup = {
   slug: string;
   shortTitle: string;
@@ -115,7 +64,6 @@ function mediaType(type: MediaItem["type"]) {
 const htmlDatePattern = /^\d{4}(?:-\d{2}(?:-\d{2})?)?$/;
 
 function buildMediaGroups(media: MediaItem[], projects: Project[]) {
-  const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));
   const itemsByProject = new Map<string, MediaItem[]>();
 
   for (const item of media) {
@@ -125,35 +73,23 @@ function buildMediaGroups(media: MediaItem[], projects: Project[]) {
     itemsByProject.set(slug, items);
   }
 
-  const configuredSlugs = new Set<string>(mediaProjectConfig.map((entry) => entry.slug));
-  const configuredGroups: MediaProjectGroup[] = mediaProjectConfig.flatMap((entry) => {
-    const items = itemsByProject.get(entry.slug) ?? [];
+  // One group per project in /work order, named by the project's own short title.
+  const projectGroups: MediaProjectGroup[] = projects.flatMap((project) => {
+    const items = itemsByProject.get(project.slug) ?? [];
 
     if (!items.length) {
       return [];
     }
 
     return [{
-      ...entry,
-      project: projectsBySlug.get(entry.slug),
+      slug: project.slug,
+      shortTitle: project.shortTitle,
+      shortTitleZh: project.shortTitleZh,
+      featuredId: project.mediaLead ?? items[0].id,
+      project,
       items
     }];
   });
-
-  const additionalGroups: MediaProjectGroup[] = [...itemsByProject.entries()]
-    .filter(([slug]) => slug !== "unassigned" && !configuredSlugs.has(slug))
-    .map(([slug, items]) => {
-      const project = projectsBySlug.get(slug);
-
-      return {
-        slug,
-        shortTitle: project?.title ?? slug,
-        shortTitleZh: project?.titleZh ?? project?.title ?? slug,
-        featuredId: items[0].id,
-        project,
-        items
-      };
-    });
 
   const unassignedItems = itemsByProject.get("unassigned") ?? [];
   const unassignedGroup: MediaProjectGroup[] = unassignedItems.length
@@ -166,7 +102,7 @@ function buildMediaGroups(media: MediaItem[], projects: Project[]) {
       }]
     : [];
 
-  return [...configuredGroups, ...additionalGroups, ...unassignedGroup];
+  return [...projectGroups, ...unassignedGroup];
 }
 
 function groupTitle(group: MediaProjectGroup) {

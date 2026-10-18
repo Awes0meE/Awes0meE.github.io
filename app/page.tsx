@@ -46,6 +46,8 @@ export default function Home() {
     slug: project.slug,
     title: project.title,
     titleZh: project.titleZh,
+    shortTitle: project.shortTitle,
+    shortTitleZh: project.shortTitleZh,
     status: project.status,
     statusZh: formatStatusZh(project.status),
     timeline: formatDateRange(project.date),
@@ -85,7 +87,7 @@ export default function Home() {
               </p>
               <div className="signal-hero-actions">
                 <Link href="#project-evidence" className="signal-primary-action signal-fill">
-                  <BilingualText en="View project evidence" zh="查看项目证据" />
+                  <BilingualText en="Browse projects" zh="浏览项目" />
                   <ArrowRight size={18} aria-hidden="true" />
                 </Link>
                 <Link href="/about" className="signal-secondary-action">

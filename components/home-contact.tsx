@@ -80,7 +80,7 @@ export function HomeContact() {
               </div>
             </dl>
             <div className={styles.stack}>
-              <h3><BilingualText en="Stack" zh="方向" /></h3>
+              <h3><BilingualText en="Stack" zh="技术栈" /></h3>
               {stack.map((item) => (
                 <p key={item.en}>
                   <b><BilingualText en={item.en} zh={item.zh} /></b>

@@ -166,7 +166,7 @@ const notes = readMdxCollection("notes");
 const projectSlugs = new Set(projects.map((project) => project.slug));
 
 for (const project of projects) {
-  validateRequiredStrings(project, ["title", "titleZh", "summary", "summaryZh", "date", "status", "cover"]);
+  validateRequiredStrings(project, ["title", "titleZh", "shortTitle", "shortTitleZh", "summary", "summaryZh", "date", "status", "cover"]);
 
   if (!isStringArray(project.data.tags)) {
     addError(project.filePath, "tags must be an array of strings");
@@ -267,6 +267,16 @@ if (!Array.isArray(media)) {
         errors.push(`content/media.json:${itemLabel}: ${field} points to a missing public file: ${item[field]}`);
       }
     }
+  }
+}
+
+// A project's media lead must be one of that project's own media records.
+for (const project of projects) {
+  const lead = project.data.mediaLead;
+  if (lead === undefined) continue;
+  const item = Array.isArray(media) ? media.find((entry) => entry.id === lead) : undefined;
+  if (!item || item.projectSlug !== project.slug) {
+    addError(project.filePath, `mediaLead must name a media record of this project: ${lead}`);
   }
 }
 

@@ -20,7 +20,7 @@ import {
 } from "@/lib/content";
 import { openGraphBase, site } from "@/lib/site";
 
-const pageTitle = "Work";
+const pageTitle = "Projects";
 const pageDescription =
   "Evidence-first project archives covering embedded control, schematic and PCB design, board bring-up, hardware–firmware integration, and robotic systems hardware.";
 const socialTitle = `${pageTitle} | Alvin Li`;
@@ -165,11 +165,11 @@ export default function WorkPage() {
           <WorkProjectRail projects={railProjects} />
           <div className="signal-work-stage">
             <header className="signal-work-mobile-header">
-              <h1><BilingualText en="Project archive" zh="项目档案" /></h1>
+              <h1><BilingualText en="Projects" zh="项目" /></h1>
               <p>
                 <BilingualText
-                  en="Eight engineering records, with status and validation limits left visible."
-                  zh="八份工程项目记录，状态与验证边界保持可见。"
+                  en={`${projects.length} projects, with status and validation limits left visible.`}
+                  zh={`${projects.length} 个项目，状态与验证边界保持可见。`}
                 />
               </p>
             </header>

@@ -14,6 +14,8 @@ export type CoverFlowItem = {
   slug: string;
   title: string;
   titleZh: string;
+  shortTitle: string;
+  shortTitleZh: string;
   status: string;
   statusZh: string;
   timeline: string;
@@ -372,20 +374,20 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
           className={styles.legend}
           aria-hidden="true"
         >
-          <BilingualText en="Project evidence" zh="项目证据" />
+          <BilingualText en="Projects" zh="项目" />
         </span>
 
         <header
           className={`signal-section-header ${styles.header}`}
         >
           <h2 id="project-index-title">
-            <BilingualText en="Project evidence index" zh="项目证据索引" />
+            <BilingualText en="Projects" zh="项目" />
           </h2>
           <span className={styles.counter} aria-hidden="true">
             <span ref={counterRef}>01</span> / {pad(count)}
           </span>
           <Link href="/work">
-            <BilingualText en="Open complete archive" zh="打开完整归档" />
+            <BilingualText en="All projects" zh="全部项目" />
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </header>
@@ -485,6 +487,9 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
                 onClick={() => goTo(index)}
               >
                 <span aria-hidden="true">{pad(index + 1)}</span>
+                <span className={styles.tickTip} aria-hidden="true">
+                  <BilingualText en={item.shortTitle} zh={item.shortTitleZh} />
+                </span>
                 <span className="sr-only">
                   <BilingualText en={`Show ${item.title}`} zh={`显示${item.titleZh}`} />
                 </span>
@@ -498,6 +503,11 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
             <ArrowRight size={18} aria-hidden="true" />
             <span className="sr-only"><BilingualText en="Next project" zh="下一个项目" /></span>
           </button>
+          {/* Leave the wheel for the full list without scrolling through every cover. */}
+          <Link href="/work" className={styles.all}>
+            <BilingualText en="All projects" zh="全部项目" />
+            <ArrowRight size={16} aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>
