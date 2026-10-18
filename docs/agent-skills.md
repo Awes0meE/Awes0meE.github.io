@@ -156,7 +156,8 @@ Expected user-level Codex skill:
 Installed copies:
 
 - Claude account: v3.0.0 from `KKKKhazix/khazix-skills` at `322346d`, installed 2026-10-14 (`SKILL.md`, references, inventory script and MIT licence; the upstream evals are omitted).
-- Codex on the Windows machine: an older installation that was not updated on 2026-10-14.
+- Codex on this Mac: v3.0.0 from `322346d`, installed 2026-10-18 and verified against all 96 upstream skill files, including eval fixtures.
+- Codex on the Windows machine: last recorded as an older installation on 2026-10-14; not rechecked from this Mac.
 
 Rules incorporated into `CODEX.md` and `docs/memory-system.md`:
 

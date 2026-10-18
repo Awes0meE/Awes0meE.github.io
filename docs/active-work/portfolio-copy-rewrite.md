@@ -1,12 +1,12 @@
 # Portfolio Writing Handoff
 
-**Updated:** 2026-10-18
+**Updated:** 2026-10-19
 
 All sixteen new bilingual study notes across the eight projects are approved. They were published through [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38), merged at `f77c1fc`. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content after the 2026-10-18 AD831 import: 10 projects, 34 public notes, 10 note channels and 119 media records. There are no remaining note drafts awaiting review.
 
 The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
-The unapproved 2026-09-07 About draft (`docs/rewrite-about-copy`, `af3ace5`) was discarded on 2026-10-14 as outdated. A future About rewrite starts from current `main` with a new confirmed brief. Preserve remote `gh-pages`, which redirects old GitHub Pages visits. The latest named tag remains `v0.9.0`; this maintenance release does not create a tag.
+The unapproved 2026-09-07 About draft (`docs/rewrite-about-copy`, `af3ace5`) was discarded on 2026-10-14 as outdated. The current `/about` online CV follows the confirmed 2026-10-16 brief below; there is no parked About draft to resume. Preserve remote `gh-pages`, which redirects old GitHub Pages visits. The latest named tag remains `v0.9.0`; this maintenance release does not create a tag.
 
 ## Writing Contract
 
@@ -59,7 +59,7 @@ The Claude Chime homepage was rewritten again on 2026-10-14 through [PR #40](htt
 - The student pass caps work at 16 h/week, so he is looking for RA or part-time roles.
 - Off the clock: cutting weight, gym, badminton, road cycling, piano, chess, talking with AI, occasional writing. On AI: it raises everyone's floor and the world's ceiling, but thinking stays his own ("teach me to fish"). The Chinese page may carry the meme; English keeps only the idea.
 - Section headings: 我走的路 / The Road So Far, 在做的事 / Work in Progress, 认真之余 / Off the Clock. English is adapted, not translated literally.
-- The GaN-versus-silicon ESC dissertation is not on the page until its project page exists.
+- The original brief deferred the GaN-versus-silicon ESC dissertation until its project page existed. That page is now published; `/about` still omits it, so adding it would be a separate content decision.
 
 ## GaN Quadrotor ESC FYP Brief (confirmed 2026-10-17)
 

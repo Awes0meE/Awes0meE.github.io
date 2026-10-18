@@ -116,12 +116,15 @@ Projects are stored in `content/projects/*.mdx`. Each project uses frontmatter:
 ---
 title: "Example Hardware Archive"
 titleZh: "示例硬件档案"
+shortTitle: "Example hardware"
+shortTitleZh: "示例硬件"
 summary: "English summary"
 summaryZh: "中文摘要"
 date: "2024.10"
 status: "In Progress"
 tags: ["STM32", "Control", "PCB"]
 cover: "/uploads/projects/example-hardware/cover.jpg"
+coverKind: "render"
 featured: true
 links:
   repo: "https://github.com/Awes0meE/example"
@@ -161,7 +164,7 @@ Git retains earlier versions. The original source-document articles remain intac
 
 The [release record](docs/releases/remaining-engineering-notes-2026-09-07/README.md) lists routes and checks.
 The [handoff](docs/active-work/portfolio-copy-rewrite.md) records the completed
-note work and the separately parked, unapproved About draft.
+note work and the confirmed briefs. The unapproved September About draft was discarded; the current online CV follows the October brief.
 [Engineering Note Writer](skills/engineering-note-writer/SKILL.md) includes the
 Chinese sentence gates, cross-page division, natural endings, concrete headings
 and the limit of one Chinese paragraph beginning with 我 per learning note.
@@ -338,11 +341,11 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 当前工作区内容状态：
 
-2026-09-07 内容状态：8 个项目主页、25 篇公开笔记、8 个项目通道、84 条媒体记录。每个项目各有两篇获批的双语专题，另保留 9 篇既有技术或来源文档。
+2026-10-18 内容状态：10 个项目主页、34 篇公开笔记、10 个项目通道、119 条媒体记录。原有 8 个项目各有两篇获批的双语专题，GaN 电调毕设有 5 篇，AD831 有源混频器有 4 篇，另保留 9 篇既有技术或来源文档。
 
 本批加入天津 STM32、南京图灵、卷云相变散热器、无感 FOC 和 Claude Chime 各两篇笔记。原先暂挂的 12 篇旧稿及完成的预览副本已弃用，正文以 `content/notes/` 为准，历史版本仍保留在 Git 中。原始来源文档保持不变。
 
-[发布记录](docs/releases/remaining-engineering-notes-2026-09-07/README.md)列出入口和检查结果，[接力文档](docs/active-work/portfolio-copy-rewrite.md)记录笔记工作完成及单独保留的未获批 About 草稿。最新 [Engineering Note Writer](skills/engineering-note-writer/SKILL.md)包含中文病句门禁、跨页面分工、自然结尾、具体小标题，以及每篇中文笔记最多一个以“我”开头的段落。完整设计和公开资料规则见 `PRODUCT.md`、`DESIGN.md` 和 `docs/content-workflow.md`。
+[发布记录](docs/releases/remaining-engineering-notes-2026-09-07/README.md)列出入口和检查结果，[接力文档](docs/active-work/portfolio-copy-rewrite.md)记录已完成的笔记工作和确认过的 brief。9 月未获批的 About 草稿已弃用，现役在线简历采用 10 月确认的 brief。最新 [Engineering Note Writer](skills/engineering-note-writer/SKILL.md)包含中文病句门禁、跨页面分工、自然结尾、具体小标题，以及每篇中文笔记最多一个以“我”开头的段落。完整设计和公开资料规则见 `PRODUCT.md`、`DESIGN.md` 和 `docs/content-workflow.md`。
 
 ## 部署
 

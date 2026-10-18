@@ -7,7 +7,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 ## Current Baseline
 
 - The user approved all notes and authorized their publication on 2026-09-07. Ten final bilingual studies are promoted to `content/notes/`; twelve suspended old notes are retired. Together with the six earlier studies, all eight projects now have two approved studies. Release scope and checks: `docs/releases/remaining-engineering-notes-2026-09-07/README.md`. Completed review previews and duplicate drafts are removed. Historical review JSON remains dated evidence.
-- The 2026-09-07 About draft (`docs/rewrite-about-copy`, `af3ace5`) was never approved and was discarded on 2026-10-14 as outdated: it removed the education list and predates the current NTU dissertation work. A future About rewrite starts from current `main` with a new confirmed brief.
+- The 2026-09-07 About draft (`docs/rewrite-about-copy`, `af3ace5`) was never approved and was discarded on 2026-10-14. The current online CV follows the confirmed 2026-10-16 brief in `docs/active-work/portfolio-copy-rewrite.md`; there is no parked draft to resume.
 - Writing contract: homepages tell Alvin's work and project progression; notes investigate a selected question without repeating the full project story. Keep fact checking internal, use natural attribution, and omit evidence-inventory commentary. The independent information-retention gate is removed. Ordinary closing paragraphs are welcome, without forced elevation. Compare nearby endings for repeated look-back/next-time frames, including synonyms; the user explicitly allows an apt occasional `下一次再看到……`. Do not turn repetition review into a phrase ban. Since 2026-10-17, never write open-question or suspense lines (`哪条占主导，我现在也说不准`, `最后也没定论`); what was not investigated is left out. Chinese sentence checks remain before English at Step 10 and on final Chinese at Step 12; English retains its existing rules. Do not announce or count an article's spine: counted scaffold labels and forward road signs such as `四个问题`, `前两个问题到这里有了答案`, `这一点后面还会再碰到`, `four questions` or `that comes back later` fail; list the concrete items once and return to them in ordinary words. In Chinese change sentences such as `从 A 变成 B`, the subject must actually undergo the change and A and B must be the same kind of thing.
 - Section headings name the actual subject and aspect after the full section is written. The 20-note pass changed 56 bilingual headings in 19 notes; these approved edits ship with the final note release.
 - Each Chinese learning note may have at most one prose paragraph beginning with `我`, including its introduction; zero is allowed. Preserve ownership, technical meaning and proposed-versus-completed work. First person within paragraphs remains available; English has no numerical quota. The approved pass changed 15 Chinese and 13 English openings in 12 notes; all 20 authored notes satisfy the limit.
@@ -120,7 +120,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - Use Conventional Commits for commit messages. Name topic branches `<semantic-prefix>/<kebab-case-purpose>` with a Conventional Commits-aligned prefix, and never encode Codex, agent, AI, bot, or other author/tool identity in the branch name. Keep existing/native worktree placement; a manually chosen worktree directory may omit the semantic prefix.
 - Keep content Git-friendly: projects and notes live in `content/**/*.mdx`; media metadata lives in `content/media.json`; assets live under `public/uploads/`.
 - Treat project covers and other visual-identity choices as user-controlled. Preserve `cover`, visual assets, and their presentation role during prose/content rewrites unless the user explicitly requests or approves a visual change.
-- Keep `public/uploads/hero/` limited to the nine homepage nucleus cutouts referenced by `components/technical-visual.tsx` (since 2026-10-18: eight real boards, four lifted from project photos with macOS Vision masks, plus the AD831 render). Release `v0.8.0` presented them as a five-card mosaic; `v0.9.0` reused them as the prototype nucleus; since 2026-10 four are transparent `*-cutout-v4.webp` derivatives and the old white-field files were removed. Neither presentation supports project-level technical claims; use original photographs, drawings, Gerbers, logs, or other direct artifacts for evidence.
+- Keep `public/uploads/hero/` limited to the nine homepage nucleus cutouts referenced by `components/technical-visual.tsx` (since 2026-10-18: eight real boards, four lifted from project photos with macOS Vision masks, plus the AD831 render). The earlier five-image mosaic and nucleus belong to `v0.8.0` and `v0.9.0`; the active file list and sizing contract are in `components/technical-visual.tsx` and `DESIGN.md`. Neither presentation supports project-level technical claims; use original photographs, drawings, Gerbers, logs, or other direct artifacts for evidence.
 - Keep the current atom-orbit geometry explicit: three same-size ellipses with long axes at `0deg`, `60deg`, and `120deg`, five evenly spaced marks per orbit, and a nucleus that shows one prototype cutout at a time (5 s each, no ring). Keep motion slow, pause it outside the viewport, and preserve a deterministic `prefers-reduced-motion` layout.
 - Keep shared navigation route semantics deterministic: exact destinations use `aria-current="page"`, nested detail routes use `aria-current="location"`, and `/` does not select a fabricated item. Desktop navigation shares `01`–`04`, control sizing, typography, and interaction motion in both themes, reading colours from the theme tokens; mobile omits the indices, and reduced motion keeps state without movement.
 - Keep one token set for every route: RGB-triplet `--c-*` variables at the top of `app/globals.css`, with dark (Ember Black) and light (Bench Paper) values, applied through the global shell and Tailwind colour names. New colours are added as tokens with both theme values, never as literals. Each index surface still needs its own approved structure in `DESIGN.md`.
@@ -171,7 +171,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 - `app/page.tsx`: homepage layout and major public-facing sections.
 - `app/layout.tsx`: root layout, metadata, language bootstrap script, header/footer shell.
 - `components/logo.tsx`: approved iRidium header mark and the user-selected B-style script wordmark from `public/brand/iridium-wordmark-script.png`; the wordmark is a portable transparent asset and does not switch to `铱` in Chinese mode.
-- `components/technical-visual.tsx`: homepage atom composition, the rotating five-prototype nucleus, the three five-item technology groups, deterministic phase placement, visibility pausing, and bilingual accessible description.
+- `components/technical-visual.tsx`: homepage atom composition, the rotating nine-prototype nucleus, the three five-item technology groups, deterministic phase placement, visibility pausing, and bilingual accessible description.
 - `components/technical-visual.module.css`: same-size `0deg` / `60deg` / `120deg` orbit geometry, nucleus and orbit motion, counter-rotation, comet trails, responsive scaling, and reduced-motion behavior.
 - `app/work/page.tsx`: server-rendered project sequence (ten projects), chapter links, authentic project imagery, and one signal interval between each adjacent pair.
 - `components/work-project-rail.tsx`: small client island for active chapter state and visibility-aware interval motion.
@@ -238,9 +238,14 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
-Lint, content, encoding, typecheck and build were last rerun on `2026-10-18`
-for the merged GaN import and lightbox (`main` at `bd9ee25`) on Windows (Node 24.19.0); the browser-review bullets
-below are dated route checkpoints from 2026-08/09. Use the `npm.cmd` form on
+Lint, content, encoding and typecheck passed on `2026-10-19` for `main` at
+`fe11492` on macOS (Node 22.23.1, npm 10.9.8). An isolated copy of that commit
+passed `npm run build -- --webpack`, generating 51 static pages without touching
+the existing port-3100 preview. GitHub reports a successful Vercel check for this
+commit, and its Production deployment record reports success. The canonical homepage
+and Notes index were inspected in a browser. These were spot checks, not a renewed
+responsive or Safari performance review. The route-review
+bullets below are historical checkpoints from 2026-08/09. Use the `npm.cmd` form on
 Windows PowerShell:
 
 ```bash
@@ -257,7 +262,7 @@ Expected result:
 - lint passes;
 - content validation passes for 10 projects, 34 public notes (none suspended), 119 media records, project/note frontmatter, projectSlug joins, and local `/uploads` references;
 - encoding validation passes; use the current command output for the UTF-8 file count;
-- the production build passes and prerenders 46 pages for the current 9-project, 30-note set (40 before the GaN import); earlier 39-page results below describe an older set;
+- the production build passes and generates 51 static pages for the current 10-project, 34-note set; earlier 39-, 40- and 46-page results describe older checkpoints;
 - the integrated homepage, `/work`, `/notes`, `/media`, and `/about` indexes passed English/Chinese review at 1440 × 900 and 390 × 844 with no horizontal overflow, broken images, or console errors; representative work and note details were then still on the retired paper system (they use Bench Log since PR #43);
 - the `/work` Project Aperture Sequence passed desktop, mobile, reduced-motion, semantic-link, keyboard, project-count, interval-count, and horizontal-overflow review before its local closeout; the closeout revalidated diff whitespace, lint, content, encoding, and TypeScript without rebuilding the shared `.next` directory used by neighboring page threads;
 - the `/notes` Routed Signal Map passed English/Chinese browser review at 320, 390, 768, 1024, and 1440 pixel widths with no horizontal overflow, plus search/filter/reset, semantic-link, reduced-motion, console, and HTTP-error checks. Its isolated 39-page webpack build passed, and the terminal Impeccable review returned `disposition: ship` with remaining issues `clear`;
@@ -272,7 +277,8 @@ Expected result:
 - If older Git history privacy matters, decide whether to rewrite Git history or move the repository private, because previously committed Juanyun attachments may remain in commit history even after they are removed from the served website.
 - Browser-review each future deployment on `https://www.66ccff-labs.com/`, prioritizing the routes changed by that release and representative `/work`, `/notes`, and `/media` navigation.
 - Add more real project photos, screenshots, videos, diagrams, and written interpretation for project archive files that are now listed directly on project pages.
-- Re-evaluate thesis content later only after the user provides real project evidence.
+- The GaN ESC thesis is already published with five notes. New dissertation material still needs its own evidence and confirmed brief.
+- The owner deferred full `/notes` and `/media` redesigns after the 2026-10-18 critique. They remain future work; do not treat the small-label fixes as those redesigns (see `docs/session-log.md`).
 
 ## Memory Update Rules
 
