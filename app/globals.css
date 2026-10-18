@@ -188,6 +188,13 @@ html[data-lang="zh"] .lang-en {
   text-transform: none;
 }
 
+/* Chinese titles break only between words (components/zh-words.tsx); a word
+   longer than the line still breaks rather than overflow. */
+.zh-words {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 .language-option-en,
 .language-option-zh {
   min-width: 44px;
@@ -545,11 +552,6 @@ body .site-mobile-nav-link:focus-visible::after {
 html[data-lang="en"] body .language-option-en,
 html[data-lang="zh"] body .language-option-zh {
   color: rgb(var(--c-on-ember));
-}
-
-body .site-header-cta {
-  border-color: rgb(var(--c-ember));
-  color: rgb(var(--c-ember-hover));
 }
 
 body .site-footer {
@@ -1506,6 +1508,7 @@ html[data-lang="zh"] .signal-work-mobile-header h1 {
 
 html[data-lang="zh"] .signal-work-title {
   max-width: 10ch;
+  text-wrap: balance;
   font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
   font-size: clamp(2.75rem, 3.5vw, 4.35rem);
   font-weight: 800;
@@ -1669,18 +1672,6 @@ html[data-lang="zh"] .signal-work-case-action {
 .signal-work-image {
   filter: saturate(0.72) brightness(0.86) contrast(1.04);
   transition: filter 320ms ease-out, transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.signal-work-media-index {
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1rem;
-  z-index: 1;
-  color: rgb(var(--c-warm) / 0.52);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.875rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -3363,11 +3354,6 @@ html[data-theme="light"] .site-preference-theme .site-preference-thumb {
   transform: translateX(2px);
 }
 
-/* Header CTA keeps its outline colour from the theme. */
-body .site-header-cta.signal-fill:is(:hover, :focus-visible) {
-  color: rgb(var(--c-on-ember));
-}
-
 /* Project file browser: a new preview eases in. */
 .asset-preview-swap {
   animation: preview-in 260ms var(--ease-out-soft) both;
@@ -3689,13 +3675,6 @@ html[data-theme="light"] .signal-hero-copy::before {
 
 @media (min-width: 900px) and (max-width: 1299px) {
   body .site-logo-subtitle {
-    display: none;
-  }
-}
-
-/* The work CTA repeats the first nav item; drop it until the row has room. */
-@media (min-width: 1024px) and (max-width: 1079px) {
-  body .site-header-cta {
     display: none;
   }
 }

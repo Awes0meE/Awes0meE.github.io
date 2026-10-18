@@ -5,6 +5,7 @@
 }
 
 .atomVisual {
+  --electron-size: 44px;
   --atom-ink: rgb(var(--c-warm));
   --atom-muted: rgb(var(--c-t3));
   --atom-orange: rgb(var(--c-ember));
@@ -76,7 +77,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  transform: scale(0.86);
+  transform: scale(0.96);
   transform-origin: 49% 51%;
 }
 
@@ -88,12 +89,20 @@
   left: 50.5%;
   z-index: 2;
   width: min(86%, 760px);
-  transform: translateX(-50%) rotate(calc(0deg - var(--assembly-angle)));
+  /* The orbits sit 16% larger than the stage scale so electrons pass clear of
+     the board corners; the nucleus keeps its own size. */
+  transform: translateX(-50%) rotate(calc(0deg - var(--assembly-angle))) scale(1.16);
   transform-origin: 50% 51%;
   animation: orbit-assembly-ccw 132s linear infinite;
 }
 
 .orbit {
+  /* Comet colours: near the head, at the tail's end, the bright core, and how
+     dense the dust is. They default to the orbit's own colour. */
+  --comet-near-rgb: var(--orbit-rgb);
+  --comet-far-rgb: var(--orbit-rgb);
+  --comet-core-rgb: var(--c-glow);
+  --comet-dust-alpha: 0.45;
   --orbit-tilt: 0deg;
   --counter-tilt: 0deg;
   --orbit-color: rgb(var(--c-orbit-embedded));
@@ -114,12 +123,8 @@
   --counter-tilt: 0deg;
   --orbit-color: rgb(var(--c-orbit-embedded));
   --orbit-rgb: var(--c-orbit-embedded);
-}
-
-.embeddedOrbit .orbitLabel {
-  right: 20px;
-  left: auto;
-  text-align: right;
+  --comet-near-rgb: 240 190 100;
+  --comet-far-rgb: 200 110 30;
 }
 
 .firmwareOrbit {
@@ -127,6 +132,8 @@
   --counter-tilt: -60deg;
   --orbit-color: rgb(var(--c-orbit-firmware));
   --orbit-rgb: var(--c-orbit-firmware);
+  --comet-near-rgb: 120 220 190;
+  --comet-far-rgb: 40 150 170;
 }
 
 .toolsOrbit {
@@ -134,6 +141,8 @@
   --counter-tilt: -120deg;
   --orbit-color: rgb(var(--c-orbit-tools));
   --orbit-rgb: var(--c-orbit-tools);
+  --comet-near-rgb: 190 170 240;
+  --comet-far-rgb: 120 90 200;
 }
 
 .orbitLine {
@@ -156,27 +165,46 @@
   animation: orbit-dash-flow 7s linear infinite;
 }
 
-.orbitLabel {
+.orbitLegend {
   position: absolute;
-  top: 50%;
-  left: calc(100% + 17px);
-  color: rgb(var(--orbit-rgb) / 0.92);
+  bottom: 26px;
+  left: 56px;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  margin: 0;
+  padding: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.8125rem; /* decorative, aria-hidden orbit label */
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.075em;
-  line-height: 1.25;
+  letter-spacing: 0.06em;
+  list-style: none;
   text-transform: uppercase;
-  transform: translateY(-50%) rotate(calc(var(--counter-tilt) + var(--assembly-angle)));
-  transform-origin: center;
-  white-space: nowrap;
 }
 
+.orbitLegend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(var(--orbit-rgb) / 0.92);
+}
+
+.orbitLegend li::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--orbit-rgb));
+  content: "";
+}
+
+/* Electrons are drawn smaller than before the orbits grew (54px), so the
+   enlarged orbits read lighter and pass clear of the board. */
 .electron,
 .cometRunner {
   position: absolute;
-  width: 54px;
-  height: 54px;
+  width: var(--electron-size);
+  height: var(--electron-size);
   offset-path: ellipse(50% 50% at 50% 50%);
   offset-anchor: center;
   offset-distance: 0%;
@@ -197,43 +225,64 @@
   pointer-events: none;
 }
 
-.cometTail {
+/* A comet in three layers:
+   - the dust tail: seven soft puffs riding the electron's own path, each a
+     little further behind, shrinking and fading, so the tail is as wide as the
+     electron where it leaves it and bends with the orbit;
+   - the ion tail: a short bright core on the runner's tangent that whitens at
+     the head;
+   - the coma: a soft halo around the head that the tail grows out of.
+   The badge sits above all of them, so the tail emerges from behind it. */
+.cometPuff {
+  --puff-color: color-mix(in oklab, rgb(var(--comet-far-rgb)) calc(var(--puff) * 18%), rgb(var(--comet-near-rgb)));
   position: absolute;
-  top: 50%;
-  right: calc(50% - 5px);
+  z-index: 3;
+  width: calc(var(--electron-size) * (1.12 - 0.12 * var(--puff)));
+  height: calc(var(--electron-size) * (0.7 - 0.09 * var(--puff)));
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse closest-side,
+    color-mix(in srgb, var(--puff-color) calc(var(--comet-dust-alpha) * 100%), transparent),
+    color-mix(in srgb, var(--puff-color) calc(var(--comet-dust-alpha) * 38%), transparent) 55%,
+    transparent 100%
+  );
+  opacity: calc(1 - 0.13 * var(--puff));
+  filter: blur(calc(1.2px + 0.5px * var(--puff)));
+  pointer-events: none;
+  offset-path: ellipse(50% 50% at 50% 50%);
+  offset-anchor: center;
+  offset-distance: 0%;
+  offset-rotate: auto 0deg;
+  animation: electron-orbit var(--orbit-duration) linear infinite;
+  animation-delay: var(--electron-delay);
+  animation-direction: var(--orbit-direction);
+}
+
+.cometTail {
+  --tail-mask: radial-gradient(ellipse 100% 50% at 100% 50%, #000 0 42%, rgb(0 0 0 / 0.55) 68%, transparent 100%);
+  position: absolute;
+  top: 32%;
+  right: 50%;
   display: block;
-  width: clamp(56px, 4.8vw, 78px);
-  height: 18px;
+  width: 115%;
+  height: 36%;
   background: linear-gradient(
     90deg,
-    rgb(var(--orbit-rgb) / 0) 0%,
-    rgb(var(--orbit-rgb) / 0.08) 30%,
-    rgb(var(--orbit-rgb) / 0.36) 72%,
-    rgb(var(--orbit-rgb) / 0.88) 100%
+    rgb(var(--comet-near-rgb) / 0) 0%,
+    rgb(var(--comet-near-rgb) / 0.5) 55%,
+    rgb(var(--comet-core-rgb) / 0.9) 100%
   );
-  clip-path: polygon(0 47%, 100% 8%, 100% 92%, 0 53%);
-  filter: drop-shadow(0 0 3px rgb(var(--orbit-rgb) / 0.3));
-  transform: translateY(-50%);
+  filter: blur(1.5px);
+  -webkit-mask-image: var(--tail-mask);
+  mask-image: var(--tail-mask);
 }
 
-.cometTail::before,
-.cometTail::after {
+.cometRunner::before {
   position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--comet-near-rgb) / 0.4) 0 40%, rgb(var(--comet-near-rgb) / 0.12) 56%, transparent 71%);
   content: "";
-}
-
-.cometTail::before {
-  inset: 3px 0;
-  background: linear-gradient(90deg, transparent, rgb(var(--orbit-rgb) / 0.54));
-  filter: blur(3px);
-}
-
-.cometTail::after {
-  top: calc(50% - 1px);
-  right: 0;
-  width: 66%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgb(var(--c-glow) / 0.9));
 }
 
 .electronBadge {
@@ -317,11 +366,10 @@
   animation-delay: var(--slot-delay);
 }
 
+/* Width and height come from boardSize() so every board shows the same area. */
 .nucleusImage {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 100%;
+  max-width: none;
+  object-fit: contain;
   filter: drop-shadow(0 14px 16px rgb(var(--c-shadow) / calc(0.6 * var(--shadow-k))));
 }
 
@@ -329,6 +377,7 @@
 .atomVisual[data-paused="true"] .orbitLine ellipse,
 .atomVisual[data-paused="true"] .electron,
 .atomVisual[data-paused="true"] .cometRunner,
+.atomVisual[data-paused="true"] .cometPuff,
 .atomVisual[data-paused="true"] .nucleusSlide {
   animation-play-state: paused;
 }
@@ -348,12 +397,13 @@
   to { --assembly-angle: 360deg; }
 }
 
-/* Each slot is 20% of the cycle; neighbours cross-fade over 3%. */
+/* Nine boards: each slot is 1/9 (11.11%) of the 45s cycle, and neighbours
+   cross-fade over 1.67% (0.75s). Change these stops with the board count. */
 @keyframes nucleus-slide {
   0% { opacity: 0; transform: translateY(10px) scale(0.97); }
-  3% { opacity: 1; transform: none; }
-  20% { opacity: 1; transform: none; }
-  23% { opacity: 0; transform: translateY(-8px) scale(1.01); }
+  1.67% { opacity: 1; transform: none; }
+  11.11% { opacity: 1; transform: none; }
+  12.78% { opacity: 0; transform: translateY(-8px) scale(1.01); }
   100% { opacity: 0; transform: translateY(-8px) scale(1.01); }
 }
 
@@ -361,17 +411,14 @@
   .atomVisual { min-height: 650px; }
 
   .atomStage {
-    transform: scale(0.8);
-  }
-
-  .orbitLabel {
-    display: none;
+    transform: scale(0.88);
   }
 
 }
 
 @media (max-width: 1023px) {
-  .visualLabel {
+  .visualLabel,
+  .orbitLegend {
     left: 30px;
   }
 }
@@ -383,7 +430,7 @@
   }
 
   .atomStage {
-    transform: scale(0.76);
+    transform: scale(0.84);
     transform-origin: 50% 51%;
   }
 
@@ -406,6 +453,11 @@
     left: 22px;
   }
 
+  .orbitLegend {
+    bottom: 20px;
+    left: 22px;
+  }
+
 }
 
 @media (max-width: 540px) {
@@ -418,7 +470,7 @@
   }
 
   .atomStage {
-    transform: scale(0.62);
+    transform: scale(0.68);
   }
 
   .orbit {
@@ -426,18 +478,12 @@
     height: 56%;
   }
 
-  .electron,
-  .cometRunner {
-    width: 44px;
-    height: 44px;
+  .atomVisual {
+    --electron-size: 37px;
   }
 
-  .cometTail {
-    width: 50px;
-    height: 14px;
-  }
-
-  .visualLabel {
+  .visualLabel,
+  .orbitLegend {
     display: none;
   }
 }
@@ -462,7 +508,8 @@
     stroke-dashoffset: 0;
   }
 
-  .cometRunner {
+  .cometRunner,
+  .cometPuff {
     display: none;
   }
 }
@@ -473,10 +520,33 @@
   stroke-width: 1.5;
 }
 
-:global(html[data-theme="light"]) .orbitLabel {
+:global(html[data-theme="light"]) .orbitLegend li {
   color: rgb(var(--orbit-rgb));
 }
 
 :global(html[data-theme="light"]) .electronBadge {
   border-width: 1.5px;
+}
+
+/* Each comet keeps its orbit's hue, deepening along the tail (the owner's
+   pick, scheme D): gold to amber, teal-green to teal-blue, lavender to violet.
+   Bench Paper: no white core on a white field, thinner dust, deeper inks. */
+:global(html[data-theme="light"]) .orbit {
+  --comet-core-rgb: var(--orbit-rgb);
+  --comet-dust-alpha: 0.3;
+}
+
+:global(html[data-theme="light"]) .embeddedOrbit {
+  --comet-near-rgb: 230 170 60;
+  --comet-far-rgb: 180 90 20;
+}
+
+:global(html[data-theme="light"]) .firmwareOrbit {
+  --comet-near-rgb: 60 190 160;
+  --comet-far-rgb: 20 120 140;
+}
+
+:global(html[data-theme="light"]) .toolsOrbit {
+  --comet-near-rgb: 160 140 230;
+  --comet-far-rgb: 100 80 190;
 }

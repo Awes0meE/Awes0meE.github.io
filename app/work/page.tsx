@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ZhWords } from "@/components/zh-words";
+import { zhWords } from "@/lib/zh-words";
 import { tagZh } from "@/lib/tags";
 import { PROJECT_FIGURE_SIZES, ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition, RouteStage } from "@/components/route-stage";
@@ -94,7 +96,7 @@ function WorkProjectChapter({
             <span>/ {total}</span>
           </span>
           <h2 id={titleId} className="signal-work-title">
-            <BilingualText en={project.title} zh={project.titleZh} />
+            <BilingualText en={project.title} zh={<ZhWords words={zhWords(project.titleZh)} />} />
           </h2>
           <dl className="signal-work-meta">
             <div>
@@ -135,7 +137,6 @@ function WorkProjectChapter({
               />
             </span>
           </ProjectFigureTransition>
-          <span className="signal-work-media-index">{chapterNumber} / APERTURE</span>
         </div>
         <span id={detailsId} className="sr-only">
           <BilingualText
@@ -168,8 +169,8 @@ export default function WorkPage() {
               <h1><BilingualText en="Projects" zh="项目" /></h1>
               <p>
                 <BilingualText
-                  en={`${projects.length} projects, with status and validation limits left visible.`}
-                  zh={`${projects.length} 个项目，状态与验证边界保持可见。`}
+                  en={`${projects.length} projects, newest first.`}
+                  zh={`${projects.length} 个项目，按时间倒序。`}
                 />
               </p>
             </header>

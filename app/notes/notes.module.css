@@ -685,7 +685,7 @@ html[data-lang="zh"] .intro h1 {
   align-items: baseline;
   color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.03em;
   line-height: 1.3;
@@ -749,9 +749,9 @@ html[data-lang="zh"] .noteTitle {
   flex-wrap: wrap;
   gap: 0.25rem 0.9rem;
   margin-top: 0.8rem;
-  color: rgb(var(--c-t5));
+  color: rgb(var(--c-t4));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   letter-spacing: 0.02em;
   line-height: 1.3;
 }

@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type BilingualTextProps = {
   en: string;
-  zh: string;
+  zh: ReactNode;
   className?: string;
 };
 

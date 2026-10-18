@@ -15,38 +15,35 @@ type StackMark = {
   tone?: "light-ink" | "lift" | "outline";
 };
 
+// Real boards, lifted from project photos (the four added on 2026-10-18 with
+// macOS subject lifting), alternating with the earlier cutouts, plus the AD831
+// render. Every file is cropped tight to the board, and each one is drawn at the
+// same visible area (see `boardSize`); `boost` enlarges a board whose cutout
+// carries a lot besides the board itself (the mixer's SMA connectors).
 const prototypes = [
-  {
-    id: "power",
-    src: "/uploads/hero/power-supply-board-cutout-v4.webp",
-    width: 590,
-    height: 511
-  },
-  {
-    id: "oled",
-    src: "/uploads/hero/embedded-controller-cutout-v4.webp",
-    width: 727,
-    height: 528
-  },
-  {
-    id: "tft",
-    src: "/uploads/hero/hardware-prototype-cutout-v4.webp",
-    width: 615,
-    height: 536
-  },
-  {
-    id: "battery",
-    src: "/uploads/hero/battery-power-cutout-v4.webp",
-    width: 865,
-    height: 600
-  },
-  {
-    id: "mixer",
-    src: "/uploads/hero/ad831-mixer-cutout-v1.png",
-    width: 292,
-    height: 227
-  }
+  { id: "power", src: "/uploads/hero/power-supply-board-cutout-v5.webp", width: 575, height: 498 },
+  { id: "gan-esc", src: "/uploads/hero/gan-esc-board-cutout-v1.webp", width: 720, height: 523 },
+  { id: "oled", src: "/uploads/hero/embedded-controller-cutout-v5.webp", width: 703, height: 505 },
+  { id: "acunit-main", src: "/uploads/hero/acunit-main-board-cutout-v1.webp", width: 720, height: 595 },
+  { id: "tft", src: "/uploads/hero/hardware-prototype-cutout-v5.webp", width: 603, height: 523 },
+  { id: "acunit-power", src: "/uploads/hero/acunit-power-board-cutout-v1.webp", width: 720, height: 495 },
+  { id: "battery", src: "/uploads/hero/battery-power-cutout-v5.webp", width: 720, height: 483 },
+  { id: "line-car", src: "/uploads/hero/line-tracking-car-cutout-v1.webp", width: 648, height: 720 },
+  { id: "mixer", src: "/uploads/hero/ad831-mixer-cutout-v2.webp", width: 720, height: 539, boost: 1.22 }
 ] as const;
+
+/** Side of the square every board's visible area matches, in stage pixels. */
+const boardArea = 186;
+
+function boardSize(prototype: (typeof prototypes)[number]) {
+  const boost = "boost" in prototype ? prototype.boost : 1;
+  const ratio = prototype.width / prototype.height;
+  return { width: Math.round(boardArea * Math.sqrt(ratio) * boost), height: Math.round((boardArea / Math.sqrt(ratio)) * boost) };
+}
+
+/** Dust-tail puffs behind each electron, and how far apart they ride (fraction of an orbit). */
+const tailPuffs = 6;
+const tailStep = 0.0072;
 
 /** Seconds each prototype holds the nucleus before the next one fades in. */
 const nucleusSlot = 5;
@@ -98,8 +95,9 @@ function PrototypeNucleus() {
             alt=""
             width={prototype.width}
             height={prototype.height}
-            sizes="180px"
+            sizes="240px"
             className={styles.nucleusImage}
+            style={boardSize(prototype)}
           />
         </span>
       ))}
@@ -110,14 +108,12 @@ function PrototypeNucleus() {
 function AtomOrbit({
   className,
   labelEn,
-  labelZh,
   marks,
   duration,
   phaseOffset
 }: {
   className: string;
   labelEn: string;
-  labelZh: string;
   marks: readonly StackMark[];
   duration: number;
   phaseOffset: number;
@@ -140,9 +136,6 @@ function AtomOrbit({
       >
         <ellipse cx="50" cy="50" rx="49.4" ry="49.4" pathLength="100" />
       </svg>
-      <span className={styles.orbitLabel}>
-        <BilingualText en={labelEn} zh={labelZh} />
-      </span>
       {marks.map((mark, index) => {
         const phase = wrapPhase(phaseOffset + index / marks.length);
 
@@ -157,6 +150,18 @@ function AtomOrbit({
             >
               <i className={styles.cometTail} />
             </span>
+            {/* The dust tail: puffs on the electron's own path, each a little
+                further behind, so the tail bends with the orbit. */}
+            {Array.from({ length: tailPuffs }, (_, puff) => (
+              <span
+                key={puff}
+                className={styles.cometPuff}
+                style={{
+                  "--electron-delay": delayAt(phase - (puff + 1) * tailStep),
+                  "--puff": puff
+                } as CSSProperties}
+              />
+            ))}
             <span
               className={styles.electron}
               style={{
@@ -237,13 +242,20 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
     >
       <span id={visualDescriptionId} className="sr-only">
         <BilingualText
-          en="The nucleus shows five prototype boards in turn. Three slow rotating orbits with evenly spaced electrons group representative embedded systems, firmware, and engineering tool skills."
-          zh="原子核轮流展示五块原型板；三条缓慢旋转且电子等距分布的轨道，分别代表嵌入式系统、固件开发和工程工具。"
+          en="The nucleus shows nine prototype boards in turn. Three slow rotating orbits with evenly spaced electrons group representative embedded systems, firmware, and engineering tool skills."
+          zh="原子核轮流展示九块原型板；三条缓慢旋转且电子等距分布的轨道，分别代表嵌入式系统、固件开发和工程工具。"
         />
       </span>
       <div className={styles.visualLabel} aria-hidden="true">
         <BilingualText en="Prototype nucleus · representative stack" zh="原型核心 · 代表性技术栈" />
       </div>
+      {/* The orbits reach the frame at their tips, so the category names sit in
+          a fixed legend instead of riding the orbit ends. */}
+      <ul className={styles.orbitLegend} aria-hidden="true">
+        <li className={styles.embeddedOrbit}><BilingualText en="Embedded systems" zh="嵌入式系统" /></li>
+        <li className={styles.firmwareOrbit}><BilingualText en="Firmware" zh="固件开发" /></li>
+        <li className={styles.toolsOrbit}><BilingualText en="Engineering tools" zh="工程工具" /></li>
+      </ul>
       <span className={styles.cornerTopRight} aria-hidden="true" />
 
       <div className={styles.atomStage} aria-hidden="true">
@@ -251,7 +263,6 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
           <AtomOrbit
             className={styles.embeddedOrbit}
             labelEn="Embedded systems"
-            labelZh="嵌入式系统"
             marks={stackGroups.embedded}
             duration={72}
             phaseOffset={0}
@@ -259,7 +270,6 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
           <AtomOrbit
             className={styles.firmwareOrbit}
             labelEn="Firmware"
-            labelZh="固件开发"
             marks={stackGroups.firmware}
             duration={72}
             phaseOffset={1 / 30}
@@ -267,7 +277,6 @@ export function TechnicalVisual({ className }: TechnicalVisualProps) {
           <AtomOrbit
             className={styles.toolsOrbit}
             labelEn="Engineering tools"
-            labelZh="工程工具"
             marks={stackGroups.tools}
             duration={72}
             phaseOffset={2 / 30}

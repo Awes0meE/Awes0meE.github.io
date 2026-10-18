@@ -505,7 +505,7 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
           </button>
           {/* Leave the wheel for the full list without scrolling through every cover. */}
           <Link href="/work" className={styles.all}>
-            <BilingualText en="All projects" zh="全部项目" />
+            <BilingualText en="View all" zh="查看全部" />
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
 import { FilmStrip, TicketTape, type FilmRecord, type TicketRecord } from "@/components/home-feed-strips";
 import { getMediaItems, getNotes, getProjects } from "@/lib/content";
+import { zhWords } from "@/lib/zh-words";
 import styles from "./home-feed.module.css";
 
 /** Round-robin: the first of every group, then the second of every group, and so on. */
@@ -46,6 +47,7 @@ export function HomeFeed() {
     slug: note.slug,
     title: note.title,
     titleZh: note.titleZh,
+    titleZhWords: zhWords(note.titleZh),
     tags: note.tags,
     group: note.projectSlug ?? "",
     project: (note.projectSlug && byProject.get(note.projectSlug)) || null
