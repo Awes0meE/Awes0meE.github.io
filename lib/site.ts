@@ -7,7 +7,8 @@ export const site = {
   url: "https://www.66ccff-labs.com",
   github: "https://github.com/Awes0meE",
   linkedin: "https://www.linkedin.com/in/zhiyi-li-3a0821429/",
-  email: "ZHIYI012@e.ntu.edu.sg"
+  email: "ZHIYI012@e.ntu.edu.sg",
+  wechat: "AlvinLi_2333"
 };
 
 export const openGraphBase = {
