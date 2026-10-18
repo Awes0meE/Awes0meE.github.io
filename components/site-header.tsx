@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { BilingualText } from "@/components/bilingual-text";
 import { SitePreferences } from "@/components/site-preferences";
 import { Logo } from "@/components/logo";
 import { SiteNavigation } from "@/components/site-navigation";
@@ -16,13 +13,6 @@ export function SiteHeader() {
         <SiteNavigation variant="desktop" />
         <div className="flex shrink-0 items-center gap-2">
           <SitePreferences />
-          <Link
-            href="/work"
-            className="site-header-cta signal-fill hidden items-center gap-2 border border-pine px-4 py-2 text-sm font-semibold text-pine lg:flex"
-          >
-            <BilingualText en="View projects" zh="查看项目" />
-            <ArrowRight size={16} />
-          </Link>
         </div>
       </div>
       <SiteNavigation variant="mobile" />

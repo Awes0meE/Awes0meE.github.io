@@ -125,7 +125,7 @@ export default async function NotePage({ params }: NotePageProps) {
                     ) : null}
                     <div className="bench-spec-half">
                       <dt><BilingualText en="Date" zh="日期" /></dt>
-                      <dd><time>{note.date}</time></dd>
+                      <dd><time dateTime={note.date.replaceAll(".", "-")}>{note.date}</time></dd>
                     </div>
                     <div>
                       <dt><BilingualText en="Tags" zh="标签" /></dt>

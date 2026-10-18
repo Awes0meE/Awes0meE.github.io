@@ -36,7 +36,7 @@ type NotesSignalIndexProps = {
 
 const allProjects = "all";
 const allYears = "all";
-const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
+const dottedDatePattern = /^\d{4}\.\d{2}\.\d{2}$/;
 const routeBusContinuation = "V 96 H 443 V 180 H 457 V 264 H 443 V 352 H 477";
 const routeBusPath = `M 457 20 ${routeBusContinuation}`;
 const routeBusTurns = [
@@ -115,7 +115,7 @@ function ProjectSelect({
       value={value}
       onChange={(event) => onChange(event.target.value)}
     >
-      <option value={allProjects}>{isEnglish ? "All linked projects" : "全部关联项目"}</option>
+      <option value={allProjects}>{isEnglish ? "All projects" : "全部项目"}</option>
       {projects.map((project) => (
         <option key={project.slug} value={project.slug}>
           {isEnglish ? project.title : project.titleZh}
@@ -200,7 +200,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
           </div>
           <dl className={styles.coverage} aria-label="Archive coverage / 档案范围">
             <div>
-              <dt><BilingualText en="notes" zh="篇记录" /></dt>
+              <dt><BilingualText en="notes" zh="篇笔记" /></dt>
               <dd>{notes.length}</dd>
             </div>
             <div>
@@ -208,7 +208,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
               <dd>{projects.length}</dd>
             </div>
             <div>
-              <dt><BilingualText en="years represented" zh="个记录年份" /></dt>
+              <dt><BilingualText en="years covered" zh="个年份" /></dt>
               <dd>{years.length}</dd>
             </div>
           </dl>
@@ -279,7 +279,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
           <section className={styles.projectPanel} aria-labelledby="project-channels-title">
             <header className={styles.regionHeader}>
               <h2 id="project-channels-title">
-                <BilingualText en="Project channels" zh="项目通道" />
+                <BilingualText en="Projects" zh="项目" />
               </h2>
               <button
                 type="button"
@@ -287,7 +287,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                 aria-pressed={activeProject === allProjects}
                 onClick={() => setActiveProject(allProjects)}
               >
-                <BilingualText en="All signals" zh="全部信号" />
+                <BilingualText en="All projects" zh="全部项目" />
               </button>
             </header>
             <div className={styles.channels}>
@@ -324,21 +324,21 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
           <section className={styles.routingPanel} aria-labelledby="route-controls-title">
             <header className={styles.regionHeader}>
               <h2 id="route-controls-title">
-                <BilingualText en="Route controls" zh="路由控制" />
+                <BilingualText en="Filter" zh="筛选" />
               </h2>
               <span className={styles.routeState}>
                 {selectedProject ? (
                   <BilingualText en={selectedProject.title} zh={selectedProject.titleZh} />
                 ) : (
-                  <BilingualText en="Archive open" zh="归档全开" />
+                  <BilingualText en="All notes" zh="全部笔记" />
                 )}
               </span>
             </header>
 
             <form className={styles.controls} onSubmit={preventSubmit}>
               <div className={styles.controlGroup}>
-                <label className="lang-en" htmlFor="notes-search-en">Search metadata</label>
-                <label className="lang-zh" htmlFor="notes-search-zh">搜索元数据</label>
+                <label className="lang-en" htmlFor="notes-search-en">Search</label>
+                <label className="lang-zh" htmlFor="notes-search-zh">搜索</label>
                 <div className={styles.searchField}>
                   <Search size={17} strokeWidth={1.8} aria-hidden="true" />
                   <input
@@ -366,7 +366,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
 
               <div className={styles.controlGroup}>
                 <label>
-                  <BilingualText en="Linked project" zh="关联项目" />
+                  <BilingualText en="Project" zh="项目" />
                 </label>
                 <div className={styles.selectField}>
                   <ProjectSelect
@@ -385,7 +385,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
               </div>
 
               <fieldset className={styles.yearGroup}>
-                <legend><BilingualText en="Frontmatter year" zh="记录年份" /></legend>
+                <legend><BilingualText en="Year" zh="年份" /></legend>
                 <div className={styles.yearOptions}>
                   <button
                     type="button"
@@ -411,8 +411,8 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                 <span className={styles.routePulse} aria-hidden="true" />
                 <span>
                   <BilingualText
-                    en={`${filteredNotes.length} records on route`}
-                    zh={`当前路由 ${filteredNotes.length} 篇记录`}
+                    en={`${filteredNotes.length} notes shown`}
+                    zh={`显示 ${filteredNotes.length} 篇笔记`}
                   />
                 </span>
                 {hasFilters ? (
@@ -429,9 +429,9 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
             <header className={styles.ledgerHeader}>
               <div>
                 <h2 id="note-ledger-title">
-                  <BilingualText en="Note ledger" zh="笔记台账" />
+                  <BilingualText en="Notes" zh="笔记列表" />
                 </h2>
-                <p><BilingualText en="Newest frontmatter date first" zh="按记录日期倒序" /></p>
+                <p><BilingualText en="Newest first" zh="最新在前" /></p>
               </div>
               <output aria-live="polite" aria-atomic="true">
                 <strong>{filteredNotes.length}</strong>
@@ -446,7 +446,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
               <ol key={listMotionKey} className={styles.noteList}>
                 {filteredNotes.map((note, index) => {
                   const hiddenTagCount = Math.max(0, note.tags.length - 3);
-                  const isIsoDate = isoDatePattern.test(note.date);
+                  const machineDate = dottedDatePattern.test(note.date) ? note.date.replaceAll(".", "-") : undefined;
 
                   return (
                     <li
@@ -472,7 +472,7 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
                             <span className={styles.noteProject}>
                               <BilingualText en={note.projectTitle} zh={note.projectTitleZh} />
                             </span>
-                            <time dateTime={isIsoDate ? note.date : undefined}>{note.date}</time>
+                            <time dateTime={machineDate}>{note.date}</time>
                           </span>
                           <span className={styles.noteTitle}>
                             <BilingualText en={note.title} zh={note.titleZh} />
@@ -499,11 +499,11 @@ export function NotesSignalIndex({ notes, projects }: NotesSignalIndexProps) {
               <div className={styles.emptyState} role="status">
                 <SearchX size={28} strokeWidth={1.5} aria-hidden="true" />
                 <div>
-                  <h3><BilingualText en="No notes on this route" zh="这条路由暂无笔记" /></h3>
+                  <h3><BilingualText en="No matching notes" zh="没有匹配的笔记" /></h3>
                   <p>
                     <BilingualText
-                      en="Change the search terms or reopen the full archive."
-                      zh="请调整搜索词，或重新打开完整归档。"
+                      en="Try other search terms, or reset the filters."
+                      zh="换个搜索词试试，或者重置筛选。"
                     />
                   </p>
                 </div>

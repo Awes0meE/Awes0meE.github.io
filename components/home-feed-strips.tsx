@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { ArrowUpRight, PlayCircle } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { ZhWords } from "@/components/zh-words";
 import { tagZh } from "@/lib/tags";
 import styles from "./home-feed.module.css";
 
@@ -25,6 +26,8 @@ export type TicketRecord = {
   slug: string;
   title: string;
   titleZh: string;
+  /** `titleZh` split into words on the server, so the stub wraps between words. */
+  titleZhWords: string[];
   tags: string[];
   group: string;
   project: ProjectName;
@@ -141,7 +144,7 @@ export function TicketTape({ records }: { records: TicketRecord[] }) {
         <span className={styles.ticketBody}>
           <span className={styles.ticketProject}>{name(note.project)}</span>
           <strong className={styles.ticketTitle}>
-            <BilingualText en={note.title} zh={note.titleZh} />
+            <BilingualText en={note.title} zh={<ZhWords words={note.titleZhWords} />} />
           </strong>
           <span className={styles.ticketTags}>
             <BilingualText en={note.tags.slice(0, 3).join(" · ")} zh={note.tags.slice(0, 3).map(tagZh).join(" · ")} />

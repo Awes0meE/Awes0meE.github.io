@@ -126,7 +126,7 @@ Every desktop header uses the same subdued `01`–`04` prefixes, control size, t
 
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
-The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. The nucleus shows the five prototype cutouts from `public/uploads/hero/` one at a time, switching every 5 seconds. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
+The homepage technical visual is maintained in `components/technical-visual.tsx` and `components/technical-visual.module.css`. The nucleus shows the nine prototype cutouts from `public/uploads/hero/` one at a time, switching every 5 seconds. Three equal-sized orbits are separated by 60 degrees, and each orbit carries five evenly spaced technology marks representing embedded systems, firmware development, or engineering tools.
 
 The prototype images and technology marks are presentation material only. They do not prove that a pictured board was fabricated or validated, and the marks do not imply affiliation, endorsement, or proficiency. Technology-mark sources are documented in `public/skills/icons/README.md`; institution-mark sources are documented in `public/education/README.md`.
 
@@ -160,19 +160,19 @@ Seven spacious black signal intervals separate adjacent projects. Their short or
 
 ## Using The Notes Routed Index
 
-On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by frontmatter year. The 2026-09-07 content revision has 25 public notes across 8 channels, including two approved studies per project and nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
+On `/notes`, choose a visible project channel or use the project dropdown, then narrow the public records by year. The 2026-09-07 content revision has 25 public notes across 8 channels, including two approved studies per project and nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete ledger.
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` opens in the Bench Log reading layout.
 
-The selected orange path follows the existing graphite stem and zig-zag bus to the chosen project's ledger endpoint. On wide screens, Project channels and Route controls stay the same height while only the note ledger follows the filtered result count. Long titles use the available desktop width, then wrap safely on narrower screens.
+The selected orange path follows the existing graphite stem and zig-zag bus to the chosen project's ledger endpoint. On wide screens, the Projects and Filter columns stay the same height while only the note ledger follows the filtered result count. Long titles use the available desktop width, then wrap safely on narrower screens.
 
 ## 使用笔记路由索引
 
-在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按 frontmatter 年份筛选公开笔记。2026-09-07 这轮发布后为 25 篇公开笔记、8 个通道，每个项目有两篇获批专题，另保留 9 篇技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
+在 `/notes` 中，可以直接选择当前显示的项目通道，也可以使用项目下拉框，再按年份筛选公开笔记。2026-09-07 这轮发布后为 25 篇公开笔记、8 个通道，每个项目有两篇获批专题，另保留 9 篇技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整台账。
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会以“工作台日志”阅读版式打开。
 
-选中的橙色路径会沿既有灰色 stem 和折线 bus 走到对应项目的台账端点。宽屏下“项目通道”和“路由控制”保持同一固定高度，只让右侧笔记台账跟随筛选结果变化；较长标题会利用桌面可用宽度，并在窄屏安全换行。
+选中的橙色路径会沿既有灰色 stem 和折线 bus 走到对应项目的台账端点。宽屏下“项目”和“筛选”两栏保持同一固定高度，只让右侧笔记台账跟随筛选结果变化；较长标题会利用桌面可用宽度，并在窄屏安全换行。
 
 ## Themes And Detail Transitions
 

@@ -204,6 +204,11 @@ for (const project of projects) {
 for (const note of notes) {
   validateRequiredStrings(note, ["title", "titleZh", "summary", "summaryZh", "date"]);
 
+  // One date format across the notes ledger and note pages (<time dateTime> converts it).
+  if (isString(note.data.date) && !/^\d{4}\.\d{2}\.\d{2}$/.test(note.data.date)) {
+    addError(note.filePath, `date must be YYYY.MM.DD, got "${note.data.date}"`);
+  }
+
   if (!isStringArray(note.data.tags)) {
     addError(note.filePath, "tags must be an array of strings");
   }

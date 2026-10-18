@@ -534,6 +534,7 @@
     gap: 0.45rem;
     margin-left: 0.5rem;
     padding: 0 0.9rem;
+    flex-shrink: 0;
     border: 1px solid rgb(var(--c-ember) / 0.55);
     color: var(--signal-ember-text);
     font-size: 0.875rem;
@@ -583,9 +584,14 @@
     display: none;
   }
 
+  .controls {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
+
   .stepCount {
     display: inline-block;
-    min-width: 6.5rem;
+    min-width: 4.5rem;
     color: rgb(var(--c-t3));
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.9375rem;
