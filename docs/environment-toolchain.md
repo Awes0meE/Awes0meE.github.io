@@ -253,6 +253,12 @@ Delete temporary screenshots and helper scripts before committing.
 - Output directory: default.
 - Node.js: use the repository `engines` baseline or Vercel's current Node LTS.
 
+### Deployment retention
+
+The free plan caps Deployment Storage at 10 GB. Every deployment keeps a full copy of `public/uploads` (about 240 MB in 2026-10), and on 2026-10-17 the retained previews reached 75%. Vercel's built-in retention policy is time-based only, so `.github/workflows/prune-vercel-deployments.yml` runs `scripts/prune-vercel-deployments.mjs` after every successful Vercel deployment and once a day. The script keeps the deployment serving `www.66ccff-labs.com`, the newest three ready deployments and any build still running, and deletes the rest, including failed builds. It deletes nothing if the production domain does not resolve to a deployment of `awes0mee-portfolio`.
+
+It needs the repository secret `VERCEL_TOKEN`: a Vercel access token with access to the `awes0mees-projects` team, created by the owner under Vercel Account Settings → Tokens. Without the secret the job exits without doing anything. A manual run (Actions → Prune Vercel deployments → Run workflow) defaults to a dry run that only lists what it would delete. Deleted deployments cannot be restored, and their preview URLs stop working.
+
 Keep root `.nojekyll` committed. The live deployment is Vercel, but this repository name can trigger GitHub Pages, and `.nojekyll` prevents Jekyll/Liquid from parsing uploaded Markdown and code evidence under `public/uploads/`.
 
 ## GitHub Pages Fallback Guardrail
