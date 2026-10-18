@@ -129,7 +129,7 @@ Projects require frontmatter matching `lib/content.ts`:
 - `summaryZh`
 - `date`
 - `status`
-- `tags`
+- `tags` (every word tag needs a Chinese label in `content/tag-labels.json`; see `docs/content-workflow.md`)
 - `cover`
 - `featured` (still validated; no route reads it since the homepage wheel shows every project)
 - `links`
@@ -304,6 +304,7 @@ For visual/layout edits:
 - check both languages at desktop and mobile widths;
 - verify no horizontal overflow. `body` hides horizontal overflow, so the page never scrolls sideways and clipped elements stay hidden; measure each element's edges, especially the header row, rather than page scroll width;
 - headless Chrome applies wheel deltas instantly, while Safari and Chrome on a Mac animate wheel scrolling and add trackpad momentum. For pinned scroll scenes (the homepage project wheel), test with real-cadence wheel sequences, record any move against the scroll direction, and still ask the owner to feel it in Safari;
+- measure view transitions in Safari itself (`safaridriver`, once the owner enables Allow Remote Automation, with the window in front) at the owner's window size: Safari snapshots a named element at its full height, so never give a page-tall element such as `<main>` its own `view-transition-name`;
 - do not rely on automatic CJK wrapping (`word-break: keep-all`) for display titles. Safari will not break at `、`, so set explicit lines and check Safari when a Chinese title must wrap;
 - verify links and dynamic content routes;
 - verify visibility pausing and `prefers-reduced-motion` behavior for every changed route motion, including the homepage atom, Work intervals, Notes route motion, Media reveal/scan, and About pulse when those surfaces are in scope.
