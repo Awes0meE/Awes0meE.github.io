@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Code2,
-  Github,
-  Mail,
-  Microchip,
-  SquareActivity
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
+import { HomeContact } from "@/components/home-contact";
 import { HomeFeed } from "@/components/home-feed";
 import { RouteStage } from "@/components/route-stage";
 import { ProjectCoverFlow, type CoverFlowItem } from "@/components/project-cover-flow";
@@ -20,7 +14,6 @@ import {
   getProjectCover,
   getProjects
 } from "@/lib/content";
-import { site } from "@/lib/site";
 
 function EducationMark({ school }: { school: "ntu" | "xjtlu" | "liverpool" }) {
   const marks = {
@@ -141,20 +134,7 @@ export default function Home() {
 
         <HomeFeed />
 
-        <section className="signal-section signal-contact-section" aria-labelledby="stack-contact-title">
-          <div className="signal-stack">
-            <h2 id="stack-contact-title"><BilingualText en="Engineering stack and contact" zh="工程技术栈与联系" /></h2>
-            <div className="signal-stack-list">
-              <p><Microchip size={19} aria-hidden="true" /><BilingualText en="Embedded control and firmware — STM32, ESP32, C/C++, and bare-metal peripheral development" zh="嵌入式控制与固件——STM32、ESP32、C/C++ 与裸机外设开发" /></p>
-              <p><SquareActivity size={19} aria-hidden="true" /><BilingualText en="Hardware development — schematic capture, PCB layout, hand assembly, and staged board bring-up" zh="硬件开发——原理图设计、PCB 布局、手工装配与分阶段板级 bring-up" /></p>
-              <p><Code2 size={19} aria-hidden="true" /><BilingualText en="Motor drives and power electronics — PWM, SVPWM, FOC, gate driving, sensing, and power conversion" zh="电机驱动与电力电子——PWM、SVPWM、FOC、栅极驱动、采样与电源变换" /></p>
-            </div>
-          </div>
-          <div className="signal-contact-links">
-            <a href={site.github}><Github size={19} aria-hidden="true" /><BilingualText en="GitHub profile" zh="GitHub 主页" /><ArrowRight size={17} aria-hidden="true" /></a>
-            <a href={`mailto:${site.email}`}><Mail size={19} aria-hidden="true" />{site.email}<ArrowRight size={17} aria-hidden="true" /></a>
-          </div>
-        </section>
+        <HomeContact />
       </main>
     </RouteStage>
   );

@@ -1,0 +1,480 @@
+/* Homepage close: a paper rating label screwed to the bench. */
+
+.close {
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --zh: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+  /* Paper inks: printed-label colours scoped to the label, so it reads as
+     the same sheet of paper in both themes. */
+  --paper: #eeece6;
+  --paper-edge: #dcd9d1;
+  --ink: #1c1a17;
+  --ink-2: #2f2b25;
+  --ink-accent: #8a3600;
+  --ink-rule: #c2560a;
+  --paper-shadow: 0 0 0;
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: clamp(2rem, 4cqi, 4rem);
+  width: 100%;
+  padding: clamp(2rem, 3.4cqi, 3rem) clamp(1.25rem, 4vw, 4.75rem);
+  border-bottom: 1px solid var(--signal-line);
+  background:
+    radial-gradient(ellipse at 78% 50%, rgb(var(--c-halo) / 0.1), transparent 52%),
+    rgb(var(--c-deep));
+}
+
+:global(html[data-theme="light"]) .close {
+  --paper: #ffffff;
+  --paper-edge: #f4f3ef;
+  --ink: #1c1a17;
+  --ink-2: #4a433a;
+  --ink-accent: #00334d;
+  --ink-rule: #2563eb;
+  --paper-shadow: 15 23 42;
+  background: rgb(var(--c-band));
+}
+
+.title {
+  margin: 0;
+  color: var(--signal-warm-white);
+  font-family: var(--font-display-en);
+  font-size: clamp(2.8rem, 6.4cqi, 6rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+:global(html[data-lang="zh"]) .title {
+  font-family: var(--zh);
+  font-size: clamp(2.6rem, 5.4cqi, 5.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+:global(html[data-theme="light"]) .title {
+  color: rgb(var(--c-heading));
+}
+
+/* ---------------- The label ---------------- */
+
+.plate {
+  position: relative;
+  isolation: isolate;
+  border-radius: 2px;
+  color: var(--ink);
+  background:
+    /* short fibres */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='480'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.04 0.11' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.42  0 0 0 0 0.42  0 0 0 0 0.44  0.9 0 0 0 -0.56'/></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>"),
+    /* fine tooth */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.35  0 0 0 0 0.37  0.5 0 0 0 -0.16'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+    /* cloudy formation */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.52  0.32 0 0 0 -0.12'/></filter><rect width='100%25' height='100%25' filter='url(%23c)'/></svg>"),
+    /* laid lines: fine horizontal laid wires, wider vertical chain lines */
+    repeating-linear-gradient(0deg, rgb(60 60 70 / 0.022) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgb(60 60 70 / 0.03) 0 1px, transparent 1px 27px),
+    radial-gradient(ellipse at 50% 50%, transparent 66%, var(--paper-edge) 135%),
+    var(--paper);
+  box-shadow:
+    0 0 0 1px rgb(var(--paper-shadow) / 0.1),
+    0 2px 3px rgb(var(--paper-shadow) / 0.16),
+    0 18px 36px -20px rgb(var(--paper-shadow) / 0.5);
+}
+
+/* Bench Paper: the same sheet, whiter, with every texture layer at about
+   60% so it reads as fresh letter paper on the pale band. */
+:global(html[data-theme="light"]) .plate {
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='480'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.04 0.11' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.45  0 0 0 0 0.48  0.55 0 0 0 -0.34'/></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.4  0 0 0 0 0.43  0.3 0 0 0 -0.1'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.55  0 0 0 0 0.58  0.18 0 0 0 -0.07'/></filter><rect width='100%25' height='100%25' filter='url(%23c)'/></svg>"),
+    repeating-linear-gradient(0deg, rgb(60 60 70 / 0.012) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgb(60 60 70 / 0.017) 0 1px, transparent 1px 27px),
+    radial-gradient(ellipse at 50% 50%, transparent 70%, var(--paper-edge) 140%),
+    var(--paper);
+}
+
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* The printed layer: ink bends with the relief, picks up a faint speckle,
+   and multiplies into the paper so the fibres show through it. */
+.sheet {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem 2.1rem 1.4rem;
+  filter: url(#contact-ink);
+  mix-blend-mode: multiply;
+}
+
+.relief,
+.falloff,
+.screws,
+.lamp,
+.lampGlow,
+.spill {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* The paper's relief, shaded from above; it multiplies over the ink too,
+   so a dip darkens the letters inside it exactly as it darkens the paper. */
+.relief {
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+}
+
+/* Bench Paper keeps the sheet nearly white: the relief reads at a third. */
+:global(html[data-theme="light"]) .relief {
+  opacity: 0.35;
+}
+
+/* Desk-lamp falloff (Ember Black only): an even wash from the bar down,
+   bright under it and falling steeply to a dark bottom edge, with the
+   lower corners darker still. Text in the lower half is allowed to read
+   dimly, like a page under a desk lamp. */
+.falloff {
+  z-index: 4;
+  inset: 0;
+  display: none;
+  background:
+    radial-gradient(ellipse 80% 160% at 50% 0%, #ffffff 55%, #bdb9b2 100%),
+    linear-gradient(to bottom, #ffffff 0%, #f5f2ec 14%, #c9c5bd 40%, #85827c 70%, #45433f 100%);
+  background-blend-mode: multiply;
+  mix-blend-mode: multiply;
+}
+
+/* The bar's own light on the top of the sheet, under the ink, so the
+   paper brightens while the letters stay dark. */
+.spill {
+  z-index: 0;
+  inset: 0;
+  display: none;
+  background: radial-gradient(ellipse 60% 85% at 50% 0%, rgb(255 248 234 / 0.9), rgb(255 246 228 / 0.3) 42%, transparent 74%);
+  mix-blend-mode: screen;
+}
+
+.screws {
+  z-index: 5;
+  inset: 0;
+}
+
+/* Polished steel heads: a specular spot, a conic sheen that reads as
+   turned metal, a darker bevel ring and a cut slot. */
+.screws i {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background:
+    linear-gradient(45deg, transparent 42%, #5d646c 42% 50%, #f3f6f8 50% 58%, transparent 58%),
+    radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.95) 0 9%, rgb(255 255 255 / 0) 34%),
+    conic-gradient(from 20deg, #e9edf0, #a3abb3, #f7f9fa, #8e969f, #dfe4e8, #9aa2ab, #e9edf0);
+  box-shadow:
+    inset 0 0 0 1px rgb(70 78 88 / 0.55),
+    inset 0 -1.5px 1.5px rgb(40 46 54 / 0.35),
+    0 0 0 1.5px rgb(255 255 255 / 0.35),
+    0 1.5px 2px rgb(0 0 0 / 0.4);
+}
+
+.screws i:nth-child(1) { top: 10px; left: 10px; }
+.screws i:nth-child(2) { top: 10px; right: 10px; }
+.screws i:nth-child(3) { bottom: 10px; left: 10px; }
+.screws i:nth-child(4) { bottom: 10px; right: 10px; }
+
+/* The steel follows the lamp: the top pair catch the bar's light, the
+   bottom pair, furthest from it, sit nearly in the dark. Against the
+   bright top of the sheet a dimmed head reads darker than it is, so the
+   top pair stay close to full brightness. */
+:global(html[data-theme="dark"]) .screws i {
+  filter: brightness(0.82) saturate(0.9);
+}
+
+:global(html[data-theme="dark"]) .screws i:nth-child(n + 3) {
+  filter: brightness(0.16) saturate(0.7);
+}
+
+/* A monitor light bar hung over the top edge (Ember Black only). */
+.lamp {
+  z-index: 6;
+  top: -9px;
+  left: 18%;
+  right: 18%;
+  display: none;
+  height: 13px;
+  border-radius: 7px;
+  background: linear-gradient(to bottom, #3b3935, #1c1b19 70%, #121110);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    0 3px 6px rgb(0 0 0 / 0.5);
+}
+
+.lamp::after {
+  content: "";
+  position: absolute;
+  right: 6%;
+  bottom: -1px;
+  left: 6%;
+  height: 2.5px;
+  border-radius: 2px;
+  background: #fffaf0;
+  box-shadow:
+    0 0 8px 2px rgb(255 240 214 / 0.95),
+    0 4px 22px 6px rgb(255 236 204 / 0.45),
+    0 10px 48px 14px rgb(255 232 196 / 0.22);
+}
+
+.lampGlow {
+  z-index: -1;
+  top: -40px;
+  right: -6%;
+  left: -6%;
+  display: none;
+  height: 220px;
+  background: radial-gradient(ellipse 50% 60% at 50% 18%, rgb(255 226 186 / 0.26), transparent 70%);
+}
+
+:global(html[data-theme="dark"]) :is(.falloff, .lamp, .lampGlow, .spill) {
+  display: block;
+}
+
+.plateHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.6rem 0.7rem;
+  border-bottom: 2px solid var(--ink-rule);
+}
+
+.plateHead strong {
+  font-family: var(--font-display-en);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.plateHead span {
+  color: var(--ink-accent);
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.16em;
+}
+
+.plateBody {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+}
+
+/* Left column: contact routes */
+
+.routes {
+  margin: 0;
+  padding: 0.3rem 1.1rem 0 0.6rem;
+}
+
+.routes > div {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px dashed rgb(31 27 22 / 0.24);
+}
+
+.routes > div:last-child {
+  border-bottom: 0;
+}
+
+.routes dt,
+.stack h3,
+.label {
+  margin: 0;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.routes dd {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin: 0;
+}
+
+.routes a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+.routes a:hover,
+.routes a:focus-visible {
+  color: var(--ink-accent);
+  text-decoration-line: underline;
+}
+
+/* The copy button is taller than a text link; give its row air above. */
+.routes > .wechat {
+  padding: 0.65rem 0 0.25rem;
+}
+
+.handle {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.mail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  padding: 0.85rem 0.6rem 0.8rem;
+  border-bottom: 1px dashed rgb(31 27 22 / 0.28);
+}
+
+.label {
+  width: 4.6rem;
+}
+
+.mail a {
+  color: var(--ink-accent);
+  font-family: var(--font-display-en);
+  font-size: clamp(1.6rem, 3cqi, 2.6rem);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.mail a:hover,
+.mail a:focus-visible {
+  text-decoration-line: underline;
+}
+
+.copy {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.75rem;
+  border: 1px solid rgb(31 27 22 / 0.3);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.18);
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 200ms ease-out, color 200ms ease-out, background-color 200ms ease-out;
+}
+
+.copy:hover,
+.copy:focus-visible {
+  border-color: var(--ink-accent);
+  color: var(--ink-accent);
+}
+
+.copy[data-copied] {
+  border-color: var(--ink-accent);
+  background: var(--ink-accent);
+  color: var(--paper);
+}
+
+/* Right column: stack */
+
+.stack {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  padding: 0.7rem 0.6rem 0.1rem 1.4rem;
+  border-left: 1px dashed rgb(31 27 22 / 0.28);
+}
+
+.stack p {
+  display: grid;
+  gap: 0.05rem;
+  margin: 0;
+}
+
+.stack b {
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.stack span {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+/* ---------------- Narrow screens ---------------- */
+
+@media (max-width: 1023px) {
+  .close {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 719px) {
+  .sheet {
+    padding: 1.6rem 1.25rem 1.5rem;
+  }
+
+  .plateBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .routes {
+    padding: 0.4rem 0.2rem 0.6rem;
+  }
+
+  .stack {
+    padding: 0.9rem 0.2rem 0.2rem;
+    border-top: 1px dashed rgb(31 27 22 / 0.28);
+    border-left: 0;
+  }
+
+  .mail {
+    padding-inline: 0.2rem;
+  }
+
+  .label {
+    width: 100%;
+  }
+
+  .mail a {
+    font-size: clamp(1.45rem, 7.4cqi, 2.1rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .routes > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-top: 0.45rem;
+  }
+}

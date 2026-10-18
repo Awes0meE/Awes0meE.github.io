@@ -894,8 +894,7 @@ html[data-lang="en"] .signal-hero-actions {
   border-bottom: 1px solid var(--signal-line);
 }
 
-.signal-section-header h2,
-.signal-stack h2 {
+.signal-section-header h2 {
   margin: 0;
   color: var(--signal-warm-white);
   font-family: var(--font-signal-display), "Arial Narrow", sans-serif;
@@ -906,8 +905,7 @@ html[data-lang="en"] .signal-hero-actions {
   text-transform: uppercase;
 }
 
-html[data-lang="zh"] .signal-section-header h2,
-html[data-lang="zh"] .signal-stack h2 {
+html[data-lang="zh"] .signal-section-header h2 {
   font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
   letter-spacing: 0.02em;
 }
@@ -983,71 +981,6 @@ html[data-lang="zh"] .signal-stack h2 {
 
 .signal-credential-current {
   background: linear-gradient(110deg, rgb(var(--c-ember) / 0.08), transparent 72%);
-}
-
-.signal-contact-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-  background:
-    radial-gradient(circle at 86% 54%, rgb(var(--c-halo) / 0.12), transparent 28%),
-    rgb(var(--c-deep));
-}
-
-.signal-stack {
-  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 4vw, 4.75rem);
-  border-right: 1px solid var(--signal-line);
-}
-
-.signal-stack-list {
-  display: grid;
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.signal-stack-list p {
-  display: flex;
-  max-width: 74ch;
-  align-items: flex-start;
-  gap: 0.9rem;
-  margin: 0;
-  color: var(--signal-muted);
-  font-size: 0.985rem;
-  line-height: 1.7;
-}
-
-.signal-stack-list svg {
-  margin-top: 0.24rem;
-  flex: 0 0 auto;
-  color: var(--signal-ember-text);
-}
-
-.signal-contact-links {
-  display: grid;
-  align-content: center;
-}
-
-.signal-contact-links a {
-  display: grid;
-  min-height: 74px;
-  grid-template-columns: 24px minmax(0, 1fr) 20px;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1rem clamp(1.25rem, 3vw, 3.2rem);
-  border-bottom: 1px solid var(--signal-line);
-  color: var(--signal-warm-white);
-  font-size: 0.955rem;
-  overflow-wrap: anywhere;
-  transition: background-color 240ms ease-out, color 240ms ease-out;
-}
-
-.signal-contact-links a:first-child {
-  border-top: 1px solid var(--signal-line);
-}
-
-.signal-contact-links a:hover,
-.signal-contact-links a:focus-visible {
-  background: var(--signal-orange);
-  color: var(--signal-canvas);
 }
 
 @media (max-width: 1180px) {
@@ -1147,18 +1080,6 @@ html[data-lang="zh"] .signal-stack h2 {
     grid-column: 1 / -1;
     border-bottom: 1px solid var(--signal-line);
   }
-
-  .signal-contact-section {
-    grid-template-columns: 1fr;
-  }
-
-  .signal-stack {
-    border-right: 0;
-  }
-
-  .signal-stack {
-    border-bottom: 1px solid var(--signal-line);
-  }
 }
 
 @media (max-width: 767px) {
@@ -1221,11 +1142,6 @@ html[data-lang="zh"] .signal-stack h2 {
     grid-column: auto;
     border-right: 0;
     border-bottom: 1px solid var(--signal-line);
-  }
-
-  .signal-stack,
-  .signal-contact-links a {
-    padding-inline: 1.25rem;
   }
 }
 
@@ -3513,7 +3429,7 @@ body .site-header-cta.signal-fill:is(:hover, :focus-visible) {
 
 /* Bench Paper colour mass: faint cobalt bands alternate with white so the
    page reads as a rhythm of sheets rather than one empty white field. */
-html[data-theme="light"] :is(.signal-hero, .atmosphereConveyor, .bench-mast, .signal-credentials-section, .signal-contact-section) {
+html[data-theme="light"] :is(.signal-hero, .atmosphereConveyor, .bench-mast, .signal-credentials-section) {
   background-color: rgb(var(--c-band));
 }
 
