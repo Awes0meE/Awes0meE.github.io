@@ -18,7 +18,7 @@ Public site:
 ## Identity And Privacy
 
 - The public site leads with the robotic systems hardware direction; student status provides current-stage context rather than the primary headline.
-- Reader-facing contact surfaces expose GitHub and the public NTU student email `ZHIYI012@e.ntu.edu.sg`; location remains omitted.
+- Reader-facing contact surfaces expose GitHub, LinkedIn, the public NTU student email `ZHIYI012@e.ntu.edu.sg` and the WeChat ID `AlvinLi_2333` (homepage contact label); location remains omitted.
 
 ## Tech Stack
 
