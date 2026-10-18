@@ -82,7 +82,7 @@ title: "English note title"
 titleZh: "中文笔记标题"
 summary: "English summary"
 summaryZh: "中文摘要"
-date: "2026-05-06"
+date: "2026.05.06"   # always YYYY.MM.DD; validate-content rejects other formats
 tags: ["PID", "Control", "Lab Note"]
 visibility: private
 projectSlug: "my-project-slug"
@@ -124,7 +124,7 @@ public/uploads/hero/
 
 Approved site-identity assets are kept separately under `public/brand/`. Preserve the exact `iRidium` capitalization in both language modes, keep the mark's upper-left and lower-right square bounds equal, and retain the user-selected B-style transparent wordmark at its approved compact 26px header height. Treat logo/brand changes as user-controlled visual-identity decisions; do not mix project evidence into that folder.
 
-`public/uploads/hero/` contains the five prototype images consumed by the homepage atom visual in `components/technical-visual.tsx`. Keep all five in the rotating nucleus. The three equal-sized orbits remain separated by 60 degrees and each carries five evenly spaced technology marks, grouped as embedded systems, firmware development, and engineering tools. Do not treat the nucleus images or orbit marks as project evidence, proof of fabrication or validation, an affiliation or endorsement claim, or a proficiency scale; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
+`public/uploads/hero/` contains the nine prototype cutouts consumed by the homepage atom visual in `components/technical-visual.tsx`. Keep all of them in the rotating nucleus. The three equal-sized orbits remain separated by 60 degrees and each carries five evenly spaced technology marks, grouped as embedded systems, firmware development, and engineering tools. Do not treat the nucleus images or orbit marks as project evidence, proof of fabrication or validation, an affiliation or endorsement claim, or a proficiency scale; project pages and technical claims must continue to use original photographs or direct engineering artifacts.
 
 Keep technology-mark source and trademark notes current in `public/skills/icons/README.md`, and keep institution-mark provenance current in `public/education/README.md`. Do not add a mark to the visual without recording its source and confirming that its public use remains appropriate.
 
