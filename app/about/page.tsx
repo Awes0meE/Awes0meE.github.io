@@ -182,7 +182,7 @@ export default function AboutPage() {
             />
             <figcaption>
               <span>NTU · MSc RIS</span>
-              <span>SINGAPORE</span>
+              <span><BilingualText en="SINGAPORE" zh="新加坡" /></span>
             </figcaption>
           </figure>
         </section>

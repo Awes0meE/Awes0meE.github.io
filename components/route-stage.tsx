@@ -11,7 +11,9 @@ const routeMotion = {
  * Page-level view transition. Links into a project or note carry the
  * `nav-forward` type, back links carry `nav-back`; untyped navigations
  * (browser history, refresh) swap without directional motion.
- * The child must be a single DOM element such as `<main>`.
+ * The child must be a single DOM element such as `<main>`. The motion itself runs on the
+ * root snapshot (see the `main` rule in `app/globals.css`): main keeps no snapshot of its
+ * own, because Safari renders a named element's snapshot at its full page height.
  */
 export function RouteStage({ children }: { children: ReactElement }) {
   return (

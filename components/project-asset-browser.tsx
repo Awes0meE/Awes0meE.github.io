@@ -86,7 +86,6 @@ function PreviewBody({ asset }: { asset: ProjectAsset }) {
             alt={asset.name}
             fill
             sizes="(min-width: 1024px) 760px, calc(100vw - 40px)"
-            loading="eager"
             unoptimized
             className="object-contain p-4"
           />

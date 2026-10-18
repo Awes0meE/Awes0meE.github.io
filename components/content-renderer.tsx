@@ -386,8 +386,6 @@ export function ContentRenderer({ source, baseHref }: { source: string; baseHref
               alt={image.alt}
               fill
               sizes={sizes}
-              loading="eager"
-              unoptimized
               className="prose-figure-image"
             />
           </div>

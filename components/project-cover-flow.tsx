@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, type CSSProperties, type KeyboardEvent, type MouseEvent, type PointerEvent } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { BilingualText } from "@/components/bilingual-text";
-import { ProjectCover } from "@/components/project-cover";
+import { tagZh } from "@/lib/tags";
+import { PROJECT_FIGURE_SIZES, ProjectCover } from "@/components/project-cover";
 import { ProjectFigureTransition } from "@/components/route-stage";
 import type { ProjectMedia } from "@/lib/content";
 import styles from "./project-cover-flow.module.css";
@@ -418,7 +419,7 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
             >
               <ProjectFigureTransition slug={item.slug}>
                 <span className={styles.cover}>
-                  <ProjectCover media={item.cover} alt="" sizes="(min-width: 1024px) 560px, 76vw" preload={index === 0} />
+                  <ProjectCover media={item.cover} alt="" sizes={PROJECT_FIGURE_SIZES} preload={index === 0} />
                 </span>
               </ProjectFigureTransition>
               <span className={styles.cardIndex} aria-hidden="true">{pad(index + 1)}</span>
@@ -456,7 +457,9 @@ export function ProjectCoverFlow({ items }: ProjectCoverFlowProps) {
               <p className={styles.captionMeta}>
                 <span><BilingualText en={item.status} zh={item.statusZh} /></span>
                 <span><BilingualText en={item.timeline} zh={item.timelineZh} /></span>
-                <span>{item.tags.slice(0, 3).join(" / ")}</span>
+                <span>
+                  <BilingualText en={item.tags.slice(0, 3).join(" / ")} zh={item.tags.slice(0, 3).map(tagZh).join(" / ")} />
+                </span>
               </p>
             </div>
           ))}

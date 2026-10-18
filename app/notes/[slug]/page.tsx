@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { BenchLogRail } from "@/components/bench-log-rail";
 import { BilingualText } from "@/components/bilingual-text";
+import { tagZh } from "@/lib/tags";
 import { ContentRenderer, getContentOutline } from "@/components/content-renderer";
 import { RouteStage } from "@/components/route-stage";
 import { getNote, getNotes, getProjects } from "@/lib/content";
@@ -130,7 +131,7 @@ export default async function NotePage({ params }: NotePageProps) {
                       <dt><BilingualText en="Tags" zh="标签" /></dt>
                       <dd className="bench-tags">
                         {note.tags.map((tag) => (
-                          <span key={tag}>{tag}</span>
+                          <span key={tag}><BilingualText en={tag} zh={tagZh(tag)} /></span>
                         ))}
                       </dd>
                     </div>
