@@ -238,6 +238,14 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Verification Baseline
 
+On `2026-10-22`, a documentation-only reconciliation from local `main` at
+`2f81186` passed lint (including content and encoding validation) on Windows
+(Node 24.19.0, npm 11.17.0). Source counts remain 10 projects, 34 public notes
+and 119 media records (114 images, five videos). All 15 Markdown links in the
+15 root/core-doc/handoff files resolve locally. This check corrects remaining
+theme, schema-template and image-loading guidance; it does not refresh the
+build, browser or deployment evidence below. See `docs/session-log.md` for scope.
+
 Lint, content, encoding and typecheck passed on `2026-10-19` for `main` at
 `fe11492` on macOS (Node 22.23.1, npm 10.9.8). An isolated copy of that commit
 passed `npm run build -- --webpack`, generating 51 static pages without touching
