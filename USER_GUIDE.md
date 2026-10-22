@@ -12,7 +12,7 @@ The site contains:
 - Work: project case studies
 - Notes: learning notes and technical writing
 - Media: images, videos, board renders, and experiment materials
-- About: a CV-grounded identity, working-method, and contact route
+- About: an online CV with a personal introduction, career route, current work, interests, and contact links
 
 ## 这个网站是什么
 
@@ -24,7 +24,7 @@ The site contains:
 - Work / 项目：项目案例
 - Notes / 笔记：学习笔记和技术记录
 - Media / 媒体：图片、视频、板卡渲染图和实验材料
-- About / 关于：以简历事实为边界的个人路径、工作方法和联系方式
+- About / 关于：线上简历，包括个人介绍、经历、当前工作、兴趣和联系方式
 
 ## How To Visit The Website On This Computer
 
@@ -122,7 +122,7 @@ Long note or project body text is not automatically machine-translated. If a lon
 
 The header brand is always the English wordmark `iRidium`; switching the site to Chinese does not replace it with `铱`. Its approved mark and transparent B-style script wordmark live under `public/brand/`. Keep the upper-left and lower-right blocks of the mark equal in size and preserve the compact 26px wordmark height.
 
-Every desktop header uses the same subdued `01`–`04` prefixes, control size, typography, lift, press feedback, and line-growth motion. Both themes use the same orange signal; only the ground and text colors change. The mobile navigation remains unnumbered. The first keyboard stop is a bilingual `Skip to content` link, and shared controls keep at least a 44px touch target in both themes. Reduced-motion mode keeps the current/focus signal but removes movement and transition effects.
+Every desktop header uses the same subdued `01`–`04` prefixes, control size, typography, lift, press feedback, and line-growth motion. The dark header uses orange accents; the light theme's deep-cobalt header uses white labels and sky-blue navigation lines. The mobile navigation remains unnumbered. The first keyboard stop is a bilingual `Skip to content` link, and shared controls keep at least a 44px touch target in both themes. Reduced-motion mode keeps the current/focus signal but removes movement and transition effects.
 
 The homepage education block uses a full-width row for `Nanyang Technological University, Singapore`, followed by a two-column undergraduate row labelled as dual-degree awards. The two undergraduate degrees are listed separately under Xi'an Jiaotong-Liverpool University and the University of Liverpool; `First Class Honours` belongs to the University of Liverpool degree.
 
@@ -136,7 +136,7 @@ The orbit and nucleus motion pauses when the visual is offscreen or the browser 
 
 页头品牌名始终使用英文 `iRidium`，切换到中文界面也不会变成“铱”。已确认的图形标记和 B 款透明花体字标保存在 `public/brand/`；维护时要保持图形左上角与右下角方块等大，并保留字标 26px 的紧凑显示高度。
 
-所有桌面页头现在共用低透明度的 `01`–`04` 编号、控件尺寸、字体、抬升、按压反馈和信号线生长动画；深浅两种主题使用同一个橙色信号，只有底色和文字颜色不同。移动端导航不显示编号。键盘第一个焦点是双语“跳到主要内容”链接，共享控件在两种主题里都保持至少 44px 的触控区域；“减少动态效果”模式仍保留当前项和焦点提示，但取消位移与过渡动画。
+所有桌面页头共用低透明度的 `01`–`04` 编号、控件尺寸、字体、抬升、按压反馈和信号线生长动画。深色页头使用橙色强调；浅色主题的深钴蓝页头使用白色文字和天蓝色导航线。移动端导航不显示编号。键盘第一个焦点是双语“跳到主要内容”链接，共享控件在两种主题里都保持至少 44px 的触控区域；“减少动态效果”模式仍保留当前项和焦点提示，但取消位移与过渡动画。
 
 首页教育区第一行显示南洋理工大学及硕士在读信息，第二行以双栏明确展示西交利物浦大学与英国利物浦大学授予的本科双学位；“一等荣誉学位”归在英国利物浦大学学位下。
 
@@ -164,7 +164,7 @@ On `/notes`, choose a project from the list or dropdown, then narrow the public 
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` opens in the Bench Log reading layout.
 
-The selected orange path follows the existing graphite stem and zig-zag bus to the chosen project's ledger endpoint. On wide screens, the Projects and Filter columns stay the same height while only the note ledger follows the filtered result count. Long titles use the available desktop width, then wrap safely on narrower screens.
+The selected path uses orange in the dark theme and cobalt in the light theme, following the existing neutral stem and zig-zag bus to the chosen project's ledger endpoint. On wide screens, the Projects and Filter columns stay the same height while only the note ledger follows the filtered result count. Long titles use the available desktop width, then wrap safely on narrower screens.
 
 ## 使用笔记路由索引
 
@@ -172,7 +172,7 @@ The selected orange path follows the existing graphite stem and zig-zag bus to t
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会以“工作台日志”阅读版式打开。
 
-选中的橙色路径会沿既有灰色 stem 和折线 bus 走到对应项目的台账端点。宽屏下“项目”和“筛选”两栏保持同一固定高度，只让右侧笔记台账跟随筛选结果变化；较长标题会利用桌面可用宽度，并在窄屏安全换行。
+选中路径在深色主题中为橙色，在浅色主题中为钴蓝色，沿既有中性色主干和折线总线走到对应项目的台账端点。宽屏下“项目”和“筛选”两栏保持同一固定高度，只让右侧笔记台账跟随筛选结果变化；较长标题会利用桌面可用宽度，并在窄屏安全换行。
 
 ## Themes And Detail Transitions
 
@@ -296,12 +296,15 @@ visibility: public
 ---
 title: "English Project Name"
 titleZh: "中文项目名称"
+shortTitle: "Short Project Name"
+shortTitleZh: "项目短名"
 summary: "Short English summary"
 summaryZh: "中文简短介绍"
 date: "2026.05"
 status: "In Progress"
 tags: ["Next.js", "Control", "Robotics"]
-cover: "/uploads/projects/my-new-project/cover.jpg"
+cover: "/uploads/projects/my-new-project/cover-card.webp"
+coverKind: "render"
 featured: false
 links:
   repo: "https://github.com/Awes0meE/example"
@@ -311,7 +314,9 @@ assetPaths:
 ```
 
 4. Write the project story below the metadata.
-5. Save the file and check the website locally.
+5. Prepare the referenced cover and uploaded files, run `npm run validate-content`, and check the website locally. Use `npm.cmd` in Windows PowerShell.
+
+`shortTitle` and `shortTitleZh` are required names for compact surfaces. `coverKind` is required: use `company` for a company logo or `render` for a personal project's normalized cover. Optional `coverDark` supplies a dark-theme variant; optional `mediaLead` names one of this project's own media records. See [Content Workflow](docs/content-workflow.md) for cover preparation and the full schema.
 
 The homepage project wheel shows every project in `/work` order. `featured` is still required by the content check but no longer selects homepage projects.
 
@@ -325,7 +330,9 @@ If `assetPaths` is set, the project page shows uploaded public files in a file b
 2. 重命名，例如 `content/projects/my-new-project.mdx`。
 3. 修改文件顶部的元数据。
 4. 在元数据下面写项目介绍。
-5. 保存文件，并在本地网站里检查效果。
+5. 准备引用的封面和上传文件，运行 `npm run validate-content`，再在本地网站检查效果；Windows PowerShell 使用 `npm.cmd`。
+
+`shortTitle` 和 `shortTitleZh` 是紧凑界面使用的必填短名；`coverKind` 也必填，公司标志用 `company`，个人项目的标准化封面用 `render`。可选的 `coverDark` 提供深色主题封面，`mediaLead` 指定属于本项目的媒体记录。封面制作和完整字段说明见[内容维护流程](docs/content-workflow.md)。
 
 首页项目封面流按 `/work` 的顺序展示全部项目。`featured` 仍是内容检查要求的字段，但已经不再决定哪些项目出现在首页。
 
@@ -440,7 +447,7 @@ npm audit --omit=dev
 1. Start local preview with `npm run dev`.
 2. Modify content or pages.
 3. Check the website in the browser.
-4. Run `npm run lint`, `npm run validate-content`, `npm run validate-encoding`, `npm run typecheck`, and `npm run build`.
+4. Stop the development server, then run `npm run lint`, `npm run typecheck`, and `npm run build`. Lint includes content and encoding validation; dev and build must not write `.next/` concurrently.
 5. Commit the reviewed changes on a topic branch.
 6. Push the topic branch and open a pull request.
 7. Review the pull-request diff and Vercel preview, then merge after checks pass.
@@ -451,7 +458,7 @@ npm audit --omit=dev
 1. 用 `npm run dev` 启动本地预览。
 2. 修改内容或页面。
 3. 在浏览器检查网站效果。
-4. 运行 `npm run lint`、`npm run validate-content`、`npm run validate-encoding`、`npm run typecheck` 和 `npm run build`。
+4. 停止开发服务器，再运行 `npm run lint`、`npm run typecheck` 和 `npm run build`。lint 已包含内容与编码校验；dev 和 build 不应同时写入 `.next/`。
 5. 在 topic branch 上提交已经检查过的改动。
 6. 推送 topic branch，并创建 pull request。
 7. 检查 PR diff 与 Vercel 预览，所有检查通过后再合并。

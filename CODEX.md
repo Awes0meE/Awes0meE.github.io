@@ -203,7 +203,7 @@ Canonical prose lives in `content/projects/` and `content/notes/`. The writer is
 Maintenance releases use PRs without inventing a new tag.
 
 Family note counts are Smart Car 2, counter 2, DIY Cooling 2, Juanyun thermal 7,
-Tianjin 2, Nanjing Turing 6, FOC 2 and Claude Chime 2. Source-document notes and
+Tianjin 2, Nanjing Turing 6, FOC 2, Claude Chime 2, GaN ESC 5 and AD831 4. Source-document notes and
 reviewed assets keep their existing publication rules. The Smart Car homepage
 identifies seven IR tracking inputs. The DIY schematic PNG is a faithful
 derivative of the existing public PDF. The legacy FOC note redirect now leads
@@ -238,7 +238,7 @@ Maintain the current engineering-academic identity:
 - preserve the `v0.8.0` five-card mosaic as a historical release fact: it placed the OLED and TFT-display assemblies above the battery/USB power board, multi-rail power-supply board, and AD831 mixer;
 - keep the current nine-cutout nucleus in `components/technical-visual.tsx`, showing one board at a time for 5 seconds each; the earlier five-image nucleus belongs to release `v0.9.0`. Preserve the three equal-sized orbits, five marks per orbit, fixed category legend and category-coloured curved comets specified in `DESIGN.md`;
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
-- on `/work`, keep the sticky `01`–`10` rail, ten complete semantic project links, and exactly nine black signal intervals (one between each adjacent pair) whose short orange ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
+- on `/work`, keep the sticky `01`–`10` rail, ten complete semantic project links, and exactly nine canvas-colored signal intervals (one between each adjacent pair) whose short theme-accent ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
 - on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 10 channels and 34 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
 - on `/media`, keep the project-first Focus Aperture with ten source choices, one authentic lead record, and all 119 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the owner-voiced online CV described in `DESIGN.md`: no repeated method chains, education blocks or duplicate contact links, idiomatic (not literal) English headings, the complete original `public/uploads/projects/avatar.jpg` without crop, filter or replacement, and motion that pauses offscreen and disappears under `prefers-reduced-motion`;

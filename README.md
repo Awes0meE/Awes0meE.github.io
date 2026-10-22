@@ -241,7 +241,7 @@ git push origin v0.9.1
 ## 身份定位与隐私
 
 - 公开站点首先呈现机器人系统硬件方向，学生身份只用于说明当前阶段，不作为主标题。
-- 面向读者的联系入口公开 GitHub 与南洋理工大学学生邮箱 `ZHIYI012@e.ntu.edu.sg`，不公开所在地。
+- 面向读者的联系入口公开 GitHub、LinkedIn、南洋理工大学学生邮箱 `ZHIYI012@e.ntu.edu.sg`，以及仅在首页联系区显示的微信号 `AlvinLi_2333`；不公开所在地。
 
 ## 技术栈
 
@@ -364,7 +364,7 @@ Vercel 推荐配置：
 - Install command：`npm install`
 - Build command：`npm run build`
 - Output directory：保持默认
-- Node.js：使用 Vercel 默认 LTS
+- Node.js：遵循仓库 `engines` 基线，或使用满足该基线的 Vercel 当前 LTS
 
 ## 质量检查
 
