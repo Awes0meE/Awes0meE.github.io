@@ -4,7 +4,7 @@ This document explains how to add real portfolio content without changing the ap
 
 ## Content Priority
 
-1. Review the current ten-project archive and every route changed by the release candidate or active maintenance branch in both languages and at desktop/mobile widths.
+1. Review the current eleven-project archive and every route changed by the release candidate or active maintenance branch in both languages and at desktop/mobile widths.
 2. Keep the Juanyun sensitive boundary explicit: `Current_Product_ACUnit_Project` and `Current_Product_BaseUnit_Project` remain sensitive; only individually reviewed and explicitly approved desensitized derivatives may be published. Other legacy Juanyun material can use selected reviewed public evidence.
 3. Prefer real project photos, screenshots, videos, diagrams, logs, and selected files over placeholders or generated evidence imagery.
 4. Expand project archive pages with direct evidence, inline source/text previews, and internal links while preserving claim and privacy boundaries.
@@ -196,7 +196,7 @@ The homepage batch was published through PR #36, followed by six approved studie
 through PR #37. The final 2026-09-07 note batch adds ten approved studies across
 five projects. The collection then had 25 public notes across eight projects; the 2026-10-17 GaN
 quadrotor ESC import brought it to 30 public notes across nine projects, and the
-2026-10-18 AD831 active mixer import to 34 across ten, with no suspended sources. Twelve old notes and completed preview copies are retired;
+2026-10-18 AD831 active mixer import to 34 across ten, and the 2026-11-05 NUEDC 2025 self-aiming car import to 38 across eleven, with no suspended sources. Twelve old notes and completed preview copies are retired;
 current MDX is authoritative and Git retains previous versions.
 See [`active-work/portfolio-copy-rewrite.md`](active-work/portfolio-copy-rewrite.md)
 for the handoff and [`releases/remaining-engineering-notes-2026-09-07/README.md`](releases/remaining-engineering-notes-2026-09-07/README.md)

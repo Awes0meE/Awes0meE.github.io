@@ -1,8 +1,8 @@
 # Portfolio Writing Handoff
 
-**Updated:** 2026-10-19
+**Updated:** 2026-11-05
 
-All sixteen new bilingual study notes across the eight projects are approved. They were published through [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38), merged at `f77c1fc`. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content after the 2026-10-18 AD831 import: 10 projects, 34 public notes, 10 note channels and 119 media records. There are no remaining note drafts awaiting review.
+All sixteen new bilingual study notes across the eight projects are approved. They were published through [PR #38](https://github.com/Awes0meE/Awes0meE.github.io/pull/38), merged at `f77c1fc`. The final ten have been promoted into `content/notes/`, together with the approved concrete-heading and natural-paragraph-opening corrections. Twelve suspended old notes have been retired. Current content after the 2026-11-05 NUEDC import: 11 projects, 38 public notes, 11 note channels and 144 media records. There are no remaining note drafts awaiting review.
 
 The [release record](../releases/remaining-engineering-notes-2026-09-07/README.md) lists canonical routes, exact promotion/retirement hashes and verification. Completed review servers on ports 8771 and 8772 and their generated preview files are retired after publication. Dated review JSON records preserve the earlier checks; their old draft paths are historical.
 
@@ -78,7 +78,7 @@ This brief is for `gan-quadrotor-esc-fyp` and its five notes. They were publishe
 
 ## NUEDC 2025 Self-Aiming Car Brief (confirmed 2026-11-05)
 
-This brief is for `nuedc-2025-self-aiming-car` and its four notes. It was confirmed after three `grilling` rounds.
+This brief is for `nuedc-2025-self-aiming-car` and its four notes. They were published through PR #63 (merged at `580729a`). It was confirmed after three `grilling` rounds.
 
 - Contest: 2025 NUEDC (TI Cup), undergraduate problem E, a simple self-aiming device. The contest ran from 08:00 on 2025-07-30 to 20:00 on 08-02, and Jiangsu judging was in Nanjing on 08-03. The team won a Jiangsu second prize, the first NUEDC award in XJTLU's history, and did not reach the national round.
 - Team: three third-year SAT students (year 3 in summer 2025). Alvin was captain and owned system architecture, the hardware plan, wiring, power and all MSPM0 car code. One teammate owned K230 vision and gimbal code, and trained the single-class `yuan` model on the first morning. The other owned mechanics, assembly, integration and the report. Teammates appear as "two teammates" with no names, and no teacher is named.

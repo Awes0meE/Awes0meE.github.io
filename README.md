@@ -149,12 +149,12 @@ Use optional project `assetPaths` to list uploaded evidence from `public/uploads
 
 Important privacy rule: `visibility: private` hides a note from the website, but it does not hide the source file from a public GitHub repository. Files under `public/uploads/` are always public after deployment. Do not place private financial, proof, credential, installer, vendor, dependency, or build-output files there. For Juanyun material, `Current_Product_ACUnit_Project*` and `Current_Product_BaseUnit_Project*` remain sensitive; non-Current_Product legacy folders may publish selected reviewed evidence such as small source snippets, Gerber/BOM/PnP exports, EDA files, STEP/3MF files, schematics, PDFs, images, and demo media after pruning noisy raw dumps.
 
-Current repository content state, 2026-10-18:
+Current repository content state, 2026-11-05:
 
-The source collection contains 10 project pages, 34 public notes across all ten
-project channels, and 119 media records. The first eight projects have two approved
-bilingual studies each and the GaN quadrotor ESC final-year project has five, and the AD831 active mixer
-coursework has four; nine
+The source collection contains 11 project pages, 38 public notes across all eleven
+project channels, and 144 media records. The first eight projects have two approved
+bilingual studies each and the GaN quadrotor ESC final-year project has five, the AD831 active mixer
+coursework has four, and the NUEDC 2025 self-aiming car has four; nine
 existing technical/source-document pages remain available.
 
 The final batch adds two studies each for Tianjin STM32, Nanjing Turing, Juanyun
@@ -341,7 +341,7 @@ npm run validate-encoding # 检查 Git 管理的文本文件是否都是干净 U
 
 当前工作区内容状态：
 
-2026-10-18 内容状态：10 个项目主页、34 篇公开笔记、10 个项目通道、119 条媒体记录。原有 8 个项目各有两篇获批的双语专题，GaN 电调毕设有 5 篇，AD831 有源混频器有 4 篇，另保留 9 篇既有技术或来源文档。
+2026-11-05 内容状态：11 个项目主页、38 篇公开笔记、11 个项目通道、144 条媒体记录。原有 8 个项目各有两篇获批的双语专题，GaN 电调毕设有 5 篇，AD831 有源混频器有 4 篇，2025 电赛自行瞄准装置有 4 篇，另保留 9 篇既有技术或来源文档。
 
 本批加入天津 STM32、南京图灵、卷云相变散热器、无感 FOC 和 Claude Chime 各两篇笔记。原先暂挂的 12 篇旧稿及完成的预览副本已弃用，正文以 `content/notes/` 为准，历史版本仍保留在 Git 中。原始来源文档保持不变。
 

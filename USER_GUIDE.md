@@ -148,19 +148,19 @@ prototype 图片和技术标识只用于展示。它们不能证明某块板卡�
 
 ## Using The Work Project Aperture
 
-On `/work`, the desktop `01`–`10` rail stays visible while ten large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
+On `/work`, the desktop `01`–`11` rail stays visible while eleven large project chapters pass through the inspection stage. Each chapter is one complete link and exposes authentic imagery, status, timeline, focus, summary, and evidence availability. On mobile, the rail becomes a horizontal locator above the vertical chapter sequence.
 
 Nine spacious signal intervals separate adjacent projects. Their short accent-coloured ticks move from right to left, pause when the interval is offscreen or the browser document is hidden, and become static when the operating system requests reduced motion. The moving ticks mean “next record”; they do not report progress, telemetry, or completion.
 
 ## 使用项目检视窗
 
-`/work` 的桌面版会固定显示 `01`–`10` 定位条，右侧依次展示 10 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把定位条改成位于纵向章节上方的横向条。
+`/work` 的桌面版会固定显示 `01`–`11` 定位条，右侧依次展示 11 个大型项目章节。每个章节本身就是一个完整链接，并显示真实项目图像、状态、时间、方向、摘要和证据可用性；移动端会把定位条改成位于纵向章节上方的横向条。
 
 相邻项目之间共有 9 段留白更大的信号间隔。短竖线采用当前主题的强调色，由右向左移动；间隔离开视口或浏览器页面被隐藏时暂停，操作系统启用“减少动态效果”时保持静态。这些短竖线只表示“下一条档案”，不表示进度、遥测或项目完成度。
 
 ## Using The Notes Routed Index
 
-On `/notes`, choose a project from the list or dropdown, then narrow the public records by year. The current collection has 34 public notes across 10 projects, including nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete list.
+On `/notes`, choose a project from the list or dropdown, then narrow the public records by year. The current collection has 38 public notes across 11 projects, including nine retained technical/source-document pages. The twelve formerly suspended notes are retired; Git retains their history. Search matches English and Chinese titles, summaries, tags, and related project names. The result count updates with the controls, and Reset restores the complete list.
 
 Each ledger row is one complete link to the note detail. Dates describe archive coverage rather than a strict activity timeline, and `/notes/[slug]` opens in the Bench Log reading layout.
 
@@ -168,7 +168,7 @@ The selected path uses orange in the dark theme and cobalt in the light theme, f
 
 ## 使用笔记路由索引
 
-在 `/notes` 中，可以直接从列表或下拉框选择项目，再按年份筛选公开笔记。当前共有 34 篇公开笔记，关联 10 个项目，其中包括 9 篇保留的技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整列表。
+在 `/notes` 中，可以直接从列表或下拉框选择项目，再按年份筛选公开笔记。当前共有 38 篇公开笔记，关联 11 个项目，其中包括 9 篇保留的技术或来源文档。原先暂挂的 12 篇旧笔记已弃用，历史版本保留在 Git 中。搜索会匹配中英文标题、摘要、标签和关联项目名；结果数会随条件更新，“重置”会恢复完整列表。
 
 每条台账记录都是进入笔记详情的完整链接。日期只表示档案覆盖，不代表严格的工程活动时间线；`/notes/[slug]` 会以“工作台日志”阅读版式打开。
 
@@ -184,13 +184,13 @@ EN/ZH 旁边的太阳/月亮按钮用于切换浅色和深色主题。第一次�
 
 ## Using The Media Focus Aperture
 
-On `/media`, choose one of ten project sources to load that project's authentic lead record in the Focus Aperture. Frames on the homepage film carry their project source into this chooser. The complete 119-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
+On `/media`, choose one of eleven project sources to load that project's authentic lead record in the Focus Aperture. Frames on the homepage film carry their project source into this chooser. The complete 144-record archive remains grouped by project below, where each chapter keeps its context, case-study link, and source records together.
 
 Technical evidence is shown with contain fitting so schematics, PCB renders, and board photographs remain complete. The aperture reveal and scan stop when the operating system requests reduced motion; project identity, selection state, and all links remain available.
 
 ## 使用媒体深焦检视窗
 
-在 `/media` 中，选择 10 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页胶片上的画格会把项目来源带入这个选择器。完整的 119 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
+在 `/media` 中，选择 11 个项目来源之一，就会在深焦检视窗中加载该项目的一条真实主记录。首页胶片上的画格会把项目来源带入这个选择器。完整的 144 条档案仍按项目分组保留在下方，每个章节会把工程背景、案例链接和来源记录放在一起。
 
 原理图、PCB 渲染和板卡照片使用 contain 适配，避免为了版式裁掉技术证据。操作系统启用“减少动态效果”时，检视窗显现和扫描线会停止，但项目身份、选择状态和所有链接仍然可用。
 
