@@ -35,8 +35,8 @@ export type Project = {
   mediaLead?: string;
   /**
    * Normalized transparent cover card (subject centred on a 16:10 canvas).
-   * Company experience uses the company logo; personal work uses an EDA 3D
-   * render of the board (or the closest equivalent when none exists).
+   * Whatever best represents the project: usually the company logo for
+   * company experience, and a render, photo or wiring view for personal work.
    */
   cover: string;
   /** Optional dark-theme variant when the light card does not read on dark. */

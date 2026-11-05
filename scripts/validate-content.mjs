@@ -183,7 +183,7 @@ for (const project of projects) {
   }
 
   if (project.data.coverKind !== "company" && project.data.coverKind !== "render") {
-    addError(project.filePath, 'coverKind must be "company" (company logo) or "render" (EDA 3D render)');
+    addError(project.filePath, 'coverKind must be "company" (company logo) or "render" (personal-project cover)');
   }
 
   if (project.data.assetPaths !== undefined) {
