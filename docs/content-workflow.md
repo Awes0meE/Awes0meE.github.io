@@ -105,6 +105,27 @@ This is website-level hiding only. If the GitHub repository is public, private n
 
 The `/notes` Chinese headings and ledger titles use the shared explicit CJK system stack (`PingFang SC`, `Microsoft YaHei`, then the system sans fallback), matching the Media title treatment. The former ZCOOL subset remains archived under `app/fonts/` for provenance and does not require regeneration for new note titles.
 
+## Local Content Editor
+
+The owner edits Chinese only; English follows later through Claude. `npm.cmd run editor` (or double-click `tools/content-editor/open-editor.cmd` on Windows) opens a minimal desktop-style window: projects on the left with their notes nested underneath, and on the right the selected page's Chinese title plus every Chinese block of its body as an editable document. `Ctrl+S` saves.
+
+- Blocks are split and classified with the same rules as `components/content-renderer.tsx` (`tools/content-editor/blocks.mjs` mirrors `splitBlocks`, `getBlockLanguage` and `splitBilingualSlash`; keep them in step). English blocks are hidden. A bilingual heading `## English / 中文` shows only its Chinese half. Images and code appear as dim read-only markers for orientation; HTML comments are hidden.
+- In a paragraph, a blank line splits it into two paragraphs; emptying a paragraph deletes it. The Chinese half of a bilingual heading cannot be emptied.
+- Saving rewrites only the `titleZh:` line and the edited Chinese blocks. English text, every other frontmatter field and all untouched lines stay byte-identical.
+- If the file changed on disk after it was opened (another editor, an agent, a `git pull`), the save is refused and the page must be reopened.
+- The server uses no new dependencies, binds to `127.0.0.1` on a random port with a per-launch token, and exits a few seconds after the window closes, or after 30 minutes without hearing from the window. On Windows it opens an Edge `--app` window, on macOS a Chrome app window, otherwise the default browser.
+- The editor does not commit, lint or check writing rules.
+
+### Translation Queue
+
+Every saved Chinese change is appended to `docs/active-work/translation-queue.json`. The header shows "待翻译 N 处" and the sidebar marks pages with pending entries. Each entry carries `file`, `field` (`titleZh` or `body`), `blockType`, `section` (the nearest heading), `englishCounterpart` (the English title, the English half of the heading, or the English block directly before the Chinese one, when there is one), `before` (the Chinese the English still matches) and `after` (the current Chinese; empty means deleted). Repeated edits to the same text extend one entry, and an edit reverted to its original text removes the entry.
+
+Processing the queue (any agent, when it is non-empty and the owner asks for an update or a release):
+
+1. For each entry, find `after` in `file` (or `titleZh`), locate the English counterpart, and revise only that English so it carries the same substance as the new Chinese, deriving English from the Chinese under `skills/engineering-note-writer/SKILL.md` bilingual rules. A deletion removes the matching English; a split or added paragraph gets a matching English paragraph placed before its Chinese. For source-document notes with a separate English translation section, `englishCounterpart` is null and the matching passage lives in that section.
+2. Do not edit the owner's new Chinese beyond flagging problems to the owner.
+3. Remove processed entries, leaving `{ "entries": [] }`, then run the content verification below and commit the English with the queue update.
+
 ## Add Images Or Videos
 
 Put assets under:

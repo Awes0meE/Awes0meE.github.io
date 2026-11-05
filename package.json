@@ -10,6 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "editor": "node tools/content-editor/server.mjs",
     "lint": "eslint . --max-warnings=0 && npm run validate-content && npm run validate-encoding",
     "typecheck": "tsc --noEmit",
     "validate-content": "node scripts/validate-content.mjs",

@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>内容编辑器</title>
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --panel: #ffffff;
+    --line: #e2e0da;
+    --hover: #efede8;
+    --text: #1d1d1b;
+    --muted: #8a877f;
+    --accent: #d9541e;
+    --accent-soft: #fbe9e1;
+    --danger: #c0392b;
+    --ok: #2e7d4f;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121211;
+      --panel: #1a1a19;
+      --line: #2c2b29;
+      --hover: #222220;
+      --text: #e9e7e2;
+      --muted: #8d8a83;
+      --accent: #ff7a3d;
+      --accent-soft: #3a2116;
+      --danger: #ff6b5b;
+      --ok: #5cc88a;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 system-ui, "Microsoft YaHei UI", "PingFang SC", sans-serif;
+  }
+
+  /* sidebar */
+  aside { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--line); }
+  #search {
+    margin: 12px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    color: inherit;
+    font: inherit;
+  }
+  #tree { flex: 1; overflow-y: auto; padding: 0 6px 16px; }
+  .group { margin-bottom: 8px; }
+  .item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    width: 100%;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 5px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .item:hover { background: var(--hover); }
+  .item.active { background: var(--accent-soft); color: var(--accent); }
+  .item.project { font-weight: 600; }
+  .item.note { padding-left: 22px; color: var(--muted); }
+  .item.note.active { color: var(--accent); }
+  .item .name { flex: 1; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; transform: translateY(-1px); }
+  .tag { font-size: 11px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
+  .section-label { padding: 12px 10px 4px; font-size: 12px; color: var(--muted); }
+
+  /* main */
+  main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  #path { flex: 1; font: 12px ui-monospace, Consolas, monospace; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #queue { font-size: 12px; color: var(--accent); }
+  #status { font-size: 12px; color: var(--muted); }
+  #status.dirty { color: var(--accent); }
+  #status.error { color: var(--danger); }
+  #status.ok { color: var(--ok); }
+  button.primary {
+    padding: 6px 16px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+  }
+  button.primary:disabled { opacity: 0.4; cursor: default; }
+
+  #scroll { flex: 1; overflow-y: auto; }
+  #doc { max-width: 780px; margin: 0 auto; padding: 28px 24px 120px; }
+  #empty { padding: 80px 24px; text-align: center; color: var(--muted); }
+
+  .field {
+    display: block;
+    width: 100%;
+    margin: 0 0 6px;
+    padding: 6px 12px;
+    border: 0;
+    border-left: 3px solid transparent;
+    border-radius: 0 6px 6px 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.85;
+    resize: none;
+    overflow: hidden;
+  }
+  .field:hover { background: var(--hover); }
+  .field:focus { outline: none; background: var(--panel); box-shadow: 0 0 0 1px var(--line); }
+  .field.changed { border-left-color: var(--accent); }
+  #titleZh { font-size: 26px; font-weight: 700; line-height: 1.4; margin-bottom: 18px; }
+  .field.h2 { font-size: 20px; font-weight: 700; margin-top: 22px; line-height: 1.5; }
+  .field.h3, .field.h4 { font-size: 17px; font-weight: 700; margin-top: 14px; line-height: 1.5; }
+  .fixed {
+    margin: 4px 0 10px 15px;
+    padding: 4px 10px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    max-height: 4.6em;
+  }
+  .fixed b { font-weight: 600; margin-right: 6px; }
+  .hint { color: var(--muted); font-size: 12px; margin: 0 0 18px 15px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<aside>
+  <input id="search" type="search" placeholder="搜索标题" autocomplete="off">
+  <nav id="tree"></nav>
+</aside>
+<main>
+  <header>
+    <span id="path">未选择</span>
+    <span id="queue"></span>
+    <span id="status"></span>
+    <button id="save" class="primary" disabled title="Ctrl+S">保存</button>
+  </header>
+  <div id="scroll">
+    <div id="empty">从左侧选一篇项目或笔记</div>
+    <div id="doc" hidden></div>
+  </div>
+</main>
+<script>
+  const TOKEN = "__TOKEN__";
+  const $ = (id) => document.getElementById(id);
+  const fixedLabel = { image: "图片", code: "代码", heading: "标题", text: "其他" };
+  let list = null;
+  let current = null; // { kind, slug, hash, title, fields: [{ el, index?, original }] }
+
+  async function api(path, options = {}) {
+    const res = await fetch(path, {
+      ...options,
+      headers: { "Content-Type": "application/json", "X-Token": TOKEN, ...(options.headers || {}) }
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+
+  const changedFields = () => (current ? current.fields.filter((f) => f.el.value !== f.original) : []);
+  const isDirty = () => changedFields().length > 0;
+
+  function setStatus(text, kind = "") {
+    $("status").textContent = text;
+    $("status").className = kind;
+  }
+
+  function refreshState() {
+    for (const f of current ? current.fields : []) f.el.classList.toggle("changed", f.el.value !== f.original);
+    const dirty = isDirty();
+    $("save").disabled = !dirty;
+    if (dirty) setStatus(`● ${changedFields().length} 处未保存`, "dirty");
+    else if ($("status").classList.contains("dirty")) setStatus("");
+    document.title = (dirty ? "● " : "") + "内容编辑器";
+  }
+
+  function grow(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
+
+  function renderTree() {
+    const query = $("search").value.trim().toLowerCase();
+    const matches = (e) => !query || [e.titleZh, e.slug].some((v) => v.toLowerCase().includes(query));
+    const button = (e) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = `item ${e.kind}` + (current && current.kind === e.kind && current.slug === e.slug ? " active" : "");
+      const name = document.createElement("span");
+      name.className = "name";
+      name.textContent = e.titleZh || e.slug;
+      b.append(name);
+      if (e.kind === "note" && e.visibility !== "public") {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = "私密";
+        b.append(tag);
+      }
+      if (e.pending) {
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.title = `${e.pending} 处待翻译`;
+        b.append(dot);
+      }
+      b.addEventListener("click", () => open(e.kind, e.slug));
+      return b;
+    };
+    const tree = $("tree");
+    tree.replaceChildren();
+    for (const project of list.projects) {
+      const notes = project.notes.filter(matches);
+      if (!matches(project) && !notes.length) continue;
+      const group = document.createElement("div");
+      group.className = "group";
+      group.append(button(project), ...notes.map(button));
+      tree.append(group);
+    }
+    const loose = list.unlinkedNotes.filter(matches);
+    if (loose.length) {
+      const label = document.createElement("div");
+      label.className = "section-label";
+      label.textContent = "未关联项目的笔记";
+      tree.append(label, ...loose.map(button));
+    }
+    $("queue").textContent = list.pendingTotal ? `待翻译 ${list.pendingTotal} 处` : "";
+    $("queue").title = "保存过的中文改动，下次让 Claude 按 docs/active-work/translation-queue.json 补英文";
+  }
+
+  async function loadList() {
+    list = await api("/api/list");
+    renderTree();
+  }
+
+  function field(className, value, index) {
+    const el = document.createElement("textarea");
+    el.className = `field ${className}`;
+    el.rows = 1;
+    el.spellcheck = false;
+    el.value = value;
+    el.addEventListener("input", () => { grow(el); refreshState(); });
+    current.fields.push({ el, index, original: value });
+    return el;
+  }
+
+  function render(data) {
+    const doc = $("doc");
+    doc.replaceChildren();
+    current.fields = [];
+    const title = field("", data.titleZh);
+    title.id = "titleZh";
+    title.addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
+    doc.append(title);
+
+    const editable = data.blocks.filter((b) => b.role === "zh");
+    if (!editable.length) {
+      const hint = document.createElement("p");
+      hint.className = "hint";
+      hint.textContent = "这一篇的正文没有中文段落。";
+      doc.append(hint);
+    }
+    for (const block of data.blocks) {
+      if (block.role === "fixed") {
+        const div = document.createElement("div");
+        div.className = "fixed";
+        const label = document.createElement("b");
+        label.textContent = fixedLabel[block.type] || "其他";
+        div.append(label, block.text || "");
+        doc.append(div);
+        continue;
+      }
+      const isHeading = block.type === "heading" || block.type === "heading-pair";
+      const el = field(isHeading ? `h${block.level}` : "", block.text, block.index);
+      if (isHeading) el.addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
+      doc.append(el);
+    }
+    $("empty").hidden = true;
+    doc.hidden = false;
+    requestAnimationFrame(() => current.fields.forEach((f) => grow(f.el)));
+  }
+
+  async function open(kind, slug, { keepScroll = false } = {}) {
+    if (!keepScroll && isDirty() && !confirm("当前改动还没保存，确定要丢弃吗？")) return;
+    try {
+      const data = await api(`/api/${kind}/${slug}`);
+      const scrollTop = $("scroll").scrollTop;
+      current = { kind, slug, hash: data.hash, fields: [] };
+      render(data);
+      $("path").textContent = data.path;
+      $("scroll").scrollTop = keepScroll ? scrollTop : 0;
+      if (!keepScroll) setStatus("");
+      refreshState();
+      renderTree();
+    } catch (error) {
+      setStatus(error.message, "error");
+    }
+  }
+
+  async function save() {
+    if (!isDirty()) return;
+    const edits = {};
+    let titleZh = null;
+    for (const f of changedFields()) {
+      if (f.index === undefined) titleZh = f.el.value;
+      else edits[f.index] = f.el.value;
+    }
+    const payload = { titleZh: titleZh ?? current.fields[0].original, edits, baseHash: current.hash };
+    try {
+      setStatus("保存中…");
+      await api(`/api/${current.kind}/${current.slug}`, { method: "PUT", body: JSON.stringify(payload) });
+      // Block positions can shift after a delete or a split, so reload the page from disk.
+      await open(current.kind, current.slug, { keepScroll: true });
+      setStatus("已保存 " + new Date().toLocaleTimeString(), "ok");
+      await loadList();
+    } catch (error) {
+      setStatus(error.message, "error");
+    }
+  }
+
+  $("search").addEventListener("input", renderTree);
+  $("save").addEventListener("click", save);
+  document.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+      event.preventDefault();
+      save();
+    }
+  });
+  window.addEventListener("resize", () => current && current.fields.forEach((f) => grow(f.el)));
+  window.addEventListener("beforeunload", (event) => { if (isDirty()) event.preventDefault(); });
+  window.addEventListener("pagehide", () => navigator.sendBeacon(`/api/bye?token=${TOKEN}`));
+  setInterval(() => api("/api/ping", { method: "POST" }).catch(() => {}), 60_000);
+
+  loadList().catch((error) => setStatus(error.message, "error"));
+</script>
+</body>
+</html>

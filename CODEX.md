@@ -68,6 +68,7 @@ Baseline:
 ```powershell
 npm.cmd install
 npm.cmd run dev
+npm.cmd run editor
 npm.cmd run lint
 npm.cmd run validate-content
 npm.cmd run validate-encoding

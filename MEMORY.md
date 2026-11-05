@@ -169,6 +169,7 @@ This file is for future AI sessions and long-running portfolio maintenance. Keep
 
 ## Important Files
 
+- `tools/content-editor/`: local-only Chinese editor (`npm run editor`, added 2026-11-05). The owner edits only `titleZh` and Chinese body blocks; each save logs the change to `docs/active-work/translation-queue.json`, and agents later update the matching English and clear the queue (`docs/content-workflow.md`).
 - `app/page.tsx`: homepage layout and major public-facing sections.
 - `app/layout.tsx`: root layout, metadata, language bootstrap script, header/footer shell.
 - `components/logo.tsx`: approved iRidium header mark and the user-selected B-style script wordmark from `public/brand/iridium-wordmark-script.png`; the wordmark is a portable transparent asset and does not switch to `铱` in Chinese mode.

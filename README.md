@@ -87,6 +87,12 @@ Open:
 http://127.0.0.1:3000
 ```
 
+Edit Chinese titles and body text in the local content editor window; saved changes queue up for English translation (see `docs/content-workflow.md`):
+
+```bash
+npm run editor
+```
+
 Local troubleshooting:
 
 - Detailed setup and recovery commands live in `docs/environment-toolchain.md`.

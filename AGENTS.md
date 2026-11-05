@@ -14,6 +14,9 @@ When starting work on a new computer or a fresh Codex session:
    - `CODEX.md`
    - if `docs/active-work/portfolio-copy-rewrite.md` exists, read it before
      resuming the active rewrite;
+   - if `docs/active-work/translation-queue.json` has entries, the owner has
+     edited Chinese in the content editor and the matching English still needs
+     updating; follow "Translation Queue" in `docs/content-workflow.md`;
    - `PRODUCT.md` for product, scope, and evidence constraints;
    - `DESIGN.md` for visual, layout, interaction, or motion work;
    - `MEMORY.md`
