@@ -20,3 +20,5 @@
 *.webp binary
 *.ico binary
 *.pdf binary
+
+*.cmd text eol=crlf
