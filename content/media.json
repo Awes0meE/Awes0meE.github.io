@@ -1585,8 +1585,8 @@
   },
   {
     "id": "nuedc-teammate-at-bench",
-    "title": "A teammate at the bench during the contest",
-    "titleZh": "比赛中在工位上调试的队友",
+    "title": "Our bench in the lab during the contest",
+    "titleZh": "比赛期间我们在实验室的工位",
     "type": "image",
     "src": "/uploads/projects/nuedc-2025-self-aiming-car/photos/teammate-at-bench.webp",
     "thumbnail": "/uploads/projects/nuedc-2025-self-aiming-car/photos/teammate-at-bench.webp",
@@ -1597,15 +1597,15 @@
   },
   {
     "id": "nuedc-car-on-bench",
-    "title": "The car on the bench during the contest",
-    "titleZh": "比赛中工位上的小车",
+    "title": "Debugging on with flying wires",
+    "titleZh": "板子烧了以后飞线接着调",
     "type": "image",
     "src": "/uploads/projects/nuedc-2025-self-aiming-car/photos/car-on-bench.webp",
     "thumbnail": "/uploads/projects/nuedc-2025-self-aiming-car/photos/car-on-bench.webp",
     "date": "2025-08-01",
     "projectSlug": "nuedc-2025-self-aiming-car",
-    "caption": "The car on the bench midway through the contest, wired up with the gimbal mounted.",
-    "captionZh": "比赛进行到一半时工位上的小车，线已经接上，云台也装好了。"
+    "caption": "Day three in the lab, after the core board burned: the car kept running on the spare board through a nest of flying wires while the new chip was on its way.",
+    "captionZh": "比赛第三天的实验室，核心板烧掉以后：新芯片还在路上，车靠备用板和一大把飞线接着调。"
   },
   {
     "id": "nuedc-track-and-target",
@@ -1618,6 +1618,18 @@
     "projectSlug": "nuedc-2025-self-aiming-car",
     "caption": "The car on the practice track with the K230 screen facing the target.",
     "captionZh": "练习跑道上的小车，K230 的屏幕正对着靶子。"
+  },
+  {
+    "id": "nuedc-sealed-box",
+    "title": "The box sealed by the organisers",
+    "titleZh": "组委会封条封好的箱子",
+    "type": "image",
+    "src": "/uploads/projects/nuedc-2025-self-aiming-car/photos/sealed-box.webp",
+    "thumbnail": "/uploads/projects/nuedc-2025-self-aiming-car/photos/sealed-box.webp",
+    "date": "2025-08-02",
+    "projectSlug": "nuedc-2025-self-aiming-car",
+    "caption": "The finished car boxed and closed with the Jiangsu organising committee's seal at 8 pm on 2 August.",
+    "captionZh": "8 月 2 日晚 8 点，做好的车装进箱子，贴上江苏赛区组委会的封条。"
   },
   {
     "id": "nuedc-packed-for-judging",

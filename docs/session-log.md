@@ -1279,3 +1279,8 @@ A true 3D atom (rings evenly spread in space, perspective tumble) was sketched a
 - Rules: the owner relaxed the cover rule to whatever best represents the project. `docs/content-workflow.md`, `DESIGN.md`, `lib/content.ts` and the validator message were updated; `coverKind` keeps its two values. The cover is a transparent card cut from the owner's rendering of the car.
 - Release: PR #63 merged at `580729a`; Vercel production reports success, and the live project page, four notes and cover return 200 with the corrected text. Closeout branch `docs/neat-nuedc-closeout` synchronized counts in `CODEX.md`, `PRODUCT.md`, `DESIGN.md`, `README.md`, `USER_GUIDE.md`, `MEMORY.md`, `docs/architecture.md`, `docs/content-workflow.md` and the handoff: 11 projects, 38 public notes, 11 channels, 144 media records (135 images, 9 videos).
 - Verification: lint, content and encoding validation, typecheck and the 56-page production build pass. `npm audit --omit=dev` reports one critical advisory in `next` (fix needs `next@16.4.5`, outside the declared range), left for later at the owner's earlier instruction.
+
+## 2026-11-05 — NUEDC cover and result correction
+
+- The owner corrected the result: no extension was completed (extension 1 had been recorded as passed). The homepage judging paragraph and ending, the K230 note and the handoff brief now say basic requirements 1 to 3 only.
+- The cover is now the NUEDC logo, cut out with a white-lettering `coverDark` variant; `coverKind` stays `render`. The homepage gained the organisers' sealed box (new media record), the contest-lab bench and the flying-wire debugging photo (existing records, recaptioned). Totals: 11 projects, 38 notes, 145 media records (136 images, 9 videos).

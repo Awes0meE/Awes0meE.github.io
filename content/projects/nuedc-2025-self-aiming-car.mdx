@@ -10,6 +10,7 @@ date: "2025-06 to 2025-08"
 status: "Completed"
 tags: ["MSPM0", "K230", "Line Tracking", "Control", "Embedded", "Competition"]
 cover: "/uploads/projects/nuedc-2025-self-aiming-car/cover-card.webp"
+coverDark: "/uploads/projects/nuedc-2025-self-aiming-car/cover-card-dark.webp"
 coverKind: "render"
 featured: true
 links:
@@ -56,6 +57,8 @@ I was the captain, responsible for the system architecture, the hardware plan, t
 ![Rendering of the car, front / 整车渲染图，前侧](/uploads/projects/nuedc-2025-self-aiming-car/design/render-front.webp)
 ![Rendering of the car, rear / 整车渲染图，后侧](/uploads/projects/nuedc-2025-self-aiming-car/design/render-rear.webp)
 
+![Our bench in the lab during the contest / 比赛期间我们在实验室的工位](/uploads/projects/nuedc-2025-self-aiming-car/photos/teammate-at-bench.webp)
+
 ![Pin map for the MSPM0 and K230 / MSPM0 与 K230 的引脚分配](/uploads/projects/nuedc-2025-self-aiming-car/design/pin-topology.webp)
 
 ## Line Tracking / 循迹
@@ -71,6 +74,7 @@ On day two the main controller burned. The grey-scale sensors were powered from 
 第二天，主控板烧了。灰度传感器那时接的是 5 V，输出的高电平也就是 5 V；MSPM0 的普通 IO 口最多只能承受比 3.3 V 电源高 0.3 V 的电压，我们又没在中间加任何保护，5 V 的输出直接怼进 IO 口，C07A 核心板就这么没了。手上的备用板几乎不能用，我在上面飞线，凑合着接着调；顺丰加急寄来的新芯片第四天清晨才到。最后十二个小时，一直在换芯片、焊接、飞线，这些都是我做的，传感器也改到了 3.3 V 上。5 V 的输出怎样烧掉一个 3.3 V 的引脚，车上两套电源各自给谁供电，写在[两套电源与继电器控制的激光](/notes/nuedc-power-systems-and-relay-laser)。
 
 ![The C07A core board that burned / 烧掉的那块 C07A 核心板](/uploads/projects/nuedc-2025-self-aiming-car/photos/burned-c07a-board.webp)
+![Debugging on with flying wires after the board burned / 板子烧了以后飞线接着调](/uploads/projects/nuedc-2025-self-aiming-car/photos/car-on-bench.webp)
 
 ![Power topology of the car / 整车电源拓扑](/uploads/projects/nuedc-2025-self-aiming-car/design/power-topology.webp)
 
@@ -94,12 +98,13 @@ We sealed the box at 8 pm on 2 August. The next day we carried it to Nanjing for
 
 8 月 2 日晚上 8 点封箱。第二天我们抱着箱子去南京，在南京信息职业技术学院参加江苏赛区测评，一路上都在担心那些飞线经不经得住颠。到了现场，别的学校是学校统一组织，大巴一辆接一辆，队伍举着队旗，带着一届届传下来的代码和成熟的备赛体系；我们三个人自己来，抱着一个箱子，活像误闯天家。场上还看到了江苏科技大学的队伍。我的嵌入式全是跟着江协科技的视频学的，那套课大家都管它叫江科大，这回真撞见了江科大本校的人，差距一下子就具体了。
 
+![The box sealed by the organisers / 组委会封条封好的箱子](/uploads/projects/nuedc-2025-self-aiming-car/photos/sealed-box.webp)
 ![The car packed for judging / 装箱待测的小车](/uploads/projects/nuedc-2025-self-aiming-car/photos/packed-for-judging.webp)
 ![Unpacking at the venue / 测评现场开箱](/uploads/projects/nuedc-2025-self-aiming-car/photos/unpacking-the-car.webp)
 
-Before opening the box we silently prayed to the machine spirit. The car behaved itself and ran just as it had in the lab. All three basic requirements passed, and so did the first extension: one lap with the laser held on the target the whole way. The second extension needed two laps. At every right-angle corner the car body swung round, the target was flung out of frame, and the gimbal could not win it back, so that one failed. We never attempted the third, drawing a circle in sync with the lap. When the judge picked up the score sheet and walked away, the string that had been pulled tight for four days finally went slack.
+Before opening the box we silently prayed to the machine spirit. The car behaved itself and ran just as it had in the lab. All three basic requirements passed. The extensions were another story: not one of them. The first two ask the car to drive one lap and then two with the laser held on the target the whole way, and both came apart at the right-angle corners. The car body swung round, the target was flung out of frame, and the gimbal could not win it back. We never attempted the third, drawing a circle in sync with the lap. When the judge picked up the score sheet and walked away, the string that had been pulled tight for four days finally went slack.
 
-开箱前，三个人对着车默默祈祷机魂大悦。车很争气，跟在实验室里一个样：基本要求三项全部完成，发挥部分第一项，跑一圈全程激光连续打靶，也做到了。发挥第二项要跑两圈，每过一个直角弯，车身一转，靶就被甩出画面，云台追不回来，这一项没拿下；第三项同步画圆，我们没做。评委拿着测评表转身走开的那一刻，三个人绷了四天的那根弦才终于松下来。
+开箱前，三个人对着车默默祈祷机魂大悦。车很争气，跟在实验室里一个样：基本要求三项全部完成。发挥部分就没那么争气了，一项都没拿下：前两项要车跑一圈、跑两圈，全程让激光一直打在靶上，结果都栽在直角弯上，车身一转，靶就被甩出画面，云台追不回来；第三项同步画圆，我们没做。评委拿着测评表转身走开的那一刻，三个人绷了四天的那根弦才终于松下来。
 
 ![The car on the track / 跑道上的小车](/uploads/projects/nuedc-2025-self-aiming-car/photos/car-on-track.webp)
 ![The target sheet / 靶纸](/uploads/projects/nuedc-2025-self-aiming-car/photos/target-sheet.webp)
@@ -115,6 +120,6 @@ A few days later the [Jiangsu results](/uploads/projects/nuedc-2025-self-aiming-
 ![The team with the car and certificate at the SAT building / 三人带着小车和证书在 SAT 楼前](/uploads/projects/nuedc-2025-self-aiming-car/photos/team-at-sat.webp)
 ![The team at the Jiangsu division backdrop / 三人在江苏赛区背景板前](/uploads/projects/nuedc-2025-self-aiming-car/photos/team-at-backdrop.webp)
 
-A team that knocked on seven or eight doors to find a supervisor and only scraped through registration on an organiser's goodwill. In four days it burned a core board, threw away a gimbal, and still finished the extension with the laser on the bullseye, putting XJTLU's name on Jiangsu's NUEDC award list for the first time. I'm genuinely proud of this, and I have no intention of being modest about it.
+A team that knocked on seven or eight doors to find a supervisor and only scraped through registration on an organiser's goodwill. In four days it burned a core board, threw away a gimbal and failed every extension, and the basic requirements alone still carried it to a provincial second prize, putting XJTLU's name on Jiangsu's NUEDC award list for the first time. I'm genuinely proud of this, and I have no intention of being modest about it.
 
-一支敲了七八扇门才找到老师、靠组委会通融才补上报名的队伍，四天里烧了一块核心板、扔了一个云台，最后还是在发挥题里把激光稳稳打在靶心上，把西浦的名字第一次写进了江苏赛区电赛的获奖名单。这件事我是真的骄傲，也不打算谦虚。
+一支敲了七八扇门才找到老师、靠组委会通融才补上报名的队伍，四天里烧了一块核心板、扔了一个云台，发挥题一项都没拿下，光靠基本要求也拼到了省二等奖，把西浦的名字第一次写进了江苏赛区电赛的获奖名单。这件事我是真的骄傲，也不打算谦虚。
