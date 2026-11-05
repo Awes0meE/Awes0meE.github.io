@@ -262,9 +262,9 @@ export default function MediaPage() {
                           <a
                             href={item.src}
                             className={styles.mediaCell}
-                            {...(item.type === "image"
-                              ? { "data-lightbox": "", "data-caption-en": item.title, "data-caption-zh": item.titleZh ?? item.title }
-                              : {})}
+                            data-lightbox={item.type === "video" ? "video" : ""}
+                            data-caption-en={item.title}
+                            data-caption-zh={item.titleZh ?? item.title}
                             aria-label={`${item.titleZh ?? item.title} / ${item.title}`}
                           >
                             <div className={styles.mediaVisual}>

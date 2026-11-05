@@ -266,9 +266,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       key={item.id}
                       href={item.src}
                       className="bench-media-tile"
-                      {...(item.type === "image"
-                        ? { "data-lightbox": "", "data-caption-en": item.title, "data-caption-zh": item.titleZh ?? item.title }
-                        : {})}
+                      data-lightbox={item.type === "video" ? "video" : ""}
+                      data-caption-en={item.title}
+                      data-caption-zh={item.titleZh ?? item.title}
                     >
                       <span className="bench-media-frame">
                         <Image

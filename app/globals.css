@@ -3748,20 +3748,46 @@ html.lightbox-open {
   backdrop-filter: blur(6px);
 }
 
+/* A flex stage gives the media a definite box, so max-height: 100% resolves
+   and the whole image fits. Auto margins centre it without clipping when the
+   zoomed image is larger than the stage and the stage scrolls. */
 .lightbox-stage {
-  display: grid;
+  display: flex;
   min-height: 0;
-  place-items: center;
+  overflow: hidden;
   padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem) 0.75rem;
   cursor: zoom-out;
 }
 
-.lightbox-image {
+.lightbox-stage.is-zoomed {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.lightbox-image,
+.lightbox-video {
+  width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 100%;
+  margin: auto;
   object-fit: contain;
   background: rgb(var(--c-well));
   box-shadow: 0 24px 64px rgb(var(--c-shadow) / calc(0.45 * var(--shadow-k)));
+}
+
+.lightbox-image {
+  cursor: zoom-in;
+}
+
+.lightbox-stage.is-zoomed .lightbox-image {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+.lightbox-video {
+  background: rgb(var(--c-well));
   cursor: default;
 }
 
@@ -3810,6 +3836,10 @@ html.lightbox-open {
 
 [data-lightbox] {
   cursor: zoom-in;
+}
+
+[data-lightbox="video"] {
+  cursor: pointer;
 }
 
 @keyframes lightbox-in {
