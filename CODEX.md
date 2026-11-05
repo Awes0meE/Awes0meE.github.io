@@ -187,8 +187,8 @@ The site has a top-right language toggle for English and Simplified Chinese.
 
 ## Current Content State
 
-The source now contains 11 project pages, 38 public notes and 144 media records
-(135 images, 9 videos). All eleven projects have note channels. The 2026-09-07 revision
+The source now contains 11 project pages, 38 public notes and 145 media records
+(136 images, 9 videos). All eleven projects have note channels. The 2026-09-07 revision
 gave the first eight projects two approved bilingual studies each, with nine
 technical/source-document notes remaining; the GaN quadrotor ESC final-year project
 (added 2026-10-17) has five notes, the AD831 active mixer coursework (added
@@ -240,7 +240,7 @@ Maintain the current engineering-academic identity:
 - keep the atom motion slow and legible, pause it when the hero is not visible, and provide a stable `prefers-reduced-motion` state with the five marks on every orbit still evenly distributed;
 - on `/work`, keep the sticky `01`–`11` rail, eleven complete semantic project links, and exactly ten canvas-colored signal intervals (one between each adjacent pair) whose short theme-accent ticks move right to left at about `12px/s`; pause an interval when it is offscreen or the document is hidden, make it static under `prefers-reduced-motion`, and use only reviewed project imagery from `public/uploads/projects/`;
 - on `/notes`, derive channel stems and semantic note rows from currently public notes, feeding one continuous Ember reading path with native search plus project and year controls (currently 11 channels and 38 rows). Search only lightweight bilingual metadata, treat dates as archive metadata rather than a strict engineering timeline, open `/notes/[slug]` in the Bench Log layout, and preserve a fully visible static equivalent under `prefers-reduced-motion`;
-- on `/media`, keep the project-first Focus Aperture with eleven source choices, one authentic lead record, and all 144 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
+- on `/media`, keep the project-first Focus Aperture with eleven source choices, one authentic lead record, and all 145 repository records grouped server-side by project. Preserve uncropped evidence, query-linked source context from homepage thumbnails, native controls, and a complete static state under `prefers-reduced-motion`;
 - on `/about`, keep the owner-voiced online CV described in `DESIGN.md`: no repeated method chains, education blocks or duplicate contact links, idiomatic (not literal) English headings, the complete original `public/uploads/projects/avatar.jpg` without crop, filter or replacement, and motion that pauses offscreen and disappears under `prefers-reduced-motion`;
 - treat the hero derivatives and sourced technology marks as presentation and identification only. They do not prove component identity, tool proficiency, project ownership, fabrication, bring-up, measurement, validation, endorsement, or affiliation;
 - bilingual Chinese/English content;

@@ -408,7 +408,7 @@ The `/media` route uses **Experience mode** inside the shared Kinetic Signal Led
 
 ### Project-first archive structure
 
-- The current repository-backed archive contains 144 records across eleven real projects: 135 images and nine videos, with no unassigned records. These totals are derived from `content/media.json`; interface counters must continue to follow the content rather than preserving stale hard-coded numbers.
+- The current repository-backed archive contains 145 records across eleven real projects: 136 images and nine videos, with no unassigned records. These totals are derived from `content/media.json`; interface counters must continue to follow the content rather than preserving stale hard-coded numbers.
 - The first viewport is a three-zone aperture on wide screens: an archive ledger at left, one uncropped focus record in the center, and the eleven-project source index at right. A grouped-library cue touches the lower edge and leads directly to the selected project's chapter.
 - Below the aperture, one server-rendered section per project keeps the full localized project title, summary, status, timeline, record counts, case-study action, and continuous contact sheet directly attached to its media records. Project identity must not be separated from the images it qualifies.
 - `app/media/page.tsx` owns data loading, grouping, counters, project chapters, and record links as a Server Component. `MediaFocusAperture` is the deliberately small client island: it owns only project-source selection and the lead-record swap. Do not move the full repository archive or its factual grouping into client state.

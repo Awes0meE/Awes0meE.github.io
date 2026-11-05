@@ -1,23 +1,23 @@
 ---
 title: "Weighted Six-Channel Line Tracking and Lap Counting"
 titleZh: "六路灰度循迹的加权与计圈"
-summary: "How the NUEDC car's MSPM0 code turns six grey-scale channels into steering: signed weights summed into a target wheel-speed difference, a steering loop and a speed loop sharing one base PWM, and laps counted from the outer sensor crossing each right-angle corner while the main loop blocks and the interrupt keeps driving."
-summaryZh: "电赛小车的 MSPM0 代码怎样把六路灰度变成转向：带符号的权重加成一个轮速差目标，转向环和速度环共用一个基础 PWM，计圈靠最外侧那一路在每个直角弯压线再离线，主循环卡住的时候中断照样在开车。"
+summary: "The NUEDC car's line tracking took the first two days and ran steadily only on the evening of day two. Read again, its handful of lines turn six grey-scale channels into a target wheel-speed difference, let a sum and a difference decide between a gentle arc and a pivot, and count laps off the same outer sensor that pulls hardest."
+summaryZh: "电赛小车的循迹占掉了前两天，到第二天晚上才跑稳。把那几行代码重新读一遍：六路灰度加成一个轮速差目标，一个和、一个差决定车是缓缓画弧还是原地打转，计圈用的又恰好是拽得最狠的那一路传感器。"
 date: "2026.11.05"
 tags: ["MSPM0", "Line Tracking", "Motor Control", "Encoder"]
 projectSlug: "nuedc-2025-self-aiming-car"
 visibility: public
 ---
 
-The whole line-following logic in `empty.c` is one function, `xunji()`. It reads six pins and runs six `if` statements, each adding a fixed number to `score`: 25, 14, 6, −6, −14, −25. The return value, minus 1, becomes `Turn1`, and nothing else in the car decides where to steer. The first two days went almost entirely into line tracking, and the car only ran steadily on the evening of day two. What a sum of six weights actually commands is clearer once it is followed into the two control loops and then into the corner logic sharing the same sensors.
+The line-tracking function in `empty.c` is called `xunji()`, pinyin for line tracking. The variable that picks the lap count is `xuanti`, pinyin for choosing the problem, and the six grey-scale readings live in `HD0` to `HD5`, the initials of grey-scale in pinyin. One glance at the names tells you this code was written in a contest. The first two days went almost entirely into it, and the car only ran steadily on the evening of day two. The whole decision about where to steer is six `if` statements, each adding a fixed number to `score`: 25, 14, 6, −6, −14, −25. It reads like a little scoreboard. What it actually commands only becomes clear once it is followed into the two control loops.
 
-`empty.c` 里的循迹逻辑全在一个函数 `xunji()` 里：读六个引脚，走六个 `if`，每个往 `score` 上加一个固定的数，25、14、6、−6、−14、−25。返回值减 1 就是 `Turn1`，车往哪拐，全由它说了算。前两天几乎全花在循迹上，车到第二天晚上才跑稳。六个权重加起来到底在命令什么，要顺着它进到两个控制环里看，再看用同一组传感器的过弯逻辑。
+`empty.c` 里负责循迹的函数叫 `xunji()`，选圈数的变量叫 `xuanti`，六路灰度的读数存在 `HD0` 到 `HD5`，一水的拼音缩写，比赛代码的气质一眼就能认出来。前两天几乎全花在它身上，车到第二天晚上才跑稳。往哪拐的全部判断，就是六个 `if`，每个往 `score` 上加一个固定的数：25、14、6、−6、−14、−25。读起来像一块小记分牌。这块记分牌到底在命令什么，要跟着它走进两个控制环才看得清。
 
 ## Weights and the Steering Target / 权重与转向目标
 
-The sensor bar has eight channels, OUT1 to OUT8; six are wired, OUT1, OUT3, OUT4, OUT5, OUT6 and OUT8, leaving OUT2 and OUT7 unused. The pins have internal pull-downs, and the code counts a channel as on the line whenever it reads high. The six weights are symmetric: ±25 for the outer pair, ±14 for the middle pair, ±6 for the inner pair. A black line 1.8 cm wide often covers two neighbouring channels, so the useful thing to look at is what each line position adds up to:
+The sensor bar has eight channels, OUT1 to OUT8, and six are wired: OUT1, OUT3, OUT4, OUT5, OUT6 and OUT8. The pins have internal pull-downs, and a channel counts as on the line whenever it reads high. The weights are symmetric, ±25 for the outer pair, ±14 for the middle pair and ±6 for the inner pair. The black line is 1.8 cm wide and often covers two neighbouring channels at once, so the useful thing is what each line position adds up to:
 
-灰度条有 OUT1 到 OUT8 八路，接了其中六路：OUT1、OUT3、OUT4、OUT5、OUT6、OUT8，OUT2 和 OUT7 空着。引脚开了内部下拉，代码里读到高电平就算这一路压在线上。六个权重左右对称：最外两路 ±25，中间两路 ±14，最里两路 ±6。黑线有 1.8 cm 宽，经常同时盖住相邻两路，所以更值得看的是线在各个位置时加出来是多少：
+灰度条有 OUT1 到 OUT8 八路，接了其中六路：OUT1、OUT3、OUT4、OUT5、OUT6、OUT8。引脚开了内部下拉，读到高电平就算这一路压在线上。权重左右对称，最外两路 ±25，中间两路 ±14，最里两路 ±6。黑线有 1.8 cm 宽，经常一次盖住相邻两路，所以更该看的是线在各个位置时加出来是多少：
 
 | Channels on the line / 压线的通道 | score | Turn1 |
 | --- | --- | --- |
@@ -27,38 +27,34 @@ The sensor bar has eight channels, OUT1 to OUT8; six are wired, OUT1, OUT3, OUT4
 | OUT3 | 14 | 13 |
 | OUT1 | 25 | 24 |
 
-The other side mirrors this with negative signs. Pololu's line sensors do something similar but [divide the weighted sum by the sum of the readings](https://www.pololu.com/docs/0J18/16), which turns it into a position estimate. Here nothing is divided, so the score is closer to a lookup table: two channels on at once give more than either alone, and the inner pair gives a gentle nudge while the outer pair gives a hard pull. The −1 is a fixed offset added on every pass, a small constant bias on the steering target.
+The other side mirrors this with negative signs, and `Turn1` is the score minus one, a small constant bias added on every pass. Pololu's line sensors also weight their channels, but they [divide the weighted sum by the sum of the readings](https://www.pololu.com/docs/0J18/16) to get a position. Nothing is divided here, so the score works more like a lookup table: two channels together give more than either alone, the inner pair gives a nudge and the outer pair a hard yank.
 
-另一侧对称，换成负号。Pololu 的循迹传感器做的是类似的事，但它会[拿加权和除以读数之和](https://www.pololu.com/docs/0J18/16)，得到一个位置估计。这里什么都没除，score 更像一张查表：两路同时压线，比任何一路单独压线都大；最里两路只是轻轻推一下，最外两路是狠狠拽一把。那个 −1 是每次都加上的固定偏置，给转向目标垫了一个小小的常数。
+另一侧对称，换成负号；`Turn1` 是 score 再减 1，每次都垫上一个小小的固定偏置。Pololu 的循迹传感器也给各路加权，不过它会[拿加权和除以读数之和](https://www.pololu.com/docs/0J18/16)，算出一个位置。这里什么都没除，score 更像一张查表：两路一起压线，比哪一路单独压线都大；最里两路只是轻轻推一把，最外两路是狠狠拽一把。
 
 ## Steering and Speed Loops / 转向环与速度环
 
-What `Turn1` means is decided in `balance.c`. The steering loop there computes `Turn_Pwm = Turn_Kp * (Turn1 - (Encoder_Left - Encoder_Right))` with `Turn_Kp` at 15, and the two motors get `base + Turn_Pwm` and `base - Turn_Pwm`. So the score is a target for the difference between the left and right encoder counts in one 10 ms control period, and the loop pushes until the wheels actually turn at that difference. Working the sign backwards: a positive score makes the left wheel faster and the car swing right, so OUT1 sits on the right of the bar and OUT8 on the left.
+What `Turn1` means is settled in `balance.c`. The steering loop there computes `Turn_Pwm = Turn_Kp * (Turn1 - (Encoder_Left - Encoder_Right))` with `Turn_Kp` at 15, and the two motors get `base + Turn_Pwm` and `base - Turn_Pwm`. So the score is a target for the difference between the left and right encoder counts in one 10 ms control period, and the loop keeps pushing until the wheels actually turn at that difference. Running the sign backwards: a positive score speeds up the left wheel and swings the car right, which puts OUT1 on the right of the bar and OUT8 on the left.
 
-`Turn1` 是什么意思，要到 `balance.c` 里看。那里的转向环算的是 `Turn_Pwm = Turn_Kp * (Turn1 - (Encoder_Left - Encoder_Right))`，`Turn_Kp` 取 15，左右电机分别拿到 `base + Turn_Pwm` 和 `base - Turn_Pwm`。也就是说，score 是一个控制周期（10 ms）里左右编码器读数之差的目标，转向环一直推，直到两个轮子真的转出这个差。把符号倒推回去：score 为正，左轮快，车往右拐，所以 OUT1 在灰度条右边，OUT8 在左边。
+`Turn1` 是什么意思，要到 `balance.c` 里看。那里的转向环算的是 `Turn_Pwm = Turn_Kp * (Turn1 - (Encoder_Left - Encoder_Right))`，`Turn_Kp` 取 15，左右电机分别拿到 `base + Turn_Pwm` 和 `base - Turn_Pwm`。也就是说，score 是一个控制周期（10 ms）里左右编码器读数之差的目标，转向环一直推，推到两个轮子真的转出这个差为止。把符号倒推回去：score 为正，左轮快，车往右拐，所以 OUT1 在灰度条右边，OUT8 在左边。
 
-The speed loop sets the base. `Velocity2` takes the target 8 and the sum of the two counts, and returns `20 * (8 - (Encoder_Left + Encoder_Right))`. The code then accumulates that return value into `Velocity_Pwm_L`. Like the K230 gimbal, a proportional output is accumulated, so the base PWM keeps rising while the wheels are slower than the target and only stops when the sum reaches 8; it behaves as an integral controller on speed. Both motors use this one base. A `Velocity_Pwm_R` is also computed, but nothing reads it, a leftover from the balance-car example the code started from. Both outputs are then clipped to ±7666, against a timer period of 8000 counts at 80 MHz, so the PWM runs at 10 kHz and tops out at 95.8% duty.
+The base comes from the speed loop. `Velocity2` takes the target 8 and the sum of the two counts and returns `20 * (8 - (Encoder_Left + Encoder_Right))`, and the code accumulates that return value into `Velocity_Pwm_L` every period. A proportional output that gets added up behaves as an integral on speed: while the wheels are slower than the target the base PWM keeps climbing, and it only settles when the sum reaches 8. Both motors share that one base. There is also a `Velocity_Pwm_R` that is carefully computed and then read by nobody, a fossil left from adapting the balance-car example. Both motor outputs are clipped to ±7666 against a timer period of 8000 counts at 80 MHz, a 10 kHz PWM that tops out at 95.8% duty.
 
-速度环负责那个 base。`Velocity2` 拿目标值 8 和左右读数之和，返回 `20 * (8 - (Encoder_Left + Encoder_Right))`，代码再把这个返回值一次次累加到 `Velocity_Pwm_L` 上。和 K230 那边的云台一样，比例输出被一路累加，轮子比目标慢，基础 PWM 就一直往上加，读数之和到 8 才停，实际表现是速度上的积分控制。两个电机共用这一个 base。代码里还算了一个 `Velocity_Pwm_R`，但没有任何地方读它，是改自平衡车例程留下的痕迹。两路输出最后都夹在 ±7666，定时器在 80 MHz 下一个周期 8000 个计数，PWM 是 10 kHz，占空比最高 95.8%。
+基础 PWM 由速度环给。`Velocity2` 拿目标值 8 和左右读数之和，返回 `20 * (8 - (Encoder_Left + Encoder_Right))`，代码每个周期把这个返回值累加到 `Velocity_Pwm_L` 上。比例输出一累加，表现出来就是速度上的积分控制：轮子比目标慢，基础 PWM 就一直往上爬，读数之和到 8 才停下。两个电机共用这一个 base。代码里还认认真真算了一个 `Velocity_Pwm_R`，然后谁都没读它，这是代码从平衡车例程改过来时留下的化石。两路输出最后都夹在 ±7666，定时器在 80 MHz 下一个周期 8000 个计数，PWM 是 10 kHz，占空比最高 95.8%。
 
-Putting the two targets together explains how the car handles a hard correction. If both loops reach their targets with `Turn1` at 24, the counts satisfy L − R = 24 and L + R = 8, which gives L = 16 and R = −8. The right wheel runs backwards and the car pivots. With the line under the inner pair the difference target is only a few counts, the sum still dominates, and the car arcs gently. The score never has to say turn hard or turn gently; that falls out of comparing a difference target with a fixed sum.
+Put the two targets side by side and the car's behaviour on a hard correction falls out by itself. If both loops reach their targets with `Turn1` at 24, the counts must satisfy L − R = 24 and L + R = 8, which gives L = 16 and R = −8. The right wheel runs backwards and the car pivots. With the line under the inner pair, the difference target is only a few counts, the sum dominates, and the car draws a gentle arc. Nowhere does the score say turn hard or turn gently; that comes from setting a difference target against a fixed sum.
 
-两个目标放在一起，能看出车怎么处理大幅度修正。`Turn1` 是 24 时，假如两个环都达到目标，读数要同时满足 L − R = 24 和 L + R = 8，解出来 L = 16，R = −8，右轮倒转，车原地打转。线压在最里两路时，差的目标只有几个计数，和还占大头，车就是缓缓地画弧。score 从来不用说急转还是缓转，这件事是差的目标和固定的和一比较，自然得出来的。
+两个目标摆在一起，车遇到大幅修正时会怎么动，自己就算出来了。`Turn1` 是 24 时，假如两个环都达到目标，读数要同时满足 L − R = 24 和 L + R = 8，解出来 L = 16，R = −8，右轮倒转，车原地打转。线压在最里两路时，差的目标只有几个计数，和占大头，车就缓缓画一道弧。score 从头到尾没说过急转还是缓转，这件事是拿一个差去对一个固定的和，自然比出来的。
 
 ## Corner Counting and Laps / 过弯计圈
 
-The car runs the square counterclockwise, so every corner is a left turn, and the channel that meets each corner first is OUT8 on the left edge. `xunji()` watches it with a two-state flag. When OUT8 goes high, `gyst` is set; when OUT8 drops back with `gyst` set, that counts as one corner: `gy` goes up by one and the code enters a `while` loop that holds `Turn1` at −60 until OUT3 reads the line again. Plugging −60 into the same arithmetic gives L = −26 and R = 34, so the car spins left almost on the spot until the middle channel finds the new segment.
+The car runs the square counterclockwise, so every corner is a left turn, and the first channel to meet each corner is OUT8 on the left edge. `xunji()` watches it with a two-state flag: when OUT8 goes high, `gyst` is set, and when OUT8 drops back while `gyst` is set, that counts as one corner. `gy` goes up by one and the code drops into a `while` loop that pins `Turn1` at −60 until OUT3 reads the line again. Put −60 into the same pair of equations and you get L = −26 and R = 34: the car spins left almost on the spot until the middle channel finds the new leg.
 
-车逆时针跑方形跑道，每个弯都是左转，最先碰到弯的是左边缘的 OUT8。`xunji()` 用一个两态标志盯着它：OUT8 变高，`gyst` 置位；`gyst` 置着的时候 OUT8 又掉回低电平，就算过了一个弯，`gy` 加一，代码进入一个 `while` 循环，把 `Turn1` 钉在 −60，直到 OUT3 重新读到黑线才出来。把 −60 代进同一组式子，得到 L = −26、R = 34，车几乎原地往左转，直到中间那一路找到新的一段线。
+车逆时针跑方形跑道，每个弯都是左转，最先碰到弯的是左边缘的 OUT8。`xunji()` 用一个两态标志盯着它：OUT8 变高，`gyst` 置位；`gyst` 置着的时候 OUT8 又掉回低电平，就算过了一个弯，`gy` 加一，代码一头扎进一个 `while` 循环，把 `Turn1` 钉在 −60，直到 OUT3 重新读到黑线才出来。把 −60 代进同一组式子，得到 L = −26、R = 34，车几乎原地往左转，直到中间那一路找到新的一段线。
 
-That `while` loop blocks the main loop completely, and the car keeps driving anyway, because the steering and speed loops run in the MPU6050 interrupt, not in `main`. The main loop only writes `Turn1`; the interrupt reads whatever is there every 10 ms. How that interrupt became the control clock is the subject of [MPU6050 Interrupts as the Control Clock](/notes/nuedc-mpu6050-interrupt-control-clock).
+That `while` loop freezes the main loop solid, and the car keeps driving anyway, which is a slightly surreal thing to watch in your own code. It works because the steering and speed loops live in the MPU6050 interrupt, not in `main`; the main loop only writes `Turn1`, and the interrupt picks up whatever is there every 10 ms. How an IMU interrupt ended up as the control clock is in [MPU6050 Interrupts as the Control Clock](/notes/nuedc-mpu6050-interrupt-control-clock). The rest of the lap logic is short. A key on `KEY0` steps `xuanti` from 1 to 5 and wraps back to 1, a high level on the start input clears `Flag_Stop`, and once `gy` reaches `xuanti * 4` the main loop sets `Flag_Stop` again and the interrupt brings the motors to a stop.
 
-这个 `while` 循环把主循环整个卡住，车却照样在跑，因为转向环和速度环都在 MPU6050 的中断里，不在 `main` 里。主循环只管写 `Turn1`，中断每 10 ms 来读一次，读到什么用什么。这个中断是怎么当上控制环时钟的，写在[用 MPU6050 中断给控制环打拍子](/notes/nuedc-mpu6050-interrupt-control-clock)。
+这个 `while` 把主循环卡得死死的，车却照样在跑，在自己的代码里看到这一幕，多少有点魔幻。能这么干，是因为转向环和速度环都住在 MPU6050 的中断里，不在 `main` 里；主循环只管写 `Turn1`，中断每 10 ms 来取一次，取到什么用什么。一个陀螺仪的中断怎么当上了控制环的时钟，写在[用 MPU6050 中断给控制环打拍子](/notes/nuedc-mpu6050-interrupt-control-clock)。计圈剩下的逻辑很短：`KEY0` 上的按键让 `xuanti` 从 1 加到 5 再绕回 1，启动输入读到高电平就清掉 `Flag_Stop`，`gy` 数到 `xuanti * 4`，主循环重新置位 `Flag_Stop`，中断把电机停下。
 
-The lap logic around it is short. A key on `KEY0` steps the lap count `xuanti` from 1 to 5 and wraps back to 1, a high level on the start input clears `Flag_Stop`, and once `gy` reaches `xuanti * 4` the main loop sets `Flag_Stop` again and the interrupt stops the motors.
+OUT8 does two jobs, and that is where the scheme is thinnest. It carries the hardest-pulling weight and it is also the corner counter. On a straight, if the car ever drifts far enough for the line to reach OUT8 and leave it again, that counts as a corner and triggers a forced left spin in the middle of nowhere. And the `while` loop has no timeout, so every corner bets on OUT3 finding the line again. The scheme runs only while both bets hold: the weights have to pull hard enough that the line never reaches OUT8 on a straight, and every spin has to land OUT3 back on the black.
 
-计圈的外围逻辑很短：`KEY0` 上的按键让圈数 `xuanti` 从 1 加到 5，再绕回 1；启动输入读到高电平，清掉 `Flag_Stop`；`gy` 数到 `xuanti * 4`，主循环重新置位 `Flag_Stop`，中断把电机停下。
-
-The same channel doing two jobs is what makes this scheme fragile. OUT8 is both the hardest-pulling tracking weight and the corner counter, so on a straight, if the car drifts far enough for the line to reach OUT8 and leave it again, that counts as a corner and fires a forced left spin. The ±25 weight is there to stop the line from ever getting that far out, and the `while` loop has no timeout, so it depends on OUT3 finding the line again every time. For the scheme to work at all, both have to hold at once: weights strong enough that the line never reaches OUT8 on a straight, and a spin that always lands OUT3 back on the black.
-
-同一路传感器身兼两职，是这套方案最脆的地方。OUT8 既是拽得最狠的循迹权重，又是数弯的计数器：直道上车一旦偏到线压上 OUT8 再离开，就会被算成一个弯，触发一次强行左转。±25 这个权重的用处之一，就是不让线跑到那么外面去；而那个 `while` 循环没有超时，每次都指望 OUT3 能重新找到线。这套方案要跑得起来，两件事得同时成立：权重要拽得住，直道上线始终压不到 OUT8；原地转的那一下，每次都要让 OUT3 落回黑线上。
+OUT8 身兼两职，这套方案最薄的地方就在这里。它既是拽得最狠的那一路权重，又是数弯的计数器：直道上车一旦偏到线压上 OUT8 再离开，就会被当成一个弯，平白无故原地左转一次。那个 `while` 又没有超时，每过一个弯都在赌 OUT3 能重新找到线。这套方案跑得起来，靠的是两个赌同时押中：权重拽得住，直道上线永远够不着 OUT8；每次原地转，都让 OUT3 落回黑线上。
