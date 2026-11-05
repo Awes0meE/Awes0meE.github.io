@@ -1,0 +1,58 @@
+{
+    "nncase_version": "2.9.0",
+    "chip_type": "k230",
+    "inference_width": 320,
+    "inference_height": 320,
+    "confidence_threshold": 0.5,
+    "nms_threshold": 0.5,
+    "calibrate_method": "NoClip",
+    "ptq_option": "w:uint8 d:uint8",
+    "export_kmodel_name": "best_AnchorBaseDet_can2_10_s_20250730105226.npy",
+    "model_type": "AnchorBaseDet",
+    "img_size": [
+        320,
+        320
+    ],
+    "anchors": [
+        [
+            49,
+            47,
+            54,
+            53,
+            64,
+            61
+        ],
+        [
+            60,
+            69,
+            74,
+            71,
+            89,
+            90
+        ],
+        [
+            109,
+            88,
+            114,
+            109,
+            132,
+            132
+        ]
+    ],
+    "mean": [
+        0.485,
+        0.456,
+        0.406
+    ],
+    "std": [
+        0.229,
+        0.224,
+        0.225
+    ],
+    "categories": [
+        "yuan"
+    ],
+    "nms_option": false,
+    "kmodel_path": "best_AnchorBaseDet_can2_10_s_20250730105226.kmodel",
+    "num_classes": 1
+}
